@@ -9,11 +9,10 @@ class Agent:
         self.llm = llm_provider
         self.prompt_manager = PromptManager()
         self.context_manager = ContextManager()
-        self.context_name = context_name  # 使用哪个 context 文件
-        self.identity = identity          # 在该文件中的身份标识
+        self.context_name = context_name 
+        self.identity = identity
 
     def think(self, context_name=None, identity=None, input_data=""):
-        # 优先用调用时传入的，否则用初始化时绑定的
         ctx_name = context_name or self.context_name
         ctx_identity = identity or self.identity
 

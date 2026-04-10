@@ -1,7 +1,7 @@
 import requests
 import json
 from .const import (
-    DEEPSEEK_KEY, 
+    DEEPSEEK_APIKEY, 
     DEFAULT_MODEL_DEEPSEEK, 
     DEFAULT_TEMPERATURE, 
     DEFAULT_MAX_TOKENS
@@ -9,7 +9,9 @@ from .const import (
 
 class DeepSeekProvider:
     def __init__(self, api_key=None, model=None):
-        self.api_key = api_key or DEEPSEEK_KEY
+        self.api_key = api_key or DEEPSEEK_APIKEY
+        if not self.api_key:
+            raise ValueError("DeepSeek API key not found. Please set DEEPSEEK_APIKEY environment variable.")
         self.model = model or DEFAULT_MODEL_DEEPSEEK
         self.base_url = "https://api.deepseek.com/v1"
     
