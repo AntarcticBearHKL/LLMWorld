@@ -1,8 +1,4 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from SimEngine import Agent, DeepSeekProvider
+from SimEngine import Agent, DeepSeekProvider, GLMProvider
 
 if __name__ == "__main__":
     landlord = Agent("李明", DeepSeekProvider(), context_name="rental", identity="房东")

@@ -1,4 +1,4 @@
-from .llm_provider import DeepSeekProvider
+from .llm_provider import DeepSeekProvider, GLMProvider
 from .prompt_manager import PromptManager
 from .context_manager import ContextManager
 

@@ -1,6 +1,9 @@
 # Ignore Reference folder
 /Reference/
 
+# Kiro IDE
+.kiro/
+
 # Environment variables
 .env
 
@@ -10,4 +13,3 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-
