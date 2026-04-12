@@ -1,28 +1,32 @@
 from .llm_provider import DeepSeekProvider, GLMProvider
-from .prompt_manager import PromptManager
 from .context_manager import ContextManager
+from .result import Result
 
 
 class Agent:
-    def __init__(self, name, llm_provider, context_name=None, identity=None):
+    def __init__(self, name, llm_provider):
         self.name = name
         self.llm = llm_provider
-        self.prompt_manager = PromptManager()
         self.context_manager = ContextManager()
-        self.context_name = context_name 
-        self.identity = identity
+        self.contexts = []
+        self.inputs = []
 
-    def think(self, context_name=None, identity=None, input_data=""):
-        ctx_name = context_name or self.context_name
-        ctx_identity = identity or self.identity
+    def add_context(self, context_name):
+        context_content = self.context_manager.get_context(context_name)
+        if context_content:
+            self.contexts.append(context_content)
+        return self
 
-        environment_context = ""
-        if ctx_name and self.context_manager.has_context(ctx_name, ctx_identity):
-            environment_context = self.context_manager.get_context(ctx_name, ctx_identity)
+    def add_input(self, input_text):
+        self.inputs.append(input_text)
+        return self
 
-        full_context = input_data
-        if environment_context:
-            full_context = f"{environment_context}\n\nInput: {input_data}" if input_data else environment_context
+    def think(self):
+        full_context = "\n\n".join(self.contexts)
+        
+        if self.inputs:
+            input_text = "\n\n".join(self.inputs)
+            full_context = f"{full_context}\n\nInput: {input_text}" if full_context else input_text
 
-        prompt = self.prompt_manager.get_prompt("think_prompt", context=full_context)
-        return self.llm.generate(prompt)
+        raw_response = self.llm.generate(full_context)
+        return Result(raw_response)
