@@ -180,7 +180,7 @@ class SubAgent:
     @staticmethod
     def _worker(prompt: str, result_queue: Queue, json_mode: bool, thinking: bool,
                api_key: str, model: str, index: int):
-        result = SubAgent.call_glm(prompt, json_mode, thinking, api_key, model)
+        result = SubAgent.call_deepseek(prompt, json_mode, thinking, api_key, model)
         result_queue.put((index, result))
     
     @staticmethod
@@ -211,4 +211,4 @@ class SubAgent:
     @staticmethod
     def single_call(prompt: str, json_mode: bool = False, thinking: bool = False,
                    api_key: str = None, model: str = None) -> str:
-        return SubAgent.call_glm(prompt, json_mode, thinking, api_key, model)
+        return SubAgent.call_deepseek(prompt, json_mode, thinking, api_key, model)

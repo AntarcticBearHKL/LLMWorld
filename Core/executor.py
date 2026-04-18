@@ -14,12 +14,17 @@ class Executor:
         self.prompt = Prompt()
     
     def execute_all_segments(self, season="夏天", weather="晴天", temperature=28):
-        for member_name, segments in self.planner.time_segments.items():
+        for member_name, timeline in self.planner.timelines.items():
             member = self._get_member(member_name)
             if not member:
                 continue
             
-            for segment in segments:
+            for slot in timeline.slots:
+                segment = {
+                    "time": slot._format_time_range(),
+                    "location": slot.location,
+                    "activity": slot.activity
+                }
                 self._execute_segment(member, segment, season, weather, temperature)
         
         return self.appliance_operations

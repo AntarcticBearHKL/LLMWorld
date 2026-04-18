@@ -3,14 +3,14 @@ import os
 from datetime import datetime
 from .prompt import Prompt
 from .subagent import SubAgent
+from .timeline import Timeline, visualize_timelines
 
 class Planner:
     def __init__(self, home):
         self.home = home
         self.macro_plans = {}
         self.coordinations = []
-        self.decomposed_plans = {}
-        self.time_segments = {}
+        self.timelines = {}
         self.logs = []
         self.prompt = Prompt()
         self.adjustment_iteration = 0
@@ -51,6 +51,11 @@ class Planner:
             try:
                 plan_data = json.loads(result)
                 self.macro_plans[member.name] = plan_data
+                
+                timeline = Timeline(member.name)
+                timeline.load_from_activities(plan_data.get("activities", []))
+                self.timelines[member.name] = timeline
+                
             except:
                 print(f"解析{member.name}的计划失败")
         
@@ -84,82 +89,99 @@ class Planner:
     def adjust_timelines(self):
         self.adjustment_iteration += 1
         
-        for member_name in self.macro_plans.keys():
-            self.decomposed_plans[member_name] = {
-                "member": member_name,
-                "activities": self.macro_plans[member_name].get("activities", [])
-            }
-        
         if not self.coordinations:
             print("没有需要协调的场景，跳过调整")
-            return self.decomposed_plans
+            return self.timelines
         
-        coordinations_str = json.dumps(self.coordinations, ensure_ascii=False, indent=2)
-        
-        for member_name in self.decomposed_plans.keys():
-            current_timeline = self.decomposed_plans[member_name].get("activities", [])
-            current_timeline_str = json.dumps(current_timeline, ensure_ascii=False, indent=2)
-            
+        for member_name, timeline in self.timelines.items():
             member_coordinations = []
             for coord in self.coordinations:
                 participants = coord.get("participants", {})
                 if member_name in participants:
-                    member_coord = {
+                    unified_time = coord.get("unified_time", "")
+                    unified_location = coord.get("unified_location", "")
+                    activity = participants.get(member_name, "")
+                    
+                    timeline.update_slot(unified_time, unified_location, activity)
+                    
+                    member_coordinations.append({
                         "coordination_id": coord.get("coordination_id", ""),
                         "type": coord.get("type", ""),
-                        "unified_time": coord.get("unified_time", ""),
-                        "unified_location": coord.get("unified_location", ""),
-                        "your_activity": participants.get(member_name, ""),
-                        "other_participants": [p for p in participants.keys() if p != member_name],
-                        "reason": coord.get("reason", "")
-                    }
-                    member_coordinations.append(member_coord)
+                        "unified_time": unified_time,
+                        "unified_location": unified_location,
+                        "activity": activity
+                    })
             
-            if not member_coordinations:
-                print(f"{member_name} 没有参与任何协调，保持原计划")
+            if member_coordinations:
+                log_name = f"03_第三层_代码强制插入_第{self.adjustment_iteration}次_{member_name}"
+                self._save_log(log_name, 
+                    f"协调要求:\n{json.dumps(member_coordinations, ensure_ascii=False, indent=2)}", 
+                    timeline.to_json(), 
+                    None)
+                print(f"已强制插入 {member_name} 的协调时间段（第{self.adjustment_iteration}次）")
+        
+        return self.timelines
+    
+    def fill_empty_slots(self):
+        for member_name, timeline in self.timelines.items():
+            empty_slots = timeline.get_empty_slots_formatted()
+            
+            if not empty_slots:
+                print(f"{member_name} 没有空余时间段")
                 continue
             
-            coordinations_for_member = json.dumps(member_coordinations, ensure_ascii=False, indent=2)
+            member = self._get_member(member_name)
+            if not member:
+                continue
             
-            prompt = self.prompt.load("timeline_adjustment",
+            current_activities = timeline.to_dict()["activities"]
+            
+            prompt = self.prompt.load("fill_empty_slots",
                 member_name=member_name,
-                current_timeline=current_timeline_str,
-                coordinations=coordinations_for_member
+                member_age=member.age,
+                member_occupation=member.occupation,
+                member_personality=member.personality,
+                current_activities=json.dumps(current_activities, ensure_ascii=False, indent=2),
+                empty_slots=json.dumps(empty_slots, ensure_ascii=False, indent=2)
             )
             
             result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
             tokens = SubAgent.get_tokens()
             
-            log_name = f"03_第三层_批量调整_第{self.adjustment_iteration}次_{member_name}"
+            log_name = f"04_第四层_填充空余时间_{member_name}"
             self._save_log(log_name, prompt, result, tokens)
             
             try:
-                adjusted_timeline = json.loads(result)
-                self.decomposed_plans[member_name] = adjusted_timeline
-                print(f"已调整 {member_name} 的时间线（第{self.adjustment_iteration}次）")
+                fill_data = json.loads(result)
+                fill_activities = fill_data.get("fill_activities", [])
+                
+                for activity in fill_activities:
+                    time_range = activity["time"]
+                    location = activity.get("location", "")
+                    activity_desc = activity["activity"]
+                    timeline.insert_slot(time_range, location, activity_desc, force=False)
+                
+                print(f"已填充 {member_name} 的空余时间段")
             except:
-                print(f"解析 {member_name} 的调整失败（第{self.adjustment_iteration}次）")
+                print(f"解析 {member_name} 的填充活动失败")
         
-        return self.decomposed_plans
+        return self.timelines
     
     def verify_coordinations(self):
         self.verification_iteration += 1
         
         plans_text = ""
-        for name, plan in self.decomposed_plans.items():
+        for name, timeline in self.timelines.items():
             plans_text += f"\n{name}的计划：\n"
-            for activity in plan.get("activities", []):
-                time_str = activity['time']
-                location = activity.get('location', '')
-                activity_desc = activity['activity']
-                plans_text += f"  {time_str}: {location} - {activity_desc}\n"
+            for slot in timeline.slots:
+                plans_text += f"  {slot._format_time_range()}: {slot.location} - {slot.activity}\n"
         
         prompt = self.prompt.load("coordination_verification", plans_text=plans_text)
         
         result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
         tokens = SubAgent.get_tokens()
         
-        log_name = f"04_第四层_协调验证_第{self.verification_iteration}次"
+        log_name = f"05_第五层_协调验证_第{self.verification_iteration}次"
         self._save_log(log_name, prompt, result, tokens)
         
         try:
@@ -178,34 +200,32 @@ class Planner:
             return False
     
     def save_final_plans(self):
-        for member_name, plan in self.decomposed_plans.items():
-            member_summary = json.dumps(plan, ensure_ascii=False, indent=2)
-            self._save_log(f"05_第五层_最终计划_{member_name}", "经过所有协调后的最终计划", member_summary, None)
+        for member_name, timeline in self.timelines.items():
+            self._save_log(f"06_第六层_最终计划_{member_name}", "经过所有协调后的最终计划", timeline.to_json(), None)
         
-        return self.decomposed_plans
+        return self.timelines
+    
+    def visualize_plans(self, stage_name="最终计划"):
+        timelines_list = list(self.timelines.values())
+        output_path = f"{self.log_dir}/{stage_name}_可视化.png"
+        visualize_timelines(timelines_list, output_path, f"家庭成员{stage_name}")
     
     def decompose_to_segments(self):
-        for name, plan in self.decomposed_plans.items():
+        time_segments = {}
+        for name, timeline in self.timelines.items():
             segments = []
-            for activity in plan.get("activities", []):
-                time_range = activity["time"]
-                location = activity.get("location", "")
-                activity_desc = activity["activity"]
-                
-                segment = {
-                    "time": time_range,
-                    "location": location,
-                    "activity": activity_desc
-                }
-                
-                segments.append(segment)
-            
-            self.time_segments[name] = segments
+            for slot in timeline.slots:
+                segments.append({
+                    "time": slot._format_time_range(),
+                    "location": slot.location,
+                    "activity": slot.activity
+                })
+            time_segments[name] = segments
         
-        segments_summary = json.dumps(self.time_segments, ensure_ascii=False, indent=2)
-        self._save_log("06_第六层_时间段分解", "基于最终计划生成时间段", segments_summary, None)
+        segments_summary = json.dumps(time_segments, ensure_ascii=False, indent=2)
+        self._save_log("07_第七层_时间段分解", "基于最终计划生成时间段", segments_summary, None)
         
-        return self.time_segments
+        return time_segments
     
     def _get_member(self, name):
         for member in self.home.members:
