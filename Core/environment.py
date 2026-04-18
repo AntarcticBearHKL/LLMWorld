@@ -54,6 +54,26 @@ class Home:
                 if appliance.name == appliance_name:
                     return appliance
         return None
+    
+    def get_home_structure(self):
+        structure = {}
+        for room_name, room in self.rooms.items():
+            structure[room_name] = {
+                "appliances": [appliance.name for appliance in room.appliances]
+            }
+        return structure
+    
+    def get_members_info(self):
+        members_info = []
+        for member in self.members:
+            members_info.append({
+                "name": member.name,
+                "age": member.age,
+                "occupation": member.occupation,
+                "personality": member.personality,
+                "habits": member.habits
+            })
+        return members_info
 
 def create_default_home():
     home = Home("家庭")
@@ -73,25 +93,28 @@ def create_default_home():
     kitchen.add_appliance(Appliance("灯"))
     
     bedroom1 = Room("卧室1")
-    bedroom.add_appliance(Appliance("空调"))
-    bedroom.add_appliance(Appliance("台灯"))
-    bedroom.add_appliance(Appliance("手机充电器"))
-    bedroom.add_appliance(Appliance("电脑"))
+    bedroom1.add_appliance(Appliance("空调"))
+    bedroom1.add_appliance(Appliance("台灯"))
+    bedroom1.add_appliance(Appliance("手机充电器"))
+    bedroom1.add_appliance(Appliance("电脑"))
 
     bedroom2 = Room("卧室2")
-    bedroom.add_appliance(Appliance("空调"))
-    bedroom.add_appliance(Appliance("台灯"))
-    bedroom.add_appliance(Appliance("手机充电器"))
+    bedroom2.add_appliance(Appliance("空调"))
+    bedroom2.add_appliance(Appliance("台灯"))
+    bedroom2.add_appliance(Appliance("手机充电器"))
 
     bedroom3 = Room("卧室3")
-    bedroom.add_appliance(Appliance("空调"))
-    bedroom.add_appliance(Appliance("台灯"))
-    bedroom.add_appliance(Appliance("手机充电器"))
+    bedroom3.add_appliance(Appliance("空调"))
+    bedroom3.add_appliance(Appliance("台灯"))
+    bedroom3.add_appliance(Appliance("手机充电器"))
     
     bathroom = Room("卫生间")
     bathroom.add_appliance(Appliance("热水器"))
     bathroom.add_appliance(Appliance("洗衣机"))
     bathroom.add_appliance(Appliance("灯"))
+
+    garage = Room("garage")
+    bathroom.add_appliance(Appliance("电动汽车"))
     
     home.add_room(living_room)
     home.add_room(kitchen)
@@ -101,9 +124,13 @@ def create_default_home():
     home.add_room(bedroom3)
 
     home.add_room(bathroom)
+
+    home.add_room(garage)
     
     mem1 = Member("爸爸", 45, "工程师", "勤劳、负责", "节能意识中等")
+    mem2 = Member("妈妈", 43, "教师", "勤劳、负责", "节能意识中等")
     
     home.add_member(mem1)
+    home.add_member(mem2)
     
     return home
