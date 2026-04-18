@@ -4,4 +4,4 @@ from .executor import Executor
 from .recorder import Recorder
 from .subagent import SubAgent
 from .prompt import Prompt
-from .visualizer import Visualizer
+from .timeline import Timeline, visualize_timelines

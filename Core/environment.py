@@ -114,7 +114,7 @@ def create_default_home():
     bathroom.add_appliance(Appliance("灯"))
 
     garage = Room("garage")
-    bathroom.add_appliance(Appliance("电动汽车"))
+    garage.add_appliance(Appliance("电动汽车"))
     
     home.add_room(living_room)
     home.add_room(kitchen)
