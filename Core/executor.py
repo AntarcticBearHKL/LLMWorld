@@ -1,16 +1,17 @@
 import json
 import os
 from datetime import datetime
-from Engine import Agent
+from .prompt import Prompt
+from .subagent import SubAgent
 
 class Executor:
-    def __init__(self, llm_provider, home, planner):
-        self.llm = llm_provider
+    def __init__(self, home, planner):
         self.home = home
         self.planner = planner
         self.appliance_operations = []
         self.log_dir = planner.log_dir
         self.segment_counter = 0
+        self.prompt = Prompt()
     
     def execute_all_segments(self, season="夏天", weather="晴天", temperature=28):
         for member_name, segments in self.planner.time_segments.items():
@@ -70,60 +71,31 @@ class Executor:
         
         status_str = "\n".join([f"- {name}: {status}" for name, status in current_status.items()])
         
-        prompt = f"""你是一个家庭用电行为专家。请根据以下信息，决定该时间段需要操作哪些家电。
-
-家庭结构：
-{home_structure_str}
-
-时间段信息：
-- 时间：{time}
-- 人物：{member.name}（{member.age}岁，{member.occupation}）
-- 地点：{location}
-- 活动：{activity}
-
-环境信息：
-- 季节：{season}
-- 天气：{weather}
-- 气温：{temperature}度
-
-{location}的家电：
-{appliances_info}
-
-当前电器状态：
-{status_str}
-
-人物用电习惯：
-- {member.habits}
-
-请决策：
-1. 需要开启哪些家电（如果已经开启则不需要重复开启）
-2. 需要关闭哪些家电
-3. 每个操作的原因
-
-要求：
-- 只操作家中的电器，不涉及家外的设备
-- 符合活动需求
-- 符合人物习惯
-- 合理真实
-- 检查电器当前状态，避免重复操作
-
-输出JSON格式：
-{{
-  "operations": [
-    {{"appliance": "家电名称", "action": "开启/关闭", "reason": "原因"}}
-  ]
-}}"""
+        prompt = self.prompt.load("appliance_decision",
+            home_structure=home_structure_str,
+            time=time,
+            member_name=member.name,
+            member_age=member.age,
+            member_occupation=member.occupation,
+            location=location,
+            activity=activity,
+            season=season,
+            weather=weather,
+            temperature=temperature,
+            appliances_info=appliances_info,
+            status_str=status_str,
+            member_habits=member.habits
+        )
         
-        agent = Agent("用电决策", self.llm)
-        agent.add_input(prompt)
-        result = agent.think()
+        result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
+        tokens = SubAgent.get_tokens()
         
         self.segment_counter += 1
         safe_time = time.replace(":", "-")
-        self._save_log(f"第四层_用电决策_{self.segment_counter:03d}_{member.name}_{safe_time}", prompt, result.raw)
+        self._save_log(f"07_第七层_用电决策_{self.segment_counter:03d}_{member.name}_{safe_time}", prompt, result, tokens)
         
         try:
-            decision_data = json.loads(result.raw)
+            decision_data = json.loads(result)
             operations = decision_data.get("operations", [])
             
             if start_slot is not None and end_slot is not None:
@@ -153,10 +125,14 @@ class Executor:
         except Exception as e:
             print(f"解析用电决策失败: {e}")
     
-    def _save_log(self, stage_name, prompt, response):
+    def _save_log(self, stage_name, prompt, response, tokens=None):
         log_file = os.path.join(self.log_dir, f"{stage_name}.md")
         
         with open(log_file, "w", encoding="utf-8") as f:
+            if tokens:
+                miss, hit, completion = tokens
+                f.write(f"Token使用: prompt_cache_miss={miss}, prompt_cache_hit={hit}, completion={completion}\n\n")
+            
             f.write(f"# {stage_name}\n\n")
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
             f.write("---\n\n")

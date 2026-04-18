@@ -1,70 +1,58 @@
 import json
 import os
 from datetime import datetime
-from Engine import Agent
+from .prompt import Prompt
+from .subagent import SubAgent
 
 class Planner:
-    def __init__(self, llm_provider, home):
-        self.llm = llm_provider
+    def __init__(self, home):
         self.home = home
         self.macro_plans = {}
-        self.interactions = []
+        self.coordinations = []
+        self.decomposed_plans = {}
         self.time_segments = {}
         self.logs = []
+        self.prompt = Prompt()
+        self.adjustment_iteration = 0
+        self.verification_iteration = 0
         
         os.makedirs("output", exist_ok=True)
         self.log_dir = os.path.join("output", f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
         os.makedirs(self.log_dir, exist_ok=True)
     
-    def generate_macro_plan(self, member, date, day_type="工作日"):
-        prompt = f"""你是一个家庭生活规划专家。请为以下家庭成员生成一天的宏观活动计划。
-
-家庭成员信息：
-- 姓名：{member.name}
-- 年龄：{member.age}岁
-- 职业：{member.occupation}
-- 性格：{member.personality}
-
-日期：{date}（{day_type}）
-
-请生成该成员从00:00到23:59一整天的活动安排，要求：
-- 只描述做什么活动，不涉及具体地点和家电
-- 时间段颗粒度最低为10分钟，但是可以是以10分钟为单位的时间段
-- 符合角色特征和日常规律
-- 必须从00:00开始，覆盖完整的24小时
-- 包含这个角色所有可能的日常活动
-- 本项目只统计在家中的活动，因此如果当前时间段角色不在家中，那么应该写外出
-
-输出JSON格式：
-{{
-  "member": "{member.name}",
-  "activities": [
-    {{"time": "...", "activity": "..."}},
-    {{"time": "...", "activity": "..."}},
-    ...
-  ]
-}}"""
+    def generate_plans(self, date, day_type="工作日"):
+        home_structure = self.home.get_home_structure()
+        members_info = self.home.get_members_info()
         
-        agent = Agent(f"{member.name}计划生成", self.llm)
-        agent.add_input(prompt)
-        result = agent.think()
+        prompts = []
+        members = []
         
-        self._save_log(f"第一层_宏观计划_{member.name}", prompt, result.raw)
-        
-        try:
-            plan_data = json.loads(result.raw)
-            self.macro_plans[member.name] = plan_data
-            return plan_data
-        except:
-            print(f"解析{member.name}的计划失败")
-            return None
-    
-    def generate_all_plans(self, date, day_type="工作日"):
         for member in self.home.members:
-            self.generate_macro_plan(member, date, day_type)
+            prompt = self.prompt.load("macro_plan",
+                member_name=member.name,
+                member_age=member.age,
+                member_occupation=member.occupation,
+                member_personality=member.personality,
+                date=date,
+                day_type=day_type,
+                home_structure=json.dumps(home_structure, ensure_ascii=False, indent=2),
+                members_info=json.dumps(members_info, ensure_ascii=False, indent=2)
+            )
+            prompts.append(prompt)
+            members.append(member)
         
-        home_structure = self.home.to_json()
-        self._save_log("家庭结构", "家庭房间和电器配置", json.dumps(home_structure, ensure_ascii=False, indent=2))
+        from .subagent import SubAgent
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=False)
+        
+        for idx, (member, prompt, result) in enumerate(zip(members, prompts, results)):
+            tokens = SubAgent.get_tokens()
+            self._save_log(f"01_第一层_宏观计划_{member.name}", prompt, result, tokens)
+            
+            try:
+                plan_data = json.loads(result)
+                self.macro_plans[member.name] = plan_data
+            except:
+                print(f"解析{member.name}的计划失败")
         
         return self.macro_plans
     
@@ -73,107 +61,166 @@ class Planner:
         for name, plan in self.macro_plans.items():
             plans_text += f"\n{name}的计划：\n"
             for activity in plan.get("activities", []):
-                plans_text += f"  {activity['time']}: {activity['activity']}\n"
+                time_str = activity['time']
+                location = activity.get('location', '')
+                activity_desc = activity['activity']
+                plans_text += f"  {time_str}: {location} - {activity_desc}\n"
         
-        prompt = f"""你是一个家庭互动场景编剧。以下是一个家庭成员的宏观计划，请分析他们的互动。
-
-{plans_text}
-
-请找出所有时间段的交集，对每个交集生成互动场景，包括：
-1. 参与者
-2. 活动内容
-3. 互动过程
-4. 最终结果（谁在哪里做什么，持续多久）
-
-要求：
-- 互动要自然合理
-- 考虑家庭关系和角色
-- 如有冲突，给出协商过程和结果
-
-输出JSON格式：
-{{
-  "interactions": [
-    {{
-      "time": "时间段",
-      "participants": ["参与者1", "参与者2"],
-      "type": "互动类型",
-      "content": "互动内容描述",
-      "result": {{
-        "location": "地点",
-        "details": "详细描述"
-      }}
-    }}
-  ]
-}}"""
+        prompt = self.prompt.load("interaction_analysis", plans_text=plans_text)
         
-        agent = Agent("互动分析", self.llm)
-        agent.add_input(prompt)
-        result = agent.think()
+        result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
+        tokens = SubAgent.get_tokens()
         
-        self._save_log("第二层_互动分析", prompt, result.raw)
+        self._save_log("02_第二层_协调识别", prompt, result, tokens)
         
         try:
-            interaction_data = json.loads(result.raw)
-            self.interactions = interaction_data.get("interactions", [])
-            return self.interactions
+            coordination_data = json.loads(result)
+            self.coordinations = coordination_data.get("coordinations", [])
+            return self.coordinations
         except:
-            print("解析互动失败")
+            print("解析协调场景失败")
             return []
     
+    def adjust_timelines(self):
+        self.adjustment_iteration += 1
+        
+        for member_name in self.macro_plans.keys():
+            self.decomposed_plans[member_name] = {
+                "member": member_name,
+                "activities": self.macro_plans[member_name].get("activities", [])
+            }
+        
+        if not self.coordinations:
+            print("没有需要协调的场景，跳过调整")
+            return self.decomposed_plans
+        
+        coordinations_str = json.dumps(self.coordinations, ensure_ascii=False, indent=2)
+        
+        for member_name in self.decomposed_plans.keys():
+            current_timeline = self.decomposed_plans[member_name].get("activities", [])
+            current_timeline_str = json.dumps(current_timeline, ensure_ascii=False, indent=2)
+            
+            member_coordinations = []
+            for coord in self.coordinations:
+                participants = coord.get("participants", {})
+                if member_name in participants:
+                    member_coord = {
+                        "coordination_id": coord.get("coordination_id", ""),
+                        "type": coord.get("type", ""),
+                        "unified_time": coord.get("unified_time", ""),
+                        "unified_location": coord.get("unified_location", ""),
+                        "your_activity": participants.get(member_name, ""),
+                        "other_participants": [p for p in participants.keys() if p != member_name],
+                        "reason": coord.get("reason", "")
+                    }
+                    member_coordinations.append(member_coord)
+            
+            if not member_coordinations:
+                print(f"{member_name} 没有参与任何协调，保持原计划")
+                continue
+            
+            coordinations_for_member = json.dumps(member_coordinations, ensure_ascii=False, indent=2)
+            
+            prompt = self.prompt.load("timeline_adjustment",
+                member_name=member_name,
+                current_timeline=current_timeline_str,
+                coordinations=coordinations_for_member
+            )
+            
+            result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
+            tokens = SubAgent.get_tokens()
+            
+            log_name = f"03_第三层_批量调整_第{self.adjustment_iteration}次_{member_name}"
+            self._save_log(log_name, prompt, result, tokens)
+            
+            try:
+                adjusted_timeline = json.loads(result)
+                self.decomposed_plans[member_name] = adjusted_timeline
+                print(f"已调整 {member_name} 的时间线（第{self.adjustment_iteration}次）")
+            except:
+                print(f"解析 {member_name} 的调整失败（第{self.adjustment_iteration}次）")
+        
+        return self.decomposed_plans
+    
+    def verify_coordinations(self):
+        self.verification_iteration += 1
+        
+        plans_text = ""
+        for name, plan in self.decomposed_plans.items():
+            plans_text += f"\n{name}的计划：\n"
+            for activity in plan.get("activities", []):
+                time_str = activity['time']
+                location = activity.get('location', '')
+                activity_desc = activity['activity']
+                plans_text += f"  {time_str}: {location} - {activity_desc}\n"
+        
+        prompt = self.prompt.load("coordination_verification", plans_text=plans_text)
+        
+        result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
+        tokens = SubAgent.get_tokens()
+        
+        log_name = f"04_第四层_协调验证_第{self.verification_iteration}次"
+        self._save_log(log_name, prompt, result, tokens)
+        
+        try:
+            verification_data = json.loads(result)
+            new_coordinations = verification_data.get("coordinations", [])
+            
+            if not new_coordinations:
+                print(f"验证通过（第{self.verification_iteration}次），没有发现新的协调问题")
+                return False
+            else:
+                print(f"发现 {len(new_coordinations)} 个新的协调问题（第{self.verification_iteration}次），需要重新调整")
+                self.coordinations = new_coordinations
+                return True
+        except:
+            print(f"解析验证结果失败（第{self.verification_iteration}次）")
+            return False
+    
+    def save_final_plans(self):
+        for member_name, plan in self.decomposed_plans.items():
+            member_summary = json.dumps(plan, ensure_ascii=False, indent=2)
+            self._save_log(f"05_第五层_最终计划_{member_name}", "经过所有协调后的最终计划", member_summary, None)
+        
+        return self.decomposed_plans
+    
     def decompose_to_segments(self):
-        for name, plan in self.macro_plans.items():
+        for name, plan in self.decomposed_plans.items():
             segments = []
             for activity in plan.get("activities", []):
                 time_range = activity["time"]
+                location = activity.get("location", "")
                 activity_desc = activity["activity"]
                 
-                location = self._infer_location(activity_desc)
-                
-                segments.append({
+                segment = {
                     "time": time_range,
                     "location": location,
                     "activity": activity_desc
-                })
+                }
+                
+                segments.append(segment)
             
             self.time_segments[name] = segments
         
-        self._apply_interactions()
-        
         segments_summary = json.dumps(self.time_segments, ensure_ascii=False, indent=2)
-        self._save_log("第三层_时间段分解", "基于宏观计划和互动结果分解时间段", segments_summary)
+        self._save_log("06_第六层_时间段分解", "基于最终计划生成时间段", segments_summary, None)
         
         return self.time_segments
     
-    def _infer_location(self, activity):
-        if any(word in activity for word in ["出门", "上班", "上学", "外出", "公司", "学校", "商场", "超市"]):
-            return "外出"
-        elif any(word in activity for word in ["做饭", "准备餐", "厨房"]):
-            return "厨房"
-        elif any(word in activity for word in ["看电视", "吃饭", "客厅"]):
-            return "客厅"
-        elif any(word in activity for word in ["睡觉", "午休", "卧室"]):
-            return "卧室"
-        elif any(word in activity for word in ["洗漱", "洗澡", "卫生间"]):
-            return "卫生间"
-        else:
-            return "客厅"
+    def _get_member(self, name):
+        for member in self.home.members:
+            if member.name == name:
+                return member
+        return None
     
-    def _apply_interactions(self):
-        for interaction in self.interactions:
-            time = interaction["time"]
-            location = interaction["result"]["location"]
-            
-            for participant in interaction["participants"]:
-                if participant in self.time_segments:
-                    for segment in self.time_segments[participant]:
-                        if segment["time"] == time:
-                            segment["location"] = location
-                            segment["interaction"] = interaction["content"]
-    
-    def _save_log(self, stage_name, prompt, response):
+    def _save_log(self, stage_name, prompt, response, tokens=None):
         log_file = os.path.join(self.log_dir, f"{stage_name}.md")
         
         with open(log_file, "w", encoding="utf-8") as f:
+            if tokens:
+                miss, hit, completion = tokens
+                f.write(f"Token使用: prompt_cache_miss={miss}, prompt_cache_hit={hit}, completion={completion}\n\n")
+            
             f.write(f"# {stage_name}\n\n")
             f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
             f.write("---\n\n")
