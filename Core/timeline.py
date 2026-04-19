@@ -3,21 +3,25 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
 
 class TimeSlot:
-    def __init__(self, start_minutes, end_minutes, location, activity):
+    def __init__(self, start_minutes, end_minutes, location, activity, desc=""):
         self.start = start_minutes
         self.end = end_minutes
         self.location = location
         self.activity = activity
+        self.desc = desc
     
     def overlaps(self, other_start, other_end):
         return not (self.end <= other_start or self.start >= other_end)
     
     def to_dict(self):
-        return {
+        result = {
             "time": self._format_time_range(),
             "location": self.location,
             "activity": self.activity
         }
+        if self.desc:
+            result["desc"] = self.desc
+        return result
     
     def _format_time_range(self):
         start_hour = self.start // 60
@@ -40,46 +44,82 @@ class Timeline:
         self.color_index = 0
     
     def _parse_time(self, time_str):
-        hour, minute = map(int, time_str.split(':'))
-        return hour * 60 + minute
+        try:
+            hour, minute = map(int, time_str.split(':'))
+            return hour * 60 + minute
+        except Exception as e:
+            print(f"[错误] 解析时间失败: '{time_str}' - {e}")
+            print(f"[回退] 使用默认时间: 00:00")
+            return 0
     
     def _parse_time_range(self, time_range):
-        start, end = time_range.split('-')
-        start_min = self._parse_time(start.strip())
-        end_min = self._parse_time(end.strip())
-        if end_min <= start_min:
-            end_min += 1440
-        return start_min, end_min
+        try:
+            parts = time_range.split('-')
+            if len(parts) != 2:
+                print(f"[警告] 时间格式错误: '{time_range}'，尝试修复...")
+                if len(parts) > 2:
+                    start = parts[0]
+                    end = parts[-1]
+                    print(f"[修复] 使用第一个和最后一个时间: {start} - {end}")
+                else:
+                    raise ValueError(f"无法解析时间范围: {time_range}")
+            else:
+                start, end = parts
+            
+            start_min = self._parse_time(start.strip())
+            end_min = self._parse_time(end.strip())
+            
+            if end_min <= start_min:
+                end_min += 1440
+            
+            return start_min, end_min
+        except Exception as e:
+            print(f"[错误] 解析时间范围失败: '{time_range}' - {e}")
+            print(f"[回退] 使用默认时间范围: 00:00-00:10")
+            return 0, 10
     
     def load_from_activities(self, activities):
         self.slots = []
         for activity in activities:
-            time_range = activity['time']
-            location = activity.get('location', '')
-            activity_desc = activity['activity']
-            
-            start_min, end_min = self._parse_time_range(time_range)
-            slot = TimeSlot(start_min, end_min, location, activity_desc)
-            self.slots.append(slot)
+            try:
+                time_range = activity['time']
+                location = activity.get('location', '')
+                activity_desc = activity['activity']
+                
+                start_min, end_min = self._parse_time_range(time_range)
+                slot = TimeSlot(start_min, end_min, location, activity_desc)
+                self.slots.append(slot)
+            except Exception as e:
+                print(f"[错误] 加载活动失败: {activity} - {e}")
+                print(f"[跳过] 该活动")
+                continue
         
         self.slots.sort(key=lambda s: s.start)
     
     def insert_slot(self, time_range, location, activity, force=True):
-        start_min, end_min = self._parse_time_range(time_range)
-        
-        if force:
-            self._remove_overlapping_slots(start_min, end_min)
-        
-        new_slot = TimeSlot(start_min, end_min, location, activity)
-        self.slots.append(new_slot)
-        self.slots.sort(key=lambda s: s.start)
+        try:
+            start_min, end_min = self._parse_time_range(time_range)
+            
+            if force:
+                self._remove_overlapping_slots(start_min, end_min)
+            
+            new_slot = TimeSlot(start_min, end_min, location, activity)
+            self.slots.append(new_slot)
+            self.slots.sort(key=lambda s: s.start)
+        except Exception as e:
+            print(f"[错误] 插入时间段失败: {time_range} - {e}")
+            print(f"[跳过] 该时间段")
     
     def update_slot(self, time_range, location, activity):
-        start_min, end_min = self._parse_time_range(time_range)
-        self._remove_overlapping_slots(start_min, end_min)
-        new_slot = TimeSlot(start_min, end_min, location, activity)
-        self.slots.append(new_slot)
-        self.slots.sort(key=lambda s: s.start)
+        try:
+            start_min, end_min = self._parse_time_range(time_range)
+            self._remove_overlapping_slots(start_min, end_min)
+            new_slot = TimeSlot(start_min, end_min, location, activity)
+            self.slots.append(new_slot)
+            self.slots.sort(key=lambda s: s.start)
+        except Exception as e:
+            print(f"[错误] 更新时间段失败: {time_range} - {e}")
+            print(f"[跳过] 该时间段")
     
     def _remove_overlapping_slots(self, start_min, end_min):
         new_slots = []

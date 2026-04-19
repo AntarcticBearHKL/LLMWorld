@@ -6,7 +6,7 @@ from .subagent import SubAgent
 from .timeline import Timeline, visualize_timelines
 
 class Planner:
-    def __init__(self, home):
+    def __init__(self, home, run_id=None, date_str=None):
         self.home = home
         self.macro_plans = {}
         self.coordinations = []
@@ -17,12 +17,22 @@ class Planner:
         self.verification_iteration = 0
         
         os.makedirs("output", exist_ok=True)
-        self.log_dir = os.path.join("output", f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
+        
+        if run_id and date_str:
+            run_dir = os.path.join("output", f"{run_id}_logs")
+            os.makedirs(run_dir, exist_ok=True)
+            self.log_dir = os.path.join(run_dir, date_str)
+        else:
+            self.log_dir = os.path.join("output", f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
         os.makedirs(self.log_dir, exist_ok=True)
     
-    def generate_plans(self, date, day_type="工作日"):
+    def generate_plans(self, time_obj):
         home_structure = self.home.get_home_structure()
         members_info = self.home.get_members_info()
+        
+        date = time_obj.get_date_string()
+        day_type = time_obj.day_type
+        time_context = time_obj.get_prompt_string()
         
         prompts = []
         members = []
@@ -35,6 +45,7 @@ class Planner:
                 member_personality=member.personality,
                 date=date,
                 day_type=day_type,
+                time_context=time_context,
                 home_structure=json.dumps(home_structure, ensure_ascii=False, indent=2),
                 members_info=json.dumps(members_info, ensure_ascii=False, indent=2)
             )
@@ -102,15 +113,20 @@ class Planner:
                     unified_location = coord.get("unified_location", "")
                     activity = participants.get(member_name, "")
                     
-                    timeline.update_slot(unified_time, unified_location, activity)
-                    
-                    member_coordinations.append({
-                        "coordination_id": coord.get("coordination_id", ""),
-                        "type": coord.get("type", ""),
-                        "unified_time": unified_time,
-                        "unified_location": unified_location,
-                        "activity": activity
-                    })
+                    try:
+                        timeline.update_slot(unified_time, unified_location, activity)
+                        
+                        member_coordinations.append({
+                            "coordination_id": coord.get("coordination_id", ""),
+                            "type": coord.get("type", ""),
+                            "unified_time": unified_time,
+                            "unified_location": unified_location,
+                            "activity": activity
+                        })
+                    except Exception as e:
+                        print(f"[错误] {member_name} 插入协调事件失败: {e}")
+                        print(f"[跳过] 协调事件: {unified_time} - {activity}")
+                        continue
             
             if member_coordinations:
                 log_name = f"03_第三层_代码强制插入_第{self.adjustment_iteration}次_{member_name}"
@@ -123,6 +139,9 @@ class Planner:
         return self.timelines
     
     def fill_empty_slots(self):
+        prompts = []
+        members_data = []
+        
         for member_name, timeline in self.timelines.items():
             empty_slots = timeline.get_empty_slots_formatted()
             
@@ -145,9 +164,16 @@ class Planner:
                 empty_slots=json.dumps(empty_slots, ensure_ascii=False, indent=2)
             )
             
-            result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
+            prompts.append(prompt)
+            members_data.append((member_name, timeline))
+        
+        if not prompts:
+            return self.timelines
+        
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=False)
+        
+        for (member_name, timeline), prompt, result in zip(members_data, prompts, results):
             tokens = SubAgent.get_tokens()
-            
             log_name = f"04_第四层_填充空余时间_{member_name}"
             self._save_log(log_name, prompt, result, tokens)
             
@@ -215,17 +241,73 @@ class Planner:
         for name, timeline in self.timelines.items():
             segments = []
             for slot in timeline.slots:
-                segments.append({
+                segment = {
                     "time": slot._format_time_range(),
                     "location": slot.location,
                     "activity": slot.activity
-                })
+                }
+                if slot.desc:
+                    segment["desc"] = slot.desc
+                segments.append(segment)
             time_segments[name] = segments
         
         segments_summary = json.dumps(time_segments, ensure_ascii=False, indent=2)
         self._save_log("07_第七层_时间段分解", "基于最终计划生成时间段", segments_summary, None)
         
         return time_segments
+    
+    def enrich_activities(self, season="夏天", weather="晴天", temperature=28):
+        prompts = []
+        members = []
+        
+        for member_name, timeline in self.timelines.items():
+            member = self._get_member(member_name)
+            if not member:
+                continue
+            
+            member_timeline = timeline.to_dict()["activities"]
+            
+            other_timelines = {}
+            for other_name, other_timeline in self.timelines.items():
+                if other_name != member_name:
+                    other_timelines[other_name] = other_timeline.to_dict()["activities"]
+            
+            prompt = self.prompt.load("enrich_activities",
+                member_name=member_name,
+                member_age=member.age,
+                member_occupation=member.occupation,
+                member_personality=member.personality,
+                member_timeline=json.dumps(member_timeline, ensure_ascii=False, indent=2),
+                other_members_timelines=json.dumps(other_timelines, ensure_ascii=False, indent=2),
+                home_structure=json.dumps(self.home.get_home_structure(), ensure_ascii=False, indent=2),
+                season=season,
+                weather=weather,
+                temperature=temperature
+            )
+            
+            prompts.append(prompt)
+            members.append((member_name, timeline))
+        
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=False)
+        
+        for (member_name, timeline), prompt, result in zip(members, prompts, results):
+            tokens = SubAgent.get_tokens()
+            log_name = f"08_第八层_丰富行为描述_{member_name}"
+            self._save_log(log_name, prompt, result, tokens)
+            
+            try:
+                enriched_data = json.loads(result)
+                enriched_activities = enriched_data.get("enriched_activities", [])
+                
+                for i, slot in enumerate(timeline.slots):
+                    if i < len(enriched_activities):
+                        slot.desc = enriched_activities[i].get("desc", "")
+                
+                print(f"已丰富 {member_name} 的行为描述")
+            except Exception as e:
+                print(f"解析 {member_name} 的丰富描述失败: {e}")
+        
+        return self.timelines
     
     def _get_member(self, name):
         for member in self.home.members:
