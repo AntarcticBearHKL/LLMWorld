@@ -1,6 +1,7 @@
 from .environment import Home
 from .planner import Planner
 from .executor import Executor
+from .energy_calculator import EnergyCalculator
 from .subagent import SubAgent
 from .time import Time
 import random
@@ -36,48 +37,32 @@ class World:
         planner.visualize_plans("宏观计划")
         
         if verbose:
-            print("第二步：识别协调场景...")
-        planner.analyze_interactions()
+            print("第二步：渐进式协调生成完整时间线...")
+        planner.coordinate_timelines_progressively()
         
         if verbose:
-            print("第三步：代码强制插入协调时间段...")
-        planner.adjust_timelines()
+            print("第二步完成：生成协调后时间线可视化图表...")
+        planner.visualize_plans("协调后时间线")
         
         if verbose:
-            print("第四步：填充空余时间段...")
-        planner.fill_empty_slots()
-        
-        if verbose:
-            print("第五步：验证协调...")
-        needs_readjust = planner.verify_coordinations()
-        
-        if needs_readjust:
-            if verbose:
-                print("发现协调问题，再次调整...")
-            planner.adjust_timelines()
-            planner.fill_empty_slots()
-        
-        if verbose:
-            print("\n第六步：保存最终计划...")
-        planner.save_final_plans()
-        
-        if verbose:
-            print("第六步完成：生成最终计划可视化图表...")
-        planner.visualize_plans("最终计划")
-        
-        if verbose:
-            print("第七步：分解时间段...")
-        planner.decompose_to_segments()
-        
-        if verbose:
-            print("第八步：丰富行为描述...")
+            print("第三步：丰富行为描述...")
         planner.enrich_activities(season=season, weather=weather, temperature=temperature)
         
         if verbose:
-            print("第九步：执行用电模拟...")
+            print("第四步：执行用电模拟...")
         executor = Executor(self.home, planner)
         self.current_executor = executor
         executor.execute_all_segments(season=season, weather=weather, temperature=temperature)
+        
+        if verbose:
+            print("第五步：计算用电信息...")
+        energy_calculator = EnergyCalculator(self.home, planner.log_dir)
+        energy_calculator.calculate_all_energy()
+        energy_summary = energy_calculator.get_summary()
+        
+        if verbose:
+            print(f"第五步完成：总用电量 {energy_summary['total_energy_kwh']} kWh")
+            print(f"用电信息已保存到：{energy_calculator.energy_info_dir}")
         
         day_result = {
             "date": self.time.get_date_string(),
@@ -88,7 +73,9 @@ class World:
             "temperature": temperature,
             "log_dir": planner.log_dir,
             "planner": planner,
-            "executor": executor
+            "executor": executor,
+            "energy_calculator": energy_calculator,
+            "energy_summary": energy_summary
         }
         
         self.history.append(day_result)
