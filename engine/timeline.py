@@ -1,6 +1,7 @@
 import json
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.colors import to_rgba
 
 class TimeSlot:
     def __init__(self, start_minutes, end_minutes, location, activity, desc=""):
@@ -95,76 +96,6 @@ class Timeline:
                 continue
         
         self.slots.sort(key=lambda s: s.start)
-    
-    def insert_slot(self, time_range, location, activity, force=True):
-        try:
-            start_min, end_min = self._parse_time_range(time_range)
-            
-            if force:
-                self._remove_overlapping_slots(start_min, end_min)
-            
-            new_slot = TimeSlot(start_min, end_min, location, activity)
-            self.slots.append(new_slot)
-            self.slots.sort(key=lambda s: s.start)
-        except Exception as e:
-            print(f"[错误] 插入时间段失败: {time_range} - {e}")
-            print(f"[跳过] 该时间段")
-    
-    def update_slot(self, time_range, location, activity):
-        try:
-            start_min, end_min = self._parse_time_range(time_range)
-            self._remove_overlapping_slots(start_min, end_min)
-            new_slot = TimeSlot(start_min, end_min, location, activity)
-            self.slots.append(new_slot)
-            self.slots.sort(key=lambda s: s.start)
-        except Exception as e:
-            print(f"[错误] 更新时间段失败: {time_range} - {e}")
-            print(f"[跳过] 该时间段")
-    
-    def _remove_overlapping_slots(self, start_min, end_min):
-        new_slots = []
-        for slot in self.slots:
-            if not slot.overlaps(start_min, end_min):
-                new_slots.append(slot)
-            else:
-                if slot.start < start_min:
-                    new_slots.append(TimeSlot(slot.start, start_min, slot.location, slot.activity))
-                if slot.end > end_min:
-                    new_slots.append(TimeSlot(end_min, slot.end, slot.location, slot.activity))
-        
-        self.slots = new_slots
-    
-    def get_empty_slots(self):
-        if not self.slots:
-            return [(0, 1440)]
-        
-        empty_slots = []
-        self.slots.sort(key=lambda s: s.start)
-        
-        if self.slots[0].start > 0:
-            empty_slots.append((0, self.slots[0].start))
-        
-        for i in range(len(self.slots) - 1):
-            gap_start = self.slots[i].end
-            gap_end = self.slots[i + 1].start
-            if gap_end > gap_start:
-                empty_slots.append((gap_start, gap_end))
-        
-        if self.slots[-1].end < 1440:
-            empty_slots.append((self.slots[-1].end, 1440))
-        
-        return empty_slots
-    
-    def get_empty_slots_formatted(self):
-        empty_slots = self.get_empty_slots()
-        formatted = []
-        for start, end in empty_slots:
-            start_hour = start // 60
-            start_min = start % 60
-            end_hour = end // 60
-            end_min = end % 60
-            formatted.append(f"{start_hour:02d}:{start_min:02d}-{end_hour:02d}:{end_min:02d}")
-        return formatted
     
     def to_json(self):
         activities = [slot.to_dict() for slot in self.slots]

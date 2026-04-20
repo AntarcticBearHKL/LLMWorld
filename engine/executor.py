@@ -57,9 +57,9 @@ class Executor:
                     segment["desc"] = slot.desc
                 member_timeline.append(segment)
             
-            home_structure_with_appliances = self._get_home_structure_with_appliances()
+            home_structure_with_appliances = self._get_home_structure_with_appliances(member)
             
-            prompt = self.prompt.load("09_batch_appliance_decision",
+            prompt = self.prompt.load("04_batch_appliance_decision",
                 member_name=member_name,
                 member_age=member.age,
                 member_occupation=member.occupation,
@@ -78,7 +78,7 @@ class Executor:
         
         for (member_name, member), prompt, result in zip(members_data, prompts, results):
             tokens = SubAgent.get_tokens()
-            log_name = f"09_第九层_批量用电决策_{member_name}"
+            log_name = f"04_第四层_批量用电决策_{member_name}"
             result_content = result["content"] if isinstance(result, dict) else result
             reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
             self._save_log(log_name, prompt, result_content, tokens, reasoning_content)
@@ -86,23 +86,87 @@ class Executor:
             try:
                 decision_data = json.loads(result_content)
                 
-                json_filename = f"09_第九层_批量用电决策_{member_name}.json"
+                # 计算实际能耗
+                total_energy = self._calculate_member_energy_consumption(member, decision_data)
+                decision_data["total_energy_kwh"] = total_energy
+                
+                json_filename = f"04_第四层_批量用电决策_{member_name}.json"
                 json_filepath = os.path.join(self.log_dir, json_filename)
                 with open(json_filepath, "w", encoding="utf-8") as f:
                     json.dump(decision_data, f, ensure_ascii=False, indent=2)
                 
-                print(f"已生成 {member_name} 的用电决策")
+                print(f"已生成 {member_name} 的用电决策，总耗电量：{total_energy:.3f} kWh")
             except Exception as e:
                 print(f"解析 {member_name} 的用电决策失败: {e}")
         
         return None
     
-    def _get_home_structure_with_appliances(self):
+    def _calculate_member_energy_consumption(self, member, decision_data):
+        """计算成员的实际家庭用电量"""
+        total_energy = 0
+        
+        for decision in decision_data.get("appliance_decisions", []):
+            time_range = decision["time"]
+            location = decision.get("location", "")
+            start_str, end_str = time_range.split("-")
+            
+            # 解析时间（简化版，假设同一天）
+            start_hour, start_min = map(int, start_str.split(":"))
+            end_hour, end_min = map(int, end_str.split(":"))
+            
+            start_minutes = start_hour * 60 + start_min
+            end_minutes = end_hour * 60 + end_min
+            
+            # 处理跨天情况
+            if end_minutes <= start_minutes:
+                end_minutes += 1440
+            
+            for operation in decision.get("operations", []):
+                appliance_id = operation["unique_id"]
+                action = operation["action"]
+                
+                # 获取电器对象
+                appliance = self.home.get_appliance(appliance_id)
+                if not appliance:
+                    continue
+                
+                # 只计算耗电操作
+                if action in ["use", "charge_home"]:
+                    # 确定电力来源
+                    power_source = "home" if action != "charge_external" else "external"
+                    
+                    # 计算能耗
+                    energy = appliance.calculate_energy(
+                        start_minutes, 
+                        end_minutes, 
+                        power_source=power_source
+                    )
+                    total_energy += energy
+                    
+                    # 记录使用日志
+                    appliance.log_usage(
+                        start_minutes, 
+                        end_minutes, 
+                        energy, 
+                        action=action,
+                        power_source=power_source,
+                        location=location
+                    )
+        
+        return total_energy
+    
+    def _get_home_structure_with_appliances(self, member):
         structure = {}
         for room_name, room in self.home.rooms.items():
             structure[room_name] = {
                 "appliances": [appliance.to_dict() for appliance in room.appliances]
             }
+        
+        if member.personal_appliances:
+            structure[f"{member.name}的个人电器"] = {
+                "appliances": [appliance.to_dict() for appliance in member.personal_appliances]
+            }
+        
         return structure
     
     def _get_member(self, name):
