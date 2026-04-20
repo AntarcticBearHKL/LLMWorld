@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
-from appliance import create_appliance
+from appliances import create_appliance
 
 class Member:
     def __init__(self, name, age, occupation, personality, habits):

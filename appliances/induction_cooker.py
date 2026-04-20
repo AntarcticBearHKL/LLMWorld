@@ -1,4 +1,4 @@
-from .base_appliance import OnDemandAppliance
+from .base import OnDemandAppliance
 
 class InductionCooker(OnDemandAppliance):
     def __init__(self, location=None, owner=None):

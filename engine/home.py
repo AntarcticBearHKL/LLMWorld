@@ -3,7 +3,7 @@ from .member import Member
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
-from appliance import create_appliance
+from appliances import create_appliance
 
 class Home:
     def __init__(self, name):

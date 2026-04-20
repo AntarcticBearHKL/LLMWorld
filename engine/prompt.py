@@ -2,7 +2,7 @@ import os
 import re
 
 class Prompt:
-    def __init__(self, prompts_dir="Prompts"):
+    def __init__(self, prompts_dir="prompts"):
         self.prompts_dir = prompts_dir
         self._ensure_prompts_dir()
     

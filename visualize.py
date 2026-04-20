@@ -11,7 +11,7 @@ plt.rcParams['axes.unicode_minus'] = False
 
 class TabbedEnergyVisualizer:
     def __init__(self):
-        self.output_dir = "output"
+        self.output_dir = "logs"
         self.available_runs = self._scan_available_runs()
         self.selected_run_id = None
         self.selected_dates = []

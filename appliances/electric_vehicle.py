@@ -1,4 +1,4 @@
-from .base_appliance import ChargingAppliance
+from .base import ChargingAppliance
 
 class ElectricVehicle(ChargingAppliance):
     def __init__(self, location=None, owner=None):
