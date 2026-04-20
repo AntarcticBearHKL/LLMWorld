@@ -4,6 +4,32 @@ from datetime import datetime
 from .prompt import Prompt
 from .subagent import SubAgent
 
+def format_json_compact(obj, indent=2, current_indent=0):
+    if isinstance(obj, dict):
+        if all(not isinstance(v, (dict, list)) for v in obj.values()):
+            return json.dumps(obj, ensure_ascii=False)
+        
+        items = []
+        for key, value in obj.items():
+            formatted_value = format_json_compact(value, indent, current_indent + indent)
+            items.append(f'{" " * (current_indent + indent)}"{key}": {formatted_value}')
+        
+        return "{\n" + ",\n".join(items) + "\n" + " " * current_indent + "}"
+    
+    elif isinstance(obj, list):
+        if not obj:
+            return "[]"
+        
+        if all(isinstance(item, dict) and all(not isinstance(v, (dict, list)) for v in item.values()) for item in obj):
+            items = [format_json_compact(item, indent, current_indent + indent) for item in obj]
+            return "[\n" + " " * (current_indent + indent) + (",\n" + " " * (current_indent + indent)).join(items) + "\n" + " " * current_indent + "]"
+        
+        items = [format_json_compact(item, indent, current_indent + indent) for item in obj]
+        return "[\n" + ",\n".join(items) + "\n" + " " * current_indent + "]"
+    
+    else:
+        return json.dumps(obj, ensure_ascii=False)
+
 class Executor:
     def __init__(self, home, planner):
         self.home = home
@@ -33,7 +59,7 @@ class Executor:
             
             home_structure_with_appliances = self._get_home_structure_with_appliances()
             
-            prompt = self.prompt.load("batch_appliance_decision",
+            prompt = self.prompt.load("09_batch_appliance_decision",
                 member_name=member_name,
                 member_age=member.age,
                 member_occupation=member.occupation,
@@ -48,15 +74,17 @@ class Executor:
             prompts.append(prompt)
             members_data.append((member_name, member))
         
-        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=False)
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=True)
         
         for (member_name, member), prompt, result in zip(members_data, prompts, results):
             tokens = SubAgent.get_tokens()
             log_name = f"09_第九层_批量用电决策_{member_name}"
-            self._save_log(log_name, prompt, result, tokens)
+            result_content = result["content"] if isinstance(result, dict) else result
+            reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
+            self._save_log(log_name, prompt, result_content, tokens, reasoning_content)
             
             try:
-                decision_data = json.loads(result)
+                decision_data = json.loads(result_content)
                 
                 json_filename = f"09_第九层_批量用电决策_{member_name}.json"
                 json_filepath = os.path.join(self.log_dir, json_filename)
@@ -73,13 +101,7 @@ class Executor:
         structure = {}
         for room_name, room in self.home.rooms.items():
             structure[room_name] = {
-                "appliances": [
-                    {
-                        "name": appliance.name,
-                        "always_on": appliance.always_on
-                    }
-                    for appliance in room.appliances
-                ]
+                "appliances": [appliance.to_dict() for appliance in room.appliances]
             }
         return structure
     
@@ -89,7 +111,7 @@ class Executor:
                 return member
         return None
     
-    def _save_log(self, stage_name, prompt, response, tokens=None):
+    def _save_log(self, stage_name, prompt, response, tokens=None, reasoning_content=""):
         log_file = os.path.join(self.log_dir, f"{stage_name}.md")
         
         with open(log_file, "w", encoding="utf-8") as f:
@@ -105,8 +127,21 @@ class Executor:
             f.write(prompt)
             f.write("\n```\n\n")
             f.write("---\n\n")
+            
+            if reasoning_content:
+                f.write("## 思考过程\n\n")
+                f.write("```\n")
+                f.write(reasoning_content)
+                f.write("\n```\n\n")
+                f.write("---\n\n")
+            
             f.write("## LLM返回结果\n\n")
             f.write("```json\n")
-            f.write(response)
+            try:
+                response_obj = json.loads(response)
+                formatted_response = format_json_compact(response_obj)
+                f.write(formatted_response)
+            except:
+                f.write(response)
             f.write("\n```\n")
 

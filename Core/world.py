@@ -6,9 +6,9 @@ from .time import Time
 import random
 
 class World:
-    def __init__(self, home, start_date=None, day_type=None):
+    def __init__(self, home, start_date=None):
         self.home = home
-        self.time = Time(start_date, day_type) if start_date else Time()
+        self.time = Time(start_date) if start_date else Time()
         self.history = []
         self.current_planner = None
         self.current_executor = None
@@ -130,8 +130,8 @@ class World:
         self.time.prev_day()
         return self
     
-    def set_date(self, date_str, day_type=None):
-        self.time = Time(date_str, day_type)
+    def set_date(self, date_str):
+        self.time = Time(date_str)
         return self
     
     def add_holiday(self, date_str, holiday_name, description=""):

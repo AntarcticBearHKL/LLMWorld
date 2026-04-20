@@ -1,4 +1,7 @@
-from .environment import Home, Room, Appliance, Member, create_default_home
+from .environment import (
+    Home, Room, Member, create_default_home,
+    Appliance, OnDemandAppliance, ChargingAppliance, AlwaysOnAppliance
+)
 from .planner import Planner
 from .executor import Executor
 from .subagent import SubAgent

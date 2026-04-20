@@ -2,13 +2,13 @@ from datetime import datetime, timedelta
 import json
 
 class Time:
-    def __init__(self, date_str=None, day_type=None):
+    def __init__(self, date_str=None):
         if date_str:
             self.date = datetime.strptime(date_str, "%Y年%m月%d日")
         else:
             self.date = datetime.now()
         
-        self.day_type = day_type or self._auto_detect_day_type()
+        self.day_type = self._auto_detect_day_type()
         
         self.holidays = {}
         self.special_events = {}
