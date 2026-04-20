@@ -1,9 +1,36 @@
 import json
 import os
+import re
 from datetime import datetime
 from .prompt import Prompt
 from .subagent import SubAgent
 from .timeline import Timeline, visualize_timelines
+
+def format_json_compact(obj, indent=2, current_indent=0):
+    if isinstance(obj, dict):
+        if all(not isinstance(v, (dict, list)) for v in obj.values()):
+            return json.dumps(obj, ensure_ascii=False)
+        
+        items = []
+        for key, value in obj.items():
+            formatted_value = format_json_compact(value, indent, current_indent + indent)
+            items.append(f'{" " * (current_indent + indent)}"{key}": {formatted_value}')
+        
+        return "{\n" + ",\n".join(items) + "\n" + " " * current_indent + "}"
+    
+    elif isinstance(obj, list):
+        if not obj:
+            return "[]"
+        
+        if all(isinstance(item, dict) and all(not isinstance(v, (dict, list)) for v in item.values()) for item in obj):
+            items = [format_json_compact(item, indent, current_indent + indent) for item in obj]
+            return "[\n" + " " * (current_indent + indent) + (",\n" + " " * (current_indent + indent)).join(items) + "\n" + " " * current_indent + "]"
+        
+        items = [format_json_compact(item, indent, current_indent + indent) for item in obj]
+        return "[\n" + ",\n".join(items) + "\n" + " " * current_indent + "]"
+    
+    else:
+        return json.dumps(obj, ensure_ascii=False)
 
 class Planner:
     def __init__(self, home, run_id=None, date_str=None):
@@ -38,7 +65,7 @@ class Planner:
         members = []
         
         for member in self.home.members:
-            prompt = self.prompt.load("macro_plan",
+            prompt = self.prompt.load("01_macro_plan",
                 member_name=member.name,
                 member_age=member.age,
                 member_occupation=member.occupation,
@@ -53,14 +80,16 @@ class Planner:
             members.append(member)
         
         from .subagent import SubAgent
-        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=False)
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=True)
         
         for idx, (member, prompt, result) in enumerate(zip(members, prompts, results)):
             tokens = SubAgent.get_tokens()
-            self._save_log(f"01_第一层_宏观计划_{member.name}", prompt, result, tokens)
+            result_content = result["content"] if isinstance(result, dict) else result
+            reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
+            self._save_log(f"01_第一层_宏观计划_{member.name}", prompt, result_content, tokens, reasoning_content)
             
             try:
-                plan_data = json.loads(result)
+                plan_data = json.loads(result_content)
                 self.macro_plans[member.name] = plan_data
                 
                 timeline = Timeline(member.name)
@@ -82,15 +111,17 @@ class Planner:
                 activity_desc = activity['activity']
                 plans_text += f"  {time_str}: {location} - {activity_desc}\n"
         
-        prompt = self.prompt.load("interaction_analysis", plans_text=plans_text)
+        prompt = self.prompt.load("02_interaction_analysis", plans_text=plans_text)
         
-        result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
+        result = SubAgent.single_call(prompt, json_mode=True, thinking=True)
         tokens = SubAgent.get_tokens()
         
-        self._save_log("02_第二层_协调识别", prompt, result, tokens)
+        result_content = result["content"] if isinstance(result, dict) else result
+        reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
+        self._save_log("02_第二层_协调识别", prompt, result_content, tokens, reasoning_content)
         
         try:
-            coordination_data = json.loads(result)
+            coordination_data = json.loads(result_content)
             self.coordinations = coordination_data.get("coordinations", [])
             return self.coordinations
         except:
@@ -155,7 +186,7 @@ class Planner:
             
             current_activities = timeline.to_dict()["activities"]
             
-            prompt = self.prompt.load("fill_empty_slots",
+            prompt = self.prompt.load("04_fill_empty_slots",
                 member_name=member_name,
                 member_age=member.age,
                 member_occupation=member.occupation,
@@ -170,15 +201,17 @@ class Planner:
         if not prompts:
             return self.timelines
         
-        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=False)
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=True)
         
         for (member_name, timeline), prompt, result in zip(members_data, prompts, results):
             tokens = SubAgent.get_tokens()
             log_name = f"04_第四层_填充空余时间_{member_name}"
-            self._save_log(log_name, prompt, result, tokens)
+            result_content = result["content"] if isinstance(result, dict) else result
+            reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
+            self._save_log(log_name, prompt, result_content, tokens, reasoning_content)
             
             try:
-                fill_data = json.loads(result)
+                fill_data = json.loads(result_content)
                 fill_activities = fill_data.get("fill_activities", [])
                 
                 for activity in fill_activities:
@@ -202,16 +235,18 @@ class Planner:
             for slot in timeline.slots:
                 plans_text += f"  {slot._format_time_range()}: {slot.location} - {slot.activity}\n"
         
-        prompt = self.prompt.load("coordination_verification", plans_text=plans_text)
+        prompt = self.prompt.load("05_coordination_verification", plans_text=plans_text)
         
-        result = SubAgent.single_call(prompt, json_mode=True, thinking=False)
+        result = SubAgent.single_call(prompt, json_mode=True, thinking=True)
         tokens = SubAgent.get_tokens()
         
         log_name = f"05_第五层_协调验证_第{self.verification_iteration}次"
-        self._save_log(log_name, prompt, result, tokens)
+        result_content = result["content"] if isinstance(result, dict) else result
+        reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
+        self._save_log(log_name, prompt, result_content, tokens, reasoning_content)
         
         try:
-            verification_data = json.loads(result)
+            verification_data = json.loads(result_content)
             new_coordinations = verification_data.get("coordinations", [])
             
             if not new_coordinations:
@@ -272,7 +307,7 @@ class Planner:
                 if other_name != member_name:
                     other_timelines[other_name] = other_timeline.to_dict()["activities"]
             
-            prompt = self.prompt.load("enrich_activities",
+            prompt = self.prompt.load("08_enrich_activities",
                 member_name=member_name,
                 member_age=member.age,
                 member_occupation=member.occupation,
@@ -288,15 +323,17 @@ class Planner:
             prompts.append(prompt)
             members.append((member_name, timeline))
         
-        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=False)
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=True)
         
         for (member_name, timeline), prompt, result in zip(members, prompts, results):
             tokens = SubAgent.get_tokens()
             log_name = f"08_第八层_丰富行为描述_{member_name}"
-            self._save_log(log_name, prompt, result, tokens)
+            result_content = result["content"] if isinstance(result, dict) else result
+            reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
+            self._save_log(log_name, prompt, result_content, tokens, reasoning_content)
             
             try:
-                enriched_data = json.loads(result)
+                enriched_data = json.loads(result_content)
                 enriched_activities = enriched_data.get("enriched_activities", [])
                 
                 for i, slot in enumerate(timeline.slots):
@@ -315,7 +352,7 @@ class Planner:
                 return member
         return None
     
-    def _save_log(self, stage_name, prompt, response, tokens=None):
+    def _save_log(self, stage_name, prompt, response, tokens=None, reasoning_content=""):
         log_file = os.path.join(self.log_dir, f"{stage_name}.md")
         
         with open(log_file, "w", encoding="utf-8") as f:
@@ -331,9 +368,22 @@ class Planner:
             f.write(prompt)
             f.write("\n```\n\n")
             f.write("---\n\n")
+            
+            if reasoning_content:
+                f.write("## 思考过程\n\n")
+                f.write("```\n")
+                f.write(reasoning_content)
+                f.write("\n```\n\n")
+                f.write("---\n\n")
+            
             f.write("## LLM返回结果\n\n")
             f.write("```json\n")
-            f.write(response)
+            try:
+                response_obj = json.loads(response)
+                formatted_response = format_json_compact(response_obj)
+                f.write(formatted_response)
+            except:
+                f.write(response)
             f.write("\n```\n")
         
         print(f"日志已保存: {log_file}")

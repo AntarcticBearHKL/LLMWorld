@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import re
 from dotenv import load_dotenv
 from threading import Thread, Lock
 from queue import Queue
@@ -14,13 +15,28 @@ DEFAULT_MODEL_DEEPSEEK = 'deepseek-chat'
 DEFAULT_MODEL_REASONER = 'deepseek-reasoner'
 DEFAULT_MODEL_GLM = 'glm-4.7'
 DEFAULT_TEMPERATURE = 1.0
-DEFAULT_MAX_TOKENS = 8192
+DEFAULT_MAX_TOKENS = 64000
 
 class SubAgent:
     _lock = Lock()
     _total_prompt_cache_hit_tokens = 0
     _total_prompt_cache_miss_tokens = 0
     _total_completion_tokens = 0
+    
+    @staticmethod
+    def _clean_json_response(text: str) -> str:
+        text = text.strip()
+        
+        if text.startswith('```'):
+            lines = text.split('\n')
+            if lines[0].startswith('```'):
+                lines = lines[1:]
+            if lines and lines[-1].strip() == '```':
+                lines = lines[:-1]
+            text = '\n'.join(lines)
+        
+        text = text.strip()
+        return text
     
     @staticmethod
     def _update_tokens(cache_hit, cache_miss, completion):
@@ -95,6 +111,7 @@ class SubAgent:
                 SubAgent._update_tokens(cache_hit, cache_miss, completion)
             
             content = result["choices"][0]["message"]["content"].strip()
+            content = SubAgent._clean_json_response(content)
             return content
         except requests.exceptions.RequestException as e:
             error_msg = "Network Error: " + str(e)
@@ -110,7 +127,7 @@ class SubAgent:
             return error_msg
     
     @staticmethod
-    def call_deepseek(prompt: str, json_mode: bool = False, thinking: bool = False, api_key: str = None, model: str = None) -> str:
+    def call_deepseek(prompt: str, json_mode: bool = False, thinking: bool = False, api_key: str = None, model: str = None) -> dict:
         api_key = api_key or DEEPSEEK_APIKEY
         if not api_key:
             raise ValueError("DeepSeek API key not found. Please set DEEPSEEK_APIKEY environment variable.")
@@ -142,19 +159,19 @@ class SubAgent:
             if response.status_code != 200:
                 error_msg = "DeepSeek API Error " + str(response.status_code) + ": " + response.text
                 print("[DeepSeek Error] " + error_msg)
-                return error_msg
+                return {"content": error_msg, "reasoning_content": "", "thinking": False}
             
             result = response.json()
             
             if "error" in result:
                 error_msg = "DeepSeek Error: " + result['error']['message']
                 print("[DeepSeek Error] " + error_msg)
-                return error_msg
+                return {"content": error_msg, "reasoning_content": "", "thinking": False}
             
             if "choices" not in result or not result["choices"]:
                 error_msg = "DeepSeek Error: No choices in response. Full response: " + str(result)
                 print("[DeepSeek Error] " + error_msg)
-                return error_msg
+                return {"content": error_msg, "reasoning_content": "", "thinking": False}
             
             if "usage" in result:
                 cache_hit = result["usage"].get("prompt_cache_hit_tokens", 0)
@@ -163,19 +180,29 @@ class SubAgent:
                 SubAgent._update_tokens(cache_hit, cache_miss, completion)
             
             content = result["choices"][0]["message"]["content"].strip()
-            return content
+            content = SubAgent._clean_json_response(content)
+            
+            reasoning_content = ""
+            if thinking and "reasoning_content" in result["choices"][0]["message"]:
+                reasoning_content = result["choices"][0]["message"]["reasoning_content"]
+            
+            return {
+                "content": content,
+                "reasoning_content": reasoning_content,
+                "thinking": thinking
+            }
         except requests.exceptions.RequestException as e:
             error_msg = "Network Error: " + str(e)
             print("[DeepSeek Network Error] " + error_msg)
-            return error_msg
+            return {"content": error_msg, "reasoning_content": "", "thinking": False}
         except json.JSONDecodeError as e:
             error_msg = "JSON Error: " + str(e)
             print("[DeepSeek JSON Error] " + error_msg)
-            return error_msg
+            return {"content": error_msg, "reasoning_content": "", "thinking": False}
         except Exception as e:
             error_msg = "DeepSeek Error: " + str(e)
             print("[DeepSeek Exception] " + error_msg)
-            return error_msg
+            return {"content": error_msg, "reasoning_content": "", "thinking": False}
     
     @staticmethod
     def _worker(prompt: str, result_queue: Queue, json_mode: bool, thinking: bool,
@@ -185,7 +212,7 @@ class SubAgent:
     
     @staticmethod
     def parallel_call(prompts: List[str], json_mode: bool = False, thinking: bool = False,
-                     api_key: str = None, model: str = None) -> List[str]:
+                     api_key: str = None, model: str = None) -> List[dict]:
         if not prompts:
             return []
         
@@ -210,5 +237,5 @@ class SubAgent:
     
     @staticmethod
     def single_call(prompt: str, json_mode: bool = False, thinking: bool = False,
-                   api_key: str = None, model: str = None) -> str:
+                   api_key: str = None, model: str = None) -> dict:
         return SubAgent.call_deepseek(prompt, json_mode, thinking, api_key, model)

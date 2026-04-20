@@ -2,7 +2,7 @@ from Core import create_default_home, World
 
 home = create_default_home()
 
-world = World(home, start_date="2025年4月13日", day_type="工作日")
+world = World(home, start_date="2025年4月13日")
 
 num_days = 5
 
