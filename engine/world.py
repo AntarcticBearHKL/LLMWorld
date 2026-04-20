@@ -1,9 +1,9 @@
-from .environment import Home
+from .home import Home
 from .planner import Planner
 from .executor import Executor
 from .energy_calculator import EnergyCalculator
 from .subagent import SubAgent
-from .time import Time
+from .environment import Time
 import random
 
 class World:

@@ -1,28 +1,28 @@
-from .base_appliance import BaseAppliance
-from .tv import TV
-from .ac import AirConditioner
-from .fridge import Fridge
+from .base import BaseAppliance
+from .television import TV
+from .air_conditioner import AirConditioner
+from .refrigerator import Refrigerator
 from .rice_cooker import RiceCooker
 from .microwave import Microwave
 from .induction_cooker import InductionCooker
-from .hood import Hood
+from .range_hood import RangeHood
 from .light import Light
 from .lamp import Lamp
 from .computer import Computer
 from .phone import Phone
-from .ev import ElectricVehicle
-from .heater import WaterHeater
-from .washer import WashingMachine
-from .vacuum import VacuumCleaner
+from .electric_vehicle import ElectricVehicle
+from .water_heater import WaterHeater
+from .washing_machine import WashingMachine
+from .vacuum_cleaner import VacuumCleaner
 
 APPLIANCE_REGISTRY = {
     "电视": TV,
     "空调": AirConditioner,
-    "冰箱": Fridge,
+    "冰箱": Refrigerator,
     "电饭煲": RiceCooker,
     "微波炉": Microwave,
     "电磁炉": InductionCooker,
-    "油烟机": Hood,
+    "油烟机": RangeHood,
     "灯": Light,
     "台灯": Lamp,
     "电脑": Computer,

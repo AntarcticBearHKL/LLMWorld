@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
-from appliance import create_appliance
+from appliances import create_appliance
 
 class Room:
     def __init__(self, name):

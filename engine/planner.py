@@ -37,14 +37,14 @@ class Planner:
         self.timelines = {}
         self.prompt = Prompt()
         
-        os.makedirs("output", exist_ok=True)
+        os.makedirs("logs", exist_ok=True)
         
         if run_id and date_str:
-            run_dir = os.path.join("output", f"{run_id}_logs")
+            run_dir = os.path.join("logs", f"{run_id}_logs")
             os.makedirs(run_dir, exist_ok=True)
             self.log_dir = os.path.join(run_dir, date_str)
         else:
-            self.log_dir = os.path.join("output", f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
+            self.log_dir = os.path.join("logs", f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
         os.makedirs(self.log_dir, exist_ok=True)
     
     def generate_plans(self, time_obj):
