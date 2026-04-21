@@ -1,0 +1,19 @@
+{
+  "world_id": "109",
+  "created_at": "2026-04-21 22:32:45",
+  "user_prompt": "位于墨尔本的中产家庭，居住在clayton",
+  "district": {
+    "postcode": "3168",
+    "city": "Melbourne",
+    "district": "Clayton",
+    "economic_level": "中"
+  },
+  "households": [
+    {
+      "house_id": "house_0001",
+      "type": "小家庭/丁克家庭",
+      "members_count": 2,
+      "rooms_count": 6
+    }
+  ]
+}

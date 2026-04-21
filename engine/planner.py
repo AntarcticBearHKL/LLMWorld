@@ -32,19 +32,17 @@ def format_json_compact(obj, indent=2, current_indent=0):
         return json.dumps(obj, ensure_ascii=False)
 
 class Planner:
-    def __init__(self, home, run_id=None, date_str=None):
+    def __init__(self, home, world_id=None, postcode=None, house_id=None, date_str=None):
         self.home = home
         self.timelines = {}
         self.prompt = Prompt()
         
-        os.makedirs("logs", exist_ok=True)
+        os.makedirs("outputs", exist_ok=True)
         
-        if run_id and date_str:
-            run_dir = os.path.join("logs", f"{run_id}_logs")
-            os.makedirs(run_dir, exist_ok=True)
-            self.log_dir = os.path.join(run_dir, date_str)
+        if world_id and postcode and house_id and date_str:
+            self.log_dir = os.path.join("outputs", world_id, postcode, house_id, date_str)
         else:
-            self.log_dir = os.path.join("logs", f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
+            self.log_dir = os.path.join("outputs", f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
         os.makedirs(self.log_dir, exist_ok=True)
     
     def generate_plans(self, time_obj):
@@ -59,7 +57,7 @@ class Planner:
         members = []
         
         for member in self.home.members:
-            prompt = self.prompt.load("01_macro_plan",
+            prompt = self.prompt.load("simulate_step1_macro_plan",
                 member_name=member.name,
                 member_age=member.age,
                 member_occupation=member.occupation,
@@ -100,6 +98,20 @@ class Planner:
         
         print(f"\n开始渐进式协调，基准成员：{member_names[0]}")
         
+        exclusive_resources = self.home.get_exclusive_resources()
+        exclusive_info = ""
+        if exclusive_resources:
+            exclusive_info = "\n\n## 家庭独占资源\n\n"
+            for resource in exclusive_resources:
+                exclusive_info += f"### {resource['name']}\n"
+                exclusive_info += f"- 位置：{resource.get('location', '家中')}\n"
+                if resource.get('owner'):
+                    exclusive_info += f"- 所有者：{resource['owner']}\n"
+                exclusive_info += "- 使用规则：\n"
+                for rule in resource['rules']:
+                    exclusive_info += f"  - {rule}\n"
+                exclusive_info += "\n"
+        
         for i in range(1, len(member_names)):
             current_member = member_names[i]
             coordinated_members = member_names[:i]
@@ -120,7 +132,7 @@ class Planner:
             
             member = self._get_member(current_member)
             
-            prompt = self.prompt.load("02_progressive_coordination",
+            prompt_content = self.prompt.load("simulate_step2_progressive_coordination",
                 current_member_name=current_member,
                 current_member_age=member.age,
                 current_member_occupation=member.occupation,
@@ -130,12 +142,18 @@ class Planner:
                 current_timeline=current_timeline_text
             )
             
-            result = SubAgent.single_call(prompt, json_mode=True, thinking=True)
+            if exclusive_resources:
+                prompt_content = prompt_content.replace(
+                    "## 独占资源约束",
+                    exclusive_info + "\n## 协调要求"
+                )
+            
+            result = SubAgent.single_call(prompt_content, json_mode=True, thinking=True)
             tokens = SubAgent.get_tokens()
             
             result_content = result["content"] if isinstance(result, dict) else result
             reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
-            self._save_log(f"02_第二层_渐进协调_{i}_{current_member}", prompt, result_content, tokens, reasoning_content)
+            self._save_log(f"02_第二层_渐进协调_{i}_{current_member}", prompt_content, result_content, tokens, reasoning_content)
             
             try:
                 coordination_data = json.loads(result_content)
@@ -172,7 +190,7 @@ class Planner:
                 if other_name != member_name:
                     other_timelines[other_name] = other_timeline.to_dict()["activities"]
             
-            prompt = self.prompt.load("03_enrich_activities",
+            prompt = self.prompt.load("simulate_step3_enrich_activities",
                 member_name=member_name,
                 member_age=member.age,
                 member_occupation=member.occupation,

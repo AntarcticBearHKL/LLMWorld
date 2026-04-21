@@ -93,6 +93,30 @@ class Home:
     def get_members_info(self):
         return [member.to_dict() for member in self.members]
     
+    def get_exclusive_resources(self):
+        exclusive_resources = []
+        for appliance in self.appliance_registry.values():
+            if hasattr(appliance, 'is_exclusive') and appliance.is_exclusive:
+                exclusive_resources.append({
+                    "unique_id": appliance.unique_id,
+                    "name": appliance.name,
+                    "type": appliance.appliance_type,
+                    "owner": appliance.owner,
+                    "location": appliance.location,
+                    "rules": self._get_exclusive_rules(appliance)
+                })
+        return exclusive_resources
+    
+    def _get_exclusive_rules(self, appliance):
+        if appliance.name == "电动汽车":
+            return [
+                "同一时间只能一人使用",
+                "使用者负责开出和归还",
+                "其他人可以选择同乘",
+                "回家时只能由开出去的人开回来，或顺路接回其他人"
+            ]
+        return ["同一时间只能一人使用"]
+    
     def get_total_energy_consumption(self):
         total = 0
         for appliance in self.appliance_registry.values():

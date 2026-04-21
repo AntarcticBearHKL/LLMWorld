@@ -1,0 +1,42 @@
+{
+  "appliance_info": {
+    "unique_id": "david_chen_电脑",
+    "name": "电脑",
+    "type": "on_demand",
+    "power_watts": 200
+  },
+  "usage_summary": {
+    "total_minutes": 15,
+    "total_hours": 0.25,
+    "total_energy_kwh": 0.05
+  },
+  "usage_segments": [
+    {
+      "time_range": "07:40-07:55",
+      "start_minutes": 460,
+      "end_minutes": 475,
+      "duration_minutes": 15,
+      "action": "use",
+      "location": "厨房",
+      "member": "David Chen",
+      "energy_kwh": 0.05
+    }
+  ],
+  "minute_by_minute_usage": [
+    "07:40",
+    "07:41",
+    "07:42",
+    "07:43",
+    "07:44",
+    "07:45",
+    "07:46",
+    "07:47",
+    "07:48",
+    "07:49",
+    "07:50",
+    "07:51",
+    "07:52",
+    "07:53",
+    "07:54"
+  ]
+}

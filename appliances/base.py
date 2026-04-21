@@ -1,57 +1,45 @@
 from abc import ABC, abstractmethod
 
 class BaseAppliance(ABC):
-    def __init__(self, name, power_watts, appliance_type, location=None, owner=None):
+    def __init__(self, name, power_watts, appliance_type, brand=None, age=0, 
+                 is_exclusive=False, location=None, owner=None, location_id=None, owner_id=None):
         self.name = name
         self.power_watts = power_watts
         self.appliance_type = appliance_type
+        self.brand = brand
+        self.age = age
+        self.is_exclusive = is_exclusive
         self.location = location
         self.owner = owner
+        self.location_id = location_id
+        self.owner_id = owner_id
         self.usage_log = []
         self.unique_id = self._generate_unique_id()
     
     def _generate_unique_id(self):
         parts = []
-        if self.location:
-            location_map = {
-                "客厅": "living",
-                "厨房": "kitchen",
-                "卧室1": "bedroom1",
-                "卧室2": "bedroom2",
-                "卧室3": "bedroom3",
-                "卫生间": "bathroom",
-                "车库": "garage"
-            }
-            parts.append(location_map.get(self.location, self.location.lower()))
         
-        if self.owner:
-            owner_map = {
-                "爸爸": "dad",
-                "妈妈": "mom",
-                "儿子": "son"
-            }
-            parts.append(owner_map.get(self.owner, self.owner.lower()))
+        if self.location_id:
+            parts.append(self.location_id)
+        elif self.location:
+            parts.append(self._to_snake_case(self.location))
         
-        name_map = {
-            "电视": "tv",
-            "空调": "ac",
-            "冰箱": "fridge",
-            "电饭煲": "rice_cooker",
-            "微波炉": "microwave",
-            "电磁炉": "induction",
-            "油烟机": "hood",
-            "灯": "light",
-            "台灯": "lamp",
-            "电脑": "computer",
-            "手机": "phone",
-            "电动汽车": "ev",
-            "热水器": "heater",
-            "洗衣机": "washer",
-            "吸尘器": "vacuum"
-        }
-        parts.append(name_map.get(self.name, self.name.lower()))
+        if self.owner_id:
+            parts.append(self.owner_id)
+        elif self.owner:
+            parts.append(self._to_snake_case(self.owner))
+        
+        parts.append(self._to_snake_case(self.name))
         
         return "_".join(parts)
+    
+    def _to_snake_case(self, text):
+        import re
+        text = text.strip()
+        text = re.sub(r'[^\w\s-]', '', text)
+        text = re.sub(r'[\s-]+', '_', text)
+        text = text.lower()
+        return text
     
     def calculate_energy(self, start_minutes, end_minutes, power_source="home", **kwargs):
         duration_minutes = end_minutes - start_minutes
@@ -68,6 +56,16 @@ class BaseAppliance(ABC):
     
     @abstractmethod
     def get_available_actions(self):
+        pass
+    
+    @classmethod
+    @abstractmethod
+    def get_config_schema(cls):
+        pass
+    
+    @classmethod
+    @abstractmethod
+    def from_config(cls, config, location=None, owner=None, location_id=None, owner_id=None):
         pass
     
     def log_usage(self, start_time, end_time, energy_kwh, **kwargs):
@@ -87,13 +85,18 @@ class BaseAppliance(ABC):
             "name": self.name,
             "type": self.appliance_type,
             "power_watts": self.power_watts,
+            "brand": self.brand,
+            "age": self.age,
+            "is_exclusive": self.is_exclusive,
             "available_actions": self.get_available_actions()
         }
 
 
 class OnDemandAppliance(BaseAppliance):
-    def __init__(self, name, power_watts, location=None, owner=None):
-        super().__init__(name, power_watts, "on_demand", location, owner)
+    def __init__(self, name, power_watts, brand=None, age=0, is_exclusive=False, 
+                 location=None, owner=None, location_id=None, owner_id=None):
+        super().__init__(name, power_watts, "on_demand", brand, age, is_exclusive,
+                        location, owner, location_id, owner_id)
     
     def get_available_actions(self):
         return ["use", "idle"]
@@ -105,12 +108,16 @@ class OnDemandAppliance(BaseAppliance):
             "use": "使用该设备（耗电）",
             "idle": "不使用该设备（不耗电）"
         }
+        if self.is_exclusive:
+            base["exclusive_note"] = "独占资源：同一时间只能一人使用"
         return base
 
 
 class ChargingAppliance(BaseAppliance):
-    def __init__(self, name, power_watts, location=None, owner=None):
-        super().__init__(name, power_watts, "charging", location, owner)
+    def __init__(self, name, power_watts, brand=None, age=0, is_exclusive=False,
+                 location=None, owner=None, location_id=None, owner_id=None):
+        super().__init__(name, power_watts, "charging", brand, age, is_exclusive,
+                        location, owner, location_id, owner_id)
     
     def get_available_actions(self):
         return ["charge_home", "charge_external", "use", "idle"]
@@ -126,12 +133,16 @@ class ChargingAppliance(BaseAppliance):
                 "idle": "不使用也不充电"
             }
         })
+        if self.is_exclusive:
+            base["exclusive_note"] = "独占资源：同一时间只能一人使用，使用者负责开出和归还"
         return base
 
 
 class AlwaysOnAppliance(BaseAppliance):
-    def __init__(self, name, power_watts, daily_energy_kwh=None, location=None, owner=None):
-        super().__init__(name, power_watts, "always_on", location, owner)
+    def __init__(self, name, power_watts, daily_energy_kwh=None, brand=None, age=0, 
+                 location=None, owner=None, location_id=None, owner_id=None):
+        super().__init__(name, power_watts, "always_on", brand, age, False,
+                        location, owner, location_id, owner_id)
         self.daily_energy_kwh = daily_energy_kwh if daily_energy_kwh is not None else (power_watts / 1000.0) * 24
     
     def _calculate_energy_logic(self, duration_hours, **kwargs):

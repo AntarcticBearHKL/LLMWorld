@@ -1,29 +1,45 @@
 from engine import Home, Room, Member, World, DateHelper, WeatherAPI
 import json
 import os
+import sys
 from datetime import datetime
 
-def load_config():
-    if not os.path.exists('members'):
-        print("错误：未找到 members/ 目录")
-        print("请先运行 'python generate.py' 生成配置")
+def load_world(world_id):
+    world_path = os.path.join('worlds', world_id)
+    
+    if not os.path.exists(world_path):
+        print(f"错误：未找到世界 '{world_id}'")
+        print(f"请先运行 'python generate.py' 生成世界")
         exit(1)
     
-    with open('members/environment.json', 'r', encoding='utf-8') as f:
-        environment = json.load(f)
+    with open(os.path.join(world_path, 'world.json'), 'r', encoding='utf-8') as f:
+        world_meta = json.load(f)
     
-    with open('members/home.json', 'r', encoding='utf-8') as f:
-        home_config = json.load(f)
+    postcode = world_meta['district']['postcode']
+    district_path = os.path.join(world_path, postcode)
     
-    with open('members/members.json', 'r', encoding='utf-8') as f:
-        members_config = json.load(f)
+    with open(os.path.join(district_path, 'district.json'), 'r', encoding='utf-8') as f:
+        district_info = json.load(f)
     
-    with open('members/holidays.json', 'r', encoding='utf-8') as f:
-        holidays = json.load(f)
+    households = []
+    for house_info in world_meta['households']:
+        house_id = house_info['house_id']
+        house_path = os.path.join(district_path, house_id)
+        
+        with open(os.path.join(house_path, 'household.json'), 'r', encoding='utf-8') as f:
+            household = json.load(f)
+        
+        households.append({
+            'house_id': house_id,
+            'household': household
+        })
     
-    return environment, home_config, members_config, holidays
+    return world_meta, district_info, households
 
-def create_home_from_config(home_config, members_config):
+def create_home_from_household(household):
+    home_config = household['home']
+    members_config = household['members']
+    
     home = Home(home_config['name'])
     
     for room_config in home_config['rooms']:
@@ -49,9 +65,51 @@ def create_home_from_config(home_config, members_config):
     return home
 
 def main():
-    environment, home_config, members_config, holidays = load_config()
+    if len(sys.argv) < 2:
+        print("错误：请指定世界ID")
+        print("用法: python simulate.py <world_id>")
+        
+        worlds_dir = 'worlds'
+        if os.path.exists(worlds_dir):
+            worlds = [d for d in os.listdir(worlds_dir) if os.path.isdir(os.path.join(worlds_dir, d))]
+            if worlds:
+                print(f"\n可用的世界:")
+                for w in worlds:
+                    print(f"  - {w}")
+        exit(1)
     
-    home = create_home_from_config(home_config, members_config)
+    world_id = sys.argv[1]
+    
+    print("="*60)
+    print("世界模拟系统")
+    print("="*60)
+    print(f"世界ID: {world_id}")
+    
+    world_meta, district_info, households = load_world(world_id)
+    
+    print(f"\n世界信息:")
+    print(f"  地区: {district_info['location']['city']} - {district_info['location']['district']}")
+    print(f"  邮编: {district_info['postcode']}")
+    print(f"  家庭数: {len(households)}")
+    
+    if len(households) > 1:
+        print(f"\n可用的家庭:")
+        for i, h in enumerate(households):
+            household = h['household']
+            print(f"  {i+1}. {h['house_id']} - {len(household['members'])}名成员, {len(household['home']['rooms'])}个房间")
+        
+        house_idx = int(input(f"\n请选择要模拟的家庭（1-{len(households)}）：").strip() or "1") - 1
+        house_idx = max(0, min(house_idx, len(households) - 1))
+    else:
+        house_idx = 0
+    
+    selected_house = households[house_idx]
+    household = selected_house['household']
+    
+    print(f"\n选择的家庭: {selected_house['house_id']}")
+    print(f"  成员: {', '.join([m['name'] for m in household['members']])}")
+    
+    home = create_home_from_household(household)
     
     start_date = input("\n请输入开始日期（格式：2025年4月20日，留空使用今天）：").strip()
     if not start_date:
@@ -60,9 +118,12 @@ def main():
     num_days_input = input("请输入模拟天数（默认5天）：").strip()
     num_days = int(num_days_input) if num_days_input else 5
     
-    world = World(home, start_date=start_date)
+    postcode = district_info['postcode']
+    house_id = selected_house['house_id']
     
-    location = environment['location']
+    world = World(home, world_id=world_id, postcode=postcode, house_id=house_id, start_date=start_date)
+    
+    location = district_info['location']
     
     for day in range(num_days):
         print(f"\n{'#'*60}")
@@ -71,10 +132,14 @@ def main():
         
         current_date = world.time.date
         date_str = current_date.strftime('%Y-%m-%d')
+        year = current_date.year
+        
+        from engine.generator import EnvironmentGenerator
+        generator = EnvironmentGenerator()
+        holidays = generator.get_holiday_data(location, year)
         
         is_holiday = DateHelper.is_holiday(current_date, holidays)
         is_weekend = DateHelper.is_weekend(current_date)
-        is_workday = DateHelper.is_workday(current_date, holidays)
         
         holiday_name = DateHelper.get_holiday_name(current_date, holidays)
         
@@ -95,8 +160,10 @@ def main():
         print(f"温度：{weather_data['temperature']['min']}°C - {weather_data['temperature']['max']}°C")
         print(f"湿度：{weather_data['humidity']}%")
         
+        season = household.get('season', '春天')
+        
         world.simulate_day(
-            season=environment.get('season', '春天'),
+            season=season,
             weather=weather_data['condition'],
             temperature=weather_data['temperature']['avg'],
             verbose=True

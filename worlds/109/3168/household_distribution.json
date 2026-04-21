@@ -1,0 +1,41 @@
+{
+  "total_households": 10000,
+  "household_types": [
+    {
+      "type": "学生/年轻专业人士",
+      "count": 3000,
+      "percentage": 30,
+      "description": "主要由莫纳什大学的学生、研究生及刚工作的年轻专业人士构成。流动性较强，注重交通便利、生活成本及靠近校园。高度多元文化，生活方式较为活跃、社交频繁。",
+      "typical_members": 1,
+      "typical_housing": "公寓",
+      "typical_size": "50-80平方米"
+    },
+    {
+      "type": "小家庭/丁克家庭",
+      "count": 2500,
+      "percentage": 25,
+      "description": "通常为夫妻二人或带有一个年幼孩子的核心家庭。收入稳定，注重社区安全、休闲设施（如公园）和生活便利性。追求工作与生活的平衡，文化背景多样。",
+      "typical_members": 2,
+      "typical_housing": "联排别墅",
+      "typical_size": "100-150平方米"
+    },
+    {
+      "type": "中产核心家庭",
+      "count": 2500,
+      "percentage": 25,
+      "description": "典型的有孩家庭，通常有1-3个学龄或青少年子女。父母多从事专业或技术工作，高度重视子女教育质量及社区内学校资源。生活方式以家庭为中心，积极参与社区和学校活动。",
+      "typical_members": 4,
+      "typical_housing": "独立屋",
+      "typical_size": "180-250平方米"
+    },
+    {
+      "type": "多代同堂大家庭",
+      "count": 2000,
+      "percentage": 20,
+      "description": "常见于亚裔、印度裔等移民社区，由祖父母、父母及子女共同居住。家庭凝聚力强，重视传统文化传承。对住房空间需求大，需要多个卧室和公共活动区域，并偏好带有私人院落的房屋。",
+      "typical_members": 5,
+      "typical_housing": "独立屋",
+      "typical_size": "250-300平方米"
+    }
+  ]
+}

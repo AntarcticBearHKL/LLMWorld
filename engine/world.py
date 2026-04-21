@@ -5,18 +5,18 @@ from .energy_calculator import EnergyCalculator
 from .subagent import SubAgent
 from .environment import Time
 import random
+from datetime import datetime
 
 class World:
-    def __init__(self, home, start_date=None):
+    def __init__(self, home, world_id=None, postcode=None, house_id=None, start_date=None):
         self.home = home
         self.time = Time(start_date) if start_date else Time()
         self.history = []
         self.current_planner = None
         self.current_executor = None
-        self.run_id = self._generate_run_id()
-    
-    def _generate_run_id(self):
-        return str(random.randint(100000, 999999))
+        self.world_id = world_id
+        self.postcode = postcode
+        self.house_id = house_id
     
     def simulate_day(self, season="夏天", weather="晴天", temperature=28, verbose=True):
         if verbose:
@@ -25,7 +25,8 @@ class World:
             print(f"{'='*60}\n")
         
         date_str = self.time.date.strftime('%Y%m%d')
-        planner = Planner(self.home, run_id=self.run_id, date_str=date_str)
+        planner = Planner(self.home, world_id=self.world_id, postcode=self.postcode, 
+                         house_id=self.house_id, date_str=date_str)
         self.current_planner = planner
         
         if verbose:
@@ -146,7 +147,7 @@ class World:
     
     def _print_summary(self):
         print("\n模拟统计：")
-        print(f"  运行ID：{self.run_id}")
+        print(f"  世界ID：{self.world_id}")
         print(f"  总天数：{len(self.history)}")
         
         tokens = self.get_total_tokens()

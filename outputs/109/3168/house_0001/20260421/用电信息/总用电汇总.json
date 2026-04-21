@@ -1,0 +1,160 @@
+{
+  "total_appliances": 22,
+  "total_energy_kwh": 26.8437,
+  "appliances": [
+    {
+      "unique_id": "主卧室_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 0.47,
+      "total_energy_kwh": 0.028
+    },
+    {
+      "unique_id": "主卧室_台灯",
+      "name": "台灯",
+      "type": "on_demand",
+      "total_hours": 0.98,
+      "total_energy_kwh": 0.0295
+    },
+    {
+      "unique_id": "主卧室_空调",
+      "name": "空调",
+      "type": "on_demand",
+      "total_hours": 0.0,
+      "total_energy_kwh": 0
+    },
+    {
+      "unique_id": "david_chen_手机",
+      "name": "手机",
+      "type": "charging",
+      "total_hours": 12.08,
+      "total_energy_kwh": 0.2417
+    },
+    {
+      "unique_id": "浴室_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 0.95,
+      "total_energy_kwh": 0.038
+    },
+    {
+      "unique_id": "浴室_热水器",
+      "name": "热水器",
+      "type": "on_demand",
+      "total_hours": 0.72,
+      "total_energy_kwh": 2.15
+    },
+    {
+      "unique_id": "浴室_洗衣机",
+      "name": "洗衣机",
+      "type": "on_demand",
+      "total_hours": 0.0,
+      "total_energy_kwh": 0
+    },
+    {
+      "unique_id": "厨房_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 2.15,
+      "total_energy_kwh": 0.1433
+    },
+    {
+      "unique_id": "厨房_微波炉",
+      "name": "微波炉",
+      "type": "on_demand",
+      "total_hours": 0.23,
+      "total_energy_kwh": 0.2333
+    },
+    {
+      "unique_id": "厨房_电磁炉",
+      "name": "电磁炉",
+      "type": "on_demand",
+      "total_hours": 0.95,
+      "total_energy_kwh": 2.8667
+    },
+    {
+      "unique_id": "厨房_油烟机",
+      "name": "油烟机",
+      "type": "on_demand",
+      "total_hours": 1.43,
+      "total_energy_kwh": 0.3833
+    },
+    {
+      "unique_id": "厨房_电饭煲",
+      "name": "电饭煲",
+      "type": "on_demand",
+      "total_hours": 1.43,
+      "total_energy_kwh": 1.5333
+    },
+    {
+      "unique_id": "david_chen_电脑",
+      "name": "电脑",
+      "type": "on_demand",
+      "total_hours": 7.43,
+      "total_energy_kwh": 1.4867
+    },
+    {
+      "unique_id": "车库_电动汽车",
+      "name": "电动汽车",
+      "type": "charging",
+      "total_hours": 1.95,
+      "total_energy_kwh": 15.2833
+    },
+    {
+      "unique_id": "次卧室书房_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 1.47,
+      "total_energy_kwh": 0.088
+    },
+    {
+      "unique_id": "次卧室书房_电脑",
+      "name": "电脑",
+      "type": "on_demand",
+      "total_hours": 1.47,
+      "total_energy_kwh": 0.2933
+    },
+    {
+      "unique_id": "客厅_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 1.47,
+      "total_energy_kwh": 0.088
+    },
+    {
+      "unique_id": "客厅_电视",
+      "name": "电视",
+      "type": "on_demand",
+      "total_hours": 0.48,
+      "total_energy_kwh": 0.1075
+    },
+    {
+      "unique_id": "客厅_空调",
+      "name": "空调",
+      "type": "on_demand",
+      "total_hours": 0.73,
+      "total_energy_kwh": 1.4667
+    },
+    {
+      "unique_id": "sophia_chen_手机",
+      "name": "手机",
+      "type": "charging",
+      "total_hours": 19.15,
+      "total_energy_kwh": 0.383
+    },
+    {
+      "unique_id": "客厅_台灯",
+      "name": "台灯",
+      "type": "on_demand",
+      "total_hours": 0.0,
+      "total_energy_kwh": 0
+    },
+    {
+      "unique_id": "客厅_吸尘器",
+      "name": "吸尘器",
+      "type": "on_demand",
+      "total_hours": 0.0,
+      "total_energy_kwh": 0
+    }
+  ]
+}

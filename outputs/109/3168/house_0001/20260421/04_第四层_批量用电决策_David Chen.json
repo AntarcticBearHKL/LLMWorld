@@ -1,0 +1,417 @@
+{
+  "member": "David Chen",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:59",
+      "location": "主卧室",
+      "activity": "睡觉",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:14",
+      "location": "主卧室",
+      "activity": "起床，整理床铺，穿衣",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:29",
+      "location": "浴室",
+      "activity": "洗漱",
+      "operations": [
+        {
+          "unique_id": "浴室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "浴室_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "浴室_洗衣机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:44",
+      "location": "厨房",
+      "activity": "准备简单的早餐（使用微波炉或电磁炉）",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:45-07:59",
+      "location": "厨房",
+      "activity": "吃早餐，同时用手机查看新闻和工作日程",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:14",
+      "location": "主卧室",
+      "activity": "更换外出工作服装，检查并携带个人物品（手机、电脑）",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_电脑",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:15-08:29",
+      "location": "车库",
+      "activity": "驾驶电动汽车外出上班",
+      "operations": [
+        {
+          "unique_id": "车库_电动汽车",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:14",
+      "location": "外出",
+      "activity": "通勤（驾驶或乘坐通勤班车）",
+      "operations": [
+        {
+          "unique_id": "车库_电动汽车",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:15-12:14",
+      "location": "外出",
+      "activity": "在公司工作：进行软件开发、代码审查、团队站会",
+      "operations": [
+        {
+          "unique_id": "david_chen_电脑",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "车库_电动汽车",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:15-13:14",
+      "location": "外出",
+      "activity": "在公司或附近餐厅午餐及午休",
+      "operations": [
+        {
+          "unique_id": "david_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:15-17:14",
+      "location": "外出",
+      "activity": "在公司工作：专注编程、技术方案设计、与同事讨论问题",
+      "operations": [
+        {
+          "unique_id": "david_chen_电脑",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:15-18:14",
+      "location": "外出",
+      "activity": "下班通勤",
+      "operations": [
+        {
+          "unique_id": "车库_电动汽车",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:15-18:29",
+      "location": "车库",
+      "activity": "停放电动汽车",
+      "operations": [
+        {
+          "unique_id": "车库_电动汽车",
+          "action": "idle"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "david_chen_电脑",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:44",
+      "location": "外出",
+      "activity": "前往健身房进行锻炼（符合每周三次的习惯）",
+      "operations": [
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:45-20:14",
+      "location": "浴室",
+      "activity": "淋浴，更衣",
+      "operations": [
+        {
+          "unique_id": "浴室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "浴室_热水器",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:15-20:44",
+      "location": "厨房",
+      "activity": "准备晚餐（使用电饭煲、电磁炉）",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:45-21:14",
+      "location": "厨房",
+      "activity": "吃晚餐",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:44",
+      "location": "次卧室/书房",
+      "activity": "阅读技术书籍或行业文章",
+      "operations": [
+        {
+          "unique_id": "次卧室书房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "次卧室书房_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:44",
+      "location": "次卧室/书房",
+      "activity": "使用电脑进行个人编程项目或学习新技术",
+      "operations": [
+        {
+          "unique_id": "次卧室书房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "次卧室书房_电脑",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-22:59",
+      "location": "客厅",
+      "activity": "用电视观看简短的科技新闻或纪录片放松",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:59",
+      "location": "主卧室",
+      "activity": "睡前准备，在床上用手机阅读后入睡",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "david_chen_手机",
+          "action": "use"
+        }
+      ]
+    }
+  ],
+  "total_energy_kwh": 19.448749999999986
+}

@@ -1,0 +1,273 @@
+{
+  "type": "小家庭/丁克家庭",
+  "season": "春天",
+  "home": {
+    "name": "Chen Residence",
+    "type": "联排别墅",
+    "size": 120,
+    "rooms": [
+      {
+        "name": "客厅",
+        "size": 25,
+        "appliances": [
+          {
+            "type": "电视",
+            "brand": "Samsung",
+            "power": 150,
+            "age": 0
+          },
+          {
+            "type": "空调",
+            "brand": "Daikin",
+            "power": 2000,
+            "age": 0
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
+            "age": 0
+          },
+          {
+            "type": "台灯",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 0
+          },
+          {
+            "type": "吸尘器",
+            "brand": "Dyson",
+            "power": 1200,
+            "age": 0
+          }
+        ]
+      },
+      {
+        "name": "厨房",
+        "size": 15,
+        "appliances": [
+          {
+            "type": "冰箱",
+            "brand": "LG",
+            "power": 100,
+            "age": 0
+          },
+          {
+            "type": "电饭煲",
+            "brand": "Panasonic",
+            "power": 800,
+            "age": 0
+          },
+          {
+            "type": "微波炉",
+            "brand": "Sharp",
+            "power": 1000,
+            "age": 0
+          },
+          {
+            "type": "电磁炉",
+            "brand": "Midea",
+            "power": 2000,
+            "age": 0
+          },
+          {
+            "type": "油烟机",
+            "brand": "Fotile",
+            "power": 200,
+            "age": 0
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
+            "age": 0
+          }
+        ]
+      },
+      {
+        "name": "主卧室",
+        "size": 20,
+        "appliances": [
+          {
+            "type": "空调",
+            "brand": "Daikin",
+            "power": 2000,
+            "age": 0
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
+            "age": 0
+          },
+          {
+            "type": "台灯",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 0
+          }
+        ]
+      },
+      {
+        "name": "次卧室/书房",
+        "size": 15,
+        "appliances": [
+          {
+            "type": "电脑",
+            "brand": "Dell",
+            "power": 200,
+            "age": 0
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
+            "age": 0
+          }
+        ]
+      },
+      {
+        "name": "浴室",
+        "size": 10,
+        "appliances": [
+          {
+            "type": "热水器",
+            "brand": "Rheem",
+            "power": 3000,
+            "age": 0
+          },
+          {
+            "type": "洗衣机",
+            "brand": "Haier",
+            "power": 500,
+            "age": 0
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
+            "age": 0
+          }
+        ]
+      },
+      {
+        "name": "车库",
+        "size": 20,
+        "appliances": [
+          {
+            "type": "电动汽车",
+            "brand": "Tesla",
+            "power": 7000,
+            "age": 0
+          }
+        ]
+      }
+    ]
+  },
+  "members": [
+    {
+      "name": "David Chen",
+      "age": 35,
+      "gender": "男",
+      "occupation": "软件工程师",
+      "work_schedule": {
+        "start": "09:00",
+        "end": "18:00",
+        "remote": true,
+        "work_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "有条理",
+          "技术导向"
+        ],
+        "energy_awareness": "高"
+      },
+      "habits": {
+        "wake_time": "07:00",
+        "sleep_time": "23:00",
+        "exercise": "每周三次健身房",
+        "hobbies": [
+          "阅读",
+          "编程"
+        ]
+      },
+      "health": {
+        "condition": "良好",
+        "temperature_preference": {
+          "summer": 26,
+          "winter": 22
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Apple",
+          "power": 20,
+          "age": 0
+        },
+        {
+          "type": "电脑",
+          "brand": "Dell",
+          "power": 200,
+          "age": 0
+        }
+      ]
+    },
+    {
+      "name": "Sophia Chen",
+      "age": 32,
+      "gender": "女",
+      "occupation": "小学教师",
+      "work_schedule": {
+        "start": "08:30",
+        "end": "16:30",
+        "remote": false,
+        "work_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "耐心",
+          "社交"
+        ],
+        "energy_awareness": "中"
+      },
+      "habits": {
+        "wake_time": "06:30",
+        "sleep_time": "22:30",
+        "exercise": "瑜伽",
+        "hobbies": [
+          "烹饪",
+          "园艺"
+        ]
+      },
+      "health": {
+        "condition": "良好",
+        "temperature_preference": {
+          "summer": 25,
+          "winter": 21
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Samsung",
+          "power": 20,
+          "age": 0
+        }
+      ]
+    }
+  ]
+}
