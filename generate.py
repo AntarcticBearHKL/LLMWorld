@@ -8,24 +8,22 @@ USER_PROMPT = """
 位于墨尔本的中产家庭，居住在clayton
 """
 
-def generate_run_id():
-    return str(random.randint(100000, 999999))
+def generate_world_id():
+    return str(random.randint(100, 999))
 
-def save_log(log_dir, filename, data):
-    filepath = os.path.join(log_dir, filename)
+def save_json(filepath, data):
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print(f"  已保存: {filepath}")
 
 def main():
-    run_id = generate_run_id()
-    log_dir = os.path.join('logs', f"{run_id}_logs_env")
+    world_id = generate_world_id()
     
     print("="*60)
-    print("环境与家庭生成系统")
+    print("世界生成系统")
     print("="*60)
-    print(f"运行ID: {run_id}")
-    print(f"输出目录: {log_dir}")
+    print(f"世界ID: {world_id}")
     
     user_prompt = USER_PROMPT.strip()
     
@@ -36,127 +34,86 @@ def main():
     print(f"\n用户设定：")
     print(f"  {user_prompt}")
     
-    os.makedirs(log_dir, exist_ok=True)
-    os.makedirs('members', exist_ok=True)
-    
     generator = EnvironmentGenerator()
     
     print("\n" + "="*60)
-    print("步骤 1/5: 生成环境设定")
+    print("第一层：生成地区设定")
     print("="*60)
-    environment = generator.expand_setting(user_prompt)
-    print(f"\n环境设定生成完成：")
-    print(f"  位置: {environment['location']['city']} - {environment['location']['district']}")
-    print(f"  经济水平: {environment['economic_level']}")
-    print(f"  住房类型: {environment['housing']['type']}")
-    print(f"  住房面积: {environment['housing']['size']}平米")
-    save_log(log_dir, '01_environment.json', environment)
+    district_info = generator.generate_district(user_prompt)
+    print(f"\n地区设定生成完成：")
+    print(f"  邮编: {district_info['postcode']}")
+    print(f"  位置: {district_info['location']['city']} - {district_info['location']['district']}")
+    print(f"  经济水平: {district_info['economic_level']}")
+    
+    postcode = district_info['postcode']
+    district_dir = os.path.join('worlds', world_id, postcode)
+    save_json(os.path.join(district_dir, 'district.json'), district_info)
     
     print("\n" + "="*60)
-    print("步骤 2/5: 获取天气数据")
+    print("第二层：生成家庭类型分布")
     print("="*60)
-    weather = generator.get_weather_data(environment['location'])
-    print(f"\n天气数据获取完成：")
-    print(f"  日期: {weather['date']}")
-    print(f"  天气: {weather['condition']}")
-    print(f"  温度: {weather['temperature']['min']}°C - {weather['temperature']['max']}°C")
-    print(f"  湿度: {weather['humidity']}%")
-    save_log(log_dir, '02_weather.json', weather)
+    household_distribution = generator.generate_household_distribution(district_info)
+    print(f"\n家庭类型分布生成完成：")
+    print(f"  总家庭数: {household_distribution['total_households']}")
+    print(f"  家庭类型:")
+    for htype in household_distribution['household_types']:
+        print(f"    - {htype['type']}: {htype['count']}户 ({htype['percentage']}%)")
+    
+    save_json(os.path.join(district_dir, 'household_distribution.json'), household_distribution)
     
     print("\n" + "="*60)
-    print("步骤 3/5: 获取节假日数据")
+    print("第三层：生成具体家庭")
     print("="*60)
-    holidays = generator.get_holiday_data(environment['location'])
-    print(f"\n节假日数据获取完成：")
-    print(f"  年份: {holidays['year']}")
-    print(f"  国家: {holidays['country']}")
-    print(f"  节假日数量: {len(holidays['holidays'])}")
-    if holidays['holidays']:
-        print(f"  示例节假日:")
-        for date, holiday_list in list(holidays['holidays'].items())[:3]:
-            for holiday in holiday_list:
-                print(f"    - {date}: {holiday['name']}")
-    save_log(log_dir, '03_holidays.json', holidays)
     
-    print("\n" + "="*60)
-    print("步骤 4/5: 生成家庭结构")
-    print("="*60)
-    home = generator.generate_home_structure(environment)
-    print(f"\n家庭结构生成完成：")
-    print(f"  家庭名称: {home['name']}")
-    print(f"  住房类型: {home['type']}")
-    print(f"  房间数量: {len(home['rooms'])}")
-    print(f"  房间列表:")
-    for room in home['rooms']:
-        appliance_count = len(room['appliances'])
-        print(f"    - {room['name']} ({room['size']}平米, {appliance_count}个家电)")
-    save_log(log_dir, '04_home.json', home)
+    num_households = int(input(f"\n请输入要生成的家庭数量（最多{household_distribution['total_households']}户）：").strip() or "1")
+    num_households = min(num_households, household_distribution['total_households'])
     
-    print("\n" + "="*60)
-    print("步骤 5/5: 生成家庭成员")
-    print("="*60)
-    members = generator.generate_members(environment, home)
-    print(f"\n家庭成员生成完成：")
-    print(f"  成员数量: {len(members)}")
-    print(f"  成员列表:")
-    for member in members:
-        personal_appliances = len(member.get('personal_appliances', []))
-        print(f"    - {member['name']} ({member['age']}岁, {member['gender']}, {member['occupation']})")
-        print(f"      作息: {member['habits']['wake_time']} - {member['habits']['sleep_time']}")
-        print(f"      个人设备: {personal_appliances}个")
-    save_log(log_dir, '05_members.json', members)
+    households = []
+    for i in range(num_households):
+        house_id = f"house_{i+1:04d}"
+        print(f"\n生成家庭 {i+1}/{num_households} (ID: {house_id})...")
+        
+        household_type = random.choice(household_distribution['household_types'])
+        
+        household = generator.generate_household(district_info, household_type)
+        
+        house_dir = os.path.join(district_dir, house_id)
+        save_json(os.path.join(house_dir, 'household.json'), household)
+        
+        households.append({
+            'house_id': house_id,
+            'type': household_type['type'],
+            'members_count': len(household['members']),
+            'rooms_count': len(household['home']['rooms'])
+        })
+        
+        print(f"  家庭类型: {household_type['type']}")
+        print(f"  成员数量: {len(household['members'])}")
+        print(f"  房间数量: {len(household['home']['rooms'])}")
     
-    with open('members/environment.json', 'w', encoding='utf-8') as f:
-        json.dump(environment, f, ensure_ascii=False, indent=2)
-    
-    with open('members/weather.json', 'w', encoding='utf-8') as f:
-        json.dump(weather, f, ensure_ascii=False, indent=2)
-    
-    with open('members/holidays.json', 'w', encoding='utf-8') as f:
-        json.dump(holidays, f, ensure_ascii=False, indent=2)
-    
-    with open('members/home.json', 'w', encoding='utf-8') as f:
-        json.dump(home, f, ensure_ascii=False, indent=2)
-    
-    with open('members/members.json', 'w', encoding='utf-8') as f:
-        json.dump(members, f, ensure_ascii=False, indent=2)
-    
-    summary = {
-        'run_id': run_id,
-        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    world_meta = {
+        'world_id': world_id,
+        'created_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'user_prompt': user_prompt,
-        'environment': {
-            'city': environment['location']['city'],
-            'economic_level': environment['economic_level'],
-            'housing_type': environment['housing']['type'],
-            'housing_size': environment['housing']['size']
+        'district': {
+            'postcode': postcode,
+            'city': district_info['location']['city'],
+            'district': district_info['location']['district'],
+            'economic_level': district_info['economic_level']
         },
-        'home': {
-            'name': home['name'],
-            'rooms_count': len(home['rooms']),
-            'total_appliances': sum(len(room['appliances']) for room in home['rooms'])
-        },
-        'members': {
-            'count': len(members),
-            'names': [m['name'] for m in members]
-        }
+        'households': households
     }
-    save_log(log_dir, '00_summary.json', summary)
+    
+    save_json(os.path.join('worlds', world_id, 'world.json'), world_meta)
     
     print("\n" + "="*60)
-    print("生成完成！")
+    print("世界生成完成！")
     print("="*60)
-    print(f"\n配置已保存到:")
-    print(f"  - members/ 目录（用于模拟）")
-    print(f"  - {log_dir}/ 目录（详细日志）")
+    print(f"\n世界路径: worlds/{world_id}/")
+    print(f"  地区: {postcode}")
+    print(f"  家庭数: {len(households)}")
     
-    print("\n环境概览：")
-    print(f"  位置：{environment['location']['city']}")
-    print(f"  家庭类型：{home['type']}")
-    print(f"  房间数量：{len(home['rooms'])}")
-    print(f"  成员数量：{len(members)}")
-    
-    print("\n请运行 'python simulate.py' 开始模拟")
+    print(f"\n请运行 'python simulate.py {world_id}' 开始模拟")
 
 if __name__ == "__main__":
     main()

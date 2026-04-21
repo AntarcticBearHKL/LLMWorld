@@ -11,55 +11,81 @@ plt.rcParams['axes.unicode_minus'] = False
 
 class TabbedEnergyVisualizer:
     def __init__(self):
-        self.output_dir = "logs"
-        self.available_runs = self._scan_available_runs()
-        self.selected_run_id = None
+        self.output_dir = "outputs"
+        self.available_data = self._scan_available_data()
+        self.selected_world_id = None
+        self.selected_postcode = None
+        self.selected_house_id = None
         self.selected_dates = []
         
-    def _scan_available_runs(self):
-        runs = {}
+    def _scan_available_data(self):
+        data_structure = {}
         if not os.path.exists(self.output_dir):
-            return runs
+            return data_structure
         
-        for run_folder in os.listdir(self.output_dir):
-            run_path = os.path.join(self.output_dir, run_folder)
-            if not os.path.isdir(run_path) or not run_folder.endswith("_logs"):
+        for world_id in os.listdir(self.output_dir):
+            world_path = os.path.join(self.output_dir, world_id)
+            if not os.path.isdir(world_path):
                 continue
             
-            run_id = run_folder.replace("_logs", "")
-            dates = []
+            data_structure[world_id] = {}
             
-            for date_folder in os.listdir(run_path):
-                date_path = os.path.join(run_path, date_folder)
-                energy_info_path = os.path.join(date_path, "用电信息")
+            for postcode in os.listdir(world_path):
+                postcode_path = os.path.join(world_path, postcode)
+                if not os.path.isdir(postcode_path):
+                    continue
                 
-                if os.path.isdir(energy_info_path):
-                    summary_file = os.path.join(energy_info_path, "总用电汇总.json")
-                    if os.path.exists(summary_file):
-                        dates.append(date_folder)
-            
-            if dates:
-                runs[run_id] = sorted(dates)
+                data_structure[world_id][postcode] = {}
+                
+                for house_id in os.listdir(postcode_path):
+                    house_path = os.path.join(postcode_path, house_id)
+                    if not os.path.isdir(house_path):
+                        continue
+                    
+                    dates = []
+                    for date_folder in os.listdir(house_path):
+                        date_path = os.path.join(house_path, date_folder)
+                        if not os.path.isdir(date_path):
+                            continue
+                        
+                        energy_info_path = os.path.join(date_path, "用电信息")
+                        if os.path.isdir(energy_info_path):
+                            summary_file = os.path.join(energy_info_path, "总用电汇总.json")
+                            if os.path.exists(summary_file):
+                                dates.append(date_folder)
+                    
+                    if dates:
+                        data_structure[world_id][postcode][house_id] = sorted(dates)
         
-        return runs
+        return data_structure
     
     def select_run_and_dates(self):
-        if not self.available_runs:
+        if not self.available_data:
             print("未找到任何用电数据")
             return False
         
         root = tk.Tk()
-        root.title("选择运行ID和日期")
-        root.geometry("500x400")
+        root.title("选择模拟数据")
+        root.geometry("700x500")
         
-        selected_run = tk.StringVar()
+        selected_world = tk.StringVar()
+        selected_postcode = tk.StringVar()
+        selected_house = tk.StringVar()
         
-        ttk.Label(root, text="选择运行ID:", font=("Arial", 12)).pack(pady=10)
-        run_combo = ttk.Combobox(root, textvariable=selected_run, width=40, font=("Arial", 10))
-        run_combo['values'] = list(self.available_runs.keys())
-        run_combo.pack(pady=5)
+        ttk.Label(root, text="1. 选择世界ID:", font=("Arial", 12, "bold")).pack(pady=5)
+        world_combo = ttk.Combobox(root, textvariable=selected_world, width=60, font=("Arial", 10))
+        world_combo['values'] = list(self.available_data.keys())
+        world_combo.pack(pady=5)
         
-        ttk.Label(root, text="选择日期 (可多选):", font=("Arial", 12)).pack(pady=10)
+        ttk.Label(root, text="2. 选择邮编/街区:", font=("Arial", 12, "bold")).pack(pady=5)
+        postcode_combo = ttk.Combobox(root, textvariable=selected_postcode, width=60, font=("Arial", 10))
+        postcode_combo.pack(pady=5)
+        
+        ttk.Label(root, text="3. 选择家庭:", font=("Arial", 12, "bold")).pack(pady=5)
+        house_combo = ttk.Combobox(root, textvariable=selected_house, width=60, font=("Arial", 10))
+        house_combo.pack(pady=5)
+        
+        ttk.Label(root, text="4. 选择日期 (可多选):", font=("Arial", 12, "bold")).pack(pady=5)
         
         listbox_frame = tk.Frame(root)
         listbox_frame.pack(pady=5, fill=tk.BOTH, expand=True)
@@ -72,23 +98,46 @@ class TabbedEnergyVisualizer:
         date_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         scrollbar.config(command=date_listbox.yview)
         
-        def on_run_selected(event):
-            run_id = selected_run.get()
-            if run_id in self.available_runs:
+        def on_world_selected(event):
+            world_id = selected_world.get()
+            if world_id in self.available_data:
+                postcode_combo['values'] = list(self.available_data[world_id].keys())
+                postcode_combo.set('')
+                house_combo['values'] = []
+                house_combo.set('')
                 date_listbox.delete(0, tk.END)
-                for date in self.available_runs[run_id]:
+        
+        def on_postcode_selected(event):
+            world_id = selected_world.get()
+            postcode = selected_postcode.get()
+            if world_id and postcode and postcode in self.available_data[world_id]:
+                house_combo['values'] = list(self.available_data[world_id][postcode].keys())
+                house_combo.set('')
+                date_listbox.delete(0, tk.END)
+        
+        def on_house_selected(event):
+            world_id = selected_world.get()
+            postcode = selected_postcode.get()
+            house_id = selected_house.get()
+            if world_id and postcode and house_id and house_id in self.available_data[world_id][postcode]:
+                date_listbox.delete(0, tk.END)
+                dates = self.available_data[world_id][postcode][house_id]
+                for date in dates:
                     date_listbox.insert(tk.END, date)
         
-        run_combo.bind('<<ComboboxSelected>>', on_run_selected)
+        world_combo.bind('<<ComboboxSelected>>', on_world_selected)
+        postcode_combo.bind('<<ComboboxSelected>>', on_postcode_selected)
+        house_combo.bind('<<ComboboxSelected>>', on_house_selected)
         
-        if self.available_runs:
-            run_combo.current(0)
-            first_run = list(self.available_runs.keys())[0]
-            for date in self.available_runs[first_run]:
-                date_listbox.insert(tk.END, date)
+        if self.available_data:
+            world_combo.current(0)
+            first_world = list(self.available_data.keys())[0]
+            postcode_combo['values'] = list(self.available_data[first_world].keys())
         
         def on_confirm():
-            self.selected_run_id = selected_run.get()
+            self.selected_world_id = selected_world.get()
+            self.selected_postcode = selected_postcode.get()
+            self.selected_house_id = selected_house.get()
             selected_indices = date_listbox.curselection()
             self.selected_dates = [date_listbox.get(i) for i in selected_indices]
             root.quit()
@@ -98,12 +147,15 @@ class TabbedEnergyVisualizer:
         
         root.mainloop()
         
-        return self.selected_run_id and self.selected_dates
+        return (self.selected_world_id and self.selected_postcode and 
+                self.selected_house_id and self.selected_dates)
     
     def load_energy_data(self, date):
         energy_info_dir = os.path.join(
             self.output_dir,
-            f"{self.selected_run_id}_logs",
+            self.selected_world_id,
+            self.selected_postcode,
+            self.selected_house_id,
             date,
             "用电信息"
         )
@@ -125,7 +177,8 @@ class TabbedEnergyVisualizer:
     
     def create_tabbed_window(self):
         root = tk.Tk()
-        root.title(f'用电数据分析 - 运行ID: {self.selected_run_id}')
+        title = f'用电数据分析 - 世界:{self.selected_world_id} 街区:{self.selected_postcode} 家庭:{self.selected_house_id}'
+        root.title(title)
         root.state('zoomed')
         
         def on_closing():
@@ -564,8 +617,11 @@ class TabbedEnergyVisualizer:
             print("未选择数据")
             return
         
-        print(f"正在加载数据: 运行ID={self.selected_run_id}")
-        print(f"选择的日期: {', '.join(self.selected_dates)}")
+        print(f"正在加载数据:")
+        print(f"  世界ID: {self.selected_world_id}")
+        print(f"  街区: {self.selected_postcode}")
+        print(f"  家庭: {self.selected_house_id}")
+        print(f"  选择的日期: {', '.join(self.selected_dates)}")
         
         self.create_tabbed_window()
 

@@ -59,7 +59,7 @@ class Executor:
             
             home_structure_with_appliances = self._get_home_structure_with_appliances(member)
             
-            prompt = self.prompt.load("04_batch_appliance_decision",
+            prompt = self.prompt.load("simulate_step4_batch_appliance_decision",
                 member_name=member_name,
                 member_age=member.age,
                 member_occupation=member.occupation,

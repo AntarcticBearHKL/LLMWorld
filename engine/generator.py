@@ -9,11 +9,41 @@ from .prompt import Prompt
 load_dotenv()
 
 WEATHER_API_KEY = os.getenv('WEATHER_API_KEY', '')
-HOLIDAY_API_KEY = os.getenv('HOLIDAY_API_KEY', '')
 
 class EnvironmentGenerator:
     def __init__(self):
-        pass
+        self.prompt = Prompt()
+    
+    def generate_district(self, user_prompt):
+        prompt = self.prompt.load("generate_step1_district",
+            user_prompt=user_prompt
+        )
+        
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        return json.loads(response['content'])
+    
+    def generate_household_distribution(self, district_info):
+        prompt = self.prompt.load("generate_step2_household_distribution",
+            district_info=json.dumps(district_info, ensure_ascii=False, indent=2)
+        )
+        
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        return json.loads(response['content'])
+    
+    def generate_household(self, district_info, household_type):
+        from appliances import get_supported_appliances_text, get_appliance_schemas_text
+        import json
+        
+        prompt = self.prompt.load("generate_step3_household",
+            district_info=json.dumps(district_info, ensure_ascii=False, indent=2),
+            household_type=json.dumps(household_type, ensure_ascii=False, indent=2),
+            household_type_name=household_type['type'],
+            supported_appliances=get_supported_appliances_text(),
+            appliance_schemas=get_appliance_schemas_text()
+        )
+        
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        return json.loads(response['content'])
     
     def expand_setting(self, user_prompt):
         prompt = f"""你是一个家庭环境设计专家。根据用户的简短描述，生成详细的家庭环境设定。
@@ -95,42 +125,7 @@ class EnvironmentGenerator:
             return self._generate_mock_weather(location)
     
     def get_holiday_data(self, location, year=None):
-        if not HOLIDAY_API_KEY:
-            return self._generate_mock_holidays(location)
-        
-        if year is None:
-            year = datetime.now().year
-        
-        url = "https://holidayapi.com/v1/holidays"
-        params = {
-            'key': HOLIDAY_API_KEY,
-            'country': location.get('country', 'CN'),
-            'year': year
-        }
-        
-        try:
-            response = requests.get(url, params=params, timeout=10)
-            response.raise_for_status()
-            data = response.json()
-            
-            holidays = {}
-            for holiday in data.get('holidays', []):
-                date = holiday['date']
-                if date not in holidays:
-                    holidays[date] = []
-                holidays[date].append({
-                    'name': holiday['name'],
-                    'type': holiday.get('type', 'public')
-                })
-            
-            return {
-                'year': year,
-                'country': location.get('country', 'CN'),
-                'holidays': holidays
-            }
-        except Exception as e:
-            print(f"节假日API调用失败: {e}")
-            return self._generate_mock_holidays(location)
+        return self._generate_mock_holidays(location, year)
     
     def generate_home_structure(self, environment):
         prompt = f"""根据环境设定，设计合理的家庭房间布局和家电配置。
@@ -251,16 +246,53 @@ class EnvironmentGenerator:
             ]
         }
     
-    def _generate_mock_holidays(self, location):
-        year = datetime.now().year
-        mock_holidays = {
-            f"{year}-01-01": [{"name": "元旦", "type": "public"}],
-            f"{year}-05-01": [{"name": "劳动节", "type": "public"}],
-            f"{year}-10-01": [{"name": "国庆节", "type": "public"}],
-        }
+    def _generate_mock_holidays(self, location, year=None):
+        if year is None:
+            year = datetime.now().year
+        
+        country = location.get('country', 'CN')
+        
+        if country == 'CN':
+            mock_holidays = {
+                f"{year}-01-01": [{"name": "元旦", "type": "public"}],
+                f"{year}-02-10": [{"name": "春节", "type": "public"}],
+                f"{year}-02-11": [{"name": "春节", "type": "public"}],
+                f"{year}-02-12": [{"name": "春节", "type": "public"}],
+                f"{year}-04-04": [{"name": "清明节", "type": "public"}],
+                f"{year}-05-01": [{"name": "劳动节", "type": "public"}],
+                f"{year}-06-10": [{"name": "端午节", "type": "public"}],
+                f"{year}-09-17": [{"name": "中秋节", "type": "public"}],
+                f"{year}-10-01": [{"name": "国庆节", "type": "public"}],
+                f"{year}-10-02": [{"name": "国庆节", "type": "public"}],
+                f"{year}-10-03": [{"name": "国庆节", "type": "public"}],
+            }
+        elif country == 'AU':
+            mock_holidays = {
+                f"{year}-01-01": [{"name": "New Year's Day", "type": "public"}],
+                f"{year}-01-26": [{"name": "Australia Day", "type": "public"}],
+                f"{year}-04-18": [{"name": "Good Friday", "type": "public"}],
+                f"{year}-04-21": [{"name": "Easter Monday", "type": "public"}],
+                f"{year}-04-25": [{"name": "Anzac Day", "type": "public"}],
+                f"{year}-06-09": [{"name": "Queen's Birthday", "type": "public"}],
+                f"{year}-12-25": [{"name": "Christmas Day", "type": "public"}],
+                f"{year}-12-26": [{"name": "Boxing Day", "type": "public"}],
+            }
+        elif country == 'US':
+            mock_holidays = {
+                f"{year}-01-01": [{"name": "New Year's Day", "type": "public"}],
+                f"{year}-07-04": [{"name": "Independence Day", "type": "public"}],
+                f"{year}-11-27": [{"name": "Thanksgiving", "type": "public"}],
+                f"{year}-12-25": [{"name": "Christmas Day", "type": "public"}],
+            }
+        else:
+            mock_holidays = {
+                f"{year}-01-01": [{"name": "New Year's Day", "type": "public"}],
+                f"{year}-12-25": [{"name": "Christmas Day", "type": "public"}],
+            }
+        
         return {
             'year': year,
-            'country': location.get('country', 'CN'),
+            'country': country,
             'holidays': mock_holidays
         }
 

@@ -1,0 +1,56 @@
+{
+  "appliance_info": {
+    "unique_id": "客厅_电视",
+    "name": "电视",
+    "type": "on_demand",
+    "power_watts": 150
+  },
+  "usage_summary": {
+    "total_minutes": 29,
+    "total_hours": 0.48,
+    "total_energy_kwh": 0.0725
+  },
+  "usage_segments": [
+    {
+      "time_range": "20:16-20:45",
+      "start_minutes": 1216,
+      "end_minutes": 1245,
+      "duration_minutes": 29,
+      "action": "use",
+      "location": "客厅",
+      "member": "Sophia Chen",
+      "energy_kwh": 0.0725
+    }
+  ],
+  "minute_by_minute_usage": [
+    "20:16",
+    "20:17",
+    "20:18",
+    "20:19",
+    "20:20",
+    "20:21",
+    "20:22",
+    "20:23",
+    "20:24",
+    "20:25",
+    "20:26",
+    "20:27",
+    "20:28",
+    "20:29",
+    "20:30",
+    "20:31",
+    "20:32",
+    "20:33",
+    "20:34",
+    "20:35",
+    "20:36",
+    "20:37",
+    "20:38",
+    "20:39",
+    "20:40",
+    "20:41",
+    "20:42",
+    "20:43",
+    "20:44"
+  ]
+}

@@ -1,0 +1,669 @@
+{
+  "member": "Sophia Chen",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:29",
+      "location": "主卧室",
+      "activity": "睡觉",
+      "operations": [
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:30-06:35",
+      "location": "主卧室",
+      "activity": "醒来，在床上用手机查看天气和当日消息",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:36-06:45",
+      "location": "浴室",
+      "activity": "洗漱，淋浴",
+      "operations": [
+        {
+          "unique_id": "浴室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "浴室_热水器",
+          "action": "use"
+        },
+        {
+          "unique_id": "浴室_洗衣机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:46-07:00",
+      "location": "主卧室",
+      "activity": "更衣，整理个人仪表",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:01-07:15",
+      "location": "厨房",
+      "activity": "准备并享用早餐，使用电饭煲和电磁炉",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:16-07:20",
+      "location": "客厅",
+      "activity": "整理随身物品，检查是否有需要带往学校的材料",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_吸尘器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:21-07:25",
+      "location": "外出",
+      "activity": "步行至公交站",
+      "operations": [
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:26-08:20",
+      "location": "外出",
+      "activity": "乘坐公共交通前往学校",
+      "operations": [
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:21-15:00",
+      "location": "外出",
+      "activity": "在学校进行教学、备课、与学生及同事交流等工作",
+      "operations": [
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:01-15:40",
+      "location": "外出",
+      "activity": "在学校处理部分行政工作或与个别学生家长沟通",
+      "operations": [
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:41-16:40",
+      "location": "外出",
+      "activity": "乘坐公共交通回家",
+      "operations": [
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:41-16:45",
+      "location": "入口",
+      "activity": "进入家中",
+      "operations": [
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:46-16:55",
+      "location": "客厅",
+      "activity": "更换居家衣物，短暂休息",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_吸尘器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:56-17:25",
+      "location": "客厅",
+      "activity": "进行每日的居家瑜伽练习",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_吸尘器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:26-17:45",
+      "location": "厨房",
+      "activity": "准备晚餐食材，规划烹饪步骤",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:46-18:45",
+      "location": "次卧室/书房",
+      "activity": "使用电脑浏览园艺论坛或学习新的烹饪食谱，同时等待David回家",
+      "operations": [
+        {
+          "unique_id": "次卧室书房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "次卧室书房_电脑",
+          "action": "use"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:46-19:15",
+      "location": "厨房",
+      "activity": "与David一起烹饪晚餐，使用电磁炉、油烟机等电器",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:16-19:35",
+      "location": "客厅",
+      "activity": "与David一起在客厅吃晚餐",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_吸尘器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:36-19:45",
+      "location": "厨房",
+      "activity": "与David一起清理厨房台面，将餐具放入洗碗机",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:46-20:15",
+      "location": "次卧室/书房",
+      "activity": "检查学校邮件，准备或完善明天的教案",
+      "operations": [
+        {
+          "unique_id": "次卧室书房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "次卧室书房_电脑",
+          "action": "use"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:16-20:45",
+      "location": "客厅",
+      "activity": "观看电视节目，放松心情",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_吸尘器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:46-21:00",
+      "location": "浴室",
+      "activity": "使用洗衣机清洗衣物",
+      "operations": [
+        {
+          "unique_id": "浴室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "浴室_洗衣机",
+          "action": "use"
+        },
+        {
+          "unique_id": "浴室_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:01-21:15",
+      "location": "客厅",
+      "activity": "协助David清洁客厅地面",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_吸尘器",
+          "action": "use"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:16-21:45",
+      "location": "次卧室/书房",
+      "activity": "使用电脑浏览园艺论坛或学习新的烹饪食谱",
+      "operations": [
+        {
+          "unique_id": "次卧室书房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "次卧室书房_电脑",
+          "action": "use"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:46-22:00",
+      "location": "浴室",
+      "activity": "晚间洗漱与护肤",
+      "operations": [
+        {
+          "unique_id": "浴室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "浴室_热水器",
+          "action": "use"
+        },
+        {
+          "unique_id": "浴室_洗衣机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:01-22:30",
+      "location": "主卧室",
+      "activity": "在床上用手机阅读新闻或电子书，酝酿睡意",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:31-22:50",
+      "location": "主卧室",
+      "activity": "睡前准备，与David一起进行简短日程回顾",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:51-23:00",
+      "location": "主卧室",
+      "activity": "阅读（与David一起）",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:01-23:59",
+      "location": "主卧室",
+      "activity": "睡眠",
+      "operations": [
+        {
+          "unique_id": "主卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "sophia_chen_手机",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ],
+  "total_energy_kwh": 4.658416666666665
+}
