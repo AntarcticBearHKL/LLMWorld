@@ -18,7 +18,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from engine import World, utils
+from engine import World, utils, SubAgent
+from engine.subagent import MAX_WORKERS
 from simulate import load_world, create_home_from_household
 import config
 
@@ -220,6 +221,12 @@ def main():
     print(f"\n=== Token 账单（{args.days} 天 × {len(worlds)} 户）===")
     print(f"  缓存未命中 {tokens['prompt_cache_miss']} + 缓存命中 {tokens['prompt_cache_hit']} + 输出 {tokens['completion']} = {tokens['total']}")
     print(f"  户均/天 ≈ {tokens['total'] / (args.days * len(worlds)):.0f} tokens")
+
+    # 并发硬约束验证（用户要求：同时并发 ≤10）
+    current, peak = SubAgent.get_concurrency_stats()
+    ok = peak <= MAX_WORKERS
+    print(f"\n=== 并发实测 ===")
+    print(f"  历史峰值并发 {peak}（硬上限 {MAX_WORKERS}）→ {'[符合约束]' if ok else '[违反约束]'}")
     print("\n人口模拟完成")
 
 

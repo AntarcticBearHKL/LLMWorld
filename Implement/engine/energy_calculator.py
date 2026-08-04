@@ -9,6 +9,7 @@
 import json
 import os
 
+import config
 from . import utils
 
 MINUTES_PER_DAY = 1440
@@ -26,6 +27,7 @@ class EnergyCalculator:
         self.baseline_kwh = 0.0            # 常开电器基载（千瓦时/天）
         self.decision_kwh = 0.0            # 成员决策耗电（千瓦时/天）
         self.validation_warnings = []      # 决策校验警告
+        self._daily_minutes = {}           # 每电器当日已用分钟（超限截断用）
 
     # ---------- 读取决策 ----------
 
@@ -81,13 +83,20 @@ class EnergyCalculator:
                     # charge_external（外部充电）不计入家庭用电；use（使用已存电量）不耗家庭电
                     continue
 
+                # 真实性子约束（计划7）：每电器每日使用分钟上限，超限截断并警告
+                clipped_end = self._apply_daily_cap(appliance, start_minutes, end_minutes,
+                                                    time_range, member_name)
+
+                if clipped_end <= start_minutes:
+                    continue   # 当日额度已用完，整段被截断
+
                 # 计算这段使用的耗电量（千瓦时）
-                energy = appliance.calculate_energy(start_minutes, end_minutes, power_source="home")
+                energy = appliance.calculate_energy(start_minutes, clipped_end, power_source="home")
                 self.decision_kwh += energy
 
                 # 累加进家庭分钟负荷（瓦）
                 watts = appliance.power_watts
-                for minute in range(start_minutes, end_minutes):
+                for minute in range(start_minutes, clipped_end):
                     actual_minute = minute % MINUTES_PER_DAY
                     self.household_load_watts[actual_minute] += watts
 
@@ -96,17 +105,51 @@ class EnergyCalculator:
                 usage["usage_segments"].append({
                     "time_range": time_range,
                     "start_minutes": start_minutes,
-                    "end_minutes": end_minutes,
-                    "duration_minutes": end_minutes - start_minutes,
+                    "end_minutes": clipped_end,
+                    "duration_minutes": clipped_end - start_minutes,
                     "action": action,
                     "location": location,
                     "member": member_name,
-                    "energy_kwh": energy
+                    "energy_kwh": energy,
+                    "capped": clipped_end != end_minutes,
                 })
                 usage["total_energy_kwh"] += energy
-                for minute in range(start_minutes, end_minutes):
+                for minute in range(start_minutes, clipped_end):
                     actual_minute = minute % MINUTES_PER_DAY
                     usage["minute_watts"][actual_minute] += watts
+
+    # ---------- 超限截断 ----------
+
+    def _apply_daily_cap(self, appliance, start_minutes, end_minutes, time_range, member_name):
+        """每电器每日使用分钟上限（config.APPLIANCE_DAILY_CAP_MINUTES）。
+
+        返回截断后的结束分钟；当日额度已用完则返回 start（整段丢弃）。超限记警告。
+        """
+        cap = config.APPLIANCE_DAILY_CAP_MINUTES.get(appliance.name)
+        if not cap:
+            return end_minutes
+
+        used = self._daily_minutes.get(appliance.unique_id, 0)
+        duration = end_minutes - start_minutes
+        remaining = cap - used
+
+        if duration <= remaining:
+            self._daily_minutes[appliance.unique_id] = used + duration
+            return end_minutes
+
+        if remaining <= 0:
+            self.validation_warnings.append(
+                f"[超限截断] {appliance.name}[{appliance.unique_id}] 当日已用 {used} 分钟"
+                f"（上限 {cap}），{member_name} 在 {time_range} 的使用被完全丢弃"
+            )
+            return start_minutes
+
+        self._daily_minutes[appliance.unique_id] = used + remaining
+        self.validation_warnings.append(
+            f"[超限截断] {appliance.name}[{appliance.unique_id}] 当日已用 {used} 分钟"
+            f"（上限 {cap}），{member_name} 在 {time_range} 的使用从 {duration} 分钟截断为 {remaining} 分钟"
+        )
+        return start_minutes + remaining
 
     # ---------- 常开电器基载 ----------
 
