@@ -24,11 +24,38 @@ from engine.memory import HouseholdMemory
 from engine.prompt import Prompt
 from population import _build_template
 from population_runner import aggregate_population
+from validate_baseline import hourly_normalized, compare_curves, pearson
 
 
 class FakeEnergyCalculator:
     def __init__(self, loads):
         self.household_load_watts = loads
+
+
+class TestBaseline(unittest.TestCase):
+    """基线对比指标（计划5）。"""
+
+    def test_hourly_normalized(self):
+        loads = [50.0] * 1440
+        loads[19 * 60:20 * 60] = [2050.0] * 60   # 19 点整点高峰
+        curve = hourly_normalized(loads)
+        self.assertEqual(len(curve), 24)
+        mean = sum(curve) / 24
+        self.assertAlmostEqual(mean, 1.0)        # 归一化后均值 = 1
+        self.assertEqual(curve.index(max(curve)), 19)
+
+    def test_pearson_identical_is_one(self):
+        a = [1.0, 2.0, 3.0]
+        self.assertAlmostEqual(pearson(a, a), 1.0)
+
+    def test_compare_curves_same_shape(self):
+        sim = [0.5, 0.6, 0.8, 1.0, 1.2, 1.5, 1.3, 1.0, 0.7, 0.6, 0.5, 0.5] * 2
+        real = [0.55, 0.65, 0.85, 1.05, 1.25, 1.45, 1.35, 1.05, 0.75, 0.65, 0.55, 0.5] * 2
+        report = compare_curves(sim, real)
+        self.assertEqual(report["sim_peak_hour"], 5)
+        self.assertEqual(report["real_peak_hour"], 5)
+        self.assertEqual(report["peak_hour_offset"], 0)
+        self.assertGreater(report["correlation"], 0.9)   # 同形状 → 高相关
 
 
 class TestPopulation(unittest.TestCase):
