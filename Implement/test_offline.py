@@ -795,6 +795,24 @@ class TestMemory(unittest.TestCase):
         self.assertIn("22:30-07:00", rendered)
         self.assertIn("电动汽车充电", rendered)
 
+    def test_prompt_community_notice(self):
+
+        from engine.prompt import Prompt
+        rendered = Prompt().load("simulate_step1_macro_plan",
+            member_name="Alice", member_age=28, member_occupation="软件工程师",
+            member_personality="细心", date="2026年4月21日", day_type="工作日",
+            time_context="日期：2026年4月21日（工作日）",
+            home_structure="{}", members_info="[]", memory_context="",
+            world_news="", community_notice="本社区本周节能目标 5%")
+        self.assertIn("本社区本周节能目标 5%", rendered)
+        empty = Prompt().load("simulate_step1_macro_plan",
+            member_name="Alice", member_age=28, member_occupation="软件工程师",
+            member_personality="细心", date="2026年4月21日", day_type="工作日",
+            time_context="日期：2026年4月21日（工作日）",
+            home_structure="{}", members_info="[]", memory_context="",
+            world_news="", community_notice="")
+        self.assertNotIn("community_notice", empty)
+
 
 
 
