@@ -134,6 +134,35 @@ def load_world_state(world_id):
     }
 
 
+def load_jobs():
+    """后台任务状态（background_runner 产物，计划28：前端监控面板）。"""
+    jobs_dir = os.path.join(PROJECT_ROOT, "logs", "jobs")
+    if not os.path.isdir(jobs_dir):
+        return []
+    jobs = []
+    for name in sorted(os.listdir(jobs_dir)):
+        if not name.endswith(".json") or name.startswith("server"):
+            continue
+        try:
+            with open(os.path.join(jobs_dir, name), "r", encoding="utf-8") as f:
+                meta = json.load(f)
+            # 进度解析（复用 background_runner 逻辑）
+            sys.path.insert(0, os.path.join(PROJECT_ROOT, "Implement"))
+            import background_runner as br
+            prog = br.parse_progress(meta["out"])
+            jobs.append({
+                "job_id": meta["job_id"],
+                "status": prog["status"],
+                "progress": prog["detail"],
+                "command": meta["command"],
+                "started_at": meta["started_at"],
+                "log_tail": br.tail_text(meta["out"], 800),
+            })
+        except Exception:
+            continue
+    return jobs
+
+
 def load_events(world_id):
     """上帝剧本（events.json）。"""
     path = os.path.join(WORLDS_DIR, world_id, "events.json")
@@ -282,6 +311,9 @@ class Handler(BaseHTTPRequestHandler):
                     return
             if parts == ["api", "compare"]:
                 self._send_json({"worlds": [w["id"] for w in list_worlds()]})
+                return
+            if parts == ["api", "jobs"]:
+                self._send_json(load_jobs())
                 return
 
             self._send_json({"error": f"unknown api: {path}"}, 404)
