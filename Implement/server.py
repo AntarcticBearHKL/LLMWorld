@@ -103,6 +103,23 @@ def load_events(world_id):
         return json.load(f)
 
 
+def add_event_to_script(world_id, event):
+    """上帝注入：把事件追加进 worlds/<id>/events.json（模拟中每天重读 → 实时生效）。"""
+    path = os.path.join(WORLDS_DIR, world_id, "events.json")
+    data = load_events(world_id)
+    item = {
+        "date": event["date"], "time": event.get("time", "07:00"),
+        "title": event["title"], "content": event["content"],
+        "source": event.get("source", "上帝"), "type": event.get("type", "一般"),
+    }
+    data.setdefault("events", []).append(item)
+    if not os.path.isdir(os.path.dirname(path)):
+        os.makedirs(os.path.dirname(path))
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    return data
+
+
 def load_house_profile(world_id, postcode, house_id, scenario, date):
     """单户 1440 分钟曲线。"""
     path = os.path.join(OUTPUTS_DIR, world_id, postcode, house_id, scenario, date,
@@ -125,6 +142,16 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
+
+    def _read_json_body(self):
+        length = int(self.headers.get("Content-Length", 0))
+        if length <= 0:
+            return {}
+        raw = self.rfile.read(length).decode("utf-8")
+        try:
+            return json.loads(raw)
+        except Exception:
+            return {}
 
     def _send_file(self, path):
         if not os.path.exists(path):
@@ -179,6 +206,24 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json({"worlds": [w["id"] for w in list_worlds()]})
                 return
 
+            self._send_json({"error": f"unknown api: {path}"}, 404)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def do_POST(self):
+        path = self.path.split("?")[0].rstrip("/")
+        parts = [p for p in path.split("/") if p]
+        try:
+            if len(parts) == 4 and parts[:2] == ["api", "worlds"] and parts[3] == "events":
+                world_id = parts[2]
+                body = self._read_json_body()
+                missing = [k for k in ("date", "title", "content") if not body.get(k)]
+                if missing:
+                    self._send_json({"error": f"缺少字段: {missing}"}, 400)
+                    return
+                events = add_event_to_script(world_id, body)
+                self._send_json(events)
+                return
             self._send_json({"error": f"unknown api: {path}"}, 404)
         except Exception as e:
             self._send_json({"error": str(e)}, 500)

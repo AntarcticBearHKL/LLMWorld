@@ -55,6 +55,14 @@
 
 <div class="panel">
   <h3>上帝剧本（events.json 新闻）</h3>
+  <div style="margin-bottom:8px;font-size:13px;">
+    日期 <input id="evDate" value="2026-04-22" style="width:110px"> 
+    标题 <input id="evTitle" placeholder="事件标题" style="width:200px">
+    内容 <input id="evContent" placeholder="事件内容" style="width:360px">
+    来源 <input id="evSource" value="上帝" style="width:90px">
+    <button onclick="godInject()">注入事件</button>
+    <span id="godStatus" style="color:#4a7;font-size:12px;"></span>
+  </div>
   <div id="news" class="news">（加载中…）</div>
 </div>
 
@@ -195,6 +203,40 @@ async function renderNews(worldId) {
   div.innerHTML = evs.map(n =>
     `<div><b>[${n.date} ${n.time}]（${n.source || ""}）${n.title}</b><br>${n.content}</div><br>`).join("");
 }
+
+async function godInject() {
+  const worldId = document.getElementById("selWorld").value;
+  const st = document.getElementById("godStatus");
+  if (!worldId) { st.textContent = "请先选择世界"; return; }
+  const body = {
+    date: document.getElementById("evDate").value.trim(),
+    title: document.getElementById("evTitle").value.trim(),
+    content: document.getElementById("evContent").value.trim(),
+    source: document.getElementById("evSource").value.trim() || "上帝",
+  };
+  if (!body.date || !body.title || !body.content) { st.textContent = "日期/标题/内容必填"; return; }
+  try {
+    const r = await fetch(`/api/worlds/${worldId}/events`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body),
+    });
+    const res = await r.json();
+    if (res.error) throw new Error(res.error);
+    st.textContent = "已注入：" + body.title;
+    document.getElementById("evTitle").value = "";
+    document.getElementById("evContent").value = "";
+    await renderNews(worldId);
+  } catch (e) {
+    st.textContent = "失败: " + e.message;
+  }
+}
+
+// 自动刷新：每 10 秒重新拉取当前视图（世界变动实时可见）
+setInterval(() => {
+  const sel = document.getElementById("selWorld");
+  if (sel && sel.value) refresh();
+}, 10000);
 
 init();
 </script>
