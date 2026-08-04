@@ -1,60 +1,53 @@
-class PopulationBuilder（population.py 人口构建器）
-    基于 Clayton 3168 census 统计（总人口约 2.2 万、中位年龄 28、住宅约 7150 套）的
-    本地确定性家庭人口生成器，0 LLM 调用，全部随机由 seed 控制以保证可复现。
-    FIRST_NAMES_M / FIRST_NAMES_F / SURNAMES 与 census 社区构成相符的姓名池
-    OCCUPATIONS 职业池（软件工程师、教师、研究生、电工等）
-    家庭模板 四类：young_couple 年轻夫妇/丁克、family_with_kids 有孩家庭、
-        single_living 独居、share_house 合租（参照 census 家庭构成）
+class PopulationBuilder (population.py v2)
+    本地确定性人口构建（0 LLM 调用）：Big Five 人格 + 8 类垂直家庭 + 属性关联（census 校准）。
 
-    func build_population(world_id, count, seed, household_types):
-        本地生成 count 户异质家庭，写入 worlds/<world_id>/3168/house_XXXX/ 目录。
-        1. 默认按 census 校准的 4 类家庭模板轮转选取每户类型。
-        2. 以 seed 初始化随机数发生器，同种子两次生成结果完全一致。
-        3. 逐户调用 _build_template 生成 household.json，写入对应 house_XXXX 目录。
-        4. 生成 district.json（postcode 3168、Clayton 经纬度坐标、经济水平"中"）。
-        5. 汇总各户元信息并生成 world.json（结构对齐 generate.py），返回世界元数据。
+    人格模型：
+    - sample_big_five(rng, bias)：五维采样（开放性/尽责性/外向性/宜人性/神经质，1-10）
+    - big_five_to_text(bf)：五维 → 中文行为描述（注入 prompt）
+    - big_five_to_traits(bf, rng)：五维 → 2-3 个性格词（兼容旧 traits 字段）
+    - big_five_to_energy_awareness(bf)：尽责性 → 节能意识（高/中/低）
+    - big_five_to_news_sensitivity(bf)：神经质 → 新闻/政策敏感度
+
+    家庭类型（8 类，census 配额 + fringe 保障）：
+    young_couple 25% / family_with_kids 20% / share_house 15% / single_living 15%
+    / international_student 10% / multigenerational 5% / single_parent 5% / retired_couple 5%
+    - fringe 保障：户数 ≥ 类型数时每类至少 1 户（防止边缘群体缺失）
+
+    属性关联链：
+    - 年龄 → 职业/收入档 → 住房面积 → 电器配置（EV/空调按收入）
+    - 夫妻年龄差 ≤5；孩子年龄 = 父母-24~34；三代年龄有序
+    - 多文化姓名池（中/印/越/澳）；家庭内姓名去重
+
+    func _make_member(rng, name, gender, age, occupation, income, big_five, ...):
+        Big Five 驱动人格字段（big_five/behavior_text/news_sensitivity/energy_awareness）
+        + 作息推导（角色/尽责性/外向性）+ 爱好池（按收入档）。
+
+    func _home_by_income(rng, name, income_bracket, size_override, with_ev):
+        收入 → 房间/电器配置（低收入无空调/高收入车库 EV）。
 
     func _build_template(household_type, rng):
-        按家庭类型生成一个完整的 household.json 结构。
-        1. 从姓名池抽取姓氏并随机家庭面积。
-        2. young_couple：2 名年轻成员，25% 概率配电动汽车车库。
-        3. family_with_kids：3 名成员（含 5-12 岁儿童），配电动汽车与儿童房。
-        4. single_living：1 名成员（青年或退休老人）。
-        5. share_house：3 名合租青年（含研究生）。
-        6. 成员作息、职业、节能意识等均由 rng 按 seed 控制随机变化。
+        8 类家庭模板（含成员关联规则与性格偏置）。
 
-    func _base_home(name, size, room_appliances):
-        将 {房间名: [电器类型列表]} 拼装为标准 home 结构字典（含 Generic 品牌占位）。
+    func _dedupe_names(household):
+        家庭内姓名唯一（agent 身份键要求）。
 
-    func _standard_rooms(with_ev):
-        返回 Clayton 典型联排的房间与电器配置（客厅/厨房/主卧/次卧/卫生间/阳台），
-        可选地追加带电动汽车的车库。
+    func build_population(world_id, count, seed, household_types):
+        配额分配 → 逐户生成 → 写 worlds/<id>/3168/house_XXXX/household.json + world.json。
 
-    func _member(name, age, gender, occupation, traits, energy_awareness, habits, personal):
-        拼装一名成员的标准档案字典（作息表、性格特征、节能意识、健康温度偏好、个人电器）。
-
-
-class PopulationRunner（population_runner.py 人口级并行模拟器）
-    MAX_HOUSEHOLDS_PARALLEL 同时模拟的家庭数上限 5（每户每阶段的并发受 SubAgent
-        全局信号量约束，同一时刻打向 API 的总并发仍不超过 10）
+class PopulationRunner (population_runner.py)
+    人口级并行模拟 + 聚合。
 
     func aggregate_population(house_results):
-        把多户的日模拟结果聚合成人口级负荷曲线与统计。
-        1. 逐户累加 1440 分钟家庭负荷曲线为人口总负荷。
-        2. 记录每户总用电、峰值功率与峰值时刻。
-        3. 计算人口总用电、户均、中位数、标准差与整体峰值。
-        4. 返回含 load_profile_watts、hourly_average_watts 与 per_house 明细的聚合字典。
-
-    func main_aggregate_only(args, project_root, pop_root):
-        离线聚合：不消耗 Token，直接从各户已保存的 house_load_profile_1440min.json 重建人口曲线。
-        1. 加载世界与家庭清单，兼容新旧两种输出目录结构。
-        2. 取每户最新日期的负荷曲线文件，包装为轻量结果对象。
-        3. 调用 aggregate_population 聚合并写入 aggregate_only.json。
+        1440 分钟总负荷 = Σ 逐户；总/户均/中位/标准差/峰值/逐户明细。
 
     func main:
-        人口级并行模拟主入口。
-        1. 命令行参数：world_id、--days、--date、--house-start、--house-count、--seed、--policy、--aggregate-only。
-        2. 指定 --policy 时通过 Policy.from_name 渲染政策上下文并取得场景名（无干预为空串，与基线一致）。
-        3. 为每户创建独立的 World（含各自跨天记忆），用 ThreadPoolExecutor 按天并行模拟。
-        4. 每日调用 aggregate_population 聚合，按政策场景分目录保存 population_profile_1440min.json。
-        5. 输出 Token 账单、各户决策校验警告汇总与并发峰值实测（验证并发 ≤10 硬约束）。
+        1. 解析参数（--days/--date/--policy/--event/--scenario/--no-events/--aggregate-only）。
+        2. 每户独立 World（跨天记忆 + 新闻台 + 上帝注入事件）。
+        3. 逐日：ThreadPoolExecutor(≤5 户) 并行 simulate_day。
+           - 环境走 EnvironmentInterface（真实/随机/手工）
+           - 政策上下文 policy_context / 场景标签 policy_name
+        4. 聚合 → outputs/<world>/population/<scenario>/<date>/*.json（含 environment 字段）。
+        5. 打印 Token 账单与并发实测峰值。
+
+    func main_aggregate_only:
+        从已保存的逐户曲线离线聚合（0 token），兼容新旧目录结构。
