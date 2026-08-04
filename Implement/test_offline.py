@@ -396,6 +396,29 @@ class TestSeasonAuto(unittest.TestCase):
         self.assertEqual(utils.season_for_date("2026-12-25"), "夏天")
 
 
+class TestNewsTemplates(unittest.TestCase):
+
+    def test_build_heatwave(self):
+        from engine.news_templates import build_template
+        item = build_template("heatwave", "2026-01-15")
+        self.assertEqual(item.date, "2026-01-15")
+        self.assertIn("热浪", item.title)
+        self.assertEqual(item.news_type, "环境")
+
+    def test_build_unknown_raises(self):
+        from engine.news_templates import build_template
+        with self.assertRaises(ValueError):
+            build_template("不存在的模板", "2026-01-15")
+
+    def test_all_templates_valid(self):
+        from engine.news_templates import TEMPLATES
+        self.assertGreaterEqual(len(TEMPLATES), 8)
+        for name, t in TEMPLATES.items():
+            self.assertTrue(t["title"])
+            self.assertTrue(t["content"])
+            self.assertTrue(t["source"])
+
+
 class TestPolicy(unittest.TestCase):
 
 
