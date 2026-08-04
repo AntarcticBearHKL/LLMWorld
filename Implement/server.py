@@ -331,6 +331,23 @@ def build_sim_args(world_id, body):
     return sim_args
 
 
+def load_templates():
+
+    from engine.news_templates import template_names, build_template
+    items = []
+    for name in sorted(template_names()):
+        try:
+            sample = build_template(name, "2026-05-01")
+        except Exception:
+            continue
+        items.append({
+            "name": name,
+            "title": getattr(sample, "title", ""),
+            "content": getattr(sample, "content", ""),
+        })
+    return items
+
+
 def load_events(world_id):
 
     path = os.path.join(WORLDS_DIR, world_id, "events.json")
@@ -511,6 +528,9 @@ class Handler(BaseHTTPRequestHandler):
             if len(parts) == 4 and parts[:3] == ["api", "worlds"] and parts[3] == "timeline":
                 data = load_timeline(parts[2])
                 self._send_json({"timeline": data})
+                return
+            if parts == ["api", "news-templates"]:
+                self._send_json({"templates": load_templates()})
                 return
             if parts == ["api", "jobs"]:
                 self._send_json(load_jobs())

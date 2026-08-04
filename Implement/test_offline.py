@@ -1482,6 +1482,15 @@ class TestTimelineServer(unittest.TestCase):
         from server import load_timeline
         self.assertEqual(load_timeline("__no_such_world"), [])
 
+    def test_load_templates_nonempty(self):
+        from server import load_templates
+        items = load_templates()
+        self.assertGreaterEqual(len(items), 10)
+        for item in items:
+            self.assertTrue(item["name"])
+            self.assertTrue(item["title"])
+            self.assertTrue(item["content"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
