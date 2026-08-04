@@ -31,6 +31,7 @@
   <label>世界 <select id="selWorld"></select></label>
   <label>日期 <select id="selDate"></select></label>
   <button onclick="refresh()">刷新</button>
+  <span id="worldState" style="font-size:12px;color:#456;"></span>
   <span id="status" class="err"></span>
 </div>
 
@@ -141,6 +142,13 @@ async function refresh() {
   const st = document.getElementById("status");
   if (!worldId || !date || !scenarios.length) { st.textContent = "请选择世界/日期/至少一个场景"; return; }
   st.textContent = "加载中…";
+  // 世界连续状态（计划27：上次日期+记忆天数）
+  try {
+    const ws = await api(`/api/worlds/${worldId}/state`);
+    document.getElementById("worldState").textContent = ws.has_state
+      ? `世界状态: 上次至 ${ws.date}，记忆 ${ws.memory_days} 天（未指定日期将自动续跑）`
+      : "世界状态: 新世界（无日期，从默认日期开始）";
+  } catch (e) { /* 忽略状态错误 */ }
   try {
     const profiles = [];
     for (const s of scenarios) {
