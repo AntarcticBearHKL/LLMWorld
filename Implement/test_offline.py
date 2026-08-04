@@ -2099,5 +2099,43 @@ class TestWorldSummary(unittest.TestCase):
         self.assertEqual(report["per_house"], [])
 
 
+class TestPolicyTradeoffs(unittest.TestCase):
+
+
+    def test_parse(self):
+        from analyze_policy_tradeoffs import _to_float
+        self.assertEqual(_to_float("30.0 (+0.0%)"), 0.0)
+        self.assertEqual(_to_float("-8.5%"), -8.5)
+        self.assertIsNone(_to_float(None))
+
+    def test_build_report(self):
+        from analyze_policy_tradeoffs import build_report
+        import os, shutil
+        path = os.path.join("outputs", "__pt", "comparison", "policy_matrix.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({"scenarios": [
+                {"场景": "baseline", "总kWh": "30.0", "晚峰16-21点kWh": "10.0",
+                 "峰值W": "3000", "峰值平台分钟": "60", "峰均比": "3.0"},
+                {"场景": "tou", "总kWh": "27.0 (-10.0%)",
+                 "晚峰16-21点kWh": "7.0 (-30.0%)",
+                 "峰值W": "2400 (-20.0%)",
+                 "峰值平台分钟": "40 (-33.3%)", "峰均比": "2.5"},
+            ]}, f)
+        try:
+            report = build_report("__pt")
+            by_name = {r["scenario"]: r for r in report["scenarios"]}
+            self.assertEqual(by_name["tou"]["total_change_pct"], -10.0)
+            self.assertEqual(by_name["tou"]["peak_hours_change_pct"], -30.0)
+            self.assertEqual(by_name["tou"]["peak_load_cut_pct"], -20.0)
+        finally:
+            shutil.rmtree(os.path.join("outputs", "__pt"), ignore_errors=True)
+
+    def test_missing_matrix(self):
+        from analyze_policy_tradeoffs import build_report
+        with self.assertRaises(ValueError):
+            build_report("__no_such_world")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
