@@ -1,0 +1,19 @@
+class Member
+    name 成员姓名，默认为 空
+    age 成员年龄，默认为 0
+    occupation 成员职业，默认为 空
+    personality 成员性格特征描述，默认为 空
+    habits 成员日常习惯描述，默认为 空
+    personal_appliances 成员拥有的个人专属电器对象列表，默认为 空列表
+
+    func add_personal_appliance(appliance):
+        将指定的电器对象绑定为该成员的专属电器。
+
+    func add_personal_appliance_by_name(appliance_name):
+        使用电器工厂根据名称创建电器对象，自动将所有权绑定为当前成员，并加入其专属电器列表中。
+
+    func get_personal_appliance(appliance_name):
+        根据电器名称检索成员的个人专属电器。
+
+    func to_dict:
+        将成员的所有属性（基本资料、性格习惯和个人专属电器名称）转化为适合序列化或大模型 Context 输入的字典格式。

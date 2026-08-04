@@ -1,0 +1,22 @@
+class WeatherAPI
+    @静态方法
+    func get_history(lat, lon, date):
+        获取指定日期和经纬度的历史天气信息。
+        如果系统中缺少 WEATHER_API_KEY，自动调用 `_mock_data` 生成包含高分辨率温度走势的模拟数据。
+        如果密钥可用，向 api.weatherapi.com 发送请求，解析并获取最高温、最低温、平均温、整体气候状况（晴天/雨天）以及 24 小时逐小时温度与湿度序列，用于为温控家电（如空调）计算提供高分辨率物理边界输入。
+
+    @静态方法
+    func _mock_data(date):
+        生成默认的高分辨率天气物理模拟数据，利用余弦温差曲线生成 24 小时的逐小时气温，提供合理的常识数据。
+
+
+class HolidayAPI
+    @静态方法
+    func get_holidays(country, year):
+        获取指定国家和年份的法定节假日清单。
+        若没有配置密钥，调用 `_mock_data` 返回默认的国家法定节假日（如CN的元旦、劳动节、国庆节）。
+        若有密钥配置，向 holidayapi.com 发送 HTTP 请求并解析 YYYY-MM-DD 对应的全部公众假期属性，返回标准映射表。
+
+    @静态方法
+    func _mock_data(country, year):
+        提供基础国家法定节假日数据的安全硬编码回退。

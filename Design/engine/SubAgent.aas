@@ -1,0 +1,45 @@
+class SubAgent
+    _lock 线程并发锁，用于保障 Token 统计的多线程安全
+    _total_prompt_cache_hit_tokens 累计大语言模型 Prompt 缓存命中的 Token 数量，默认为 0
+    _total_prompt_cache_miss_tokens 累计大语言模型 Prompt 缓存未命中的 Token 数量，默认为 0
+    _total_completion_tokens 累计大语言模型生成的输出 Token 数量，默认为 0
+
+    @静态方法
+    func _clean_json_response(text):
+        自动清洗大模型应答文本中的 Markdown 代码块包裹标记（如 "```json ... ```"），提取出合法的纯 JSON 字符串。
+
+    @静态方法
+    func _update_tokens(cache_hit, cache_miss, completion):
+        多线程安全地累加更新当前模型请求消耗的各类 Token 计数器。
+
+    @静态方法
+    func get_tokens:
+        线程安全地获取当前全局累计的（未命中、命中、输出）Token 使用量元组。
+
+    @静态方法
+    func reset_tokens:
+        线程安全地将全局 Token 计数器清零复位。
+
+    @静态方法
+    func call_glm(prompt, json_mode, thinking, api_key, model):
+        向 GLM-4.7 接口模型发送同步阻塞的单次对话请求，获取生成应答。解析并记录相应的 Token 消耗，返回清洗后的响应内容。
+
+    @静态方法
+    func call_deepseek(prompt, json_mode, thinking, api_key, model):
+        使用 deepseek-v4-flash 模型发送同步阻塞的单次对话请求。如果启用 thinking 思考模式，则在请求载荷中注入 thinking 参数以启用模型自带的思维链，并结合 reasoning_effort 控制思考强度。最后解析并扣算缓存命中率等 Token 明细，返回包含模型最终生成、思考推理过程和是否带思维链信息的字典。
+
+    @静态方法
+    func _worker(prompt, result_queue, json_mode, thinking, api_key, model, index):
+        多线程工作子例程，执行 call_deepseek 并将结果连同其在输入序列中的索引打包放入队列。
+
+    @静态方法
+    func parallel_call(prompts, json_mode, thinking, api_key, model):
+        利用 Python 多线程，并发调用大语言模型处理批量的 Prompt 提示词。
+        1. 初始化结果队列。
+        2. 为每一个 prompt 启动一个工作线程，执行线程工作例程 _worker。
+        3. 等待所有工作线程执行结束（join）。
+        4. 从结果队列中按原始输入顺序收集并组装大模型的应答结果，并返回结果列表。这对于并行模拟一个家庭中多名成员的一日计划或批量电器决策至关重要。
+
+    @静态方法
+    func single_call(prompt, json_mode, thinking, api_key, model):
+        执行单次大语言模型同步调用请求，返回包含生成内容和推理内容的字典。

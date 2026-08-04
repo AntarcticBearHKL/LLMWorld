@@ -1,0 +1,37 @@
+class Planner
+    home 关联的家庭对象
+    timelines 存储所有家庭成员姓名到 Timeline 对象的映射表，默认为 空字典
+    prompt 提示词模板加载器对象，默认为 Prompt()
+    log_dir 当前运行日志的输出物理目录路径，默认为 系统自动生成的含时间戳目录
+
+    func generate_plans(time_obj):
+        第一层规划：异步并发生成家庭中所有成员各自的宏观一日行为规划。
+        1. 获取家庭当前的家电结构和成员基础档案信息。
+        2. 遍历所有成员，提取其姓名、年龄、职业和性格特征，加载 `simulate_step1_macro_plan` 模板，拼装成独立的提示词。
+        3. 调用 SubAgent 并行请求大语言模型，并结合思维链（CoT/Thinking）生成宏观时间表。
+        4. 解析大语言模型返回的 JSON 数据，为各成员建立原始 Timeline，并将大模型完整的 Prompt、推理路径和应答写入日志归档。
+
+    func coordinate_timelines_progressively:
+        第二层规划：解决成员之间独占资源与空间的物理冲突，以渐进迭代方式协调家庭时间线。
+        1. 检查家庭成员数量，若仅一人则直接跳过协调。
+        2. 从 Home 获取当前家庭的独占硬件资源清单（如电动汽车的使用所有权与保管规则）。
+        3. 以第一个成员作为时间线基准，以渐进顺序（从第 2 个成员开始到最后一个）逐步串行与已完成协调的成员们的时间线做对齐。
+        4. 对当前被协调的成员，将其原始时间线、已协调完毕的其他成员的时间线以及独占资源规则输入 `simulate_step2_progressive_coordination` 提示词中。
+        5. 调用 SubAgent 请求大模型重新分配存在冲突的时间片、协同活动（如一起乘车或一起用餐）及共享位置。
+        6. 解析并应用协调结果，更新该成员的 Timeline 对象，并保存详细的过程日志。
+
+
+
+    func enrich_activities(season, weather, temperature):
+        第三层规划：在时间线骨架的基础上，结合自然气候情境和交互场景，丰富家庭活动的行为细节。
+        1. 遍历每个家庭成员。
+        2. 组合其当前的时间线数据、其他家庭成员的时间线数据、家庭结构字典以及当前的气象因子（季节、天气、气温）。
+        3. 加载 `simulate_step3_enrich_activities` 模板并渲染。
+        4. 通过 SubAgent 的并发调度系统（parallel_call）批量对大模型发起请求。
+        5. 解析大模型应答，将细化的描述文字补充到各 Timeline 具体的 TimeSlot.desc 中，并将思考思考过程和模板保存归档。
+
+    func _get_member(name):
+        通过名字检索家庭成员对象。
+
+    func _save_log(stage_name, prompt, response, tokens, reasoning_content):
+        在磁盘的日志目录中，将各个规划阶段的完整模板、模型返回结果、Token 消耗统计和推理过程持久化存储为 Markdown 格式，以确保实验和评估的可回溯性。
