@@ -198,13 +198,10 @@ def main():
 
         print(f"日期类型：{day_info}")
 
-        weather_data = WeatherAPI.get_history(
-            location['coordinates']['lat'],
-            location['coordinates']['lon'],
-            date_str
-        )
+        from engine.environment_interface import EnvironmentInterface
+        weather_data = EnvironmentInterface.get_weather(location, date_str, season)
 
-        print(f"天气：{weather_data['condition']}")
+        print(f"天气：{weather_data['condition']}（模式：{weather_data.get('mode', '?')}）")
         print(f"温度：{weather_data['temperature']['min']}°C - {weather_data['temperature']['max']}°C")
         print(f"湿度：{weather_data['humidity']}%")
 

@@ -162,6 +162,12 @@ function renderCards(p) {
     ["峰值时刻", p.peak_time],
     ["家庭数", p.households],
   ];
+  // 环境信息（计划23）：第一户的环境作为代表展示
+  const envMap = p.environment || {};
+  const firstEnv = Object.values(envMap)[0];
+  if (firstEnv) {
+    items.push([`天气(${firstEnv.mode || "?"})`, `${firstEnv.condition} ${firstEnv.temperature}℃`]);
+  }
   document.getElementById("cards").innerHTML = items.map(([k, v]) =>
     `<div class="card"><div class="v">${v}</div><div class="k">${k}</div></div>`).join("");
 }
