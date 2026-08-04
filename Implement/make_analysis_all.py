@@ -132,6 +132,43 @@ def run_all(world_id, date_arg=None):
                                f"solar_{scenario}_{date.replace('-', '')}.json")
             summary.append(f"  光伏自用[{scenario}] 覆盖{sol['mean_solar_coverage']} {path}")
 
+        if per_house:
+            import analyze_electrification
+            elec = analyze_electrification.build_report(per_house)
+            elec["world_id"] = world_id
+            elec["scenario"] = scenario
+            elec["date"] = date
+            path = save_report(elec, world_id,
+                               f"electrification_{scenario}_{date.replace('-', '')}.json")
+            summary.append(f"  电气化[{scenario}] {path}")
+
+        if per_house:
+            import analyze_advice
+            adv = analyze_advice.build_report(per_house)
+            adv["world_id"] = world_id
+            adv["scenario"] = scenario
+            adv["date"] = date
+            path = save_report(adv, world_id,
+                               f"advice_{scenario}_{date.replace('-', '')}.json")
+            summary.append(f"  建议[{scenario}] {path}")
+
+        if daily:
+            import analyze_seasonal
+            seasonal = analyze_seasonal.build_report(daily)
+            seasonal["world_id"] = world_id
+            seasonal["scenario"] = scenario
+            path = save_report(seasonal, world_id, f"seasonal_{scenario}.json")
+            summary.append(f"  季节[{scenario}] {len(seasonal['seasons'])}季 {path}")
+
+        import analyze_weather_sensitivity
+        w_points = analyze_weather_sensitivity.load_daily_points(world_id, scenario)
+        if w_points:
+            weather = analyze_weather_sensitivity.build_report(w_points)
+            weather["world_id"] = world_id
+            weather["scenario"] = scenario
+            path = save_report(weather, world_id, f"weather_{scenario}.json")
+            summary.append(f"  天气敏感性[{scenario}] 相关{weather['temperature_kwh_corr']} {path}")
+
     for source in ("awareness", "variability"):
         if source == "variability":
             labels = analyze_groups.load_variability_labels(world_id)
