@@ -157,6 +157,16 @@ def load_event_response(world_id, scenario="baseline"):
         return json.load(f)
 
 
+def load_anomalies(world_id, scenario="baseline"):
+
+    path = os.path.join(OUTPUTS_DIR, world_id, "analysis",
+                        f"anomalies_{scenario}.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_worlds_matrix():
 
     path = os.path.join(OUTPUTS_DIR, "comparison", "worlds_matrix.json")
@@ -494,6 +504,10 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3] == "event-response" and len(parts) >= 5:
                     data = load_event_response(world_id, parts[4])
                     self._send_json(data or {"error": "no event response"}, 200 if data else 404)
+                    return
+                if parts[3] == "anomalies" and len(parts) >= 5:
+                    data = load_anomalies(world_id, parts[4])
+                    self._send_json(data or {"error": "no anomalies"}, 200 if data else 404)
                     return
                 if parts[3] == "events":
                     self._send_json(load_events(world_id))
