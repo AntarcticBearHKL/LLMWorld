@@ -1,0 +1,13 @@
+class AnalyzeAnomalies
+    异常户检测（计划62，Banik 2023 / Glauner 2017 / Olowookere 2026，0 LLM）。
+
+    - zscore(values) → 逐样本 z 分数（n<3 返回 None 列表）
+    - build_report(profiles) → 每户四维特征（total_kwh / peak_to_mean /
+      load_factor / overlap_count）逐维 z，|z|>2 标记（高/低）：
+      per_house[]（z_* 字段 / anomaly_flags / max_abs_z）+
+      anomalies[]（按 max_abs_z 降序）
+    - CLI：python analyze_anomalies.py <world> --scenario [--date]
+    - 输出：outputs/<world>/analysis/anomalies_<scenario>.json
+
+    调用链：make_analysis_all 一键化；server
+    /api/worlds/<id>/anomalies/<scenario> → 前端"异常户检测"面板
