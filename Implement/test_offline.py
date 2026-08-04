@@ -1458,6 +1458,22 @@ class TestSimArgs(unittest.TestCase):
         world_id, count = validate_create_args("__ok_world", "3")
         self.assertEqual((world_id, count), ("__ok_world", 3))
 
+    def test_delete_world_validation(self):
+        from server import validate_delete_world
+        with self.assertRaises(ValueError):
+            validate_delete_world("")
+        with self.assertRaises(ValueError):
+            validate_delete_world("bad/name")
+        with self.assertRaises(ValueError):
+            validate_delete_world("__no_such_world_dir")
+        import os
+        os.makedirs(os.path.join("worlds", "__del_me"), exist_ok=True)
+        try:
+            self.assertEqual(validate_delete_world("__del_me"), "__del_me")
+        finally:
+            import shutil
+            shutil.rmtree(os.path.join("worlds", "__del_me"))
+
 
 class TestPeerNudge(unittest.TestCase):
 

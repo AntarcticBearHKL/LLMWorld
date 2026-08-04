@@ -445,6 +445,32 @@ def validate_create_args(world_id, count):
     return world_id.strip(), count
 
 
+def validate_delete_world(world_id):
+    import re
+    if not world_id or not str(world_id).strip():
+        raise ValueError("世界 ID 不能为空")
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", str(world_id).strip()):
+        raise ValueError("世界 ID 非法")
+    if not os.path.isdir(os.path.join(WORLDS_DIR, world_id)):
+        raise ValueError(f"世界 {world_id} 不存在")
+    return world_id.strip()
+
+
+def delete_world(world_id):
+    world_id = validate_delete_world(world_id)
+    for job in load_jobs():
+        if job["status"] == "running" and world_id in job.get("command", ""):
+            raise ValueError(f"世界 {world_id} 有运行中任务 {job['job_id']}，请先停止")
+    import shutil
+    deleted = []
+    for target in (os.path.join(WORLDS_DIR, world_id),
+                   os.path.join(OUTPUTS_DIR, world_id)):
+        if os.path.isdir(target):
+            shutil.rmtree(target)
+            deleted.append(target)
+    return deleted
+
+
 def create_world(world_id, count, seed=42):
     world_id, count = validate_create_args(world_id, count)
     import population
@@ -747,6 +773,15 @@ class Handler(BaseHTTPRequestHandler):
                     self._send_json({"ok": True,
                                      "world_id": world_id,
                                      "households": len(meta.get("households", []))})
+                except ValueError as e:
+                    self._send_json({"error": str(e)}, 400)
+                except Exception as e:
+                    self._send_json({"error": str(e)}, 500)
+                return
+            if len(parts) == 4 and parts[:3] == ["api", "worlds", "delete"]:
+                try:
+                    deleted = delete_world(parts[3])
+                    self._send_json({"ok": True, "deleted": deleted})
                 except ValueError as e:
                     self._send_json({"error": str(e)}, 400)
                 except Exception as e:

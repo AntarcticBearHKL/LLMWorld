@@ -32,6 +32,7 @@
   <label>世界 <select id="selWorld"></select></label>
   <label>日期 <select id="selDate"></select></label>
   <button onclick="refresh()">刷新</button>
+  <button onclick="deleteWorld()" style="color:#c33;">删除世界</button>
   <span id="worldState" style="font-size:12px;color:#456;"></span>
   <span id="status" class="err"></span>
 </div>
@@ -910,6 +911,24 @@ async function runAnalysis() {
     st.textContent = "失败: " + e.message;
   } finally {
     btn.disabled = false;
+  }
+}
+
+async function deleteWorld() {
+  const worldId = document.getElementById("selWorld").value;
+  if (!worldId) return;
+  if (!confirm(`删除世界 ${worldId}？（worlds/ 与 outputs/ 全部产物）\n此操作不可恢复！`)) return;
+  try {
+    const r = await fetch(`/api/worlds/delete/${worldId}`, {method: "POST"});
+    const res = await r.json();
+    if (res.error) { alert("删除失败: " + res.error); return; }
+    worldsData = await api("/api/worlds");
+    const sel = document.getElementById("selWorld");
+    sel.innerHTML = worldsData.map(w => `<option value="${w.id}">${w.id}（${w.households.length}户）</option>`).join("");
+    await loadScenarios();
+    await refresh();
+  } catch (e) {
+    alert("删除失败: " + e.message);
   }
 }
 
