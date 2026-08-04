@@ -194,6 +194,58 @@ def run_all(world_id, date_arg=None):
     except SystemExit:
         summary.append("  政策矩阵 跳过（无 baseline）")
 
+    import analyze_world_summary
+    ws = analyze_world_summary.build_report(world_id, "baseline")
+    if ws["per_house"]:
+        ws["world_id"] = world_id
+        ws["scenario"] = "baseline"
+        path = save_report(ws, world_id, "world_summary_baseline.json")
+        summary.append(f"  世界总览 {ws['households']}户 {path}")
+    else:
+        summary.append("  世界总览 跳过（无分析数据）")
+
+    import analyze_policy_tradeoffs
+    try:
+        tradeoffs = analyze_policy_tradeoffs.build_report(world_id)
+        tradeoffs["world_id"] = world_id
+        path = save_report(tradeoffs, world_id, "policy_tradeoffs.json")
+        summary.append(f"  政策权衡 {len(tradeoffs['scenarios'])}政策 {path}")
+    except ValueError as e:
+        summary.append(f"  政策权衡 跳过: {e}")
+
+    import analyze_forecast
+    try:
+        forecast = analyze_forecast.build_report(daily) if daily else None
+        if forecast and forecast["per_house"]:
+            forecast["world_id"] = world_id
+            forecast["scenario"] = "baseline"
+            path = save_report(forecast, world_id, "forecast_baseline.json")
+            summary.append(f"  负荷预测 {forecast['households']}户 {path}")
+        else:
+            summary.append("  负荷预测 跳过（多日数据不足）")
+    except ValueError as e:
+        summary.append(f"  负荷预测 跳过: {e}")
+
+    import analyze_appliance_usage
+    try:
+        usage = analyze_appliance_usage.build_report(world_id, "baseline",
+                                                     date_arg)
+        usage["world_id"] = world_id
+        usage["scenario"] = "baseline"
+        date_tag = date_arg.replace("-", "") if date_arg else "latest"
+        path = save_report(usage, world_id,
+                           f"appliance_usage_baseline_{date_tag}.json")
+        summary.append(f"  电器画像 {len(usage['ranking'])}类 {path}")
+    except ValueError as e:
+        summary.append(f"  电器画像 跳过: {e}")
+
+    import export_analysis_csv
+    try:
+        exported = export_analysis_csv.export_world(world_id)
+        summary.append(f"  CSV 导出 {len(exported)} 文件")
+    except ValueError as e:
+        summary.append(f"  CSV 导出 跳过: {e}")
+
     print(f"\n=== 分析一键化完成: {world_id} ===")
     for line in summary:
         print(line)
