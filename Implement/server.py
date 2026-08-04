@@ -282,6 +282,17 @@ def load_forecast(world_id, scenario="baseline"):
         return json.load(f)
 
 
+def load_appliance_usage(world_id, scenario, date):
+
+    date_tag = date.replace("-", "") if date else "latest"
+    path = os.path.join(OUTPUTS_DIR, world_id, "analysis",
+                        f"appliance_usage_{scenario}_{date_tag}.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_worlds_matrix():
 
     path = os.path.join(OUTPUTS_DIR, "comparison", "worlds_matrix.json")
@@ -717,6 +728,10 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3] == "forecast" and len(parts) >= 5:
                     data = load_forecast(world_id, parts[4])
                     self._send_json(data or {"error": "no forecast"}, 200 if data else 404)
+                    return
+                if parts[3] == "appliance-usage" and len(parts) >= 6:
+                    data = load_appliance_usage(world_id, parts[4], parts[5])
+                    self._send_json(data or {"error": "no appliance usage"}, 200 if data else 404)
                     return
                 if parts[3] == "events":
                     self._send_json(load_events(world_id))

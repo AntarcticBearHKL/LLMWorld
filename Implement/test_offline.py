@@ -2179,5 +2179,38 @@ class TestForecast(unittest.TestCase):
             build_report([{"house_id": "h1", "days": []}])
 
 
+class TestApplianceUsage(unittest.TestCase):
+
+
+    def test_build_report(self):
+        from analyze_appliance_usage import build_report
+        import os, shutil
+        base = os.path.join("outputs", "__au", "3168", "h1", "baseline",
+                            "20260501", "用电信息")
+        os.makedirs(base, exist_ok=True)
+        def write_appliance(name, watts, kwh):
+            with open(os.path.join(base, f"{name}.json"), "w",
+                      encoding="utf-8") as f:
+                json.dump({"appliance_info": {"unique_id": name, "name": name,
+                                              "power_watts": watts},
+                           "usage_summary": {"total_energy_kwh": kwh}}, f)
+        write_appliance("ac", 2000, 8.0)
+        write_appliance("fridge", 100, 2.4)
+        try:
+            report = build_report("__au", "baseline", "2026-05-01")
+            self.assertEqual(report["households"], 1)
+            self.assertAlmostEqual(report["grand_total_kwh"], 10.4)
+            self.assertEqual(report["ranking"][0]["name"], "ac")
+            self.assertAlmostEqual(report["ranking"][0]["share_pct"], 76.92,
+                                   places=1)
+        finally:
+            shutil.rmtree(os.path.join("outputs", "__au"), ignore_errors=True)
+
+    def test_empty_raise(self):
+        from analyze_appliance_usage import build_report
+        with self.assertRaises(ValueError):
+            build_report("__no_such_world", "baseline", None)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

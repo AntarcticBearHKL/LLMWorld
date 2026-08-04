@@ -176,6 +176,11 @@
 </div>
 
 <div class="panel">
+  <h3>电器使用画像（计划103：电器贡献排行，Gunkel 2022）</h3>
+  <div id="applianceUsagePanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -345,6 +350,7 @@ async function refresh() {
     await renderWorldSummary(worldId);
     await renderTradeoffs(worldId);
     await renderForecast(worldId);
+    await renderApplianceUsage(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -862,6 +868,20 @@ async function renderForecast(worldId) {
   }).join("");
   div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">随机森林次日预测 vs 重复昨日基线（正提升=负荷有规律可循，可预测性=模拟真实感维度，Zharova 2022）</div>
     <table><thead><tr><th>家庭</th><th>训练日</th><th>测试日</th><th>MAE(kW)</th><th>Naive MAE</th><th>提升%</th><th>MAPE</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+}
+
+async function renderApplianceUsage(worldId) {
+  const div = document.getElementById("applianceUsagePanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const date = document.getElementById("selDate").value;
+  const a = await api(`/api/worlds/${worldId}/appliance-usage/${scenario}/${date}`);
+  if (!a || a.error) { div.innerHTML = "<span class='err'>（无电器画像，先跑 analyze_appliance_usage.py）</span>"; return; }
+  const rows = a.ranking.map(r => `
+    <tr><td>${r.name}</td><td>${r.total_kwh}</td><td>${r.share_pct}%</td><td>${r.households}</td></tr>`).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    ${a.households} 户，总电 ${a.grand_total_kwh}kWh；电器贡献排行（Gunkel 2022 类别贡献）</div>
+    <table><thead><tr><th>电器</th><th>总能耗(kWh)</th><th>占比%</th><th>户数</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
 }
 
