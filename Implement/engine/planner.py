@@ -19,18 +19,20 @@ from .timeline import Timeline
 
 class Planner:
     def __init__(self, home, world_id=None, postcode=None, house_id=None, date_str=None,
-                 memory_context=""):
+                 memory_context="", policy_name="baseline"):
         self.home = home
         self.timelines = {}
         self.prompt = Prompt()
         self.memory_context = memory_context   # 跨天记忆文本（可为空）
+        self.policy_name = policy_name         # 场景名（计划10：per-house 输出按场景隔离）
 
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         outputs_dir = os.path.join(project_root, "outputs")
         os.makedirs(outputs_dir, exist_ok=True)
 
         if world_id and postcode and house_id and date_str:
-            self.log_dir = os.path.join(outputs_dir, world_id, postcode, house_id, date_str)
+            self.log_dir = os.path.join(outputs_dir, world_id, postcode, house_id,
+                                        self.policy_name, date_str)
         else:
             self.log_dir = os.path.join(outputs_dir, f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
         os.makedirs(self.log_dir, exist_ok=True)

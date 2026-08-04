@@ -21,7 +21,7 @@ class World:
         self.memory = HouseholdMemory()   # 跨天记忆：昨天的行为影响今天的计划
     
     def simulate_day(self, season="夏天", weather="晴天", temperature=28, verbose=True,
-                     policy_context=""):
+                     policy_context="", policy_name="baseline"):
         if verbose:
             print(f"\n{'='*60}")
             print(f"开始模拟：{self.time.get_full_date_string()}")
@@ -30,7 +30,8 @@ class World:
         date_str = self.time.date.strftime('%Y%m%d')
         planner = Planner(self.home, world_id=self.world_id, postcode=self.postcode, 
                          house_id=self.house_id, date_str=date_str,
-                         memory_context=self.memory.get_prompt_context())
+                         memory_context=self.memory.get_prompt_context(),
+                         policy_name=policy_name)
         self.current_planner = planner
         
         if verbose:
