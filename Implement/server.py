@@ -129,10 +129,25 @@ def add_event_to_script(world_id, event):
     return data
 
 
+def _dir_date(date_str):
+    """日期目录兼容：'2026-04-21' 与 '20260421' 都接受（per-house 目录为紧凑格式）。"""
+    return date_str.replace("-", "") if date_str else date_str
+
+
 def load_house_profile(world_id, postcode, house_id, scenario, date):
     """单户 1440 分钟曲线。"""
-    path = os.path.join(OUTPUTS_DIR, world_id, postcode, house_id, scenario, date,
-                        "用电信息", "house_load_profile_1440min.json")
+    path = os.path.join(OUTPUTS_DIR, world_id, postcode, house_id, scenario,
+                        _dir_date(date), "用电信息", "house_load_profile_1440min.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_house_summary(world_id, postcode, house_id, scenario, date):
+    """单户电器级汇总（总用电汇总.json）。"""
+    path = os.path.join(OUTPUTS_DIR, world_id, postcode, house_id, scenario,
+                        _dir_date(date), "用电信息", "总用电汇总.json")
     if not os.path.exists(path):
         return None
     with open(path, "r", encoding="utf-8") as f:
@@ -214,6 +229,22 @@ class Handler(BaseHTTPRequestHandler):
                     return
                 if parts[3] == "events":
                     self._send_json(load_events(world_id))
+                    return
+                if parts[3] == "house" and len(parts) >= 6:
+                    # /api/worlds/<id>/house/<house_id>/summary/<scenario>/<date>
+                    house_id, sub, scenario, date = parts[4], parts[5], parts[6], parts[7]
+                    postcode = None
+                    world = next((w for w in list_worlds() if w["id"] == world_id), None)
+                    district = (world or {}).get("district") or {}
+                    postcode = district.get("postcode")
+                    if not postcode:
+                        self._send_json({"error": "unknown postcode"}, 404)
+                        return
+                    if sub == "summary":
+                        data = load_house_summary(world_id, postcode, house_id, scenario, date)
+                    else:
+                        data = load_house_profile(world_id, postcode, house_id, scenario, date)
+                    self._send_json(data or {"error": "house data not found"}, 200 if data else 404)
                     return
             if parts == ["api", "compare"]:
                 self._send_json({"worlds": [w["id"] for w in list_worlds()]})
