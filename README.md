@@ -91,6 +91,7 @@ StepInfo/                  开发日志（计划N/执行N）
 - `DEEPSEEK_APIKEY`（.env）：DeepSeek API
 - `ENV_MODE = real/config/manual`：天气来源（真实 API / 墨尔本气候表随机 / env_manual.json 手工）
 - `WEATHER_API_KEY`（.env）：可选，real 模式用
+- Python 依赖：`numpy` / `scipy` / `scikit-learn`（聚类分析）/ `matplotlib`（基线图，可选）
 
 ## 论文素材
 

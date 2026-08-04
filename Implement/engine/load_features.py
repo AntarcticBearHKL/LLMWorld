@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.cluster import KMeans
 
 
 def hourly_means(profile_watts):
@@ -42,43 +43,18 @@ def peak_to_mean(hourly):
     return peak / mean
 
 
-def _init_centers_plusplus(data, k, rng):
-    n = len(data)
-    centers = [data[int(rng.integers(n))]]
-    for _ in range(1, k):
-        dists = np.min(np.linalg.norm(data[:, None, :] - np.asarray(centers)[None, :, :], axis=2), axis=1)
-        total = float(dists.sum())
-        probs = dists / total if total > 0 else np.ones(n) / n
-        centers.append(data[int(rng.choice(n, p=probs))])
-    return np.asarray(centers)
-
-
-def kmeans(features, k, seed=42, iters=100):
+def kmeans(features, k, seed=42, iters=300):
     data = np.asarray(features, dtype=float)
     n = len(data)
     if n < k:
         raise ValueError("样本数少于簇数")
-    rng = np.random.default_rng(seed)
-    centers = _init_centers_plusplus(data, k, rng)
-    labels = np.zeros(n, dtype=int)
-    for _ in range(iters):
-        dists = np.linalg.norm(data[:, None, :] - centers[None, :, :], axis=2)
-        labels = np.argmin(dists, axis=1)
-        new_centers = centers.copy()
-        for c in range(k):
-            members = data[labels == c]
-            if len(members):
-                new_centers[c] = members.mean(axis=0)
-            else:
-                far = np.linalg.norm(data - centers[c], axis=1)
-                new_centers[c] = data[int(np.argmax(far))]
-        if np.allclose(new_centers, centers):
-            centers = new_centers
-            break
-        centers = new_centers
-    dists = np.linalg.norm(data[:, None, :] - centers[None, :, :], axis=2)
-    wcss = float(np.sum(np.min(dists, axis=1) ** 2))
-    return labels.tolist(), centers.tolist(), wcss
+    model = KMeans(n_clusters=k, init="k-means++", n_init=10,
+                   max_iter=iters, random_state=seed)
+    model.fit(data)
+    labels = model.labels_.tolist()
+    centers = model.cluster_centers_.tolist()
+    wcss = float(model.inertia_)
+    return labels, centers, wcss
 
 
 def elbow_scores(features, k_max=8):
