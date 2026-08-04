@@ -31,7 +31,7 @@ FRONTEND_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fronten
 # ============================================================
 
 def list_worlds():
-    """世界列表：worlds/ 下的目录（含 outputs 里的场景概览）。"""
+    """世界列表：worlds/ 下的目录 + outputs/ 下的"虚拟世界"（如多世界联合聚合）。"""
     worlds = []
     if not os.path.isdir(WORLDS_DIR):
         return worlds
@@ -53,6 +53,23 @@ def list_worlds():
         # 场景与日期（outputs/<world>/）
         world.update(scan_world(name))
         worlds.append(world)
+
+    # 虚拟世界：outputs/ 下存在但 worlds/ 不存在的目录（combine_worlds 产物等）
+    real_ids = {w["id"] for w in worlds}
+    if os.path.isdir(OUTPUTS_DIR):
+        for name in sorted(os.listdir(OUTPUTS_DIR)):
+            if name in real_ids:
+                continue
+            out_world_dir = os.path.join(OUTPUTS_DIR, name)
+            if not os.path.isdir(out_world_dir):
+                continue
+            if not os.path.isdir(os.path.join(out_world_dir, "population")):
+                continue
+            world = {"id": name, "households": [], "scenarios": [], "days": [],
+                     "virtual": True}
+            world.update(scan_world(name))
+            if world["scenarios"]:
+                worlds.append(world)
     return worlds
 
 
