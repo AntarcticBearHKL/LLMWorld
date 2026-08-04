@@ -170,6 +170,8 @@ def main():
     parser.add_argument("--world", required=True)
     parser.add_argument("--intervention", default="tou", help="干预 policy 名（默认 tou）")
     parser.add_argument("--all", action="store_true", help="基线 + 所有干预场景并排汇总")
+    parser.add_argument("--base-date", default=None,
+                        help="指定基线日期（连续时间线下同日公平对比，如 2026-04-23）")
     args = parser.parse_args()
 
     if args.all:
@@ -186,11 +188,20 @@ def main():
         print(f"没有找到 {args.intervention} 干预曲线，请先用 --policy {args.intervention} 跑模拟")
         sys.exit(1)
 
-    baseline = baselines[0][2]
+    if args.base_date:
+        # 同日对比：baseline 取指定日期（否则默认最早一次）
+        baseline = next((d for _, p, d in baselines if args.base_date in p), None)
+        baseline_path = next((p for _, p, d in baselines if args.base_date in p), None)
+        if baseline is None:
+            print(f"基线中找不到日期 {args.base_date}")
+            sys.exit(1)
+    else:
+        baseline = baselines[0][2]
+        baseline_path = baselines[0][1]
     intervention = interventions[-1][2]   # 取最新一次干预运行
 
     report = compare(baseline, intervention)
-    report["baseline_source"] = baselines[0][1]
+    report["baseline_source"] = baseline_path
     report["intervention_source"] = interventions[-1][1]
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
