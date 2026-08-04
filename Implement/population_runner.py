@@ -1,4 +1,4 @@
-"""人口级并行模拟器：多家庭逐日并行模拟 + 人口级负荷聚合。
+﻿"""人口级并行模拟器：多家庭逐日并行模拟 + 人口级负荷聚合。
 
 用法（先构建人口）：
     python Implement/population.py pop01 --count 4
@@ -149,11 +149,20 @@ def main():
     parser.add_argument("--event", action="append", default=None,
                         help="上帝注入的世界事件（可多次）：日期|标题|内容[|来源]，如 "
                         "'2026-04-21|政府宣布开征空调用电附加税|从今日起空调电价上调10%|政府公告'")
+    parser.add_argument("--scenario", default=None,
+                        help="场景标签（聚合输出目录名，默认=政策名或 baseline）。"
+                        "新闻实验请用自定义名如 war_news，避免与基线混淆")
     parser.add_argument("--aggregate-only", action="store_true",
                         help="不跑 LLM，直接从已保存的 outputs 曲线文件离线聚合")
     args = parser.parse_args()
 
     utils.set_seed(args.seed)
+
+    # 场景标签：--scenario > 政策名 > baseline
+    scenario_name = args.scenario
+    if not scenario_name:
+        from engine.policy import Policy
+        scenario_name = args.policy if args.policy else "baseline"
 
     # 上帝注入的新闻（命令行方式，与 events.json 剧本并存）
     inline_events = []
@@ -227,7 +236,7 @@ def main():
                 temperature=config.DEFAULT_TEMPERATURE,
                 verbose=False,
                 policy_context=policy_context,
-                policy_name=policy.type if policy else "baseline")
+                policy_name=scenario_name)
             return house_id, day_result
 
         with ThreadPoolExecutor(max_workers=MAX_HOUSEHOLDS_PARALLEL) as executor:
@@ -235,11 +244,11 @@ def main():
 
         # 聚合
         population = aggregate_population(house_results)
-        population["policy"] = policy.type if policy else "baseline"   # 记录干预类型，供对比脚本识别
+        population["policy"] = scenario_name   # 场景标签（政策或新闻实验名），供对比脚本识别
 
         date_str = house_results[0][1]["date"].replace("年", "-").replace("月", "-").replace("日", "")
         # 每个政策场景存独立子目录，避免互相覆盖（计划9发现的缺陷）
-        policy_dir = policy.type if policy else "baseline"
+        policy_dir = scenario_name
         out_dir = os.path.join(pop_root, policy_dir, date_str)
         os.makedirs(out_dir, exist_ok=True)
         out_path = os.path.join(out_dir, "population_profile_1440min.json")
@@ -282,3 +291,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
