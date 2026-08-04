@@ -117,6 +117,16 @@ def load_clusters(world_id, scenario, date):
         return json.load(f)
 
 
+def load_variability(world_id, scenario):
+
+    path = os.path.join(OUTPUTS_DIR, world_id, "analysis",
+                        f"variability_{scenario}.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_matrix(world_id):
 
     path = os.path.join(OUTPUTS_DIR, world_id, "comparison", "policy_matrix.json")
@@ -354,6 +364,10 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3] == "clusters" and len(parts) >= 5:
                     data = load_clusters(world_id, parts[4], parts[5] if len(parts) > 5 else None)
                     self._send_json(data or {"error": "no clusters"}, 200 if data else 404)
+                    return
+                if parts[3] == "variability" and len(parts) >= 5:
+                    data = load_variability(world_id, parts[4])
+                    self._send_json(data or {"error": "no variability"}, 200 if data else 404)
                     return
                 if parts[3] == "events":
                     self._send_json(load_events(world_id))
