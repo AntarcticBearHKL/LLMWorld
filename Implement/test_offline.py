@@ -2212,5 +2212,38 @@ class TestApplianceUsage(unittest.TestCase):
             build_report("__no_such_world", "baseline", None)
 
 
+class TestExportCsv(unittest.TestCase):
+
+
+    def test_export(self):
+        from export_analysis_csv import export_world
+        import os, shutil
+        analysis = os.path.join("outputs", "__csv", "analysis")
+        os.makedirs(analysis, exist_ok=True)
+        with open(os.path.join(analysis, "anomalies_baseline.json"),
+                  "w", encoding="utf-8") as f:
+            json.dump({"per_house": [
+                {"house_id": "h1", "total_kwh": 10.0,
+                 "anomaly_flags": ["a", "b"]},
+                {"house_id": "h2", "total_kwh": 45.0, "anomaly_flags": []},
+            ]}, f)
+        try:
+            exported = export_world("__csv")
+            self.assertEqual(len(exported), 1)
+            csv_path = exported[0]
+            with open(csv_path, "r", encoding="utf-8-sig") as f:
+                lines = f.readlines()
+            self.assertEqual(len(lines), 3)
+            self.assertIn("house_id", lines[0])
+            self.assertIn("h2", lines[2])
+        finally:
+            shutil.rmtree(os.path.join("outputs", "__csv"), ignore_errors=True)
+
+    def test_missing_analysis(self):
+        from export_analysis_csv import export_world
+        with self.assertRaises(ValueError):
+            export_world("__no_such_world")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
