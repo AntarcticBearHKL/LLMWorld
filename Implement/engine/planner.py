@@ -40,7 +40,7 @@ class Planner:
 
 
 
-    def generate_plans(self, time_obj):
+    def generate_plans(self, time_obj, community_notice=""):
         home_structure = self.home.get_home_structure()
         members_info = self.home.get_members_info()
 
@@ -63,7 +63,8 @@ class Planner:
                 home_structure=json.dumps(home_structure, ensure_ascii=False, indent=2),
                 members_info=json.dumps(members_info, ensure_ascii=False, indent=2),
                 memory_context=self.memory_context,
-                world_news=self.news_context
+                world_news=self.news_context,
+                community_notice=community_notice
             )
             prompts.append(prompt)
             members.append(member)

@@ -178,6 +178,8 @@ def main():
                         help="跳过 worlds/<id>/events.json 剧本（仅用命令行 --event）")
     parser.add_argument("--peer-nudge", action="store_true",
                         help="个性化 nudge：第 2 天起每户收到基于邻居前一天实际用电的社会规范文本（Ayres 2013）")
+    parser.add_argument("--community-notice", default=None,
+                        help="社区公告板文本（所有家庭同见，轻量社交网络入口，如 '本社区本周节能目标 5%'）")
     parser.add_argument("--aggregate-only", action="store_true",
                         help="不跑 LLM，直接从已保存的 outputs 曲线文件离线聚合")
     args = parser.parse_args()
@@ -331,7 +333,8 @@ def main():
                 temperature=env["temperature"]["avg"],
                 verbose=False,
                 policy_context=cur_context,
-                policy_name=scenario_name)
+                policy_name=scenario_name,
+                community_notice=args.community_notice or "")
             day_result["_env"] = {"season": season, "condition": env["condition"],
                                   "temperature": env["temperature"]["avg"],
                                   "mode": env.get("mode", "?")}

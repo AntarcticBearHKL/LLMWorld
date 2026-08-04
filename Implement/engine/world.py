@@ -190,7 +190,7 @@ class World:
         return self
 
     def simulate_day(self, season="夏天", weather="晴天", temperature=28, verbose=True,
-                     policy_context="", policy_name="baseline"):
+                     policy_context="", policy_name="baseline", community_notice=""):
         if verbose:
             print(f"\n{'='*60}")
             print(f"开始模拟：{self.time.get_full_date_string()}")
@@ -210,7 +210,7 @@ class World:
         self.current_planner = planner        
         if verbose:
             print("第一步：生成宏观计划...")
-        planner.generate_plans(self.time)
+        planner.generate_plans(self.time, community_notice=community_notice)
         
         if verbose:
             print("第二步：渐进式协调生成完整时间线...")
