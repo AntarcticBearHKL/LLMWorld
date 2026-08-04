@@ -110,6 +110,11 @@
 </div>
 
 <div class="panel">
+  <h3>世界时间线（计划56：日期 → 政策/事件/用电）</h3>
+  <div id="timelinePanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -248,6 +253,7 @@ async function refresh() {
     await renderGroups();
     await renderWorldsMatrix();
     await renderEventResponse(worldId);
+    await renderTimeline(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -561,6 +567,21 @@ async function renderEventResponse(worldId) {
     事件日迁移率 ${r.event_move_rate ?? "-"} vs 非事件日 ${r.non_event_move_rate ?? "-"}（迁移率=每日切换行为模式的户比例）</div>
     <table><thead><tr><th>事件日期</th><th>标题</th><th>事件日迁移率</th><th>基线迁移率</th><th>事件日均kWh</th><th>用电变化%</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
+}
+
+async function renderTimeline(worldId) {
+  const div = document.getElementById("timelinePanel");
+  const r = await api(`/api/worlds/${worldId}/timeline`);
+  const rows = (r.timeline || []).map(t => {
+    const policyColor = t.policy && t.policy !== "baseline" ? "color:#c63;" : "";
+    const evs = (t.events || []).map(e => `<span title="${e.content || ''}">${e.title}</span>`).join("、");
+    return `<tr><td>${t.date}</td><td>${t.scenario}</td>
+      <td style="${policyColor}">${t.policy || "-"}</td><td>${t.kwh ?? "-"}</td>
+      <td style="color:#456;font-size:12px;">${evs || "-"}</td></tr>`;
+  }).join("");
+  div.innerHTML = rows
+    ? `<table><thead><tr><th>日期</th><th>场景</th><th>当日政策</th><th>总用电(kWh)</th><th>新闻事件</th></tr></thead><tbody>${rows}</tbody></table>`
+    : "<span class='err'>（无模拟数据）</span>";
 }
 
 async function renderPersonality(worldId) {

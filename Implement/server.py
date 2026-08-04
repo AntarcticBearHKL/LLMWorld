@@ -166,6 +166,42 @@ def load_worlds_matrix():
         return json.load(f)
 
 
+def load_timeline(world_id):
+
+    events = load_events(world_id)
+    by_date = {}
+    for item in events.get("events", []):
+        date = item.get("date", "")
+        if date:
+            by_date.setdefault(date, []).append(item)
+    timeline = []
+    pop_dir = os.path.join(OUTPUTS_DIR, world_id, "population")
+    if os.path.isdir(pop_dir):
+        for scenario in sorted(os.listdir(pop_dir)):
+            sdir = os.path.join(pop_dir, scenario)
+            if not os.path.isdir(sdir):
+                continue
+            for date_dir in sorted(os.listdir(sdir)):
+                path = os.path.join(sdir, date_dir,
+                                    "population_profile_1440min.json")
+                if not os.path.exists(path):
+                    continue
+                try:
+                    with open(path, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                except Exception:
+                    continue
+                timeline.append({
+                    "date": date_dir,
+                    "scenario": scenario,
+                    "policy": data.get("day_policy") or data.get("policy", ""),
+                    "kwh": data.get("total_energy_kwh"),
+                    "events": by_date.get(date_dir, []),
+                })
+    timeline.sort(key=lambda t: (t["date"], t["scenario"]))
+    return timeline
+
+
 def load_matrix(world_id):
 
     path = os.path.join(OUTPUTS_DIR, world_id, "comparison", "policy_matrix.json")
@@ -471,6 +507,10 @@ class Handler(BaseHTTPRequestHandler):
             if parts == ["api", "worlds-matrix"]:
                 data = load_worlds_matrix()
                 self._send_json(data or {"error": "no worlds matrix"}, 200 if data else 404)
+                return
+            if len(parts) == 4 and parts[:3] == ["api", "worlds"] and parts[3] == "timeline":
+                data = load_timeline(parts[2])
+                self._send_json({"timeline": data})
                 return
             if parts == ["api", "jobs"]:
                 self._send_json(load_jobs())

@@ -1449,5 +1449,39 @@ class TestEventResponse(unittest.TestCase):
             build_event_response([], {})
 
 
+class TestTimelineServer(unittest.TestCase):
+
+
+    def test_load_timeline_merges(self):
+        from server import load_timeline
+        import os, shutil
+        base = os.path.join("outputs", "__tl_world")
+        pop = os.path.join(base, "population", "tou", "20260501")
+        os.makedirs(pop, exist_ok=True)
+        with open(os.path.join(pop, "population_profile_1440min.json"),
+                  "w", encoding="utf-8") as f:
+            json.dump({"day_policy": "tou", "policy": "tou",
+                       "total_energy_kwh": 55.0}, f)
+        ev_dir = os.path.join("worlds", "__tl_world")
+        os.makedirs(ev_dir, exist_ok=True)
+        with open(os.path.join(ev_dir, "events.json"), "w",
+                  encoding="utf-8") as f:
+            json.dump({"events": [{"date": "20260501",
+                                   "title": "电价上涨", "content": "x"}]}, f)
+        try:
+            rows = load_timeline("__tl_world")
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(rows[0]["policy"], "tou")
+            self.assertEqual(rows[0]["kwh"], 55.0)
+            self.assertEqual(rows[0]["events"][0]["title"], "电价上涨")
+        finally:
+            shutil.rmtree(base)
+            shutil.rmtree(ev_dir)
+
+    def test_load_timeline_empty_world(self):
+        from server import load_timeline
+        self.assertEqual(load_timeline("__no_such_world"), [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
