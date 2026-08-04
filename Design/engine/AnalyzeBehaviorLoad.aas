@@ -1,0 +1,17 @@
+class AnalyzeBehaviorLoad
+    活动-负荷一致性检查（计划64，Xia 2026 行为层保真度，0 LLM）。
+
+    - scan_world(world_id, scenario, date) → 每户 activities
+      （02_第二层_渐进协调_*.json）+ load_profile_watts
+      （用电信息/house_load_profile_1440min.json）
+    - _load_household_rooms / _parse_activities：location ∈ 房间名
+      或含"家" → at_home
+    - build_report(house_results) → 每户：
+      at_home_mean_watts vs away_mean_watts（load_consistent=
+      在家>离家）、peak_hour vs busy_hour（仅在家活动，|差|≤2h=
+      peak_aligned）、at_home_minutes/members、flags
+    - CLI：python analyze_behavior_load.py <world> --scenario [--date]
+    - 输出：outputs/<world>/analysis/behavior_load_<scenario>_<date>.json
+
+    调用链：make_analysis_all 一键化；server
+    /api/worlds/<id>/behavior-load/<scenario>/<date> → 前端面板

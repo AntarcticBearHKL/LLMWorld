@@ -97,6 +97,41 @@ def run_all(world_id, date_arg=None):
         except ValueError as e:
             summary.append(f"  归因[{scenario}] 跳过: {e}")
 
+        if per_house:
+            import analyze_anomalies
+            anom = analyze_anomalies.build_report(per_house)
+            anom["world_id"] = world_id
+            anom["scenario"] = scenario
+            anom["date"] = date
+            path = save_report(anom, world_id, f"anomalies_{scenario}.json")
+            summary.append(f"  异常户[{scenario}] {anom['anomaly_count']}户 {path}")
+
+        import analyze_behavior_load
+        bl_rows = analyze_behavior_load.scan_world(world_id, scenario, date)
+        if bl_rows:
+            bl = analyze_behavior_load.build_report(bl_rows)
+            bl["world_id"] = world_id
+            bl["scenario"] = scenario
+            bl["date"] = date
+            path = save_report(bl, world_id,
+                               f"behavior_load_{scenario}_{date.replace('-', '')}.json")
+            summary.append(f"  行为-负荷[{scenario}] 异常{bl['anomaly_count']}户 {path}")
+
+        import analyze_solar
+        solar_profiles = [dict(p) for p in per_house]
+        for p in solar_profiles:
+            p["weather"] = "晴天"
+        if solar_profiles:
+            from engine import utils as _utils
+            season = _utils.season_for_date(date) if date else "夏天"
+            sol = analyze_solar.build_report(solar_profiles, 5000.0, season)
+            sol["world_id"] = world_id
+            sol["scenario"] = scenario
+            sol["date"] = date
+            path = save_report(sol, world_id,
+                               f"solar_{scenario}_{date.replace('-', '')}.json")
+            summary.append(f"  光伏自用[{scenario}] 覆盖{sol['mean_solar_coverage']} {path}")
+
     for source in ("awareness", "variability"):
         if source == "variability":
             labels = analyze_groups.load_variability_labels(world_id)
