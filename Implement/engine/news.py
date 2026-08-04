@@ -126,10 +126,13 @@ class NewsBoard:
 
     def render_for_prompt(self, date_str):
         """渲染当天新增新闻为 prompt 文本（计划35：只投递当天新出现的）。无新增返回空串。"""
-        items = self.get_new_for(date_str)
+        items = self.get_new_for(date_str)   # 拿当天新新闻并标记投递
+        return self.render_items(items)
+
+    def render_items(self, items):
+        """把新闻列表渲染为 prompt 文本（纯渲染，无投递副作用）。"""
         if not items:
             return ""
-
         lines = ["## 今日外界信息（你会在今天获取到以下新闻）", ""]
         for n in items:
             header = f"- [{n.date} {n.time}]（{n.source}）{n.title}"

@@ -32,6 +32,8 @@ class World:
         self.memory = HouseholdMemory()   # 跨天记忆：昨天的行为影响今天的计划
         self.memory.load_days(self._load_memory_days())   # 恢复历史记忆（连续性）
         self.news = self._load_news_board()  # 新闻台：上帝注入的外界信息
+        # 新闻记忆化（计划35）：恢复新闻投递进度 + 本户新闻要点（重启后只投递新一天）
+        self._restore_news_state()
 
     # ---------- 世界状态持久化（断点续跑）----------
 
@@ -74,10 +76,28 @@ class World:
         except Exception:
             return []
 
-    def save_state(self):
-        """保存世界状态：当前日期 + 本户跨天记忆（原子写，多户并行安全）。
+    def _restore_news_state(self):
+        """恢复新闻投递进度（NewsBoard）与本户新闻记忆（计划35）。"""
+        path = self._state_path()
+        if not path or not os.path.exists(path):
+            return
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                state = json.load(f)
+            delivery = state.get("news_delivery")
+            if isinstance(delivery, dict):
+                self.news.restore_state(delivery)
+            news_memory = state.get("news_memory")
+            if isinstance(news_memory, dict):
+                self.memory.load_news_memory(news_memory.get(self.house_id, []))
+        except Exception:
+            pass
 
-        state.json 结构：{date, memory_days: {house_id: [摘要...]}}
+    def save_state(self):
+        """保存世界状态：日期 + 跨天记忆 + 新闻记忆 + 新闻投递进度（原子写，多户并行安全）。
+
+        state.json 结构：{date, memory_days: {house_id: [摘要]}, news_memory: {house_id: [要点]},
+                          news_delivery: {delivered_ids: [...]}}
         """
         path = self._state_path()
         if not path:
@@ -96,6 +116,14 @@ class World:
         memory[self.house_id] = self.memory.days
         state["date"] = self.time.get_date_string()
         state["memory_days"] = memory
+
+        # 新闻记忆化（计划35）：新闻要点按户 + 投递进度（世界级）
+        news_memory = state.get("news_memory")
+        if not isinstance(news_memory, dict):
+            news_memory = {}
+        news_memory[self.house_id] = self.memory.get_news_memory_state()
+        state["news_memory"] = news_memory
+        state["news_delivery"] = self.news.to_state()
 
         os.makedirs(os.path.dirname(path), exist_ok=True)
         # 原子写：先写临时文件再改名，避免并发读写的半写文件
@@ -127,14 +155,17 @@ class World:
             print(f"{'='*60}\n")
         
         date_str = self.time.date.strftime('%Y%m%d')
-        news_text = self.news.render_for_prompt(self.time.date.strftime('%Y-%m-%d'))
+        # 新闻记忆化（计划35）：先取当天新新闻（标记投递），再渲染，避免重复投递
+        date_iso = self.time.date.strftime('%Y-%m-%d')
+        new_news = self.news.get_new_for(date_iso)
+        news_text = self.news.render_items(new_news)
+        self._news_delivered = new_news   # 供 memory 并入新闻记忆
         planner = Planner(self.home, world_id=self.world_id, postcode=self.postcode, 
                          house_id=self.house_id, date_str=date_str,
                          memory_context=self.memory.get_prompt_context(),
                          policy_name=policy_name,
                          news_context=news_text)
-        self.current_planner = planner
-        
+        self.current_planner = planner        
         if verbose:
             print("第一步：生成宏观计划...")
         planner.generate_plans(self.time)
@@ -182,6 +213,10 @@ class World:
 
         # 每天结束后更新跨天记忆（昨天的行为 → 明天的上下文）并保存世界状态（断点续跑）
         self.memory.update_from_day(day_result)
+        # 新闻记忆化（计划35）：当天新新闻并入记忆（滚动保留，摘要形式供明日回顾）
+        if getattr(self, "_news_delivered", None):
+            self.memory.add_news(self._news_delivered)
+            self._news_delivered = None
         self.save_state()
 
         if verbose:
