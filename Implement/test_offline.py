@@ -1436,6 +1436,19 @@ class TestSimArgs(unittest.TestCase):
         self.assertIn("--scenario", args)
         self.assertIn("my_run", args)
 
+    def test_create_world_validation(self):
+        from server import validate_create_args
+        with self.assertRaises(ValueError):
+            validate_create_args("", 3)
+        with self.assertRaises(ValueError):
+            validate_create_args("bad/name", 3)
+        with self.assertRaises(ValueError):
+            validate_create_args("__x", 11)
+        with self.assertRaises(ValueError):
+            validate_create_args("__x", "not-a-number")
+        world_id, count = validate_create_args("__ok_world", "3")
+        self.assertEqual((world_id, count), ("__ok_world", 3))
+
 
 class TestPeerNudge(unittest.TestCase):
 
