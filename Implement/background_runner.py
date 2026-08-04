@@ -219,8 +219,71 @@ def _process_alive(pid):
         return False
 
 
+# ---------- 服务器管理（系统级常驻，前后端修改后重启）----------
+
+SERVER_PID_FILE = os.path.join(JOBS_DIR, "server.pid")
+SERVER_LOG = os.path.join(JOBS_DIR, "server.out")
+SERVER_DEFAULT_PORT = 8080
+
+
+def _read_pid_file(path):
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return int(f.read().strip())
+        except Exception:
+            return None
+    return None
+
+
+def _write_pid_file(path, pid):
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(str(pid))
+
+
+def cmd_server(args):
+    """server start|restart|stop|status [--port N]"""
+    port = args.port or SERVER_DEFAULT_PORT
+    pid = _read_pid_file(SERVER_PID_FILE)
+
+    if args.action in ("restart", "start"):
+        if pid and _process_alive(pid):
+            subprocess.run(["taskkill", "/PID", str(pid), "/T", "/F"],
+                           capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            print(f"已停止旧服务器（PID {pid}）")
+        cmd = [PYTHON, "-X", "utf8", "-u",
+               os.path.join(PROJECT_ROOT, "Implement", "server.py"),
+               "--port", str(port)]
+        os.makedirs(JOBS_DIR, exist_ok=True)
+        with open(SERVER_LOG, "w", encoding="utf-8") as f:
+            proc = subprocess.Popen(cmd, stdout=f, stderr=subprocess.STDOUT,
+                                    cwd=PROJECT_ROOT,
+                                    creationflags=subprocess.CREATE_NO_WINDOW)
+        _write_pid_file(SERVER_PID_FILE, proc.pid)
+        print(f"服务器已启动（PID {proc.pid}）→ http://localhost:{port}")
+        print(f"  日志: {SERVER_LOG}")
+        print(f"  重启: python Implement/background_runner.py server restart")
+        return
+
+    if args.action == "stop":
+        if pid and _process_alive(pid):
+            subprocess.run(["taskkill", "/PID", str(pid), "/T", "/F"],
+                           capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            print(f"服务器已停止（PID {pid}）")
+        else:
+            print("服务器未在运行")
+        return
+
+    if args.action == "status":
+        if pid and _process_alive(pid):
+            print(f"服务器运行中（PID {pid}）→ http://localhost:{port}")
+        else:
+            print("服务器未运行（启动: python Implement/background_runner.py server start）")
+        return
+
+
 def parse_args():
-    parser = argparse.ArgumentParser(description="后台模拟任务管理器")
+    parser = argparse.ArgumentParser(description="后台任务管理器（模拟 + 服务器）")
     sub = parser.add_subparsers(dest="command", required=True)
     p_start = sub.add_parser("start", help="启动后台模拟")
     p_start.add_argument("sim_args", nargs=argparse.REMAINDER, help="模拟命令参数（世界ID等）")
@@ -229,6 +292,9 @@ def parse_args():
     p_watch.add_argument("job_id")
     p_stop = sub.add_parser("stop", help="终止任务")
     p_stop.add_argument("job_id")
+    p_server = sub.add_parser("server", help="可视化服务器管理（系统级常驻）")
+    p_server.add_argument("action", choices=["start", "restart", "stop", "status"])
+    p_server.add_argument("--port", type=int, default=SERVER_DEFAULT_PORT)
     return parser.parse_args()
 
 
@@ -242,3 +308,5 @@ if __name__ == "__main__":
         cmd_watch(args)
     elif args.command == "stop":
         cmd_stop(args)
+    elif args.command == "server":
+        cmd_server(args)
