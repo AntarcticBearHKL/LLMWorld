@@ -129,8 +129,8 @@ def parse_time_range(time_range):
 
 # ---------- LLM 返回解析与校验 ----------
 
-def parse_json_response(text):
-    """清理 LLM 返回的 ```json 代码块并解析为 Python 对象。解析失败抛异常（不静默）。"""
+def clean_json_text(text):
+    """去掉 LLM 返回中的 ```json 代码块标记，只保留 JSON 本体。"""
     text = text.strip()
 
     if text.startswith('```'):
@@ -141,8 +141,12 @@ def parse_json_response(text):
             lines = lines[:-1]
         text = '\n'.join(lines)
 
-    text = text.strip()
-    return json.loads(text)
+    return text.strip()
+
+
+def parse_json_response(text):
+    """清理 LLM 返回的 ```json 代码块并解析为 Python 对象。解析失败抛异常（不静默）。"""
+    return json.loads(clean_json_text(text))
 
 
 def parse_json_with_retry(prompt, raw_text, json_mode=True, thinking=False):

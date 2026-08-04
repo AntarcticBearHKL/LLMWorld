@@ -210,15 +210,6 @@ class SubAgent:
 
 
 def _clean_json_response(text):
-    """去掉 LLM 返回中的 ```json 代码块标记，只保留 JSON 本体。"""
-    text = text.strip()
-
-    if text.startswith('```'):
-        lines = text.split('\n')
-        if lines[0].startswith('```'):
-            lines = lines[1:]
-        if lines and lines[-1].strip() == '```':
-            lines = lines[:-1]
-        text = '\n'.join(lines)
-
-    return text.strip()
+    """去掉 LLM 返回中的 ```json 代码块标记（复用 utils.clean_json_text，避免重复）。"""
+    from . import utils
+    return utils.clean_json_text(text)
