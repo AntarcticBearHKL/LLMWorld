@@ -98,11 +98,83 @@ def compare(baseline, intervention):
     }
 
 
+def main_all(args):
+    """基线 + 所有干预场景并排汇总表（RQ2/RQ3 核心对比矩阵）。"""
+    all_pop = load_population(args.world)
+    baseline_items = [(p, d) for policy, p, d in all_pop
+                      if d.get("policy", "baseline") == "baseline"]
+    if not baseline_items:
+        print("没有找到 baseline 聚合曲线")
+        sys.exit(1)
+    baseline_path, baseline = baseline_items[-1]
+
+    rows = [("场景", "总kWh", "晚峰16-21点kWh", "谷段22-7点kWh", "峰值W", "峰值时刻")]
+    per_policy = {}
+    for policy, path, data in all_pop:
+        name = data.get("policy", "baseline")
+        if name in ("baseline",):
+            continue
+        # 同名政策只取最新一次
+        if name not in per_policy or path > per_policy[name][0]:
+            per_policy[name] = (path, data)
+
+    for name, (_, data) in per_policy.items():
+        report = compare(baseline, data)
+        peak_min = data["load_profile_watts"].index(max(data["load_profile_watts"]))
+        peak_time = f"{peak_min // 60:02d}:{peak_min % 60:02d}"
+        rows.append((
+            name,
+            f"{report['total_kwh_intervention']:.1f} ({report['total_change_pct']:+.1f}%)",
+            f"{report['peak_kwh_intervention']:.1f} ({report['peak_hours_change_pct']:+.1f}%)",
+            f"{report['valley_kwh_intervention']:.1f} ({report['valley_hours_change_pct']:+.1f}%)",
+            f"{report['max_watts_intervention']:.0f} ({report['peak_load_cut_pct']:+.1f}%)",
+            peak_time,
+        ))
+
+    # 基线行
+    b_peak_kwh = energy_of_hours(baseline["load_profile_watts"], PEAK_HOURS)
+    b_valley_kwh = energy_of_hours(baseline["load_profile_watts"], VALLEY_HOURS)
+    b_peak_min = baseline["load_profile_watts"].index(max(baseline["load_profile_watts"]))
+    rows.insert(1, (
+        "baseline",
+        f"{baseline['total_energy_kwh']:.1f}",
+        f"{b_peak_kwh:.1f}",
+        f"{b_valley_kwh:.1f}",
+        f"{max(baseline['load_profile_watts']):.0f}",
+        f"{b_peak_min // 60:02d}:{b_peak_min % 60:02d}",
+    ))
+
+    width = [10, 16, 18, 18, 18, 10]
+    header = " | ".join(r.ljust(w) for r, w in zip(rows[0], width))
+    print("=== 政策场景对比矩阵（括号内为 vs 基线变化%）===")
+    print(header)
+    print("-" * len(header))
+    for row in rows[1:]:
+        print(" | ".join(r.ljust(w) for r, w in zip(row, width)))
+
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_dir = os.path.join(project_root, "outputs", args.world, "comparison")
+    os.makedirs(out_dir, exist_ok=True)
+    summary_path = os.path.join(out_dir, "policy_matrix.json")
+    summary = {
+        "scenarios": [dict(zip(rows[0], r)) for r in rows[1:]],
+        "baseline_source": baseline_path,
+    }
+    with open(summary_path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, ensure_ascii=False, indent=2)
+    print(f"汇总表已保存: {summary_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="政策干预对比")
     parser.add_argument("--world", required=True)
     parser.add_argument("--intervention", default="tou", help="干预 policy 名（默认 tou）")
+    parser.add_argument("--all", action="store_true", help="基线 + 所有干预场景并排汇总")
     args = parser.parse_args()
+
+    if args.all:
+        main_all(args)
+        return
 
     baselines = load_population(args.world, "baseline")
     interventions = load_population(args.world, args.intervention)

@@ -204,7 +204,9 @@ def main():
         population["policy"] = policy.type if policy else "baseline"   # 记录干预类型，供对比脚本识别
 
         date_str = house_results[0][1]["date"].replace("年", "-").replace("月", "-").replace("日", "")
-        out_dir = os.path.join(pop_root, date_str)
+        # 每个政策场景存独立子目录，避免互相覆盖（计划9发现的缺陷）
+        policy_dir = policy.type if policy else "baseline"
+        out_dir = os.path.join(pop_root, policy_dir, date_str)
         os.makedirs(out_dir, exist_ok=True)
         out_path = os.path.join(out_dir, "population_profile_1440min.json")
         with open(out_path, "w", encoding="utf-8") as f:
