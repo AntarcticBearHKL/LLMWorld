@@ -2057,5 +2057,47 @@ class TestWeekday(unittest.TestCase):
             build_report([])
 
 
+class TestWorldSummary(unittest.TestCase):
+
+
+    def _write(self, world_id, filename, data):
+        import os
+        path = os.path.join("outputs", world_id, "analysis", filename)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f)
+
+    def test_summary_merges(self):
+        from analyze_world_summary import build_report
+        import os, shutil
+        self._write("__ws", "clusters_baseline_20260501.json",
+                    {"per_house": [{"house_id": "h1", "cluster": 1},
+                                   {"house_id": "h2", "cluster": 0}]})
+        self._write("__ws", "variability_baseline.json",
+                    {"regular_half": ["h1"], "variable_half": ["h2"],
+                     "per_house": []})
+        self._write("__ws", "anomalies_baseline.json",
+                    {"per_house": [{"house_id": "h1",
+                                    "total_kwh": 10.0, "anomaly_flags": []},
+                                   {"house_id": "h2", "total_kwh": 45.0,
+                                    "anomaly_flags": ["total_kwh(高)"]}]})
+        try:
+            report = build_report("__ws", "baseline")
+            by_house = {r["house_id"]: r for r in report["per_house"]}
+            self.assertEqual(by_house["h1"]["cluster"], 1)
+            self.assertEqual(by_house["h1"]["variability_group"], "规律")
+            self.assertEqual(by_house["h2"]["variability_group"], "波动")
+            self.assertEqual(by_house["h2"]["anomaly_flags"],
+                             ["total_kwh(高)"])
+            self.assertEqual(report["households"], 2)
+        finally:
+            shutil.rmtree(os.path.join("outputs", "__ws"), ignore_errors=True)
+
+    def test_empty_world(self):
+        from analyze_world_summary import build_report
+        report = build_report("__no_such_world", "baseline")
+        self.assertEqual(report["per_house"], [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

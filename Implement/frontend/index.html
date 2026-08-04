@@ -161,6 +161,11 @@
 </div>
 
 <div class="panel">
+  <h3>世界总览（计划97：全部分析聚合，每户一行）</h3>
+  <div id="worldSummaryPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -327,6 +332,7 @@ async function refresh() {
     await renderWeather(worldId);
     await renderNilm(worldId);
     await renderWeekday(worldId);
+    await renderWorldSummary(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -799,6 +805,22 @@ async function renderWeekday(worldId) {
     <td>${r.mean_peak_watts}</td><td>${r.mean_evening_kwh}</td><td>${r.mean_peak_hour}:00</td></tr>`).join("");
   div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">星期是负荷变异第二驱动（Jin 2021，温度之后）</div>
     <table><thead><tr><th>分组</th><th>样本数</th><th>日均kWh</th><th>平均峰值(W)</th><th>晚峰kWh</th><th>平均峰时</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+}
+
+async function renderWorldSummary(worldId) {
+  const div = document.getElementById("worldSummaryPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const s = await api(`/api/worlds/${worldId}/world-summary/${scenario}`);
+  if (!s || s.error) { div.innerHTML = "<span class='err'>（无总览数据，先跑 analyze_world_summary.py）</span>"; return; }
+  const rows = s.per_house.map(r => {
+    const flags = r.anomaly_flags && r.anomaly_flags.length ? r.anomaly_flags.join("；") : "OK";
+    const consistent = r.load_consistent === undefined ? "-" : (r.load_consistent ? "✓" : "✗");
+    return `<tr><td>${r.house_id}</td><td>${r.cluster ?? "-"}</td>
+      <td>${r.variability_group ?? "-"}</td><td>${r.total_kwh ?? "-"}</td>
+      <td>${consistent}</td><td style="font-size:12px;color:${flags === "OK" ? "#2a7" : "#c33"};">${flags}</td></tr>`;
+  }).join("");
+  div.innerHTML = `<table><thead><tr><th>家庭</th><th>行为簇</th><th>变异性</th><th>kWh</th><th>行为-负荷一致</th><th>异常</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
 }
 
