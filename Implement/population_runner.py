@@ -140,7 +140,8 @@ def main():
     parser = argparse.ArgumentParser(description="人口级并行模拟")
     parser.add_argument("world_id", help="世界ID")
     parser.add_argument("--days", type=int, default=1)
-    parser.add_argument("--date", type=str, default=config.DEFAULT_START_DATE)
+    parser.add_argument("--date", type=str, default=None,
+                        help="开始日期(如 2026-04-21)。缺省=自动续跑：读 worlds/<id>/state.json 从上一次日期下一天继续")
     parser.add_argument("--house-start", type=int, default=0, help="起始家庭序号")
     parser.add_argument("--house-count", type=int, default=None, help="参与家庭数（默认全部）")
     parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED)
@@ -302,5 +303,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 

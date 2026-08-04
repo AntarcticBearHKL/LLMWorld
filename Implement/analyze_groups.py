@@ -17,10 +17,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 
 def load_household_labels(world_id):
-    """读 worlds/<world_id>/3168/house_XXXX/household.json 的节能意识标签。"""
+    """读 worlds/<world_id>/3168/house_XXXX/household.json 的节能意识标签。
+
+    注意（去作弊化 2026-08）：v2 人口不再生成 energy_awareness 字段，
+    该维度仅对旧世界（pop02 等）有效；缺失时标记 "未知" 并在报告中提示。
+    """
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     base = os.path.join(project_root, "worlds", world_id, "3168")
     labels = {}
+    has_any = False
     if not os.path.isdir(base):
         return labels
     for house_id in sorted(os.listdir(base)):
@@ -31,11 +36,12 @@ def load_household_labels(world_id):
             household = json.load(f)
         members = household.get("members", [])
         if members:
-            # 取第一成员的节能意识作为家庭标签
-            awareness = members[0].get("personality", {}).get("energy_awareness", "中")
+            awareness = members[0].get("personality", {}).get("energy_awareness")
+            if awareness:
+                has_any = True
+            labels[house_id] = awareness or "未知"
         else:
-            awareness = "中"
-        labels[house_id] = awareness
+            labels[house_id] = "未知"
     return labels
 
 
@@ -69,7 +75,7 @@ def load_scenario_house_kwh(world_id):
 
 def group_stats(labels, scenarios):
     """三组 × 各场景的均值与相对基线变化。"""
-    groups = {"高": [], "中": [], "低": []}
+    groups = {"高": [], "中": [], "低": [], "未知": []}
     for house_id, awareness in labels.items():
         if awareness in groups:
             groups[awareness].append(house_id)

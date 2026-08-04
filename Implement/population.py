@@ -57,12 +57,12 @@ BIG_FIVE_ZH = {
 
 BIG_FIVE_TEXT = {
     "openness": {
-        "high": "好奇心强、乐于尝试新技术（如电动车、智能家居）",
-        "low": "习惯传统生活方式，不轻易尝试新事物",
+        "high": "好奇心强、乐于尝试新鲜事物",
+        "low": "习惯熟悉的生活方式，不太尝试新鲜事物",
     },
     "conscientiousness": {
-        "high": "条理分明、作息规律，会主动关灯省电",
-        "low": "随性随意，经常忘记关灯关电器",
+        "high": "条理分明、作息规律、做事细致",
+        "low": "随性随意，生活节奏松散",
     },
     "extraversion": {
         "high": "喜欢社交聚会，经常外出活动",
@@ -109,7 +109,7 @@ def big_five_to_text(bf):
 
 
 def big_five_to_traits(bf, rng):
-    """五维 → 2-3 个中文性格词（兼容旧 personality.traits 字段）。"""
+    """五维 → 2-3 个中文性格词（兼容 personality.traits 字段）。"""
     traits = []
     for dim in BIG_FIVE_ZH:
         v = bf[dim]
@@ -119,16 +119,6 @@ def big_five_to_traits(bf, rng):
             traits.append(TRAITS_BY_LEVEL[dim]["low"])
     rng.shuffle(traits)
     return traits[:3] if traits else ["随和"]
-
-
-def big_five_to_energy_awareness(bf):
-    """尽责性 → 节能意识（心理学实证：尽责者更节能）。"""
-    c = bf["conscientiousness"]
-    if c >= 7:
-        return "高"
-    if c >= 4:
-        return "中"
-    return "低"
 
 
 def big_five_to_news_sensitivity(bf):
@@ -141,13 +131,17 @@ def big_five_to_news_sensitivity(bf):
     return "低"
 
 
+# 注：energy_awareness（节能意识）字段已按用户 2026-08 指令移除——
+# 生成阶段不得预设任何与用电行为直接相关的词条（避免"作弊"），
+# 节能行为应完全由 LLM 在模拟中从人格/情境自发涌现。
+
+
 # ---------- 成员生成 ----------
 
 def _make_member(rng, name, gender, age, occupation, income_bracket,
                  big_five=None, wake=None, sleep=None, personal=None, role="成员"):
-    """生成一名成员（Big Five 驱动人格字段）。"""
+    """生成一名成员（Big Five 驱动人格字段；不含任何用电行为预设——去作弊化）。"""
     bf = big_five or sample_big_five(rng)
-    energy_awareness = big_five_to_energy_awareness(bf)
     traits = big_five_to_traits(bf, rng)
 
     # 作息习惯：由角色/尽责性/外向性推导 + 随机扰动
@@ -182,9 +176,8 @@ def _make_member(rng, name, gender, age, occupation, income_bracket,
                           "work_days": [1, 2, 3, 4, 5]},
         "personality": {
             "traits": traits,
-            "energy_awareness": energy_awareness,
             "big_five": bf,                       # v2：五维人格分数
-            "behavior_text": big_five_to_text(bf),  # v2：行为描述（注入 prompt）
+            "behavior_text": big_five_to_text(bf),  # v2：行为描述（注入 prompt，无用电预设）
             "news_sensitivity": big_five_to_news_sensitivity(bf),  # v2：新闻敏感度
         },
         "habits": {"wake_time": wake, "sleep_time": sleep,
@@ -218,8 +211,12 @@ def _income_by_age(rng, age):
 
 # ---------- 住宅生成（收入 → 面积 → 房间/电器）----------
 
-def _home_by_income(rng, name, income_bracket, size_override=None, with_ev=None):
-    """收入档 → 住宅结构（关联链：收入→住房→电器）。"""
+def _home_by_income(rng, name, income_bracket, size_override=None):
+    """收入档 → 住宅结构（关联链：收入→住房→电器）。
+
+    去作弊化（用户 2026-08 指令）：不预设任何用电行为相关资产
+    （如电动汽车）——所有电器均为中性物理配置，用电行为由模拟自发涌现。
+    """
     sizes = {"高": rng.choice([120, 135, 150, 180]),
              "中": rng.choice([85, 95, 105, 115]),
              "低": rng.choice([55, 65, 75])}
@@ -254,12 +251,6 @@ def _home_by_income(rng, name, income_bracket, size_override=None, with_ev=None)
             bed.append("空调")
         rooms[f"卧室{i + 1}"] = bed
 
-    # 高收入：车库 EV
-    if with_ev is None:
-        with_ev = income_bracket == "高" and rng.random() < 0.5
-    if with_ev:
-        rooms["车库"] = ["电动汽车"]
-
     home = {"name": name, "type": "联排别墅" if size <= 115 else "独立屋",
             "size": size, "rooms": []}
     for room_name, appliance_types in rooms.items():
@@ -268,7 +259,7 @@ def _home_by_income(rng, name, income_bracket, size_override=None, with_ev=None)
             "appliances": [{"type": t, "brand": "Generic", "power": None, "age": 0}
                            for t in appliance_types],
         })
-    return home, with_ev
+    return home
 
 
 # ---------- 家庭模板（8 类，含成员关联规则）----------
@@ -286,7 +277,7 @@ def _build_template(household_type, rng):
         bf_m = sample_big_five(rng, bias={"conscientiousness": rng.choice([0, 0, -1])})
         return {
             "type": "年轻夫妇/丁克家庭", "season": "春天",
-            "home": _home_by_income(rng, "Clayton温馨联排", income)[0],
+            "home": _home_by_income(rng, "Clayton温馨联排", income),
             "members": [
                 _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "女", age_w,
                              _pick_occupation(rng, income), income, big_five=bf_w,
@@ -303,8 +294,7 @@ def _build_template(household_type, rng):
         kid_age = max(4, kid_age)
         bf_parents = sample_big_five(rng, bias={"conscientiousness": 2, "agreeableness": 1})
         bf_kid = sample_big_five(rng, bias={"extraversion": 2})
-        home, _ = _home_by_income(rng, "Clayton家庭住宅", "高" if rng.random() < 0.6 else "中",
-                                  with_ev=True)
+        home = _home_by_income(rng, "Clayton家庭住宅", "高" if rng.random() < 0.6 else "中")
         home["rooms"].append({"name": "儿童房", "size": 0,
                               "appliances": [{"type": "灯", "brand": "Generic", "power": None, "age": 0},
                                              {"type": "台灯", "brand": "Generic", "power": None, "age": 0}]})
@@ -329,7 +319,7 @@ def _build_template(household_type, rng):
         occ = _pick_occupation(rng, _income_by_age(rng, age)) if age < 60 else "退休"
         return {
             "type": "独居", "season": "春天",
-            "home": _home_by_income(rng, "Clayton一居室", _income_by_age(rng, age))[0],
+            "home": _home_by_income(rng, "Clayton一居室", _income_by_age(rng, age)),
             "members": [_make_member(rng, f"{rng.choice(FIRST_NAMES_M + FIRST_NAMES_F)} {surname}",
                                      rng.choice(["男", "女"]), age, occ,
                                      "低" if age >= 60 else "中")],
@@ -347,7 +337,7 @@ def _build_template(household_type, rng):
                 sleep=rng.choice(["00:00", "00:30", "01:00"])))
         return {
             "type": "合租", "season": "春天",
-            "home": _home_by_income(rng, "Clayton合租公寓", "中")[0],
+            "home": _home_by_income(rng, "Clayton合租公寓", "中"),
             "members": members,
         }
 
@@ -366,7 +356,7 @@ def _build_template(household_type, rng):
                 personal=["手机", "电脑", "台灯"]))
         return {
             "type": "国际学生合租", "season": "春天",
-            "home": _home_by_income(rng, "Clayton学生公寓", "低")[0],
+            "home": _home_by_income(rng, "Clayton学生公寓", "低"),
             "members": members,
         }
 
@@ -379,7 +369,7 @@ def _build_template(household_type, rng):
         kid_age = max(5, kid_age)
         return {
             "type": "多代同堂", "season": "春天",
-            "home": _home_by_income(rng, "Clayton三代之家", "中", size_override=rng.choice([120, 140]))[0],
+            "home": _home_by_income(rng, "Clayton三代之家", "中", size_override=rng.choice([120, 140])),
             "members": [
                 _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "男", grandpa, "退休", "低",
                              wake="06:30", sleep="21:30",
@@ -402,7 +392,7 @@ def _build_template(household_type, rng):
         bf = sample_big_five(rng, bias={"conscientiousness": 1})
         return {
             "type": "单亲家庭", "season": "春天",
-            "home": _home_by_income(rng, "Clayton单亲之家", "中")[0],
+            "home": _home_by_income(rng, "Clayton单亲之家", "中"),
             "members": [
                 _make_member(rng, f"{rng.choice(FIRST_NAMES_F + FIRST_NAMES_M)} {surname}",
                              rng.choice(["女", "男"]), age, _pick_occupation(rng, "中"), "中",
@@ -418,7 +408,7 @@ def _build_template(household_type, rng):
     age_w = age_m + rng.randint(-3, 3)
     return {
         "type": "退休夫妇", "season": "春天",
-        "home": _home_by_income(rng, "Clayton养老宅", "低", size_override=rng.choice([65, 75, 85]))[0],
+        "home": _home_by_income(rng, "Clayton养老宅", "低", size_override=rng.choice([65, 75, 85])),
         "members": [
             _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "男", age_m, "退休", "低",
                          wake="06:30", sleep="21:00", personal=["手机"]),
@@ -558,3 +548,4 @@ if __name__ == "__main__":
     print(f"人口构建 v2：world={args.world_id}，{args.count} 户，种子 {args.seed}")
     build_population(args.world_id, args.count, args.seed)
     print(f"完成：worlds/{args.world_id}/ 已生成")
+

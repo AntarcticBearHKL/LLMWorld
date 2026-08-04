@@ -1,4 +1,4 @@
-"""命令行入口：加载世界 → 选择家庭 → 逐日模拟。
+﻿"""命令行入口：加载世界 → 选择家庭 → 逐日模拟。
 
 两种模式：
 1. 交互模式（不带参数或仅带 world_id）：照旧让用户输入日期/天数/家庭
@@ -104,7 +104,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="LLM 家庭用电模拟")
     parser.add_argument("world_id", help="世界ID（worlds/ 下的文件夹名）")
     parser.add_argument("--days", type=int, default=None, help=f"模拟天数（默认 {config.DEFAULT_DAYS}）")
-    parser.add_argument("--date", type=str, default=None, help=f"开始日期，如 '2026年4月21日'（默认今天）")
+    parser.add_argument("--date", type=str, default=None, help="开始日期(如 2026年4月21日)。缺省=自动续跑(读 state.json 从上次日期下一天继续)")
     parser.add_argument("--house", type=int, default=None, help="家庭序号（0 起，默认 0）")
     parser.add_argument("--season", type=str, default=None, help=f"季节（默认 {config.DEFAULT_SEASON}）")
     parser.add_argument("--weather", type=str, default=None, help=f"天气（默认 {config.DEFAULT_WEATHER}）")
@@ -155,7 +155,7 @@ def main():
 
     # ---- 日期与天数 ----
     if args.no_input:
-        start_date = args.date or config.DEFAULT_START_DATE
+        start_date = args.date   # None=自动续跑(World 内部处理)
         num_days = args.days if args.days is not None else config.DEFAULT_DAYS
     else:
         start_date = args.date or input("\n请输入开始日期（格式：2025年4月20日，留空使用今天）：").strip() or datetime.now().strftime('%Y年%m月%d日')
@@ -232,3 +232,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

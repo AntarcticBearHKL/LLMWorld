@@ -15,6 +15,11 @@ class HouseholdMemory:
         self.days = []   # 每天一份结构化摘要
         self.last = None # 最近一天的摘要（注入明天的 prompt）
 
+    def load_days(self, days):
+        """从世界状态恢复历史记忆（断点续跑：昨天的行为影响今天）。"""
+        self.days = list(days)
+        self.last = days[-1] if days else None
+
     # ---------- 每天结束后调用 ----------
 
     def update_from_day(self, day_result):
