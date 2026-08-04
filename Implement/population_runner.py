@@ -273,11 +273,11 @@ def main():
             house_id, world = item
 
             household = next(h for h in selected if h["house_id"] == house_id)["household"]
-            season = household.get("season", config.DEFAULT_SEASON)
-
-            from engine.environment_interface import EnvironmentInterface
             from engine.policy import Policy
             date_iso = world.time.date.strftime('%Y-%m-%d')
+            season = household.get("season") or utils.season_for_date(date_iso)
+
+            from engine.environment_interface import EnvironmentInterface
             cur_policy = _policy_for_date(policy_schedule, date_iso) if policy_schedule else args.policy
             cur_context = Policy.from_name(cur_policy).render() if cur_policy else ""
             env = EnvironmentInterface.get_weather(location, date_iso, season)

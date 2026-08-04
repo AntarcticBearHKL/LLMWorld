@@ -385,6 +385,17 @@ class TestPolicySchedule(unittest.TestCase):
         self.assertIsNone(_policy_for_date(sched, "2026-04-26"))
 
 
+class TestSeasonAuto(unittest.TestCase):
+
+    def test_southern_hemisphere_seasons(self):
+        from engine import utils
+        self.assertEqual(utils.season_for_date("2026-01-15"), "夏天")
+        self.assertEqual(utils.season_for_date("2026-04-21"), "秋天")
+        self.assertEqual(utils.season_for_date("2026-07-01"), "冬天")
+        self.assertEqual(utils.season_for_date("2026-10-01"), "春天")
+        self.assertEqual(utils.season_for_date("2026-12-25"), "夏天")
+
+
 class TestPolicy(unittest.TestCase):
 
 
