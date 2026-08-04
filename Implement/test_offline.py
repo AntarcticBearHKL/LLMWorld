@@ -121,6 +121,28 @@ class TestNewsBoard(unittest.TestCase):
             NewsBoard().add_inline_event("只有两个字段")
 
 
+class TestServerData(unittest.TestCase):
+    """可视化后端数据层（计划18）。"""
+
+    def test_list_worlds_contains_pop02(self):
+        import server
+        worlds = server.list_worlds()
+        ids = [w["id"] for w in worlds]
+        self.assertIn("pop02", ids)
+
+    def test_load_profile_known_scenario(self):
+        import server
+        data = server.load_profile("pop02", "tou", "2026-04-21")
+        self.assertIsNotNone(data)
+        self.assertEqual(len(data["load_profile_watts"]), 1440)
+        self.assertGreater(data["total_energy_kwh"], 0)
+
+    def test_load_events_pop02(self):
+        import server
+        events = server.load_events("pop02")
+        self.assertGreaterEqual(len(events.get("events", [])), 1)
+
+
 class TestPolicy(unittest.TestCase):
     """政策渲染与对比指标（计划8）。"""
 

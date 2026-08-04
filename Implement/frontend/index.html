@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>LLMWorld 模拟世界可视化</title>
+<style>
+  body { font-family: "Microsoft YaHei", sans-serif; margin: 16px; background: #f5f6f8; color: #222; }
+  h1 { font-size: 20px; margin: 0 0 12px; }
+  .toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; background: #fff; padding: 10px 14px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .toolbar label { font-size: 13px; color: #555; }
+  select { padding: 4px 8px; border-radius: 4px; border: 1px solid #bbb; font-size: 13px; }
+  .cards { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .card { background: #fff; border-radius: 6px; padding: 10px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.12); min-width: 120px; }
+  .card .v { font-size: 22px; font-weight: 600; }
+  .card .k { font-size: 12px; color: #888; }
+  .panel { background: #fff; border-radius: 6px; padding: 12px 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .panel h3 { margin: 0 0 8px; font-size: 15px; border-left: 4px solid #4a7; padding-left: 8px; }
+  canvas { width: 100%; height: 260px; border: 1px solid #eee; background: #fafbfc; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { border: 1px solid #e3e5e8; padding: 5px 8px; text-align: left; }
+  th { background: #f0f2f5; }
+  .err { color: #c33; font-size: 13px; }
+  .news { font-size: 13px; line-height: 1.6; }
+  .news b { color: #456; }
+</style>
+</head>
+<body>
+<h1>LLMWorld 模拟世界可视化</h1>
+
+<div class="toolbar">
+  <label>世界 <select id="selWorld"></select></label>
+  <label>场景 <select id="selScenario"></select></label>
+  <label>日期 <select id="selDate"></select></label>
+  <button onclick="refresh()">刷新</button>
+  <span id="status" class="err"></span>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<div class="panel">
+  <h3>人口级负荷曲线（1440 分钟 → 小时均值）</h3>
+  <canvas id="curve" width="1100" height="260"></canvas>
+  <div id="curveInfo" style="font-size:12px;color:#666;margin-top:6px;"></div>
+</div>
+
+<div class="panel">
+  <h3>逐户用电明细</h3>
+  <table id="houseTable"><thead><tr><th>家庭</th><th>用电(kWh)</th><th>峰值(W)</th><th>峰值时刻</th></tr></thead><tbody></tbody></table>
+</div>
+
+<div class="panel">
+  <h3>场景对比矩阵（vs 基线变化%）</h3>
+  <div id="matrix"></div>
+</div>
+
+<div class="panel">
+  <h3>上帝剧本（events.json 新闻）</h3>
+  <div id="news" class="news">（加载中…）</div>
+</div>
+
+<script>
+let worldsData = [];
+
+async function api(path) {
+  const r = await fetch(path);
+  return r.json();
+}
+
+async function init() {
+  worldsData = await api("/api/worlds");
+  const sel = document.getElementById("selWorld");
+  sel.innerHTML = worldsData.map(w => `<option value="${w.id}">${w.id}（${w.households.length}户）</option>`).join("");
+  sel.onchange = () => { loadScenario(); };
+  await loadScenario();
+  refresh();
+}
+
+async function loadScenario() {
+  const worldId = document.getElementById("selWorld").value;
+  const world = worldsData.find(w => w.id === worldId);
+  const sel = document.getElementById("selScenario");
+  if (!world || !world.scenarios.length) {
+    sel.innerHTML = "<option value=''>（无模拟结果）</option>";
+    document.getElementById("selDate").innerHTML = "";
+    return;
+  }
+  sel.innerHTML = world.scenarios.map(s => `<option value="${s.name}">${s.name}</option>`).join("");
+  sel.onchange = () => { loadDate(); };
+  await loadDate();
+}
+
+async function loadDate() {
+  const worldId = document.getElementById("selWorld").value;
+  const scenario = document.getElementById("selScenario").value;
+  const world = worldsData.find(w => w.id === worldId);
+  const sc = (world && world.scenarios.find(s => s.name === scenario)) || {dates: []};
+  const sel = document.getElementById("selDate");
+  sel.innerHTML = sc.dates.map(d => `<option value="${d}">${d}</option>`).join("");
+}
+
+async function refresh() {
+  const worldId = document.getElementById("selWorld").value;
+  const scenario = document.getElementById("selScenario").value;
+  const date = document.getElementById("selDate").value;
+  const st = document.getElementById("status");
+  if (!worldId || !scenario || !date) { st.textContent = "请选择世界/场景/日期"; return; }
+  st.textContent = "加载中…";
+  try {
+    const p = await api(`/api/worlds/${worldId}/profile/${scenario}/${date}`);
+    if (p.error) throw new Error(p.error);
+    renderCards(p);
+    renderCurve(p);
+    renderHouses(p);
+    await renderMatrix(worldId);
+    await renderNews(worldId);
+    st.textContent = "";
+  } catch (e) {
+    st.textContent = "错误: " + e.message;
+  }
+}
+
+function renderCards(p) {
+  const items = [
+    ["总用电(kWh)", p.total_energy_kwh],
+    ["户均(kWh)", p.mean_household_kwh],
+    ["峰值(W)", p.peak_watts],
+    ["峰值时刻", p.peak_time],
+    ["家庭数", p.households],
+  ];
+  document.getElementById("cards").innerHTML = items.map(([k, v]) =>
+    `<div class="card"><div class="v">${v}</div><div class="k">${k}</div></div>`).join("");
+}
+
+function renderCurve(p) {
+  const cv = document.getElementById("curve");
+  const ctx = cv.getContext("2d");
+  const W = cv.width, H = cv.height, padL = 50, padB = 26, padT = 10;
+  ctx.clearRect(0, 0, W, H);
+  const watts = p.load_profile_watts;
+  if (!watts || !watts.length) return;
+  const hourly = [];
+  for (let h = 0; h < 24; h++) {
+    const seg = watts.slice(h * 60, (h + 1) * 60);
+    hourly.push(seg.reduce((a, b) => a + b, 0) / seg.length);
+  }
+  const max = Math.max(...hourly) * 1.1 || 1;
+  const x = h => padL + (h / 23) * (W - padL - 10);
+  const y = v => H - padB - (v / max) * (H - padT - padB);
+  ctx.strokeStyle = "#eee";
+  ctx.fillStyle = "#666";
+  ctx.font = "11px sans-serif";
+  for (let h = 0; h < 24; h += 2) {
+    ctx.beginPath(); ctx.moveTo(x(h), padT); ctx.lineTo(x(h), H - padB); ctx.stroke();
+    ctx.fillText(h + ":00", x(h) - 10, H - 10);
+  }
+  for (let g = 0; g <= 4; g++) {
+    const v = max * g / 4;
+    ctx.beginPath(); ctx.moveTo(padL, y(v)); ctx.lineTo(W - 10, y(v)); ctx.stroke();
+    ctx.fillText(Math.round(v), 6, y(v) + 4);
+  }
+  ctx.strokeStyle = "#2a7";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  hourly.forEach((v, h) => h === 0 ? ctx.moveTo(x(h), y(v)) : ctx.lineTo(x(h), y(v)));
+  ctx.stroke();
+  // 峰值标记
+  const pi = hourly.indexOf(Math.max(...hourly));
+  ctx.fillStyle = "#c33";
+  ctx.beginPath(); ctx.arc(x(pi), y(hourly[pi]), 5, 0, 7); ctx.fill();
+  document.getElementById("curveInfo").textContent =
+    `峰值 ${p.peak_watts} W @ ${p.peak_time}（小时均值曲线，峰值时刻已标注）`;
+}
+
+function renderHouses(p) {
+  const tb = document.querySelector("#houseTable tbody");
+  tb.innerHTML = (p.per_house || []).map(h =>
+    `<tr><td>${h.house_id}</td><td>${h.total_energy_kwh}</td><td>${h.peak_watts}</td><td>${h.peak_time}</td></tr>`).join("");
+}
+
+async function renderMatrix(worldId) {
+  const m = await api(`/api/worlds/${worldId}/matrix`);
+  const div = document.getElementById("matrix");
+  if (!m || m.error || !m.scenarios) { div.innerHTML = "<span class='err'>（无矩阵，先跑 compare_policies --all）</span>"; return; }
+  const keys = Object.keys(m.scenarios[0]);
+  const head = keys.map(k => `<th>${k}</th>`).join("");
+  const rows = m.scenarios.map(s => `<tr>${keys.map(k => `<td>${s[k] ?? ""}</td>`).join("")}</tr>`).join("");
+  div.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+async function renderNews(worldId) {
+  const e = await api(`/api/worlds/${worldId}/events`);
+  const div = document.getElementById("news");
+  const evs = e.events || [];
+  if (!evs.length) { div.innerHTML = "（无剧本事件）"; return; }
+  div.innerHTML = evs.map(n =>
+    `<div><b>[${n.date} ${n.time}]（${n.source || ""}）${n.title}</b><br>${n.content}</div><br>`).join("");
+}
+
+init();
+</script>
+</body>
+</html>
