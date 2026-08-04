@@ -89,11 +89,23 @@ def main_aggregate_only(args, project_root, pop_root):
         house_dir = os.path.join(outputs_root, house_id)
         if not os.path.isdir(house_dir):
             continue
-        date_dirs = sorted(d for d in os.listdir(house_dir)
-                           if os.path.isdir(os.path.join(house_dir, d)))
-        if not date_dirs:
+        # 兼容两种目录结构：
+        # 新：house_dir/<policy>/<date>/用电信息/...
+        # 旧：house_dir/<date>/用电信息/...
+        date_candidates = []
+        for entry in os.listdir(house_dir):
+            entry_path = os.path.join(house_dir, entry)
+            if os.path.isdir(entry_path):
+                sub = os.listdir(entry_path)
+                if any(d.isdigit() and len(d) == 8 for d in sub):
+                    date_candidates.extend(os.path.join(entry_path, d) for d in sub
+                                           if d.isdigit() and len(d) == 8)
+                elif entry.isdigit() and len(entry) == 8:
+                    date_candidates.append(entry_path)
+        if not date_candidates:
             continue
-        profile_path = os.path.join(house_dir, date_dirs[-1], "用电信息",
+        date_candidates.sort()
+        profile_path = os.path.join(date_candidates[-1], "用电信息",
                                     "house_load_profile_1440min.json")
         if not os.path.exists(profile_path):
             continue
@@ -193,7 +205,8 @@ def main():
                 weather=config.DEFAULT_WEATHER,
                 temperature=config.DEFAULT_TEMPERATURE,
                 verbose=False,
-                policy_context=policy_context)
+                policy_context=policy_context,
+                policy_name=policy.type if policy else "baseline")
             return house_id, day_result
 
         with ThreadPoolExecutor(max_workers=MAX_HOUSEHOLDS_PARALLEL) as executor:

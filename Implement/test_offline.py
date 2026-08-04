@@ -58,6 +58,28 @@ class TestBaseline(unittest.TestCase):
         self.assertGreater(report["correlation"], 0.9)   # 同形状 → 高相关
 
 
+class TestGroupAnalysis(unittest.TestCase):
+    """节能意识分组（计划10）。"""
+
+    def test_group_stats(self):
+        from analyze_groups import group_stats
+        labels = {"h1": "高", "h2": "高", "h3": "低"}
+        scenarios = {
+            "baseline": {"h1": 10.0, "h2": 14.0, "h3": 8.0},
+            "tou": {"h1": 8.0, "h2": 12.0, "h3": 8.2},
+            "nudge": {"h1": 9.0, "h2": 13.0, "h3": 7.9},
+        }
+        rows = {r["group"]: r for r in group_stats(labels, scenarios)}
+
+        self.assertEqual(rows["高"]["households"], 2)
+        self.assertAlmostEqual(rows["高"]["baseline_mean_kwh"], 12.0)
+        # 高意识组 TOU 响应为负（节电）
+        self.assertAlmostEqual(rows["高"]["tou_mean_kwh"], 10.0)
+        self.assertAlmostEqual(rows["高"]["tou_change_pct"], -16.67, places=2)
+        # 低意识组几乎不响应
+        self.assertAlmostEqual(rows["低"]["tou_change_pct"], 2.5, places=2)
+
+
 class TestPolicy(unittest.TestCase):
     """政策渲染与对比指标（计划8）。"""
 
