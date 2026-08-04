@@ -136,6 +136,16 @@ def main_aggregate_only(args, project_root, pop_root):
     print(f"  已保存: {out_path}")
 
 
+def _policy_for_date(schedule, date_str):
+    for start, end, name in schedule:
+        if start and date_str < start:
+            continue
+        if end and date_str > end:
+            continue
+        return name
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser(description="人口级并行模拟")
     parser.add_argument("world_id", help="世界ID")
@@ -147,6 +157,8 @@ def main():
     parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED)
     parser.add_argument("--policy", default=None,
                         help="政策干预（RQ2）：tou 分时电价 / subsidy 低谷补贴 / nudge 社会规范 / nudge_loss 损失框架")
+    parser.add_argument("--policy-schedule", action="append", default=None,
+                        help="政策时间表(可多次)：开始,结束,政策名（结束留空=永久），如 2026-04-25,2026-04-28,tou")
     parser.add_argument("--event", action="append", default=None,
                         help="上帝注入的世界事件（可多次）：日期|标题|内容[|来源]，如 "
                         "'2026-04-21|政府宣布开征空调用电附加税|从今日起空调电价上调10%|政府公告'")
@@ -169,8 +181,12 @@ def main():
 
     scenario_name = args.scenario
     if not scenario_name:
-        from engine.policy import Policy
-        scenario_name = args.policy if args.policy else "baseline"
+        if policy_schedule:
+            scenario_name = "schedule"
+        elif args.policy:
+            scenario_name = args.policy
+        else:
+            scenario_name = "baseline"
 
 
     inline_events = []
@@ -195,6 +211,23 @@ def main():
         policy_name = policy.describe()
         policy_context = policy.render()
         print(f"政策干预: {policy_name}")
+
+    policy_schedule = []
+    if args.policy_schedule:
+        if args.policy:
+            print("[错误] --policy 与 --policy-schedule 不能同时使用")
+            sys.exit(1)
+        from engine.policy import Policy
+        for text in args.policy_schedule:
+            parts = [p.strip() for p in text.split(",")]
+            if len(parts) < 2 or not parts[0]:
+                print(f"[错误] 政策时间表格式应为 开始,结束,政策名：{text}")
+                sys.exit(1)
+            name = parts[-1]
+            end = parts[1] if len(parts) > 1 and parts[1] else ""
+            policy_schedule.append((parts[0], end, name))
+            Policy.from_name(name)
+        print(f"政策时间表: {len(policy_schedule)} 段")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pop_root = os.path.join(project_root, "outputs", args.world_id, "population")
@@ -243,17 +276,22 @@ def main():
             season = household.get("season", config.DEFAULT_SEASON)
 
             from engine.environment_interface import EnvironmentInterface
-            env = EnvironmentInterface.get_weather(location, world.time.date.strftime('%Y-%m-%d'), season)
+            from engine.policy import Policy
+            date_iso = world.time.date.strftime('%Y-%m-%d')
+            cur_policy = _policy_for_date(policy_schedule, date_iso) if policy_schedule else args.policy
+            cur_context = Policy.from_name(cur_policy).render() if cur_policy else ""
+            env = EnvironmentInterface.get_weather(location, date_iso, season)
             day_result = world.simulate_day(
                 season=season,
                 weather=env["condition"],
                 temperature=env["temperature"]["avg"],
                 verbose=False,
-                policy_context=policy_context,
+                policy_context=cur_context,
                 policy_name=scenario_name)
             day_result["_env"] = {"season": season, "condition": env["condition"],
                                   "temperature": env["temperature"]["avg"],
                                   "mode": env.get("mode", "?")}
+            day_result["_policy"] = cur_policy or "baseline"
             return house_id, day_result
 
         with ThreadPoolExecutor(max_workers=len(worlds)) as executor:
@@ -263,6 +301,8 @@ def main():
         population = aggregate_population(house_results)
         population["policy"] = scenario_name
         population["environment"] = {h: r.get("_env", {}) for h, r in house_results}
+        policies = {h: r.get("_policy", "baseline") for h, r in house_results}
+        population["day_policy"] = next(iter(policies.values()), "baseline")
 
         date_str = house_results[0][1]["date"].replace("年", "-").replace("月", "-").replace("日", "")
 
