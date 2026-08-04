@@ -690,6 +690,12 @@ class TestSubAgent(unittest.TestCase):
         self.assertGreaterEqual(cfg.MAX_RETRIES, 1)   # 重试仍启用
         self.assertFalse(hasattr(cfg, "MAX_WORKERS"))  # 并发上限已移除
 
+    def test_reasoning_effort_lowest(self):
+        """用户指令：思考强度最低。官方枚举仅 low/high/max（api-docs.deepseek.com）。"""
+        import config as cfg
+        self.assertEqual(cfg.REASONING_EFFORT, "low")
+        self.assertIn(cfg.REASONING_EFFORT, ("low", "high", "max"))   # 官方枚举
+
     def test_concurrency_stats_reset(self):
         """并发统计可查询，且峰值初始为 0。"""
         SubAgent.reset_tokens()

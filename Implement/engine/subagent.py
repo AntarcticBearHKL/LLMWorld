@@ -91,13 +91,17 @@ class SubAgent:
         data = {
             "model": model,
             "messages": [{"role": "user", "content": prompt}],
-            "temperature": DEFAULT_TEMPERATURE,
             "max_tokens": DEFAULT_MAX_TOKENS
         }
 
         if thinking:
+            # 官方文档（api-docs.deepseek.com/guides/thinking_mode）：
+            # - reasoning_effort 仅支持 low/high/max；flash 传 low = 最低档（用户指令）
+            # - 思考模式下 temperature/top_p/presence_penalty/frequency_penalty 不生效，不发送
             data["thinking"] = {"type": "enabled"}
             data["reasoning_effort"] = config.REASONING_EFFORT
+        else:
+            data["temperature"] = DEFAULT_TEMPERATURE
 
         if json_mode and not thinking:
             data["response_format"] = {"type": "json_object"}

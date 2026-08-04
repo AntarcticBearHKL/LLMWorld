@@ -17,10 +17,14 @@ MODEL = "deepseek-v4-flash"
 TEMPERATURE = 1.0
 MAX_TOKENS = 64000
 
-# 深度思考开关（基准测试：开启约慢 90 倍，3分钟 vs 2秒，JSON 质量无差异）
-# 默认关闭以保证大规模模拟可行；需要更高决策质量时置 True（单点实验用）
+# 深度思考开关与强度（DeepSeek 官方文档 api-docs.deepseek.com/guides/thinking_mode）
+# 官方取值：reasoning_effort 仅支持 low/high/max
+# effort 映射表：deepseek-v4-flash 传 low → 实际 low（最低）；默认 high
+# 用户 2026-08 指令：所有模拟思考强度调到最低 → "low"
+# 注：思考模式下 temperature/top_p/presence_penalty/frequency_penalty 不生效（官方文档），
+#     故 thinking=True 的请求不再发送 temperature
 THINKING = False
-REASONING_EFFORT = "medium"   # low / medium / high（仅 THINKING=True 时生效）
+REASONING_EFFORT = "low"   # low / high / max（官方枚举；flash 模型 low 映射为最低）
 
 # 并发与重试（用户最新指令 2026-08：解除 API 并发限制——不设任何上限）
 # 注意：世界级约束见 population.py（每世界最多 10 户）
