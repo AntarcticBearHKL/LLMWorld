@@ -448,6 +448,19 @@ class Handler(BaseHTTPRequestHandler):
                 events = add_event_to_script(world_id, body)
                 self._send_json(events)
                 return
+            if len(parts) == 4 and parts[:2] == ["api", "worlds"] and parts[3] == "analyze":
+                world_id = parts[2]
+                import io
+                from contextlib import redirect_stdout
+                import make_analysis_all
+                buf = io.StringIO()
+                try:
+                    with redirect_stdout(buf):
+                        make_analysis_all.run_all(world_id)
+                    self._send_json({"ok": True, "output": buf.getvalue()})
+                except Exception as e:
+                    self._send_json({"error": str(e)}, 500)
+                return
             if len(parts) == 4 and parts[:3] == ["api", "jobs", "delete"]:
                 job_id = parts[3]
                 deleted = delete_job(job_id)

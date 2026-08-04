@@ -120,6 +120,10 @@
     <button onclick="godInject()">注入事件</button>
     <span id="godStatus" style="color:#4a7;font-size:12px;"></span>
   </div>
+  <div style="margin-bottom:8px;font-size:13px;">
+    <button onclick="runAnalysis()" id="btnAnalyze">一键分析当前世界（聚类/变异性/模式/归因/分组/矩阵，0 token）</button>
+    <span id="analyzeStatus" style="color:#4a7;font-size:12px;"></span>
+  </div>
   <div id="news" class="news">（加载中…）</div>
 </div>
 
@@ -564,6 +568,26 @@ async function deleteJob(jobId) {
     await renderJobs();
   } catch (e) {
     alert("删除失败: " + e.message);
+  }
+}
+
+async function runAnalysis() {
+  const worldId = document.getElementById("selWorld").value;
+  const st = document.getElementById("analyzeStatus");
+  const btn = document.getElementById("btnAnalyze");
+  if (!worldId) { st.textContent = "请先选择世界"; return; }
+  btn.disabled = true;
+  st.textContent = "分析中（0 token，约数秒）…";
+  try {
+    const r = await fetch(`/api/worlds/${worldId}/analyze`, {method: "POST"});
+    const res = await r.json();
+    if (res.error) throw new Error(res.error);
+    st.textContent = "完成，已刷新";
+    await refresh();
+  } catch (e) {
+    st.textContent = "失败: " + e.message;
+  } finally {
+    btn.disabled = false;
   }
 }
 
