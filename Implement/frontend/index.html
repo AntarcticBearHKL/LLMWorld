@@ -656,10 +656,12 @@ async function renderSolar(worldId) {
   const rows = s.per_house.map(r => `
     <tr><td>${r.house_id}</td><td>${r.total_load_kwh}</td><td>${r.solar_gen_kwh}</td>
     <td>${r.self_consumption_rate}</td><td>${r.solar_coverage}</td>
-    <td>${r.grid_import_kwh}</td><td>${r.grid_export_kwh}</td><td>${r.net_peak_watts}</td></tr>`).join("");
+    <td>${r.grid_import_kwh}</td><td>${r.grid_export_kwh}</td><td>${r.net_peak_watts}</td>
+    ${s.battery_kwh ? `<td>${r.battery_cycle_kwh}</td><td>${r.peak_import_cut_pct ?? "-"}</td>` : ""}</tr>`).join("");
+  const batteryHead = s.battery_kwh ? `<th>电池循环(kWh)</th><th>晚峰购电削减%</th>` : "";
   div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
-    ${s.capacity_kw}kW 光伏（${s.season}季）：平均自用率 ${s.mean_self_consumption_rate}，平均覆盖 ${s.mean_solar_coverage}</div>
-    <table><thead><tr><th>家庭</th><th>用电(kWh)</th><th>发电(kWh)</th><th>自用率</th><th>覆盖占比</th><th>购电(kWh)</th><th>上网(kWh)</th><th>净峰值(W)</th></tr></thead>
+    ${s.capacity_kw}kW 光伏${s.battery_kwh ? " + " + s.battery_kwh + "kWh 电池" : ""}（${s.season}季）：平均自用率 ${s.mean_self_consumption_rate}，平均覆盖 ${s.mean_solar_coverage}</div>
+    <table><thead><tr><th>家庭</th><th>用电(kWh)</th><th>发电(kWh)</th><th>自用率</th><th>覆盖占比</th><th>购电(kWh)</th><th>上网(kWh)</th><th>净峰值(W)</th>${batteryHead}</tr></thead>
     <tbody>${rows}</tbody></table>`;
 }
 
