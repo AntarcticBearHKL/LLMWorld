@@ -201,6 +201,34 @@ class TestEnvironmentInterface(unittest.TestCase):
             EnvironmentInterface.get_weather({}, "2026-04-21", "春天")
 
 
+class TestPopulationAnalysis(unittest.TestCase):
+    """人口行为归因（计划25）。"""
+
+    def test_group_mean(self):
+        from analyze_population import group_mean
+        result = group_mean([("高", 10), ("高", 20), ("低", 4)])
+        self.assertEqual(result["高"], 15.0)
+        self.assertEqual(result["低"], 4.0)
+
+    def test_household_features(self):
+        from analyze_population import household_features
+        h = {"type": "有孩家庭", "members": [
+            {"age": 35, "personality": {"energy_awareness": "高",
+                                         "big_five": {"conscientiousness": 8}}},
+            {"age": 33, "personality": {}},
+        ]}
+        f = household_features(h)
+        self.assertEqual(f["members_count"], 2)
+        self.assertEqual(f["energy_awareness"], "高")
+        self.assertEqual(f["big_five"]["conscientiousness"], 8)
+
+    def test_pearson_sign(self):
+        from analyze_population import pearson
+        self.assertGreater(pearson([1, 2, 3], [2, 4, 6]), 0.99)
+        self.assertLess(pearson([1, 2, 3], [6, 4, 2]), -0.99)
+        self.assertIsNone(pearson([1], [2]))   # 样本不足
+
+
 class TestPolicy(unittest.TestCase):
     """政策渲染与对比指标（计划8）。"""
 
