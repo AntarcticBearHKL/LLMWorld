@@ -1802,5 +1802,50 @@ class TestSolar(unittest.TestCase):
             without["per_house"][0]["self_consumption_rate"])
 
 
+class TestElectrification(unittest.TestCase):
+
+
+    def test_ev_curve_night(self):
+        from analyze_electrification import ev_curve
+        curve = ev_curve(power_watts=7000, hours=3, start_hour=22)
+        self.assertEqual(sum(1 for w in curve if w > 0), 180)
+        self.assertEqual(curve[22 * 60], 7000)
+        self.assertEqual(curve[6 * 60], 0)
+
+    def test_ev_curve_crosses_midnight(self):
+        from analyze_electrification import ev_curve
+        curve = ev_curve(power_watts=7000, hours=4, start_hour=22)
+        self.assertEqual(sum(1 for w in curve if w > 0), 240)
+        self.assertEqual(curve[1 * 60], 7000)
+
+    def test_heat_pump_curve(self):
+        from analyze_electrification import heat_pump_curve
+        curve = heat_pump_curve(power_watts=3000)
+        self.assertEqual(curve[7 * 60], 3000)
+        self.assertEqual(curve[12 * 60], 0)
+        self.assertEqual(curve[20 * 60], 3000)
+
+    def test_hp_peak_impact(self):
+        from analyze_electrification import build_report
+        loads = [300.0] * 1440
+        loads[18 * 60:21 * 60] = [1200.0] * (3 * 60)
+        profiles = [{"house_id": "h1", "total_energy_kwh": 10.0,
+                     "load_profile_watts": loads}]
+        report = build_report(profiles)
+        by_name = {r["scenario"]: r for r in report["scenarios"]}
+        self.assertLess(by_name["ev"]["total_change_pct"],
+                        by_name["hp"]["total_change_pct"])
+        self.assertGreater(by_name["hp"]["evening_change_pct"],
+                           by_name["ev"]["evening_change_pct"])
+        self.assertGreater(by_name["ev"]["peak_change_pct"],
+                           by_name["hp"]["peak_change_pct"])
+        self.assertEqual(by_name["ev_hp"]["scenario"], "ev_hp")
+
+    def test_empty_raise(self):
+        from analyze_electrification import build_report
+        with self.assertRaises(ValueError):
+            build_report([])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
