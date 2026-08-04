@@ -141,7 +141,7 @@ def main():
     parser.add_argument("world_id", help="世界ID")
     parser.add_argument("--days", type=int, default=1)
     parser.add_argument("--date", type=str, default=None,
-                        help="开始日期(如 2026-04-21)。缺省=自动续跑：读 worlds/<id>/state.json 从上一次日期下一天继续")
+                        help="开始日期(如 2026-04-21 或 2026年4月21日)。缺省=自动续跑：读 worlds/<id>/state.json 从上一次日期下一天继续")
     parser.add_argument("--house-start", type=int, default=0, help="起始家庭序号")
     parser.add_argument("--house-count", type=int, default=None, help="参与家庭数（默认全部）")
     parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED)
@@ -160,6 +160,11 @@ def main():
     args = parser.parse_args()
 
     utils.set_seed(args.seed)
+
+    # 日期格式兼容：'2026-04-23' → '2026年4月23日'（Time 引擎要求中文格式）
+    if args.date and "-" in args.date:
+        y, m, d = args.date.split("-")
+        args.date = f"{int(y)}年{int(m)}月{int(d)}日"
 
     # 场景标签：--scenario > 政策名 > baseline
     scenario_name = args.scenario
