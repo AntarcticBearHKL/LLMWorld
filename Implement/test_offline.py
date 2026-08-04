@@ -1694,5 +1694,49 @@ class TestBehaviorLoad(unittest.TestCase):
             build_report([])
 
 
+class TestSolar(unittest.TestCase):
+
+
+    def test_curve_shape_summer_clear(self):
+        from analyze_solar import solar_generation_curve
+        curve = solar_generation_curve("夏天", "晴天", capacity=5000)
+        self.assertEqual(len(curve), 1440)
+        self.assertEqual(curve[0], 0.0)
+        peak_minute = max(range(1440), key=lambda m: curve[m])
+        self.assertLessEqual(abs(peak_minute / 60 - 13.5), 1.5)
+        self.assertGreater(curve[peak_minute], 4000)
+
+    def test_curve_zero_at_night(self):
+        from analyze_solar import solar_generation_curve
+        curve = solar_generation_curve("冬天", "晴天", capacity=5000)
+        for m in range(0, 7 * 60):
+            self.assertEqual(curve[m], 0.0)
+        for m in range(17 * 60, 1440):
+            self.assertEqual(curve[m], 0.0)
+
+    def test_weather_factor(self):
+        from analyze_solar import solar_generation_curve
+        clear = solar_generation_curve("夏天", "晴天", capacity=5000)
+        rain = solar_generation_curve("夏天", "雨天", capacity=5000)
+        self.assertGreater(sum(clear), sum(rain) * 5)
+
+    def test_self_consumption_math(self):
+        from analyze_solar import build_report
+        loads = [500.0] * 1440
+        profiles = [{"house_id": "h1", "total_energy_kwh": 12.0,
+                     "load_profile_watts": loads, "weather": "晴天"}]
+        report = build_report(profiles, 5000, "夏天")
+        r = report["per_house"][0]
+        self.assertGreater(r["solar_gen_kwh"], 0)
+        self.assertGreaterEqual(r["self_consumption_rate"], 0.0)
+        self.assertLessEqual(r["self_consumption_rate"], 1.0)
+        self.assertLessEqual(r["grid_import_kwh"], r["total_load_kwh"])
+
+    def test_empty_raise(self):
+        from analyze_solar import build_report
+        with self.assertRaises(ValueError):
+            build_report([], 5000, "夏天")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

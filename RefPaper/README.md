@@ -29,3 +29,4 @@
 | LLM Social Particle Swarm: Personality Heterogeneity in Behavior | - | - | arXiv:2604.12250 | 计划22 | LLM Social Particle Swarm - Personality Heterogeneity in Behavior.pdf |
 | PRISM: Personalized Cognitive Strategies for Consistent Behavior | - | - | arXiv:2512.19933 | 计划22 | PRISM - Personalized Cognitive Strategies for Consistent Behavior.pdf |
 | Personality-Driven LLM Agents | - | - | arXiv:2501.08985 | 计划22 | Personality-Driven LLM Agents.pdf |
+| Uniform Taxation of Electricity: Incentives for Flexibility and Cost Redistribution among Household Categories | Gunkel et al. | 2023 | arXiv:2306.11566 | 计划71 | Uniform Taxation of Electricity - Incentives for Flexibility and Cost Redistribution among Household Categories.pdf |

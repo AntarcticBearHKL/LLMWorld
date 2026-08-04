@@ -31,6 +31,7 @@ PAPERS = [
     ("2604.12250", "LLM Social Particle Swarm: Personality Heterogeneity in Behavior", None, None, "计划22"),
     ("2512.19933", "PRISM: Personalized Cognitive Strategies for Consistent Behavior", None, None, "计划22"),
     ("2501.08985", "Personality-Driven LLM Agents", None, None, "计划22"),
+    ("2306.11566", "Uniform Taxation of Electricity: Incentives for Flexibility and Cost Redistribution among Household Categories", "Gunkel et al.", 2023, "计划71"),
 ]
 
 

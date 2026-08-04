@@ -125,6 +125,11 @@
 </div>
 
 <div class="panel">
+  <h3>光伏自用分析（计划71：prosumer，Gunkel 2023）</h3>
+  <div id="solarPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -272,6 +277,7 @@ async function refresh() {
     await renderTimeline(worldId);
     await renderAnomalies(worldId);
     await renderBehaviorLoad(worldId);
+    await renderSolar(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -638,6 +644,22 @@ async function renderBehaviorLoad(worldId) {
   div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
     共 ${b.households} 户，一致 ${b.consistent_count}，异常 ${b.anomaly_count}（预期：人在家时段负荷更高，峰值与活动高峰接近）</div>
     <table><thead><tr><th>家庭</th><th>成员</th><th>在家均值(W)</th><th>离家均值(W)</th><th>在家&gt;离家</th><th>负荷峰时</th><th>活动峰时</th><th>标记</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+}
+
+async function renderSolar(worldId) {
+  const div = document.getElementById("solarPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const date = document.getElementById("selDate").value;
+  const s = await api(`/api/worlds/${worldId}/solar/${scenario}/${date}`);
+  if (!s || s.error) { div.innerHTML = "<span class='err'>（无光伏数据，先跑 analyze_solar.py）</span>"; return; }
+  const rows = s.per_house.map(r => `
+    <tr><td>${r.house_id}</td><td>${r.total_load_kwh}</td><td>${r.solar_gen_kwh}</td>
+    <td>${r.self_consumption_rate}</td><td>${r.solar_coverage}</td>
+    <td>${r.grid_import_kwh}</td><td>${r.grid_export_kwh}</td><td>${r.net_peak_watts}</td></tr>`).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    ${s.capacity_kw}kW 光伏（${s.season}季）：平均自用率 ${s.mean_self_consumption_rate}，平均覆盖 ${s.mean_solar_coverage}</div>
+    <table><thead><tr><th>家庭</th><th>用电(kWh)</th><th>发电(kWh)</th><th>自用率</th><th>覆盖占比</th><th>购电(kWh)</th><th>上网(kWh)</th><th>净峰值(W)</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
 }
 
