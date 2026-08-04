@@ -1413,5 +1413,41 @@ class TestPeerNudge(unittest.TestCase):
         self.assertEqual(neighbor_mean_kwh(kwhs, "h1"), 12.0)
 
 
+class TestEventResponse(unittest.TestCase):
+
+
+    def _samples(self):
+        import numpy as np
+        def shape(peak_h):
+            return [0.6 + 0.4 * np.exp(-((h - peak_h) ** 2) / 4) for h in range(24)]
+        samples = []
+        for house_id in ("h1", "h2"):
+            for day, ph in enumerate((19, 8, 8, 8)):
+                samples.append({
+                    "house_id": house_id, "date": f"2026050{day + 1}",
+                    "kwh": 10.0 if day != 1 else 8.0,
+                    "shape": shape(ph), "hourly": [1.0] * 24})
+        return samples
+
+    def test_event_day_moves_more(self):
+        from analyze_event_response import build_event_response
+        events = {"2026-05-02": [{"title": "电价上涨"}]}
+        report = build_event_response(self._samples(), events)
+        by_date = {e["date"]: e for e in report["per_event"]}
+        self.assertGreater(report["event_move_rate"], report["non_event_move_rate"])
+        self.assertEqual(by_date["2026-05-02"]["kwh_change_pct"], -20.0)
+
+    def test_no_events(self):
+        from analyze_event_response import build_event_response
+        report = build_event_response(self._samples(), {})
+        self.assertEqual(report["event_days"], 0)
+        self.assertEqual(report["per_event"], [])
+
+    def test_empty_samples_raise(self):
+        from analyze_event_response import build_event_response
+        with self.assertRaises(ValueError):
+            build_event_response([], {})
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
