@@ -235,13 +235,19 @@ def main():
             # 季节从 household 配置读
             household = next(h for h in selected if h["house_id"] == house_id)["household"]
             season = household.get("season", config.DEFAULT_SEASON)
+            # 环境接口：真实/配置随机/手工（计划23）
+            from engine.environment_interface import EnvironmentInterface
+            env = EnvironmentInterface.get_weather(location, world.time.date.strftime('%Y-%m-%d'), season)
             day_result = world.simulate_day(
                 season=season,
-                weather=config.DEFAULT_WEATHER,
-                temperature=config.DEFAULT_TEMPERATURE,
+                weather=env["condition"],
+                temperature=env["temperature"]["avg"],
                 verbose=False,
                 policy_context=policy_context,
                 policy_name=scenario_name)
+            day_result["_env"] = {"season": season, "condition": env["condition"],
+                                  "temperature": env["temperature"]["avg"],
+                                  "mode": env.get("mode", "?")}
             return house_id, day_result
 
         with ThreadPoolExecutor(max_workers=MAX_HOUSEHOLDS_PARALLEL) as executor:
@@ -250,6 +256,7 @@ def main():
         # 聚合
         population = aggregate_population(house_results)
         population["policy"] = scenario_name   # 场景标签（政策或新闻实验名），供对比脚本识别
+        population["environment"] = {h: r.get("_env", {}) for h, r in house_results}  # 计划23：环境信息
 
         date_str = house_results[0][1]["date"].replace("年", "-").replace("月", "-").replace("日", "")
         # 每个政策场景存独立子目录，避免互相覆盖（计划9发现的缺陷）

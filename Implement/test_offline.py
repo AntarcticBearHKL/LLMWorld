@@ -143,6 +143,64 @@ class TestServerData(unittest.TestCase):
         self.assertGreaterEqual(len(events.get("events", [])), 1)
 
 
+class TestEnvironmentInterface(unittest.TestCase):
+    """环境信息开放接口（计划23）。"""
+
+    def setUp(self):
+        import config as cfg
+        self._saved_mode = cfg.ENV_MODE
+        self._saved_file = cfg.ENV_MANUAL_FILE
+
+    def tearDown(self):
+        import config as cfg
+        cfg.ENV_MODE = self._saved_mode
+        cfg.ENV_MANUAL_FILE = self._saved_file
+
+    def test_config_mode_temp_within_season_range(self):
+        """config 模式：温度落在该季节范围内。"""
+        import config as cfg
+        cfg.ENV_MODE = "config"
+        from engine.environment_interface import EnvironmentInterface
+        lo, hi = cfg.MELBOURNE_CLIMATE["冬天"]["temp_range"]
+        for _ in range(30):
+            w = EnvironmentInterface.get_weather({"coordinates": {}}, "", "冬天")
+            avg = w["temperature"]["avg"]
+            self.assertGreaterEqual(avg, lo)
+            self.assertLessEqual(avg, hi)
+            self.assertIn("mode", w)
+
+    def test_config_mode_seeded_reproducible(self):
+        """同种子 → 同天气（实验可复现）。"""
+        import config as cfg
+        cfg.ENV_MODE = "config"
+        from engine.environment_interface import EnvironmentInterface
+        import random
+        random.seed(7)
+        w1 = EnvironmentInterface.get_weather({}, "", "春天")
+        random.seed(7)
+        w2 = EnvironmentInterface.get_weather({}, "", "春天")
+        self.assertEqual(w1["temperature"]["avg"], w2["temperature"]["avg"])
+        self.assertEqual(w1["condition"], w2["condition"])
+
+    def test_manual_mode_fixed_value(self):
+        """manual 模式：读配置文件固定值。"""
+        import config as cfg
+        cfg.ENV_MODE = "manual"
+        from engine.environment_interface import EnvironmentInterface
+        w = EnvironmentInterface.get_weather({}, "2026-04-21", "春天")
+        self.assertEqual(w["mode"], "manual")
+        self.assertIn("condition", w)
+
+    def test_manual_missing_file_raises(self):
+        """manual 模式但文件不存在 → 显式报错（不静默）。"""
+        import config as cfg
+        cfg.ENV_MODE = "manual"
+        cfg.ENV_MANUAL_FILE = "不存在的文件.json"
+        from engine.environment_interface import EnvironmentInterface
+        with self.assertRaises(FileNotFoundError):
+            EnvironmentInterface.get_weather({}, "2026-04-21", "春天")
+
+
 class TestPolicy(unittest.TestCase):
     """政策渲染与对比指标（计划8）。"""
 
