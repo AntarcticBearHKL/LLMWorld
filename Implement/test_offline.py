@@ -229,6 +229,26 @@ class TestPopulationAnalysis(unittest.TestCase):
         self.assertIsNone(pearson([1], [2]))   # 样本不足
 
 
+class TestCombineWorlds(unittest.TestCase):
+    """多世界联合聚合（每世界≤10户 → 更大人口，计划26）。"""
+
+    def test_combine_math(self):
+        """联合曲线 = 各世界逐元素之和，统计正确。"""
+        from combine_worlds import combine
+
+        # 用 pop02 + pop03 的真实基线数据（已存在）
+        data = combine(["pop02", "pop03"], "baseline", "2026-04-21")
+        self.assertEqual(data["households"], 22)   # 10 + 12
+        self.assertEqual(len(data["load_profile_watts"]), 1440)
+        p02 = combine(["pop02"], "baseline", "2026-04-21")
+        p03 = combine(["pop03"], "baseline", "2026-04-21")
+        self.assertAlmostEqual(data["total_energy_kwh"],
+                               p02["total_energy_kwh"] + p03["total_energy_kwh"], places=2)
+        # per_house 带世界前缀
+        self.assertTrue(any(h["house_id"].startswith("pop02:") for h in data["per_house"]))
+        self.assertTrue(any(h["house_id"].startswith("pop03:") for h in data["per_house"]))
+
+
 class TestPolicy(unittest.TestCase):
     """政策渲染与对比指标（计划8）。"""
 
