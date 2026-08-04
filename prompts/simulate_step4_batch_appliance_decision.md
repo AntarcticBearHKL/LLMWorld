@@ -17,6 +17,8 @@
 - 天气：{weather}
 - 温度：{temperature}度
 
+{policy_context}
+
 ## 电器类型说明
 
 ### 1. on_demand（按需使用电器）

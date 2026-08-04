@@ -58,6 +58,52 @@ class TestBaseline(unittest.TestCase):
         self.assertGreater(report["correlation"], 0.9)   # 同形状 → 高相关
 
 
+class TestPolicy(unittest.TestCase):
+    """政策渲染与对比指标（计划8）。"""
+
+    def test_render_empty_when_no_policy(self):
+        from engine.policy import Policy
+        self.assertEqual(Policy("none").render(), "")
+
+    def test_tou_render(self):
+        from engine.policy import Policy
+        text = Policy.tou().render()
+        self.assertIn("分时电价", text)
+        self.assertIn("0.55", text)
+        self.assertIn("谷时段 22:00-07:00", text)
+
+    def test_subsidy_and_nudge_render(self):
+        from engine.policy import Policy
+        self.assertIn("低谷充电补贴", Policy.subsidy().render())
+        self.assertIn("社会规范", Policy.nudge().render())
+
+    def test_compare_metrics(self):
+        """干预把 2 kWh 从晚峰挪到谷段 → 晚峰变化 -X%、谷段 +X%。"""
+        from compare_policies import compare
+        from population_runner import aggregate_population
+
+        def make_profile(peak_watts, valley_extra):
+            loads = [50.0] * 1440
+            for h in range(17, 20):           # 晚峰 17-19 点
+                loads[h * 60:(h + 1) * 60] = [peak_watts] * 60
+            for h in range(23, 24):           # 谷段 23 点
+                loads[h * 60:(h + 1) * 60] = [valley_extra] * 60
+            return loads
+
+        baseline = aggregate_population([("h1", {
+            "energy_calculator": FakeEnergyCalculator(make_profile(2000, 0)),
+            "energy_summary": {"total_energy_kwh": 12.0}})])
+
+        intervention = aggregate_population([("h1", {
+            "energy_calculator": FakeEnergyCalculator(make_profile(1500, 500)),
+            "energy_summary": {"total_energy_kwh": 12.0}})])
+
+        report = compare(baseline, intervention)
+        self.assertLess(report["peak_hours_change_pct"], 0)     # 晚峰削减
+        self.assertGreater(report["valley_hours_change_pct"], 0)  # 谷段上升
+        self.assertAlmostEqual(report["total_change_pct"], 0.0, places=1)  # 总量近似不变
+
+
 class TestPopulation(unittest.TestCase):
     """人口构建器 + 聚合（计划4）。"""
 

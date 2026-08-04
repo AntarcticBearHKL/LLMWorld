@@ -203,6 +203,8 @@ def main():
         import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
+        matplotlib.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "DejaVu Sans"]
+        matplotlib.rcParams["axes.unicode_minus"] = False
 
         hours = list(range(24))
         fig, ax = plt.subplots(1, 1, figsize=(10, 5))

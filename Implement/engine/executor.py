@@ -17,11 +17,12 @@ import config
 
 
 class Executor:
-    def __init__(self, home, planner):
+    def __init__(self, home, planner, policy_context=""):
         self.home = home
         self.planner = planner
         self.log_dir = planner.log_dir
         self.prompt = Prompt()
+        self.policy_context = policy_context   # 政策干预文本（RQ2），无政策为空串
         self.validation_warnings = []   # 本步骤发现的所有决策校验问题
 
     def execute_all_segments(self, season="夏天", weather="晴天", temperature=28):
@@ -55,7 +56,8 @@ class Executor:
                 home_structure_with_appliances=json.dumps(home_structure_with_appliances, ensure_ascii=False, indent=2),
                 season=season,
                 weather=weather,
-                temperature=temperature
+                temperature=temperature,
+                policy_context=self.policy_context
             )
 
             prompts.append(prompt)
