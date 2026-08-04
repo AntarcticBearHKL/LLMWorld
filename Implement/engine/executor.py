@@ -1,4 +1,4 @@
-"""执行器：第四层 —— 让每个成员根据时间线做批量用电决策（一次 LLM 调用）。
+﻿"""执行器：第四层 —— 让每个成员根据时间线做批量用电决策（一次 LLM 调用）。
 
 职责：
 1. 把成员时间线 + 家庭电器清单组装成 prompt
@@ -13,6 +13,7 @@ import os
 from . import utils
 from .prompt import Prompt
 from .subagent import SubAgent
+import config
 
 
 class Executor:
@@ -60,7 +61,7 @@ class Executor:
             prompts.append(prompt)
             members_data.append((member_name, member))
 
-        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=True)
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=config.THINKING)
 
         for (member_name, member), prompt, result in zip(members_data, prompts, results):
             tokens = SubAgent.get_tokens()
@@ -147,3 +148,5 @@ class Executor:
             if member.name == name:
                 return member
         return None
+
+

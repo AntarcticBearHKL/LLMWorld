@@ -2,7 +2,12 @@ from engine import EnvironmentGenerator
 import json
 import os
 import random
+import argparse
+import sys
 from datetime import datetime
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from engine import utils
 
 USER_PROMPT = """
 位于墨尔本的中产家庭，居住在clayton
@@ -18,6 +23,12 @@ def save_json(filepath, data):
     print(f"  已保存: {filepath}")
 
 def main():
+    parser = argparse.ArgumentParser(description="LLM 世界生成")
+    parser.add_argument("--seed", type=int, default=42, help="随机种子（可复现）")
+    args = parser.parse_args()
+
+    utils.set_seed(args.seed)
+
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     worlds_dir = os.path.join(project_root, 'worlds')
     world_id = generate_world_id()
@@ -25,7 +36,7 @@ def main():
     print("="*60)
     print("世界生成系统")
     print("="*60)
-    print(f"世界ID: {world_id}")
+    print(f"世界ID: {world_id}  随机种子: {args.seed}")
     
     user_prompt = USER_PROMPT.strip()
     
