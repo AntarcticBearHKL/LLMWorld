@@ -159,6 +159,11 @@
     <span id="godStatus" style="color:#4a7;font-size:12px;"></span>
   </div>
   <div style="margin-bottom:8px;font-size:13px;">
+    新闻模板
+    <select id="selTemplate" onchange="fillTemplate()"><option value="">（选择模板）</option></select>
+    <button onclick="fillTemplate()">填入模板</button>
+  </div>
+  <div style="margin-bottom:8px;font-size:13px;">
     <button onclick="runAnalysis()" id="btnAnalyze">一键分析当前世界（聚类/变异性/模式/归因/分组/矩阵，0 token）</button>
     <span id="analyzeStatus" style="color:#4a7;font-size:12px;"></span>
   </div>
@@ -245,6 +250,7 @@ async function refresh() {
     await renderMatrix(worldId);
     await renderAnalysis(worldId);
     await renderNews(worldId);
+    await loadTemplates();
     await renderJobs();
     await renderPersonality(worldId);
     await renderClusters(worldId);
@@ -707,6 +713,28 @@ async function startSimulation() {
   } catch (e) {
     st.textContent = "失败: " + e.message;
   }
+}
+
+let templatesCache = [];
+
+async function loadTemplates() {
+  try {
+    const r = await api("/api/news-templates");
+    templatesCache = r.templates || [];
+    const sel = document.getElementById("selTemplate");
+    sel.innerHTML = `<option value="">（选择模板）</option>` +
+      templatesCache.map(t => `<option value="${t.name}">${t.name}</option>`).join("");
+  } catch (e) {  }
+}
+
+function fillTemplate() {
+  const name = document.getElementById("selTemplate").value;
+  if (!name) return;
+  const t = templatesCache.find(x => x.name === name);
+  if (!t) return;
+  document.getElementById("evTitle").value = t.title;
+  document.getElementById("evContent").value = t.content;
+  document.getElementById("godStatus").textContent = `已填入模板 ${name}，可修改后注入`;
 }
 
 async function renderNews(worldId) {
