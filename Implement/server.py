@@ -120,6 +120,20 @@ def load_analysis(world_id, scenario="baseline"):
         return json.load(f)
 
 
+def load_world_state(world_id):
+    """世界连续状态（worlds/<id>/state.json，计划27）：上次日期+记忆天数。"""
+    path = os.path.join(WORLDS_DIR, world_id, "state.json")
+    if not os.path.exists(path):
+        return {"has_state": False}
+    with open(path, "r", encoding="utf-8") as f:
+        state = json.load(f)
+    return {
+        "has_state": True,
+        "date": state.get("date"),
+        "memory_days": len(state.get("memory_days", [])),
+    }
+
+
 def load_events(world_id):
     """上帝剧本（events.json）。"""
     path = os.path.join(WORLDS_DIR, world_id, "events.json")
@@ -246,6 +260,9 @@ class Handler(BaseHTTPRequestHandler):
                     return
                 if parts[3] == "events":
                     self._send_json(load_events(world_id))
+                    return
+                if parts[3] == "state":
+                    self._send_json(load_world_state(world_id))
                     return
                 if parts[3] == "house" and len(parts) >= 6:
                     # /api/worlds/<id>/house/<house_id>/summary/<scenario>/<date>
