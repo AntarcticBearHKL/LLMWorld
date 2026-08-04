@@ -152,6 +152,8 @@ def main():
     parser.add_argument("--scenario", default=None,
                         help="场景标签（聚合输出目录名，默认=政策名或 baseline）。"
                         "新闻实验请用自定义名如 war_news，避免与基线混淆")
+    parser.add_argument("--no-events", action="store_true",
+                        help="跳过 worlds/<id>/events.json 剧本（仅用命令行 --event）")
     parser.add_argument("--aggregate-only", action="store_true",
                         help="不跑 LLM，直接从已保存的 outputs 曲线文件离线聚合")
     args = parser.parse_args()
@@ -217,7 +219,10 @@ def main():
         world = World(
             home, world_id=args.world_id, postcode=postcode,
             house_id=info["house_id"], start_date=args.date)
-        # 命令行注入的新闻并入每个世界的新闻台（与 events.json 剧本并存）
+        # --no-events：跳过 events.json 剧本，仅保留命令行注入的新闻
+        if args.no_events:
+            world.news.items = []
+        # 命令行注入的新闻并入每个世界的新闻台
         for item in inline_events:
             world.news.add_event(item)
         worlds[info["house_id"]] = world

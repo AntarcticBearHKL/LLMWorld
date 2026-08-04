@@ -160,7 +160,7 @@ def main():
     args = parser.parse_args()
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    real_path = args.real or os.path.join(project_root, "vic_electricity_data.csv")
+    real_path = args.real or os.path.join(project_root, "Data", "vic_electricity_data.csv")
 
     # 加载数据
     sim_data, sim_path = load_sim_profile(args.world)
