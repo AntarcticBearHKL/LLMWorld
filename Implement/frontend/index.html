@@ -29,18 +29,28 @@
 
 <div class="toolbar">
   <label>世界 <select id="selWorld"></select></label>
-  <label>场景 <select id="selScenario"></select></label>
   <label>日期 <select id="selDate"></select></label>
   <button onclick="refresh()">刷新</button>
   <span id="status" class="err"></span>
 </div>
 
+<div class="panel">
+  <h3>场景选择（可多选，同图叠加对比）</h3>
+  <div id="scenarioList" style="font-size:13px;"></div>
+</div>
+
 <div class="cards" id="cards"></div>
 
 <div class="panel">
-  <h3>人口级负荷曲线（1440 分钟 → 小时均值）</h3>
+  <h3>人口级负荷曲线（1440 分钟 → 小时均值，多场景叠加）</h3>
   <canvas id="curve" width="1100" height="260"></canvas>
   <div id="curveInfo" style="font-size:12px;color:#666;margin-top:6px;"></div>
+</div>
+
+<div class="panel">
+  <h3>多日能量轨迹（各场景每日总用电）</h3>
+  <canvas id="trend" width="1100" height="200"></canvas>
+  <div id="trendInfo" style="font-size:12px;color:#666;margin-top:6px;"></div>
 </div>
 
 <div class="panel">
@@ -69,6 +79,8 @@
 <script>
 let worldsData = [];
 
+const COLORS = ["#2a7", "#c33", "#36c", "#c90", "#a2a", "#0aa", "#c63"];
+
 async function api(path) {
   const r = await fetch(path);
   return r.json();
@@ -78,47 +90,62 @@ async function init() {
   worldsData = await api("/api/worlds");
   const sel = document.getElementById("selWorld");
   sel.innerHTML = worldsData.map(w => `<option value="${w.id}">${w.id}（${w.households.length}户）</option>`).join("");
-  sel.onchange = () => { loadScenario(); };
-  await loadScenario();
+  sel.onchange = () => { loadScenarios(); };
+  await loadScenarios();
   refresh();
 }
 
-async function loadScenario() {
+async function loadScenarios() {
   const worldId = document.getElementById("selWorld").value;
   const world = worldsData.find(w => w.id === worldId);
-  const sel = document.getElementById("selScenario");
+  const box = document.getElementById("scenarioList");
+  const dateSel = document.getElementById("selDate");
   if (!world || !world.scenarios.length) {
-    sel.innerHTML = "<option value=''>（无模拟结果）</option>";
-    document.getElementById("selDate").innerHTML = "";
+    box.innerHTML = "（无模拟结果）";
+    dateSel.innerHTML = "";
     return;
   }
-  sel.innerHTML = world.scenarios.map(s => `<option value="${s.name}">${s.name}</option>`).join("");
-  sel.onchange = () => { loadDate(); };
-  await loadDate();
+  // 场景多选框（默认全选）
+  box.innerHTML = world.scenarios.map((s, i) =>
+    `<label style="margin-right:10px;"><input type="checkbox" class="scChk" value="${s.name}" ${i < 5 ? "checked" : ""}> ${s.name}</label>`).join("");
+  // 日期下拉：取第一个场景的日期
+  const dates = world.scenarios[0].dates;
+  dateSel.innerHTML = dates.map(d => `<option value="${d}">${d}</option>`).join("");
+  document.querySelectorAll(".scChk").forEach(c => c.onchange = refresh);
+  dateSel.onchange = refresh;
 }
 
-async function loadDate() {
-  const worldId = document.getElementById("selWorld").value;
-  const scenario = document.getElementById("selScenario").value;
-  const world = worldsData.find(w => w.id === worldId);
-  const sc = (world && world.scenarios.find(s => s.name === scenario)) || {dates: []};
-  const sel = document.getElementById("selDate");
-  sel.innerHTML = sc.dates.map(d => `<option value="${d}">${d}</option>`).join("");
+function selectedScenarios() {
+  return [...document.querySelectorAll(".scChk:checked")].map(c => c.value);
+}
+
+function hourCurve(watts) {
+  const hourly = [];
+  for (let h = 0; h < 24; h++) {
+    const seg = watts.slice(h * 60, (h + 1) * 60);
+    hourly.push(seg.reduce((a, b) => a + b, 0) / seg.length);
+  }
+  return hourly;
 }
 
 async function refresh() {
   const worldId = document.getElementById("selWorld").value;
-  const scenario = document.getElementById("selScenario").value;
   const date = document.getElementById("selDate").value;
+  const scenarios = selectedScenarios();
   const st = document.getElementById("status");
-  if (!worldId || !scenario || !date) { st.textContent = "请选择世界/场景/日期"; return; }
+  if (!worldId || !date || !scenarios.length) { st.textContent = "请选择世界/日期/至少一个场景"; return; }
   st.textContent = "加载中…";
   try {
-    const p = await api(`/api/worlds/${worldId}/profile/${scenario}/${date}`);
-    if (p.error) throw new Error(p.error);
-    renderCards(p);
-    renderCurve(p);
-    renderHouses(p);
+    const profiles = [];
+    for (const s of scenarios) {
+      const p = await api(`/api/worlds/${worldId}/profile/${s}/${date}`);
+      if (!p.error) profiles.push({scenario: s, data: p});
+    }
+    if (!profiles.length) throw new Error("所选场景无数据");
+    renderCards(profiles[0].data);
+    renderCurve(profiles);
+    renderHouses(profiles[0].data);
+    renderTrend(worldId);
     await renderMatrix(worldId);
     await renderNews(worldId);
     st.textContent = "";
@@ -139,19 +166,14 @@ function renderCards(p) {
     `<div class="card"><div class="v">${v}</div><div class="k">${k}</div></div>`).join("");
 }
 
-function renderCurve(p) {
+function renderCurve(profiles) {
   const cv = document.getElementById("curve");
   const ctx = cv.getContext("2d");
   const W = cv.width, H = cv.height, padL = 50, padB = 26, padT = 10;
   ctx.clearRect(0, 0, W, H);
-  const watts = p.load_profile_watts;
-  if (!watts || !watts.length) return;
-  const hourly = [];
-  for (let h = 0; h < 24; h++) {
-    const seg = watts.slice(h * 60, (h + 1) * 60);
-    hourly.push(seg.reduce((a, b) => a + b, 0) / seg.length);
-  }
-  const max = Math.max(...hourly) * 1.1 || 1;
+  if (!profiles.length) return;
+  const curves = profiles.map(p => ({name: p.scenario, hourly: hourCurve(p.data.load_profile_watts)}));
+  const max = Math.max(...curves.flatMap(c => c.hourly)) * 1.1 || 1;
   const x = h => padL + (h / 23) * (W - padL - 10);
   const y = v => H - padB - (v / max) * (H - padT - padB);
   ctx.strokeStyle = "#eee";
@@ -166,23 +188,72 @@ function renderCurve(p) {
     ctx.beginPath(); ctx.moveTo(padL, y(v)); ctx.lineTo(W - 10, y(v)); ctx.stroke();
     ctx.fillText(Math.round(v), 6, y(v) + 4);
   }
-  ctx.strokeStyle = "#2a7";
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  hourly.forEach((v, h) => h === 0 ? ctx.moveTo(x(h), y(v)) : ctx.lineTo(x(h), y(v)));
-  ctx.stroke();
-  // 峰值标记
-  const pi = hourly.indexOf(Math.max(...hourly));
-  ctx.fillStyle = "#c33";
-  ctx.beginPath(); ctx.arc(x(pi), y(hourly[pi]), 5, 0, 7); ctx.fill();
-  document.getElementById("curveInfo").textContent =
-    `峰值 ${p.peak_watts} W @ ${p.peak_time}（小时均值曲线，峰值时刻已标注）`;
+  curves.forEach((c, i) => {
+    ctx.strokeStyle = COLORS[i % COLORS.length];
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    c.hourly.forEach((v, h) => h === 0 ? ctx.moveTo(x(h), y(v)) : ctx.lineTo(x(h), y(v)));
+    ctx.stroke();
+    const pi = c.hourly.indexOf(Math.max(...c.hourly));
+    ctx.fillStyle = COLORS[i % COLORS.length];
+    ctx.beginPath(); ctx.arc(x(pi), y(c.hourly[pi]), 4, 0, 7); ctx.fill();
+  });
+  document.getElementById("curveInfo").innerHTML =
+    curves.map((c, i) => `<span style="color:${COLORS[i % COLORS.length]};margin-right:14px;">■ ${c.name}</span>`).join("")
+    + "（小时均值曲线，点=各场景峰值时刻）";
 }
 
 function renderHouses(p) {
   const tb = document.querySelector("#houseTable tbody");
   tb.innerHTML = (p.per_house || []).map(h =>
     `<tr><td>${h.house_id}</td><td>${h.total_energy_kwh}</td><td>${h.peak_watts}</td><td>${h.peak_time}</td></tr>`).join("");
+}
+
+async function renderTrend(worldId) {
+  const world = worldsData.find(w => w.id === worldId);
+  const cv = document.getElementById("trend");
+  const ctx = cv.getContext("2d");
+  const W = cv.width, H = cv.height, padL = 50, padB = 26, padT = 10;
+  ctx.clearRect(0, 0, W, H);
+  if (!world || !world.scenarios.length) return;
+  // 收集所有日期（去重排序）
+  const dates = [...new Set(world.scenarios.flatMap(s => s.dates))].sort();
+  if (!dates.length) return;
+  // 各场景各日期总用电
+  const rows = [];
+  for (const s of world.scenarios) {
+    for (const d of s.dates) {
+      const p = await api(`/api/worlds/${worldId}/profile/${s.name}/${d}`);
+      if (!p.error) rows.push({scenario: s.name, date: d, kwh: p.total_energy_kwh});
+    }
+  }
+  if (!rows.length) return;
+  const maxKwh = Math.max(...rows.map(r => r.kwh)) * 1.1 || 1;
+  const bw = 12, gap = 4;
+  const x = i => padL + i * (bw + gap) + bw;
+  const y = v => H - padB - (v / maxKwh) * (H - padT - padB);
+  // 每个日期一组柱
+  const colorOf = s => COLORS[world.scenarios.findIndex(w2 => w2.name === s) % COLORS.length];
+  dates.forEach((d, di) => {
+    const ds = rows.filter(r => r.date === d);
+    ds.forEach((r, ri) => {
+      const xx = padL + di * (bw + gap) * ds.length + ri * (bw + gap) + gap;
+      ctx.fillStyle = colorOf(r.scenario);
+      ctx.fillRect(xx, y(r.kwh), bw, H - padB - y(r.kwh));
+    });
+    ctx.fillStyle = "#666";
+    ctx.font = "10px sans-serif";
+    ctx.fillText(d.slice(5), padL + di * (bw + gap) * ds.length + 4, H - 10);
+  });
+  for (let g = 0; g <= 4; g++) {
+    const v = maxKwh * g / 4;
+    ctx.strokeStyle = "#eee";
+    ctx.beginPath(); ctx.moveTo(padL, y(v)); ctx.lineTo(W - 10, y(v)); ctx.stroke();
+    ctx.fillText(Math.round(v), 6, y(v) + 4);
+  }
+  const legend = [...new Set(rows.map(r => r.scenario))]
+    .map((s, i) => `<span style="color:${colorOf(s)};margin-right:10px;">■ ${s}</span>`).join("");
+  document.getElementById("trendInfo").innerHTML = legend;
 }
 
 async function renderMatrix(worldId) {
