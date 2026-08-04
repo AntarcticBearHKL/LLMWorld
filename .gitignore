@@ -1,4 +1,4 @@
-/Reference/
+﻿/Reference/
 .kiro/
 /docs/
 
@@ -11,3 +11,13 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+# 生成的模拟产物（不入库）
+outputs/
+worlds/
+logs/
+Data/
+*.csv
+.venv/
+.kiro/
+__pycache__/
+

@@ -1,0 +1,19 @@
+class Prompt
+    prompts_dir 提示词模板所在的目录路径，默认为 "prompts"
+
+    func _ensure_prompts_dir:
+        检查 prompts_dir 物理目录是否存在。如果不存在，则在系统磁盘中自动创建它。
+
+    func load(filename, **kwargs):
+        加载并渲染指定的 Markdown 提示词文件。
+        1. 拼接获取提示词文件的完整物理路径（如 "prompts/filename.md"）。
+        2. 读取该文件中的原始模板字符串。
+        3. 调用 `_render` 函数，传入外部动态变量 kwargs 进行渲染替换，并返回渲染完成后的字符串。
+
+    func _render(template, variables):
+        使用变量字典渲染模板中的占位符。
+        正则表达式匹配形如 `{变量名}` 的标记，并将其替换为 variables 中对应的变量值。
+        如果是列表或字典等复杂数据结构，自动以紧凑格式序列化为 JSON 字符串，保留中文（ensure_ascii=False），最后返回完整的渲染文本。
+
+    func list_prompts:
+        扫描 prompts_dir 目录，获取该目录下所有可用的提示词模板文件名称列表。

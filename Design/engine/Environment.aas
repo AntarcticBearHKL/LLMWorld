@@ -1,0 +1,48 @@
+class Time
+    date 当前模拟日期（datetime格式），默认为 当前系统时间
+    day_type 日期分类特征（"工作日" 或 "周末"），由日期自动推断
+    holidays 存储全局自定义法定节假日的映射字典，格式为 "YYYY-MM-DD" -> 节假日详情，默认为 空字典
+    special_events 存储特殊干预事件（如限电、灾害、补贴注入）的字典，默认为 空字典
+
+    func _auto_detect_day_type:
+        检查 date 是一周中的星期几。周一至周五返回 "工作日"，周六与周日返回 "周末"。
+
+    func next_day:
+        将日期向后推移一天，并自动重新检测和更新 day_type。
+
+    func prev_day:
+        将日期向前回退一天，并自动重新检测和更新 day_type。
+
+    func set_day_type(day_type):
+        手动强行覆盖日期分类类型。
+
+    func add_holiday(date_str, holiday_name, description):
+        向系统中注册特定日期的法定节假日属性。
+
+    func add_special_event(date_str, event_name, description):
+        向系统中注册特定日期的特殊外部干预或环境事件属性。
+
+    func is_holiday:
+        检查当前模拟日期是否被定义为法定节假日。
+
+    func get_holiday_info:
+        获取当前模拟日期的节假日属性。
+
+    func get_special_event_info:
+        获取当前模拟日期的特殊外部干预事件属性。
+
+    func get_date_string:
+        返回 YYYY年MM月DD日 格式的中文日期字符串。
+
+    func get_weekday_chinese:
+        返回当前日期的中文星期表示（如 "周一"、"周日"）。
+
+    func get_full_date_string:
+        返回拼装后的完整日期格式，如 "2026年06月25日（周四）"。
+
+    func get_context_info:
+        生成包含日期、星期、日期分类、节假日标志及名称、特殊事件标志及描述的完整上下文信息字典，为大模型提供详尽的仿真背景背景。
+
+    func get_prompt_string:
+        将当前环境信息序列化为文本块。
+        包括日期、星期类型。若当天为节假日或含有特殊事件，会自动拼装节假日/特殊事件名称和说明描述，便于大模型理解环境变化。

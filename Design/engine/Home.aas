@@ -1,0 +1,43 @@
+class Home
+    name 家庭的名称，默认为 空
+    rooms 存储房间名称到房间对象的字典映射，默认为 空字典
+    members 存储家庭成员对象的列表，默认为 空列表
+    appliance_registry 存储整个家庭中所有电器（包括房间公用电器和个人电器）唯一ID到电器对象的映射表，默认为 空字典
+
+    func add_room(room):
+        向家庭中添加一个房间。
+        将房间加入 rooms 映射中，并将该房间拥有的所有电器注册到全局 appliance_registry 中，方便后续进行快速查询。最后返回 self。
+
+    func add_member(member):
+        向家庭中添加一位家庭成员。
+        将成员加入 members 列表，并将该成员的所有个人专属电器注册到全局 appliance_registry 中。最后返回 self。
+
+    func get_room(room_name):
+        通过房间名称快速检索对应的 Room 房间对象。
+
+    func get_appliance(unique_id):
+        通过电器唯一标识符检索对应的 Appliance 电器对象。
+
+    func get_appliance_by_room_and_name(room_name, appliance_name):
+        在指定房间内通过电器名称（如 "空调"）获取电器对象。
+
+    func to_json:
+        将家庭的静态空间结构序列化为字典，映射每个房间名到其电器名称列表。
+
+    func get_home_structure:
+        生成适合大模型理解的家庭资产结构描述字典，包括各个房间的公用电器列表以及各成员的个人电器列表。
+
+    func get_home_structure_with_details:
+        生成包含详细物理信息的家庭资产字典，每个电器包含唯一ID、名称、用电类型以及额定功率。
+
+    func get_members_info:
+        生成包含所有成员基础信息（姓名、年龄、职业、性格特征、个人电器等）的字典列表。
+
+    func get_exclusive_resources:
+        搜集并获取家庭中所有标记为独占资源（如电动汽车）的电器信息，包括拥有者、位置和使用规则。
+
+    func _get_exclusive_rules(appliance):
+        根据电器名称匹配并返回其特定的物理/行为约束规则。例如电动汽车只能由当前使用者开走并负责归还，且支持同乘。
+
+    func get_total_energy_consumption:
+        遍历全局 appliance_registry 中的所有电器，计算并累加每个电器的累计总消耗电量（kWh）。

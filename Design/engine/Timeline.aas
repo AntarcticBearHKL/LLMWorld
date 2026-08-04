@@ -1,0 +1,36 @@
+class TimeSlot
+    start 开始时间（按一天中过完的分钟数计算），默认为 0
+    end 结束时间（按分钟数计算），默认为 0
+    location 活动发生的物理地点/房间名称，默认为 空
+    activity 活动的具体内容，默认为 空
+    desc 活动的详细情境丰富化描述，默认为 空
+
+    func overlaps(other_start, other_end):
+        检测当前时间段是否与另一个给定的时间段（以分钟数区间形式）发生时间交叉。
+
+    func to_dict:
+        将时间段转化为字典，包含格式化后的时间范围（如 "08:00-09:30"）、地点、活动内容和详细描述。
+
+    func _format_time_range:
+        将内部的起止分钟数转换为直观的二十四小时制时间范围字符串。
+
+
+class Timeline
+    member_name 此时间线所属的家庭成员姓名，默认为 空
+    slots 存储排序后 TimeSlot 时间段对象的列表，默认为 空列表
+
+    func _parse_time(time_str):
+        将 "HH:MM" 格式的字符串解析为一天中的分钟数。如果解析失败，则抛出警告并安全回退到 00:00 分钟。
+
+    func _parse_time_range(time_range):
+        解析 "HH:MM-HH:MM" 格式的时间范围字符串。如果跨午夜（结束分钟数小于开始分钟数），自动为结束时间增加 24 小时（1440分钟）。解析异常时回退到默认时长为 10 分钟的安全区间。
+
+    func load_from_activities(activities):
+        清空当前时间线并从原始活动列表（由大模型生成的 JSON 数组）加载数据。
+        对每个活动条目解析其时间范围、物理地点和活动类型，实例化为 TimeSlot 对象并加入列表中，最后按照开始分钟数进行升序排序。
+
+    func to_json:
+        将当前时间线的所有活动条目序列化为紧凑的 JSON 格式。
+
+    func to_dict:
+        将时间线转化为普通的字典结构，包含成员名称和格式化后的活动序列。
