@@ -44,6 +44,19 @@ class Policy:
 
         return cls("nudge_loss", comparison_text=comparison_text)
 
+    @classmethod
+    def peak_demand(cls, rate_per_kw=12.0, window=(0, 24)):
+
+        return cls("peak_demand", rate_per_kw=rate_per_kw, window=window)
+
+    @classmethod
+    def ev_delay(cls, max_delay_hours=8, incentive_per_hour=0.02,
+                 charging_window=(23, 7), flat_rate=0.55):
+
+        return cls("ev_delay", max_delay_hours=max_delay_hours,
+                   incentive_per_hour=incentive_per_hour,
+                   charging_window=charging_window, flat_rate=flat_rate)
+
 
 
     def render(self):
@@ -89,6 +102,31 @@ class Policy:
                 f"- 请务必避免这种损失，立刻减少不必要的用电。"
             )
 
+        if self.type == "peak_demand":
+            rate = self.params["rate_per_kw"]
+            start, end = self.params["window"]
+            return (
+                f"## 需量电价（峰值收费）\n"
+                f"- 每天 {start:02d}:00-{end:02d}:00 中，家庭全天功率最高的"
+                f" 60 分钟将按 {rate} 澳元/kW 额外收费（月度结算）。\n"
+                f"- 避免让多个大功率电器（空调、洗衣机、电磁炉、"
+                f"电动汽车充电）在同一小时叠加使用；错峰开启可大幅降低账单。"
+            )
+
+        if self.type == "ev_delay":
+            max_delay = self.params["max_delay_hours"]
+            incentive = self.params["incentive_per_hour"]
+            flat = self.params["flat_rate"]
+            discount = min(flat, max_delay * incentive)
+            delayed_rate = round(flat - discount, 2)
+            return (
+                f"## 电动汽车充电延迟激励（灵活充电菜单）\n"
+                f"- 立即充电（今晚{flat:.2f} 澳元/kWh）：最早完成，价格最高。\n"
+                f"- 延迟充电菜单：选择“最晚完成充电时间”越晚，电价越低——"
+                f"每延迟 1 小时电价降 {incentive:.2f} 澳元/kWh，"
+                f"最多延迟 {max_delay} 小时（电价降至 {delayed_rate:.2f} 澳元/kWh）。\n"
+                f"- 系统会在深夜谷段自动安排充电，保证在承诺时限前充满。"
+            )
         return ""
 
 
@@ -100,7 +138,9 @@ class Policy:
     def from_name(cls, name, **kwargs):
 
         factories = {"tou": cls.tou, "subsidy": cls.subsidy,
-                     "nudge": cls.nudge, "nudge_loss": cls.nudge_loss}
+                     "nudge": cls.nudge, "nudge_loss": cls.nudge_loss,
+                     "peak_demand": cls.peak_demand, "ev_delay": cls.ev_delay}
         if name not in factories:
-            raise ValueError(f"未知政策类型: {name}（可用: tou/subsidy/nudge/nudge_loss）")
+            raise ValueError(f"未知政策类型: {name}"
+                             "（可用: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay）")
         return factories[name](**kwargs)
