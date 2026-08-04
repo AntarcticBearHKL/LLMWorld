@@ -1737,6 +1737,47 @@ class TestSolar(unittest.TestCase):
         with self.assertRaises(ValueError):
             build_report([], 5000, "夏天")
 
+    def test_battery_charges_surplus(self):
+        from analyze_solar import battery_operation
+        gen = [0.0] * 1440
+        gen[10 * 60:14 * 60] = [6000.0] * (4 * 60)
+        load = [500.0] * 1440
+        charge, discharge = battery_operation(load, gen, 10.0, 3.0)
+        self.assertGreater(sum(charge), 0)
+        self.assertGreater(sum(discharge), 0)
+
+    def test_battery_discharges_evening(self):
+        from analyze_solar import battery_operation
+        gen = [0.0] * 1440
+        gen[10 * 60:14 * 60] = [6000.0] * (4 * 60)
+        load = [500.0] * 1440
+        charge, discharge = battery_operation(load, gen, 10.0, 3.0)
+        discharge_start = next(m for m in range(1440) if discharge[m] > 0)
+        self.assertGreaterEqual(discharge_start, 17 * 60)
+        self.assertLess(discharge_start, 22 * 60)
+        self.assertGreater(sum(discharge), 0)
+
+    def test_battery_capacity_limited(self):
+        from analyze_solar import battery_operation
+        gen = [0.0] * 1440
+        gen[8 * 60:18 * 60] = [5000.0] * (10 * 60)
+        load = [100.0] * 1440
+        charge, _ = battery_operation(load, gen, 5.0, 3.0)
+        charged_kwh = sum(charge) / 60000
+        self.assertLessEqual(charged_kwh, 5.0 + 1e-6)
+
+    def test_battery_improves_self_consumption(self):
+        from analyze_solar import build_report
+        loads = [300.0] * 1440
+        loads[18 * 60:22 * 60] = [2000.0] * (4 * 60)
+        profiles = [{"house_id": "h1", "total_energy_kwh": 15.0,
+                     "load_profile_watts": loads, "weather": "晴天"}]
+        without = build_report(profiles, 5000, "夏天", 0.0)
+        with_batt = build_report(profiles, 5000, "夏天", 10.0, 3.0)
+        self.assertGreater(
+            with_batt["per_house"][0]["self_consumption_rate"],
+            without["per_house"][0]["self_consumption_rate"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
