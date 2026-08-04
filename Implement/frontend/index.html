@@ -71,6 +71,11 @@
 </div>
 
 <div class="panel">
+  <h3>家庭人格档案（Big Five，计划30）</h3>
+  <div id="personalityPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>后台模拟任务（系统级进程，计划28）</h3>
   <div id="jobsPanel">（加载中…）</div>
 </div>
@@ -169,6 +174,7 @@ async function refresh() {
     await renderAnalysis(worldId);
     await renderNews(worldId);
     await renderJobs();
+    await renderPersonality(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -323,6 +329,22 @@ async function renderAnalysis(worldId) {
     table("成员数 → 户均kWh", a.by_members_count) +
     table("Big Five × 户用电相关性", a.big_five_corr_with_kwh) +
     `<div style="font-size:12px;color:#666;">成员数×用电相关：${a.members_kwh_corr}</div>`;
+}
+
+async function renderPersonality(worldId) {
+  const div = document.getElementById("personalityPanel");
+  const list = await api(`/api/worlds/${worldId}/households`);
+  if (!list || !list.length) { div.innerHTML = "（无家庭数据）"; return; }
+  const zh = {openness: "开放", conscientiousness: "尽责", extraversion: "外向", agreeableness: "宜人", neuroticism: "神经质"};
+  div.innerHTML = list.map(h => `
+    <div style="margin-bottom:8px;font-size:13px;">
+      <b>${h.house_id}</b> [${h.type}] ${h.members.map(m => `${m.name}(${m.age}岁,${m.occupation})`).join("、")}
+      ${h.members.map(m => {
+        const bf = m.big_five || {};
+        const bar = Object.entries(bf).map(([k, v]) => `<span title="${zh[k]} ${v}">${zh[k]}<b>${v}</b></span>`).join(" ");
+        return `<div style="margin-left:16px;color:#456;">${m.name}: ${bar}${m.news_sensitivity ? ` 新闻敏感:${m.news_sensitivity}` : ""}</div>`;
+      }).join("")}
+    </div>`).join("");
 }
 
 async function renderJobs() {

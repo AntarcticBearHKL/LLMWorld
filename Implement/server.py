@@ -124,6 +124,40 @@ def load_analysis(world_id, scenario="baseline"):
         return json.load(f)
 
 
+def load_households_profile(world_id):
+    """世界家庭人格档案（worlds/<id>/3168/house_XXXX/household.json，计划30：前端展示）。"""
+    base = os.path.join(WORLDS_DIR, world_id, "3168")
+    if not os.path.isdir(base):
+        return []
+    households = []
+    for house_id in sorted(os.listdir(base)):
+        hpath = os.path.join(base, house_id, "household.json")
+        if not os.path.isfile(hpath):
+            continue
+        try:
+            with open(hpath, "r", encoding="utf-8") as f:
+                household = json.load(f)
+            members = []
+            for m in household.get("members", []):
+                pers = m.get("personality", {})
+                members.append({
+                    "name": m.get("name"),
+                    "age": m.get("age"),
+                    "occupation": m.get("occupation"),
+                    "traits": pers.get("traits", []),
+                    "big_five": pers.get("big_five", {}),
+                    "news_sensitivity": pers.get("news_sensitivity"),
+                })
+            households.append({
+                "house_id": house_id,
+                "type": household.get("type"),
+                "members": members,
+            })
+        except Exception:
+            continue
+    return households
+
+
 def load_world_state(world_id):
     """世界连续状态（worlds/<id>/state.json，计划27）：上次日期+记忆天数。"""
     path = os.path.join(WORLDS_DIR, world_id, "state.json")
@@ -294,6 +328,9 @@ class Handler(BaseHTTPRequestHandler):
                     return
                 if parts[3] == "state":
                     self._send_json(load_world_state(world_id))
+                    return
+                if parts[3] == "households":
+                    self._send_json(load_households_profile(world_id))
                     return
                 if parts[3] == "house" and len(parts) >= 6:
                     # /api/worlds/<id>/house/<house_id>/summary/<scenario>/<date>
