@@ -2137,5 +2137,47 @@ class TestPolicyTradeoffs(unittest.TestCase):
             build_report("__no_such_world")
 
 
+class TestForecast(unittest.TestCase):
+
+
+    def _days(self, n_days, base_kw=2.0, day_noise=0.35):
+        import math
+        import random
+        rng = random.Random(7)
+        days = []
+        for d in range(n_days):
+            noise = rng.uniform(-day_noise, day_noise)
+            hourly = []
+            for h in range(24):
+                pattern = base_kw + 1.0 * math.sin(2 * math.pi * (h - 7) / 24)
+                hourly.append(round(pattern + noise, 3))
+            days.append({"date": f"202605{d + 1:02d}", "kwh": round(sum(hourly) / 1000, 3),
+                         "hourly": hourly})
+        return days
+
+    def test_forecast_beats_naive(self):
+        from analyze_forecast import evaluate_forecast
+        result = evaluate_forecast(self._days(14))
+        self.assertIsNotNone(result)
+        self.assertLess(result["mae_kw"], result["naive_mae_kw"])
+        self.assertGreater(result["improvement_pct"], 0)
+
+    def test_insufficient_days(self):
+        from analyze_forecast import evaluate_forecast
+        self.assertIsNone(evaluate_forecast(self._days(3)))
+
+    def test_build_report(self):
+        from analyze_forecast import build_report
+        per_house = [{"house_id": "h1", "days": self._days(14)}]
+        report = build_report(per_house)
+        self.assertEqual(report["households"], 1)
+        self.assertGreater(report["per_house"][0]["improvement_pct"], 0)
+
+    def test_no_data_raise(self):
+        from analyze_forecast import build_report
+        with self.assertRaises(ValueError):
+            build_report([{"house_id": "h1", "days": []}])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
