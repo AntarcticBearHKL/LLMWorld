@@ -272,6 +272,16 @@ def load_policy_tradeoffs(world_id):
         return json.load(f)
 
 
+def load_forecast(world_id, scenario="baseline"):
+
+    path = os.path.join(OUTPUTS_DIR, world_id, "analysis",
+                        f"forecast_{scenario}.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_worlds_matrix():
 
     path = os.path.join(OUTPUTS_DIR, "comparison", "worlds_matrix.json")
@@ -703,6 +713,10 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3] == "policy-tradeoffs":
                     data = load_policy_tradeoffs(world_id)
                     self._send_json(data or {"error": "no policy tradeoffs"}, 200 if data else 404)
+                    return
+                if parts[3] == "forecast" and len(parts) >= 5:
+                    data = load_forecast(world_id, parts[4])
+                    self._send_json(data or {"error": "no forecast"}, 200 if data else 404)
                     return
                 if parts[3] == "events":
                     self._send_json(load_events(world_id))

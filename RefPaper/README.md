@@ -33,3 +33,4 @@
 | Identifying and Understanding Obstacles to Heating Sobriety and Thermal Comfort in Collective Housing | Cabezas-Rivière et al. | 2025 | arXiv:2512.16949 | 计划75 | Identifying and Understanding Obstacles to Heating Sobriety and Thermal Comfort in Collective Housing.pdf |
 | An Open Solution to Provide Personalized Feedback for Building Energy Management | Monacchi et al. | 2015 | arXiv:1505.01311 | 计划83 | An Open Solution to Provide Personalized Feedback for Building Energy Management.pdf |
 | Non-Intrusive Load Monitoring (NILM) Using Deep Neural Networks: A Review | Azad et al. | 2023 | arXiv:2306.05017 | 计划91 | Non-Intrusive Load Monitoring (NILM) Using Deep Neural Networks - A Review.pdf |
+| Multistep Multiappliance Load Prediction | Zharova & Scherz | 2022 | arXiv:2212.09426 | 计划101 | Multistep Multiappliance Load Prediction.pdf |

@@ -35,6 +35,7 @@ PAPERS = [
     ("2512.16949", "Identifying and Understanding Obstacles to Heating Sobriety and Thermal Comfort in Collective Housing", "Cabezas-Rivière et al.", 2025, "计划75"),
     ("1505.01311", "An Open Solution to Provide Personalized Feedback for Building Energy Management", "Monacchi et al.", 2015, "计划83"),
     ("2306.05017", "Non-Intrusive Load Monitoring (NILM) Using Deep Neural Networks: A Review", "Azad et al.", 2023, "计划91"),
+    ("2212.09426", "Multistep Multiappliance Load Prediction", "Zharova & Scherz", 2022, "计划101"),
 ]
 
 

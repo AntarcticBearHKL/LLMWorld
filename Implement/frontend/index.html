@@ -171,6 +171,11 @@
 </div>
 
 <div class="panel">
+  <h3>负荷预测与可预测性（计划101：Zharova 2022）</h3>
+  <div id="forecastPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -339,6 +344,7 @@ async function refresh() {
     await renderWeekday(worldId);
     await renderWorldSummary(worldId);
     await renderTradeoffs(worldId);
+    await renderForecast(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -842,6 +848,21 @@ async function renderTradeoffs(worldId) {
   }).join("");
   div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">多目标权衡：总电（节电）/晚峰（错峰）/峰值（削峰）/平台（尖峰时长）（CoRenew 2026 competing objectives）</div>
     <table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+async function renderForecast(worldId) {
+  const div = document.getElementById("forecastPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const f = await api(`/api/worlds/${worldId}/forecast/${scenario}`);
+  if (!f || f.error) { div.innerHTML = "<span class='err'>（无预测数据，先跑 analyze_forecast.py，需每户≥5日）</span>"; return; }
+  const rows = f.per_house.map(r => {
+    const imp = r.improvement_pct === null ? "-" : r.improvement_pct.toFixed(1) + "%";
+    return `<tr><td>${r.house_id}</td><td>${r.train_days}</td><td>${r.test_days}</td>
+      <td>${r.mae_kw}</td><td>${r.naive_mae_kw}</td><td>${imp}</td><td>${r.mape}</td></tr>`;
+  }).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">随机森林次日预测 vs 重复昨日基线（正提升=负荷有规律可循，可预测性=模拟真实感维度，Zharova 2022）</div>
+    <table><thead><tr><th>家庭</th><th>训练日</th><th>测试日</th><th>MAE(kW)</th><th>Naive MAE</th><th>提升%</th><th>MAPE</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
 }
 
 async function renderPersonality(worldId) {
