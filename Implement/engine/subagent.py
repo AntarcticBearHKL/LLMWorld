@@ -43,6 +43,8 @@ class SubAgent:
     _total_prompt_cache_hit_tokens = 0
     _total_prompt_cache_miss_tokens = 0
     _total_completion_tokens = 0
+    _current_concurrent = 0   # 当前同时在飞的请求数
+    _peak_concurrent = 0      # 实测并发峰值（验证"并发 ≤10"硬约束用）
 
     # ---------- Token 统计 ----------
 
@@ -68,6 +70,12 @@ class SubAgent:
             SubAgent._total_prompt_cache_hit_tokens = 0
             SubAgent._total_prompt_cache_miss_tokens = 0
             SubAgent._total_completion_tokens = 0
+
+    @staticmethod
+    def get_concurrency_stats():
+        """返回 (当前并发数, 历史峰值并发数)。峰值用于验证并发 ≤10 硬约束。"""
+        with SubAgent._lock:
+            return SubAgent._current_concurrent, SubAgent._peak_concurrent
 
     # ---------- 单次调用（含重试）----------
 
@@ -101,6 +109,10 @@ class SubAgent:
 
         # 全局并发硬保险：同一时刻最多 MAX_WORKERS(10) 个请求
         with _GLOBAL_SEMAPHORE:
+            with SubAgent._lock:
+                SubAgent._current_concurrent += 1
+                if SubAgent._current_concurrent > SubAgent._peak_concurrent:
+                    SubAgent._peak_concurrent = SubAgent._current_concurrent
             try:
                 response = requests.post(
                     base_url + "/chat/completions",
@@ -110,6 +122,9 @@ class SubAgent:
                 )
             except requests.exceptions.RequestException as e:
                 raise LLMCallError(f"DeepSeek 网络错误: {e}") from e
+            finally:
+                with SubAgent._lock:
+                    SubAgent._current_concurrent -= 1
 
         if response.status_code != 200:
             raise LLMCallError(f"DeepSeek API 错误 {response.status_code}: {response.text[:500]}")

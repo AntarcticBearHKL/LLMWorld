@@ -331,6 +331,36 @@ class TestEnergyCalculator(unittest.TestCase):
         self.assertAlmostEqual(profile["total_energy_kwh"], 1.2, places=4)
         self.assertAlmostEqual(profile["peak_watts"], 50.0, places=4)  # 只有基载时峰值 50W
 
+    def test_daily_cap_truncates_ev_overcharge(self):
+        """计划7：电动汽车 12 小时充电被截断到 4 小时上限，并记警告。"""
+        # 给 Alice 加一台电动汽车（charging 类），配置 7000W
+        self.home.get_room("厨房").appliances  # noop 确保 room 存在
+        garage = Room("车库")
+        garage.add_appliance_by_name("电动汽车")
+        self.home.add_room(garage)
+
+        self._write_decision({
+            "member": "Alice",
+            "appliance_decisions": [
+                {
+                    "time": "20:00-08:00",   # 12 小时连续充电
+                    "location": "车库",
+                    "activity": "充电",
+                    "operations": [{"unique_id": "车库_电动汽车", "action": "charge_home"}],
+                }
+            ]
+        })
+
+        calc = EnergyCalculator(self.home, self.tmpdir)
+        calc.calculate_all_energy()
+
+        ev = calc.appliance_usage["车库_电动汽车"]
+        # 7000W × 4 小时 = 28 kWh（截断到上限 240 分钟）
+        self.assertAlmostEqual(ev["total_energy_kwh"], 28.0, places=4)
+        self.assertEqual(ev["usage_segments"][0]["duration_minutes"], 240)
+        self.assertTrue(ev["usage_segments"][0]["capped"])
+        self.assertTrue(any("超限截断" in w for w in calc.validation_warnings))
+
 
 class TestSubAgent(unittest.TestCase):
     def test_parallel_call_empty(self):
@@ -339,6 +369,12 @@ class TestSubAgent(unittest.TestCase):
     def test_retry_config_limits(self):
         from engine.subagent import MAX_WORKERS
         self.assertLessEqual(MAX_WORKERS, 10)   # 用户硬性要求：并发 ≤ 10
+
+    def test_concurrency_stats_reset(self):
+        """并发统计可查询，且峰值初始为 0。"""
+        SubAgent.reset_tokens()
+        current, peak = SubAgent.get_concurrency_stats()
+        self.assertEqual(peak, 0)   # 本轮未调用 API 前峰值应为 0
 
 
 if __name__ == "__main__":
