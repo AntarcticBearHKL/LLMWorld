@@ -145,6 +145,11 @@
 </div>
 
 <div class="panel">
+  <h3>天气敏感性（计划87：温度-用电关系，Jin 2021）</h3>
+  <div id="weatherPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -308,6 +313,7 @@ async function refresh() {
     await renderElectrification(worldId);
     await renderAdvice(worldId);
     await renderSeasonal(worldId);
+    await renderWeather(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -738,6 +744,19 @@ async function renderSeasonal(worldId) {
   div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">季节是负荷变异的核心外部驱动（Jin 2021）</div>
     <table><thead><tr><th>季节</th><th>样本数</th><th>日均kWh</th><th>平均峰值(W)</th><th>晚峰kWh</th><th>平均峰时</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
+}
+
+async function renderWeather(worldId) {
+  const div = document.getElementById("weatherPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const w = await api(`/api/worlds/${worldId}/weather/${scenario}`);
+  if (!w || w.error) { div.innerHTML = "<span class='err'>（无天气数据，先跑 analyze_weather_sensitivity.py，需多日模拟）</span>"; return; }
+  const rows = (w.by_weather || []).map(r => `
+    <tr><td>${r.condition}</td><td>${r.samples}</td><td>${r.mean_kwh}</td></tr>`).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    ${w.days} 天（温度 ${w.temp_min}-${w.temp_max}°C）：温度-用电相关 <b>${w.temperature_kwh_corr}</b>，
+    斜率 <b>${w.kwh_per_degree} kWh/°C</b>（正=空调主导，负=采暖主导；Jin 2021 温度驱动）</div>
+    <table><thead><tr><th>天气</th><th>天数</th><th>日均kWh</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 async function renderPersonality(worldId) {

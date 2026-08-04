@@ -221,6 +221,16 @@ def load_seasonal(world_id, scenario="baseline"):
         return json.load(f)
 
 
+def load_weather_sensitivity(world_id, scenario="baseline"):
+
+    path = os.path.join(OUTPUTS_DIR, world_id, "analysis",
+                        f"weather_{scenario}.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_worlds_matrix():
 
     path = os.path.join(OUTPUTS_DIR, "comparison", "worlds_matrix.json")
@@ -606,6 +616,10 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3] == "seasonal" and len(parts) >= 5:
                     data = load_seasonal(world_id, parts[4])
                     self._send_json(data or {"error": "no seasonal"}, 200 if data else 404)
+                    return
+                if parts[3] == "weather" and len(parts) >= 5:
+                    data = load_weather_sensitivity(world_id, parts[4])
+                    self._send_json(data or {"error": "no weather"}, 200 if data else 404)
                     return
                 if parts[3] == "events":
                     self._send_json(load_events(world_id))
