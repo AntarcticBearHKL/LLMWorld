@@ -1004,6 +1004,15 @@ class TestReport(unittest.TestCase):
         self.assertIsNone(parse_kwh("无数据"))
         self.assertIsNone(parse_kwh(None))
 
+    def test_build_report_empty_world_no_crash(self):
+        from make_report import build_report
+        report_path, content = build_report("__no_such_world")
+        self.assertTrue(report_path.endswith("paper_material___no_such_world.md"))
+        self.assertIn("行为聚类", content)
+        self.assertIn("行为变异性", content)
+        self.assertIn("多世界对比", content)
+        self.assertIn("无 clusters_", content)
+
 
 class TestLoadFeatures(unittest.TestCase):
 
