@@ -43,11 +43,14 @@ class EnergyCalculator
 
     func _finalize_statistics:
         根据每台电器的分钟功率曲线推算其当日运行分钟数与小时数。
+        并调用 load_features.peak_overlap_events 计算户级峰值叠加事件
+        （≥8kW 连续分钟段，需量电价配套指标，计划47）。
 
     func _save_energy_info:
         将统计计算结果持久化写入磁盘。
         1. 为每个发生过能耗的电器生成单独的 JSON 运行明细报告，详细列明其运行分钟轨迹、操作时段、以及累计电量。
-        2. 生成全局的 "总用电汇总.json"，包含总家电数量、基载/决策耗电与总耗电量（kWh）以及各家电能耗排行，并附校验警告。
+        2. 生成全局的 "总用电汇总.json"，包含总家电数量、基载/决策耗电与总耗电量（kWh）以及各家电能耗排行，
+           附 peak_overlap_events 峰值叠加事件与校验警告。
         3. 生成家庭级 1440 分钟总负荷曲线 house_load_profile_1440min.json（峰值时刻、24 小时平均功率），作为论文 RQ1 的核心产出。
 
     func get_summary:

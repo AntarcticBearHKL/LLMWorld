@@ -63,14 +63,20 @@ Implement/
   simulate.py              单家庭模拟入口
   background_runner.py     后台任务管理器（start/status/watch/stop）
   server.py                可视化后端（常驻 HTTP + CLI 查询）
-  frontend/index.html      浏览器前端（曲线叠加/矩阵/新闻/上帝控制台）
+  frontend/index.html      浏览器前端（曲线叠加/矩阵/新闻/上帝控制台/聚类/变异性/模式迁移/分组响应）
   config.py                全局配置中心
-  test_offline.py          离线测试（58+ 项）
-Design/                    架构设计文档（.aas）
-prompts/                   LLM 提示词模板
-worlds/<id>/               世界数据（household.json / events.json 剧本）
-outputs/<id>/population/   聚合结果（按场景分目录）
-StepInfo/                  开发日志（计划N/执行N）
+  engine/load_features.py  负荷特征族（聚类/变异性/峰值叠加，sklearn）
+  load_profile_cluster.py  负荷曲线聚类（计划40）
+  analyze_variability.py   跨日行为变异性（计划41）
+  analyze_behavior_patterns.py 行为模式迁移（计划42）
+  analyze_groups.py        分组政策响应（计划45，--label-source）
+  make_analysis_all.py     分析一键化（计划46）
+  test_offline.py          离线测试（122+ 项）
+  Design/                  架构设计文档（.aas）
+  prompts/                 LLM 提示词模板
+  worlds/<id>/               世界数据（household.json / events.json 剧本）
+  outputs/<id>/population/   聚合结果（按场景分目录）
+  StepInfo/                  开发日志（计划N/执行N）
 ```
 
 ## 关键设计决策

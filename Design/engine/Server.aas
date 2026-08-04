@@ -20,6 +20,18 @@ class Server
     func load_house_profile(world_id, postcode, house_id, scenario, date):
         读取单户 1440 分钟曲线。
 
+    func load_clusters(world_id, scenario, date):
+        读取聚类报告 clusters_<scenario>_<date>.json（计划40）。
+
+    func load_variability(world_id, scenario):
+        读取变异性报告 variability_<scenario>.json（计划41）。
+
+    func load_behavior_patterns(world_id, scenario):
+        读取模式迁移报告 patterns_<scenario>.json（计划42）。
+
+    func load_groups(world_id, source):
+        读取分组响应报告 groups_<source>.json（计划45，awareness|variability）。
+
     class Handler(BaseHTTPRequestHandler):
         GET /                      → 前端 index.html
         GET /api/worlds            → 世界列表
@@ -27,6 +39,14 @@ class Server
         GET /api/worlds/<id>/profile/<scenario>/<date> → 聚合曲线+摘要+逐户
         GET /api/worlds/<id>/matrix → 场景矩阵
         GET /api/worlds/<id>/events → 上帝剧本
+        GET /api/worlds/<id>/state → 世界存档状态（续跑提示）
+        GET /api/worlds/<id>/households → 家庭人格档案（Big Five）
+        GET /api/worlds/<id>/clusters/<scenario>/<date> → 负荷聚类
+        GET /api/worlds/<id>/variability/<scenario> → 跨日变异性
+        GET /api/worlds/<id>/patterns/<scenario> → 行为模式迁移
+        GET /api/worlds/<id>/groups/<source> → 分组政策响应
+        GET /api/jobs → 后台任务列表；POST /api/worlds/<id>/events → 上帝注入；
+        POST /api/jobs/delete/<job_id> → 删除任务
         错误统一返回 {"error": ...} + 相应状态码。
 
     func serve(port):
@@ -40,6 +60,9 @@ class Server
 - 世界/场景/日期三级选择
 - 摘要卡片（总用电/户均/峰值/峰值时刻/家庭数）
 - canvas 24 小时均值负荷曲线（峰值标注）
-- 逐户用电明细表
-- 场景对比矩阵表
-- 上帝剧本新闻面板
+- 逐户用电明细表（含峰值叠加事件区，计划47）
+- 场景对比矩阵表（含峰值形态列，计划48）
+- 负荷聚类面板（计划40）/ 行为变异性面板（计划41）/
+  行为模式迁移面板（计划42）/ 分组政策响应面板（计划45）
+- 任务 tab 面板（进行中/完成/报错，计划36）
+- 上帝剧本新闻面板 + 上帝注入

@@ -11,6 +11,18 @@ class AnalyzeTools
     - check(world_id, date_dir)：验证某日所有成员第一层日志含"昨日记忆"章节
       （断点续跑的记忆注入验证，0 token）
 
+    load_profile_cluster.py：见 LoadProfileCluster.aas（计划40 负荷聚类）
+    analyze_variability.py：见 AnalyzeVariability.aas（计划41 跨日变异性）
+    analyze_behavior_patterns.py：见 AnalyzeBehaviorPatterns.aas（计划42 模式迁移）
+    analyze_groups.py（计划45 扩展）：
+    - --label-source awareness|variability
+      awareness=节能意识（household.json）/ variability=variability_*.json 的
+      规律/波动对半分组；group_stats 动态分组；输出 groups_<source>.json
+    make_analysis_all.py：见 MakeAnalysisAll.aas（计划46 一键化）
+    compare_policies.py（计划48 扩展）：
+    - 矩阵新增峰值平台分钟（≥80%峰值）/ 峰均比 / 叠加分钟（≥30kW）
+      peak_plateau_minutes / peak_to_mean_ratio / high_overlap_minutes
+
     combine_worlds.py：见 CombineWorlds.aas
 
     调用链：模拟产物(outputs/) → 分析 → 报告/前端（server /api/worlds/<id>/analysis/<scenario>）

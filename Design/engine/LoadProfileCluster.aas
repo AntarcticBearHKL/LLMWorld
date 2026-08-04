@@ -1,0 +1,16 @@
+class LoadProfileCluster
+    家庭负荷曲线聚类（计划40，Michalakopoulos 2023 / Dent 2014，0 LLM）。
+
+    - scan_house_profiles(world_id, scenario, date) → 每户 1440min 曲线
+      （outputs/<world>/<postcode>/<house_id>/<scenario>/<date>/用电信息/）
+      date 缺省取每户最后一天
+    - build_report(profiles, k) → 报告：
+      k（--k 或肘部法 auto_k）、wcss、elbow 序列、
+      clusters[]（中心形状/户列表/平均负荷率/峰均比/峰时/谷时）、
+      per_house[]（标签+日kWh）
+      kmeans 退化（distinct<k）时降级 k=1 单簇
+    - CLI：python load_profile_cluster.py <world> --scenario --date --k
+    - 输出：outputs/<world>/analysis/clusters_<scenario>_<date>.json
+
+    调用链：make_analysis_all 一键化调用；server
+    /api/worlds/<id>/clusters/<scenario>/<date> 供前端"负荷曲线聚类"面板
