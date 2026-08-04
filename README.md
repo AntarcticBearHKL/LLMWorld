@@ -15,6 +15,7 @@ python Implement/simulate.py 495 --days 1 --date "2026年4月21日" --no-input
 # 3. 人口级并行模拟（多户并行，聚合负荷）
 python Implement/population_runner.py pop03 --days 1
 python Implement/population_runner.py pop03 --policy tou          # 政策干预（tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay）
+python Implement/population_runner.py pop03 --policy "tou,nudge"  # 政策组合（价格+信息，Faruqui & Sergici 2010）
 python Implement/population_runner.py pop03 --scenario war_news  # 新闻剧本（worlds/pop03/events.json）
 python Implement/population_runner.py pop03 --event "2026-04-21|标题|内容"  # 上帝注入
 

@@ -186,7 +186,7 @@ def main():
         if policy_schedule:
             scenario_name = "schedule"
         elif args.policy:
-            scenario_name = args.policy
+            scenario_name = args.policy.replace(",", "+")
         else:
             scenario_name = "baseline"
 
