@@ -18,10 +18,12 @@ from .timeline import Timeline
 
 
 class Planner:
-    def __init__(self, home, world_id=None, postcode=None, house_id=None, date_str=None):
+    def __init__(self, home, world_id=None, postcode=None, house_id=None, date_str=None,
+                 memory_context=""):
         self.home = home
         self.timelines = {}
         self.prompt = Prompt()
+        self.memory_context = memory_context   # 跨天记忆文本（可为空）
 
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         outputs_dir = os.path.join(project_root, "outputs")
@@ -56,7 +58,8 @@ class Planner:
                 day_type=day_type,
                 time_context=time_context,
                 home_structure=json.dumps(home_structure, ensure_ascii=False, indent=2),
-                members_info=json.dumps(members_info, ensure_ascii=False, indent=2)
+                members_info=json.dumps(members_info, ensure_ascii=False, indent=2),
+                memory_context=self.memory_context
             )
             prompts.append(prompt)
             members.append(member)
@@ -70,7 +73,7 @@ class Planner:
             utils.save_log(self.log_dir, f"01_第一层_宏观计划_{member.name}", prompt, result_content, tokens, reasoning_content)
 
             try:
-                plan_data = utils.parse_json_response(result_content)
+                plan_data = utils.parse_json_with_retry(prompt, result_content, json_mode=True, thinking=config.THINKING)
                 timeline = Timeline(member.name)
                 timeline.load_from_activities(plan_data.get("activities", []))
                 self.timelines[member.name] = timeline
@@ -148,7 +151,7 @@ class Planner:
             utils.save_log(self.log_dir, f"02_第二层_渐进协调_{i}_{current_member}", prompt_content, result_content, tokens, reasoning_content)
 
             try:
-                coordination_data = utils.parse_json_response(result_content)
+                coordination_data = utils.parse_json_with_retry(prompt_content, result_content, json_mode=True, thinking=config.THINKING)
                 new_activities = coordination_data.get("coordinated_activities", [])
 
                 new_timeline = Timeline(current_member)
@@ -205,7 +208,7 @@ class Planner:
             utils.save_log(self.log_dir, log_name, prompt, result_content, tokens, reasoning_content)
 
             try:
-                enriched_data = utils.parse_json_response(result_content)
+                enriched_data = utils.parse_json_with_retry(prompt, result_content, json_mode=True, thinking=config.THINKING)
                 enriched_activities = enriched_data.get("enriched_activities", [])
 
                 for i, slot in enumerate(timeline.slots):
@@ -225,5 +228,6 @@ class Planner:
             if member.name == name:
                 return member
         return None
+
 
 

@@ -71,7 +71,7 @@ class Executor:
             utils.save_log(self.log_dir, log_name, prompt, result_content, tokens, reasoning_content)
 
             try:
-                decision_data = utils.parse_json_response(result_content)
+                decision_data = utils.parse_json_with_retry(prompt, result_content, json_mode=True, thinking=config.THINKING)
             except Exception as e:
                 self.validation_warnings.append(f"[解析失败] {member_name} 的用电决策不是合法 JSON: {e}")
                 print(f"[错误] 解析 {member_name} 的用电决策失败: {e}（该成员今日用电决策缺失）")
@@ -148,5 +148,6 @@ class Executor:
             if member.name == name:
                 return member
         return None
+
 
 

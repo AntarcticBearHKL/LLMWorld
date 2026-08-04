@@ -78,6 +78,19 @@ def main():
             if not found:
                 failures.append(f"缺少 {prefix} 日志")
 
+        # 跨天记忆检查：从第 2 天起，第一层 prompt 必须包含"昨日记忆"章节
+        if day >= 1:
+            step1_logs = [f for f in os.listdir(log_dir) if f.startswith("01_第一层")]
+            if not step1_logs:
+                failures.append("第 2 天缺少第一层日志（无法检查记忆注入）")
+            else:
+                with open(os.path.join(log_dir, step1_logs[0]), "r", encoding="utf-8") as f:
+                    step1_text = f.read()
+                if "昨日记忆" not in step1_text:
+                    failures.append("第 2 天 prompt 未包含昨日记忆章节（跨天记忆未注入）")
+                else:
+                    print("  [记忆] 昨日记忆已注入第 2 天计划")
+
         # 检查用电信息
         info_dir = os.path.join(log_dir, "用电信息")
         summary_path = os.path.join(info_dir, "总用电汇总.json")
