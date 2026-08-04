@@ -19,6 +19,8 @@
 
 {policy_context}
 
+{world_news}
+
 ## 电器类型说明
 
 ### 1. on_demand（按需使用电器）

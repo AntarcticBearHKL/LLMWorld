@@ -5,7 +5,9 @@ from .energy_calculator import EnergyCalculator
 from .subagent import SubAgent
 from .environment import Time
 from .memory import HouseholdMemory
+from .news import NewsBoard
 import random
+import os
 from datetime import datetime
 
 class World:
@@ -19,7 +21,21 @@ class World:
         self.postcode = postcode
         self.house_id = house_id
         self.memory = HouseholdMemory()   # 跨天记忆：昨天的行为影响今天的计划
+        self.news = self._load_news_board()  # 新闻台：上帝注入的外界信息
     
+    def _load_news_board(self):
+        """从 worlds/<world_id>/events.json 加载上帝剧本（不存在则为空新闻台）。"""
+        if not self.world_id:
+            return NewsBoard()
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        events_file = os.path.join(project_root, "worlds", self.world_id, "events.json")
+        return NewsBoard(events_file)
+
+    def add_world_event(self, news_item):
+        """上帝接口：运行时注入一条世界新闻。"""
+        self.news.add_event(news_item)
+        return self
+
     def simulate_day(self, season="夏天", weather="晴天", temperature=28, verbose=True,
                      policy_context="", policy_name="baseline"):
         if verbose:
@@ -28,10 +44,12 @@ class World:
             print(f"{'='*60}\n")
         
         date_str = self.time.date.strftime('%Y%m%d')
+        news_text = self.news.render_for_prompt(self.time.date.strftime('%Y-%m-%d'))
         planner = Planner(self.home, world_id=self.world_id, postcode=self.postcode, 
                          house_id=self.house_id, date_str=date_str,
                          memory_context=self.memory.get_prompt_context(),
-                         policy_name=policy_name)
+                         policy_name=policy_name,
+                         news_context=news_text)
         self.current_planner = planner
         
         if verbose:
@@ -48,7 +66,8 @@ class World:
         
         if verbose:
             print("第四步：执行用电模拟...")
-        executor = Executor(self.home, planner, policy_context=policy_context)
+        executor = Executor(self.home, planner, policy_context=policy_context,
+                            news_context=news_text)
         self.current_executor = executor
         executor.execute_all_segments(season=season, weather=weather, temperature=temperature)
         

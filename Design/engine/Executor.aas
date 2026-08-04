@@ -3,30 +3,32 @@ class Executor
     planner 关联的计划器对象
     log_dir 当前运行日志的输出物理目录路径，与计划器保持一致
     prompt 提示词模板加载器对象，默认为 Prompt()
+    policy_context 政策干预文本（RQ2：tou/subsidy/nudge 等），无政策干预时为空串
+    validation_warnings 本步骤发现的全部决策校验问题列表（未知电器/非法操作/解析失败），默认为 空列表
 
     func execute_all_segments(season, weather, temperature):
         第四层规划：为所有家庭成员批量做出一整天的具体电器操作决策（开关、档位调节、充电方式等）。
         1. 遍历计划器中所有家庭成员的时间线。
-        2. 将每个成员 the Timeline（按时间范围、地点、活动名称、丰富化描述）组装成可读的时间段序列。
+        2. 将每个成员的时间线（按时间范围、地点、活动名称、丰富化描述）组装成可读的时间段序列。
         3. 获取当前成员视野内的家庭结构电器配置（包含房间公共电器属性及个人专属电器状态特征）。
-        4. 加载 `simulate_step4_batch_appliance_decision` 提示词模板并渲染。
-        5. 调用 SubAgent 的并行大模型调度，获取批量用电决策 JSON 应答。
-        6. 调用 `_calculate_member_energy_consumption` 对每个操作动作折算成物理能耗并更新电器运行时状态，同时保存该成员当日决策 JSON 文件及运行日志。
+        4. 加载 `simulate_step4_batch_appliance_decision` 提示词模板并渲染，注入 policy_context 政策干预文本。
+        5. 调用 SubAgent 的并行大模型调度（json_mode），获取批量用电决策 JSON 应答。
+        6. 用 utils.parse_json_with_retry 解析应答，解析失败则记入 validation_warnings 并跳过该成员。
+        7. 调用 `_calculate_member_energy_consumption` 校验并折算能耗，将总能耗与校验警告写回决策数据，保存该成员当日决策 JSON 文件及运行日志。
 
-    func _calculate_member_energy_consumption(member, decision_data):
-        根据电器操作决策，计算成员在当天的物理总能耗（kWh）。
-        1. 循环遍历 decision_data 里的所有 appliance_decisions（电器决策时间段）。
-        2. 解析该时间段的起止小时与分钟，并换算为分钟数。
-        3. 遍历在该时间段内的所有家电操作列表 operations。
-        4. 检索对应的 Appliance 硬件对象，根据 action 操作（例如 use 使用、idle 闲置、charge_home 家中充电、charge_external 外部充电）确定其用能类型。
-        5. 对耗电操作调用 appliance.calculate_energy 积分计算实际物理能耗，并将用能事实记录到电器的运行日志 usage_log 中。
-        6. 返回该成员一整天产生的累计耗电总量。
+    func _calculate_member_energy_consumption(member, decision_data, warnings):
+        校验决策并计算成员在当天的物理总能耗（kWh），非法操作记入 warnings。
+        1. 调用 utils.validate_appliance_decisions 校验决策：unique_id 必须存在于家庭电器注册表、action 必须为该电器合法操作，非法项记入警告而非静默丢弃。
+        2. 遍历清洗后的决策时间段，解析起止分钟数。
+        3. 仅将 use / charge_home 操作计入家庭用电（外部充电不耗家庭电）。
+        4. 调用 appliance.calculate_energy 积分计算实际物理能耗，并将用能事实记录到电器的运行日志 usage_log 中。
+        5. 返回该成员一整天产生的累计耗电总量。
 
     func _get_home_structure_with_appliances(member):
         为特定成员提供其能够接触到的所有房间公用电器以及其个人专属电器的属性描述字典。
 
     func _get_member(name):
-        通过名字检索家庭成员对象.
+        通过名字检索家庭成员对象。
 
     func _save_log(stage_name, prompt, response, tokens, reasoning_content):
-        在磁盘的日志目录中，保存每个执行器并发决策的提示词模板、模型推理记录和 Token 消耗。
+        经 utils.save_log 工具在日志目录中保存每个执行器并发决策的提示词模板、模型推理记录和 Token 消耗。

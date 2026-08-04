@@ -145,12 +145,29 @@ def main():
     parser.add_argument("--house-count", type=int, default=None, help="参与家庭数（默认全部）")
     parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED)
     parser.add_argument("--policy", default=None,
-                        help="政策干预（RQ2）：tou 分时电价 / subsidy 低谷补贴 / nudge 社会规范")
+                        help="政策干预（RQ2）：tou 分时电价 / subsidy 低谷补贴 / nudge 社会规范 / nudge_loss 损失框架")
+    parser.add_argument("--event", action="append", default=None,
+                        help="上帝注入的世界事件（可多次）：日期|标题|内容[|来源]，如 "
+                        "'2026-04-21|政府宣布开征空调用电附加税|从今日起空调电价上调10%|政府公告'")
     parser.add_argument("--aggregate-only", action="store_true",
                         help="不跑 LLM，直接从已保存的 outputs 曲线文件离线聚合")
     args = parser.parse_args()
 
     utils.set_seed(args.seed)
+
+    # 上帝注入的新闻（命令行方式，与 events.json 剧本并存）
+    inline_events = []
+    if args.event:
+        from engine.news import NewsItem
+        for text in args.event:
+            parts = [p.strip() for p in text.split("|")]
+            if len(parts) < 3:
+                print(f"[错误] 事件格式应为 日期|标题|内容[|来源]：{text}")
+                sys.exit(1)
+            inline_events.append(NewsItem(
+                date=parts[0], time="07:00", title=parts[1], content=parts[2],
+                source=parts[3] if len(parts) > 3 else "官方公告"))
+        print(f"上帝注入新闻 {len(inline_events)} 条")
 
     # 政策上下文（无干预为空串 → 与基线行为完全一致）
     policy_context = ""
@@ -181,16 +198,20 @@ def main():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pop_root = os.path.join(project_root, "outputs", args.world_id, "population")
 
-    # 每户一个 World（含各自跨天记忆）
+    # 每户一个 World（含各自跨天记忆与新闻台）
     worlds = {}
     homes = {}
     for info in selected:
         household = info["household"]
         home = create_home_from_household(household)
         homes[info["house_id"]] = home
-        worlds[info["house_id"]] = World(
+        world = World(
             home, world_id=args.world_id, postcode=postcode,
             house_id=info["house_id"], start_date=args.date)
+        # 命令行注入的新闻并入每个世界的新闻台（与 events.json 剧本并存）
+        for item in inline_events:
+            world.news.add_event(item)
+        worlds[info["house_id"]] = world
 
     for day in range(args.days):
         print(f"\n=== 第 {day + 1}/{args.days} 天 ===")

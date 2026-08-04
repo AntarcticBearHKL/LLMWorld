@@ -25,6 +25,7 @@ from engine.prompt import Prompt
 from population import _build_template
 from population_runner import aggregate_population
 from validate_baseline import hourly_normalized, compare_curves, pearson
+from make_report import price_elasticity, tou_elasticity, parse_kwh
 
 
 class FakeEnergyCalculator:
@@ -78,6 +79,46 @@ class TestGroupAnalysis(unittest.TestCase):
         self.assertAlmostEqual(rows["高"]["tou_change_pct"], -16.67, places=2)
         # 低意识组几乎不响应
         self.assertAlmostEqual(rows["低"]["tou_change_pct"], 2.5, places=2)
+
+
+class TestNewsBoard(unittest.TestCase):
+    """新闻台（计划13：上帝模式）。"""
+
+    def test_filter_by_date(self):
+        from engine.news import NewsBoard, NewsItem
+        board = NewsBoard()
+        board.add_event(NewsItem("2026-04-21", "07:00", "征税", "内容A"))
+        board.add_event(NewsItem("2026-04-22", "07:00", "返利", "内容B"))
+
+        self.assertEqual(len(board.available_on("2026-04-20")), 0)   # 未来事件不可见
+        self.assertEqual(len(board.available_on("2026-04-21")), 1)
+        self.assertEqual(len(board.available_on("2026-04-23")), 2)
+
+    def test_render_empty_when_no_news(self):
+        from engine.news import NewsBoard
+        self.assertEqual(NewsBoard().render_for_prompt("2026-04-21"), "")
+
+    def test_render_contains_news_and_personality_instruction(self):
+        from engine.news import NewsBoard, NewsItem
+        board = NewsBoard()
+        board.add_event(NewsItem("2026-04-21", "07:00", "战争爆发", "能源紧张", source="新闻媒体"))
+        text = board.render_for_prompt("2026-04-21")
+        self.assertIn("今日外界信息", text)
+        self.assertIn("战争爆发", text)
+        self.assertIn("性格", text)   # 个性分析指令
+
+    def test_inline_event_parsing(self):
+        from engine.news import NewsBoard
+        board = NewsBoard()
+        board.add_inline_event("2026-04-21|新税|内容|政府公告")
+        self.assertEqual(len(board.items), 1)
+        self.assertEqual(board.items[0].title, "新税")
+        self.assertEqual(board.items[0].source, "政府公告")
+
+    def test_inline_event_bad_format_raises(self):
+        from engine.news import NewsBoard
+        with self.assertRaises(ValueError):
+            NewsBoard().add_inline_event("只有两个字段")
 
 
 class TestPolicy(unittest.TestCase):
@@ -446,6 +487,50 @@ class TestSubAgent(unittest.TestCase):
         SubAgent.reset_tokens()
         current, peak = SubAgent.get_concurrency_stats()
         self.assertEqual(peak, 0)   # 本轮未调用 API 前峰值应为 0
+
+
+class TestReport(unittest.TestCase):
+    """论文报告：价格弹性计算（make_report）。"""
+
+    def test_price_elasticity_typical(self):
+        # 峰段用电 -9.2%，电价 +57.1% → 弹性 ≈ -0.161
+        self.assertAlmostEqual(price_elasticity(-9.2, 57.1), -0.161, places=3)
+
+    def test_price_elasticity_zero_price_change(self):
+        # 电价不变（ΔP% = 0）→ 弹性未定义，返回 None
+        self.assertIsNone(price_elasticity(-5.0, 0))
+
+    def test_price_elasticity_positive_demand_growth(self):
+        # 需求上升 +10% 而价格不变动区间外的情况：涨价仍增长 → 正弹性
+        self.assertEqual(price_elasticity(10.0, 20.0), 0.5)
+
+    def test_tou_elasticity_real_values(self):
+        # 论文实测值：56.5 → 51.3 kWh，0.35 → 0.55 澳元/kWh
+        elasticity, q_change = tou_elasticity(56.5, 51.3, 0.55, 0.35)
+        self.assertAlmostEqual(q_change, -9.2035, places=3)
+        self.assertAlmostEqual(elasticity, -0.161, places=3)
+        self.assertLess(elasticity, 0)   # 涨价 → 用电下降
+
+    def test_tou_elasticity_zero_baseline(self):
+        # 基线峰段电量为 0 → 无法算变化率，返回 (None, None) 而非崩溃
+        self.assertEqual(tou_elasticity(0.0, 10.0, 0.55, 0.35), (None, None))
+
+    def test_tou_elasticity_no_response(self):
+        # 电价涨但峰段用电不变 → 弹性为 0（完全无响应）
+        elasticity, q_change = tou_elasticity(50.0, 50.0, 0.55, 0.35)
+        self.assertEqual(q_change, 0.0)
+        self.assertEqual(elasticity, 0.0)
+
+    def test_parse_kwh_plain_and_suffixed(self):
+        # 矩阵单元格：纯数字与带 '(±x.x%)' 后缀均可解析
+        self.assertEqual(parse_kwh("56.5"), 56.5)
+        self.assertEqual(parse_kwh("51.3 (-9.1%)"), 51.3)
+        self.assertEqual(parse_kwh("+151.3 (+6.9%)"), 151.3)
+
+    def test_parse_kwh_invalid_returns_none(self):
+        # 无数字或 None → 返回 None，不抛异常
+        self.assertIsNone(parse_kwh("无数据"))
+        self.assertIsNone(parse_kwh(None))
 
 
 if __name__ == "__main__":

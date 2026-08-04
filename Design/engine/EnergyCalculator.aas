@@ -1,25 +1,54 @@
 class EnergyCalculator
     home 关联的家庭对象
     log_dir 仿真日志物理目录，默认为 空
-    energy_info_dir 存储能耗明细输出结果的物理子目录，默认为 空
+    energy_info_dir 存储能耗明细输出结果的物理子目录（log_dir/用电信息），默认为 空
     appliance_usage 缓存电器ID到累积能耗明细映射的字典，默认为 空字典
+    household_load_watts 家庭每分钟总负荷（瓦），长度为 1440 的列表，全 0 初始化
+    baseline_kwh 常开电器（always_on）基载耗电量（千瓦时/天），默认为 0
+    decision_kwh 成员决策产生的耗电量（千瓦时/天），默认为 0
+    validation_warnings 决策校验与超限截断的警告列表，默认为 空列表
+    _daily_minutes 每电器当日已用分钟数（日使用上限截断用），默认为 空字典
 
     func load_all_decisions:
-        扫描日志目录中的所有批量电器决策 JSON 文件，加载并反序列化为决策数据列表返回。
+        扫描日志目录中所有 "04_第四层_批量用电决策_" 开头的 JSON 文件，加载并反序列化为决策数据列表返回。
 
     func calculate_all_energy:
         第五层规划：收集全天所有成员的操作行为并结算整个家庭中所有电器的物理用电情况。
         1. 载入所有成员的批量决策记录。
-        2. 遍历每个操作时间段，解析起止分钟数。
-        3. 对每个家电的每次操作行为（use/charge_home），结合额定功率与状态时间段积分计算实际能耗（kWh）。
-        4. 标记该电器在 1440 分钟内的分钟级工作状态位。
-        5. 将能耗明细（含发生时间、时长、成员名字、能耗值等）追加至该电器使用统计中。
-        6. 在全部处理结束后，调用 `_save_energy_info` 将各类汇总数据写入磁盘。
+        2. 调用 _process_member_decisions 逐成员校验并累加决策耗电（含超限截断）。
+        3. 调用 _add_always_on_baseline 将常开电器（如冰箱）的基载耗电自动计入家庭负荷。
+        4. 调用 _finalize_statistics 与 _save_energy_info 汇总统计并写入磁盘。
+
+    func _process_member_decisions(member_name, decision_data):
+        校验并累加一个成员的全部用电决策，非法操作记入警告（不静默）。
+        1. 经 utils.validate_appliance_decisions 清洗决策，未知电器/非法操作记入 validation_warnings。
+        2. 仅 use / charge_home 操作计入家庭用电（外部充电不计）。
+        3. 调用 _apply_daily_cap 按电器日使用上限截断超长时段。
+        4. 积分计算能耗并累加决策耗电、家庭分钟负荷曲线与单台电器的分钟曲线及使用段明细。
+
+    func _apply_daily_cap(appliance, start_minutes, end_minutes, time_range, member_name):
+        每电器每日使用分钟上限（config.APPLIANCE_DAILY_CAP_MINUTES），超限截断并记警告。
+        1. 查询该电器的日上限，无配置则原样返回。
+        2. 当日剩余额度不足时截断结束分钟；额度已用完则整段丢弃并记警告。
+        3. 截断行为均写入 validation_warnings（不静默）。
+
+    func _add_always_on_baseline:
+        把 always_on 电器（如冰箱）按日耗能平摊进每一分钟，并计入家庭负荷。
+        1. 遍历电器注册表，筛出 appliance_type 为 always_on 的电器。
+        2. 将日耗能（kWh/天）换算为持续瓦数（1.2 kWh/天 = 50W 持续），累加进 1440 分钟家庭负荷。
+        3. 为每台常开电器生成 24 小时整段的使用记录，并累加基载耗电。
+
+    func _get_or_create_usage(appliance):
+        获取或初始化单台电器的使用统计结构（分钟曲线、使用段、总时长与总能耗）。
+
+    func _finalize_statistics:
+        根据每台电器的分钟功率曲线推算其当日运行分钟数与小时数。
 
     func _save_energy_info:
         将统计计算结果持久化写入磁盘。
         1. 为每个发生过能耗的电器生成单独的 JSON 运行明细报告，详细列明其运行分钟轨迹、操作时段、以及累计电量。
-        2. 生成一份全局的 "总用电汇总.json"，包含总家电数量、总耗电量（kWh）以及各家电能耗排行，用于前台可视化或政策弹性评估。
+        2. 生成全局的 "总用电汇总.json"，包含总家电数量、基载/决策耗电与总耗电量（kWh）以及各家电能耗排行，并附校验警告。
+        3. 生成家庭级 1440 分钟总负荷曲线 house_load_profile_1440min.json（峰值时刻、24 小时平均功率），作为论文 RQ1 的核心产出。
 
     func get_summary:
-        快速返回全局用电量的简要汇总字典，按照耗电量降序排列。
+        快速返回全局用电量的简要汇总字典（含基载与决策耗电），按照耗电量降序排列。
