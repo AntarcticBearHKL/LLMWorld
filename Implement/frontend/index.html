@@ -135,6 +135,16 @@
 </div>
 
 <div class="panel">
+  <h3>新建世界（计划77：0 token 程序化人口生成，一键体验闭环）</h3>
+  <div style="margin-bottom:8px;font-size:13px;">
+    世界名 <input id="newWorldId" placeholder="如 pop06" style="width:120px">
+    户数 <input id="newWorldCount" value="3" style="width:50px" title="世界级约束 ≤10 户">
+    <button onclick="createWorld()">生成人口（0 token）</button>
+    <span id="createStatus" style="color:#4a7;font-size:12px;"></span>
+  </div>
+</div>
+
+<div class="panel">
   <h3>政策实验启动（计划53：后台模拟一键启动，CoRenew 2026 政策评估 UI）</h3>
   <div style="margin-bottom:8px;font-size:13px;">
     政策
@@ -775,6 +785,31 @@ async function runAnalysis() {
     st.textContent = "失败: " + e.message;
   } finally {
     btn.disabled = false;
+  }
+}
+
+async function createWorld() {
+  const st = document.getElementById("createStatus");
+  const worldId = document.getElementById("newWorldId").value.trim();
+  const count = document.getElementById("newWorldCount").value || "3";
+  if (!worldId) { st.textContent = "请填写世界名"; return; }
+  st.textContent = "生成中（0 token）…";
+  try {
+    const r = await fetch("/api/worlds/create", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({world_id: worldId, count}),
+    });
+    const res = await r.json();
+    if (res.error) throw new Error(res.error);
+    st.textContent = `已生成 ${res.world_id}（${res.households} 户），可开启模拟`;
+    worldsData = await api("/api/worlds");
+    const sel = document.getElementById("selWorld");
+    sel.innerHTML = worldsData.map(w => `<option value="${w.id}">${w.id}（${w.households.length}户）</option>`).join("");
+    sel.value = res.world_id;
+    await loadScenarios();
+  } catch (e) {
+    st.textContent = "失败: " + e.message;
   }
 }
 

@@ -365,6 +365,30 @@ def build_sim_args(world_id, body):
     return sim_args
 
 
+def validate_create_args(world_id, count):
+    import re
+    if not world_id or not str(world_id).strip():
+        raise ValueError("世界 ID 不能为空")
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", str(world_id).strip()):
+        raise ValueError("世界 ID 只能含字母/数字/下划线/连字符")
+    if os.path.isdir(os.path.join(WORLDS_DIR, world_id)):
+        raise ValueError(f"世界 {world_id} 已存在")
+    try:
+        count = int(count)
+    except (TypeError, ValueError):
+        raise ValueError("家庭数必须是整数")
+    if count < 1 or count > 10:
+        raise ValueError("家庭数需在 1-10 之间（世界级约束 ≤10 户）")
+    return world_id.strip(), count
+
+
+def create_world(world_id, count, seed=42):
+    world_id, count = validate_create_args(world_id, count)
+    import population
+    world_meta = population.build_population(world_id, count, int(seed))
+    return world_meta
+
+
 def load_templates():
 
     from engine.news_templates import template_names, build_template
@@ -622,6 +646,20 @@ class Handler(BaseHTTPRequestHandler):
                         argparse.Namespace(sim_args=sim_args))
                     self._send_json({"ok": True, "job_id": job_id,
                                      "command": " ".join(sim_args)})
+                except ValueError as e:
+                    self._send_json({"error": str(e)}, 400)
+                except Exception as e:
+                    self._send_json({"error": str(e)}, 500)
+                return
+            if parts == ["api", "worlds", "create"]:
+                body = self._read_json_body()
+                try:
+                    world_id = str(body.get("world_id", "")).strip()
+                    meta = create_world(world_id, body.get("count", 3),
+                                        body.get("seed", 42))
+                    self._send_json({"ok": True,
+                                     "world_id": world_id,
+                                     "households": len(meta.get("households", []))})
                 except ValueError as e:
                     self._send_json({"error": str(e)}, 400)
                 except Exception as e:
