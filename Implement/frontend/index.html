@@ -105,6 +105,11 @@
 </div>
 
 <div class="panel">
+  <h3>事件响应（计划55：新闻事件 × 行为模式迁移，Fidone 2026）</h3>
+  <div id="eventResponsePanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -242,6 +247,7 @@ async function refresh() {
     await renderPatterns(worldId);
     await renderGroups();
     await renderWorldsMatrix();
+    await renderEventResponse(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -538,6 +544,23 @@ async function renderWorldsMatrix() {
   }).join("");
   div.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>
     <div style="font-size:12px;color:#666;margin-top:6px;">总用电变化%：同一政策在不同世界的效果分布（Eco3S 2026 稳健性检验）</div>`;
+}
+
+async function renderEventResponse(worldId) {
+  const div = document.getElementById("eventResponsePanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const r = await api(`/api/worlds/${worldId}/event-response/${scenario}`);
+  if (!r || r.error) { div.innerHTML = "<span class='err'>（无事件响应数据，先跑 analyze_event_response.py）</span>"; return; }
+  const rows = r.per_event.map(e => {
+    const mv = e.move_rate === null ? "-" : e.move_rate.toFixed(2);
+    const bm = e.baseline_move_rate === null ? "-" : e.baseline_move_rate.toFixed(2);
+    const kc = e.kwh_change_pct === null ? "-" : e.kwh_change_pct.toFixed(1) + "%";
+    return `<tr><td>${e.date}</td><td>${(e.titles || []).join("；")}</td><td>${mv}</td><td>${bm}</td><td>${e.mean_kwh ?? "-"}</td><td>${kc}</td></tr>`;
+  }).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    事件日迁移率 ${r.event_move_rate ?? "-"} vs 非事件日 ${r.non_event_move_rate ?? "-"}（迁移率=每日切换行为模式的户比例）</div>
+    <table><thead><tr><th>事件日期</th><th>标题</th><th>事件日迁移率</th><th>基线迁移率</th><th>事件日均kWh</th><th>用电变化%</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
 }
 
 async function renderPersonality(worldId) {
