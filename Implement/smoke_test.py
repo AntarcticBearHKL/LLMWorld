@@ -1,14 +1,14 @@
-"""冒烟测试：真实调用 DeepSeek API 跑通五阶段全管线，检查产物完整性。
 
-用法（在 LLMWorld 根目录）：
-    python Implement/smoke_test.py 495 --days 1 --no-input
 
-成功标准：
-1. 五阶段日志文件齐全（01/02/03/04 前缀）
-2. 用电信息/总用电汇总.json 含基载（baseline_kwh > 0）
-3. house_load_profile_1440min.json 为 1440 点
-4. 无解析失败、无未捕获异常
-"""
+
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -71,14 +71,14 @@ def main():
         day_result = world.history[-1]
         log_dir = day_result["log_dir"]
 
-        # 检查五阶段日志
+
         stage_prefixes = ["01_第一层", "02_第二层", "03_第三层", "04_第四层"]
         for prefix in stage_prefixes:
             found = [f for f in os.listdir(log_dir) if f.startswith(prefix)]
             if not found:
                 failures.append(f"缺少 {prefix} 日志")
 
-        # 跨天记忆检查：从第 2 天起，第一层 prompt 必须包含"昨日记忆"章节
+
         if day >= 1:
             step1_logs = [f for f in os.listdir(log_dir) if f.startswith("01_第一层")]
             if not step1_logs:
@@ -91,7 +91,7 @@ def main():
                 else:
                     print("  [记忆] 昨日记忆已注入第 2 天计划")
 
-        # 检查用电信息
+
         info_dir = os.path.join(log_dir, "用电信息")
         summary_path = os.path.join(info_dir, "总用电汇总.json")
         profile_path = os.path.join(info_dir, "house_load_profile_1440min.json")

@@ -1,12 +1,12 @@
-"""节能意识分组分析（论文 Costa & Kahn 2010 对齐，0 token 离线分析）。
 
-从 worlds/<world>/ 读每户 energy_awareness 标签（第一成员），
-从 outputs/<world>/population/ 各场景聚合曲线的 per_house 明细读每户总 kWh，
-统计"高/中/低节能意识"三组对 baseline/TOU/nudge 的响应差异。
 
-用法：
-    python Implement/analyze_groups.py --world pop02
-"""
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -17,11 +17,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 
 def load_household_labels(world_id):
-    """读 worlds/<world_id>/3168/house_XXXX/household.json 的节能意识标签。
 
-    注意（去作弊化 2026-08）：v2 人口不再生成 energy_awareness 字段，
-    该维度仅对旧世界（pop02 等）有效；缺失时标记 "未知" 并在报告中提示。
-    """
+
+
+
+
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     base = os.path.join(project_root, "worlds", world_id, "3168")
     labels = {}
@@ -46,12 +46,12 @@ def load_household_labels(world_id):
 
 
 def load_scenario_house_kwh(world_id):
-    """读各场景聚合曲线的 per_house 明细 → {scenario: {house_id: kwh}}。
 
-    兼容两种目录结构：
-    - 新：population/<policy>/<date>/*.json（policy 字段已写入）
-    - 旧：population/<date>/*.json 或根目录 aggregate_only.json（按 policy 字段/文件名归类）
-    """
+
+
+
+
+
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pop_dir = os.path.join(project_root, "outputs", world_id, "population")
     scenarios = {}
@@ -74,7 +74,7 @@ def load_scenario_house_kwh(world_id):
 
 
 def group_stats(labels, scenarios):
-    """三组 × 各场景的均值与相对基线变化。"""
+
     groups = {"高": [], "中": [], "低": [], "未知": []}
     for house_id, awareness in labels.items():
         if awareness in groups:
@@ -83,7 +83,7 @@ def group_stats(labels, scenarios):
     rows = []
     for group, house_ids in groups.items():
         if not house_ids:
-            continue   # 跳过空组
+            continue
         row = {"group": group, "households": len(house_ids)}
         base_kwh = None
         if "baseline" in scenarios:

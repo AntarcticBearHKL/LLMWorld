@@ -1,14 +1,14 @@
-"""后台模拟任务管理器：模拟放后台跑，期间可继续开发，完成/报错后回来处理。
 
-用法：
-    python Implement/background_runner.py start pop02 --days 3 --policy tou --scenario foo
-    python Implement/background_runner.py status
-    python Implement/background_runner.py watch <job_id>     # 阻塞等待完成/失败
-    python Implement/background_runner.py stop <job_id>
 
-任务元数据与输出：logs/jobs/<job_id>.json / .out
-进度从输出文件解析：'第 X/Y 天'、'Token 账单'、'[冒烟通过]'、'Traceback' 等。
-"""
+
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -22,7 +22,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JOBS_DIR = os.path.join(PROJECT_ROOT, "logs", "jobs")
 PYTHON = os.path.join(PROJECT_ROOT, ".venv", "Scripts", "python.exe")
 if not os.path.exists(PYTHON):
-    PYTHON = sys.executable   # 回退系统 python
+    PYTHON = sys.executable
 
 
 def _job_path(job_id):
@@ -38,13 +38,13 @@ def _next_job_id():
     return f"job_{n:03d}"
 
 
-# ---------- 进度解析 ----------
+
 
 PROGRESS_MARKERS = ["第 ", "Token 账单", "冒烟", "完成", "Traceback", "Error", "Failed"]
 
 
 def _pids_of(out_path):
-    """从日志路径反查任务 PID（从对应的 .json 元数据）。"""
+
     job_id = os.path.splitext(os.path.basename(out_path))[0]
     meta_path = _job_path(job_id)
     if os.path.exists(meta_path):
@@ -59,7 +59,7 @@ def _any_alive(pids):
 
 
 def tail_text(path, max_chars=800):
-    """读日志尾部文本（供 server API 展示）。"""
+
     if not os.path.exists(path):
         return ""
     try:
@@ -71,7 +71,7 @@ def tail_text(path, max_chars=800):
 
 
 def parse_progress(out_path):
-    """从输出文件提取任务进度摘要。"""
+
     if not os.path.exists(out_path):
         return {"status": "pending", "detail": "尚未启动"}
     try:
@@ -80,9 +80,9 @@ def parse_progress(out_path):
     except Exception:
         return {"status": "unknown", "detail": "日志读取失败"}
 
-    text = "".join(lines[-60:])   # 只看尾部（进度/错误都在尾部）
+    text = "".join(lines[-60:])
 
-    # 状态判定（按优先级：失败 > 完成 > 运行中）
+
     done_markers = ["[冒烟通过]", "人口模拟完成", "离线聚合完成", "完成 N 天模拟", "完成！"]
     has_done = any(m in text for m in done_markers)
     if "Traceback" in text or "[冒烟失败]" in text or ("Error:" in text and not has_done):
@@ -92,11 +92,11 @@ def parse_progress(out_path):
     else:
         status = "running"
 
-    # 进程已死但无完成标记 → 异常终止（不能标 done）
+
     if status == "running" and not _any_alive(_pids_of(out_path)):
         status = "stopped"
 
-    # 进度行：第 X/Y 天
+
     progress = None
     for line in reversed(lines):
         if "第" in line and "/" in line and "天" in line:
@@ -110,15 +110,15 @@ def parse_progress(out_path):
     return {"status": status, "detail": detail}
 
 
-# ---------- 命令 ----------
+
 
 def cmd_start(args):
     job_id = _next_job_id()
     os.makedirs(JOBS_DIR, exist_ok=True)
     out_path = os.path.join(JOBS_DIR, f"{job_id}.out")
 
-    # 组装模拟命令：pop02 等世界参数直接透传
-    # -X utf8：强制子进程 UTF-8 输出（Windows 默认 GBK 会乱码，导致进度解析失败）
+
+
     sim_cmd = [PYTHON, "-X", "utf8", "-u",
                os.path.join(PROJECT_ROOT, "Implement", "population_runner.py")]
     sim_cmd += args.sim_args
@@ -155,7 +155,7 @@ def cmd_status(_args=None):
         with open(_job_path(jid), "r", encoding="utf-8") as f:
             meta = json.load(f)
         prog = parse_progress(meta["out"])
-        # 进程是否还活着
+
         alive = _process_alive(meta.get("pid"))
         if not alive and prog["status"] == "running":
             prog["status"] = "done" if prog["detail"] != "初始化中…" else "failed"
@@ -179,7 +179,7 @@ def cmd_watch(args):
     try:
         while True:
             prog = parse_progress(meta["out"])
-            # 打印新增输出
+
             size = os.path.getsize(meta["out"]) if os.path.exists(meta["out"]) else 0
             if size > last_size:
                 with open(meta["out"], "r", encoding="utf-8", errors="replace") as f:
@@ -226,12 +226,12 @@ def _process_alive(pid):
         exit_code = ctypes.c_ulong()
         ctypes.windll.kernel32.GetExitCodeProcess(h, ctypes.byref(exit_code))
         ctypes.windll.kernel32.CloseHandle(h)
-        return exit_code.value == 259   # STILL_ACTIVE
+        return exit_code.value == 259
     except Exception:
         return False
 
 
-# ---------- 服务器管理（系统级常驻，前后端修改后重启）----------
+
 
 SERVER_PID_FILE = os.path.join(JOBS_DIR, "server.pid")
 SERVER_LOG = os.path.join(JOBS_DIR, "server.out")
@@ -254,7 +254,7 @@ def _write_pid_file(path, pid):
 
 
 def cmd_server(args):
-    """server start|restart|stop|status [--port N]"""
+
     port = args.port or SERVER_DEFAULT_PORT
     pid = _read_pid_file(SERVER_PID_FILE)
 

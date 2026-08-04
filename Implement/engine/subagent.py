@@ -1,11 +1,11 @@
-"""LLM 调用层：统一管理 DeepSeek API 的并发、重试与 Token 统计。
 
-规则（用户最新指令 2026-08）：
-- 只用 DeepSeek API 做测试
-- 并发不设任何上限（每个 prompt 一个线程；户级并行多少只取决于世界家庭数）
-- 网络/服务端错误自动重试 3 次（指数退避），仍失败则抛 LLMCallError（绝不静默返回错误字符串）
-- 保留并发峰值统计（get_concurrency_stats）作为观测，不再做限制
-"""
+
+
+
+
+
+
+
 
 import os
 import time
@@ -23,14 +23,14 @@ DEFAULT_MODEL_DEEPSEEK = config.MODEL
 DEFAULT_TEMPERATURE = config.TEMPERATURE
 DEFAULT_MAX_TOKENS = config.MAX_TOKENS
 
-# ---- 重试参数（见 config.py）----
+
 MAX_RETRIES = config.MAX_RETRIES
 RETRY_BACKOFF_SECONDS = config.RETRY_BACKOFF_SECONDS
 REQUEST_TIMEOUT_SECONDS = config.REQUEST_TIMEOUT_SECONDS
 
 
 class LLMCallError(RuntimeError):
-    """LLM 调用失败（重试后仍失败）。调用方必须显式处理，不允许静默吞掉。"""
+    pass
 
 
 class SubAgent:
@@ -38,10 +38,10 @@ class SubAgent:
     _total_prompt_cache_hit_tokens = 0
     _total_prompt_cache_miss_tokens = 0
     _total_completion_tokens = 0
-    _current_concurrent = 0   # 当前同时在飞的请求数
-    _peak_concurrent = 0      # 实测并发峰值（验证"并发 ≤10"硬约束用）
+    _current_concurrent = 0
+    _peak_concurrent = 0
 
-    # ---------- Token 统计 ----------
+
 
     @staticmethod
     def _update_tokens(cache_hit, cache_miss, completion):
@@ -68,15 +68,15 @@ class SubAgent:
 
     @staticmethod
     def get_concurrency_stats():
-        """返回 (当前并发数, 历史峰值并发数)。峰值用于验证并发 ≤10 硬约束。"""
+
         with SubAgent._lock:
             return SubAgent._current_concurrent, SubAgent._peak_concurrent
 
-    # ---------- 单次调用（含重试）----------
+
 
     @staticmethod
     def call_deepseek(prompt, json_mode=False, thinking=False, api_key=None, model=None):
-        """调用 DeepSeek 一次。网络/服务端错误抛 LLMCallError，成功返回 dict。"""
+
         api_key = api_key or DEEPSEEK_APIKEY
         if not api_key:
             raise LLMCallError("DeepSeek API key 未配置，请在 .env 中设置 DEEPSEEK_APIKEY")
@@ -95,9 +95,9 @@ class SubAgent:
         }
 
         if thinking:
-            # 官方文档（api-docs.deepseek.com/guides/thinking_mode）：
-            # - reasoning_effort 仅支持 low/high/max；flash 传 low = 最低档（用户指令）
-            # - 思考模式下 temperature/top_p/presence_penalty/frequency_penalty 不生效，不发送
+
+
+
             data["thinking"] = {"type": "enabled"}
             data["reasoning_effort"] = config.REASONING_EFFORT
         else:
@@ -106,7 +106,7 @@ class SubAgent:
         if json_mode and not thinking:
             data["response_format"] = {"type": "json_object"}
 
-        # 并发观测（不限制，用户 2026-08 指令：不设上限）
+
         with SubAgent._lock:
             SubAgent._current_concurrent += 1
             if SubAgent._current_concurrent > SubAgent._peak_concurrent:
@@ -156,7 +156,7 @@ class SubAgent:
 
     @staticmethod
     def call_with_retry(prompt, json_mode=False, thinking=False, api_key=None, model=None):
-        """带指数退避重试的单次调用，重试 MAX_RETRIES 次后仍失败则抛 LLMCallError。"""
+
         last_error = None
         for attempt in range(MAX_RETRIES):
             try:
@@ -169,14 +169,14 @@ class SubAgent:
                     time.sleep(wait)
         raise LLMCallError(f"DeepSeek 调用失败（重试 {MAX_RETRIES} 次后放弃）: {last_error}")
 
-    # ---------- 并发调用（上限 MAX_WORKERS）----------
+
 
     @staticmethod
     def parallel_call(prompts, json_mode=False, thinking=False, api_key=None, model=None):
-        """并发调用多个 prompt，无并发上限（每个 prompt 一个线程，户级并行只取决于家庭数）。
 
-        单个失败会抛 LLMCallError（携带失败的 prompt 序号），调用方需显式处理。
-        """
+
+
+
         if not prompts:
             return []
 
@@ -209,11 +209,11 @@ class SubAgent:
 
     @staticmethod
     def single_call(prompt, json_mode=False, thinking=False, api_key=None, model=None):
-        """单次调用（自动重试）。"""
+
         return SubAgent.call_with_retry(prompt, json_mode, thinking, api_key, model)
 
 
 def _clean_json_response(text):
-    """去掉 LLM 返回中的 ```json 代码块标记（复用 utils.clean_json_text，避免重复）。"""
+
     from . import utils
     return utils.clean_json_text(text)

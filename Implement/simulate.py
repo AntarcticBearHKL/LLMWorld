@@ -1,13 +1,13 @@
-﻿"""命令行入口：加载世界 → 选择家庭 → 逐日模拟。
 
-两种模式：
-1. 交互模式（不带参数或仅带 world_id）：照旧让用户输入日期/天数/家庭
-2. 自动模式（--no-input）：所有参数用命令行或 config.py 默认值，用于批量实验
 
-用法：
-    python Implement/simulate.py <world_id> [--days 5] [--date "2026年4月21日"]
-        [--house 0] [--season 春天] [--weather 晴天] [--temp 20] [--seed 42] [--no-input]
-"""
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -56,7 +56,7 @@ def load_world(world_id):
 
 
 def _personality_str(member_config):
-    """人格 → prompt 文本（v2：Big Five 行为描述 + 新闻敏感度，兼容旧结构）。"""
+
     pers = member_config.get("personality", {})
     parts = [', '.join(pers.get("traits", []))]
     if pers.get("behavior_text"):
@@ -67,7 +67,7 @@ def _personality_str(member_config):
 
 
 def create_home_from_household(household):
-    """把 household.json 转成 Home 对象（电器配置真正生效，人格字段完整注入）。"""
+
     home_config = household['home']
     members_config = household['members']
 
@@ -118,7 +118,7 @@ def main():
     args = parse_args()
     world_id = args.world_id
 
-    # 固定随机种子，保证实验可复现
+
     utils.set_seed(args.seed)
 
     print("=" * 60)
@@ -133,7 +133,7 @@ def main():
     print(f"  邮编: {district_info['postcode']}")
     print(f"  家庭数: {len(households)}")
 
-    # ---- 选择家庭 ----
+
     if len(households) > 1 and not args.no_input:
         print(f"\n可用的家庭:")
         for i, h in enumerate(households):
@@ -153,16 +153,16 @@ def main():
 
     home = create_home_from_household(household)
 
-    # ---- 日期与天数 ----
+
     if args.no_input:
-        start_date = args.date   # None=自动续跑(World 内部处理)
+        start_date = args.date
         num_days = args.days if args.days is not None else config.DEFAULT_DAYS
     else:
         start_date = args.date or input("\n请输入开始日期（格式：2025年4月20日，留空使用今天）：").strip() or datetime.now().strftime('%Y年%m月%d日')
         num_days_input = input("请输入模拟天数（默认5天）：").strip()
         num_days = int(num_days_input) if num_days_input else (args.days or config.DEFAULT_DAYS)
 
-    # 日期格式兼容：'2026-04-23' → '2026年4月23日'
+
     if start_date and "-" in start_date:
         y, m, d = start_date.split("-")
         start_date = f"{int(y)}年{int(m)}月{int(d)}日"
@@ -217,7 +217,7 @@ def main():
             verbose=True
         )
 
-        # 显式报告校验警告（失败不静默）
+
         executor = world.current_executor
         if executor and executor.validation_warnings:
             print(f"\n[警告] 今日发现 {len(executor.validation_warnings)} 条决策校验问题：")

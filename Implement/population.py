@@ -1,14 +1,14 @@
-"""人口构建器 v2：Big Five 人格驱动 + 8 类垂直家庭 + 属性关联（census 校准）。
 
-依据（计划22 文献调研）：
-- Big Five 人格 → LLM 智能体行为（PsyAgent arXiv:2601.06158；2604.12250）
-- 成员间属性关联（2508.09964）：夫妻年龄差 ≤5、孩子年龄=父母-25~35
-- 住宅-家庭联合（2605.17031）：年龄→职业→收入→住房→电器 关联链
-- fringe 群体显式配额（2501.16080）：独居老人/单亲/学生不缺席
-- Clayton 本地化（2112.12071）：Monash 大学区 → 国际学生类型
 
-census 校准锚点（Data/clayton_3168_*.csv）：中位年龄 28、中位月供 2000、住宅 7150。
-"""
+
+
+
+
+
+
+
+
+
 
 import json
 import os
@@ -19,7 +19,7 @@ CLAYTON_POSTCODE = "3168"
 CLAYTON_CITY = "墨尔本"
 CLAYTON_DISTRICT = "Clayton"
 
-# ---------- 多文化姓名池（Clayton 真实多元社区）----------
+
 
 FIRST_NAMES_M = ["David", "Jack", "Lucas", "Ethan", "James", "Daniel", "Ryan", "Ben",
                  "Arjun", "Rohan", "Minh", "Tuan", "Liam", "Noah", "William"]
@@ -30,7 +30,7 @@ SURNAMES = ["Chen", "Wang", "Li", "Zhang", "Smith", "Nguyen", "Patel", "Brown",
 KID_NAMES = ["Liam", "Noah", "Emma", "Olivia", "Ava", "Mia", "Ethan", "Lucas",
              "Arjun", "Minh", "Hana", "Zoe"]
 
-# ---------- 职业与收入（按年龄段/收入档关联）----------
+
 
 OCCUPATIONS_PROFESSIONAL = ["软件工程师", "数据分析师", "会计", "律师", "医生", "大学教授",
                             "银行经理", "建筑师", "药剂师"]
@@ -45,7 +45,7 @@ INCOME_BY_OCCUPATION = {
     "低": OCCUPATIONS_SERVICE,
 }
 
-# ---------- Big Five 人格模型 ----------
+
 
 BIG_FIVE_ZH = {
     "openness": "开放性",
@@ -88,7 +88,7 @@ TRAITS_BY_LEVEL = {
 
 
 def sample_big_five(rng, bias=None):
-    """采样 Big Five 五维分数（1-10）。bias 可给某维加倾向（如父母尽责性偏高）。"""
+
     bias = bias or {}
     scores = {}
     for dim in BIG_FIVE_ZH:
@@ -98,7 +98,7 @@ def sample_big_five(rng, bias=None):
 
 
 def big_five_to_text(bf):
-    """五维分数 → 中文行为描述（喂给 LLM prompt）。"""
+
     parts = []
     for dim, zh in BIG_FIVE_ZH.items():
         v = bf[dim]
@@ -109,7 +109,7 @@ def big_five_to_text(bf):
 
 
 def big_five_to_traits(bf, rng):
-    """五维 → 2-3 个中文性格词（兼容 personality.traits 字段）。"""
+
     traits = []
     for dim in BIG_FIVE_ZH:
         v = bf[dim]
@@ -122,7 +122,7 @@ def big_five_to_traits(bf, rng):
 
 
 def big_five_to_news_sensitivity(bf):
-    """神经质 → 对新闻/价格事件的敏感度（影响政策响应强度）。"""
+
     n = bf["neuroticism"]
     if n >= 7:
         return "高"
@@ -131,20 +131,20 @@ def big_five_to_news_sensitivity(bf):
     return "低"
 
 
-# 注：energy_awareness（节能意识）字段已按用户 2026-08 指令移除——
-# 生成阶段不得预设任何与用电行为直接相关的词条（避免"作弊"），
-# 节能行为应完全由 LLM 在模拟中从人格/情境自发涌现。
 
 
-# ---------- 成员生成 ----------
+
+
+
+
 
 def _make_member(rng, name, gender, age, occupation, income_bracket,
                  big_five=None, wake=None, sleep=None, personal=None, role="成员"):
-    """生成一名成员（Big Five 驱动人格字段；不含任何用电行为预设——去作弊化）。"""
+
     bf = big_five or sample_big_five(rng)
     traits = big_five_to_traits(bf, rng)
 
-    # 作息习惯：由角色/尽责性/外向性推导 + 随机扰动
+
     if wake is None:
         if occupation == "退休":
             wake = rng.choice(["06:30", "07:00", "07:30"])
@@ -153,13 +153,13 @@ def _make_member(rng, name, gender, age, occupation, income_bracket,
         else:
             wake = rng.choice(["06:45", "07:00", "07:15", "07:30"])
         if bf["extraversion"] >= 7 and occupation != "退休":
-            wake = rng.choice(["06:45", "07:00"])   # 外向早起社交
+            wake = rng.choice(["06:45", "07:00"])
         elif bf["conscientiousness"] >= 7:
             wake = rng.choice(["06:30", "06:45"])
     if sleep is None:
         sleep = rng.choice(["22:30", "23:00", "23:30", "00:00"])
         if occupation in ("本科生", "研究生", "博士生"):
-            sleep = rng.choice(["00:00", "00:30", "01:00"])   # 学生熬夜
+            sleep = rng.choice(["00:00", "00:30", "01:00"])
         elif bf["conscientiousness"] >= 7:
             sleep = rng.choice(["22:00", "22:30"])
 
@@ -176,9 +176,9 @@ def _make_member(rng, name, gender, age, occupation, income_bracket,
                           "work_days": [1, 2, 3, 4, 5]},
         "personality": {
             "traits": traits,
-            "big_five": bf,                       # v2：五维人格分数
-            "behavior_text": big_five_to_text(bf),  # v2：行为描述（注入 prompt，无用电预设）
-            "news_sensitivity": big_five_to_news_sensitivity(bf),  # v2：新闻敏感度
+            "big_five": bf,
+            "behavior_text": big_five_to_text(bf),
+            "news_sensitivity": big_five_to_news_sensitivity(bf),
         },
         "habits": {"wake_time": wake, "sleep_time": sleep,
                    "exercise": rng.choice(["每周跑步", "偶尔散步", "健身房", "无"]),
@@ -196,7 +196,7 @@ def _pick_occupation(rng, income_bracket):
 
 
 def _income_by_age(rng, age):
-    """年龄 → 收入档（年轻人多数中低档，中年分布广，退休无收入标注）。"""
+
     if age >= 65:
         return "低"
     if age < 25:
@@ -209,14 +209,14 @@ def _income_by_age(rng, age):
     return "低"
 
 
-# ---------- 住宅生成（收入 → 面积 → 房间/电器）----------
+
 
 def _home_by_income(rng, name, income_bracket, size_override=None):
-    """收入档 → 住宅结构（关联链：收入→住房→电器）。
 
-    去作弊化（用户 2026-08 指令）：不预设任何用电行为相关资产
-    （如电动汽车）——所有电器均为中性物理配置，用电行为由模拟自发涌现。
-    """
+
+
+
+
     sizes = {"高": rng.choice([120, 135, 150, 180]),
              "中": rng.choice([85, 95, 105, 115]),
              "低": rng.choice([55, 65, 75])}
@@ -224,13 +224,13 @@ def _home_by_income(rng, name, income_bracket, size_override=None):
 
     rooms = {}
 
-    # 客厅：全收入档都有电视/灯；空调按收入
+
     living = ["电视", "灯"]
     if income_bracket != "低":
         living.append("空调")
     rooms["客厅"] = living
 
-    # 厨房：冰箱必有；电饭煲/微波炉按收入
+
     kitchen = ["冰箱", "灯"]
     if income_bracket in ("中", "高"):
         kitchen += ["电饭煲", "微波炉"]
@@ -240,10 +240,10 @@ def _home_by_income(rng, name, income_bracket, size_override=None):
         kitchen += ["电磁炉"]
     rooms["厨房"] = kitchen
 
-    # 卫生间：热水器/洗衣机
+
     rooms["卫生间"] = ["热水器", "洗衣机", "灯"]
 
-    # 卧室数：按面积
+
     n_bedrooms = 1 if size <= 65 else (2 if size <= 105 else 3)
     for i in range(n_bedrooms):
         bed = ["灯", "台灯"]
@@ -262,16 +262,16 @@ def _home_by_income(rng, name, income_bracket, size_override=None):
     return home
 
 
-# ---------- 家庭模板（8 类，含成员关联规则）----------
+
 
 def _build_template(household_type, rng):
-    """按家庭类型生成完整 household.json（Big Five 驱动 + 成员关联）。"""
+
     surname = rng.choice(SURNAMES)
-    income = rng.choice(["低", "中", "中", "高"])   # 整体收入分布（census 中位 2000 月供 → 中档为主）
+    income = rng.choice(["低", "中", "中", "高"])
 
     if household_type == "young_couple":
         age_w = rng.randint(26, 33)
-        age_m = age_w + rng.randint(0, 4)   # 关联规则：夫妻年龄差 ≤4
+        age_m = age_w + rng.randint(0, 4)
         bf_w = sample_big_five(rng, bias={"conscientiousness": rng.choice([0, 1, 2]),
                                           "openness": rng.choice([0, 1, 1])})
         bf_m = sample_big_five(rng, bias={"conscientiousness": rng.choice([0, 0, -1])})
@@ -290,7 +290,7 @@ def _build_template(household_type, rng):
     if household_type == "family_with_kids":
         age_m = rng.randint(32, 42)
         age_w = age_m + rng.randint(-3, 3)
-        kid_age = age_m - rng.randint(24, 34)   # 关联规则：孩子年龄 = 父母-24~34
+        kid_age = age_m - rng.randint(24, 34)
         kid_age = max(4, kid_age)
         bf_parents = sample_big_five(rng, bias={"conscientiousness": 2, "agreeableness": 1})
         bf_kid = sample_big_five(rng, bias={"extraversion": 2})
@@ -342,7 +342,7 @@ def _build_template(household_type, rng):
         }
 
     if household_type == "international_student":
-        # Clayton 特色：Monash 大学区国际学生（census 中位年龄 28 佐证）
+
         members = []
         for i in range(rng.choice([2, 3])):
             age = rng.randint(19, 27)
@@ -361,7 +361,7 @@ def _build_template(household_type, rng):
         }
 
     if household_type == "multigenerational":
-        # 关联规则：三代同堂，父母年龄夹在祖父母与孩子之间
+
         grandpa = rng.randint(62, 76)
         grandma = grandpa + rng.randint(-3, 2)
         parent_age = grandpa - rng.randint(24, 32)
@@ -403,7 +403,7 @@ def _build_template(household_type, rng):
             ],
         }
 
-    # retired_couple
+
     age_m = rng.randint(66, 80)
     age_w = age_m + rng.randint(-3, 3)
     return {
@@ -418,7 +418,7 @@ def _build_template(household_type, rng):
     }
 
 
-# ---------- 家庭类型配额（census 校准 + fringe 保障）----------
+
 
 HOUSEHOLD_QUOTAS = [
     ("young_couple", 25),
@@ -433,11 +433,11 @@ HOUSEHOLD_QUOTAS = [
 
 
 def _quota_distribution(count, rng):
-    """按配额百分比分配 count 户的类型。
 
-    fringe 保障（呼应 2501.16080 的警告）：户数 ≥ 类型数时，每类至少 1 户，
-    保证独居老人/单亲/学生等边缘群体不缺席；剩余按权重分配。
-    """
+
+
+
+
     n_types = len(HOUSEHOLD_QUOTAS)
     counts = {t: 0 for t, _ in HOUSEHOLD_QUOTAS}
     if count >= n_types:
@@ -452,10 +452,10 @@ def _quota_distribution(count, rng):
     return counts
 
 
-# ---------- 构建入口 ----------
+
 
 def _dedupe_names(household):
-    """保证同一家庭内成员姓名唯一（agent 身份键要求）。"""
+
     seen = set()
     for m in household["members"]:
         name = m["name"]
@@ -468,10 +468,10 @@ def _dedupe_names(household):
 
 
 def build_population(world_id, count, seed=42, household_types=None):
-    """本地生成 count 户异质家庭（Big Five v2），写入 worlds/<world_id>/3168/house_XXXX/。
 
-    世界级约束（用户 2026-08 指令）：每个世界最多 10 户。
-    """
+
+
+
     if count > 10:
         raise ValueError(f"每世界最多 10 户（收到 {count}）。请拆分多个世界。")
 
@@ -491,7 +491,7 @@ def build_population(world_id, count, seed=42, household_types=None):
     for i in range(count):
         htype = household_types[i % len(household_types)]
         household = _build_template(htype, rng)
-        _dedupe_names(household)   # 家庭内姓名唯一
+        _dedupe_names(household)
 
         house_id = f"house_{i + 1:04d}"
         house_dir = os.path.join(district_dir, house_id)

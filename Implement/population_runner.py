@@ -1,14 +1,14 @@
-﻿"""人口级并行模拟器：多家庭逐日并行模拟 + 人口级负荷聚合。
 
-用法（先构建人口）：
-    python Implement/population.py pop01 --count 4
-    python Implement/population_runner.py pop01 --days 1
 
-输出：
-    outputs/<world_id>/population/<日期>/population_profile_1440min.json
-    - 人口级 1440 分钟总负荷（所有家庭之和）
-    - 群体统计：总 kWh、户均、分散度、峰值、逐户明细
-"""
+
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -22,12 +22,12 @@ from engine import World, utils, SubAgent
 from simulate import load_world, create_home_from_household
 import config
 
-# 户级并行不设上限：并行多少户只取决于世界有多少家庭（用户 2026-08 指令）
-# 世界级约束：每世界最多 10 户（见 population.py 校验）
+
+
 
 
 def aggregate_population(house_results):
-    """把多户的日结果聚合成人口级负荷曲线与统计。"""
+
     total_profile = [0.0] * 1440
     per_house = []
 
@@ -73,7 +73,7 @@ def aggregate_population(house_results):
 
 
 def main_aggregate_only(args, project_root, pop_root):
-    """离线聚合：从各户已保存的 house_load_profile_1440min.json 重建人口曲线（不花 token）。"""
+
     from simulate import load_world
     world_meta, district_info, households = load_world(args.world_id)
     postcode = district_info["postcode"]
@@ -89,9 +89,9 @@ def main_aggregate_only(args, project_root, pop_root):
         house_dir = os.path.join(outputs_root, house_id)
         if not os.path.isdir(house_dir):
             continue
-        # 兼容两种目录结构：
-        # 新：house_dir/<policy>/<date>/用电信息/...
-        # 旧：house_dir/<date>/用电信息/...
+
+
+
         date_candidates = []
         for entry in os.listdir(house_dir):
             entry_path = os.path.join(house_dir, entry)
@@ -161,18 +161,18 @@ def main():
 
     utils.set_seed(args.seed)
 
-    # 日期格式兼容：'2026-04-23' → '2026年4月23日'（Time 引擎要求中文格式）
+
     if args.date and "-" in args.date:
         y, m, d = args.date.split("-")
         args.date = f"{int(y)}年{int(m)}月{int(d)}日"
 
-    # 场景标签：--scenario > 政策名 > baseline
+
     scenario_name = args.scenario
     if not scenario_name:
         from engine.policy import Policy
         scenario_name = args.policy if args.policy else "baseline"
 
-    # 上帝注入的新闻（命令行方式，与 events.json 剧本并存）
+
     inline_events = []
     if args.event:
         from engine.news import NewsItem
@@ -186,7 +186,7 @@ def main():
                 source=parts[3] if len(parts) > 3 else "官方公告"))
         print(f"上帝注入新闻 {len(inline_events)} 条")
 
-    # 政策上下文（无干预为空串 → 与基线行为完全一致）
+
     policy_context = ""
     policy_name = None
     if args.policy:
@@ -215,7 +215,7 @@ def main():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pop_root = os.path.join(project_root, "outputs", args.world_id, "population")
 
-    # 每户一个 World（含各自跨天记忆与新闻台）
+
     worlds = {}
     homes = {}
     for info in selected:
@@ -225,10 +225,10 @@ def main():
         world = World(
             home, world_id=args.world_id, postcode=postcode,
             house_id=info["house_id"], start_date=args.date)
-        # --no-events：跳过 events.json 剧本，仅保留命令行注入的新闻
+
         if args.no_events:
             world.news.items = []
-        # 命令行注入的新闻并入每个世界的新闻台
+
         for item in inline_events:
             world.news.add_event(item)
         worlds[info["house_id"]] = world
@@ -238,10 +238,10 @@ def main():
 
         def run_one(item):
             house_id, world = item
-            # 季节从 household 配置读
+
             household = next(h for h in selected if h["house_id"] == house_id)["household"]
             season = household.get("season", config.DEFAULT_SEASON)
-            # 环境接口：真实/配置随机/手工（计划23）
+
             from engine.environment_interface import EnvironmentInterface
             env = EnvironmentInterface.get_weather(location, world.time.date.strftime('%Y-%m-%d'), season)
             day_result = world.simulate_day(
@@ -256,16 +256,16 @@ def main():
                                   "mode": env.get("mode", "?")}
             return house_id, day_result
 
-        with ThreadPoolExecutor(max_workers=len(worlds)) as executor:  # 户级并行 = 世界家庭数
+        with ThreadPoolExecutor(max_workers=len(worlds)) as executor:
             house_results = list(executor.map(run_one, worlds.items()))
 
-        # 聚合
+
         population = aggregate_population(house_results)
-        population["policy"] = scenario_name   # 场景标签（政策或新闻实验名），供对比脚本识别
-        population["environment"] = {h: r.get("_env", {}) for h, r in house_results}  # 计划23：环境信息
+        population["policy"] = scenario_name
+        population["environment"] = {h: r.get("_env", {}) for h, r in house_results}
 
         date_str = house_results[0][1]["date"].replace("年", "-").replace("月", "-").replace("日", "")
-        # 每个政策场景存独立子目录，避免互相覆盖（计划9发现的缺陷）
+
         policy_dir = scenario_name
         out_dir = os.path.join(pop_root, policy_dir, date_str)
         os.makedirs(out_dir, exist_ok=True)
@@ -279,11 +279,11 @@ def main():
         print(f"  人口峰值 {population['peak_watts']} W @ {population['peak_time']}")
         print(f"  已保存: {out_path}")
 
-        # 每日汇总每户
+
         for h in population["per_house"]:
             print(f"    - {h['house_id']}: {h['total_energy_kwh']} kWh, 峰值 {h['peak_watts']}W@{h['peak_time']}")
 
-        # 校验警告汇总
+
         for house_id, day_result in house_results:
             executor_obj = day_result["executor"]
             if executor_obj and executor_obj.validation_warnings:
@@ -293,13 +293,13 @@ def main():
             for world in worlds.values():
                 world.next_day()
 
-    # Token 汇总
+
     tokens = next(iter(worlds.values())).get_total_tokens()
     print(f"\n=== Token 账单（{args.days} 天 × {len(worlds)} 户）===")
     print(f"  缓存未命中 {tokens['prompt_cache_miss']} + 缓存命中 {tokens['prompt_cache_hit']} + 输出 {tokens['completion']} = {tokens['total']}")
     print(f"  户均/天 ≈ {tokens['total'] / (args.days * len(worlds)):.0f} tokens")
 
-    # 并发观测（用户 2026-08：不设上限，仅报告实测峰值）
+
     current, peak = SubAgent.get_concurrency_stats()
     print("\n=== 并发实测（观测，无限制）===")
     print(f"  历史峰值并发 {peak}")

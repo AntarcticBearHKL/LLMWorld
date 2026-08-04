@@ -1,15 +1,15 @@
-"""多世界联合聚合：把多个世界（每世界 ≤10 户）的同场景同日曲线合并成更大人口曲线。
 
-背景：用户 2026-08 指令"每世界最多 10 户"。要得到 20/30 户的人口聚合，
-就把多个世界的结果合并（各世界已各自模拟，本脚本 0 token 纯聚合）。
 
-用法：
-    python Implement/combine_worlds.py --worlds pop02 pop03 --scenario baseline --date 2026-04-21
 
-输出：
-    outputs/combined_<w1>+<w2>/population/<scenario>/<date>/population_profile_1440min.json
-    （前端 scan_world 自动识别该目录）
-"""
+
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -30,7 +30,7 @@ def load_profile(world_id, scenario, date):
 
 
 def combine(world_ids, scenario, date):
-    """合并多世界聚合曲线 → 联合曲线 + 统计。"""
+
     profiles = []
     for wid in world_ids:
         p = load_profile(wid, scenario, date)

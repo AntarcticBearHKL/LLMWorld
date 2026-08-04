@@ -1,14 +1,14 @@
-"""基线对比：人口模拟负荷 vs 维州真实负荷（RQ3 第一组证据）。
 
-对比对象：
-- 模拟：population_runner 聚合输出（1440 分钟曲线，或各户曲线）
-- 真实：vic_electricity_data.csv（VIC1 区域小时需求 MW，OpenElectricity）
 
-方法：都转成"归一化小时曲线"（每小时均值/全天均值），比较形状而非量纲。
 
-用法：
-    python Implement/validate_baseline.py --world pop01 [--real vic_electricity_data.csv]
-"""
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -21,15 +21,15 @@ import math
 import pandas as pd
 
 
-# ---------- 指标计算（纯函数，便于测试）----------
+
 
 def hourly_normalized(load_watts_or_mw, hours=24):
-    """1440 分钟(或 N 小时)数据 → 归一化小时曲线（每小时均值/全天均值）。"""
+
     n = len(load_watts_or_mw)
     if n == hours * 60:
         hourly = [sum(load_watts_or_mw[h * 60:(h + 1) * 60]) / 60.0 for h in range(hours)]
     else:
-        hourly = list(load_watts_or_mw)  # 已是小时数据
+        hourly = list(load_watts_or_mw)
     mean = sum(hourly) / len(hourly)
     if mean == 0:
         return [0.0] * len(hourly)
@@ -37,7 +37,7 @@ def hourly_normalized(load_watts_or_mw, hours=24):
 
 
 def find_peak_hour(curve):
-    """返回 (峰值小时, 峰值归一化值)。"""
+
     peak = max(range(len(curve)), key=lambda h: curve[h])
     return peak, curve[peak]
 
@@ -52,7 +52,7 @@ def peak_to_mean(curve):
 
 
 def bimodality(curve, morning=(6, 10), evening=(16, 21)):
-    """双峰强度：晚峰均值与晨峰均值的比值 + 谷底深度。"""
+
     m_peak = max(curve[morning[0]:morning[1] + 1])
     e_peak = max(curve[evening[0]:evening[1] + 1])
     valley = min(curve)
@@ -76,7 +76,7 @@ def pearson(a, b):
 
 
 def compare_curves(sim_curve, real_curve):
-    """两条归一化小时曲线 → 对比报告。"""
+
     sim_h, sim_v = find_peak_hour(sim_curve)
     real_h, real_v = find_peak_hour(real_curve)
     sim_valley, _ = find_valley_hour(sim_curve)
@@ -98,16 +98,16 @@ def compare_curves(sim_curve, real_curve):
     }
 
 
-# ---------- 数据加载 ----------
+
 
 def load_real_data(path):
-    """加载 VIC1 小时需求 CSV → (hourly_mw 列表, 日期列表)。"""
+
     df = pd.read_csv(path)
     df = df[df["region_id"] == "VIC1"]
     df["interval"] = pd.to_datetime(df["interval"])
     df = df.sort_values("interval")
 
-    # 取一个完整的自然日（0 点开始、24 个整点），保证与模拟的小时轴一致
+
     df["date"] = df["interval"].dt.date
     full_day = None
     for d, g in df.groupby("date"):
@@ -124,7 +124,7 @@ def load_real_data(path):
 
 
 def load_sim_profile(world_id):
-    """读取 population 聚合曲线（递归扫描，兼容新旧目录结构）。"""
+
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pop_dir = os.path.join(project_root, "outputs", world_id, "population")
 
@@ -138,13 +138,13 @@ def load_sim_profile(world_id):
     if not candidates:
         raise FileNotFoundError(f"没有找到 {world_id} 的人口聚合曲线，请先跑 population_runner")
 
-    path = sorted(candidates)[-1]   # 取最新
+    path = sorted(candidates)[-1]
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
     return data, path
 
 
-# ---------- 主流程 ----------
+
 
 def main():
     parser = argparse.ArgumentParser(description="人口模拟 vs 维州真实负荷基线对比")
@@ -156,7 +156,7 @@ def main():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     real_path = args.real or os.path.join(project_root, "Data", "vic_electricity_data.csv")
 
-    # 加载数据
+
     sim_data, sim_path = load_sim_profile(args.world)
     real_hourly, real_dates, _ = load_real_data(real_path)
     print(f"模拟数据: {sim_path}")
@@ -164,7 +164,7 @@ def main():
     print(f"真实数据: {real_path}")
     print(f"  小时需求 {len(real_hourly)} 点, 首 {real_dates[0]} → 末 {real_dates[-1]}")
 
-    # 归一化小时曲线
+
     sim_curve = hourly_normalized(sim_data["load_profile_watts"])
     real_curve = hourly_normalized(real_hourly)
 
@@ -174,14 +174,14 @@ def main():
     report["sim_total_kwh"] = sim_data.get("total_energy_kwh")
     report["real_mean_mw"] = round(sum(real_hourly) / len(real_hourly), 2)
 
-    # 输出
+
     out_dir = args.out or os.path.join(project_root, "outputs", args.world, "baseline")
     os.makedirs(out_dir, exist_ok=True)
     report_path = os.path.join(out_dir, "baseline_report.json")
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    # 打印解读
+
     print("\n=== 形状对比报告 ===")
     print(f"晚峰时刻: 模拟 {report['sim_peak_hour']}:00 vs 真实 {report['real_peak_hour']}:00"
           f"（偏移 {report['peak_hour_offset']} 小时）")
@@ -192,7 +192,7 @@ def main():
     print(f"逐小时相关性: {report['correlation']}")
     print(f"报告已保存: {report_path}")
 
-    # 出图
+
     try:
         import matplotlib
         matplotlib.use("Agg")

@@ -1,8 +1,8 @@
-"""公共工具模块：JSON 格式化、日志保存、时间解析、LLM 输出校验。
 
-所有模块统一从这里取工具函数，避免复制粘贴重复代码。
-设计原则：每个函数只做一件事，命名即文档（不懂代码的人也能看懂）。
-"""
+
+
+
+
 
 import json
 import os
@@ -10,22 +10,22 @@ import random
 from datetime import datetime
 
 
-# ---------- 随机种子 ----------
+
 
 def set_seed(seed):
-    """固定随机种子，保证实验可复现（论文要求）。"""
+
     random.seed(seed)
     try:
         import numpy
         numpy.random.seed(seed)
     except ImportError:
-        pass  # numpy 非必需，无则跳过
+        pass
 
 
-# ---------- JSON 格式化 ----------
+
 
 def format_json_compact(obj, indent=2, current_indent=0):
-    """把 JSON 格式化得紧凑易读（列表项不留额外缩进），用于写日志。"""
+
     if isinstance(obj, dict):
         if all(not isinstance(v, (dict, list)) for v in obj.values()):
             return json.dumps(obj, ensure_ascii=False)
@@ -48,10 +48,10 @@ def format_json_compact(obj, indent=2, current_indent=0):
         return json.dumps(obj, ensure_ascii=False)
 
 
-# ---------- 日志保存 ----------
+
 
 def save_log(log_dir, stage_name, prompt, response, tokens=None, reasoning_content=""):
-    """把一次 LLM 调用的 提示词/思考过程/返回结果 保存为 .md 日志文件。"""
+
     log_file = os.path.join(log_dir, f"{stage_name}.md")
 
     with open(log_file, "w", encoding="utf-8") as f:
@@ -86,10 +86,10 @@ def save_log(log_dir, stage_name, prompt, response, tokens=None, reasoning_conte
         f.write("\n```\n")
 
 
-# ---------- 时间解析 ----------
+
 
 def parse_time(time_str):
-    """把 'HH:MM' 解析为"从零点起的分钟数"。失败时返回 0 并打印警告。"""
+
     try:
         hour, minute = map(int, time_str.split(':'))
         return hour * 60 + minute
@@ -100,8 +100,8 @@ def parse_time(time_str):
 
 
 def parse_time_range(time_range):
-    """把 'HH:MM-HH:MM' 解析为 (开始分钟, 结束分钟)。
-    跨天时自动 +1440（如 22:00-02:00）；格式错误时回退 (0, 10)。"""
+
+
     try:
         parts = time_range.split('-')
         if len(parts) != 2:
@@ -127,10 +127,10 @@ def parse_time_range(time_range):
         return 0, 10
 
 
-# ---------- LLM 返回解析与校验 ----------
+
 
 def clean_json_text(text):
-    """去掉 LLM 返回中的 ```json 代码块标记，只保留 JSON 本体。"""
+
     text = text.strip()
 
     if text.startswith('```'):
@@ -145,16 +145,16 @@ def clean_json_text(text):
 
 
 def parse_json_response(text):
-    """清理 LLM 返回的 ```json 代码块并解析为 Python 对象。解析失败抛异常（不静默）。"""
+
     return json.loads(clean_json_text(text))
 
 
 def parse_json_with_retry(prompt, raw_text, json_mode=True, thinking=False):
-    """解析 LLM 返回的 JSON；失败时用同一 prompt 重试一次（追加'只输出JSON'指令）。
 
-    这是对 thinking=False 快速模式下偶发畸形 JSON 的保险：最多多花一次调用，
-    但避免整层结果丢失。仍失败则抛原始异常（由调用方显式处理）。
-    """
+
+
+
+
     try:
         return parse_json_response(raw_text)
     except Exception:
@@ -169,10 +169,10 @@ def parse_json_with_retry(prompt, raw_text, json_mode=True, thinking=False):
 
 
 def validate_appliance_decisions(decision_data, home, warnings):
-    """校验 LLM 的用电决策：unique_id 必须存在、action 必须合法。
 
-    返回清洗后的决策列表；非法操作不会被静默丢弃，而是记入 warnings。
-    """
+
+
+
     cleaned_decisions = []
     raw_decisions = decision_data.get("appliance_decisions", [])
 

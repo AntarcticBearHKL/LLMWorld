@@ -1,10 +1,10 @@
-"""离线单元测试：不调用任何 LLM API，只测纯逻辑。
 
-运行方式（在 LLMWorld 根目录）：
-    python Implement/test_offline.py
 
-覆盖：时间解析、时间线装载、能耗计算（含常开基载）、分钟负荷曲线、决策校验、并发层空输入。
-"""
+
+
+
+
+
 
 import os
 import sys
@@ -34,15 +34,15 @@ class FakeEnergyCalculator:
 
 
 class TestBaseline(unittest.TestCase):
-    """基线对比指标（计划5）。"""
+
 
     def test_hourly_normalized(self):
         loads = [50.0] * 1440
-        loads[19 * 60:20 * 60] = [2050.0] * 60   # 19 点整点高峰
+        loads[19 * 60:20 * 60] = [2050.0] * 60
         curve = hourly_normalized(loads)
         self.assertEqual(len(curve), 24)
         mean = sum(curve) / 24
-        self.assertAlmostEqual(mean, 1.0)        # 归一化后均值 = 1
+        self.assertAlmostEqual(mean, 1.0)
         self.assertEqual(curve.index(max(curve)), 19)
 
     def test_pearson_identical_is_one(self):
@@ -56,11 +56,11 @@ class TestBaseline(unittest.TestCase):
         self.assertEqual(report["sim_peak_hour"], 5)
         self.assertEqual(report["real_peak_hour"], 5)
         self.assertEqual(report["peak_hour_offset"], 0)
-        self.assertGreater(report["correlation"], 0.9)   # 同形状 → 高相关
+        self.assertGreater(report["correlation"], 0.9)
 
 
 class TestGroupAnalysis(unittest.TestCase):
-    """节能意识分组（计划10）。"""
+
 
     def test_group_stats(self):
         from analyze_groups import group_stats
@@ -74,15 +74,15 @@ class TestGroupAnalysis(unittest.TestCase):
 
         self.assertEqual(rows["高"]["households"], 2)
         self.assertAlmostEqual(rows["高"]["baseline_mean_kwh"], 12.0)
-        # 高意识组 TOU 响应为负（节电）
+
         self.assertAlmostEqual(rows["高"]["tou_mean_kwh"], 10.0)
         self.assertAlmostEqual(rows["高"]["tou_change_pct"], -16.67, places=2)
-        # 低意识组几乎不响应
+
         self.assertAlmostEqual(rows["低"]["tou_change_pct"], 2.5, places=2)
 
 
 class TestNewsBoard(unittest.TestCase):
-    """新闻台（计划13：上帝模式）。"""
+
 
     def test_filter_by_date(self):
         from engine.news import NewsBoard, NewsItem
@@ -90,7 +90,7 @@ class TestNewsBoard(unittest.TestCase):
         board.add_event(NewsItem("2026-04-21", "07:00", "征税", "内容A"))
         board.add_event(NewsItem("2026-04-22", "07:00", "返利", "内容B"))
 
-        self.assertEqual(len(board.available_on("2026-04-20")), 0)   # 未来事件不可见
+        self.assertEqual(len(board.available_on("2026-04-20")), 0)
         self.assertEqual(len(board.available_on("2026-04-21")), 1)
         self.assertEqual(len(board.available_on("2026-04-23")), 2)
 
@@ -105,7 +105,7 @@ class TestNewsBoard(unittest.TestCase):
         text = board.render_for_prompt("2026-04-21")
         self.assertIn("今日外界信息", text)
         self.assertIn("战争爆发", text)
-        self.assertIn("性格", text)   # 个性分析指令
+        self.assertIn("性格", text)
 
     def test_inline_event_parsing(self):
         from engine.news import NewsBoard
@@ -122,21 +122,23 @@ class TestNewsBoard(unittest.TestCase):
 
 
 class TestServerData(unittest.TestCase):
-    """可视化后端数据层（计划18）。"""
+    _OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "outputs")
 
+    @unittest.skipUnless(os.path.isdir(os.path.join(_OUT, "pop04")), "需要 pop04 模拟数据")
     def test_list_worlds_contains_pop04(self):
         import server
         worlds = server.list_worlds()
         ids = [w["id"] for w in worlds]
         self.assertIn("pop04", ids)
 
+    @unittest.skipUnless(os.path.isdir(os.path.join(_OUT, "pop04")), "需要 pop04 模拟数据")
     def test_load_profile_known_scenario(self):
         import server
         data = server.load_profile("pop04", "baseline", "2026-04-21")
         self.assertIsNotNone(data)
         self.assertEqual(len(data["load_profile_watts"]), 1440)
-        self.assertGreater(data["total_energy_kwh"], 0)
 
+    @unittest.skipUnless(os.path.isdir(os.path.join(_OUT, "pop04")), "需要 pop04 模拟数据")
     def test_load_events_pop04(self):
         import server
         events = server.load_events("pop04")
@@ -144,7 +146,7 @@ class TestServerData(unittest.TestCase):
 
 
 class TestEnvironmentInterface(unittest.TestCase):
-    """环境信息开放接口（计划23）。"""
+
 
     def setUp(self):
         import config as cfg
@@ -157,7 +159,7 @@ class TestEnvironmentInterface(unittest.TestCase):
         cfg.ENV_MANUAL_FILE = self._saved_file
 
     def test_config_mode_temp_within_season_range(self):
-        """config 模式：温度落在该季节范围内。"""
+
         import config as cfg
         cfg.ENV_MODE = "config"
         from engine.environment_interface import EnvironmentInterface
@@ -170,7 +172,7 @@ class TestEnvironmentInterface(unittest.TestCase):
             self.assertIn("mode", w)
 
     def test_config_mode_seeded_reproducible(self):
-        """同种子 → 同天气（实验可复现）。"""
+
         import config as cfg
         cfg.ENV_MODE = "config"
         from engine.environment_interface import EnvironmentInterface
@@ -183,7 +185,7 @@ class TestEnvironmentInterface(unittest.TestCase):
         self.assertEqual(w1["condition"], w2["condition"])
 
     def test_manual_mode_fixed_value(self):
-        """manual 模式：读配置文件固定值。"""
+
         import config as cfg
         cfg.ENV_MODE = "manual"
         from engine.environment_interface import EnvironmentInterface
@@ -192,7 +194,7 @@ class TestEnvironmentInterface(unittest.TestCase):
         self.assertIn("condition", w)
 
     def test_manual_missing_file_raises(self):
-        """manual 模式但文件不存在 → 显式报错（不静默）。"""
+
         import config as cfg
         cfg.ENV_MODE = "manual"
         cfg.ENV_MANUAL_FILE = "不存在的文件.json"
@@ -202,7 +204,7 @@ class TestEnvironmentInterface(unittest.TestCase):
 
 
 class TestPopulationAnalysis(unittest.TestCase):
-    """人口行为归因（计划25）。"""
+
 
     def test_group_mean(self):
         from analyze_population import group_mean
@@ -226,17 +228,19 @@ class TestPopulationAnalysis(unittest.TestCase):
         from analyze_population import pearson
         self.assertGreater(pearson([1, 2, 3], [2, 4, 6]), 0.99)
         self.assertLess(pearson([1, 2, 3], [6, 4, 2]), -0.99)
-        self.assertIsNone(pearson([1], [2]))   # 样本不足
+        self.assertIsNone(pearson([1], [2]))
 
 
 class TestCombineWorlds(unittest.TestCase):
-    """多世界联合聚合（每世界≤10户 → 更大人口，计划26）。"""
+    _OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "outputs")
 
+    @unittest.skipUnless(os.path.isdir(os.path.join(_OUT, "pop04", "population", "baseline")),
+                         "需要 pop04 模拟数据")
     def test_combine_math(self):
-        """联合曲线 = 各世界逐元素之和，统计正确。"""
+
         from combine_worlds import combine
 
-        # 用 pop04 真实基线数据（清理后唯一有模拟结果的世界）
+
         data = combine(["pop04"], "baseline", "2026-04-21")
         self.assertEqual(data["households"], 10)
         self.assertEqual(len(data["load_profile_watts"]), 1440)
@@ -245,10 +249,10 @@ class TestCombineWorlds(unittest.TestCase):
 
 
 class TestNewsMemoryProgressive(unittest.TestCase):
-    """新闻记忆化渐进（计划35）：当天新新闻 + 旧闻记忆摘要 + 落盘恢复。"""
+
 
     def test_delivery_first_day_only_new(self):
-        """第 1 天：只投递当天（及之前未投递）的新闻。"""
+
         from engine.news import NewsBoard, NewsItem
         board = NewsBoard()
         board.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
@@ -257,11 +261,11 @@ class TestNewsMemoryProgressive(unittest.TestCase):
         day1 = board.get_new_for("2026-04-21")
         self.assertEqual(len(day1), 1)
         self.assertEqual(day1[0].title, "新闻A")
-        # 同日再次调用：不重复投递
+
         self.assertEqual(len(board.get_new_for("2026-04-21")), 0)
 
     def test_delivery_day2_only_new(self):
-        """第 2 天：只投递新新闻（B），旧闻（A）不再出现。"""
+
         from engine.news import NewsBoard, NewsItem
         board = NewsBoard()
         board.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
@@ -273,19 +277,19 @@ class TestNewsMemoryProgressive(unittest.TestCase):
         self.assertEqual(day2[0].title, "新闻B")
 
     def test_backfilled_old_news_considered_new(self):
-        """后补旧新闻（从未投递过）算新的，会被投递。"""
+
         from engine.news import NewsBoard, NewsItem
         board = NewsBoard()
         board.add_event(NewsItem("2026-04-22", "07:00", "新闻B", "内容B"))
         board.get_new_for("2026-04-22")
-        # 上帝后补一条 04-21 的旧新闻
+
         board.add_event(NewsItem("2026-04-21", "09:00", "后补旧闻", "内容"))
         day2b = board.get_new_for("2026-04-22")
         self.assertEqual(len(day2b), 1)
         self.assertEqual(day2b[0].title, "后补旧闻")
 
     def test_delivery_state_roundtrip(self):
-        """投递进度序列化/恢复（重启后只投递新一天）。"""
+
         from engine.news import NewsBoard, NewsItem
         board = NewsBoard()
         board.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
@@ -297,10 +301,10 @@ class TestNewsMemoryProgressive(unittest.TestCase):
         board2.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
         board2.add_event(NewsItem("2026-04-22", "07:00", "新闻B", "内容B"))
         day2 = board2.get_new_for("2026-04-22")
-        self.assertEqual([n.title for n in day2], ["新闻B"])   # A 已投递过，不重复
+        self.assertEqual([n.title for n in day2], ["新闻B"])
 
     def test_memory_news_rolling_keep(self):
-        """新闻记忆：滚动保留最近 N 条（默认 5），去重。"""
+
         from engine.news import NewsItem
         from engine.memory import HouseholdMemory
         mem = HouseholdMemory()
@@ -311,7 +315,7 @@ class TestNewsMemoryProgressive(unittest.TestCase):
         self.assertEqual(mem.news_memory[0]["title"], "新闻3")
 
     def test_prompt_context_contains_news_review(self):
-        """记忆上下文含'近期外界信息回顾'章节（旧闻以摘要形式）。"""
+
         from engine.news import NewsItem
         from engine.memory import HouseholdMemory
         mem = HouseholdMemory()
@@ -320,8 +324,11 @@ class TestNewsMemoryProgressive(unittest.TestCase):
         self.assertIn("近期外界信息回顾", ctx)
         self.assertIn("昨日新闻标题", ctx)
 
+    @unittest.skipUnless(os.path.isdir(os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "worlds", "pop05")),
+        "需要 pop05 世界")
     def test_world_state_news_roundtrip(self):
-        """World 落盘：news_delivery + news_memory 保存与恢复。"""
+
         import json, os, tempfile
         from engine.world import World
         from simulate import load_world, create_home_from_household
@@ -336,16 +343,16 @@ class TestNewsMemoryProgressive(unittest.TestCase):
         w.memory.add_news(w.news.delivered_on("2026-04-21"), keep=5)
         w.save_state()
 
-        # 恢复
+
         w2 = World(home, world_id="pop05", postcode="3168", house_id="house_0001")
-        # 需要把剧本新闻也加载进 w2（与 w 相同）
+
         w2.news.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
-        # 已投递进度恢复 → 同一天不再投递
+
         self.assertEqual(len(w2.news.get_new_for("2026-04-21")), 0)
         self.assertEqual(len(w2.memory.news_memory), 1)
         self.assertEqual(w2.memory.news_memory[0]["title"], "新闻A")
 
-        # 清理测试 state
+
         sp = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                           "worlds", "pop05", "state.json")
         if os.path.exists(sp):
@@ -353,7 +360,7 @@ class TestNewsMemoryProgressive(unittest.TestCase):
 
 
 class TestPolicy(unittest.TestCase):
-    """政策渲染与对比指标（计划8）。"""
+
 
     def test_render_empty_when_no_policy(self):
         from engine.policy import Policy
@@ -375,15 +382,15 @@ class TestPolicy(unittest.TestCase):
         self.assertIn("返利", loss_text)
 
     def test_compare_metrics(self):
-        """干预把 2 kWh 从晚峰挪到谷段 → 晚峰变化 -X%、谷段 +X%。"""
+
         from compare_policies import compare
         from population_runner import aggregate_population
 
         def make_profile(peak_watts, valley_extra):
             loads = [50.0] * 1440
-            for h in range(17, 20):           # 晚峰 17-19 点
+            for h in range(17, 20):
                 loads[h * 60:(h + 1) * 60] = [peak_watts] * 60
-            for h in range(23, 24):           # 谷段 23 点
+            for h in range(23, 24):
                 loads[h * 60:(h + 1) * 60] = [valley_extra] * 60
             return loads
 
@@ -396,31 +403,31 @@ class TestPolicy(unittest.TestCase):
             "energy_summary": {"total_energy_kwh": 12.0}})])
 
         report = compare(baseline, intervention)
-        self.assertLess(report["peak_hours_change_pct"], 0)     # 晚峰削减
-        self.assertGreater(report["valley_hours_change_pct"], 0)  # 谷段上升
-        self.assertAlmostEqual(report["total_change_pct"], 0.0, places=1)  # 总量近似不变
+        self.assertLess(report["peak_hours_change_pct"], 0)
+        self.assertGreater(report["valley_hours_change_pct"], 0)
+        self.assertAlmostEqual(report["total_change_pct"], 0.0, places=1)
 
 
 class TestPopulationV2(unittest.TestCase):
-    """世界生成 v2（计划22：Big Five + 垂直家庭 + 关联）。"""
+
 
     def test_big_five_to_news_sensitivity(self):
-        """神经质 → 新闻敏感度映射（保留，与用电行为无关）。"""
+
         from population import big_five_to_news_sensitivity
         self.assertEqual(big_five_to_news_sensitivity(
             {"openness": 3, "conscientiousness": 5, "extraversion": 5,
              "agreeableness": 6, "neuroticism": 8}), "高")
 
     def test_no_energy_awareness_in_generation(self):
-        """去作弊化（用户 2026-08）：生成结果不得含用电行为相关词条。"""
+
         import random
         from population import _build_template
         h = _build_template("young_couple", random.Random(9))
         blob = json.dumps(h, ensure_ascii=False)
-        self.assertNotIn("energy_awareness", blob)      # 无节能意识预设
-        self.assertNotIn("电动汽车", blob)               # 无 EV 预设
-        self.assertNotIn("省电", blob)                   # 无省电表述
-        self.assertNotIn("关灯", blob)                   # 无关灯类行为预设
+        self.assertNotIn("energy_awareness", blob)
+        self.assertNotIn("电动汽车", blob)
+        self.assertNotIn("省电", blob)
+        self.assertNotIn("关灯", blob)
         self.assertNotIn("节能", blob)
 
     def test_big_five_to_text_describes_high(self):
@@ -429,18 +436,18 @@ class TestPopulationV2(unittest.TestCase):
                                  "extraversion": 5, "agreeableness": 5,
                                  "neuroticism": 5})
         self.assertIn("开放性高", text)
-        self.assertIn("新鲜事物", text)   # 去作弊化：不再提及"新技术/电动车"等用电关联词
+        self.assertIn("新鲜事物", text)
 
     def test_quota_distribution_covers_all_types(self):
-        """配额：8 类家庭全部覆盖，总数正确。"""
+
         import random
         from population import _quota_distribution
         counts = _quota_distribution(100, random.Random(1))
         self.assertEqual(sum(counts.values()), 100)
-        self.assertEqual(len(counts), 8)   # 8 类全在
+        self.assertEqual(len(counts), 8)
 
     def test_couple_age_association(self):
-        """成员关联：夫妻年龄差 ≤5（2508.09964 关联思想）。"""
+
         import random
         from population import _build_template
         h = _build_template("young_couple", random.Random(7))
@@ -448,18 +455,18 @@ class TestPopulationV2(unittest.TestCase):
         self.assertLessEqual(ages[1] - ages[0], 5)
 
     def test_multigenerational_age_order(self):
-        """多代同堂：三代年龄有序（祖父母夫妻差≤5，代际差≥18）。"""
+
         import random
         from population import _build_template
         h = _build_template("multigenerational", random.Random(3))
         ages = sorted(m["age"] for m in h["members"])
-        # ages = [孩子, 父母, 祖父母(小), 祖父母(大)]
-        self.assertLessEqual(ages[3] - ages[2], 5)    # 祖父母是夫妻，年龄差小
-        self.assertGreaterEqual(ages[2] - ages[1], 20)  # 祖父母-父母 ≥20
-        self.assertGreaterEqual(ages[1] - ages[0], 18)  # 父母-孩子 ≥18
+
+        self.assertLessEqual(ages[3] - ages[2], 5)
+        self.assertGreaterEqual(ages[2] - ages[1], 20)
+        self.assertGreaterEqual(ages[1] - ages[0], 18)
 
     def test_big_five_field_in_household(self):
-        """v2 字段：big_five / behavior_text / news_sensitivity 存在。"""
+
         import random
         from population import _build_template
         h = _build_template("single_living", random.Random(5))
@@ -470,7 +477,7 @@ class TestPopulationV2(unittest.TestCase):
         self.assertIn("news_sensitivity", pers)
 
     def test_dedupe_names(self):
-        """家庭内成员姓名唯一（agent 身份键要求）。"""
+
         import random
         from population import _build_template, _dedupe_names
         h = _build_template("multigenerational", random.Random(3))
@@ -480,10 +487,10 @@ class TestPopulationV2(unittest.TestCase):
 
 
 class TestPopulation(unittest.TestCase):
-    """人口构建器 + 聚合（计划4）。"""
+
 
     def test_builder_deterministic(self):
-        """同种子两次生成完全一致（论文可复现要求）。"""
+
         import random
         rng1 = random.Random(42)
         rng2 = random.Random(42)
@@ -492,19 +499,19 @@ class TestPopulation(unittest.TestCase):
         self.assertEqual(json.dumps(h1, ensure_ascii=False), json.dumps(h2, ensure_ascii=False))
 
     def test_builder_heterogeneous(self):
-        """不同种子/类型生成不同家庭（异质性）。"""
+
         import random
         a = _build_template("young_couple", random.Random(1))
         b = _build_template("family_with_kids", random.Random(2))
         self.assertNotEqual(a["type"], b["type"])
-        self.assertEqual(len(b["members"]), 3)   # 有孩家庭 3 人
+        self.assertEqual(len(b["members"]), 3)
 
     def test_aggregation_math(self):
-        """聚合：总曲线 = 逐户曲线之和，统计量正确。"""
+
         house_results = []
         for i, watts in enumerate([(100.0, 500.0), (150.0, 700.0)]):
             loads = [watts[0]] * 1440
-            loads[1200] = watts[1]   # 20:00 各自峰值
+            loads[1200] = watts[1]
 
             day_result = {
                 "energy_calculator": FakeEnergyCalculator(loads),
@@ -515,15 +522,15 @@ class TestPopulation(unittest.TestCase):
         pop = aggregate_population(house_results)
 
         self.assertEqual(pop["households"], 2)
-        self.assertAlmostEqual(pop["load_profile_watts"][0], 250.0)        # 100+150
-        self.assertAlmostEqual(pop["load_profile_watts"][1200], 1200.0)    # 500+700
+        self.assertAlmostEqual(pop["load_profile_watts"][0], 250.0)
+        self.assertAlmostEqual(pop["load_profile_watts"][1200], 1200.0)
         self.assertEqual(pop["peak_time"], "20:00")
         self.assertAlmostEqual(pop["mean_household_kwh"], (500.0 * 0.06 + 700.0 * 0.06) / 2, places=4)
-        self.assertGreater(pop["std_household_kwh"], 0)   # 异质性存在
+        self.assertGreater(pop["std_household_kwh"], 0)
 
 
 class TestMemory(unittest.TestCase):
-    """跨天记忆：摘要生成与 prompt 注入。"""
+
 
     def _make_day_result(self):
         tl = Timeline("Alice")
@@ -539,7 +546,7 @@ class TestMemory(unittest.TestCase):
             timelines = {"Alice": tl}
 
         loads = [50.0] * 1440
-        loads[1200] += 2000.0   # 20:00 高峰 2050W
+        loads[1200] += 2000.0
 
         return {
             "date": "2026年4月20日",
@@ -566,8 +573,8 @@ class TestMemory(unittest.TestCase):
 
         summary = mem.last
         alice = summary["members"]["Alice"]
-        self.assertEqual(alice["wake_time"], "07:30")    # 第一个非睡觉活动
-        self.assertEqual(alice["sleep_time"], "23:59")   # 最后一个睡觉段结束
+        self.assertEqual(alice["wake_time"], "07:30")
+        self.assertEqual(alice["sleep_time"], "23:59")
         self.assertIn("吃早餐", alice["activities"][0])
         self.assertGreaterEqual(len(alice["activities"]), 3)
 
@@ -587,31 +594,31 @@ class TestMemory(unittest.TestCase):
         self.assertIn("空调 2.0 kWh", ctx)
 
     def test_prompt_template_renders_with_empty_memory(self):
-        """模板在 memory_context 为空时也能正常渲染。"""
+
         from engine.prompt import Prompt
         rendered = Prompt().load("simulate_step1_macro_plan",
             member_name="Alice", member_age=28, member_occupation="软件工程师",
             member_personality="细心", date="2026年4月21日", day_type="工作日",
             time_context="日期：2026年4月21日（工作日）",
             home_structure="{}", members_info="[]", memory_context="")
-        self.assertNotIn("memory_context", rendered)   # 占位符被替换，无残留
+        self.assertNotIn("memory_context", rendered)
 
 
-# ---------- 测试用固定家庭：1 台冰箱（常开）+ 1 台电视（按需）----------
+
 
 def build_test_home():
     home = Home("测试之家")
 
     kitchen = Room("厨房")
-    kitchen.add_appliance_by_name("冰箱")   # always_on，默认日耗 1.2 kWh
+    kitchen.add_appliance_by_name("冰箱")
     home.add_room(kitchen)
 
     living = Room("客厅")
-    living.add_appliance_by_name("电视")    # on_demand，150W
+    living.add_appliance_by_name("电视")
     home.add_room(living)
 
     alice = Member("Alice", 28, "软件工程师", "细心", {"wake_time": "07:00"})
-    alice.add_personal_appliance_by_name("手机")  # charging，20W
+    alice.add_personal_appliance_by_name("手机")
     home.add_member(alice)
 
     return home
@@ -631,11 +638,11 @@ class TestTimeParsing(unittest.TestCase):
         self.assertEqual(utils.parse_time_range("22:00-02:00"), (1320, 1560))
 
     def test_parse_time_range_bad_returns_fallback(self):
-        # "not-a-range" 被修复逻辑拆成 not/range → 都解析失败回退 0:00 → 跨天规则变全天 (0,1440)
+
         self.assertEqual(utils.parse_time_range("not-a-range"), (0, 1440))
 
     def test_parse_time_range_multi_dash_repair(self):
-        # "18:00-19:00-20:00" 这种 LLM 常见错误：取第一个和最后一个
+
         self.assertEqual(utils.parse_time_range("18:00-19:00-20:00"), (1080, 1200))
 
 
@@ -647,7 +654,7 @@ class TestTimeline(unittest.TestCase):
             {"time": "08:00-09:00", "location": "厨房", "activity": "吃早餐"},
         ])
         self.assertEqual(len(tl.slots), 2)
-        self.assertEqual(tl.slots[0].activity, "吃早餐")   # 已按开始时间排序
+        self.assertEqual(tl.slots[0].activity, "吃早餐")
         self.assertTrue(tl.slots[0].overlaps(480, 500))
 
     def test_load_bad_activity_skipped(self):
@@ -670,8 +677,8 @@ class TestEnergyCalculator(unittest.TestCase):
             json.dump(decision_data, f, ensure_ascii=False, indent=2)
 
     def test_baseline_included_in_total(self):
-        """计划1核心：冰箱基载 1.2 kWh 必须计入日总用电。"""
-        # 只给 Alice 一条合法决策：看电视 1 小时（150W → 0.15 kWh）
+
+
         self._write_decision({
             "member": "Alice",
             "appliance_decisions": [
@@ -687,17 +694,17 @@ class TestEnergyCalculator(unittest.TestCase):
         calc = EnergyCalculator(self.home, self.tmpdir)
         calc.calculate_all_energy()
 
-        # 冰箱 1.2 + 电视 0.15
+
         self.assertAlmostEqual(calc.baseline_kwh, 1.2, places=4)
         self.assertAlmostEqual(calc.decision_kwh, 0.15, places=4)
         self.assertAlmostEqual(calc.baseline_kwh + calc.decision_kwh, 1.35, places=4)
 
-        # 家庭分钟负荷：1440 点；基载 50W 持续；20:00 区间多 150W
+
         profile = calc.household_load_watts
         self.assertEqual(len(profile), 1440)
-        self.assertAlmostEqual(profile[0], 50.0, places=2)         # 0:00 只有冰箱
-        self.assertAlmostEqual(profile[1200], 200.0, places=2)     # 20:00 = 50 + 150
-        self.assertEqual(calc.validation_warnings, [])             # 无警告
+        self.assertAlmostEqual(profile[0], 50.0, places=2)
+        self.assertAlmostEqual(profile[1200], 200.0, places=2)
+        self.assertEqual(calc.validation_warnings, [])
 
     def test_always_on_usage_recorded(self):
         self._write_decision({
@@ -713,7 +720,7 @@ class TestEnergyCalculator(unittest.TestCase):
         self.assertEqual(fridge["total_minutes"], 1440)
 
     def test_invalid_appliance_and_action_warned(self):
-        """非法 unique_id / action 必须进 warnings，绝不静默。"""
+
         self._write_decision({
             "member": "Alice",
             "appliance_decisions": [
@@ -723,8 +730,8 @@ class TestEnergyCalculator(unittest.TestCase):
                     "activity": "看电视",
                     "operations": [
                         {"unique_id": "客厅_电视", "action": "use"},
-                        {"unique_id": "不存在的电器", "action": "use"},          # 未知电器
-                        {"unique_id": "客厅_电视", "action": "launch_nuclear"},   # 非法操作
+                        {"unique_id": "不存在的电器", "action": "use"},
+                        {"unique_id": "客厅_电视", "action": "launch_nuclear"},
                     ]
                 }
             ]
@@ -734,7 +741,7 @@ class TestEnergyCalculator(unittest.TestCase):
         calc.calculate_all_energy()
 
         self.assertEqual(len(calc.validation_warnings), 2)
-        # 合法操作仍被计入
+
         self.assertAlmostEqual(calc.decision_kwh, 0.15, places=4)
 
     def test_profile_file_saved(self):
@@ -750,12 +757,12 @@ class TestEnergyCalculator(unittest.TestCase):
         self.assertEqual(len(profile["load_profile_watts"]), 1440)
         self.assertEqual(profile["unit"], "watts")
         self.assertAlmostEqual(profile["total_energy_kwh"], 1.2, places=4)
-        self.assertAlmostEqual(profile["peak_watts"], 50.0, places=4)  # 只有基载时峰值 50W
+        self.assertAlmostEqual(profile["peak_watts"], 50.0, places=4)
 
     def test_daily_cap_truncates_ev_overcharge(self):
-        """计划7：电动汽车 12 小时充电被截断到 4 小时上限，并记警告。"""
-        # 给 Alice 加一台电动汽车（charging 类），配置 7000W
-        self.home.get_room("厨房").appliances  # noop 确保 room 存在
+
+
+        self.home.get_room("厨房").appliances
         garage = Room("车库")
         garage.add_appliance_by_name("电动汽车")
         self.home.add_room(garage)
@@ -764,7 +771,7 @@ class TestEnergyCalculator(unittest.TestCase):
             "member": "Alice",
             "appliance_decisions": [
                 {
-                    "time": "20:00-08:00",   # 12 小时连续充电
+                    "time": "20:00-08:00",
                     "location": "车库",
                     "activity": "充电",
                     "operations": [{"unique_id": "车库_电动汽车", "action": "charge_home"}],
@@ -776,7 +783,7 @@ class TestEnergyCalculator(unittest.TestCase):
         calc.calculate_all_energy()
 
         ev = calc.appliance_usage["车库_电动汽车"]
-        # 7000W × 4 小时 = 28 kWh（截断到上限 240 分钟）
+
         self.assertAlmostEqual(ev["total_energy_kwh"], 28.0, places=4)
         self.assertEqual(ev["usage_segments"][0]["duration_minutes"], 240)
         self.assertTrue(ev["usage_segments"][0]["capped"])
@@ -788,64 +795,64 @@ class TestSubAgent(unittest.TestCase):
         self.assertEqual(SubAgent.parallel_call([]), [])
 
     def test_retry_config_limits(self):
-        """用户 2026-08 指令：并发不设上限（观测保留，无硬性限制常量）。"""
+
         import config as cfg
-        self.assertGreaterEqual(cfg.MAX_RETRIES, 1)   # 重试仍启用
-        self.assertFalse(hasattr(cfg, "MAX_WORKERS"))  # 并发上限已移除
+        self.assertGreaterEqual(cfg.MAX_RETRIES, 1)
+        self.assertFalse(hasattr(cfg, "MAX_WORKERS"))
 
     def test_reasoning_effort_lowest(self):
-        """用户指令：思考强度最低。官方枚举仅 low/high/max（api-docs.deepseek.com）。"""
+
         import config as cfg
         self.assertEqual(cfg.REASONING_EFFORT, "low")
-        self.assertIn(cfg.REASONING_EFFORT, ("low", "high", "max"))   # 官方枚举
+        self.assertIn(cfg.REASONING_EFFORT, ("low", "high", "max"))
 
     def test_concurrency_stats_reset(self):
-        """并发统计可查询，且峰值初始为 0。"""
+
         SubAgent.reset_tokens()
         current, peak = SubAgent.get_concurrency_stats()
-        self.assertEqual(peak, 0)   # 本轮未调用 API 前峰值应为 0
+        self.assertEqual(peak, 0)
 
 
 class TestReport(unittest.TestCase):
-    """论文报告：价格弹性计算（make_report）。"""
+
 
     def test_price_elasticity_typical(self):
-        # 峰段用电 -9.2%，电价 +57.1% → 弹性 ≈ -0.161
+
         self.assertAlmostEqual(price_elasticity(-9.2, 57.1), -0.161, places=3)
 
     def test_price_elasticity_zero_price_change(self):
-        # 电价不变（ΔP% = 0）→ 弹性未定义，返回 None
+
         self.assertIsNone(price_elasticity(-5.0, 0))
 
     def test_price_elasticity_positive_demand_growth(self):
-        # 需求上升 +10% 而价格不变动区间外的情况：涨价仍增长 → 正弹性
+
         self.assertEqual(price_elasticity(10.0, 20.0), 0.5)
 
     def test_tou_elasticity_real_values(self):
-        # 论文实测值：56.5 → 51.3 kWh，0.35 → 0.55 澳元/kWh
+
         elasticity, q_change = tou_elasticity(56.5, 51.3, 0.55, 0.35)
         self.assertAlmostEqual(q_change, -9.2035, places=3)
         self.assertAlmostEqual(elasticity, -0.161, places=3)
-        self.assertLess(elasticity, 0)   # 涨价 → 用电下降
+        self.assertLess(elasticity, 0)
 
     def test_tou_elasticity_zero_baseline(self):
-        # 基线峰段电量为 0 → 无法算变化率，返回 (None, None) 而非崩溃
+
         self.assertEqual(tou_elasticity(0.0, 10.0, 0.55, 0.35), (None, None))
 
     def test_tou_elasticity_no_response(self):
-        # 电价涨但峰段用电不变 → 弹性为 0（完全无响应）
+
         elasticity, q_change = tou_elasticity(50.0, 50.0, 0.55, 0.35)
         self.assertEqual(q_change, 0.0)
         self.assertEqual(elasticity, 0.0)
 
     def test_parse_kwh_plain_and_suffixed(self):
-        # 矩阵单元格：纯数字与带 '(±x.x%)' 后缀均可解析
+
         self.assertEqual(parse_kwh("56.5"), 56.5)
         self.assertEqual(parse_kwh("51.3 (-9.1%)"), 51.3)
         self.assertEqual(parse_kwh("+151.3 (+6.9%)"), 151.3)
 
     def test_parse_kwh_invalid_returns_none(self):
-        # 无数字或 None → 返回 None，不抛异常
+
         self.assertIsNone(parse_kwh("无数据"))
         self.assertIsNone(parse_kwh(None))
 

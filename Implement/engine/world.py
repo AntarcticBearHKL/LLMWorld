@@ -20,8 +20,8 @@ class World:
         self.world_id = world_id
         self.postcode = postcode
         self.house_id = house_id
-        # 世界日期连续逻辑（用户 2026-08 指令）：显式 start_date 优先；
-        # 否则读 worlds/<id>/state.json → 从上次保存日期的下一天继续（断点续跑）
+
+
         if start_date:
             self.time = Time(start_date)
         else:
@@ -29,13 +29,13 @@ class World:
         self.history = []
         self.current_planner = None
         self.current_executor = None
-        self.memory = HouseholdMemory()   # 跨天记忆：昨天的行为影响今天的计划
-        self.memory.load_days(self._load_memory_days())   # 恢复历史记忆（连续性）
-        self.news = self._load_news_board()  # 新闻台：上帝注入的外界信息
-        # 新闻记忆化（计划35）：恢复新闻投递进度 + 本户新闻要点（重启后只投递新一天）
+        self.memory = HouseholdMemory()
+        self.memory.load_days(self._load_memory_days())
+        self.news = self._load_news_board()
+
         self._restore_news_state()
 
-    # ---------- 世界状态持久化（断点续跑）----------
+
 
     def _state_path(self):
         if not self.world_id:
@@ -44,7 +44,7 @@ class World:
         return os.path.join(project_root, "worlds", self.world_id, "state.json")
 
     def _resume_date(self):
-        """从 state.json 读上次日期 → 返回下一天（连续时间延续）。无状态返回 None。"""
+
         path = self._state_path()
         if not path or not os.path.exists(path):
             return None
@@ -61,7 +61,7 @@ class World:
             return None
 
     def _load_memory_days(self):
-        """从 state.json 恢复本户跨天记忆（按 house_id 存储，多户并行不互相覆盖）。"""
+
         path = self._state_path()
         if not path or not os.path.exists(path):
             return []
@@ -69,7 +69,7 @@ class World:
             with open(path, "r", encoding="utf-8") as f:
                 state = json.load(f)
             days = state.get("memory_days", [])
-            # 兼容新格式（dict 按户）与旧格式（list 单户）
+
             if isinstance(days, dict):
                 return days.get(self.house_id, [])
             return days if isinstance(days, list) else []
@@ -77,7 +77,7 @@ class World:
             return []
 
     def _restore_news_state(self):
-        """恢复新闻投递进度（NewsBoard）与本户新闻记忆（计划35）。"""
+
         path = self._state_path()
         if not path or not os.path.exists(path):
             return
@@ -94,11 +94,11 @@ class World:
             pass
 
     def save_state(self):
-        """保存世界状态：日期 + 跨天记忆 + 新闻记忆 + 新闻投递进度（原子写，多户并行安全）。
 
-        state.json 结构：{date, memory_days: {house_id: [摘要]}, news_memory: {house_id: [要点]},
-                          news_delivery: {delivered_ids: [...]}}
-        """
+
+
+
+
         path = self._state_path()
         if not path:
             return
@@ -109,7 +109,7 @@ class World:
                     state = json.load(f)
             except Exception:
                 state = {}
-        # 兼容旧格式（list）→ 迁移为 dict
+
         memory = state.get("memory_days")
         if not isinstance(memory, dict):
             memory = {}
@@ -117,7 +117,7 @@ class World:
         state["date"] = self.time.get_date_string()
         state["memory_days"] = memory
 
-        # 新闻记忆化（计划35）：新闻要点按户 + 投递进度（世界级）
+
         news_memory = state.get("news_memory")
         if not isinstance(news_memory, dict):
             news_memory = {}
@@ -126,16 +126,16 @@ class World:
         state["news_delivery"] = self.news.to_state()
 
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        # 原子写：先写临时文件再改名，避免并发读写的半写文件
+
         tmp = path + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
         os.replace(tmp, path)
 
-    # ---------- 新闻台 ----------
+
 
     def _load_news_board(self):
-        """从 worlds/<world_id>/events.json 加载上帝剧本（不存在则为空新闻台）。"""
+
         if not self.world_id:
             return NewsBoard()
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -143,7 +143,7 @@ class World:
         return NewsBoard(events_file)
 
     def add_world_event(self, news_item):
-        """上帝接口：运行时注入一条世界新闻。"""
+
         self.news.add_event(news_item)
         return self
 
@@ -155,11 +155,11 @@ class World:
             print(f"{'='*60}\n")
         
         date_str = self.time.date.strftime('%Y%m%d')
-        # 新闻记忆化（计划35）：先取当天新新闻（标记投递），再渲染，避免重复投递
+
         date_iso = self.time.date.strftime('%Y-%m-%d')
         new_news = self.news.get_new_for(date_iso)
         news_text = self.news.render_items(new_news)
-        self._news_delivered = new_news   # 供 memory 并入新闻记忆
+        self._news_delivered = new_news
         planner = Planner(self.home, world_id=self.world_id, postcode=self.postcode, 
                          house_id=self.house_id, date_str=date_str,
                          memory_context=self.memory.get_prompt_context(),
@@ -211,9 +211,9 @@ class World:
         
         self.history.append(day_result)
 
-        # 每天结束后更新跨天记忆（昨天的行为 → 明天的上下文）并保存世界状态（断点续跑）
+
         self.memory.update_from_day(day_result)
-        # 新闻记忆化（计划35）：当天新新闻并入记忆（滚动保留，摘要形式供明日回顾）
+
         if getattr(self, "_news_delivered", None):
             self.memory.add_news(self._news_delivered)
             self._news_delivered = None

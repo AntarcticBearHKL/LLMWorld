@@ -1,16 +1,16 @@
-"""人口生成叠加 LLM（计划37）：程序化骨架 + LLM 多样化细节。
 
-设计：
-1. 程序化基线：复用 population._build_template 生成"默认家庭"（成员数/年龄/性别/
-   Big Five/电器 确定性且 census 校准——这部分绝不让 LLM 自由发挥，保证物理一致）
-2. LLM 差异化重写：把基线家庭 + 社区语境 + 已有家庭摘要 给 LLM，
-   让它生成更丰富独特的细节（多元文化姓名/职业/作息/爱好/性格行为描述/家庭故事）
-3. 校验合并：成员数与年龄以程序化为准（LLM 不可改）；LLM 输出缺失/非法 → 回退基线
-4. 防重复：每户 prompt 含"社区已有家庭摘要"，LLM 看到社区全貌避免同质化
 
-用法：
-    python Implement/population_llm.py pop06 --count 3 --seed 7
-"""
+
+
+
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -28,11 +28,11 @@ import config
 
 
 def community_context(rng, existing_households):
-    """社区已有家庭摘要（防重复：名字/职业/习惯）。"""
+
     if not existing_households:
         return "（暂无其他家庭——你是这个社区的第一个家庭）"
     lines = []
-    for h in existing_households[-8:]:   # 只给最近 8 户，控制 token
+    for h in existing_households[-8:]:
         members = h.get("members", [])
         brief = "、".join(f"{m.get('name','?')}({m.get('occupation','?')})" for m in members[:3])
         habits = "; ".join(f"{m.get('name','?')}：{m.get('habits',{}).get('hobbies',[])}"
@@ -42,12 +42,12 @@ def community_context(rng, existing_households):
 
 
 def llm_fill_details(base_household, community_text, prompt, rng):
-    """用 LLM 差异化重写基线家庭细节。返回 (household, warnings)。
 
-    成员数/年龄/性别/Big Five/电器 以基线为准；LLM 输出非法时逐字段回退基线。
-    """
+
+
+
     warnings = []
-    household = json.loads(json.dumps(base_household))   # 深拷贝基线
+    household = json.loads(json.dumps(base_household))
 
     rendered = prompt.load("generate_step4_household_details",
                            household_json=json.dumps(base_household, ensure_ascii=False, indent=2),
@@ -61,14 +61,14 @@ def llm_fill_details(base_household, community_text, prompt, rng):
         warnings.append(f"LLM 生成失败（回退基线）：{e}")
         return household, warnings
 
-    # 住宅名与家庭故事（可选）
+
     if data.get("home_name"):
         household["home"]["name"] = str(data["home_name"])
     if data.get("story"):
         household["story"] = str(data["story"])
     household["llm_generated"] = True
 
-    # 成员：数量必须与基线一致；逐字段合并（缺失回退基线）
+
     llm_members = data.get("members", [])
     if len(llm_members) != len(household["members"]):
         warnings.append(f"LLM 成员数 {len(llm_members)} != 基线 {len(household['members'])}，成员保持基线")
@@ -78,15 +78,15 @@ def llm_fill_details(base_household, community_text, prompt, rng):
         if not isinstance(llm_m, dict):
             warnings.append(f"成员 {i} LLM 输出非法，保持基线")
             continue
-        # 名字（必须非空）
+
         name = str(llm_m.get("name", "")).strip()
         if name and len(name) >= 2:
             base_m["name"] = name
-        # 职业
+
         occ = str(llm_m.get("occupation", "")).strip()
         if occ:
             base_m["occupation"] = occ
-        # 作息/运动/爱好（可选项，缺失回退基线）
+
         for field, key in [("wake_time", "habits"), ("sleep_time", "habits"),
                            ("exercise", "habits"), ("hobbies", "habits")]:
             if field in llm_m and key == "habits":
@@ -95,7 +95,7 @@ def llm_fill_details(base_household, community_text, prompt, rng):
                     base_m["habits"]["hobbies"] = [str(x) for x in llm_m[field]][:3]
                 elif llm_m[field]:
                     base_m["habits"][field] = str(llm_m[field])
-        # 性格行为描述（基于基线的 Big Five，LLM 只写叙事不写分数）
+
         bt = str(llm_m.get("behavior_text", "")).strip()
         if bt:
             base_m["personality"]["behavior_text"] = bt
@@ -104,7 +104,7 @@ def llm_fill_details(base_household, community_text, prompt, rng):
 
 
 def build_population_llm(world_id, count, seed=42, household_types=None):
-    """混合生成：程序化骨架（配额/类型/成员关联/Big Five/电器）+ LLM 细节。"""
+
     rng = random.Random(seed)
     utils.set_seed(seed)
 
@@ -114,15 +114,15 @@ def build_population_llm(world_id, count, seed=42, household_types=None):
         rng.shuffle(household_types)
 
     prompt = Prompt()
-    existing = []          # 已生成家庭（防重复上下文）
-    all_households = []    # 完整家庭列表（落盘用）
+    existing = []
+    all_households = []
 
     print(f"LLM 混合人口生成：world={world_id}，{count} 户，种子 {seed}")
     for i in range(count):
         htype = household_types[i % len(household_types)]
-        # 1) 程序化基线（确定性骨架）
+
         base = _build_template(htype, rng)
-        # 2) LLM 差异化细节（带社区上下文防重复）
+
         community = community_context(rng, existing)
         household, warnings = llm_fill_details(base, community, prompt, rng)
         for w in warnings:
@@ -133,13 +133,13 @@ def build_population_llm(world_id, count, seed=42, household_types=None):
               f"{'、'.join(m['name'] for m in household['members'])}"
               f"{'（LLM）' if household.get('llm_generated') else '（基线）'}")
 
-    # 3) 复用 build_population 的落盘逻辑（household.json + world.json）
+
     meta = _save_world(world_id, all_households, rng, seed)
     return meta
 
 
 def _save_world(world_id, households, rng, seed):
-    """落盘：复用与 build_population 相同的目录结构与 world.json 格式。"""
+
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     world_dir = os.path.join(project_root, "worlds", world_id)
     district_dir = os.path.join(world_dir, CLAYTON_POSTCODE)
