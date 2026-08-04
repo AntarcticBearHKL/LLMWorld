@@ -124,22 +124,16 @@ def load_real_data(path):
 
 
 def load_sim_profile(world_id):
-    """读取 population 聚合曲线（aggregate_only.json 或按日期目录取最新）。"""
+    """读取 population 聚合曲线（递归扫描，兼容新旧目录结构）。"""
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pop_dir = os.path.join(project_root, "outputs", world_id, "population")
 
     candidates = []
     if os.path.isdir(pop_dir):
-        for name in os.listdir(pop_dir):
-            p = os.path.join(pop_dir, name)
-            if os.path.isfile(p) and name.endswith(".json"):
-                candidates.append(p)
-        date_dirs = [os.path.join(pop_dir, d) for d in os.listdir(pop_dir)
-                     if os.path.isdir(os.path.join(pop_dir, d))]
-        for d in date_dirs:
-            for f in os.listdir(d):
+        for root, _, files in os.walk(pop_dir):
+            for f in files:
                 if f.endswith(".json"):
-                    candidates.append(os.path.join(d, f))
+                    candidates.append(os.path.join(root, f))
 
     if not candidates:
         raise FileNotFoundError(f"没有找到 {world_id} 的人口聚合曲线，请先跑 population_runner")
