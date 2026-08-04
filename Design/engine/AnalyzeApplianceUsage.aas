@@ -1,0 +1,15 @@
+class AnalyzeApplianceUsage
+    电器使用画像分析（计划103，Gunkel 2022 类别贡献，0 LLM）。
+
+    - scan_house_dirs(world_id, scenario, date_str) → 每户日期目录
+    - build_report(...) → 世界级：
+      ranking[]（电器名/总能耗/占比%/覆盖户数，降序）+
+      per_house[]（电器数/总能耗/TOP1 电器）
+      数据源：用电信息/ 下电器级 JSON（上帝视角）
+    - CLI：python analyze_appliance_usage.py <world> --scenario [--date]
+    - 输出：outputs/<world>/analysis/appliance_usage_<scenario>_<date>.json
+
+    用途：RQ1 行为→电器→能耗链路的电器端贡献排行。
+
+    调用链：server /api/worlds/<id>/appliance-usage/<scenario>/<date>
+    → 前端"电器使用画像"面板
