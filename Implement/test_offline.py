@@ -751,6 +751,18 @@ class TestMemory(unittest.TestCase):
             home_structure="{}", members_info="[]", memory_context="")
         self.assertNotIn("memory_context", rendered)
 
+    def test_prompt_template_has_routine_anchor(self):
+
+        from engine.prompt import Prompt
+        rendered = Prompt().load("simulate_step1_macro_plan",
+            member_name="Alice", member_age=28, member_occupation="软件工程师",
+            member_personality="细心", date="2026年4月21日", day_type="工作日",
+            time_context="日期：2026年4月21日（工作日）",
+            home_structure="{}", members_info="[]", memory_context="")
+        self.assertIn("典型作息锚点", rendered)
+        self.assertIn("6:30-7:30", rendered)
+        self.assertIn("22:30-23:30", rendered)
+
 
 
 
