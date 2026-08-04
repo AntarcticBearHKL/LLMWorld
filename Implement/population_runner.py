@@ -162,6 +162,8 @@ def main():
     parser.add_argument("--event", action="append", default=None,
                         help="上帝注入的世界事件（可多次）：日期|标题|内容[|来源]，如 "
                         "'2026-04-21|政府宣布开征空调用电附加税|从今日起空调电价上调10%|政府公告'")
+    parser.add_argument("--event-template", action="append", default=None,
+                        help="新闻模板注入（可多次）：日期|模板名，如 2026-01-15|heatwave")
     parser.add_argument("--scenario", default=None,
                         help="场景标签（聚合输出目录名，默认=政策名或 baseline）。"
                         "新闻实验请用自定义名如 war_news，避免与基线混淆")
@@ -201,6 +203,20 @@ def main():
                 date=parts[0], time="07:00", title=parts[1], content=parts[2],
                 source=parts[3] if len(parts) > 3 else "官方公告"))
         print(f"上帝注入新闻 {len(inline_events)} 条")
+
+    if args.event_template:
+        from engine.news_templates import build_template
+        for text in args.event_template:
+            parts = [p.strip() for p in text.split("|")]
+            if len(parts) < 2:
+                print(f"[错误] 模板注入格式应为 日期|模板名：{text}")
+                sys.exit(1)
+            try:
+                inline_events.append(build_template(parts[1], parts[0]))
+            except ValueError as e:
+                print(f"[错误] {e}")
+                sys.exit(1)
+        print(f"新闻模板注入 {len(args.event_template)} 条")
 
 
     policy_context = ""
