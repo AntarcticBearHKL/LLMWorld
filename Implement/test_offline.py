@@ -1492,5 +1492,66 @@ class TestTimelineServer(unittest.TestCase):
             self.assertTrue(item["content"])
 
 
+class TestTimelineGuard(unittest.TestCase):
+
+
+    def _write_state(self, world_id, date_str):
+        import os, shutil
+        path = os.path.join("worlds", world_id, "state.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({"date": date_str, "memory_days": {}}, f)
+
+    def test_unstarted_any_date(self):
+        from engine.world import validate_start_date, get_world_last_date
+        self.assertIsNone(get_world_last_date("__guard_new"))
+        self.assertEqual(validate_start_date("__guard_new", "2026-05-01"),
+                         "2026年05月01日")
+        self.assertIsNone(validate_start_date("__guard_new", None))
+
+    def test_started_exact_next_day(self):
+        from engine.world import validate_start_date
+        import os, shutil
+        self._write_state("__guard_w", "2026年4月21日")
+        try:
+            self.assertEqual(validate_start_date("__guard_w", "2026-04-22"),
+                             "2026年04月22日")
+            self.assertEqual(validate_start_date("__guard_w", None),
+                             "2026年04月22日")
+        finally:
+            shutil.rmtree(os.path.join("worlds", "__guard_w"))
+
+    def test_started_rewind_rejected(self):
+        from engine.world import validate_start_date
+        import os, shutil
+        self._write_state("__guard_w2", "2026年4月21日")
+        try:
+            with self.assertRaises(ValueError):
+                validate_start_date("__guard_w2", "2026-04-21")
+            with self.assertRaises(ValueError):
+                validate_start_date("__guard_w2", "2026-04-01")
+        finally:
+            shutil.rmtree(os.path.join("worlds", "__guard_w2"))
+
+    def test_started_skip_day_rejected(self):
+        from engine.world import validate_start_date
+        import os, shutil
+        self._write_state("__guard_w3", "2026年4月21日")
+        try:
+            with self.assertRaises(ValueError):
+                validate_start_date("__guard_w3", "2026-04-23")
+        finally:
+            shutil.rmtree(os.path.join("worlds", "__guard_w3"))
+
+    def test_parse_world_date_formats(self):
+        from engine.world import parse_world_date
+        self.assertEqual(parse_world_date("2026年4月21日").day, 21)
+        self.assertEqual(parse_world_date("2026-04-21").day, 21)
+        self.assertEqual(parse_world_date("20260421").day, 21)
+        self.assertIsNone(parse_world_date(None))
+        with self.assertRaises(ValueError):
+            parse_world_date("not-a-date")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

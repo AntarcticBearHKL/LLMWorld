@@ -189,6 +189,11 @@ def main():
         y, m, d = args.date.split("-")
         args.date = f"{int(y)}年{int(m)}月{int(d)}日"
 
+    from engine.world import validate_start_date
+    args.date = validate_start_date(args.world_id, args.date)
+    if args.date:
+        print(f"开始日期: {args.date}（时间线校验通过）")
+
 
     scenario_name = args.scenario
     if not scenario_name:

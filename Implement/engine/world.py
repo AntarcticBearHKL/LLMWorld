@@ -14,6 +14,48 @@ from datetime import datetime, timedelta
 import config
 
 
+def get_world_last_date(world_id):
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    path = os.path.join(project_root, "worlds", world_id, "state.json")
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            state = json.load(f)
+        return state.get("date") or None
+    except Exception:
+        return None
+
+
+def parse_world_date(date_str):
+    if not date_str:
+        return None
+    text = str(date_str).strip()
+    for fmt in ("%Y年%m月%d日", "%Y-%m-%d", "%Y%m%d"):
+        try:
+            return datetime.strptime(text, fmt)
+        except ValueError:
+            continue
+    raise ValueError(f"无法解析日期: {date_str}")
+
+
+def validate_start_date(world_id, date_str):
+    last_date = get_world_last_date(world_id)
+    requested = parse_world_date(date_str) if date_str else None
+    if last_date:
+        last = datetime.strptime(last_date, "%Y年%m月%d日")
+        expected = (last + timedelta(days=1)).strftime("%Y年%m月%d日")
+        if requested is None:
+            return expected
+        if requested.strftime("%Y年%m月%d日") == expected:
+            return requested.strftime("%Y年%m月%d日")
+        raise ValueError(
+            f"世界 {world_id} 已模拟至 {last_date}，只能继续模拟："
+            f"日期须留空（自动续跑）或等于 {expected}（下一天）。"
+            f"不允许覆盖/回退/跳日；想重新开始请使用新的世界 ID")
+    return requested.strftime("%Y年%m月%d日") if requested else None
+
+
 class World:
     def __init__(self, home, world_id=None, postcode=None, house_id=None, start_date=None):
         self.home = home
