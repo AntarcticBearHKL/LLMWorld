@@ -1,0 +1,13 @@
+class CompareWorlds
+    多世界政策效果横向对比（计划51，Eco3S 2026 稳健性检验，0 LLM）。
+
+    - load_world_policies(world_id) → {场景: {total_change_pct,
+      peak_hours_change_pct, peak_load_cut_pct, peak_plateau_cut_pct}}
+      来源：outputs/<world>/comparison/policy_matrix.json
+    - _to_float(text) → 解析 "10.0 (-8.5%)" 格式为 -8.5
+    - build_matrix(world_ids) → {worlds, scenarios, cells{世界:{场景:{指标}}}}
+    - CLI：python compare_worlds.py --worlds pop06 pop07
+    - 输出：outputs/comparison/worlds_matrix.json
+
+    调用链：server GET /api/worlds-matrix →
+    前端"多世界政策对比"面板（场景×世界变化% + 中位数）

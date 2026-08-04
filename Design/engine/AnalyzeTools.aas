@@ -22,6 +22,8 @@ class AnalyzeTools
     compare_policies.py（计划48 扩展）：
     - 矩阵新增峰值平台分钟（≥80%峰值）/ 峰均比 / 叠加分钟（≥30kW）
       peak_plateau_minutes / peak_to_mean_ratio / high_overlap_minutes
+    compare_worlds.py：见 CompareWorlds.aas（计划51 多世界对比）
+    analyze_event_response.py：见 AnalyzeEventResponse.aas（计划55 事件响应）
 
     combine_worlds.py：见 CombineWorlds.aas
 

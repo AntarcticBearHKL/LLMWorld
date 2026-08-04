@@ -1,0 +1,16 @@
+class AnalyzeEventResponse
+    新闻事件 × 行为模式迁移联动（计划55，Fidone 2026，0 LLM）。
+
+    - load_event_dates(world_id) → {日期: [事件]}（worlds/<id>/events.json）
+    - _normalize_date(date_str) → 统一为 YYYY-MM-DD
+      （兼容 2026-05-02 / 20260502 / 2026年5月2日）
+    - build_event_response(samples, event_dates, k=0)：
+      复用 analyze_behavior_patterns 聚类全部 household-days；
+      迁移归到目标日（事件当天）统计：
+      per_event[]（日期/标题/事件日迁移率/基线迁移率/mean_kwh/变化%）
+      event_move_rate vs non_event_move_rate（信息冲击→行为模式迁移检验）
+    - CLI：python analyze_event_response.py <world> --scenario [--k]
+    - 输出：outputs/<world>/analysis/event_response_<scenario>.json
+
+    调用链：server GET /api/worlds/<id>/event-response/<scenario> →
+    前端"事件响应"面板
