@@ -33,6 +33,7 @@ PAPERS = [
     ("2501.08985", "Personality-Driven LLM Agents", None, None, "计划22"),
     ("2306.11566", "Uniform Taxation of Electricity: Incentives for Flexibility and Cost Redistribution among Household Categories", "Gunkel et al.", 2023, "计划71"),
     ("2512.16949", "Identifying and Understanding Obstacles to Heating Sobriety and Thermal Comfort in Collective Housing", "Cabezas-Rivière et al.", 2025, "计划75"),
+    ("1505.01311", "An Open Solution to Provide Personalized Feedback for Building Energy Management", "Monacchi et al.", 2015, "计划83"),
 ]
 
 

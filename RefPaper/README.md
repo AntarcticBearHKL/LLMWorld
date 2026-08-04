@@ -1,12 +1,5 @@
 # RefPaper —— arXiv 论文本地存档
 
-> 非 arXiv 文献只记索引不下载（§一.23）：
-> - Faruqui, Sergici & Sharif (2010), The Electricity Journal 23(8):39-48, The impact of informational feedback on energy consumption（计划81 IHD）
-> - Faruqui & Sergici (2010), The Electricity Journal 23(1):53-63, Household response to dynamic pricing（计划44）
-> - Allcott & Rogers (2014), AEJ: Economic Policy（计划44）
-> - Ayres, Raseman & Shih (2013), JEBO 92:196-206（计划54 个性化 nudge）
-> - Allcott (2011), Journal of Public Economics（计划54）
-
 | 标题 | 作者 | 年份 | arXiv ID | 引用位置 | 文件 |
 |---|---|---|---|---|---|
 | A Machine Learning-Based Framework for Clustering Residential Electricity Load Profiles to Enhance Demand Response Programs | Michalakopoulos et al. | 2023 | arXiv:2310.20367 | 计划40 | A Machine Learning-Based Framework for Clustering Residential Electricity Load Profiles to Enhance Demand Response Programs.pdf |
@@ -38,3 +31,4 @@
 | Personality-Driven LLM Agents | - | - | arXiv:2501.08985 | 计划22 | Personality-Driven LLM Agents.pdf |
 | Uniform Taxation of Electricity: Incentives for Flexibility and Cost Redistribution among Household Categories | Gunkel et al. | 2023 | arXiv:2306.11566 | 计划71 | Uniform Taxation of Electricity - Incentives for Flexibility and Cost Redistribution among Household Categories.pdf |
 | Identifying and Understanding Obstacles to Heating Sobriety and Thermal Comfort in Collective Housing | Cabezas-Rivière et al. | 2025 | arXiv:2512.16949 | 计划75 | Identifying and Understanding Obstacles to Heating Sobriety and Thermal Comfort in Collective Housing.pdf |
+| An Open Solution to Provide Personalized Feedback for Building Energy Management | Monacchi et al. | 2015 | arXiv:1505.01311 | 计划83 | An Open Solution to Provide Personalized Feedback for Building Energy Management.pdf |

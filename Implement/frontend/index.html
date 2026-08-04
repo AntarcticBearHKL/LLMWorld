@@ -135,6 +135,11 @@
 </div>
 
 <div class="panel">
+  <h3>个性化节能建议（计划83：advisor，Monacchi 2015）</h3>
+  <div id="advicePanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -296,6 +301,7 @@ async function refresh() {
     await renderBehaviorLoad(worldId);
     await renderSolar(worldId);
     await renderElectrification(worldId);
+    await renderAdvice(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -699,6 +705,20 @@ async function renderElectrification(worldId) {
     热泵（早6-9/晚17-22，3kW）vs EV（夜22-02，7kW）；Gunkel 2022：热泵对聚合峰值贡献大于 EV</div>
     <table><thead><tr><th>情景</th><th>总电(kWh)</th><th>峰值(W)</th><th>晚峰kWh</th><th>峰均比</th><th>vs 基线</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
+}
+
+async function renderAdvice(worldId) {
+  const div = document.getElementById("advicePanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const date = document.getElementById("selDate").value;
+  const a = await api(`/api/worlds/${worldId}/advice/${scenario}/${date}`);
+  if (!a || a.error) { div.innerHTML = "<span class='err'>（无建议数据，先跑 analyze_advice.py）</span>"; return; }
+  const cards = a.per_house.map(r => `
+    <div style="display:inline-block;width:49%;vertical-align:top;margin-bottom:10px;border:1px solid #e3e5e8;border-radius:4px;padding:8px;font-size:13px;">
+      <b>${r.house_id}</b>
+      <ul style="margin:6px 0 0 18px;padding:0;color:#456;">${r.advice.map(t => `<li>${t}</li>`).join("")}</ul>
+    </div>`).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">基于异常检测/峰值叠加/晚峰集中/峰谷差自动生成（Monacchi 2015 advisor）</div>${cards}`;
 }
 
 async function renderPersonality(worldId) {

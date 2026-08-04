@@ -1856,5 +1856,49 @@ class TestElectrification(unittest.TestCase):
             build_report([])
 
 
+class TestAdvice(unittest.TestCase):
+
+
+    def _profiles(self):
+        import math
+        def curve(base, peak_w, overlap=False):
+            watts = []
+            for m in range(1440):
+                h = m // 60
+                v = base + peak_w * math.exp(-((h - 19) ** 2) / 3)
+                watts.append(round(v, 2))
+            if overlap:
+                watts[510:570] = [9000.0] * 60
+            return watts
+        return [
+            {"house_id": "h1", "total_energy_kwh": 10.0, "load_profile_watts": curve(100, 800)},
+            {"house_id": "h2", "total_energy_kwh": 11.0, "load_profile_watts": curve(100, 800)},
+            {"house_id": "h3", "total_energy_kwh": 12.0, "load_profile_watts": curve(100, 800)},
+            {"house_id": "h4", "total_energy_kwh": 13.0, "load_profile_watts": curve(100, 800)},
+            {"house_id": "h5", "total_energy_kwh": 14.0, "load_profile_watts": curve(100, 800)},
+            {"house_id": "h6", "total_energy_kwh": 45.0, "load_profile_watts": curve(400, 2500, True)},
+        ]
+
+    def test_high_consumer_advice(self):
+        from analyze_advice import build_report
+        report = build_report(self._profiles())
+        by_house = {r["house_id"]: r for r in report["per_house"]}
+        joined = " ".join(by_house["h6"]["advice"])
+        self.assertIn("高于社区平均", joined)
+        self.assertIn("叠加", joined)
+
+    def test_evening_peak_advice(self):
+        from analyze_advice import build_report
+        report = build_report(self._profiles())
+        h1 = next(r for r in report["per_house"] if r["house_id"] == "h1")
+        self.assertTrue(any("晚峰" in a for a in h1["advice"]))
+
+    def test_healthy_household(self):
+        from analyze_advice import advice_for
+        advice = advice_for({"total_kwh_z": 0.5, "overlap_count": 0,
+                             "peak_hour": 12, "peak_to_mean": 2.0})
+        self.assertEqual(advice, [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
