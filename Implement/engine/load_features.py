@@ -43,6 +43,53 @@ def peak_to_mean(hourly):
     return peak / mean
 
 
+def hourly_cv_curve(daily_hourly):
+    n_days = len(daily_hourly)
+    if n_days == 0:
+        return []
+    curve = []
+    for h in range(24):
+        values = [day[h] for day in daily_hourly]
+        mean = sum(values) / n_days
+        if mean <= 0:
+            curve.append(0.0)
+            continue
+        var = sum((v - mean) ** 2 for v in values) / n_days
+        curve.append(var ** 0.5 / mean)
+    return curve
+
+
+def variability_index(daily_hourly):
+    curve = hourly_cv_curve(daily_hourly)
+    if not curve:
+        return 0.0
+    return sum(curve) / len(curve)
+
+
+def peak_hour_shift(daily_hourly):
+    peaks = []
+    for day in daily_hourly:
+        peak = max(day)
+        if peak > 0:
+            peaks.append(max(range(24), key=lambda h: day[h]))
+    if len(peaks) < 2:
+        return 0.0
+    mean = sum(peaks) / len(peaks)
+    var = sum((p - mean) ** 2 for p in peaks) / len(peaks)
+    return var ** 0.5
+
+
+def daily_kwh_cv(per_day_kwh):
+    n = len(per_day_kwh)
+    if n == 0:
+        return 0.0
+    mean = sum(per_day_kwh) / n
+    if mean <= 0:
+        return 0.0
+    var = sum((k - mean) ** 2 for k in per_day_kwh) / n
+    return var ** 0.5 / mean
+
+
 def kmeans(features, k, seed=42, iters=300):
     data = np.asarray(features, dtype=float)
     n = len(data)

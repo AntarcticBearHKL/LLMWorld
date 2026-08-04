@@ -1015,5 +1015,52 @@ class TestClustering(unittest.TestCase):
         self.assertEqual(auto_k(shapes), 3)
 
 
+class TestVariability(unittest.TestCase):
+
+
+    def test_identical_days_zero_variability(self):
+        from engine.load_features import variability_index, peak_hour_shift
+        day = [100.0] * 24
+        daily = [day, day, day]
+        self.assertEqual(variability_index(daily), 0.0)
+        self.assertEqual(peak_hour_shift(daily), 0.0)
+
+    def test_peak_shift_detected(self):
+        from engine.load_features import peak_hour_shift
+        base = [50.0] * 24
+        day1 = list(base)
+        day2 = list(base)
+        day1[8] = 500.0
+        day2[19] = 500.0
+        self.assertAlmostEqual(peak_hour_shift([day1, day2]), 5.5, places=2)
+
+    def test_daily_kwh_cv(self):
+        from engine.load_features import daily_kwh_cv
+        self.assertEqual(daily_kwh_cv([10.0, 10.0, 10.0]), 0.0)
+        self.assertAlmostEqual(daily_kwh_cv([10.0, 30.0]), 0.5, places=4)
+        self.assertEqual(daily_kwh_cv([]), 0.0)
+
+    def test_hourly_cv_curve_shape(self):
+        from engine.load_features import hourly_cv_curve
+        day1 = [100.0] * 24
+        day2 = [100.0] * 24
+        day2[12] = 300.0
+        curve = hourly_cv_curve([day1, day2])
+        self.assertEqual(len(curve), 24)
+        self.assertAlmostEqual(curve[0], 0.0)
+        self.assertAlmostEqual(curve[12], 0.5, places=4)
+
+    def test_zero_mean_hour_safe(self):
+        from engine.load_features import hourly_cv_curve
+        curve = hourly_cv_curve([[0.0] * 24, [0.0] * 24])
+        self.assertEqual(curve, [0.0] * 24)
+
+    def test_variability_index_between(self):
+        from engine.load_features import variability_index
+        stable = [[100.0] * 24, [100.0] * 24, [100.0] * 24]
+        wild = [[100.0] * 24, [900.0] * 24, [100.0] * 24]
+        self.assertLess(variability_index(stable), variability_index(wild))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

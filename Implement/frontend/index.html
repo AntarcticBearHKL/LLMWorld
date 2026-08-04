@@ -77,6 +77,11 @@
 </div>
 
 <div class="panel">
+  <h3>行为变异性（计划41：跨日稳定性 → DR 响应预测，Zhou 2016 / Jin 2021）</h3>
+  <div id="variabilityPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -183,6 +188,7 @@ async function refresh() {
     await renderJobs();
     await renderPersonality(worldId);
     await renderClusters(worldId);
+    await renderVariability(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -387,6 +393,31 @@ function drawClusterCanvas(id, shape, color) {
   const pi = shape.indexOf(Math.max(...shape));
   ctx.fillStyle = color;
   ctx.beginPath(); ctx.arc(x(pi), y(shape[pi]), 4, 0, 7); ctx.fill();
+}
+
+async function renderVariability(worldId) {
+  const div = document.getElementById("variabilityPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const v = await api(`/api/worlds/${worldId}/variability/${scenario}`);
+  if (!v || v.error) { div.innerHTML = "<span class='err'>（无变异性数据，先跑 analyze_variability.py）</span>"; return; }
+  const maxIdx = Math.max(...v.per_house.map(r => r.variability_index), 0.001);
+  const bars = v.per_house.map(r => `
+    <div style="display:flex;align-items:center;margin:2px 0;font-size:12px;">
+      <span style="width:90px;">${r.house_id}</span>
+      <div style="background:#4a7;height:12px;width:${(r.variability_index / maxIdx) * 55}%;"></div>
+      <span style="margin-left:6px;color:#456;">${r.variability_index}（峰时漂移 ${r.peak_hour_shift}h，日kWh CV ${r.daily_kwh_cv}）</span>
+    </div>`).join("");
+  const regular = v.regular_half.join("、") || "-";
+  const variable = v.variable_half.join("、") || "-";
+  const table = (title, houses) => `<b>${title}</b><div style="font-size:12px;color:#456;margin-bottom:8px;">${houses}</div>`;
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    共 ${v.households} 户（最多 ${v.n_days_max} 天），变异指数=逐小时跨日CV均值；高变异性家庭预期对政策更敏感（Zhou 2016）</div>
+    <div style="float:right;width:46%;padding-left:14px;border-left:1px solid #eee;">
+      ${table("规律家庭（低变异性）", regular)}
+      ${table("波动家庭（高变异性）", variable)}
+    </div>
+    <div style="width:50%;">${bars}</div>
+    <div style="clear:both;"></div>`;
 }
 
 async function renderPersonality(worldId) {
