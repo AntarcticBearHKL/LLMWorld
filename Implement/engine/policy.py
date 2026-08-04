@@ -36,6 +36,14 @@ class Policy:
         """社会规范 nudge：邻居对比信息。"""
         return cls("nudge", comparison_text=comparison_text)
 
+    @classmethod
+    def nudge_loss(cls, comparison_text="你的邻居平均每天用电 18 千瓦时"):
+        """损失框架 nudge（Ghesla et al. 2019）：强调"失去"而非"获得"。
+
+        损失框架在真实田野实验中比收益框架多省电约 5%。
+        """
+        return cls("nudge_loss", comparison_text=comparison_text)
+
     # ---------- 渲染 ----------
 
     def render(self):
@@ -72,6 +80,15 @@ class Policy:
                 f"- 你的家庭用电量已通过智能电表与社区对比，请尽量节约用电。"
             )
 
+        if self.type == "nudge_loss":
+            return (
+                f"## 社会规范信息（损失警示）\n"
+                f"- {self.params['comparison_text']}。\n"
+                f"- 若家庭用电量不下降，社区将无法达成节能目标，"
+                f"你的家庭将被标记为高耗能户，并失去每月 5 澳元的社区节能返利。\n"
+                f"- 请务必避免这种损失，立刻减少不必要的用电。"
+            )
+
         return ""
 
     # ---------- 工具 ----------
@@ -81,8 +98,9 @@ class Policy:
 
     @classmethod
     def from_name(cls, name, **kwargs):
-        """按名字创建（runner 命令行用）：tou / subsidy / nudge。"""
-        factories = {"tou": cls.tou, "subsidy": cls.subsidy, "nudge": cls.nudge}
+        """按名字创建（runner 命令行用）：tou / subsidy / nudge / nudge_loss。"""
+        factories = {"tou": cls.tou, "subsidy": cls.subsidy,
+                     "nudge": cls.nudge, "nudge_loss": cls.nudge_loss}
         if name not in factories:
-            raise ValueError(f"未知政策类型: {name}（可用: tou/subsidy/nudge）")
+            raise ValueError(f"未知政策类型: {name}（可用: tou/subsidy/nudge/nudge_loss）")
         return factories[name](**kwargs)

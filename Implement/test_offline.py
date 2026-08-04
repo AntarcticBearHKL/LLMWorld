@@ -98,6 +98,9 @@ class TestPolicy(unittest.TestCase):
         from engine.policy import Policy
         self.assertIn("低谷充电补贴", Policy.subsidy().render())
         self.assertIn("社会规范", Policy.nudge().render())
+        loss_text = Policy.nudge_loss().render()
+        self.assertIn("损失", loss_text)
+        self.assertIn("返利", loss_text)
 
     def test_compare_metrics(self):
         """干预把 2 kWh 从晚峰挪到谷段 → 晚峰变化 -X%、谷段 +X%。"""
