@@ -8,6 +8,7 @@
 
 import os
 import time
+import threading
 import requests
 from concurrent.futures import ThreadPoolExecutor
 from dotenv import load_dotenv
@@ -27,6 +28,10 @@ MAX_WORKERS = config.MAX_WORKERS
 MAX_RETRIES = config.MAX_RETRIES
 RETRY_BACKOFF_SECONDS = config.RETRY_BACKOFF_SECONDS
 REQUEST_TIMEOUT_SECONDS = config.REQUEST_TIMEOUT_SECONDS
+
+# 全局并发硬保险：即使多个模块（如多户并行模拟）同时发起调用，
+# 同一时刻真正打到 DeepSeek 的并发也不超过 MAX_WORKERS(10)
+_GLOBAL_SEMAPHORE = threading.Semaphore(MAX_WORKERS)
 
 
 class LLMCallError(RuntimeError):
@@ -94,15 +99,17 @@ class SubAgent:
         if json_mode and not thinking:
             data["response_format"] = {"type": "json_object"}
 
-        try:
-            response = requests.post(
-                base_url + "/chat/completions",
-                headers=headers,
-                json=data,
-                timeout=REQUEST_TIMEOUT_SECONDS
-            )
-        except requests.exceptions.RequestException as e:
-            raise LLMCallError(f"DeepSeek 网络错误: {e}") from e
+        # 全局并发硬保险：同一时刻最多 MAX_WORKERS(10) 个请求
+        with _GLOBAL_SEMAPHORE:
+            try:
+                response = requests.post(
+                    base_url + "/chat/completions",
+                    headers=headers,
+                    json=data,
+                    timeout=REQUEST_TIMEOUT_SECONDS
+                )
+            except requests.exceptions.RequestException as e:
+                raise LLMCallError(f"DeepSeek 网络错误: {e}") from e
 
         if response.status_code != 200:
             raise LLMCallError(f"DeepSeek API 错误 {response.status_code}: {response.text[:500]}")
