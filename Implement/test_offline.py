@@ -1900,5 +1900,39 @@ class TestAdvice(unittest.TestCase):
         self.assertEqual(advice, [])
 
 
+class TestSeasonal(unittest.TestCase):
+
+
+    def _per_house(self):
+        summer_day = {"date": "20260115", "kwh": 20.0,
+                      "hourly": [400.0 + 1500.0 * (h == 14) for h in range(24)]}
+        winter_day = {"date": "20260715", "kwh": 25.0,
+                      "hourly": [400.0 + 1800.0 * (h == 19) for h in range(24)]}
+        return [{"house_id": "h1", "days": [summer_day, winter_day, summer_day]}]
+
+    def test_season_grouping(self):
+        from analyze_seasonal import build_report, season_of
+        self.assertEqual(season_of("20260115"), "夏天")
+        self.assertEqual(season_of("20260715"), "冬天")
+        report = build_report(self._per_house())
+        by_name = {r["season"]: r for r in report["seasons"]}
+        self.assertEqual(by_name["夏天"]["samples"], 2)
+        self.assertEqual(by_name["冬天"]["samples"], 1)
+        self.assertAlmostEqual(by_name["夏天"]["mean_kwh"], 20.0)
+        self.assertAlmostEqual(by_name["冬天"]["mean_kwh"], 25.0)
+
+    def test_season_peak_hour(self):
+        from analyze_seasonal import build_report
+        report = build_report(self._per_house())
+        by_name = {r["season"]: r for r in report["seasons"]}
+        self.assertAlmostEqual(by_name["夏天"]["mean_peak_hour"], 14)
+        self.assertAlmostEqual(by_name["冬天"]["mean_peak_hour"], 19)
+
+    def test_empty_raise(self):
+        from analyze_seasonal import build_report
+        with self.assertRaises(ValueError):
+            build_report([])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
