@@ -1934,5 +1934,44 @@ class TestSeasonal(unittest.TestCase):
             build_report([])
 
 
+class TestWeatherSensitivity(unittest.TestCase):
+
+
+    def _points(self, temps, kwhs, conditions=None):
+        points = []
+        for i, (t, k) in enumerate(zip(temps, kwhs)):
+            points.append({"date": f"2026010{i + 1}", "temperature": t,
+                           "kwh": k, "conditions": {conditions[i]} if conditions else {"晴天"}})
+        return points
+
+    def test_positive_correlation(self):
+        from analyze_weather_sensitivity import build_report
+        report = build_report(self._points(
+            [20, 22, 25, 28, 31], [12, 13, 15, 18, 22]))
+        self.assertGreater(report["temperature_kwh_corr"], 0.9)
+        self.assertGreater(report["kwh_per_degree"], 0)
+
+    def test_negative_correlation(self):
+        from analyze_weather_sensitivity import build_report
+        report = build_report(self._points(
+            [8, 10, 12, 14, 16], [20, 18, 16, 14, 12]))
+        self.assertLess(report["temperature_kwh_corr"], -0.9)
+        self.assertLess(report["kwh_per_degree"], 0)
+
+    def test_by_weather_grouping(self):
+        from analyze_weather_sensitivity import build_report
+        report = build_report(self._points(
+            [20, 22, 24, 26, 28], [10, 11, 12, 14, 16],
+            ["晴天", "晴天", "雨天", "雨天", "雨天"]))
+        rows = {r["condition"]: r for r in report["by_weather"]}
+        self.assertEqual(rows["晴天"]["samples"], 2)
+        self.assertEqual(rows["雨天"]["samples"], 3)
+
+    def test_empty_raise(self):
+        from analyze_weather_sensitivity import build_report
+        with self.assertRaises(ValueError):
+            build_report([])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
