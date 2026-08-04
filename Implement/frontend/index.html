@@ -16,6 +16,7 @@
   .panel { background: #fff; border-radius: 6px; padding: 12px 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
   .panel h3 { margin: 0 0 8px; font-size: 15px; border-left: 4px solid #4a7; padding-left: 8px; }
   canvas { width: 100%; height: 260px; border: 1px solid #eee; background: #fafbfc; }
+  canvas.cluster { width: 100%; height: 150px; }
   table { border-collapse: collapse; width: 100%; font-size: 13px; }
   th, td { border: 1px solid #e3e5e8; padding: 5px 8px; text-align: left; }
   th { background: #f0f2f5; }
@@ -68,6 +69,11 @@
 <div class="panel">
   <h3>人口归因分析（计划25：家庭类型/节能意识/成员数/人格 → 用电）</h3>
   <div id="populationAnalysis">（加载中…）</div>
+</div>
+
+<div class="panel">
+  <h3>负荷曲线聚类（计划40：家庭行为分群，Michalakopoulos 2023 / Dent 2014）</h3>
+  <div id="clusterPanel">（加载中…）</div>
 </div>
 
 <div class="panel">
@@ -176,6 +182,7 @@ async function refresh() {
     await renderNews(worldId);
     await renderJobs();
     await renderPersonality(worldId);
+    await renderClusters(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -330,6 +337,56 @@ async function renderAnalysis(worldId) {
     table("成员数 → 户均kWh", a.by_members_count) +
     table("Big Five × 户用电相关性", a.big_five_corr_with_kwh) +
     `<div style="font-size:12px;color:#666;">成员数×用电相关：${a.members_kwh_corr}</div>`;
+}
+
+async function renderClusters(worldId) {
+  const div = document.getElementById("clusterPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const date = document.getElementById("selDate").value;
+  const c = await api(`/api/worlds/${worldId}/clusters/${scenario}/${date}`);
+  if (!c || c.error) { div.innerHTML = "<span class='err'>（无聚类结果，先跑 load_profile_cluster.py）</span>"; return; }
+  const blocks = c.clusters.map((cl, i) => {
+    const cv = `<canvas class="cluster" id="clusterCanvas${i}" width="640" height="150"></canvas>`;
+    const rows = [["家庭数", cl.households], ["平均负荷率", cl.mean_load_factor],
+                  ["平均峰均比", cl.mean_peak_to_mean], ["平均峰时", cl.mean_peak_hour + ":00"],
+                  ["平均谷时", cl.mean_valley_hour + ":00"]];
+    const tbl = rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join("");
+    const houses = cl.house_ids.map(h => `<span style="margin-right:8px;">${h}</span>`).join("");
+    return `<div style="display:inline-block;width:49%;vertical-align:top;margin-bottom:14px;">
+      <b style="color:${COLORS[i % COLORS.length]};">簇${cl.label}</b>（${cl.households} 户）
+      ${cv}
+      <table style="margin:4px 0;"><tbody>${tbl}</tbody></table>
+      <div style="font-size:12px;color:#456;">${houses}</div></div>`;
+  }).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    共 ${c.households} 户，k=${c.k}（WCSS ${c.wcss}），曲线为归一化形状（去量级）</div>${blocks}`;
+  c.clusters.forEach((cl, i) => drawClusterCanvas(`clusterCanvas${i}`, cl.center_shape, COLORS[i % COLORS.length]));
+}
+
+function drawClusterCanvas(id, shape, color) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  const ctx = cv.getContext("2d");
+  const W = cv.width, H = cv.height, padL = 30, padB = 20, padT = 8;
+  ctx.clearRect(0, 0, W, H);
+  const max = Math.max(...shape) * 1.1 || 1;
+  const x = h => padL + (h / 23) * (W - padL - 6);
+  const y = v => H - padB - (v / max) * (H - padT - padB);
+  ctx.strokeStyle = "#eee";
+  ctx.fillStyle = "#888";
+  ctx.font = "9px sans-serif";
+  for (let h = 0; h < 24; h += 6) {
+    ctx.beginPath(); ctx.moveTo(x(h), padT); ctx.lineTo(x(h), H - padB); ctx.stroke();
+    ctx.fillText(h + ":00", x(h) - 6, H - 6);
+  }
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  shape.forEach((v, h) => h === 0 ? ctx.moveTo(x(h), y(v)) : ctx.lineTo(x(h), y(v)));
+  ctx.stroke();
+  const pi = shape.indexOf(Math.max(...shape));
+  ctx.fillStyle = color;
+  ctx.beginPath(); ctx.arc(x(pi), y(shape[pi]), 4, 0, 7); ctx.fill();
 }
 
 async function renderPersonality(worldId) {
