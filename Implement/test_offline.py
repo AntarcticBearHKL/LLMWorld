@@ -402,7 +402,7 @@ class TestNewsTemplates(unittest.TestCase):
         from engine.news_templates import build_template
         item = build_template("heatwave", "2026-01-15")
         self.assertEqual(item.date, "2026-01-15")
-        self.assertIn("热浪", item.title)
+        self.assertIn("高温", item.title)
         self.assertEqual(item.news_type, "环境")
 
     def test_build_unknown_raises(self):
