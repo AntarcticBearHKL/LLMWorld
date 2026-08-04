@@ -64,6 +64,11 @@
 </div>
 
 <div class="panel">
+  <h3>人口归因分析（计划25：家庭类型/节能意识/成员数/人格 → 用电）</h3>
+  <div id="populationAnalysis">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>上帝剧本（events.json 新闻）</h3>
   <div style="margin-bottom:8px;font-size:13px;">
     日期 <input id="evDate" value="2026-04-22" style="width:110px"> 
@@ -147,6 +152,7 @@ async function refresh() {
     renderHouses(profiles[0].data);
     renderTrend(worldId);
     await renderMatrix(worldId);
+    await renderAnalysis(worldId);
     await renderNews(worldId);
     st.textContent = "";
   } catch (e) {
@@ -270,6 +276,23 @@ async function renderMatrix(worldId) {
   const head = keys.map(k => `<th>${k}</th>`).join("");
   const rows = m.scenarios.map(s => `<tr>${keys.map(k => `<td>${s[k] ?? ""}</td>`).join("")}</tr>`).join("");
   div.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+async function renderAnalysis(worldId) {
+  const div = document.getElementById("populationAnalysis");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const a = await api(`/api/worlds/${worldId}/analysis/${scenario}`);
+  if (!a || a.error) { div.innerHTML = "<span class='err'>（无分析，先跑 analyze_population）</span>"; return; }
+  const table = (title, obj) => {
+    const rows = Object.entries(obj || {}).map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join("");
+    return `<b>${title}</b><table style="margin:6px 0 14px;"><tbody>${rows}</tbody></table>`;
+  };
+  div.innerHTML =
+    table("家庭类型 → 户均kWh", a.by_type) +
+    table("节能意识 → 户均kWh", a.by_awareness) +
+    table("成员数 → 户均kWh", a.by_members_count) +
+    table("Big Five × 户用电相关性", a.big_five_corr_with_kwh) +
+    `<div style="font-size:12px;color:#666;">成员数×用电相关：${a.members_kwh_corr}</div>`;
 }
 
 async function renderNews(worldId) {

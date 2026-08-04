@@ -94,6 +94,15 @@ def load_matrix(world_id):
         return json.load(f)
 
 
+def load_analysis(world_id, scenario="baseline"):
+    """人口归因分析（analyze_population 产物，计划25）。"""
+    path = os.path.join(OUTPUTS_DIR, world_id, "analysis", f"population_{scenario}.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_events(world_id):
     """上帝剧本（events.json）。"""
     path = os.path.join(WORLDS_DIR, world_id, "events.json")
@@ -198,6 +207,10 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3] == "matrix":
                     data = load_matrix(world_id)
                     self._send_json(data or {"error": "no matrix"}, 200 if data else 404)
+                    return
+                if parts[3] == "analysis" and len(parts) >= 5:
+                    data = load_analysis(world_id, parts[4])
+                    self._send_json(data or {"error": "no analysis"}, 200 if data else 404)
                     return
                 if parts[3] == "events":
                     self._send_json(load_events(world_id))
