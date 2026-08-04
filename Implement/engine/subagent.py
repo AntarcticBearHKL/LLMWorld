@@ -1,14 +1,14 @@
 """LLM 调用层：统一管理 DeepSeek API 的并发、重试与 Token 统计。
 
-规则（用户硬性要求）：
+规则（用户最新指令 2026-08）：
 - 只用 DeepSeek API 做测试
-- 同时并发的调用数量不超过 10 个（见 config.MAX_WORKERS，禁止调大）
+- 并发不设任何上限（每个 prompt 一个线程；户级并行多少只取决于世界家庭数）
 - 网络/服务端错误自动重试 3 次（指数退避），仍失败则抛 LLMCallError（绝不静默返回错误字符串）
+- 保留并发峰值统计（get_concurrency_stats）作为观测，不再做限制
 """
 
 import os
 import time
-import threading
 import requests
 from concurrent.futures import ThreadPoolExecutor
 from dotenv import load_dotenv
@@ -23,15 +23,10 @@ DEFAULT_MODEL_DEEPSEEK = config.MODEL
 DEFAULT_TEMPERATURE = config.TEMPERATURE
 DEFAULT_MAX_TOKENS = config.MAX_TOKENS
 
-# ---- 并发与重试参数（硬性上限 10，见 config.py）----
-MAX_WORKERS = config.MAX_WORKERS
+# ---- 重试参数（见 config.py）----
 MAX_RETRIES = config.MAX_RETRIES
 RETRY_BACKOFF_SECONDS = config.RETRY_BACKOFF_SECONDS
 REQUEST_TIMEOUT_SECONDS = config.REQUEST_TIMEOUT_SECONDS
-
-# 全局并发硬保险：即使多个模块（如多户并行模拟）同时发起调用，
-# 同一时刻真正打到 DeepSeek 的并发也不超过 MAX_WORKERS(10)
-_GLOBAL_SEMAPHORE = threading.Semaphore(MAX_WORKERS)
 
 
 class LLMCallError(RuntimeError):
@@ -107,24 +102,23 @@ class SubAgent:
         if json_mode and not thinking:
             data["response_format"] = {"type": "json_object"}
 
-        # 全局并发硬保险：同一时刻最多 MAX_WORKERS(10) 个请求
-        with _GLOBAL_SEMAPHORE:
+        # 并发观测（不限制，用户 2026-08 指令：不设上限）
+        with SubAgent._lock:
+            SubAgent._current_concurrent += 1
+            if SubAgent._current_concurrent > SubAgent._peak_concurrent:
+                SubAgent._peak_concurrent = SubAgent._current_concurrent
+        try:
+            response = requests.post(
+                base_url + "/chat/completions",
+                headers=headers,
+                json=data,
+                timeout=REQUEST_TIMEOUT_SECONDS
+            )
+        except requests.exceptions.RequestException as e:
+            raise LLMCallError(f"DeepSeek 网络错误: {e}") from e
+        finally:
             with SubAgent._lock:
-                SubAgent._current_concurrent += 1
-                if SubAgent._current_concurrent > SubAgent._peak_concurrent:
-                    SubAgent._peak_concurrent = SubAgent._current_concurrent
-            try:
-                response = requests.post(
-                    base_url + "/chat/completions",
-                    headers=headers,
-                    json=data,
-                    timeout=REQUEST_TIMEOUT_SECONDS
-                )
-            except requests.exceptions.RequestException as e:
-                raise LLMCallError(f"DeepSeek 网络错误: {e}") from e
-            finally:
-                with SubAgent._lock:
-                    SubAgent._current_concurrent -= 1
+                SubAgent._current_concurrent -= 1
 
         if response.status_code != 200:
             raise LLMCallError(f"DeepSeek API 错误 {response.status_code}: {response.text[:500]}")
@@ -175,7 +169,7 @@ class SubAgent:
 
     @staticmethod
     def parallel_call(prompts, json_mode=False, thinking=False, api_key=None, model=None):
-        """并发调用多个 prompt，最多同时 MAX_WORKERS 个。返回结果按输入顺序排列。
+        """并发调用多个 prompt，无并发上限（每个 prompt 一个线程，户级并行只取决于家庭数）。
 
         单个失败会抛 LLMCallError（携带失败的 prompt 序号），调用方需显式处理。
         """
@@ -193,7 +187,7 @@ class SubAgent:
                 failure["error"] = e
                 return index, None
 
-        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        with ThreadPoolExecutor(max_workers=len(prompts)) as executor:
             futures = {
                 executor.submit(_run, idx, prompt): idx
                 for idx, prompt in enumerate(prompts)
