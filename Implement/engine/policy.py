@@ -59,6 +59,13 @@ class Policy:
 
 
 
+    @classmethod
+    def combine(cls, names, **kwargs):
+        parts = [name.strip() for name in names.split(",") if name.strip()]
+        policies = [cls.from_name(name) for name in parts]
+        return cls("+".join(parts), policies=policies)
+
+
     def render(self):
 
         if self.type == "tou":
@@ -127,6 +134,12 @@ class Policy:
                 f"最多延迟 {max_delay} 小时（电价降至 {delayed_rate:.2f} 澳元/kWh）。\n"
                 f"- 系统会在深夜谷段自动安排充电，保证在承诺时限前充满。"
             )
+
+        if "+" in self.type:
+            subs = self.params["policies"]
+            names = " + ".join(s.type for s in subs)
+            body = "\n\n".join(s.render() for s in subs)
+            return f"## 当前政策组合（{names}）\n\n{body}"
         return ""
 
 
@@ -140,7 +153,9 @@ class Policy:
         factories = {"tou": cls.tou, "subsidy": cls.subsidy,
                      "nudge": cls.nudge, "nudge_loss": cls.nudge_loss,
                      "peak_demand": cls.peak_demand, "ev_delay": cls.ev_delay}
+        if "," in name:
+            return cls.combine(name, **kwargs)
         if name not in factories:
             raise ValueError(f"未知政策类型: {name}"
-                             "（可用: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay）")
+                             "（可用: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay 或逗号组合）")
         return factories[name](**kwargs)

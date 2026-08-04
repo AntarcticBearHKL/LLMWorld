@@ -469,6 +469,35 @@ class TestPolicy(unittest.TestCase):
         with self.assertRaises(ValueError):
             Policy.from_name("no_such_policy")
 
+    def test_combined_policy_render(self):
+        from engine.policy import Policy
+        combined = Policy.from_name("tou,nudge")
+        self.assertEqual(combined.type, "tou+nudge")
+        text = combined.render()
+        self.assertIn("政策组合", text)
+        self.assertIn("分时电价", text)
+        self.assertIn("社会规范", text)
+        self.assertIn("tou + nudge", text)
+
+    def test_combined_policy_triple(self):
+        from engine.policy import Policy
+        combined = Policy.combine("peak_demand,ev_delay,subsidy")
+        text = combined.render()
+        self.assertEqual(combined.type, "peak_demand+ev_delay+subsidy")
+        self.assertIn("需量电价", text)
+        self.assertIn("延迟激励", text)
+        self.assertIn("低谷充电补贴", text)
+
+    def test_combined_policy_unknown_raises(self):
+        from engine.policy import Policy
+        with self.assertRaises(ValueError):
+            Policy.from_name("tou,no_such")
+
+    def test_combined_policy_whitespace(self):
+        from engine.policy import Policy
+        combined = Policy.from_name("tou, nudge")
+        self.assertEqual(combined.type, "tou+nudge")
+
     def test_compare_metrics(self):
 
         from compare_policies import compare
