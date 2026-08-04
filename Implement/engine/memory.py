@@ -14,11 +14,35 @@ class HouseholdMemory:
     def __init__(self):
         self.days = []   # 每天一份结构化摘要
         self.last = None # 最近一天的摘要（注入明天的 prompt）
+        self.news_memory = []   # 近期新闻要点（计划35：滚动保留，摘要形式注入）
 
     def load_days(self, days):
         """从世界状态恢复历史记忆（断点续跑：昨天的行为影响今天）。"""
         self.days = list(days)
         self.last = days[-1] if days else None
+
+    def load_news_memory(self, news_memory):
+        """恢复新闻记忆（计划35：旧闻以摘要形式留存）。"""
+        self.news_memory = list(news_memory or [])
+
+    def add_news(self, items, keep=None):
+        """当天投递的新新闻并入新闻记忆（滚动保留最近 keep 条，去重）。
+
+        items: NewsItem 列表或 (date, title) 元组列表。
+        """
+        if keep is None:
+            import config
+            keep = config.NEWS_MEMORY_KEEP
+        for item in items:
+            date = item.date if hasattr(item, "date") else item[0]
+            title = item.title if hasattr(item, "title") else item[1]
+            entry = {"date": date, "title": title}
+            if entry not in self.news_memory:
+                self.news_memory.append(entry)
+        self.news_memory = self.news_memory[-keep:]   # 滚动保留最近 N 条
+
+    def get_news_memory_state(self):
+        return list(self.news_memory)
 
     # ---------- 每天结束后调用 ----------
 
@@ -112,34 +136,42 @@ class HouseholdMemory:
     # ---------- 注入 prompt ----------
 
     def get_prompt_context(self):
-        """返回"昨日记忆"章节文本（无记忆时返回空串，调用方需容忍空）。"""
-        if not self.last:
-            return ""
+        """返回"昨日记忆 + 近期外界信息回顾"章节文本（无记忆时返回空串）。"""
+        parts = []
+        if self.last:
+            lines = []
+            for name, m in self.last["members"].items():
+                lines.append(f"{name}昨天的活动：")
+                for act in m["activities"]:
+                    lines.append(f"  - {act}")
+                rhythm = []
+                if m["wake_time"]:
+                    rhythm.append(f"起床 {m['wake_time']}")
+                if m["sleep_time"]:
+                    rhythm.append(f"入睡 {m['sleep_time']}")
+                if rhythm:
+                    lines.append(f"  作息：{'，'.join(rhythm)}")
+                lines.append("")
 
-        lines = []
-        for name, m in self.last["members"].items():
-            lines.append(f"{name}昨天的活动：")
-            for act in m["activities"]:
-                lines.append(f"  - {act}")
-            rhythm = []
-            if m["wake_time"]:
-                rhythm.append(f"起床 {m['wake_time']}")
-            if m["sleep_time"]:
-                rhythm.append(f"入睡 {m['sleep_time']}")
-            if rhythm:
-                lines.append(f"  作息：{'，'.join(rhythm)}")
-            lines.append("")
+            elec = self.last["electricity"]
+            elec_line = f"昨天（{self.last['date']}）家庭用电：总 {elec['total_kwh']} kWh"
+            if elec["peak_time"]:
+                elec_line += f"，高峰 {elec['peak_time']}（{elec['peak_watts']} W）"
+            lines.append(elec_line)
+            if elec["top_appliances"]:
+                lines.append(f"主要耗电：{'、'.join(elec['top_appliances'])}")
 
-        elec = self.last["electricity"]
-        elec_line = f"昨天（{self.last['date']}）家庭用电：总 {elec['total_kwh']} kWh"
-        if elec["peak_time"]:
-            elec_line += f"，高峰 {elec['peak_time']}（{elec['peak_watts']} W）"
-        lines.append(elec_line)
-        if elec["top_appliances"]:
-            lines.append(f"主要耗电：{'、'.join(elec['top_appliances'])}")
+            parts.append("## 昨日记忆（帮助你保持习惯连续性，昨天发生的事会影响今天的安排）\n"
+                         + "\n".join(lines))
 
-        header = "## 昨日记忆（帮助你保持习惯连续性，昨天发生的事会影响今天的安排）"
-        return header + "\n" + "\n".join(lines)
+        # 近期新闻要点（计划35：旧闻以摘要形式留存，不重复注入原文）
+        if self.news_memory:
+            lines = ["## 近期外界信息回顾（最近看过的新闻要点）"]
+            for entry in self.news_memory:
+                lines.append(f"- [{entry['date']}] {entry['title']}")
+            parts.append("\n".join(lines))
+
+        return "\n\n".join(parts)
 
     # ---------- 工具 ----------
 
