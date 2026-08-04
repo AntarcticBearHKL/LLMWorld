@@ -6,7 +6,20 @@
 
 import json
 import os
+import random
 from datetime import datetime
+
+
+# ---------- 随机种子 ----------
+
+def set_seed(seed):
+    """固定随机种子，保证实验可复现（论文要求）。"""
+    random.seed(seed)
+    try:
+        import numpy
+        numpy.random.seed(seed)
+    except ImportError:
+        pass  # numpy 非必需，无则跳过
 
 
 # ---------- JSON 格式化 ----------

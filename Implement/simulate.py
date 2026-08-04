@@ -1,14 +1,24 @@
 """命令行入口：加载世界 → 选择家庭 → 逐日模拟。
 
-用法：python Implement/simulate.py <world_id>
+两种模式：
+1. 交互模式（不带参数或仅带 world_id）：照旧让用户输入日期/天数/家庭
+2. 自动模式（--no-input）：所有参数用命令行或 config.py 默认值，用于批量实验
+
+用法：
+    python Implement/simulate.py <world_id> [--days 5] [--date "2026年4月21日"]
+        [--house 0] [--season 春天] [--weather 晴天] [--temp 20] [--seed 42] [--no-input]
 """
 
-from engine import Home, Room, Member, World, DateHelper, WeatherAPI
-from appliances import create_appliance_from_config
+import argparse
 import json
 import os
 import sys
 from datetime import datetime
+
+from engine import Home, Room, Member, World, DateHelper, WeatherAPI
+from engine import utils
+from appliances import create_appliance_from_config
+import config
 
 
 def load_world(world_id):
@@ -46,11 +56,7 @@ def load_world(world_id):
 
 
 def create_home_from_household(household):
-    """把 household.json 转成 Home 对象。
-
-    注意：电器配置（功率/日耗能/品牌）通过 from_config 真正生效，
-    而不是像旧代码那样丢弃配置只用默认值。
-    """
+    """把 household.json 转成 Home 对象（电器配置真正生效）。"""
     home_config = household['home']
     members_config = household['members']
 
@@ -83,27 +89,31 @@ def create_home_from_household(household):
     return home
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="LLM 家庭用电模拟")
+    parser.add_argument("world_id", help="世界ID（worlds/ 下的文件夹名）")
+    parser.add_argument("--days", type=int, default=None, help=f"模拟天数（默认 {config.DEFAULT_DAYS}）")
+    parser.add_argument("--date", type=str, default=None, help=f"开始日期，如 '2026年4月21日'（默认今天）")
+    parser.add_argument("--house", type=int, default=None, help="家庭序号（0 起，默认 0）")
+    parser.add_argument("--season", type=str, default=None, help=f"季节（默认 {config.DEFAULT_SEASON}）")
+    parser.add_argument("--weather", type=str, default=None, help=f"天气（默认 {config.DEFAULT_WEATHER}）")
+    parser.add_argument("--temp", type=float, default=None, help=f"温度（默认 {config.DEFAULT_TEMPERATURE}）")
+    parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED, help="随机种子（可复现）")
+    parser.add_argument("--no-input", action="store_true", help="自动模式：不询问任何输入，缺省用默认值")
+    return parser.parse_args()
+
+
 def main():
-    if len(sys.argv) < 2:
-        print("错误：请指定世界ID")
-        print("用法: python Implement/simulate.py <world_id>")
+    args = parse_args()
+    world_id = args.world_id
 
-        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        worlds_dir = os.path.join(project_root, 'worlds')
-        if os.path.exists(worlds_dir):
-            worlds = [d for d in os.listdir(worlds_dir) if os.path.isdir(os.path.join(worlds_dir, d))]
-            if worlds:
-                print(f"\n可用的世界:")
-                for w in worlds:
-                    print(f"  - {w}")
-        exit(1)
-
-    world_id = sys.argv[1]
+    # 固定随机种子，保证实验可复现
+    utils.set_seed(args.seed)
 
     print("=" * 60)
     print("世界模拟系统")
     print("=" * 60)
-    print(f"世界ID: {world_id}")
+    print(f"世界ID: {world_id}  随机种子: {args.seed}")
 
     world_meta, district_info, households = load_world(world_id)
 
@@ -112,7 +122,8 @@ def main():
     print(f"  邮编: {district_info['postcode']}")
     print(f"  家庭数: {len(households)}")
 
-    if len(households) > 1:
+    # ---- 选择家庭 ----
+    if len(households) > 1 and not args.no_input:
         print(f"\n可用的家庭:")
         for i, h in enumerate(households):
             household = h['household']
@@ -121,7 +132,7 @@ def main():
         house_idx = int(input(f"\n请选择要模拟的家庭（1-{len(households)}）：").strip() or "1") - 1
         house_idx = max(0, min(house_idx, len(households) - 1))
     else:
-        house_idx = 0
+        house_idx = args.house or 0
 
     selected_house = households[house_idx]
     household = selected_house['household']
@@ -131,12 +142,18 @@ def main():
 
     home = create_home_from_household(household)
 
-    start_date = input("\n请输入开始日期（格式：2025年4月20日，留空使用今天）：").strip()
-    if not start_date:
-        start_date = datetime.now().strftime('%Y年%m月%d日')
+    # ---- 日期与天数 ----
+    if args.no_input:
+        start_date = args.date or config.DEFAULT_START_DATE
+        num_days = args.days if args.days is not None else config.DEFAULT_DAYS
+    else:
+        start_date = args.date or input("\n请输入开始日期（格式：2025年4月20日，留空使用今天）：").strip() or datetime.now().strftime('%Y年%m月%d日')
+        num_days_input = input("请输入模拟天数（默认5天）：").strip()
+        num_days = int(num_days_input) if num_days_input else (args.days or config.DEFAULT_DAYS)
 
-    num_days_input = input("请输入模拟天数（默认5天）：").strip()
-    num_days = int(num_days_input) if num_days_input else 5
+    season = args.season or household.get('season', config.DEFAULT_SEASON)
+    weather = args.weather or config.DEFAULT_WEATHER
+    temperature = args.temp if args.temp is not None else config.DEFAULT_TEMPERATURE
 
     postcode = district_info['postcode']
     house_id = selected_house['house_id']
@@ -180,8 +197,6 @@ def main():
         print(f"温度：{weather_data['temperature']['min']}°C - {weather_data['temperature']['max']}°C")
         print(f"湿度：{weather_data['humidity']}%")
 
-        season = household.get('season', '春天')
-
         world.simulate_day(
             season=season,
             weather=weather_data['condition'],
@@ -189,7 +204,7 @@ def main():
             verbose=True
         )
 
-        # 显式报告校验警告（计划1：失败不静默）
+        # 显式报告校验警告（失败不静默）
         executor = world.current_executor
         if executor and executor.validation_warnings:
             print(f"\n[警告] 今日发现 {len(executor.validation_warnings)} 条决策校验问题：")

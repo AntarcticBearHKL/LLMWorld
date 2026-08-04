@@ -13,6 +13,7 @@ from datetime import datetime
 from . import utils
 from .prompt import Prompt
 from .subagent import SubAgent
+import config
 from .timeline import Timeline
 
 
@@ -60,7 +61,7 @@ class Planner:
             prompts.append(prompt)
             members.append(member)
 
-        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=True)
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=config.THINKING)
 
         for member, prompt, result in zip(members, prompts, results):
             tokens = SubAgent.get_tokens()
@@ -139,7 +140,7 @@ class Planner:
                     exclusive_info + "\n## 协调要求"
                 )
 
-            result = SubAgent.single_call(prompt_content, json_mode=True, thinking=True)
+            result = SubAgent.single_call(prompt_content, json_mode=True, thinking=config.THINKING)
             tokens = SubAgent.get_tokens()
 
             result_content = result["content"] if isinstance(result, dict) else result
@@ -194,7 +195,7 @@ class Planner:
             prompts.append(prompt)
             members.append((member_name, timeline))
 
-        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=True)
+        results = SubAgent.parallel_call(prompts, json_mode=True, thinking=config.THINKING)
 
         for (member_name, timeline), prompt, result in zip(members, prompts, results):
             tokens = SubAgent.get_tokens()
@@ -224,3 +225,5 @@ class Planner:
             if member.name == name:
                 return member
         return None
+
+

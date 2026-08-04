@@ -2,11 +2,10 @@
 
 规则（用户硬性要求）：
 - 只用 DeepSeek API 做测试
-- 同时并发的调用数量不超过 10 个
+- 同时并发的调用数量不超过 10 个（见 config.MAX_WORKERS，禁止调大）
 - 网络/服务端错误自动重试 3 次（指数退避），仍失败则抛 LLMCallError（绝不静默返回错误字符串）
 """
 
-import json
 import os
 import time
 import requests
@@ -14,18 +13,20 @@ from concurrent.futures import ThreadPoolExecutor
 from dotenv import load_dotenv
 from threading import Lock
 
+import config
+
 load_dotenv()
 
-DEEPSEEK_APIKEY = os.getenv('DEEPSEEK_APIKEY', '')
-DEFAULT_MODEL_DEEPSEEK = 'deepseek-v4-flash'
-DEFAULT_TEMPERATURE = 1.0
-DEFAULT_MAX_TOKENS = 64000
+DEEPSEEK_APIKEY = os.getenv('DEEPSEEK_APIKEY', '') or config.DEEPSEEK_APIKEY
+DEFAULT_MODEL_DEEPSEEK = config.MODEL
+DEFAULT_TEMPERATURE = config.TEMPERATURE
+DEFAULT_MAX_TOKENS = config.MAX_TOKENS
 
-# ---- 并发与重试参数（硬性上限 10）----
-MAX_WORKERS = 10           # 同时进行的 LLM 调用数，不允许超过 10
-MAX_RETRIES = 3            # 失败后最多重试次数
-RETRY_BACKOFF_SECONDS = 2  # 第一次重试等待秒数，之后指数增长
-REQUEST_TIMEOUT_SECONDS = 120
+# ---- 并发与重试参数（硬性上限 10，见 config.py）----
+MAX_WORKERS = config.MAX_WORKERS
+MAX_RETRIES = config.MAX_RETRIES
+RETRY_BACKOFF_SECONDS = config.RETRY_BACKOFF_SECONDS
+REQUEST_TIMEOUT_SECONDS = config.REQUEST_TIMEOUT_SECONDS
 
 
 class LLMCallError(RuntimeError):
@@ -88,7 +89,7 @@ class SubAgent:
 
         if thinking:
             data["thinking"] = {"type": "enabled"}
-            data["reasoning_effort"] = "high"
+            data["reasoning_effort"] = config.REASONING_EFFORT
 
         if json_mode and not thinking:
             data["response_format"] = {"type": "json_object"}

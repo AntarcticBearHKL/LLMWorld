@@ -1,9 +1,10 @@
-import json
+﻿import json
 import os
 import requests
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from .subagent import SubAgent
+import config
 from .prompt import Prompt
 
 load_dotenv()
@@ -19,7 +20,7 @@ class EnvironmentGenerator:
             user_prompt=user_prompt
         )
         
-        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
     
     def generate_household_distribution(self, district_info):
@@ -27,7 +28,7 @@ class EnvironmentGenerator:
             district_info=json.dumps(district_info, ensure_ascii=False, indent=2)
         )
         
-        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
     
     def generate_household(self, district_info, household_type):
@@ -45,7 +46,7 @@ class EnvironmentGenerator:
             appliance_schemas=get_appliance_schemas_text()
         )
         
-        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
     
     def expand_setting(self, user_prompt):
@@ -80,7 +81,7 @@ class EnvironmentGenerator:
 
 只返回JSON，不要其他内容。"""
         
-        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
     
     def get_weather_data(self, location, date=None):
@@ -165,7 +166,7 @@ class EnvironmentGenerator:
 
 只返回JSON，不要其他内容。"""
         
-        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
     
     def generate_members(self, environment, home):
@@ -223,7 +224,7 @@ class EnvironmentGenerator:
 
 只返回JSON，不要其他内容。"""
         
-        response = SubAgent.single_call(prompt, json_mode=False, thinking=True)
+        response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
     
     def _generate_mock_weather(self, location):
@@ -318,3 +319,5 @@ class DateHelper:
         date_str = date.strftime('%Y-%m-%d')
         holidays = holidays_data.get('holidays', {}).get(date_str, [])
         return holidays[0]['name'] if holidays else None
+
+
