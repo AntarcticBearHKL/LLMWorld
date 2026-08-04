@@ -1553,5 +1553,55 @@ class TestTimelineGuard(unittest.TestCase):
             parse_world_date("not-a-date")
 
 
+class TestAnomalies(unittest.TestCase):
+
+
+    def _profiles(self):
+        import math
+        def curve(kwh_scale, peak_w, overlap):
+            watts = []
+            for m in range(1440):
+                h = m // 60
+                base = kwh_scale * 100
+                v = base + peak_w * math.exp(-((h - 19) ** 2) / 3)
+                watts.append(round(v, 2))
+            if overlap:
+                watts[510:570] = [9000.0] * 60
+            return watts
+        profiles = []
+        for i in range(5):
+            profiles.append({"house_id": f"h{i + 1}", "total_energy_kwh": 10.0 + i,
+                             "load_profile_watts": curve(1.0 + i * 0.05, 800, False)})
+        profiles.append({"house_id": "h6", "total_energy_kwh": 45.0,
+                         "load_profile_watts": curve(4.5, 2000, True)})
+        return profiles
+
+    def test_high_consumer_flagged(self):
+        from analyze_anomalies import build_report
+        report = build_report(self._profiles())
+        by_house = {r["house_id"]: r for r in report["per_house"]}
+        self.assertGreater(by_house["h6"]["z_total_kwh"], 2)
+        self.assertIn("total_kwh", " ".join(by_house["h6"]["anomaly_flags"]))
+        self.assertGreater(by_house["h6"]["max_abs_z"], 2)
+        self.assertEqual(by_house["h1"]["anomaly_flags"], [])
+
+    def test_overlap_counted_in_flags(self):
+        from analyze_anomalies import build_report
+        report = build_report(self._profiles())
+        h6 = next(r for r in report["per_house"] if r["house_id"] == "h6")
+        self.assertGreater(h6["overlap_count"], 0)
+        self.assertEqual(report["anomaly_count"], 1)
+        self.assertEqual(report["anomalies"][0]["house_id"], "h6")
+
+    def test_empty_profiles_raise(self):
+        from analyze_anomalies import build_report
+        with self.assertRaises(ValueError):
+            build_report([])
+
+    def test_zscore_few_samples(self):
+        from analyze_anomalies import zscore
+        self.assertEqual(zscore([1.0, 2.0]), [None, None])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

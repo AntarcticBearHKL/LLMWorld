@@ -115,6 +115,11 @@
 </div>
 
 <div class="panel">
+  <h3>异常户检测（计划62：消费模式 z-score，Banik 2023 / Glauner 2017）</h3>
+  <div id="anomalyPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -260,6 +265,7 @@ async function refresh() {
     await renderWorldsMatrix();
     await renderEventResponse(worldId);
     await renderTimeline(worldId);
+    await renderAnomalies(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -588,6 +594,24 @@ async function renderTimeline(worldId) {
   div.innerHTML = rows
     ? `<table><thead><tr><th>日期</th><th>场景</th><th>当日政策</th><th>总用电(kWh)</th><th>新闻事件</th></tr></thead><tbody>${rows}</tbody></table>`
     : "<span class='err'>（无模拟数据）</span>";
+}
+
+async function renderAnomalies(worldId) {
+  const div = document.getElementById("anomalyPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const a = await api(`/api/worlds/${worldId}/anomalies/${scenario}`);
+  if (!a || a.error) { div.innerHTML = "<span class='err'>（无异常检测数据，先跑 analyze_anomalies.py）</span>"; return; }
+  const rows = a.per_house.map(r => {
+    const cells = ["total_kwh", "peak_to_mean", "load_factor", "overlap_count"].map(dim => {
+      const z = r["z_" + dim];
+      const color = z !== null && Math.abs(z) > 2 ? (z > 0 ? "#c33" : "#36c") : "";
+      return `<td style="color:${color};">${r[dim]}<br><span style="font-size:11px;">z=${z ?? "-"}</span></td>`;
+    }).join("");
+    return `<tr><td>${r.house_id}</td>${cells}<td>${r.anomaly_flags.length ? r.anomaly_flags.join("；") : "正常"}</td></tr>`;
+  }).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    共 ${a.households} 户，异常 ${a.anomaly_count} 户（|z|&gt;2 标红；蓝=偏低红=偏高）</div>
+    <table><thead><tr><th>家庭</th><th>日kWh</th><th>峰均比</th><th>负荷率</th><th>叠加事件</th><th>异常标记</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 async function renderPersonality(worldId) {
