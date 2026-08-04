@@ -32,6 +32,7 @@ PAPERS = [
     ("2512.19933", "PRISM: Personalized Cognitive Strategies for Consistent Behavior", None, None, "计划22"),
     ("2501.08985", "Personality-Driven LLM Agents", None, None, "计划22"),
     ("2306.11566", "Uniform Taxation of Electricity: Incentives for Flexibility and Cost Redistribution among Household Categories", "Gunkel et al.", 2023, "计划71"),
+    ("2512.16949", "Identifying and Understanding Obstacles to Heating Sobriety and Thermal Comfort in Collective Housing", "Cabezas-Rivière et al.", 2025, "计划75"),
 ]
 
 

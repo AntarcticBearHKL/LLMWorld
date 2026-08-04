@@ -500,6 +500,16 @@ class TestPolicy(unittest.TestCase):
         with self.assertRaises(ValueError):
             Policy.from_name("no_such_policy")
 
+    def test_night_setback_render(self):
+        from engine.policy import Policy
+        text = Policy.night_setback().render()
+        self.assertIn("夜间降暖", text)
+        self.assertIn("23:00-06:00", text)
+        self.assertIn("16-18°C", text)
+        self.assertIn("5-10%", text)
+        self.assertEqual(Policy.from_name("night_setback").type,
+                         "night_setback")
+
     def test_combined_policy_render(self):
         from engine.policy import Policy
         combined = Policy.from_name("tou,nudge")
