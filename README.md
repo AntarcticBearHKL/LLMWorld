@@ -23,8 +23,10 @@ python Implement/background_runner.py start pop03 --days 1
 python Implement/background_runner.py status
 python Implement/background_runner.py watch job_001
 
-# 5. 可视化（浏览器）
-python Implement/server.py            # → http://localhost:8080
+# 5. 可视化服务器（系统级常驻，开发期间保持开启；前后端修改后重启）
+python Implement/background_runner.py server start      # → http://localhost:8080
+python Implement/background_runner.py server restart    # 前后端修改后执行
+python Implement/background_runner.py server stop
 python Implement/server.py --query profile --world pop03 --scenario baseline --date 2026-04-21
 
 # 6. 分析
@@ -74,7 +76,10 @@ StepInfo/                  开发日志（计划N/执行N）
 | 决策 | 理由 |
 |---|---|
 | API 并发不设上限 | 用户 2026-08 指令：解除限制；户级并行多少只取决于世界家庭数 |
-| 每世界最多 10 户 | 用户 2026-08 指令：world 级约束（population.py 校验）|
+| 每世界最多 10 户 | 用户 2026-08 指令：world 级约束（population.py 校验）；更大人口用 combine_worlds 联合 |
+| 世界日期连续 | state.json 断点续跑：--date 缺省自动从上次日期下一天继续并恢复记忆 |
+| 生成去作弊化 | 生成时无 EV/节能意识/省电预设，用电行为由 LLM 自发涌现 |
+| 服务器系统级常驻 | background_runner server start/restart；前后端修改即重启 |
 | thinking 默认关闭 | 基准测试：开=3分钟/条，关=2秒/条（90 倍），JSON 质量无差异 |
 | 电器日使用上限 | 防止 LLM 不真实决策（EV 充 12 小时），超限截断+警告 |
 | 常开电器基载计入 | 冰箱等 always_on 必须进日总用电（修复前系统性偏低）|
