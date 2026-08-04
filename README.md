@@ -33,17 +33,29 @@ python Implement/background_runner.py server restart
 python Implement/background_runner.py server stop
 python Implement/server.py --query profile --world pop03 --scenario baseline --date 2026-04-21
 
-# 6. 分析（一键化：聚类/变异性/模式/归因/分组/矩阵，0 token；也可在浏览器"一键分析"按钮）
+# 6. 分析（一键化 15 工具；浏览器"一键分析"按钮 0 token）
 python Implement/make_analysis_all.py --world pop03
+python Implement/export_analysis_csv.py pop03              # 全部分析 JSON → CSV（论文表格）
+python Implement/analyze_forecast.py pop03                 # 负荷预测可预测性（RF vs naive）
+python Implement/analyze_policy_tradeoffs.py pop03         # 政策多目标权衡
+python Implement/analyze_world_summary.py pop03            # 世界总览（每户一行）
+python Implement/analyze_appliance_usage.py pop03          # 电器贡献排行
+python Implement/analyze_seasonal.py pop03 / analyze_weekday.py pop03   # 季节/周内
+python Implement/analyze_weather_sensitivity.py pop03      # 温度-用电关系
+python Implement/analyze_nilm.py pop03                     # 负荷分解基准
 python Implement/validate_baseline.py --world pop03        # vs 维州真实负荷
 python Implement/compare_policies.py --world pop03 --all   # 政策矩阵（含峰值形态列）
 python Implement/analyze_anomalies.py pop03                # 异常户检测（z-score）
+python Implement/analyze_advice.py pop03                   # 个性化节能建议
 python Implement/analyze_event_response.py pop03           # 新闻事件 × 模式迁移
+python Implement/analyze_solar.py pop03 --battery 10       # 光伏+电池自用
+python Implement/analyze_electrification.py pop03          # EV/热泵情景
+python Implement/analyze_behavior_load.py pop03            # 行为-负荷一致性
 python Implement/compare_worlds.py --worlds pop03 pop04    # 多世界政策对比
 python Implement/make_report.py --world pop03              # 论文素材报告
 
 # 7. 测试
-python Implement/test_offline.py                            # 148 项
+python Implement/test_offline.py                            # 202 项
 ```
 
 ## 世界日期时间线约束（用户指令）
@@ -66,7 +78,7 @@ Implement/
     memory.py              跨天记忆（昨日摘要→今日计划 + 新闻记忆）
     news.py                新闻台（events.json/投递进度/状态序列化）
     news_templates.py      新闻模板库（10 类预置事件）
-    policy.py              政策（tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay/组合）
+    policy.py              政策（tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay/night_setback/in_home_display/组合）
     environment_interface.py 环境三模式（real API/config 气候随机/manual 手工）
     generator.py           世界生成（LLM 版，地区→分布→家庭）
     weather_api.py         真实天气/节假日 API（含兜底）
@@ -77,35 +89,55 @@ Implement/
   population_runner.py     人口级并行模拟 + 聚合 + 政策/场景/事件/peer-nudge/时间线校验
   simulate.py              单家庭模拟入口（时间线校验）
   background_runner.py     后台任务管理器（start/status/watch/stop + server 子命令）
-  server.py                可视化后端（常驻 HTTP + CLI 查询；模拟/分析/停止/删除端点）
-  frontend/index.html      浏览器前端（曲线/矩阵/聚类/变异性/模式/分组/异常/事件/时间线/
-                           多世界对比/开启模拟闭环/一键分析/上帝面板/新闻模板）
+  server.py                可视化后端（常驻 HTTP + CLI 查询；模拟/分析/停止/删除/新建世界端点）
+  frontend/index.html      浏览器前端（30+ 面板：曲线/矩阵/聚类/变异性/模式/分组/异常/事件/
+                           时间线/多世界对比/光伏/电气化/建议/NILM/季节/周内/天气/总览/
+                           政策权衡/预测/电器画像/开启模拟闭环/一键分析/上帝面板/新建删除世界）
   config.py                全局配置中心
   load_profile_cluster.py  负荷曲线聚类（计划40，Michalakopoulos 2023）
   analyze_variability.py   跨日行为变异性（计划41，Zhou 2016）
   analyze_behavior_patterns.py 行为模式迁移（计划42，Jin 2021）
   analyze_groups.py        分组政策响应（计划45，--label-source awareness|variability）
-  make_analysis_all.py     分析一键化（计划46）
+  make_analysis_all.py     分析一键化（计划46，15 工具）
   analyze_event_response.py 事件响应（计划55，Fidone 2026）
   analyze_anomalies.py     异常户检测（计划62，z-score）
+  analyze_behavior_load.py 行为-负荷一致性（计划64，Xia 2026）
+  analyze_solar.py         光伏+电池自用（计划71/72，Gunkel 2023）
+  analyze_electrification.py EV/热泵情景（计划79，Gunkel 2022）
+  analyze_advice.py        个性化节能建议（计划83，Monacchi 2015）
+  analyze_seasonal.py      季节性对比（计划85，Jin 2021）
+  analyze_weather_sensitivity.py 温度-用电关系（计划87，Jin 2021）
+  analyze_nilm.py          NILM 分解基准（计划91，Azad 2023）
+  analyze_weekday.py       周内模式（计划93，Jin 2021）
+  analyze_world_summary.py 世界总览（计划97）
+  analyze_policy_tradeoffs.py 政策权衡（计划99，CoRenew 2026）
+  analyze_forecast.py      负荷预测（计划101，Zharova 2022）
+  analyze_appliance_usage.py 电器画像（计划103，Gunkel 2022）
+  export_analysis_csv.py   JSON→CSV（计划105）
   compare_worlds.py        多世界政策对比（计划51）
   compare_policies.py      政策对比（--base-date 同日公平对比；峰值形态）
-  test_offline.py          离线测试（148 项）
+  test_offline.py          离线测试（202 项）
   Design/                  架构设计文档（.aas）
   prompts/                 LLM 提示词模板
+  RefPaper/                arXiv 论文本地存档（32 篇 + 索引）
   worlds/<id>/             世界数据（household.json / events.json / state.json 存档）
   outputs/<id>/population/ 聚合结果（按场景/日期分目录）
-  outputs/<id>/analysis/   分析产物（聚类/变异性/模式/分组/异常/事件响应）
+  outputs/<id>/analysis/   分析产物（各工具 JSON + csv/ 导出）
   StepInfo/                开发日志（计划N/执行N，00_需求与规则=最高优先级存档）
 ```
 
 ## 前端能力（http://localhost:8080）
 
-- **开启模拟**：选世界→政策下拉（6 政策+组合+peer_nudge）→天数/日期→确认启动
+- **新建世界**：0 token 程序化人口生成（≤10 户）→ 自动选中
+- **删除世界**：精确清理 worlds+outputs（运行中任务拒绝）
+- **开启模拟**：政策下拉（8 政策+组合+peer_nudge）→天数/日期→确认启动
   （系统级后台执行，自动跟踪进度，完成后自动刷新全部结果）
-- **一键分析**：0 token 跑完聚类/变异性/模式/归因/分组/矩阵
-- **面板**：负荷曲线/矩阵/聚类/变异性/模式迁移/分组响应/异常户/
-  事件响应/世界时间线/多世界对比/任务（停止/删除）
+- **一键分析**：0 token 跑完 15 个工具（聚类/变异性/模式/归因/分组/矩阵/
+  异常/建议/光伏/电气化/季节/天气/周内/NILM 等）
+- **面板（30+）**：负荷曲线/矩阵/聚类/变异性/模式迁移/分组响应/异常户/
+  行为-负荷/光伏自用/电气化/个性化建议/事件响应/时间线/多世界对比/
+  季节/周内/天气敏感性/NILM/世界总览/政策权衡/负荷预测/电器画像/
+  任务（停止/删除）
 - **上帝面板**：事件注入 + 新闻模板一键填入
 
 ## 关键设计决策
