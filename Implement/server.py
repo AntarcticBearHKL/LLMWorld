@@ -25,6 +25,10 @@ OUTPUTS_DIR = os.path.join(PROJECT_ROOT, "outputs")
 WORLDS_DIR = os.path.join(PROJECT_ROOT, "worlds")
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend")
 
+# 后台任务状态解析（复用 background_runner；模块级导入避免每次请求重复加载）
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "Implement"))
+import background_runner as _br
+
 
 # ============================================================
 # 数据读取层（API 与 CLI 共用）
@@ -146,17 +150,15 @@ def load_jobs():
         try:
             with open(os.path.join(jobs_dir, name), "r", encoding="utf-8") as f:
                 meta = json.load(f)
-            # 进度解析（复用 background_runner 逻辑）
-            sys.path.insert(0, os.path.join(PROJECT_ROOT, "Implement"))
-            import background_runner as br
-            prog = br.parse_progress(meta["out"])
+            # 进度解析（复用 background_runner 模块）
+            prog = _br.parse_progress(meta["out"])
             jobs.append({
                 "job_id": meta["job_id"],
                 "status": prog["status"],
                 "progress": prog["detail"],
                 "command": meta["command"],
                 "started_at": meta["started_at"],
-                "log_tail": br.tail_text(meta["out"], 800),
+                "log_tail": _br.tail_text(meta["out"], 800),
             })
         except Exception:
             continue
