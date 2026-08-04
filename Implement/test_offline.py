@@ -1164,6 +1164,55 @@ class TestVariability(unittest.TestCase):
         self.assertLess(variability_index(stable), variability_index(wild))
 
 
+class TestPeakOverlap(unittest.TestCase):
+
+
+    def test_single_overlap_event(self):
+        from engine.load_features import peak_overlap_events
+        watts = [500.0] * 1440
+        watts[510:570] = [8500.0] * 60
+        events = peak_overlap_events(watts, threshold=8000)
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]["start_minute"], 510)
+        self.assertEqual(events[0]["end_minute"], 569)
+        self.assertEqual(events[0]["duration_minutes"], 60)
+        self.assertEqual(events[0]["peak_watts"], 8500.0)
+        self.assertEqual(events[0]["start_time"], "08:30")
+
+    def test_two_separate_events(self):
+        from engine.load_features import peak_overlap_events
+        watts = [500.0] * 1440
+        watts[100:110] = [9000.0] * 10
+        watts[700:720] = [8200.0] * 20
+        events = peak_overlap_events(watts, threshold=8000)
+        self.assertEqual(len(events), 2)
+        self.assertEqual(events[0]["start_minute"], 100)
+        self.assertEqual(events[1]["start_minute"], 700)
+
+    def test_below_threshold_no_event(self):
+        from engine.load_features import peak_overlap_events
+        watts = [500.0] * 1440
+        watts[100:110] = [7999.0] * 10
+        self.assertEqual(peak_overlap_events(watts, threshold=8000), [])
+
+    def test_count_and_minutes(self):
+        from engine.load_features import peak_overlap_count, peak_overlap_minutes
+        watts = [500.0] * 1440
+        watts[100:110] = [9000.0] * 10
+        self.assertEqual(peak_overlap_count(watts), 1)
+        self.assertEqual(peak_overlap_minutes(watts), 10)
+
+    def test_summary_contains_overlap(self):
+        import tempfile
+        from engine.energy_calculator import EnergyCalculator
+        with tempfile.TemporaryDirectory() as tmp:
+            calc = EnergyCalculator(None, tmp)
+            calc.household_load_watts = [500.0] * 1440
+            calc.household_load_watts[510:570] = [8500.0] * 60
+            calc._finalize_statistics()
+            self.assertEqual(len(calc.peak_overlap_events), 1)
+
+
 class TestBehaviorPatterns(unittest.TestCase):
 
 

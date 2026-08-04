@@ -287,8 +287,15 @@ async function showHouseDetail(houseId) {
   if (!d || d.error) { div.innerHTML = `<span class="err">（无该户电器数据）</span>`; return; }
   const rows = (d.appliances || []).map(a =>
     `<tr><td>${a.name}</td><td>${a.type}</td><td>${a.total_hours} h</td><td>${a.total_energy_kwh} kWh</td></tr>`).join("");
+  const overlaps = (d.peak_overlap_events || []).map(e =>
+    `<tr><td>${e.start_time}</td><td>${e.end_time}</td><td>${e.peak_watts} W</td><td>${e.duration_minutes} 分钟</td></tr>`).join("");
+  const overlapBlock = overlaps
+    ? `<b>峰值叠加事件（&gt;8kW，需量电价计费风险）</b>
+       <table style="margin-top:6px;"><thead><tr><th>开始</th><th>结束</th><th>峰值</th><th>时长</th></tr></thead><tbody>${overlaps}</tbody></table>`
+    : "";
   div.innerHTML = `<b>${houseId} 电器明细（${scenario}/${date}）</b>
-    <table style="margin-top:6px;"><thead><tr><th>电器</th><th>类型</th><th>时长</th><th>耗电</th></tr></thead><tbody>${rows}</tbody></table>`;
+    <table style="margin-top:6px;"><thead><tr><th>电器</th><th>类型</th><th>时长</th><th>耗电</th></tr></thead><tbody>${rows}</tbody></table>
+    <div style="margin-top:10px;">${overlapBlock}</div>`;
 }
 
 async function renderTrend(worldId) {

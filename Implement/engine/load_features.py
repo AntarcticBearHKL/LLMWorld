@@ -90,6 +90,45 @@ def daily_kwh_cv(per_day_kwh):
     return var ** 0.5 / mean
 
 
+def peak_overlap_events(profile_watts, threshold=8000):
+    events = []
+    start = None
+    peak = 0.0
+    for minute, watts in enumerate(profile_watts):
+        if watts >= threshold:
+            if start is None:
+                start = minute
+            peak = max(peak, watts)
+        elif start is not None:
+            events.append({
+                "start_minute": start,
+                "end_minute": minute - 1,
+                "peak_watts": round(peak, 2),
+                "duration_minutes": minute - start,
+            })
+            start = None
+            peak = 0.0
+    if start is not None:
+        events.append({
+            "start_minute": start,
+            "end_minute": len(profile_watts) - 1,
+            "peak_watts": round(peak, 2),
+            "duration_minutes": len(profile_watts) - start,
+        })
+    for event in events:
+        event["start_time"] = f"{event['start_minute'] // 60:02d}:{event['start_minute'] % 60:02d}"
+        event["end_time"] = f"{event['end_minute'] // 60:02d}:{event['end_minute'] % 60:02d}"
+    return events
+
+
+def peak_overlap_count(profile_watts, threshold=8000):
+    return len(peak_overlap_events(profile_watts, threshold))
+
+
+def peak_overlap_minutes(profile_watts, threshold=8000):
+    return sum(e["duration_minutes"] for e in peak_overlap_events(profile_watts, threshold))
+
+
 def kmeans(features, k, seed=42, iters=300):
     data = np.asarray(features, dtype=float)
     n = len(data)
