@@ -1,0 +1,45 @@
+class Server
+    可视化后端：常驻 HTTP 服务 + 命令行查询（前后端分离，零第三方依赖）。
+
+    func list_worlds:
+        世界列表：扫描 worlds/ 目录，读取 world.json（家庭构成/地区），
+        并叠加 scan_world 的场景与日期概览。
+
+    func scan_world(world_id):
+        扫描 outputs/<world>/population/ → 场景列表（各场景的日期与最新日期）。
+
+    func load_profile(world_id, scenario, date):
+        读取人口聚合曲线 population_profile_1440min.json；不存在返回 None。
+
+    func load_matrix(world_id):
+        读取场景对比矩阵 policy_matrix.json（compare_policies 产物）。
+
+    func load_events(world_id):
+        读取上帝剧本 events.json（新闻列表）。
+
+    func load_house_profile(world_id, postcode, house_id, scenario, date):
+        读取单户 1440 分钟曲线。
+
+    class Handler(BaseHTTPRequestHandler):
+        GET /                      → 前端 index.html
+        GET /api/worlds            → 世界列表
+        GET /api/worlds/<id>       → 世界详情
+        GET /api/worlds/<id>/profile/<scenario>/<date> → 聚合曲线+摘要+逐户
+        GET /api/worlds/<id>/matrix → 场景矩阵
+        GET /api/worlds/<id>/events → 上帝剧本
+        错误统一返回 {"error": ...} + 相应状态码。
+
+    func serve(port):
+        启动常驻服务（ThreadingHTTPServer），Ctrl+C 停止。
+
+    func query_cli(args):
+        命令行查询（同一数据层）：
+        --query worlds | days | profile | matrix | events
+
+前端（frontend/index.html）：
+- 世界/场景/日期三级选择
+- 摘要卡片（总用电/户均/峰值/峰值时刻/家庭数）
+- canvas 24 小时均值负荷曲线（峰值标注）
+- 逐户用电明细表
+- 场景对比矩阵表
+- 上帝剧本新闻面板
