@@ -1393,5 +1393,25 @@ class TestSimArgs(unittest.TestCase):
         self.assertIn("my_run", args)
 
 
+class TestPeerNudge(unittest.TestCase):
+
+
+    def test_neighbor_mean_excludes_self(self):
+        from population_runner import neighbor_mean_kwh
+        kwhs = {"h1": 10.0, "h2": 14.0, "h3": 18.0}
+        self.assertEqual(neighbor_mean_kwh(kwhs, "h1"), 16.0)
+        self.assertEqual(neighbor_mean_kwh(kwhs, "h3"), 12.0)
+
+    def test_neighbor_mean_no_others(self):
+        from population_runner import neighbor_mean_kwh
+        self.assertIsNone(neighbor_mean_kwh({"h1": 10.0}, "h1"))
+        self.assertIsNone(neighbor_mean_kwh({}, "h1"))
+
+    def test_neighbor_mean_rounding(self):
+        from population_runner import neighbor_mean_kwh
+        kwhs = {"h1": 10.0, "h2": 11.0, "h3": 12.0, "h4": 13.0}
+        self.assertEqual(neighbor_mean_kwh(kwhs, "h1"), 12.0)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -123,6 +123,7 @@
       <option value="ev_delay">ev_delay EV延迟激励</option>
       <option value="tou,nudge">组合: tou+nudge</option>
       <option value="peak_demand,ev_delay">组合: peak_demand+ev_delay</option>
+      <option value="peer_nudge">peer_nudge 个性化邻居反馈</option>
     </select>
     天数 <input id="simDays" value="1" style="width:50px">
     日期 <input id="simDate" placeholder="留空=自动续跑" style="width:130px">
@@ -645,6 +646,7 @@ async function startSimulation() {
   const policy = document.getElementById("selPolicy").value;
   const days = document.getElementById("simDays").value || "1";
   const date = document.getElementById("simDate").value.trim();
+  const peerNudge = policy === "peer_nudge";
   const desc = policy ? `政策「${policy}」` : "baseline";
   if (!confirm(`将消耗 DeepSeek API tokens 启动后台模拟：\n世界 ${worldId}，${desc}，${days} 天${date ? "，从 " + date : "（自动续跑）"}。\n确认继续？`)) return;
   st.textContent = "启动中…";
@@ -652,7 +654,7 @@ async function startSimulation() {
     const r = await fetch(`/api/worlds/${worldId}/simulate`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({policy, days, date}),
+      body: JSON.stringify({policy: peerNudge ? "" : policy, days, date, peer_nudge: peerNudge}),
     });
     const res = await r.json();
     if (res.error) throw new Error(res.error);

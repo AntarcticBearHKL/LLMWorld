@@ -146,6 +146,13 @@ def _policy_for_date(schedule, date_str):
     return None
 
 
+def neighbor_mean_kwh(prev_kwhs, house_id):
+    others = [kwh for hid, kwh in prev_kwhs.items() if hid != house_id and kwh]
+    if not others:
+        return None
+    return round(sum(others) / len(others), 1)
+
+
 def main():
     parser = argparse.ArgumentParser(description="人口级并行模拟")
     parser.add_argument("world_id", help="世界ID")
@@ -169,6 +176,8 @@ def main():
                         "新闻实验请用自定义名如 war_news，避免与基线混淆")
     parser.add_argument("--no-events", action="store_true",
                         help="跳过 worlds/<id>/events.json 剧本（仅用命令行 --event）")
+    parser.add_argument("--peer-nudge", action="store_true",
+                        help="个性化 nudge：第 2 天起每户收到基于邻居前一天实际用电的社会规范文本（Ayres 2013）")
     parser.add_argument("--aggregate-only", action="store_true",
                         help="不跑 LLM，直接从已保存的 outputs 曲线文件离线聚合")
     args = parser.parse_args()
@@ -183,7 +192,9 @@ def main():
 
     scenario_name = args.scenario
     if not scenario_name:
-        if policy_schedule:
+        if args.peer_nudge:
+            scenario_name = "peer_nudge"
+        elif policy_schedule:
             scenario_name = "schedule"
         elif args.policy:
             scenario_name = args.policy.replace(",", "+")
@@ -282,6 +293,7 @@ def main():
             world.news.add_event(item)
         worlds[info["house_id"]] = world
 
+    prev_kwhs = {}
     for day in range(args.days):
         print(f"\n=== 第 {day + 1}/{args.days} 天 ===")
 
@@ -294,8 +306,19 @@ def main():
             season = household.get("season") or utils.season_for_date(date_iso)
 
             from engine.environment_interface import EnvironmentInterface
-            cur_policy = _policy_for_date(policy_schedule, date_iso) if policy_schedule else args.policy
-            cur_context = Policy.from_name(cur_policy).render() if cur_policy else ""
+            if args.peer_nudge and day > 0:
+                mean = neighbor_mean_kwh(prev_kwhs, house_id)
+                if mean is not None:
+                    nudge = Policy.nudge(
+                        comparison_text=f"你的邻居平均每天用电 {mean} 千瓦时")
+                    cur_context = nudge.render()
+                    cur_policy = "peer_nudge"
+                else:
+                    cur_context = ""
+                    cur_policy = "baseline"
+            else:
+                cur_policy = _policy_for_date(policy_schedule, date_iso) if policy_schedule else args.policy
+                cur_context = Policy.from_name(cur_policy).render() if cur_policy else ""
             env = EnvironmentInterface.get_weather(location, date_iso, season)
             day_result = world.simulate_day(
                 season=season,
@@ -312,6 +335,9 @@ def main():
 
         with ThreadPoolExecutor(max_workers=len(worlds)) as executor:
             house_results = list(executor.map(run_one, worlds.items()))
+
+        prev_kwhs = {h: r["energy_summary"]["total_energy_kwh"]
+                     for h, r in house_results}
 
 
         population = aggregate_population(house_results)
