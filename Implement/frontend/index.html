@@ -82,6 +82,11 @@
 </div>
 
 <div class="panel">
+  <h3>行为模式迁移（计划42：household-days 聚类，Jin 2021）</h3>
+  <div id="patternPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -189,6 +194,7 @@ async function refresh() {
     await renderPersonality(worldId);
     await renderClusters(worldId);
     await renderVariability(worldId);
+    await renderPatterns(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -418,6 +424,27 @@ async function renderVariability(worldId) {
     </div>
     <div style="width:50%;">${bars}</div>
     <div style="clear:both;"></div>`;
+}
+
+async function renderPatterns(worldId) {
+  const div = document.getElementById("patternPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const p = await api(`/api/worlds/${worldId}/patterns/${scenario}`);
+  if (!p || p.error) { div.innerHTML = "<span class='err'>（无模式数据，先跑 analyze_behavior_patterns.py）</span>"; return; }
+  const curves = p.clusters.map((c, i) =>
+    `<canvas class="cluster" id="patternCanvas${i}" width="640" height="120"></canvas>`).join("");
+  const seqBlocks = p.per_house.map(h => {
+    const cells = h.cluster_sequence.map(c =>
+      `<span style="display:inline-block;width:14px;height:14px;margin:1px;background:${COLORS[c % COLORS.length]};"></span>`).join("");
+    return `<div style="font-size:12px;margin:2px 0;">
+      <span style="width:90px;display:inline-block;">${h.house_id}</span>${cells}
+      <span style="color:#456;margin-left:6px;">迁移${h.transitions}次，主导簇${h.dominant_cluster}，日kWh ${h.mean_kwh}</span></div>`;
+  }).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    共 ${p.samples} 个 household-days（${p.households} 户，k=${p.k}），平均迁移 ${p.mean_transitions} 次；每格=一天所属行为模式（Jin 2021）</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">${curves}</div>
+    <div style="margin-top:8px;">${seqBlocks}</div>`;
+  p.clusters.forEach((c, i) => drawClusterCanvas(`patternCanvas${i}`, c.center_shape, COLORS[i % COLORS.length]));
 }
 
 async function renderPersonality(worldId) {

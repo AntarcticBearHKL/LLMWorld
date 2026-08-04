@@ -1062,5 +1062,55 @@ class TestVariability(unittest.TestCase):
         self.assertLess(variability_index(stable), variability_index(wild))
 
 
+class TestBehaviorPatterns(unittest.TestCase):
+
+
+    def _samples(self):
+        import numpy as np
+        def shape(peak_h):
+            return [0.6 + 0.4 * np.sin(np.pi * h / 10) if h < 12 else
+                    0.6 + 0.4 * np.exp(-((h - peak_h) ** 2) / 4) for h in range(24)]
+        samples = []
+        for day in range(3):
+            samples.append({"house_id": "fixed", "date": f"2026042{day + 1}",
+                            "kwh": 10.0, "shape": shape(19), "hourly": [1.0] * 24})
+        for day in range(3):
+            samples.append({"house_id": "switch", "date": f"2026041{day + 1}",
+                            "kwh": 12.0, "shape": shape(8 if day == 0 else 19),
+                            "hourly": [1.0] * 24})
+        return samples
+
+    def test_transitions_counted(self):
+        from analyze_behavior_patterns import build_report
+        report = build_report(self._samples(), 2)
+        by_house = {h["house_id"]: h for h in report["per_house"]}
+        self.assertEqual(by_house["fixed"]["transitions"], 0)
+        self.assertGreater(by_house["switch"]["transitions"], 0)
+        self.assertEqual(report["k"], 2)
+
+    def test_dominant_cluster(self):
+        from analyze_behavior_patterns import build_report
+        report = build_report(self._samples(), 2)
+        by_house = {h["house_id"]: h for h in report["per_house"]}
+        seq = by_house["switch"]["cluster_sequence"]
+        counts = {}
+        for c in seq:
+            counts[c] = counts.get(c, 0) + 1
+        dominant = max(counts, key=counts.get)
+        self.assertEqual(by_house["switch"]["dominant_cluster"], dominant)
+
+    def test_cluster_centers_count(self):
+        from analyze_behavior_patterns import build_report
+        report = build_report(self._samples(), 2)
+        self.assertEqual(len(report["clusters"]), 2)
+        self.assertEqual(len(report["clusters"][0]["center_shape"]), 24)
+        self.assertEqual(report["samples"], 6)
+
+    def test_empty_samples_raise(self):
+        from analyze_behavior_patterns import build_report
+        with self.assertRaises(ValueError):
+            build_report([], 2)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
