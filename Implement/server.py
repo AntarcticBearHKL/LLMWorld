@@ -1,18 +1,18 @@
-"""模拟世界可视化后端：常驻 HTTP 服务 + 命令行查询（前后端分离）。
 
-启动（常驻服务，浏览器访问 http://localhost:8080）：
-    python Implement/server.py [--port 8080]
 
-命令行查询（同一后端逻辑，一次性输出）：
-    python Implement/server.py --query worlds
-    python Implement/server.py --query days pop02
-    python Implement/server.py --query profile pop02 --scenario tou --date 2026-04-21
-    python Implement/server.py --query matrix pop02
-    python Implement/server.py --query events pop02
 
-数据来源：outputs/（模拟产物）与 worlds/（世界配置/上帝剧本）。
-零第三方依赖（标准库 http.server）。
-"""
+
+
+
+
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -25,17 +25,17 @@ OUTPUTS_DIR = os.path.join(PROJECT_ROOT, "outputs")
 WORLDS_DIR = os.path.join(PROJECT_ROOT, "worlds")
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend")
 
-# 后台任务状态解析（复用 background_runner；模块级导入避免每次请求重复加载）
+
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "Implement"))
 import background_runner as _br
 
 
-# ============================================================
-# 数据读取层（API 与 CLI 共用）
-# ============================================================
+
+
+
 
 def list_worlds():
-    """世界列表：worlds/ 下的目录 + outputs/ 下的"虚拟世界"（如多世界联合聚合）。"""
+
     worlds = []
     if not os.path.isdir(WORLDS_DIR):
         return worlds
@@ -44,7 +44,7 @@ def list_worlds():
         if not os.path.isdir(wdir):
             continue
         world = {"id": name, "households": [], "scenarios": [], "days": []}
-        # 家庭构成（world.json 或 3168/house_*）
+
         meta_path = os.path.join(wdir, "world.json")
         if os.path.exists(meta_path):
             try:
@@ -54,11 +54,11 @@ def list_worlds():
                 world["district"] = meta.get("district", {})
             except Exception:
                 pass
-        # 场景与日期（outputs/<world>/）
+
         world.update(scan_world(name))
         worlds.append(world)
 
-    # 虚拟世界：outputs/ 下存在但 worlds/ 不存在的目录（combine_worlds 产物等）
+
     real_ids = {w["id"] for w in worlds}
     if os.path.isdir(OUTPUTS_DIR):
         for name in sorted(os.listdir(OUTPUTS_DIR)):
@@ -78,7 +78,7 @@ def list_worlds():
 
 
 def scan_world(world_id):
-    """扫描 outputs/<world_id>/ → {scenarios: [...], days: [...], per_house_dirs: [...]}"""
+
     result = {"scenarios": [], "days": []}
     out_dir = os.path.join(OUTPUTS_DIR, world_id, "population")
     if os.path.isdir(out_dir):
@@ -97,7 +97,7 @@ def scan_world(world_id):
 
 
 def load_profile(world_id, scenario, date):
-    """读取某场景某日的聚合曲线。返回 dict 或 None。"""
+
     path = os.path.join(OUTPUTS_DIR, world_id, "population", scenario, date,
                         "population_profile_1440min.json")
     if not os.path.exists(path):
@@ -107,7 +107,7 @@ def load_profile(world_id, scenario, date):
 
 
 def load_matrix(world_id):
-    """场景对比矩阵（compare_policies 产物）。"""
+
     path = os.path.join(OUTPUTS_DIR, world_id, "comparison", "policy_matrix.json")
     if not os.path.exists(path):
         return None
@@ -116,7 +116,7 @@ def load_matrix(world_id):
 
 
 def load_analysis(world_id, scenario="baseline"):
-    """人口归因分析（analyze_population 产物，计划25）。"""
+
     path = os.path.join(OUTPUTS_DIR, world_id, "analysis", f"population_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -125,7 +125,7 @@ def load_analysis(world_id, scenario="baseline"):
 
 
 def load_households_profile(world_id):
-    """世界家庭人格档案（worlds/<id>/3168/house_XXXX/household.json，计划30：前端展示）。"""
+
     base = os.path.join(WORLDS_DIR, world_id, "3168")
     if not os.path.isdir(base):
         return []
@@ -159,7 +159,7 @@ def load_households_profile(world_id):
 
 
 def load_world_state(world_id):
-    """世界连续状态（worlds/<id>/state.json，计划27）：上次日期+记忆天数。"""
+
     path = os.path.join(WORLDS_DIR, world_id, "state.json")
     if not os.path.exists(path):
         return {"has_state": False}
@@ -173,7 +173,7 @@ def load_world_state(world_id):
 
 
 def delete_job(job_id):
-    """删除后台任务记录（元数据 + 日志）。运行中的任务不允许删除。"""
+
     jobs = load_jobs()
     job = next((j for j in jobs if j["job_id"] == job_id), None)
     if not job:
@@ -190,7 +190,7 @@ def delete_job(job_id):
 
 
 def load_jobs():
-    """后台任务状态（background_runner 产物，计划28：前端监控面板）。"""
+
     jobs_dir = os.path.join(PROJECT_ROOT, "logs", "jobs")
     if not os.path.isdir(jobs_dir):
         return []
@@ -201,7 +201,7 @@ def load_jobs():
         try:
             with open(os.path.join(jobs_dir, name), "r", encoding="utf-8") as f:
                 meta = json.load(f)
-            # 进度解析（复用 background_runner 模块）
+
             prog = _br.parse_progress(meta["out"])
             jobs.append({
                 "job_id": meta["job_id"],
@@ -217,7 +217,7 @@ def load_jobs():
 
 
 def load_events(world_id):
-    """上帝剧本（events.json）。"""
+
     path = os.path.join(WORLDS_DIR, world_id, "events.json")
     if not os.path.exists(path):
         return {"events": []}
@@ -226,7 +226,7 @@ def load_events(world_id):
 
 
 def add_event_to_script(world_id, event):
-    """上帝注入：把事件追加进 worlds/<id>/events.json（模拟中每天重读 → 实时生效）。"""
+
     path = os.path.join(WORLDS_DIR, world_id, "events.json")
     data = load_events(world_id)
     item = {
@@ -243,12 +243,12 @@ def add_event_to_script(world_id, event):
 
 
 def _dir_date(date_str):
-    """日期目录兼容：'2026-04-21' 与 '20260421' 都接受（per-house 目录为紧凑格式）。"""
+
     return date_str.replace("-", "") if date_str else date_str
 
 
 def load_house_profile(world_id, postcode, house_id, scenario, date):
-    """单户 1440 分钟曲线。"""
+
     path = os.path.join(OUTPUTS_DIR, world_id, postcode, house_id, scenario,
                         _dir_date(date), "用电信息", "house_load_profile_1440min.json")
     if not os.path.exists(path):
@@ -258,7 +258,7 @@ def load_house_profile(world_id, postcode, house_id, scenario, date):
 
 
 def load_house_summary(world_id, postcode, house_id, scenario, date):
-    """单户电器级汇总（总用电汇总.json）。"""
+
     path = os.path.join(OUTPUTS_DIR, world_id, postcode, house_id, scenario,
                         _dir_date(date), "用电信息", "总用电汇总.json")
     if not os.path.exists(path):
@@ -267,9 +267,9 @@ def load_house_summary(world_id, postcode, house_id, scenario, date):
         return json.load(f)
 
 
-# ============================================================
-# HTTP 服务
-# ============================================================
+
+
+
 
 class Handler(BaseHTTPRequestHandler):
     def _send_json(self, obj, status=200):
@@ -310,7 +310,7 @@ class Handler(BaseHTTPRequestHandler):
         parts = [p for p in path.split("/") if p]
 
         try:
-            # 静态前端
+
             if not parts or parts[0] == "index.html":
                 self._send_file(os.path.join(FRONTEND_DIR, "index.html"))
                 return
@@ -318,7 +318,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_file(os.path.join(FRONTEND_DIR, *parts[1:]))
                 return
 
-            # API
+
             if parts == ["api", "worlds"]:
                 self._send_json(list_worlds())
                 return
@@ -350,7 +350,7 @@ class Handler(BaseHTTPRequestHandler):
                     self._send_json(load_households_profile(world_id))
                     return
                 if parts[3] == "house" and len(parts) >= 6:
-                    # /api/worlds/<id>/house/<house_id>/summary/<scenario>/<date>
+
                     house_id, sub, scenario, date = parts[4], parts[5], parts[6], parts[7]
                     postcode = None
                     world = next((w for w in list_worlds() if w["id"] == world_id), None)
@@ -402,7 +402,7 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json({"error": str(e)}, 500)
 
     def log_message(self, format, *args):
-        pass  # 静默访问日志，保持终端干净
+        pass
 
 
 def serve(port=8080):
@@ -416,9 +416,9 @@ def serve(port=8080):
         server.server_close()
 
 
-# ============================================================
-# 命令行查询
-# ============================================================
+
+
+
 
 def query_cli(args):
     if args.query == "worlds":

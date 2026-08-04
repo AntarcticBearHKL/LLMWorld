@@ -1,14 +1,14 @@
-"""上帝交互控制台：逐日模拟时随时注入世界事件（用户=上帝）。
 
-用法：
-    python Implement/god_cli.py <world_id> --days N [--date 2026年4月21日] [--policy tou]
 
-每个模拟日之前会询问上帝是否注入新事件：
-    输入格式：日期|标题|内容[|来源]（如 2026-04-21|暴风雨预警|强降雨可能停电|气象局）
-    回车跳过，q 退出模拟。
 
-事件实时注入内存新闻台 → 当天 prompt 即生效（不必等 events.json 重读）。
-"""
+
+
+
+
+
+
+
+
 
 import argparse
 import os
@@ -23,7 +23,7 @@ import config
 
 
 def ask_god(day_index, num_days, world):
-    """上帝交互：模拟第 day_index 天前询问注入事件。返回 False 表示要退出。"""
+
     while True:
         print(f"\n[上帝] 第 {day_index + 1}/{num_days} 天模拟前，要注入新事件吗？"
               f"（日期|标题|内容[|来源]，回车跳过，q 退出）")
@@ -76,7 +76,7 @@ def main():
     season = household.get("season", config.DEFAULT_SEASON)
 
     for day in range(args.days):
-        # 上帝交互（每日本前）
+
         if not ask_god(day, args.days, world):
             print("\n[上帝] 退出模拟")
             break

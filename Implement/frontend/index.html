@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
@@ -123,10 +123,10 @@ async function loadScenarios() {
     dateSel.innerHTML = "";
     return;
   }
-  // 场景多选框（默认全选）
+  
   box.innerHTML = world.scenarios.map((s, i) =>
     `<label style="margin-right:10px;"><input type="checkbox" class="scChk" value="${s.name}" ${i < 5 ? "checked" : ""}> ${s.name}</label>`).join("");
-  // 日期下拉：取第一个场景的日期
+  
   const dates = world.scenarios[0].dates;
   dateSel.innerHTML = dates.map(d => `<option value="${d}">${d}</option>`).join("");
   document.querySelectorAll(".scChk").forEach(c => c.onchange = refresh);
@@ -153,13 +153,13 @@ async function refresh() {
   const st = document.getElementById("status");
   if (!worldId || !date || !scenarios.length) { st.textContent = "请选择世界/日期/至少一个场景"; return; }
   st.textContent = "加载中…";
-  // 世界连续状态（计划27：上次日期+记忆天数）
+  
   try {
     const ws = await api(`/api/worlds/${worldId}/state`);
     document.getElementById("worldState").textContent = ws.has_state
       ? `世界状态: 上次至 ${ws.date}，记忆 ${ws.memory_days} 天（未指定日期将自动续跑）`
       : "世界状态: 新世界（无日期，从默认日期开始）";
-  } catch (e) { /* 忽略状态错误 */ }
+  } catch (e) {  }
   try {
     const profiles = [];
     for (const s of scenarios) {
@@ -190,7 +190,7 @@ function renderCards(p) {
     ["峰值时刻", p.peak_time],
     ["家庭数", p.households],
   ];
-  // 环境信息（计划23）：第一户的环境作为代表展示
+  
   const envMap = p.environment || {};
   const firstEnv = Object.values(envMap)[0];
   if (firstEnv) {
@@ -265,10 +265,10 @@ async function renderTrend(worldId) {
   const W = cv.width, H = cv.height, padL = 50, padB = 26, padT = 10;
   ctx.clearRect(0, 0, W, H);
   if (!world || !world.scenarios.length) return;
-  // 收集所有日期（去重排序）
+  
   const dates = [...new Set(world.scenarios.flatMap(s => s.dates))].sort();
   if (!dates.length) return;
-  // 各场景各日期总用电
+  
   const rows = [];
   for (const s of world.scenarios) {
     for (const d of s.dates) {
@@ -281,7 +281,7 @@ async function renderTrend(worldId) {
   const bw = 12, gap = 4;
   const x = i => padL + i * (bw + gap) + bw;
   const y = v => H - padB - (v / maxKwh) * (H - padT - padB);
-  // 每个日期一组柱
+  
   const colorOf = s => COLORS[world.scenarios.findIndex(w2 => w2.name === s) % COLORS.length];
   dates.forEach((d, di) => {
     const ds = rows.filter(r => r.date === d);
@@ -349,7 +349,7 @@ async function renderPersonality(worldId) {
 }
 
 let jobsCache = [];
-let jobsTab = "running";   // 当前任务 tab（默认进行中）
+let jobsTab = "running";   
 
 const JOB_GROUPS = [
   ["running", "进行中"],
@@ -357,7 +357,7 @@ const JOB_GROUPS = [
   ["failed", "报错"],
 ];
 
-// 状态归类：stopped/pending 并入对应组
+
 function jobGroup(status) {
   if (status === "stopped") return "failed";
   if (status === "pending") return "running";
@@ -371,7 +371,7 @@ async function renderJobs() {
   try { jobs = await api("/api/jobs"); } catch (e) { div.innerHTML = "<span class='err'>无法获取任务状态</span>"; return; }
   jobsCache = jobs;
 
-  // tab 栏（带数量，默认进行中）
+  
   const counts = {running: 0, done: 0, failed: 0};
   jobs.forEach(j => { counts[jobGroup(j.status)]++; });
   tabs.innerHTML = JOB_GROUPS.map(([key, label]) => {
@@ -379,7 +379,7 @@ async function renderJobs() {
     return `<button onclick="setJobsTab('${key}')" style="margin-right:6px;padding:4px 14px;border:none;border-radius:4px;cursor:pointer;${active}">${label} (${counts[key]})</button>`;
   }).join("");
 
-  // 当前组任务
+  
   const groupJobs = jobs.filter(j => jobGroup(j.status) === jobsTab);
   if (!groupJobs.length) { div.innerHTML = "（该分类暂无任务）"; return; }
   const color = {running: "#c90", done: "#2a7", failed: "#c33", stopped: "#c63", pending: "#888"};
@@ -448,7 +448,7 @@ async function godInject() {
   }
 }
 
-// 自动刷新：每 10 秒重新拉取当前视图（世界变动实时可见）
+
 setInterval(() => {
   const sel = document.getElementById("selWorld");
   if (sel && sel.value) refresh();
@@ -458,3 +458,4 @@ init();
 </script>
 </body>
 </html>
+

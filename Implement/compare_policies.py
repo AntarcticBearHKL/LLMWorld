@@ -1,14 +1,14 @@
-"""政策对比：基线 vs 干预场景的聚合负荷差异（论文 RQ2 的量化证据）。
 
-用法：
-    python Implement/compare_policies.py --world pop02 --intervention tou
 
-读取 outputs/<world>/population/ 下的聚合曲线（baseline 与干预各一份），计算：
-- 晚峰时段(16-21点)用电量变化%
-- 峰值负荷削减%
-- 谷时段(22-7点)变化%
-- 逐小时差值表 + 对比图
-"""
+
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -20,15 +20,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pandas as pd
 
 
-# ---------- 时段定义（与 TOU 一致）----------
-PEAK_HOURS = (16, 21)      # 晚峰 16:00-21:00
-VALLEY_HOURS = (22, 7)     # 谷段 22:00-次日 7:00
+
+PEAK_HOURS = (16, 21)
+VALLEY_HOURS = (22, 7)
 
 
 def energy_of_hours(profile_watts, hours):
-    """给定小时区间内的总耗电（kWh）。支持跨天区间如 (22,7)。"""
+
     start, end = hours
-    total_wh = 0.0   # 瓦·时
+    total_wh = 0.0
     for h in range(24):
         in_window = False
         if start < end:
@@ -36,13 +36,13 @@ def energy_of_hours(profile_watts, hours):
         else:
             in_window = h >= start or h < end
         if in_window:
-            # 该小时平均瓦数 × 1 小时 = 瓦·时
+
             total_wh += sum(profile_watts[h * 60:(h + 1) * 60]) / 60.0
-    return total_wh / 1000.0   # → 千瓦时
+    return total_wh / 1000.0
 
 
 def load_population(world_id, policy_filter=None):
-    """加载 outputs/<world>/population/ 下所有聚合曲线（policy 字段匹配）。"""
+
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pop_dir = os.path.join(project_root, "outputs", world_id, "population")
     results = []
@@ -63,16 +63,16 @@ def load_population(world_id, policy_filter=None):
 
 
 def compare(baseline, intervention):
-    """两条聚合曲线 → 干预效果报告。"""
+
     b, i = baseline["load_profile_watts"], intervention["load_profile_watts"]
 
-    # 各时段用电（kWh）
+
     b_peak = energy_of_hours(b, PEAK_HOURS)
     i_peak = energy_of_hours(i, PEAK_HOURS)
     b_valley = energy_of_hours(b, VALLEY_HOURS)
     i_valley = energy_of_hours(i, VALLEY_HOURS)
 
-    # 峰值
+
     b_max = max(b)
     i_max = max(i)
 
@@ -99,7 +99,7 @@ def compare(baseline, intervention):
 
 
 def main_all(args):
-    """基线 + 所有干预场景并排汇总表（RQ2/RQ3 核心对比矩阵）。"""
+
     all_pop = load_population(args.world)
     baseline_items = [(p, d) for policy, p, d in all_pop
                       if d.get("policy", "baseline") == "baseline"]
@@ -114,7 +114,7 @@ def main_all(args):
         name = data.get("policy", "baseline")
         if name in ("baseline",):
             continue
-        # 同名政策只取最新一次
+
         if name not in per_policy or path > per_policy[name][0]:
             per_policy[name] = (path, data)
 
@@ -131,7 +131,7 @@ def main_all(args):
             peak_time,
         ))
 
-    # 基线行
+
     b_peak_kwh = energy_of_hours(baseline["load_profile_watts"], PEAK_HOURS)
     b_valley_kwh = energy_of_hours(baseline["load_profile_watts"], VALLEY_HOURS)
     b_peak_min = baseline["load_profile_watts"].index(max(baseline["load_profile_watts"]))
@@ -189,7 +189,7 @@ def main():
         sys.exit(1)
 
     if args.base_date:
-        # 同日对比：baseline 取指定日期（否则默认最早一次）
+
         baseline = next((d for _, p, d in baselines if args.base_date in p), None)
         baseline_path = next((p for _, p, d in baselines if args.base_date in p), None)
         if baseline is None:
@@ -198,7 +198,7 @@ def main():
     else:
         baseline = baselines[0][2]
         baseline_path = baselines[0][1]
-    intervention = interventions[-1][2]   # 取最新一次干预运行
+    intervention = interventions[-1][2]
 
     report = compare(baseline, intervention)
     report["baseline_source"] = baseline_path
@@ -223,7 +223,7 @@ def main():
           f"（{report['peak_load_cut_pct']:+.2f}%）")
     print(f"报告已保存: {report_path}")
 
-    # 出图：逐小时差值
+
     try:
         import matplotlib
         matplotlib.use("Agg")

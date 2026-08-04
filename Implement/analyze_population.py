@@ -1,14 +1,14 @@
-"""人口行为归因分析：家庭类型/人格维度/成员规模 → 日用电差异（0 token 离线）。
 
-数据源：
-- worlds/<world_id>/3168/house_XXXX/household.json（v2 人口含 Big Five）
-- outputs/<world_id>/population/<scenario>/<date>/population_profile_1440min.json（per_house）
 
-输出：分组表 + 人格×用电相关性表 + JSON。
 
-用法：
-    python Implement/analyze_population.py --world pop03 --scenario baseline --date 2026-04-21
-"""
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 
 def load_households(world_id):
-    """worlds/<id>/3168/house_XXXX/household.json → {house_id: household}"""
+
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     base = os.path.join(project_root, "worlds", world_id, "3168")
     households = {}
@@ -34,7 +34,7 @@ def load_households(world_id):
 
 
 def load_per_house_kwh(world_id, scenario, date):
-    """聚合曲线 per_house → {house_id: kwh}"""
+
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     p = os.path.join(project_root, "outputs", world_id, "population",
                      scenario, date, "population_profile_1440min.json")
@@ -46,7 +46,7 @@ def load_per_house_kwh(world_id, scenario, date):
 
 
 def household_features(household):
-    """提取分析特征：类型/成员数/第一成员人格。"""
+
     members = household.get("members", [])
     first = members[0] if members else {}
     pers = first.get("personality", {})
@@ -60,7 +60,7 @@ def household_features(household):
 
 
 def group_mean(items):
-    """items: [(标签, 值)] → {标签: 均值}（按值降序）。"""
+
     buckets = {}
     for label, value in items:
         buckets.setdefault(label, []).append(value)
@@ -103,13 +103,13 @@ def analyze(world_id, scenario, date):
         "by_type": group_mean([(r["household_type"], r["kwh"]) for r in rows]),
         "by_members_count": group_mean([(f"{r['members_count']}人", r["kwh"]) for r in rows]),
     }
-    # 节能意识维度（去作弊化后无该字段则跳过）
+
     aware = [(r["energy_awareness"], r["kwh"]) for r in rows
              if r.get("energy_awareness") not in (None, "?", "未知")]
     if aware:
         report["by_awareness"] = group_mean(aware)
 
-    # 人格维度相关性（第一成员五维 vs 户 kWh）
+
     dims = ["openness", "conscientiousness", "extraversion", "agreeableness", "neuroticism"]
     corr = {}
     for dim in dims:
@@ -120,7 +120,7 @@ def analyze(world_id, scenario, date):
             corr[dim] = pearson(a, b)
     report["big_five_corr_with_kwh"] = corr
 
-    # 成员数 vs kWh 相关性（规模效应）
+
     report["members_kwh_corr"] = pearson([r["members_count"] for r in rows],
                                          [r["kwh"] for r in rows])
 

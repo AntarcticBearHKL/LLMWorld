@@ -1,17 +1,17 @@
-"""论文素材报告生成器：自动汇总实验数据 → reports/paper_material.md。
 
-从 outputs/<world>/ 读取：
-- 基线形状对比（baseline_report.json）
-- 政策矩阵（comparison/policy_matrix.json）
-- 分组分析（analysis/groups.json）
-- 各场景聚合曲线
 
-并计算价格弹性（TOU 峰段），对照文献。
-可重复运行：任何新实验跑完后再执行一次即可刷新报告。
 
-用法：
-    python Implement/make_report.py --world pop02
-"""
+
+
+
+
+
+
+
+
+
+
+
 
 import argparse
 import json
@@ -22,8 +22,8 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# Windows GBK 控制台兜底：内容若含 GBK 无法编码的字符（如 ✓、→），
-# 直接 print 会抛 UnicodeEncodeError 崩溃；改用 UTF-8 + errors='replace' 兜底。
+
+
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
@@ -31,17 +31,17 @@ except AttributeError:
     pass
 
 
-# ---------- 价格弹性（纯函数）----------
+
 
 def price_elasticity(quantity_change_pct, price_change_pct):
-    """价格弹性 = ΔQ% / ΔP%（负值表示涨价抑制用电）。"""
+
     if price_change_pct == 0:
         return None
     return round(quantity_change_pct / price_change_pct, 3)
 
 
 def tou_elasticity(peak_kwh_baseline, peak_kwh_tou, peak_rate, flat_rate):
-    """TOU 峰段弹性：峰段电量变化% ÷ 峰段电价变化%。"""
+
     q_change = (peak_kwh_tou / peak_kwh_baseline - 1) * 100 if peak_kwh_baseline else None
     p_change = (peak_rate / flat_rate - 1) * 100
     if q_change is None:
@@ -49,10 +49,10 @@ def tou_elasticity(peak_kwh_baseline, peak_kwh_tou, peak_rate, flat_rate):
     return price_elasticity(q_change, p_change), q_change
 
 
-# ---------- 读取 ----------
+
 
 def load_json(path):
-    """读取 JSON；文件缺失或内容损坏返回 None，避免主流程崩溃。"""
+
     if not os.path.exists(path):
         return None
     try:
@@ -70,14 +70,14 @@ def find_file(root, name):
 
 
 def parse_kwh(value):
-    """从矩阵单元格（如 '51.3 (-9.1%)'）中提取数字，无数字时返回 None。"""
+
     if value is None:
         return None
     m = re.search(r"-?\d+(?:\.\d+)?", str(value))
     return float(m.group(0)) if m else None
 
 
-# ---------- 报告 ----------
+
 
 def build_report(world):
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -88,7 +88,7 @@ def build_report(world):
     lines.append(f"生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append("")
 
-    # 1. 场景概览
+
     lines.append("## 1. 政策场景概览")
     lines.append("")
     matrix = None
@@ -103,7 +103,7 @@ def build_report(world):
         lines.append("（无 policy_matrix.json，先跑 compare_policies --all）")
     lines.append("")
 
-    # 2. 基线对齐
+
     lines.append("## 2. 基线对齐（RQ1/RQ3）")
     lines.append("")
     baseline_report = find_file(os.path.join(out_root, "baseline"), "baseline_report.json")
@@ -117,7 +117,7 @@ def build_report(world):
         lines.append("（无 baseline_report.json，先跑 validate_baseline）")
     lines.append("")
 
-    # 3. 价格弹性
+
     lines.append("## 3. 价格弹性粗算（TOU 峰段）")
     lines.append("")
     if matrix and "scenarios" in matrix:
@@ -142,7 +142,7 @@ def build_report(world):
                 lines.append("（基线峰段电量为 0，无法计算弹性）")
         lines.append("")
 
-    # 4. 分组分析
+
     lines.append("## 4. 节能意识分组（Costa & Kahn 2010 对照）")
     lines.append("")
     groups_path = os.path.join(out_root, "analysis", "groups.json")
@@ -163,7 +163,7 @@ def build_report(world):
         lines.append("（无 groups.json，先跑 analyze_groups）")
     lines.append("")
 
-    # 5. 成本与规模（RQ4）
+
     lines.append("## 5. 成本与规模（RQ4）")
     lines.append("")
     lines.append("- 单户单日 token ≈ 80k~90k（thinking=False 快速模式）")
@@ -171,7 +171,7 @@ def build_report(world):
     lines.append("- 并发实测峰值 = 10 = 硬上限（多户并行不破限）")
     lines.append("- 峰均比随 N：4 户 4.83 → 10 户 2.52（平滑效应）")
 
-    # 6. 图表清单
+
     lines.append("")
     lines.append("## 6. 已产出图表清单")
     lines.append("")
@@ -194,7 +194,7 @@ def main():
     args = parser.parse_args()
 
     report_path, content = build_report(args.world)
-    # 打印关键部分
+
     for section in ["## 3. 价格弹性", "## 4. 节能意识分组"]:
         idx = content.find(section)
         if idx >= 0:

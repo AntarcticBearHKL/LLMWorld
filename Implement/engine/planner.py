@@ -1,10 +1,10 @@
-﻿"""计划器：前三层 —— 宏观计划、渐进式协调、丰富行为描述。
 
-职责：
-1. 第一层：每个成员生成全天宏观活动计划（并行 LLM 调用）
-2. 第二层：逐个成员协调时间线，解决家庭独占资源冲突
-3. 第三层：结合季节/天气/温度丰富行为描述
-"""
+
+
+
+
+
+
 
 import json
 import os
@@ -23,9 +23,9 @@ class Planner:
         self.home = home
         self.timelines = {}
         self.prompt = Prompt()
-        self.memory_context = memory_context   # 跨天记忆文本（可为空）
-        self.policy_name = policy_name         # 场景名（计划10：per-house 输出按场景隔离）
-        self.news_context = news_context       # 当日外界新闻（上帝模式，可为空）
+        self.memory_context = memory_context
+        self.policy_name = policy_name
+        self.news_context = news_context
 
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         outputs_dir = os.path.join(project_root, "outputs")
@@ -38,7 +38,7 @@ class Planner:
             self.log_dir = os.path.join(outputs_dir, f"logs_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
         os.makedirs(self.log_dir, exist_ok=True)
 
-    # ---------- 第一层：宏观计划 ----------
+
 
     def generate_plans(self, time_obj):
         home_structure = self.home.get_home_structure()
@@ -86,7 +86,7 @@ class Planner:
 
         return self.timelines
 
-    # ---------- 第二层：渐进式协调 ----------
+
 
     def coordinate_timelines_progressively(self):
         member_names = list(self.timelines.keys())
@@ -168,7 +168,7 @@ class Planner:
 
         return self.timelines
 
-    # ---------- 第三层：丰富行为描述 ----------
+
 
     def enrich_activities(self, season="夏天", weather="晴天", temperature=28):
         prompts = []
@@ -225,7 +225,7 @@ class Planner:
 
         return self.timelines
 
-    # ---------- 辅助 ----------
+
 
     def _get_member(self, name):
         for member in self.home.members:

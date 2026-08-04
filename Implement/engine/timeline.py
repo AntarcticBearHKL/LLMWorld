@@ -1,8 +1,8 @@
-"""时间线：单个成员一天的活动段列表（TimeSlot）。
 
-每个时间段有：开始/结束（分钟）、位置、活动、可选描述。
-时间解析逻辑在 utils 里，这里只做组合。
-"""
+
+
+
+
 
 import json
 
@@ -44,7 +44,7 @@ class Timeline:
         self.slots = []
 
     def load_from_activities(self, activities):
-        """把 LLM 返回的活动列表装载成时间线，按开始时间排序。"""
+
         self.slots = []
         for activity in activities:
             try:

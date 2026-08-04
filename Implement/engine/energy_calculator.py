@@ -1,10 +1,10 @@
-"""能耗计算：把成员的电器使用决策换算成分钟级家庭负荷。
 
-核心改动（计划1）：
-1. 常开电器（冰箱等 always_on）的基载耗电自动计入 —— 之前完全丢失，导致日用电偏低
-2. 输出家庭级 1440 分钟总负荷曲线 house_load_profile_1440min.json —— 论文 RQ1 的核心产出
-3. 非法决策（未知电器/非法操作）记入 validation_warnings，绝不静默
-"""
+
+
+
+
+
+
 
 import json
 import os
@@ -22,14 +22,14 @@ class EnergyCalculator:
         self.energy_info_dir = os.path.join(log_dir, "用电信息")
         os.makedirs(self.energy_info_dir, exist_ok=True)
 
-        self.appliance_usage = {}          # 每台电器的使用统计
-        self.household_load_watts = [0.0] * MINUTES_PER_DAY   # 家庭每分钟总负荷（瓦）
-        self.baseline_kwh = 0.0            # 常开电器基载（千瓦时/天）
-        self.decision_kwh = 0.0            # 成员决策耗电（千瓦时/天）
-        self.validation_warnings = []      # 决策校验警告
-        self._daily_minutes = {}           # 每电器当日已用分钟（超限截断用）
+        self.appliance_usage = {}
+        self.household_load_watts = [0.0] * MINUTES_PER_DAY
+        self.baseline_kwh = 0.0
+        self.decision_kwh = 0.0
+        self.validation_warnings = []
+        self._daily_minutes = {}
 
-    # ---------- 读取决策 ----------
+
 
     def load_all_decisions(self):
         decisions = []
@@ -40,29 +40,29 @@ class EnergyCalculator:
                     decisions.append(json.load(f))
         return decisions
 
-    # ---------- 主计算 ----------
+
 
     def calculate_all_energy(self):
         decisions = self.load_all_decisions()
 
-        # 第一步：处理每个成员的有序决策
+
         for decision_data in decisions:
             member_name = decision_data.get("member", "未知成员")
             self._process_member_decisions(member_name, decision_data)
 
-        # 第二步：加入常开电器（always_on）基载 —— 计划1修复：之前完全丢失
+
         self._add_always_on_baseline()
 
-        # 第三步：汇总统计并保存
+
         self._finalize_statistics()
         self._save_energy_info()
 
         return self.appliance_usage
 
-    # ---------- 成员决策 ----------
+
 
     def _process_member_decisions(self, member_name, decision_data):
-        """校验并累加一个成员的全部用电决策。非法操作记入警告，不静默。"""
+
         cleaned_decisions = utils.validate_appliance_decisions(decision_data, self.home, self.validation_warnings)
 
         for decision in cleaned_decisions:
@@ -80,27 +80,27 @@ class EnergyCalculator:
                     continue
 
                 if action not in ["use", "charge_home"]:
-                    # charge_external（外部充电）不计入家庭用电；use（使用已存电量）不耗家庭电
+
                     continue
 
-                # 真实性子约束（计划7）：每电器每日使用分钟上限，超限截断并警告
+
                 clipped_end = self._apply_daily_cap(appliance, start_minutes, end_minutes,
                                                     time_range, member_name)
 
                 if clipped_end <= start_minutes:
-                    continue   # 当日额度已用完，整段被截断
+                    continue
 
-                # 计算这段使用的耗电量（千瓦时）
+
                 energy = appliance.calculate_energy(start_minutes, clipped_end, power_source="home")
                 self.decision_kwh += energy
 
-                # 累加进家庭分钟负荷（瓦）
+
                 watts = appliance.power_watts
                 for minute in range(start_minutes, clipped_end):
                     actual_minute = minute % MINUTES_PER_DAY
                     self.household_load_watts[actual_minute] += watts
 
-                # 累加进这台电器的使用记录
+
                 usage = self._get_or_create_usage(appliance)
                 usage["usage_segments"].append({
                     "time_range": time_range,
@@ -118,13 +118,13 @@ class EnergyCalculator:
                     actual_minute = minute % MINUTES_PER_DAY
                     usage["minute_watts"][actual_minute] += watts
 
-    # ---------- 超限截断 ----------
+
 
     def _apply_daily_cap(self, appliance, start_minutes, end_minutes, time_range, member_name):
-        """每电器每日使用分钟上限（config.APPLIANCE_DAILY_CAP_MINUTES）。
 
-        返回截断后的结束分钟；当日额度已用完则返回 start（整段丢弃）。超限记警告。
-        """
+
+
+
         cap = config.APPLIANCE_DAILY_CAP_MINUTES.get(appliance.name)
         if not cap:
             return end_minutes
@@ -151,17 +151,17 @@ class EnergyCalculator:
         )
         return start_minutes + remaining
 
-    # ---------- 常开电器基载 ----------
+
 
     def _add_always_on_baseline(self):
-        """把 always_on 电器（如冰箱）按日耗能平摊进每一分钟，并计入家庭负荷。"""
+
         baseline_appliances = []
 
         for appliance in self.home.appliance_registry.values():
             if appliance.appliance_type != "always_on":
                 continue
 
-            # 日耗能 → 持续瓦数（1.2 kWh/天 = 50W 持续）
+
             watts = (appliance.daily_energy_kwh / 24.0) * 1000.0
             kwh_per_day = appliance.daily_energy_kwh
 
@@ -194,7 +194,7 @@ class EnergyCalculator:
 
         self.baseline_appliances = baseline_appliances
 
-    # ---------- 统计与保存 ----------
+
 
     def _get_or_create_usage(self, appliance):
         if appliance.unique_id not in self.appliance_usage:
@@ -217,7 +217,7 @@ class EnergyCalculator:
             usage["total_hours"] = round(usage["total_minutes"] / 60.0, 2)
 
     def _save_energy_info(self):
-        # 每台电器的分钟曲线 + 使用段
+
         for appliance_id, usage_data in self.appliance_usage.items():
             safe_name = usage_data["name"].replace("/", "_").replace("\\", "_")
             filename = f"{appliance_id}_{safe_name}.json"
@@ -251,7 +251,7 @@ class EnergyCalculator:
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(output_data, f, ensure_ascii=False, indent=2)
 
-        # 家庭总汇总
+
         summary_data = {
             "total_appliances": len(self.appliance_usage),
             "total_energy_kwh": round(self.baseline_kwh + self.decision_kwh, 4),
@@ -273,7 +273,7 @@ class EnergyCalculator:
         with open(summary_filepath, "w", encoding="utf-8") as f:
             json.dump(summary_data, f, ensure_ascii=False, indent=2)
 
-        # 家庭级 1440 分钟总负荷曲线（论文 RQ1 核心产出）
+
         peak_minute = max(range(MINUTES_PER_DAY), key=lambda m: self.household_load_watts[m])
         profile = {
             "unit": "watts",

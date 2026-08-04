@@ -1,11 +1,11 @@
-"""续跑结果检查（计划30/32）：验证第 2 天模拟使用了第 1 天的记忆。
 
-用法：python Implement/check_resume.py pop04 20260422
-检查项：
-1. 第 2 天 step1 prompt 是否含"昨日记忆"章节（跨天记忆注入）
-2. 记忆内容是否来自第 1 天的行为（含活动/作息/用电要点）
-3. 两天聚合对比（可选 --date2）
-"""
+
+
+
+
+
+
+
 
 import argparse
 import json
