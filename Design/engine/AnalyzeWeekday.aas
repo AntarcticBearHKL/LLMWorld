@@ -1,0 +1,13 @@
+class AnalyzeWeekday
+    周内模式分析（计划93，Jin 2021 星期驱动，0 LLM）。
+
+    - weekday_group(date_dir) → 工作日/周末（weekday≥5）
+    - evening_kwh(hourly) → 晚峰 16-21 点 kWh
+    - build_report(per_house) → 按工作日/周末分组：
+      samples / mean_kwh / mean_peak_watts / mean_evening_kwh /
+      mean_peak_hour（周末晚峰通常更晚=作息锚定验证）
+    - CLI：python analyze_weekday.py <world> --scenario
+    - 输出：outputs/<world>/analysis/weekday_<scenario>.json
+
+    调用链：server /api/worlds/<id>/weekday/<scenario>
+    → 前端"周内模式"面板
