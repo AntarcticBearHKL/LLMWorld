@@ -120,6 +120,11 @@
 </div>
 
 <div class="panel">
+  <h3>行为-负荷一致性（计划64：行为层保真度，Xia 2026）</h3>
+  <div id="behaviorLoadPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -266,6 +271,7 @@ async function refresh() {
     await renderEventResponse(worldId);
     await renderTimeline(worldId);
     await renderAnomalies(worldId);
+    await renderBehaviorLoad(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -612,6 +618,27 @@ async function renderAnomalies(worldId) {
   div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
     共 ${a.households} 户，异常 ${a.anomaly_count} 户（|z|&gt;2 标红；蓝=偏低红=偏高）</div>
     <table><thead><tr><th>家庭</th><th>日kWh</th><th>峰均比</th><th>负荷率</th><th>叠加事件</th><th>异常标记</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+async function renderBehaviorLoad(worldId) {
+  const div = document.getElementById("behaviorLoadPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const date = document.getElementById("selDate").value;
+  const b = await api(`/api/worlds/${worldId}/behavior-load/${scenario}/${date}`);
+  if (!b || b.error) { div.innerHTML = "<span class='err'>（无一致性数据，先跑 analyze_behavior_load.py）</span>"; return; }
+  const rows = b.per_house.map(r => {
+    const ok = r.load_consistent && r.peak_aligned;
+    const flags = r.flags.filter(f => f).join("；") || "OK";
+    return `<tr><td>${r.house_id}</td><td>${r.members}</td>
+      <td>${r.at_home_mean_watts}</td><td>${r.away_mean_watts}</td>
+      <td style="${r.load_consistent ? "color:#2a7;" : "color:#c33;font-weight:600;"}">${r.load_consistent ? "✓" : "✗ 异常"}</td>
+      <td>${r.peak_hour}:00</td><td>${r.busy_hour}:00</td>
+      <td style="color:${ok ? "#2a7" : "#c33"};font-size:12px;">${flags}</td></tr>`;
+  }).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">
+    共 ${b.households} 户，一致 ${b.consistent_count}，异常 ${b.anomaly_count}（预期：人在家时段负荷更高，峰值与活动高峰接近）</div>
+    <table><thead><tr><th>家庭</th><th>成员</th><th>在家均值(W)</th><th>离家均值(W)</th><th>在家&gt;离家</th><th>负荷峰时</th><th>活动峰时</th><th>标记</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
 }
 
 async function renderPersonality(worldId) {

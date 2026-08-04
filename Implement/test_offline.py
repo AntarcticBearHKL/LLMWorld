@@ -1603,5 +1603,62 @@ class TestAnomalies(unittest.TestCase):
         self.assertEqual(zscore([1.0, 2.0]), [None, None])
 
 
+class TestBehaviorLoad(unittest.TestCase):
+
+
+    def _house_result(self, activities, loads):
+        return {"house_id": "h1", "member_count": 2, "activities": activities,
+                "load_profile_watts": loads}
+
+    def test_at_home_higher_load(self):
+        from analyze_behavior_load import build_report, _parse_minutes
+        loads = [100.0] * 1440
+        loads[18 * 60:21 * 60] = [800.0] * (3 * 60)
+        activities = [
+            {"time": "09:00-17:00", "start": 540, "end": 1020,
+             "location": "公司", "activity": "上班", "at_home": False},
+            {"time": "18:00-22:00", "start": 1080, "end": 1320,
+             "location": "厨房", "activity": "晚餐", "at_home": True},
+        ]
+        report = build_report([self._house_result(activities, loads)])
+        r = report["per_house"][0]
+        self.assertGreater(r["at_home_mean_watts"], r["away_mean_watts"])
+        self.assertTrue(r["load_consistent"])
+        self.assertTrue(r["peak_aligned"])
+        self.assertEqual(report["anomaly_count"], 0)
+
+    def test_away_high_load_flagged(self):
+        from analyze_behavior_load import build_report
+        loads = [100.0] * 1440
+        loads[10 * 60:14 * 60] = [3000.0] * (4 * 60)
+        activities = [
+            {"time": "09:00-17:00", "start": 540, "end": 1020,
+             "location": "公司", "activity": "上班", "at_home": False},
+            {"time": "18:00-22:00", "start": 1080, "end": 1320,
+             "location": "客厅", "activity": "休息", "at_home": True},
+        ]
+        report = build_report([self._house_result(activities, loads)])
+        r = report["per_house"][0]
+        self.assertFalse(r["load_consistent"])
+        self.assertEqual(report["anomaly_count"], 1)
+
+    def test_peak_alignment(self):
+        from analyze_behavior_load import build_report
+        loads = [50.0] * 1440
+        loads[20 * 60:21 * 60] = [4000.0] * 60
+        activities = [
+            {"time": "19:00-22:00", "start": 1140, "end": 1320,
+             "location": "客厅", "activity": "看电视", "at_home": True},
+        ]
+        report = build_report([self._house_result(activities, loads)])
+        r = report["per_house"][0]
+        self.assertTrue(r["peak_aligned"])
+
+    def test_empty_raise(self):
+        from analyze_behavior_load import build_report
+        with self.assertRaises(ValueError):
+            build_report([])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
