@@ -1356,5 +1356,42 @@ class TestCompareWorlds(unittest.TestCase):
             build_matrix(["__no_such_world_a", "__no_such_world_b"])
 
 
+class TestSimArgs(unittest.TestCase):
+
+
+    def test_baseline_args(self):
+        from server import build_sim_args
+        args = build_sim_args("pop06", {"policy": "", "days": 1, "date": ""})
+        self.assertEqual(args, ["pop06", "--days", "1"])
+
+    def test_policy_and_date(self):
+        from server import build_sim_args
+        args = build_sim_args("pop06", {"policy": "tou", "days": 3,
+                                        "date": "2026-04-21"})
+        self.assertIn("--policy", args)
+        self.assertIn("tou", args)
+        self.assertIn("--date", args)
+        self.assertIn("2026-04-21", args)
+
+    def test_combined_policy(self):
+        from server import build_sim_args
+        args = build_sim_args("pop06", {"policy": "tou,nudge", "days": 1,
+                                        "date": ""})
+        self.assertIn("tou,nudge", args)
+
+    def test_invalid_policy_raises(self):
+        from server import build_sim_args
+        with self.assertRaises(ValueError):
+            build_sim_args("pop06", {"policy": "no_such_policy",
+                                     "days": 1, "date": ""})
+
+    def test_scenario_override(self):
+        from server import build_sim_args
+        args = build_sim_args("pop06", {"policy": "tou", "days": 1,
+                                        "date": "", "scenario": "my_run"})
+        self.assertIn("--scenario", args)
+        self.assertIn("my_run", args)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
