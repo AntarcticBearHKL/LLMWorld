@@ -359,6 +359,32 @@ class TestNewsMemoryProgressive(unittest.TestCase):
             os.remove(sp)
 
 
+class TestPolicySchedule(unittest.TestCase):
+
+    def test_date_in_range(self):
+        from population_runner import _policy_for_date
+        sched = [("2026-04-25", "2026-04-28", "tou")]
+        self.assertEqual(_policy_for_date(sched, "2026-04-25"), "tou")
+        self.assertEqual(_policy_for_date(sched, "2026-04-28"), "tou")
+        self.assertIsNone(_policy_for_date(sched, "2026-04-24"))
+        self.assertIsNone(_policy_for_date(sched, "2026-04-29"))
+
+    def test_open_end(self):
+        from population_runner import _policy_for_date
+        sched = [("2026-04-25", "", "nudge_loss")]
+        self.assertEqual(_policy_for_date(sched, "2026-04-25"), "nudge_loss")
+        self.assertEqual(_policy_for_date(sched, "2026-12-31"), "nudge_loss")
+        self.assertIsNone(_policy_for_date(sched, "2026-04-24"))
+
+    def test_multiple_segments_first_match(self):
+        from population_runner import _policy_for_date
+        sched = [("2026-04-20", "2026-04-22", "tou"),
+                 ("2026-04-23", "2026-04-25", "subsidy")]
+        self.assertEqual(_policy_for_date(sched, "2026-04-21"), "tou")
+        self.assertEqual(_policy_for_date(sched, "2026-04-24"), "subsidy")
+        self.assertIsNone(_policy_for_date(sched, "2026-04-26"))
+
+
 class TestPolicy(unittest.TestCase):
 
 
