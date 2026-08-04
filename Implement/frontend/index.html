@@ -110,6 +110,28 @@
 </div>
 
 <div class="panel">
+  <h3>政策实验启动（计划53：后台模拟一键启动，CoRenew 2026 政策评估 UI）</h3>
+  <div style="margin-bottom:8px;font-size:13px;">
+    政策
+    <select id="selPolicy">
+      <option value="">baseline（无政策）</option>
+      <option value="tou">tou 分时电价</option>
+      <option value="subsidy">subsidy 低谷补贴</option>
+      <option value="nudge">nudge 社会规范</option>
+      <option value="nudge_loss">nudge_loss 损失框架</option>
+      <option value="peak_demand">peak_demand 需量电价</option>
+      <option value="ev_delay">ev_delay EV延迟激励</option>
+      <option value="tou,nudge">组合: tou+nudge</option>
+      <option value="peak_demand,ev_delay">组合: peak_demand+ev_delay</option>
+    </select>
+    天数 <input id="simDays" value="1" style="width:50px">
+    日期 <input id="simDate" placeholder="留空=自动续跑" style="width:130px">
+    <button onclick="startSimulation()">启动后台模拟</button>
+    <span id="simStatus" style="color:#4a7;font-size:12px;"></span>
+  </div>
+</div>
+
+<div class="panel">
   <h3>后台模拟任务（系统级进程，tab 分组）</h3>
   <div id="jobsTabs" style="margin-bottom:8px;"></div>
   <div id="jobsPanel">（加载中…）</div>
@@ -613,6 +635,31 @@ async function runAnalysis() {
     st.textContent = "失败: " + e.message;
   } finally {
     btn.disabled = false;
+  }
+}
+
+async function startSimulation() {
+  const worldId = document.getElementById("selWorld").value;
+  const st = document.getElementById("simStatus");
+  if (!worldId) { st.textContent = "请先选择世界"; return; }
+  const policy = document.getElementById("selPolicy").value;
+  const days = document.getElementById("simDays").value || "1";
+  const date = document.getElementById("simDate").value.trim();
+  const desc = policy ? `政策「${policy}」` : "baseline";
+  if (!confirm(`将消耗 DeepSeek API tokens 启动后台模拟：\n世界 ${worldId}，${desc}，${days} 天${date ? "，从 " + date : "（自动续跑）"}。\n确认继续？`)) return;
+  st.textContent = "启动中…";
+  try {
+    const r = await fetch(`/api/worlds/${worldId}/simulate`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({policy, days, date}),
+    });
+    const res = await r.json();
+    if (res.error) throw new Error(res.error);
+    st.textContent = `已启动 ${res.job_id}（${res.command}）`;
+    setTimeout(renderJobs, 1500);
+  } catch (e) {
+    st.textContent = "失败: " + e.message;
   }
 }
 

@@ -266,6 +266,23 @@ def load_jobs():
     return jobs
 
 
+def build_sim_args(world_id, body):
+    from engine.policy import Policy
+    policy = body.get("policy") or ""
+    days = body.get("days") or 1
+    date = body.get("date") or ""
+    scenario = body.get("scenario") or ""
+    sim_args = [world_id, "--days", str(days)]
+    if date:
+        sim_args += ["--date", str(date)]
+    if policy:
+        Policy.from_name(policy)
+        sim_args += ["--policy", str(policy)]
+    if scenario:
+        sim_args += ["--scenario", str(scenario)]
+    return sim_args
+
+
 def load_events(world_id):
 
     path = os.path.join(WORLDS_DIR, world_id, "events.json")
@@ -471,6 +488,20 @@ class Handler(BaseHTTPRequestHandler):
                     with redirect_stdout(buf):
                         make_analysis_all.run_all(world_id)
                     self._send_json({"ok": True, "output": buf.getvalue()})
+                except Exception as e:
+                    self._send_json({"error": str(e)}, 500)
+                return
+            if len(parts) == 4 and parts[:2] == ["api", "worlds"] and parts[3] == "simulate":
+                world_id = parts[2]
+                body = self._read_json_body()
+                try:
+                    sim_args = build_sim_args(world_id, body)
+                    job_id = _br.cmd_start(
+                        argparse.Namespace(sim_args=sim_args))
+                    self._send_json({"ok": True, "job_id": job_id,
+                                     "command": " ".join(sim_args)})
+                except ValueError as e:
+                    self._send_json({"error": str(e)}, 400)
                 except Exception as e:
                     self._send_json({"error": str(e)}, 500)
                 return
