@@ -87,6 +87,19 @@
 </div>
 
 <div class="panel">
+  <h3>分组政策响应（计划45：标签源=节能意识 / 行为变异性 → 政策响应，Zhou 2016）</h3>
+  <div style="margin-bottom:6px;">
+    <label>标签源
+      <select id="selGroupSource" onchange="renderGroups()">
+        <option value="awareness">节能意识</option>
+        <option value="variability">行为变异性</option>
+      </select>
+    </label>
+  </div>
+  <div id="groupResponsePanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -195,6 +208,7 @@ async function refresh() {
     await renderClusters(worldId);
     await renderVariability(worldId);
     await renderPatterns(worldId);
+    await renderGroups();
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -445,6 +459,26 @@ async function renderPatterns(worldId) {
     <div style="display:flex;gap:8px;flex-wrap:wrap;">${curves}</div>
     <div style="margin-top:8px;">${seqBlocks}</div>`;
   p.clusters.forEach((c, i) => drawClusterCanvas(`patternCanvas${i}`, c.center_shape, COLORS[i % COLORS.length]));
+}
+
+async function renderGroups() {
+  const worldId = document.getElementById("selWorld").value;
+  const source = document.getElementById("selGroupSource").value;
+  const div = document.getElementById("groupResponsePanel");
+  const g = await api(`/api/worlds/${worldId}/groups/${source}`);
+  if (!g || g.error) { div.innerHTML = "<span class='err'>（无分组数据，先跑 analyze_groups.py --label-source " + source + "）</span>"; return; }
+  const scenarios = Object.keys(g.scenarios || {}).filter(s => s !== "baseline");
+  const head = `<th>组</th><th>户数</th><th>基线(kWh)</th>` + scenarios.map(s => `<th>${s}</th>`).join("");
+  const rows = g.groups.map(r => {
+    const cells = scenarios.map(s => {
+      const v = r[s + "_change_pct"];
+      const color = v === null ? "" : (v < 0 ? "#2a7" : "#c33");
+      return `<td style="color:${color};">${r[s + "_mean_kwh"]} (${v === null ? "-" : v.toFixed(1) + "%"})</td>`;
+    }).join("");
+    return `<tr><td>${r.group}</td><td>${r.households}</td><td>${r.baseline_mean_kwh}</td>${cells}</tr>`;
+  }).join("");
+  div.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>
+    <div style="font-size:12px;color:#666;margin-top:6px;">高变异性家庭预期对政策更敏感（Zhou 2016 / Dent 2014）</div>`;
 }
 
 async function renderPersonality(worldId) {

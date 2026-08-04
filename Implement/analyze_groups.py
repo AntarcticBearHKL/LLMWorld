@@ -45,6 +45,23 @@ def load_household_labels(world_id):
     return labels
 
 
+def load_variability_labels(world_id, scenario="baseline"):
+
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(project_root, "outputs", world_id, "analysis",
+                        f"variability_{scenario}.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    labels = {}
+    for house_id in data.get("regular_half", []):
+        labels[house_id] = "规律"
+    for house_id in data.get("variable_half", []):
+        labels[house_id] = "波动"
+    return labels
+
+
 def load_scenario_house_kwh(world_id):
 
 
@@ -75,13 +92,14 @@ def load_scenario_house_kwh(world_id):
 
 def group_stats(labels, scenarios):
 
-    groups = {"高": [], "中": [], "低": [], "未知": []}
-    for house_id, awareness in labels.items():
-        if awareness in groups:
-            groups[awareness].append(house_id)
+    group_names = []
+    for house_id, label in labels.items():
+        if label not in group_names:
+            group_names.append(label)
 
     rows = []
-    for group, house_ids in groups.items():
+    for group in group_names:
+        house_ids = [h for h, lab in labels.items() if lab == group]
         if not house_ids:
             continue
         row = {"group": group, "households": len(house_ids)}
@@ -104,16 +122,25 @@ def group_stats(labels, scenarios):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="节能意识分组分析")
+    parser = argparse.ArgumentParser(description="分组政策响应分析")
     parser.add_argument("--world", required=True)
+    parser.add_argument("--label-source", default="awareness",
+                        choices=["awareness", "variability"],
+                        help="标签源：awareness=节能意识 / variability=行为变异性")
     args = parser.parse_args()
 
-    labels = load_household_labels(args.world)
+    if args.label_source == "variability":
+        labels = load_variability_labels(args.world)
+        if not labels:
+            print(f"没有找到 {args.world} 的变异性标签（先跑 analyze_variability.py）")
+            sys.exit(1)
+    else:
+        labels = load_household_labels(args.world)
+        if not labels:
+            print(f"没有找到 {args.world} 的 household 数据")
+            sys.exit(1)
     scenarios = load_scenario_house_kwh(args.world)
 
-    if not labels:
-        print(f"没有找到 {args.world} 的 household 数据")
-        sys.exit(1)
     if not scenarios:
         print(f"没有找到 {args.world} 的聚合数据")
         sys.exit(1)
@@ -123,7 +150,7 @@ def main():
 
     rows = group_stats(labels, scenarios)
 
-    print("\n=== 节能意识分组响应（总 kWh，括号为 vs 基线%）===")
+    print("\n=== 分组政策响应（总 kWh，括号为 vs 基线%）===")
     header = f"{'组':<6}{'户数':<4}{'基线':<10}"
     for s in scenarios:
         if s != "baseline":
@@ -139,9 +166,10 @@ def main():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_dir = os.path.join(project_root, "outputs", args.world, "analysis")
     os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, "groups.json")
+    out_path = os.path.join(out_dir, f"groups_{args.label_source}.json")
     with open(out_path, "w", encoding="utf-8") as f:
-        json.dump({"labels": labels, "scenarios": {k: v for k, v in scenarios.items()},
+        json.dump({"label_source": args.label_source,
+                   "labels": labels, "scenarios": {k: v for k, v in scenarios.items()},
                    "groups": rows}, f, ensure_ascii=False, indent=2)
     print(f"\n已保存: {out_path}")
 
