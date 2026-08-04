@@ -1,0 +1,16 @@
+class AnalyzeWorldSummary
+    世界总览（计划97，18 分析工具聚合，0 LLM）。
+
+    - build_report(world_id, scenario) → 每户一行总览：
+      cluster（行为簇）/ variability_group（规律/波动）/
+      anomaly_flags（z-score 异常）/ load_consistent（行为-负荷一致）/
+      total_kwh
+      数据源：analysis/ 下 clusters_*/variability_*/anomalies_*/
+      behavior_load_* JSON（缺文件容错）
+    - CLI：python analyze_world_summary.py <world> --scenario
+    - 输出：outputs/<world>/analysis/world_summary_<scenario>.json
+
+    用途：全部分析的最终聚合视图（研究总览/报告入口）。
+
+    调用链：server /api/worlds/<id>/world-summary/<scenario>
+    → 前端"世界总览"面板
