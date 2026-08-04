@@ -132,11 +132,23 @@ def main():
     parser.add_argument("--house-start", type=int, default=0, help="起始家庭序号")
     parser.add_argument("--house-count", type=int, default=None, help="参与家庭数（默认全部）")
     parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED)
+    parser.add_argument("--policy", default=None,
+                        help="政策干预（RQ2）：tou 分时电价 / subsidy 低谷补贴 / nudge 社会规范")
     parser.add_argument("--aggregate-only", action="store_true",
                         help="不跑 LLM，直接从已保存的 outputs 曲线文件离线聚合")
     args = parser.parse_args()
 
     utils.set_seed(args.seed)
+
+    # 政策上下文（无干预为空串 → 与基线行为完全一致）
+    policy_context = ""
+    policy_name = None
+    if args.policy:
+        from engine.policy import Policy
+        policy = Policy.from_name(args.policy)
+        policy_name = policy.describe()
+        policy_context = policy.render()
+        print(f"政策干预: {policy_name}")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pop_root = os.path.join(project_root, "outputs", args.world_id, "population")
@@ -180,7 +192,8 @@ def main():
                 season=season,
                 weather=config.DEFAULT_WEATHER,
                 temperature=config.DEFAULT_TEMPERATURE,
-                verbose=False)
+                verbose=False,
+                policy_context=policy_context)
             return house_id, day_result
 
         with ThreadPoolExecutor(max_workers=MAX_HOUSEHOLDS_PARALLEL) as executor:
@@ -188,6 +201,7 @@ def main():
 
         # 聚合
         population = aggregate_population(house_results)
+        population["policy"] = policy.type if policy else "baseline"   # 记录干预类型，供对比脚本识别
 
         date_str = house_results[0][1]["date"].replace("年", "-").replace("月", "-").replace("日", "")
         out_dir = os.path.join(pop_root, date_str)

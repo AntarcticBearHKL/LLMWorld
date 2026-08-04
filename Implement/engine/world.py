@@ -20,7 +20,8 @@ class World:
         self.house_id = house_id
         self.memory = HouseholdMemory()   # 跨天记忆：昨天的行为影响今天的计划
     
-    def simulate_day(self, season="夏天", weather="晴天", temperature=28, verbose=True):
+    def simulate_day(self, season="夏天", weather="晴天", temperature=28, verbose=True,
+                     policy_context=""):
         if verbose:
             print(f"\n{'='*60}")
             print(f"开始模拟：{self.time.get_full_date_string()}")
@@ -46,7 +47,7 @@ class World:
         
         if verbose:
             print("第四步：执行用电模拟...")
-        executor = Executor(self.home, planner)
+        executor = Executor(self.home, planner, policy_context=policy_context)
         self.current_executor = executor
         executor.execute_all_segments(season=season, weather=weather, temperature=temperature)
         
