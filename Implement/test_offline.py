@@ -1164,8 +1164,49 @@ class TestVariability(unittest.TestCase):
         self.assertLess(variability_index(stable), variability_index(wild))
 
 
-class TestPeakOverlap(unittest.TestCase):
+class TestPeakShape(unittest.TestCase):
 
+
+    def test_peak_plateau_minutes(self):
+        from compare_policies import peak_plateau_minutes
+        watts = [100.0] * 1440
+        watts[0:600] = [900.0] * 600
+        self.assertEqual(peak_plateau_minutes(watts, ratio=0.8), 600)
+
+    def test_peak_plateau_zero_curve(self):
+        from compare_policies import peak_plateau_minutes
+        self.assertEqual(peak_plateau_minutes([0.0] * 1440), 0)
+
+    def test_peak_to_mean_ratio(self):
+        from compare_policies import peak_to_mean_ratio
+        watts = [100.0] * 1440
+        watts[0:1440] = [100.0] * 1440
+        watts[100] = 300.0
+        self.assertAlmostEqual(peak_to_mean_ratio(watts), 3.0, places=2)
+        self.assertIsNone(peak_to_mean_ratio([0.0] * 1440))
+
+    def test_high_overlap_minutes(self):
+        from compare_policies import high_overlap_minutes
+        watts = [1000.0] * 1440
+        watts[0:30] = [32000.0] * 30
+        self.assertEqual(high_overlap_minutes(watts, threshold=30000), 30)
+
+    def test_compare_includes_peak_shape_fields(self):
+        from compare_policies import compare
+        baseline = {"policy": "baseline", "load_profile_watts": [500.0] * 1440,
+                    "total_energy_kwh": 12.0}
+        watts = [500.0] * 1440
+        watts[700:760] = [9000.0] * 60
+        intervention = {"policy": "tou", "load_profile_watts": watts,
+                        "total_energy_kwh": 11.0}
+        report = compare(baseline, intervention)
+        self.assertIn("peak_plateau_minutes_baseline", report)
+        self.assertGreater(report["peak_plateau_minutes_intervention"], 0)
+        self.assertIn("peak_to_mean_intervention", report)
+        self.assertIn("high_overlap_minutes_intervention", report)
+
+
+class TestPeakOverlap(unittest.TestCase):
 
     def test_single_overlap_event(self):
         from engine.load_features import peak_overlap_events

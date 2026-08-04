@@ -41,6 +41,29 @@ def energy_of_hours(profile_watts, hours):
     return total_wh / 1000.0
 
 
+def peak_plateau_minutes(profile_watts, ratio=0.8):
+
+    peak = max(profile_watts)
+    if peak <= 0:
+        return 0
+    threshold = peak * ratio
+    return sum(1 for w in profile_watts if w >= threshold)
+
+
+def peak_to_mean_ratio(profile_watts):
+
+    mean = sum(profile_watts) / len(profile_watts)
+    peak = max(profile_watts)
+    if mean <= 0:
+        return None
+    return round(peak / mean, 2)
+
+
+def high_overlap_minutes(profile_watts, threshold=30000):
+
+    return sum(1 for w in profile_watts if w >= threshold)
+
+
 def load_population(world_id, policy_filter=None):
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -90,6 +113,13 @@ def compare(baseline, intervention):
         "max_watts_baseline": round(b_max, 2),
         "max_watts_intervention": round(i_max, 2),
         "peak_load_cut_pct": round((i_max / b_max - 1) * 100, 2) if b_max else None,
+        "peak_plateau_minutes_baseline": peak_plateau_minutes(b),
+        "peak_plateau_minutes_intervention": peak_plateau_minutes(i),
+        "peak_plateau_cut_pct": round((peak_plateau_minutes(i) / peak_plateau_minutes(b) - 1) * 100, 2) if peak_plateau_minutes(b) else None,
+        "peak_to_mean_baseline": peak_to_mean_ratio(b),
+        "peak_to_mean_intervention": peak_to_mean_ratio(i),
+        "high_overlap_minutes_baseline": high_overlap_minutes(b),
+        "high_overlap_minutes_intervention": high_overlap_minutes(i),
         "hourly_diff_kwh": [
             round((i[h * 60:(h + 1) * 60] and sum(i[h * 60:(h + 1) * 60]) / 60.0
                    - sum(b[h * 60:(h + 1) * 60]) / 60.0) / 1000.0, 4)
@@ -108,7 +138,8 @@ def main_all(args):
         sys.exit(1)
     baseline_path, baseline = baseline_items[-1]
 
-    rows = [("场景", "总kWh", "晚峰16-21点kWh", "谷段22-7点kWh", "峰值W", "峰值时刻")]
+    rows = [("场景", "总kWh", "晚峰16-21点kWh", "谷段22-7点kWh", "峰值W", "峰值时刻",
+             "峰值平台分钟", "峰均比", "叠加分钟(≥30kW)")]
     per_policy = {}
     for policy, path, data in all_pop:
         name = data.get("policy", "baseline")
@@ -129,6 +160,9 @@ def main_all(args):
             f"{report['valley_kwh_intervention']:.1f} ({report['valley_hours_change_pct']:+.1f}%)",
             f"{report['max_watts_intervention']:.0f} ({report['peak_load_cut_pct']:+.1f}%)",
             peak_time,
+            f"{report['peak_plateau_minutes_intervention']} ({report['peak_plateau_cut_pct']:+.1f}%)" if report['peak_plateau_cut_pct'] is not None else str(report['peak_plateau_minutes_intervention']),
+            str(report['peak_to_mean_intervention']),
+            str(report['high_overlap_minutes_intervention']),
         ))
 
 
@@ -142,9 +176,12 @@ def main_all(args):
         f"{b_valley_kwh:.1f}",
         f"{max(baseline['load_profile_watts']):.0f}",
         f"{b_peak_min // 60:02d}:{b_peak_min % 60:02d}",
+        str(peak_plateau_minutes(baseline["load_profile_watts"])),
+        str(peak_to_mean_ratio(baseline["load_profile_watts"])),
+        str(high_overlap_minutes(baseline["load_profile_watts"])),
     ))
 
-    width = [10, 16, 18, 18, 18, 10]
+    width = [10, 16, 18, 18, 18, 10, 16, 8, 18]
     header = " | ".join(r.ljust(w) for r, w in zip(rows[0], width))
     print("=== 政策场景对比矩阵（括号内为 vs 基线变化%）===")
     print(header)
