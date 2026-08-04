@@ -1,0 +1,16 @@
+class AnalyzeVariability
+    跨日行为变异性分析（计划41，Zhou 2016 / Jin 2021 / Dent 2014，0 LLM）。
+
+    - scan_house_daily_profiles(world_id, scenario) → 每户全部日期曲线
+      （多日：outputs/<world>/<postcode>/<house_id>/<scenario>/<date>/用电信息/）
+    - build_report(per_house) → 报告：
+      per_house[]（variability_index / peak_hour_shift / daily_kwh_cv /
+      mean_kwh / hourly_cv_curve / daily_kwhs）、
+      regular_half（规律组）/ variable_half（波动组，按变异指数对半）
+    - CLI：python analyze_variability.py <world> --scenario
+    - 输出：outputs/<world>/analysis/variability_<scenario>.json
+
+    用途：
+    - analyze_groups --label-source variability 直接消费该 JSON
+    - server /api/worlds/<id>/variability/<scenario> 供前端"行为变异性"面板
+    - make_analysis_all 一键化调用
