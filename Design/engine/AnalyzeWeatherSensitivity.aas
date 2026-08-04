@@ -1,0 +1,15 @@
+class AnalyzeWeatherSensitivity
+    天气敏感性分析（计划87，Jin 2021 温度驱动，0 LLM）。
+
+    - pearson(a, b) / linear_slope(a, b) → 温度-用电关系
+    - load_daily_points(world_id, scenario) → 每日
+      (temperature=environment 首户均值, kwh, conditions)
+      来源：outputs/<world>/population/<scenario>/*/population_profile_1440min.json
+    - build_report(points) → days / temp_min-max /
+      temperature_kwh_corr（正=空调主导，负=采暖主导）/
+      kwh_per_degree / by_weather（按天气分组均值）
+    - CLI：python analyze_weather_sensitivity.py <world> --scenario
+    - 输出：outputs/<world>/analysis/weather_<scenario>.json
+
+    调用链：server /api/worlds/<id>/weather/<scenario>
+    → 前端"天气敏感性"面板
