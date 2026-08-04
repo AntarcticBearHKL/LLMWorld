@@ -1,0 +1,11 @@
+class ExportCsv
+    分析结果 CSV 导出（计划105，论文数据处理，0 LLM）。
+
+    - flatten(record, prefix="") → 嵌套 dict 平铺（点号前缀）
+    - export_json_to_csv(path, out_dir) → per_house/scenarios/
+      groups/seasons/clusters 记录平铺为 CSV（utf-8-sig，Excel 兼容）
+    - export_world(world_id) → analysis/*.json → analysis/csv/*.csv
+    - CLI：python export_analysis_csv.py <world>
+
+    用途：20 个分析工具的 JSON 报告批量转表格，
+    供论文表格/Excel/统计软件使用。
