@@ -31,9 +31,10 @@ python Implement/background_runner.py server stop
 python Implement/server.py --query profile --world pop03 --scenario baseline --date 2026-04-21
 
 # 6. 分析
+python Implement/make_analysis_all.py --world pop03     # 一键化：聚类/变异性/模式/归因/分组/政策矩阵
 python Implement/validate_baseline.py --world pop03   # vs 维州真实负荷
 python Implement/compare_policies.py --world pop03 --all   # 政策矩阵
-python Implement/analyze_groups.py --world pop03     # 节能意识分组
+python Implement/analyze_groups.py --world pop03 --label-source variability   # 变异性分组响应
 python Implement/make_report.py --world pop03        # 论文素材报告
 
 # 7. 测试

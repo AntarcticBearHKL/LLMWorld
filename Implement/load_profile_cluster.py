@@ -72,8 +72,14 @@ def build_report(profiles, k):
         raise ValueError("没有找到任何已保存的模拟曲线")
 
     features = [r["shape"] for r in rows]
-    chosen_k = k if k else auto_k(features)
-    labels, centers, wcss = kmeans(features, chosen_k)
+    try:
+        chosen_k = k if k else auto_k(features)
+        labels, centers, wcss = kmeans(features, chosen_k)
+    except ValueError:
+        chosen_k = 1
+        labels = [0] * len(rows)
+        centers = [[round(v, 6) for v in features[0]]]
+        wcss = 0.0
     scores = elbow_scores(features)
 
     clusters = []

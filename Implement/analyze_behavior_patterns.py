@@ -46,8 +46,14 @@ def scan_household_days(world_id, scenario):
 def build_report(samples, k):
     if not samples:
         raise ValueError("没有找到任何模拟曲线")
-    chosen_k = k if k else auto_k([s["shape"] for s in samples])
-    labels, centers, wcss = kmeans([s["shape"] for s in samples], chosen_k)
+    try:
+        chosen_k = k if k else auto_k([s["shape"] for s in samples])
+        labels, centers, wcss = kmeans([s["shape"] for s in samples], chosen_k)
+    except ValueError:
+        chosen_k = 1
+        labels = [0] * len(samples)
+        centers = [[round(v, 6) for v in samples[0]["shape"]]]
+        wcss = 0.0
     for i, sample in enumerate(samples):
         sample["cluster"] = labels[i]
 
