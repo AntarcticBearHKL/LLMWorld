@@ -2007,5 +2007,39 @@ class TestNilm(unittest.TestCase):
             build_report([0.0] * 1440, [])
 
 
+class TestWeekday(unittest.TestCase):
+
+
+    def _per_house(self):
+        weekday = {"date": "20260713", "kwh": 20.0,
+                   "hourly": [400.0 + 1500.0 * (h == 19) for h in range(24)]}
+        weekend = {"date": "20260718", "kwh": 25.0,
+                   "hourly": [400.0 + 1500.0 * (h == 21) for h in range(24)]}
+        return [{"house_id": "h1",
+                 "days": [weekday, weekend, weekday, weekend]}]
+
+    def test_grouping(self):
+        from analyze_weekday import build_report, weekday_group
+        self.assertEqual(weekday_group("20260713"), "工作日")
+        self.assertEqual(weekday_group("20260718"), "周末")
+        report = build_report(self._per_house())
+        by_name = {r["group"]: r for r in report["groups"]}
+        self.assertEqual(by_name["工作日"]["samples"], 2)
+        self.assertEqual(by_name["周末"]["samples"], 2)
+        self.assertAlmostEqual(by_name["工作日"]["mean_kwh"], 20.0)
+
+    def test_weekend_later_peak(self):
+        from analyze_weekday import build_report
+        report = build_report(self._per_house())
+        by_name = {r["group"]: r for r in report["groups"]}
+        self.assertGreater(by_name["周末"]["mean_peak_hour"],
+                           by_name["工作日"]["mean_peak_hour"])
+
+    def test_empty_raise(self):
+        from analyze_weekday import build_report
+        with self.assertRaises(ValueError):
+            build_report([])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
