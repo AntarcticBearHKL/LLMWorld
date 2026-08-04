@@ -59,29 +59,50 @@ class World:
             return None
 
     def _load_memory_days(self):
-        """从 state.json 恢复跨天记忆摘要列表（昨天/前天的行为影响今天）。"""
+        """从 state.json 恢复本户跨天记忆（按 house_id 存储，多户并行不互相覆盖）。"""
         path = self._state_path()
         if not path or not os.path.exists(path):
             return []
         try:
             with open(path, "r", encoding="utf-8") as f:
                 state = json.load(f)
-            return state.get("memory_days", [])
+            days = state.get("memory_days", [])
+            # 兼容新格式（dict 按户）与旧格式（list 单户）
+            if isinstance(days, dict):
+                return days.get(self.house_id, [])
+            return days if isinstance(days, list) else []
         except Exception:
             return []
 
     def save_state(self):
-        """保存世界状态：当前日期 + 跨天记忆（供下次续跑）。"""
+        """保存世界状态：当前日期 + 本户跨天记忆（原子写，多户并行安全）。
+
+        state.json 结构：{date, memory_days: {house_id: [摘要...]}}
+        """
         path = self._state_path()
         if not path:
             return
-        state = {
-            "date": self.time.get_date_string(),
-            "memory_days": self.memory.days,
-        }
+        state = {}
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    state = json.load(f)
+            except Exception:
+                state = {}
+        # 兼容旧格式（list）→ 迁移为 dict
+        memory = state.get("memory_days")
+        if not isinstance(memory, dict):
+            memory = {}
+        memory[self.house_id] = self.memory.days
+        state["date"] = self.time.get_date_string()
+        state["memory_days"] = memory
+
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, "w", encoding="utf-8") as f:
+        # 原子写：先写临时文件再改名，避免并发读写的半写文件
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
+        os.replace(tmp, path)
 
     # ---------- 新闻台 ----------
 
