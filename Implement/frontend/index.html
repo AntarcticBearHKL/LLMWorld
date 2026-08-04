@@ -140,6 +140,11 @@
 </div>
 
 <div class="panel">
+  <h3>季节性对比（计划85：季节×负荷，Jin 2021）</h3>
+  <div id="seasonalPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -302,6 +307,7 @@ async function refresh() {
     await renderSolar(worldId);
     await renderElectrification(worldId);
     await renderAdvice(worldId);
+    await renderSeasonal(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -719,6 +725,19 @@ async function renderAdvice(worldId) {
       <ul style="margin:6px 0 0 18px;padding:0;color:#456;">${r.advice.map(t => `<li>${t}</li>`).join("")}</ul>
     </div>`).join("");
   div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">基于异常检测/峰值叠加/晚峰集中/峰谷差自动生成（Monacchi 2015 advisor）</div>${cards}`;
+}
+
+async function renderSeasonal(worldId) {
+  const div = document.getElementById("seasonalPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const s = await api(`/api/worlds/${worldId}/seasonal/${scenario}`);
+  if (!s || s.error) { div.innerHTML = "<span class='err'>（无季节数据，先跑 analyze_seasonal.py，需多日模拟）</span>"; return; }
+  const rows = s.seasons.map(r => `
+    <tr><td>${r.season}</td><td>${r.samples}</td><td>${r.mean_kwh}</td>
+    <td>${r.mean_peak_watts}</td><td>${r.mean_evening_kwh}</td><td>${r.mean_peak_hour}:00</td></tr>`).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">季节是负荷变异的核心外部驱动（Jin 2021）</div>
+    <table><thead><tr><th>季节</th><th>样本数</th><th>日均kWh</th><th>平均峰值(W)</th><th>晚峰kWh</th><th>平均峰时</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
 }
 
 async function renderPersonality(worldId) {
