@@ -646,10 +646,23 @@ async function renderJobs() {
       <b>${j.job_id}</b>
       <span style="color:${color[j.status] || '#888'};margin:0 8px;">[${j.status}]</span>
       <span>${j.progress}</span>
+      ${j.status === "running" ? `<button onclick="stopJob('${j.job_id}')" style="float:right;padding:2px 10px;cursor:pointer;">停止</button>` : ""}
       ${j.status !== "running" ? `<button onclick="deleteJob('${j.job_id}')" style="float:right;padding:2px 10px;cursor:pointer;">删除</button>` : ""}
       <div style="color:#666;">${j.command}</div>
       <pre style="background:#f6f7f9;padding:6px;font-size:12px;max-height:120px;overflow:auto;white-space:pre-wrap;">${(j.log_tail || "").replace(/</g, "&lt;")}</pre>
     </div>`).join("");
+}
+
+async function stopJob(jobId) {
+  if (!confirm(`终止任务 ${jobId}？`)) return;
+  try {
+    const r = await fetch(`/api/jobs/stop/${jobId}`, {method: "POST"});
+    const res = await r.json();
+    if (res.error) { alert("停止失败: " + res.error); return; }
+    await renderJobs();
+  } catch (e) {
+    alert("停止失败: " + e.message);
+  }
 }
 
 function setJobsTab(key) {
@@ -708,11 +721,35 @@ async function startSimulation() {
     });
     const res = await r.json();
     if (res.error) throw new Error(res.error);
-    st.textContent = `已启动 ${res.job_id}（${res.command}）`;
-    setTimeout(renderJobs, 1500);
+    st.textContent = `已启动 ${res.job_id}（${res.command}），正在跟踪任务…`;
+    await trackJob(res.job_id);
   } catch (e) {
     st.textContent = "失败: " + e.message;
   }
+}
+
+async function trackJob(jobId) {
+  const st = document.getElementById("simStatus");
+  let tries = 0;
+  while (tries < 600) {
+    tries++;
+    await new Promise(res => setTimeout(res, 2000));
+    let job = null;
+    try {
+      const jobs = await api("/api/jobs");
+      job = jobs.find(j => j.job_id === jobId);
+    } catch (e) {  }
+    if (!job) { st.textContent = `任务 ${jobId} 已结束，正在刷新结果…`; break; }
+    if (job.status === "running" || job.status === "pending") {
+      st.textContent = `任务 ${jobId} 进行中（${job.progress}）…`;
+      continue;
+    }
+    st.textContent = `任务 ${jobId} ${job.status === "done" ? "完成" : "报错"}，正在刷新结果…`;
+    break;
+  }
+  await renderJobs();
+  await refresh();
+  st.textContent = st.textContent.replace("，正在刷新结果…", "，结果已刷新");
 }
 
 let templatesCache = [];
