@@ -244,6 +244,114 @@ class TestCombineWorlds(unittest.TestCase):
         self.assertAlmostEqual(data["total_energy_kwh"], single["total_energy_kwh"], places=2)
 
 
+class TestNewsMemoryProgressive(unittest.TestCase):
+    """新闻记忆化渐进（计划35）：当天新新闻 + 旧闻记忆摘要 + 落盘恢复。"""
+
+    def test_delivery_first_day_only_new(self):
+        """第 1 天：只投递当天（及之前未投递）的新闻。"""
+        from engine.news import NewsBoard, NewsItem
+        board = NewsBoard()
+        board.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
+        board.add_event(NewsItem("2026-04-22", "07:00", "新闻B", "内容B"))
+
+        day1 = board.get_new_for("2026-04-21")
+        self.assertEqual(len(day1), 1)
+        self.assertEqual(day1[0].title, "新闻A")
+        # 同日再次调用：不重复投递
+        self.assertEqual(len(board.get_new_for("2026-04-21")), 0)
+
+    def test_delivery_day2_only_new(self):
+        """第 2 天：只投递新新闻（B），旧闻（A）不再出现。"""
+        from engine.news import NewsBoard, NewsItem
+        board = NewsBoard()
+        board.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
+        board.add_event(NewsItem("2026-04-22", "07:00", "新闻B", "内容B"))
+        board.get_new_for("2026-04-21")
+
+        day2 = board.get_new_for("2026-04-22")
+        self.assertEqual(len(day2), 1)
+        self.assertEqual(day2[0].title, "新闻B")
+
+    def test_backfilled_old_news_considered_new(self):
+        """后补旧新闻（从未投递过）算新的，会被投递。"""
+        from engine.news import NewsBoard, NewsItem
+        board = NewsBoard()
+        board.add_event(NewsItem("2026-04-22", "07:00", "新闻B", "内容B"))
+        board.get_new_for("2026-04-22")
+        # 上帝后补一条 04-21 的旧新闻
+        board.add_event(NewsItem("2026-04-21", "09:00", "后补旧闻", "内容"))
+        day2b = board.get_new_for("2026-04-22")
+        self.assertEqual(len(day2b), 1)
+        self.assertEqual(day2b[0].title, "后补旧闻")
+
+    def test_delivery_state_roundtrip(self):
+        """投递进度序列化/恢复（重启后只投递新一天）。"""
+        from engine.news import NewsBoard, NewsItem
+        board = NewsBoard()
+        board.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
+        board.add_event(NewsItem("2026-04-22", "07:00", "新闻B", "内容B"))
+        board.get_new_for("2026-04-21")
+        state = board.to_state()
+
+        board2 = NewsBoard(delivered_ids=state["delivered_ids"])
+        board2.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
+        board2.add_event(NewsItem("2026-04-22", "07:00", "新闻B", "内容B"))
+        day2 = board2.get_new_for("2026-04-22")
+        self.assertEqual([n.title for n in day2], ["新闻B"])   # A 已投递过，不重复
+
+    def test_memory_news_rolling_keep(self):
+        """新闻记忆：滚动保留最近 N 条（默认 5），去重。"""
+        from engine.news import NewsItem
+        from engine.memory import HouseholdMemory
+        mem = HouseholdMemory()
+        for i in range(8):
+            mem.add_news([NewsItem(f"2026-04-{20+i}", "07:00", f"新闻{i}", "x")], keep=5)
+        self.assertEqual(len(mem.news_memory), 5)
+        self.assertEqual(mem.news_memory[-1]["title"], "新闻7")
+        self.assertEqual(mem.news_memory[0]["title"], "新闻3")
+
+    def test_prompt_context_contains_news_review(self):
+        """记忆上下文含'近期外界信息回顾'章节（旧闻以摘要形式）。"""
+        from engine.news import NewsItem
+        from engine.memory import HouseholdMemory
+        mem = HouseholdMemory()
+        mem.add_news([NewsItem("2026-04-21", "07:00", "昨日新闻标题", "x")], keep=5)
+        ctx = mem.get_prompt_context()
+        self.assertIn("近期外界信息回顾", ctx)
+        self.assertIn("昨日新闻标题", ctx)
+
+    def test_world_state_news_roundtrip(self):
+        """World 落盘：news_delivery + news_memory 保存与恢复。"""
+        import json, os, tempfile
+        from engine.world import World
+        from simulate import load_world, create_home_from_household
+        from engine.news import NewsItem
+
+        wmeta, d, hs = load_world("pop05")
+        home = create_home_from_household(hs[0]["household"])
+        w = World(home, world_id="pop05", postcode="3168", house_id="house_0001",
+                  start_date="2026年4月21日")
+        w.news.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
+        w.news.get_new_for("2026-04-21")
+        w.memory.add_news(w.news.delivered_on("2026-04-21"), keep=5)
+        w.save_state()
+
+        # 恢复
+        w2 = World(home, world_id="pop05", postcode="3168", house_id="house_0001")
+        # 需要把剧本新闻也加载进 w2（与 w 相同）
+        w2.news.add_event(NewsItem("2026-04-21", "07:00", "新闻A", "内容A"))
+        # 已投递进度恢复 → 同一天不再投递
+        self.assertEqual(len(w2.news.get_new_for("2026-04-21")), 0)
+        self.assertEqual(len(w2.memory.news_memory), 1)
+        self.assertEqual(w2.memory.news_memory[0]["title"], "新闻A")
+
+        # 清理测试 state
+        sp = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "worlds", "pop05", "state.json")
+        if os.path.exists(sp):
+            os.remove(sp)
+
+
 class TestPolicy(unittest.TestCase):
     """政策渲染与对比指标（计划8）。"""
 
