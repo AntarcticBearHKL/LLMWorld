@@ -150,6 +150,11 @@
 </div>
 
 <div class="panel">
+  <h3>NILM 分解基准（计划91：负荷可分解性，Azad 2023）</h3>
+  <div id="nilmPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -314,6 +319,7 @@ async function refresh() {
     await renderAdvice(worldId);
     await renderSeasonal(worldId);
     await renderWeather(worldId);
+    await renderNilm(worldId);
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -757,6 +763,23 @@ async function renderWeather(worldId) {
     ${w.days} 天（温度 ${w.temp_min}-${w.temp_max}°C）：温度-用电相关 <b>${w.temperature_kwh_corr}</b>，
     斜率 <b>${w.kwh_per_degree} kWh/°C</b>（正=空调主导，负=采暖主导；Jin 2021 温度驱动）</div>
     <table><thead><tr><th>天气</th><th>天数</th><th>日均kWh</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+async function renderNilm(worldId) {
+  const div = document.getElementById("nilmPanel");
+  const scenario = selectedScenarios()[0] || "baseline";
+  const date = document.getElementById("selDate").value;
+  const n = await api(`/api/worlds/${worldId}/nilm/${scenario}/${date}`);
+  if (!n || n.error) { div.innerHTML = "<span class='err'>（无 NILM 数据，先跑 analyze_nilm.py）</span>"; return; }
+  const blocks = n.per_house.map(h => {
+    const rows = h.per_appliance.map(a => `
+      <tr><td>${a.name}</td><td>${a.power_watts}</td><td>${a.true_kwh}</td>
+      <td>${a.estimated_kwh}</td><td>${a.mae_kwh}</td><td>${a.relative_error ?? "-"}</td></tr>`).join("");
+    return `<div style="margin-bottom:10px;"><b>${h.house_id}</b>（分解率 ${h.disaggregation_rate}，总 MAE ${h.total_mae_kwh}kWh）
+      <table style="margin-top:4px;"><thead><tr><th>电器</th><th>功率(W)</th><th>真值kWh</th><th>估计kWh</th><th>MAE</th><th>相对误差</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
+  }).join("");
+  div.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:6px;">功率指纹平台匹配（Azad 2023 NILM 基线指标）</div>${blocks}`;
 }
 
 async function renderPersonality(worldId) {

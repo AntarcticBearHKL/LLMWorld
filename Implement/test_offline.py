@@ -1973,5 +1973,39 @@ class TestWeatherSensitivity(unittest.TestCase):
             build_report([])
 
 
+class TestNilm(unittest.TestCase):
+
+
+    def test_find_plateaus(self):
+        from analyze_nilm import find_plateaus
+        watts = [0.0] * 1440
+        watts[600:660] = [2000.0] * 60
+        plateaus = find_plateaus(watts)
+        self.assertEqual(len(plateaus), 1)
+        self.assertEqual(plateaus[0]["watts"], 2000.0)
+        self.assertEqual(plateaus[0]["start"], 600)
+
+    def test_match_appliances(self):
+        from analyze_nilm import build_report
+        watts = [100.0] * 1440
+        watts[600:660] = [2100.0] * 60
+        appliances = [
+            {"unique_id": "kitchen_cooker", "name": "电磁炉",
+             "power_watts": 2000, "total_energy_kwh": 2.0},
+            {"unique_id": "living_light", "name": "灯",
+             "power_watts": 100, "total_energy_kwh": 2.4},
+        ]
+        report = build_report(watts, appliances)
+        by_name = {r["name"]: r for r in report["per_appliance"]}
+        self.assertAlmostEqual(by_name["电磁炉"]["estimated_kwh"], 2.0, places=2)
+        self.assertAlmostEqual(by_name["灯"]["estimated_kwh"], 2.3, places=2)
+        self.assertGreater(report["disaggregation_rate"], 0.9)
+
+    def test_empty_raise(self):
+        from analyze_nilm import build_report
+        with self.assertRaises(ValueError):
+            build_report([0.0] * 1440, [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
