@@ -441,6 +441,34 @@ class TestPolicy(unittest.TestCase):
         self.assertIn("损失", loss_text)
         self.assertIn("返利", loss_text)
 
+    def test_peak_demand_render(self):
+        from engine.policy import Policy
+        text = Policy.peak_demand(rate_per_kw=12.0).render()
+        self.assertIn("需量电价", text)
+        self.assertIn("12.0 澳元/kW", text)
+        self.assertIn("最高", text)
+
+    def test_ev_delay_render_menu(self):
+        from engine.policy import Policy
+        text = Policy.ev_delay().render()
+        self.assertIn("延迟激励", text)
+        self.assertIn("每延迟 1 小时", text)
+        self.assertIn("0.39", text)
+        self.assertIn("0.55", text)
+
+    def test_ev_delay_custom_params(self):
+        from engine.policy import Policy
+        text = Policy.ev_delay(max_delay_hours=4, incentive_per_hour=0.05,
+                               flat_rate=0.5).render()
+        self.assertIn("0.30", text)
+
+    def test_from_name_new_policies(self):
+        from engine.policy import Policy
+        self.assertEqual(Policy.from_name("peak_demand").type, "peak_demand")
+        self.assertEqual(Policy.from_name("ev_delay").type, "ev_delay")
+        with self.assertRaises(ValueError):
+            Policy.from_name("no_such_policy")
+
     def test_compare_metrics(self):
 
         from compare_policies import compare
