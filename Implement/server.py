@@ -280,6 +280,8 @@ def build_sim_args(world_id, body):
         sim_args += ["--policy", str(policy)]
     if scenario:
         sim_args += ["--scenario", str(scenario)]
+    if body.get("peer_nudge"):
+        sim_args += ["--peer-nudge"]
     return sim_args
 
 
