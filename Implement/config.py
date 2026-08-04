@@ -22,8 +22,8 @@ MAX_TOKENS = 64000
 THINKING = False
 REASONING_EFFORT = "medium"   # low / medium / high（仅 THINKING=True 时生效）
 
-# 并发与重试（用户硬性要求：同时并发不得超过 10）
-MAX_WORKERS = 10
+# 并发与重试（用户最新指令 2026-08：解除 API 并发限制——不设任何上限）
+# 注意：世界级约束见 population.py（每世界最多 10 户）
 MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 2
 REQUEST_TIMEOUT_SECONDS = 120

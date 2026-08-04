@@ -478,7 +478,13 @@ def _dedupe_names(household):
 
 
 def build_population(world_id, count, seed=42, household_types=None):
-    """本地生成 count 户异质家庭（Big Five v2），写入 worlds/<world_id>/3168/house_XXXX/。"""
+    """本地生成 count 户异质家庭（Big Five v2），写入 worlds/<world_id>/3168/house_XXXX/。
+
+    世界级约束（用户 2026-08 指令）：每个世界最多 10 户。
+    """
+    if count > 10:
+        raise ValueError(f"每世界最多 10 户（收到 {count}）。请拆分多个世界。")
+
     rng = random.Random(seed)
 
     if household_types is None:

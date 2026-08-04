@@ -19,11 +19,11 @@ from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from engine import World, utils, SubAgent
-from engine.subagent import MAX_WORKERS
 from simulate import load_world, create_home_from_household
 import config
 
-MAX_HOUSEHOLDS_PARALLEL = 5   # 同时模拟的家庭数（每户每阶段并发受 SubAgent 全局信号量 ≤10 约束）
+# 户级并行不设上限：并行多少户只取决于世界有多少家庭（用户 2026-08 指令）
+# 世界级约束：每世界最多 10 户（见 population.py 校验）
 
 
 def aggregate_population(house_results):
@@ -250,7 +250,7 @@ def main():
                                   "mode": env.get("mode", "?")}
             return house_id, day_result
 
-        with ThreadPoolExecutor(max_workers=MAX_HOUSEHOLDS_PARALLEL) as executor:
+        with ThreadPoolExecutor(max_workers=len(worlds)) as executor:  # 户级并行 = 世界家庭数
             house_results = list(executor.map(run_one, worlds.items()))
 
         # 聚合
@@ -293,14 +293,14 @@ def main():
     print(f"  缓存未命中 {tokens['prompt_cache_miss']} + 缓存命中 {tokens['prompt_cache_hit']} + 输出 {tokens['completion']} = {tokens['total']}")
     print(f"  户均/天 ≈ {tokens['total'] / (args.days * len(worlds)):.0f} tokens")
 
-    # 并发硬约束验证（用户要求：同时并发 ≤10）
+    # 并发观测（用户 2026-08：不设上限，仅报告实测峰值）
     current, peak = SubAgent.get_concurrency_stats()
-    ok = peak <= MAX_WORKERS
-    print(f"\n=== 并发实测 ===")
-    print(f"  历史峰值并发 {peak}（硬上限 {MAX_WORKERS}）→ {'[符合约束]' if ok else '[违反约束]'}")
-    print("\n人口模拟完成")
+    print("\n=== 并发实测（观测，无限制）===")
+    print(f"  历史峰值并发 {peak}")
+    print("人口模拟完成")
 
 
 if __name__ == "__main__":
     main()
+
 

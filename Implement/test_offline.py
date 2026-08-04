@@ -628,8 +628,10 @@ class TestSubAgent(unittest.TestCase):
         self.assertEqual(SubAgent.parallel_call([]), [])
 
     def test_retry_config_limits(self):
-        from engine.subagent import MAX_WORKERS
-        self.assertLessEqual(MAX_WORKERS, 10)   # 用户硬性要求：并发 ≤ 10
+        """用户 2026-08 指令：并发不设上限（观测保留，无硬性限制常量）。"""
+        import config as cfg
+        self.assertGreaterEqual(cfg.MAX_RETRIES, 1)   # 重试仍启用
+        self.assertFalse(hasattr(cfg, "MAX_WORKERS"))  # 并发上限已移除
 
     def test_concurrency_stats_reset(self):
         """并发统计可查询，且峰值初始为 0。"""
