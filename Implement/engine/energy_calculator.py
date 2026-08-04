@@ -11,6 +11,7 @@ import os
 
 import config
 from . import utils
+from .load_features import peak_overlap_events
 
 MINUTES_PER_DAY = 1440
 
@@ -27,6 +28,7 @@ class EnergyCalculator:
         self.baseline_kwh = 0.0
         self.decision_kwh = 0.0
         self.validation_warnings = []
+        self.peak_overlap_events = []
         self._daily_minutes = {}
 
 
@@ -215,6 +217,7 @@ class EnergyCalculator:
         for usage in self.appliance_usage.values():
             usage["total_minutes"] = sum(1 for w in usage["minute_watts"] if w > 0)
             usage["total_hours"] = round(usage["total_minutes"] / 60.0, 2)
+        self.peak_overlap_events = peak_overlap_events(self.household_load_watts)
 
     def _save_energy_info(self):
 
@@ -257,6 +260,7 @@ class EnergyCalculator:
             "total_energy_kwh": round(self.baseline_kwh + self.decision_kwh, 4),
             "baseline_kwh": round(self.baseline_kwh, 4),
             "decision_kwh": round(self.decision_kwh, 4),
+            "peak_overlap_events": self.peak_overlap_events,
             "validation_warnings": self.validation_warnings,
             "appliances": [
                 {
