@@ -588,6 +588,14 @@ class Handler(BaseHTTPRequestHandler):
                 deleted = delete_job(job_id)
                 self._send_json({"deleted": deleted})
                 return
+            if len(parts) == 4 and parts[:3] == ["api", "jobs", "stop"]:
+                job_id = parts[3]
+                try:
+                    _br.cmd_stop(argparse.Namespace(job_id=job_id))
+                    self._send_json({"stopped": job_id})
+                except SystemExit:
+                    self._send_json({"error": f"任务 {job_id} 不存在"}, 404)
+                return
             self._send_json({"error": f"unknown api: {path}"}, 404)
         except ValueError as e:
             self._send_json({"error": str(e)}, 400)
