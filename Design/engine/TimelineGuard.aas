@@ -1,0 +1,17 @@
+class TimelineGuard
+    世界日期时间线约束（计划58，用户 2026-08 指令，纯函数 0 LLM）。
+
+    - get_world_last_date(world_id) → state.json 的 date
+      （"2026年4月21日" 或 None=未开始）
+    - parse_world_date(date_str) → datetime
+      （兼容 %Y年%m月%d日 / %Y-%m-%d / %Y%m%d，无法解析抛 ValueError）
+    - validate_start_date(world_id, date_str) → 规范化开始日期（中文格式）：
+      未开始：任意日期 / None → None（用默认日期）
+      已开始：date_str 空 → 上次+1（自动续跑）；
+              date_str == 上次+1 → 放行；
+              其他 → ValueError（禁止覆盖/回退/跳日，
+              提示"想重新开始请使用新的世界 ID"）
+
+    接入入口：population_runner.main / simulate.py / server.build_sim_args
+    （前端日期输入同样被校验）。保护 §一.12 世界日期连续
+    （记忆/新闻投递按天单调推进）。

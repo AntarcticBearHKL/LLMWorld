@@ -32,6 +32,21 @@ class Server
     func load_groups(world_id, source):
         读取分组响应报告 groups_<source>.json（计划45，awareness|variability）。
 
+    func load_event_response(world_id, scenario):
+        读取事件响应报告 event_response_<scenario>.json（计划55）。
+
+    func load_timeline(world_id):
+        汇总各场景各日期 population JSON 的 day_policy/kwh + events.json
+        （计划56 世界时间线）。
+
+    func load_templates:
+        遍历 news_templates 模板（计划57 新闻模板下拉）。
+
+    func build_sim_args(world_id, body):
+        构造 population_runner 参数（计划53 前端开启模拟）：
+        policy 先 Policy.from_name 校验；date 先 validate_start_date
+        校验（计划58 时间线约束）。
+
     class Handler(BaseHTTPRequestHandler):
         GET /                      → 前端 index.html
         GET /api/worlds            → 世界列表
@@ -45,8 +60,16 @@ class Server
         GET /api/worlds/<id>/variability/<scenario> → 跨日变异性
         GET /api/worlds/<id>/patterns/<scenario> → 行为模式迁移
         GET /api/worlds/<id>/groups/<source> → 分组政策响应
-        GET /api/jobs → 后台任务列表；POST /api/worlds/<id>/events → 上帝注入；
+        GET /api/worlds/<id>/event-response/<scenario> → 事件响应
+        GET /api/worlds/<id>/timeline → 世界时间线
+        GET /api/worlds-matrix → 多世界政策对比
+        GET /api/news-templates → 新闻模板列表
+        GET /api/jobs → 后台任务列表
+        POST /api/worlds/<id>/events → 上帝注入
+        POST /api/worlds/<id>/simulate → 开启后台模拟（时间线校验）
+        POST /api/worlds/<id>/analyze → 一键分析（make_analysis_all）
         POST /api/jobs/delete/<job_id> → 删除任务
+        POST /api/jobs/stop/<job_id> → 停止任务（精确 PID）
         错误统一返回 {"error": ...} + 相应状态码。
 
     func serve(port):
@@ -64,5 +87,10 @@ class Server
 - 场景对比矩阵表（含峰值形态列，计划48）
 - 负荷聚类面板（计划40）/ 行为变异性面板（计划41）/
   行为模式迁移面板（计划42）/ 分组政策响应面板（计划45）
-- 任务 tab 面板（进行中/完成/报错，计划36）
+- 政策实验启动（计划53：政策下拉+天数+日期+开启模拟，
+  后台执行+任务跟踪+完成后自动刷新，计划59）/ 任务 tab 面板
+  （进行中/完成/报错 + 停止/删除按钮）
+- 一键分析按钮（计划50）/ 新闻模板下拉（计划57）
+- 事件响应面板（计划55）/ 世界时间线面板（计划56）/
+  多世界政策对比面板（计划51）
 - 上帝剧本新闻面板 + 上帝注入
