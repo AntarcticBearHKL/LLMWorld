@@ -301,15 +301,24 @@ class TestPolicy(unittest.TestCase):
 class TestPopulationV2(unittest.TestCase):
     """世界生成 v2（计划22：Big Five + 垂直家庭 + 关联）。"""
 
-    def test_big_five_to_energy_awareness(self):
-        """心理学映射：尽责性高 → 节能意识高。"""
-        from population import big_five_to_energy_awareness
-        self.assertEqual(big_five_to_energy_awareness(
-            {"conscientiousness": 9, "openness": 3, "extraversion": 5,
-             "agreeableness": 6, "neuroticism": 4}), "高")
-        self.assertEqual(big_five_to_energy_awareness(
-            {"conscientiousness": 2, "openness": 3, "extraversion": 5,
-             "agreeableness": 6, "neuroticism": 4}), "低")
+    def test_big_five_to_news_sensitivity(self):
+        """神经质 → 新闻敏感度映射（保留，与用电行为无关）。"""
+        from population import big_five_to_news_sensitivity
+        self.assertEqual(big_five_to_news_sensitivity(
+            {"openness": 3, "conscientiousness": 5, "extraversion": 5,
+             "agreeableness": 6, "neuroticism": 8}), "高")
+
+    def test_no_energy_awareness_in_generation(self):
+        """去作弊化（用户 2026-08）：生成结果不得含用电行为相关词条。"""
+        import random
+        from population import _build_template
+        h = _build_template("young_couple", random.Random(9))
+        blob = json.dumps(h, ensure_ascii=False)
+        self.assertNotIn("energy_awareness", blob)      # 无节能意识预设
+        self.assertNotIn("电动汽车", blob)               # 无 EV 预设
+        self.assertNotIn("省电", blob)                   # 无省电表述
+        self.assertNotIn("关灯", blob)                   # 无关灯类行为预设
+        self.assertNotIn("节能", blob)
 
     def test_big_five_to_text_describes_high(self):
         from population import big_five_to_text
@@ -317,7 +326,7 @@ class TestPopulationV2(unittest.TestCase):
                                  "extraversion": 5, "agreeableness": 5,
                                  "neuroticism": 5})
         self.assertIn("开放性高", text)
-        self.assertIn("新技术", text)
+        self.assertIn("新鲜事物", text)   # 去作弊化：不再提及"新技术/电动车"等用电关联词
 
     def test_quota_distribution_covers_all_types(self):
         """配额：8 类家庭全部覆盖，总数正确。"""

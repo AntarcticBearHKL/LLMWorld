@@ -8,21 +8,83 @@ from .memory import HouseholdMemory
 from .news import NewsBoard
 import random
 import os
-from datetime import datetime
+import json
+from datetime import datetime, timedelta
+
+import config
+
 
 class World:
     def __init__(self, home, world_id=None, postcode=None, house_id=None, start_date=None):
         self.home = home
-        self.time = Time(start_date) if start_date else Time()
-        self.history = []
-        self.current_planner = None
-        self.current_executor = None
         self.world_id = world_id
         self.postcode = postcode
         self.house_id = house_id
+        # 世界日期连续逻辑（用户 2026-08 指令）：显式 start_date 优先；
+        # 否则读 worlds/<id>/state.json → 从上次保存日期的下一天继续（断点续跑）
+        if start_date:
+            self.time = Time(start_date)
+        else:
+            self.time = Time(self._resume_date() or config.DEFAULT_START_DATE)
+        self.history = []
+        self.current_planner = None
+        self.current_executor = None
         self.memory = HouseholdMemory()   # 跨天记忆：昨天的行为影响今天的计划
+        self.memory.load_days(self._load_memory_days())   # 恢复历史记忆（连续性）
         self.news = self._load_news_board()  # 新闻台：上帝注入的外界信息
-    
+
+    # ---------- 世界状态持久化（断点续跑）----------
+
+    def _state_path(self):
+        if not self.world_id:
+            return None
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        return os.path.join(project_root, "worlds", self.world_id, "state.json")
+
+    def _resume_date(self):
+        """从 state.json 读上次日期 → 返回下一天（连续时间延续）。无状态返回 None。"""
+        path = self._state_path()
+        if not path or not os.path.exists(path):
+            return None
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                state = json.load(f)
+            last_date = state.get("date")
+            if not last_date:
+                return None
+            d = datetime.strptime(last_date, "%Y年%m月%d日") + timedelta(days=1)
+            return d.strftime("%Y年%m月%d日")
+        except Exception as e:
+            print(f"[状态] 读取世界状态失败（将从默认日期开始）: {e}")
+            return None
+
+    def _load_memory_days(self):
+        """从 state.json 恢复跨天记忆摘要列表（昨天/前天的行为影响今天）。"""
+        path = self._state_path()
+        if not path or not os.path.exists(path):
+            return []
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                state = json.load(f)
+            return state.get("memory_days", [])
+        except Exception:
+            return []
+
+    def save_state(self):
+        """保存世界状态：当前日期 + 跨天记忆（供下次续跑）。"""
+        path = self._state_path()
+        if not path:
+            return
+        state = {
+            "date": self.time.get_date_string(),
+            "memory_days": self.memory.days,
+        }
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(state, f, ensure_ascii=False, indent=2)
+
+    # ---------- 新闻台 ----------
+
     def _load_news_board(self):
         """从 worlds/<world_id>/events.json 加载上帝剧本（不存在则为空新闻台）。"""
         if not self.world_id:
@@ -97,8 +159,9 @@ class World:
         
         self.history.append(day_result)
 
-        # 每天结束后更新跨天记忆（昨天的行为 → 明天的上下文）
+        # 每天结束后更新跨天记忆（昨天的行为 → 明天的上下文）并保存世界状态（断点续跑）
         self.memory.update_from_day(day_result)
+        self.save_state()
 
         if verbose:
             print(f"\n{self.time.get_full_date_string()} 模拟完成！")
