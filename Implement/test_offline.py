@@ -763,6 +763,19 @@ class TestMemory(unittest.TestCase):
         self.assertIn("6:30-7:30", rendered)
         self.assertIn("22:30-23:30", rendered)
 
+    def test_prompt_step4_has_appliance_time_anchor(self):
+
+        from engine.prompt import Prompt
+        rendered = Prompt().load("simulate_step4_batch_appliance_decision",
+            member_name="Alice", member_age=28, member_occupation="软件工程师",
+            member_habits="按时作息", member_timeline="[]",
+            home_structure_with_appliances="{}",
+            season="夏天", weather="晴天", temperature=28,
+            policy_context="", world_news="")
+        self.assertIn("典型使用时段", rendered)
+        self.assertIn("22:30-07:00", rendered)
+        self.assertIn("电动汽车充电", rendered)
+
 
 
 
