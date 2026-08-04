@@ -54,8 +54,9 @@
 </div>
 
 <div class="panel">
-  <h3>逐户用电明细</h3>
+  <h3>逐户用电明细（点击行查看电器详情）</h3>
   <table id="houseTable"><thead><tr><th>家庭</th><th>用电(kWh)</th><th>峰值(W)</th><th>峰值时刻</th></tr></thead><tbody></tbody></table>
+  <div id="houseDetail" style="margin-top:10px;font-size:13px;"></div>
 </div>
 
 <div class="panel">
@@ -217,8 +218,23 @@ function renderCurve(profiles) {
 
 function renderHouses(p) {
   const tb = document.querySelector("#houseTable tbody");
-  tb.innerHTML = (p.per_house || []).map(h =>
-    `<tr><td>${h.house_id}</td><td>${h.total_energy_kwh}</td><td>${h.peak_watts}</td><td>${h.peak_time}</td></tr>`).join("");
+  tb.innerHTML = (p.per_house || []).map((h, i) =>
+    `<tr onclick="showHouseDetail('${h.house_id}')" style="cursor:pointer;" title="点击查看电器详情">
+      <td>${h.house_id}</td><td>${h.total_energy_kwh}</td><td>${h.peak_watts}</td><td>${h.peak_time}</td></tr>`).join("");
+}
+
+async function showHouseDetail(houseId) {
+  const worldId = document.getElementById("selWorld").value;
+  const scenario = selectedScenarios()[0] || "baseline";
+  const date = document.getElementById("selDate").value;
+  const div = document.getElementById("houseDetail");
+  div.innerHTML = `（加载 ${houseId} 电器明细…）`;
+  const d = await api(`/api/worlds/${worldId}/house/${houseId}/summary/${scenario}/${date}`);
+  if (!d || d.error) { div.innerHTML = `<span class="err">（无该户电器数据）</span>`; return; }
+  const rows = (d.appliances || []).map(a =>
+    `<tr><td>${a.name}</td><td>${a.type}</td><td>${a.total_hours} h</td><td>${a.total_energy_kwh} kWh</td></tr>`).join("");
+  div.innerHTML = `<b>${houseId} 电器明细（${scenario}/${date}）</b>
+    <table style="margin-top:6px;"><thead><tr><th>电器</th><th>类型</th><th>时长</th><th>耗电</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 async function renderTrend(worldId) {
