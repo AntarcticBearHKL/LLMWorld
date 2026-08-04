@@ -95,6 +95,9 @@ def kmeans(features, k, seed=42, iters=300):
     n = len(data)
     if n < k:
         raise ValueError("样本数少于簇数")
+    distinct = np.unique(np.round(data, 6), axis=0).shape[0]
+    if distinct < k:
+        raise ValueError("不同形状的样本数少于簇数")
     model = KMeans(n_clusters=k, init="k-means++", n_init=10,
                    max_iter=iters, random_state=seed)
     model.fit(data)
@@ -108,7 +111,10 @@ def elbow_scores(features, k_max=8):
     n = len(features)
     scores = []
     for k in range(2, min(k_max, n) + 1):
-        _, _, wcss = kmeans(features, k)
+        try:
+            _, _, wcss = kmeans(features, k)
+        except ValueError:
+            break
         scores.append({"k": k, "wcss": round(wcss, 4)})
     return scores
 

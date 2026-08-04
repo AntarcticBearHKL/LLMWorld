@@ -1055,11 +1055,15 @@ class TestClustering(unittest.TestCase):
 
     def _three_shapes(self, n_per=6):
         import numpy as np
+        rng = np.random.default_rng(3)
         shapes = []
         for _ in range(n_per):
-            shapes.append([0.6 + 0.4 * np.sin(np.pi * h / 10) for h in range(24)])
-            shapes.append([0.8 - 0.5 * abs(h - 18) / 12 for h in range(24)])
-            shapes.append([0.5 + 0.5 * np.sin(np.pi * (h + 6) / 8) for h in range(24)])
+            noise_a = rng.normal(0, 0.02, 24)
+            noise_b = rng.normal(0, 0.02, 24)
+            noise_c = rng.normal(0, 0.02, 24)
+            shapes.append([0.6 + 0.4 * np.sin(np.pi * h / 10) + noise_a[h] for h in range(24)])
+            shapes.append([0.8 - 0.5 * abs(h - 18) / 12 + noise_b[h] for h in range(24)])
+            shapes.append([0.5 + 0.5 * np.sin(np.pi * (h + 6) / 8) + noise_c[h] for h in range(24)])
         return shapes
 
     def test_kmeans_recovers_three_clusters(self):
@@ -1078,6 +1082,16 @@ class TestClustering(unittest.TestCase):
         from engine.load_features import kmeans
         with self.assertRaises(ValueError):
             kmeans([[1.0] * 24, [2.0] * 24], 3)
+
+    def test_kmeans_duplicate_shapes_raise(self):
+        from engine.load_features import kmeans
+        with self.assertRaises(ValueError):
+            kmeans([[1.0] * 24, [1.0] * 24, [1.0] * 24], 2)
+
+    def test_elbow_breaks_on_degenerate(self):
+        from engine.load_features import elbow_scores
+        shapes = [[1.0] * 24, [1.0] * 24, [1.0] * 24]
+        self.assertEqual(elbow_scores(shapes), [])
 
     def test_kmeans_deterministic(self):
         from engine.load_features import kmeans
