@@ -58,6 +58,10 @@ MELBOURNE_CLIMATE = {
 # manual 模式的手工配置文件（固定值或 [min,max] 范围）
 ENV_MANUAL_FILE = "env_manual.json"
 
+# ---------- 新闻记忆化（计划35）----------
+# 跨天记忆里保留的新闻要点条数（滚动保留最近 N 条，摘要形式注入，不重复原文）
+NEWS_MEMORY_KEEP = 5
+
 # ---------- 决策真实性硬上限（计划7）----------
 # 每电器每日最大使用分钟数：防止 LLM 产生不真实决策（如 EV 连续充电 12 小时）
 # 超限部分会被截断并记入 validation_warnings（不静默）
