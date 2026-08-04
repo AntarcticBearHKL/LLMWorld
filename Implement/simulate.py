@@ -55,8 +55,19 @@ def load_world(world_id):
     return world_meta, district_info, households
 
 
+def _personality_str(member_config):
+    """人格 → prompt 文本（v2：Big Five 行为描述 + 新闻敏感度，兼容旧结构）。"""
+    pers = member_config.get("personality", {})
+    parts = [', '.join(pers.get("traits", []))]
+    if pers.get("behavior_text"):
+        parts.append("行为倾向：" + pers["behavior_text"])
+    if pers.get("news_sensitivity"):
+        parts.append("对新闻/政策敏感度：" + pers["news_sensitivity"])
+    return "。".join(p for p in parts if p)
+
+
 def create_home_from_household(household):
-    """把 household.json 转成 Home 对象（电器配置真正生效）。"""
+    """把 household.json 转成 Home 对象（电器配置真正生效，人格字段完整注入）。"""
     home_config = household['home']
     members_config = household['members']
 
@@ -75,7 +86,7 @@ def create_home_from_household(household):
             member_config['name'],
             member_config['age'],
             member_config['occupation'],
-            ', '.join(member_config['personality']['traits']),
+            _personality_str(member_config),
             member_config['habits']
         )
 

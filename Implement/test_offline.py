@@ -192,6 +192,75 @@ class TestPolicy(unittest.TestCase):
         self.assertAlmostEqual(report["total_change_pct"], 0.0, places=1)  # 总量近似不变
 
 
+class TestPopulationV2(unittest.TestCase):
+    """世界生成 v2（计划22：Big Five + 垂直家庭 + 关联）。"""
+
+    def test_big_five_to_energy_awareness(self):
+        """心理学映射：尽责性高 → 节能意识高。"""
+        from population import big_five_to_energy_awareness
+        self.assertEqual(big_five_to_energy_awareness(
+            {"conscientiousness": 9, "openness": 3, "extraversion": 5,
+             "agreeableness": 6, "neuroticism": 4}), "高")
+        self.assertEqual(big_five_to_energy_awareness(
+            {"conscientiousness": 2, "openness": 3, "extraversion": 5,
+             "agreeableness": 6, "neuroticism": 4}), "低")
+
+    def test_big_five_to_text_describes_high(self):
+        from population import big_five_to_text
+        text = big_five_to_text({"openness": 9, "conscientiousness": 5,
+                                 "extraversion": 5, "agreeableness": 5,
+                                 "neuroticism": 5})
+        self.assertIn("开放性高", text)
+        self.assertIn("新技术", text)
+
+    def test_quota_distribution_covers_all_types(self):
+        """配额：8 类家庭全部覆盖，总数正确。"""
+        import random
+        from population import _quota_distribution
+        counts = _quota_distribution(100, random.Random(1))
+        self.assertEqual(sum(counts.values()), 100)
+        self.assertEqual(len(counts), 8)   # 8 类全在
+
+    def test_couple_age_association(self):
+        """成员关联：夫妻年龄差 ≤5（2508.09964 关联思想）。"""
+        import random
+        from population import _build_template
+        h = _build_template("young_couple", random.Random(7))
+        ages = sorted(m["age"] for m in h["members"])
+        self.assertLessEqual(ages[1] - ages[0], 5)
+
+    def test_multigenerational_age_order(self):
+        """多代同堂：三代年龄有序（祖父母夫妻差≤5，代际差≥18）。"""
+        import random
+        from population import _build_template
+        h = _build_template("multigenerational", random.Random(3))
+        ages = sorted(m["age"] for m in h["members"])
+        # ages = [孩子, 父母, 祖父母(小), 祖父母(大)]
+        self.assertLessEqual(ages[3] - ages[2], 5)    # 祖父母是夫妻，年龄差小
+        self.assertGreaterEqual(ages[2] - ages[1], 20)  # 祖父母-父母 ≥20
+        self.assertGreaterEqual(ages[1] - ages[0], 18)  # 父母-孩子 ≥18
+
+    def test_big_five_field_in_household(self):
+        """v2 字段：big_five / behavior_text / news_sensitivity 存在。"""
+        import random
+        from population import _build_template
+        h = _build_template("single_living", random.Random(5))
+        pers = h["members"][0]["personality"]
+        self.assertIn("big_five", pers)
+        self.assertEqual(len(pers["big_five"]), 5)
+        self.assertIn("behavior_text", pers)
+        self.assertIn("news_sensitivity", pers)
+
+    def test_dedupe_names(self):
+        """家庭内成员姓名唯一（agent 身份键要求）。"""
+        import random
+        from population import _build_template, _dedupe_names
+        h = _build_template("multigenerational", random.Random(3))
+        _dedupe_names(h)
+        names = [m["name"] for m in h["members"]]
+        self.assertEqual(len(names), len(set(names)))
+
+
 class TestPopulation(unittest.TestCase):
     """人口构建器 + 聚合（计划4）。"""
 
