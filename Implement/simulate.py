@@ -104,7 +104,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="LLM 家庭用电模拟")
     parser.add_argument("world_id", help="世界ID（worlds/ 下的文件夹名）")
     parser.add_argument("--days", type=int, default=None, help=f"模拟天数（默认 {config.DEFAULT_DAYS}）")
-    parser.add_argument("--date", type=str, default=None, help="开始日期(如 2026年4月21日)。缺省=自动续跑(读 state.json 从上次日期下一天继续)")
+    parser.add_argument("--date", type=str, default=None, help="开始日期，如 '2026年4月21日' 或 '2026-04-21'（缺省=自动续跑）")
     parser.add_argument("--house", type=int, default=None, help="家庭序号（0 起，默认 0）")
     parser.add_argument("--season", type=str, default=None, help=f"季节（默认 {config.DEFAULT_SEASON}）")
     parser.add_argument("--weather", type=str, default=None, help=f"天气（默认 {config.DEFAULT_WEATHER}）")
@@ -161,6 +161,11 @@ def main():
         start_date = args.date or input("\n请输入开始日期（格式：2025年4月20日，留空使用今天）：").strip() or datetime.now().strftime('%Y年%m月%d日')
         num_days_input = input("请输入模拟天数（默认5天）：").strip()
         num_days = int(num_days_input) if num_days_input else (args.days or config.DEFAULT_DAYS)
+
+    # 日期格式兼容：'2026-04-23' → '2026年4月23日'
+    if start_date and "-" in start_date:
+        y, m, d = start_date.split("-")
+        start_date = f"{int(y)}年{int(m)}月{int(d)}日"
 
     season = args.season or household.get('season', config.DEFAULT_SEASON)
     weather = args.weather or config.DEFAULT_WEATHER
