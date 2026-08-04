@@ -30,7 +30,9 @@ REASONING_EFFORT = "low"   # low / high / max（官方枚举；flash 模型 low 
 # 注意：世界级约束见 population.py（每世界最多 10 户）
 MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 2
-REQUEST_TIMEOUT_SECONDS = 120
+# 请求超时 600s：DeepSeek 对超限速请求会排队（实测 5 并发中 2 个排队 4 分钟），
+# 过短超时会误杀排队中的请求并触发重试雪崩
+REQUEST_TIMEOUT_SECONDS = 600
 
 # ---------- 模拟默认值 ----------
 DEFAULT_START_DATE = "2026年4月21日"
