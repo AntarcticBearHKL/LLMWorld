@@ -1,0 +1,20 @@
+class AnalyzeElectrification
+    电气化情景分析（计划79，Gunkel 2022 热泵 vs EV，0 LLM）。
+
+    - ev_curve(power_watts=7000, hours=3, start_hour=22) → 1440min
+      夜间充电曲线（跨午夜支持）
+    - heat_pump_curve(power_watts=3000, morning=(6,9), evening=(17,22))
+      → 1440min 早晚峰采暖曲线
+    - build_report(profiles, ev_kw, hp_kw) → 4 情景
+      （baseline/ev/hp/ev_hp）聚合指标：
+      total_kwh / peak_watts / evening_kwh / peak_to_mean +
+      vs 基线变化%（total/peak/evening）
+    - CLI：python analyze_electrification.py <world> --scenario [--date]
+      [--ev-kw 7] [--hp-kw 3]
+    - 输出：outputs/<world>/analysis/electrification_<scenario>_<date>.json
+
+    语义：100% 渗透率（每户都装）完全同步假设；聚合 coincidence
+    效应（热泵>EV）需真实多户 LLM 模拟数据验证（Gunkel 2022）。
+
+    调用链：server /api/worlds/<id>/electrification/<scenario>/<date>
+    → 前端"电气化情景"面板
