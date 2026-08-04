@@ -1,0 +1,46 @@
+class Policy
+    type 政策类型标识（tou / subsidy / nudge / nudge_loss），默认为 空
+    params 政策参数字典（时段、费率、补贴对象、对比文本等），默认为 空字典
+
+    @类方法
+    func tou(peak_hours, valley_hours, peak_rate, flat_rate, valley_rate):
+        构建分时电价政策。
+        1. 默认峰时段 16:00-21:00、谷时段 22:00-07:00（跨天时段用元组表示）。
+        2. 默认峰/平/谷费率分别为 0.55 / 0.35 / 0.25 澳元每千瓦时。
+        3. 返回 type 为 "tou" 的 Policy 实例。
+
+    @类方法
+    func subsidy(appliance, off_peak_rate, valley_hours):
+        构建低谷充电补贴政策。
+        1. 默认对电动汽车在谷时段 22:00-07:00 充电提供 0.18 澳元每千瓦时的优惠电价。
+        2. 返回 type 为 "subsidy" 的 Policy 实例。
+
+    @类方法
+    func nudge(comparison_text):
+        构建社会规范 nudge 政策（邻居对比 + 节能呼吁）。
+        1. 默认对比文本为"你的邻居平均每天用电 18 千瓦时"。
+        2. 返回 type 为 "nudge" 的 Policy 实例。
+
+    @类方法
+    func nudge_loss(comparison_text):
+        构建损失框架 nudge 政策（Ghesla et al. 2019）。
+        1. 默认对比文本与 nudge 相同。
+        2. 强调"用电不下降将失去每月 5 澳元社区节能返利、被标记为高耗能户"等损失警示。
+        3. 返回 type 为 "nudge_loss" 的 Policy 实例。
+
+    func render:
+        将政策渲染成注入决策 prompt 的文本段，返回空串表示无政策干预。
+        1. tou 输出峰/平/谷时段与费率，并附大功率电器错峰使用提示。
+        2. subsidy 输出指定电器谷时段优惠电价与充电提示。
+        3. nudge 输出社会规范对比信息与节能呼吁。
+        4. nudge_loss 输出损失框架警示文本。
+        5. 未知政策类型返回空串。
+
+    func describe:
+        返回 "type(参数)" 形式的政策描述字符串，用于输出目录隔离与实验标识。
+
+    @类方法
+    func from_name(name, **kwargs):
+        按名字创建政策实例（命令行入口用）。
+        1. 从 tou / subsidy / nudge / nudge_loss 四个工厂方法的映射表中查找。
+        2. 未知名称抛出 ValueError，并列出所有可用类型。

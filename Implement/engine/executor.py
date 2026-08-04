@@ -17,12 +17,13 @@ import config
 
 
 class Executor:
-    def __init__(self, home, planner, policy_context=""):
+    def __init__(self, home, planner, policy_context="", news_context=""):
         self.home = home
         self.planner = planner
         self.log_dir = planner.log_dir
         self.prompt = Prompt()
         self.policy_context = policy_context   # 政策干预文本（RQ2），无政策为空串
+        self.news_context = news_context       # 当日外界新闻（上帝模式），可为空
         self.validation_warnings = []   # 本步骤发现的所有决策校验问题
 
     def execute_all_segments(self, season="夏天", weather="晴天", temperature=28):
@@ -57,7 +58,8 @@ class Executor:
                 season=season,
                 weather=weather,
                 temperature=temperature,
-                policy_context=self.policy_context
+                policy_context=self.policy_context,
+                world_news=self.news_context
             )
 
             prompts.append(prompt)

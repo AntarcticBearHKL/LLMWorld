@@ -1,0 +1,36 @@
+class Config（config.py 全局配置中心）
+    DEEPSEEK_APIKEY 从 .env 读取的 DeepSeek API 密钥，本文件不存任何密钥
+    MODEL 大模型名称，固定为 "deepseek-v4-flash"
+    TEMPERATURE 生成温度，默认为 1.0
+    MAX_TOKENS 单次生成的最大 Token 数，默认为 64000
+    THINKING 深度思考开关，默认为 False（开启约慢 90 倍，JSON 质量无差异；大规模模拟保持关闭）
+    REASONING_EFFORT 思考强度（low / medium / high），仅 THINKING=True 时生效，默认为 medium
+    MAX_WORKERS 全局并发硬上限 10（用户硬性要求，禁止调大）
+    MAX_RETRIES 网络/服务端错误的自动重试次数 3（指数退避）
+    RETRY_BACKOFF_SECONDS 重试退避的基数秒数，默认为 2
+    REQUEST_TIMEOUT_SECONDS 单次请求超时秒数，默认为 120
+    DEFAULT_START_DATE 模拟默认起始日期 "2026年4月21日"
+    DEFAULT_DAYS 模拟默认天数 5
+    DEFAULT_SEASON 默认季节 "春天"
+    DEFAULT_WEATHER 默认天气 "晴天"
+    DEFAULT_TEMPERATURE 默认气温 20 摄氏度
+    DEFAULT_SEED 默认随机种子 42（固定种子保证实验可复现）
+    CLAYTON_POSTCODE 研究区域邮政编码 "3168"
+
+    电器日使用上限表 APPLIANCE_DAILY_CAP_MINUTES（决策真实性硬约束，计划7）：
+        电动汽车 240 分钟（约 4 小时充满）
+        热水器 45 分钟
+        空调 360 分钟（一天最多连开 6 小时）
+        洗衣机 120 分钟
+        吸尘器 60 分钟
+        电视 480 分钟（8 小时）
+        电脑 600 分钟（10 小时）
+        电磁炉 120 分钟
+        微波炉 60 分钟
+        电饭煲 120 分钟
+        手机 240 分钟（4 小时）
+        灯 960 分钟（16 小时）
+        台灯 960 分钟（16 小时）
+        油烟机 120 分钟
+
+    设计规则：所有可调参数集中于此，改一处全项目生效；超限部分由能耗计算器截断并记入校验警告（不静默）。
