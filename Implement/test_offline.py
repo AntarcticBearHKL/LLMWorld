@@ -80,6 +80,37 @@ class TestGroupAnalysis(unittest.TestCase):
 
         self.assertAlmostEqual(rows["低"]["tou_change_pct"], 2.5, places=2)
 
+    def test_group_stats_dynamic_labels(self):
+        from analyze_groups import group_stats
+        labels = {"h1": "规律", "h2": "规律", "h3": "波动"}
+        scenarios = {"baseline": {"h1": 10.0, "h2": 14.0, "h3": 8.0},
+                     "tou": {"h1": 9.5, "h2": 13.0, "h3": 6.0}}
+        rows = {r["group"]: r for r in group_stats(labels, scenarios)}
+        self.assertEqual(set(rows.keys()), {"规律", "波动"})
+        self.assertAlmostEqual(rows["波动"]["tou_change_pct"], -25.0, places=2)
+        self.assertAlmostEqual(rows["规律"]["tou_change_pct"], -6.25, places=2)
+
+    def test_load_variability_labels_mapping(self):
+        from analyze_groups import load_variability_labels
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            import os
+            real_path = os.path.join("outputs", "__fake_world", "analysis",
+                                     "variability_baseline.json")
+            if os.path.exists(real_path):
+                os.makedirs(os.path.dirname(real_path), exist_ok=True)
+                with open(real_path, "w", encoding="utf-8") as f:
+                    json.dump({"regular_half": ["h1"], "variable_half": ["h2", "h3"]}, f)
+                labels = load_variability_labels("__fake_world")
+                self.assertEqual(labels["h1"], "规律")
+                self.assertEqual(labels["h2"], "波动")
+                os.remove(real_path)
+                try:
+                    os.rmdir(os.path.dirname(real_path))
+                    os.rmdir(os.path.dirname(os.path.dirname(real_path)))
+                except OSError:
+                    pass
+
 
 class TestNewsBoard(unittest.TestCase):
 
