@@ -1304,5 +1304,57 @@ class TestBehaviorPatterns(unittest.TestCase):
             build_report([], 2)
 
 
+class TestCompareWorlds(unittest.TestCase):
+
+
+    def _write_matrix(self, world_id, scenarios):
+        import os
+        path = os.path.join("outputs", world_id, "comparison",
+                            "policy_matrix.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({"scenarios": scenarios}, f)
+
+    def test_load_world_policies_parses_matrix(self):
+        from compare_worlds import load_world_policies, _to_float
+        self.assertEqual(_to_float("30.0 (+0.0%)"), 0.0)
+        self.assertEqual(_to_float("20.5 (-8.5%)"), -8.5)
+        self.assertIsNone(_to_float(None))
+        self.assertIsNone(_to_float("no-data"))
+        rows = load_world_policies("__no_such_world")
+        self.assertEqual(rows, {})
+
+    def test_build_matrix_shape(self):
+        from compare_worlds import build_matrix
+        import os
+        self._write_matrix("__cw_a", [
+            {"场景": "baseline"}, {"场景": "tou",
+             "总kWh": "10.0 (-8.5%)", "晚峰16-21点kWh": "5.0 (-15.0%)",
+             "峰值W": "3000 (-20.0%)", "峰值平台分钟": "60 (-30.0%)"}])
+        self._write_matrix("__cw_b", [
+            {"场景": "baseline"}, {"场景": "tou",
+             "总kWh": "11.0 (-5.0%)", "晚峰16-21点kWh": "5.5 (-10.0%)",
+             "峰值W": "3200 (-12.0%)", "峰值平台分钟": "90 (-20.0%)"}])
+        try:
+            matrix = build_matrix(["__cw_a", "__cw_b"])
+            self.assertEqual(matrix["worlds"], ["__cw_a", "__cw_b"])
+            self.assertEqual(matrix["scenarios"], ["tou"])
+            self.assertAlmostEqual(
+                matrix["cells"]["__cw_a"]["tou"]["total_change_pct"], -8.5)
+            self.assertAlmostEqual(
+                matrix["cells"]["__cw_b"]["tou"]["peak_hours_change_pct"], -10.0)
+        finally:
+            import shutil
+            for w in ("__cw_a", "__cw_b"):
+                path = os.path.join("outputs", w)
+                if os.path.isdir(path):
+                    shutil.rmtree(path)
+
+    def test_build_matrix_no_worlds_raise(self):
+        from compare_worlds import build_matrix
+        with self.assertRaises(ValueError):
+            build_matrix(["__no_such_world_a", "__no_such_world_b"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

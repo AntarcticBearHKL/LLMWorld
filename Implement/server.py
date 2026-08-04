@@ -147,6 +147,15 @@ def load_groups(world_id, source="awareness"):
         return json.load(f)
 
 
+def load_worlds_matrix():
+
+    path = os.path.join(OUTPUTS_DIR, "comparison", "worlds_matrix.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_matrix(world_id):
 
     path = os.path.join(OUTPUTS_DIR, world_id, "comparison", "policy_matrix.json")
@@ -425,6 +434,10 @@ class Handler(BaseHTTPRequestHandler):
                     return
             if parts == ["api", "compare"]:
                 self._send_json({"worlds": [w["id"] for w in list_worlds()]})
+                return
+            if parts == ["api", "worlds-matrix"]:
+                data = load_worlds_matrix()
+                self._send_json(data or {"error": "no worlds matrix"}, 200 if data else 404)
                 return
             if parts == ["api", "jobs"]:
                 self._send_json(load_jobs())

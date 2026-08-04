@@ -100,6 +100,11 @@
 </div>
 
 <div class="panel">
+  <h3>多世界政策对比（计划51：效果稳健性横向检验，Eco3S 2026）</h3>
+  <div id="worldsMatrixPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>家庭人格档案（Big Five，计划30）</h3>
   <div id="personalityPanel">（加载中…）</div>
 </div>
@@ -213,6 +218,7 @@ async function refresh() {
     await renderVariability(worldId);
     await renderPatterns(worldId);
     await renderGroups();
+    await renderWorldsMatrix();
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -490,6 +496,25 @@ async function renderGroups() {
   }).join("");
   div.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>
     <div style="font-size:12px;color:#666;margin-top:6px;">高变异性家庭预期对政策更敏感（Zhou 2016 / Dent 2014）</div>`;
+}
+
+async function renderWorldsMatrix() {
+  const div = document.getElementById("worldsMatrixPanel");
+  const m = await api("/api/worlds-matrix");
+  if (!m || m.error) { div.innerHTML = "<span class='err'>（无多世界矩阵，先跑 compare_worlds.py --worlds a b c）</span>"; return; }
+  const head = `<th>场景</th>` + m.worlds.map(w => `<th>${w}</th>`).join("") + `<th>中位数</th>`;
+  const rows = m.scenarios.map(s => {
+    const pcts = m.worlds.map(w => {
+      const p = m.cells[w][s] ? m.cells[w][s].total_change_pct : null;
+      return p;
+    });
+    const valid = pcts.filter(p => p !== null);
+    const med = valid.length ? valid.slice().sort((a, b) => a - b)[Math.floor(valid.length / 2)] : null;
+    const cell = (p) => p === null ? "<td>-</td>" : `<td style="color:${p < 0 ? "#2a7" : "#c33"};">${p.toFixed(1)}%</td>`;
+    return `<tr><td>${s}</td>${pcts.map(cell).join("")}${med === null ? "<td>-</td>" : `<td style="font-weight:600;">${med.toFixed(1)}%</td>`}</tr>`;
+  }).join("");
+  div.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>
+    <div style="font-size:12px;color:#666;margin-top:6px;">总用电变化%：同一政策在不同世界的效果分布（Eco3S 2026 稳健性检验）</div>`;
 }
 
 async function renderPersonality(worldId) {
