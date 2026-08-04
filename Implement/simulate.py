@@ -158,7 +158,7 @@ def main():
         start_date = args.date
         num_days = args.days if args.days is not None else config.DEFAULT_DAYS
     else:
-        start_date = args.date or input("\n请输入开始日期（格式：2025年4月20日，留空使用今天）：").strip() or datetime.now().strftime('%Y年%m月%d日')
+        start_date = args.date or input("\n请输入开始日期（格式：2025年4月20日，留空=自动续跑）：").strip()
         num_days_input = input("请输入模拟天数（默认5天）：").strip()
         num_days = int(num_days_input) if num_days_input else (args.days or config.DEFAULT_DAYS)
 
@@ -166,6 +166,11 @@ def main():
     if start_date and "-" in start_date:
         y, m, d = start_date.split("-")
         start_date = f"{int(y)}年{int(m)}月{int(d)}日"
+
+    from engine.world import validate_start_date
+    start_date = validate_start_date(world_id, start_date)
+    if start_date:
+        print(f"开始日期: {start_date}（时间线校验通过）")
 
     season = args.season or household.get('season', config.DEFAULT_SEASON)
     weather = args.weather or config.DEFAULT_WEATHER

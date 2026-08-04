@@ -320,6 +320,8 @@ def build_sim_args(world_id, body):
     scenario = body.get("scenario") or ""
     sim_args = [world_id, "--days", str(days)]
     if date:
+        from engine.world import validate_start_date
+        validate_start_date(world_id, date)
         sim_args += ["--date", str(date)]
     if policy:
         Policy.from_name(policy)
