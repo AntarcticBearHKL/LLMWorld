@@ -53,7 +53,7 @@ def tou_elasticity(peak_kwh_baseline, peak_kwh_tou, peak_rate, flat_rate):
 
 def load_json(path):
 
-    if not os.path.exists(path):
+    if not path or not os.path.exists(path):
         return None
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -172,8 +172,116 @@ def build_report(world):
     lines.append("- 峰均比随 N：4 户 4.83 → 10 户 2.52（平滑效应）")
 
 
+    analysis_dir = os.path.join(out_root, "analysis")
+
     lines.append("")
-    lines.append("## 6. 已产出图表清单")
+    lines.append("## 6. 行为聚类（Michalakopoulos 2023 / Dent 2014）")
+    lines.append("")
+    cluster = find_file(analysis_dir, "clusters_baseline_latest.json")
+    if not cluster:
+        for name in sorted(os.listdir(analysis_dir)) if os.path.isdir(analysis_dir) else []:
+            if name.startswith("clusters_"):
+                cluster = os.path.join(analysis_dir, name)
+                break
+    cd = load_json(cluster)
+    if cd and "clusters" in cd:
+        lines.append(f"- 户数 {cd['households']}，k={cd['k']}（WCSS {cd['wcss']}）")
+        for c in cd["clusters"]:
+            lines.append(f"  - 簇{c['label']}: {c['households']} 户, "
+                         f"负荷率 {c['mean_load_factor']}, 峰时 {c['mean_peak_hour']}:00")
+    else:
+        lines.append("（无 clusters_*.json，先跑 load_profile_cluster）")
+
+    lines.append("")
+    lines.append("## 7. 行为变异性（Zhou 2016 / Jin 2021）")
+    lines.append("")
+    var = load_json(os.path.join(analysis_dir, "variability_baseline.json"))
+    if var and var.get("per_house"):
+        rows = var["per_house"]
+        regular = var.get("regular_half", [])
+        variable = var.get("variable_half", [])
+        lines.append(f"- 规律户 {len(regular)}：{', '.join(regular[:8])}")
+        lines.append(f"- 波动户 {len(variable)}：{', '.join(variable[:8])}")
+        top = sorted(rows, key=lambda r: -r["variability_index"])[:3]
+        for r in top:
+            lines.append(f"  - {r['house_id']}: 变异指数 {r['variability_index']}, "
+                         f"峰时漂移 {r['peak_hour_shift']}h")
+        lines.append("- 文献主张：高变异性家庭对政策更敏感（Zhou 2016）")
+    else:
+        lines.append("（无 variability_baseline.json，先跑 analyze_variability）")
+
+    lines.append("")
+    lines.append("## 8. 行为模式迁移（Jin 2021 household-days）")
+    lines.append("")
+    pat = load_json(os.path.join(analysis_dir, "patterns_baseline.json"))
+    if pat and pat.get("per_house"):
+        lines.append(f"- household-days {pat['samples']}，k={pat['k']}，"
+                     f"平均迁移次数 {pat['mean_transitions']}")
+        for h in pat["per_house"][:5]:
+            seq = "→".join(str(c) for c in h["cluster_sequence"])
+            lines.append(f"  - {h['house_id']}: 迁移 {h['transitions']} 次 [{seq}]")
+    else:
+        lines.append("（无 patterns_baseline.json，先跑 analyze_behavior_patterns）")
+
+    lines.append("")
+    lines.append("## 9. 异常户检测（Banik 2023 / Glauner 2017）")
+    lines.append("")
+    anom = load_json(os.path.join(analysis_dir, "anomalies_baseline.json"))
+    if anom and "anomalies" in anom:
+        lines.append(f"- 异常 {anom['anomaly_count']}/{anom['households']} 户")
+        for a in anom["anomalies"]:
+            lines.append(f"  - {a['house_id']}: {', '.join(a['flags'])}")
+    else:
+        lines.append("（无 anomalies_baseline.json，先跑 analyze_anomalies）")
+
+    lines.append("")
+    lines.append("## 10. 行为-负荷一致性（Xia 2026）")
+    lines.append("")
+    bl = None
+    if os.path.isdir(analysis_dir):
+        for name in sorted(os.listdir(analysis_dir)):
+            if name.startswith("behavior_load_"):
+                bl = load_json(os.path.join(analysis_dir, name))
+                break
+    if bl and "anomalies" in bl:
+        lines.append(f"- 一致 {bl['consistent_count']}/{bl['households']} 户，"
+                     f"异常 {bl['anomaly_count']} 户")
+        for a in bl["anomalies"]:
+            lines.append(f"  - {a['house_id']}: {', '.join(a['flags'])}")
+    else:
+        lines.append("（无 behavior_load_*.json，先跑 analyze_behavior_load）")
+
+    lines.append("")
+    lines.append("## 11. 事件响应（Fidone 2026）")
+    lines.append("")
+    ev = load_json(os.path.join(analysis_dir, "event_response_baseline.json"))
+    if ev and "per_event" in ev:
+        lines.append(f"- 事件日迁移率 {ev.get('event_move_rate')} vs "
+                     f"非事件日 {ev.get('non_event_move_rate')}")
+        for e in ev["per_event"]:
+            title = e["titles"][0] if e.get("titles") else ""
+            lines.append(f"  - [{e['date']}] {title}: 迁移 {e['move_rate']}, "
+                         f"用电变化 {e['kwh_change_pct']}%")
+    else:
+        lines.append("（无 event_response_baseline.json，先跑 analyze_event_response）")
+
+    lines.append("")
+    lines.append("## 12. 多世界对比（Eco3S 2026 稳健性）")
+    lines.append("")
+    wm = load_json(os.path.join(out_root, os.pardir, "comparison", "worlds_matrix.json"))
+    if wm and "cells" in wm:
+        for s in wm.get("scenarios", []):
+            cells = []
+            for w in wm["worlds"]:
+                pct = wm["cells"].get(w, {}).get(s, {}).get("total_change_pct")
+                cells.append(f"{w} {pct:+.1f}%" if pct is not None else f"{w} -")
+            lines.append(f"- {s}: {', '.join(cells)}")
+    else:
+        lines.append("（无 worlds_matrix.json，先跑 compare_worlds）")
+
+
+    lines.append("")
+    lines.append("## 13. 已产出图表清单")
     lines.append("")
     for r, _, files in os.walk(out_root):
         for f in sorted(files):
