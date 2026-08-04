@@ -12,6 +12,17 @@ from datetime import datetime
 
 
 
+def season_for_date(date_str):
+    month = int(date_str.split("-")[1]) if "-" in date_str else int(date_str[4:6])
+    if month in (12, 1, 2):
+        return "夏天"
+    if month in (3, 4, 5):
+        return "秋天"
+    if month in (6, 7, 8):
+        return "冬天"
+    return "春天"
+
+
 def set_seed(seed):
 
     random.seed(seed)
