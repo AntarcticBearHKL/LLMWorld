@@ -99,9 +99,13 @@ def analyze(world_id, scenario, date):
         "world": world_id, "scenario": scenario, "date": date,
         "households": len(rows),
         "by_type": group_mean([(r["household_type"], r["kwh"]) for r in rows]),
-        "by_awareness": group_mean([(r["energy_awareness"], r["kwh"]) for r in rows]),
         "by_members_count": group_mean([(f"{r['members_count']}人", r["kwh"]) for r in rows]),
     }
+    # 节能意识维度（去作弊化后无该字段则跳过）
+    aware = [(r["energy_awareness"], r["kwh"]) for r in rows
+             if r.get("energy_awareness") not in (None, "?", "未知")]
+    if aware:
+        report["by_awareness"] = group_mean(aware)
 
     # 人格维度相关性（第一成员五维 vs 户 kWh）
     dims = ["openness", "conscientiousness", "extraversion", "agreeableness", "neuroticism"]
