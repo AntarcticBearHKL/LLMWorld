@@ -57,6 +57,13 @@ class Policy:
                    incentive_per_hour=incentive_per_hour,
                    charging_window=charging_window, flat_rate=flat_rate)
 
+    @classmethod
+    def night_setback(cls, reduce_hours=(23, 6), target_temp="16-18°C",
+                      saving_note="可节省 5-10% 供暖电费"):
+
+        return cls("night_setback", reduce_hours=reduce_hours,
+                   target_temp=target_temp, saving_note=saving_note)
+
 
 
     @classmethod
@@ -140,6 +147,19 @@ class Policy:
             names = " + ".join(s.type for s in subs)
             body = "\n\n".join(s.render() for s in subs)
             return f"## 当前政策组合（{names}）\n\n{body}"
+
+        if self.type == "night_setback":
+            start, end = self.params["reduce_hours"]
+            target = self.params["target_temp"]
+            note = self.params["saving_note"]
+            return (
+                f"## 夜间降暖建议（供暖节能）\n"
+                f"- 夜间 {start:02d}:00-{end:02d}:00 及全家人离家时段，"
+                f"请把暖气调低至 {target}。\n"
+                f"- 睡觉时盖厚被子代替高室温；离家前关闭或调低暖气，"
+                f"避免空房供暖浪费。\n"
+                f"- {note}，是住宅供暖最重要的节能行为之一。"
+            )
         return ""
 
 
@@ -152,10 +172,11 @@ class Policy:
 
         factories = {"tou": cls.tou, "subsidy": cls.subsidy,
                      "nudge": cls.nudge, "nudge_loss": cls.nudge_loss,
-                     "peak_demand": cls.peak_demand, "ev_delay": cls.ev_delay}
+                     "peak_demand": cls.peak_demand, "ev_delay": cls.ev_delay,
+                     "night_setback": cls.night_setback}
         if "," in name:
             return cls.combine(name, **kwargs)
         if name not in factories:
             raise ValueError(f"未知政策类型: {name}"
-                             "（可用: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay 或逗号组合）")
+                             "（可用: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay/night_setback 或逗号组合）")
         return factories[name](**kwargs)
