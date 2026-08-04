@@ -22,11 +22,56 @@ from engine.timeline import Timeline
 from engine.subagent import SubAgent
 from engine.memory import HouseholdMemory
 from engine.prompt import Prompt
+from population import _build_template
+from population_runner import aggregate_population
 
 
 class FakeEnergyCalculator:
     def __init__(self, loads):
         self.household_load_watts = loads
+
+
+class TestPopulation(unittest.TestCase):
+    """人口构建器 + 聚合（计划4）。"""
+
+    def test_builder_deterministic(self):
+        """同种子两次生成完全一致（论文可复现要求）。"""
+        import random
+        rng1 = random.Random(42)
+        rng2 = random.Random(42)
+        h1 = _build_template("young_couple", rng1)
+        h2 = _build_template("young_couple", rng2)
+        self.assertEqual(json.dumps(h1, ensure_ascii=False), json.dumps(h2, ensure_ascii=False))
+
+    def test_builder_heterogeneous(self):
+        """不同种子/类型生成不同家庭（异质性）。"""
+        import random
+        a = _build_template("young_couple", random.Random(1))
+        b = _build_template("family_with_kids", random.Random(2))
+        self.assertNotEqual(a["type"], b["type"])
+        self.assertEqual(len(b["members"]), 3)   # 有孩家庭 3 人
+
+    def test_aggregation_math(self):
+        """聚合：总曲线 = 逐户曲线之和，统计量正确。"""
+        house_results = []
+        for i, watts in enumerate([(100.0, 500.0), (150.0, 700.0)]):
+            loads = [watts[0]] * 1440
+            loads[1200] = watts[1]   # 20:00 各自峰值
+
+            day_result = {
+                "energy_calculator": FakeEnergyCalculator(loads),
+                "energy_summary": {"total_energy_kwh": watts[1] * 0.06},
+            }
+            house_results.append((f"house_{i}", day_result))
+
+        pop = aggregate_population(house_results)
+
+        self.assertEqual(pop["households"], 2)
+        self.assertAlmostEqual(pop["load_profile_watts"][0], 250.0)        # 100+150
+        self.assertAlmostEqual(pop["load_profile_watts"][1200], 1200.0)    # 500+700
+        self.assertEqual(pop["peak_time"], "20:00")
+        self.assertAlmostEqual(pop["mean_household_kwh"], (500.0 * 0.06 + 700.0 * 0.06) / 2, places=4)
+        self.assertGreater(pop["std_household_kwh"], 0)   # 异质性存在
 
 
 class TestMemory(unittest.TestCase):
