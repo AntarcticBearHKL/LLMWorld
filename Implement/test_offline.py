@@ -20,6 +20,88 @@ from engine import utils, Home, Room, Member
 from engine.energy_calculator import EnergyCalculator
 from engine.timeline import Timeline
 from engine.subagent import SubAgent
+from engine.memory import HouseholdMemory
+from engine.prompt import Prompt
+
+
+class FakeEnergyCalculator:
+    def __init__(self, loads):
+        self.household_load_watts = loads
+
+
+class TestMemory(unittest.TestCase):
+    """跨天记忆：摘要生成与 prompt 注入。"""
+
+    def _make_day_result(self):
+        tl = Timeline("Alice")
+        tl.load_from_activities([
+            {"time": "00:00-07:30", "location": "主卧", "activity": "睡觉"},
+            {"time": "07:30-08:30", "location": "厨房", "activity": "吃早餐"},
+            {"time": "09:00-17:30", "location": "外出", "activity": "工作"},
+            {"time": "18:00-20:00", "location": "客厅", "activity": "看电视"},
+            {"time": "22:30-23:59", "location": "主卧", "activity": "睡觉"},
+        ])
+
+        class FakePlanner:
+            timelines = {"Alice": tl}
+
+        loads = [50.0] * 1440
+        loads[1200] += 2000.0   # 20:00 高峰 2050W
+
+        return {
+            "date": "2026年4月20日",
+            "planner": FakePlanner(),
+            "energy_summary": {
+                "total_energy_kwh": 5.6,
+                "baseline_kwh": 1.2,
+                "decision_kwh": 4.4,
+                "appliances": [
+                    {"name": "空调", "total_energy_kwh": 2.0},
+                    {"name": "电磁炉", "total_energy_kwh": 1.5},
+                    {"name": "电视", "total_energy_kwh": 0.3},
+                ],
+            },
+            "energy_calculator": FakeEnergyCalculator(loads),
+        }
+
+    def test_empty_when_no_memory(self):
+        self.assertEqual(HouseholdMemory().get_prompt_context(), "")
+
+    def test_summary_extracts_rhythm_and_electricity(self):
+        mem = HouseholdMemory()
+        mem.update_from_day(self._make_day_result())
+
+        summary = mem.last
+        alice = summary["members"]["Alice"]
+        self.assertEqual(alice["wake_time"], "07:30")    # 第一个非睡觉活动
+        self.assertEqual(alice["sleep_time"], "23:59")   # 最后一个睡觉段结束
+        self.assertIn("吃早餐", alice["activities"][0])
+        self.assertGreaterEqual(len(alice["activities"]), 3)
+
+        self.assertAlmostEqual(summary["electricity"]["total_kwh"], 5.6)
+        self.assertEqual(summary["electricity"]["peak_time"], "20:00")
+        self.assertEqual(summary["electricity"]["peak_watts"], 2050)
+
+    def test_prompt_context_contains_memory(self):
+        mem = HouseholdMemory()
+        mem.update_from_day(self._make_day_result())
+        ctx = mem.get_prompt_context()
+
+        self.assertIn("昨日记忆", ctx)
+        self.assertIn("起床 07:30", ctx)
+        self.assertIn("入睡 23:59", ctx)
+        self.assertIn("高峰 20:00（2050 W）", ctx)
+        self.assertIn("空调 2.0 kWh", ctx)
+
+    def test_prompt_template_renders_with_empty_memory(self):
+        """模板在 memory_context 为空时也能正常渲染。"""
+        from engine.prompt import Prompt
+        rendered = Prompt().load("simulate_step1_macro_plan",
+            member_name="Alice", member_age=28, member_occupation="软件工程师",
+            member_personality="细心", date="2026年4月21日", day_type="工作日",
+            time_context="日期：2026年4月21日（工作日）",
+            home_structure="{}", members_info="[]", memory_context="")
+        self.assertNotIn("memory_context", rendered)   # 占位符被替换，无残留
 
 
 # ---------- 测试用固定家庭：1 台冰箱（常开）+ 1 台电视（按需）----------

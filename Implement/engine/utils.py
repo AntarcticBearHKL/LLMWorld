@@ -145,6 +145,25 @@ def parse_json_response(text):
     return json.loads(text)
 
 
+def parse_json_with_retry(prompt, raw_text, json_mode=True, thinking=False):
+    """解析 LLM 返回的 JSON；失败时用同一 prompt 重试一次（追加'只输出JSON'指令）。
+
+    这是对 thinking=False 快速模式下偶发畸形 JSON 的保险：最多多花一次调用，
+    但避免整层结果丢失。仍失败则抛原始异常（由调用方显式处理）。
+    """
+    try:
+        return parse_json_response(raw_text)
+    except Exception:
+        from .subagent import SubAgent
+        retry_prompt = prompt + (
+            "\n\n重要：你上一次的输出不是合法 JSON。"
+            "请重新输出，只输出一个合法 JSON 对象，不要任何解释、不要代码块标记。"
+        )
+        result = SubAgent.single_call(retry_prompt, json_mode=json_mode, thinking=thinking)
+        content = result["content"] if isinstance(result, dict) else result
+        return parse_json_response(content)
+
+
 def validate_appliance_decisions(decision_data, home, warnings):
     """校验 LLM 的用电决策：unique_id 必须存在、action 必须合法。
 

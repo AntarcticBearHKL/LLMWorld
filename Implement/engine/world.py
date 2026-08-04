@@ -4,6 +4,7 @@ from .executor import Executor
 from .energy_calculator import EnergyCalculator
 from .subagent import SubAgent
 from .environment import Time
+from .memory import HouseholdMemory
 import random
 from datetime import datetime
 
@@ -17,6 +18,7 @@ class World:
         self.world_id = world_id
         self.postcode = postcode
         self.house_id = house_id
+        self.memory = HouseholdMemory()   # 跨天记忆：昨天的行为影响今天的计划
     
     def simulate_day(self, season="夏天", weather="晴天", temperature=28, verbose=True):
         if verbose:
@@ -26,7 +28,8 @@ class World:
         
         date_str = self.time.date.strftime('%Y%m%d')
         planner = Planner(self.home, world_id=self.world_id, postcode=self.postcode, 
-                         house_id=self.house_id, date_str=date_str)
+                         house_id=self.house_id, date_str=date_str,
+                         memory_context=self.memory.get_prompt_context())
         self.current_planner = planner
         
         if verbose:
@@ -72,7 +75,10 @@ class World:
         }
         
         self.history.append(day_result)
-        
+
+        # 每天结束后更新跨天记忆（昨天的行为 → 明天的上下文）
+        self.memory.update_from_day(day_result)
+
         if verbose:
             print(f"\n{self.time.get_full_date_string()} 模拟完成！")
             print(f"日志目录：{planner.log_dir}\n")
