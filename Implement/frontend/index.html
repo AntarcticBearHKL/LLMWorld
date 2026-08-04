@@ -71,6 +71,11 @@
 </div>
 
 <div class="panel">
+  <h3>后台模拟任务（系统级进程，计划28）</h3>
+  <div id="jobsPanel">（加载中…）</div>
+</div>
+
+<div class="panel">
   <h3>上帝剧本（events.json 新闻）</h3>
   <div style="margin-bottom:8px;font-size:13px;">
     日期 <input id="evDate" value="2026-04-22" style="width:110px"> 
@@ -163,6 +168,7 @@ async function refresh() {
     await renderMatrix(worldId);
     await renderAnalysis(worldId);
     await renderNews(worldId);
+    await renderJobs();
     st.textContent = "";
   } catch (e) {
     st.textContent = "错误: " + e.message;
@@ -317,6 +323,22 @@ async function renderAnalysis(worldId) {
     table("成员数 → 户均kWh", a.by_members_count) +
     table("Big Five × 户用电相关性", a.big_five_corr_with_kwh) +
     `<div style="font-size:12px;color:#666;">成员数×用电相关：${a.members_kwh_corr}</div>`;
+}
+
+async function renderJobs() {
+  const div = document.getElementById("jobsPanel");
+  let jobs;
+  try { jobs = await api("/api/jobs"); } catch (e) { div.innerHTML = "<span class='err'>无法获取任务状态</span>"; return; }
+  if (!jobs || !jobs.length) { div.innerHTML = "（无后台任务）"; return; }
+  const color = {running: "#c90", done: "#2a7", failed: "#c33", stopped: "#c63", pending: "#888"};
+  div.innerHTML = jobs.map(j => `
+    <div style="margin-bottom:10px;font-size:13px;">
+      <b>${j.job_id}</b>
+      <span style="color:${color[j.status] || '#888'};margin:0 8px;">[${j.status}]</span>
+      <span>${j.progress}</span>
+      <div style="color:#666;">${j.command}</div>
+      <pre style="background:#f6f7f9;padding:6px;font-size:12px;max-height:120px;overflow:auto;white-space:pre-wrap;">${(j.log_tail || "").replace(/</g, "&lt;")}</pre>
+    </div>`).join("");
 }
 
 async function renderNews(worldId) {

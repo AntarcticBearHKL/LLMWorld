@@ -58,6 +58,18 @@ def _any_alive(pids):
     return any(_process_alive(p) for p in pids)
 
 
+def tail_text(path, max_chars=800):
+    """读日志尾部文本（供 server API 展示）。"""
+    if not os.path.exists(path):
+        return ""
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            text = f.read()
+        return text[-max_chars:]
+    except Exception:
+        return ""
+
+
 def parse_progress(out_path):
     """从输出文件提取任务进度摘要。"""
     if not os.path.exists(out_path):
