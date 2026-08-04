@@ -98,6 +98,8 @@ def analyze(world_id, scenario, date):
     report = {
         "world": world_id, "scenario": scenario, "date": date,
         "households": len(rows),
+        "total_kwh": round(sum(r["kwh"] for r in rows), 4),
+        "mean_household_kwh": round(sum(r["kwh"] for r in rows) / len(rows), 4),
         "by_type": group_mean([(r["household_type"], r["kwh"]) for r in rows]),
         "by_members_count": group_mean([(f"{r['members_count']}人", r["kwh"]) for r in rows]),
     }
@@ -130,7 +132,18 @@ def main():
     parser.add_argument("--world", required=True)
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--date", default="2026-04-21")
+    parser.add_argument("--dates", nargs="+", default=None,
+                        help="多日期对比（如 --dates 2026-04-21 2026-04-22），输出逐日户均/总用电")
     args = parser.parse_args()
+
+    if args.dates:
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        print("=== 多日轨迹（户均 kWh）===")
+        print(f"{'日期':<14}{'户均':<10}{'总用电':<12}逐户数")
+        for d in args.dates:
+            report, rows = analyze(args.world, args.scenario, d)
+            print(f"{d:<14}{report['mean_household_kwh']:<10}{report['total_kwh']:<12}{report['households']}")
+        return
 
     report, rows = analyze(args.world, args.scenario, args.date)
 
