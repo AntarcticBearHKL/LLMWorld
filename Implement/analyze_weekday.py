@@ -1,0 +1,89 @@
+import argparse
+import json
+import os
+import sys
+from datetime import datetime
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from analyze_variability import scan_house_daily_profiles
+
+
+def weekday_group(date_dir):
+    if len(date_dir) == 8 and date_dir.isdigit():
+        date_str = f"{date_dir[:4]}-{date_dir[4:6]}-{date_dir[6:]}"
+    else:
+        date_str = date_dir
+    weekday = datetime.strptime(date_str, "%Y-%m-%d").weekday()
+    return "周末" if weekday >= 5 else "工作日"
+
+
+def evening_kwh(hourly):
+    total_wh = 0.0
+    for h in range(16, 21):
+        total_wh += sum(hourly[h] * 60 for _ in range(60)) / 60.0
+    return total_wh / 1000.0
+
+
+def build_report(per_house):
+    if not per_house:
+        raise ValueError("没有找到任何多日模拟曲线")
+    groups = {}
+    for house in per_house:
+        for day in house["days"]:
+            group = weekday_group(day["date"])
+            groups.setdefault(group, []).append(day)
+    rows = []
+    for group in ("工作日", "周末"):
+        days = groups.get(group, [])
+        if not days:
+            continue
+        totals = [d["kwh"] for d in days]
+        peaks = [max(d["hourly"]) for d in days]
+        evenings = [evening_kwh(d["hourly"]) for d in days]
+        peak_hours = [max(range(24), key=lambda h: d["hourly"][h])
+                      for d in days]
+        rows.append({
+            "group": group,
+            "samples": len(days),
+            "mean_kwh": round(sum(totals) / len(totals), 4),
+            "mean_peak_watts": round(sum(peaks) / len(peaks), 2),
+            "mean_evening_kwh": round(sum(evenings) / len(evenings), 4),
+            "mean_peak_hour": round(sum(peak_hours) / len(peak_hours), 2),
+        })
+    if not rows:
+        raise ValueError("没有可用的周内分组数据")
+    return {"groups": rows}
+
+
+def main():
+    parser = argparse.ArgumentParser(description="周内模式分析（工作日 vs 周末）")
+    parser.add_argument("world_id")
+    parser.add_argument("--scenario", default="baseline")
+    parser.add_argument("--out", default=None)
+    args = parser.parse_args()
+
+    per_house = scan_house_daily_profiles(args.world_id, args.scenario)
+    report = build_report(per_house)
+    report["world_id"] = args.world_id
+    report["scenario"] = args.scenario
+
+    if not args.out:
+        out_dir = os.path.join(PROJECT_ROOT, "outputs", args.world_id,
+                               "analysis")
+        os.makedirs(out_dir, exist_ok=True)
+        args.out = os.path.join(out_dir, f"weekday_{args.scenario}.json")
+    with open(args.out, "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+
+    print(f"周内模式分析完成")
+    for r in report["groups"]:
+        print(f"  {r['group']}: {r['samples']} 样本 均电 {r['mean_kwh']}kWh "
+              f"峰值 {r['mean_peak_watts']}W 晚峰 {r['mean_evening_kwh']}kWh "
+              f"峰时 {r['mean_peak_hour']}:00")
+    print(f"  已保存: {args.out}")
+
+
+if __name__ == "__main__":
+    main()
