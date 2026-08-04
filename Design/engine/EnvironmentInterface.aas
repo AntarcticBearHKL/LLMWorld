@@ -1,0 +1,19 @@
+class EnvironmentInterface
+    环境信息开放接口（真实/配置随机/手工 三模式，由 config.ENV_MODE 决定）。
+
+    func get_weather(location, date_str, season):
+        获取某日天气（统一返回结构 temperature{min,max,avg} / condition / humidity / mode）。
+        1. real   → WeatherAPI.get_history；无 key 或失败自动回退 config（不再用固定 mock）。
+        2. config → 从 MELBOURNE_CLIMATE 按季节采样：天气按概率分布，avg 温度在季节范围内。
+        3. manual → 读 env_manual.json：temperature 可为固定值或 [min,max] 范围随机。
+
+    func _real(location, date_str):
+        调用真实天气 API，异常返回 None（触发回退）。
+
+    func _config(season):
+        气候表随机：random.choices 按权重选天气；random.randint 取温度。
+
+    func _manual(date_str):
+        读 Implement/env_manual.json；文件缺失抛 FileNotFoundError（不静默）。
+
+调用方：simulate.py / population_runner.py（人口聚合记录 environment 字段，前端摘要卡片展示）。

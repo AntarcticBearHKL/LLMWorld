@@ -1,0 +1,24 @@
+class BackgroundRunner
+    后台模拟任务管理器：模拟放后台跑，期间可继续开发，完成/报错后回来处理。
+
+    func cmd_start(args):
+        1. 生成 job_id（logs/jobs/job_NNN）。
+        2. 组装命令：python -X utf8 -u population_runner.py <模拟参数>。
+           -X utf8 强制 UTF-8 输出（Windows GBK 乱码会导致进度解析失败）。
+        3. Popen 启动子进程，stdout/stderr 重定向到 logs/jobs/<job_id>.out。
+        4. 写元数据 <job_id>.json（PID/命令/开始时间/日志路径）。
+
+    func parse_progress(out_path):
+        读取日志尾部 60 行，判定状态（优先级）：
+        1. Traceback / [冒烟失败] / Error → failed
+        2. 完成标记（冒烟通过/人口模拟完成/离线聚合完成/完成！）→ done
+        3. 否则 running；并解析"第 X/Y 天"进度。
+
+    func cmd_status:
+        列出所有任务：状态/进度/耗时/命令；进程已死则按解析结果定终态。
+
+    func cmd_watch(job_id):
+        阻塞监控：增量打印日志尾部，进程退出后输出最终状态；Ctrl+C 只停等待。
+
+    func cmd_stop(job_id):
+        taskkill 终止进程树。
