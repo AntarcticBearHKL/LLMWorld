@@ -917,5 +917,103 @@ class TestReport(unittest.TestCase):
         self.assertIsNone(parse_kwh(None))
 
 
+class TestLoadFeatures(unittest.TestCase):
+
+
+    def test_hourly_means_shape(self):
+        from engine.load_features import hourly_means
+        loads = [100.0] * 1440
+        hourly = hourly_means(loads)
+        self.assertEqual(len(hourly), 24)
+        self.assertTrue(all(v == 100.0 for v in hourly))
+
+    def test_hourly_means_peak_bucket(self):
+        from engine.load_features import hourly_means
+        loads = [50.0] * 1440
+        loads[19 * 60:20 * 60] = [2050.0] * 60
+        hourly = hourly_means(loads)
+        self.assertEqual(hourly.index(max(hourly)), 19)
+
+    def test_hourly_means_too_short(self):
+        from engine.load_features import hourly_means
+        with self.assertRaises(ValueError):
+            hourly_means([1.0] * 100)
+
+    def test_normalize_shape_sums_to_one(self):
+        from engine.load_features import normalize_shape
+        shape = normalize_shape([1.0, 2.0, 3.0, 4.0])
+        self.assertAlmostEqual(sum(shape), 1.0)
+        self.assertAlmostEqual(shape[-1], 0.4)
+
+    def test_normalize_shape_zero_total(self):
+        from engine.load_features import normalize_shape
+        self.assertEqual(normalize_shape([0.0, 0.0]), [0.0, 0.0])
+
+    def test_load_factor_and_peak_to_mean(self):
+        from engine.load_features import load_factor, peak_to_mean
+        hourly = [100.0, 200.0, 300.0]
+        self.assertAlmostEqual(load_factor(hourly), 200.0 / 300.0)
+        self.assertAlmostEqual(peak_to_mean(hourly), 300.0 / 200.0)
+
+    def test_peak_and_valley_hour(self):
+        from engine.load_features import peak_hour, valley_hour
+        hourly = [10.0, 40.0, 20.0, 5.0]
+        self.assertEqual(peak_hour(hourly), 1)
+        self.assertEqual(valley_hour(hourly), 3)
+
+
+class TestClustering(unittest.TestCase):
+
+
+    def _three_shapes(self, n_per=6):
+        import numpy as np
+        shapes = []
+        for _ in range(n_per):
+            shapes.append([0.6 + 0.4 * np.sin(np.pi * h / 10) for h in range(24)])
+            shapes.append([0.8 - 0.5 * abs(h - 18) / 12 for h in range(24)])
+            shapes.append([0.5 + 0.5 * np.sin(np.pi * (h + 6) / 8) for h in range(24)])
+        return shapes
+
+    def test_kmeans_recovers_three_clusters(self):
+        from engine.load_features import kmeans
+        shapes = self._three_shapes()
+        labels, centers, wcss = kmeans(shapes, 3, seed=7)
+        counts = {}
+        for lab in labels:
+            counts[lab] = counts.get(lab, 0) + 1
+        self.assertEqual(sorted(counts.values()), [6, 6, 6])
+        self.assertGreater(wcss, 0)
+        self.assertEqual(len(centers), 3)
+        self.assertEqual(len(centers[0]), 24)
+
+    def test_kmeans_fewer_samples_than_k(self):
+        from engine.load_features import kmeans
+        with self.assertRaises(ValueError):
+            kmeans([[1.0] * 24, [2.0] * 24], 3)
+
+    def test_kmeans_deterministic(self):
+        from engine.load_features import kmeans
+        shapes = self._three_shapes()
+        l1, c1, _ = kmeans(shapes, 3, seed=42)
+        l2, c2, _ = kmeans(shapes, 3, seed=42)
+        self.assertEqual(l1, l2)
+        self.assertEqual(c1, c2)
+
+    def test_elbow_scores_monotonic(self):
+        from engine.load_features import elbow_scores
+        shapes = self._three_shapes()
+        scores = elbow_scores(shapes)
+        self.assertEqual(len(scores), 7)
+        self.assertEqual(scores[0]["k"], 2)
+        self.assertEqual(scores[-1]["k"], 8)
+        wcss_list = [s["wcss"] for s in scores]
+        self.assertEqual(wcss_list, sorted(wcss_list, reverse=True))
+
+    def test_auto_k_on_three_separable_shapes(self):
+        from engine.load_features import auto_k
+        shapes = self._three_shapes()
+        self.assertEqual(auto_k(shapes), 3)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
