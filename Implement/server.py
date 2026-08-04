@@ -172,6 +172,23 @@ def load_world_state(world_id):
     }
 
 
+def delete_job(job_id):
+    """删除后台任务记录（元数据 + 日志）。运行中的任务不允许删除。"""
+    jobs = load_jobs()
+    job = next((j for j in jobs if j["job_id"] == job_id), None)
+    if not job:
+        raise ValueError(f"任务 {job_id} 不存在")
+    if job["status"] == "running":
+        raise ValueError(f"任务 {job_id} 运行中，请先停止再删除")
+    deleted = []
+    for ext in (".json", ".out"):
+        p = os.path.join(PROJECT_ROOT, "logs", "jobs", job_id + ext)
+        if os.path.exists(p):
+            os.remove(p)
+            deleted.append(os.path.basename(p))
+    return deleted
+
+
 def load_jobs():
     """后台任务状态（background_runner 产物，计划28：前端监控面板）。"""
     jobs_dir = os.path.join(PROJECT_ROOT, "logs", "jobs")
@@ -373,7 +390,14 @@ class Handler(BaseHTTPRequestHandler):
                 events = add_event_to_script(world_id, body)
                 self._send_json(events)
                 return
+            if len(parts) == 4 and parts[:3] == ["api", "jobs", "delete"]:
+                job_id = parts[3]
+                deleted = delete_job(job_id)
+                self._send_json({"deleted": deleted})
+                return
             self._send_json({"error": f"unknown api: {path}"}, 404)
+        except ValueError as e:
+            self._send_json({"error": str(e)}, 400)
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 

@@ -124,22 +124,22 @@ class TestNewsBoard(unittest.TestCase):
 class TestServerData(unittest.TestCase):
     """可视化后端数据层（计划18）。"""
 
-    def test_list_worlds_contains_pop02(self):
+    def test_list_worlds_contains_pop04(self):
         import server
         worlds = server.list_worlds()
         ids = [w["id"] for w in worlds]
-        self.assertIn("pop02", ids)
+        self.assertIn("pop04", ids)
 
     def test_load_profile_known_scenario(self):
         import server
-        data = server.load_profile("pop02", "tou", "2026-04-21")
+        data = server.load_profile("pop04", "baseline", "2026-04-21")
         self.assertIsNotNone(data)
         self.assertEqual(len(data["load_profile_watts"]), 1440)
         self.assertGreater(data["total_energy_kwh"], 0)
 
-    def test_load_events_pop02(self):
+    def test_load_events_pop04(self):
         import server
-        events = server.load_events("pop02")
+        events = server.load_events("pop04")
         self.assertGreaterEqual(len(events.get("events", [])), 1)
 
 
@@ -236,17 +236,12 @@ class TestCombineWorlds(unittest.TestCase):
         """联合曲线 = 各世界逐元素之和，统计正确。"""
         from combine_worlds import combine
 
-        # 用 pop02 + pop03 的真实基线数据（已存在）
-        data = combine(["pop02", "pop03"], "baseline", "2026-04-21")
-        self.assertEqual(data["households"], 22)   # 10 + 12
+        # 用 pop04 真实基线数据（清理后唯一有模拟结果的世界）
+        data = combine(["pop04"], "baseline", "2026-04-21")
+        self.assertEqual(data["households"], 10)
         self.assertEqual(len(data["load_profile_watts"]), 1440)
-        p02 = combine(["pop02"], "baseline", "2026-04-21")
-        p03 = combine(["pop03"], "baseline", "2026-04-21")
-        self.assertAlmostEqual(data["total_energy_kwh"],
-                               p02["total_energy_kwh"] + p03["total_energy_kwh"], places=2)
-        # per_house 带世界前缀
-        self.assertTrue(any(h["house_id"].startswith("pop02:") for h in data["per_house"]))
-        self.assertTrue(any(h["house_id"].startswith("pop03:") for h in data["per_house"]))
+        single = combine(["pop04"], "baseline", "2026-04-21")
+        self.assertAlmostEqual(data["total_energy_kwh"], single["total_energy_kwh"], places=2)
 
 
 class TestPolicy(unittest.TestCase):

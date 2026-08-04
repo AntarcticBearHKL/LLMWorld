@@ -76,7 +76,8 @@
 </div>
 
 <div class="panel">
-  <h3>后台模拟任务（系统级进程，计划28）</h3>
+  <h3>后台模拟任务（系统级进程，tab 分组）</h3>
+  <div id="jobsTabs" style="margin-bottom:8px;"></div>
   <div id="jobsPanel">（加载中…）</div>
 </div>
 
@@ -347,20 +348,67 @@ async function renderPersonality(worldId) {
     </div>`).join("");
 }
 
+let jobsCache = [];
+let jobsTab = "running";   // 当前任务 tab（默认进行中）
+
+const JOB_GROUPS = [
+  ["running", "进行中"],
+  ["done", "完成"],
+  ["failed", "报错"],
+];
+
+// 状态归类：stopped/pending 并入对应组
+function jobGroup(status) {
+  if (status === "stopped") return "failed";
+  if (status === "pending") return "running";
+  return status;
+}
+
 async function renderJobs() {
+  const tabs = document.getElementById("jobsTabs");
   const div = document.getElementById("jobsPanel");
   let jobs;
   try { jobs = await api("/api/jobs"); } catch (e) { div.innerHTML = "<span class='err'>无法获取任务状态</span>"; return; }
-  if (!jobs || !jobs.length) { div.innerHTML = "（无后台任务）"; return; }
+  jobsCache = jobs;
+
+  // tab 栏（带数量，默认进行中）
+  const counts = {running: 0, done: 0, failed: 0};
+  jobs.forEach(j => { counts[jobGroup(j.status)]++; });
+  tabs.innerHTML = JOB_GROUPS.map(([key, label]) => {
+    const active = jobsTab === key ? "background:#4a7;color:#fff;" : "background:#eef;";
+    return `<button onclick="setJobsTab('${key}')" style="margin-right:6px;padding:4px 14px;border:none;border-radius:4px;cursor:pointer;${active}">${label} (${counts[key]})</button>`;
+  }).join("");
+
+  // 当前组任务
+  const groupJobs = jobs.filter(j => jobGroup(j.status) === jobsTab);
+  if (!groupJobs.length) { div.innerHTML = "（该分类暂无任务）"; return; }
   const color = {running: "#c90", done: "#2a7", failed: "#c33", stopped: "#c63", pending: "#888"};
-  div.innerHTML = jobs.map(j => `
-    <div style="margin-bottom:10px;font-size:13px;">
+  div.innerHTML = groupJobs.map(j => `
+    <div style="margin-bottom:10px;font-size:13px;border:1px solid #e3e5e8;border-radius:4px;padding:8px;">
       <b>${j.job_id}</b>
       <span style="color:${color[j.status] || '#888'};margin:0 8px;">[${j.status}]</span>
       <span>${j.progress}</span>
+      ${j.status !== "running" ? `<button onclick="deleteJob('${j.job_id}')" style="float:right;padding:2px 10px;cursor:pointer;">删除</button>` : ""}
       <div style="color:#666;">${j.command}</div>
       <pre style="background:#f6f7f9;padding:6px;font-size:12px;max-height:120px;overflow:auto;white-space:pre-wrap;">${(j.log_tail || "").replace(/</g, "&lt;")}</pre>
     </div>`).join("");
+}
+
+function setJobsTab(key) {
+  jobsTab = key;
+  renderJobs();
+}
+
+async function deleteJob(jobId) {
+  if (!confirm(`删除任务 ${jobId} 的记录与日志？`)) return;
+  try {
+    const r = await fetch(`/api/jobs/delete/${jobId}`, {method: "POST"});
+    const res = await r.json();
+    if (res.error) { alert("删除失败: " + res.error); return; }
+    await renderJobs();
+  } catch (e) {
+    alert("删除失败: " + e.message);
+  }
 }
 
 async function renderNews(worldId) {
