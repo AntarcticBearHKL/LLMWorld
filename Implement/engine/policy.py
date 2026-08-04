@@ -64,6 +64,11 @@ class Policy:
         return cls("night_setback", reduce_hours=reduce_hours,
                    target_temp=target_temp, saving_note=saving_note)
 
+    @classmethod
+    def in_home_display(cls, feedback_text="家庭智能电表显示屏实时显示当前功率与电费"):
+
+        return cls("in_home_display", feedback_text=feedback_text)
+
 
 
     @classmethod
@@ -160,6 +165,16 @@ class Policy:
                 f"避免空房供暖浪费。\n"
                 f"- {note}，是住宅供暖最重要的节能行为之一。"
             )
+
+        if self.type == "in_home_display":
+            return (
+                f"## 智能电表实时反馈\n"
+                f"- {self.params['feedback_text']}，可随时查看：\n"
+                f"  1. 当前瞬时功率与每小时电费；\n"
+                f"  2. 近 7 日每日用电量趋势对比；\n"
+                f"  3. 大功率电器开启时的即时费用提醒。\n"
+                f"- 打开大功率电器时显示屏会实时变化，请留意并避免浪费。"
+            )
         return ""
 
 
@@ -173,10 +188,11 @@ class Policy:
         factories = {"tou": cls.tou, "subsidy": cls.subsidy,
                      "nudge": cls.nudge, "nudge_loss": cls.nudge_loss,
                      "peak_demand": cls.peak_demand, "ev_delay": cls.ev_delay,
-                     "night_setback": cls.night_setback}
+                     "night_setback": cls.night_setback,
+                     "in_home_display": cls.in_home_display}
         if "," in name:
             return cls.combine(name, **kwargs)
         if name not in factories:
             raise ValueError(f"未知政策类型: {name}"
-                             "（可用: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay/night_setback 或逗号组合）")
+                             "（可用: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay/night_setback/in_home_display 或逗号组合）")
         return factories[name](**kwargs)

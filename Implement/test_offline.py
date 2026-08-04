@@ -510,6 +510,15 @@ class TestPolicy(unittest.TestCase):
         self.assertEqual(Policy.from_name("night_setback").type,
                          "night_setback")
 
+    def test_in_home_display_render(self):
+        from engine.policy import Policy
+        text = Policy.in_home_display().render()
+        self.assertIn("智能电表实时反馈", text)
+        self.assertIn("瞬时功率", text)
+        self.assertIn("近 7 日", text)
+        self.assertEqual(Policy.from_name("in_home_display").type,
+                         "in_home_display")
+
     def test_combined_policy_render(self):
         from engine.policy import Policy
         combined = Policy.from_name("tou,nudge")
