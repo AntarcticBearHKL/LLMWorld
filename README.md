@@ -14,7 +14,7 @@ python Implement/simulate.py 495 --days 1 --date "2026年4月21日" --no-input
 
 # 3. 人口级并行模拟（多户并行，聚合负荷；系统级后台可用 background_runner）
 python Implement/population_runner.py pop03 --days 1
-python Implement/population_runner.py pop03 --policy tou          # tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay
+python Implement/population_runner.py pop03 --policy tou          # tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay/night_setback
 python Implement/population_runner.py pop03 --policy "tou,nudge"  # 政策组合（Faruqui & Sergici 2010）
 python Implement/population_runner.py pop03 --peer-nudge --days 3 # 个性化邻居反馈（Ayres 2013）
 python Implement/population_runner.py pop03 --policy-schedule "2026-04-25,2026-04-28,tou"  # 政策时间表
