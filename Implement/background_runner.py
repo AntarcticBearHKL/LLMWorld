@@ -43,6 +43,21 @@ def _next_job_id():
 PROGRESS_MARKERS = ["第 ", "Token 账单", "冒烟", "完成", "Traceback", "Error", "Failed"]
 
 
+def _pids_of(out_path):
+    """从日志路径反查任务 PID（从对应的 .json 元数据）。"""
+    job_id = os.path.splitext(os.path.basename(out_path))[0]
+    meta_path = _job_path(job_id)
+    if os.path.exists(meta_path):
+        with open(meta_path, "r", encoding="utf-8") as f:
+            meta = json.load(f)
+        return [meta.get("pid")]
+    return []
+
+
+def _any_alive(pids):
+    return any(_process_alive(p) for p in pids)
+
+
 def parse_progress(out_path):
     """从输出文件提取任务进度摘要。"""
     if not os.path.exists(out_path):
@@ -58,12 +73,16 @@ def parse_progress(out_path):
     # 状态判定（按优先级：失败 > 完成 > 运行中）
     done_markers = ["[冒烟通过]", "人口模拟完成", "离线聚合完成", "完成 N 天模拟", "完成！"]
     has_done = any(m in text for m in done_markers)
-    if "Traceback" in text or "[冒烟失败]" in text or "Error:" in text and not has_done:
+    if "Traceback" in text or "[冒烟失败]" in text or ("Error:" in text and not has_done):
         status = "failed"
     elif has_done:
         status = "done"
     else:
         status = "running"
+
+    # 进程已死但无完成标记 → 异常终止（不能标 done）
+    if status == "running" and not _any_alive(_pids_of(out_path)):
+        status = "stopped"
 
     # 进度行：第 X/Y 天
     progress = None
