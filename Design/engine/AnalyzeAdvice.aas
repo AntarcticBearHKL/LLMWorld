@@ -1,0 +1,14 @@
+class AnalyzeAdvice
+    个性化节能建议引擎（计划83，Monacchi 2015 advisor，0 LLM）。
+
+    - advice_for(metrics) → 规则引擎：
+      total_kwh_z>2 → 高耗能建议；overlap_count>0 → 错峰建议；
+      peak_hour∈[17,21] → 晚峰集中建议（移谷段）；
+      peak_to_mean>5 → 峰谷差建议；无触发 → []
+    - build_report(profiles) → 每户建议列表
+      （复用 analyze_anomalies 指标 + hourly 特征）
+    - CLI：python analyze_advice.py <world> --scenario [--date]
+    - 输出：outputs/<world>/analysis/advice_<scenario>_<date>.json
+
+    调用链：server /api/worlds/<id>/advice/<scenario>/<date>
+    → 前端"个性化节能建议"面板（每户建议卡片）

@@ -28,6 +28,7 @@ class AnalyzeTools
     analyze_behavior_load.py：见 AnalyzeBehaviorLoad.aas（计划64 行为-负荷一致性）
     analyze_solar.py：见 AnalyzeSolar.aas（计划71/72 光伏自用+电池）
     analyze_electrification.py：见 AnalyzeElectrification.aas（计划79 EV/热泵）
+    analyze_advice.py：见 AnalyzeAdvice.aas（计划83 个性化建议）
     download_ref_papers.py：见 RefPapers.aas（计划65 论文存档）
 
     combine_worlds.py：见 CombineWorlds.aas
