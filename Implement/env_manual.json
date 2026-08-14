@@ -1,6 +1,0 @@
-{
-  "说明": "ENV_MODE=manual 时使用本文件。temperature 可用固定值（如 22）或范围（如 [18, 26] 表示范围内随机）。condition/humidity 缺省用默认值。",
-  "temperature": [18, 26],
-  "condition": "多云",
-  "humidity": 60
-}
