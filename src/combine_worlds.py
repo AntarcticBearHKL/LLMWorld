@@ -17,11 +17,12 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 
 def load_profile(world_id, scenario, date):
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    path = os.path.join(project_root, "simulation", world_id, "population",
+    path = os.path.join(sim_root(world_id), "population",
                         scenario, date, "population_profile_1440min.json")
     if not os.path.exists(path):
         return None
@@ -92,7 +93,7 @@ def main():
 
     name = "combined_" + "+".join(args.worlds)
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_dir = os.path.join(project_root, "simulation", name, "population",
+    out_dir = os.path.join(sim_root(name), "population",
                            args.scenario, args.date)
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, "population_profile_1440min.json")

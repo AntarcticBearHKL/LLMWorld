@@ -5,6 +5,7 @@ import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 
 def load_true_appliances(house_dir):
@@ -117,7 +118,7 @@ def main():
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
-    simulation_root = os.path.join(PROJECT_ROOT, "simulation", args.world_id)
+    simulation_root = os.path.join(sim_root(args.world_id))
     house_dirs = []
     for postcode_dir in sorted(os.listdir(simulation_root)) if os.path.isdir(simulation_root) else []:
         postcode_path = os.path.join(simulation_root, postcode_dir)
@@ -157,7 +158,7 @@ def main():
         "per_house": reports,
     }
     if not args.out:
-        out_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        out_dir = os.path.join(sim_root(args.world_id),
                                "analysis")
         os.makedirs(out_dir, exist_ok=True)
         date_tag = args.date.replace("-", "") if args.date else "latest"

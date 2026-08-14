@@ -5,6 +5,7 @@ import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 from engine.load_features import (hourly_means, normalize_shape, load_factor,
                                   peak_hour, valley_hour, peak_to_mean,
@@ -16,7 +17,7 @@ def _dir_date(date_str):
 
 
 def scan_house_profiles(world_id, scenario, date):
-    simulation_root = os.path.join(PROJECT_ROOT, "simulation", world_id)
+    simulation_root = os.path.join(sim_root(world_id))
     if not os.path.isdir(simulation_root):
         return []
     profiles = []
@@ -132,7 +133,7 @@ def main():
 
     if not args.out:
         date_tag = _dir_date(args.date) if args.date else "latest"
-        analysis_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        analysis_dir = os.path.join(sim_root(args.world_id),
                                     "analysis")
         os.makedirs(analysis_dir, exist_ok=True)
         args.out = os.path.join(analysis_dir,

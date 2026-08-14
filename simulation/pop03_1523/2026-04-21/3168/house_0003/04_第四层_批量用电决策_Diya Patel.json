@@ -1,0 +1,388 @@
+{
+  "member": "Diya Patel",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "次卧2（Diya）",
+      "activity": "睡觉",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "次卧2（Diya）",
+      "activity": "起床、穿衣、整理床铺",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:10",
+      "location": "卫生间",
+      "activity": "洗漱",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:30",
+      "location": "厨房",
+      "activity": "与Mei-Ling一起吃早餐",
+      "operations": [
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:40",
+      "location": "次卧2（Diya）",
+      "activity": "快速整理书包",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:00",
+      "location": "次卧2（Diya）",
+      "activity": "看早间新闻或阅读",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "次卧2（Diya）",
+      "activity": "整理房间和书包（补充准备）",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "外出",
+      "activity": "步行去学校",
+      "operations": [
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:00-15:00",
+      "location": "外出",
+      "activity": "在学校上课，课间独自整理笔记",
+      "operations": [
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:30",
+      "location": "外出",
+      "activity": "步行回家",
+      "operations": [
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:30-17:00",
+      "location": "次卧2（Diya）",
+      "activity": "做家庭作业",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "次卧2（Diya）",
+      "activity": "整理房间",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "厨房",
+      "activity": "与Aarav一起摆放餐具，准备晚餐",
+      "operations": [
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "厨房",
+      "activity": "与Mei-Ling和Aarav一起准备晚餐",
+      "operations": [
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "厨房",
+      "activity": "与家人（Mei-Ling、Arjun、Aarav）一起吃晚餐",
+      "operations": [
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "客厅",
+      "activity": "与Mei-Ling一起看电视新闻",
+      "operations": [
+        {
+          "unique_id": "客厅_电视",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "次卧2（Diya）",
+      "activity": "阅读或整理笔记",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:30-20:45",
+      "location": "卫生间",
+      "activity": "洗漱，准备睡觉",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:45-23:59",
+      "location": "次卧2（Diya）",
+      "activity": "睡觉",
+      "operations": [
+        {
+          "unique_id": "次卧2diya_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "次卧2diya_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "diya_patel_手机",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ],
+  "total_energy_kwh": 0.7946666666666667,
+  "validation_warnings": []
+}

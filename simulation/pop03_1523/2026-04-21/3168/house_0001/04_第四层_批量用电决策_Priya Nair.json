@@ -1,0 +1,486 @@
+{
+  "member": "Priya Nair",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:30",
+      "location": "卧室2",
+      "activity": "睡眠",
+      "operations": [
+        {
+          "unique_id": "卧室2_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:40",
+      "location": "卧室2",
+      "activity": "起床、整理床铺、穿衣",
+      "operations": [
+        {
+          "unique_id": "卧室2_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室2_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:40-07:50",
+      "location": "卧室2",
+      "activity": "收拾房间、整理个人物品",
+      "operations": [
+        {
+          "unique_id": "卧室2_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室2_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:10",
+      "location": "卫生间",
+      "activity": "洗漱（刷牙、洗脸）",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卫生间_洗衣机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:55",
+      "location": "厨房",
+      "activity": "与Arjun一起准备早餐（布置餐桌、热牛奶等）",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:55-09:15",
+      "location": "厨房",
+      "activity": "与Mei-Ling和Arjun一起吃早餐，并服药",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:15-09:40",
+      "location": "外出",
+      "activity": "与Mei-Ling和Arjun一起步行去莫纳什大学",
+      "operations": [
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:40-12:00",
+      "location": "外出",
+      "activity": "在莫纳什大学上课",
+      "operations": [
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "外出",
+      "activity": "在学校餐厅与Mei-Ling一起吃午餐",
+      "operations": [
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "外出",
+      "activity": "在莫纳什大学上课/学习",
+      "operations": [
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-17:00",
+      "location": "外出",
+      "activity": "在莫纳什大学图书馆自习（与Mei-Ling一起）",
+      "operations": [
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "外出",
+      "activity": "与Mei-Ling一起步行回家",
+      "operations": [
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:30",
+      "location": "卧室2",
+      "activity": "休息、听音乐",
+      "operations": [
+        {
+          "unique_id": "卧室2_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室2_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:30-20:00",
+      "location": "厨房",
+      "activity": "与Mei-Ling一起准备并享用晚餐（Arjun 19:30加入）",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:15",
+      "location": "厨房",
+      "activity": "与Mei-Ling和Arjun一起洗碗、清洁厨房",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:15-21:15",
+      "location": "卧室2",
+      "activity": "阅读、学习",
+      "operations": [
+        {
+          "unique_id": "卧室2_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室2_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_台灯",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "客厅",
+      "activity": "与Mei-Ling和Arjun一起泡茶、品尝茶",
+      "operations": [
+        {
+          "unique_id": "客厅_电视",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:15",
+      "location": "卫生间",
+      "activity": "洗漱、洗澡",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "use"
+        },
+        {
+          "unique_id": "卫生间_洗衣机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:30",
+      "location": "卧室2",
+      "activity": "冥想、祷告",
+      "operations": [
+        {
+          "unique_id": "卧室2_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "卧室2",
+      "activity": "睡前放松（听轻音乐）",
+      "operations": [
+        {
+          "unique_id": "卧室2_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:59",
+      "location": "卧室2",
+      "activity": "睡眠",
+      "operations": [
+        {
+          "unique_id": "卧室2_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室2_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_手机",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "priya_nair_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "priya_nair_台灯",
+          "action": "idle"
+        }
+      ]
+    }
+  ],
+  "total_energy_kwh": 8.527583333333332,
+  "validation_warnings": []
+}

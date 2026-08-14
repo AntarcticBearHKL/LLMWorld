@@ -21,6 +21,7 @@ import sys
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 
 
@@ -81,7 +82,7 @@ def parse_kwh(value):
 
 def build_report(world):
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_root = os.path.join(project_root, "simulation", world)
+    out_root = os.path.join(sim_root(world))
 
     lines = []
     lines.append(f"# LLMWorld 论文素材报告（world: {world}）")
@@ -289,7 +290,7 @@ def build_report(world):
                 rel = os.path.relpath(os.path.join(r, f), project_root)
                 lines.append(f"- `{rel}`")
 
-    report_path = os.path.join(project_root, "simulation", world, f"paper_material_{world}.md")
+    report_path = os.path.join(sim_root(world), f"paper_material_{world}.md")
     os.makedirs(os.path.dirname(report_path), exist_ok=True)
     with open(report_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))

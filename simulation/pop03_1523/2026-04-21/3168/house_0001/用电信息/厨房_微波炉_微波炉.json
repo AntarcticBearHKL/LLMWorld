@@ -1,0 +1,128 @@
+{
+  "appliance_info": {
+    "unique_id": "厨房_微波炉",
+    "name": "微波炉",
+    "type": "on_demand",
+    "power_watts": 1000
+  },
+  "usage_summary": {
+    "total_minutes": 20,
+    "total_hours": 0.33,
+    "total_energy_kwh": 0.3333
+  },
+  "usage_segments": [
+    {
+      "time_range": "08:55-09:15",
+      "start_minutes": 535,
+      "end_minutes": 555,
+      "duration_minutes": 20,
+      "action": "use",
+      "location": "厨房",
+      "member": "Mei-Ling Zhang",
+      "energy_kwh": 0.3333333333333333,
+      "capped": false
+    }
+  ],
+  "minute_by_minute_usage": [
+    {
+      "minute": 535,
+      "time": "08:55",
+      "watts": 1000.0
+    },
+    {
+      "minute": 536,
+      "time": "08:56",
+      "watts": 1000.0
+    },
+    {
+      "minute": 537,
+      "time": "08:57",
+      "watts": 1000.0
+    },
+    {
+      "minute": 538,
+      "time": "08:58",
+      "watts": 1000.0
+    },
+    {
+      "minute": 539,
+      "time": "08:59",
+      "watts": 1000.0
+    },
+    {
+      "minute": 540,
+      "time": "09:00",
+      "watts": 1000.0
+    },
+    {
+      "minute": 541,
+      "time": "09:01",
+      "watts": 1000.0
+    },
+    {
+      "minute": 542,
+      "time": "09:02",
+      "watts": 1000.0
+    },
+    {
+      "minute": 543,
+      "time": "09:03",
+      "watts": 1000.0
+    },
+    {
+      "minute": 544,
+      "time": "09:04",
+      "watts": 1000.0
+    },
+    {
+      "minute": 545,
+      "time": "09:05",
+      "watts": 1000.0
+    },
+    {
+      "minute": 546,
+      "time": "09:06",
+      "watts": 1000.0
+    },
+    {
+      "minute": 547,
+      "time": "09:07",
+      "watts": 1000.0
+    },
+    {
+      "minute": 548,
+      "time": "09:08",
+      "watts": 1000.0
+    },
+    {
+      "minute": 549,
+      "time": "09:09",
+      "watts": 1000.0
+    },
+    {
+      "minute": 550,
+      "time": "09:10",
+      "watts": 1000.0
+    },
+    {
+      "minute": 551,
+      "time": "09:11",
+      "watts": 1000.0
+    },
+    {
+      "minute": 552,
+      "time": "09:12",
+      "watts": 1000.0
+    },
+    {
+      "minute": 553,
+      "time": "09:13",
+      "watts": 1000.0
+    },
+    {
+      "minute": 554,
+      "time": "09:14",
+      "watts": 1000.0
+    }
+  ]
+}

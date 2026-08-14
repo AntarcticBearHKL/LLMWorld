@@ -18,7 +18,7 @@ import random
 import re
 import sys
 import threading
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -123,8 +123,9 @@ def _parse_json_lenient(text):
 class ChatLogger:
     """LLM 调用记录器：每次调用写一份可读 .md + 追加一条结构化 .jsonl。
 
-    可读文件: log/<stage>_<seq>.md      —— 提示词 / 思考(thinking) / 回复全文
-    结构化:   log/llm_chat.jsonl        —— 每行一条完整记录（含耗时/成败/错误）
+    可读文件: log/<prefix><stage>.md   —— 提示词 / 思考(thinking) / 回复全文
+              prefix 为调用方所属（如 house_0001_ / global_），同一户的文件后缀一致
+    结构化:   log/llm_chat.jsonl        —— 每行一条完整记录（含成败/错误/重试次数）
     """
 
     def __init__(self, log_dir):
@@ -135,20 +136,21 @@ class ChatLogger:
         self._lock = threading.Lock()  # 多户并行写日志防交错
 
     def record(self, stage, prompt, response, reasoning=None, ok=True, error=None,
-               attempt=1):
+               attempt=1, prefix=""):
         with self._lock:
             self._seq += 1
             ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             entry = {
-                "seq": self._seq, "time": ts, "stage": stage, "attempt": attempt,
-                "ok": ok, "prompt": prompt, "response": response,
+                "seq": self._seq, "time": ts, "prefix": prefix, "stage": stage,
+                "attempt": attempt, "ok": ok, "prompt": prompt, "response": response,
                 "reasoning": reasoning, "error": error,
             }
             with open(self.jsonl_path, "a", encoding="utf-8") as f:
                 f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
-            md_path = os.path.join(self.log_dir, f"{stage}_{self._seq:03d}.md")
-            lines = [f"# [{ts}] {stage}（第 {attempt} 次尝试，{'成功' if ok else '失败'}）",
+            # 同一户同一阶段的 md 只保留最终一份（重试覆盖，后缀固定不跳号）
+            md_path = os.path.join(self.log_dir, f"{prefix}{stage}.md")
+            lines = [f"# [{ts}] {prefix}{stage}",
                      "\n## 提示词（Prompt）\n", prompt or "(空)", ]
             if reasoning:
                 lines += ["\n## 思考（Thinking）\n", reasoning]
@@ -159,10 +161,11 @@ class ChatLogger:
                 f.write("\n".join(lines) + "\n")
 
 
-def llm_json(prompt, label, attempts=2, logger=None, stage=None, thinking=None):
-    """调用 LLM 并解析 JSON；失败重试 attempts 次，返回 (data, warnings)。
+def llm_json(prompt, label, attempts=2, logger=None, stage=None, thinking=None,
+             prefix=""):
+    """调用 LLM 并解析 JSON；失败静默重试 attempts 次，返回 (data, warnings)。
 
-    logger 非空时每次调用（含失败）都会写入 log/；thinking 覆盖 config.THINKING。
+    重试不产生可见提示（工程兜底），最终失败才返回一条警告。
     """
     warnings = []
     if thinking is None:
@@ -180,26 +183,27 @@ def llm_json(prompt, label, attempts=2, logger=None, stage=None, thinking=None):
             if isinstance(data, dict) or isinstance(data, list):
                 if logger:
                     logger.record(stage, prompt, content, reasoning=reasoning,
-                                  ok=True, attempt=i + 1)
+                                  ok=True, attempt=i + 1, prefix=prefix)
                 return data, warnings
             raise ValueError("JSON 顶层必须是对象或数组")
         except Exception as e:
-            warnings.append(f"{label} 第 {i + 1} 次调用失败：{e}")
             if logger:
                 logger.record(stage, prompt, content, reasoning=reasoning,
-                              ok=False, error=str(e), attempt=i + 1)
+                              ok=False, error=str(e), attempt=i + 1, prefix=prefix)
             if i < attempts - 1:
                 prompt += ("\n\n重要：你上一次的输出不是合法 JSON。"
                            "请重新输出，只输出一个合法 JSON 对象，不要任何解释。")
+    warnings.append(f"{label} 调用异常：{e}")
     return None, warnings
 
 
-def generate_household_types(district_text, count, prompt_obj, logger=None, thinking=None):
-    """步骤 1：地区描述 -> count 种家庭类型。返回 [(type, desc, members, housing), ...]"""
+def generate_household_types(district_text, count, prompt_obj, logger=None,
+                             thinking=None, prefix=""):
+    """步骤 1：地区描述 → count 种家庭类型。返回 [(type, desc, members, housing), ...]"""
     rendered = prompt_obj.load("generate_world_step1_types",
                                district_info=district_text, count=count)
     data, warnings = llm_json(rendered, "家庭类型生成", logger=logger,
-                              stage="step1_types", thinking=thinking)
+                              stage="step1_types", thinking=thinking, prefix=prefix)
     for w in warnings:
         print(f"  [警告] {w}")
     if not isinstance(data, dict) or not isinstance(data.get("household_types"), list):
@@ -240,55 +244,33 @@ def sample_personas(household_type, attempt_seed):
     return texts, rows
 
 
-def validate_personas(household_type, persona_texts, prompt_obj, logger=None, thinking=None):
-    """步骤 4：LLM 校验画像与家庭类型自洽。返回 (ok, reasons)。"""
-    rendered = prompt_obj.load(
-        "generate_world_step2_validate",
-        household_type=household_type["type"],
-        household_description=household_type["description"],
-        member_count=household_type["typical_members"],
-        persona_texts="\n\n".join(persona_texts),
-    )
-    data, warnings = llm_json(rendered, "画像校验", logger=logger,
-                              stage="step2_validate", thinking=thinking)
-    for w in warnings:
-        print(f"    [警告] {w}")
-    if not isinstance(data, dict) or "pass" not in data:
-        # LLM 无法判定时放行（校验是门禁不是生成器，失败不应卡死）
-        return True, ["校验无法判定，放行"]
-    reasons = data.get("reasons", [])
-    if isinstance(reasons, str):
-        reasons = [reasons]
-    return bool(data["pass"]), reasons
+def align_personas(household_type, persona_texts, prompt_obj, logger=None,
+                   thinking=None, prefix=""):
+    """步骤 2：LLM 直接把抽样画像对齐到家庭设定——冲突部分改写，无关部分原样保留。
 
-
-def fix_personas(household_type, persona_texts, reasons, prompt_obj,
-                 logger=None, thinking=None):
-    """步骤 4b：LLM 按不合格原因就地修正画像（只改冲突部分，无关部分保留）。
-
-    返回 (fixed_texts, warnings)；fixed_texts 为 None 表示修正失败（调用方应沿用原始画像）。
+    不校验、不解释"哪里不对"，直接返回符合设定的最终画像。
+    返回 (final_texts, warnings)；final_texts 为 None 表示输出异常（调用方沿用原始画像）。
     """
     rendered = prompt_obj.load(
-        "generate_world_step2_fix",
+        "generate_world_step2_align",
         household_type=household_type["type"],
         household_description=household_type["description"],
         member_count=household_type["typical_members"],
-        reasons="\n".join(f"- {r}" for r in reasons) if reasons else "（未提供）",
         persona_texts="\n\n".join(persona_texts),
     )
-    data, warnings = llm_json(rendered, "画像修正", logger=logger,
-                              stage="step2_fix", thinking=thinking)
+    data, warnings = llm_json(rendered, "画像对齐", logger=logger,
+                              stage="step2_align", thinking=thinking, prefix=prefix)
     if not isinstance(data, dict) or not isinstance(data.get("members"), list):
-        return None, warnings + ["修正输出结构非法，保留原始画像"]
-    fixed = [str(m).strip() for m in data["members"] if str(m).strip()]
-    if len(fixed) != len(persona_texts):
-        return None, warnings + [f"修正后成员数 {len(fixed)} != 原始 {len(persona_texts)}，保留原始画像"]
-    return fixed, warnings
+        return None, warnings + ["画像对齐输出异常，沿用原始画像"]
+    aligned = [str(m).strip() for m in data["members"] if str(m).strip()]
+    if len(aligned) != len(persona_texts):
+        return None, warnings + [f"画像对齐成员数不符，沿用原始画像"]
+    return aligned, warnings
 
 
 def build_household(household_type, persona_texts, district_text, prompt_obj,
-                    logger=None, thinking=None):
-    """步骤 5：LLM 生成家庭配置（房间+家电+成员档案）。返回 household dict。"""
+                    logger=None, thinking=None, prefix=""):
+    """步骤 3：LLM 由对齐后的画像 + 家庭设定生成房间家电与成员档案。返回 household dict。"""
     rendered = prompt_obj.load(
         "generate_world_step3_household",
         district_info=district_text,
@@ -300,7 +282,7 @@ def build_household(household_type, persona_texts, district_text, prompt_obj,
         appliance_schemas=get_appliance_schemas_text(),
     )
     data, warnings = llm_json(rendered, "家庭生成", logger=logger,
-                              stage="step3_household", thinking=thinking)
+                              stage="step3_household", thinking=thinking, prefix=prefix)
     return data, warnings
 
 
@@ -414,52 +396,40 @@ def fallback_household(household_type, rng):
 
 
 def generate_one_household(household_type, district_text, rng, prompt_obj,
-                           logger=None, thinking=None):
-    """单户完整流程：抽样 → 校验 → 不合格则 LLM 就地修正 → 生成家庭。
+                           logger=None, thinking=None, prefix=""):
+    """单户完整流程：抽样 → LLM 直接对齐画像到家庭设定 → 生成房间电器。直线三步，无分支。
 
-    返回 (household, notes, persona_texts, original_persona_texts,
-          validation_attempts, persona_seed)。
-    persona_texts 为最终采用的画像（可能已修正）；original_persona_texts 为抽样原始画像。
+    返回 (household, notes, persona_texts, original_persona_texts, persona_seed)。
+    persona_texts 为最终采用的画像（已对齐）；original_persona_texts 为抽样原始画像。
     """
     notes = []
     attempt_seed = rng.randint(0, 2 ** 31 - 1)
     persona_texts, rows = sample_personas(household_type, attempt_seed)
     original_persona_texts = list(persona_texts)
 
-    ok, reasons = validate_personas(household_type, persona_texts, prompt_obj,
-                                    logger=logger, thinking=thinking)
-    validation_attempts = [{"attempt": 1, "pass": ok, "reasons": reasons,
-                            "seed": attempt_seed, "fixed": False}]
-    if not ok:
-        notes.append(f"画像与家庭类型冲突：{reasons}")
-        fixed_texts, warnings = fix_personas(household_type, persona_texts, reasons,
-                                             prompt_obj, logger=logger, thinking=thinking)
-        notes.extend(warnings)
-        if fixed_texts is not None:
-            persona_texts = fixed_texts
-            validation_attempts[0]["fixed"] = True
-            notes.append("画像已由 LLM 修正（冲突部分修改，无关部分保留）")
-        else:
-            notes.append("修正失败，沿用原始画像")
+    aligned_texts, warnings = align_personas(household_type, persona_texts, prompt_obj,
+                                             logger=logger, thinking=thinking, prefix=prefix)
+    notes.extend(warnings)
+    if aligned_texts is not None:
+        persona_texts = aligned_texts
 
     for attempt in range(MAX_BUILD_ATTEMPTS):
         household, warnings = build_household(household_type, persona_texts,
                                               district_text, prompt_obj,
-                                              logger=logger, thinking=thinking)
+                                              logger=logger, thinking=thinking,
+                                              prefix=prefix)
         notes.extend(warnings)
         if household is None:
             continue
         ok, problems = _repair_household(household)
         if ok:
             household["llm_generated"] = True
-            return household, notes, persona_texts, original_persona_texts, \
-                validation_attempts, attempt_seed
+            return household, notes, persona_texts, original_persona_texts, attempt_seed
         notes.append(f"家庭结构校验失败（第 {attempt + 1} 次）：{problems}")
 
     notes.append("LLM 家庭生成多次失败，回退程序化模板")
     household = fallback_household(household_type, rng)
-    return household, notes, persona_texts, original_persona_texts, \
-        validation_attempts, attempt_seed
+    return household, notes, persona_texts, original_persona_texts, attempt_seed
 
 
 def _write_json(path, data):
@@ -510,21 +480,18 @@ def save_household_types(world_id, household_types):
 
 
 def save_household_artifacts(world_id, idx, persona_texts, original_persona_texts,
-                             validation_attempts, persona_seed, household):
-    """每户生成完成后立即落盘：personas.json + validation.json + household.json。"""
+                             persona_seed, household):
+    """每户生成完成后立即落盘：personas.json（原始+最终画像）+ household.json。"""
     district_dir = os.path.join(PROJECT_ROOT, "worlds", world_id, CLAYTON_POSTCODE)
     house_id = f"house_{idx + 1:04d}"
     house_dir = os.path.join(district_dir, house_id)
     os.makedirs(house_dir, exist_ok=True)
 
-    fixed = bool(validation_attempts) and validation_attempts[0].get("fixed")
-    personas = {"seed": persona_seed, "fixed": fixed,
-                "persona_texts": persona_texts}
-    if fixed:
-        personas["original_persona_texts"] = original_persona_texts
-    _write_json(os.path.join(house_dir, "personas.json"), personas)
-    _write_json(os.path.join(house_dir, "validation.json"),
-                {"attempts": validation_attempts})
+    _write_json(os.path.join(house_dir, "personas.json"), {
+        "seed": persona_seed,
+        "persona_texts": persona_texts,                    # 对齐后的最终画像
+        "original_persona_texts": original_persona_texts,  # 抽样原始画像（可对比）
+    })
     _write_json(os.path.join(house_dir, "household.json"), household)
     return house_id
 
@@ -539,19 +506,21 @@ def update_world_meta(world_id, house_meta):
     return world_meta
 
 
-def _household_worker(idx, htype, world_id, district_text, prompt_obj,
-                      logger, thinking, base_seed):
-    """单户完整流程，在一个线程内完成：抽样 → 校验 → 修正 → 生成家电 → 结构检查 → 落盘。
+def _household_worker(idx, htype, world_id, district_text, prompt_obj, log_dir,
+                      thinking, base_seed):
+    """单户完整流程，在一个独立进程中完成：抽样 → 画像对齐 → 生成房间家电 → 检查 → 落盘。
 
-    返回 (house_meta, household, notes, error)。
+    返回 (house_meta, household, notes, error, tokens)。多进程参数必须全部可 pickle。
     """
     try:
         rng = random.Random(base_seed * 10007 + idx)  # 每户独立种子，并行/串行均可复现
-        household, notes, personas, original_personas, v_attempts, p_seed = \
+        prefix = f"house_{idx + 1:04d}_"              # 每户固定 log 文件后缀
+        logger = ChatLogger(log_dir)                  # 进程内创建（logger 对象不可跨进程）
+        household, notes, personas, original_personas, p_seed = \
             generate_one_household(htype, district_text, rng, prompt_obj,
-                                   logger=logger, thinking=thinking)
+                                   logger=logger, thinking=thinking, prefix=prefix)
         house_id = save_household_artifacts(world_id, idx, personas, original_personas,
-                                            v_attempts, p_seed, household)
+                                            p_seed, household)
         house_meta = {
             "house_id": house_id,
             "type": household.get("type", "?"),
@@ -559,9 +528,10 @@ def _household_worker(idx, htype, world_id, district_text, prompt_obj,
             "rooms_count": len(household.get("home", {}).get("rooms", [])),
             "llm_generated": household.get("llm_generated", False),
         }
-        return house_meta, household, notes, None
+        tokens = SubAgent.get_tokens()  # (缓存未命中, 命中, 输出) 本进程累计
+        return house_meta, household, notes, None, tokens
     except Exception as e:
-        return None, None, [f"线程异常：{e}"], str(e)
+        return None, None, [f"进程异常：{e}"], str(e), (0, 0, 0)
 
 
 def main():
@@ -599,19 +569,20 @@ def main():
 
     print("\n[步骤 1] 由地区描述生成家庭类型...")
     household_types = generate_household_types(district_text, args.count, prompt_obj,
-                                               logger=logger, thinking=args.think)
+                                               logger=logger, thinking=args.think,
+                                               prefix="global_")
     save_household_types(args.world_id, household_types)  # 立即落盘
     print(f"  [OK] 已保存 {args.count} 种家庭类型 -> worlds/{args.world_id}/household_types.json")
     for i, t in enumerate(household_types):
         print(f"    {i + 1}. {t['type']}（{t['typical_members']} 人）— {t['housing_hint']}")
 
-    # 步骤 2-5：每户（抽样+校验+修正+生成+检查）一个线程，最多 12 户并行
+    # 步骤 2-3：每户（抽样+画像对齐+生成房间家电+检查）一个独立进程，最多 12 个进程并行
     max_workers = min(len(household_types), 12)
-    print(f"\n[步骤 2-5] 并行生成 {len(household_types)} 户（{max_workers} 线程同时处理）…")
-    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+    print(f"\n[步骤 2-3] 并行生成 {len(household_types)} 户（{max_workers} 个进程同时处理）…")
+    with ProcessPoolExecutor(max_workers=max_workers) as pool:
         futures = {
             pool.submit(_household_worker, idx, htype, args.world_id, district_text,
-                        prompt_obj, logger, args.think, args.seed): idx
+                        prompt_obj, log_dir, args.think, args.seed): idx
             for idx, htype in enumerate(household_types)
         }
         results = {}
@@ -620,11 +591,15 @@ def main():
             try:
                 results[idx] = fut.result()
             except Exception as e:  # worker 已兜底，这里仅防御
-                results[idx] = (None, None, [f"线程异常：{e}"], str(e))
+                results[idx] = (None, None, [f"进程异常：{e}"], str(e), (0, 0, 0))
 
-    # 主线程按家庭顺序输出 + 增量更新 world.json（串行，无并发写冲突）
+    # 主进程按家庭顺序输出 + 增量更新 world.json（串行，无并发写冲突）
+    total_miss = total_hit = total_completion = 0
     for idx in range(len(household_types)):
-        house_meta, household, notes, error = results[idx]
+        house_meta, household, notes, error, tokens = results[idx]
+        total_miss += tokens[0]
+        total_hit += tokens[1]
+        total_completion += tokens[2]
         if house_meta is None:
             print(f"\n  [失败] house_{idx + 1:04d} 生成失败：{error}")
             continue
@@ -636,11 +611,10 @@ def main():
               f" — {'、'.join(m.get('name', '?') for m in household.get('members', []))}"
               f" -> 已落盘")
 
-    miss, hit, completion = SubAgent.get_tokens()  # (缓存未命中, 命中, 输出)
-    total = miss + hit + completion
+    total = total_miss + total_hit + total_completion
     print(f"\n=== 完成：worlds/{args.world_id}/ （{len(household_types)} 户）===")
-    print(f"  Token 消耗：{total}（缓存未命中 {miss} + "
-          f"缓存命中 {hit} + 输出 {completion}）")
+    print(f"  Token 消耗：{total}（缓存未命中 {total_miss} + "
+          f"缓存命中 {total_hit} + 输出 {total_completion}，跨 {max_workers} 进程汇总）")
     print(f"  LLM 聊天记录：{log_dir}（每步 .md + llm_chat.jsonl）")
     print(f"  下一步：python src/simulate.py {args.world_id} --days 1 --no-input")
 

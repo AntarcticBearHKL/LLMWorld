@@ -1,0 +1,178 @@
+{
+  "appliance_info": {
+    "unique_id": "卧室1_台灯",
+    "name": "台灯",
+    "type": "on_demand",
+    "power_watts": 15
+  },
+  "usage_summary": {
+    "total_minutes": 30,
+    "total_hours": 0.5,
+    "total_energy_kwh": 0.0075
+  },
+  "usage_segments": [
+    {
+      "time_range": "23:00-23:30",
+      "start_minutes": 1380,
+      "end_minutes": 1410,
+      "duration_minutes": 30,
+      "action": "use",
+      "location": "卧室1",
+      "member": "Arjun Patel",
+      "energy_kwh": 0.0075,
+      "capped": false
+    }
+  ],
+  "minute_by_minute_usage": [
+    {
+      "minute": 1380,
+      "time": "23:00",
+      "watts": 15.0
+    },
+    {
+      "minute": 1381,
+      "time": "23:01",
+      "watts": 15.0
+    },
+    {
+      "minute": 1382,
+      "time": "23:02",
+      "watts": 15.0
+    },
+    {
+      "minute": 1383,
+      "time": "23:03",
+      "watts": 15.0
+    },
+    {
+      "minute": 1384,
+      "time": "23:04",
+      "watts": 15.0
+    },
+    {
+      "minute": 1385,
+      "time": "23:05",
+      "watts": 15.0
+    },
+    {
+      "minute": 1386,
+      "time": "23:06",
+      "watts": 15.0
+    },
+    {
+      "minute": 1387,
+      "time": "23:07",
+      "watts": 15.0
+    },
+    {
+      "minute": 1388,
+      "time": "23:08",
+      "watts": 15.0
+    },
+    {
+      "minute": 1389,
+      "time": "23:09",
+      "watts": 15.0
+    },
+    {
+      "minute": 1390,
+      "time": "23:10",
+      "watts": 15.0
+    },
+    {
+      "minute": 1391,
+      "time": "23:11",
+      "watts": 15.0
+    },
+    {
+      "minute": 1392,
+      "time": "23:12",
+      "watts": 15.0
+    },
+    {
+      "minute": 1393,
+      "time": "23:13",
+      "watts": 15.0
+    },
+    {
+      "minute": 1394,
+      "time": "23:14",
+      "watts": 15.0
+    },
+    {
+      "minute": 1395,
+      "time": "23:15",
+      "watts": 15.0
+    },
+    {
+      "minute": 1396,
+      "time": "23:16",
+      "watts": 15.0
+    },
+    {
+      "minute": 1397,
+      "time": "23:17",
+      "watts": 15.0
+    },
+    {
+      "minute": 1398,
+      "time": "23:18",
+      "watts": 15.0
+    },
+    {
+      "minute": 1399,
+      "time": "23:19",
+      "watts": 15.0
+    },
+    {
+      "minute": 1400,
+      "time": "23:20",
+      "watts": 15.0
+    },
+    {
+      "minute": 1401,
+      "time": "23:21",
+      "watts": 15.0
+    },
+    {
+      "minute": 1402,
+      "time": "23:22",
+      "watts": 15.0
+    },
+    {
+      "minute": 1403,
+      "time": "23:23",
+      "watts": 15.0
+    },
+    {
+      "minute": 1404,
+      "time": "23:24",
+      "watts": 15.0
+    },
+    {
+      "minute": 1405,
+      "time": "23:25",
+      "watts": 15.0
+    },
+    {
+      "minute": 1406,
+      "time": "23:26",
+      "watts": 15.0
+    },
+    {
+      "minute": 1407,
+      "time": "23:27",
+      "watts": 15.0
+    },
+    {
+      "minute": 1408,
+      "time": "23:28",
+      "watts": 15.0
+    },
+    {
+      "minute": 1409,
+      "time": "23:29",
+      "watts": 15.0
+    }
+  ]
+}

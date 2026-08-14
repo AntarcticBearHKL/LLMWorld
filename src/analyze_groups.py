@@ -14,6 +14,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 
 def load_household_labels(world_id):
@@ -48,7 +49,7 @@ def load_household_labels(world_id):
 def load_variability_labels(world_id, scenario="baseline"):
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    path = os.path.join(project_root, "simulation", world_id, "analysis",
+    path = os.path.join(sim_root(world_id), "analysis",
                         f"variability_{scenario}.json")
     if not os.path.exists(path):
         return {}
@@ -70,7 +71,7 @@ def load_scenario_house_kwh(world_id):
 
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    pop_dir = os.path.join(project_root, "simulation", world_id, "population")
+    pop_dir = os.path.join(sim_root(world_id), "population")
     scenarios = {}
     if not os.path.isdir(pop_dir):
         return scenarios
@@ -164,7 +165,7 @@ def main():
         print(line)
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_dir = os.path.join(project_root, "simulation", args.world, "analysis")
+    out_dir = os.path.join(sim_root(args.world), "analysis")
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"groups_{args.label_source}.json")
     with open(out_path, "w", encoding="utf-8") as f:

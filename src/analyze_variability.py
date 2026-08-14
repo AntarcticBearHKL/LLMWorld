@@ -5,6 +5,7 @@ import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 from engine.load_features import (hourly_means, variability_index,
                                   peak_hour_shift, daily_kwh_cv,
@@ -12,7 +13,7 @@ from engine.load_features import (hourly_means, variability_index,
 
 
 def scan_house_daily_profiles(world_id, scenario):
-    simulation_root = os.path.join(PROJECT_ROOT, "simulation", world_id)
+    simulation_root = os.path.join(sim_root(world_id))
     if not os.path.isdir(simulation_root):
         return []
     per_house = []
@@ -86,7 +87,7 @@ def main():
     report["scenario"] = args.scenario
 
     if not args.out:
-        analysis_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        analysis_dir = os.path.join(sim_root(args.world_id),
                                     "analysis")
         os.makedirs(analysis_dir, exist_ok=True)
         args.out = os.path.join(analysis_dir,

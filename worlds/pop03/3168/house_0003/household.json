@@ -1,15 +1,15 @@
 {
-  "type": "有孩子的夫妻家庭",
-  "season": "秋天",
-  "story": "Rajan 和 Mei-Ling 在莫纳什大学相识，结婚后选择在 Clayton 安家，因为这里多元文化浓厚、教育资源优质。Rajan 在附近的科技公司担任 IT 项目经理，Mei-Ling 是莫纳什医学中心的护士，两个孩子都在当地公立学校就读。",
+  "type": "有孩夫妻家庭",
+  "season": "春天",
+  "story": "这是一个在Clayton生活了五年的四口之家，父亲在本地科技公司做项目经理，母亲在医院轮班，两个孩子就读于附近的小学。每天傍晚父亲遛狗，母亲在厨房忙碌，孩子们在客厅写作业，日子平凡而充实。",
   "home": {
-    "name": "The Patel Residence",
-    "type": "独立式房屋",
-    "size": 180,
+    "name": "Patel Family Home",
+    "type": "联排别墅",
+    "size": 140,
     "rooms": [
       {
         "name": "客厅",
-        "size": 40,
+        "size": 25,
         "appliances": [
           {
             "type": "电视",
@@ -27,13 +27,13 @@
             "type": "灯",
             "brand": "Philips",
             "power": 40,
-            "age": 5
+            "age": 1
           }
         ]
       },
       {
         "name": "厨房",
-        "size": 25,
+        "size": 15,
         "appliances": [
           {
             "type": "冰箱",
@@ -49,62 +49,56 @@
           },
           {
             "type": "微波炉",
-            "brand": "Bosch",
+            "brand": "Sharp",
             "power": 1000,
-            "age": 3
+            "age": 5
           },
           {
             "type": "电磁炉",
-            "brand": "Electrolux",
+            "brand": "Bosch",
             "power": 2000,
             "age": 1
           },
           {
             "type": "油烟机",
-            "brand": "Fisher & Paykel",
+            "brand": "Westinghouse",
             "power": 200,
+            "age": 3
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
             "age": 1
           }
         ]
       },
       {
         "name": "主卧",
-        "size": 20,
+        "size": 18,
         "appliances": [
           {
             "type": "空调",
             "brand": "Daikin",
             "power": 2000,
             "age": 2
-          },
-          {
-            "type": "灯",
-            "brand": "Philips",
-            "power": 40,
-            "age": 5
           },
           {
             "type": "台灯",
             "brand": "IKEA",
             "power": 15,
-            "age": 3
+            "age": 1
           }
         ]
       },
       {
-        "name": "次卧1",
-        "size": 16,
+        "name": "次卧1（Aarav）",
+        "size": 12,
         "appliances": [
           {
             "type": "空调",
-            "brand": "Daikin",
+            "brand": "Toshiba",
             "power": 2000,
-            "age": 2
-          },
-          {
-            "type": "灯",
-            "brand": "Philips",
-            "power": 40,
             "age": 4
           },
           {
@@ -116,19 +110,13 @@
         ]
       },
       {
-        "name": "次卧2",
-        "size": 14,
+        "name": "次卧2（Diya）",
+        "size": 12,
         "appliances": [
           {
             "type": "空调",
-            "brand": "Daikin",
+            "brand": "Toshiba",
             "power": 2000,
-            "age": 2
-          },
-          {
-            "type": "灯",
-            "brand": "Philips",
-            "power": 40,
             "age": 4
           },
           {
@@ -141,31 +129,31 @@
       },
       {
         "name": "卫生间",
-        "size": 10,
+        "size": 8,
         "appliances": [
           {
             "type": "热水器",
-            "brand": "Rheem",
+            "brand": "Rinnai",
             "power": 3000,
-            "age": 6
-          },
-          {
-            "type": "灯",
-            "brand": "Philips",
-            "power": 40,
-            "age": 5
+            "age": 3
           }
         ]
       },
       {
         "name": "洗衣房",
-        "size": 8,
+        "size": 5,
         "appliances": [
           {
             "type": "洗衣机",
             "brand": "Bosch",
             "power": 500,
             "age": 3
+          },
+          {
+            "type": "吸尘器",
+            "brand": "Dyson",
+            "power": 1200,
+            "age": 2
           }
         ]
       }
@@ -173,13 +161,82 @@
   },
   "members": [
     {
-      "name": "Rajan Patel",
-      "age": 40,
+      "name": "Mei-Ling Patel",
+      "age": 34,
+      "gender": "女",
+      "occupation": "医院行政人员",
+      "work_schedule": {
+        "start": "08:00",
+        "end": "16:00",
+        "remote": false,
+        "work_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "数字原住民",
+          "谨慎",
+          "直觉决策",
+          "社区归属感强",
+          "焦虑",
+          "内向"
+        ],
+        "behavior_text": "她习惯用直觉快速处理事情，对社区事务非常投入，常参与本地志愿者活动。科技产品用得得心应手，但面对压力时容易焦虑，喜欢提前列出周计划，购物时十分在意价格。",
+        "energy_awareness": "中",
+        "news_sensitivity": "高",
+        "big_five": {
+          "openness": 8,
+          "conscientiousness": 8,
+          "extraversion": 3,
+          "agreeableness": 8,
+          "neuroticism": 8
+        }
+      },
+      "habits": {
+        "wake_time": "06:30",
+        "sleep_time": "22:30",
+        "exercise": "从不锻炼",
+        "hobbies": [
+          "逛便宜货市场",
+          "去咖啡馆",
+          "做慈善捐款"
+        ]
+      },
+      "health": {
+        "condition": "身体健康，心理稳定，压力较大，轻度慢性疼痛",
+        "temperature_preference": {
+          "summer": 26,
+          "winter": 22
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Samsung",
+          "power": 20,
+          "age": 1
+        },
+        {
+          "type": "电脑",
+          "brand": "Apple",
+          "power": 200,
+          "age": 2
+        }
+      ]
+    },
+    {
+      "name": "Arjun Patel",
+      "age": 38,
       "gender": "男",
       "occupation": "IT项目经理",
       "work_schedule": {
         "start": "09:00",
-        "end": "18:00",
+        "end": "17:00",
         "remote": false,
         "work_days": [
           1,
@@ -192,104 +249,35 @@
       "personality": {
         "traits": [
           "果断",
-          "开放",
-          "自由市场拥护者",
+          "自由至上",
           "虔诚",
-          "社交活跃",
-          "健康自管理"
+          "爱社交",
+          "但耐心不足",
+          "常迟到"
         ],
-        "behavior_text": "Rajan 是一位性格开放、决策果断的父亲。他非常重视个人自由与自主，对隐私高度敏感。他每天都会进行宗教冥想，并坚持参与社区志愿服务。工作中，他倡导直接高效，但对权威持保留态度。他患有多种慢性病，却仍保持着较高的健康自我管理意识，每日按时服药并锻炼。他很少关注新闻，更倾向于从具体经验中获取信息。在家庭中，他以行动支持家人，但有时因作息不如妻子规律而迟到。",
+        "behavior_text": "他决策果断，讨厌被束缚，对家庭非常忠诚，重视个人自由。虽然社交能力强，但有时不够耐心，经常因迟到而匆忙。热心志愿服务，每天都在社区帮忙，但很少关注新闻。",
         "energy_awareness": "低",
         "news_sensitivity": "低",
         "big_five": {
           "openness": 3,
           "conscientiousness": 2,
-          "extraversion": 8,
-          "agreeableness": 5,
+          "extraversion": 9,
+          "agreeableness": 6,
           "neuroticism": 6
         }
       },
       "habits": {
         "wake_time": "07:00",
-        "sleep_time": "23:00",
-        "exercise": "每周三次在家进行力量训练",
+        "sleep_time": "23:30",
+        "exercise": "每周锻炼",
         "hobbies": [
+          "养狗",
           "阅读",
-          "遛狗",
           "志愿服务"
         ]
       },
       "health": {
-        "condition": "患有多发性慢性病（如高血压、糖尿病），视力需矫正，心理偶有焦虑，每天需服药。",
-        "temperature_preference": {
-          "summer": 24,
-          "winter": 22
-        }
-      },
-      "personal_appliances": [
-        {
-          "type": "手机",
-          "brand": "Samsung",
-          "power": 20,
-          "age": 2
-        },
-        {
-          "type": "电脑",
-          "brand": "Dell",
-          "power": 200,
-          "age": 3
-        }
-      ]
-    },
-    {
-      "name": "Mei-Ling Zhang",
-      "age": 38,
-      "gender": "女",
-      "occupation": "注册护士",
-      "work_schedule": {
-        "start": "07:00",
-        "end": "15:30",
-        "remote": false,
-        "work_days": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ]
-      },
-      "personality": {
-        "traits": [
-          "INFJ",
-          "谨慎",
-          "直觉决策",
-          "社区导向",
-          "素食者",
-          "焦虑"
-        ],
-        "behavior_text": "Mei-Ling 是一位谨慎且依赖直觉的护士。她非常重视社区归属，经常参与社区活动并定期捐款。她有虔诚的宗教信仰，坚持素食。作为护士，她轮班制工作，压力较大，但精力充沛。她习惯先验证再相信，面对信息保持警惕。她每天自己做饭，爱淘便宜货，对价格敏感。她喜欢去咖啡馆，虽然有些焦虑，但在家中承担着照顾孩子和老人的责任。她每天阅读新闻，对政策变化保持关注。",
-        "energy_awareness": "中",
-        "news_sensitivity": "高",
-        "big_five": {
-          "openness": 9,
-          "conscientiousness": 8,
-          "extraversion": 3,
-          "agreeableness": 8,
-          "neuroticism": 8
-        }
-      },
-      "habits": {
-        "wake_time": "05:30",
-        "sleep_time": "22:00",
-        "exercise": "从不锻炼",
-        "hobbies": [
-          "烹饪",
-          "逛咖啡馆",
-          "阅读新闻"
-        ]
-      },
-      "health": {
-        "condition": "身体健康，但有轻度慢性疼痛（如背痛）。心理状态稳定但压力较大。健康知识丰富，医保全面。",
+        "condition": "总体良好，但有多种慢性病，心理上有挣扎，需每天吃药",
         "temperature_preference": {
           "summer": 25,
           "winter": 23
@@ -303,20 +291,20 @@
           "age": 1
         },
         {
-          "type": "台灯",
-          "brand": "Philips",
-          "power": 15,
-          "age": 2
+          "type": "电脑",
+          "brand": "Dell",
+          "power": 200,
+          "age": 3
         }
       ]
     },
     {
       "name": "Aarav Patel",
-      "age": 14,
+      "age": 11,
       "gender": "男",
-      "occupation": "学生（9年级）",
+      "occupation": "小学生",
       "work_schedule": {
-        "start": "08:30",
+        "start": "09:00",
         "end": "15:00",
         "remote": false,
         "work_days": [
@@ -329,107 +317,102 @@
       },
       "personality": {
         "traits": [
-          "ISTP",
           "谨慎",
-          "成就导向",
-          "虔诚",
-          "晨型人",
-          "冒险精神"
+          "内向",
+          "尊重传统",
+          "冒险精神",
+          "敏感",
+          "注重独立"
         ],
-        "behavior_text": "Aarav 是家中长子，性格谨慎而内向。他非常看重成就和个人自由，对安全有强烈需求。他每天早起，按时上学，生活规律。他喜欢做长期规划，很守时。尽管他刻意回避新闻，但对新鲜事物保持好奇。他养了一只狗，喜欢待在家里动手制作。他有注意力相关诊断，有时难以同时处理多件事。他非常虔诚，坚持宗教饮食限制。",
-        "energy_awareness": "低",
+        "behavior_text": "他性格谨慎，喜欢观察而不是急于表达，对家庭和宗教很虔诚。平时由家长接送上学，不爱出门，但内心渴望冒险，在家会看YouTube视频，也喜欢帮助别人。",
+        "energy_awareness": "中",
         "news_sensitivity": "低",
         "big_five": {
-          "openness": 5,
+          "openness": 8,
           "conscientiousness": 7,
           "extraversion": 3,
-          "agreeableness": 7,
-          "neuroticism": 4
-        }
-      },
-      "habits": {
-        "wake_time": "06:00",
-        "sleep_time": "21:30",
-        "exercise": "每天遛狗",
-        "hobbies": [
-          "木工模型",
-          "看YouTube科技视频"
-        ]
-      },
-      "health": {
-        "condition": "身体一般，有些未确诊的健康问题（如频繁头痛），视力需矫正，听力轻度下降，睡眠质量差，偶尔需要吃药，有宗教饮食限制。",
-        "temperature_preference": {
-          "summer": 25,
-          "winter": 21
-        }
-      },
-      "personal_appliances": [
-        {
-          "type": "手机",
-          "brand": "Google",
-          "power": 20,
-          "age": 1
-        },
-        {
-          "type": "电脑",
-          "brand": "HP",
-          "power": 200,
-          "age": 2
-        }
-      ]
-    },
-    {
-      "name": "Ananya Patel",
-      "age": 10,
-      "gender": "女",
-      "occupation": "学生（5年级）",
-      "work_schedule": {
-        "start": "08:30",
-        "end": "15:00",
-        "remote": false,
-        "work_days": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ]
-      },
-      "personality": {
-        "traits": [
-          "ISTJ",
-          "厌恶风险",
-          "利他",
-          "学业优秀",
-          "社区归属感",
-          "爱整洁"
-        ],
-        "behavior_text": "Ananya 是家中幼女，性格内向而谨慎，非常厌恶风险。她做决定果断直接，但从不冒险。她非常重视学业和社区，乐于帮助他人。她信守承诺，房间一尘不染。她每天坚持锻炼，生活作息灵活但守时。她喜欢阅读和观看教育视频。虽然不信教，但她重视灵性信仰。她买东西前会做足功课，对价格敏感。",
-        "energy_awareness": "高",
-        "news_sensitivity": "低",
-        "big_five": {
-          "openness": 2,
-          "conscientiousness": 9,
-          "extraversion": 3,
-          "agreeableness": 7,
-          "neuroticism": 8
+          "agreeableness": 8,
+          "neuroticism": 6
         }
       },
       "habits": {
         "wake_time": "06:30",
         "sleep_time": "21:00",
-        "exercise": "每周锻炼三次，喜欢跳绳",
+        "exercise": "偶尔户外跑动",
         "hobbies": [
-          "阅读",
-          "绘画",
-          "看YouTube"
+          "看剧",
+          "听音乐",
+          "摆弄小工具"
         ]
       },
       "health": {
-        "condition": "身体健康，视力需矫正，心理状态稳定，压力较小，但精力不足。",
+        "condition": "身体一般，有未确诊健康问题，视力矫正，听力轻度下降，睡眠质量差",
+        "temperature_preference": {
+          "summer": 24,
+          "winter": 22
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Samsung",
+          "power": 20,
+          "age": 2
+        }
+      ]
+    },
+    {
+      "name": "Diya Patel",
+      "age": 8,
+      "gender": "女",
+      "occupation": "小学生",
+      "work_schedule": {
+        "start": "09:00",
+        "end": "15:00",
+        "remote": false,
+        "work_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "守规矩",
+          "完美主义",
+          "内向",
+          "利他",
+          "谨慎",
+          "有责任感"
+        ],
+        "behavior_text": "她做事一板一眼，家里的东西必须摆放整齐，厌恶风险，凡事都要先求证。每天看新闻，虽然年纪小但关心世界。在学校乐于助人，回家后喜欢整理房间，对价格敏感，买东西前会做功课。",
+        "energy_awareness": "高",
+        "news_sensitivity": "高",
+        "big_five": {
+          "openness": 2,
+          "conscientiousness": 9,
+          "extraversion": 2,
+          "agreeableness": 9,
+          "neuroticism": 8
+        }
+      },
+      "habits": {
+        "wake_time": "07:00",
+        "sleep_time": "20:30",
+        "exercise": "每周锻炼",
+        "hobbies": [
+          "整理房间",
+          "看新闻",
+          "画画"
+        ]
+      },
+      "health": {
+        "condition": "身体健康，视力矫正，精力不足",
         "temperature_preference": {
           "summer": 26,
-          "winter": 22
+          "winter": 24
         }
       },
       "personal_appliances": [
@@ -437,13 +420,7 @@
           "type": "手机",
           "brand": "Apple",
           "power": 20,
-          "age": 2
-        },
-        {
-          "type": "台灯",
-          "brand": "IKEA",
-          "power": 15,
-          "age": 3
+          "age": 1
         }
       ]
     }

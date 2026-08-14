@@ -1,0 +1,758 @@
+{
+  "appliance_info": {
+    "unique_id": "客厅_灯",
+    "name": "灯",
+    "type": "on_demand",
+    "power_watts": 40
+  },
+  "usage_summary": {
+    "total_minutes": 135,
+    "total_hours": 2.25,
+    "total_energy_kwh": 0.15
+  },
+  "usage_segments": [
+    {
+      "time_range": "20:15-21:15",
+      "start_minutes": 1215,
+      "end_minutes": 1275,
+      "duration_minutes": 60,
+      "action": "use",
+      "location": "客厅",
+      "member": "Arjun Patel",
+      "energy_kwh": 0.04,
+      "capped": false
+    },
+    {
+      "time_range": "21:15-21:45",
+      "start_minutes": 1275,
+      "end_minutes": 1305,
+      "duration_minutes": 30,
+      "action": "use",
+      "location": "客厅",
+      "member": "Arjun Patel",
+      "energy_kwh": 0.02,
+      "capped": false
+    },
+    {
+      "time_range": "21:45-22:30",
+      "start_minutes": 1305,
+      "end_minutes": 1350,
+      "duration_minutes": 45,
+      "action": "use",
+      "location": "客厅",
+      "member": "Arjun Patel",
+      "energy_kwh": 0.03,
+      "capped": false
+    },
+    {
+      "time_range": "21:15-21:45",
+      "start_minutes": 1275,
+      "end_minutes": 1305,
+      "duration_minutes": 30,
+      "action": "use",
+      "location": "客厅",
+      "member": "Mei-Ling Zhang",
+      "energy_kwh": 0.02,
+      "capped": false
+    },
+    {
+      "time_range": "21:15-21:45",
+      "start_minutes": 1275,
+      "end_minutes": 1305,
+      "duration_minutes": 30,
+      "action": "use",
+      "location": "客厅",
+      "member": "Priya Nair",
+      "energy_kwh": 0.02,
+      "capped": false
+    },
+    {
+      "time_range": "21:15-21:45",
+      "start_minutes": 1275,
+      "end_minutes": 1305,
+      "duration_minutes": 30,
+      "action": "use",
+      "location": "客厅",
+      "member": "Wei Chen",
+      "energy_kwh": 0.02,
+      "capped": false
+    }
+  ],
+  "minute_by_minute_usage": [
+    {
+      "minute": 1215,
+      "time": "20:15",
+      "watts": 40.0
+    },
+    {
+      "minute": 1216,
+      "time": "20:16",
+      "watts": 40.0
+    },
+    {
+      "minute": 1217,
+      "time": "20:17",
+      "watts": 40.0
+    },
+    {
+      "minute": 1218,
+      "time": "20:18",
+      "watts": 40.0
+    },
+    {
+      "minute": 1219,
+      "time": "20:19",
+      "watts": 40.0
+    },
+    {
+      "minute": 1220,
+      "time": "20:20",
+      "watts": 40.0
+    },
+    {
+      "minute": 1221,
+      "time": "20:21",
+      "watts": 40.0
+    },
+    {
+      "minute": 1222,
+      "time": "20:22",
+      "watts": 40.0
+    },
+    {
+      "minute": 1223,
+      "time": "20:23",
+      "watts": 40.0
+    },
+    {
+      "minute": 1224,
+      "time": "20:24",
+      "watts": 40.0
+    },
+    {
+      "minute": 1225,
+      "time": "20:25",
+      "watts": 40.0
+    },
+    {
+      "minute": 1226,
+      "time": "20:26",
+      "watts": 40.0
+    },
+    {
+      "minute": 1227,
+      "time": "20:27",
+      "watts": 40.0
+    },
+    {
+      "minute": 1228,
+      "time": "20:28",
+      "watts": 40.0
+    },
+    {
+      "minute": 1229,
+      "time": "20:29",
+      "watts": 40.0
+    },
+    {
+      "minute": 1230,
+      "time": "20:30",
+      "watts": 40.0
+    },
+    {
+      "minute": 1231,
+      "time": "20:31",
+      "watts": 40.0
+    },
+    {
+      "minute": 1232,
+      "time": "20:32",
+      "watts": 40.0
+    },
+    {
+      "minute": 1233,
+      "time": "20:33",
+      "watts": 40.0
+    },
+    {
+      "minute": 1234,
+      "time": "20:34",
+      "watts": 40.0
+    },
+    {
+      "minute": 1235,
+      "time": "20:35",
+      "watts": 40.0
+    },
+    {
+      "minute": 1236,
+      "time": "20:36",
+      "watts": 40.0
+    },
+    {
+      "minute": 1237,
+      "time": "20:37",
+      "watts": 40.0
+    },
+    {
+      "minute": 1238,
+      "time": "20:38",
+      "watts": 40.0
+    },
+    {
+      "minute": 1239,
+      "time": "20:39",
+      "watts": 40.0
+    },
+    {
+      "minute": 1240,
+      "time": "20:40",
+      "watts": 40.0
+    },
+    {
+      "minute": 1241,
+      "time": "20:41",
+      "watts": 40.0
+    },
+    {
+      "minute": 1242,
+      "time": "20:42",
+      "watts": 40.0
+    },
+    {
+      "minute": 1243,
+      "time": "20:43",
+      "watts": 40.0
+    },
+    {
+      "minute": 1244,
+      "time": "20:44",
+      "watts": 40.0
+    },
+    {
+      "minute": 1245,
+      "time": "20:45",
+      "watts": 40.0
+    },
+    {
+      "minute": 1246,
+      "time": "20:46",
+      "watts": 40.0
+    },
+    {
+      "minute": 1247,
+      "time": "20:47",
+      "watts": 40.0
+    },
+    {
+      "minute": 1248,
+      "time": "20:48",
+      "watts": 40.0
+    },
+    {
+      "minute": 1249,
+      "time": "20:49",
+      "watts": 40.0
+    },
+    {
+      "minute": 1250,
+      "time": "20:50",
+      "watts": 40.0
+    },
+    {
+      "minute": 1251,
+      "time": "20:51",
+      "watts": 40.0
+    },
+    {
+      "minute": 1252,
+      "time": "20:52",
+      "watts": 40.0
+    },
+    {
+      "minute": 1253,
+      "time": "20:53",
+      "watts": 40.0
+    },
+    {
+      "minute": 1254,
+      "time": "20:54",
+      "watts": 40.0
+    },
+    {
+      "minute": 1255,
+      "time": "20:55",
+      "watts": 40.0
+    },
+    {
+      "minute": 1256,
+      "time": "20:56",
+      "watts": 40.0
+    },
+    {
+      "minute": 1257,
+      "time": "20:57",
+      "watts": 40.0
+    },
+    {
+      "minute": 1258,
+      "time": "20:58",
+      "watts": 40.0
+    },
+    {
+      "minute": 1259,
+      "time": "20:59",
+      "watts": 40.0
+    },
+    {
+      "minute": 1260,
+      "time": "21:00",
+      "watts": 40.0
+    },
+    {
+      "minute": 1261,
+      "time": "21:01",
+      "watts": 40.0
+    },
+    {
+      "minute": 1262,
+      "time": "21:02",
+      "watts": 40.0
+    },
+    {
+      "minute": 1263,
+      "time": "21:03",
+      "watts": 40.0
+    },
+    {
+      "minute": 1264,
+      "time": "21:04",
+      "watts": 40.0
+    },
+    {
+      "minute": 1265,
+      "time": "21:05",
+      "watts": 40.0
+    },
+    {
+      "minute": 1266,
+      "time": "21:06",
+      "watts": 40.0
+    },
+    {
+      "minute": 1267,
+      "time": "21:07",
+      "watts": 40.0
+    },
+    {
+      "minute": 1268,
+      "time": "21:08",
+      "watts": 40.0
+    },
+    {
+      "minute": 1269,
+      "time": "21:09",
+      "watts": 40.0
+    },
+    {
+      "minute": 1270,
+      "time": "21:10",
+      "watts": 40.0
+    },
+    {
+      "minute": 1271,
+      "time": "21:11",
+      "watts": 40.0
+    },
+    {
+      "minute": 1272,
+      "time": "21:12",
+      "watts": 40.0
+    },
+    {
+      "minute": 1273,
+      "time": "21:13",
+      "watts": 40.0
+    },
+    {
+      "minute": 1274,
+      "time": "21:14",
+      "watts": 40.0
+    },
+    {
+      "minute": 1275,
+      "time": "21:15",
+      "watts": 160.0
+    },
+    {
+      "minute": 1276,
+      "time": "21:16",
+      "watts": 160.0
+    },
+    {
+      "minute": 1277,
+      "time": "21:17",
+      "watts": 160.0
+    },
+    {
+      "minute": 1278,
+      "time": "21:18",
+      "watts": 160.0
+    },
+    {
+      "minute": 1279,
+      "time": "21:19",
+      "watts": 160.0
+    },
+    {
+      "minute": 1280,
+      "time": "21:20",
+      "watts": 160.0
+    },
+    {
+      "minute": 1281,
+      "time": "21:21",
+      "watts": 160.0
+    },
+    {
+      "minute": 1282,
+      "time": "21:22",
+      "watts": 160.0
+    },
+    {
+      "minute": 1283,
+      "time": "21:23",
+      "watts": 160.0
+    },
+    {
+      "minute": 1284,
+      "time": "21:24",
+      "watts": 160.0
+    },
+    {
+      "minute": 1285,
+      "time": "21:25",
+      "watts": 160.0
+    },
+    {
+      "minute": 1286,
+      "time": "21:26",
+      "watts": 160.0
+    },
+    {
+      "minute": 1287,
+      "time": "21:27",
+      "watts": 160.0
+    },
+    {
+      "minute": 1288,
+      "time": "21:28",
+      "watts": 160.0
+    },
+    {
+      "minute": 1289,
+      "time": "21:29",
+      "watts": 160.0
+    },
+    {
+      "minute": 1290,
+      "time": "21:30",
+      "watts": 160.0
+    },
+    {
+      "minute": 1291,
+      "time": "21:31",
+      "watts": 160.0
+    },
+    {
+      "minute": 1292,
+      "time": "21:32",
+      "watts": 160.0
+    },
+    {
+      "minute": 1293,
+      "time": "21:33",
+      "watts": 160.0
+    },
+    {
+      "minute": 1294,
+      "time": "21:34",
+      "watts": 160.0
+    },
+    {
+      "minute": 1295,
+      "time": "21:35",
+      "watts": 160.0
+    },
+    {
+      "minute": 1296,
+      "time": "21:36",
+      "watts": 160.0
+    },
+    {
+      "minute": 1297,
+      "time": "21:37",
+      "watts": 160.0
+    },
+    {
+      "minute": 1298,
+      "time": "21:38",
+      "watts": 160.0
+    },
+    {
+      "minute": 1299,
+      "time": "21:39",
+      "watts": 160.0
+    },
+    {
+      "minute": 1300,
+      "time": "21:40",
+      "watts": 160.0
+    },
+    {
+      "minute": 1301,
+      "time": "21:41",
+      "watts": 160.0
+    },
+    {
+      "minute": 1302,
+      "time": "21:42",
+      "watts": 160.0
+    },
+    {
+      "minute": 1303,
+      "time": "21:43",
+      "watts": 160.0
+    },
+    {
+      "minute": 1304,
+      "time": "21:44",
+      "watts": 160.0
+    },
+    {
+      "minute": 1305,
+      "time": "21:45",
+      "watts": 40.0
+    },
+    {
+      "minute": 1306,
+      "time": "21:46",
+      "watts": 40.0
+    },
+    {
+      "minute": 1307,
+      "time": "21:47",
+      "watts": 40.0
+    },
+    {
+      "minute": 1308,
+      "time": "21:48",
+      "watts": 40.0
+    },
+    {
+      "minute": 1309,
+      "time": "21:49",
+      "watts": 40.0
+    },
+    {
+      "minute": 1310,
+      "time": "21:50",
+      "watts": 40.0
+    },
+    {
+      "minute": 1311,
+      "time": "21:51",
+      "watts": 40.0
+    },
+    {
+      "minute": 1312,
+      "time": "21:52",
+      "watts": 40.0
+    },
+    {
+      "minute": 1313,
+      "time": "21:53",
+      "watts": 40.0
+    },
+    {
+      "minute": 1314,
+      "time": "21:54",
+      "watts": 40.0
+    },
+    {
+      "minute": 1315,
+      "time": "21:55",
+      "watts": 40.0
+    },
+    {
+      "minute": 1316,
+      "time": "21:56",
+      "watts": 40.0
+    },
+    {
+      "minute": 1317,
+      "time": "21:57",
+      "watts": 40.0
+    },
+    {
+      "minute": 1318,
+      "time": "21:58",
+      "watts": 40.0
+    },
+    {
+      "minute": 1319,
+      "time": "21:59",
+      "watts": 40.0
+    },
+    {
+      "minute": 1320,
+      "time": "22:00",
+      "watts": 40.0
+    },
+    {
+      "minute": 1321,
+      "time": "22:01",
+      "watts": 40.0
+    },
+    {
+      "minute": 1322,
+      "time": "22:02",
+      "watts": 40.0
+    },
+    {
+      "minute": 1323,
+      "time": "22:03",
+      "watts": 40.0
+    },
+    {
+      "minute": 1324,
+      "time": "22:04",
+      "watts": 40.0
+    },
+    {
+      "minute": 1325,
+      "time": "22:05",
+      "watts": 40.0
+    },
+    {
+      "minute": 1326,
+      "time": "22:06",
+      "watts": 40.0
+    },
+    {
+      "minute": 1327,
+      "time": "22:07",
+      "watts": 40.0
+    },
+    {
+      "minute": 1328,
+      "time": "22:08",
+      "watts": 40.0
+    },
+    {
+      "minute": 1329,
+      "time": "22:09",
+      "watts": 40.0
+    },
+    {
+      "minute": 1330,
+      "time": "22:10",
+      "watts": 40.0
+    },
+    {
+      "minute": 1331,
+      "time": "22:11",
+      "watts": 40.0
+    },
+    {
+      "minute": 1332,
+      "time": "22:12",
+      "watts": 40.0
+    },
+    {
+      "minute": 1333,
+      "time": "22:13",
+      "watts": 40.0
+    },
+    {
+      "minute": 1334,
+      "time": "22:14",
+      "watts": 40.0
+    },
+    {
+      "minute": 1335,
+      "time": "22:15",
+      "watts": 40.0
+    },
+    {
+      "minute": 1336,
+      "time": "22:16",
+      "watts": 40.0
+    },
+    {
+      "minute": 1337,
+      "time": "22:17",
+      "watts": 40.0
+    },
+    {
+      "minute": 1338,
+      "time": "22:18",
+      "watts": 40.0
+    },
+    {
+      "minute": 1339,
+      "time": "22:19",
+      "watts": 40.0
+    },
+    {
+      "minute": 1340,
+      "time": "22:20",
+      "watts": 40.0
+    },
+    {
+      "minute": 1341,
+      "time": "22:21",
+      "watts": 40.0
+    },
+    {
+      "minute": 1342,
+      "time": "22:22",
+      "watts": 40.0
+    },
+    {
+      "minute": 1343,
+      "time": "22:23",
+      "watts": 40.0
+    },
+    {
+      "minute": 1344,
+      "time": "22:24",
+      "watts": 40.0
+    },
+    {
+      "minute": 1345,
+      "time": "22:25",
+      "watts": 40.0
+    },
+    {
+      "minute": 1346,
+      "time": "22:26",
+      "watts": 40.0
+    },
+    {
+      "minute": 1347,
+      "time": "22:27",
+      "watts": 40.0
+    },
+    {
+      "minute": 1348,
+      "time": "22:28",
+      "watts": 40.0
+    },
+    {
+      "minute": 1349,
+      "time": "22:29",
+      "watts": 40.0
+    }
+  ]
+}

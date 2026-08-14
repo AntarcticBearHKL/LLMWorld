@@ -1,0 +1,178 @@
+{
+  "appliance_info": {
+    "unique_id": "厨房_微波炉",
+    "name": "微波炉",
+    "type": "on_demand",
+    "power_watts": 1000
+  },
+  "usage_summary": {
+    "total_minutes": 30,
+    "total_hours": 0.5,
+    "total_energy_kwh": 0.5
+  },
+  "usage_segments": [
+    {
+      "time_range": "08:00-08:30",
+      "start_minutes": 480,
+      "end_minutes": 510,
+      "duration_minutes": 30,
+      "action": "use",
+      "location": "厨房",
+      "member": "Mei-Ling Zhang",
+      "energy_kwh": 0.5,
+      "capped": false
+    }
+  ],
+  "minute_by_minute_usage": [
+    {
+      "minute": 480,
+      "time": "08:00",
+      "watts": 1000.0
+    },
+    {
+      "minute": 481,
+      "time": "08:01",
+      "watts": 1000.0
+    },
+    {
+      "minute": 482,
+      "time": "08:02",
+      "watts": 1000.0
+    },
+    {
+      "minute": 483,
+      "time": "08:03",
+      "watts": 1000.0
+    },
+    {
+      "minute": 484,
+      "time": "08:04",
+      "watts": 1000.0
+    },
+    {
+      "minute": 485,
+      "time": "08:05",
+      "watts": 1000.0
+    },
+    {
+      "minute": 486,
+      "time": "08:06",
+      "watts": 1000.0
+    },
+    {
+      "minute": 487,
+      "time": "08:07",
+      "watts": 1000.0
+    },
+    {
+      "minute": 488,
+      "time": "08:08",
+      "watts": 1000.0
+    },
+    {
+      "minute": 489,
+      "time": "08:09",
+      "watts": 1000.0
+    },
+    {
+      "minute": 490,
+      "time": "08:10",
+      "watts": 1000.0
+    },
+    {
+      "minute": 491,
+      "time": "08:11",
+      "watts": 1000.0
+    },
+    {
+      "minute": 492,
+      "time": "08:12",
+      "watts": 1000.0
+    },
+    {
+      "minute": 493,
+      "time": "08:13",
+      "watts": 1000.0
+    },
+    {
+      "minute": 494,
+      "time": "08:14",
+      "watts": 1000.0
+    },
+    {
+      "minute": 495,
+      "time": "08:15",
+      "watts": 1000.0
+    },
+    {
+      "minute": 496,
+      "time": "08:16",
+      "watts": 1000.0
+    },
+    {
+      "minute": 497,
+      "time": "08:17",
+      "watts": 1000.0
+    },
+    {
+      "minute": 498,
+      "time": "08:18",
+      "watts": 1000.0
+    },
+    {
+      "minute": 499,
+      "time": "08:19",
+      "watts": 1000.0
+    },
+    {
+      "minute": 500,
+      "time": "08:20",
+      "watts": 1000.0
+    },
+    {
+      "minute": 501,
+      "time": "08:21",
+      "watts": 1000.0
+    },
+    {
+      "minute": 502,
+      "time": "08:22",
+      "watts": 1000.0
+    },
+    {
+      "minute": 503,
+      "time": "08:23",
+      "watts": 1000.0
+    },
+    {
+      "minute": 504,
+      "time": "08:24",
+      "watts": 1000.0
+    },
+    {
+      "minute": 505,
+      "time": "08:25",
+      "watts": 1000.0
+    },
+    {
+      "minute": 506,
+      "time": "08:26",
+      "watts": 1000.0
+    },
+    {
+      "minute": 507,
+      "time": "08:27",
+      "watts": 1000.0
+    },
+    {
+      "minute": 508,
+      "time": "08:28",
+      "watts": 1000.0
+    },
+    {
+      "minute": 509,
+      "time": "08:29",
+      "watts": 1000.0
+    }
+  ]
+}

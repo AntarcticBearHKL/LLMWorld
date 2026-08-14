@@ -16,6 +16,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 import math
 import pandas as pd
@@ -126,7 +127,7 @@ def load_real_data(path):
 def load_sim_profile(world_id):
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    pop_dir = os.path.join(project_root, "simulation", world_id, "population")
+    pop_dir = os.path.join(sim_root(world_id), "population")
 
     candidates = []
     if os.path.isdir(pop_dir):
@@ -175,7 +176,7 @@ def main():
     report["real_mean_mw"] = round(sum(real_hourly) / len(real_hourly), 2)
 
 
-    out_dir = args.out or os.path.join(project_root, "simulation", args.world, "baseline")
+    out_dir = args.out or os.path.join(sim_root(args.world), "baseline")
     os.makedirs(out_dir, exist_ok=True)
     report_path = os.path.join(out_dir, "baseline_report.json")
     with open(report_path, "w", encoding="utf-8") as f:
