@@ -1,0 +1,203 @@
+{
+  "total_appliances": 23,
+  "total_energy_kwh": 13.2937,
+  "baseline_kwh": 1.2,
+  "decision_kwh": 12.0938,
+  "peak_overlap_events": [],
+  "validation_warnings": [
+    "[超限截断] 手机[arjun_patel_手机] 当日已用 230 分钟（上限 240），Arjun Patel 在 14:00-15:00 的使用从 60 分钟截断为 10 分钟",
+    "[超限截断] 手机[arjun_patel_手机] 当日已用 240 分钟（上限 240），Arjun Patel 在 15:00-15:30 的使用被完全丢弃",
+    "[超限截断] 手机[arjun_patel_手机] 当日已用 240 分钟（上限 240），Arjun Patel 在 18:00-19:00 的使用被完全丢弃",
+    "[超限截断] 手机[arjun_patel_手机] 当日已用 240 分钟（上限 240），Arjun Patel 在 20:15-21:15 的使用被完全丢弃",
+    "[超限截断] 手机[arjun_patel_手机] 当日已用 240 分钟（上限 240），Arjun Patel 在 22:45-23:00 的使用被完全丢弃",
+    "[超限截断] 手机[arjun_patel_手机] 当日已用 240 分钟（上限 240），Arjun Patel 在 23:00-23:30 的使用被完全丢弃",
+    "[超限截断] 手机[arjun_patel_手机] 当日已用 240 分钟（上限 240），Arjun Patel 在 23:30-23:59 的使用被完全丢弃",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 0 分钟（上限 240），Mei-Ling Zhang 在 00:00-08:30 的使用从 510 分钟截断为 240 分钟",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 09:15-09:40 的使用被完全丢弃",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 09:40-12:00 的使用被完全丢弃",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 12:00-13:00 的使用被完全丢弃",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 13:00-15:00 的使用被完全丢弃",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 15:00-17:00 的使用被完全丢弃",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 17:00-17:30 的使用被完全丢弃",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 17:30-18:30 的使用被完全丢弃",
+    "[超限截断] 电磁炉[厨房_电磁炉] 当日已用 55 分钟（上限 120），Mei-Ling Zhang 在 18:30-20:00 的使用从 90 分钟截断为 65 分钟",
+    "[超限截断] 油烟机[厨房_油烟机] 当日已用 55 分钟（上限 120），Mei-Ling Zhang 在 18:30-20:00 的使用从 90 分钟截断为 65 分钟",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 23:00-23:30 的使用被完全丢弃",
+    "[超限截断] 手机[mei_ling_zhang_手机] 当日已用 240 分钟（上限 240），Mei-Ling Zhang 在 23:30-23:59 的使用被完全丢弃",
+    "[超限截断] 电磁炉[厨房_电磁炉] 当日已用 120 分钟（上限 120），Priya Nair 在 08:10-08:55 的使用被完全丢弃",
+    "[超限截断] 电磁炉[厨房_电磁炉] 当日已用 120 分钟（上限 120），Priya Nair 在 18:30-20:00 的使用被完全丢弃",
+    "[超限截断] 油烟机[厨房_油烟机] 当日已用 120 分钟（上限 120），Priya Nair 在 18:30-20:00 的使用被完全丢弃",
+    "[超限截断] 手机[priya_nair_手机] 当日已用 205 分钟（上限 240），Priya Nair 在 23:00-23:59 的使用从 59 分钟截断为 35 分钟",
+    "[超限截断] 电磁炉[厨房_电磁炉] 当日已用 120 分钟（上限 120），Wei Chen 在 07:30-07:50 的使用被完全丢弃",
+    "[超限截断] 电磁炉[厨房_电磁炉] 当日已用 120 分钟（上限 120），Wei Chen 在 07:50-08:10 的使用被完全丢弃",
+    "[超限截断] 电磁炉[厨房_电磁炉] 当日已用 120 分钟（上限 120），Wei Chen 在 08:10-08:20 的使用被完全丢弃",
+    "[超限截断] 电磁炉[厨房_电磁炉] 当日已用 120 分钟（上限 120），Wei Chen 在 08:20-08:55 的使用被完全丢弃",
+    "[超限截断] 电磁炉[厨房_电磁炉] 当日已用 120 分钟（上限 120），Wei Chen 在 17:30-18:30 的使用被完全丢弃",
+    "[超限截断] 油烟机[厨房_油烟机] 当日已用 120 分钟（上限 120），Wei Chen 在 17:30-18:30 的使用被完全丢弃",
+    "[超限截断] 电饭煲[厨房_电饭煲] 当日已用 90 分钟（上限 120），Wei Chen 在 17:30-18:30 的使用从 60 分钟截断为 30 分钟",
+    "[超限截断] 热水器[卫生间_热水器] 当日已用 30 分钟（上限 45），Wei Chen 在 20:15-20:45 的使用从 30 分钟截断为 15 分钟"
+  ],
+  "appliances": [
+    {
+      "unique_id": "卧室1_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 3.92,
+      "total_energy_kwh": 0.1567
+    },
+    {
+      "unique_id": "厨房_电磁炉",
+      "name": "电磁炉",
+      "type": "on_demand",
+      "total_hours": 2.0,
+      "total_energy_kwh": 4.0
+    },
+    {
+      "unique_id": "厨房_油烟机",
+      "name": "油烟机",
+      "type": "on_demand",
+      "total_hours": 2.0,
+      "total_energy_kwh": 0.4
+    },
+    {
+      "unique_id": "arjun_patel_手机",
+      "name": "手机",
+      "type": "charging",
+      "total_hours": 4.0,
+      "total_energy_kwh": 0.08
+    },
+    {
+      "unique_id": "arjun_patel_电脑",
+      "name": "电脑",
+      "type": "on_demand",
+      "total_hours": 3.67,
+      "total_energy_kwh": 0.7333
+    },
+    {
+      "unique_id": "客厅_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 2.25,
+      "total_energy_kwh": 0.15
+    },
+    {
+      "unique_id": "卧室1_台灯",
+      "name": "台灯",
+      "type": "on_demand",
+      "total_hours": 0.5,
+      "total_energy_kwh": 0.0075
+    },
+    {
+      "unique_id": "mei_ling_zhang_手机",
+      "name": "手机",
+      "type": "charging",
+      "total_hours": 4.0,
+      "total_energy_kwh": 0.08
+    },
+    {
+      "unique_id": "厨房_微波炉",
+      "name": "微波炉",
+      "type": "on_demand",
+      "total_hours": 0.33,
+      "total_energy_kwh": 0.3333
+    },
+    {
+      "unique_id": "mei_ling_zhang_电脑",
+      "name": "电脑",
+      "type": "on_demand",
+      "total_hours": 5.0,
+      "total_energy_kwh": 1.0
+    },
+    {
+      "unique_id": "mei_ling_zhang_台灯",
+      "name": "台灯",
+      "type": "on_demand",
+      "total_hours": 2.5,
+      "total_energy_kwh": 0.0375
+    },
+    {
+      "unique_id": "卧室2_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 2.33,
+      "total_energy_kwh": 0.0933
+    },
+    {
+      "unique_id": "priya_nair_手机",
+      "name": "手机",
+      "type": "charging",
+      "total_hours": 4.0,
+      "total_energy_kwh": 0.08
+    },
+    {
+      "unique_id": "priya_nair_电脑",
+      "name": "电脑",
+      "type": "on_demand",
+      "total_hours": 4.0,
+      "total_energy_kwh": 0.8
+    },
+    {
+      "unique_id": "厨房_电饭煲",
+      "name": "电饭煲",
+      "type": "on_demand",
+      "total_hours": 2.0,
+      "total_energy_kwh": 1.6
+    },
+    {
+      "unique_id": "priya_nair_台灯",
+      "name": "台灯",
+      "type": "on_demand",
+      "total_hours": 1.0,
+      "total_energy_kwh": 0.015
+    },
+    {
+      "unique_id": "卫生间_热水器",
+      "name": "热水器",
+      "type": "on_demand",
+      "total_hours": 0.75,
+      "total_energy_kwh": 2.25
+    },
+    {
+      "unique_id": "卧室2_台灯",
+      "name": "台灯",
+      "type": "on_demand",
+      "total_hours": 0.75,
+      "total_energy_kwh": 0.0112
+    },
+    {
+      "unique_id": "卧室3_灯",
+      "name": "灯",
+      "type": "on_demand",
+      "total_hours": 0.75,
+      "total_energy_kwh": 0.03
+    },
+    {
+      "unique_id": "wei_chen_手机",
+      "name": "手机",
+      "type": "charging",
+      "total_hours": 3.17,
+      "total_energy_kwh": 0.0633
+    },
+    {
+      "unique_id": "wei_chen_台灯",
+      "name": "台灯",
+      "type": "on_demand",
+      "total_hours": 1.5,
+      "total_energy_kwh": 0.0225
+    },
+    {
+      "unique_id": "wei_chen_电脑",
+      "name": "电脑",
+      "type": "on_demand",
+      "total_hours": 0.75,
+      "total_energy_kwh": 0.15
+    },
+    {
+      "unique_id": "厨房_冰箱",
+      "name": "冰箱",
+      "type": "always_on",
+      "total_hours": 24.0,
+      "total_energy_kwh": 1.2
+    }
+  ]
+}

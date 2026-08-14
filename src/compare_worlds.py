@@ -1,4 +1,5 @@
 import argparse
+from simulation_env import sim_root
 import json
 import os
 import sys
@@ -7,7 +8,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def load_world_policies(world_id):
-    path = os.path.join(PROJECT_ROOT, "simulation", world_id, "comparison",
+    path = os.path.join(sim_root(world_id), "comparison",
                         "policy_matrix.json")
     if not os.path.exists(path):
         return {}

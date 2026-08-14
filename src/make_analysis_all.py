@@ -5,6 +5,7 @@ import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 import analyze_population
 import analyze_variability
@@ -15,7 +16,7 @@ import compare_policies
 
 
 def scan_scenarios(world_id):
-    pop_dir = os.path.join(PROJECT_ROOT, "simulation", world_id, "population")
+    pop_dir = os.path.join(sim_root(world_id), "population")
     scenarios = {}
     if not os.path.isdir(pop_dir):
         return scenarios
@@ -37,7 +38,7 @@ def latest_date(dates, date_arg):
 
 
 def save_report(report, world_id, filename):
-    analysis_dir = os.path.join(PROJECT_ROOT, "simulation", world_id, "analysis")
+    analysis_dir = os.path.join(sim_root(world_id), "analysis")
     os.makedirs(analysis_dir, exist_ok=True)
     path = os.path.join(analysis_dir, filename)
     with open(path, "w", encoding="utf-8") as f:

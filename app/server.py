@@ -22,6 +22,15 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SIMULATION_DIR = os.path.join(PROJECT_ROOT, "simulation")
+
+
+def _sim_root(world_id):
+    """返回世界最新模拟环境根目录（simulation/<world>_<time>）；无环境时回退旧路径（不存在）。"""
+    try:
+        from simulation_env import sim_root
+        return sim_root(world_id)
+    except Exception:
+        return os.path.join(SIMULATION_DIR, world_id)
 WORLDS_DIR = os.path.join(PROJECT_ROOT, "worlds")
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend")
 
@@ -59,18 +68,29 @@ def list_worlds():
 
 
     real_ids = {w["id"] for w in worlds}
+    # 虚拟世界：扫描 simulation/<world>_<time>/ 环境目录（env.json 声明 world_id）
     if os.path.isdir(SIMULATION_DIR):
+        virtual_map = {}  # world_id -> (env_id, last_date)
         for name in sorted(os.listdir(SIMULATION_DIR)):
-            if name in real_ids:
+            ep = os.path.join(SIMULATION_DIR, name, "env.json")
+            if not os.path.isfile(ep):
                 continue
-            out_world_dir = os.path.join(SIMULATION_DIR, name)
-            if not os.path.isdir(out_world_dir):
+            try:
+                with open(ep, "r", encoding="utf-8") as f:
+                    st = json.load(f)
+            except Exception:
                 continue
-            if not os.path.isdir(os.path.join(out_world_dir, "population")):
+            wid = st.get("world_id") or name.rsplit("_", 1)[0]
+            last = st.get("last_date") or ""
+            cur = virtual_map.get(wid)
+            if cur is None or last > cur[1]:
+                virtual_map[wid] = (name, last)
+        for wid, (env_id, _) in sorted(virtual_map.items()):
+            if wid in real_ids:
                 continue
-            world = {"id": name, "households": [], "scenarios": [], "days": [],
-                     "virtual": True}
-            world.update(scan_world(name))
+            world = {"id": wid, "households": [], "scenarios": [], "days": [],
+                     "virtual": True, "env_id": env_id}
+            world.update(scan_world(wid))
             if world["scenarios"]:
                 worlds.append(world)
     return worlds
@@ -79,7 +99,7 @@ def list_worlds():
 def scan_world(world_id):
 
     result = {"scenarios": [], "days": []}
-    out_dir = os.path.join(SIMULATION_DIR, world_id, "population")
+    out_dir = os.path.join(_sim_root(world_id), "population")
     if os.path.isdir(out_dir):
         for scenario in sorted(os.listdir(out_dir)):
             sdir = os.path.join(out_dir, scenario)
@@ -97,7 +117,7 @@ def scan_world(world_id):
 
 def load_profile(world_id, scenario, date):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "population", scenario, date,
+    path = os.path.join(_sim_root(world_id), "population", scenario, date,
                         "population_profile_1440min.json")
     if not os.path.exists(path):
         return None
@@ -108,7 +128,7 @@ def load_profile(world_id, scenario, date):
 def load_clusters(world_id, scenario, date):
 
     date_tag = _dir_date(date) if date else "latest"
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"clusters_{scenario}_{date_tag}.json")
     if not os.path.exists(path):
         return None
@@ -118,7 +138,7 @@ def load_clusters(world_id, scenario, date):
 
 def load_variability(world_id, scenario):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"variability_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -128,7 +148,7 @@ def load_variability(world_id, scenario):
 
 def load_behavior_patterns(world_id, scenario):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"patterns_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -138,7 +158,7 @@ def load_behavior_patterns(world_id, scenario):
 
 def load_groups(world_id, source="awareness"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"groups_{source}.json")
     if not os.path.exists(path):
         return None
@@ -148,7 +168,7 @@ def load_groups(world_id, source="awareness"):
 
 def load_event_response(world_id, scenario="baseline"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"event_response_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -158,7 +178,7 @@ def load_event_response(world_id, scenario="baseline"):
 
 def load_anomalies(world_id, scenario="baseline"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"anomalies_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -169,7 +189,7 @@ def load_anomalies(world_id, scenario="baseline"):
 def load_behavior_load(world_id, scenario, date):
 
     date_tag = date.replace("-", "") if date else "latest"
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"behavior_load_{scenario}_{date_tag}.json")
     if not os.path.exists(path):
         return None
@@ -180,7 +200,7 @@ def load_behavior_load(world_id, scenario, date):
 def load_solar(world_id, scenario, date):
 
     date_tag = date.replace("-", "") if date else "latest"
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"solar_{scenario}_{date_tag}.json")
     if not os.path.exists(path):
         return None
@@ -191,7 +211,7 @@ def load_solar(world_id, scenario, date):
 def load_electrification(world_id, scenario, date):
 
     date_tag = date.replace("-", "") if date else "latest"
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"electrification_{scenario}_{date_tag}.json")
     if not os.path.exists(path):
         return None
@@ -202,7 +222,7 @@ def load_electrification(world_id, scenario, date):
 def load_advice(world_id, scenario, date):
 
     date_tag = date.replace("-", "") if date else "latest"
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"advice_{scenario}_{date_tag}.json")
     if not os.path.exists(path):
         return None
@@ -212,7 +232,7 @@ def load_advice(world_id, scenario, date):
 
 def load_seasonal(world_id, scenario="baseline"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"seasonal_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -222,7 +242,7 @@ def load_seasonal(world_id, scenario="baseline"):
 
 def load_weather_sensitivity(world_id, scenario="baseline"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"weather_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -233,7 +253,7 @@ def load_weather_sensitivity(world_id, scenario="baseline"):
 def load_nilm(world_id, scenario, date):
 
     date_tag = date.replace("-", "") if date else "latest"
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"nilm_{scenario}_{date_tag}.json")
     if not os.path.exists(path):
         return None
@@ -243,7 +263,7 @@ def load_nilm(world_id, scenario, date):
 
 def load_weekday(world_id, scenario="baseline"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"weekday_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -253,7 +273,7 @@ def load_weekday(world_id, scenario="baseline"):
 
 def load_world_summary(world_id, scenario="baseline"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"world_summary_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -263,7 +283,7 @@ def load_world_summary(world_id, scenario="baseline"):
 
 def load_policy_tradeoffs(world_id):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         "policy_tradeoffs.json")
     if not os.path.exists(path):
         return None
@@ -273,7 +293,7 @@ def load_policy_tradeoffs(world_id):
 
 def load_forecast(world_id, scenario="baseline"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"forecast_{scenario}.json")
     if not os.path.exists(path):
         return None
@@ -284,7 +304,7 @@ def load_forecast(world_id, scenario="baseline"):
 def load_appliance_usage(world_id, scenario, date):
 
     date_tag = date.replace("-", "") if date else "latest"
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis",
+    path = os.path.join(_sim_root(world_id), "analysis",
                         f"appliance_usage_{scenario}_{date_tag}.json")
     if not os.path.exists(path):
         return None
@@ -310,7 +330,7 @@ def load_timeline(world_id):
         if date:
             by_date.setdefault(date, []).append(item)
     timeline = []
-    pop_dir = os.path.join(SIMULATION_DIR, world_id, "population")
+    pop_dir = os.path.join(_sim_root(world_id), "population")
     if os.path.isdir(pop_dir):
         for scenario in sorted(os.listdir(pop_dir)):
             sdir = os.path.join(pop_dir, scenario)
@@ -339,7 +359,7 @@ def load_timeline(world_id):
 
 def load_matrix(world_id):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "comparison", "policy_matrix.json")
+    path = os.path.join(_sim_root(world_id), "comparison", "policy_matrix.json")
     if not os.path.exists(path):
         return None
     with open(path, "r", encoding="utf-8") as f:
@@ -348,7 +368,7 @@ def load_matrix(world_id):
 
 def load_analysis(world_id, scenario="baseline"):
 
-    path = os.path.join(SIMULATION_DIR, world_id, "analysis", f"population_{scenario}.json")
+    path = os.path.join(_sim_root(world_id), "analysis", f"population_{scenario}.json")
     if not os.path.exists(path):
         return None
     with open(path, "r", encoding="utf-8") as f:
@@ -520,7 +540,7 @@ def _dir_date(date_str):
 
 def load_house_profile(world_id, postcode, house_id, scenario, date):
 
-    path = os.path.join(SIMULATION_DIR, world_id, postcode, house_id, scenario,
+    path = os.path.join(_sim_root(world_id), postcode, house_id, scenario,
                         _dir_date(date), "用电信息", "house_load_profile_1440min.json")
     if not os.path.exists(path):
         return None
@@ -530,7 +550,7 @@ def load_house_profile(world_id, postcode, house_id, scenario, date):
 
 def load_house_summary(world_id, postcode, house_id, scenario, date):
 
-    path = os.path.join(SIMULATION_DIR, world_id, postcode, house_id, scenario,
+    path = os.path.join(_sim_root(world_id), postcode, house_id, scenario,
                         _dir_date(date), "用电信息", "总用电汇总.json")
     if not os.path.exists(path):
         return None

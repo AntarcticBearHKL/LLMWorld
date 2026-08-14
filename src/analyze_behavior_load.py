@@ -1,4 +1,5 @@
 import argparse
+from simulation_env import sim_root
 import json
 import os
 import sys
@@ -119,7 +120,7 @@ def build_report(house_results):
 
 
 def scan_world(world_id, scenario, date_str):
-    simulation_root = os.path.join(PROJECT_ROOT, "simulation", world_id)
+    simulation_root = os.path.join(sim_root(world_id))
     if not os.path.isdir(simulation_root):
         return []
     house_results = []
@@ -175,7 +176,7 @@ def main():
     report["date"] = args.date or "latest"
 
     if not args.out:
-        out_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        out_dir = os.path.join(sim_root(args.world_id),
                                "analysis")
         os.makedirs(out_dir, exist_ok=True)
         date_tag = args.date.replace("-", "") if args.date else "latest"

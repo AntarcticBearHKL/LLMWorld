@@ -16,6 +16,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 import pandas as pd
 
@@ -67,7 +68,7 @@ def high_overlap_minutes(profile_watts, threshold=30000):
 def load_population(world_id, policy_filter=None):
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    pop_dir = os.path.join(project_root, "simulation", world_id, "population")
+    pop_dir = os.path.join(sim_root(world_id), "population")
     results = []
     if not os.path.isdir(pop_dir):
         return results
@@ -190,7 +191,7 @@ def main_all(args):
         print(" | ".join(r.ljust(w) for r, w in zip(row, width)))
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_dir = os.path.join(project_root, "simulation", args.world, "comparison")
+    out_dir = os.path.join(sim_root(args.world), "comparison")
     os.makedirs(out_dir, exist_ok=True)
     summary_path = os.path.join(out_dir, "policy_matrix.json")
     summary = {
@@ -242,7 +243,7 @@ def main():
     report["intervention_source"] = interventions[-1][1]
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_dir = os.path.join(project_root, "simulation", args.world, "comparison")
+    out_dir = os.path.join(sim_root(args.world), "comparison")
     os.makedirs(out_dir, exist_ok=True)
     report_path = os.path.join(out_dir, f"{args.intervention}_vs_baseline.json")
     with open(report_path, "w", encoding="utf-8") as f:

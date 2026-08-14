@@ -1,4 +1,5 @@
 import argparse
+from simulation_env import sim_root
 import csv
 import json
 import os
@@ -52,7 +53,7 @@ def export_json_to_csv(path, out_dir):
 
 
 def export_world(world_id):
-    analysis_dir = os.path.join(PROJECT_ROOT, "simulation", world_id, "analysis")
+    analysis_dir = os.path.join(sim_root(world_id), "analysis")
     if not os.path.isdir(analysis_dir):
         raise ValueError(f"没有 analysis 目录: {analysis_dir}")
     out_dir = os.path.join(analysis_dir, "csv")

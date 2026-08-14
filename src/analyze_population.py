@@ -16,6 +16,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 
 def load_households(world_id):
@@ -36,7 +37,7 @@ def load_households(world_id):
 def load_per_house_kwh(world_id, scenario, date):
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    p = os.path.join(project_root, "simulation", world_id, "population",
+    p = os.path.join(sim_root(world_id), "population",
                      scenario, date, "population_profile_1440min.json")
     if not os.path.exists(p):
         return {}
@@ -162,7 +163,7 @@ def main():
     print(f"  成员数×用电相关: {report['members_kwh_corr']}")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_dir = os.path.join(project_root, "simulation", args.world, "analysis")
+    out_dir = os.path.join(sim_root(args.world), "analysis")
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"population_{args.scenario}.json")
     with open(out_path, "w", encoding="utf-8") as f:

@@ -1,4 +1,5 @@
 import argparse
+from simulation_env import sim_root
 import json
 import os
 import sys
@@ -21,7 +22,7 @@ def _to_float(text):
 
 
 def build_report(world_id):
-    path = os.path.join(PROJECT_ROOT, "simulation", world_id, "comparison",
+    path = os.path.join(sim_root(world_id), "comparison",
                         "policy_matrix.json")
     if not os.path.exists(path):
         raise ValueError("没有 policy_matrix.json（先跑 compare_policies --all）")
@@ -52,7 +53,7 @@ def main():
     report = build_report(args.world_id)
     report["world_id"] = args.world_id
     if not args.out:
-        out_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        out_dir = os.path.join(sim_root(args.world_id),
                                "analysis")
         os.makedirs(out_dir, exist_ok=True)
         args.out = os.path.join(out_dir, "policy_tradeoffs.json")

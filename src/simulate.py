@@ -167,10 +167,11 @@ def main():
         y, m, d = start_date.split("-")
         start_date = f"{int(y)}年{int(m)}月{int(d)}日"
 
-    from engine.world import validate_start_date
-    start_date = validate_start_date(world_id, start_date)
-    if start_date:
-        print(f"开始日期: {start_date}（时间线校验通过）")
+    # 模拟环境时间线：只允许线性逐日向下（要重新开始请新建世界）
+    from simulation_env import resolve_sim_date, update_env_date
+    env_id, start_date = resolve_sim_date(world_id, start_date)
+    print(f"模拟环境: {env_id}")
+    print(f"开始日期: {start_date}（时间线校验通过）")
 
     season = args.season or household.get('season', config.DEFAULT_SEASON)
     weather = args.weather or config.DEFAULT_WEATHER
@@ -179,7 +180,8 @@ def main():
     postcode = district_info['postcode']
     house_id = selected_house['house_id']
 
-    world = World(home, world_id=world_id, postcode=postcode, house_id=house_id, start_date=start_date)
+    world = World(home, world_id=world_id, postcode=postcode, house_id=house_id,
+                  start_date=start_date, env_id=env_id)
 
     location = district_info['location']
 
@@ -228,6 +230,8 @@ def main():
             print(f"\n[警告] 今日发现 {len(executor.validation_warnings)} 条决策校验问题：")
             for w in executor.validation_warnings:
                 print(f"  - {w}")
+
+        update_env_date(env_id, current_date.strftime('%Y-%m-%d'))  # 推进环境日期
 
         if day < num_days - 1:
             world.next_day()

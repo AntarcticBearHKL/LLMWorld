@@ -5,6 +5,7 @@ import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 
 def load_json(path):
@@ -18,7 +19,7 @@ def load_json(path):
 
 
 def build_report(world_id, scenario):
-    analysis_dir = os.path.join(PROJECT_ROOT, "simulation", world_id, "analysis")
+    analysis_dir = os.path.join(sim_root(world_id), "analysis")
 
     cluster = load_json(os.path.join(analysis_dir, f"clusters_{scenario}_latest.json"))
     if not cluster:
@@ -98,7 +99,7 @@ def main():
         raise ValueError("没有找到任何分析数据")
 
     if not args.out:
-        out_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        out_dir = os.path.join(sim_root(args.world_id),
                                "analysis")
         os.makedirs(out_dir, exist_ok=True)
         args.out = os.path.join(out_dir, f"world_summary_{args.scenario}.json")

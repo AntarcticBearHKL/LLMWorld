@@ -5,6 +5,7 @@ import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 
 def pearson(a, b):
@@ -35,7 +36,7 @@ def linear_slope(a, b):
 
 
 def load_daily_points(world_id, scenario):
-    pop_dir = os.path.join(PROJECT_ROOT, "simulation", world_id, "population",
+    pop_dir = os.path.join(sim_root(world_id), "population",
                            scenario)
     points = []
     if not os.path.isdir(pop_dir):
@@ -110,7 +111,7 @@ def main():
     report["scenario"] = args.scenario
 
     if not args.out:
-        out_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        out_dir = os.path.join(sim_root(args.world_id),
                                "analysis")
         os.makedirs(out_dir, exist_ok=True)
         args.out = os.path.join(out_dir, f"weather_{args.scenario}.json")

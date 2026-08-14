@@ -1,0 +1,264 @@
+{
+  "appliance_info": {
+    "unique_id": "卧室3_灯",
+    "name": "灯",
+    "type": "on_demand",
+    "power_watts": 40
+  },
+  "usage_summary": {
+    "total_minutes": 45,
+    "total_hours": 0.75,
+    "total_energy_kwh": 0.03
+  },
+  "usage_segments": [
+    {
+      "time_range": "07:00-07:15",
+      "start_minutes": 420,
+      "end_minutes": 435,
+      "duration_minutes": 15,
+      "action": "use",
+      "location": "卧室3",
+      "member": "Wei Chen",
+      "energy_kwh": 0.01,
+      "capped": false
+    },
+    {
+      "time_range": "20:45-21:15",
+      "start_minutes": 1245,
+      "end_minutes": 1275,
+      "duration_minutes": 30,
+      "action": "use",
+      "location": "卧室3",
+      "member": "Wei Chen",
+      "energy_kwh": 0.02,
+      "capped": false
+    }
+  ],
+  "minute_by_minute_usage": [
+    {
+      "minute": 420,
+      "time": "07:00",
+      "watts": 40.0
+    },
+    {
+      "minute": 421,
+      "time": "07:01",
+      "watts": 40.0
+    },
+    {
+      "minute": 422,
+      "time": "07:02",
+      "watts": 40.0
+    },
+    {
+      "minute": 423,
+      "time": "07:03",
+      "watts": 40.0
+    },
+    {
+      "minute": 424,
+      "time": "07:04",
+      "watts": 40.0
+    },
+    {
+      "minute": 425,
+      "time": "07:05",
+      "watts": 40.0
+    },
+    {
+      "minute": 426,
+      "time": "07:06",
+      "watts": 40.0
+    },
+    {
+      "minute": 427,
+      "time": "07:07",
+      "watts": 40.0
+    },
+    {
+      "minute": 428,
+      "time": "07:08",
+      "watts": 40.0
+    },
+    {
+      "minute": 429,
+      "time": "07:09",
+      "watts": 40.0
+    },
+    {
+      "minute": 430,
+      "time": "07:10",
+      "watts": 40.0
+    },
+    {
+      "minute": 431,
+      "time": "07:11",
+      "watts": 40.0
+    },
+    {
+      "minute": 432,
+      "time": "07:12",
+      "watts": 40.0
+    },
+    {
+      "minute": 433,
+      "time": "07:13",
+      "watts": 40.0
+    },
+    {
+      "minute": 434,
+      "time": "07:14",
+      "watts": 40.0
+    },
+    {
+      "minute": 1245,
+      "time": "20:45",
+      "watts": 40.0
+    },
+    {
+      "minute": 1246,
+      "time": "20:46",
+      "watts": 40.0
+    },
+    {
+      "minute": 1247,
+      "time": "20:47",
+      "watts": 40.0
+    },
+    {
+      "minute": 1248,
+      "time": "20:48",
+      "watts": 40.0
+    },
+    {
+      "minute": 1249,
+      "time": "20:49",
+      "watts": 40.0
+    },
+    {
+      "minute": 1250,
+      "time": "20:50",
+      "watts": 40.0
+    },
+    {
+      "minute": 1251,
+      "time": "20:51",
+      "watts": 40.0
+    },
+    {
+      "minute": 1252,
+      "time": "20:52",
+      "watts": 40.0
+    },
+    {
+      "minute": 1253,
+      "time": "20:53",
+      "watts": 40.0
+    },
+    {
+      "minute": 1254,
+      "time": "20:54",
+      "watts": 40.0
+    },
+    {
+      "minute": 1255,
+      "time": "20:55",
+      "watts": 40.0
+    },
+    {
+      "minute": 1256,
+      "time": "20:56",
+      "watts": 40.0
+    },
+    {
+      "minute": 1257,
+      "time": "20:57",
+      "watts": 40.0
+    },
+    {
+      "minute": 1258,
+      "time": "20:58",
+      "watts": 40.0
+    },
+    {
+      "minute": 1259,
+      "time": "20:59",
+      "watts": 40.0
+    },
+    {
+      "minute": 1260,
+      "time": "21:00",
+      "watts": 40.0
+    },
+    {
+      "minute": 1261,
+      "time": "21:01",
+      "watts": 40.0
+    },
+    {
+      "minute": 1262,
+      "time": "21:02",
+      "watts": 40.0
+    },
+    {
+      "minute": 1263,
+      "time": "21:03",
+      "watts": 40.0
+    },
+    {
+      "minute": 1264,
+      "time": "21:04",
+      "watts": 40.0
+    },
+    {
+      "minute": 1265,
+      "time": "21:05",
+      "watts": 40.0
+    },
+    {
+      "minute": 1266,
+      "time": "21:06",
+      "watts": 40.0
+    },
+    {
+      "minute": 1267,
+      "time": "21:07",
+      "watts": 40.0
+    },
+    {
+      "minute": 1268,
+      "time": "21:08",
+      "watts": 40.0
+    },
+    {
+      "minute": 1269,
+      "time": "21:09",
+      "watts": 40.0
+    },
+    {
+      "minute": 1270,
+      "time": "21:10",
+      "watts": 40.0
+    },
+    {
+      "minute": 1271,
+      "time": "21:11",
+      "watts": 40.0
+    },
+    {
+      "minute": 1272,
+      "time": "21:12",
+      "watts": 40.0
+    },
+    {
+      "minute": 1273,
+      "time": "21:13",
+      "watts": 40.0
+    },
+    {
+      "minute": 1274,
+      "time": "21:14",
+      "watts": 40.0
+    }
+  ]
+}

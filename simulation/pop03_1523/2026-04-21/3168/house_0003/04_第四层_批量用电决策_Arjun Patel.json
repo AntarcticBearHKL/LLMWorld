@@ -1,0 +1,547 @@
+{
+  "member": "Arjun Patel",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:00",
+      "location": "主卧",
+      "activity": "睡眠",
+      "operations": [
+        {
+          "unique_id": "主卧_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:10",
+      "location": "主卧",
+      "activity": "起床、穿衣",
+      "operations": [
+        {
+          "unique_id": "主卧_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:25",
+      "location": "卫生间",
+      "activity": "洗漱",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:25-07:45",
+      "location": "外出",
+      "activity": "遛狗",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "厨房",
+      "activity": "准备早餐",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:15",
+      "location": "厨房",
+      "activity": "吃早餐",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:15-08:20",
+      "location": "厨房",
+      "activity": "清洗餐具",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:20-09:00",
+      "location": "外出",
+      "activity": "驾驶电动车去公司",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "外出",
+      "activity": "在办公室工作，管理项目",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "外出",
+      "activity": "在餐厅吃午餐",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "外出",
+      "activity": "在办公室工作，开会和协调",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:15",
+      "location": "外出",
+      "activity": "驾驶电动车从公司前往社区志愿服务点",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:15-18:00",
+      "location": "外出",
+      "activity": "在社区做志愿服务",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "外出",
+      "activity": "驾驶电动车回家",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "厨房",
+      "activity": "与Mei-Ling一起吃晚餐",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:10",
+      "location": "厨房",
+      "activity": "清洗餐具",
+      "operations": [
+        {
+          "unique_id": "厨房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:10-19:30",
+      "location": "外出",
+      "activity": "遛狗",
+      "operations": [
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "客厅",
+      "activity": "与Mei-Ling一起看电视",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "主卧",
+      "activity": "阅读或使用电脑",
+      "operations": [
+        {
+          "unique_id": "主卧_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "客厅",
+      "activity": "看电视或放松",
+      "operations": [
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_电视",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:15",
+      "location": "卫生间",
+      "activity": "洗漱",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:15-23:15",
+      "location": "主卧",
+      "activity": "睡前阅读或看手机",
+      "operations": [
+        {
+          "unique_id": "主卧_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:15-23:30",
+      "location": "主卧",
+      "activity": "准备就寝",
+      "operations": [
+        {
+          "unique_id": "主卧_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:30-23:59",
+      "location": "主卧",
+      "activity": "睡眠",
+      "operations": [
+        {
+          "unique_id": "主卧_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "主卧_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "arjun_patel_手机",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "arjun_patel_电脑",
+          "action": "idle"
+        }
+      ]
+    }
+  ],
+  "total_energy_kwh": 2.754666666666667,
+  "validation_warnings": []
+}

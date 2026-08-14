@@ -5,6 +5,7 @@ import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 from load_profile_cluster import scan_house_profiles
 
@@ -102,7 +103,7 @@ def main():
     report["date"] = args.date or "latest"
 
     if not args.out:
-        out_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        out_dir = os.path.join(sim_root(args.world_id),
                                "analysis")
         os.makedirs(out_dir, exist_ok=True)
         date_tag = args.date.replace("-", "") if args.date else "latest"

@@ -5,6 +5,7 @@ import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from simulation_env import sim_root
 
 from analyze_variability import scan_house_daily_profiles
 from engine import utils
@@ -77,7 +78,7 @@ def main():
     report["scenario"] = args.scenario
 
     if not args.out:
-        out_dir = os.path.join(PROJECT_ROOT, "simulation", args.world_id,
+        out_dir = os.path.join(sim_root(args.world_id),
                                "analysis")
         os.makedirs(out_dir, exist_ok=True)
         args.out = os.path.join(out_dir, f"seasonal_{args.scenario}.json")

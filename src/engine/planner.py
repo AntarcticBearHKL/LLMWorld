@@ -19,7 +19,7 @@ from .timeline import Timeline
 
 class Planner:
     def __init__(self, home, world_id=None, postcode=None, house_id=None, date_str=None,
-                 memory_context="", policy_name="baseline", news_context=""):
+                 memory_context="", policy_name="baseline", news_context="", env_id=None):
         self.home = home
         self.timelines = {}
         self.prompt = Prompt()
@@ -31,7 +31,10 @@ class Planner:
         simulation_dir = os.path.join(project_root, "simulation")
         os.makedirs(simulation_dir, exist_ok=True)
 
-        if world_id and postcode and house_id and date_str:
+        if env_id and world_id and postcode and house_id and date_str:
+            # 新结构：simulation/<env>/<date>/<postcode>/<house_id>/
+            self.log_dir = os.path.join(simulation_dir, env_id, date_str, postcode, house_id)
+        elif world_id and postcode and house_id and date_str:
             self.log_dir = os.path.join(simulation_dir, world_id, postcode, house_id,
                                         self.policy_name, date_str)
         else:

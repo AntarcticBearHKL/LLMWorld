@@ -1,0 +1,562 @@
+{
+  "member": "Wei Chen",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:00",
+      "location": "卧室3",
+      "activity": "睡眠",
+      "operations": [
+        {
+          "unique_id": "卧室3_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室3_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:15",
+      "location": "卧室3",
+      "activity": "起床、整理床铺、换衣",
+      "operations": [
+        {
+          "unique_id": "卧室3_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室3_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:30",
+      "location": "卫生间",
+      "activity": "洗漱（刷牙、洗脸）",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卫生间_洗衣机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:50",
+      "location": "厨房",
+      "activity": "准备早餐（煮燕麦、切水果），为与Arjun、Priya共进早餐做准备",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:10",
+      "location": "厨房",
+      "activity": "品尝自制的咖啡，继续准备早餐（Priya在卫生间）",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:20",
+      "location": "厨房",
+      "activity": "与Priya一起准备早餐",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:20-08:55",
+      "location": "厨房",
+      "activity": "与Arjun和Priya一起准备早餐（布置餐桌、热牛奶等）",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:55-09:15",
+      "location": "厨房",
+      "activity": "与Mei-Ling、Arjun、Priya一起吃早餐",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:15-09:40",
+      "location": "外出",
+      "activity": "与Mei-Ling、Arjun、Priya步行去莫纳什大学",
+      "operations": [
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:40-12:00",
+      "location": "外出",
+      "activity": "在实验室做研究工作",
+      "operations": [
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "外出",
+      "activity": "在学校餐厅与Mei-Ling、Priya一起吃午餐",
+      "operations": [
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-16:30",
+      "location": "外出",
+      "activity": "在实验室继续工作学习",
+      "operations": [
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "外出",
+      "activity": "骑自行车回家",
+      "operations": [
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "厨房",
+      "activity": "准备晚餐（洗菜、切菜）",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:30",
+      "location": "厨房",
+      "activity": "独自继续准备晚餐（Mei-Ling和Priya在休息）",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-20:00",
+      "location": "厨房",
+      "activity": "与Mei-Ling、Priya一起准备并享用晚餐（Arjun 19:30加入）",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:15",
+      "location": "厨房",
+      "activity": "与Mei-Ling、Arjun、Priya一起洗碗、清洁厨房",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:15-20:45",
+      "location": "卫生间",
+      "activity": "洗澡",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "use"
+        },
+        {
+          "unique_id": "卫生间_洗衣机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:45-21:15",
+      "location": "卧室3",
+      "activity": "听音乐放松",
+      "operations": [
+        {
+          "unique_id": "卧室3_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室3_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "客厅",
+      "activity": "与Mei-Ling、Arjun、Priya一起泡茶、品尝茶",
+      "operations": [
+        {
+          "unique_id": "客厅_电视",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:15",
+      "location": "卧室3",
+      "activity": "阅读书籍",
+      "operations": [
+        {
+          "unique_id": "卧室3_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室3_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-23:00",
+      "location": "卧室3",
+      "activity": "用电脑做研究或学习",
+      "operations": [
+        {
+          "unique_id": "卧室3_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室3_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "use"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:15",
+      "location": "卫生间",
+      "activity": "洗漱（刷牙、洗脸）",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卫生间_洗衣机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:15-23:30",
+      "location": "卧室3",
+      "activity": "换睡衣、睡前准备",
+      "operations": [
+        {
+          "unique_id": "卧室3_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室3_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "卧室3",
+      "activity": "躺在床上用手机浏览网页，逐渐入睡",
+      "operations": [
+        {
+          "unique_id": "卧室3_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室3_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "wei_chen_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "wei_chen_台灯",
+          "action": "idle"
+        }
+      ]
+    }
+  ],
+  "total_energy_kwh": 7.619166666666666,
+  "validation_warnings": []
+}

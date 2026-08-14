@@ -16,9 +16,21 @@ import config
 
 def get_world_last_date(world_id):
     project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    path = os.path.join(project_root, "worlds", world_id, "state.json")
+    world_dir = os.path.join(project_root, "worlds", world_id)
+    path = os.path.join(world_dir, "state.json")
     if not os.path.exists(path):
-        return None
+        # 多户并行：state_<house>.json 中取最大日期
+        dates = []
+        for name in sorted(os.listdir(world_dir)) if os.path.isdir(world_dir) else []:
+            if name.startswith("state_") and name.endswith(".json"):
+                try:
+                    with open(os.path.join(world_dir, name), "r", encoding="utf-8") as f:
+                        d = json.load(f).get("date")
+                    if d:
+                        dates.append(d)
+                except Exception:
+                    continue
+        return max(dates) if dates else None
     try:
         with open(path, "r", encoding="utf-8") as f:
             state = json.load(f)
@@ -57,11 +69,13 @@ def validate_start_date(world_id, date_str):
 
 
 class World:
-    def __init__(self, home, world_id=None, postcode=None, house_id=None, start_date=None):
+    def __init__(self, home, world_id=None, postcode=None, house_id=None, start_date=None,
+                 env_id=None):
         self.home = home
         self.world_id = world_id
         self.postcode = postcode
         self.house_id = house_id
+        self.env_id = env_id  # 模拟环境 id（simulation/<world>_<time>/），None=旧结构
 
 
         if start_date:
@@ -83,6 +97,10 @@ class World:
         if not self.world_id:
             return None
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        if self.house_id:
+            # 多户并行下按户隔离，避免并发写同一 state.json 互相覆盖
+            return os.path.join(project_root, "worlds", self.world_id,
+                                f"state_{self.house_id}.json")
         return os.path.join(project_root, "worlds", self.world_id, "state.json")
 
     def _resume_date(self):
@@ -196,17 +214,15 @@ class World:
             print(f"开始模拟：{self.time.get_full_date_string()}")
             print(f"{'='*60}\n")
         
-        date_str = self.time.date.strftime('%Y%m%d')
-
         date_iso = self.time.date.strftime('%Y-%m-%d')
         new_news = self.news.get_new_for(date_iso)
         news_text = self.news.render_items(new_news)
         self._news_delivered = new_news
         planner = Planner(self.home, world_id=self.world_id, postcode=self.postcode, 
-                         house_id=self.house_id, date_str=date_str,
+                         house_id=self.house_id, date_str=date_iso,
                          memory_context=self.memory.get_prompt_context(),
                          policy_name=policy_name,
-                         news_context=news_text)
+                         news_context=news_text, env_id=self.env_id)
         self.current_planner = planner        
         if verbose:
             print("第一步：生成宏观计划...")

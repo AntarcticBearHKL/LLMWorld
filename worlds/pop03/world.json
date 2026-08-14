@@ -1,6 +1,6 @@
 {
   "world_id": "pop03",
-  "created_at": "2026-08-14 14:31:29",
+  "created_at": "2026-08-14 14:48:02",
   "user_prompt": "统一生成器：地区描述 -> 家庭类型 -> Persona 抽样校验 -> 房间家电（seed=42）",
   "generator": "generate_world.py v2",
   "district": {
@@ -13,20 +13,20 @@
     {
       "house_id": "house_0001",
       "type": "国际学生合租",
-      "members_count": 3,
+      "members_count": 4,
       "rooms_count": 6,
       "llm_generated": true
     },
     {
       "house_id": "house_0002",
-      "type": "年轻夫妇无孩家庭",
+      "type": "年轻夫妻无孩家庭",
       "members_count": 2,
       "rooms_count": 5,
       "llm_generated": true
     },
     {
       "house_id": "house_0003",
-      "type": "有孩子的夫妻家庭",
+      "type": "有孩夫妻家庭",
       "members_count": 4,
       "rooms_count": 7,
       "llm_generated": true

@@ -1,0 +1,413 @@
+{
+  "member": "Mei-Ling Zhang",
+  "appliance_decisions": [
+    {
+      "time": "00:00-00:30",
+      "location": "卧室",
+      "activity": "睡前在手机上浏览艺术类内容，准备入睡",
+      "operations": [
+        {
+          "unique_id": "卧室_空调",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "00:30-07:30",
+      "location": "卧室",
+      "activity": "睡觉",
+      "operations": [
+        {
+          "unique_id": "卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:45",
+      "location": "卧室",
+      "activity": "起床，整理床铺，换衣服",
+      "operations": [
+        {
+          "unique_id": "卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "卫生间",
+      "activity": "洗漱，护肤",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卫生间_洗衣机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卫生间_灯",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "厨房",
+      "activity": "准备并吃早餐，同时用手机看艺术类视频",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "use"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "use"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "厨房",
+      "activity": "清洗餐具，整理厨房",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:00-11:00",
+      "location": "书房",
+      "activity": "用电脑画插画，浏览艺术设计网站获取灵感",
+      "operations": [
+        {
+          "unique_id": "书房_电脑",
+          "action": "use"
+        },
+        {
+          "unique_id": "书房_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "书房_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "mei_ling_zhang_电脑",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:00-11:15",
+      "location": "客厅",
+      "activity": "做简单的拉伸运动",
+      "operations": [
+        {
+          "unique_id": "客厅_电视",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "客厅_灯",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:15-11:45",
+      "location": "厨房",
+      "activity": "准备午餐（健康素食搭配）",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:45-12:15",
+      "location": "厨房",
+      "activity": "吃午餐",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:15-12:30",
+      "location": "厨房",
+      "activity": "收拾餐具，清理台面",
+      "operations": [
+        {
+          "unique_id": "厨房_微波炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电饭煲",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_电磁炉",
+          "action": "idle"
+        },
+        {
+          "unique_id": "厨房_油烟机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:30",
+      "location": "卧室",
+      "activity": "午休小憩，恢复精力",
+      "operations": [
+        {
+          "unique_id": "卧室_空调",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:30-14:00",
+      "location": "卧室",
+      "activity": "更换护士制服，整理上班随身物品",
+      "operations": [
+        {
+          "unique_id": "卧室_空调",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室_台灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卧室_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "14:00-14:30",
+      "location": "外出",
+      "activity": "通勤去医院（乘坐公共交通）",
+      "operations": [
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "mei_ling_zhang_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "14:30-22:30",
+      "location": "外出",
+      "activity": "在医院上班，进行护理工作、记录患者情况、参与团队会议等",
+      "operations": [
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "use"
+        },
+        {
+          "unique_id": "mei_ling_zhang_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "外出",
+      "activity": "下班通勤回家（乘坐公共交通）",
+      "operations": [
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_电脑",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "卫生间",
+      "activity": "洗漱，卸妆，护肤",
+      "operations": [
+        {
+          "unique_id": "卫生间_热水器",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卫生间_洗衣机",
+          "action": "idle"
+        },
+        {
+          "unique_id": "卫生间_灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:30-23:59",
+      "location": "卧室",
+      "activity": "换上睡衣，坐在床上阅读或放空，准备入睡",
+      "operations": [
+        {
+          "unique_id": "卧室_空调",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室_台灯",
+          "action": "use"
+        },
+        {
+          "unique_id": "卧室_灯",
+          "action": "idle"
+        },
+        {
+          "unique_id": "mei_ling_zhang_手机",
+          "action": "idle"
+        }
+      ]
+    }
+  ],
+  "total_energy_kwh": 6.491416666666665,
+  "validation_warnings": []
+}
