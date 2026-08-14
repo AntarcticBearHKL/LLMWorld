@@ -1,8 +1,4 @@
-﻿/Reference/
-.kiro/
-/docs/
-
-# Environment variables
+﻿# Environment variables
 .env
 
 # Python cache
@@ -13,11 +9,6 @@ __pycache__/
 .Python
 
 # 生成的模拟产物（不入库）
-outputs/
-worlds/
-logs/
-Data/
-*.csv
 .venv/
 __pycache__/
 .vscode/
