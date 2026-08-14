@@ -17,6 +17,12 @@ import glob
 import json
 import os
 import random
+import threading
+
+# 已解析 chunk 缓存：并行抽样时避免重复读取同一 CSV 分片（每分片 1 万行）
+_chunk_cache = {}
+_chunk_cache_lock = threading.Lock()
+_CHUNK_CACHE_MAX = 10
 
 
 class PersonaSampler:
@@ -29,6 +35,19 @@ class PersonaSampler:
         with open(self._chunks[0], encoding='utf-8-sig') as f:
             self.columns = next(csv.reader(f))
         self._map = self._load_dimension_map()
+
+    def _load_chunk_rows(self, path):
+        """读取并缓存一个分片的全部行（线程安全）。"""
+        with _chunk_cache_lock:
+            rows = _chunk_cache.get(path)
+        if rows is None:
+            with open(path, encoding='utf-8-sig') as f:
+                rows = list(csv.DictReader(f))
+            with _chunk_cache_lock:
+                if len(_chunk_cache) >= _CHUNK_CACHE_MAX:
+                    _chunk_cache.pop(next(iter(_chunk_cache)))
+                _chunk_cache[path] = rows
+        return rows
 
     def _load_dimension_map(self):
         p = os.path.join(self.data_dir, 'dimension_map.json')
@@ -48,9 +67,7 @@ class PersonaSampler:
 
     def _random_row(self):
         path = self._chunks[self._rng.randrange(len(self._chunks))]
-        with open(path, encoding='utf-8-sig') as f:
-            reader = csv.DictReader(f)
-            rows = list(reader)
+        rows = self._load_chunk_rows(path)
         return rows[self._rng.randrange(len(rows))]
 
     def sample(self, n=1, seed=None, conditions=None, max_attempts=2000):
@@ -64,8 +81,7 @@ class PersonaSampler:
             if attempts > max_attempts:
                 break
             path = self._chunks[rng.randrange(len(self._chunks))]
-            with open(path, encoding='utf-8-sig') as f:
-                rows = list(csv.DictReader(f))
+            rows = self._load_chunk_rows(path)
             row = rows[rng.randrange(len(rows))]
             if conditions and not all(row.get(k) == v for k, v in conditions.items()):
                 continue

@@ -1,0 +1,286 @@
+{
+  "type": "年轻夫妇无孩家庭",
+  "season": "秋天",
+  "story": "Mei-Ling 和 Arjun 在墨尔本求学时相识，毕业后选择在 Clayton 租下这套两居室公寓。Mei-Ling 在医院轮班，Arjun 在校研究，两人虽忙碌但也会在周末一起探索附近的咖啡馆。",
+  "home": {
+    "name": "Clayton 两居室公寓",
+    "type": "公寓",
+    "size": 80,
+    "rooms": [
+      {
+        "name": "客厅",
+        "size": 25,
+        "appliances": [
+          {
+            "type": "电视",
+            "brand": "Samsung",
+            "power": 150,
+            "age": 3
+          },
+          {
+            "type": "空调",
+            "brand": "LG",
+            "power": 2000,
+            "age": 2
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
+            "age": 1
+          },
+          {
+            "type": "吸尘器",
+            "brand": "Dyson",
+            "power": 1200,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "厨房",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "冰箱",
+            "brand": "LG",
+            "power": 100,
+            "daily_energy_kwh": 1.2,
+            "age": 3
+          },
+          {
+            "type": "电磁炉",
+            "brand": "Bosch",
+            "power": 2000,
+            "age": 2
+          },
+          {
+            "type": "油烟机",
+            "brand": "Bosch",
+            "power": 200,
+            "age": 2
+          },
+          {
+            "type": "电饭煲",
+            "brand": "Panasonic",
+            "power": 800,
+            "age": 1
+          },
+          {
+            "type": "微波炉",
+            "brand": "Samsung",
+            "power": 1000,
+            "age": 3
+          }
+        ]
+      },
+      {
+        "name": "主卧室",
+        "size": 16,
+        "appliances": [
+          {
+            "type": "空调",
+            "brand": "Mitsubishi",
+            "power": 2000,
+            "age": 2
+          },
+          {
+            "type": "台灯",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 1
+          }
+        ]
+      },
+      {
+        "name": "次卧室",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "台灯",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "卫生间",
+        "size": 6,
+        "appliances": [
+          {
+            "type": "热水器",
+            "brand": "Rheem",
+            "power": 3000,
+            "age": 4
+          },
+          {
+            "type": "洗衣机",
+            "brand": "Bosch",
+            "power": 500,
+            "age": 3
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
+            "age": 1
+          }
+        ]
+      }
+    ]
+  },
+  "members": [
+    {
+      "name": "Mei-Ling Zhang",
+      "age": 29,
+      "gender": "女",
+      "occupation": "注册护士",
+      "work_schedule": {
+        "start": "08:00",
+        "end": "16:00",
+        "remote": false,
+        "work_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "理性",
+          "成就导向",
+          "艺术爱好者",
+          "夜猫子",
+          "价格敏感",
+          "直接"
+        ],
+        "behavior_text": "理性冷静，喜欢先分析再决策，对新技术保持谨慎。事业心很强，把成就看得最重，有时会忽略整理。喜欢艺术和淘便宜货，购物时精打细算。作为护士，工作排班不规律，常感到时间紧张。虽然信任他人，但不太注重礼节，说话直接。",
+        "energy_awareness": "低",
+        "news_sensitivity": "低",
+        "big_five": {
+          "openness": 8,
+          "conscientiousness": 5,
+          "extraversion": 8,
+          "agreeableness": 5,
+          "neuroticism": 9
+        }
+      },
+      "habits": {
+        "wake_time": "07:30",
+        "sleep_time": "00:30",
+        "exercise": "偶尔散步",
+        "hobbies": [
+          "艺术",
+          "淘二手货"
+        ]
+      },
+      "health": {
+        "condition": "身体健康，但有食物过敏和注意力相关诊断",
+        "temperature_preference": {
+          "summer": 26,
+          "winter": 22
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Xiaomi",
+          "power": 20,
+          "age": 1
+        },
+        {
+          "type": "电脑",
+          "brand": "Lenovo",
+          "power": 200,
+          "age": 2
+        },
+        {
+          "type": "台灯",
+          "brand": "Philips",
+          "power": 15,
+          "age": 1
+        }
+      ]
+    },
+    {
+      "name": "Arjun Patel",
+      "age": 31,
+      "gender": "男",
+      "occupation": "大学研究员",
+      "work_schedule": {
+        "start": "09:00",
+        "end": "17:00",
+        "remote": true,
+        "work_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "谨慎",
+          "果断",
+          "虔诚",
+          "利他",
+          "焦虑",
+          "宅家",
+          "整洁"
+        ],
+        "behavior_text": "性格偏内向，喜欢宅家，但对新事物保持开放。决策果断，但总是先验证。虔诚的信仰让他乐于助人。关注新闻，对数据隐私很敏感。作息灵活，经常下厨，家里收拾得井井有条。虽然容易焦虑，但身体力行地照顾家人。",
+        "energy_awareness": "低",
+        "news_sensitivity": "高",
+        "big_five": {
+          "openness": 7,
+          "conscientiousness": 7,
+          "extraversion": 3,
+          "agreeableness": 7,
+          "neuroticism": 9
+        }
+      },
+      "habits": {
+        "wake_time": "08:30",
+        "sleep_time": "23:30",
+        "exercise": "每周慢跑",
+        "hobbies": [
+          "烹饪",
+          "游戏",
+          "阅读"
+        ]
+      },
+      "health": {
+        "condition": "有控制良好的慢性病和轻度慢性疼痛",
+        "temperature_preference": {
+          "summer": 26,
+          "winter": 22
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Samsung",
+          "power": 20,
+          "age": 3
+        },
+        {
+          "type": "电脑",
+          "brand": "Dell",
+          "power": 200,
+          "age": 2
+        },
+        {
+          "type": "台灯",
+          "brand": "IKEA",
+          "power": 15,
+          "age": 2
+        }
+      ]
+    }
+  ],
+  "llm_generated": true
+}

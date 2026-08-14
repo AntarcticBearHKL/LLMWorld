@@ -27,7 +27,7 @@ def load_world(world_id):
 
     if not os.path.exists(world_path):
         print(f"错误：未找到世界 '{world_id}'")
-        print(f"请先运行 'python src/generate.py' 生成世界")
+        print(f"请先运行 'python src/generate_world.py {world_id} --count 3' 生成世界")
         exit(1)
 
     with open(os.path.join(world_path, 'world.json'), 'r', encoding='utf-8') as f:

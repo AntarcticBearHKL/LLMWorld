@@ -1,0 +1,327 @@
+{
+  "type": "国际学生合租",
+  "season": "春天",
+  "story": "三个来自中国、印度和哥伦比亚的年轻人在莫纳什大学附近合租一套三居室公寓，各自忙于学业和兼职，共享着这间生活便利的小家。",
+  "home": {
+    "name": "Clayton Shared Apartment",
+    "type": "公寓",
+    "size": 95,
+    "rooms": [
+      {
+        "name": "客厅",
+        "size": 25,
+        "appliances": [
+          {
+            "type": "电视",
+            "brand": "Hisense",
+            "power": 150,
+            "age": 3
+          },
+          {
+            "type": "灯",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "空调",
+            "brand": "Daikin",
+            "power": 2000,
+            "age": 4
+          }
+        ]
+      },
+      {
+        "name": "厨房",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "冰箱",
+            "brand": "Samsung",
+            "power": 100,
+            "daily_energy_kwh": 1.2,
+            "age": 4
+          },
+          {
+            "type": "电饭煲",
+            "brand": "Breville",
+            "power": 800,
+            "age": 2
+          },
+          {
+            "type": "微波炉",
+            "brand": "LG",
+            "power": 1000,
+            "age": 3
+          },
+          {
+            "type": "电磁炉",
+            "brand": "Midea",
+            "power": 2000,
+            "age": 1
+          },
+          {
+            "type": "油烟机",
+            "brand": "Omega",
+            "power": 200,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "卫生间",
+        "size": 8,
+        "appliances": [
+          {
+            "type": "热水器",
+            "brand": "Rheem",
+            "power": 3000,
+            "age": 5
+          },
+          {
+            "type": "洗衣机",
+            "brand": "Bosch",
+            "power": 500,
+            "age": 3
+          }
+        ]
+      },
+      {
+        "name": "卧室1",
+        "size": 15,
+        "appliances": [
+          {
+            "type": "台灯",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 1
+          }
+        ]
+      },
+      {
+        "name": "卧室2",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "台灯",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 1
+          }
+        ]
+      },
+      {
+        "name": "卧室3",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "台灯",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 2
+          }
+        ]
+      }
+    ]
+  },
+  "members": [
+    {
+      "name": "Li Wei",
+      "age": 24,
+      "gender": "男",
+      "occupation": "兼职行政助理",
+      "work_schedule": {
+        "start": "09:00",
+        "end": "17:00",
+        "remote": false,
+        "work_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "深思熟虑",
+          "追求自由",
+          "谨慎稳妥",
+          "亲和慷慨"
+        ],
+        "behavior_text": "Li Wei 做事总是反复权衡，不轻易尝试新事物，但一旦认定就会非常投入。他天性乐观，乐于帮助室友，重视承诺与正直。虽然压力较大，他仍能保持条理，每天早上慢悠悠地准备，然后步行去上班。",
+        "energy_awareness": "中",
+        "news_sensitivity": "低",
+        "big_five": {
+          "openness": 6,
+          "conscientiousness": 8,
+          "extraversion": 4,
+          "agreeableness": 8,
+          "neuroticism": 5
+        }
+      },
+      "habits": {
+        "wake_time": "07:30",
+        "sleep_time": "23:30",
+        "exercise": "每周慢跑或瑜伽三次",
+        "hobbies": [
+          "做饭",
+          "浏览Reddit",
+          "喝茶"
+        ]
+      },
+      "health": {
+        "condition": "视力矫正，压力较大，有轻度慢性疼痛，但睡眠质量不错",
+        "temperature_preference": {
+          "summer": 25,
+          "winter": 22
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Xiaomi",
+          "power": 20,
+          "age": 2
+        },
+        {
+          "type": "电脑",
+          "brand": "Dell",
+          "power": 200,
+          "age": 2
+        }
+      ]
+    },
+    {
+      "name": "Priya Raman",
+      "age": 23,
+      "gender": "女",
+      "occupation": "IT专业学生/兼职软件开发",
+      "work_schedule": {
+        "start": "14:00",
+        "end": "18:00",
+        "remote": true,
+        "work_days": [
+          1,
+          3,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "技术达人",
+          "理性分析",
+          "热爱社交",
+          "追求新奇"
+        ],
+        "behavior_text": "Priya 是典型的数字原住民，对新科技充满好奇，喜欢在线上线下社群中分享经验。她决策讲究逻辑和数据分析，对价格很在意，却偶尔会因新奇数码产品而冲动消费。虽是夜猫子，但她总能提前规划并准时赴约。",
+        "energy_awareness": "低",
+        "news_sensitivity": "中",
+        "big_five": {
+          "openness": 5,
+          "conscientiousness": 7,
+          "extraversion": 9,
+          "agreeableness": 5,
+          "neuroticism": 3
+        }
+      },
+      "habits": {
+        "wake_time": "10:30",
+        "sleep_time": "02:00",
+        "exercise": "从不锻炼",
+        "hobbies": [
+          "玩电子游戏",
+          "刷TikTok",
+          "阅读技术博客"
+        ]
+      },
+      "health": {
+        "condition": "身体健康，心理状态稳定",
+        "temperature_preference": {
+          "summer": 26,
+          "winter": 21
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Google",
+          "power": 20,
+          "age": 1
+        },
+        {
+          "type": "电脑",
+          "brand": "Apple",
+          "power": 200,
+          "age": 1
+        }
+      ]
+    },
+    {
+      "name": "Mateo Fernandez",
+      "age": 26,
+      "gender": "男",
+      "occupation": "护理专业学生/兼职护工",
+      "work_schedule": {
+        "start": "08:00",
+        "end": "12:00",
+        "remote": false,
+        "work_days": [
+          2,
+          4,
+          5
+        ]
+      },
+      "personality": {
+        "traits": [
+          "传统虔诚",
+          "随和果断",
+          "勤俭认真",
+          "热爱生活"
+        ],
+        "behavior_text": "Mateo 信仰虔诚，生活简单而有规律。他非常看重传统与家庭，对价格极为敏感，总想多存些钱。虽有些慢性小病，他仍坚持自己做饭和整理房间。他喜欢看剧和听音乐，偶尔会迟到，但一切都收拾得井井有条。",
+        "energy_awareness": "中",
+        "news_sensitivity": "中",
+        "big_five": {
+          "openness": 4,
+          "conscientiousness": 8,
+          "extraversion": 7,
+          "agreeableness": 6,
+          "neuroticism": 2
+        }
+      },
+      "habits": {
+        "wake_time": "06:30",
+        "sleep_time": "22:30",
+        "exercise": "每周做轻度有氧运动",
+        "hobbies": [
+          "看电视剧",
+          "听音乐",
+          "烹饪传统料理"
+        ]
+      },
+      "health": {
+        "condition": "有多种慢性病，视力矫正，心理状态稳定，几乎无压力，睡眠质量不错，每天服药",
+        "temperature_preference": {
+          "summer": 27,
+          "winter": 23
+        }
+      },
+      "personal_appliances": [
+        {
+          "type": "手机",
+          "brand": "Nokia",
+          "power": 20,
+          "age": 3
+        },
+        {
+          "type": "电脑",
+          "brand": "Acer",
+          "power": 200,
+          "age": 3
+        }
+      ]
+    }
+  ],
+  "llm_generated": true
+}

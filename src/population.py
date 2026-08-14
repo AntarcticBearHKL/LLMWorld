@@ -536,16 +536,3 @@ def build_population(world_id, count, seed=42, household_types=None):
 
     return world_meta
 
-
-if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="本地人口构建 v2（0 LLM 调用）")
-    parser.add_argument("world_id", help="新世界ID，如 pop03")
-    parser.add_argument("--count", type=int, default=12, help="家庭数量")
-    parser.add_argument("--seed", type=int, default=42, help="随机种子")
-    args = parser.parse_args()
-
-    print(f"人口构建 v2：world={args.world_id}，{args.count} 户，种子 {args.seed}")
-    build_population(args.world_id, args.count, args.seed)
-    print(f"完成：worlds/{args.world_id}/ 已生成")
-
