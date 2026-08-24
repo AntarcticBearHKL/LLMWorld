@@ -9,13 +9,13 @@ from simulation_env import sim_root
 
 
 def load_true_appliances(house_dir):
-    info_dir = os.path.join(house_dir, "用电信息")
+    info_dir = os.path.join(house_dir, "ElectricityInfo")
     appliances = []
     if not os.path.isdir(info_dir):
         return appliances
     for name in sorted(os.listdir(info_dir)):
         if not name.endswith(".json") or name.startswith("house_load_profile") \
-                or name == "总用电汇总.json":
+                or name == "TotalEnergySummary.json":
             continue
         try:
             with open(os.path.join(info_dir, name), "r", encoding="utf-8") as f:
@@ -80,7 +80,7 @@ def match_appliances(plateaus, appliances):
 
 def build_report(load_watts, appliances):
     if not appliances:
-        raise ValueError("没有找到任何电器真值数据")
+        raise ValueError("No appliance ground-truth data found")
     plateaus = find_plateaus(load_watts)
     estimates = match_appliances(plateaus, appliances)
     rows = []
@@ -111,10 +111,10 @@ def build_report(load_watts, appliances):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="NILM 负荷分解基准")
+    parser = argparse.ArgumentParser(description="NILM load disaggregation benchmark")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default=None, help="YYYY-MM-DD，缺省取最后一天")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the last day")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
@@ -138,7 +138,7 @@ def main():
     reports = []
     for house_id, house_dir in house_dirs:
         appliances = load_true_appliances(house_dir)
-        profile_path = os.path.join(house_dir, "用电信息",
+        profile_path = os.path.join(house_dir, "ElectricityInfo",
                                     "house_load_profile_1440min.json")
         if not os.path.exists(profile_path):
             continue
@@ -149,7 +149,7 @@ def main():
         reports.append(report)
 
     if not reports:
-        raise ValueError("没有找到任何可分解的户数据")
+        raise ValueError("No disaggregatable household data found")
     report = {
         "world_id": args.world_id,
         "scenario": args.scenario,
@@ -166,11 +166,11 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"NILM 分解基准完成（{len(reports)} 户）")
+    print(f"NILM disaggregation benchmark done ({len(reports)} households)")
     for r in reports:
-        print(f"  {r['house_id']}: 分解率 {r['disaggregation_rate']}, "
-              f"总 MAE {r['total_mae_kwh']}kWh")
-    print(f"  已保存: {args.out}")
+        print(f"  {r['house_id']}: disaggregation rate {r['disaggregation_rate']}, "
+              f"total MAE {r['total_mae_kwh']}kWh")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

@@ -33,7 +33,7 @@ def scan_house_profiles(world_id, scenario, date):
             if date:
                 date_dir = _dir_date(date)
                 candidate = os.path.join(house_dir, scenario, date_dir,
-                                         "用电信息", "house_load_profile_1440min.json")
+                                         "ElectricityInfo", "house_load_profile_1440min.json")
                 if os.path.exists(candidate):
                     profile_path = candidate
             else:
@@ -43,7 +43,7 @@ def scan_house_profiles(world_id, scenario, date):
                                    if os.path.isdir(os.path.join(scenario_dir, d)))
                     if dates:
                         candidate = os.path.join(scenario_dir, dates[-1],
-                                                 "用电信息",
+                                                 "ElectricityInfo",
                                                  "house_load_profile_1440min.json")
                         if os.path.exists(candidate):
                             profile_path = candidate
@@ -70,7 +70,7 @@ def build_report(profiles, k):
             "shape": [round(v, 6) for v in normalize_shape(hourly)],
         })
     if not rows:
-        raise ValueError("没有找到任何已保存的模拟曲线")
+        raise ValueError("No saved simulation curves found")
 
     features = [r["shape"] for r in rows]
     try:
@@ -117,12 +117,12 @@ def build_report(profiles, k):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="家庭负荷曲线聚类分析")
+    parser = argparse.ArgumentParser(description="Household load profile clustering analysis")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default=None, help="YYYY-MM-DD，缺省取每户最后一天")
-    parser.add_argument("--k", type=int, default=0, help="簇数，缺省肘部法自动选")
-    parser.add_argument("--out", default=None, help="输出文件路径，缺省写入 analysis/")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the last day per household")
+    parser.add_argument("--k", type=int, default=0, help="Number of clusters; defaults to automatic selection via the elbow method")
+    parser.add_argument("--out", default=None, help="Output file path; defaults to analysis/")
     args = parser.parse_args()
 
     profiles = scan_house_profiles(args.world_id, args.scenario, args.date)
@@ -142,13 +142,13 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"负荷曲线聚类完成（{report['households']} 户，k={report['k']}，WCSS={report['wcss']}）")
+    print(f"Load profile clustering done ({report['households']} households, k={report['k']}, WCSS={report['wcss']})")
     for c in report["clusters"]:
-        print(f"  簇{c['label']}: {c['households']} 户 "
-              f"(负荷率 {c['mean_load_factor']}, 峰均比 {c['mean_peak_to_mean']}, "
-              f"平均峰时 {c['mean_peak_hour']}:00, 谷时 {c['mean_valley_hour']}:00)")
-        print(f"    家庭: {', '.join(c['house_ids'])}")
-    print(f"  已保存: {args.out}")
+        print(f"  Cluster{c['label']}: {c['households']} households "
+              f"(load factor {c['mean_load_factor']}, peak-to-mean {c['mean_peak_to_mean']}, "
+              f"mean peak hour {c['mean_peak_hour']}:00, valley hour {c['mean_valley_hour']}:00)")
+        print(f"    Households: {', '.join(c['house_ids'])}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

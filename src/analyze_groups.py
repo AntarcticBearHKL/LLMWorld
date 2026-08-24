@@ -40,9 +40,9 @@ def load_household_labels(world_id):
             awareness = members[0].get("personality", {}).get("energy_awareness")
             if awareness:
                 has_any = True
-            labels[house_id] = awareness or "未知"
+            labels[house_id] = awareness or "Unknown"
         else:
-            labels[house_id] = "未知"
+            labels[house_id] = "Unknown"
     return labels
 
 
@@ -57,9 +57,9 @@ def load_variability_labels(world_id, scenario="baseline"):
         data = json.load(f)
     labels = {}
     for house_id in data.get("regular_half", []):
-        labels[house_id] = "规律"
+        labels[house_id] = "Regular"
     for house_id in data.get("variable_half", []):
-        labels[house_id] = "波动"
+        labels[house_id] = "Variable"
     return labels
 
 
@@ -123,36 +123,36 @@ def group_stats(labels, scenarios):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="分组政策响应分析")
+    parser = argparse.ArgumentParser(description="Grouped policy response analysis")
     parser.add_argument("--world", required=True)
     parser.add_argument("--label-source", default="awareness",
                         choices=["awareness", "variability"],
-                        help="标签源：awareness=节能意识 / variability=行为变异性")
+                        help="Label source: awareness = energy awareness / variability = behavior variability")
     args = parser.parse_args()
 
     if args.label_source == "variability":
         labels = load_variability_labels(args.world)
         if not labels:
-            print(f"没有找到 {args.world} 的变异性标签（先跑 analyze_variability.py）")
+            print(f"No variability labels found for {args.world} (run analyze_variability.py first)")
             sys.exit(1)
     else:
         labels = load_household_labels(args.world)
         if not labels:
-            print(f"没有找到 {args.world} 的 household 数据")
+            print(f"No household data found for {args.world}")
             sys.exit(1)
     scenarios = load_scenario_house_kwh(args.world)
 
     if not scenarios:
-        print(f"没有找到 {args.world} 的聚合数据")
+        print(f"No aggregated data found for {args.world}")
         sys.exit(1)
 
-    print(f"家庭标签: {labels}")
-    print(f"可用场景: {list(scenarios.keys())}")
+    print(f"Household labels: {labels}")
+    print(f"Available scenarios: {list(scenarios.keys())}")
 
     rows = group_stats(labels, scenarios)
 
-    print("\n=== 分组政策响应（总 kWh，括号为 vs 基线%）===")
-    header = f"{'组':<6}{'户数':<4}{'基线':<10}"
+    print("\n=== Grouped policy response (total kWh; parentheses show % vs baseline) ===")
+    header = f"{'Group':<6}{'N':<4}{'Baseline':<10}"
     for s in scenarios:
         if s != "baseline":
             header += f"{s:<18}"
@@ -172,7 +172,7 @@ def main():
         json.dump({"label_source": args.label_source,
                    "labels": labels, "scenarios": {k: v for k, v in scenarios.items()},
                    "groups": rows}, f, ensure_ascii=False, indent=2)
-    print(f"\n已保存: {out_path}")
+    print(f"\nSaved: {out_path}")
 
 
 if __name__ == "__main__":

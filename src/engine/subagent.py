@@ -1,20 +1,14 @@
-
-
-
-
-
-
-
-
-
 import os
 import time
+import json
+import sys
 import requests
 from concurrent.futures import ThreadPoolExecutor
 from dotenv import load_dotenv
 from threading import Lock
 
 import config
+import matilda_auth
 
 load_dotenv()
 
@@ -79,7 +73,7 @@ class SubAgent:
 
         api_key = api_key or DEEPSEEK_APIKEY
         if not api_key:
-            raise LLMCallError("DeepSeek API key 未配置，请在 .env 中设置 DEEPSEEK_APIKEY")
+            raise LLMCallError("DeepSeek API key is not configured; please set DEEPSEEK_APIKEY in .env")
 
         model = model or DEFAULT_MODEL_DEEPSEEK
         base_url = "https://api.deepseek.com/v1"
@@ -119,21 +113,21 @@ class SubAgent:
                 timeout=REQUEST_TIMEOUT_SECONDS
             )
         except requests.exceptions.RequestException as e:
-            raise LLMCallError(f"DeepSeek 网络错误: {e}") from e
+            raise LLMCallError(f"DeepSeek network error: {e}") from e
         finally:
             with SubAgent._lock:
                 SubAgent._current_concurrent -= 1
 
         if response.status_code != 200:
-            raise LLMCallError(f"DeepSeek API 错误 {response.status_code}: {response.text[:500]}")
+            raise LLMCallError(f"DeepSeek API error {response.status_code}: {response.text[:500]}")
 
         result = response.json()
 
         if "error" in result:
-            raise LLMCallError(f"DeepSeek 返回错误: {result['error'].get('message', result['error'])}")
+            raise LLMCallError(f"DeepSeek returned an error: {result['error'].get('message', result['error'])}")
 
         if "choices" not in result or not result["choices"]:
-            raise LLMCallError("DeepSeek 返回为空（无 choices）")
+            raise LLMCallError("DeepSeek returned empty (no choices)")
 
         if "usage" in result:
             cache_hit = result["usage"].get("prompt_cache_hit_tokens", 0)
@@ -155,24 +149,119 @@ class SubAgent:
         }
 
     @staticmethod
-    def call_with_retry(prompt, json_mode=False, thinking=False, api_key=None, model=None):
+    def call_matilda(prompt, json_mode=False, thinking=False, api_key=None, model=None, json_schema=None):
+
+        # Matilda uses OAuth 2.0 device-flow authentication, not a static API key;
+        # the json_mode/thinking/api_key/model arguments only keep the signature consistent with call_deepseek.
+        # Standard OpenAI-compatible endpoint: POST /api/v1/chat/completions with response_format.
+        base_url = config.MATILDA_API_BASE
+
+        data = {
+            "model": "matilda",
+            "messages": [{"role": "user", "content": prompt}],
+        }
+        if json_mode:
+            # Structured output via the standard OpenAI response_format parameter:
+            # json_schema mode applies server-side grammar-constrained decoding; the
+            # output is guaranteed to be valid JSON conforming to the schema.
+            if json_schema:
+                data["response_format"] = {
+                    "type": "json_schema",
+                    "json_schema": {"name": "structured_output", "schema": json_schema},
+                }
+            else:
+                data["response_format"] = {"type": "json_object"}
+
+        with SubAgent._lock:
+            SubAgent._current_concurrent += 1
+            if SubAgent._current_concurrent > SubAgent._peak_concurrent:
+                SubAgent._peak_concurrent = SubAgent._current_concurrent
+
+        response = None
+        try:
+            headers = {
+                "Authorization": "Bearer " + matilda_auth.get_access_token(),
+                "Content-Type": "application/json",
+                "X-Matilda-API-Version": config.MATILDA_API_VERSION,
+            }
+
+            response = requests.post(
+                base_url + "/v1/chat/completions",
+                headers=headers,
+                json=data,
+                timeout=(30, 120)
+            )
+
+            if response.status_code in (401, 403):
+                # Token may be invalid/unauthorized: force a refresh and retry once
+                matilda_auth.force_refresh()
+                headers["Authorization"] = "Bearer " + matilda_auth.get_access_token()
+                response = requests.post(
+                    base_url + "/v1/chat/completions",
+                    headers=headers,
+                    json=data,
+                    timeout=(30, 120)
+                )
+
+            if response.status_code != 200:
+                text = response.text[:500]
+                raise LLMCallError(f"Matilda API error {response.status_code}: {text}")
+
+            result = response.json()
+            if "error" in result:
+                err = result["error"]
+                raise LLMCallError(f"Matilda returned error: {err.get('message', err)}")
+            choices = result.get("choices")
+            if not choices or not choices[0].get("message", {}).get("content"):
+                raise LLMCallError("Matilda returned empty response (no choices)")
+
+            usage = result.get("usage") or {}
+            completion = int(usage.get("completion_tokens", 0) or 0)
+            SubAgent._update_tokens(0, 0, completion)
+
+            content = choices[0]["message"]["content"].strip()
+            content = _clean_json_response(content)
+
+        except requests.exceptions.RequestException as e:
+            raise LLMCallError(f"Matilda network error: {e}") from e
+        except matilda_auth.LLMCallError as e:
+            raise LLMCallError(str(e)) from e
+        finally:
+            with SubAgent._lock:
+                SubAgent._current_concurrent -= 1
+
+        return {
+            "content": content,
+            "reasoning_content": "",
+            "thinking": thinking
+        }
+
+    @staticmethod
+    def call_with_retry(prompt, json_mode=False, thinking=False, api_key=None, model=None, provider=None,
+                        json_schema=None):
+
+        provider = (provider or config.LLM_PROVIDER or "deepseek").lower()
+        call_fn = SubAgent.call_matilda if provider == "matilda" else SubAgent.call_deepseek
 
         last_error = None
         for attempt in range(MAX_RETRIES):
             try:
-                return SubAgent.call_deepseek(prompt, json_mode, thinking, api_key, model)
+                if provider == "matilda":
+                    return call_fn(prompt, json_mode, thinking, api_key, model, json_schema=json_schema)
+                return call_fn(prompt, json_mode, thinking, api_key, model)
             except LLMCallError as e:
                 last_error = e
                 if attempt < MAX_RETRIES - 1:
                     wait = RETRY_BACKOFF_SECONDS * (2 ** attempt)
-                    print(f"[重试] DeepSeek 调用失败(第{attempt + 1}次): {e} → {wait}秒后重试")
+                    print(f"[Retry] {provider} call failed (attempt {attempt + 1}): {e} -> retrying in {wait}s")
                     time.sleep(wait)
-        raise LLMCallError(f"DeepSeek 调用失败（重试 {MAX_RETRIES} 次后放弃）: {last_error}")
+        raise LLMCallError(f"{provider} call failed (gave up after {MAX_RETRIES} retries): {last_error}")
 
 
 
     @staticmethod
-    def parallel_call(prompts, json_mode=False, thinking=False, api_key=None, model=None):
+    def parallel_call(prompts, json_mode=False, thinking=False, api_key=None, model=None, provider=None,
+                      json_schema=None):
 
 
 
@@ -185,7 +274,8 @@ class SubAgent:
 
         def _run(index, prompt):
             try:
-                return index, SubAgent.call_with_retry(prompt, json_mode, thinking, api_key, model)
+                return index, SubAgent.call_with_retry(prompt, json_mode, thinking, api_key, model, provider,
+                                                       json_schema=json_schema)
             except LLMCallError as e:
                 failure["index"] = index
                 failure["error"] = e
@@ -202,15 +292,17 @@ class SubAgent:
 
         if "error" in failure:
             raise LLMCallError(
-                f"并行调用失败：prompt 序号 {failure['index']} → {failure['error']}"
+                f"Parallel call failed: prompt index {failure['index']} -> {failure['error']}"
             )
 
         return results
 
     @staticmethod
-    def single_call(prompt, json_mode=False, thinking=False, api_key=None, model=None):
+    def single_call(prompt, json_mode=False, thinking=False, api_key=None, model=None, provider=None,
+                    json_schema=None):
 
-        return SubAgent.call_with_retry(prompt, json_mode, thinking, api_key, model)
+        return SubAgent.call_with_retry(prompt, json_mode, thinking, api_key, model, provider,
+                                        json_schema=json_schema)
 
 
 def _clean_json_response(text):

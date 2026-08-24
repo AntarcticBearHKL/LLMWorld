@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import json
 import os
 import random
@@ -15,12 +9,12 @@ from datetime import datetime
 def season_for_date(date_str):
     month = int(date_str.split("-")[1]) if "-" in date_str else int(date_str[4:6])
     if month in (12, 1, 2):
-        return "夏天"
+        return "Summer"
     if month in (3, 4, 5):
-        return "秋天"
+        return "Autumn"
     if month in (6, 7, 8):
-        return "冬天"
-    return "春天"
+        return "Winter"
+    return "Spring"
 
 
 def set_seed(seed):
@@ -68,25 +62,25 @@ def save_log(log_dir, stage_name, prompt, response, tokens=None, reasoning_conte
     with open(log_file, "w", encoding="utf-8") as f:
         if tokens:
             miss, hit, completion = tokens
-            f.write(f"Token使用: prompt_cache_miss={miss}, prompt_cache_hit={hit}, completion={completion}\n\n")
+            f.write(f"Token usage: prompt_cache_miss={miss}, prompt_cache_hit={hit}, completion={completion}\n\n")
 
         f.write(f"# {stage_name}\n\n")
-        f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+        f.write(f"Generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
         f.write("---\n\n")
-        f.write("## 提示词\n\n")
+        f.write("## Prompt\n\n")
         f.write("```\n")
         f.write(prompt)
         f.write("\n```\n\n")
         f.write("---\n\n")
 
         if reasoning_content:
-            f.write("## 思考过程\n\n")
+            f.write("## Reasoning\n\n")
             f.write("```\n")
             f.write(reasoning_content)
             f.write("\n```\n\n")
             f.write("---\n\n")
 
-        f.write("## LLM返回结果\n\n")
+        f.write("## LLM Response\n\n")
         f.write("```json\n")
         try:
             response_obj = json.loads(response)
@@ -105,8 +99,8 @@ def parse_time(time_str):
         hour, minute = map(int, time_str.split(':'))
         return hour * 60 + minute
     except Exception as e:
-        print(f"[错误] 解析时间失败: '{time_str}' - {e}")
-        print("[回退] 使用默认时间: 00:00")
+        print(f"[Error] Failed to parse time: '{time_str}' - {e}")
+        print("[Fallback] Using default time: 00:00")
         return 0
 
 
@@ -116,12 +110,12 @@ def parse_time_range(time_range):
     try:
         parts = time_range.split('-')
         if len(parts) != 2:
-            print(f"[警告] 时间格式错误: '{time_range}'，尝试修复...")
+            print(f"[Warning] Time format error: '{time_range}', attempting to fix...")
             if len(parts) > 2:
                 start, end = parts[0], parts[-1]
-                print(f"[修复] 使用第一个和最后一个时间: {start} - {end}")
+                print(f"[Fixed] Using the first and last times: {start} - {end}")
             else:
-                raise ValueError(f"无法解析时间范围: {time_range}")
+                raise ValueError(f"Cannot parse time range: {time_range}")
         else:
             start, end = parts
 
@@ -133,8 +127,8 @@ def parse_time_range(time_range):
 
         return start_min, end_min
     except Exception as e:
-        print(f"[错误] 解析时间范围失败: '{time_range}' - {e}")
-        print("[回退] 使用默认时间范围: 00:00-00:10")
+        print(f"[Error] Failed to parse time range: '{time_range}' - {e}")
+        print("[Fallback] Using default time range: 00:00-00:10")
         return 0, 10
 
 
@@ -165,14 +159,13 @@ def parse_json_with_retry(prompt, raw_text, json_mode=True, thinking=False):
 
 
 
-
     try:
         return parse_json_response(raw_text)
     except Exception:
         from .subagent import SubAgent
         retry_prompt = prompt + (
-            "\n\n重要：你上一次的输出不是合法 JSON。"
-            "请重新输出，只输出一个合法 JSON 对象，不要任何解释、不要代码块标记。"
+            "\n\nImportant: your previous output was not valid JSON. "
+            "Please output again, providing only a single valid JSON object, with no explanation and no code fence markers."
         )
         result = SubAgent.single_call(retry_prompt, json_mode=json_mode, thinking=thinking)
         content = result["content"] if isinstance(result, dict) else result
@@ -201,15 +194,15 @@ def validate_appliance_decisions(decision_data, home, warnings):
                 appliance = home.get_appliance(appliance_id)
                 if not appliance:
                     warnings.append(
-                        f"未知电器 unique_id='{appliance_id}'（成员 {decision_data.get('member','?')}，"
-                        f"时段 {time_range}，位置 {location}）→ 已跳过该操作"
+                        f"Unknown appliance unique_id='{appliance_id}' (member {decision_data.get('member','?')}, "
+                        f"time {time_range}, location {location}) -> operation skipped"
                     )
                     continue
 
                 if action not in appliance.get_available_actions():
                     warnings.append(
-                        f"非法操作 action='{action}'（电器 {appliance.name}[{appliance_id}]，可用: "
-                        f"{appliance.get_available_actions()}）→ 已跳过该操作"
+                        f"Invalid action='{action}' (appliance {appliance.name}[{appliance_id}], available: "
+                        f"{appliance.get_available_actions()}) -> operation skipped"
                     )
                     continue
 
@@ -224,6 +217,6 @@ def validate_appliance_decisions(decision_data, home, warnings):
                 "operations": operations,
             })
         except Exception as e:
-            warnings.append(f"决策解析失败: {e} → 该时段已跳过")
+            warnings.append(f"Decision parse failed: {e} -> this time segment was skipped")
 
     return cleaned_decisions

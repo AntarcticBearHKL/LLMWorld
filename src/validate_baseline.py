@@ -116,7 +116,7 @@ def load_real_data(path):
             full_day = g
             break
     if full_day is None:
-        raise ValueError("真实数据中没有完整的自然日（0 点起 24 小时）")
+        raise ValueError("No complete natural day (24 hours from 00:00) in the real data")
     df = full_day
 
     hourly = df["demand"].tolist()
@@ -137,7 +137,7 @@ def load_sim_profile(world_id):
                     candidates.append(os.path.join(root, f))
 
     if not candidates:
-        raise FileNotFoundError(f"没有找到 {world_id} 的人口聚合曲线，请先跑 population_runner")
+        raise FileNotFoundError(f"No population aggregate curve found for {world_id} (run population_runner first)")
 
     path = sorted(candidates)[-1]
     with open(path, "r", encoding="utf-8") as f:
@@ -148,10 +148,10 @@ def load_sim_profile(world_id):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="人口模拟 vs 维州真实负荷基线对比")
-    parser.add_argument("--world", required=True, help="世界ID（取人口聚合曲线）")
-    parser.add_argument("--real", default=None, help="真实数据 CSV（默认 Data/vic_electricity_data.csv）")
-    parser.add_argument("--out", default=None, help="输出目录（默认 simulation/<world>/baseline/）")
+    parser = argparse.ArgumentParser(description="Population simulation vs VIC real load baseline comparison")
+    parser.add_argument("--world", required=True, help="World ID (uses its population aggregate curve)")
+    parser.add_argument("--real", default=None, help="Real-data CSV (default Data/vic_electricity_data.csv)")
+    parser.add_argument("--out", default=None, help="Output directory (default simulation/<world>/baseline/)")
     args = parser.parse_args()
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -160,10 +160,10 @@ def main():
 
     sim_data, sim_path = load_sim_profile(args.world)
     real_hourly, real_dates, _ = load_real_data(real_path)
-    print(f"模拟数据: {sim_path}")
-    print(f"  总用电 {sim_data.get('total_energy_kwh')} kWh, {sim_data.get('households')} 户")
-    print(f"真实数据: {real_path}")
-    print(f"  小时需求 {len(real_hourly)} 点, 首 {real_dates[0]} → 末 {real_dates[-1]}")
+    print(f"Simulation data: {sim_path}")
+    print(f"  total energy {sim_data.get('total_energy_kwh')} kWh, {sim_data.get('households')} households")
+    print(f"Real data: {real_path}")
+    print(f"  hourly demand {len(real_hourly)} points, first {real_dates[0]} to last {real_dates[-1]}")
 
 
     sim_curve = hourly_normalized(sim_data["load_profile_watts"])
@@ -183,41 +183,41 @@ def main():
         json.dump(report, f, ensure_ascii=False, indent=2)
 
 
-    print("\n=== 形状对比报告 ===")
-    print(f"晚峰时刻: 模拟 {report['sim_peak_hour']}:00 vs 真实 {report['real_peak_hour']}:00"
-          f"（偏移 {report['peak_hour_offset']} 小时）")
-    print(f"峰均比: 模拟 {report['sim_peak_to_mean']} vs 真实 {report['real_peak_to_mean']}")
-    print(f"双峰强度(晨/晚): 模拟 {report['sim_bimodality']['morning_peak']}/{report['sim_bimodality']['evening_peak']}"
-          f" vs 真实 {report['real_bimodality']['morning_peak']}/{report['real_bimodality']['evening_peak']}")
-    print(f"谷值时刻: 模拟 {report['sim_valley_hour']}:00 vs 真实 {report['real_valley_hour']}:00")
-    print(f"逐小时相关性: {report['correlation']}")
-    print(f"报告已保存: {report_path}")
+    print("\n=== Shape comparison report ===")
+    print(f"Evening peak: sim {report['sim_peak_hour']}:00 vs real {report['real_peak_hour']}:00"
+          f" (offset {report['peak_hour_offset']} hours)")
+    print(f"Peak-to-mean: sim {report['sim_peak_to_mean']} vs real {report['real_peak_to_mean']}")
+    print(f"Bimodality (morning/evening): sim {report['sim_bimodality']['morning_peak']}/{report['sim_bimodality']['evening_peak']}"
+          f" vs real {report['real_bimodality']['morning_peak']}/{report['real_bimodality']['evening_peak']}")
+    print(f"Valley time: sim {report['sim_valley_hour']}:00 vs real {report['real_valley_hour']}:00")
+    print(f"Hourly correlation: {report['correlation']}")
+    print(f"Report saved: {report_path}")
 
 
     try:
         import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
-        matplotlib.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "DejaVu Sans"]
+        matplotlib.rcParams["font.sans-serif"] = ["DejaVu Sans", "DejaVu Sans", "DejaVu Sans"]
         matplotlib.rcParams["axes.unicode_minus"] = False
 
         hours = list(range(24))
         fig, ax = plt.subplots(1, 1, figsize=(10, 5))
-        ax.plot(hours, report["sim_hourly"], "o-", label=f"模拟人口 (world {args.world})")
-        ax.plot(hours, report["real_hourly"], "s--", label="真实 VIC1 需求 (2026-06-23 周二)")
+        ax.plot(hours, report["sim_hourly"], "o-", label=f"Simulated population (world {args.world})")
+        ax.plot(hours, report["real_hourly"], "s--", label="Real VIC1 demand (2026-06-23 Tuesday)")
         ax.axvline(report["sim_peak_hour"], color="C0", alpha=0.3, linestyle=":")
         ax.axvline(report["real_peak_hour"], color="C1", alpha=0.3, linestyle=":")
-        ax.set_xlabel("小时")
-        ax.set_ylabel("归一化负荷（全天均值 = 1）")
-        ax.set_title(f"人口模拟 vs 维州真实负荷形状对比（相关性 {report['correlation']}）")
+        ax.set_xlabel("Hour")
+        ax.set_ylabel("Normalized load (daily mean = 1)")
+        ax.set_title(f"Population simulation vs VIC real load shape comparison (correlation {report['correlation']})")
         ax.legend()
         ax.grid(alpha=0.3)
         png_path = os.path.join(out_dir, "baseline_shape.png")
         fig.savefig(png_path, dpi=130, bbox_inches="tight")
         plt.close(fig)
-        print(f"对比图已保存: {png_path}")
+        print(f"Comparison chart saved: {png_path}")
     except ImportError:
-        print("（matplotlib 未安装，跳过出图）")
+        print("（matplotlib not installed; skipping plot)")
 
 
 if __name__ == "__main__":

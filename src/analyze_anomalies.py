@@ -36,7 +36,7 @@ def build_report(profiles):
             "overlap_count": peak_overlap_count(p["load_profile_watts"]),
         })
     if not rows:
-        raise ValueError("没有找到任何模拟曲线")
+        raise ValueError("No simulation curves found")
 
     dims = ["total_kwh", "peak_to_mean", "load_factor", "overlap_count"]
     zs = {dim: zscore([r[dim] for r in rows]) for dim in dims}
@@ -46,7 +46,7 @@ def build_report(profiles):
             z = zs[dim][i]
             r[f"z_{dim}"] = round(z, 2) if z is not None else None
             if z is not None and abs(z) > 2:
-                flag = "高" if z > 0 else "低"
+                flag = "High" if z > 0 else "Low"
                 flags.append(f"{dim}({flag} z={z:.1f})")
         r["anomaly_flags"] = flags
         r["max_abs_z"] = round(max((abs(z) for z in
@@ -66,10 +66,10 @@ def build_report(profiles):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="异常户检测（消费模式 z-score）")
+    parser = argparse.ArgumentParser(description="Anomalous household detection (consumption pattern z-score)")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default=None, help="YYYY-MM-DD，缺省取每户最后一天")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the last day per household")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
@@ -87,11 +87,11 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"异常户检测完成（{report['households']} 户，"
-          f"{report['anomaly_count']} 户异常）")
+    print(f"Anomalous household detection done ({report['households']} households, "
+          f"{report['anomaly_count']} anomalous households)")
     for a in report["anomalies"]:
         print(f"  {a['house_id']}: {', '.join(a['flags'])}")
-    print(f"  已保存: {args.out}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

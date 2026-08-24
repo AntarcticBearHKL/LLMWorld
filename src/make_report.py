@@ -1,18 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import argparse
 import json
 import os
@@ -24,7 +9,6 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from simulation_env import sim_root
 
 
-
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
@@ -32,17 +16,13 @@ except AttributeError:
     pass
 
 
-
-
 def price_elasticity(quantity_change_pct, price_change_pct):
-
     if price_change_pct == 0:
         return None
     return round(quantity_change_pct / price_change_pct, 3)
 
 
 def tou_elasticity(peak_kwh_baseline, peak_kwh_tou, peak_rate, flat_rate):
-
     q_change = (peak_kwh_tou / peak_kwh_baseline - 1) * 100 if peak_kwh_baseline else None
     p_change = (peak_rate / flat_rate - 1) * 100
     if q_change is None:
@@ -50,10 +30,7 @@ def tou_elasticity(peak_kwh_baseline, peak_kwh_tou, peak_rate, flat_rate):
     return price_elasticity(q_change, p_change), q_change
 
 
-
-
 def load_json(path):
-
     if not path or not os.path.exists(path):
         return None
     try:
@@ -71,13 +48,10 @@ def find_file(root, name):
 
 
 def parse_kwh(value):
-
     if value is None:
         return None
     m = re.search(r"-?\d+(?:\.\d+)?", str(value))
     return float(m.group(0)) if m else None
-
-
 
 
 def build_report(world):
@@ -85,72 +59,68 @@ def build_report(world):
     out_root = os.path.join(sim_root(world))
 
     lines = []
-    lines.append(f"# LLMWorld 论文素材报告（world: {world}）")
-    lines.append(f"生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    lines.append(f"# LLMWorld Paper Material Report (world: {world})")
+    lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append("")
 
-
-    lines.append("## 1. 政策场景概览")
+    lines.append("## 1. Policy Scenario Overview")
     lines.append("")
     matrix = None
     matrix_path = os.path.join(out_root, "comparison", "policy_matrix.json")
     matrix = load_json(matrix_path)
     if matrix and "scenarios" in matrix:
-        lines.append("| 场景 | 总kWh (vs基线) | 晚峰16-21点 (vs基线) | 谷段22-7点 (vs基线) | 峰值W (vs基线) | 峰值时刻 |")
+        lines.append("| Scenario | Total kWh (vs baseline) | Evening peak 16-21h (vs baseline) | Valley 22-7h (vs baseline) | Peak W (vs baseline) | Peak time |")
         lines.append("|---|---|---|---|---|---|")
         for s in matrix["scenarios"]:
-            lines.append(f"| {s['场景']} | {s['总kWh']} | {s['晚峰16-21点kWh']} | {s['谷段22-7点kWh']} | {s['峰值W']} | {s['峰值时刻']} |")
+            lines.append(f"| {s['scenario']} | {s['total_kwh']} | {s['peak_hours_kwh']} | {s['valley_hours_kwh']} | {s['peak_watts']} | {s['peak_time']} |")
     else:
-        lines.append("（无 policy_matrix.json，先跑 compare_policies --all）")
+        lines.append("(No policy_matrix.json; run compare_policies --all first)")
     lines.append("")
 
-
-    lines.append("## 2. 基线对齐（RQ1/RQ3）")
+    lines.append("## 2. Baseline Alignment (RQ1/RQ3)")
     lines.append("")
     baseline_report = find_file(os.path.join(out_root, "baseline"), "baseline_report.json")
     br = load_json(baseline_report) if baseline_report else None
     if br:
-        lines.append(f"- 模拟晚峰：{br['sim_peak_hour']}:00，真实晚峰：{br['real_peak_hour']}:00（偏移 {br['peak_hour_offset']} 小时）")
-        lines.append(f"- 峰均比：模拟 {br['sim_peak_to_mean']} vs 真实 {br['real_peak_to_mean']}")
-        lines.append(f"- 逐小时相关性：{br['correlation']}")
-        lines.append(f"- 数据源：{baseline_report}")
+        lines.append(f"- Simulated evening peak: {br['sim_peak_hour']}:00; real evening peak: {br['real_peak_hour']}:00 (offset {br['peak_hour_offset']} hours)")
+        lines.append(f"- Peak-to-mean: simulated {br['sim_peak_to_mean']} vs real {br['real_peak_to_mean']}")
+        lines.append(f"- Hourly correlation: {br['correlation']}")
+        lines.append(f"- Data source: {baseline_report}")
     else:
-        lines.append("（无 baseline_report.json，先跑 validate_baseline）")
+        lines.append("(No baseline_report.json; run validate_baseline first)")
     lines.append("")
 
-
-    lines.append("## 3. 价格弹性粗算（TOU 峰段）")
+    lines.append("## 3. Rough Price Elasticity (TOU peak)")
     lines.append("")
     if matrix and "scenarios" in matrix:
-        tou_row = next((s for s in matrix["scenarios"] if s.get("场景") == "tou"), None)
-        base_row = next((s for s in matrix["scenarios"] if s.get("场景") == "baseline"), None)
-        if tou_row and base_row and "晚峰16-21点kWh" in tou_row and "晚峰16-21点kWh" in base_row:
-            peak_base = parse_kwh(base_row["晚峰16-21点kWh"])
-            peak_tou = parse_kwh(tou_row["晚峰16-21点kWh"])
+        tou_row = next((s for s in matrix["scenarios"] if s.get("scenario") == "tou"), None)
+        base_row = next((s for s in matrix["scenarios"] if s.get("scenario") == "baseline"), None)
+        if tou_row and base_row and "peak_hours_kwh" in tou_row and "peak_hours_kwh" in base_row:
+            peak_base = parse_kwh(base_row["peak_hours_kwh"])
+            peak_tou = parse_kwh(tou_row["peak_hours_kwh"])
             elasticity, q_change = (None, None)
             if peak_tou is not None:
                 elasticity, q_change = tou_elasticity(peak_base, peak_tou, 0.55, 0.35)
-            lines.append(f"- 峰段电价：0.35 → 0.55 澳元/kWh（+57.1%）")
+            lines.append(f"- Peak rate: 0.35 -> 0.55 AUD/kWh (+57.1%)")
             if q_change is not None:
-                lines.append(f"- 峰段用电：{peak_base} → {peak_tou} kWh（{q_change:+.1f}%）")
-                lines.append(f"- **峰段价格弹性 ≈ {elasticity}**（负值 = 涨价抑制用电）")
-                lines.append(f"- 文献对照：Wang et al. (2021) 实证价格弹性有限、习惯主导；")
-                lines.append(f"  Albadi & El-Saadany (2008) DR 弹性典型区间约 -0.05 ~ -0.5")
+                lines.append(f"- Peak energy: {peak_base} -> {peak_tou} kWh ({q_change:+.1f}%)")
+                lines.append(f"- **Peak price elasticity ~= {elasticity}** (negative value = higher price curbs usage)")
+                lines.append(f"- Literature comparison: Wang et al. (2021) find limited price elasticity and habit-dominant behavior;")
+                lines.append(f"  Albadi & El-Saadany (2008) report typical DR elasticity range about -0.05 to -0.5")
                 lines.append("")
-                lines.append(f"- 解读：模拟弹性 {elasticity} 落在文献区间内 → 价格响应存在但有限，")
-                lines.append(f"  与 Wang et al. (2021) '价格调节有限、习惯主导' 结论一致")
+                lines.append(f"- Interpretation: simulated elasticity {elasticity} falls within the literature range -> price response exists but is limited,")
+                lines.append(f"  consistent with Wang et al. (2021) \"limited price adjustment, habit dominant\"")
             else:
-                lines.append("（基线峰段电量为 0，无法计算弹性）")
+                lines.append("(Baseline peak energy is 0; elasticity cannot be computed)")
         lines.append("")
 
-
-    lines.append("## 4. 节能意识分组（Costa & Kahn 2010 对照）")
+    lines.append("## 4. Energy Awareness Groups (Costa & Kahn 2010 comparison)")
     lines.append("")
     groups_path = os.path.join(out_root, "analysis", "groups.json")
     groups_data = load_json(groups_path)
     if groups_data and "groups" in groups_data:
         groups = groups_data["groups"]
-        lines.append("| 组 | 户数 | 基线均值kWh | nudge | tou |")
+        lines.append("| Group | Households | Baseline mean kWh | nudge | tou |")
         lines.append("|---|---|---|---|---|")
         for g in groups:
             n = g.get("nudge_mean_kwh")
@@ -159,24 +129,22 @@ def build_report(world):
             t_str = f"{t} ({g.get('tou_change_pct', 0):+.1f}%)" if t is not None else "-"
             lines.append(f"| {g['group']} | {g['households']} | {g['baseline_mean_kwh']} | {n_str} | {t_str} |")
         lines.append("")
-        lines.append("- 高意识组 TOU 响应 -15.7% vs 低意识组 +5.2% → 异质性响应（Costa & Kahn 2010 方向一致）")
+        lines.append("- High-awareness group TOU response -15.7% vs low-awareness group +5.2% -> heterogeneous response (consistent with Costa & Kahn 2010)")
     else:
-        lines.append("（无 groups.json，先跑 analyze_groups）")
+        lines.append("(No groups.json; run analyze_groups first)")
     lines.append("")
 
-
-    lines.append("## 5. 成本与规模（RQ4）")
+    lines.append("## 5. Cost and Scale (RQ4)")
     lines.append("")
-    lines.append("- 单户单日 token ≈ 80k~90k（thinking=False 快速模式）")
-    lines.append("- thinking=True 慢约 90 倍（3 分钟 vs 2 秒/调用）→ 大规模模拟必须关闭")
-    lines.append("- 并发实测峰值 = 10 = 硬上限（多户并行不破限）")
-    lines.append("- 峰均比随 N：4 户 4.83 → 10 户 2.52（平滑效应）")
-
+    lines.append("- Per-household per-day tokens ~= 80k-90k (thinking=False fast mode)")
+    lines.append("- thinking=True is about 90x slower (3 min vs 2 s/call) -> must be disabled for large-scale simulation")
+    lines.append("- Measured concurrency peak = 10 = hard cap (parallel households stay under the limit)")
+    lines.append("- Peak-to-mean vs N: 4 households 4.83 -> 10 households 2.52 (smoothing effect)")
 
     analysis_dir = os.path.join(out_root, "analysis")
 
     lines.append("")
-    lines.append("## 6. 行为聚类（Michalakopoulos 2023 / Dent 2014）")
+    lines.append("## 6. Behavior Clustering (Michalakopoulos 2023 / Dent 2014)")
     lines.append("")
     cluster = find_file(analysis_dir, "clusters_baseline_latest.json")
     if not cluster:
@@ -186,57 +154,57 @@ def build_report(world):
                 break
     cd = load_json(cluster)
     if cd and "clusters" in cd:
-        lines.append(f"- 户数 {cd['households']}，k={cd['k']}（WCSS {cd['wcss']}）")
+        lines.append(f"- Households {cd['households']}, k={cd['k']} (WCSS {cd['wcss']})")
         for c in cd["clusters"]:
-            lines.append(f"  - 簇{c['label']}: {c['households']} 户, "
-                         f"负荷率 {c['mean_load_factor']}, 峰时 {c['mean_peak_hour']}:00")
+            lines.append(f"  - Cluster {c['label']}: {c['households']} households, "
+                         f"load factor {c['mean_load_factor']}, peak hour {c['mean_peak_hour']}:00")
     else:
-        lines.append("（无 clusters_*.json，先跑 load_profile_cluster）")
+        lines.append("(No clusters_*.json; run load_profile_cluster first)")
 
     lines.append("")
-    lines.append("## 7. 行为变异性（Zhou 2016 / Jin 2021）")
+    lines.append("## 7. Behavior Variability (Zhou 2016 / Jin 2021)")
     lines.append("")
     var = load_json(os.path.join(analysis_dir, "variability_baseline.json"))
     if var and var.get("per_house"):
         rows = var["per_house"]
         regular = var.get("regular_half", [])
         variable = var.get("variable_half", [])
-        lines.append(f"- 规律户 {len(regular)}：{', '.join(regular[:8])}")
-        lines.append(f"- 波动户 {len(variable)}：{', '.join(variable[:8])}")
+        lines.append(f"- Regular households {len(regular)}: {', '.join(regular[:8])}")
+        lines.append(f"- Variable households {len(variable)}: {', '.join(variable[:8])}")
         top = sorted(rows, key=lambda r: -r["variability_index"])[:3]
         for r in top:
-            lines.append(f"  - {r['house_id']}: 变异指数 {r['variability_index']}, "
-                         f"峰时漂移 {r['peak_hour_shift']}h")
-        lines.append("- 文献主张：高变异性家庭对政策更敏感（Zhou 2016）")
+            lines.append(f"  - {r['house_id']}: variability index {r['variability_index']}, "
+                         f"peak hour shift {r['peak_hour_shift']}h")
+        lines.append("- Literature claim: high-variability households respond more strongly to policies (Zhou 2016)")
     else:
-        lines.append("（无 variability_baseline.json，先跑 analyze_variability）")
+        lines.append("(No variability_baseline.json; run analyze_variability first)")
 
     lines.append("")
-    lines.append("## 8. 行为模式迁移（Jin 2021 household-days）")
+    lines.append("## 8. Behavior Pattern Transitions (Jin 2021 household-days)")
     lines.append("")
     pat = load_json(os.path.join(analysis_dir, "patterns_baseline.json"))
     if pat and pat.get("per_house"):
-        lines.append(f"- household-days {pat['samples']}，k={pat['k']}，"
-                     f"平均迁移次数 {pat['mean_transitions']}")
+        lines.append(f"- household-days {pat['samples']}, k={pat['k']}, "
+                     f"mean transitions {pat['mean_transitions']}")
         for h in pat["per_house"][:5]:
-            seq = "→".join(str(c) for c in h["cluster_sequence"])
-            lines.append(f"  - {h['house_id']}: 迁移 {h['transitions']} 次 [{seq}]")
+            seq = "->".join(str(c) for c in h["cluster_sequence"])
+            lines.append(f"  - {h['house_id']}: transitions {h['transitions']} [{seq}]")
     else:
-        lines.append("（无 patterns_baseline.json，先跑 analyze_behavior_patterns）")
+        lines.append("(No patterns_baseline.json; run analyze_behavior_patterns first)")
 
     lines.append("")
-    lines.append("## 9. 异常户检测（Banik 2023 / Glauner 2017）")
+    lines.append("## 9. Anomalous Household Detection (Banik 2023 / Glauner 2017)")
     lines.append("")
     anom = load_json(os.path.join(analysis_dir, "anomalies_baseline.json"))
     if anom and "anomalies" in anom:
-        lines.append(f"- 异常 {anom['anomaly_count']}/{anom['households']} 户")
+        lines.append(f"- Anomalous {anom['anomaly_count']}/{anom['households']} households")
         for a in anom["anomalies"]:
             lines.append(f"  - {a['house_id']}: {', '.join(a['flags'])}")
     else:
-        lines.append("（无 anomalies_baseline.json，先跑 analyze_anomalies）")
+        lines.append("(No anomalies_baseline.json; run analyze_anomalies first)")
 
     lines.append("")
-    lines.append("## 10. 行为-负荷一致性（Xia 2026）")
+    lines.append("## 10. Behavior-Load Consistency (Xia 2026)")
     lines.append("")
     bl = None
     if os.path.isdir(analysis_dir):
@@ -245,29 +213,29 @@ def build_report(world):
                 bl = load_json(os.path.join(analysis_dir, name))
                 break
     if bl and "anomalies" in bl:
-        lines.append(f"- 一致 {bl['consistent_count']}/{bl['households']} 户，"
-                     f"异常 {bl['anomaly_count']} 户")
+        lines.append(f"- Consistent {bl['consistent_count']}/{bl['households']} households, "
+                     f"anomalous {bl['anomaly_count']} households")
         for a in bl["anomalies"]:
             lines.append(f"  - {a['house_id']}: {', '.join(a['flags'])}")
     else:
-        lines.append("（无 behavior_load_*.json，先跑 analyze_behavior_load）")
+        lines.append("(No behavior_load_*.json; run analyze_behavior_load first)")
 
     lines.append("")
-    lines.append("## 11. 事件响应（Fidone 2026）")
+    lines.append("## 11. Event Response (Fidone 2026)")
     lines.append("")
     ev = load_json(os.path.join(analysis_dir, "event_response_baseline.json"))
     if ev and "per_event" in ev:
-        lines.append(f"- 事件日迁移率 {ev.get('event_move_rate')} vs "
-                     f"非事件日 {ev.get('non_event_move_rate')}")
+        lines.append(f"- Event-day move rate {ev.get('event_move_rate')} vs "
+                     f"non-event days {ev.get('non_event_move_rate')}")
         for e in ev["per_event"]:
             title = e["titles"][0] if e.get("titles") else ""
-            lines.append(f"  - [{e['date']}] {title}: 迁移 {e['move_rate']}, "
-                         f"用电变化 {e['kwh_change_pct']}%")
+            lines.append(f"  - [{e['date']}] {title}: move rate {e['move_rate']}, "
+                         f"energy change {e['kwh_change_pct']}%")
     else:
-        lines.append("（无 event_response_baseline.json，先跑 analyze_event_response）")
+        lines.append("(No event_response_baseline.json; run analyze_event_response first)")
 
     lines.append("")
-    lines.append("## 12. 多世界对比（Eco3S 2026 稳健性）")
+    lines.append("## 12. Multi-World Comparison (Eco3S 2026 robustness)")
     lines.append("")
     wm = load_json(os.path.join(out_root, os.pardir, "comparison", "worlds_matrix.json"))
     if wm and "cells" in wm:
@@ -278,11 +246,10 @@ def build_report(world):
                 cells.append(f"{w} {pct:+.1f}%" if pct is not None else f"{w} -")
             lines.append(f"- {s}: {', '.join(cells)}")
     else:
-        lines.append("（无 worlds_matrix.json，先跑 compare_worlds）")
-
+        lines.append("(No worlds_matrix.json; run compare_worlds first)")
 
     lines.append("")
-    lines.append("## 13. 已产出图表清单")
+    lines.append("## 13. Generated Charts")
     lines.append("")
     for r, _, files in os.walk(out_root):
         for f in sorted(files):
@@ -298,18 +265,18 @@ def build_report(world):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="论文素材报告生成")
+    parser = argparse.ArgumentParser(description="Paper material report generation")
     parser.add_argument("--world", required=True)
     args = parser.parse_args()
 
     report_path, content = build_report(args.world)
 
-    for section in ["## 3. 价格弹性", "## 4. 节能意识分组"]:
+    for section in ["## 3. Rough Price Elasticity", "## 4. Energy Awareness Groups"]:
         idx = content.find(section)
         if idx >= 0:
             end = content.find("\n## ", idx + 3)
             print(content[idx:end if end > 0 else idx + 800])
-    print(f"\n报告已保存: {report_path}")
+    print(f"\nReport saved: {report_path}")
 
 
 if __name__ == "__main__":

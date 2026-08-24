@@ -25,27 +25,27 @@ def build_report(world_id):
     path = os.path.join(sim_root(world_id), "comparison",
                         "policy_matrix.json")
     if not os.path.exists(path):
-        raise ValueError("没有 policy_matrix.json（先跑 compare_policies --all）")
+        raise ValueError("No policy_matrix.json (run compare_policies --all first)")
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
     rows = []
     for s in data.get("scenarios", []):
-        name = s.get("场景", "?")
+        name = s.get("scenario", "?")
         rows.append({
             "scenario": name,
-            "total_change_pct": _to_float(s.get("总kWh")),
-            "peak_hours_change_pct": _to_float(s.get("晚峰16-21点kWh")),
-            "peak_load_cut_pct": _to_float(s.get("峰值W")),
-            "peak_plateau_cut_pct": _to_float(s.get("峰值平台分钟")),
-            "peak_to_mean": _to_float(s.get("峰均比")),
+            "total_change_pct": _to_float(s.get("total_kwh")),
+            "peak_hours_change_pct": _to_float(s.get("peak_hours_kwh")),
+            "peak_load_cut_pct": _to_float(s.get("peak_watts")),
+            "peak_plateau_cut_pct": _to_float(s.get("peak_plateau_minutes")),
+            "peak_to_mean": _to_float(s.get("peak_to_mean")),
         })
     if not rows:
-        raise ValueError("矩阵为空")
+        raise ValueError("Matrix is empty")
     return {"scenarios": rows}
 
 
 def main():
-    parser = argparse.ArgumentParser(description="政策权衡分析（多目标）")
+    parser = argparse.ArgumentParser(description="Policy tradeoff analysis (multi-objective)")
     parser.add_argument("world_id")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
@@ -60,8 +60,8 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print("政策权衡矩阵（% 为 vs 基线；越负越优）")
-    print(f"{'政策':<14}{'总电':<10}{'晚峰':<10}{'峰值':<10}{'平台':<10}{'峰均比':<8}")
+    print("Policy tradeoff matrix (% is vs baseline; more negative is better)")
+    print(f"{'Policy':<14}{'Total':<10}{'Peak hrs':<10}{'Peak':<10}{'Plateau':<10}{'P/M':<8}")
     for r in report["scenarios"]:
         fmt = lambda v: f"{v:+.1f}%" if v is not None else "-"
         print(f"{r['scenario']:<14}{fmt(r['total_change_pct']):<10}"
@@ -69,7 +69,7 @@ def main():
               f"{fmt(r['peak_load_cut_pct']):<10}"
               f"{fmt(r['peak_plateau_cut_pct']):<10}"
               f"{str(r['peak_to_mean']):<8}")
-    print(f"  已保存: {args.out}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

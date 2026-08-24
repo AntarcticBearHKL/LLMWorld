@@ -1,6 +1,9 @@
 ﻿# Environment variables
 .env
 
+# Matilda OAuth credentials
+src/matilda_credentials.json
+
 # Python cache
 __pycache__/
 *.pyc

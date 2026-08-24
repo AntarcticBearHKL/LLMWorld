@@ -55,7 +55,7 @@ def export_json_to_csv(path, out_dir):
 def export_world(world_id):
     analysis_dir = os.path.join(sim_root(world_id), "analysis")
     if not os.path.isdir(analysis_dir):
-        raise ValueError(f"没有 analysis 目录: {analysis_dir}")
+        raise ValueError(f"No analysis directory: {analysis_dir}")
     out_dir = os.path.join(analysis_dir, "csv")
     os.makedirs(out_dir, exist_ok=True)
     exported = []
@@ -67,20 +67,20 @@ def export_world(world_id):
         if result:
             exported.append(result)
     if not exported:
-        raise ValueError("没有可导出的 JSON 报告")
+        raise ValueError("No JSON reports to export")
     return exported
 
 
 def main():
-    parser = argparse.ArgumentParser(description="分析结果 CSV 导出")
+    parser = argparse.ArgumentParser(description="Export analysis results to CSV")
     parser.add_argument("world_id")
     args = parser.parse_args()
 
     exported = export_world(args.world_id)
-    print(f"CSV 导出完成（{len(exported)} 个文件）")
+    print(f"CSV export done ({len(exported)} files)")
     for path in exported:
         print(f"  {path}")
-    print(f"  目录: simulation/{args.world_id}/analysis/csv/")
+    print(f"  Directory: simulation/{args.world_id}/analysis/csv/")
 
 
 if __name__ == "__main__":

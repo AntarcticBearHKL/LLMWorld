@@ -37,7 +37,7 @@ def scan_house_dirs(world_id, scenario, date_str):
 def build_report(world_id, scenario, date_str):
     house_dirs = scan_house_dirs(world_id, scenario, date_str)
     if not house_dirs:
-        raise ValueError("没有找到任何户数据")
+        raise ValueError("No household data found")
     appliance_totals = {}
     per_house = []
     for house_id, house_dir in house_dirs:
@@ -58,7 +58,7 @@ def build_report(world_id, scenario, date_str):
             entry["total_kwh"] += a["total_energy_kwh"]
             entry["households"] += 1
     if not per_house:
-        raise ValueError("没有找到任何电器数据")
+        raise ValueError("No appliance data found")
     grand_total = sum(e["total_kwh"] for e in appliance_totals.values())
     ranking = []
     for name, entry in appliance_totals.items():
@@ -79,10 +79,10 @@ def build_report(world_id, scenario, date_str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="电器使用画像分析")
+    parser = argparse.ArgumentParser(description="Appliance usage profiling analysis")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default=None, help="YYYY-MM-DD，缺省取最后一天")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the last day")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
@@ -101,12 +101,12 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"电器使用画像完成（{report['households']} 户，"
-          f"总电 {report['grand_total_kwh']}kWh）")
+    print(f"Appliance usage profiling done ({report['households']} households, "
+          f"total {report['grand_total_kwh']}kWh）")
     for r in report["ranking"][:10]:
         print(f"  {r['name']}: {r['total_kwh']}kWh "
-              f"({r['share_pct']}%, {r['households']} 户)")
-    print(f"  已保存: {args.out}")
+              f"({r['share_pct']}%, {r['households']} households)")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

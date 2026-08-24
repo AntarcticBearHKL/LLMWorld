@@ -17,7 +17,7 @@ def weekday_group(date_dir):
     else:
         date_str = date_dir
     weekday = datetime.strptime(date_str, "%Y-%m-%d").weekday()
-    return "周末" if weekday >= 5 else "工作日"
+    return "Weekend" if weekday >= 5 else "Weekday"
 
 
 def evening_kwh(hourly):
@@ -29,14 +29,14 @@ def evening_kwh(hourly):
 
 def build_report(per_house):
     if not per_house:
-        raise ValueError("没有找到任何多日模拟曲线")
+        raise ValueError("No multi-day simulation curves found")
     groups = {}
     for house in per_house:
         for day in house["days"]:
             group = weekday_group(day["date"])
             groups.setdefault(group, []).append(day)
     rows = []
-    for group in ("工作日", "周末"):
+    for group in ("Weekday", "Weekend"):
         days = groups.get(group, [])
         if not days:
             continue
@@ -54,12 +54,12 @@ def build_report(per_house):
             "mean_peak_hour": round(sum(peak_hours) / len(peak_hours), 2),
         })
     if not rows:
-        raise ValueError("没有可用的周内分组数据")
+        raise ValueError("No usable within-week group data")
     return {"groups": rows}
 
 
 def main():
-    parser = argparse.ArgumentParser(description="周内模式分析（工作日 vs 周末）")
+    parser = argparse.ArgumentParser(description="Within-week pattern analysis (weekday vs weekend)")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--out", default=None)
@@ -78,12 +78,12 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"周内模式分析完成")
+    print(f"Within-week pattern analysis done")
     for r in report["groups"]:
-        print(f"  {r['group']}: {r['samples']} 样本 均电 {r['mean_kwh']}kWh "
-              f"峰值 {r['mean_peak_watts']}W 晚峰 {r['mean_evening_kwh']}kWh "
-              f"峰时 {r['mean_peak_hour']}:00")
-    print(f"  已保存: {args.out}")
+        print(f"  {r['group']}: {r['samples']} samples, mean energy {r['mean_kwh']}kWh "
+              f"peak {r['mean_peak_watts']}W evening {r['mean_evening_kwh']}kWh "
+              f"peak hour {r['mean_peak_hour']}:00")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

@@ -68,7 +68,7 @@ def load_daily_points(world_id, scenario):
 
 def build_report(points):
     if not points:
-        raise ValueError("没有找到任何多日聚合数据")
+        raise ValueError("No multi-day aggregated data found")
     temps = [p["temperature"] for p in points]
     kwhs = [p["kwh"] for p in points if p["kwh"] is not None]
     valid = [(p["temperature"], p["kwh"]) for p in points
@@ -77,7 +77,7 @@ def build_report(points):
     slope = linear_slope([v[0] for v in valid], [v[1] for v in valid])
     by_weather = {}
     for p in points:
-        for c in p["conditions"] or {"未知"}:
+        for c in p["conditions"] or {"Unknown"}:
             by_weather.setdefault(c, []).append(p["kwh"])
     weather_rows = []
     for condition, values in sorted(by_weather.items()):
@@ -99,7 +99,7 @@ def build_report(points):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="天气敏感性分析")
+    parser = argparse.ArgumentParser(description="Weather sensitivity analysis")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--out", default=None)
@@ -118,13 +118,13 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"天气敏感性分析完成（{report['days']} 天，"
-          f"温度 {report['temp_min']}-{report['temp_max']}°C）")
-    print(f"  温度-用电相关 {report['temperature_kwh_corr']}，"
-          f"斜率 {report['kwh_per_degree']} kWh/°C")
+    print(f"Weather sensitivity analysis done ({report['days']} days, "
+          f"temperature {report['temp_min']}-{report['temp_max']} C)")
+    print(f"  temperature-energy correlation {report['temperature_kwh_corr']}, "
+          f"slope {report['kwh_per_degree']} kWh/C")
     for w in report["by_weather"]:
-        print(f"  {w['condition']}: {w['samples']} 天, 均电 {w['mean_kwh']}kWh")
-    print(f"  已保存: {args.out}")
+        print(f"  {w['condition']}: {w['samples']} days, mean energy {w['mean_kwh']}kWh")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

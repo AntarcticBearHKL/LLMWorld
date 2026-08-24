@@ -1,16 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
 import json
 import os
 
@@ -18,7 +5,7 @@ import os
 class NewsItem:
 
 
-    def __init__(self, date, time, title, content, source="官方公告", news_type="一般"):
+    def __init__(self, date, time, title, content, source="Official announcement", news_type="General"):
         self.date = date
         self.time = time
         self.title = title
@@ -37,14 +24,11 @@ class NewsItem:
         return cls(
             date=d.get("date", ""), time=d.get("time", "07:00"),
             title=d.get("title", ""), content=d.get("content", ""),
-            source=d.get("source", "官方公告"), news_type=d.get("type", "一般"),
+            source=d.get("source", "Official announcement"), news_type=d.get("type", "General"),
         )
 
 
 class NewsBoard:
-
-
-
 
 
 
@@ -77,10 +61,10 @@ class NewsBoard:
 
         parts = [p.strip() for p in text.split("|")]
         if len(parts) < 3:
-            raise ValueError(f"事件格式应为 日期|标题|内容[|来源]，收到: {text}")
+            raise ValueError(f"Event format should be date|title|content[|source], received: {text}")
         self.add_event(NewsItem(date=parts[0], time="07:00",
                                 title=parts[1], content=parts[2],
-                                source=parts[3] if len(parts) > 3 else "官方公告"))
+                                source=parts[3] if len(parts) > 3 else "Official announcement"))
 
 
 
@@ -133,13 +117,14 @@ class NewsBoard:
 
         if not items:
             return ""
-        lines = ["## 今日外界信息（你会在今天获取到以下新闻）", ""]
+        lines = ["## External information today (you will receive the following news today)", ""]
         for n in items:
-            header = f"- [{n.date} {n.time}]（{n.source}）{n.title}"
+            header = f"- [{n.date} {n.time}] ({n.source}) {n.title}"
             lines.append(header)
             lines.append(f"  {n.content}")
         lines.append("")
-        lines.append("请结合你的性格、职业与立场分析这些信息，思考它们对你的生活安排的影响。")
+        lines.append("Please analyze this information in light of your personality, occupation and stance, "
+                     "and consider how it affects your daily arrangements.")
         return "\n".join(lines)
 
     def to_json(self):

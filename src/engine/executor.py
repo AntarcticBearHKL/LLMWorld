@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 import json
 import os
 
@@ -26,7 +17,7 @@ class Executor:
         self.news_context = news_context
         self.validation_warnings = []
 
-    def execute_all_segments(self, season="夏天", weather="晴天", temperature=28):
+    def execute_all_segments(self, season="Summer", weather="Sunny", temperature=28):
         prompts = []
         members_data = []
 
@@ -69,7 +60,7 @@ class Executor:
 
         for (member_name, member), prompt, result in zip(members_data, prompts, results):
             tokens = SubAgent.get_tokens()
-            log_name = f"04_第四层_批量用电决策_{member_name}"
+            log_name = f"04_layer4_batch_appliance_decision_{member_name}"
             result_content = result["content"] if isinstance(result, dict) else result
             reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
             utils.save_log(self.log_dir, log_name, prompt, result_content, tokens, reasoning_content)
@@ -77,8 +68,8 @@ class Executor:
             try:
                 decision_data = utils.parse_json_with_retry(prompt, result_content, json_mode=True, thinking=config.THINKING)
             except Exception as e:
-                self.validation_warnings.append(f"[解析失败] {member_name} 的用电决策不是合法 JSON: {e}")
-                print(f"[错误] 解析 {member_name} 的用电决策失败: {e}（该成员今日用电决策缺失）")
+                self.validation_warnings.append(f"[Parse failed] {member_name}'s appliance decision is not valid JSON: {e}")
+                print(f"[Error] Failed to parse {member_name}'s appliance decision: {e} (this member's appliance decisions for today are missing)")
                 continue
 
 
@@ -88,13 +79,13 @@ class Executor:
             decision_data["validation_warnings"] = member_warnings
             self.validation_warnings.extend(member_warnings)
 
-            json_filename = f"04_第四层_批量用电决策_{member_name}.json"
+            json_filename = f"04_layer4_batch_appliance_decision_{member_name}.json"
             json_filepath = os.path.join(self.log_dir, json_filename)
             with open(json_filepath, "w", encoding="utf-8") as f:
                 json.dump(decision_data, f, ensure_ascii=False, indent=2)
 
-            print(f"已生成 {member_name} 的用电决策，总耗电量：{total_energy:.3f} kWh"
-                  + (f"，{len(member_warnings)} 条校验警告" if member_warnings else ""))
+            print(f"Generated {member_name}'s appliance decisions, total energy: {total_energy:.3f} kWh"
+                  + (f", {len(member_warnings)} validation warnings" if member_warnings else ""))
 
         return None
 
@@ -141,7 +132,7 @@ class Executor:
             }
 
         if member.personal_appliances:
-            structure[f"{member.name}的个人电器"] = {
+            structure[f"{member.name}'s personal appliances"] = {
                 "appliances": [appliance.to_dict() for appliance in member.personal_appliances]
             }
 
@@ -152,6 +143,3 @@ class Executor:
             if member.name == name:
                 return member
         return None
-
-
-

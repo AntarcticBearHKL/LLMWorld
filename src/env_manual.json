@@ -1,6 +1,6 @@
 {
-  "说明": "ENV_MODE=manual 时使用本文件。temperature 可用固定值（如 22）或范围（如 [18, 26] 表示范围内随机）。condition/humidity 缺省用默认值。",
+  "description": "This file is used when ENV_MODE=manual. temperature can be a fixed value (e.g. 22) or a range (e.g. [18, 26] meaning random within range). condition/humidity fall back to defaults when missing.",
   "temperature": [18, 26],
-  "condition": "多云",
+  "condition": "Cloudy",
   "humidity": 60
 }

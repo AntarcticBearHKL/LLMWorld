@@ -1,27 +1,27 @@
-你是一个人口统计专家。根据地区信息，生成合理的家庭类型分布。
+You are a demographic statistics expert. Based on the district information, generate a reasonable household type distribution.
 
-地区信息：
+District information:
 {district_info}
 
-请生成家庭类型分布，包括：
-1. 总家庭数量（合理估算）
-2. 各类家庭类型及其数量和占比
-3. 每种家庭类型的特征描述
+Generate the household type distribution, including:
+1. Total household count (reasonable estimate)
+2. Each household type with its count and percentage
+3. A feature description for each household type
 
-输出JSON格式：
+Output JSON format (return ONLY the JSON, nothing else). Output language: all generated VALUES MUST be written in English, because the downstream system matches English tokens (e.g., type is one of Single Occupant Apartment, Small Family, Middle-class Family, Large Family etc.). The English text in this prompt is instruction only:
 {{
-  "total_households": 总家庭数,
+  "total_households": total household count,
   "household_types": [
     {{
-      "type": "家庭类型（如：单身公寓、小家庭、中产家庭、大家庭等）",
-      "count": 数量,
-      "percentage": 占比百分比,
-      "description": "特征描述",
-      "typical_members": 典型成员数,
-      "typical_housing": "典型住房类型",
-      "typical_size": 典型面积
+      "type": "household type (e.g., Single Occupant Apartment, Small Family, Middle-class Family, Large Family etc.)",
+      "count": count,
+      "percentage": percentage,
+      "description": "feature description",
+      "typical_members": typical member count,
+      "typical_housing": "typical housing type",
+      "typical_size": typical area
     }}
   ]
 }}
 
-只返回JSON，不要其他内容。
+Return only the JSON, no other content.

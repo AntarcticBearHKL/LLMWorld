@@ -29,7 +29,7 @@ def scan_house_daily_profiles(world_id, scenario):
                            if os.path.isdir(os.path.join(scenario_dir, d)))
             days = []
             for date_dir in dates:
-                path = os.path.join(scenario_dir, date_dir, "用电信息",
+                path = os.path.join(scenario_dir, date_dir, "ElectricityInfo",
                                     "house_load_profile_1440min.json")
                 if not os.path.exists(path):
                     continue
@@ -60,7 +60,7 @@ def build_report(per_house):
             "daily_kwhs": [round(d["kwh"], 2) for d in house["days"]],
         })
     if not rows:
-        raise ValueError("没有找到任何多日模拟曲线")
+        raise ValueError("No multi-day simulation curves found")
     rows.sort(key=lambda r: r["variability_index"])
     split = max(1, len(rows) // 2)
     low = rows[:split]
@@ -75,10 +75,10 @@ def build_report(per_house):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="跨日行为变异性分析")
+    parser = argparse.ArgumentParser(description="Cross-day behavior variability analysis")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--out", default=None, help="输出文件路径，缺省写入 analysis/")
+    parser.add_argument("--out", default=None, help="Output file path; defaults to analysis/")
     args = parser.parse_args()
 
     per_house = scan_house_daily_profiles(args.world_id, args.scenario)
@@ -96,13 +96,13 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"行为变异性分析完成（{report['households']} 户，最多 {report['n_days_max']} 天）")
-    print("  最规律（低变异性）：" + ", ".join(report["regular_half"][:8]))
-    print("  最不规律（高变异性）：" + ", ".join(report["variable_half"][:8]))
+    print(f"Behavior variability analysis done ({report['households']} households, max {report['n_days_max']} days)")
+    print("  Most regular (low variability): " + ", ".join(report["regular_half"][:8]))
+    print("  Most variable (high variability): " + ", ".join(report["variable_half"][:8]))
     for r in report["per_house"][:5]:
-        print(f"    {r['house_id']}: 变异指数 {r['variability_index']}, "
-              f"峰时漂移 {r['peak_hour_shift']}h, 日kWh CV {r['daily_kwh_cv']}")
-    print(f"  已保存: {args.out}")
+        print(f"    {r['house_id']}: variability index {r['variability_index']}, "
+              f"peak hour shift {r['peak_hour_shift']}h, daily kWh CV {r['daily_kwh_cv']}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

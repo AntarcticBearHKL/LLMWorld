@@ -53,7 +53,7 @@ class Home:
         
         for member in self.members:
             if member.personal_appliances:
-                structure[f"{member.name}的个人电器"] = {
+                structure[f"{member.name} personal appliances"] = {
                     "appliances": [appliance.name for appliance in member.personal_appliances]
                 }
         
@@ -76,7 +76,7 @@ class Home:
         
         for member in self.members:
             if member.personal_appliances:
-                structure[f"{member.name}的个人电器"] = {
+                structure[f"{member.name} personal appliances"] = {
                     "appliances": [
                         {
                             "unique_id": a.unique_id,
@@ -108,14 +108,14 @@ class Home:
         return exclusive_resources
     
     def _get_exclusive_rules(self, appliance):
-        if appliance.name == "电动汽车":
+        if appliance.name == "ElectricVehicle":
             return [
-                "同一时间只能一人使用",
-                "使用者负责开出和归还",
-                "其他人可以选择同乘",
-                "回家时只能由开出去的人开回来，或顺路接回其他人"
+                "Only one person can use it at a time",
+                "The user is responsible for taking it out and returning it",
+                "Others may choose to ride along",
+                "When returning home, only the person who took it out can drive it back, or pick up others on the way"
             ]
-        return ["同一时间只能一人使用"]
+        return ["Only one person can use it at a time"]
     
     def get_total_energy_consumption(self):
         total = 0

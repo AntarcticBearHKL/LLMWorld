@@ -20,7 +20,7 @@ class EnergyCalculator:
     def __init__(self, home, log_dir):
         self.home = home
         self.log_dir = log_dir
-        self.energy_info_dir = os.path.join(log_dir, "用电信息")
+        self.energy_info_dir = os.path.join(log_dir, "energy_info")
         os.makedirs(self.energy_info_dir, exist_ok=True)
 
         self.appliance_usage = {}
@@ -36,7 +36,7 @@ class EnergyCalculator:
     def load_all_decisions(self):
         decisions = []
         for filename in os.listdir(self.log_dir):
-            if filename.startswith("04_第四层_批量用电决策_") and filename.endswith(".json"):
+            if filename.startswith("04_layer4_batch_decision_") and filename.endswith(".json"):
                 filepath = os.path.join(self.log_dir, filename)
                 with open(filepath, "r", encoding="utf-8") as f:
                     decisions.append(json.load(f))
@@ -49,7 +49,7 @@ class EnergyCalculator:
 
 
         for decision_data in decisions:
-            member_name = decision_data.get("member", "未知成员")
+            member_name = decision_data.get("member", "unknown_member")
             self._process_member_decisions(member_name, decision_data)
 
 
@@ -141,15 +141,15 @@ class EnergyCalculator:
 
         if remaining <= 0:
             self.validation_warnings.append(
-                f"[超限截断] {appliance.name}[{appliance.unique_id}] 当日已用 {used} 分钟"
-                f"（上限 {cap}），{member_name} 在 {time_range} 的使用被完全丢弃"
+                f"[over-limit truncation] {appliance.name}[{appliance.unique_id}] already used {used} minutes today"
+                f" (limit {cap}), {member_name}'s usage in {time_range} was fully discarded"
             )
             return start_minutes
 
         self._daily_minutes[appliance.unique_id] = used + remaining
         self.validation_warnings.append(
-            f"[超限截断] {appliance.name}[{appliance.unique_id}] 当日已用 {used} 分钟"
-            f"（上限 {cap}），{member_name} 在 {time_range} 的使用从 {duration} 分钟截断为 {remaining} 分钟"
+            f"[over-limit truncation] {appliance.name}[{appliance.unique_id}] already used {used} minutes today"
+            f" (limit {cap}), {member_name}'s usage in {time_range} was truncated from {duration} to {remaining} minutes"
         )
         return start_minutes + remaining
 
@@ -182,7 +182,7 @@ class EnergyCalculator:
                 "duration_minutes": MINUTES_PER_DAY,
                 "action": "always_on",
                 "location": appliance.location,
-                "member": "（自动基载）",
+                "member": "(automatic baseline)",
                 "energy_kwh": kwh_per_day
             }]
 
@@ -273,7 +273,7 @@ class EnergyCalculator:
                 for usage_data in self.appliance_usage.values()
             ]
         }
-        summary_filepath = os.path.join(self.energy_info_dir, "总用电汇总.json")
+        summary_filepath = os.path.join(self.energy_info_dir, "total_energy_summary.json")
         with open(summary_filepath, "w", encoding="utf-8") as f:
             json.dump(summary_data, f, ensure_ascii=False, indent=2)
 

@@ -19,7 +19,7 @@ def get_world_last_date(world_id):
     world_dir = os.path.join(project_root, "worlds", world_id)
     path = os.path.join(world_dir, "state.json")
     if not os.path.exists(path):
-        # 多户并行：state_<house>.json 中取最大日期
+        # Parallel households: take the max date from state_<house>.json
         dates = []
         for name in sorted(os.listdir(world_dir)) if os.path.isdir(world_dir) else []:
             if name.startswith("state_") and name.endswith(".json"):
@@ -43,29 +43,29 @@ def parse_world_date(date_str):
     if not date_str:
         return None
     text = str(date_str).strip()
-    for fmt in ("%Y年%m月%d日", "%Y-%m-%d", "%Y%m%d"):
+    for fmt in ("%Y-%m-%d", "%Y%m%d"):
         try:
             return datetime.strptime(text, fmt)
         except ValueError:
             continue
-    raise ValueError(f"无法解析日期: {date_str}")
+    raise ValueError(f"Cannot parse date: {date_str}")
 
 
 def validate_start_date(world_id, date_str):
     last_date = get_world_last_date(world_id)
     requested = parse_world_date(date_str) if date_str else None
     if last_date:
-        last = datetime.strptime(last_date, "%Y年%m月%d日")
-        expected = (last + timedelta(days=1)).strftime("%Y年%m月%d日")
+        last = datetime.strptime(last_date, "%Y-%m-%d")
+        expected = (last + timedelta(days=1)).strftime("%Y-%m-%d")
         if requested is None:
             return expected
-        if requested.strftime("%Y年%m月%d日") == expected:
-            return requested.strftime("%Y年%m月%d日")
+        if requested.strftime("%Y-%m-%d") == expected:
+            return requested.strftime("%Y-%m-%d")
         raise ValueError(
-            f"世界 {world_id} 已模拟至 {last_date}，只能继续模拟："
-            f"日期须留空（自动续跑）或等于 {expected}（下一天）。"
-            f"不允许覆盖/回退/跳日；想重新开始请使用新的世界 ID")
-    return requested.strftime("%Y年%m月%d日") if requested else None
+            f"World {world_id} already simulated until {last_date}; can only continue from there: "
+            f"date must be left empty (auto-resume) or equal to {expected} (the next day). "
+            f"Overwriting/rolling back/skipping days is not allowed; to restart, use a new world ID")
+    return requested.strftime("%Y-%m-%d") if requested else None
 
 
 class World:
@@ -75,7 +75,7 @@ class World:
         self.world_id = world_id
         self.postcode = postcode
         self.house_id = house_id
-        self.env_id = env_id  # 模拟环境 id（simulation/<world>_<time>/），None=旧结构
+        self.env_id = env_id  # simulation environment id (simulation/<world>_<time>/), None=legacy structure
 
 
         if start_date:
@@ -98,7 +98,7 @@ class World:
             return None
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         if self.house_id:
-            # 多户并行下按户隔离，避免并发写同一 state.json 互相覆盖
+            # Parallel households: isolate per-house so concurrent runs do not overwrite the same state.json
             return os.path.join(project_root, "worlds", self.world_id,
                                 f"state_{self.house_id}.json")
         return os.path.join(project_root, "worlds", self.world_id, "state.json")
@@ -114,10 +114,10 @@ class World:
             last_date = state.get("date")
             if not last_date:
                 return None
-            d = datetime.strptime(last_date, "%Y年%m月%d日") + timedelta(days=1)
-            return d.strftime("%Y年%m月%d日")
+            d = datetime.strptime(last_date, "%Y-%m-%d") + timedelta(days=1)
+            return d.strftime("%Y-%m-%d")
         except Exception as e:
-            print(f"[状态] 读取世界状态失败（将从默认日期开始）: {e}")
+            print(f"[status] Failed to read world state (will start from the default date): {e}")
             return None
 
     def _load_memory_days(self):
@@ -207,11 +207,11 @@ class World:
         self.news.add_event(news_item)
         return self
 
-    def simulate_day(self, season="夏天", weather="晴天", temperature=28, verbose=True,
+    def simulate_day(self, season="Summer", weather="Sunny", temperature=28, verbose=True,
                      policy_context="", policy_name="baseline", community_notice=""):
         if verbose:
             print(f"\n{'='*60}")
-            print(f"开始模拟：{self.time.get_full_date_string()}")
+            print(f"Starting simulation: {self.time.get_full_date_string()}")
             print(f"{'='*60}\n")
         
         date_iso = self.time.date.strftime('%Y-%m-%d')
@@ -225,33 +225,33 @@ class World:
                          news_context=news_text, env_id=self.env_id)
         self.current_planner = planner        
         if verbose:
-            print("第一步：生成宏观计划...")
+            print("Step 1: Generating macro plan...")
         planner.generate_plans(self.time, community_notice=community_notice)
         
         if verbose:
-            print("第二步：渐进式协调生成完整时间线...")
+            print("Step 2: Progressively coordinating the full timeline...")
         planner.coordinate_timelines_progressively()
         
         if verbose:
-            print("第三步：丰富行为描述...")
+            print("Step 3: Enriching activity descriptions...")
         planner.enrich_activities(season=season, weather=weather, temperature=temperature)
         
         if verbose:
-            print("第四步：执行用电模拟...")
+            print("Step 4: Running electricity simulation...")
         executor = Executor(self.home, planner, policy_context=policy_context,
                             news_context=news_text)
         self.current_executor = executor
         executor.execute_all_segments(season=season, weather=weather, temperature=temperature)
         
         if verbose:
-            print("第五步：计算用电信息...")
+            print("Step 5: Calculating electricity usage...")
         energy_calculator = EnergyCalculator(self.home, planner.log_dir)
         energy_calculator.calculate_all_energy()
         energy_summary = energy_calculator.get_summary()
         
         if verbose:
-            print(f"第五步完成：总用电量 {energy_summary['total_energy_kwh']} kWh")
-            print(f"用电信息已保存到：{energy_calculator.energy_info_dir}")
+            print(f"Step 5 complete: total electricity {energy_summary['total_energy_kwh']} kWh")
+            print(f"Electricity info saved to: {energy_calculator.energy_info_dir}")
         
         day_result = {
             "date": self.time.get_date_string(),
@@ -278,18 +278,18 @@ class World:
         self.save_state()
 
         if verbose:
-            print(f"\n{self.time.get_full_date_string()} 模拟完成！")
-            print(f"日志目录：{planner.log_dir}\n")
+            print(f"\n{self.time.get_full_date_string()} simulation complete!")
+            print(f"Log directory: {planner.log_dir}\n")
         
         return day_result
     
-    def simulate_days(self, num_days, season="夏天", weather="晴天", temperature=28, verbose=True):
+    def simulate_days(self, num_days, season="Summer", weather="Sunny", temperature=28, verbose=True):
         results = []
         
         for day in range(num_days):
             if verbose:
                 print(f"\n{'#'*60}")
-                print(f"第 {day + 1}/{num_days} 天")
+                print(f"Day {day + 1}/{num_days}")
                 print(f"{'#'*60}")
             
             result = self.simulate_day(season=season, weather=weather, temperature=temperature, verbose=verbose)
@@ -300,7 +300,7 @@ class World:
         
         if verbose:
             print(f"\n{'='*60}")
-            print(f"完成 {num_days} 天模拟")
+            print(f"Completed simulation of {num_days} days")
             print(f"{'='*60}")
             self._print_summary()
         
@@ -342,18 +342,18 @@ class World:
         SubAgent.reset_tokens()
     
     def _print_summary(self):
-        print("\n模拟统计：")
-        print(f"  世界ID：{self.world_id}")
-        print(f"  总天数：{len(self.history)}")
+        print("\nSimulation statistics:")
+        print(f"  World ID: {self.world_id}")
+        print(f"  Total days: {len(self.history)}")
         
         tokens = self.get_total_tokens()
-        print(f"\nToken 使用统计：")
-        print(f"  未命中缓存 Token: {tokens['prompt_cache_miss']}")
-        print(f"  命中缓存 Token: {tokens['prompt_cache_hit']}")
-        print(f"  输出 Token: {tokens['completion']}")
-        print(f"  总计: {tokens['total']}")
+        print(f"\nToken usage statistics:")
+        print(f"  Cache miss tokens: {tokens['prompt_cache_miss']}")
+        print(f"  Cache hit tokens: {tokens['prompt_cache_hit']}")
+        print(f"  Output tokens: {tokens['completion']}")
+        print(f"  Total: {tokens['total']}")
         
-        print(f"\n模拟日期列表：")
+        print(f"\nSimulated dates:")
         for i, day in enumerate(self.history, 1):
             print(f"  {i}. {day['date']} ({day['day_type']}) - {day['log_dir']}")
     

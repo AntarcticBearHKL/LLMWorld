@@ -4,7 +4,7 @@ import json
 class Time:
     def __init__(self, date_str=None):
         if date_str:
-            self.date = datetime.strptime(date_str, "%Y年%m月%d日")
+            self.date = datetime.strptime(date_str, "%Y-%m-%d")
         else:
             self.date = datetime.now()
         
@@ -16,9 +16,9 @@ class Time:
     def _auto_detect_day_type(self):
         weekday = self.date.weekday()
         if weekday < 5:
-            return "工作日"
+            return "Workday"
         else:
-            return "周末"
+            return "Weekend"
     
     def next_day(self):
         self.date = self.date + timedelta(days=1)
@@ -35,7 +35,7 @@ class Time:
         return self
     
     def add_holiday(self, date_str, holiday_name, description=""):
-        date_key = datetime.strptime(date_str, "%Y年%m月%d日").strftime("%Y-%m-%d")
+        date_key = datetime.strptime(date_str, "%Y-%m-%d").strftime("%Y-%m-%d")
         self.holidays[date_key] = {
             "name": holiday_name,
             "description": description
@@ -43,7 +43,7 @@ class Time:
         return self
     
     def add_special_event(self, date_str, event_name, description=""):
-        date_key = datetime.strptime(date_str, "%Y年%m月%d日").strftime("%Y-%m-%d")
+        date_key = datetime.strptime(date_str, "%Y-%m-%d").strftime("%Y-%m-%d")
         self.special_events[date_key] = {
             "name": event_name,
             "description": description
@@ -63,14 +63,14 @@ class Time:
         return self.special_events.get(date_key, None)
     
     def get_date_string(self):
-        return self.date.strftime("%Y年%m月%d日")
+        return self.date.strftime("%Y-%m-%d")
     
     def get_weekday_chinese(self):
-        weekdays = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+        weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         return weekdays[self.date.weekday()]
     
     def get_full_date_string(self):
-        return f"{self.get_date_string()}（{self.get_weekday_chinese()}）"
+        return f"{self.get_date_string()} ({self.get_weekday_chinese()})"
     
     def get_context_info(self):
         info = {
@@ -104,18 +104,18 @@ class Time:
         context = self.get_context_info()
         
         prompt_parts = [
-            f"日期：{context['full_date']}（{context['day_type']}）"
+            f"Date: {context['full_date']} ({context['day_type']})"
         ]
         
         if context["is_holiday"]:
-            prompt_parts.append(f"节假日：{context['holiday_name']}")
+            prompt_parts.append(f"Holiday: {context['holiday_name']}")
             if "holiday_description" in context:
-                prompt_parts.append(f"说明：{context['holiday_description']}")
+                prompt_parts.append(f"Description: {context['holiday_description']}")
         
         if context["has_special_event"]:
-            prompt_parts.append(f"特殊事件：{context['special_event_name']}")
+            prompt_parts.append(f"Special event: {context['special_event_name']}")
             if "special_event_description" in context:
-                prompt_parts.append(f"说明：{context['special_event_description']}")
+                prompt_parts.append(f"Description: {context['special_event_description']}")
         
         return "\n".join(prompt_parts)
     

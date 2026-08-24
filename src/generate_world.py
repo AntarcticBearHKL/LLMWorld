@@ -1,14 +1,16 @@
-"""统一世界生成器 v1 —— 单一生成方式。
+"""Unified world generator v1 - single generation pipeline.
 
-流程（每户）：
-  1. 读取 Data/ 地区描述（clayton_3168_profile.md）
-  2. LLM：由地区描述生成 N 种家庭类型（--count 指定）
-  3. 每户：按家庭类型从 Persona 合成人格库抽样 N 位成员画像
-  4. LLM 校验：画像与家庭类型是否自洽；不合格 -> 换一批重新抽样（--max-retry 次）
-  5. LLM：由家庭类型 + 成员画像生成房间布局与家电配置、成员档案
-  6. 结构校验失败 -> 重生成（≤2 次）-> 仍失败回退程序化模板（population.py）
+Pipeline (per household):
+  1. Read the district description from Data/ (clayton_3168_profile.md)
+  2. LLM: generate N household types from the district description (specified by --count)
+  3. Per household: sample N member personas from the Persona synthesis library by household type
+  4. LLM validation: check whether personas are consistent with the household type; on failure
+     re-sample a new batch (up to --max-retry times)
+  5. LLM: generate room layout, appliance config and member profiles from household type + personas
+  6. On structural validation failure -> regenerate (<=2 times) -> fall back to programmatic
+     templates (population.py) if still failing
 
-用法：
+Usage:
   python src/generate_world.py pop03 --count 3 --seed 42 --max-retry 3
 """
 import argparse
@@ -21,6 +23,10 @@ import threading
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from engine import utils, SubAgent
@@ -31,25 +37,25 @@ from appliances import get_supported_appliances_text, get_appliance_schemas_text
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERSONA_DIR = os.path.join(PROJECT_ROOT, "Persona")
 DATA_DIR = os.path.join(PROJECT_ROOT, "Data")
-DEFAULT_DISTRICT_FILE = os.path.join(DATA_DIR, "clayton_3168_profile.md")
+DEFAULT_DISTRICT_FILE = os.path.join(DATA_DIR, "clayton_3168_profile_en.md")
 
 CLAYTON_POSTCODE = "3168"
-CLAYTON_CITY = "墨尔本"
+CLAYTON_CITY = "Melbourne"
 CLAYTON_DISTRICT = "Clayton"
 
-# 回退模板的类型关键词映射（population.py 的程序化 8 类）
+# Fallback template type keyword mapping (population.py's 8 programmatic household types)
 FALLBACK_TYPE_KEYWORDS = [
-    (["单亲"], "single_parent"),
-    (["独居"], "single_living"),
-    (["合租", "室友"], "share_house"),
-    (["学生", "留学"], "international_student"),
-    (["多代", "三代"], "multigenerational"),
-    (["退休", "老年"], "retired_couple"),
-    (["有孩", "孩子", "家庭"], "family_with_kids"),
+    (["single parent"], "single_parent"),
+    (["living alone"], "single_living"),
+    (["share", "roommate"], "share_house"),
+    (["student", "international student"], "international_student"),
+    (["multigenerational", "three generations"], "multigenerational"),
+    (["retired", "elderly"], "retired_couple"),
+    (["children", "family"], "family_with_kids"),
 ]
 FALLBACK_DEFAULT = "young_couple"
 
-MAX_BUILD_ATTEMPTS = 3  # 房间家电生成的 LLM 重试次数（含首次）
+MAX_BUILD_ATTEMPTS = 3  # LLM retry count for room/appliance generation (including the first attempt)
 
 
 def load_district_text(path=None):
@@ -57,23 +63,82 @@ def load_district_text(path=None):
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
             return f.read().strip()
-    print(f"[警告] 未找到地区描述 {path}，使用内置默认描述")
-    return ("位于墨尔本东南部的 Clayton 3168 邮编区，是莫纳什大学所在地的多元文化社区。"
-            "人口结构年轻（中位年龄 28 岁），学生与年轻专业人士占比高；家庭形态以夫妻无孩、"
-            "合租与学生家庭为主；住房以联排、单元房与公寓居多，租房比例高。"
-            "家庭周收入中位数约 1778 澳元。")
+    print(f"[Warning] District description file not found: {path}; using built-in default description")
+    return ("Located in the southeastern part of Melbourne, the Clayton 3168 postcode area is a "
+            "multicultural community home to Monash University. The population is young (median age "
+            "28) with a high share of students and young professionals; household forms are dominated "
+            "by couple-only households, share houses and student households; housing is mostly "
+            "townhouses, units and apartments with a high rental share. Median household weekly "
+            "income is about AUD 1,778.")
+
+
+def _escape_newlines_in_strings(text):
+    """Escape bare newlines inside JSON string values to \\n (models often emit literal newlines in persona text)."""
+    out = []
+    in_str = False
+    i = 0
+    n = len(text)
+    while i < n:
+        ch = text[i]
+        if in_str:
+            if ch == "\\" and i + 1 < n:
+                out.append(ch)
+                out.append(text[i + 1])
+                i += 2
+                continue
+            if ch == '"':
+                in_str = False
+                out.append(ch)
+                i += 1
+                continue
+            if ch in "\r\n":
+                out.append("\\n")
+                i += 1
+                continue
+            out.append(ch)
+            i += 1
+            continue
+        if ch == '"':
+            in_str = True
+        out.append(ch)
+        i += 1
+    return "".join(out)
 
 
 def _parse_json_lenient(text):
-    """容错解析 LLM 输出：容忍代码围栏/首尾噪声/单引号属性与值/尾逗号/注释/JS 字面量。
+    """Lenient parsing of LLM output: tolerates code fences / leading and trailing noise /
+    single-quoted keys and values / trailing commas / comments / JS literals.
 
-    策略：逐级修复，每级修复后尝试标准 json.loads；全部失败则抛最后异常。
+    Strategy: fix progressively, attempting standard json.loads after each fix;
+    if all fixes fail, raise the last exception.
     """
     text = str(text).strip()
-    text = utils.clean_json_text(text)  # 剥 ``` 代码围栏
+    text = utils.clean_json_text(text)  # strip ``` code fences
     if text.startswith("\ufeff"):  # BOM
         text = text[1:].strip()
-    # 剥离开头噪声（直到第一个 { 或 [）
+    text = _escape_newlines_in_strings(text)
+    # Extract the first complete JSON (tolerate trailing junk: models often append a
+    # second object / </output> tag / explanatory text)
+    decoder = json.JSONDecoder()
+    start = None
+    for i, ch in enumerate(text):
+        if ch in "[{":
+            start = i
+            break
+    if start is not None:
+        try:
+            return decoder.raw_decode(text, start)[0]
+        except Exception:
+            pass
+    # Prefer extracting the ```json code block (models like Matilda often wrap JSON in
+    # markdown fences, with explanatory text before and after)
+    fence = re.search(r"```(?:json)?\s*\n?(.*?)\n?```", text, re.S)
+    if fence:
+        try:
+            return json.loads(fence.group(1).strip())
+        except Exception:
+            pass
+    # Strip leading noise (up to the first { or [)
     start = None
     for i, ch in enumerate(text):
         if ch in "[{":
@@ -81,26 +146,27 @@ def _parse_json_lenient(text):
             break
     if start is not None:
         text = text[start:]
-    # 去掉注释
+    # Remove comments
     text = re.sub(r"//[^\n]*", "", text)
     text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
 
     def _load(t):
         return json.loads(t)
 
-    # 第 1 级：原样
+    # Level 1: as-is
     try:
         return _load(text)
     except Exception:
         pass
-    # 第 1.5 级：双花括号归一化（LLM 偶发照抄模板示例的 {{ }} 转义）
+    # Level 1.5: normalize double braces (models occasionally copy the {{ }} escaping
+    # straight from template examples)
     t1 = re.sub(r"\{\{", "{", text)
     t1 = re.sub(r"\}\}", "}", t1)
     try:
         return _load(t1)
     except Exception:
         pass
-    # 第 2 级：去掉尾逗号 + JS 字面量 → JSON 字面量
+    # Level 2: remove trailing commas + convert JS literals -> JSON literals
     t2 = re.sub(r",\s*([}\]])", r"\1", text)
     t2 = re.sub(r"\bTrue\b", "true", t2)
     t2 = re.sub(r"\bFalse\b", "false", t2)
@@ -109,23 +175,26 @@ def _parse_json_lenient(text):
         return _load(t2)
     except Exception:
         pass
-    # 第 3 级：单引号属性名（{ 'xxx': / , 'xxx': ）、字符串值（: 'xxx' ,），
-    #        最后兜底把剩余单引号对整体转双引号（覆盖数组元素 ['a', 'b'] 等场景）
+    # Level 3: single-quoted property names ({ 'xxx': / , 'xxx': ), string values
+    # (: 'xxx' ,), finally convert any remaining single-quote pairs to double quotes
+    # (covers array elements like ['a', 'b'])
     t3 = re.sub(r"([{,])\s*'([^']+)'\s*:", r'\1"\2":', t2)
     t3 = re.sub(r":\s*'([^']+)'(\s*[,}\]])", r':"\1"\2', t3)
     t3 = re.sub(r"'([^']*)'", r'"\1"', t3)
     try:
         return _load(t3)
     except Exception as e:
-        raise ValueError(f"JSON 容错解析失败（原始输出前 300 字符：{text[:300]}）: {e}")
+        raise ValueError(f"Lenient JSON parsing failed (first 300 chars of raw output: "
+                         f"{text[:300]}): {e}")
 
 
 class ChatLogger:
-    """LLM 调用记录器：每次调用写一份可读 .md + 追加一条结构化 .jsonl。
+    """LLM call logger: writes one readable .md + appends one structured .jsonl per call.
 
-    可读文件: log/<prefix><stage>.md   —— 提示词 / 思考(thinking) / 回复全文
-              prefix 为调用方所属（如 house_0001_ / global_），同一户的文件后缀一致
-    结构化:   log/llm_chat.jsonl        —— 每行一条完整记录（含成败/错误/重试次数）
+    Readable file: log/<prefix><stage>.md   - full prompt / thinking(thinking) / response
+                  prefix belongs to the caller (e.g. house_0001_ / global_); files of the
+                  same household share the same suffix
+    Structured:   log/llm_chat.jsonl        - one full record per line (ok/error/retries included)
     """
 
     def __init__(self, log_dir):
@@ -133,7 +202,7 @@ class ChatLogger:
         os.makedirs(log_dir, exist_ok=True)
         self.jsonl_path = os.path.join(log_dir, "llm_chat.jsonl")
         self._seq = 0
-        self._lock = threading.Lock()  # 多户并行写日志防交错
+        self._lock = threading.Lock()  # lock against interleaved writes from parallel households
 
     def record(self, stage, prompt, response, reasoning=None, ok=True, error=None,
                attempt=1, prefix=""):
@@ -148,29 +217,31 @@ class ChatLogger:
             with open(self.jsonl_path, "a", encoding="utf-8") as f:
                 f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
-            # 同一户同一阶段的 md 只保留最终一份（重试覆盖，后缀固定不跳号）
+            # Keep only the final .md per house per stage (retries overwrite; suffix fixed, no renumbering)
             md_path = os.path.join(self.log_dir, f"{prefix}{stage}.md")
             lines = [f"# [{ts}] {prefix}{stage}",
-                     "\n## 提示词（Prompt）\n", prompt or "(空)", ]
+                     "\n## Prompt\n", prompt or "(empty)", ]
             if reasoning:
-                lines += ["\n## 思考（Thinking）\n", reasoning]
-            lines += ["\n## 回复（Response）\n", response or "(空)"]
+                lines += ["\n## Thinking\n", reasoning]
+            lines += ["\n## Response\n", response or "(empty)"]
             if error:
-                lines += ["\n## 错误（Error）\n", str(error)]
+                lines += ["\n## Error\n", str(error)]
             with open(md_path, "w", encoding="utf-8") as f:
                 f.write("\n".join(lines) + "\n")
 
 
 def llm_json(prompt, label, attempts=2, logger=None, stage=None, thinking=None,
              prefix=""):
-    """调用 LLM 并解析 JSON；失败静默重试 attempts 次，返回 (data, warnings)。
+    """Call the LLM and parse the JSON; silently retry attempts times on failure,
+    return (data, warnings).
 
-    重试不产生可见提示（工程兜底），最终失败才返回一条警告。
+    Retries produce no visible message (engineering fallback); only final failure returns a warning.
     """
     warnings = []
     if thinking is None:
         thinking = config.THINKING
     content = reasoning = None
+    last_error = None
     for i in range(attempts):
         try:
             result = SubAgent.single_call(prompt, json_mode=True, thinking=thinking)
@@ -185,38 +256,70 @@ def llm_json(prompt, label, attempts=2, logger=None, stage=None, thinking=None,
                     logger.record(stage, prompt, content, reasoning=reasoning,
                                   ok=True, attempt=i + 1, prefix=prefix)
                 return data, warnings
-            raise ValueError("JSON 顶层必须是对象或数组")
+            raise ValueError("JSON top level must be an object or array")
         except Exception as e:
+            last_error = e
             if logger:
                 logger.record(stage, prompt, content, reasoning=reasoning,
                               ok=False, error=str(e), attempt=i + 1, prefix=prefix)
             if i < attempts - 1:
-                prompt += ("\n\n重要：你上一次的输出不是合法 JSON。"
-                           "请重新输出，只输出一个合法 JSON 对象，不要任何解释。")
-    warnings.append(f"{label} 调用异常：{e}")
+                prompt += ("\n\nImportant: your previous output was not valid JSON. "
+                           "Output again: a single valid JSON object only, no explanation, no code fences.")
+    warnings.append(f"{label} call failed: {last_error}")
     return None, warnings
+
+
+def _coerce_household_types(data):
+    """Normalize various model return structures into {"household_types": [...]}.
+
+    Supports three shapes: {household_types: [...]} / single object {type: ...} / bare array [...].
+    """
+    if isinstance(data, list):
+        return {"household_types": data}
+    if isinstance(data, dict):
+        if isinstance(data.get("household_types"), list):
+            return data
+        if "type" in data or "household_type" in data:
+            return {"household_types": [data]}
+    return data
 
 
 def generate_household_types(district_text, count, prompt_obj, logger=None,
                              thinking=None, prefix=""):
-    """步骤 1：地区描述 → count 种家庭类型。返回 [(type, desc, members, housing), ...]"""
+    """Step 1: district description -> count household types. Returns [(type, desc, members, housing), ...]"""
     rendered = prompt_obj.load("generate_world_step1_types",
                                district_info=district_text, count=count)
-    data, warnings = llm_json(rendered, "家庭类型生成", logger=logger,
+    data, warnings = llm_json(rendered, "Household type generation", logger=logger,
                               stage="step1_types", thinking=thinking, prefix=prefix)
     for w in warnings:
-        print(f"  [警告] {w}")
+        print(f"  [Warning] {w}")
+    data = _coerce_household_types(data)
     if not isinstance(data, dict) or not isinstance(data.get("household_types"), list):
-        print("[错误] 家庭类型生成结果结构非法，终止")
+        print("[Error] Household type generation returned an invalid structure; aborting")
         sys.exit(1)
     types = []
     for t in data["household_types"]:
-        if not isinstance(t, dict) or not str(t.get("type", "")).strip():
+        if not isinstance(t, dict):
+            continue
+        # Field-name compatibility for models like Matilda: household_type->type; housing
+        # fields vary widely, so match by the housing prefix
+        if "type" not in t and "household_type" in t:
+            t["type"] = t["household_type"]
+        if "typical_members" not in t and "typical_member_count" in t:
+            t["typical_members"] = t["typical_member_count"]
+        if "housing_hint" not in t:
+            for k in ("typical_housing", "housing_need", "housing_type", "housing"):
+                if k in t:
+                    t["housing_hint"] = t[k]
+                    break
+        if not str(t.get("type", "")).strip():
             continue
         try:
             members = int(t.get("typical_members", 2))
         except (TypeError, ValueError):
-            members = 2
+            # Models may return strings like "3-5 young students": extract the first number
+            m = re.search(r"\d+", str(t.get("typical_members", "")))
+            members = int(m.group()) if m else 2
         members = max(1, min(8, members))
         types.append({
             "type": str(t["type"]).strip(),
@@ -224,32 +327,37 @@ def generate_household_types(district_text, count, prompt_obj, logger=None,
             "typical_members": members,
             "housing_hint": str(t.get("housing_hint", "")).strip(),
         })
+    # Models may not strictly obey "generate N households": extras are truncated, fewer are kept as-is
+    types = types[:count]
     if not types:
-        print("[错误] 家庭类型列表为空，终止")
+        print("[Error] Household type list is empty; aborting")
         sys.exit(1)
     return types
 
 
 def sample_personas(household_type, attempt_seed):
-    """步骤 3：从 Persona 库按成员数抽样，渲染成中文画像文本。返回 (texts, rows)。"""
+    """Step 3: sample personas from the Persona library by member count, render as persona text.
+    Returns (texts, rows)."""
     if PERSONA_DIR not in sys.path:
         sys.path.insert(0, PERSONA_DIR)
     from sampler import PersonaSampler
     from persona_render import PersonaRenderer
     n = household_type["typical_members"]
     sampler = PersonaSampler(data_dir=PERSONA_DIR, seed=attempt_seed)
-    rows = sampler.sample(n)  # 使用内部 rng（已按 attempt_seed 播种）
+    rows = sampler.sample(n)  # uses internal rng (seeded by attempt_seed)
     renderer = PersonaRenderer(PERSONA_DIR)
-    texts = ["【成员 %d】\n%s" % (i + 1, renderer.render(r)) for i, r in enumerate(rows)]
+    texts = ["Member %d:\n%s" % (i + 1, renderer.render(r)) for i, r in enumerate(rows)]
     return texts, rows
 
 
 def align_personas(household_type, persona_texts, prompt_obj, logger=None,
                    thinking=None, prefix=""):
-    """步骤 2：LLM 直接把抽样画像对齐到家庭设定——冲突部分改写，无关部分原样保留。
+    """Step 2: the LLM aligns the sampled personas directly to the household setup -
+    rewriting conflicting parts and keeping unrelated parts as-is.
 
-    不校验、不解释"哪里不对"，直接返回符合设定的最终画像。
-    返回 (final_texts, warnings)；final_texts 为 None 表示输出异常（调用方沿用原始画像）。
+    No validation or explanation of "what is wrong"; returns the final personas matching
+    the setup directly. Returns (final_texts, warnings); final_texts is None on abnormal
+    output (caller keeps the original personas).
     """
     rendered = prompt_obj.load(
         "generate_world_step2_align",
@@ -258,30 +366,35 @@ def align_personas(household_type, persona_texts, prompt_obj, logger=None,
         member_count=household_type["typical_members"],
         persona_texts="\n\n".join(persona_texts),
     )
-    data, warnings = llm_json(rendered, "画像对齐", logger=logger,
+    data, warnings = llm_json(rendered, "Persona alignment", logger=logger,
                               stage="step2_align", thinking=thinking, prefix=prefix)
     if not isinstance(data, dict) or not isinstance(data.get("members"), list):
-        return None, warnings + ["画像对齐输出异常，沿用原始画像"]
+        return None, warnings + ["Persona alignment output abnormal; using original personas"]
     aligned = [str(m).strip() for m in data["members"] if str(m).strip()]
     if len(aligned) != len(persona_texts):
-        return None, warnings + [f"画像对齐成员数不符，沿用原始画像"]
+        return None, warnings + ["Persona alignment member count mismatch; using original personas"]
     return aligned, warnings
 
 
 def build_household(household_type, persona_texts, district_text, prompt_obj,
-                    logger=None, thinking=None, prefix=""):
-    """步骤 3：LLM 由对齐后的画像 + 家庭设定生成房间家电与成员档案。返回 household dict。"""
+                    logger=None, thinking=None, prefix="", retry_hint=None):
+    """Step 3: the LLM generates rooms/appliances and member profiles from aligned personas
+    + household setup. Returns household dict."""
     rendered = prompt_obj.load(
         "generate_world_step3_household",
         district_info=district_text,
         household_type=household_type["type"],
         household_description=household_type["description"],
         housing_hint=household_type["housing_hint"],
+        member_count=household_type["typical_members"],
         persona_texts="\n\n".join(persona_texts),
         supported_appliances=get_supported_appliances_text(),
         appliance_schemas=get_appliance_schemas_text(),
     )
-    data, warnings = llm_json(rendered, "家庭生成", logger=logger,
+    if retry_hint:
+        rendered += (f"\n\nImportant: your previous output was rejected: {retry_hint}. "
+                     "Output a complete JSON object again, containing home (rooms layout) and members.")
+    data, warnings = llm_json(rendered, "Household generation", logger=logger,
                               stage="step3_household", thinking=thinking, prefix=prefix)
     return data, warnings
 
@@ -297,22 +410,48 @@ def _supported_set():
     return SUPPORTED_APPLIANCES
 
 
-def _repair_household(h):
-    """轻量修补：补齐缺失字段/默认值，过滤非法家电。返回 (ok, problems)。"""
+def _coerce_household_structure(h):
+    """Normalize model output structure variants into {home, members, ...}.
+
+    Matilda etc. sometimes put rooms at top level, wrap everything in a
+    "household" object, or use home_name/size_sqm instead of home.name/size.
+    """
+    if not isinstance(h, dict):
+        return h
+    if "household" in h and isinstance(h["household"], dict):
+        inner = h["household"]
+        for k, v in inner.items():
+            h.setdefault(k, v)
+    if "home" not in h and isinstance(h.get("rooms"), list):
+        h["home"] = {"rooms": h["rooms"]}
+        if "size_sqm" in h:
+            h["home"]["size"] = h["size_sqm"]
+        h["home"].setdefault("name", h.get("home_name") or h.get("type") or "Home")
+    return h
+
+
+def _repair_household(h, expected_members=None):
+    """Lightweight repair: fill missing fields/defaults, filter invalid appliances.
+    Returns (ok, problems)."""
+    h = _coerce_household_structure(h)
     problems = []
     if not isinstance(h, dict):
-        return False, ["顶层不是对象"]
+        return False, ["Top level is not an object"]
     home = h.get("home")
     if not isinstance(home, dict):
-        return False, ["缺少 home"]
+        return False, ["Missing home"]
     rooms = home.get("rooms")
     if not isinstance(rooms, list) or not rooms:
-        return False, ["home.rooms 缺失或为空"]
+        return False, ["home.rooms missing or empty"]
     supported = _supported_set()
     for room in rooms:
         if not isinstance(room, dict):
-            problems.append("房间非法，跳过")
+            problems.append("Invalid room; skipped")
             continue
+        if "name" not in room and "type" in room:
+            # Models often put the room name in the type field: move it to name
+            # (simulation uses room['name'])
+            room["name"] = room["type"]
         room.setdefault("size", 0)
         apps = room.get("appliances")
         if not isinstance(apps, list):
@@ -321,7 +460,7 @@ def _repair_household(h):
         kept = []
         for app in apps:
             if not isinstance(app, dict) or app.get("type") not in supported:
-                problems.append(f"非法家电 {app.get('type') if isinstance(app, dict) else app}，已剔除")
+                problems.append(f"Invalid appliance {app.get('type') if isinstance(app, dict) else app}; removed")
                 continue
             app.setdefault("brand", "Generic")
             app.setdefault("power", None)
@@ -330,46 +469,80 @@ def _repair_household(h):
         room["appliances"] = kept
     members = h.get("members")
     if not isinstance(members, list) or not members:
-        return False, ["members 缺失或为空"]
+        return False, ["members missing or empty"]
+    if expected_members is not None:
+        if len(members) > expected_members:
+            problems.append(f"Member count {len(members)} > expected {expected_members}; "
+                            f"truncated to the first {expected_members}")
+            members = members[:expected_members]
+            h["members"] = members
+        elif len(members) < expected_members:
+            return False, [f"Member count {len(members)} < expected {expected_members}"]
+    member_names = [str(m.get("name", "")).strip() for m in members if isinstance(m, dict)]
+    if len(member_names) != len(set(member_names)):
+        return False, [f"Duplicate member names: {member_names}"]
     for m in members:
         if not isinstance(m, dict):
-            problems.append("成员非法，跳过")
+            problems.append("Invalid member; skipped")
             continue
-        m.setdefault("gender", "未知")
-        m.setdefault("occupation", "无业")
-        m.setdefault("work_schedule", {"start": "09:00", "end": "17:00",
-                                       "remote": False, "work_days": [1, 2, 3, 4, 5]})
+        m.setdefault("gender", "Unknown")
+        m.setdefault("occupation", "Unemployed")
+        if not isinstance(m.get("work_schedule"), dict):
+            m["work_schedule"] = {"start": "09:00", "end": "17:00",
+                                   "remote": False, "work_days": [1, 2, 3, 4, 5]}
         pers = m.setdefault("personality", {})
         if not isinstance(pers, dict):
             m["personality"] = {"traits": []}
             pers = m["personality"]
+        if isinstance(pers.get("traits"), str):
+            pers["traits"] = [pers["traits"]]
         pers.setdefault("traits", [])
         pers.setdefault("behavior_text", "")
-        pers.setdefault("energy_awareness", "低")   # 分析工具分组依赖；缺失兜底
-        pers.setdefault("news_sensitivity", "中")   # 模拟提示词拼接；缺失兜底
+        pers.setdefault("energy_awareness", "Low")   # analysis tools group by this; fallback when missing
+        pers.setdefault("news_sensitivity", "Medium")  # used when building simulation prompts; fallback
         if not isinstance(pers.get("big_five"), dict):
-            pers["big_five"] = {}                   # 分析工具归因依赖；缺失兜底
+            pers["big_five"] = {}                   # analysis attribution depends on this; fallback
         habits = m.setdefault("habits", {})
         if not isinstance(habits, dict):
             m["habits"] = {}
             habits = m["habits"]
+        # Normalize model field-name variants: wake->wake_time, sleep->sleep_time
+        if "wake" in habits and "wake_time" not in habits:
+            habits["wake_time"] = habits.pop("wake")
+        if "sleep" in habits and "sleep_time" not in habits:
+            habits["sleep_time"] = habits.pop("sleep")
+        # Models often put work_days/remote into habits: move them back to work_schedule
+        if "work_days" in habits and "work_days" not in m["work_schedule"]:
+            m["work_schedule"]["work_days"] = habits.pop("work_days")
+        if "remote" in habits and isinstance(m.get("work_schedule"), dict):
+            m["work_schedule"]["remote"] = habits.pop("remote")
         habits.setdefault("wake_time", "07:30")
         habits.setdefault("sleep_time", "23:00")
-        habits.setdefault("exercise", "偶尔散步")
+        habits.setdefault("exercise", "Occasional walks")
         habits.setdefault("hobbies", [])
         health = m.setdefault("health", {})
         if not isinstance(health, dict):
             m["health"] = {}
-        health.setdefault("condition", "良好")
-        health.setdefault("temperature_preference", {"summer": 26, "winter": 22})
+            health = m["health"]
+        health.setdefault("condition", "Good")
+        if not isinstance(health.get("temperature_preference"), dict):
+            # Models often return "22°C" or 22: extract the number into
+            # {"summer": v, "winter": v}
+            nums = re.findall(r"\d+", str(health.get("temperature_preference", "")))
+            health["temperature_preference"] = {"summer": int(nums[0]), "winter": int(nums[0])} if nums else {"summer": 26, "winter": 22}
         papps = m.get("personal_appliances")
+        if (not isinstance(papps, list) or not papps) and isinstance(m.get("appliances"), list) and m["appliances"]:
+            # Models often put personal appliances under the appliances key
+            # (personal_appliances missing or an empty array)
+            m["personal_appliances"] = m.pop("appliances")
+            papps = m["personal_appliances"]
         if not isinstance(papps, list):
             m["personal_appliances"] = []
         else:
             kept = []
             for app in papps:
                 if not isinstance(app, dict) or app.get("type") not in supported:
-                    problems.append(f"非法个人家电 {app.get('type') if isinstance(app, dict) else app}，已剔除")
+                    problems.append(f"Invalid personal appliance {app.get('type') if isinstance(app, dict) else app}; removed")
                     continue
                 app.setdefault("brand", "Generic")
                 app.setdefault("power", None)
@@ -377,12 +550,12 @@ def _repair_household(h):
                 kept.append(app)
             m["personal_appliances"] = kept
         if not (str(m.get("name", "")).strip() and isinstance(m.get("age"), int)):
-            problems.append(f"成员 {m.get('name', '?')} 缺姓名/年龄")
+            return False, [f"Member missing name/age: {m.get('name', '?')}"]
     return True, problems
 
 
 def fallback_household(household_type, rng):
-    """LLM 多次失败后的程序化回退（population.py 模板）。"""
+    """Programmatic fallback after repeated LLM failures (population.py template)."""
     from population import _build_template
     key = FALLBACK_DEFAULT
     text = household_type["type"] + household_type["description"]
@@ -397,10 +570,12 @@ def fallback_household(household_type, rng):
 
 def generate_one_household(household_type, district_text, rng, prompt_obj,
                            logger=None, thinking=None, prefix=""):
-    """单户完整流程：抽样 → LLM 直接对齐画像到家庭设定 → 生成房间电器。直线三步，无分支。
+    """Full single-household flow: sample -> LLM aligns personas to the household setup ->
+    generate rooms/appliances. Straight three steps, no branching.
 
-    返回 (household, notes, persona_texts, original_persona_texts, persona_seed)。
-    persona_texts 为最终采用的画像（已对齐）；original_persona_texts 为抽样原始画像。
+    Returns (household, notes, persona_texts, original_persona_texts, persona_seed).
+    persona_texts is the final adopted persona set (aligned); original_persona_texts is the
+    raw sampled persona set.
     """
     notes = []
     attempt_seed = rng.randint(0, 2 ** 31 - 1)
@@ -413,22 +588,26 @@ def generate_one_household(household_type, district_text, rng, prompt_obj,
     if aligned_texts is not None:
         persona_texts = aligned_texts
 
+    problems = []
     for attempt in range(MAX_BUILD_ATTEMPTS):
+        hint = "; ".join(problems) if attempt > 0 else None
         household, warnings = build_household(household_type, persona_texts,
                                               district_text, prompt_obj,
                                               logger=logger, thinking=thinking,
-                                              prefix=prefix)
+                                              prefix=prefix, retry_hint=hint)
         notes.extend(warnings)
         if household is None:
             continue
-        ok, problems = _repair_household(household)
+        ok, problems = _repair_household(household, len(persona_texts))
         if ok:
+            household.setdefault("type", household_type["type"])
             household["llm_generated"] = True
             return household, notes, persona_texts, original_persona_texts, attempt_seed
-        notes.append(f"家庭结构校验失败（第 {attempt + 1} 次）：{problems}")
+        notes.append(f"Household structure validation failed (attempt {attempt + 1}): {problems}")
 
-    notes.append("LLM 家庭生成多次失败，回退程序化模板")
+    notes.append("LLM household generation failed repeatedly; falling back to the programmatic template")
     household = fallback_household(household_type, rng)
+    household.setdefault("type", household_type["type"])
     return household, notes, persona_texts, original_persona_texts, attempt_seed
 
 
@@ -439,7 +618,8 @@ def _write_json(path, data):
 
 
 def init_world(world_id, district_text, seed):
-    """建世界目录 + log/ + district.json + world.json 骨架（立即落盘）。返回 (world_dir, log_dir)。"""
+    """Create the world directory + log/ + district.json + world.json skeleton (written
+    immediately). Returns (world_dir, log_dir)."""
     world_dir = os.path.join(PROJECT_ROOT, "worlds", world_id)
     district_dir = os.path.join(world_dir, CLAYTON_POSTCODE)
     log_dir = os.path.join(world_dir, "log")
@@ -450,7 +630,7 @@ def init_world(world_id, district_text, seed):
         "postcode": CLAYTON_POSTCODE,
         "location": {"city": CLAYTON_CITY, "district": CLAYTON_DISTRICT,
                      "coordinates": {"lat": -37.916, "lon": 145.123}},
-        "economic_level": "中",
+        "economic_level": "Medium",
         "description": district_text,
     }
     _write_json(os.path.join(district_dir, "district.json"), district)
@@ -458,13 +638,14 @@ def init_world(world_id, district_text, seed):
     world_meta = {
         "world_id": world_id,
         "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "user_prompt": f"统一生成器：地区描述 -> 家庭类型 -> Persona 抽样校验 -> 房间家电（seed={seed}）",
+        "user_prompt": (f"Unified generator: district description -> household types -> "
+                        f"Persona sampling/validation -> rooms and appliances (seed={seed})"),
         "generator": "generate_world.py v2",
         "district": {
             "postcode": CLAYTON_POSTCODE,
             "city": CLAYTON_CITY,
             "district": CLAYTON_DISTRICT,
-            "economic_level": "中",
+            "economic_level": "Medium",
         },
         "households": [],
     }
@@ -473,7 +654,7 @@ def init_world(world_id, district_text, seed):
 
 
 def save_household_types(world_id, household_types):
-    """步骤 1 完成后立即落盘家庭类型清单。"""
+    """Write the household type list to disk immediately after step 1."""
     _write_json(os.path.join(PROJECT_ROOT, "worlds", world_id, "household_types.json"),
                 {"generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                  "household_types": household_types})
@@ -481,7 +662,8 @@ def save_household_types(world_id, household_types):
 
 def save_household_artifacts(world_id, idx, persona_texts, original_persona_texts,
                              persona_seed, household):
-    """每户生成完成后立即落盘：personas.json（原始+最终画像）+ household.json。"""
+    """Write personas.json (original + final personas) + household.json immediately after
+    each household is generated."""
     district_dir = os.path.join(PROJECT_ROOT, "worlds", world_id, CLAYTON_POSTCODE)
     house_id = f"house_{idx + 1:04d}"
     house_dir = os.path.join(district_dir, house_id)
@@ -489,15 +671,15 @@ def save_household_artifacts(world_id, idx, persona_texts, original_persona_text
 
     _write_json(os.path.join(house_dir, "personas.json"), {
         "seed": persona_seed,
-        "persona_texts": persona_texts,                    # 对齐后的最终画像
-        "original_persona_texts": original_persona_texts,  # 抽样原始画像（可对比）
+        "persona_texts": persona_texts,                    # final aligned personas
+        "original_persona_texts": original_persona_texts,  # raw sampled personas (for comparison)
     })
     _write_json(os.path.join(house_dir, "household.json"), household)
     return house_id
 
 
 def update_world_meta(world_id, house_meta):
-    """每户完成后增量更新 world.json 的 households 列表。"""
+    """Incrementally update the households list in world.json after each household."""
     world_path = os.path.join(PROJECT_ROOT, "worlds", world_id, "world.json")
     with open(world_path, "r", encoding="utf-8") as f:
         world_meta = json.load(f)
@@ -508,14 +690,16 @@ def update_world_meta(world_id, house_meta):
 
 def _household_worker(idx, htype, world_id, district_text, prompt_obj, log_dir,
                       thinking, base_seed):
-    """单户完整流程，在一个独立进程中完成：抽样 → 画像对齐 → 生成房间家电 → 检查 → 落盘。
+    """Full single-household flow in a separate process: sample -> align personas ->
+    generate rooms/appliances -> check -> write to disk.
 
-    返回 (house_meta, household, notes, error, tokens)。多进程参数必须全部可 pickle。
+    Returns (house_meta, household, notes, error, tokens). All multiprocessing args must be
+    picklable.
     """
     try:
-        rng = random.Random(base_seed * 10007 + idx)  # 每户独立种子，并行/串行均可复现
-        prefix = f"house_{idx + 1:04d}_"              # 每户固定 log 文件后缀
-        logger = ChatLogger(log_dir)                  # 进程内创建（logger 对象不可跨进程）
+        rng = random.Random(base_seed * 10007 + idx)  # per-household independent seed; reproducible in parallel or serial
+        prefix = f"house_{idx + 1:04d}_"              # fixed log file suffix per household
+        logger = ChatLogger(log_dir)                  # created inside the process (logger objects cannot cross processes)
         household, notes, personas, original_personas, p_seed = \
             generate_one_household(htype, district_text, rng, prompt_obj,
                                    logger=logger, thinking=thinking, prefix=prefix)
@@ -528,96 +712,7 @@ def _household_worker(idx, htype, world_id, district_text, prompt_obj, log_dir,
             "rooms_count": len(household.get("home", {}).get("rooms", [])),
             "llm_generated": household.get("llm_generated", False),
         }
-        tokens = SubAgent.get_tokens()  # (缓存未命中, 命中, 输出) 本进程累计
+        tokens = SubAgent.get_tokens()  # (cache miss, hit, output) accumulated in this process
         return house_meta, household, notes, None, tokens
     except Exception as e:
-        return None, None, [f"进程异常：{e}"], str(e), (0, 0, 0)
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="统一世界生成器：地区描述 -> 家庭类型 -> Persona 抽样校验 -> 房间家电")
-    parser.add_argument("world_id", help="新世界ID（worlds/ 下的文件夹名）")
-    parser.add_argument("--count", type=int, default=3, help="家庭数量（1-10，默认 3）")
-    parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED, help="随机种子（可复现）")
-    parser.add_argument("--district", default=None, help="地区描述文件（默认 Data/clayton_3168_profile.md）")
-    parser.add_argument("--think", action="store_true",
-                        help="开启深度思考并记录思考内容到 log/（慢约 90 倍，默认关闭）")
-    args = parser.parse_args()
-
-    if not (1 <= args.count <= 10):
-        print(f"[错误] 每世界最多 10 户（收到 {args.count}）")
-        sys.exit(1)
-    world_dir = os.path.join(PROJECT_ROOT, "worlds", args.world_id)
-    if os.path.isdir(world_dir):
-        print(f"[错误] 世界 {args.world_id} 已存在，请使用新世界 ID")
-        sys.exit(1)
-
-    utils.set_seed(args.seed)
-    prompt_obj = Prompt()
-    district_text = load_district_text(args.district)
-
-    # 0. 先建世界目录 + log/，再开始任何步骤（每步产物都会立即落盘）
-    world_dir, log_dir = init_world(args.world_id, district_text, args.seed)
-    logger = ChatLogger(log_dir)
-    print("=" * 60)
-    print(f"统一世界生成器 v2：world={args.world_id}，{args.count} 户，种子 {args.seed}"
-          f"{'，深度思考开启' if args.think else ''}")
-    print("=" * 60)
-    print(f"  LLM 聊天记录目录：{log_dir}")
-    print(f"  世界目录：{world_dir}")
-
-    print("\n[步骤 1] 由地区描述生成家庭类型...")
-    household_types = generate_household_types(district_text, args.count, prompt_obj,
-                                               logger=logger, thinking=args.think,
-                                               prefix="global_")
-    save_household_types(args.world_id, household_types)  # 立即落盘
-    print(f"  [OK] 已保存 {args.count} 种家庭类型 -> worlds/{args.world_id}/household_types.json")
-    for i, t in enumerate(household_types):
-        print(f"    {i + 1}. {t['type']}（{t['typical_members']} 人）— {t['housing_hint']}")
-
-    # 步骤 2-3：每户（抽样+画像对齐+生成房间家电+检查）一个独立进程，最多 12 个进程并行
-    max_workers = min(len(household_types), 12)
-    print(f"\n[步骤 2-3] 并行生成 {len(household_types)} 户（{max_workers} 个进程同时处理）…")
-    with ProcessPoolExecutor(max_workers=max_workers) as pool:
-        futures = {
-            pool.submit(_household_worker, idx, htype, args.world_id, district_text,
-                        prompt_obj, log_dir, args.think, args.seed): idx
-            for idx, htype in enumerate(household_types)
-        }
-        results = {}
-        for fut in as_completed(futures):
-            idx = futures[fut]
-            try:
-                results[idx] = fut.result()
-            except Exception as e:  # worker 已兜底，这里仅防御
-                results[idx] = (None, None, [f"进程异常：{e}"], str(e), (0, 0, 0))
-
-    # 主进程按家庭顺序输出 + 增量更新 world.json（串行，无并发写冲突）
-    total_miss = total_hit = total_completion = 0
-    for idx in range(len(household_types)):
-        house_meta, household, notes, error, tokens = results[idx]
-        total_miss += tokens[0]
-        total_hit += tokens[1]
-        total_completion += tokens[2]
-        if house_meta is None:
-            print(f"\n  [失败] house_{idx + 1:04d} 生成失败：{error}")
-            continue
-        for n in notes:
-            print(f"    [备注] {n}")
-        update_world_meta(args.world_id, house_meta)  # 增量更新 world.json
-        print(f"  [OK] {house_meta['house_id']}：{house_meta['type']}"
-              f"{'（LLM 生成）' if house_meta['llm_generated'] else '（程序化回退）'}"
-              f" — {'、'.join(m.get('name', '?') for m in household.get('members', []))}"
-              f" -> 已落盘")
-
-    total = total_miss + total_hit + total_completion
-    print(f"\n=== 完成：worlds/{args.world_id}/ （{len(household_types)} 户）===")
-    print(f"  Token 消耗：{total}（缓存未命中 {total_miss} + "
-          f"缓存命中 {total_hit} + 输出 {total_completion}，跨 {max_workers} 进程汇总）")
-    print(f"  LLM 聊天记录：{log_dir}（每步 .md + llm_chat.jsonl）")
-    print(f"  下一步：python src/simulate.py {args.world_id} --days 1 --no-input")
-
-
-if __name__ == "__main__":
-    main()
+        return None, None, [f"Process error: {e}"], str(e), (0, 0, 0)
