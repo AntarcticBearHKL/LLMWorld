@@ -1,93 +1,95 @@
-你是一个家庭生活协调专家。现在需要协调 {{current_member_name}} 的时间线，使其与已经协调好的家庭成员时间线相匹配。
+You are a household life coordination expert. You need to coordinate {{current_member_name}}'s timeline so that it matches the timelines of the already-coordinated household members.
 
-## 成员信息
-- 姓名：{{current_member_name}}
-- 年龄：{{current_member_age}}
-- 职业：{{current_member_occupation}}
-- 性格：{{current_member_personality}}
+## Member information
+- Name: {{current_member_name}}
+- Age: {{current_member_age}}
+- Occupation: {{current_member_occupation}}
+- Personality: {{current_member_personality}}
 
-## 已协调的家庭成员时间线
-以下成员的时间线已经协调完成：{{coordinated_members}}
+## Already-coordinated household member timelines
+The following members' timelines are already coordinated: {{coordinated_members}}
 
 {{coordinated_timelines}}
 
-## 当前成员的原始时间线
+## Current member's original timeline
 {{current_timeline}}
 
-## 独占资源约束
+## Exclusive resource constraints
 
-家庭中存在以下独占资源，需要特别注意协调：
+The household has the following exclusive resources that need special coordination:
 
-### 电动汽车
-- **独占规则**：同一时间只能一人使用
-- **使用责任**：使用者负责开出和归还
-- **同乘选项**：其他人可以选择与使用者同乘
-- **归还规则**：回家时只能由开出去的人开回来，或顺路接回其他人
+### Electric vehicle (ElectricVehicle)
+- **Exclusive rule**: only one person can use it at a time
+- **Usage responsibility**: the user is responsible for driving it out and returning it
+- **Car-pooling option**: others may ride along with the user
+- **Return rule**: when coming home, the vehicle must be driven back by the person who drove it out, or pick up others on the way
 
-**协调要求**：
-1. 如果已协调成员在某时段使用电动车外出，{{current_member_name}} 有以下选择：
-   - 选择同乘（调整出发和返回时间与使用者一致）
-   - 选择其他交通方式（公交、地铁、步行等）
-   - 调整外出时间避开冲突
+**Coordination requirements**:
+1. If an already-coordinated member uses the electric vehicle to go out during some period, {{current_member_name}} has these options:
+   - Ride along (adjust departure and return times to match the user)
+   - Use other transport (bus, train, walking, etc.)
+   - Adjust the outing time to avoid the conflict
 
-2. 如果 {{current_member_name}} 需要使用电动车：
-   - 确保该时段没有其他人使用
-   - 如果有其他人同时需要外出，考虑让他们同乘
-   - 明确标注"驾驶电动车"，并在返回时也标注"驾驶电动车返回"
+2. If {{current_member_name}} needs to use the electric vehicle:
+   - Ensure no one else is using it during that period
+   - If others need to go out at the same time, consider letting them ride along
+   - Explicitly mark "drive the EV", and also mark "drive the EV back" when returning
 
-3. 电动车使用的连贯性：
-   - 谁开出去谁负责开回来
-   - 如果中途有人需要回家，驾驶者可以顺路送回
-   - 活动描述中要体现"驾驶"、"同乘"、"送XX回家"等细节
+3. Electric vehicle usage continuity:
+   - Whoever drives it out is responsible for driving it back
+   - If someone needs to come home mid-way, the driver may drop them off on the way
+   - The activity description must reflect details such as "drive" (driving), "ride along" (riding along), "take XX home" (taking XX home)
 
-## 协调任务
+## Coordination tasks
 
-你需要根据已协调成员的时间线，调整 {{current_member_name}} 的时间线，使其：
+Adjust {{current_member_name}}'s timeline according to the already-coordinated members' timelines, so that it:
 
-1. **识别共同活动机会**
-   - 如果已协调成员在某个时间段进行用餐、家务等活动，考虑 {{current_member_name}} 是否应该参与
-   - 如果多人的活动可以合并或协作，调整时间使其一致
+1. **Identify joint activity opportunities**
+   - If an already-coordinated member is eating, doing chores, etc. during a period, consider whether {{current_member_name}} should join
+   - If multiple members' activities can be merged or collaborated on, adjust the times to align them
 
-2. **解决空间冲突**
-   - 如果 {{current_member_name}} 的活动与已协调成员在同一时间使用同一空间，需要调整时间或空间
-   - 优先保持核心活动（工作、睡眠等）不变
+2. **Resolve spatial conflicts**
+   - If {{current_member_name}}'s activity uses the same space at the same time as an already-coordinated member, adjust the time or space
+   - Keep core activities (work, sleep, etc.) unchanged as a priority
 
-3. **协调独占资源使用**
-   - 严格遵守电动车等独占资源的使用规则
-   - 在活动描述中明确标注资源使用方式（驾驶/同乘）
-   - 确保资源使用的连贯性和合理性
+3. **Coordinate exclusive resource usage**
+   - Strictly follow the usage rules of exclusive resources such as the electric vehicle
+   - Explicitly mark the resource usage mode in activity descriptions (drive/ride along)
+   - Ensure the continuity and reasonableness of resource usage
 
-4. **优化家庭协作**
-   - 识别可以由一人完成的重复活动
-   - 合理分配家务和照顾责任
-   - 考虑家庭成员之间的互动和陪伴
+4. **Optimize household collaboration**
+   - Identify duplicate activities that could be done by one person
+   - Allocate chores and caregiving responsibilities reasonably
+   - Consider interaction and companionship between household members
 
-5. **保持合理性**
-   - 调整后的时间线要符合 {{current_member_name}} 的身份和习惯
-   - 保持活动的逻辑连贯性
-   - 确保有足够的休息和个人时间
+5. **Maintain reasonableness**
+   - The adjusted timeline must fit {{current_member_name}}'s identity and habits
+   - Keep the logical continuity of activities
+   - Ensure sufficient rest and personal time
 
-## 输出格式
+## Output format
 
-输出调整后的完整时间线，JSON格式：
+Output the adjusted complete timeline in JSON format (return ONLY the JSON, nothing else):
 
 {
   "coordinated_activities": [
     {
-      "time": "时间段（如 07:00-07:30）",
-      "location": "地点",
-      "activity": "活动描述（如涉及电动车，需明确标注：驾驶电动车去XX / 与XX同乘电动车去XX / 驾驶电动车返回）"
+      "time": "time segment (e.g., 07:00-07:30)",
+      "location": "location",
+      "activity": "activity description (if involving the EV, explicitly mark: drive the EV to XX / ride along with XX in the EV to XX / drive the EV back)"
     }
   ]
 }
 
-## 要求
+## Requirements
 
-- 输出完整的一天时间线（00:00-24:00）
-- 时间段不能重叠
-- 时间段要连续，不要有空隙
-- 活动描述要清晰具体
-- 如果与其他成员有共同活动，在活动描述中体现出来（如"与XX一起吃早餐"）
-- **如果涉及电动车使用，必须明确标注使用方式**（驾驶/同乘）
-- **确保电动车使用的连贯性**（谁开出去谁开回来）
-- 输出必须是有效的JSON格式
+- Output language: all generated VALUES (location, activity descriptions) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only. EV usage markers are the English tokens drive/ride along/drive the EV back (see below).
+- Output the complete day timeline (00:00-24:00)
+- Time segments must not overlap
+- Time segments must be continuous, with no gaps
+- Activity descriptions must be clear and specific
+- If there are joint activities with other members, reflect them in the description (e.g., "having breakfast with XX")
+- **If the electric vehicle is involved, the usage mode must be explicitly marked** (drive/ride along)
+- **Ensure electric vehicle usage continuity** (whoever drives it out drives it back)
+- Activity descriptions must be in English
+- Output must be valid JSON

@@ -11,19 +11,19 @@ from simulation_env import sim_root
 from load_profile_cluster import scan_house_profiles
 from engine import utils
 
-WEATHER_FACTOR = {"晴天": 1.0, "热浪": 1.0, "多云": 0.6,
-                  "阴天": 0.3, "阵雨": 0.15, "雨天": 0.15}
+WEATHER_FACTOR = {"Sunny": 1.0, "Heatwave": 1.0, "Cloudy": 0.6,
+                  "Overcast": 0.3, "Shower": 0.15, "Rainy": 0.15}
 
 SEASON_SUN = {
-    "夏天": (6.5, 20.5, 1.0),
-    "春天": (6.5, 18.5, 0.9),
-    "秋天": (7.0, 18.0, 0.85),
-    "冬天": (7.5, 17.0, 0.7),
+    "Summer": (6.5, 20.5, 1.0),
+    "Spring": (6.5, 18.5, 0.9),
+    "Autumn": (7.0, 18.0, 0.85),
+    "Winter": (7.5, 17.0, 0.7),
 }
 
 
 def solar_generation_curve(season, weather, capacity=5000):
-    sunrise, sunset, season_factor = SEASON_SUN.get(season, SEASON_SUN["春天"])
+    sunrise, sunset, season_factor = SEASON_SUN.get(season, SEASON_SUN["Spring"])
     weather_factor = WEATHER_FACTOR.get(weather, 0.6)
     curve = []
     for m in range(1440):
@@ -60,10 +60,10 @@ def battery_operation(load, gen, capacity_kwh, power_kw):
 
 def build_report(profiles, capacity, season, battery_kwh=0.0, battery_power_kw=3.0):
     if not profiles:
-        raise ValueError("没有找到任何模拟曲线")
+        raise ValueError("No simulation curves found")
     rows = []
     for p in profiles:
-        gen = solar_generation_curve(season, p.get("weather", "晴天"), capacity)
+        gen = solar_generation_curve(season, p.get("weather", "Sunny"), capacity)
         load = p["load_profile_watts"]
         charge_curve, discharge_curve = battery_operation(
             load, gen, battery_kwh, battery_power_kw)
@@ -108,14 +108,14 @@ def build_report(profiles, capacity, season, battery_kwh=0.0, battery_power_kw=3
 
 
 def main():
-    parser = argparse.ArgumentParser(description="光伏自用分析（prosumer）")
+    parser = argparse.ArgumentParser(description="Photovoltaic self-consumption analysis (prosumer)")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default=None, help="YYYY-MM-DD，缺省取每户最后一天")
-    parser.add_argument("--capacity", type=float, default=5.0, help="光伏容量 kW（默认 5）")
-    parser.add_argument("--battery", type=float, default=0.0, help="电池容量 kWh（默认 0=无）")
-    parser.add_argument("--battery-power", type=float, default=3.0, help="电池功率 kW（默认 3）")
-    parser.add_argument("--weather", default=None, help="天气（缺省自动：从聚合环境读取或默认晴天）")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the last day per household")
+    parser.add_argument("--capacity", type=float, default=5.0, help="PV capacity in kW (default 5)")
+    parser.add_argument("--battery", type=float, default=0.0, help="Battery capacity in kWh (default 0 = none)")
+    parser.add_argument("--battery-power", type=float, default=3.0, help="Battery power in kW (default 3)")
+    parser.add_argument("--weather", default=None, help="Weather (default automatic: read from aggregated environment or default to Sunny)")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
@@ -124,8 +124,8 @@ def main():
     if args.date:
         season = utils.season_for_date(args.date)
     if not season:
-        season = "夏天"
-    weather = args.weather or "晴天"
+        season = "Summer"
+    weather = args.weather or "Sunny"
     for p in profiles:
         p["weather"] = weather
     report = build_report(profiles, args.capacity * 1000.0, season,
@@ -144,20 +144,20 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"光伏自用分析完成（{report['households']} 户，"
+    print(f"PV self-consumption analysis done ({report['households']} households, "
           f"{report['capacity_kw']}kW"
-          f"{('+电池' + str(report['battery_kwh']) + 'kWh') if report['battery_kwh'] else ''}"
-          f"，{report['season']}季）")
-    print(f"  平均自用率 {report['mean_self_consumption_rate']}，"
-          f"平均覆盖占比 {report['mean_solar_coverage']}")
+          f"{('+battery ' + str(report['battery_kwh']) + 'kWh') if report['battery_kwh'] else ''}"
+          f", {report['season']} season)")
+    print(f"  mean self-consumption rate {report['mean_self_consumption_rate']}, "
+          f"mean solar coverage {report['mean_solar_coverage']}")
     for r in report["per_house"]:
-        battery_note = (f" 电池循环 {r['battery_cycle_kwh']}kWh "
-                        f"晚峰削减 {r['peak_import_cut_pct']}%") \
+        battery_note = (f"  battery cycle {r['battery_cycle_kwh']}kWh "
+                        f"evening peak cut {r['peak_import_cut_pct']}%") \
                         if report['battery_kwh'] else ""
-        print(f"  {r['house_id']}: 发电 {r['solar_gen_kwh']}kWh "
-              f"自用率 {r['self_consumption_rate']} 覆盖 {r['solar_coverage']}"
+        print(f"  {r['house_id']}: generation {r['solar_gen_kwh']}kWh "
+              f"self-consumption rate {r['self_consumption_rate']} coverage {r['solar_coverage']}"
               f"{battery_note}")
-    print(f"  已保存: {args.out}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

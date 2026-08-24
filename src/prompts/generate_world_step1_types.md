@@ -1,26 +1,31 @@
-你是一位人口统计专家。根据下面的地区描述，生成这个社区最可能出现的家庭类型清单。
+You are a demographic statistics expert. Based on the district description below, generate a list of the household types most likely to appear in this community.
 
-## 地区描述（ABS 2021 census 摘要）
+## District Description (ABS 2021 census summary)
 
 {district_info}
 
-## 生成要求
+## Generation Requirements
 
-1. 生成 **{count} 种**不同的家庭类型（覆盖该社区最典型、占比最高的家庭形态）
-2. 每种家庭类型给出：类型名称、详细描述、典型成员数、典型住房提示
-3. 家庭类型必须与该地区的年龄结构、收入水平、住房类型、文化构成吻合
-   （例如学生区应出现合租/学生家庭，而非大量退休家庭）
-4. 类型名称用中文（如：年轻夫妇丁克、有孩家庭、国际学生合租、独居上班族、单亲家庭、多代同堂、退休夫妇）
+1. Generate exactly **{count}** distinct household types (covering the most typical and most common household forms in this community)
+2. For each household type provide: a type name, a detailed description, the typical member count, and a typical housing hint
+3. Household types must match the district's age structure, income level, housing types, and cultural composition
+   (e.g., a student area should feature share-house/student households, not large numbers of retired households)
+4. Output language: all generated VALUES (type names, descriptions, housing hints) MUST be written in English, because the downstream system matches English tokens. Example type names: Young DINK Couple, Family with Children, International Student Share House, Single Professional Living Alone, Single-Parent Family, Multigenerational Household, Retired Couple
 
-输出 JSON 格式（只返回 JSON，不要任何其他内容）：
+Output JSON format (return ONLY the JSON, nothing else):
+
+MANDATORY INSTRUCTIONS (must follow):
+- Output only the JSON object itself in the format below. Never output markdown code fences (```), never output any explanatory text, never output lists or headings
+- Use exactly the field names below: type, description, typical_members (must be an integer 1-8), housing_hint
+- Generate exactly {count} types, no more and no fewer
 
 {
   "household_types": [
     {
-      "type": "家庭类型名称",
-      "description": "该类型的详细特征描述（3-5 句：成员构成、职业收入、生活方式、住房需求）",
-      "typical_members": 典型成员数(1-8的整数),
-      "housing_hint": "典型住房类型提示（如：两居室公寓、三居室联排、一居室单元房）"
+      "type": "household type name (in English)",
+      "description": "detailed feature description (3-5 sentences: member composition, occupation/income, lifestyle, housing needs)",
+      "typical_members": 3,
+      "housing_hint": "typical housing type hint (e.g., two-bedroom apartment, three-bedroom townhouse, one-bedroom unit)"
     }
   ]
 }

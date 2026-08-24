@@ -3,31 +3,31 @@ from .base import OnDemandAppliance
 class InductionCooker(OnDemandAppliance):
     def __init__(self, brand=None, power=None, age=0, location=None, owner=None, location_id=None, owner_id=None):
         power_watts = power if power is not None else 2000
-        super().__init__("电磁炉", power_watts=power_watts, brand=brand, age=age,
+        super().__init__("InductionCooker", power_watts=power_watts, brand=brand, age=age,
                         location=location, owner=owner, location_id=location_id, owner_id=owner_id)
     
     @classmethod
     def get_config_schema(cls):
         return {
-            "type": "电磁炉",
-            "description": "电磁炉",
+            "type": "InductionCooker",
+            "description": "Induction cooker",
             "config_fields": {
                 "brand": {
                     "type": "string",
-                    "description": "品牌名称",
+                    "description": "Brand name",
                     "required": False,
-                    "example": "苏泊尔"
+                    "example": "Supor"
                 },
                 "power": {
                     "type": "number",
-                    "description": "功率（瓦）",
+                    "description": "Power (watts)",
                     "required": False,
                     "default": 2000,
                     "range": [1000, 3000]
                 },
                 "age": {
                     "type": "number",
-                    "description": "使用年限",
+                    "description": "Age (years)",
                     "required": False,
                     "default": 0,
                     "range": [0, 10]

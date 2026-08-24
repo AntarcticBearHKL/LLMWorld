@@ -1,34 +1,34 @@
-你是一个地区规划专家。根据用户描述，生成详细的地区设定。
+You are a district planning expert. Based on the user's description, generate a detailed district setting.
 
-用户描述：{user_prompt}
+User description: {user_prompt}
 
-请生成地区设定，包括：
-1. 地理位置（城市、区域、邮编、坐标）
-2. 经济水平和消费能力
-3. 文化背景和生活方式
-4. 社区环境描述
-5. 典型住房类型和面积范围
+Generate the district setting, including:
+1. Geographic location (city, district, postcode, coordinates)
+2. Economic level and spending power
+3. Cultural background and lifestyle
+4. Community environment description
+5. Typical housing types and area ranges
 
-输出JSON格式：
+Output JSON format (return ONLY the JSON, nothing else). Output language: all generated VALUES MUST be written in English, because the downstream system matches English tokens (e.g., economic_level is one of Low/Medium/High). The English text in this prompt is instruction only:
 {{
-  "postcode": "邮编",
+  "postcode": "postcode",
   "location": {{
-    "city": "城市名",
-    "district": "区域名",
-    "country": "国家代码（如CN、US、AU）",
-    "coordinates": {{"lat": 纬度, "lon": 经度}}
+    "city": "city name",
+    "district": "district name",
+    "country": "country code (e.g., CN, US, AU)",
+    "coordinates": {{"lat": latitude, "lon": longitude}}
   }},
-  "description": "地区详细描述",
-  "economic_level": "经济水平（低/中/高）",
-  "culture": "文化背景描述",
-  "lifestyle": "生活方式描述",
+  "description": "detailed district description",
+  "economic_level": "economic level (Low/Medium/High)",
+  "culture": "cultural background description",
+  "lifestyle": "lifestyle description",
   "housing_types": [
     {{
-      "type": "住房类型",
-      "size_range": {{"min": 最小面积, "max": 最大面积}},
-      "typical_percentage": 占比百分比
+      "type": "housing type",
+      "size_range": {{"min": min area, "max": max area}},
+      "typical_percentage": percentage
     }}
   ]
 }}
 
-只返回JSON，不要其他内容。
+Return only the JSON, no other content.

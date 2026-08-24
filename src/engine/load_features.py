@@ -4,7 +4,7 @@ from sklearn.cluster import KMeans
 
 def hourly_means(profile_watts):
     if len(profile_watts) < 1440:
-        raise ValueError("负荷曲线长度不足 1440 分钟")
+        raise ValueError("Load curve length is less than 1440 minutes")
     hourly = []
     for h in range(24):
         seg = profile_watts[h * 60:(h + 1) * 60]
@@ -133,10 +133,10 @@ def kmeans(features, k, seed=42, iters=300):
     data = np.asarray(features, dtype=float)
     n = len(data)
     if n < k:
-        raise ValueError("样本数少于簇数")
+        raise ValueError("Number of samples is less than the number of clusters")
     distinct = np.unique(np.round(data, 6), axis=0).shape[0]
     if distinct < k:
-        raise ValueError("不同形状的样本数少于簇数")
+        raise ValueError("Number of distinct-shaped samples is less than the number of clusters")
     model = KMeans(n_clusters=k, init="k-means++", n_init=10,
                    max_iter=iters, random_state=seed)
     model.fit(data)

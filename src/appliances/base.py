@@ -103,13 +103,13 @@ class OnDemandAppliance(BaseAppliance):
     
     def to_dict(self):
         base = super().to_dict()
-        base["description"] = "使用时才耗电的设备（可开关）"
+        base["description"] = "Device that only consumes power when in use (switchable)"
         base["action_description"] = {
-            "use": "使用该设备（耗电）",
-            "idle": "不使用该设备（不耗电）"
+            "use": "Use the device (consumes power)",
+            "idle": "Do not use the device (no power consumption)"
         }
         if self.is_exclusive:
-            base["exclusive_note"] = "独占资源：同一时间只能一人使用"
+            base["exclusive_note"] = "Exclusive resource: only one person can use it at a time"
         return base
 
 
@@ -125,16 +125,16 @@ class ChargingAppliance(BaseAppliance):
     def to_dict(self):
         base = super().to_dict()
         base.update({
-            "description": "充电设备（可使用家庭电力或外部电力充电）",
+            "description": "Charging device (can be charged using home or external power)",
             "action_description": {
-                "charge_home": "使用家庭电力充电（计入家庭用电）",
-                "charge_external": "使用外部电力充电（不计入家庭用电）",
-                "use": "使用设备（消耗之前充入的电量，不耗电）",
-                "idle": "不使用也不充电"
+                "charge_home": "Charge with home power (counts toward home electricity)",
+                "charge_external": "Charge with external power (not counted toward home electricity)",
+                "use": "Use the device (consumes previously stored charge, no direct power draw)",
+                "idle": "Neither use nor charge"
             }
         })
         if self.is_exclusive:
-            base["exclusive_note"] = "独占资源：同一时间只能一人使用，使用者负责开出和归还"
+            base["exclusive_note"] = "Exclusive resource: only one person can use it at a time; the user is responsible for taking it out and returning it"
         return base
 
 
@@ -154,7 +154,7 @@ class AlwaysOnAppliance(BaseAppliance):
     def to_dict(self):
         base = super().to_dict()
         base.update({
-            "description": "持续耗电设备（无需操作，自动运行）",
+            "description": "Always-on device (runs automatically, no operation needed)",
             "daily_energy_kwh": self.daily_energy_kwh,
             "action_description": {}
         })

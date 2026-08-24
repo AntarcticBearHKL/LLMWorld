@@ -87,7 +87,7 @@ def analyze(world_id, scenario, date):
     kwhs = load_per_house_kwh(world_id, scenario, date)
 
     if not households or not kwhs:
-        raise ValueError("缺数据：请确认 world/scenario/date 正确")
+        raise ValueError("Missing data: verify world/scenario/date are correct")
 
     rows = []
     for house_id, household in households.items():
@@ -102,11 +102,11 @@ def analyze(world_id, scenario, date):
         "total_kwh": round(sum(r["kwh"] for r in rows), 4),
         "mean_household_kwh": round(sum(r["kwh"] for r in rows) / len(rows), 4),
         "by_type": group_mean([(r["household_type"], r["kwh"]) for r in rows]),
-        "by_members_count": group_mean([(f"{r['members_count']}人", r["kwh"]) for r in rows]),
+        "by_members_count": group_mean([(f"{r['members_count']} persons", r["kwh"]) for r in rows]),
     }
 
     aware = [(r["energy_awareness"], r["kwh"]) for r in rows
-             if r.get("energy_awareness") not in (None, "?", "未知")]
+             if r.get("energy_awareness") not in (None, "?", "Unknown")]
     if aware:
         report["by_awareness"] = group_mean(aware)
 
@@ -129,18 +129,18 @@ def analyze(world_id, scenario, date):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="人口行为归因分析")
+    parser = argparse.ArgumentParser(description="Population behavior attribution analysis")
     parser.add_argument("--world", required=True)
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--date", default="2026-04-21")
     parser.add_argument("--dates", nargs="+", default=None,
-                        help="多日期对比（如 --dates 2026-04-21 2026-04-22），输出逐日户均/总用电")
+                        help="Multi-date comparison (e.g. --dates 2026-04-21 2026-04-22); prints per-day mean/total energy")
     args = parser.parse_args()
 
     if args.dates:
         project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        print("=== 多日轨迹（户均 kWh）===")
-        print(f"{'日期':<14}{'户均':<10}{'总用电':<12}逐户数")
+        print("=== Multi-day trajectory (mean kWh) ===")
+        print(f"{'Date':<14}{'Mean':<10}{'Total':<12}Households")
         for d in args.dates:
             report, rows = analyze(args.world, args.scenario, d)
             print(f"{d:<14}{report['mean_household_kwh']:<10}{report['total_kwh']:<12}{report['households']}")
@@ -148,19 +148,19 @@ def main():
 
     report, rows = analyze(args.world, args.scenario, args.date)
 
-    print("=== 家庭类型 vs 户均用电 ===")
+    print("=== Household type vs mean energy ===")
     for k, v in report["by_type"].items():
         print(f"  {k}: {v} kWh")
-    print("=== 节能意识 vs 户均用电 ===")
+    print("=== Energy awareness vs mean energy ===")
     for k, v in report["by_awareness"].items():
         print(f"  {k}: {v} kWh")
-    print("=== 成员数 vs 户均用电 ===")
+    print("=== Member count vs mean energy ===")
     for k, v in report["by_members_count"].items():
         print(f"  {k}: {v} kWh")
-    print("=== Big Five（第一成员）× 户用电相关性 ===")
+    print("=== Big Five (first member) x household energy correlation ===")
     for dim, c in report["big_five_corr_with_kwh"].items():
         print(f"  {dim}: {c}")
-    print(f"  成员数×用电相关: {report['members_kwh_corr']}")
+    print(f"  members x energy correlation: {report['members_kwh_corr']}")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_dir = os.path.join(sim_root(args.world), "analysis")
@@ -168,7 +168,7 @@ def main():
     out_path = os.path.join(out_dir, f"population_{args.scenario}.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
-    print(f"\n已保存: {out_path}")
+    print(f"\nSaved: {out_path}")
 
 
 if __name__ == "__main__":

@@ -25,19 +25,19 @@ class Policy:
                    peak_rate=peak_rate, flat_rate=flat_rate, valley_rate=valley_rate)
 
     @classmethod
-    def subsidy(cls, appliance="电动汽车", off_peak_rate=0.18,
+    def subsidy(cls, appliance="Electric Vehicle", off_peak_rate=0.18,
                 valley_hours=(22, 7)):
 
         return cls("subsidy", appliance=appliance, off_peak_rate=off_peak_rate,
                    valley_hours=valley_hours)
 
     @classmethod
-    def nudge(cls, comparison_text="你的邻居平均每天用电 18 千瓦时"):
+    def nudge(cls, comparison_text="Your neighbours use 18 kWh of electricity per day on average"):
 
         return cls("nudge", comparison_text=comparison_text)
 
     @classmethod
-    def nudge_loss(cls, comparison_text="你的邻居平均每天用电 18 千瓦时"):
+    def nudge_loss(cls, comparison_text="Your neighbours use 18 kWh of electricity per day on average"):
 
 
 
@@ -59,13 +59,13 @@ class Policy:
 
     @classmethod
     def night_setback(cls, reduce_hours=(23, 6), target_temp="16-18°C",
-                      saving_note="可节省 5-10% 供暖电费"):
+                      saving_note="can save 5-10% on heating electricity bills"):
 
         return cls("night_setback", reduce_hours=reduce_hours,
                    target_temp=target_temp, saving_note=saving_note)
 
     @classmethod
-    def in_home_display(cls, feedback_text="家庭智能电表显示屏实时显示当前功率与电费"):
+    def in_home_display(cls, feedback_text="The in-home smart meter display shows current power and electricity cost in real time"):
 
         return cls("in_home_display", feedback_text=feedback_text)
 
@@ -86,12 +86,13 @@ class Policy:
             p, f, v = (self.params["peak_rate"], self.params["flat_rate"],
                        self.params["valley_rate"])
             return (
-                f"## 当前电价（分时电价）\n"
-                f"- 峰时段 {peak_start:02d}:00-{peak_end:02d}:00：{p} 澳元/kWh\n"
-                f"- 平时段：{f} 澳元/kWh\n"
-                f"- 谷时段 {valley_start:02d}:00-{valley_end:02d}:00：{v} 澳元/kWh\n\n"
-                f"省钱提示：大功率电器（洗衣机、电动汽车充电、热水器、空调）尽量安排在谷时段；"
-                f"峰时段尽量减少大功率设备使用。"
+                f"## Current electricity tariff (time-of-use)\n"
+                f"- Peak hours {peak_start:02d}:00-{peak_end:02d}:00: {p} AUD/kWh\n"
+                f"- Standard hours: {f} AUD/kWh\n"
+                f"- Valley hours {valley_start:02d}:00-{valley_end:02d}:00: {v} AUD/kWh\n\n"
+                f"Money-saving tip: schedule high-power appliances (washing machine, EV charging, "
+                f"water heater, air conditioner) during valley hours; "
+                f"minimise use of high-power devices during peak hours."
             )
 
         if self.type == "subsidy":
@@ -99,37 +100,40 @@ class Policy:
             rate = self.params["off_peak_rate"]
             valley_start, valley_end = self.params["valley_hours"]
             return (
-                f"## 低谷充电补贴\n"
-                f"- {appliance} 在谷时段 {valley_start}:00-{valley_end}:00 充电享受优惠价"
-                f" {rate} 澳元/kWh\n"
-                f"- 省钱提示：尽量在谷时段给 {appliance} 充电。"
+                f"## Off-peak charging subsidy\n"
+                f"- Charging the {appliance} during valley hours {valley_start}:00-{valley_end}:00 "
+                f"qualifies for the discounted rate of {rate} AUD/kWh\n"
+                f"- Money-saving tip: charge the {appliance} during valley hours when possible."
             )
 
         if self.type == "nudge":
             return (
-                f"## 社会规范信息\n"
-                f"- {self.params['comparison_text']}。\n"
-                f"- 你的家庭用电量已通过智能电表与社区对比，请尽量节约用电。"
+                f"## Social norm information\n"
+                f"- {self.params['comparison_text']}.\n"
+                f"- Your household electricity usage is compared with the community via the smart meter; "
+                f"please try to save electricity."
             )
 
         if self.type == "nudge_loss":
             return (
-                f"## 社会规范信息（损失警示）\n"
-                f"- {self.params['comparison_text']}。\n"
-                f"- 若家庭用电量不下降，社区将无法达成节能目标，"
-                f"你的家庭将被标记为高耗能户，并失去每月 5 澳元的社区节能返利。\n"
-                f"- 请务必避免这种损失，立刻减少不必要的用电。"
+                f"## Social norm information (loss framing)\n"
+                f"- {self.params['comparison_text']}.\n"
+                f"- If your household electricity usage does not decrease, the community will not reach "
+                f"its energy-saving target, your household will be flagged as a high-consumption household, "
+                f"and you will lose the monthly AUD 5 community energy-saving rebate.\n"
+                f"- Please avoid this loss and immediately reduce unnecessary electricity use."
             )
 
         if self.type == "peak_demand":
             rate = self.params["rate_per_kw"]
             start, end = self.params["window"]
             return (
-                f"## 需量电价（峰值收费）\n"
-                f"- 每天 {start:02d}:00-{end:02d}:00 中，家庭全天功率最高的"
-                f" 60 分钟将按 {rate} 澳元/kW 额外收费（月度结算）。\n"
-                f"- 避免让多个大功率电器（空调、洗衣机、电磁炉、"
-                f"电动汽车充电）在同一小时叠加使用；错峰开启可大幅降低账单。"
+                f"## Demand tariff (peak charging)\n"
+                f"- Between {start:02d}:00-{end:02d}:00 each day, the 60 minutes with the highest "
+                f"household power draw will be charged an additional {rate} AUD/kW (settled monthly).\n"
+                f"- Avoid running multiple high-power appliances (air conditioner, washing machine, "
+                f"induction cooker, EV charging) in the same hour; staggering them can significantly "
+                f"lower your bill."
             )
 
         if self.type == "ev_delay":
@@ -139,41 +143,43 @@ class Policy:
             discount = min(flat, max_delay * incentive)
             delayed_rate = round(flat - discount, 2)
             return (
-                f"## 电动汽车充电延迟激励（灵活充电菜单）\n"
-                f"- 立即充电（今晚{flat:.2f} 澳元/kWh）：最早完成，价格最高。\n"
-                f"- 延迟充电菜单：选择“最晚完成充电时间”越晚，电价越低——"
-                f"每延迟 1 小时电价降 {incentive:.2f} 澳元/kWh，"
-                f"最多延迟 {max_delay} 小时（电价降至 {delayed_rate:.2f} 澳元/kWh）。\n"
-                f"- 系统会在深夜谷段自动安排充电，保证在承诺时限前充满。"
+                f"## EV charging delay incentive (flexible charging menu)\n"
+                f"- Charge now ({flat:.2f} AUD/kWh): finished earliest, highest price.\n"
+                f"- Delay menu: the later you choose the 'latest charging completion time', the lower the "
+                f"price — each 1-hour delay reduces the price by {incentive:.2f} AUD/kWh, "
+                f"up to {max_delay} hours delay (price drops to {delayed_rate:.2f} AUD/kWh).\n"
+                f"- The system automatically schedules charging late at night during valley hours, "
+                f"guaranteeing a full charge by the promised deadline."
             )
 
         if "+" in self.type:
             subs = self.params["policies"]
             names = " + ".join(s.type for s in subs)
             body = "\n\n".join(s.render() for s in subs)
-            return f"## 当前政策组合（{names}）\n\n{body}"
+            return f"## Current policy combination ({names})\n\n{body}"
 
         if self.type == "night_setback":
             start, end = self.params["reduce_hours"]
             target = self.params["target_temp"]
             note = self.params["saving_note"]
             return (
-                f"## 夜间降暖建议（供暖节能）\n"
-                f"- 夜间 {start:02d}:00-{end:02d}:00 及全家人离家时段，"
-                f"请把暖气调低至 {target}。\n"
-                f"- 睡觉时盖厚被子代替高室温；离家前关闭或调低暖气，"
-                f"避免空房供暖浪费。\n"
-                f"- {note}，是住宅供暖最重要的节能行为之一。"
+                f"## Night setback suggestion (heating energy saving)\n"
+                f"- Between {start:02d}:00-{end:02d}:00 at night and whenever everyone is away, "
+                f"lower the heater to {target}.\n"
+                f"- Use thick blankets instead of a high room temperature when sleeping; turn off or lower "
+                f"the heater before leaving home, avoiding wasted heating of an empty house.\n"
+                f"- {note}, one of the most important energy-saving behaviours for home heating."
             )
 
         if self.type == "in_home_display":
             return (
-                f"## 智能电表实时反馈\n"
-                f"- {self.params['feedback_text']}，可随时查看：\n"
-                f"  1. 当前瞬时功率与每小时电费；\n"
-                f"  2. 近 7 日每日用电量趋势对比；\n"
-                f"  3. 大功率电器开启时的即时费用提醒。\n"
-                f"- 打开大功率电器时显示屏会实时变化，请留意并避免浪费。"
+                f"## Smart meter real-time feedback\n"
+                f"- {self.params['feedback_text']}, viewable at any time:\n"
+                f"  1. Current instantaneous power and hourly electricity cost;\n"
+                f"  2. Daily electricity usage trend comparison over the last 7 days;\n"
+                f"  3. Instant cost reminders when high-power appliances are switched on.\n"
+                f"- The display updates in real time when you turn on high-power appliances; "
+                f"please pay attention and avoid waste."
             )
         return ""
 
@@ -193,6 +199,6 @@ class Policy:
         if "," in name:
             return cls.combine(name, **kwargs)
         if name not in factories:
-            raise ValueError(f"未知政策类型: {name}"
-                             "（可用: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay/night_setback/in_home_display 或逗号组合）")
+            raise ValueError(f"Unknown policy type: {name}"
+                             " (available: tou/subsidy/nudge/nudge_loss/peak_demand/ev_delay/night_setback/in_home_display or comma-separated combinations)")
         return factories[name](**kwargs)

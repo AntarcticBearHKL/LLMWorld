@@ -46,7 +46,7 @@ def peak_hours_kwh(watts, hours=(16, 21)):
 
 def build_report(profiles, ev_kw=7.0, hp_kw=3.0):
     if not profiles:
-        raise ValueError("没有找到任何模拟曲线")
+        raise ValueError("No simulation curves found")
     ev = ev_curve(int(ev_kw * 1000))
     hp = heat_pump_curve(int(hp_kw * 1000))
     scenarios = ["baseline", "ev", "hp", "ev_hp"]
@@ -87,10 +87,10 @@ def build_report(profiles, ev_kw=7.0, hp_kw=3.0):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="电气化情景分析（EV/热泵）")
+    parser = argparse.ArgumentParser(description="Electrification scenario analysis (EV/heat pump)")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default=None, help="YYYY-MM-DD，缺省取每户最后一天")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the last day per household")
     parser.add_argument("--ev-kw", type=float, default=7.0)
     parser.add_argument("--hp-kw", type=float, default=3.0)
     parser.add_argument("--out", default=None)
@@ -112,17 +112,17 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"电气化情景分析完成（{report['households']} 户）")
+    print(f"Electrification scenario analysis done ({report['households']} households)")
     for r in report["scenarios"]:
         extra = ""
         if r["scenario"] != "baseline":
-            extra = (f" 总电{ r['total_change_pct']:+.1f}% "
-                     f"峰值{r['peak_change_pct']:+.1f}% "
-                     f"晚峰{r['evening_change_pct']:+.1f}%")
-        print(f"  {r['scenario']:<9} 总电 {r['total_kwh']}kWh "
-              f"峰值 {r['peak_watts']}W 晚峰 {r['evening_kwh']}kWh"
-              f" 峰均比 {r['peak_to_mean']}{extra}")
-    print(f"  已保存: {args.out}")
+            extra = (f"  total {r['total_change_pct']:+.1f}% "
+                     f"peak {r['peak_change_pct']:+.1f}% "
+                     f"evening {r['evening_change_pct']:+.1f}%")
+        print(f"  {r['scenario']:<9}  total {r['total_kwh']}kWh "
+              f"peak {r['peak_watts']}W evening {r['evening_kwh']}kWh"
+              f" peak-to-mean {r['peak_to_mean']}{extra}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

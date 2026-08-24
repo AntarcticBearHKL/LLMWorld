@@ -28,7 +28,7 @@ def evening_kwh(load_watts):
 
 def build_report(per_house):
     if not per_house:
-        raise ValueError("没有找到任何多日模拟曲线")
+        raise ValueError("No multi-day simulation curves found")
     groups = {}
     for house in per_house:
         for day in house["days"]:
@@ -36,7 +36,7 @@ def build_report(per_house):
             group = groups.setdefault(season, [])
             group.append(day)
     rows = []
-    for season in ("夏天", "秋天", "冬天", "春天"):
+    for season in ("Summer", "Autumn", "Winter", "Spring"):
         days = groups.get(season, [])
         if not days:
             continue
@@ -54,7 +54,7 @@ def build_report(per_house):
             "mean_peak_hour": round(sum(peak_hours) / len(peak_hours), 2),
         })
     if not rows:
-        raise ValueError("没有可用的季节分组数据")
+        raise ValueError("No usable seasonal group data")
     return {"seasons": rows}
 
 
@@ -66,7 +66,7 @@ def _to_watts(hourly):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="季节性负荷分析")
+    parser = argparse.ArgumentParser(description="Seasonal load analysis")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--out", default=None)
@@ -85,12 +85,12 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"季节性负荷分析完成")
+    print(f"Seasonal load analysis done")
     for r in report["seasons"]:
-        print(f"  {r['season']}: {r['samples']} 样本 "
-              f"均电 {r['mean_kwh']}kWh 峰值 {r['mean_peak_watts']}W "
-              f"晚峰 {r['mean_evening_kwh']}kWh 峰时 {r['mean_peak_hour']}:00")
-    print(f"  已保存: {args.out}")
+        print(f"  {r['season']}: {r['samples']} samples, "
+              f"mean energy {r['mean_kwh']}kWh peak {r['mean_peak_watts']}W "
+              f"evening {r['mean_evening_kwh']}kWh peak hour {r['mean_peak_hour']}:00")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

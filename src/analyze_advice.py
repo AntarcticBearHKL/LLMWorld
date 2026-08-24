@@ -15,16 +15,16 @@ from engine.load_features import hourly_means, peak_hour, peak_to_mean
 def advice_for(metrics):
     advice = []
     if metrics.get("total_kwh_z") is not None and metrics["total_kwh_z"] > 2:
-        advice.append("用电显著高于社区平均：空调设定 26°C 以上、"
-                      "随手关灯、换用 LED、缩短大功率电器使用时长")
+        advice.append("Energy use significantly above community average: set the AirConditioner above 26 C, "
+                      "turn off lights when leaving, switch to LED, and shorten high-power appliance usage time")
     if metrics.get("overlap_count", 0) > 0:
-        advice.append("存在大功率叠加：将洗衣机/吸尘器与空调、"
-                      "电磁炉错开使用，避免同小时叠加")
+        advice.append("High-power appliance overlap detected: stagger WashingMachine/VacuumCleaner usage away from "
+                      "the AirConditioner and InductionCooker to avoid same-hour overlap")
     if metrics.get("peak_hour") is not None and 17 <= metrics["peak_hour"] <= 21:
-        advice.append("晚峰集中：将洗衣机/吸尘器/电动汽车充电移至"
-                      "22 点后（谷段电价更低）")
+        advice.append("Evening peak concentration: move WashingMachine/VacuumCleaner/ElectricVehicle charging to "
+                      "after 22:00 (off-peak rates are cheaper)")
     if metrics.get("peak_to_mean") is not None and metrics["peak_to_mean"] > 5:
-        advice.append("峰谷差大：分散用电时段，避免瞬时高功率")
+        advice.append("Large peak-to-valley gap: spread electricity usage across hours and avoid instantaneous high power")
     return advice
 
 
@@ -43,16 +43,16 @@ def build_report(profiles):
         }
         advice = advice_for(metrics)
         if not advice:
-            advice = ["用电规律健康，保持当前习惯"]
+            advice = ["Energy usage pattern is healthy; keep current habits"]
         rows.append({"house_id": r["house_id"], "advice": advice})
     return {"households": len(rows), "per_house": rows}
 
 
 def main():
-    parser = argparse.ArgumentParser(description="个性化节能建议（advisor）")
+    parser = argparse.ArgumentParser(description="Personalized energy-saving advice (advisor)")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default=None, help="YYYY-MM-DD，缺省取每户最后一天")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the last day per household")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
@@ -72,12 +72,12 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"个性化建议生成完成（{report['households']} 户）")
+    print(f"Personalized advice generation done ({report['households']} households)")
     for r in report["per_house"]:
         print(f"  {r['house_id']}:")
         for a in r["advice"]:
             print(f"    - {a}")
-    print(f"  已保存: {args.out}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

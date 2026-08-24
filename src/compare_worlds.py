@@ -16,12 +16,12 @@ def load_world_policies(world_id):
         data = json.load(f)
     rows = {}
     for scenario in data.get("scenarios", []):
-        name = scenario.get("场景", "?")
+        name = scenario.get("scenario", "?")
         rows[name] = {
-            "total_change_pct": _to_float(scenario.get("总kWh")),
-            "peak_hours_change_pct": _to_float(scenario.get("晚峰16-21点kWh")),
-            "peak_load_cut_pct": _to_float(scenario.get("峰值W")),
-            "peak_plateau_cut_pct": _to_float(scenario.get("峰值平台分钟")),
+            "total_change_pct": _to_float(scenario.get("total_kwh")),
+            "peak_hours_change_pct": _to_float(scenario.get("peak_hours_kwh")),
+            "peak_load_cut_pct": _to_float(scenario.get("peak_watts")),
+            "peak_plateau_cut_pct": _to_float(scenario.get("peak_plateau_minutes")),
         }
     return rows
 
@@ -47,7 +47,7 @@ def build_matrix(world_ids):
         if rows:
             worlds[world_id] = rows
     if not worlds:
-        raise ValueError("没有任何世界的 policy_matrix.json（先跑 compare_policies --all）")
+        raise ValueError("No policy_matrix.json for any world (run compare_policies --all first)")
     scenarios = set()
     for rows in worlds.values():
         scenarios.update(rows.keys())
@@ -59,9 +59,9 @@ def build_matrix(world_ids):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="多世界政策效果横向对比")
+    parser = argparse.ArgumentParser(description="Cross-world policy effect comparison")
     parser.add_argument("--worlds", nargs="+", required=True,
-                        help="世界 ID 列表，如 pop06 pop07")
+                        help="World ID list, e.g. pop06 pop07")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
@@ -73,8 +73,8 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(matrix, f, ensure_ascii=False, indent=2)
 
-    print("=== 多世界政策效果横向对比（总用电变化%）===")
-    header = f"{'场景':<14}" + "".join(f"{w:<16}" for w in matrix["worlds"])
+    print("=== Cross-world policy effect comparison (total energy change %) ===")
+    header = f"{'scenario':<14}" + "".join(f"{w:<16}" for w in matrix["worlds"])
     print(header)
     for s in matrix["scenarios"]:
         cells = []
@@ -82,7 +82,7 @@ def main():
             pct = matrix["cells"][w].get(s, {}).get("total_change_pct")
             cells.append(f"{pct:+.1f}%".ljust(16) if pct is not None else "  -  ".ljust(16))
         print(f"{s:<14}" + "".join(cells))
-    print(f"  已保存: {args.out}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

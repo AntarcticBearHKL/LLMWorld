@@ -1,24 +1,11 @@
-
-
-
-
-
-
-
-
-
-
-
-
 import json
 import os
 import random
 from datetime import datetime
 
 CLAYTON_POSTCODE = "3168"
-CLAYTON_CITY = "墨尔本"
+CLAYTON_CITY = "Melbourne"
 CLAYTON_DISTRICT = "Clayton"
-
 
 
 FIRST_NAMES_M = ["David", "Jack", "Lucas", "Ethan", "James", "Daniel", "Ryan", "Ben",
@@ -32,58 +19,60 @@ KID_NAMES = ["Liam", "Noah", "Emma", "Olivia", "Ava", "Mia", "Ethan", "Lucas",
 
 
 
-OCCUPATIONS_PROFESSIONAL = ["软件工程师", "数据分析师", "会计", "律师", "医生", "大学教授",
-                            "银行经理", "建筑师", "药剂师"]
-OCCUPATIONS_MIDDLE = ["护士", "教师", "销售经理", "电工", "厨师", "机械师",
-                      "超市主管", "建筑监理", "司机", "行政助理"]
-OCCUPATIONS_SERVICE = ["超市收银员", "清洁工", "服务员", "仓库工人", "快递员", "园林工"]
-STUDENT_LEVELS = ["研究生", "博士生", "本科生"]
+OCCUPATIONS_PROFESSIONAL = ["Software Engineer", "Data Analyst", "Accountant", "Lawyer", "Doctor",
+                            "University Professor", "Bank Manager", "Architect", "Pharmacist"]
+OCCUPATIONS_MIDDLE = ["Nurse", "Teacher", "Sales Manager", "Electrician", "Chef", "Mechanic",
+                      "Supermarket Supervisor", "Construction Supervisor", "Driver",
+                      "Administrative Assistant"]
+OCCUPATIONS_SERVICE = ["Supermarket Cashier", "Cleaner", "Waiter", "Warehouse Worker",
+                       "Courier", "Gardener"]
+STUDENT_LEVELS = ["Master's Student", "PhD Student", "Undergraduate Student"]
 
 INCOME_BY_OCCUPATION = {
-    "高": OCCUPATIONS_PROFESSIONAL,
-    "中": OCCUPATIONS_MIDDLE,
-    "低": OCCUPATIONS_SERVICE,
+    "High": OCCUPATIONS_PROFESSIONAL,
+    "Medium": OCCUPATIONS_MIDDLE,
+    "Low": OCCUPATIONS_SERVICE,
 }
 
 
 
 BIG_FIVE_ZH = {
-    "openness": "开放性",
-    "conscientiousness": "尽责性",
-    "extraversion": "外向性",
-    "agreeableness": "宜人性",
-    "neuroticism": "神经质",
+    "openness": "Openness",
+    "conscientiousness": "Conscientiousness",
+    "extraversion": "Extraversion",
+    "agreeableness": "Agreeableness",
+    "neuroticism": "Neuroticism",
 }
 
 BIG_FIVE_TEXT = {
     "openness": {
-        "high": "好奇心强、乐于尝试新鲜事物",
-        "low": "习惯熟悉的生活方式，不太尝试新鲜事物",
+        "high": "Curious and enjoys trying new things",
+        "low": "Prefers familiar routines and rarely tries new things",
     },
     "conscientiousness": {
-        "high": "条理分明、作息规律、做事细致",
-        "low": "随性随意，生活节奏松散",
+        "high": "Organized, keeps a regular routine, detail-oriented",
+        "low": "Easygoing, with a relaxed daily rhythm",
     },
     "extraversion": {
-        "high": "喜欢社交聚会，经常外出活动",
-        "low": "安静内敛，更多时间待在家里",
+        "high": "Enjoys social gatherings and often goes out",
+        "low": "Quiet and reserved, spends more time at home",
     },
     "agreeableness": {
-        "high": "重视邻里关系，容易接受他人建议",
-        "low": "独立固执，不太受他人影响",
+        "high": "Values neighborly relationships and is open to others' advice",
+        "low": "Independent and headstrong, not easily influenced",
     },
     "neuroticism": {
-        "high": "容易焦虑，对价格波动和新闻事件反应敏感",
-        "low": "心态稳定，遇事不慌",
+        "high": "Anxious, sensitive to price fluctuations and news events",
+        "low": "Emotionally stable and unflappable",
     },
 }
 
 TRAITS_BY_LEVEL = {
-    "openness": {"high": "好奇", "low": "传统"},
-    "conscientiousness": {"high": "有条理", "low": "随性"},
-    "extraversion": {"high": "开朗", "low": "安静"},
-    "agreeableness": {"high": "随和", "low": "固执"},
-    "neuroticism": {"high": "敏感", "low": "沉稳"},
+    "openness": {"high": "Curious", "low": "Traditional"},
+    "conscientiousness": {"high": "Organized", "low": "Easygoing"},
+    "extraversion": {"high": "Outgoing", "low": "Quiet"},
+    "agreeableness": {"high": "Agreeable", "low": "Stubborn"},
+    "neuroticism": {"high": "Sensitive", "low": "Composed"},
 }
 
 
@@ -104,8 +93,8 @@ def big_five_to_text(bf):
         v = bf[dim]
         level = "high" if v >= 7 else ("low" if v <= 4 else None)
         if level:
-            parts.append(f"{zh}{'高' if level == 'high' else '低'}：{BIG_FIVE_TEXT[dim][level]}")
-    return "；".join(parts) if parts else "性格中庸，无明显倾向"
+            parts.append(f"{zh} {'High' if level == 'high' else 'Low'}: {BIG_FIVE_TEXT[dim][level]}")
+    return "; ".join(parts) if parts else "Balanced personality, no strong tendency"
 
 
 def big_five_to_traits(bf, rng):
@@ -118,57 +107,53 @@ def big_five_to_traits(bf, rng):
         elif v <= 4:
             traits.append(TRAITS_BY_LEVEL[dim]["low"])
     rng.shuffle(traits)
-    return traits[:3] if traits else ["随和"]
+    return traits[:3] if traits else ["Easygoing"]
 
 
 def big_five_to_news_sensitivity(bf):
 
     n = bf["neuroticism"]
     if n >= 7:
-        return "高"
+        return "High"
     if n >= 4:
-        return "中"
-    return "低"
-
-
-
-
+        return "Medium"
+    return "Low"
 
 
 
 
 
 def _make_member(rng, name, gender, age, occupation, income_bracket,
-                 big_five=None, wake=None, sleep=None, personal=None, role="成员"):
+                 big_five=None, wake=None, sleep=None, personal=None, role="member"):
 
     bf = big_five or sample_big_five(rng)
     traits = big_five_to_traits(bf, rng)
 
 
     if wake is None:
-        if occupation == "退休":
+        if occupation == "Retired":
             wake = rng.choice(["06:30", "07:00", "07:30"])
-        elif occupation in ("本科生", "研究生", "博士生"):
+        elif occupation in ("Undergraduate Student", "Master's Student", "PhD Student"):
             wake = rng.choice(["08:30", "09:00", "09:30"])
         else:
             wake = rng.choice(["06:45", "07:00", "07:15", "07:30"])
-        if bf["extraversion"] >= 7 and occupation != "退休":
+        if bf["extraversion"] >= 7 and occupation != "Retired":
             wake = rng.choice(["06:45", "07:00"])
         elif bf["conscientiousness"] >= 7:
             wake = rng.choice(["06:30", "06:45"])
     if sleep is None:
         sleep = rng.choice(["22:30", "23:00", "23:30", "00:00"])
-        if occupation in ("本科生", "研究生", "博士生"):
+        if occupation in ("Undergraduate Student", "Master's Student", "PhD Student"):
             sleep = rng.choice(["00:00", "00:30", "01:00"])
         elif bf["conscientiousness"] >= 7:
             sleep = rng.choice(["22:00", "22:30"])
 
     hobbies_pool = {
-        "高": ["阅读", "园艺", "烘焙", "徒步", "摄影", "烹饪"],
-        "中": ["看电影", "跑步", "钓鱼", "游戏", "健身"],
-        "低": ["刷手机", "打游戏", "看直播"],
+        "High": ["Reading", "Gardening", "Baking", "Hiking", "Photography", "Cooking"],
+        "Medium": ["Movies", "Running", "Fishing", "Gaming", "Fitness"],
+        "Low": ["Scrolling phone", "Gaming", "Watching livestreams"],
     }
-    hobbies = rng.sample(hobbies_pool.get(income_bracket, hobbies_pool["中"]), 2)
+    hobbies = rng.sample(hobbies_pool.get(income_bracket, hobbies_pool["Medium"]), 2)
 
     return {
         "name": name, "age": age, "gender": gender, "occupation": occupation,
@@ -181,13 +166,13 @@ def _make_member(rng, name, gender, age, occupation, income_bracket,
             "news_sensitivity": big_five_to_news_sensitivity(bf),
         },
         "habits": {"wake_time": wake, "sleep_time": sleep,
-                   "exercise": rng.choice(["每周跑步", "偶尔散步", "健身房", "无"]),
+                   "exercise": rng.choice(["Weekly running", "Occasional walks", "Gym", "None"]),
                    "hobbies": hobbies},
-        "health": {"condition": "良好",
+        "health": {"condition": "Good",
                    "temperature_preference": {"summer": rng.choice([24, 25, 26]),
                                               "winter": rng.choice([21, 22, 23])}},
         "personal_appliances": [{"type": t, "brand": "Generic", "power": None, "age": 0}
-                                for t in (personal or ["手机", "电脑"])],
+                                for t in (personal or ["Phone", "Computer"])],
     }
 
 
@@ -198,15 +183,15 @@ def _pick_occupation(rng, income_bracket):
 def _income_by_age(rng, age):
 
     if age >= 65:
-        return "低"
+        return "Low"
     if age < 25:
-        return rng.choice(["低", "中"])
+        return rng.choice(["Low", "Medium"])
     r = rng.random()
     if r < 0.3:
-        return "高"
+        return "High"
     if r < 0.75:
-        return "中"
-    return "低"
+        return "Medium"
+    return "Low"
 
 
 
@@ -216,42 +201,41 @@ def _home_by_income(rng, name, income_bracket, size_override=None):
 
 
 
-
-    sizes = {"高": rng.choice([120, 135, 150, 180]),
-             "中": rng.choice([85, 95, 105, 115]),
-             "低": rng.choice([55, 65, 75])}
+    sizes = {"High": rng.choice([120, 135, 150, 180]),
+             "Medium": rng.choice([85, 95, 105, 115]),
+             "Low": rng.choice([55, 65, 75])}
     size = size_override or sizes[income_bracket]
 
     rooms = {}
 
 
-    living = ["电视", "灯"]
-    if income_bracket != "低":
-        living.append("空调")
-    rooms["客厅"] = living
+    living = ["TV", "Light"]
+    if income_bracket != "Low":
+        living.append("AirConditioner")
+    rooms["Living Room"] = living
 
 
-    kitchen = ["冰箱", "灯"]
-    if income_bracket in ("中", "高"):
-        kitchen += ["电饭煲", "微波炉"]
-    if income_bracket == "高":
-        kitchen += ["电磁炉", "油烟机"]
+    kitchen = ["Refrigerator", "Light"]
+    if income_bracket in ("Medium", "High"):
+        kitchen += ["RiceCooker", "Microwave"]
+    if income_bracket == "High":
+        kitchen += ["InductionCooker", "RangeHood"]
     else:
-        kitchen += ["电磁炉"]
-    rooms["厨房"] = kitchen
+        kitchen += ["InductionCooker"]
+    rooms["Kitchen"] = kitchen
 
 
-    rooms["卫生间"] = ["热水器", "洗衣机", "灯"]
+    rooms["Bathroom"] = ["WaterHeater", "WashingMachine", "Light"]
 
 
     n_bedrooms = 1 if size <= 65 else (2 if size <= 105 else 3)
     for i in range(n_bedrooms):
-        bed = ["灯", "台灯"]
-        if income_bracket == "高" or (income_bracket == "中" and i == 0):
-            bed.append("空调")
-        rooms[f"卧室{i + 1}"] = bed
+        bed = ["Light", "DeskLamp"]
+        if income_bracket == "High" or (income_bracket == "Medium" and i == 0):
+            bed.append("AirConditioner")
+        rooms[f"Bedroom {i + 1}"] = bed
 
-    home = {"name": name, "type": "联排别墅" if size <= 115 else "独立屋",
+    home = {"name": name, "type": "Townhouse" if size <= 115 else "Detached House",
             "size": size, "rooms": []}
     for room_name, appliance_types in rooms.items():
         home["rooms"].append({
@@ -267,7 +251,7 @@ def _home_by_income(rng, name, income_bracket, size_override=None):
 def _build_template(household_type, rng):
 
     surname = rng.choice(SURNAMES)
-    income = rng.choice(["低", "中", "中", "高"])
+    income = rng.choice(["Low", "Medium", "Medium", "High"])
 
     if household_type == "young_couple":
         age_w = rng.randint(26, 33)
@@ -276,13 +260,13 @@ def _build_template(household_type, rng):
                                           "openness": rng.choice([0, 1, 1])})
         bf_m = sample_big_five(rng, bias={"conscientiousness": rng.choice([0, 0, -1])})
         return {
-            "type": "年轻夫妇/丁克家庭", "season": "春天",
-            "home": _home_by_income(rng, "Clayton温馨联排", income),
+            "type": "Young Couple (DINK)", "season": "Spring",
+            "home": _home_by_income(rng, "Clayton Cozy Townhouse", income),
             "members": [
-                _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "女", age_w,
+                _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "Female", age_w,
                              _pick_occupation(rng, income), income, big_five=bf_w,
-                             personal=["手机", "电脑", "台灯"]),
-                _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "男", age_m,
+                             personal=["Phone", "Computer", "DeskLamp"]),
+                _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "Male", age_m,
                              _pick_occupation(rng, income), income, big_five=bf_m),
             ],
         }
@@ -294,35 +278,35 @@ def _build_template(household_type, rng):
         kid_age = max(4, kid_age)
         bf_parents = sample_big_five(rng, bias={"conscientiousness": 2, "agreeableness": 1})
         bf_kid = sample_big_five(rng, bias={"extraversion": 2})
-        home = _home_by_income(rng, "Clayton家庭住宅", "高" if rng.random() < 0.6 else "中")
-        home["rooms"].append({"name": "儿童房", "size": 0,
-                              "appliances": [{"type": "灯", "brand": "Generic", "power": None, "age": 0},
-                                             {"type": "台灯", "brand": "Generic", "power": None, "age": 0}]})
+        home = _home_by_income(rng, "Clayton Family Home", "High" if rng.random() < 0.6 else "Medium")
+        home["rooms"].append({"name": "Kids' Room", "size": 0,
+                              "appliances": [{"type": "Light", "brand": "Generic", "power": None, "age": 0},
+                                             {"type": "DeskLamp", "brand": "Generic", "power": None, "age": 0}]})
         return {
-            "type": "有孩家庭", "season": "春天", "home": home,
+            "type": "Family with Children", "season": "Spring", "home": home,
             "members": [
-                _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "女", age_w,
-                             _pick_occupation(rng, "高" if income == "高" else "中"),
-                             "高" if income == "高" else "中", big_five=bf_parents,
-                             personal=["手机", "电脑"]),
-                _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "男", age_m,
-                             _pick_occupation(rng, "高" if income == "高" else "中"),
-                             "高" if income == "高" else "中", big_five=bf_parents),
-                _make_member(rng, f"{rng.choice(KID_NAMES)} {surname}", rng.choice(["男", "女"]),
-                             kid_age, "小学生", "低", big_five=bf_kid,
-                             wake="07:00", sleep="21:00", personal=["手机"]),
+                _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "Female", age_w,
+                             _pick_occupation(rng, "High" if income == "High" else "Medium"),
+                             "High" if income == "High" else "Medium", big_five=bf_parents,
+                             personal=["Phone", "Computer"]),
+                _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "Male", age_m,
+                             _pick_occupation(rng, "High" if income == "High" else "Medium"),
+                             "High" if income == "High" else "Medium", big_five=bf_parents),
+                _make_member(rng, f"{rng.choice(KID_NAMES)} {surname}", rng.choice(["Male", "Female"]),
+                             kid_age, "Primary School Student", "Low", big_five=bf_kid,
+                             wake="07:00", sleep="21:00", personal=["Phone"]),
             ],
         }
 
     if household_type == "single_living":
         age = rng.randint(22, 30) if rng.random() < 0.6 else rng.randint(62, 78)
-        occ = _pick_occupation(rng, _income_by_age(rng, age)) if age < 60 else "退休"
+        occ = _pick_occupation(rng, _income_by_age(rng, age)) if age < 60 else "Retired"
         return {
-            "type": "独居", "season": "春天",
-            "home": _home_by_income(rng, "Clayton一居室", _income_by_age(rng, age)),
+            "type": "Living Alone", "season": "Spring",
+            "home": _home_by_income(rng, "Clayton One-Bedroom Unit", _income_by_age(rng, age)),
             "members": [_make_member(rng, f"{rng.choice(FIRST_NAMES_M + FIRST_NAMES_F)} {surname}",
-                                     rng.choice(["男", "女"]), age, occ,
-                                     "低" if age >= 60 else "中")],
+                                     rng.choice(["Male", "Female"]), age, occ,
+                                     "Low" if age >= 60 else "Medium")],
         }
 
     if household_type == "share_house":
@@ -332,12 +316,12 @@ def _build_template(household_type, rng):
             bf = sample_big_five(rng, bias={"extraversion": 1, "conscientiousness": -1})
             members.append(_make_member(
                 rng, f"{rng.choice(FIRST_NAMES_M + FIRST_NAMES_F)} {rng.choice(SURNAMES)}",
-                rng.choice(["男", "女"]), age, _pick_occupation(rng, "中"), "中",
+                rng.choice(["Male", "Female"]), age, _pick_occupation(rng, "Medium"), "Medium",
                 big_five=bf, wake=rng.choice(["08:30", "09:00"]),
                 sleep=rng.choice(["00:00", "00:30", "01:00"])))
         return {
-            "type": "合租", "season": "春天",
-            "home": _home_by_income(rng, "Clayton合租公寓", "中"),
+            "type": "Share House", "season": "Spring",
+            "home": _home_by_income(rng, "Clayton Share House", "Medium"),
             "members": members,
         }
 
@@ -346,17 +330,17 @@ def _build_template(household_type, rng):
         members = []
         for i in range(rng.choice([2, 3])):
             age = rng.randint(19, 27)
-            country = rng.choice(["中国", "印度", "越南", "马来西亚", "印尼"])
+            country = rng.choice(["China", "India", "Vietnam", "Malaysia", "Indonesia"])
             bf = sample_big_five(rng, bias={"openness": 2, "conscientiousness": 1})
             members.append(_make_member(
                 rng, f"{rng.choice(FIRST_NAMES_M + FIRST_NAMES_F)} {rng.choice(SURNAMES)}",
-                rng.choice(["男", "女"]), age, rng.choice(STUDENT_LEVELS), "低",
+                rng.choice(["Male", "Female"]), age, rng.choice(STUDENT_LEVELS), "Low",
                 big_five=bf, wake=rng.choice(["09:00", "09:30", "10:00"]),
                 sleep=rng.choice(["00:30", "01:00", "01:30"]),
-                personal=["手机", "电脑", "台灯"]))
+                personal=["Phone", "Computer", "DeskLamp"]))
         return {
-            "type": "国际学生合租", "season": "春天",
-            "home": _home_by_income(rng, "Clayton学生公寓", "低"),
+            "type": "International Student Share House", "season": "Spring",
+            "home": _home_by_income(rng, "Clayton Student Apartment", "Low"),
             "members": members,
         }
 
@@ -368,20 +352,22 @@ def _build_template(household_type, rng):
         kid_age = parent_age - rng.randint(24, 34)
         kid_age = max(5, kid_age)
         return {
-            "type": "多代同堂", "season": "春天",
-            "home": _home_by_income(rng, "Clayton三代之家", "中", size_override=rng.choice([120, 140])),
+            "type": "Multigenerational Household", "season": "Spring",
+            "home": _home_by_income(rng, "Clayton Multigenerational Home", "Medium",
+                                    size_override=rng.choice([120, 140])),
             "members": [
-                _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "男", grandpa, "退休", "低",
-                             wake="06:30", sleep="21:30",
-                             personal=["手机"]),
-                _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "女", grandma, "退休", "低",
-                             wake="06:30", sleep="21:30",
-                             personal=["手机"]),
+                _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "Male", grandpa,
+                             "Retired", "Low", wake="06:30", sleep="21:30",
+                             personal=["Phone"]),
+                _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "Female", grandma,
+                             "Retired", "Low", wake="06:30", sleep="21:30",
+                             personal=["Phone"]),
                 _make_member(rng, f"{rng.choice(FIRST_NAMES_M + FIRST_NAMES_F)} {surname}",
-                             rng.choice(["男", "女"]), parent_age, _pick_occupation(rng, "中"), "中"),
-                _make_member(rng, f"{rng.choice(KID_NAMES)} {surname}", rng.choice(["男", "女"]),
-                             kid_age, "小学生", "低", wake="07:00", sleep="21:00",
-                             personal=["手机"]),
+                             rng.choice(["Male", "Female"]), parent_age,
+                             _pick_occupation(rng, "Medium"), "Medium"),
+                _make_member(rng, f"{rng.choice(KID_NAMES)} {surname}", rng.choice(["Male", "Female"]),
+                             kid_age, "Primary School Student", "Low", wake="07:00", sleep="21:00",
+                             personal=["Phone"]),
             ],
         }
 
@@ -391,15 +377,15 @@ def _build_template(household_type, rng):
         kid_age = max(4, kid_age)
         bf = sample_big_five(rng, bias={"conscientiousness": 1})
         return {
-            "type": "单亲家庭", "season": "春天",
-            "home": _home_by_income(rng, "Clayton单亲之家", "中"),
+            "type": "Single-Parent Family", "season": "Spring",
+            "home": _home_by_income(rng, "Clayton Single-Parent Home", "Medium"),
             "members": [
                 _make_member(rng, f"{rng.choice(FIRST_NAMES_F + FIRST_NAMES_M)} {surname}",
-                             rng.choice(["女", "男"]), age, _pick_occupation(rng, "中"), "中",
-                             big_five=bf, personal=["手机", "电脑"]),
-                _make_member(rng, f"{rng.choice(KID_NAMES)} {surname}", rng.choice(["男", "女"]),
-                             kid_age, "小学生", "低", wake="07:00", sleep="21:00",
-                             personal=["手机"]),
+                             rng.choice(["Female", "Male"]), age, _pick_occupation(rng, "Medium"),
+                             "Medium", big_five=bf, personal=["Phone", "Computer"]),
+                _make_member(rng, f"{rng.choice(KID_NAMES)} {surname}", rng.choice(["Male", "Female"]),
+                             kid_age, "Primary School Student", "Low", wake="07:00", sleep="21:00",
+                             personal=["Phone"]),
             ],
         }
 
@@ -407,13 +393,14 @@ def _build_template(household_type, rng):
     age_m = rng.randint(66, 80)
     age_w = age_m + rng.randint(-3, 3)
     return {
-        "type": "退休夫妇", "season": "春天",
-        "home": _home_by_income(rng, "Clayton养老宅", "低", size_override=rng.choice([65, 75, 85])),
+        "type": "Retired Couple", "season": "Spring",
+        "home": _home_by_income(rng, "Clayton Retirement Home", "Low",
+                                size_override=rng.choice([65, 75, 85])),
         "members": [
-            _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "男", age_m, "退休", "低",
-                         wake="06:30", sleep="21:00", personal=["手机"]),
-            _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "女", age_w, "退休", "低",
-                         wake="06:30", sleep="21:00", personal=["手机"]),
+            _make_member(rng, f"{rng.choice(FIRST_NAMES_M)} {surname}", "Male", age_m, "Retired",
+                         "Low", wake="06:30", sleep="21:00", personal=["Phone"]),
+            _make_member(rng, f"{rng.choice(FIRST_NAMES_F)} {surname}", "Female", age_w, "Retired",
+                         "Low", wake="06:30", sleep="21:00", personal=["Phone"]),
         ],
     }
 
@@ -433,7 +420,6 @@ HOUSEHOLD_QUOTAS = [
 
 
 def _quota_distribution(count, rng):
-
 
 
 
@@ -473,7 +459,8 @@ def build_population(world_id, count, seed=42, household_types=None):
 
 
     if count > 10:
-        raise ValueError(f"每世界最多 10 户（收到 {count}）。请拆分多个世界。")
+        raise ValueError(f"At most 10 households per world (received {count}). "
+                         f"Please split into multiple worlds.")
 
     rng = random.Random(seed)
 
@@ -506,14 +493,14 @@ def build_population(world_id, count, seed=42, household_types=None):
             "members_count": len(household["members"]),
             "rooms_count": len(household["home"]["rooms"]),
         })
-        print(f"  生成 {house_id}：{household['type']}（{len(household['members'])}人/"
-              f"{len(household['home']['rooms'])}房间）")
+        print(f"  Generated {house_id}: {household['type']} "
+              f"({len(household['members'])} members/{len(household['home']['rooms'])} rooms)")
 
     district = {
         "postcode": CLAYTON_POSTCODE,
         "location": {"city": CLAYTON_CITY, "district": CLAYTON_DISTRICT,
                      "coordinates": {"lat": -37.916, "lon": 145.123}},
-        "economic_level": "中",
+        "economic_level": "Medium",
     }
     with open(os.path.join(district_dir, "district.json"), "w", encoding="utf-8") as f:
         json.dump(district, f, ensure_ascii=False, indent=2)
@@ -521,13 +508,14 @@ def build_population(world_id, count, seed=42, household_types=None):
     world_meta = {
         "world_id": world_id,
         "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "user_prompt": f"人口构建 v2（seed={seed}，Big Five 人格 + 8 类家庭 + census 校准）",
+        "user_prompt": (f"Population builder v2 (seed={seed}, Big Five personality + "
+                        f"8 household types + census calibration)"),
         "generator": "population.py v2",
         "district": {
             "postcode": CLAYTON_POSTCODE,
             "city": CLAYTON_CITY,
             "district": CLAYTON_DISTRICT,
-            "economic_level": "中",
+            "economic_level": "Medium",
         },
         "households": households_meta,
     }
@@ -535,4 +523,3 @@ def build_population(world_id, count, seed=42, household_types=None):
         json.dump(world_meta, f, ensure_ascii=False, indent=2)
 
     return world_meta
-

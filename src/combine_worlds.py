@@ -36,12 +36,12 @@ def combine(world_ids, scenario, date):
     for wid in world_ids:
         p = load_profile(wid, scenario, date)
         if p is None:
-            print(f"[跳过] {wid} 无 {scenario}/{date} 曲线")
+            print(f"[skipped] {wid} no {scenario}/{date} curve")
             continue
         profiles.append((wid, p))
 
     if not profiles:
-        raise ValueError("没有可合并的曲线")
+        raise ValueError("No curves to combine")
 
     n = len(profiles[0][1].get("load_profile_watts", []))
     total_watts = [0.0] * n
@@ -83,8 +83,8 @@ def combine(world_ids, scenario, date):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="多世界联合聚合（0 token）")
-    parser.add_argument("--worlds", nargs="+", required=True, help="世界ID列表，如 pop02 pop03")
+    parser = argparse.ArgumentParser(description="Multi-world joint aggregation (0 token)")
+    parser.add_argument("--worlds", nargs="+", required=True, help="World ID list, e.g. pop02 pop03")
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--date", default="2026-04-21")
     args = parser.parse_args()
@@ -100,10 +100,10 @@ def main():
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"联合人口 {name}：{data['households']} 户")
-    print(f"  总用电 {data['total_energy_kwh']} kWh | 户均 {data['mean_household_kwh']} | "
-          f"中位 {data['median_household_kwh']} | 峰值 {data['peak_watts']}W @ {data['peak_time']}")
-    print(f"  已保存: {out_path}")
+    print(f"Combined population {name}: {data['households']} households")
+    print(f"  total energy {data['total_energy_kwh']} kWh | mean {data['mean_household_kwh']} | "
+          f"median {data['median_household_kwh']} | peak {data['peak_watts']}W @ {data['peak_time']}")
+    print(f"  Saved: {out_path}")
 
 
 if __name__ == "__main__":

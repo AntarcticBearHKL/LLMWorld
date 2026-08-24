@@ -46,7 +46,7 @@ class WeatherAPI:
                 ]
             }
         except Exception as e:
-            print(f"天气API调用失败: {e}")
+            print(f"Weather API call failed: {e}")
             return WeatherAPI._mock_data(date)
     
     @staticmethod
@@ -58,14 +58,14 @@ class WeatherAPI:
                 'min': 20,
                 'avg': 24
             },
-            'condition': '晴天',
+            'condition': 'Sunny',
             'humidity': 65,
             'wind_kph': 15,
             'hourly': [
                 {
                     'time': f"{date} {h:02d}:00",
                     'temp': 20 + (h - 6) if 6 <= h <= 14 else 28 - (h - 14) if h > 14 else 18,
-                    'condition': '晴',
+                    'condition': 'Sunny',
                     'humidity': 65
                 }
                 for h in range(24)
@@ -108,7 +108,7 @@ class HolidayAPI:
                 'holidays': holidays
             }
         except Exception as e:
-            print(f"节假日API调用失败: {e}")
+            print(f"Holiday API call failed: {e}")
             return HolidayAPI._mock_data(country, year)
     
     @staticmethod
@@ -118,9 +118,9 @@ class HolidayAPI:
                 'year': year,
                 'country': country,
                 'holidays': {
-                    f"{year}-01-01": [{"name": "元旦", "type": "public"}],
-                    f"{year}-05-01": [{"name": "劳动节", "type": "public"}],
-                    f"{year}-10-01": [{"name": "国庆节", "type": "public"}],
+                    f"{year}-01-01": [{"name": "New Year's Day", "type": "public"}],
+                    f"{year}-05-01": [{"name": "Labour Day", "type": "public"}],
+                    f"{year}-10-01": [{"name": "National Day", "type": "public"}],
                 }
             }
         else:

@@ -18,6 +18,18 @@ TEMPERATURE = 1.0
 MAX_TOKENS = 64000
 
 
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "deepseek").lower()
+
+
+MATILDA_BASE_URL = os.getenv("MATILDA_BASE_URL", "https://matilda.maincode.com")
+MATILDA_API_BASE = os.getenv("MATILDA_API_BASE", "https://matilda.maincode.com/api")
+MATILDA_CLIENT_ID = os.getenv("MATILDA_CLIENT_ID", "matilda-code")
+MATILDA_API_VERSION = os.getenv("MATILDA_API_VERSION", "2026-06-23")
+MATILDA_CREDENTIALS_FILE = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "matilda_credentials.json"
+)
+
+
 
 
 
@@ -35,10 +47,10 @@ RETRY_BACKOFF_SECONDS = 2
 REQUEST_TIMEOUT_SECONDS = 600
 
 
-DEFAULT_START_DATE = "2026年4月21日"
+DEFAULT_START_DATE = "2026-04-21"
 DEFAULT_DAYS = 5
-DEFAULT_SEASON = "春天"
-DEFAULT_WEATHER = "晴天"
+DEFAULT_SEASON = "Spring"
+DEFAULT_WEATHER = "Sunny"
 DEFAULT_TEMPERATURE = 20
 DEFAULT_SEED = 42
 
@@ -51,10 +63,10 @@ ENV_MODE = "config"
 
 
 MELBOURNE_CLIMATE = {
-    "夏天": {"temp_range": (24, 38), "weathers": [("晴天", 40), ("多云", 25), ("热浪", 15), ("阵雨", 20)]},
-    "秋天": {"temp_range": (14, 25), "weathers": [("晴天", 35), ("多云", 30), ("阵雨", 25), ("大风", 10)]},
-    "冬天": {"temp_range": (7, 16),  "weathers": [("多云", 35), ("阴天", 25), ("阵雨", 30), ("寒潮", 10)]},
-    "春天": {"temp_range": (12, 23), "weathers": [("晴天", 40), ("多云", 30), ("阵雨", 25), ("大风", 5)]},
+    "Summer": {"temp_range": (24, 38), "weathers": [("Sunny", 40), ("Cloudy", 25), ("Heatwave", 15), ("Shower", 20)]},
+    "Autumn": {"temp_range": (14, 25), "weathers": [("Sunny", 35), ("Cloudy", 30), ("Shower", 25), ("Windy", 10)]},
+    "Winter": {"temp_range": (7, 16),  "weathers": [("Cloudy", 35), ("Overcast", 25), ("Shower", 30), ("ColdSnap", 10)]},
+    "Spring": {"temp_range": (12, 23), "weathers": [("Sunny", 40), ("Cloudy", 30), ("Shower", 25), ("Windy", 5)]},
 }
 
 
@@ -68,18 +80,18 @@ NEWS_MEMORY_KEEP = 5
 
 
 APPLIANCE_DAILY_CAP_MINUTES = {
-    "电动汽车": 4 * 60,
-    "热水器": 45,
-    "空调": 6 * 60,
-    "洗衣机": 2 * 60,
-    "吸尘器": 60,
-    "电视": 8 * 60,
-    "电脑": 10 * 60,
-    "电磁炉": 2 * 60,
-    "微波炉": 60,
-    "电饭煲": 2 * 60,
-    "手机": 4 * 60,
-    "灯": 16 * 60,
-    "台灯": 16 * 60,
-    "油烟机": 2 * 60,
+    "Electric Vehicle": 4 * 60,
+    "Water Heater": 45,
+    "Air Conditioner": 6 * 60,
+    "Washing Machine": 2 * 60,
+    "Vacuum Cleaner": 60,
+    "TV": 8 * 60,
+    "Computer": 10 * 60,
+    "Induction Cooker": 2 * 60,
+    "Microwave": 60,
+    "Rice Cooker": 2 * 60,
+    "Phone": 4 * 60,
+    "Light": 16 * 60,
+    "Desk Lamp": 16 * 60,
+    "Range Hood": 2 * 60,
 }

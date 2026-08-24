@@ -18,7 +18,7 @@ class Prompt:
         filepath = os.path.join(self.prompts_dir, f"{filename}.md")
         
         if not os.path.exists(filepath):
-            raise FileNotFoundError(f"提示词文件不存在: {filepath}")
+            raise FileNotFoundError(f"Prompt file not found: {filepath}")
         
         with open(filepath, 'r', encoding='utf-8') as f:
             template = f.read()

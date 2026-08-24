@@ -50,36 +50,36 @@ class EnvironmentGenerator:
         return json.loads(response['content'])
     
     def expand_setting(self, user_prompt):
-        prompt = f"""你是一个家庭环境设计专家。根据用户的简短描述，生成详细的家庭环境设定。
+        prompt = f"""You are a home environment design expert. Based on the user's brief description, generate a detailed home environment setting.
 
-用户描述：{user_prompt}
+User description: {user_prompt}
 
-请生成详细的环境设定，包括：
-1. 地理位置（城市、区域、坐标）
-2. 经济水平和消费能力
-3. 文化背景和生活方式
-4. 住房类型和面积
-5. 社区环境描述
+Please generate a detailed environment setting, including:
+1. Geographic location (city, district, coordinates)
+2. Economic level and spending power
+3. Cultural background and lifestyle
+4. Housing type and size
+5. Community environment description
 
-输出JSON格式：
+Output in JSON format:
 {{
-  "setting": "详细的人文环境描述",
+  "setting": "detailed human-environment description",
   "location": {{
-    "city": "城市名",
-    "district": "区域",
-    "country": "国家代码（如CN、US）",
-    "coordinates": {{"lat": 纬度, "lon": 经度}}
+    "city": "city name",
+    "district": "district",
+    "country": "country code (e.g. CN, US)",
+    "coordinates": {{"lat": latitude, "lon": longitude}}
   }},
-  "culture": "文化背景描述",
-  "economic_level": "经济水平（低/中/高）",
-  "lifestyle": "生活方式描述",
+  "culture": "cultural background description",
+  "economic_level": "economic level (low/medium/high)",
+  "lifestyle": "lifestyle description",
   "housing": {{
-    "type": "住房类型",
-    "size": 面积数字
+    "type": "housing type",
+    "size": size number
   }}
 }}
 
-只返回JSON，不要其他内容。"""
+Return only JSON, nothing else."""
         
         response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
@@ -125,73 +125,73 @@ class EnvironmentGenerator:
                 ]
             }
         except Exception as e:
-            print(f"天气API调用失败: {e}")
+            print(f"Weather API call failed: {e}")
             return self._generate_mock_weather(location)
     
     def get_holiday_data(self, location, year=None):
         return self._generate_mock_holidays(location, year)
     
     def generate_home_structure(self, environment):
-        prompt = f"""根据环境设定，设计合理的家庭房间布局和家电配置。
+        prompt = f"""Based on the environment setting, design a reasonable home room layout and appliance configuration.
 
-环境设定：
+Environment setting:
 {json.dumps(environment, ensure_ascii=False, indent=2)}
 
-要求：
-1. 房间数量和类型符合住房面积（{environment['housing']['size']}平米）
-2. 家电配置符合经济水平（{environment['economic_level']}）
-3. 家电品牌和功率真实合理
-4. 每个房间的家电要实用且不重复
+Requirements:
+1. Number and type of rooms fit the housing size ({environment['housing']['size']} square metres)
+2. Appliance configuration fits the economic level ({environment['economic_level']})
+3. Appliance brands and power ratings must be realistic and reasonable
+4. Appliances in each room must be practical and not duplicated
 
-输出JSON格式：
+Output in JSON format:
 {{
-  "name": "家庭名称",
+  "name": "home name",
   "type": "{environment['housing']['type']}",
   "size": {environment['housing']['size']},
   "rooms": [
     {{
-      "name": "房间名",
-      "size": 面积,
+      "name": "room name",
+      "size": size,
       "appliances": [
         {{
-          "type": "家电类型（必须是：电视、空调、冰箱、洗衣机、微波炉、电饭煲、电磁炉、油烟机、吸尘器、灯、台灯、电脑、手机、电动车 之一）",
-          "brand": "品牌",
-          "power": 功率瓦数,
-          "age": 使用年限
+          "type": "appliance type (must be one of: TV, Air Conditioner, Refrigerator, Washing Machine, Microwave, Rice Cooker, Induction Cooker, Range Hood, Vacuum Cleaner, Light, Desk Lamp, Computer, Phone, Electric Vehicle)",
+          "brand": "brand",
+          "power": power in watts,
+          "age": age in years
         }}
       ]
     }}
   ]
 }}
 
-只返回JSON，不要其他内容。"""
+Return only JSON, nothing else."""
         
         response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
     
     def generate_members(self, environment, home):
-        prompt = f"""根据环境和家庭结构，生成详细的家庭成员配置。
+        prompt = f"""Based on the environment and household structure, generate detailed family member configurations.
 
-环境：
+Environment:
 {json.dumps(environment, ensure_ascii=False, indent=2)}
 
-家庭：
+Home:
 {json.dumps(home, ensure_ascii=False, indent=2)}
 
-要求：
-1. 成员信息详细且合理
-2. 作息习惯符合职业特点
-3. 个人偏好有个性差异
-4. 个人设备符合年龄和职业
-5. 成员数量合理（2-5人）
+Requirements:
+1. Member information must be detailed and reasonable
+2. Daily routines must fit the profession
+3. Personal preferences must show individual differences
+4. Personal devices must fit age and profession
+5. Number of members must be reasonable (2-5 people)
 
-输出JSON格式（数组）：
+Output in JSON format (array):
 [
   {{
-    "name": "姓名",
-    "age": 年龄,
-    "gender": "性别",
-    "occupation": "职业",
+    "name": "name",
+    "age": age,
+    "gender": "gender",
+    "occupation": "occupation",
     "work_schedule": {{
       "start": "09:00",
       "end": "18:00",
@@ -199,30 +199,30 @@ class EnvironmentGenerator:
       "work_days": [1,2,3,4,5]
     }},
     "personality": {{
-      "traits": ["性格特点"],
-      "energy_awareness": "节能意识（低/中/高）"
+      "traits": ["personality traits"],
+      "energy_awareness": "energy awareness (low/medium/high)"
     }},
     "habits": {{
       "wake_time": "07:00",
       "sleep_time": "23:00",
-      "exercise": "运动习惯",
-      "hobbies": ["爱好"]
+      "exercise": "exercise habit",
+      "hobbies": ["hobbies"]
     }},
     "health": {{
-      "condition": "健康状况",
+      "condition": "health condition",
       "temperature_preference": {{"summer": 26, "winter": 22}}
     }},
     "personal_appliances": [
       {{
-        "type": "设备类型（必须是：手机、电脑、电动车 之一）",
-        "brand": "品牌",
-        "usage_pattern": "使用模式"
+        "type": "device type (must be one of: Phone, Computer, Electric Vehicle)",
+        "brand": "brand",
+        "usage_pattern": "usage pattern"
       }}
     ]
   }}
 ]
 
-只返回JSON，不要其他内容。"""
+Return only JSON, nothing else."""
         
         response = SubAgent.single_call(prompt, json_mode=False, thinking=config.THINKING)
         return json.loads(response['content'])
@@ -236,14 +236,14 @@ class EnvironmentGenerator:
                 'min': 20,
                 'avg': 24
             },
-            'condition': '晴天',
+            'condition': 'Sunny',
             'humidity': 65,
             'wind_kph': 15,
             'hourly': [
                 {
                     'time': f"2025-04-20 {h:02d}:00",
                     'temp': 20 + (h - 6) if 6 <= h <= 14 else 28 - (h - 14) if h > 14 else 18,
-                    'condition': '晴',
+                    'condition': 'Sunny',
                     'humidity': 65
                 }
                 for h in range(24)
@@ -258,17 +258,17 @@ class EnvironmentGenerator:
         
         if country == 'CN':
             mock_holidays = {
-                f"{year}-01-01": [{"name": "元旦", "type": "public"}],
-                f"{year}-02-10": [{"name": "春节", "type": "public"}],
-                f"{year}-02-11": [{"name": "春节", "type": "public"}],
-                f"{year}-02-12": [{"name": "春节", "type": "public"}],
-                f"{year}-04-04": [{"name": "清明节", "type": "public"}],
-                f"{year}-05-01": [{"name": "劳动节", "type": "public"}],
-                f"{year}-06-10": [{"name": "端午节", "type": "public"}],
-                f"{year}-09-17": [{"name": "中秋节", "type": "public"}],
-                f"{year}-10-01": [{"name": "国庆节", "type": "public"}],
-                f"{year}-10-02": [{"name": "国庆节", "type": "public"}],
-                f"{year}-10-03": [{"name": "国庆节", "type": "public"}],
+                f"{year}-01-01": [{"name": "New Year's Day", "type": "public"}],
+                f"{year}-02-10": [{"name": "Spring Festival", "type": "public"}],
+                f"{year}-02-11": [{"name": "Spring Festival", "type": "public"}],
+                f"{year}-02-12": [{"name": "Spring Festival", "type": "public"}],
+                f"{year}-04-04": [{"name": "Qingming Festival", "type": "public"}],
+                f"{year}-05-01": [{"name": "Labour Day", "type": "public"}],
+                f"{year}-06-10": [{"name": "Dragon Boat Festival", "type": "public"}],
+                f"{year}-09-17": [{"name": "Mid-Autumn Festival", "type": "public"}],
+                f"{year}-10-01": [{"name": "National Day", "type": "public"}],
+                f"{year}-10-02": [{"name": "National Day", "type": "public"}],
+                f"{year}-10-03": [{"name": "National Day", "type": "public"}],
             }
         elif country == 'AU':
             mock_holidays = {

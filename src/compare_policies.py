@@ -135,12 +135,12 @@ def main_all(args):
     baseline_items = [(p, d) for policy, p, d in all_pop
                       if d.get("policy", "baseline") == "baseline"]
     if not baseline_items:
-        print("没有找到 baseline 聚合曲线")
+        print("No baseline aggregate curve found")
         sys.exit(1)
     baseline_path, baseline = baseline_items[-1]
 
-    rows = [("场景", "总kWh", "晚峰16-21点kWh", "谷段22-7点kWh", "峰值W", "峰值时刻",
-             "峰值平台分钟", "峰均比", "叠加分钟(≥30kW)")]
+    rows = [("scenario", "total_kwh", "peak_hours_kwh", "valley_hours_kwh", "peak_watts", "peak_time",
+             "peak_plateau_minutes", "peak_to_mean", "overlap_minutes")]
     per_policy = {}
     for policy, path, data in all_pop:
         name = data.get("policy", "baseline")
@@ -184,7 +184,7 @@ def main_all(args):
 
     width = [10, 16, 18, 18, 18, 10, 16, 8, 18]
     header = " | ".join(r.ljust(w) for r, w in zip(rows[0], width))
-    print("=== 政策场景对比矩阵（括号内为 vs 基线变化%）===")
+    print("=== Policy scenario comparison matrix (values in parentheses are % vs baseline) ===")
     print(header)
     print("-" * len(header))
     for row in rows[1:]:
@@ -200,16 +200,16 @@ def main_all(args):
     }
     with open(summary_path, "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
-    print(f"汇总表已保存: {summary_path}")
+    print(f"Summary table saved: {summary_path}")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="政策干预对比")
+    parser = argparse.ArgumentParser(description="Policy intervention comparison")
     parser.add_argument("--world", required=True)
-    parser.add_argument("--intervention", default="tou", help="干预 policy 名（默认 tou）")
-    parser.add_argument("--all", action="store_true", help="基线 + 所有干预场景并排汇总")
+    parser.add_argument("--intervention", default="tou", help="Intervention policy name (default tou)")
+    parser.add_argument("--all", action="store_true", help="Baseline plus all intervention scenarios side by side")
     parser.add_argument("--base-date", default=None,
-                        help="指定基线日期（连续时间线下同日公平对比，如 2026-04-23）")
+                        help="Specify baseline date (fair same-day comparison on a continuous timeline, e.g. 2026-04-23)")
     args = parser.parse_args()
 
     if args.all:
@@ -220,10 +220,10 @@ def main():
     interventions = load_population(args.world, args.intervention)
 
     if not baselines:
-        print(f"没有找到 baseline 聚合曲线（simulation/{args.world}/population/）")
+        print(f"No baseline aggregate curve found（simulation/{args.world}/population/)")
         sys.exit(1)
     if not interventions:
-        print(f"没有找到 {args.intervention} 干预曲线，请先用 --policy {args.intervention} 跑模拟")
+        print(f"No intervention curve found for {args.intervention} (run the simulation with --policy {args.intervention} first)")
         sys.exit(1)
 
     if args.base_date:
@@ -231,7 +231,7 @@ def main():
         baseline = next((d for _, p, d in baselines if args.base_date in p), None)
         baseline_path = next((p for _, p, d in baselines if args.base_date in p), None)
         if baseline is None:
-            print(f"基线中找不到日期 {args.base_date}")
+            print(f"No baseline date found: {args.base_date}")
             sys.exit(1)
     else:
         baseline = baselines[0][2]
@@ -249,17 +249,17 @@ def main():
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print("=== 政策干预效果报告 ===")
-    print(f"干预: {report['intervention']}")
-    print(f"总用电: {report['total_kwh_baseline']} → {report['total_kwh_intervention']} kWh"
-          f"（{report['total_change_pct']:+.2f}%）")
-    print(f"晚峰时段(16-21点)用电: {report['peak_kwh_baseline']} → {report['peak_kwh_intervention']} kWh"
-          f"（{report['peak_hours_change_pct']:+.2f}%）")
-    print(f"谷时段(22-7点)用电: {report['valley_kwh_baseline']} → {report['valley_kwh_intervention']} kWh"
-          f"（{report['valley_hours_change_pct']:+.2f}%）")
-    print(f"峰值负荷: {report['max_watts_baseline']} → {report['max_watts_intervention']} W"
-          f"（{report['peak_load_cut_pct']:+.2f}%）")
-    print(f"报告已保存: {report_path}")
+    print("=== Policy intervention effect report ===")
+    print(f"Intervention: {report['intervention']}")
+    print(f"Total energy: {report['total_kwh_baseline']} → {report['total_kwh_intervention']} kWh"
+          f"（{report['total_change_pct']:+.2f}%)")
+    print(f"Evening peak (16-21h) energy: {report['peak_kwh_baseline']} → {report['peak_kwh_intervention']} kWh"
+          f"（{report['peak_hours_change_pct']:+.2f}%)")
+    print(f"Valley (22-7h) energy: {report['valley_kwh_baseline']} → {report['valley_kwh_intervention']} kWh"
+          f"（{report['valley_hours_change_pct']:+.2f}%)")
+    print(f"Peak load: {report['max_watts_baseline']} → {report['max_watts_intervention']} W"
+          f"（{report['peak_load_cut_pct']:+.2f}%)")
+    print(f"Report saved: {report_path}")
 
 
     try:
@@ -273,18 +273,18 @@ def main():
         hours = list(range(24))
         ax.bar(hours, report["hourly_diff_kwh"], color=["#d62728" if v < 0 else "#2ca02c" for v in report["hourly_diff_kwh"]])
         ax.axhline(0, color="black", linewidth=0.8)
-        ax.axvspan(PEAK_HOURS[0], PEAK_HOURS[1], color="red", alpha=0.08, label="峰时段")
+        ax.axvspan(PEAK_HOURS[0], PEAK_HOURS[1], color="red", alpha=0.08, label="Peak hours")
         ax.axvspan(VALLEY_HOURS[0], 24, color="green", alpha=0.08)
-        ax.axvspan(0, VALLEY_HOURS[1], color="green", alpha=0.08, label="谷时段")
-        ax.set_xlabel("小时")
-        ax.set_ylabel("干预 - 基线 (kWh)")
-        ax.set_title(f"{report['intervention']} 干预逐小时用电差（晚峰 {report['peak_hours_change_pct']:+.1f}%）")
+        ax.axvspan(0, VALLEY_HOURS[1], color="green", alpha=0.08, label="Valley hours")
+        ax.set_xlabel("Hour")
+        ax.set_ylabel("Intervention - baseline (kWh)")
+        ax.set_title(f"{report['intervention']} intervention hourly energy diff (evening peak {report['peak_hours_change_pct']:+.1f}%)")
         ax.legend()
         ax.grid(alpha=0.3)
         png_path = os.path.join(out_dir, f"{args.intervention}_hourly_diff.png")
         fig.savefig(png_path, dpi=130, bbox_inches="tight")
         plt.close(fig)
-        print(f"对比图已保存: {png_path}")
+        print(f"Comparison chart saved: {png_path}")
     except ImportError:
         pass
 

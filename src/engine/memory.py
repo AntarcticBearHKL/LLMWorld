@@ -82,7 +82,7 @@ class HouseholdMemory:
 
         for slot in slots:
             activity = slot.activity or ""
-            is_sleep = ("睡觉" in activity or "睡眠" in activity or "入睡" in activity)
+            is_sleep = ("sleep" in activity.lower())
 
             if not is_sleep and wake_time is None:
                 wake_time = self._fmt(slot.start)
@@ -141,32 +141,32 @@ class HouseholdMemory:
         if self.last:
             lines = []
             for name, m in self.last["members"].items():
-                lines.append(f"{name}昨天的活动：")
+                lines.append(f"{name}'s activities yesterday:")
                 for act in m["activities"]:
                     lines.append(f"  - {act}")
                 rhythm = []
                 if m["wake_time"]:
-                    rhythm.append(f"起床 {m['wake_time']}")
+                    rhythm.append(f"Wake up {m['wake_time']}")
                 if m["sleep_time"]:
-                    rhythm.append(f"入睡 {m['sleep_time']}")
+                    rhythm.append(f"Sleep {m['sleep_time']}")
                 if rhythm:
-                    lines.append(f"  作息：{'，'.join(rhythm)}")
+                    lines.append(f"  Routine: {', '.join(rhythm)}")
                 lines.append("")
 
             elec = self.last["electricity"]
-            elec_line = f"昨天（{self.last['date']}）家庭用电：总 {elec['total_kwh']} kWh"
+            elec_line = f"Household electricity yesterday ({self.last['date']}): total {elec['total_kwh']} kWh"
             if elec["peak_time"]:
-                elec_line += f"，高峰 {elec['peak_time']}（{elec['peak_watts']} W）"
+                elec_line += f", peak {elec['peak_time']} ({elec['peak_watts']} W)"
             lines.append(elec_line)
             if elec["top_appliances"]:
-                lines.append(f"主要耗电：{'、'.join(elec['top_appliances'])}")
+                lines.append(f"Main consumers: {', '.join(elec['top_appliances'])}")
 
-            parts.append("## 昨日记忆（帮助你保持习惯连续性，昨天发生的事会影响今天的安排）\n"
+            parts.append("## Yesterday's memory (to help maintain habit continuity; yesterday's events affect today's planning)\n"
                          + "\n".join(lines))
 
 
         if self.news_memory:
-            lines = ["## 近期外界信息回顾（最近看过的新闻要点）"]
+            lines = ["## Recent external information review (highlights of recently seen news)"]
             for entry in self.news_memory:
                 lines.append(f"- [{entry['date']}] {entry['title']}")
             parts.append("\n".join(lines))

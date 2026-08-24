@@ -29,7 +29,7 @@ def _parse_activities(house_dir, house_id, rooms):
     if not os.path.isdir(house_dir):
         return activities, member_count
     for name in sorted(os.listdir(house_dir)):
-        if not (name.startswith("02_第二层_渐进协调_") and name.endswith(".json")):
+        if not (name.startswith("02_SecondLayer_ProgressiveCoordination_") and name.endswith(".json")):
             continue
         member_count += 1
         try:
@@ -43,7 +43,7 @@ def _parse_activities(house_dir, house_id, rooms):
             if not time_range:
                 continue
             start, end = _parse_minutes(time_range)
-            at_home = location in rooms or "家" in location
+            at_home = location in rooms or "Home" in location
             activities.append({
                 "time": time_range, "start": start, "end": end,
                 "location": location, "activity": item.get("activity", ""),
@@ -62,7 +62,7 @@ def _parse_minutes(time_range):
 
 def build_report(house_results):
     if not house_results:
-        raise ValueError("没有找到任何活动/负荷数据")
+        raise ValueError("No activity/load data found")
     rows = []
     for hr in house_results:
         profile = hr["load_profile_watts"]
@@ -102,9 +102,9 @@ def build_report(house_results):
             "peak_hour": peak_hour,
             "busy_hour": busy_hour,
             "peak_aligned": peak_aligned,
-            "flags": ([f"在家负荷({at_home_mean:.0f}W)≤离家({away_mean:.0f}W)"
+            "flags": ([f"at-home load ({at_home_mean:.0f}W) <= away ({away_mean:.0f}W)"
                        if not consistent else ""] +
-                      [f"峰值{peak_hour}:00 与活动高峰{busy_hour}:00 错位"
+                      [f"peak {peak_hour}:00 vs activity peak {busy_hour}:00 misaligned"
                        if not peak_aligned else ""]),
         })
     anomalies = [r for r in rows if not r["load_consistent"] or not r["peak_aligned"]]
@@ -142,7 +142,7 @@ def scan_world(world_id, scenario, date_str):
                 continue
             date_dir = date_dirs[-1]
             house_dir = os.path.join(scenario_dir, date_dir)
-            profile_path = os.path.join(house_dir, "用电信息",
+            profile_path = os.path.join(house_dir, "ElectricityInfo",
                                         "house_load_profile_1440min.json")
             if not os.path.exists(profile_path):
                 continue
@@ -162,10 +162,10 @@ def scan_world(world_id, scenario, date_str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="活动-负荷一致性检查")
+    parser = argparse.ArgumentParser(description="Activity-load consistency check")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default=None, help="YYYY-MM-DD，缺省取最后一天")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the last day")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
@@ -185,14 +185,14 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"活动-负荷一致性检查完成（{report['households']} 户，"
-          f"一致 {report['consistent_count']}，异常 {report['anomaly_count']}）")
+    print(f"Activity-load consistency check done ({report['households']} households, "
+          f"consistent {report['consistent_count']}, anomalous {report['anomaly_count']}）")
     for r in report["per_house"]:
         flags = "；".join(f for f in r["flags"] if f) or "OK"
-        print(f"  {r['house_id']}: 在家 {r['at_home_mean_watts']}W / "
-              f"离家 {r['away_mean_watts']}W, 峰值{r['peak_hour']}:00 "
-              f"活动峰{r['busy_hour']}:00 [{flags}]")
-    print(f"  已保存: {args.out}")
+        print(f"  {r['house_id']}: at home {r['at_home_mean_watts']}W / "
+              f"away {r['away_mean_watts']}W, peak {r['peak_hour']}:00 "
+              f"activity peak {r['busy_hour']}:00 [{flags}]")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

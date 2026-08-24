@@ -8,7 +8,7 @@ Usage:
     rows = reader.load_all()                       # all 400,000 personas
     rows = reader.filter({'Age bracket': '25-34'})  # filter by column value
     rows = reader.sample(100, seed=42)             # random sample
-    print(reader.zh('Age bracket'))                # -> 年龄段
+    print(reader.zh('Age bracket'))                # -> age bracket
 
 Zero third-party dependencies (stdlib only).
 """

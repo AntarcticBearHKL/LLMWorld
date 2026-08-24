@@ -97,12 +97,12 @@ def build_report(per_house):
         result["house_id"] = house["house_id"]
         rows.append(result)
     if not rows:
-        raise ValueError("没有足够多日数据（每户至少 5 日）")
+        raise ValueError("Not enough multi-day data (at least 5 days per household)")
     return {"households": len(rows), "per_house": rows}
 
 
 def main():
-    parser = argparse.ArgumentParser(description="负荷预测与可预测性分析")
+    parser = argparse.ArgumentParser(description="Load forecasting and predictability analysis")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--out", default=None)
@@ -121,12 +121,12 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"负荷预测分析完成（{report['households']} 户）")
+    print(f"Load forecast analysis done ({report['households']} households)")
     for r in report["per_house"]:
         print(f"  {r['house_id']}: MAE {r['mae_kw']}kW "
-              f"(naive {r['naive_mae_kw']}, 提升 {r['improvement_pct']}%) "
+              f"(naive {r['naive_mae_kw']},  improvement {r['improvement_pct']}%) "
               f"MAPE {r['mape']}")
-    print(f"  已保存: {args.out}")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

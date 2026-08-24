@@ -27,7 +27,7 @@ def scan_household_days(world_id, scenario):
             dates = sorted(d for d in os.listdir(scenario_dir)
                            if os.path.isdir(os.path.join(scenario_dir, d)))
             for date_dir in dates:
-                path = os.path.join(scenario_dir, date_dir, "用电信息",
+                path = os.path.join(scenario_dir, date_dir, "ElectricityInfo",
                                     "house_load_profile_1440min.json")
                 if not os.path.exists(path):
                     continue
@@ -46,7 +46,7 @@ def scan_household_days(world_id, scenario):
 
 def build_report(samples, k):
     if not samples:
-        raise ValueError("没有找到任何模拟曲线")
+        raise ValueError("No simulation curves found")
     try:
         chosen_k = k if k else auto_k([s["shape"] for s in samples])
         labels, centers, wcss = kmeans([s["shape"] for s in samples], chosen_k)
@@ -102,11 +102,11 @@ def build_report(samples, k):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="行为模式迁移分析(household-days 聚类)")
+    parser = argparse.ArgumentParser(description="Behavior pattern transition analysis (household-days clustering)")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--k", type=int, default=0, help="簇数，缺省肘部法自动选")
-    parser.add_argument("--out", default=None, help="输出文件路径，缺省写入 analysis/")
+    parser.add_argument("--k", type=int, default=0, help="Number of clusters; defaults to automatic selection via the elbow method")
+    parser.add_argument("--out", default=None, help="Output file path; defaults to analysis/")
     args = parser.parse_args()
 
     samples = scan_household_days(args.world_id, args.scenario)
@@ -123,16 +123,16 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"行为模式迁移分析完成（{report['samples']} 个 household-days，"
-          f"{report['households']} 户，k={report['k']}）")
+    print(f"Behavior pattern transition analysis done ({report['samples']} household-days, "
+          f"{report['households']} households, k={report['k']})")
     for c in report["clusters"]:
-        print(f"  模式{c['label']}: {c['samples']} 样本")
-    print(f"  平均迁移次数: {report['mean_transitions']}")
+        print(f"  Pattern {c['label']}: {c['samples']} samples")
+    print(f"  Mean transitions: {report['mean_transitions']}")
     for h in report["per_house"]:
         seq = "→".join(str(c) for c in h["cluster_sequence"])
-        print(f"    {h['house_id']}: 迁移 {h['transitions']} 次, "
-              f"主导簇 {h['dominant_cluster']} [{seq}]")
-    print(f"  已保存: {args.out}")
+        print(f"    {h['house_id']}: transitions {h['transitions']}, "
+              f"dominant cluster {h['dominant_cluster']} [{seq}]")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

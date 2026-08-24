@@ -56,8 +56,8 @@ class Timeline:
                 slot = TimeSlot(start_min, end_min, location, activity_desc)
                 self.slots.append(slot)
             except Exception as e:
-                print(f"[错误] 加载活动失败: {activity} - {e}")
-                print("[跳过] 该活动")
+                print(f"[error] Failed to load activity: {activity} - {e}")
+                print("[skip] Skipping this activity")
                 continue
 
         self.slots.sort(key=lambda s: s.start)

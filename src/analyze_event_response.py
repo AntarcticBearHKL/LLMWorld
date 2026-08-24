@@ -26,7 +26,7 @@ def load_event_dates(world_id):
 
 
 def _normalize_date(date_str):
-    date_str = date_str.replace("年", "-").replace("月", "-").replace("日", "")
+    date_str = date_str.replace("-", "-").replace("-", "-").replace("", "")
     if len(date_str) == 8 and date_str.isdigit():
         date_str = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
     return date_str
@@ -34,7 +34,7 @@ def _normalize_date(date_str):
 
 def build_event_response(samples, event_dates, k=0):
     if not samples:
-        raise ValueError("没有找到任何模拟曲线")
+        raise ValueError("No simulation curves found")
     report = build_report(samples, k)
     by_house = {}
     for s in samples:
@@ -119,7 +119,7 @@ def _mean(values):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="新闻事件 × 行为模式迁移联动分析")
+    parser = argparse.ArgumentParser(description="News event x behavior pattern transition analysis")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--k", type=int, default=0)
@@ -141,15 +141,15 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"事件响应分析完成（{report['households']} 户，"
-          f"{report['event_days']} 个事件日）")
-    print(f"  事件日迁移率 {report['event_move_rate']} vs "
-          f"非事件日 {report['non_event_move_rate']}")
+    print(f"Event response analysis done ({report['households']} households, "
+          f"{report['event_days']} event days)")
+    print(f"  Event-day move rate {report['event_move_rate']} vs "
+          f"non-event days {report['non_event_move_rate']}")
     for e in report["per_event"]:
         print(f"  [{e['date']}] {e['titles'][0] if e['titles'] else ''}: "
-              f"迁移 {e['move_rate']}（基线 {e['baseline_move_rate']}）, "
-              f"用电 {e['mean_kwh']}kWh（{e['kwh_change_pct']}%）")
-    print(f"  已保存: {args.out}")
+              f"move rate {e['move_rate']} (baseline {e['baseline_move_rate']}), "
+              f"energy {e['mean_kwh']}kWh ({e['kwh_change_pct']}%)")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

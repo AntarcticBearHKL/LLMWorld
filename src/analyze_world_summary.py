@@ -53,9 +53,9 @@ def build_report(world_id, scenario):
     variability_group = {}
     if variability:
         for hid in variability.get("regular_half", []):
-            variability_group[hid] = "规律"
+            variability_group[hid] = "Regular"
         for hid in variability.get("variable_half", []):
-            variability_group[hid] = "波动"
+            variability_group[hid] = "Variable"
 
     anomaly_map = {}
     if anomalies and "per_house" in anomalies:
@@ -86,7 +86,7 @@ def build_report(world_id, scenario):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="世界总览（聚合全部分析）")
+    parser = argparse.ArgumentParser(description="World summary (aggregates all analyses)")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
     parser.add_argument("--out", default=None)
@@ -96,7 +96,7 @@ def main():
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
     if not report["per_house"]:
-        raise ValueError("没有找到任何分析数据")
+        raise ValueError("No analysis data found")
 
     if not args.out:
         out_dir = os.path.join(sim_root(args.world_id),
@@ -106,12 +106,12 @@ def main():
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"世界总览完成（{report['households']} 户）")
+    print(f"World summary done ({report['households']} households)")
     for r in report["per_house"]:
         flags = "；".join(r["anomaly_flags"]) or "OK"
-        print(f"  {r['house_id']}: 簇{r['cluster']} {r['variability_group']} "
-              f"一致性{r['load_consistent']} kWh={r['total_kwh']} [{flags}]")
-    print(f"  已保存: {args.out}")
+        print(f"  {r['house_id']}: cluster {r['cluster']} {r['variability_group']} "
+              f"consistent={r['load_consistent']} kWh={r['total_kwh']} [{flags}]")
+    print(f"  Saved: {args.out}")
 
 
 if __name__ == "__main__":

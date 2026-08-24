@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 import json
 import os
 from datetime import datetime
@@ -32,7 +24,7 @@ class Planner:
         os.makedirs(simulation_dir, exist_ok=True)
 
         if env_id and world_id and postcode and house_id and date_str:
-            # 新结构：simulation/<env>/<date>/<postcode>/<house_id>/
+            # New structure: simulation/<env>/<date>/<postcode>/<house_id>/
             self.log_dir = os.path.join(simulation_dir, env_id, date_str, postcode, house_id)
         elif world_id and postcode and house_id and date_str:
             self.log_dir = os.path.join(simulation_dir, world_id, postcode, house_id,
@@ -78,7 +70,7 @@ class Planner:
             tokens = SubAgent.get_tokens()
             result_content = result["content"] if isinstance(result, dict) else result
             reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
-            utils.save_log(self.log_dir, f"01_第一层_宏观计划_{member.name}", prompt, result_content, tokens, reasoning_content)
+            utils.save_log(self.log_dir, f"01_layer1_macro_plan_{member.name}", prompt, result_content, tokens, reasoning_content)
 
             try:
                 plan_data = utils.parse_json_with_retry(prompt, result_content, json_mode=True, thinking=config.THINKING)
@@ -86,7 +78,7 @@ class Planner:
                 timeline.load_from_activities(plan_data.get("activities", []))
                 self.timelines[member.name] = timeline
             except Exception as e:
-                print(f"[错误] 解析{member.name}的计划失败: {e}")
+                print(f"[Error] Failed to parse {member.name}'s plan: {e}")
 
         return self.timelines
 
@@ -96,21 +88,21 @@ class Planner:
         member_names = list(self.timelines.keys())
 
         if len(member_names) <= 1:
-            print("只有一个成员，无需协调")
+            print("Only one member, no coordination needed")
             return self.timelines
 
-        print(f"\n开始渐进式协调，基准成员：{member_names[0]}")
+        print(f"\nStarting progressive coordination, baseline member: {member_names[0]}")
 
         exclusive_resources = self.home.get_exclusive_resources()
         exclusive_info = ""
         if exclusive_resources:
-            exclusive_info = "\n\n## 家庭独占资源\n\n"
+            exclusive_info = "\n\n## Household Exclusive Resources\n\n"
             for resource in exclusive_resources:
                 exclusive_info += f"### {resource['name']}\n"
-                exclusive_info += f"- 位置：{resource.get('location', '家中')}\n"
+                exclusive_info += f"- Location: {resource.get('location', 'home')}\n"
                 if resource.get('owner'):
-                    exclusive_info += f"- 所有者：{resource['owner']}\n"
-                exclusive_info += "- 使用规则：\n"
+                    exclusive_info += f"- Owner: {resource['owner']}\n"
+                exclusive_info += "- Usage rules:\n"
                 for rule in resource['rules']:
                     exclusive_info += f"  - {rule}\n"
                 exclusive_info += "\n"
@@ -119,17 +111,17 @@ class Planner:
             current_member = member_names[i]
             coordinated_members = member_names[:i]
 
-            print(f"\n协调 {current_member} 与 {coordinated_members}")
+            print(f"\nCoordinating {current_member} with {coordinated_members}")
 
             coordinated_timelines_text = ""
             for name in coordinated_members:
                 timeline = self.timelines[name]
-                coordinated_timelines_text += f"\n{name}的时间线：\n"
+                coordinated_timelines_text += f"\n{name}'s timeline:\n"
                 for slot in timeline.slots:
                     coordinated_timelines_text += f"  {slot._format_time_range()}: {slot.location} - {slot.activity}\n"
 
             current_timeline = self.timelines[current_member]
-            current_timeline_text = f"\n{current_member}的原始时间线：\n"
+            current_timeline_text = f"\n{current_member}'s original timeline:\n"
             for slot in current_timeline.slots:
                 current_timeline_text += f"  {slot._format_time_range()}: {slot.location} - {slot.activity}\n"
 
@@ -147,8 +139,8 @@ class Planner:
 
             if exclusive_resources:
                 prompt_content = prompt_content.replace(
-                    "## 独占资源约束",
-                    exclusive_info + "\n## 协调要求"
+                    "## Exclusive resource constraints",
+                    exclusive_info + "\n## Coordination requirements"
                 )
 
             result = SubAgent.single_call(prompt_content, json_mode=True, thinking=config.THINKING)
@@ -156,7 +148,7 @@ class Planner:
 
             result_content = result["content"] if isinstance(result, dict) else result
             reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
-            utils.save_log(self.log_dir, f"02_第二层_渐进协调_{i}_{current_member}", prompt_content, result_content, tokens, reasoning_content)
+            utils.save_log(self.log_dir, f"02_layer2_progressive_coordination_{i}_{current_member}", prompt_content, result_content, tokens, reasoning_content)
 
             try:
                 coordination_data = utils.parse_json_with_retry(prompt_content, result_content, json_mode=True, thinking=config.THINKING)
@@ -166,15 +158,15 @@ class Planner:
                 new_timeline.load_from_activities(new_activities)
                 self.timelines[current_member] = new_timeline
 
-                print(f"已协调 {current_member} 的时间线")
+                print(f"Coordinated {current_member}'s timeline")
             except Exception as e:
-                print(f"解析 {current_member} 的协调结果失败: {e}")
+                print(f"Failed to parse coordination result for {current_member}: {e}")
 
         return self.timelines
 
 
 
-    def enrich_activities(self, season="夏天", weather="晴天", temperature=28):
+    def enrich_activities(self, season="Summer", weather="Sunny", temperature=28):
         prompts = []
         members = []
 
@@ -210,7 +202,7 @@ class Planner:
 
         for (member_name, timeline), prompt, result in zip(members, prompts, results):
             tokens = SubAgent.get_tokens()
-            log_name = f"03_第三层_丰富行为描述_{member_name}"
+            log_name = f"03_layer3_enrich_behavior_{member_name}"
             result_content = result["content"] if isinstance(result, dict) else result
             reasoning_content = result.get("reasoning_content", "") if isinstance(result, dict) else ""
             utils.save_log(self.log_dir, log_name, prompt, result_content, tokens, reasoning_content)
@@ -223,9 +215,9 @@ class Planner:
                     if i < len(enriched_activities):
                         slot.desc = enriched_activities[i].get("desc", "")
 
-                print(f"已丰富 {member_name} 的行为描述")
+                print(f"Enriched {member_name}'s behavior description")
             except Exception as e:
-                print(f"解析 {member_name} 的丰富描述失败: {e}")
+                print(f"Failed to parse enrichment for {member_name}: {e}")
 
         return self.timelines
 
@@ -236,6 +228,3 @@ class Planner:
             if member.name == name:
                 return member
         return None
-
-
-

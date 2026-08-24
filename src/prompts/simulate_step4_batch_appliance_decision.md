@@ -1,129 +1,131 @@
-你是一个家庭用电行为专家。请为{member_name}的一天生成完整的用电决策。
+You are a household electricity behavior expert. Generate the complete appliance usage decisions for {member_name}'s day.
 
-成员信息：
-- 姓名：{member_name}
-- 年龄：{member_age}
-- 职业：{member_occupation}
-- 习惯：{member_habits}
+Member information:
+- Name: {member_name}
+- Age: {member_age}
+- Occupation: {member_occupation}
+- Habits: {member_habits}
 
-该成员的完整时间线：
+This member's complete timeline:
 {member_timeline}
 
-家庭结构和电器：
+Household structure and appliances:
 {home_structure_with_appliances}
 
-环境信息：
-- 季节：{season}
-- 天气：{weather}
-- 温度：{temperature}度
+Environment information:
+- Season: {season}
+- Weather: {weather}
+- Temperature: {temperature} degrees
 
 {policy_context}
 
 {world_news}
 
-## 电器类型说明
+## Appliance type explanation
 
-### 1. on_demand（按需使用电器）
-- 描述：使用时才耗电的设备（如台灯、电视、空调）
-- 可用操作：
-  - "use": 使用该设备（耗电）
-  - "idle": 不使用该设备（不耗电）
+### 1. on_demand (use-on-demand appliances)
+- Description: devices that only consume power when used (e.g., desk lamp, TV, A/C)
+- Available actions:
+  - "use": use the device (consumes power)
+  - "idle": do not use the device (no power consumption)
 
-### 2. charging（充电设备）
-- 描述：充电设备（如手机、电动汽车）
-- 可用操作：
-  - "charge_home": 使用家庭电力充电（计入家庭用电）
-  - "charge_external": 使用外部电力充电（不计入家庭用电）
-  - "use": 使用设备（消耗之前充入的电量，不耗电）
-  - "idle": 不使用也不充电
+### 2. charging (charging devices)
+- Description: charging devices (e.g., phone, electric vehicle)
+- Available actions:
+  - "charge_home": charge using household electricity (counts toward household usage)
+  - "charge_external": charge using external electricity (does not count toward household usage)
+  - "use": use the device (consumes previously charged power, no new consumption)
+  - "idle": neither use nor charge
 
-### 3. always_on（持续耗电设备）
-- 描述：持续耗电设备（如冰箱）
-- 可用操作：无（自动运行，无需操作）
+### 3. always_on (continuously consuming devices)
+- Description: devices that consume power continuously (e.g., refrigerator)
+- Available actions: none (auto-runs, no decision needed)
 
-## 决策原则
+## Decision principles
 
-1. **根据活动内容决策**：根据该成员的活动和所在房间，决定需要使用哪些电器
-2. **只使用可用操作**：每个电器只能使用其 available_actions 中列出的操作
-3. **always_on 设备无需决策**：冰箱等持续耗电设备自动运行，不要在输出中包含
-4. **考虑环境因素**：季节、天气、温度影响用电需求（如夏天开空调）
-5. **符合生活习惯**：根据成员的习惯特征决策
-6. **注意节能**：离开房间时将该房间的电器设为 idle
-7. **外出时的电器使用**：
-   - 外出时把"外出"当作一个特殊的房间
-   - 外出时可以使用个人电器（手机等）
-   - 外出时可以选择充电方式：charge_home（家庭供电）或 charge_external（外部供电）
-   - 具体的用电统计会在后续处理中根据电力来源进行筛选
+1. **Decide based on activity content**: decide which appliances are needed based on the member's activity and room
+2. **Only use available actions**: each appliance can only use the actions listed in its available_actions
+3. **always_on devices need no decision**: continuously consuming devices like refrigerators auto-run; do not include them in the output
+4. **Consider environmental factors**: season, weather, and temperature affect electricity demand (e.g., A/C in summer)
+5. **Match lifestyle habits**: decide according to the member's habit traits
+6. **Be mindful of energy saving**: set appliances in a room to idle when leaving it
+7. **Appliance use when out**:
+   - Treat "Out" as a special room when outside
+   - Personal appliances (phone etc.) can be used when out
+   - When out, charging can be chosen as charge_home (household power) or charge_external (external power)
+   - The specific usage statistics will be filtered by power source in later processing
 
-## 典型使用时长（务必遵守，保持真实）
+## Typical usage durations (must follow, keep realistic)
 
-| 电器 | 典型一次使用时长 | 一天累计上限 |
+| Appliance | Typical single-use duration | Daily cumulative cap |
 |---|---|---|
-| 电动汽车充电 | 晚上充 2-4 小时即可充满，**充满即停**；建议夜间 22:00 后充 | 4 小时 |
-| 热水器 | 每次洗澡 15-30 分钟 | 45 分钟 |
-| 空调 | 开 1-3 小时后可关（达到舒适温度） | 6 小时 |
-| 洗衣机 | 一筒 1-1.5 小时 | 2 小时 |
-| 电磁炉/电饭煲 | 做饭 30-60 分钟 | 2 小时 |
-| 微波炉 | 加热 3-10 分钟 | 1 小时 |
-| 电视 | 看 1-3 小时 | 8 小时 |
-| 电脑 | 工作时段用 | 10 小时 |
-| 手机充电 | 充 1-2 小时即满 | 4 小时 |
-| 灯/台灯 | 人在房间就开 | 16 小时 |
-| 吸尘器 | 一次清洁 15-30 分钟 | 1 小时 |
-| 油烟机 | 做饭时开 | 2 小时 |
+| EV charging | Charge 2-4 hours at night to full, **stop when full**; recommended after 22:00 | 4 hours |
+| Water heater | 15-30 minutes per shower | 45 minutes |
+| A/C | Can turn off after 1-3 hours (comfortable temperature reached) | 6 hours |
+| Washing machine | 1-1.5 hours per load | 2 hours |
+| Induction cooker/rice cooker | 30-60 minutes for cooking | 2 hours |
+| Microwave | 3-10 minutes to heat | 1 hour |
+| TV | 1-3 hours of watching | 8 hours |
+| Computer | used during work hours | 10 hours |
+| Phone charging | 1-2 hours to full | 4 hours |
+| Lamp/desk lamp | on whenever someone is in the room | 16 hours |
+| Vacuum cleaner | 15-30 minutes per cleaning | 1 hour |
+| Range hood | on while cooking | 2 hours |
 
-**重要**：不要连续长时间开大功率电器（空调/电动汽车/热水器）。比如电动汽车一天最多充 4 小时，充满后应设 idle。
+**Important**: do not run high-power appliances (A/C/EV/water heater) continuously for long periods. For example, the EV may charge at most 4 hours per day and should be set to idle once full.
 
-## 典型使用时段（澳大利亚作息锚定，Xia et al. 2026）
+## Typical usage periods (Australian schedule baseline, Xia et al. 2026)
 
-| 时段 | 典型电器活动 |
+| Period | Typical appliance activity |
 |---|---|
-| 6:30-8:00 起床/早餐 | 电饭煲/微波炉/电磁炉（早餐）、灯 |
-| 8:00-17:00 工作时段 | 电脑（居家办公时）、待机 |
-| 17:00-19:00 返家/晚餐 | 电磁炉/油烟机/电饭煲（晚餐）、热水器（洗浴） |
-| 19:00-22:30 晚间休闲 | 电视/电脑/灯、洗衣机/吸尘器（按需） |
-| 22:30-07:00 夜间 | 电动汽车充电（22:00 后开始，2-4 小时）、手机充电 |
+| 6:30-8:00 wake/breakfast | rice cooker/microwave/induction cooker (breakfast), lamps |
+| 8:00-17:00 work hours | computer (when working from home), standby |
+| 17:00-19:00 return/dinner | induction cooker/range hood/rice cooker (dinner), water heater (shower) |
+| 19:00-22:30 evening leisure | TV/computer/lamps, washing machine/vacuum (as needed) |
+| 22:30-07:00 night | EV charging (starting after 22:00, 2-4 hours), phone charging |
 
-- 空调：夏季炎热时段（12:00-21:00 按需），达到舒适温度即关
-- 洗衣机/吸尘器：工作日傍晚或周末白天（勿在深夜运行，噪音）
-- 以上为典型时段，须与成员时间线活动一致，允许合理偏差
+- A/C: hot summer periods (12:00-21:00 as needed), turn off once comfortable
+- Washing machine/vacuum: weekday evenings or weekend daytime (do not run late at night, noise)
+- The above are typical periods and must be consistent with the member's timeline activities; reasonable deviations are allowed
 
-## 输出格式
+## Output format
 
-输出JSON格式：
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (location room names, activity descriptions) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
 {
   "member": "{member_name}",
   "appliance_decisions": [
     {
-      "time": "时间段（如 08:00-09:00）",
-      "location": "房间名称",
-      "activity": "活动描述",
+      "time": "time segment (e.g., 08:00-09:00)",
+      "location": "room name",
+      "activity": "activity description",
       "operations": [
         {
-          "unique_id": "电器唯一ID",
-          "action": "操作（必须是该电器的 available_actions 之一）"
+          "unique_id": "appliance unique ID",
+          "action": "action (must be one of the appliance's available_actions)"
         }
       ]
     }
   ]
 }
 
-## 重要约束
+## Important constraints
 
-1. **必须使用 unique_id**：不要使用电器名称，必须使用 unique_id（如 "living_tv"）
-2. **操作必须合法**：action 必须在该电器的 available_actions 列表中
-3. **跳过 always_on 设备**：不要为 always_on 类型的电器生成决策
-4. **每个时间段都要决策**：为该成员时间线中的每个时间段生成决策
-5. **根据位置决策电器**：在具体房间时决策该房间的电器，外出时决策个人电器
+1. **Must use unique_id**: do not use appliance names, must use unique_id (e.g., "living_tv")
+2. **Actions must be valid**: action must be in the appliance's available_actions list
+3. **Skip always_on devices**: do not generate decisions for always_on type appliances
+4. **Decide for every time segment**: generate decisions for every time segment in the member's timeline
+5. **Decide appliances by location**: decide the appliances of the specific room when in a room; decide personal appliances when out
+6. Activity descriptions must be in English
 
-## 示例
+## Examples
 
-假设成员在客厅看电视：
+Member watching TV in the living room:
 ```json
 {
   "time": "19:00-20:00",
-  "location": "客厅",
-  "activity": "看电视",
+  "location": "Living Room",
+  "activity": "watching TV",
   "operations": [
     {"unique_id": "living_tv", "action": "use"},
     {"unique_id": "living_light", "action": "use"},
@@ -132,12 +134,12 @@
 }
 ```
 
-假设成员在卧室睡觉并给手机充电：
+Member sleeping in the bedroom and charging the phone:
 ```json
 {
   "time": "23:00-07:00",
-  "location": "卧室1",
-  "activity": "睡觉",
+  "location": "Bedroom 1",
+  "activity": "sleeping",
   "operations": [
     {"unique_id": "bedroom1_lamp", "action": "idle"},
     {"unique_id": "dad_phone", "action": "charge_home"},
@@ -146,24 +148,24 @@
 }
 ```
 
-假设成员外出购物并使用手机：
+Member shopping out and using the phone:
 ```json
 {
   "time": "15:00-17:00",
-  "location": "外出",
-  "activity": "购物",
+  "location": "Out",
+  "activity": "shopping",
   "operations": [
     {"unique_id": "dad_phone", "action": "use"}
   ]
 }
 ```
 
-假设成员外出时在充电站给电动车充电：
+Member charging the EV at a charging station while out:
 ```json
 {
   "time": "16:00-17:00",
-  "location": "外出",
-  "activity": "在充电站给车充电",
+  "location": "Out",
+  "activity": "charging the car at a charging station",
   "operations": [
     {"unique_id": "garage_ev", "action": "charge_external"}
   ]
