@@ -1,18 +1,9 @@
-"""Simulate step 3: enrich ONE member's activities with concrete behaviors.
-
-Standalone:  python -m steps.simulate.s3_enrich --world W --member <name|idx> [--date D] [--env E]
-Or imported: run_step(world_id, member, date=None, env=None)
-
-Reads this member's s2_coord_<member>.json and the other members' s2 outputs,
-prints full INPUT/OUTPUT, reports errors, and saves s3_enrich_<member>.json.
-"""
 import argparse
-import io
 import json
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), "src"))
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -24,7 +15,7 @@ from engine.prompt import Prompt
 from steps.simulate.s1_macro_plan import load_home, resolve_member
 import generate_world as gw
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 ENRICH_SCHEMA = {
     "type": "object",
@@ -49,7 +40,7 @@ ENRICH_SCHEMA = {
 
 
 def load_timeline(world_id, member_name, date, env, prefix):
-    path = os.path.join(PROJECT_ROOT, "simulation", env, date, "house_0001",
+    path = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001",
                         f"{prefix}_{member_name}.json")
     if not os.path.exists(path):
         print(f"[Error] {path} not found; run the previous step first")
@@ -86,7 +77,7 @@ def run_step(world_id, member_arg, date=None, env=None):
             others[other_name] = timeline_activities(other, "coordinated_activities")
 
     home_structure = json.dumps(home.get_home_structure(), ensure_ascii=False, indent=2)
-    prompt = Prompt().load("simulate_step3_enrich_activities",
+    base_prompt = Prompt().load("simulate_step3_enrich_activities",
                            member_name=member.name, member_age=member.age,
                            member_occupation=member.occupation, member_personality=member.personality,
                            member_timeline=json.dumps(own_activities, ensure_ascii=False, indent=2),
@@ -95,39 +86,31 @@ def run_step(world_id, member_arg, date=None, env=None):
                            season=config.DEFAULT_SEASON, weather=config.DEFAULT_WEATHER,
                            temperature=config.DEFAULT_TEMPERATURE)
 
-    print("================ INPUT: PROMPT ================")
-    print(prompt)
-    print("================ INPUT: JSON SCHEMA ================")
-    print(json.dumps(ENRICH_SCHEMA, ensure_ascii=False, indent=2))
-
-    resp = SubAgent.single_call(prompt, json_mode=True, json_schema=ENRICH_SCHEMA)
-
-    print("================ OUTPUT: RESPONSE ================")
-    print(resp["content"])
-
-    log_dir = os.path.join(PROJECT_ROOT, "simulation", env, date, "house_0001", "log")
+    log_dir = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001", "log")
     os.makedirs(log_dir, exist_ok=True)
     logger = gw.ChatLogger(log_dir)
-    logger.record("s3_enrich", prompt, resp["content"], reasoning="",
-                  ok=True, attempt=1, prefix=f"{member.name}_")
-
+    print("================ INPUT: PROMPT ================")
+    print(base_prompt)
+    print("================ INPUT: JSON SCHEMA ================")
+    print(json.dumps(ENRICH_SCHEMA, ensure_ascii=False, indent=2))
+    resp = SubAgent.single_call(base_prompt, json_mode=True, json_schema=ENRICH_SCHEMA)
+    print("================ OUTPUT: RESPONSE ================")
+    print(resp["content"])
     try:
         data = utils.parse_json_response(resp["content"])
-    except Exception as e:
-        print(f"[Parse error] strict JSON parse failed: {e}")
-        data = gw._parse_json_lenient(resp["content"])
-        print("[Parse] lenient parse succeeded")
-
-    enriched = data.get("enriched_activities") if isinstance(data, dict) else None
-    if not isinstance(enriched, list) or not enriched:
-        print("[Error] no enriched_activities list in response")
-        return False, "no enriched_activities"
+    except Exception as exc:
+        logger.record("s3_enrich", base_prompt, resp["content"], reasoning="",
+                      ok=False, error=f"JSON parse failed: {exc}", attempt=1, prefix=f"{member.name}_")
+        return False, {"stage": "s3_enrich", "issues": [f"JSON parsing failed: {exc}"]}
+    enriched = data.get("enriched_activities", []) if isinstance(data, dict) else []
+    logger.record("s3_enrich", base_prompt, resp["content"], reasoning="",
+                  ok=True, attempt=1, prefix=f"{member.name}_")
 
     print(f"[Check] {len(enriched)} enriched segments")
     for a in enriched[:5]:
         print(f"  {a.get('time')} | {a.get('location')} | {str(a.get('activity'))[:50]} | desc {len(str(a.get('desc', '')))} chars")
 
-    out_dir = os.path.join(PROJECT_ROOT, "simulation", env, date, "house_0001")
+    out_dir = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001")
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"s3_enrich_{member.name}.json")
     with open(out_path, "w", encoding="utf-8") as f:

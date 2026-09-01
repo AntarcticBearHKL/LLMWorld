@@ -146,7 +146,13 @@ def clean_json_text(text):
             lines = lines[:-1]
         text = '\n'.join(lines)
 
-    return text.strip()
+    start = None
+    for i, ch in enumerate(text):
+        if ch in "[{":
+            start = i
+            break
+
+    return text[start:].strip() if start is not None else text.strip()
 
 
 def parse_json_response(text):

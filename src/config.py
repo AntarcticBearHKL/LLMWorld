@@ -42,9 +42,11 @@ REASONING_EFFORT = "low"
 
 MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 2
+LOGIC_MAX_ATTEMPTS = max(1, int(os.getenv("LOGIC_MAX_ATTEMPTS", "4")))
+LLM_MAX_CONCURRENCY = max(1, int(os.getenv("LLM_MAX_CONCURRENCY", "10")))
 
 
-REQUEST_TIMEOUT_SECONDS = 600
+REQUEST_TIMEOUT_SECONDS = 300
 
 
 DEFAULT_START_DATE = "2026-04-21"
@@ -80,18 +82,18 @@ NEWS_MEMORY_KEEP = 5
 
 
 APPLIANCE_DAILY_CAP_MINUTES = {
-    "Electric Vehicle": 4 * 60,
-    "Water Heater": 45,
-    "Air Conditioner": 6 * 60,
-    "Washing Machine": 2 * 60,
-    "Vacuum Cleaner": 60,
+    "ElectricVehicle": 4 * 60,
+    "WaterHeater": 45,
+    "AirConditioner": 6 * 60,
+    "WashingMachine": 2 * 60,
+    "VacuumCleaner": 60,
     "TV": 8 * 60,
     "Computer": 10 * 60,
-    "Induction Cooker": 2 * 60,
+    "InductionCooker": 2 * 60,
     "Microwave": 60,
-    "Rice Cooker": 2 * 60,
+    "RiceCooker": 2 * 60,
     "Phone": 4 * 60,
     "Light": 16 * 60,
-    "Desk Lamp": 16 * 60,
-    "Range Hood": 2 * 60,
+    "DeskLamp": 16 * 60,
+    "RangeHood": 2 * 60,
 }

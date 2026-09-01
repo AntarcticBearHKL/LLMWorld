@@ -1,0 +1,18 @@
+{
+  "household_types": [
+    {
+      "type": "Student Share House",
+      "description": "Young adults aged 18–24, mostly full-time university students at Monash University, living in shared rental accommodation. Often 3–6 people per household, many born overseas (e.g., Chinese, Malaysian, Vietnamese ancestry), with part-time or casual work and low individual income. Lifestyle centres on study, campus and social life, with high mobility and frequent turnover.",
+      "members_min": 3,
+      "members_max": 6,
+      "housing_hint": "Rented share houses, flats or apartments near campus; high rental turnover; median rent around $396/week."
+    },
+    {
+      "type": "single professional",
+      "description": "A young adult (often 25–34) living alone, employed in education, professional services, or tech, renting a flat or unit. High education level, median income around $1,508–2,000/week household, values proximity to work and amenities.",
+      "members_min": 1,
+      "members_max": 1,
+      "housing_hint": "One-bedroom flats or studios; renting, not owning."
+    }
+  ]
+}

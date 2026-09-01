@@ -1,34 +1,23 @@
-"""World step 2: sample personas + align them to the household type (per house).
-
-Standalone:  python -m steps.world.s2_persona_align --world W [--house 0] [--seed S]
-Or imported: run_step(world_id, house=0, seed=42)
-
-Reads household_types.json (step 1), samples personas for household `house`,
-sends the alignment prompt, prints full INPUT/OUTPUT, reports parse/validation
-errors, logs the LLM call, and saves the per-house aligned_texts.json under
-worlds/<world_id>/3168/house_XXXX/.
-"""
 import argparse
-import io
 import json
 import os
+import random
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), "src"))
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 from engine import SubAgent, utils
+from engine.subagent import LLMCallError
 from engine.prompt import Prompt
 import generate_world as gw
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-
-def align_members_schema(member_count):
-    # minLength 200 rejects placeholder strings like "member2"
+def _members_schema(member_count):
     return {
         "type": "object",
         "required": ["members"],
@@ -37,128 +26,130 @@ def align_members_schema(member_count):
                 "type": "array",
                 "minItems": member_count,
                 "maxItems": member_count,
-                "items": {"type": "string", "minLength": 200},
+                "items": {
+                    "type": "object",
+                    "required": ["portrait"],
+                    "properties": {
+                        "portrait": {"type": "string"},
+                    },
+                },
             }
         },
     }
 
 
 def load_household_types(world_id):
-    path = os.path.join(PROJECT_ROOT, "worlds", world_id, "household_types.json")
+    path = os.path.join(gw.WORLDS_DIR, world_id, gw.CLAYTON_POSTCODE, "household_types.json")
     if not os.path.exists(path):
         print(f"[Error] {path} not found; run step s1 first")
         return None
-    with open(path, encoding="utf-8") as f:
-        ht = json.load(f)
-    types = ht["household_types"] if isinstance(ht, dict) else ht
-    if not types:
-        print("[Error] household_types.json is empty")
-        return None
-    return types
+    with open(path, encoding="utf-8") as file:
+        data = json.load(file)
+    return data.get("household_types") if isinstance(data, dict) else data
 
 
-def normalize_type(t):
-    t = dict(t)
-    if "type" not in t and "household_type" in t:
-        t["type"] = t["household_type"]
-    if "housing_hint" not in t:
-        for k in ("typical_housing", "housing_need", "housing_type", "housing"):
-            if k in t:
-                t["housing_hint"] = t[k]
+def normalize_type(value):
+    value = dict(value)
+    if "type" not in value and "household_type" in value:
+        value["type"] = value["household_type"]
+    if "housing_hint" not in value:
+        for key in ("typical_housing", "housing_need", "housing_type", "housing"):
+            if key in value:
+                value["housing_hint"] = value[key]
                 break
-    return t
+    return value
+
+
+def _call_members(prompt, logger, prefix, member_count):
+    print("================ INPUT ================")
+    print(prompt)
+    resp = SubAgent.single_call(prompt, json_mode=True, json_schema=_members_schema(member_count))
+    print("================ OUTPUT ================")
+    print(resp["content"])
+    try:
+        data = utils.parse_json_response(resp["content"])
+    except Exception as exc:
+        logger.record("step2_members", prompt, resp["content"], reasoning="",
+                      ok=False, error=f"JSON parse failed: {exc}", attempt=1, prefix=prefix)
+        raise LLMCallError(f"step2 response is not valid JSON: {exc}") from exc
+    members = data.get("members") if isinstance(data, dict) else data
+    if not isinstance(members, list) or not members:
+        logger.record("step2_members", prompt, resp["content"], reasoning="",
+                      ok=False, error="response lacks members list", attempt=1, prefix=prefix)
+        raise LLMCallError("step2 response lacks members list")
+    portraits = []
+    for m in members:
+        p = m.get("portrait") if isinstance(m, dict) else None
+        if not (isinstance(p, str) and p.strip()):
+            logger.record("step2_members", prompt, resp["content"], reasoning="",
+                          ok=False, error="member entry has no portrait string", attempt=1, prefix=prefix)
+            raise LLMCallError("step2 response has a member with no portrait string")
+        portraits.append(p.strip())
+    logger.record("step2_members", prompt, resp["content"], reasoning="",
+                  ok=True, attempt=1, prefix=prefix)
+    return portraits
 
 
 def run_step(world_id, house=0, seed=42):
-    """Align personas for household `house`. Returns (ok, aligned_or_error)."""
     types = load_household_types(world_id)
     if types is None:
         return False, "household_types.json missing"
-    if house >= len(types):
-        print(f"[Error] house index {house} out of range (0-{len(types)-1})")
-        return False, f"house {house} out of range"
-    htype = normalize_type(types[house])
+    try:
+        household_type = normalize_type(types[house])
+    except (IndexError, TypeError, KeyError) as exc:
+        return False, str(exc)
 
-    print(f"[House {house}] {htype.get('type')} | members {htype.get('typical_members')}")
+    lo = int(household_type.get("members_min", household_type.get("typical_members", 2)))
+    hi = int(household_type.get("members_max", household_type.get("typical_members", lo)))
+    rng = random.Random(f"{world_id}-{house}-{seed}")
+    member_count = rng.randint(lo, hi)
+    print(f"[House {house}] {household_type.get('type')} | member range {lo}-{hi} -> decided {member_count}")
 
-    persona_texts, rows = gw.sample_personas(htype, seed)
-    print(f"[Sample] member count: {len(persona_texts)}")
-    for i, p in enumerate(persona_texts):
-        print(f"  ---- Member {i + 1} (len={len(p)}) ----")
-        print(p)
-        print("  ------------------------------")
+    persona_texts, _ = gw.sample_personas(household_type, seed, n=member_count)
 
-    prompt = Prompt().load("generate_world_step2_align",
-                           household_type=htype["type"],
-                           household_description=htype["description"],
-                           member_count=htype["typical_members"],
-                           persona_texts="\n\n".join(persona_texts))
-    schema = align_members_schema(htype["typical_members"])
-
-    print("================ INPUT: PROMPT ================")
-    print(prompt)
-    print("================ INPUT: JSON SCHEMA ================")
-    print(json.dumps(schema, ensure_ascii=False, indent=2))
-
-    resp = SubAgent.single_call(prompt, json_mode=True, json_schema=schema)
-
-    print("================ OUTPUT: RESPONSE ================")
-    print(resp["content"])
-
-    house_dir = os.path.join(PROJECT_ROOT, "worlds", world_id, "3168", f"house_{house + 1:04d}")
+    world_dir = os.path.join(gw.WORLDS_DIR, world_id)
+    house_dir = os.path.join(world_dir, gw.CLAYTON_POSTCODE, f"house_{house + 1:04d}")
     os.makedirs(house_dir, exist_ok=True)
-    log_dir = os.path.join(PROJECT_ROOT, "worlds", world_id, "log")
+    log_dir = os.path.join(house_dir, "log")
     os.makedirs(log_dir, exist_ok=True)
     logger = gw.ChatLogger(log_dir)
-    logger.record("step2_align", prompt, resp["content"], reasoning="",
-                  ok=True, attempt=1, prefix=f"house_{house + 1:04d}_")
+    prefix = f"house_{house + 1:04d}_"
 
-    try:
-        data = utils.parse_json_response(resp["content"])
-    except Exception as e:
-        print(f"[Parse error] strict JSON parse failed: {e}")
-        data = gw._parse_json_lenient(resp["content"])
-        print("[Parse] lenient parse succeeded")
-
-    raw = data.get("members") if isinstance(data, dict) else None
-    if isinstance(raw, list):
-        aligned = [str(m).strip() for m in raw if str(m).strip()]
-    elif isinstance(raw, dict):
-        aligned = [str(m).strip() for m in raw.values() if str(m).strip()]
-        print("[Parse] members was a dict; took values")
-    else:
-        aligned = []
-
-    expected = htype["typical_members"]
-    if len(aligned) != expected:
-        print(f"[Error] member count mismatch: got {len(aligned)}, required {expected}")
-        return False, f"member count {len(aligned)} != {expected}"
-
-    short = [i for i, a in enumerate(aligned) if len(a) < 200]
-    if short:
-        print(f"[Error] members too short (placeholders?): indices {short}")
-        return False, f"short members at {short}"
-
-    print(f"[Check] aligned member count: {len(aligned)} (required {expected})")
-    for i, a in enumerate(aligned):
-        print(f"  ---- Aligned member {i + 1} (len={len(a)}) ----")
-        print(a[:800])
-        print("  ------------------------------")
+    prompt = Prompt().load(
+        "generate_world_step2_align",
+        household_type=household_type.get("type", ""),
+        household_description=household_type.get("description", ""),
+        household_member_count=member_count,
+        persona_texts="\n\n".join(persona_texts),
+    )
+    portraits = _call_members(prompt, logger, prefix, member_count)
 
     out_path = os.path.join(house_dir, "aligned_texts.json")
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(aligned, f, ensure_ascii=False, indent=2)
+    with open(out_path, "w", encoding="utf-8") as file:
+        json.dump(portraits, file, ensure_ascii=False, indent=2)
     print(f"[Saved] {out_path}")
-    return True, aligned
+    for i, p in enumerate(portraits, 1):
+        print(f"  member {i}: {len(p)} chars, {len(p.split())} words")
+    return True, portraits
 
 
 def main():
-    parser = argparse.ArgumentParser(description="World step 2: persona align (per house)")
+    parser = argparse.ArgumentParser(description="World step 2: persona align (one call for all members)")
     parser.add_argument("--world", required=True, help="world ID")
     parser.add_argument("--house", type=int, default=0, help="household index (0-based)")
+    parser.add_argument("--all-houses", action="store_true")
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
-    ok, result = run_step(args.world, args.house, args.seed)
+    if args.all_houses:
+        types = load_household_types(args.world)
+        if types is None:
+            sys.exit(1)
+        ok = True
+        for house in range(len(types)):
+            step_ok, _ = run_step(args.world, house, args.seed)
+            ok = ok and step_ok
+        sys.exit(0 if ok else 1)
+    ok, _ = run_step(args.world, args.house, args.seed)
     sys.exit(0 if ok else 1)
 
 

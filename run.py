@@ -1,15 +1,3 @@
-"""LLMWorld single entry point.
-
-World generation:
-    python run.py --mode world [--world W] [--count N] [--seed S]
-
-Simulation (per-member steps, threaded):
-    python run.py --mode simulate --world W [--date D] [--env E] [--workers N] [--member M]
-
-Each step module can also be run standalone:
-    python -m steps.world.s1_household_types --world W
-    python -m steps.simulate.s1_macro_plan --world W --member 0
-"""
 import argparse
 import json
 import os
@@ -28,17 +16,17 @@ from steps.world import s1_household_types, s2_persona_align, s3_household_build
 from steps.simulate import s1_macro_plan, s2_coordinate, s3_enrich, s4_appliance_decision
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+WORLDS_DIR = os.path.join(PROJECT_ROOT, "output", "worlds")
 
 
 def auto_world_id():
     while True:
         cand = f"world_{random.randint(100000, 999999)}"
-        if not os.path.isdir(os.path.join(PROJECT_ROOT, "worlds", cand)):
+        if not os.path.isdir(os.path.join(WORLDS_DIR, cand)):
             return cand
 
 
 def run_house(world_id, house, seed):
-    """One household's chain: s2 -> s3 -> s4 (s3 falls back on failure)."""
     print(f"\n########## HOUSE {house} ##########")
     ok, r = s2_persona_align.run_step(world_id, house, seed)
     if not ok:
@@ -46,10 +34,8 @@ def run_house(world_id, house, seed):
         return False
     ok, r = s3_household_build.run_step(world_id, house, seed)
     if not ok:
-        print(f"[Info] house {house} s3 LLM generation failed ({r}) -> applying programmatic fallback")
-        if not fallback_household(world_id, house, seed):
-            print(f"[Abort] house {house} fallback also failed")
-            return False
+        print(f"[Abort] house {house} s3 failed: {r}")
+        return False
     ok, r = s4_world_assemble.run_step(world_id, house, seed)
     if not ok:
         print(f"[Abort] house {house} s4 failed: {r}")
@@ -58,7 +44,6 @@ def run_house(world_id, house, seed):
 
 
 def run_world(world_id, count, seed, workers=4):
-    """World generation: s1 (types) then per-house s2 -> s3 -> s4, threaded."""
     print(f"\n########## WORLD {world_id} (count={count}, workers={workers}) ##########")
     ok, r = s1_household_types.run_step(world_id, count, seed)
     if not ok:
@@ -72,52 +57,6 @@ def run_world(world_id, count, seed, workers=4):
     return 0 if all(results) else 1
 
 
-def fallback_household(world_id, house=0, seed=42):
-    """Programmatic fallback when s3 LLM generation fails (population.py template)."""
-    print(f"\n########## >>> fallback_household house={house} (programmatic template) ##########")
-    import random as rnd
-    import generate_world as gw
-
-    ht_path = os.path.join(PROJECT_ROOT, "worlds", world_id, "household_types.json")
-    if not os.path.exists(ht_path):
-        print("[Abort] household_types.json missing for fallback")
-        return False
-    with open(ht_path, encoding="utf-8") as f:
-        ht = json.load(f)
-    types = ht["household_types"] if isinstance(ht, dict) else ht
-    if house >= len(types):
-        print(f"[Abort] house {house} out of range for fallback")
-        return False
-    htype = dict(types[house])
-    if "type" not in htype and "household_type" in htype:
-        htype["type"] = htype["household_type"]
-    if "housing_hint" not in htype:
-        for k in ("typical_housing", "housing_need", "housing_type", "housing"):
-            if k in htype:
-                htype["housing_hint"] = htype[k]
-                break
-    rng = rnd.Random(seed + house)
-    household = gw.fallback_household(htype, rng)
-    household.setdefault("type", htype["type"])
-    household["llm_generated"] = False
-    # Fallback templates may not match the requested member count; repair
-    # without the strict member-count check.
-    ok, problems = gw._repair_household(household)
-    print(f"[fallback] VALID={ok}")
-    for p in problems:
-        print(f"  PROBLEM: {p}")
-    if not ok:
-        return False
-    out_dir = os.path.join(PROJECT_ROOT, "worlds", world_id, "3168", f"house_{house + 1:04d}")
-    os.makedirs(out_dir, exist_ok=True)
-    with open(os.path.join(out_dir, "household.json"), "w", encoding="utf-8") as f:
-        json.dump(household, f, ensure_ascii=False, indent=2)
-    print(f"[fallback] saved household.json | type={household.get('type')} "
-          f"| rooms={len(household.get('home', {}).get('rooms', []))} "
-          f"| members={len(household.get('members', []))}")
-    return True
-
-
 def get_member_names(world_id):
     home = s1_macro_plan.load_home(world_id)
     if home is None:
@@ -127,13 +66,6 @@ def get_member_names(world_id):
 
 
 def run_simulate(world_id, date, env, workers, member=None):
-    """Simulation: per-member steps, threaded per layer.
-
-    Layer 1 (macro plans) -> Layer 2 (coordinate) -> Layer 3 (enrich) ->
-    Layer 4 (appliance decisions). Members within a layer run in parallel
-    (workers threads); layers run sequentially because each reads the
-    previous layer's outputs.
-    """
     print(f"\n########## SIMULATE world={world_id} date={date} env={env} workers={workers} ##########")
     names = get_member_names(world_id)
     if not names:
@@ -154,8 +86,7 @@ def run_simulate(world_id, date, env, workers, member=None):
         print("[Abort] s1 failed for some members")
         return 1
 
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        results = list(ex.map(lambda m: s2_coordinate.run_step(world_id, m, date, env), targets))
+    results = [s2_coordinate.run_step(world_id, m, date, env) for m in targets]
     if any(not r[0] for r in results):
         print("[Abort] s2 failed for some members")
         return 1

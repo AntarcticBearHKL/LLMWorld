@@ -24,8 +24,6 @@ DEVICE_SCOPE = "openid offline_access"
 GRANT_TYPE_DEVICE = "urn:ietf:params:oauth:grant-type:device_code"
 GRANT_TYPE_REFRESH = "refresh_token"
 
-# Credentials JSON schema: {"access_token": "<str>", "refresh_token": "<str>", "expires_at": <float epoch seconds>}
-# Read/write lock: guarantees single-flight refresh during parallel calls (SubAgent.parallel_call uses ThreadPoolExecutor)
 _lock = threading.RLock()
 _cache = None
 
@@ -91,7 +89,6 @@ def _refresh():
     if resp.status_code == 200:
         new_creds = {
             "access_token": payload["access_token"],
-            # Reuse the old value when the response does not carry a new refresh_token
             "refresh_token": payload.get("refresh_token") or refresh_token,
             "expires_at": time.time() + float(payload.get("expires_in") or 3600),
         }
@@ -112,7 +109,6 @@ def get_access_token():
         if not creds.get("access_token"):
             raise LLMCallError("Matilda has not been authenticated yet; please first run: python src/matilda_auth.py")
         now = time.time()
-        # Reserve 60 seconds for clock skew
         if creds.get("expires_at", 0) - 60 <= now:
             creds = _refresh()
         return creds["access_token"]

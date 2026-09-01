@@ -1,19 +1,9 @@
-"""Simulate step 2: coordinate ONE member's timeline with already-coordinated members.
-
-Standalone:  python -m steps.simulate.s2_coordinate --world W --member <name|idx> [--date D] [--env E]
-Or imported: run_step(world_id, member, date=None, env=None)
-
-Reads this member's s1_macro_<member>.json and the s1 outputs of the other
-members (treated as already-coordinated), prints full INPUT/OUTPUT, reports
-errors, and saves s2_coord_<member>.json.
-"""
 import argparse
-import io
 import json
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), "src"))
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -25,12 +15,13 @@ from engine.prompt import Prompt
 from steps.simulate.s1_macro_plan import load_home, resolve_member
 import generate_world as gw
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 COORD_SCHEMA = {
     "type": "object",
-    "required": ["coordinated_activities"],
+    "required": ["member", "coordinated_activities"],
     "properties": {
+        "member": {"type": "string"},
         "coordinated_activities": {
             "type": "array",
             "items": {
@@ -48,7 +39,7 @@ COORD_SCHEMA = {
 
 
 def load_member_plan(world_id, member_name, date, env):
-    path = os.path.join(PROJECT_ROOT, "simulation", env, date, "house_0001",
+    path = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001",
                         f"s1_macro_{member_name}.json")
     if not os.path.exists(path):
         print(f"[Error] {path} not found; run s1 for this member first")
@@ -59,9 +50,24 @@ def load_member_plan(world_id, member_name, date, env):
 
 def format_timeline(data):
     lines = []
-    for a in data.get("activities", []):
+    for a in _timeline_items(data):
         lines.append(f"  {a.get('time')}: {a.get('location')} - {a.get('activity')}")
     return "\n".join(lines)
+
+
+def _timeline_items(data):
+    if not isinstance(data, dict):
+        return []
+    return data.get("coordinated_activities", data.get("activities", []))
+
+
+def load_best_member_plan(world_id, member_name, date, env):
+    base = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001")
+    coordinated = os.path.join(base, f"s2_coord_{member_name}.json")
+    if os.path.exists(coordinated):
+        with open(coordinated, encoding="utf-8") as source:
+            return json.load(source)
+    return load_member_plan(world_id, member_name, date, env)
 
 
 def run_step(world_id, member_arg, date=None, env=None):
@@ -80,57 +86,66 @@ def run_step(world_id, member_arg, date=None, env=None):
     if current is None:
         return False, "member s1 plan missing"
 
-    coordinated_members = [m.name for m in members if m.name != member.name]
-    coord_texts = []
-    for other_name in coordinated_members:
-        other = load_member_plan(world_id, other_name, date, env)
+    locked_members = []
+    locked_texts = []
+    provisional_members = []
+    provisional_texts = []
+    for other_member in members:
+        other_name = other_member.name
+        if other_name == member.name:
+            continue
+        base = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001")
+        coordinated_path = os.path.join(base, f"s2_coord_{other_name}.json")
+        other = load_best_member_plan(world_id, other_name, date, env)
         if other is not None:
-            coord_texts.append(f"{other_name}:\n" + format_timeline(other))
-    if not coord_texts:
+            rendered = f"{other_name}:\n" + format_timeline(other)
+            if os.path.exists(coordinated_path):
+                locked_members.append(other_name)
+                locked_texts.append(rendered)
+            else:
+                provisional_members.append(other_name)
+                provisional_texts.append(rendered)
+    if not locked_texts and not provisional_texts:
         print("[Info] no other member plans found; coordination will be trivial")
 
-    prompt = Prompt().load("simulate_step2_progressive_coordination",
+    base_prompt = Prompt().load("simulate_step2_progressive_coordination",
                            current_member_name=member.name,
                            current_member_age=member.age,
                            current_member_occupation=member.occupation,
                            current_member_personality=member.personality,
-                           coordinated_members=", ".join(coordinated_members),
-                           coordinated_timelines="\n".join(coord_texts),
-                           current_timeline=f"\n{member.name}'s original timeline:\n" + format_timeline(current))
-
-    print("================ INPUT: PROMPT ================")
-    print(prompt)
-    print("================ INPUT: JSON SCHEMA ================")
-    print(json.dumps(COORD_SCHEMA, ensure_ascii=False, indent=2))
-
-    resp = SubAgent.single_call(prompt, json_mode=True, json_schema=COORD_SCHEMA)
-
-    print("================ OUTPUT: RESPONSE ================")
-    print(resp["content"])
-
-    log_dir = os.path.join(PROJECT_ROOT, "simulation", env, date, "house_0001", "log")
+                           locked_members=", ".join(locked_members) or "None",
+                           locked_timelines="\n".join(locked_texts) or "None",
+                           provisional_members=", ".join(provisional_members) or "None",
+                           provisional_timelines="\n".join(provisional_texts) or "None",
+                           current_timeline=f"\n{member.name}'s original timeline:\n" + format_timeline(current),
+                           room_names=json.dumps(list(home.rooms), ensure_ascii=False),
+                           assigned_bedroom=member.bedroom,
+                           exclusive_resources=json.dumps(home.get_exclusive_resources(), ensure_ascii=False, indent=2))
+    log_dir = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001", "log")
     os.makedirs(log_dir, exist_ok=True)
     logger = gw.ChatLogger(log_dir)
-    logger.record("s2_coordinate", prompt, resp["content"], reasoning="",
-                  ok=True, attempt=1, prefix=f"{member.name}_")
-
+    print("================ INPUT: PROMPT ================")
+    print(base_prompt)
+    print("================ INPUT: JSON SCHEMA ================")
+    print(json.dumps(COORD_SCHEMA, ensure_ascii=False, indent=2))
+    resp = SubAgent.single_call(base_prompt, json_mode=True, json_schema=COORD_SCHEMA)
+    print("================ OUTPUT: RESPONSE ================")
+    print(resp["content"])
     try:
         data = utils.parse_json_response(resp["content"])
-    except Exception as e:
-        print(f"[Parse error] strict JSON parse failed: {e}")
-        data = gw._parse_json_lenient(resp["content"])
-        print("[Parse] lenient parse succeeded")
-
-    activities = data.get("coordinated_activities") if isinstance(data, dict) else None
-    if not isinstance(activities, list) or not activities:
-        print("[Error] no coordinated_activities list in response")
-        return False, "no coordinated_activities"
+    except Exception as exc:
+        logger.record("s2_coordinate", base_prompt, resp["content"], reasoning="",
+                      ok=False, error=f"JSON parse failed: {exc}", attempt=1, prefix=f"{member.name}_")
+        return False, {"stage": "s2_coordinate", "issues": [f"JSON parsing failed: {exc}"]}
+    activities = data.get("coordinated_activities", []) if isinstance(data, dict) else []
+    logger.record("s2_coordinate", base_prompt, resp["content"], reasoning="",
+                  ok=True, attempt=1, prefix=f"{member.name}_")
 
     print(f"[Check] {len(activities)} coordinated segments")
     for a in activities[:5]:
         print(f"  {a.get('time')} | {a.get('location')} | {str(a.get('activity'))[:60]}")
 
-    out_dir = os.path.join(PROJECT_ROOT, "simulation", env, date, "house_0001")
+    out_dir = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001")
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"s2_coord_{member.name}.json")
     with open(out_path, "w", encoding="utf-8") as f:
