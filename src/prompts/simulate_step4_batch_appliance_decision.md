@@ -52,7 +52,7 @@ Environment information:
 7. **Appliance use when out**:
    - Treat "Out" as a special room when outside
    - Personal appliances (phone etc.) can be used when out
-   - When out, charging can be chosen as charge_home (household power) or charge_external (external power)
+   - When out, charging may use only charge_external. charge_home is valid only while the member is at home.
    - The specific usage statistics will be filtered by power source in later processing
 
 ## Typical usage durations (must follow, keep realistic)
@@ -73,6 +73,7 @@ Environment information:
 | Range hood | on while cooking | 2 hours |
 
 **Important**: do not run high-power appliances (A/C/EV/water heater) continuously for long periods. For example, the EV may charge at most 4 hours per day and should be set to idle once full.
+If a canonical activity segment is longer than an appliance's allowed runtime, still include the semantically necessary operation. The downstream energy calculator will clip its actual powered minutes to the daily cap; never omit a required appliance solely because the timeline segment cannot be split.
 
 ## Typical usage periods (Australian schedule baseline, Xia et al. 2026)
 
@@ -111,63 +112,13 @@ Output JSON format (return ONLY the JSON, nothing else):
 
 ## Important constraints
 
-1. **Must use unique_id**: do not use appliance names, must use unique_id (e.g., "living_tv")
+1. **Must use unique_id**: do not use appliance names. Copy a unique_id character-for-character from the supplied household structure; never construct, shorten, or guess an ID.
 2. **Actions must be valid**: action must be in the appliance's available_actions list
 3. **Skip always_on devices**: do not generate decisions for always_on type appliances
 4. **Decide for every time segment**: generate decisions for every time segment in the member's timeline
 5. **Decide appliances by location**: decide the appliances of the specific room when in a room; decide personal appliances when out
 6. Activity descriptions must be in English
-
-## Examples
-
-Member watching TV in the living room:
-```json
-{
-  "time": "19:00-20:00",
-  "location": "Living Room",
-  "activity": "watching TV",
-  "operations": [
-    {"unique_id": "living_tv", "action": "use"},
-    {"unique_id": "living_light", "action": "use"},
-    {"unique_id": "living_ac", "action": "idle"}
-  ]
-}
-```
-
-Member sleeping in the bedroom and charging the phone:
-```json
-{
-  "time": "23:00-07:00",
-  "location": "Bedroom 1",
-  "activity": "sleeping",
-  "operations": [
-    {"unique_id": "bedroom1_lamp", "action": "idle"},
-    {"unique_id": "dad_phone", "action": "charge_home"},
-    {"unique_id": "bedroom1_computer", "action": "idle"}
-  ]
-}
-```
-
-Member shopping out and using the phone:
-```json
-{
-  "time": "15:00-17:00",
-  "location": "Out",
-  "activity": "shopping",
-  "operations": [
-    {"unique_id": "dad_phone", "action": "use"}
-  ]
-}
-```
-
-Member charging the EV at a charging station while out:
-```json
-{
-  "time": "16:00-17:00",
-  "location": "Out",
-  "activity": "charging the car at a charging station",
-  "operations": [
-    {"unique_id": "garage_ev", "action": "charge_external"}
-  ]
-}
-```
+7. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend segments. Only add the operations array.
+8. The member field must exactly equal "{member_name}".
+9. For room appliances, use only appliances belonging to that exact room. When Out, use only this member's personal appliances, or an actual ElectricVehicle if one is supplied.
+10. An empty operations array is valid when the activity does not use electricity. Never invent an operation merely to make the list non-empty.

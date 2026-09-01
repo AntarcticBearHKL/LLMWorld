@@ -1,20 +1,10 @@
-"""World step 4: assemble the standard world structure for ONE house (local, no LLM).
-
-Standalone:  python -m steps.world.s4_world_assemble --world W [--house 0] [--seed S]
-Or imported: run_step(world_id, house=0, seed=42)
-
-Reads this house's household.json (step 3) + household_types.json, builds the
-standard world layout (world.json meta + district files + per-house files)
-so the simulation can consume it, prints the assembled structure and reports
-any validation errors.
-"""
 import argparse
 import io
 import json
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), "src"))
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -22,17 +12,16 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import generate_world as gw
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 
 def run_step(world_id, house=0, seed=42):
-    """Assemble house `house` into the standard world structure."""
-    world_dir = os.path.join(PROJECT_ROOT, "worlds", world_id)
+    world_dir = os.path.join(gw.WORLDS_DIR, world_id)
     if not os.path.isdir(world_dir):
         print(f"[Error] world directory not found: {world_dir}")
         return False, "world dir missing"
 
-    house_dir = os.path.join(world_dir, "3168", f"house_{house + 1:04d}")
+    house_dir = os.path.join(world_dir, gw.CLAYTON_POSTCODE, f"house_{house + 1:04d}")
     hpath = os.path.join(house_dir, "household.json")
     if not os.path.exists(hpath):
         print(f"[Error] {hpath} not found; run step s3 first")
@@ -40,18 +29,12 @@ def run_step(world_id, house=0, seed=42):
     with open(hpath, encoding="utf-8") as f:
         household = json.load(f)
 
-    ht_path = os.path.join(world_dir, "household_types.json")
+    ht_path = os.path.join(world_dir, gw.CLAYTON_POSTCODE, "household_types.json")
     with open(ht_path, encoding="utf-8") as f:
         ht = json.load(f)
     types = ht["household_types"] if isinstance(ht, dict) else ht
-    expected = int(types[house].get("typical_members", types[house].get("typical_member_count", 2)))
-
-    # LLM-generated households are strictly checked against the member count in
-    # s3; fallback templates may differ, so assemble with the lenient repair.
-    ok, problems = gw._repair_household(household)
-    print(f"[Validate] structure valid = {ok} (expected members {expected})")
-    for p in problems:
-        print(f"  - {p}")
+    t = types[house]
+    expected = int(t.get("typical_members", t.get("typical_member_count", t.get("members_min", 2))))
 
     household.setdefault("type", types[house].get("type", "?"))
     household["llm_generated"] = household.get("llm_generated", True)

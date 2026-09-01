@@ -1,0 +1,13 @@
+[project]
+name = "llmworld"
+version = "1.0.0"
+description = "LLM-driven synthetic household simulator"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+    "numpy>=2.0",
+    "pandas>=2.0",
+    "scikit-learn>=1.5",
+    "matplotlib>=3.8",
+]

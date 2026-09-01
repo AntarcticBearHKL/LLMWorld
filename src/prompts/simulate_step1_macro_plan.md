@@ -5,6 +5,10 @@ Member information:
 - Age: {member_age}
 - Occupation: {member_occupation}
 - Personality: {member_personality}
+- Work/study schedule: {member_work_schedule}
+- Daily habits and lifestyle anchors: {member_habits}
+- Health and temperature preferences: {member_health}
+- Assigned private bedroom: {member_bedroom}
 
 Household structure:
 {home_structure}
@@ -31,7 +35,7 @@ Typical schedule anchors (Australian population time-use baseline, empirically a
   individual variation is allowed, but the main schedule peaks (wake/meals/bedtime) should align with the anchors;
   families with young children should move naptime and bedtime earlier
 
-Generate this member's activities from 00:00 to 23:59 for the full day. Requirements:
+Generate this member's activities from 00:00 to 24:00 for the full day. Requirements:
 - Each time segment must include: time, location, activity description
 - Location requirements:
   - If at home, must specify the actual room name, and the room must be a real room that exists in the household structure
@@ -46,6 +50,11 @@ Generate this member's activities from 00:00 to 23:59 for the full day. Requirem
 - If consecutive time segments are at the same location doing the same thing, they must be merged into one segment
 - Consistent with the role's traits and daily routine
 - Must start at 00:00 and cover the complete 24 hours
+- Adjacent segments must touch exactly: the end of one segment is the start of the next. The last segment must end at 24:00, not 23:59.
+- The member field must exactly equal "{member_name}".
+- Never change the member's identity or occupation. Work/study activities must match the stated occupation and the workday/weekend context.
+- At home, this member may use common rooms and only the bedroom assigned to them in Household members. Never place them in another resident's bedroom.
+- Do not mention or use any vehicle or household resource unless it appears in the supplied household structure.
 
 Output JSON format (return ONLY the JSON, nothing else):
 {

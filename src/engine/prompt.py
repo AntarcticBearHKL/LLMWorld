@@ -36,7 +36,8 @@ class Prompt:
                 return str(value)
             return match.group(0)
         
-        return re.sub(r'\{(\w+)\}', replace_var, template)
+        rendered = re.sub(r'\{\{(\w+)\}\}', replace_var, template)
+        return re.sub(r'(?<!\{)\{(\w+)\}(?!\})', replace_var, rendered)
     
     def list_prompts(self):
         if not os.path.exists(self.prompts_dir):

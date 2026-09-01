@@ -21,6 +21,8 @@ Environment: {season}, {weather}, {temperature} degrees
 
 **This is NOT novel-writing, this is behavior recording!**
 
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
 The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
 
 ### Requirements:
@@ -77,3 +79,4 @@ Output JSON format (return ONLY the JSON, nothing else):
 
 **Write only visible actions, never invisible thoughts!**
 **The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "{member_name}" and names mentioned in descriptions must exactly match the supplied household members.**

@@ -1,5 +1,9 @@
 # @maincode-ai/matilda-agent-sdk
 
+> Historical detailed notes for version 0.1.0. The project reference package
+> is pinned to 0.2.1 in `package.json`; consult the installed type declarations
+> for the current contract.
+
 **Version 0.1.0**
 
 A TypeScript SDK for building agentic applications on Matilda. Provides agent abstractions, client-side tool execution, multi-turn sessions, automatic retry with exponential backoff, DSML tool-call interception, and durable stream resume — all on top of the Matilda-native chat contract.

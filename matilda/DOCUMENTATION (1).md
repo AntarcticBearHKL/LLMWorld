@@ -1,5 +1,9 @@
 # @maincode-ai/matilda-client-sdk
 
+> Historical detailed notes for version 0.2.0. The project reference package
+> is pinned to 0.3.1 in `package.json`; consult the installed type declarations
+> for the current contract.
+
 **Version 0.2.0**
 
 A small, self-contained public TypeScript SDK for building Matilda clients. Ships a dual ESM + CommonJS build with bundled type definitions and zero `@matilda/*` runtime dependencies. Requires Node.js ≥ 20.

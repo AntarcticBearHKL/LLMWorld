@@ -1,4 +1,4 @@
-You are a household life coordination expert. You need to coordinate {{current_member_name}}'s timeline so that it matches the timelines of the already-coordinated household members.
+You are a household life coordination expert. Coordinate {{current_member_name}}'s timeline against locked earlier timelines and provisional later timelines.
 
 ## Member information
 - Name: {{current_member_name}}
@@ -6,26 +6,33 @@ You are a household life coordination expert. You need to coordinate {{current_m
 - Occupation: {{current_member_occupation}}
 - Personality: {{current_member_personality}}
 
-## Already-coordinated household member timelines
-The following members' timelines are already coordinated: {{coordinated_members}}
+## Locked earlier-member timelines
+These members are already coordinated and must not be treated as adjustable: {{locked_members}}
 
-{{coordinated_timelines}}
+{{locked_timelines}}
+
+## Provisional later-member timelines
+These members have only macro plans. Use them to anticipate conflicts, but they will be coordinated later: {{provisional_members}}
+
+{{provisional_timelines}}
 
 ## Current member's original timeline
 {{current_timeline}}
 
-## Exclusive resource constraints
+## Actual household rooms
 
-The household has the following exclusive resources that need special coordination:
+{{room_names}}
 
-### Electric vehicle (ElectricVehicle)
-- **Exclusive rule**: only one person can use it at a time
-- **Usage responsibility**: the user is responsible for driving it out and returning it
-- **Car-pooling option**: others may ride along with the user
-- **Return rule**: when coming home, the vehicle must be driven back by the person who drove it out, or pick up others on the way
+{{current_member_name}}'s assigned private bedroom is exactly: {{assigned_bedroom}}
+
+## Actual exclusive resource constraints
+
+{{exclusive_resources}}
+
+If the list above is empty, the household has NO electric vehicle or other exclusive appliance. Never invent one.
 
 **Coordination requirements**:
-1. If an already-coordinated member uses the electric vehicle to go out during some period, {{current_member_name}} has these options:
+1. Only if an ElectricVehicle is present above, if an already-coordinated member uses it to go out during some period, {{current_member_name}} has these options:
    - Ride along (adjust departure and return times to match the user)
    - Use other transport (bus, train, walking, etc.)
    - Adjust the outing time to avoid the conflict
@@ -72,6 +79,7 @@ Adjust {{current_member_name}}'s timeline according to the already-coordinated m
 Output the adjusted complete timeline in JSON format (return ONLY the JSON, nothing else):
 
 {
+  "member": "{{current_member_name}}",
   "coordinated_activities": [
     {
       "time": "time segment (e.g., 07:00-07:30)",
@@ -85,6 +93,7 @@ Output the adjusted complete timeline in JSON format (return ONLY the JSON, noth
 
 - Output language: all generated VALUES (location, activity descriptions) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only. EV usage markers are the English tokens drive/ride along/drive the EV back (see below).
 - Output the complete day timeline (00:00-24:00)
+- Start exactly at 00:00 and end exactly at 24:00. Adjacent segments must touch with no missing minute.
 - Time segments must not overlap
 - Time segments must be continuous, with no gaps
 - Activity descriptions must be clear and specific
@@ -93,3 +102,7 @@ Output the adjusted complete timeline in JSON format (return ONLY the JSON, noth
 - **Ensure electric vehicle usage continuity** (whoever drives it out drives it back)
 - Activity descriptions must be in English
 - Output must be valid JSON
+- Every home location must exactly match one of the actual room names above; outside activity uses exactly Out.
+- The member may use common rooms and only their assigned private bedroom. Never place them in another resident's bedroom.
+- Never change this member's identity, occupation, or core work/study role.
+- A single Bathroom is exclusive for private washing/showering/toilet routines; do not overlap those uses with another member.

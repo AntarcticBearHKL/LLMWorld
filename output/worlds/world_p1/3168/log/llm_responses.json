@@ -1,0 +1,12 @@
+[
+  {
+    "seq": 1,
+    "time": "2026-09-01 14:49:57",
+    "prefix": "global_",
+    "stage": "step1_types",
+    "attempt": 1,
+    "ok": true,
+    "response": "{\n  \"household_types\": [\n    {\n      \"type\": \"Student Share House\",\n      \"description\": \"Young adults aged 18–24, mostly full-time university students at Monash University, living in shared rental accommodation. Often 3–6 people per household, many born overseas (e.g., Chinese, Malaysian, Vietnamese ancestry), with part-time or casual work and low individual income. Lifestyle centres on study, campus and social life, with high mobility and frequent turnover.\",\n      \"members_min\": 3,\n      \"members_max\": 6,\n      \"housing_hint\": \"Rented share houses, flats or apartments near campus; high rental turnover; median rent around $396/week.\"\n    },\n    {\n      \"type\": \"single professional\",\n      \"description\": \"A young adult (often 25–34) living alone, employed in education, professional services, or tech, renting a flat or unit. High education level, median income around $1,508–2,000/week household, values proximity to work and amenities.\",\n      \"members_min\": 1,\n      \"members_max\": 1,\n      \"housing_hint\": \"One-bedroom flats or studios; renting, not owning.\"\n    }\n  ]\n}",
+    "error": null
+  }
+]
