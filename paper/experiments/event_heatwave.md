@@ -83,18 +83,18 @@
 - **baseline 三成员 AC 恒 0**；**heatwave 下 2/3 成员启用空调**（M3 未用）→ 方向成立且**个体异质性可观测**；
 - 提示：单成员**总电量**非稳健信号（伴随其它家电随机波动），应看 **AC on/off** 这一二进制信号。
 
-**Aggregate binary statistic (R059–R061, cross-world, 0 token)**
+**Aggregate binary statistic (R059–R085, cross-world)**
 
-汇总**两个独立世界**（world_838587、world_172148）中（R15 修复后）baseline 与 heatwave 运行，
+汇总**三个独立世界**（world_838587、world_172148、world_143345）中（R15 修复后）baseline 与 heatwave 运行，
 按 `AirConditioner` 分项 >0 记为"启用"：
 
 | 条件 | AC 启用率 |
 |---|---|
-| baseline（无事件） | **0/7** |
-| heatwave | **9/10** |
+| baseline（无事件） | **0/9** |
+| heatwave | **11/12** |
 
-**Fisher 精确检验：单侧 p ≈ 0.0004（双侧 < 0.001）→ 极显著，且跨世界复现。** 效应量接近 100%，
-因此在 CV≈12% 的连续噪声下**仍可达显著**——是本平台**唯一 p<0.001** 的结论类型（二值/大效应）。
+**Fisher 精确检验：双侧 p ≈ 0.00003（p<0.0001）→ 极显著，且跨 3 世界复现。** 效应量接近 100%，
+因此在 CV≈12% 的连续噪声下**仍可达显著**——是本平台**最稳健**的结论类型（二值/大效应）。
 唯一未启用者为 world_838587 house_0001 Member 3（个体异质性）。
 
 ## 6. Comparison with Literature
@@ -114,5 +114,6 @@
 - **初步（2 户、3 个 event-day 复现 + 多成员）**：以自然语言注入的热浪事件可使 LLM 居民自发启用空调；
   baseline 侧 AC 恒为 0，heatwave 侧多数启用（house_0001 三成员中 2/3）。方向与文献一致，
   且**个体异质性可观测**（个别成员不启用）。前提是新闻与环境天气**一致**（否则 agent 忽略新闻，见 R014）。
+- **跨 3 世界汇总二值统计**：baseline **0/9** vs heatwave **11/12**，Fisher 双侧 **p ≈ 0.00003**（R085）。
 - **可复现命令**：见第 3 节（窗口 2 用 `--date 2026-10-17 --env heatwave_rep/ctrl_rep`）。
 - **下一步（升格为正式结果前）**：多人户 × 多种子复现；用 `analyze_event_response.py` 度量事件日模式转移。
