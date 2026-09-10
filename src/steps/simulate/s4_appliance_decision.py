@@ -90,7 +90,15 @@ def build_decision_schema(allowed):
     return schema
 
 
-def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None):
+EV_OVERNIGHT_GUIDANCE = "Prefer overnight/off-peak hours for EV and E-bike charging."
+
+
+def strip_ev_guidance(prompt):
+    """Remove the overnight-EV-charging directive to obtain a natural EV baseline."""
+    return prompt.replace(EV_OVERNIGHT_GUIDANCE, "")
+
+
+def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -120,6 +128,9 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
                            season=w["season"], weather=w["weather"],
                            temperature=w["temperature"],
                            policy_context=policy_text, world_news=world_news)
+
+    if natural_ev:
+        base_prompt = strip_ev_guidance(base_prompt)
 
     log_dir = os.path.join(gw.SIMULATION_DIR, env, date, house, "log")
     os.makedirs(log_dir, exist_ok=True)
