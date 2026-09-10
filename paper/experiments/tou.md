@@ -65,16 +65,12 @@
 - **可复现命令**：见第 3 节（消融：`--policy tou_soft`；低方差：`--no-thinking --temperature 0.2`）。
 - **下一步**：多人户平均（≥3 成员/户 × ≥2 户）并固定星期；或优先复现更稳健的热浪（二进制信号）。
 
-## 9. Habit-stickiness probe (R045)
+## 9. Habit-stickiness probe (R045 → falsified by control, R046)
 
-Schedule `--policy-schedule "2026-09-11,2026-09-12,tou"`（TOU 生效 2 天 → 移除 2 天），n=1：
-
-| 日期 | 政策 | 峰段 kWh |
-|---|---|---|
-| 09-11 | tou | 3.559 |
-| 09-12 | tou | 1.889 |
-| 09-13 | 无 | 4.002 |
-| 09-14 | 无 | 3.098 |
-
-政策日均峰段 ≈2.72 kWh，移除后 ≈3.55 kWh（+30%）→ **移除后回弹**（弱习惯黏性）。
-**限制**：无平行对照 + 星期混叠 + n=1 → 仅方向性观察，不作因果结论。
+Within the policy arm alone (`--policy-schedule "2026-09-11,2026-09-12,tou"`), the peak-window
+"rebounded" after removal (policy days ≈2.72 kWh → removed days ≈3.55 kWh, R045). **A parallel
+no-policy control (R046) overturns this**: the policy arm's peak was lower than control on *all four*
+days, including the removed days (Δpeak: policy days ≈−1.54, removed days ≈−2.16). The apparent
+rebound was a within-arm artifact, not a policy effect.
+**Conclusion**: single-run-per-arm DiD is not trustworthy; the habit-stickiness question requires
+multi-seed / multi-household averaging.
