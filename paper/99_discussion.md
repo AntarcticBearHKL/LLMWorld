@@ -12,9 +12,9 @@
 ## RQ2 — Behavioural transmission of external inputs
 
 - **Heatwave (binary signal, statistically significant)**: a natural-language heatwave event causes
-  agents to switch the air-conditioner on. Aggregating all post-fix runs **across two independent
-  worlds**, the AC was active in **0/7** baseline vs **9/10** heatwave member-days (Fisher one-sided
-  **p ≈ 0.0004**); direction
+  agents to switch the air-conditioner on. Aggregating all post-fix runs **across three independent
+  worlds**, the AC was active in **0/9** baseline vs **11/12** heatwave member-days (Fisher two-sided
+  **p ≈ 0.00003**, p<0.0001); direction
   consistent with Xia et al. (2026). Individual heterogeneity is visible (one heatwave member did not
   use it). **Key validity condition**: the news text must agree with the environment weather,
   otherwise agents ignore it (observed failure → fixed by event↔weather linkage). Note that the

@@ -30,9 +30,9 @@ events — are injected **only as natural language**; aggregate behaviour is eme
 2. A natural-language intervention surface (pricing / norms / events) with emergent effects.
 3. Alignment experiments against empirical benchmarks (Faruqui & Sergici 2010; Allcott 2011;
    Costa & Kahn 2010; Xia et al. 2026; …), yielding **two statistically significant natural-language
-   event results** — heatwave → cooling (two-sided p≈0.0004) and lockdown → stay-home (two-sided
-   p≈0.0006) — replicated across two synthetic worlds; cold-snap → heating is directionally consistent
-   but one-sided only (p≈0.038; two-sided p≈0.077).
+   event results** — heatwave → cooling (two-sided p≈0.00003, three worlds) and lockdown → stay-home
+   (two-sided p≈0.0006) — replicated across synthetic worlds; cold-snap → heating is directionally
+   consistent but one-sided only (p≈0.038; two-sided p≈0.077).
 
 ## Notes
 
