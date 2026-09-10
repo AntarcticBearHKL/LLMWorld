@@ -15,7 +15,6 @@ load_dotenv()
 
 DEEPSEEK_APIKEY = os.getenv('DEEPSEEK_APIKEY', '') or config.DEEPSEEK_APIKEY
 DEFAULT_MODEL_DEEPSEEK = config.MODEL
-DEFAULT_TEMPERATURE = config.TEMPERATURE
 DEFAULT_MAX_TOKENS = config.MAX_TOKENS
 
 REQUEST_TIMEOUT_SECONDS = config.REQUEST_TIMEOUT_SECONDS
@@ -140,7 +139,7 @@ class SubAgent:
         if thinking:
             data["reasoning"] = {"effort": config.REASONING_EFFORT}
         else:
-            data["temperature"] = DEFAULT_TEMPERATURE
+            data["temperature"] = config.TEMPERATURE
 
         if use_schema:
             data["text"] = {"format": {
@@ -221,7 +220,7 @@ class SubAgent:
             if thinking:
                 data["reasoning"] = {"effort": config.REASONING_EFFORT}
             else:
-                data["temperature"] = DEFAULT_TEMPERATURE
+                data["temperature"] = config.TEMPERATURE
             request_body = json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
             try:
                 response = _post(data)
