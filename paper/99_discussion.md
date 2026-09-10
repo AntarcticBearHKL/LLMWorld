@@ -78,6 +78,11 @@ gave total energy 7.37 / 8.19 / 9.80 kWh — mean 8.45, std 1.01 (CV ≈12%), ma
 Any single-run treatment difference below this scale is uninterpretable, which is why single-sample
 "effects" (nudge 5/5, TOU reversals, the R045 rebound) did not survive replication.
 
+**World/date-specific baselines**: control values are not universal — e.g., a heating baseline that was
+0 in two worlds was already non-zero (3.0 / 1.5 kWh) in a third (R082). Event effects (heatwave
+0/7→9/10, lockdown 7/7→0/7) are therefore *conditional on the baseline device/appliance state*;
+experiments should use paired (within-subject) designs or verify the baseline per case.
+
 **Mitigation**: provide de-instructionalized variants (`tou_soft`, `nudge_soft`) and compare; and, for
 any magnitude claim, average across multiple households/members at a fixed weekday. Accordingly, this
 work treats the platform as suited to **direction** and **heterogeneity** claims, with absolute
