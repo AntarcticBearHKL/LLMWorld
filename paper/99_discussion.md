@@ -58,6 +58,11 @@ any magnitude claim, average across multiple households/members at a fixed weekd
 work treats the platform as suited to **direction** and **heterogeneity** claims, with absolute
 magnitude calibration left as future work.
 
+Relatedly, **framing effects are unstable**: the loss-framed `nudge_loss` did not beat the plain
+`nudge`; it *raised* total energy (+6% vs nudge's −6%~−10%, R041), contradicting Ghesla et al. (2019).
+Both the over-compliance and the framing results point to **wording-driven** rather than
+information/psychology-driven behaviour in the current agents.
+
 ## Limitations
 
 - Heatwave result so far is **single-household** (n=1) with `temperature=1.0`; needs multi-member/

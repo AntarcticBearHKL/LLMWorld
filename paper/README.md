@@ -23,7 +23,7 @@
 | 需量电费 peak_demand | RQ2 | Escarrega et al. 2025 | 峰值 −10~20% | 待做 | `experiments/peak_demand.md` |
 | EV 延迟激励 ev_delay | RQ2 | Alexeenko & Bitar 2023 | 异质性可观测 | 待做 | `experiments/ev_delay.md` |
 | 社会规范 nudge | RQ2 | Allcott 2011 / Ayres 2013 | 总电量 −1~3% | 初步(规范性措辞驱动;去指令后≈0) | `experiments/nudge.md` |
-| 损失框架 nudge_loss | RQ2 | Ghesla et al. 2019 | 比增益框架多 ~5% | 待做 | `experiments/nudge_loss.md` |
+| 损失框架 nudge_loss | RQ2 | Ghesla et al. 2019 | 比增益框架多 ~5% | 反例(总量+6%,方向相反) | `experiments/nudge_loss.md` |
 | 夜间回温 night_setback | RQ2 | Cabezas-Riviere 2025 | 采暖 −5~10% | 待做 | `experiments/night_setback.md` |
 | 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | 待做 | `experiments/in_home_display.md` |
 | 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(初步,2户3天复现) | `experiments/event_heatwave.md` |
