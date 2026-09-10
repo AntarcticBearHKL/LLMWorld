@@ -17,7 +17,7 @@ import config
 import generate_world as gw
 from engine import policy as engine_policy
 from steps.world import s1_household_types, s2_persona_align, s3_household_build, s4_world_assemble
-from steps.simulate import s1_macro_plan, s2_coordinate, s3_enrich, s4_appliance_decision
+from steps.simulate import s1_macro_plan, s2_coordinate, s3_enrich, s4_appliance_decision, day_state
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 WORLDS_DIR = os.path.join(PROJECT_ROOT, "output", "worlds")
@@ -120,14 +120,26 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
             failed.append((house, None))
             continue
 
-        for d in dates:
+        for di, d in enumerate(dates):
+            prev_date = dates[di - 1] if di > 0 else None
             print(f"\n########## SIMULATE world={world_id} house={house} date={d} env={env} "
                   f"workers={workers} policy={policy_spec or 'none'} s4_only={s4_only} ##########")
             print(f"[Members] {targets}")
 
             if not s4_only:
+                prev_states = {}
+                if prev_date:
+                    prev_dir = os.path.join(gw.SIMULATION_DIR, env or world_id, prev_date, house)
+                    for m in targets:
+                        prev_states[m] = day_state.load_day_state(prev_dir, m)
+                    carried = [m for m in targets if prev_states.get(m)]
+                    if carried:
+                        print(f"[Continuity] carry-over from {prev_date}: {carried}")
                 with ThreadPoolExecutor(max_workers=workers) as ex:
-                    results = list(ex.map(lambda m: s1_macro_plan.run_step(world_id, m, d, env, house=house), targets))
+                    results = list(ex.map(
+                        lambda m: s1_macro_plan.run_step(world_id, m, d, env, house=house,
+                                                         prev_state=prev_states.get(m)),
+                        targets))
                 if any(not r[0] for r in results):
                     print(f"[WARN] s1 failed for some members (house={house} date={d})")
                     failed.append((house, d))
