@@ -36,6 +36,7 @@ Environment information:
   - "charge_external": charge using external electricity (does not count toward household usage)
   - "use": use the device (consumes previously charged power, no new consumption)
   - "idle": neither use nor charge
+- Charge the EV/E-bike only until its battery is full, then set it to "idle". A device can absorb at most one full battery per day, so never charge beyond its remaining capacity. Prefer overnight/off-peak hours for EV and E-bike charging.
 
 ### 3. always_on (continuously consuming devices)
 - Description: devices that consume power continuously (e.g., refrigerator)
@@ -70,8 +71,8 @@ Environment information:
 
 | Appliance | Typical single-use duration | Daily cumulative cap |
 |---|---|---|
-| EV charging | Charge 2-4 hours at night to full, **stop when full**; recommended after 22:00 | 4 hours |
-| E-bike charging | Charge 1-3 hours overnight, **stop when full** | 0.7 kWh |
+| EV charging | Charge 2-4 hours at night to full, **stop when full** (one full battery per day max); recommended after 22:00 | 4 hours |
+| E-bike charging | Charge 1-3 hours overnight, **stop when full** (one full battery per day max) | 0.7 kWh |
 | Water heater | 15-30 minutes per shower | 45 minutes |
 | A/C | Can turn off after 1-3 hours (comfortable temperature reached) | 6 hours |
 | Space heater | 1-3 hours per session | 6 hours |
@@ -95,7 +96,7 @@ Environment information:
 | Range hood | on while cooking | 2 hours |
 | Freezer/Router | always_on - auto-runs, no decision | n/a |
 
-**Important**: do not run high-power appliances (A/C/EV/water heater) continuously for long periods. For example, the EV may charge at most 4 hours per day and should be set to idle once full.
+**Important**: do not run high-power appliances (A/C/EV/water heater) continuously for long periods. For example, the EV may charge at most 4 hours per day and should be set to idle once full; never charge more than one full battery per day.
 If a canonical activity segment is longer than an appliance's allowed runtime, still include the semantically necessary operation. The downstream energy calculator will clip its actual powered minutes to the daily cap; never omit a required appliance solely because the timeline segment cannot be split.
 
 ## Typical usage periods (Australian schedule baseline, Xia et al. 2026)

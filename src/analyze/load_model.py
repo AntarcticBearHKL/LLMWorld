@@ -18,6 +18,7 @@ for _path in (_HERE, _SRC):
 from engine.utils import parse_time_range
 from simulate import create_home_from_household
 from appliances.base import AlwaysOnAppliance, ChargingAppliance
+from appliances.catalog import appliance_family
 import config
 
 
@@ -130,17 +131,55 @@ def _accumulate(registry, decisions_by_member):
             best_action.pop((unique_id, index), None)
             referenced[unique_id][index] = False
 
+    # Battery ceiling for charging appliances: a day's home charging cannot
+    # exceed the battery deficit (capacity x (1 - soc)). Walk the day in order;
+    # once the deficit is met the remaining charge_home minutes draw nothing,
+    # and the crossing minute is scaled to land exactly on the deficit.
+    for unique_id, appliance in registry.items():
+        if not isinstance(appliance, ChargingAppliance):
+            continue
+        deficit = appliance.charge_deficit_kwh()
+        if deficit is None:
+            continue
+        remaining = deficit
+        minutes = contrib[unique_id]
+        for index in range(1440):
+            watts = minutes[index]
+            if watts <= 0:
+                continue
+            energy = watts / 60.0 / 1000.0
+            if energy <= remaining:
+                remaining -= energy
+                continue
+            watts = 0.0 if remaining <= 0 else remaining * 60.0 * 1000.0
+            minutes[index] = watts
+            key = (unique_id, index)
+            if watts > 0:
+                if key in best_action:
+                    best_action[key] = (watts, best_action[key][1])
+            else:
+                best_action.pop(key, None)
+                referenced[unique_id][index] = False
+            remaining = 0.0
+
     return contrib, referenced, best_action
 
 
-def build_load_profile(household, decisions_by_member):
+def build_load_profile(household, decisions_by_member, exclude_families=None):
     """household: the household.json dict; decisions_by_member: {member: [segment, ...]}.
+
+    exclude_families: optional set of appliance family names (see
+    appliances.catalog.appliance_family, e.g. {"ElectricVehicle", "Refrigerator"}).
+    Matching appliances contribute 0.0 W to the profile and 0.0 to
+    per_appliance_kwh (keys stay present so the shape is stable); this yields a
+    behavior-attributable profile. Default None counts every appliance.
 
     Returns (profile_watts, per_appliance_kwh, total_kwh).
     """
     home = create_home_from_household(household)
     registry = home.appliance_registry
     contrib, referenced, _best = _accumulate(registry, decisions_by_member)
+    excluded = set(exclude_families or ())
 
     for unique_id, appliance in registry.items():
         if isinstance(appliance, AlwaysOnAppliance):
@@ -159,6 +198,10 @@ def build_load_profile(household, decisions_by_member):
     profile = empty_profile()
     per_appliance_kwh = {}
     for unique_id, minutes in contrib.items():
+        appliance = registry.get(unique_id)
+        if excluded and appliance_family(getattr(appliance, "name", None)) in excluded:
+            per_appliance_kwh[unique_id] = 0.0
+            continue
         energy = 0.0
         for minute in range(1440):
             watts = minutes[minute]

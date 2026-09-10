@@ -3,12 +3,16 @@
 Provides:
   - DEFAULT_POWER_WATTS: estimated rated power (watts) per supported appliance type
   - DEFAULT_DAILY_ENERGY_KWH: estimated daily energy for always-on devices
+  - BATTERY_KWH: nominal battery capacity for charging appliances
+  - DEFAULT_SOC: default state of charge for charging appliances
   - PERSONAL_DEVICE_TYPES: device classes owned by a person (person-bound)
   - APPLIANCE_META: per-type experiment metadata (category/standby/duty/flexible/season)
   - appliance_meta(): copy of the metadata entry for a type
   - apply_appliance_meta(): copy metadata fields onto a constructed appliance
   - appliance_family(): collapse type aliases (Laptop/Computer) to one family
   - estimated_power_watts(): location-aware power estimate
+  - battery_kwh(): nominal battery capacity for a charging appliance type
+  - default_soc(): default state of charge for a charging appliance type
   - backfill_power(): return a config dict guaranteed to carry a numeric `power`
   - ID_TYPE_SYNONYMS: map hallucinated id fragments back to canonical type tokens
 
@@ -88,6 +92,31 @@ DEFAULT_DAILY_ENERGY_KWH = {
     "Freezer": 1.0,
     "Router": 0.29,
 }
+
+# Nominal battery capacity (kWh) and default state of charge (0-1) for charging
+# appliances. The usable charge in one day is bounded by the remaining deficit
+# (1 - soc) * capacity, so a device can never absorb more than one battery.
+BATTERY_KWH = {
+    "ElectricVehicle": 60.0,
+    "Ebike": 0.5,
+    "Phone": 0.02,
+}
+
+DEFAULT_SOC = {
+    "ElectricVehicle": 0.5,
+    "Ebike": 0.5,
+    "Phone": 0.3,
+}
+
+
+def battery_kwh(appliance_type):
+    """Nominal battery capacity (kWh) for a charging appliance type (None if unknown)."""
+    return BATTERY_KWH.get(appliance_type)
+
+
+def default_soc(appliance_type):
+    """Default state of charge (0-1) for a charging appliance type (None if unknown)."""
+    return DEFAULT_SOC.get(appliance_type)
 
 # Device classes that belong to a person rather than a room.
 PERSONAL_DEVICE_TYPES = {"Phone", "Laptop", "Computer", "DeskLamp", "Ebike", "Monitor", "ElectricVehicle"}
