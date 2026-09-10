@@ -49,7 +49,9 @@ total −6%~−10% vs −1~3% (R37). Two observations:
    so single-member magnitudes are not trustworthy.
 2. **Over-compliance**: this pattern is consistent with LLM agents over-complying with explicit
    natural-language directives, rather than the smaller, habit-bound responses of real households
-   (cf. Wang et al. 2021, who find habits dominate price effects).
+   (cf. Wang et al. 2021, who find habits dominate price effects). **Direct evidence**: removing the
+   normative phrasing from `nudge` (`nudge_soft`, R040) collapsed the total-energy effect from
+   −6%~−10% to ≈0, so the response is driven by the directive, not the information.
 
 **Mitigation**: provide de-instructionalized variants (`tou_soft`, `nudge_soft`) and compare; and, for
 any magnitude claim, average across multiple households/members at a fixed weekday. Accordingly, this
