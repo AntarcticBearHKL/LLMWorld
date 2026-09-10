@@ -22,6 +22,10 @@
   **+8%~+30%**; the de-instructionalized `tou_soft` ablation (R024) was self-contradictory. With n=1,
   the effect is not separable from run/day variance, so no alignment claim is made. Requires
   multi-household averaging.
+- Social norms: **nudge preliminary** — the fixed-text nudge lowered total energy on both days
+  (−5.8%~−10.3%), directionally consistent with Allcott (2011) / Ayres (2013) but above the −1~3%
+  benchmark (over-compliance, cf. TOU); the dynamic `--peer-nudge` was inconsistent (+11.6% / −6.6%).
+  Again n=1; requires averaging.
 
 ## RQ3 — Emergent patterns & empirical alignment
 
