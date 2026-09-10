@@ -46,7 +46,9 @@ direction is right**: TOU peak −18%~−26% vs the −3~6% plain-TOU range (R23
 total −6%~−10% vs −1~3% (R37). Two observations:
 
 1. **Fragility**: for TOU the direction *reverses* under a low-variance / no-thinking setting (R26),
-   so single-member magnitudes are not trustworthy.
+   and a within-arm "rebound" after policy removal was **overturned by a parallel no-policy control**
+   (R45 → R46), so single-member / single-run magnitudes are not trustworthy. In general, differences
+   between two independently sampled runs are comparable to, or larger than, the treatment effect.
 2. **Over-compliance**: this pattern is consistent with LLM agents over-complying with explicit
    natural-language directives, rather than the smaller, habit-bound responses of real households
    (cf. Wang et al. 2021, who find habits dominate price effects). **Direct evidence**: removing the
