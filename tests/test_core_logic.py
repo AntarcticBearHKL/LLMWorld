@@ -128,6 +128,34 @@ class PolicyTests(unittest.TestCase):
         _text, tag = policy.parse_policy_arg("nudge_loss:50")
         self.assertEqual(tag, "nudge_loss")
 
+    def test_subsidy_default_and_custom(self):
+        text, tag = policy.parse_policy_arg("subsidy")
+        self.assertEqual(tag, "subsidy")
+        self.assertIn("off-peak", text)
+        self.assertIn("0.18 AUD/kWh", text)
+        self.assertIn("0.25 AUD/kWh", policy.parse_policy_arg("subsidy:0.25")[0])
+
+    def test_peak_demand_default_and_custom(self):
+        text, tag = policy.parse_policy_arg("peak_demand")
+        self.assertEqual(tag, "peak_demand")
+        self.assertIn("12 AUD/kW", text)
+        self.assertIn("20 AUD/kW", policy.parse_policy_arg("peak_demand:20")[0])
+
+    def test_ev_delay(self):
+        text, tag = policy.parse_policy_arg("ev_delay")
+        self.assertEqual(tag, "ev_delay")
+        self.assertIn("0.02 AUD/kWh", text)
+
+    def test_night_setback(self):
+        text, tag = policy.parse_policy_arg("night_setback")
+        self.assertEqual(tag, "night_setback")
+        self.assertIn("set heating/cooling back", text)
+
+    def test_in_home_display(self):
+        text, tag = policy.parse_policy_arg("in_home_display")
+        self.assertEqual(tag, "in_home_display")
+        self.assertIn("in-home display", text)
+
 
 class PolicyScheduleTests(unittest.TestCase):
     def test_parse_entries(self):
