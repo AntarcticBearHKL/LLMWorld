@@ -147,5 +147,19 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(news.load_events_json(tmp), [])
 
 
+class PromptWiringTests(unittest.TestCase):
+    def test_s1_template_consumes_world_news(self):
+        from engine.prompt import Prompt
+        rendered = Prompt().load("simulate_step1_macro_plan", world_news="NEWS_SENTINEL_1")
+        self.assertIn("NEWS_SENTINEL_1", rendered)
+        self.assertNotIn("{world_news}", rendered)
+
+    def test_s4_template_consumes_world_news(self):
+        from engine.prompt import Prompt
+        rendered = Prompt().load("simulate_step4_batch_appliance_decision", world_news="NEWS_SENTINEL_4")
+        self.assertIn("NEWS_SENTINEL_4", rendered)
+        self.assertNotIn("{world_news}", rendered)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -69,7 +69,7 @@ def resolve_member(home, member_arg):
     return None
 
 
-def run_step(world_id, member_arg, date=None, env=None, house="house_0001", prev_state=None):
+def run_step(world_id, member_arg, date=None, env=None, house="house_0001", prev_state=None, world_news=""):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -95,7 +95,7 @@ def run_step(world_id, member_arg, date=None, env=None, house="house_0001", prev
                            member_bedroom=member.bedroom,
                            time_context=time_context,
                            home_structure=home_structure, members_info=members_info,
-                           memory_context="", world_news="", community_notice="",
+                           memory_context="", world_news=world_news, community_notice="",
                            carry_over_context=carry_over_context)
 
     log_dir = os.path.join(gw.SIMULATION_DIR, env, date, house, "log")
