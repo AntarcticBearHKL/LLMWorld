@@ -90,7 +90,7 @@ def build_decision_schema(allowed):
     return schema
 
 
-def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news=""):
+def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -110,7 +110,7 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
     decision_schema = build_decision_schema(allowed)
 
     home_with_appl = json.dumps(home.get_home_structure_with_details(), ensure_ascii=False, indent=2)
-    w = weather.get_weather(date)
+    w = weather.get_weather(date, override=weather_override)
     base_prompt = Prompt().load("simulate_step4_batch_appliance_decision",
                            member_name=member.name, member_age=member.age,
                            member_occupation=member.occupation, member_habits=member.habits,

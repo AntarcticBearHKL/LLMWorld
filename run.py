@@ -135,6 +135,7 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
             active_notices = news.events_for_date(notices, d, config.NEWS_MEMORY_KEEP)
             day_news = news.render_world_news(active_events)
             day_notice = news.render_world_news(active_notices)
+            weather_effect = news.weather_override_for(active_events)
             if active_events or active_notices:
                 print(f"[Signals] events={len(active_events)} notices={len(active_notices)} for {d}")
 
@@ -178,7 +179,7 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
                 results = list(ex.map(
                     lambda m: s4_appliance_decision.run_step(
                         world_id, m, d, env, policy_text=policy_text, policy_tag=policy_tag,
-                        house=house, world_news=day_news),
+                        house=house, world_news=day_news, weather_override=weather_effect),
                     targets))
             if any(not r[0] for r in results):
                 print(f"[WARN] s4 failed for some members (house={house} date={d})")

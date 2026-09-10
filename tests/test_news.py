@@ -167,5 +167,46 @@ class PromptWiringTests(unittest.TestCase):
         self.assertNotIn("{community_notice}", rendered)
 
 
+class WeatherLinkTests(unittest.TestCase):
+    def test_template_event_carries_template_name(self):
+        event = news.parse_event_template_spec("2026-01-15|heatwave")
+        self.assertEqual(event["template"], "heatwave")
+
+    def test_custom_event_has_no_template(self):
+        self.assertNotIn("template", news.parse_event_spec("2026-01-15|T|C"))
+
+    def test_heatwave_override(self):
+        event = news.parse_event_template_spec("2026-01-15|heatwave")
+        self.assertEqual(news.weather_override_for([event]),
+                         {"weather": "Heatwave", "temperature_delta": 12})
+
+    def test_cold_snap_override(self):
+        event = news.parse_event_template_spec("2026-01-15|cold_snap")
+        self.assertEqual(news.weather_override_for([event]),
+                         {"weather": "ColdSnap", "temperature_delta": -10})
+
+    def test_no_override_for_custom_or_empty(self):
+        self.assertIsNone(news.weather_override_for([]))
+        self.assertIsNone(news.weather_override_for(
+            [news.parse_event_spec("2026-01-15|T|C")]))
+
+    def test_events_merge_deltas(self):
+        events = [news.parse_event_template_spec("2026-01-15|heatwave"),
+                  news.parse_event_template_spec("2026-01-15|cold_snap")]
+        self.assertEqual(news.weather_override_for(events),
+                         {"weather": "ColdSnap", "temperature_delta": 2})
+
+    def test_get_weather_applies_override(self):
+        from engine import weather
+        base = weather.get_weather()
+        hot = weather.get_weather(override={"weather": "Heatwave", "temperature_delta": 12})
+        self.assertEqual(hot["weather"], "Heatwave")
+        self.assertEqual(hot["temperature"], base["temperature"] + 12)
+
+    def test_get_weather_without_override_is_default(self):
+        from engine import weather
+        self.assertEqual(weather.get_weather(), weather.get_weather(override=None))
+
+
 if __name__ == "__main__":
     unittest.main()
