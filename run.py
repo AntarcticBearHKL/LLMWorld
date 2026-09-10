@@ -84,7 +84,7 @@ def get_member_names(world_id, house="house_0001"):
 
 
 def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4_only=False,
-                 houses=None, days=1, events=None, notices=None):
+                 houses=None, days=1, events=None, notices=None, policy_schedule=None):
     print(f"\n########## SIMULATE world={world_id} env={env} workers={workers} "
           f"policy={policy_spec or 'none'} s4_only={s4_only} days={days} houses={houses or 'all'} ##########")
     policy_text, policy_tag = engine_policy.parse_policy_arg(policy_spec)
@@ -150,6 +150,12 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
             day_news = news.render_world_news(active_events)
             day_notice = news.render_world_news(active_notices)
             weather_effect = news.weather_override_for(active_events)
+            if policy_schedule:
+                day_spec = engine_policy.active_policy_spec(policy_schedule, d)
+                day_policy_text, day_policy_tag = engine_policy.parse_policy_arg(day_spec)
+                print(f"[Policy] {d}: {day_spec or 'none'}")
+            else:
+                day_policy_text, day_policy_tag = policy_text, policy_tag
             if active_events or active_notices:
                 print(f"[Signals] events={len(active_events)} notices={len(active_notices)} for {d}")
 
@@ -192,7 +198,7 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
             with ThreadPoolExecutor(max_workers=workers) as ex:
                 results = list(ex.map(
                     lambda m: s4_appliance_decision.run_step(
-                        world_id, m, d, env, policy_text=policy_text, policy_tag=policy_tag,
+                        world_id, m, d, env, policy_text=day_policy_text, policy_tag=day_policy_tag,
                         house=house, world_news=day_news, weather_override=weather_effect),
                     targets))
             if any(not r[0] for r in results):
@@ -224,7 +230,8 @@ def main():
     parser.add_argument("--env", default=None, help="simulate: env id (default world id)")
     parser.add_argument("--workers", type=int, default=4, help="simulate: thread count")
     parser.add_argument("--member", default=None, help="simulate: only this member (name or index)")
-    parser.add_argument("--policy", default=None, help="simulate: policy to inject (tou | tou:<peak>,<valley>[,<shoulder>])")
+    parser.add_argument("--policy", default=None, help="simulate: policy to inject (tou | tou_soft | tou:<peak>,<valley>[,<shoulder>])")
+    parser.add_argument("--policy-schedule", action="append", default=None, help="simulate: 'start,end,policy' timeline entry (repeatable; empty end = open)")
     parser.add_argument("--s4-only", action="store_true", help="simulate: skip s1-s3, re-run appliance decisions only (policy comparison runs)")
     parser.add_argument("--event", action="append", default=None, help="simulate: custom event 'date|title|content' (repeatable)")
     parser.add_argument("--event-template", action="append", default=None, help="simulate: preset event 'date|template' (repeatable)")
@@ -245,11 +252,13 @@ def main():
     try:
         events = news.parse_events(args.event, args.event_template)
         notices = [news.parse_event_spec(spec) for spec in (args.community_notice or []) if spec]
+        policy_schedule = engine_policy.parse_policy_schedule(args.policy_schedule)
     except ValueError as exc:
         print(f"[Abort] {exc}")
         return 1
     return run_simulate(world_id, args.date, args.env, args.workers, args.member,
-                        args.policy, args.s4_only, args.house, args.days, events, notices)
+                        args.policy, args.s4_only, args.house, args.days, events, notices,
+                        policy_schedule)
 
 
 if __name__ == "__main__":
