@@ -17,10 +17,11 @@
   Direction consistent with Xia et al. (2026). **Key validity condition**: the news text must agree
   with the environment weather, otherwise agents ignore it (observed failure → fixed by
   event↔weather linkage).
-- Pricing interventions: **TOU inconclusive** — direction correct (peak down, valley up) but the
-  magnitude (−18%~−26%) is not separable from run-to-run variance: the de-instructionalized
-  `tou_soft` ablation (R024) produced self-contradictory results (−39.8% then +79.6% peak),
-  so neither prompt bias nor the true magnitude can be concluded with n=1. Requires larger samples.
+- Pricing interventions: **TOU not robust** — the peak-shaving direction *reverses* with sampling:
+  reasoning mode gave peak −18%~−26%, while the low-variance no-thinking retest (R026) gave peak
+  **+8%~+30%**; the de-instructionalized `tou_soft` ablation (R024) was self-contradictory. With n=1,
+  the effect is not separable from run/day variance, so no alignment claim is made. Requires
+  multi-household averaging.
 
 ## RQ3 — Emergent patterns & empirical alignment
 
