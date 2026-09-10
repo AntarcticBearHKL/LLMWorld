@@ -15,7 +15,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import config
 import generate_world as gw
-from engine import policy as engine_policy, news
+from engine import policy as engine_policy, news, social
 from steps.world import s1_household_types, s2_persona_align, s3_household_build, s4_world_assemble
 from steps.simulate import s1_macro_plan, s2_coordinate, s3_enrich, s4_appliance_decision, day_state
 
@@ -35,6 +35,20 @@ def apply_sampling_overrides(temperature=None, thinking=None, reasoning_effort=N
         config.REASONING_EFFORT = str(reasoning_effort)
         applied["reasoning_effort"] = config.REASONING_EFFORT
     return applied
+
+
+def _peer_nudge_text(world_id, date, prev_date, env):
+    try:
+        from analyze import dataset
+        profile = dataset.population_profile(world_id, "baseline", prev_date, env=env)
+        totals = [house.get("total_energy_kwh") for house in profile.get("per_house", [])]
+    except Exception as exc:
+        print(f"[PeerNudge] skipped for {date}: {exc}")
+        return ""
+    text = social.render_peer_nudge(social.community_mean_kwh(totals))
+    if text:
+        print(f"[PeerNudge] {date}: {text}")
+    return text
 
 
 def auto_world_id():
@@ -84,7 +98,8 @@ def get_member_names(world_id, house="house_0001"):
 
 
 def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4_only=False,
-                 houses=None, days=1, events=None, notices=None, policy_schedule=None):
+                 houses=None, days=1, events=None, notices=None, policy_schedule=None,
+                 peer_nudge=False):
     print(f"\n########## SIMULATE world={world_id} env={env} workers={workers} "
           f"policy={policy_spec or 'none'} s4_only={s4_only} days={days} houses={houses or 'all'} ##########")
     policy_text, policy_tag = engine_policy.parse_policy_arg(policy_spec)
@@ -156,6 +171,8 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
                 print(f"[Policy] {d}: {day_spec or 'none'}")
             else:
                 day_policy_text, day_policy_tag = policy_text, policy_tag
+            peer_text = _peer_nudge_text(world_id, d, prev_date, env) if (peer_nudge and prev_date) else ""
+            s4_news = "\n\n".join(part for part in (day_news, peer_text) if part)
             if active_events or active_notices:
                 print(f"[Signals] events={len(active_events)} notices={len(active_notices)} for {d}")
 
@@ -199,7 +216,7 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
                 results = list(ex.map(
                     lambda m: s4_appliance_decision.run_step(
                         world_id, m, d, env, policy_text=day_policy_text, policy_tag=day_policy_tag,
-                        house=house, world_news=day_news, weather_override=weather_effect),
+                        house=house, world_news=s4_news, weather_override=weather_effect),
                     targets))
             if any(not r[0] for r in results):
                 print(f"[WARN] s4 failed for some members (house={house} date={d})")
@@ -239,6 +256,7 @@ def main():
     parser.add_argument("--temperature", type=float, default=None, help="override sampling temperature (used when thinking is off)")
     parser.add_argument("--no-thinking", action="store_true", help="disable model thinking/reasoning mode")
     parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default=None, help="override reasoning effort")
+    parser.add_argument("--peer-nudge", action="store_true", help="simulate: inject neighbour-comparison social nudge from the previous day's community mean")
     args = parser.parse_args()
 
     applied = apply_sampling_overrides(args.temperature, False if args.no_thinking else None,
@@ -258,7 +276,7 @@ def main():
         return 1
     return run_simulate(world_id, args.date, args.env, args.workers, args.member,
                         args.policy, args.s4_only, args.house, args.days, events, notices,
-                        policy_schedule)
+                        policy_schedule, args.peer_nudge)
 
 
 if __name__ == "__main__":
