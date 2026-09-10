@@ -28,7 +28,15 @@
 
 ## 5. Results
 
-**待验证。** 需多人户/多成员样本以形成有意义的组。
+**初步（描述性，n=1/组）**：world_172148 `house_0002`，`nudge` vs baseline（1 天）：
+
+| 成员 | awareness | baseline kWh | nudge kWh | 变化 |
+|---|---|---|---|---|
+| Member 1 | Low | 8.959 | 8.054 | −10.10% |
+| Member 2 | Medium | 9.589 | 7.920 | −17.41% |
+
+Medium（较高意识）降幅大于 Low——**方向与 Costa & Kahn (2010) 及 guide §3.4 预期一致**，
+但每组 n=1，**纯描述性**，须在 house_0001/house_0003（各 3 Low + 2 Medium）上扩大样本。
 
 ## 6. Comparison with Literature
 
