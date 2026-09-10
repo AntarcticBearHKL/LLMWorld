@@ -42,12 +42,17 @@ composite), falling back to a portrait-marker mapping. This makes group-level an
 
 ## 5. External inputs (all natural-language)
 
-- **Pricing**: TOU / subsidy / demand charge / EV-delay policies render text into the s4 prompt
-  (`engine/policy.py`, `--policy`).
+- **Pricing**: TOU / TOU-soft / subsidy / demand charge / EV-delay policies render text into the s4
+  prompt (`engine/policy.py`, `--policy`).
+- **Social norms**: fixed-text comparison (`nudge`) and loss framing (`nudge_loss`); dynamic
+  neighbour comparison (`--peer-nudge`, community mean of the previous day).
+- **Behaviour guidance**: night setback (`night_setback`) and real-time feedback (`in_home_display`).
+- **Policy timeline**: `--policy-schedule "start,end,policy"` activates a policy over a date window
+  (announcement → effective → removal).
 - **News events**: 10 preset templates + custom events (`engine/news.py`, `--event`/`--event-template`).
   Environment-type presets (**heatwave / cold_snap**) also adjust the weather context so text and
   structured fields agree.
-- **Social signals**: community notices (`--community-notice`); neighbor comparison (planned, `peer-nudge`).
+- **Social signals**: community notices (`--community-notice`).
 
 ## 6. Analysis tooling
 
