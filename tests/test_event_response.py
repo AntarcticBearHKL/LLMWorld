@@ -50,5 +50,21 @@ class NormalizeShapeTests(unittest.TestCase):
         self.assertEqual(len(aer.normalize_shape([2.0] * 24)), 24)
 
 
+class NormalizeDateTests(unittest.TestCase):
+    def test_ascii_is_unchanged(self):
+        self.assertEqual(aer._normalize_date("2026-09-11"), "2026-09-11")
+
+    def test_unicode_dashes_normalized(self):
+        self.assertEqual(aer._normalize_date("2026\u201309\u201311"), "2026-09-11")
+        self.assertEqual(aer._normalize_date("2026\u221209\u221211"), "2026-09-11")
+
+    def test_compact_digits_expanded(self):
+        self.assertEqual(aer._normalize_date("20260911"), "2026-09-11")
+
+    def test_invisible_and_space_removed(self):
+        self.assertEqual(aer._normalize_date(" 2026-09-11 "), "2026-09-11")
+        self.assertEqual(aer._normalize_date("2026-09-11\u200b"), "2026-09-11")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -52,11 +52,19 @@ def load_event_dates(world_id):
     return by_date
 
 
+_DATE_DASH_VARIANTS = ("\u2013", "\u2014", "\u2212", "\uff0d")
+_DATE_INVISIBLE = ("\u200b", "\ufeff", " ", "\t")
+
+
 def _normalize_date(date_str):
-    date_str = date_str.replace("-", "-").replace("-", "-").replace("", "")
-    if len(date_str) == 8 and date_str.isdigit():
-        date_str = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
-    return date_str
+    text = str(date_str)
+    for dash in _DATE_DASH_VARIANTS:
+        text = text.replace(dash, "-")
+    for ch in _DATE_INVISIBLE:
+        text = text.replace(ch, "")
+    if len(text) == 8 and text.isdigit():
+        text = f"{text[:4]}-{text[4:6]}-{text[6:]}"
+    return text
 
 
 def build_event_response(samples, event_dates, k=0):
