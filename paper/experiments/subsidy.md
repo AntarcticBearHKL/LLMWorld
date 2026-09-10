@@ -38,9 +38,7 @@
 
 ## 8. Conclusion
 
-- **阻塞（advisory）**：`world_143345` 的基线 EV 充电已 **100% 落在谷期**（prompt 预置 "prefer
-  overnight charging"），故 `subsidy`/峰移类干预**无 headroom**（R076/R077：subsidy 臂与基线同为
-  100% 谷期）。
-- **前置条件**：需先**移除/弱化 s4 的 overnight-charging 提示**以建立"自然/到即充"基线，
-  EV 峰移实验方能评估（研究设计决策）。
+- **阻塞（结构性 null）**：`world_143345` 的 EV 充电 **100% 谷期**；且剥离 overnight 提示后
+  （`--natural-ev`）**仍 100% 谷期**（R080）→ "夜间充电"是 agent 的**内在默认**，非 prompt 造成。
+  故 `subsidy`/TOU/`ev_delay` 的 EV 峰移干预在本平台**不可评估**。
 
