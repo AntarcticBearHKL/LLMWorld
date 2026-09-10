@@ -24,10 +24,10 @@
   (baseline **0/8** vs **4/8**). Fisher **one-sided p ≈ 0.038 but two-sided p ≈ 0.077** (exact, R072),
   so it does **not** reach the conventional two-sided α=0.05 — direction consistent, evidence
   insufficient. Activation probability (50%) is also lower than the heatwave's (90%).
-- **Lockdown (binary signal, strongest)**: a `lockdown` event removed all out-of-home time —
-  baseline **7/7** member-days had out-of-home activity vs **0/7** under lockdown (Fisher one-sided
-  **p ≈ 0.0003**), across two worlds; daytime (9–17) load rose (+294% in the single-instance case,
-  R068/R069). The clearest causal chain in this work.
+- **Lockdown (binary signal, strongest)**: a `lockdown` event removed almost all out-of-home time —
+  baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
+  **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
+  R068/R069/R086). The clearest causal chain in this work.
 - **Event-type boundary**: only events that change behaviour *structure* (appliance demand, or
   home/out-of-home time) produced detectable effects — heatwave, cold-snap, lockdown; a purely
   informational warning (`storm`) produced none (total −1.5%, no daytime/out-time change, R074).

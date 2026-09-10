@@ -1,7 +1,7 @@
 # Experiment: Lockdown event (`lockdown`)
 
-> 状态：**有效果（二值，强显著）**：lockdown 使外出行程 **7/7 → 0/7** 归零（Fisher 单侧 p≈0.0003），
-> 日间负荷激增（单例 +294%）。数值来自 R068/R069。
+> 状态：**有效果（二值，跨 3 世界，极显著）**：lockdown 使外出行程 **13/13 → 1/13** 归零
+> （Fisher 双侧 p≈0.000003），日间负荷激增（单例 +294%）。数值来自 R068/R069/R086。
 
 ## 1. Research Question
 
@@ -51,7 +51,8 @@ Out 分钟数、日间(9–17) kWh、总电量变化 %。
 | w172 house_0002 Member 1 | 600 | 0 |
 | w172 house_0002 Member 2 | 600 | 0 |
 
-**baseline 7/7 有外出；lockdown 0/7 有外出（全部居家）。Fisher 单侧 p ≈ 0.0003。**
+**累计（含 R086 world_143345 house_0001 六成员）：baseline Out>0 13/13 vs lockdown 1/13；
+Fisher 双侧 p ≈ 0.000003（跨 3 世界）。**
 
 ## 6. Comparison with Literature
 
@@ -64,6 +65,6 @@ Out 分钟数、日间(9–17) kWh、总电量变化 %。
 
 ## 8. Conclusion
 
-- **显著且最强**：lockdown 使所有成员的户外时间归零（baseline **7/7** → lockdown **0/7**, p≈0.0003），
-  日间负荷随之激增（单例 +294%）。因果链明确，是本项工作**效应量最大**的结论。
+- **显著且最强**：lockdown 使户外时间近乎归零（baseline **13/13** → lockdown **1/13**, 双侧 p≈0.000003，
+  跨 3 世界），日间负荷随之激增（单例 +294%）。是本项工作**效应量最大**的结论。
 - **可复现命令**：见第 3 节。
