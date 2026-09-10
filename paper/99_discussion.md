@@ -22,15 +22,18 @@
   **+8%~+30%**; the de-instructionalized `tou_soft` ablation (R024) was self-contradictory. With n=1,
   the effect is not separable from run/day variance, so no alignment claim is made. Requires
   multi-household averaging.
-- Social norms: **nudge preliminary** — the fixed-text nudge lowered total energy on both days
-  (−5.8%~−10.3%), directionally consistent with Allcott (2011) / Ayres (2013) but above the −1~3%
-  benchmark (over-compliance, cf. TOU); the dynamic `--peer-nudge` was inconsistent (+11.6% / −6.6%).
-  Again n=1; requires averaging.
+- Social norms: **nudge not robust** — an initial small sample looked consistent (5/5 member-days
+  negative, −5.8%~−23.3%), but a larger sample on a fresh world (7 members) had **3 members increase**
+  and within-group spread (±25~45pp) far exceeding any group difference (R054). The de-instructionalized
+  `nudge_soft` ablation (R040) still indicates the response hinges on normative wording.
 
 ## RQ3 — Emergent patterns & empirical alignment
 
 - Group-response analyzer ready (`analyze_groups.py`); awareness labels fixed to avoid single-group
-  degeneracy.
+  degeneracy, and a fresh world with non-degenerate labels was generated (R052).
+- Group heterogeneity: a preliminary direction (Medium awareness reduces more than Low under nudge)
+  was **not statistically meaningful** — within-group variance dominated the between-group difference
+  (R053/R054). Group experiments require large samples.
 - Multi-world comparison tool restored (`compare_worlds.py`).
 - Pending: systematic alignment tables vs the benchmarks in `FIT5216/研究计划.md` §2.7.
 
