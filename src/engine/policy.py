@@ -58,6 +58,11 @@ def render_nudge_policy(neighbor_kwh=18.0):
             "Most households in your area try to keep their usage near or below this level.")
 
 
+def render_nudge_soft_policy(neighbor_kwh=18.0):
+    """Factual neighbour average only, no normative pressure (prompt-bias control)."""
+    return f"Your neighbours use about {neighbor_kwh:.0f} kWh of electricity per day on average."
+
+
 def render_nudge_loss_policy(rebate=30.0):
     """Loss-framed social norm (guide §3.2): lose a rebate if flagged high-usage."""
     return (f"Households that do not reduce their electricity use will be flagged as high-usage "
@@ -117,6 +122,9 @@ def parse_policy_arg(spec):
     if name == "nudge":
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         return (render_nudge_policy(float(rest)) if rest else render_nudge_policy()), "nudge"
+    if name == "nudge_soft":
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        return (render_nudge_soft_policy(float(rest)) if rest else render_nudge_soft_policy()), "nudge_soft"
     if name == "nudge_loss":
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         return (render_nudge_loss_policy(float(rest)) if rest else render_nudge_loss_policy()), "nudge_loss"
@@ -135,7 +143,7 @@ def parse_policy_arg(spec):
         return render_in_home_display_policy(), "in_home_display"
     raise ValueError(
         "Unknown policy '%s'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>], "
-        "nudge[:<kwh>], nudge_loss[:<aud>], subsidy[:<rate>], peak_demand[:<rate>], "
+        "nudge[:<kwh>], nudge_soft[:<kwh>], nudge_loss[:<aud>], subsidy[:<rate>], peak_demand[:<rate>], "
         "ev_delay[:<step>], night_setback, in_home_display" % spec
     )
 

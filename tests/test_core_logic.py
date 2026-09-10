@@ -118,6 +118,17 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(tag, "nudge")
         self.assertIn("12 kWh", text)
 
+    def test_nudge_soft_factual_only(self):
+        text, tag = policy.parse_policy_arg("nudge_soft")
+        self.assertEqual(tag, "nudge_soft")
+        self.assertIn("18 kWh", text)
+        self.assertNotIn("keep their usage", text)
+
+    def test_nudge_soft_custom_average(self):
+        text, tag = policy.parse_policy_arg("nudge_soft:9")
+        self.assertEqual(tag, "nudge_soft")
+        self.assertIn("9 kWh", text)
+
     def test_nudge_loss_default(self):
         text, tag = policy.parse_policy_arg("nudge_loss")
         self.assertEqual(tag, "nudge_loss")
