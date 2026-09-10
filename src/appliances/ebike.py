@@ -1,10 +1,12 @@
 from .base import ChargingAppliance
 
 class Ebike(ChargingAppliance):
-    def __init__(self, brand=None, power=None, age=0, location=None, owner=None, location_id=None, owner_id=None, **meta):
+    def __init__(self, brand=None, power=None, age=0, location=None, owner=None, location_id=None, owner_id=None,
+                 battery_kwh=None, soc=None, **meta):
         power_watts = power if power is not None else 350
         super().__init__("Ebike", power_watts=power_watts, brand=brand, age=age,
-                        location=location, owner=owner, location_id=location_id, owner_id=owner_id, **meta)
+                        location=location, owner=owner, location_id=location_id, owner_id=owner_id,
+                        battery_kwh=battery_kwh, soc=soc, **meta)
 
     @classmethod
     def get_config_schema(cls):
@@ -49,5 +51,7 @@ class Ebike(ChargingAppliance):
             duty_cycle=config.get("duty_cycle", 1.0),
             flexible=config.get("flexible", False),
             season=config.get("season", "annual"),
-            preferred_window=config.get("preferred_window", "")
+            preferred_window=config.get("preferred_window", ""),
+            battery_kwh=config.get("battery_kwh"),
+            soc=config.get("soc")
         )

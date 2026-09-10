@@ -1,10 +1,12 @@
 from .base import ChargingAppliance
 
 class Phone(ChargingAppliance):
-    def __init__(self, brand=None, power=None, age=0, location=None, owner=None, location_id=None, owner_id=None):
+    def __init__(self, brand=None, power=None, age=0, location=None, owner=None, location_id=None, owner_id=None,
+                 battery_kwh=None, soc=None):
         power_watts = power if power is not None else 20
         super().__init__("Phone", power_watts=power_watts, brand=brand, age=age,
-                        location=location, owner=owner, location_id=location_id, owner_id=owner_id)
+                        location=location, owner=owner, location_id=location_id, owner_id=owner_id,
+                        battery_kwh=battery_kwh, soc=soc)
     
     @classmethod
     def get_config_schema(cls):
@@ -44,5 +46,7 @@ class Phone(ChargingAppliance):
             location=location,
             owner=owner,
             location_id=location_id,
-            owner_id=owner_id
+            owner_id=owner_id,
+            battery_kwh=config.get("battery_kwh"),
+            soc=config.get("soc")
         )

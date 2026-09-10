@@ -1,11 +1,18 @@
 import argparse
 from simulation_env import sim_root
 from dataset import iter_house_days, list_dates, read_household
+from load_model import build_load_profile
 import json
 import os
 import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Always-on (baseload is flat) and charging families (EV/E-bike charge overnight)
+# dominate the raw profile without carrying activity information, so the
+# consistency metrics use a behavior-attributable profile that excludes them.
+# The raw total_kwh is still reported per house.
+BEHAVIOR_EXCLUDE_FAMILIES = {"ElectricVehicle", "Ebike", "Refrigerator", "Freezer", "Router"}
 
 
 def _load_household_rooms(world_id, house_id):
@@ -52,7 +59,7 @@ def build_report(house_results):
         raise ValueError("No activity/load data found")
     rows = []
     for hr in house_results:
-        profile = hr["load_profile_watts"]
+        profile = hr["behavior_profile_watts"]
         at_home_watts = []
         away_watts = []
         at_home_minutes = 0
@@ -89,6 +96,8 @@ def build_report(house_results):
             "peak_hour": peak_hour,
             "busy_hour": busy_hour,
             "peak_aligned": peak_aligned,
+            "total_kwh": round(hr.get("total_kwh", 0.0), 3),
+            "behavior_total_kwh": round(hr.get("behavior_total_kwh", 0.0), 3),
             "flags": ([f"at-home load ({at_home_mean:.0f}W) <= away ({away_mean:.0f}W)"
                        if not consistent else ""] +
                       [f"peak {peak_hour}:00 vs activity peak {busy_hour}:00 misaligned"
@@ -99,6 +108,7 @@ def build_report(house_results):
         "households": len(rows),
         "consistent_count": len(rows) - len(anomalies),
         "anomaly_count": len(anomalies),
+        "exclude_families": sorted(BEHAVIOR_EXCLUDE_FAMILIES),
         "per_house": rows,
         "anomalies": [{"house_id": r["house_id"],
                        "flags": [f for f in r["flags"] if f]}
@@ -116,11 +126,17 @@ def scan_world(world_id, scenario, date_str):
         activities, member_count = _parse_activities(record, rooms)
         if not activities:
             continue
+        behavior_profile, _behavior_kwh, behavior_total_kwh = build_load_profile(
+            record["household"], record["decisions"],
+            exclude_families=BEHAVIOR_EXCLUDE_FAMILIES)
         house_results.append({
             "house_id": record["house_id"],
             "member_count": member_count,
             "activities": activities,
             "load_profile_watts": record["load_profile_watts"],
+            "behavior_profile_watts": behavior_profile,
+            "total_kwh": record["total_energy_kwh"],
+            "behavior_total_kwh": behavior_total_kwh,
         })
     return house_results
 

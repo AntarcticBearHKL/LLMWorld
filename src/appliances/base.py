@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from .catalog import battery_kwh as catalog_battery_kwh, default_soc as catalog_default_soc
+
 class BaseAppliance(ABC):
     def __init__(self, name, power_watts, appliance_type, brand=None, age=0, 
                  is_exclusive=False, location=None, owner=None, location_id=None, owner_id=None,
@@ -126,10 +128,20 @@ class OnDemandAppliance(BaseAppliance):
 
 class ChargingAppliance(BaseAppliance):
     def __init__(self, name, power_watts, brand=None, age=0, is_exclusive=False,
-                 location=None, owner=None, location_id=None, owner_id=None, **meta):
+                 location=None, owner=None, location_id=None, owner_id=None,
+                 battery_kwh=None, soc=None, **meta):
         super().__init__(name, power_watts, "charging", brand, age, is_exclusive,
                         location, owner, location_id, owner_id, **meta)
-    
+        self.battery_kwh = battery_kwh if battery_kwh is not None else catalog_battery_kwh(self.name)
+        self.soc = soc if soc is not None else catalog_default_soc(self.name)
+
+    def charge_deficit_kwh(self):
+        """Energy (kWh) needed to fill the battery from its current state of charge."""
+        if self.battery_kwh is None:
+            return None
+        soc = self.soc if self.soc is not None else 0.0
+        return max(0.0, (1.0 - soc) * self.battery_kwh)
+
     def get_available_actions(self):
         return ["charge_home", "charge_external", "use", "idle"]
     
@@ -137,6 +149,8 @@ class ChargingAppliance(BaseAppliance):
         base = super().to_dict()
         base.update({
             "description": "Charging device (can be charged using home or external power)",
+            "battery_kwh": self.battery_kwh,
+            "soc": self.soc,
             "action_description": {
                 "charge_home": "Charge with home power (counts toward home electricity)",
                 "charge_external": "Charge with external power (not counted toward home electricity)",
