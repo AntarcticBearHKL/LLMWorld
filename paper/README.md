@@ -26,7 +26,7 @@
 | 损失框架 nudge_loss | RQ2 | Ghesla et al. 2019 | 比增益框架多 ~5% | 反例(总量+6%,方向相反) | `experiments/nudge_loss.md` |
 | 夜间回温 night_setback | RQ2 | Cabezas-Riviere 2025 | 采暖 −5~10% | 占位(待跑) | `experiments/night_setback.md` |
 | 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | 占位(待跑) | `experiments/in_home_display.md` |
-| 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(初步;2户3天+多成员;baseline AC=0,heatwave多数启用) | `experiments/event_heatwave.md` |
+| 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(二值:baseline AC 0/4 vs heatwave 6/7, Fisher p≈0.015) | `experiments/event_heatwave.md` |
 | 邻居比较 peer_nudge | RQ2 | Ayres 2013 | −1~3%，高耗家庭更强 | 初步(不一致：−6.6~+11.6%) | `experiments/peer_nudge.md` |
 | 群体异质性 | RQ3 | Costa & Kahn 2010 | 环境派 2~4% / 保守派 ~0 | 名义方向但方差压倒(不可定论) | `experiments/group_heterogeneity.md` |
 | 政策组合/多目标权衡 | RQ2/RQ3 | CoRenew 2026 | 峰削减 vs 负担 vs 公平 | 占位(待跑) | `experiments/policy_tradeoffs.md` |

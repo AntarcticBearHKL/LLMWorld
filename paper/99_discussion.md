@@ -11,12 +11,14 @@
 
 ## RQ2 — Behavioural transmission of external inputs
 
-- **Heatwave (preliminary, replicated across 2 households / 3 event-days)**: a natural-language
-  heatwave event causes agents to switch the air-conditioner from `idle` to `use` and raises daily
-  total energy (control AC = 0 in every run; heatwave AC > 0 in every run; +17%~+64% total).
-  Direction consistent with Xia et al. (2026). **Key validity condition**: the news text must agree
-  with the environment weather, otherwise agents ignore it (observed failure → fixed by
-  event↔weather linkage).
+- **Heatwave (binary signal, statistically significant)**: a natural-language heatwave event causes
+  agents to switch the air-conditioner on. Aggregating all post-fix runs, the AC was active in
+  **0/4** baseline vs **6/7** heatwave member-days (Fisher one-sided **p ≈ 0.015**); direction
+  consistent with Xia et al. (2026). Individual heterogeneity is visible (one heatwave member did not
+  use it). **Key validity condition**: the news text must agree with the environment weather,
+  otherwise agents ignore it (observed failure → fixed by event↔weather linkage). Note that the
+  single-sample *total-energy* increases (+17%~+64%) are noise-dominated (cf. noise floor, R057) and
+  are not claimed.
 - Pricing interventions: **TOU not robust** — the peak-shaving direction *reverses* with sampling:
   reasoning mode gave peak −18%~−26%, while the low-variance no-thinking retest (R026) gave peak
   **+8%~+30%**; the de-instructionalized `tou_soft` ablation (R024) was self-contradictory. With n=1,
