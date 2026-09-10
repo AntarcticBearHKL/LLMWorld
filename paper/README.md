@@ -22,7 +22,7 @@
 | 谷期补贴 subsidy | RQ2 | Alexeenko & Bitar 2023 | EV 峰移 30~60% | 占位(待跑,需EV) | `experiments/subsidy.md` |
 | 需量电费 peak_demand | RQ2 | Escarrega et al. 2025 | 峰值 −10~20% | 占位(待跑) | `experiments/peak_demand.md` |
 | EV 延迟激励 ev_delay | RQ2 | Alexeenko & Bitar 2023 | 异质性可观测 | 占位(待跑,需EV) | `experiments/ev_delay.md` |
-| 社会规范 nudge | RQ2 | Allcott 2011 / Ayres 2013 | 总电量 −1~3% | 初步(跨2户方向一致;措辞驱动;去指令后≈0) | `experiments/nudge.md` |
+| 社会规范 nudge | RQ2 | Allcott 2011 / Ayres 2013 | 总电量 −1~3% | 初步(2户5成员日方向一致;措辞驱动;超基准) | `experiments/nudge.md` |
 | 损失框架 nudge_loss | RQ2 | Ghesla et al. 2019 | 比增益框架多 ~5% | 反例(总量+6%,方向相反) | `experiments/nudge_loss.md` |
 | 夜间回温 night_setback | RQ2 | Cabezas-Riviere 2025 | 采暖 −5~10% | 占位(待跑) | `experiments/night_setback.md` |
 | 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | 占位(待跑) | `experiments/in_home_display.md` |
