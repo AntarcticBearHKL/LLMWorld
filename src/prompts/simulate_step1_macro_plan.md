@@ -21,6 +21,8 @@ Time information:
 
 {memory_context}
 
+{carry_over_context}
+
 {world_news}
 
 {community_notice}
@@ -51,6 +53,7 @@ Generate this member's activities from 00:00 to 24:00 for the full day. Requirem
 - Time segment granularity is 1 minute
 - If consecutive time segments are at the same location doing the same thing, they must be merged into one segment
 - Consistent with the role's traits and daily routine
+- If carry-over context is given, the day must start exactly where the previous day ended; never teleport home from work.
 - Must start at 00:00 and cover the complete 24 hours
 - Adjacent segments must touch exactly: the end of one segment is the start of the next. The last segment must end at 24:00, not 23:59.
 - The member field must exactly equal "{member_name}".

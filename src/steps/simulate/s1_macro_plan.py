@@ -15,6 +15,7 @@ from engine.json_parse import parse as parse_llm_json
 from engine.prompt import Prompt
 from engine.environment import Time
 from simulate import create_home_from_household
+from steps.simulate import day_state
 import generate_world as gw
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -68,7 +69,7 @@ def resolve_member(home, member_arg):
     return None
 
 
-def run_step(world_id, member_arg, date=None, env=None, house="house_0001"):
+def run_step(world_id, member_arg, date=None, env=None, house="house_0001", prev_state=None):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -83,6 +84,7 @@ def run_step(world_id, member_arg, date=None, env=None, house="house_0001"):
 
     home_structure = json.dumps(home.get_home_structure(), ensure_ascii=False, indent=2)
     members_info = json.dumps(home.get_members_info(), ensure_ascii=False, indent=2)
+    carry_over_context = day_state.carry_over_text(prev_state, member.name)
 
     base_prompt = Prompt().load("simulate_step1_macro_plan",
                            member_name=member.name, member_age=member.age,
@@ -93,7 +95,8 @@ def run_step(world_id, member_arg, date=None, env=None, house="house_0001"):
                            member_bedroom=member.bedroom,
                            time_context=time_context,
                            home_structure=home_structure, members_info=members_info,
-                           memory_context="", world_news="", community_notice="")
+                           memory_context="", world_news="", community_notice="",
+                           carry_over_context=carry_over_context)
 
     log_dir = os.path.join(gw.SIMULATION_DIR, env, date, house, "log")
     os.makedirs(log_dir, exist_ok=True)
@@ -124,6 +127,14 @@ def run_step(world_id, member_arg, date=None, env=None, house="house_0001"):
             print(f"[TimeRepair] {note}")
         print(f"[TimeRepair] repaired {len(repair_log)} timestamps")
 
+    if isinstance(data, dict):
+        reconciled = day_state.reconcile_boundary(activities, prev_state)
+        if reconciled is not activities:
+            print(f"[Continuity] day boundary rewritten for {member.name}: starts "
+                  f"{reconciled[0].get('time')} @ {reconciled[0].get('location')}")
+            data["activities"] = reconciled
+            activities = reconciled
+
     print(f"[Check] {len(activities)} activity segments")
     for a in activities[:5]:
         print(f"  {a.get('time')} | {a.get('location')} | {str(a.get('activity'))[:60]}")
@@ -134,6 +145,7 @@ def run_step(world_id, member_arg, date=None, env=None, house="house_0001"):
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print(f"[Saved] {out_path}")
+    day_state.save_day_state(out_dir, member.name, day_state.end_state(activities))
     return True, data
 
 
