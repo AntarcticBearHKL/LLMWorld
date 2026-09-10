@@ -86,8 +86,10 @@ information/psychology-driven behaviour in the current agents.
 
 ## Limitations
 
-- Heatwave result so far is **single-household** (n=1) with `temperature=1.0`; needs multi-member/
-  multi-seed replication before being treated as a final result.
+- Event results are **binary / large-effect** (device on/off; out-of-home yes/no) and hold across two
+  worlds, but **continuous magnitudes cannot be resolved** at the observed noise floor (CV≈12%,
+  R057/R058) — only large effects (≳10–20%) are detectable, so literature-scale (~3%) magnitudes are
+  not claimed.
 - Weather is currently a stub; event effects use a fixed temperature offset.
 - Refactor-era drift is resolved: `engine/news.py`, `compare_worlds.py`, all documented policies
   (`tou`/`tou_soft`/`nudge`/`nudge_soft`/`nudge_loss`/`subsidy`/`peak_demand`/`ev_delay`/
@@ -96,6 +98,7 @@ information/psychology-driven behaviour in the current agents.
 
 ## Next steps
 
-1. Multi-member / multi-seed heatwave replication; `analyze_event_response.py` transition metrics.
-2. Pricing (TOU/subsidy) effect experiments vs benchmarks.
-3. Restore or formally retire `population_runner.py` capabilities.
+1. Extend the significant event set (e.g. storm) and add `analyze_event_response.py` transition metrics.
+2. Large-N (multi-seed) averaging for any *magnitude* claim — per the power analysis (R058) this is
+   high-budget; magnitude alignment remains future work.
+3. Generate an EV-containing world to run `subsidy` / `ev_delay`.
