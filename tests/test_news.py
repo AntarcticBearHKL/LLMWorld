@@ -160,6 +160,12 @@ class PromptWiringTests(unittest.TestCase):
         self.assertIn("NEWS_SENTINEL_4", rendered)
         self.assertNotIn("{world_news}", rendered)
 
+    def test_s1_template_consumes_community_notice(self):
+        from engine.prompt import Prompt
+        rendered = Prompt().load("simulate_step1_macro_plan", community_notice="NOTICE_SENTINEL_1")
+        self.assertIn("NOTICE_SENTINEL_1", rendered)
+        self.assertNotIn("{community_notice}", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -70,15 +70,16 @@ def get_member_names(world_id, house="house_0001"):
 
 
 def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4_only=False,
-                 houses=None, days=1, events=None):
+                 houses=None, days=1, events=None, notices=None):
     print(f"\n########## SIMULATE world={world_id} env={env} workers={workers} "
           f"policy={policy_spec or 'none'} s4_only={s4_only} days={days} houses={houses or 'all'} ##########")
     policy_text, policy_tag = engine_policy.parse_policy_arg(policy_spec)
 
     events = list(events or [])
-    if events:
-        events_path = news.write_events_json(os.path.join(gw.WORLDS_DIR, world_id), events)
-        print(f"[Events] registered {len(events)} event(s) -> {events_path}")
+    notices = list(notices or [])
+    if events or notices:
+        events_path = news.write_events_json(os.path.join(gw.WORLDS_DIR, world_id), events + notices)
+        print(f"[Events] registered {len(events)} event(s) + {len(notices)} notice(s) -> {events_path}")
 
     if days < 1:
         print("[Abort] --days must be >= 1")
@@ -130,10 +131,12 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
             print(f"\n########## SIMULATE world={world_id} house={house} date={d} env={env} "
                   f"workers={workers} policy={policy_spec or 'none'} s4_only={s4_only} ##########")
             print(f"[Members] {targets}")
-            day_news = news.render_world_news(
-                news.events_for_date(events, d, config.NEWS_MEMORY_KEEP))
-            if day_news:
-                print(f"[News] {len(news.events_for_date(events, d, config.NEWS_MEMORY_KEEP))} active event(s) for {d}")
+            active_events = news.events_for_date(events, d, config.NEWS_MEMORY_KEEP)
+            active_notices = news.events_for_date(notices, d, config.NEWS_MEMORY_KEEP)
+            day_news = news.render_world_news(active_events)
+            day_notice = news.render_world_news(active_notices)
+            if active_events or active_notices:
+                print(f"[Signals] events={len(active_events)} notices={len(active_notices)} for {d}")
 
             if not s4_only:
                 prev_states = {}
@@ -148,7 +151,8 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
                     results = list(ex.map(
                         lambda m: s1_macro_plan.run_step(world_id, m, d, env, house=house,
                                                          prev_state=prev_states.get(m),
-                                                         world_news=day_news),
+                                                         world_news=day_news,
+                                                         community_notice=day_notice),
                         targets))
                 if any(not r[0] for r in results):
                     print(f"[WARN] s1 failed for some members (house={house} date={d})")
@@ -209,6 +213,7 @@ def main():
     parser.add_argument("--s4-only", action="store_true", help="simulate: skip s1-s3, re-run appliance decisions only (policy comparison runs)")
     parser.add_argument("--event", action="append", default=None, help="simulate: custom event 'date|title|content' (repeatable)")
     parser.add_argument("--event-template", action="append", default=None, help="simulate: preset event 'date|template' (repeatable)")
+    parser.add_argument("--community-notice", action="append", default=None, help="simulate: community notice 'date|title|content' (repeatable)")
     args = parser.parse_args()
 
     world_id = args.world or auto_world_id()
@@ -216,11 +221,12 @@ def main():
         return run_world(world_id, args.count, args.seed, args.workers, args.world_config)
     try:
         events = news.parse_events(args.event, args.event_template)
+        notices = [news.parse_event_spec(spec) for spec in (args.community_notice or []) if spec]
     except ValueError as exc:
         print(f"[Abort] {exc}")
         return 1
     return run_simulate(world_id, args.date, args.env, args.workers, args.member,
-                        args.policy, args.s4_only, args.house, args.days, events)
+                        args.policy, args.s4_only, args.house, args.days, events, notices)
 
 
 if __name__ == "__main__":
