@@ -36,4 +36,6 @@
 
 ## 8. Conclusion
 
-待填。
+- **阻塞（同 subsidy）**：基线 EV 充电已被 prompt 预置到谷期（R076/R077），
+  `ev_delay` 的"延迟选择"缺乏可移动窗口；需先建立自然基线（移除 overnight-charging 提示）再评估。
+
