@@ -23,6 +23,20 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 WORLDS_DIR = os.path.join(PROJECT_ROOT, "output", "worlds")
 
 
+def apply_sampling_overrides(temperature=None, thinking=None, reasoning_effort=None):
+    applied = {}
+    if temperature is not None:
+        config.TEMPERATURE = float(temperature)
+        applied["temperature"] = config.TEMPERATURE
+    if thinking is not None:
+        config.THINKING = bool(thinking)
+        applied["thinking"] = config.THINKING
+    if reasoning_effort is not None:
+        config.REASONING_EFFORT = str(reasoning_effort)
+        applied["reasoning_effort"] = config.REASONING_EFFORT
+    return applied
+
+
 def auto_world_id():
     while True:
         cand = f"world_{random.randint(100000, 999999)}"
@@ -215,7 +229,15 @@ def main():
     parser.add_argument("--event", action="append", default=None, help="simulate: custom event 'date|title|content' (repeatable)")
     parser.add_argument("--event-template", action="append", default=None, help="simulate: preset event 'date|template' (repeatable)")
     parser.add_argument("--community-notice", action="append", default=None, help="simulate: community notice 'date|title|content' (repeatable)")
+    parser.add_argument("--temperature", type=float, default=None, help="override sampling temperature (used when thinking is off)")
+    parser.add_argument("--no-thinking", action="store_true", help="disable model thinking/reasoning mode")
+    parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default=None, help="override reasoning effort")
     args = parser.parse_args()
+
+    applied = apply_sampling_overrides(args.temperature, False if args.no_thinking else None,
+                                       args.reasoning_effort)
+    if applied:
+        print(f"[Sampling] overrides: {applied}")
 
     world_id = args.world or auto_world_id()
     if args.mode == "world":
