@@ -28,7 +28,7 @@
 | 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | 占位(待跑) | `experiments/in_home_display.md` |
 | 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(初步;2户3天+多成员;baseline AC=0,heatwave多数启用) | `experiments/event_heatwave.md` |
 | 邻居比较 peer_nudge | RQ2 | Ayres 2013 | −1~3%，高耗家庭更强 | 初步(不一致：−6.6~+11.6%) | `experiments/peer_nudge.md` |
-| 群体异质性 | RQ3 | Costa & Kahn 2010 | 环境派 2~4% / 保守派 ~0 | 占位(待跑) | `experiments/group_heterogeneity.md` |
+| 群体异质性 | RQ3 | Costa & Kahn 2010 | 环境派 2~4% / 保守派 ~0 | 初步(描述性:Medium>Low,n=1/组) | `experiments/group_heterogeneity.md` |
 | 政策组合/多目标权衡 | RQ2/RQ3 | CoRenew 2026 | 峰削减 vs 负担 vs 公平 | 占位(待跑) | `experiments/policy_tradeoffs.md` |
 
 ## 每个实验文件模板
