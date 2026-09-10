@@ -1,0 +1,25 @@
+{
+  "household_types": [
+    {
+      "type": "International Student Share House",
+      "description": "A group of university students, often international, sharing a rented dwelling to reduce costs. Typically aged 18-30, enrolled full-time at Monash University or other institutions, with part-time jobs. They come from diverse backgrounds, including Chinese, Indian, and Southeast Asian. High mobility, communal living, and shared expenses are common.",
+      "members_min": 2,
+      "members_max": 6,
+      "housing_hint": "Rented apartment, flat, or semi-detached house with multiple bedrooms, often located near the university and public transport."
+    },
+    {
+      "type": "Young Professional Couple (DINK)",
+      "description": "A couple in their late 20s to early 30s, both employed in professional, scientific, technical, or healthcare sectors. They are university-educated, may be migrants or Australian-born, and have no children. They value career and lifestyle, often renting or buying a unit or townhouse. Dual income, no kids.",
+      "members_min": 2,
+      "members_max": 2,
+      "housing_hint": "Modern apartment or townhouse, typically rented or recently purchased, with 1-2 bedrooms, close to amenities and transport."
+    },
+    {
+      "type": "Family with Children (Migrant Family)",
+      "description": "A couple with one or more children, often of Chinese, Indian, or Sri Lankan ancestry. Parents are typically aged 30-45, working in education, healthcare, or retail. They may be first- or second-generation migrants. Education is highly valued, and children attend local schools. Household income is modest to middle.",
+      "members_min": 3,
+      "members_max": 5,
+      "housing_hint": "Separate house or semi-detached house with 3-4 bedrooms, often owner-occupied with a mortgage or rented, in a family-friendly neighbourhood."
+    }
+  ]
+}

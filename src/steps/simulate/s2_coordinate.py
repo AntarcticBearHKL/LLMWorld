@@ -11,6 +11,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import config
 from engine import SubAgent, utils
+from engine.json_parse import parse as parse_llm_json
 from engine.prompt import Prompt
 from steps.simulate.s1_macro_plan import load_home, resolve_member
 import generate_world as gw
@@ -38,8 +39,8 @@ COORD_SCHEMA = {
 }
 
 
-def load_member_plan(world_id, member_name, date, env):
-    path = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001",
+def load_member_plan(world_id, member_name, date, env, house):
+    path = os.path.join(gw.SIMULATION_DIR, env, date, house,
                         f"s1_macro_{member_name}.json")
     if not os.path.exists(path):
         print(f"[Error] {path} not found; run s1 for this member first")
@@ -61,17 +62,17 @@ def _timeline_items(data):
     return data.get("coordinated_activities", data.get("activities", []))
 
 
-def load_best_member_plan(world_id, member_name, date, env):
-    base = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001")
+def load_best_member_plan(world_id, member_name, date, env, house):
+    base = os.path.join(gw.SIMULATION_DIR, env, date, house)
     coordinated = os.path.join(base, f"s2_coord_{member_name}.json")
     if os.path.exists(coordinated):
         with open(coordinated, encoding="utf-8") as source:
             return json.load(source)
-    return load_member_plan(world_id, member_name, date, env)
+    return load_member_plan(world_id, member_name, date, env, house)
 
 
-def run_step(world_id, member_arg, date=None, env=None):
-    home = load_home(world_id)
+def run_step(world_id, member_arg, date=None, env=None, house="house_0001"):
+    home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
     member = resolve_member(home, member_arg)
@@ -82,7 +83,7 @@ def run_step(world_id, member_arg, date=None, env=None):
     env = env or world_id
     members = list(home.members.values()) if isinstance(home.members, dict) else home.members
 
-    current = load_member_plan(world_id, member.name, date, env)
+    current = load_member_plan(world_id, member.name, date, env, house)
     if current is None:
         return False, "member s1 plan missing"
 
@@ -94,9 +95,9 @@ def run_step(world_id, member_arg, date=None, env=None):
         other_name = other_member.name
         if other_name == member.name:
             continue
-        base = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001")
+        base = os.path.join(gw.SIMULATION_DIR, env, date, house)
         coordinated_path = os.path.join(base, f"s2_coord_{other_name}.json")
-        other = load_best_member_plan(world_id, other_name, date, env)
+        other = load_best_member_plan(world_id, other_name, date, env, house)
         if other is not None:
             rendered = f"{other_name}:\n" + format_timeline(other)
             if os.path.exists(coordinated_path):
@@ -121,7 +122,7 @@ def run_step(world_id, member_arg, date=None, env=None):
                            room_names=json.dumps(list(home.rooms), ensure_ascii=False),
                            assigned_bedroom=member.bedroom,
                            exclusive_resources=json.dumps(home.get_exclusive_resources(), ensure_ascii=False, indent=2))
-    log_dir = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001", "log")
+    log_dir = os.path.join(gw.SIMULATION_DIR, env, date, house, "log")
     os.makedirs(log_dir, exist_ok=True)
     logger = gw.ChatLogger(log_dir)
     print("================ INPUT: PROMPT ================")
@@ -132,7 +133,7 @@ def run_step(world_id, member_arg, date=None, env=None):
     print("================ OUTPUT: RESPONSE ================")
     print(resp["content"])
     try:
-        data = utils.parse_json_response(resp["content"])
+        data = parse_llm_json(resp["content"])
     except Exception as exc:
         logger.record("s2_coordinate", base_prompt, resp["content"], reasoning="",
                       ok=False, error=f"JSON parse failed: {exc}", attempt=1, prefix=f"{member.name}_")
@@ -145,7 +146,7 @@ def run_step(world_id, member_arg, date=None, env=None):
     for a in activities[:5]:
         print(f"  {a.get('time')} | {a.get('location')} | {str(a.get('activity'))[:60]}")
 
-    out_dir = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001")
+    out_dir = os.path.join(gw.SIMULATION_DIR, env, date, house)
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"s2_coord_{member.name}.json")
     with open(out_path, "w", encoding="utf-8") as f:
@@ -160,8 +161,9 @@ def main():
     parser.add_argument("--member", required=True, help="member name or index")
     parser.add_argument("--date", default=None)
     parser.add_argument("--env", default=None)
+    parser.add_argument("--house", default="house_0001", help="house id (default: house_0001)")
     args = parser.parse_args()
-    ok, result = run_step(args.world, args.member, args.date, args.env)
+    ok, result = run_step(args.world, args.member, args.date, args.env, args.house)
     sys.exit(0 if ok else 1)
 
 

@@ -98,7 +98,8 @@ def main():
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
     if not report["per_house"]:
-        raise ValueError("No analysis data found")
+        print("No analysis data found (run the other analysis tools first)")
+        sys.exit(1)
 
     if not args.out:
         out_dir = os.path.join(sim_root(args.world_id),

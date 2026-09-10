@@ -1,0 +1,826 @@
+{
+  "type": "International Student Share House",
+  "season": "Autumn",
+  "story": "A international student share house in Clayton, assembled from ordered canonical personas.",
+  "home": {
+    "name": "Clayton International Student Share House",
+    "type": "Rented semi-detached house",
+    "size": 140,
+    "rooms": [
+      {
+        "name": "Bedroom 1",
+        "size": 14,
+        "appliances": [
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "DeskLamp",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 1
+          },
+          {
+            "type": "Laptop",
+            "brand": "Lenovo",
+            "power": 200,
+            "age": 2
+          },
+          {
+            "type": "Monitor",
+            "brand": "Dell",
+            "power": 30,
+            "age": 3
+          },
+          {
+            "type": "Fan",
+            "brand": "Heller",
+            "power": 60,
+            "age": 2
+          },
+          {
+            "type": "Phone",
+            "brand": "Xiaomi",
+            "power": 20,
+            "age": 1
+          }
+        ]
+      },
+      {
+        "name": "Bedroom 2",
+        "size": 13,
+        "appliances": [
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "DeskLamp",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 1
+          },
+          {
+            "type": "Laptop",
+            "brand": "Apple",
+            "power": 200,
+            "age": 1
+          },
+          {
+            "type": "Phone",
+            "brand": "Oppo",
+            "power": 20,
+            "age": 2
+          },
+          {
+            "type": "SpaceHeater",
+            "brand": "Dimplex",
+            "power": 2000,
+            "age": 4
+          }
+        ]
+      },
+      {
+        "name": "Bedroom 3",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "DeskLamp",
+            "brand": "Kmart",
+            "power": 15,
+            "age": 3
+          },
+          {
+            "type": "Laptop",
+            "brand": "HP",
+            "power": 200,
+            "age": 3
+          },
+          {
+            "type": "Phone",
+            "brand": "Samsung",
+            "power": 20,
+            "age": 1
+          },
+          {
+            "type": "Fan",
+            "brand": "Vornado",
+            "power": 60,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "Bedroom 4",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "DeskLamp",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 2
+          },
+          {
+            "type": "Computer",
+            "brand": "Acer",
+            "power": 200,
+            "age": 4
+          },
+          {
+            "type": "Monitor",
+            "brand": "AOC",
+            "power": 30,
+            "age": 2
+          },
+          {
+            "type": "Phone",
+            "brand": "Vivo",
+            "power": 20,
+            "age": 3
+          }
+        ]
+      },
+      {
+        "name": "Bedroom 5",
+        "size": 11,
+        "appliances": [
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "DeskLamp",
+            "brand": "Kmart",
+            "power": 15,
+            "age": 1
+          },
+          {
+            "type": "Laptop",
+            "brand": "Asus",
+            "power": 200,
+            "age": 2
+          },
+          {
+            "type": "Phone",
+            "brand": "OnePlus",
+            "power": 20,
+            "age": 2
+          },
+          {
+            "type": "SpaceHeater",
+            "brand": "Heller",
+            "power": 2000,
+            "age": 3
+          }
+        ]
+      },
+      {
+        "name": "Bedroom 6",
+        "size": 11,
+        "appliances": [
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "DeskLamp",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 1
+          },
+          {
+            "type": "Laptop",
+            "brand": "Dell",
+            "power": 200,
+            "age": 4
+          },
+          {
+            "type": "Phone",
+            "brand": "Google",
+            "power": 20,
+            "age": 1
+          },
+          {
+            "type": "Fan",
+            "brand": "Heller",
+            "power": 60,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "Kitchen",
+        "size": 18,
+        "appliances": [
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "Refrigerator",
+            "brand": "Hisense",
+            "power": 100,
+            "daily_energy_kwh": 1.2,
+            "age": 5
+          },
+          {
+            "type": "Freezer",
+            "brand": "Fisher & Paykel",
+            "power": 100,
+            "daily_energy_kwh": 1.0,
+            "age": 6
+          },
+          {
+            "type": "RiceCooker",
+            "brand": "Tefal",
+            "power": 800,
+            "energy_per_cycle_kwh": 0.25,
+            "cycle_minutes": 40,
+            "age": 2
+          },
+          {
+            "type": "Microwave",
+            "brand": "Panasonic",
+            "power": 1000,
+            "age": 4
+          },
+          {
+            "type": "InductionCooker",
+            "brand": "Midea",
+            "power": 2000,
+            "age": 2
+          },
+          {
+            "type": "RangeHood",
+            "brand": "Westinghouse",
+            "power": 200,
+            "age": 5
+          },
+          {
+            "type": "Oven",
+            "brand": "Chef",
+            "power": 2200,
+            "energy_per_cycle_kwh": 1.5,
+            "cycle_minutes": 60,
+            "age": 6
+          },
+          {
+            "type": "Kettle",
+            "brand": "Kambrook",
+            "power": 2000,
+            "age": 3
+          },
+          {
+            "type": "Toaster",
+            "brand": "Breville",
+            "power": 1200,
+            "age": 3
+          },
+          {
+            "type": "Dishwasher",
+            "brand": "Bosch",
+            "power": 1800,
+            "energy_per_cycle_kwh": 1.1,
+            "cycle_minutes": 120,
+            "age": 4
+          },
+          {
+            "type": "Router",
+            "brand": "TP-Link",
+            "power": 12,
+            "daily_energy_kwh": 0.29,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "Bathroom",
+        "size": 6,
+        "appliances": [
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 2
+          },
+          {
+            "type": "WaterHeater",
+            "brand": "Rheem",
+            "power": 3000,
+            "age": 7
+          },
+          {
+            "type": "WashingMachine",
+            "brand": "LG",
+            "power": 500,
+            "energy_per_cycle_kwh": 0.6,
+            "cycle_minutes": 90,
+            "age": 5
+          },
+          {
+            "type": "ClothesDryer",
+            "brand": "Simpson",
+            "power": 2500,
+            "energy_per_cycle_kwh": 2.5,
+            "cycle_minutes": 120,
+            "age": 5
+          },
+          {
+            "type": "Dehumidifier",
+            "brand": "Ausclimate",
+            "power": 500,
+            "age": 3
+          }
+        ]
+      }
+    ]
+  },
+  "members": [
+    {
+      "source_persona_index": 1,
+      "name": "Member 1",
+      "age": 24,
+      "cultural_background": "Chinese (Nanjing, China); international student in Australia",
+      "bedroom": "Bedroom 1",
+      "gender": "male",
+      "occupation": "Master of Social Work student at Monash University; part-time aged-care support worker",
+      "work_schedule": {
+        "study": "Full-time postgraduate coursework, second year",
+        "employment": "Part-time aged-care support worker on a rotating shift roster including night shifts",
+        "commute": "Public transport (train and bus) between Clayton and work placements",
+        "pattern": "Irregular and rotating; frequently returns late or sleeps during the day after night shifts"
+      },
+      "personality": {
+        "mbti": "ENFJ",
+        "traits": [
+          "communal",
+          "organised",
+          "consensus-seeking",
+          "loyal",
+          "cautious about risk and money",
+          "late adopter of technology",
+          "detail-oriented"
+        ],
+        "values": [
+          "family",
+          "community",
+          "tradition",
+          "spirituality",
+          "personal freedom"
+        ],
+        "sensitivities": [
+          "personal safety",
+          "privacy",
+          "needing predictability in rent and plans",
+          "dislikes surprises"
+        ],
+        "under_stress": "Carries high anxiety and managed depression; can overcommit and needs others to notice when his energy is low"
+      },
+      "habits": {
+        "social": "Calls house meetings, remembers housemates' birthdays, mediates conflicts",
+        "communication": "Prefers text-only messages and detailed written instructions rather than calls or voice notes",
+        "money": "Keeps to a weekly budget and often pays in cash",
+        "sleep": "Irregular; needs quiet after night shifts",
+        "diet": "Mostly flexitarian; avoids alcohol and drinks tea",
+        "leisure": "Keeps a photo of his family dog in China and volunteers occasionally at an animal shelter",
+        "routine": "Relies on routines and reminders to manage his diagnosed attention condition"
+      },
+      "health": {
+        "general": "Generally good physical health",
+        "mental_health": "High anxiety and managed depression",
+        "diagnosed_conditions": [
+          "Attention condition, managed with routines and reminders"
+        ],
+        "needs": [
+          "Predictable rent and bills",
+          "Quiet after night shifts",
+          "Housemates who confirm plans in advance"
+        ]
+      },
+      "personal_appliances": [
+        {
+          "type": "Light",
+          "brand": "Philips",
+          "power": 40,
+          "age": 2
+        },
+        {
+          "type": "DeskLamp",
+          "brand": "IKEA",
+          "power": 15,
+          "age": 1
+        },
+        {
+          "type": "Laptop",
+          "brand": "Lenovo",
+          "power": 200,
+          "age": 2
+        },
+        {
+          "type": "Monitor",
+          "brand": "Dell",
+          "power": 30,
+          "age": 3
+        },
+        {
+          "type": "Fan",
+          "brand": "Heller",
+          "power": 60,
+          "age": 2
+        },
+        {
+          "type": "Phone",
+          "brand": "Xiaomi",
+          "power": 20,
+          "age": 1
+        }
+      ]
+    },
+    {
+      "source_persona_index": 2,
+      "name": "Member 2",
+      "age": 22,
+      "cultural_background": "Indian, from Mumbai",
+      "bedroom": "Bedroom 2",
+      "gender": "Female",
+      "occupation": "Bachelor of Design student at Monash University; part-time barista and retail assistant",
+      "work_schedule": {
+        "type": "Mixed part-time shifts",
+        "pattern": "Typically 9-to-5-ish but frequently late or closing shifts",
+        "days_per_week": "4-5",
+        "start_time": "Varies, often early for cafe opening shifts",
+        "end_time": "Varies, often late when on retail closing shifts",
+        "commute": "Drives a small car for early shifts, otherwise public transport or walking",
+        "notes": "Balances uni studio classes, design deadlines, and paid shifts; joins and often organises house dinners and group outings"
+      },
+      "personality": {
+        "mbti": "ENFP",
+        "traits": "Warm, expressive, idea-driven, generous, enthusiastic, quick to invite others in",
+        "emotional_style": "High neuroticism; moods swing between excited, generous, and overwhelmed",
+        "artistic_interest": "Very high",
+        "decision_style": "Fast, intuitive, variety-seeking",
+        "tech_attitude": "Skeptical of some new technology but enthusiastic about electric vehicles, nuclear energy and government regulation; wary of climate action and urban density",
+        "values": [
+          "Health",
+          "Achievement",
+          "Creativity",
+          "Independence",
+          "Social status",
+          "Helping others"
+        ],
+        "social_style": "Loves big groups, competitions and cultural outings; directive and impatient when housemates do not follow through"
+      },
+      "habits": {
+        "sleep": "Keeps late studio hours but needs quiet hours respected for rest and recovery",
+        "cleanliness": "Likes the idea of tidiness but sometimes struggles to keep her room orderly",
+        "cooking": "Cooks most days; needs clear kitchen space, clear label rules and a stocked tea shelf",
+        "caffeine": "High caffeine intake; tea and coffee through the day",
+        "spending": "Free spender and impulse buyer who then becomes cost-sensitive",
+        "religion": "Devout; prays daily",
+        "social_habits": "Organises house dinners and group trips; brings home cafe leftovers to share",
+        "noise": "Needs quiet hours enforced around her room",
+        "transport": "Keeps a small car for early shifts"
+      },
+      "health": {
+        "dietary_restriction": "Medically restricted diet; prepares most meals herself and needs safe, clearly labelled kitchen space",
+        "mental_health": "In mental health counselling; responds best to gentle check-ins rather than pressure",
+        "energy_levels": "Can feel overwhelmed after long days of work and study",
+        "caffeine": "High intake, relevant to shared grocery planning",
+        "general": "Generally health-focused, values wellbeing and routine despite fluctuating mood"
+      },
+      "personal_appliances": [
+        {
+          "type": "Light",
+          "brand": "Philips",
+          "power": 40,
+          "age": 2
+        },
+        {
+          "type": "DeskLamp",
+          "brand": "IKEA",
+          "power": 15,
+          "age": 1
+        },
+        {
+          "type": "Laptop",
+          "brand": "Apple",
+          "power": 200,
+          "age": 1
+        },
+        {
+          "type": "Phone",
+          "brand": "Oppo",
+          "power": 20,
+          "age": 2
+        },
+        {
+          "type": "SpaceHeater",
+          "brand": "Dimplex",
+          "power": 2000,
+          "age": 4
+        },
+        {
+          "type": "Kettle",
+          "brand": "Kambrook",
+          "power": 2000,
+          "age": 2
+        },
+        {
+          "type": "ElectricVehicle",
+          "brand": "BYD",
+          "power": 7000,
+          "age": 1
+        }
+      ]
+    },
+    {
+      "source_persona_index": 3,
+      "name": "Member 3",
+      "age": 23,
+      "cultural_background": "Malaysian-Chinese",
+      "bedroom": "Bedroom 3",
+      "gender": "female",
+      "occupation": "Student in Bachelor of Nursing at Monash University; part-time pharmacy assistant and occasional aged-care aide",
+      "work_schedule": {},
+      "personality": {},
+      "habits": {},
+      "health": {},
+      "personal_appliances": [
+        {
+          "type": "Laptop",
+          "brand": "HP",
+          "power": 200,
+          "age": 3
+        },
+        {
+          "type": "Phone",
+          "brand": "Samsung",
+          "power": 20,
+          "age": 1
+        },
+        {
+          "type": "DeskLamp",
+          "brand": "Kmart",
+          "power": 15,
+          "age": 3
+        },
+        {
+          "type": "Fan",
+          "brand": "Vornado",
+          "power": 60,
+          "age": 2
+        }
+      ]
+    },
+    {
+      "source_persona_index": 4,
+      "name": "Member 4",
+      "age": 25,
+      "cultural_background": "Indian (from Bengaluru, India); international student in Australia",
+      "bedroom": "Bedroom 4",
+      "gender": "Male",
+      "occupation": "Master of Cybersecurity student at Monash University; freelance web developer working remotely",
+      "work_schedule": {},
+      "personality": {},
+      "habits": {},
+      "health": {},
+      "personal_appliances": [
+        {
+          "type": "Light",
+          "brand": "Philips",
+          "power": 40,
+          "age": 2
+        },
+        {
+          "type": "DeskLamp",
+          "brand": "IKEA",
+          "power": 15,
+          "age": 2
+        },
+        {
+          "type": "Computer",
+          "brand": "Acer",
+          "power": 200,
+          "age": 4
+        },
+        {
+          "type": "Monitor",
+          "brand": "AOC",
+          "power": 30,
+          "age": 2
+        },
+        {
+          "type": "Phone",
+          "brand": "Vivo",
+          "power": 20,
+          "age": 3
+        }
+      ]
+    },
+    {
+      "source_persona_index": 5,
+      "name": "Member 5",
+      "age": 20,
+      "cultural_background": "Vietnamese (from Ho Chi Minh City)",
+      "bedroom": "Bedroom 5",
+      "gender": "male",
+      "occupation": "Bachelor of Business student at Monash University; part-time hospitality worker",
+      "work_schedule": {
+        "type": "variable shifts",
+        "days": "weekdays and weekends",
+        "hours_per_week": 20,
+        "notes": "Shifts vary week to week around university timetable; flexible sleep schedule"
+      },
+      "personality": {
+        "mbti": "INTP",
+        "agreeableness": "high",
+        "conscientiousness": "low",
+        "cooperation": "strong",
+        "style": "warm but somewhat detached",
+        "traits": [
+          "easygoing",
+          "kind",
+          "slightly chaotic",
+          "peacemaker",
+          "generous",
+          "follows rather than leads",
+          "works best in a team",
+          "needs novelty"
+        ]
+      },
+      "habits": {
+        "breakfast": "skips breakfast daily",
+        "sleep": "flexible",
+        "reading": "reads before bed",
+        "tranport": "walks or takes public transit",
+        "chores": "loses track of chores, needs written agreements",
+        "borrowing": "often borrows items without asking",
+        "payments": "unbanked in Australia, mostly uses cash; needs simple low-friction ways to pay bills",
+        "communication": "Android and WhatsApp",
+        "volunteering": "monthly at a community garden"
+      },
+      "health": {
+        "general_health": "poor",
+        "stress": "very high",
+        "medication": "daily medication",
+        "insurance": "no private insurance beyond minimal cover",
+        "needs": [
+          "reminders about appointments",
+          "low-pressure household, avoid expensive social plans"
+        ]
+      },
+      "personal_appliances": [
+        {
+          "type": "Light",
+          "brand": "Philips",
+          "power": 40,
+          "age": 2
+        },
+        {
+          "type": "DeskLamp",
+          "brand": "Kmart",
+          "power": 15,
+          "age": 1
+        },
+        {
+          "type": "Laptop",
+          "brand": "Asus",
+          "power": 200,
+          "age": 2
+        },
+        {
+          "type": "Phone",
+          "brand": "OnePlus",
+          "power": 20,
+          "age": 2
+        },
+        {
+          "type": "SpaceHeater",
+          "brand": "Heller",
+          "power": 2000,
+          "age": 3
+        }
+      ]
+    },
+    {
+      "source_persona_index": 6,
+      "name": "Member 6",
+      "age": 23,
+      "cultural_background": "Malaysian (Malay-Chinese heritage, from Kuala Lumpur)",
+      "bedroom": "Bedroom 6",
+      "gender": "Female",
+      "occupation": "Full-time student (Bachelor of Commerce and Engineering, Monash University) and part-time shift worker in warehouse and retail jobs",
+      "work_schedule": {
+        "type": "Mixed study and shift-based part-time work",
+        "days": "5-6 days per week",
+        "earliest_start": "06:00",
+        "latest_finish": "23:00",
+        "evening_shifts": "Frequent",
+        "weekend_work": "Frequent",
+        "planning_cycle": "Monthly planner plus shared house calendar",
+        "notes": "Rotating warehouse and retail shifts around university timetable; prefers face-to-face planning and advance notice of changes"
+      },
+      "personality": {
+        "mbti": "ENTP",
+        "conscientiousness": "High",
+        "sociability": "High",
+        "ambition": "High",
+        "need_for_stability": "Strong",
+        "openness": "High (adventurous and curious)",
+        "agreeableness": "Friendly but initially sceptical or hostile toward strangers",
+        "competitiveness": "Competitive and proud",
+        "patience": "Impatient with inefficiency",
+        "values": [
+          "Family",
+          "Career success",
+          "Security",
+          "Community",
+          "Order",
+          "Sustainability",
+          "Recognition"
+        ],
+        "political_leaning": "Apolitical",
+        "spirituality": "Spiritual",
+        "attitude_to_risk": "Sceptical of government regulation and data privacy campaigns",
+        "consumer_attitude": "Sceptical of consumerism, positive about minimalism and homeownership, sceptical of urban density"
+      },
+      "habits": {
+        "diet": "Keto / low-carb",
+        "cooking": "Cooks in weekly batches",
+        "shopping": "Bargain-hunts and compares prices",
+        "finances": "Frugal saver; uses a neobank and mobile wallet; tracks six to ten subscriptions carefully",
+        "room": "Cluttered but organised, with clear rules for shared spaces",
+        "reading": "Reads daily",
+        "planning": "Plans monthly; usually on time; wants clear rules, shared calendars and no surprises",
+        "transit": "Takes public transit",
+        "technology_adoption": "Late adopter, prefers face-to-face; heavy user of X/Twitter and Messenger",
+        "household_role": "Pragmatic planner; needs help understanding health and insurance paperwork"
+      },
+      "health": {
+        "chronic_condition": "One managed chronic condition requiring ongoing care and paperwork",
+        "pain": "Mild chronic pain",
+        "stress": "High stress",
+        "health_literacy": "Low",
+        "attention": "Diagnosed attention needs",
+        "sensory": "Sensitive to motion; needs reduced-motion settings and a quiet study space",
+        "notes": "Struggles with health and insurance documentation and needs assistance interpreting it"
+      },
+      "personal_appliances": [
+        {
+          "type": "Light",
+          "brand": "Philips",
+          "power": 40,
+          "age": 2
+        },
+        {
+          "type": "DeskLamp",
+          "brand": "IKEA",
+          "power": 15,
+          "age": 1
+        },
+        {
+          "type": "Laptop",
+          "brand": "Dell",
+          "power": 200,
+          "age": 4
+        },
+        {
+          "type": "Phone",
+          "brand": "Google",
+          "power": 20,
+          "age": 1
+        },
+        {
+          "type": "Fan",
+          "brand": "Heller",
+          "power": 60,
+          "age": 2
+        }
+      ]
+    }
+  ],
+  "llm_generated": true
+}

@@ -8,43 +8,23 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import iter_house_days
 
-from engine.load_features import (hourly_means, variability_index,
+from load_profile_cluster import (hourly_means, variability_index,
                                   peak_hour_shift, daily_kwh_cv,
                                   hourly_cv_curve)
 
 
 def scan_house_daily_profiles(world_id, scenario):
-    simulation_root = os.path.join(sim_root(world_id))
-    if not os.path.isdir(simulation_root):
-        return []
-    per_house = []
-    for postcode_dir in sorted(os.listdir(simulation_root)):
-        postcode_path = os.path.join(simulation_root, postcode_dir)
-        if not os.path.isdir(postcode_path) or postcode_dir == "population":
-            continue
-        for house_id in sorted(os.listdir(postcode_path)):
-            scenario_dir = os.path.join(postcode_path, house_id, scenario)
-            if not os.path.isdir(scenario_dir):
-                continue
-            dates = sorted(d for d in os.listdir(scenario_dir)
-                           if os.path.isdir(os.path.join(scenario_dir, d)))
-            days = []
-            for date_dir in dates:
-                path = os.path.join(scenario_dir, date_dir, "ElectricityInfo",
-                                    "house_load_profile_1440min.json")
-                if not os.path.exists(path):
-                    continue
-                with open(path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                days.append({
-                    "date": date_dir,
-                    "kwh": data.get("total_energy_kwh", 0.0),
-                    "hourly": hourly_means(data.get("load_profile_watts", [])),
-                })
-            if days:
-                per_house.append({"house_id": house_id, "days": days})
-    return per_house
+    per_house = {}
+    for record in iter_house_days(world_id, policy=scenario):
+        per_house.setdefault(record["house_id"], []).append({
+            "date": record["date"],
+            "kwh": record["total_energy_kwh"],
+            "hourly": hourly_means(record["load_profile_watts"]),
+        })
+    return [{"house_id": house_id, "days": days}
+            for house_id, days in sorted(per_house.items())]
 
 
 def build_report(per_house):
@@ -84,7 +64,11 @@ def main():
     args = parser.parse_args()
 
     per_house = scan_house_daily_profiles(args.world_id, args.scenario)
-    report = build_report(per_house)
+    try:
+        report = build_report(per_house)
+    except ValueError as exc:
+        print(f"No multi-day simulation curves found for {args.world_id}: {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
 

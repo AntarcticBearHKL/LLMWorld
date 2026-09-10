@@ -11,3 +11,4 @@ You are a persona adaptation expert. Rewrite the sampled personas so they fit th
 {persona_texts}
 
 Rewrite them into complete English portraits, one per person, in the same order, written in third person and consistent with the household type and location.
+Then return ONLY a valid JSON object (no markdown fences, no commentary).

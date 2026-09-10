@@ -1,5 +1,5 @@
 import os
-import subprocess
+import copy
 import time
 import json
 import requests
@@ -10,7 +10,6 @@ from threading import BoundedSemaphore, Lock
 from uuid import uuid4
 
 import config
-import matilda_auth
 
 load_dotenv()
 
@@ -52,6 +51,38 @@ def _append_llm_trace(entry):
         print(f"[Trace warning] could not append LLM trace: {exc}")
 
 
+_STRICT_DROP_KEYS = (
+    "minItems", "maxItems", "uniqueItems", "minLength", "maxLength", "pattern",
+    "format", "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum",
+    "multipleOf", "default", "title", "examples",
+)
+
+
+def _to_strict_schema(schema):
+    """DeepSeek strict structured output requires additionalProperties=false and every
+    property listed in required; unsupported validation keywords must be stripped."""
+    if isinstance(schema, list):
+        return [_to_strict_schema(item) for item in schema]
+    if not isinstance(schema, dict):
+        return schema
+    out = copy.deepcopy(schema)
+    for key in _STRICT_DROP_KEYS:
+        out.pop(key, None)
+    properties = out.get("properties")
+    if out.get("type") == "object":
+        out["additionalProperties"] = False
+        if isinstance(properties, dict):
+            out["required"] = list(properties.keys())
+    if isinstance(properties, dict):
+        out["properties"] = {key: _to_strict_schema(value) for key, value in properties.items()}
+    if "items" in out:
+        out["items"] = _to_strict_schema(out["items"])
+    for key in ("anyOf", "oneOf", "allOf"):
+        if isinstance(out.get(key), list):
+            out[key] = [_to_strict_schema(item) for item in out[key]]
+    return out
+
+
 class SubAgent:
     _lock = Lock()
     _request_slots = BoundedSemaphore(LLM_MAX_CONCURRENCY)
@@ -85,13 +116,16 @@ class SubAgent:
             SubAgent._total_completion_tokens = 0
 
     @staticmethod
-    def call_deepseek(prompt, json_mode=False, thinking=False, api_key=None, model=None, json_schema=None):
+    def call_deepseek(prompt, json_mode=False, thinking=None, api_key=None, model=None, json_schema=None):
+        if thinking is None:
+            thinking = config.THINKING
         api_key = api_key or DEEPSEEK_APIKEY
         if not api_key:
             raise LLMCallError("DeepSeek API key is not configured; please set DEEPSEEK_APIKEY in .env")
 
         model = model or DEFAULT_MODEL_DEEPSEEK
-        base_url = "https://api.deepseek.com/v1"
+        endpoint = config.DEEPSEEK_API_BASE.rstrip("/") + "/responses"
+        use_schema = bool(json_mode and json_schema)
 
         headers = {
             "Authorization": "Bearer " + api_key,
@@ -99,32 +133,39 @@ class SubAgent:
         }
         data = {
             "model": model,
-            "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": DEFAULT_MAX_TOKENS
+            "input": prompt,
+            "max_output_tokens": DEFAULT_MAX_TOKENS
         }
 
         if thinking:
-            data["thinking"] = {"type": "enabled"}
-            data["reasoning_effort"] = config.REASONING_EFFORT
+            data["reasoning"] = {"effort": config.REASONING_EFFORT}
         else:
             data["temperature"] = DEFAULT_TEMPERATURE
 
-        if json_mode and not thinking:
-            data["response_format"] = {"type": "json_object"}
+        if use_schema:
+            data["text"] = {"format": {
+                "type": "json_schema",
+                "name": "response",
+                "schema": _to_strict_schema(json_schema),
+            }}
+        elif json_mode:
+            data["text"] = {"format": {"type": "json_object"}}
 
         logical_call_id = uuid4().hex
         trace_started_at = datetime.now(timezone.utc).isoformat()
         trace_started = time.perf_counter()
+        trace_meta = {"request_index": 1, "request_count": 1}
+        sent_prompt = prompt
         request_body = json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
 
         def trace(response=None, result=None, error=None):
             _append_llm_trace({
                 "provider": "deepseek",
                 "logical_call_id": logical_call_id,
-                "request_index": 1,
-                "request_count": 1,
-                "transport_mode": "openai_chat_completions",
-                "prompt_chars": len(prompt),
+                "request_index": trace_meta["request_index"],
+                "request_count": trace_meta["request_count"],
+                "transport_mode": "openai_responses",
+                "prompt_chars": len(sent_prompt),
                 "prompt_segmented": False,
                 "started_at": trace_started_at,
                 "duration_seconds": round(time.perf_counter() - trace_started, 6),
@@ -135,25 +176,58 @@ class SubAgent:
                 "error": error,
             })
 
-        SubAgent._request_slots.acquire()
-        with SubAgent._lock:
-            SubAgent._current_concurrent += 1
-            if SubAgent._current_concurrent > SubAgent._peak_concurrent:
-                SubAgent._peak_concurrent = SubAgent._current_concurrent
+        def _post(body):
+            SubAgent._request_slots.acquire()
+            with SubAgent._lock:
+                SubAgent._current_concurrent += 1
+                if SubAgent._current_concurrent > SubAgent._peak_concurrent:
+                    SubAgent._peak_concurrent = SubAgent._current_concurrent
+            try:
+                return requests.post(
+                    endpoint,
+                    headers=headers,
+                    json=body,
+                    timeout=REQUEST_TIMEOUT_SECONDS
+                )
+            finally:
+                with SubAgent._lock:
+                    SubAgent._current_concurrent -= 1
+                SubAgent._request_slots.release()
+
         try:
-            response = requests.post(
-                base_url + "/chat/completions",
-                headers=headers,
-                json=data,
-                timeout=REQUEST_TIMEOUT_SECONDS
-            )
+            response = _post(data)
         except requests.exceptions.RequestException as e:
             trace(error=f"{type(e).__name__}: {e}")
             raise LLMCallError(f"DeepSeek network error: {e}", retryable=True) from e
-        finally:
-            with SubAgent._lock:
-                SubAgent._current_concurrent -= 1
-            SubAgent._request_slots.release()
+
+        # Some accounts/models may reject json_schema; retry once with json_object and
+        # the schema injected into the prompt so the pipeline never hard-breaks.
+        if use_schema and response.status_code == 400:
+            print("[Fallback] DeepSeek rejected json_schema (HTTP 400); retrying with json_object and the schema injected into the prompt")
+            trace_meta["request_index"] = 2
+            trace_meta["request_count"] = 2
+            sent_prompt = (
+                prompt
+                + "\n\n## Output JSON Schema\n"
+                + "Return a JSON object conforming EXACTLY to this schema (use the exact field names):\n"
+                + json.dumps(json_schema, ensure_ascii=False)
+            )
+            data = {
+                "model": model,
+                "input": sent_prompt,
+                "max_output_tokens": DEFAULT_MAX_TOKENS,
+                "text": {"format": {"type": "json_object"}}
+            }
+            if thinking:
+                data["reasoning"] = {"effort": config.REASONING_EFFORT}
+            else:
+                data["temperature"] = DEFAULT_TEMPERATURE
+            request_body = json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+            try:
+                response = _post(data)
+            except requests.exceptions.RequestException as e:
+                trace(error=f"{type(e).__name__}: {e}")
+                raise LLMCallError(f"DeepSeek network error: {e}", retryable=True) from e
 
         if response.status_code != 200:
             trace(response=response, result={"raw_text": response.text})
@@ -164,140 +238,58 @@ class SubAgent:
 
         result = response.json()
 
-        if "error" in result:
-            trace(response=response, result=result, error=str(result["error"]))
-            raise LLMCallError(f"DeepSeek returned an error: {result['error'].get('message', result['error'])}")
+        if result.get("error"):
+            error = result["error"]
+            detail = error.get("message", error) if isinstance(error, dict) else error
+            trace(response=response, result=result, error=str(detail))
+            raise LLMCallError(f"DeepSeek returned an error: {detail}")
 
-        if "choices" not in result or not result["choices"]:
-            trace(response=response, result=result, error="no choices")
-            raise LLMCallError("DeepSeek returned empty (no choices)")
+        if result.get("status") == "failed":
+            detail = result.get("incomplete_details") or "status=failed"
+            trace(response=response, result=result, error=str(detail))
+            raise LLMCallError(f"DeepSeek Responses request failed: {detail}")
 
-        if "usage" in result:
-            cache_hit = result["usage"].get("prompt_cache_hit_tokens", 0)
-            cache_miss = result["usage"].get("prompt_cache_miss_tokens", 0)
-            completion = result["usage"].get("completion_tokens", 0)
-            SubAgent._update_tokens(cache_hit, cache_miss, completion)
+        content = ""
+        reasoning = ""
+        for item in result.get("output", []):
+            if item.get("type") == "message":
+                for part in item.get("content", []) or []:
+                    if part.get("type") == "output_text":
+                        content += part.get("text", "")
+            elif item.get("type") == "reasoning":
+                for part in item.get("content", []) or []:
+                    if part.get("type") == "reasoning_text":
+                        reasoning += part.get("text", "")
 
-        content = result["choices"][0]["message"]["content"].strip()
         from . import utils
-        content = utils.clean_json_text(content)
+        content = utils.clean_json_text(content.strip())
+        if not content:
+            trace(response=response, result=result, error="empty output")
+            raise LLMCallError("DeepSeek Responses returned empty output")
+
+        usage = result.get("usage") or {}
+        cached_tokens = (usage.get("input_tokens_details") or {}).get("cached_tokens", 0) or 0
+        input_tokens = usage.get("input_tokens", 0) or 0
+        output_tokens = usage.get("output_tokens", 0) or 0
+        SubAgent._update_tokens(cached_tokens, input_tokens - cached_tokens, output_tokens)
 
         trace(response=response, result={
             "content": content,
-            "usage": result.get("usage", {}),
+            "reasoning_content": reasoning,
+            "usage": usage,
             "model": result.get("model", model),
             "id": result.get("id"),
         })
 
-        return {"content": content, "reasoning_content": "", "thinking": thinking}
+        return {"content": content, "reasoning_content": reasoning, "thinking": thinking}
 
     @staticmethod
-    def call_matilda(prompt, json_mode=False, thinking=False, api_key=None, model=None, json_schema=None):
-        """Black-box: prompt + json_schema -> LLM raw return content."""
-        del api_key, model
-        logical_call_id = uuid4().hex
-        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-        bridge_path = os.path.join(project_root, "matilda", "agent_bridge.mjs")
-        try:
-            access_token = matilda_auth.get_access_token()
-        except matilda_auth.LLMCallError as exc:
-            raise LLMCallError(f"Matilda authentication failed: {exc}", code="authentication") from exc
-        request_data = {
-            "baseUrl": config.MATILDA_API_BASE,
-            "apiVersion": config.MATILDA_API_VERSION,
-            "accessToken": access_token,
-            "prompt": prompt,
-            "jsonMode": bool(json_mode),
-            "thinking": bool(thinking),
-            "jsonSchema": json_schema,
-        }
-        trace_request = {key: value for key, value in request_data.items() if key != "accessToken"}
-        started_at = datetime.now(timezone.utc).isoformat()
-        started = time.perf_counter()
-        payload = json.dumps(request_data, ensure_ascii=False, separators=(",", ":"))
-
-        SubAgent._request_slots.acquire()
-        with SubAgent._lock:
-            SubAgent._current_concurrent += 1
-            if SubAgent._current_concurrent > SubAgent._peak_concurrent:
-                SubAgent._peak_concurrent = SubAgent._current_concurrent
-        try:
-            completed = subprocess.run(
-                ["node", bridge_path],
-                input=payload,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                capture_output=True,
-                check=False,
-                timeout=REQUEST_TIMEOUT_SECONDS,
-            )
-        except OSError as exc:
-            raise LLMCallError(f"Could not start Matilda Agent SDK bridge: {exc}", code="sdk_bridge_start") from exc
-        except subprocess.TimeoutExpired as exc:
-            raise LLMCallError(f"Matilda Agent SDK bridge timed out after {REQUEST_TIMEOUT_SECONDS}s", code="timeout") from exc
-        finally:
-            with SubAgent._lock:
-                SubAgent._current_concurrent -= 1
-            SubAgent._request_slots.release()
-
-        try:
-            bridge_result = json.loads(completed.stdout)
-        except (json.JSONDecodeError, ValueError) as exc:
-            error = completed.stderr.strip() or completed.stdout[:500]
-            _append_llm_trace({
-                "provider": "matilda", "logical_call_id": logical_call_id,
-                "transport_mode": "official_agent_sdk", "prompt_chars": len(prompt),
-                "started_at": started_at,
-                "duration_seconds": round(time.perf_counter() - started, 6),
-                "request": trace_request, "response": None,
-                "error": f"Invalid bridge response: {error}",
-            })
-            raise LLMCallError(
-                f"Matilda Agent SDK bridge returned invalid JSON: {error}",
-                code="sdk_bridge_protocol",
-            ) from exc
-
-        _append_llm_trace({
-            "provider": "matilda", "logical_call_id": logical_call_id,
-            "transport_mode": "official_agent_sdk", "prompt_chars": len(prompt),
-            "started_at": started_at,
-            "duration_seconds": round(time.perf_counter() - started, 6),
-            "request": trace_request, "response": bridge_result,
-            "error": None if bridge_result.get("ok") else bridge_result.get("error"),
-        })
-        if not bridge_result.get("ok"):
-            detail = bridge_result.get("error") or {}
-            code = detail.get("code") or detail.get("name") or "unknown"
-            raw = detail.get("raw")
-            raw_note = f"; raw output: {raw[:500]}" if isinstance(raw, str) and raw else ""
-            raise LLMCallError(
-                f"Matilda Agent SDK error [{code}]: {detail.get('message', detail)}{raw_note}",
-                retryable=False,
-                code=code,
-            )
-
-        usage = bridge_result.get("usage") or {}
-        SubAgent._update_tokens(0, 0, int(usage.get("output_tokens", 0) or 0))
-        content = bridge_result.get("content")
-        if not isinstance(content, str) or not content.strip():
-            raise LLMCallError("Matilda Agent SDK returned empty output", code="empty_response")
-        return {
-            "content": content.strip(),
-            "reasoning_content": "",
-            "thinking": thinking,
-            "object": bridge_result.get("object"),
-        }
-
-    @staticmethod
-    def call_with_retry(prompt, json_mode=False, thinking=False, api_key=None, model=None, provider=None,
+    def call_with_retry(prompt, json_mode=False, thinking=None, api_key=None, model=None,
                         json_schema=None):
-        provider = (provider or config.LLM_PROVIDER or "deepseek").lower()
-        call_fn = SubAgent.call_matilda if provider == "matilda" else SubAgent.call_deepseek
-        return call_fn(prompt, json_mode, thinking, api_key, model, json_schema)
+        return SubAgent.call_deepseek(prompt, json_mode, thinking, api_key, model, json_schema)
 
     @staticmethod
-    def parallel_call(prompts, json_mode=False, thinking=False, api_key=None, model=None, provider=None,
+    def parallel_call(prompts, json_mode=False, thinking=None, api_key=None, model=None,
                       json_schema=None):
         if isinstance(prompts, str):
             raise TypeError("parallel_call expects an iterable of prompt strings; use single_call for one string")
@@ -318,7 +310,6 @@ class SubAgent:
                     thinking,
                     api_key,
                     model,
-                    provider,
                     json_schema=json_schema,
                 )
                 return index, result, None
@@ -347,7 +338,7 @@ class SubAgent:
         return results
 
     @staticmethod
-    def single_call(prompt, json_mode=False, thinking=False, api_key=None, model=None, provider=None,
+    def single_call(prompt, json_mode=False, thinking=None, api_key=None, model=None,
                     json_schema=None):
-        return SubAgent.call_with_retry(prompt, json_mode, thinking, api_key, model, provider,
+        return SubAgent.call_with_retry(prompt, json_mode, thinking, api_key, model,
                                         json_schema=json_schema)

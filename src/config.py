@@ -13,30 +13,19 @@ load_dotenv()
 
 
 DEEPSEEK_APIKEY = os.getenv("DEEPSEEK_APIKEY", "")
+DEEPSEEK_API_BASE = os.getenv("DEEPSEEK_API_BASE", "https://api.deepseek.com")
 MODEL = "deepseek-v4-flash"
 TEMPERATURE = 1.0
 MAX_TOKENS = 64000
 
 
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "deepseek").lower()
-
-
-MATILDA_BASE_URL = os.getenv("MATILDA_BASE_URL", "https://matilda.maincode.com")
-MATILDA_API_BASE = os.getenv("MATILDA_API_BASE", "https://matilda.maincode.com/api")
-MATILDA_CLIENT_ID = os.getenv("MATILDA_CLIENT_ID", "matilda-code")
-MATILDA_API_VERSION = os.getenv("MATILDA_API_VERSION", "2026-06-23")
-MATILDA_CREDENTIALS_FILE = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "matilda_credentials.json"
-)
 
 
 
 
 
-
-
-THINKING = False
-REASONING_EFFORT = "low"
+THINKING = os.getenv("THINKING", "true").strip().lower() in ("1", "true", "yes", "on")
+REASONING_EFFORT = os.getenv("REASONING_EFFORT", "low").strip().lower()
 
 
 
@@ -46,7 +35,7 @@ LOGIC_MAX_ATTEMPTS = max(1, int(os.getenv("LOGIC_MAX_ATTEMPTS", "4")))
 LLM_MAX_CONCURRENCY = max(1, int(os.getenv("LLM_MAX_CONCURRENCY", "10")))
 
 
-REQUEST_TIMEOUT_SECONDS = 300
+REQUEST_TIMEOUT_SECONDS = 600
 
 
 DEFAULT_START_DATE = "2026-04-21"
@@ -96,4 +85,17 @@ APPLIANCE_DAILY_CAP_MINUTES = {
     "Light": 16 * 60,
     "DeskLamp": 16 * 60,
     "RangeHood": 2 * 60,
+    "SpaceHeater": 360,
+    "Fan": 480,
+    "Dehumidifier": 480,
+    "ClothesDryer": 120,
+    "Dishwasher": 120,
+    "Kettle": 30,
+    "Toaster": 20,
+    "Oven": 120,
+    "Freezer": 0,
+    "Router": 0,
+    "GameConsole": 240,
+    "Monitor": 600,
+    "Ebike": 180,
 }

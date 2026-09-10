@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on the bed with eyes closed. Turn onto the right side. Pull the blanket up to the shoulders. Rest the head on the pillow. Turn onto the left side. Adjust the pillow under the head. Stretch the right arm out from under the blanket. Pull the arm back under the blanket. Turn onto the back. Breathe slowly with the mouth closed. Turn onto the right side again. Pull the blanket over the legs. Keep the eyes closed. Remain lying on the bed without moving."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and showering",
+      "desc": "Open eyes. Sit up on the edge of the bed. Stand up. Walk to the bathroom. Push the bathroom door open. Turn on the bathroom light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush the teeth. Rinse the mouth with water. Spit into the sink. Turn off the tap. Take off the pajamas. Step into the shower. Turn on the shower tap. Wet the hair and body. Pick up the shampoo bottle. Pour shampoo into the palm. Rub the shampoo into the hair. Rinse the hair under the water. Pick up the soap. Rub the soap over the body. Rinse the body. Turn off the shower tap. Step out of the shower. Pick up the towel. Rub the hair with the towel. Wipe the body with the towel. Wrap the towel around the body. Walk out of the bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "desc": "Walk into the kitchen. Open the refrigerator door. Take out the milk. Take out the bread. Close the refrigerator door. Put the bread into the toaster. Press the toaster lever down. Open the cupboard. Take out a bowl and a plate. Put the bowl and plate on the counter. Open the cupboard again. Take out the cereal box. Pour cereal into the bowl. Pour milk into the bowl. Pick up a spoon. Pick up the bowl. Carry the bowl to the table. Sit down on the chair. Eat the cereal with the spoon. Take the toast out of the toaster. Put the toast on the plate. Spread butter on the toast. Eat the toast. Drink the milk from the glass. Stand up. Carry the bowl and plate to the sink. Put the bowl and plate into the sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Walk into Bedroom 1. Open the wardrobe door. Take out a shirt. Take out trousers. Close the wardrobe door. Lay the shirt on the bed. Lay the trousers on the bed. Take off the towel. Put on the shirt. Button the shirt. Put on the trousers. Pull up the zip. Fasten the belt. Put on socks. Put on shoes. Tie the shoelaces. Open the drawer. Take out the work badge. Clip the badge onto the shirt. Pick up the work bag. Open the work bag. Put the phone into the bag. Put the wallet into the bag. Zip the work bag closed. Pick up the bag. Walk out of Bedroom 1."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to hospital by bus (using other transport; Member 2 is driving the EV to the clinic)",
+      "desc": "Walk out of the house. Close the front door. Lock the front door with the key. Put the key into the bag. Walk to the bus stop. Stand at the bus stop. Look at the phone for the bus arrival time. Pick up the bag from the ground. Step onto the bus. Tap the travel card on the card reader. Walk along the aisle. Sit down on a seat. Put the bag on the lap. Look out of the window. Hold the handrail when the bus turns. Press the stop button. Stand up. Pick up the bag. Walk to the bus door. Step off the bus. Walk towards the hospital entrance."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist at the hospital",
+      "desc": "Walk into the hospital. Swipe the badge at the entrance door. Walk to the physiotherapy department. Open the door of the treatment room. Turn on the light. Open the computer. Log in with the password. Read the patient appointment list on the screen. Pick up the phone. Call the first patient in. Stand up. Greet the patient. Guide the patient to the treatment bed. Help the patient sit down. Demonstrate a shoulder exercise with the right arm. Hold the patient's arm. Move the patient's arm through the range of motion. Place a heat pack on the patient's shoulder. Remove the heat pack. Hand the patient a resistance band. Show the band exercise. Write treatment notes on the computer. Walk to the waiting area. Call the next patient. Escort the patient to the treatment table. Demonstrate a knee exercise. Support the patient's leg. Apply a cold pack to the knee. Guide the patient through walking practice with a walking frame. Hold the patient's elbow during the walking practice. Write notes in the patient file. Sit down at the desk. Stand up. Walk to the staff room. Fill a cup with water. Drink the water. Return to the treatment room. Arrange the treatment bed sheets. Open the computer again. Read the afternoon appointment list. Call the next patient in. Guide the patient through a back stretching exercise. Record the session in the computer. Log off the computer. Stand up. Walk out of the treatment room. Close the door."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home by bus (using other transport; Member 2 is driving the EV home)",
+      "desc": "Walk out of the hospital. Walk to the bus stop. Stand at the bus stop. Take the phone out of the bag. Look at the phone screen. Put the phone back into the bag. Step onto the bus. Tap the travel card on the card reader. Walk along the aisle. Sit down on a seat. Put the bag on the lap. Look out of the window. Press the stop button. Stand up. Pick up the bag. Walk to the bus door. Step off the bus. Walk to the house. Take the key out of the bag. Unlock the front door. Push the front door open. Step inside. Close the front door. Lock the front door."
+    },
+    {
+      "time": "18:00-18:15",
+      "location": "Bedroom 1",
+      "activity": "Changing into comfortable clothes and unpacking",
+      "desc": "Walk into Bedroom 1. Put the work bag on the bed. Open the work bag. Take out the phone. Put the phone on the bedside table. Take out the wallet. Put the wallet into the drawer. Take off the shoes. Put the shoes into the shoe rack. Take off the socks. Take off the shirt. Unbutton the shirt. Take off the trousers. Open the wardrobe door. Take out a T-shirt. Take out sweatpants. Close the wardrobe door. Put on the T-shirt. Put on the sweatpants. Hang the work clothes on the hanger. Close the wardrobe door."
+    },
+    {
+      "time": "18:15-18:30",
+      "location": "Bathroom",
+      "activity": "Washing up (after Member 2 finishes in the bathroom)",
+      "desc": "Walk to the bathroom door. Push the bathroom door open. Turn on the bathroom light. Turn on the tap. Wet both hands under the water. Pick up the soap. Rub the soap between the hands. Put the soap back on the dish. Rub the hands together. Rinse the hands under the water. Turn off the tap. Pick up the towel. Wipe the hands with the towel. Hang the towel back on the hook. Turn off the light. Walk out of the bathroom. Close the bathroom door."
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Helping Member 2 finish cooking and eating dinner together",
+      "desc": "Walk into the kitchen. Ask Member 2: \"What should I do?\" Pick up the knife. Cut the vegetables on the chopping board. Pick up the chopped vegetables. Put the vegetables into the pot. Pick up the spoon. Stir the pot. Turn off the induction cooker. Pick up two plates from the cupboard. Put the plates on the counter. Spoon the food onto the plates. Carry the plates to the table. Put the plates on the table. Pick up two sets of cutlery. Place the cutlery beside the plates. Pull out the chair. Sit down at the table. Pick up the fork. Eat the food from the plate. Drink water from the glass. Talk with Member 2 about the workday. Put the fork down on the plate. Stand up."
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Clearing the table and tidying the kitchen together with Member 2",
+      "desc": "Pick up the plates from the table. Carry the plates to the sink. Scrape the food scraps into the bin. Put the plates into the dishwasher. Pick up the glasses. Put the glasses into the dishwasher. Pick up the cutlery. Put the cutlery into the basket. Pick up the cloth. Wipe the table surface. Rinse the cloth under the tap. Wring the cloth out. Wipe the counter. Open the dishwasher door. Add the detergent tablet. Close the dishwasher door. Press the start button. Wipe the induction cooker with the cloth. Pick up the rubbish bag. Tie the rubbish bag closed. Carry the rubbish bag to the bin. Put the rubbish bag into the bin."
+    },
+    {
+      "time": "19:45-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing and doing a stretching session with Member 2",
+      "desc": "Walk into the Living Room. Pick up the remote control. Press the power button on the TV. Open the YouTube app on the TV. Pick up the yoga mat. Unroll the yoga mat on the floor. Sit down on the mat. Stretch both arms forward. Bend forward towards the toes. Hold the position. Sit up. Raise the right arm over the head. Lean to the left side. Hold the position. Return to the upright position. Raise the left arm over the head. Lean to the right side. Hold the position. Return to the upright position. Lie down on the back on the mat. Pull the right knee to the chest. Hold the position. Lower the right leg. Pull the left knee to the chest. Hold the position. Lower the left leg. Sit up. Stand up. Roll up the yoga mat. Put the yoga mat into the corner. Press the power button on the TV."
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Study",
+      "activity": "Using computer for personal tasks alongside Member 2's study",
+      "desc": "Walk into the Study. Pull out the chair. Sit down at the desk. Press the computer power button. Turn on the desk lamp. Type the login password on the keyboard. Move the mouse. Open the web browser. Type a search term in the search bar. Press the Enter key. Scroll the page with the mouse wheel. Click a link. Read the page on the monitor. Open an email. Type a reply on the keyboard. Click the send button. Open a document file. Type text into the document. Press the save key combination. Open an online shopping page. Add an item to the cart. Click the checkout button. Enter the payment information. Click the confirm button. Close the browser window. Stand up. Push the chair back under the desk. Turn off the desk lamp. Press the computer power button to shut it down."
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine",
+      "desc": "Walk to the bathroom. Push the bathroom door open. Turn on the bathroom light. Turn on the tap. Wet the face with water. Pick up the facial cleanser. Squeeze the cleanser onto the palm. Rub the cleanser over the face. Rinse the face with water. Turn off the tap. Pick up the towel. Wipe the face with the towel. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush the teeth. Rinse the mouth. Spit into the sink. Rinse the toothbrush under the tap. Put the toothbrush into the holder. Turn off the tap. Turn off the light. Walk out of the bathroom. Close the bathroom door."
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down",
+      "desc": "Walk into Bedroom 1. Open the bedside drawer. Take out a book. Close the drawer. Turn on the bedside lamp. Sit on the bed. Pull the blanket over the legs. Open the book. Turn the page. Turn the page again. Look at the phone on the bedside table. Pick up the phone. Press the screen on. Scroll the feed. Put the phone back on the bedside table. Turn the page. Turn the page again. Close the book. Put the book on the bedside table. Turn off the bedside lamp."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed. Pull the blanket up over the body. Rest the head on the pillow. Turn onto the right side. Close the eyes. Breathe slowly. Turn onto the left side. Adjust the pillow under the head. Stretch the legs out. Pull the blanket up to the shoulders. Turn onto the back. Rest the arms beside the body. Turn onto the right side again. Remain lying on the bed with the eyes closed. Keep the body still under the blanket."
+    }
+  ]
+}

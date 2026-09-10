@@ -1,0 +1,421 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-01:20",
+      "start_minutes": 0,
+      "end_minutes": 80,
+      "location": "Study",
+      "activity": "Late-night creative session: working on personal art project at the computer, using the desk lamp and monitor, sketching and refining digital artwork",
+      "operations": [
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "01:20-01:40",
+      "start_minutes": 80,
+      "end_minutes": 100,
+      "location": "Bathroom",
+      "activity": "Night wash-up and getting ready for sleep",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "01:40-07:30",
+      "start_minutes": 100,
+      "end_minutes": 450,
+      "location": "Bedroom 2",
+      "activity": "Sleeping (night owl late bedtime, sleeping in as long as the workday allows)",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:05",
+      "start_minutes": 450,
+      "end_minutes": 485,
+      "location": "Bathroom",
+      "activity": "Shower, dress, and morning grooming (extended slightly to avoid kitchen overlap with Member 3)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:05-08:20",
+      "start_minutes": 485,
+      "end_minutes": 500,
+      "location": "Kitchen",
+      "activity": "Quick breakfast prepared and eaten, following a medically restricted diet (after Member 3 clears the kitchen)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:20-08:30",
+      "start_minutes": 500,
+      "end_minutes": 510,
+      "location": "Bedroom 2",
+      "activity": "Tidying personal space, laying out belongings, and gathering work bag and keys",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:30-08:35",
+      "start_minutes": 510,
+      "end_minutes": 515,
+      "location": "Garage",
+      "activity": "Unplugging and starting the personal electric vehicle, loading work items",
+      "operations": [
+        {
+          "unique_id": "garage_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "garage_electricvehicle",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:35-09:10",
+      "start_minutes": 515,
+      "end_minutes": 550,
+      "location": "Out",
+      "activity": "drive the EV to the workplace, running behind schedule",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:10-13:00",
+      "start_minutes": 550,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Working at the office in retail management and healthcare administration, handling scheduling, staff and patient administration tasks",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:35",
+      "start_minutes": 780,
+      "end_minutes": 815,
+      "location": "Out",
+      "activity": "Lunch break at work, eating a meal that meets a medically restricted diet",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:35-17:15",
+      "start_minutes": 815,
+      "end_minutes": 1035,
+      "location": "Out",
+      "activity": "Continuing administrative and retail management duties, meetings, and record-keeping at the workplace",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:15-17:50",
+      "start_minutes": 1035,
+      "end_minutes": 1070,
+      "location": "Out",
+      "activity": "drive the EV back home",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:50-17:55",
+      "start_minutes": 1070,
+      "end_minutes": 1075,
+      "location": "Garage",
+      "activity": "Parking and plugging in the EV, unloading work items",
+      "operations": [
+        {
+          "unique_id": "garage_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "garage_electricvehicle",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "17:55-18:20",
+      "start_minutes": 1075,
+      "end_minutes": 1100,
+      "location": "Kitchen",
+      "activity": "Cooking dinner with Member 1, using induction cooker and rice cooker, preparing a meal compatible with everyone's dietary needs",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:20-18:50",
+      "start_minutes": 1100,
+      "end_minutes": 1130,
+      "location": "Dining Room",
+      "activity": "Eating dinner with Member 1 and Member 3 at the table, air conditioner on, phone face-down for a calm meal",
+      "operations": [
+        {
+          "unique_id": "dining_room_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:50-19:15",
+      "start_minutes": 1130,
+      "end_minutes": 1155,
+      "location": "Kitchen",
+      "activity": "Washing dishes with Member 1 and Member 3, wiping counters, packing tomorrow's lunch",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:15-19:50",
+      "start_minutes": 1155,
+      "end_minutes": 1190,
+      "location": "Out",
+      "activity": "Evening dog walk with Member 1 along the familiar neighbourhood loop, staying on well-lit paths",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:50-20:30",
+      "start_minutes": 1190,
+      "end_minutes": 1230,
+      "location": "Living Room",
+      "activity": "Sitting with Member 1 and Member 3, sending one-on-one text check-ins and browsing cultural events on the phone",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:00",
+      "start_minutes": 1230,
+      "end_minutes": 1260,
+      "location": "Laundry",
+      "activity": "Running a load of laundry and tidying the house",
+      "operations": [
+        {
+          "unique_id": "laundry_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "laundry_washingmachine",
+          "action": "run"
+        },
+        {
+          "unique_id": "laundry_vacuumcleaner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:45",
+      "start_minutes": 1260,
+      "end_minutes": 1305,
+      "location": "Living Room",
+      "activity": "Unwinding on the sofa watching television to decompress after the workday",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:45",
+      "start_minutes": 1305,
+      "end_minutes": 1365,
+      "location": "Study",
+      "activity": "Focused artistic work at the computer, developing creative and cultural projects with the monitor and desk lamp",
+      "operations": [
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-23:15",
+      "start_minutes": 1365,
+      "end_minutes": 1395,
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine, washing up and preparing for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:15-23:30",
+      "start_minutes": 1395,
+      "end_minutes": 1410,
+      "location": "Bedroom 2",
+      "activity": "Wind-down reading in bed under the desk lamp, aiming for an earlier night",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "start_minutes": 1410,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

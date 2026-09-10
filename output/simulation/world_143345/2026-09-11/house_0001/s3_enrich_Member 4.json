@@ -1,0 +1,137 @@
+{
+  "member": "Member 4",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:50",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lies down on the bed in Bedroom 4. Pulls the blanket up to the chest. Closes eyes. Turns onto the right side. Pulls the blanket over the shoulder. Remains lying still. Turns onto the left side. Adjusts the pillow under the head. Extends the legs. Remains lying still. Turns onto the back. Breathes steadily with eyes closed. Turns onto the right side again. Pulls the blanket up. Remains lying still until the alarm rings at 06:50."
+    },
+    {
+      "time": "06:50-07:00",
+      "location": "Bedroom 4",
+      "activity": "Waking up and waiting for the bathroom to be free (Member 3 finishes at 07:00)",
+      "desc": "Opens eyes. Reaches the right arm to the phone on the nightstand. Picks up the phone. Presses the screen to stop the alarm. Sits up on the edge of the bed. Puts both feet on the floor. Rubs the face with both hands. Stands up. Walks to the bedroom door. Opens the door slightly. Looks toward the bathroom door. Hears water running in the Bathroom. Closes the door. Walks back to the desk. Picks up the phone again. Checks the time on the screen. Sits on the chair. Waits at the desk. Stands up at 07:00 when the Bathroom door opens."
+    },
+    {
+      "time": "07:00-07:25",
+      "location": "Bathroom",
+      "activity": "Showering and brushing teeth",
+      "desc": "Walks into the Bathroom. Turns on the Bathroom light. Pushes the door closed. Takes a towel from the hook. Turns on the shower tap. Steps under the water. Wets the hair and body. Picks up the shampoo bottle. Pours shampoo into the palm. Rubs the shampoo into the hair. Rinses the hair. Picks up the soap. Rubs the soap over the arms, chest and legs. Rinses the body. Turns off the shower tap. Steps out. Picks up the towel. Dries the hair and body. Picks up the toothbrush. Squeezes toothpaste onto the bristles. Brushes the teeth. Rinses the mouth with water from the tap. Turns off the tap. Wipes the face with the towel. Hangs the towel on the hook. Turns off the Bathroom light. Opens the door and walks out."
+    },
+    {
+      "time": "07:25-07:55",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, preparing tea and packing lunch, overlapping with Member 5's tea time",
+      "desc": "Walks into the Kitchen. Turns on the Kitchen light. Opens the refrigerator door. Takes out milk, bread and eggs. Closes the refrigerator door. Puts the items on the counter. Picks up the toaster. Puts two slices of bread into the toaster. Presses the lever down. Picks up a frying pan. Places the pan on the InductionCooker. Presses the power button. Pours oil into the pan. Cracks two eggs into the pan. Turns the eggs with a spatula. Picks up a plate from the cupboard. Slides the eggs onto the plate. Takes the toast out of the toaster. Places the toast on the plate. Sits at the kitchen table. Eats the eggs and toast. Drinks a glass of milk. Stands up. Fills the kettle with water. Presses the kettle switch to boil. Picks up a mug from the cupboard. Drops a tea bag into the mug. Pours boiling water into the mug. Says to Member 5: 'Morning, kettle's still hot.' Opens the cupboard. Takes out a lunch box. Places a sandwich and fruit into the lunch box. Closes the lid. Puts the lunch box into the backpack. Picks up the mug. Sips the tea. Rinses the plate and pan under the tap. Places them on the drying rack. Wipes the counter with a cloth. Picks up the backpack."
+    },
+    {
+      "time": "07:55-08:20",
+      "location": "Bedroom 4",
+      "activity": "Checking university timetable and replying to freelance client emails at the desk",
+      "desc": "Walks into Bedroom 4. Puts the backpack on the floor next to the desk. Sits down on the desk chair. Presses the power button on the Computer. Turns on the Monitor. Opens the university timetable page in the browser. Reads the lecture and lab times on the screen. Opens the email client. Reads an unread client email. Types a reply on the keyboard. Presses the send button. Opens a second email. Types a short reply. Presses the send button. Closes the browser tab. Stands up. Picks up a notebook and pen from the desk. Puts them into the backpack. Zips the backpack. Picks up the phone from the desk. Puts the phone into the jacket pocket. Turns off the Monitor."
+    },
+    {
+      "time": "08:20-08:50",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University campus",
+      "desc": "Walks out of Bedroom 4 with the backpack on the back. Walks to the front door. Opens the front door. Steps outside. Closes the front door. Walks along the footpath to the bus stop. Stands at the bus stop. Picks up the phone from the pocket. Checks the bus arrival time on the screen. Puts the phone back into the pocket. Steps onto the bus when it arrives. Taps the transport card on the card reader. Walks down the aisle. Sits on an empty seat. Places the backpack on the lap. Rides the bus. Stands up at the transfer stop. Walks to the door. Steps off the bus. Walks to the train platform. Waits on the platform. Steps onto the train. Taps the card on the reader. Sits on a seat. Rides the train. Stands up at Clayton station. Steps off the train. Walks up the stairs. Walks out of the station toward the campus."
+    },
+    {
+      "time": "08:50-12:00",
+      "location": "Out",
+      "activity": "Attending cybersecurity lectures and laboratory sessions at Monash University",
+      "desc": "Walks into the lecture theatre. Walks down the aisle. Sits on a seat. Puts the backpack on the floor. Takes out the notebook and pen. Puts them on the desk. Watches the lecturer at the front. Writes notes in the notebook. Turns a page. Opens the laptop on the desk. Presses the power button. Types the lecture title into a document. Types bullet points while the lecturer speaks. Raises the hand. Asks a question about the encryption topic. Lowers the hand. Types the answer into the document. Closes the laptop at the end of the lecture. Stands up. Puts the notebook and laptop into the backpack. Walks out of the lecture theatre. Walks along the corridor to the laboratory room. Walks into the lab. Sits at a lab computer. Logs in with the student ID and password. Opens the terminal window. Types commands on the keyboard. Reads the output on the screen. Types a second command. Writes the results into the notebook. Turns to the lab partner and says: 'The scan finished, the port is open.' Saves the file to the student drive. Logs out. Stands up. Picks up the backpack. Walks out of the lab."
+    },
+    {
+      "time": "12:00-12:40",
+      "location": "Out",
+      "activity": "Eating lunch on campus",
+      "desc": "Walks into the campus food court. Walks to a food counter. Reads the menu board. Tells the server: 'One rice bowl, please.' Taps the bank card on the payment terminal. Picks up the tray. Carries the tray to an empty table. Sits on the chair. Puts the backpack on the floor. Picks up the fork. Eats the rice bowl. Drinks water from the bottle in the backpack. Picks up the phone. Opens the messages application. Reads a message from a client. Types a reply with the thumb. Presses send. Puts the phone down on the table. Finishes eating. Stands up. Carries the tray to the return rack. Puts the tray down. Picks up the backpack. Walks out of the food court."
+    },
+    {
+      "time": "12:40-15:30",
+      "location": "Out",
+      "activity": "Studying in the campus library and working on a group assignment",
+      "desc": "Walks into the library. Walks past the shelves to a study table. Sits on a chair. Puts the backpack on the floor. Opens the laptop. Presses the power button. Opens the group assignment document. Types paragraphs into the document. Opens the shared group chat on the phone. Reads messages from group members. Types a message: 'I've finished section two, uploading now.' Presses send. Attaches the document file. Presses send. Opens a reference database in the browser. Searches for journal articles on network security. Reads an abstract on the screen. Copies the citation into a reference manager. Types notes into a second document. Stands up. Walks to the shelf. Takes a book from the shelf. Walks back to the table. Sits down. Opens the book. Reads a chapter. Writes notes in the notebook. Closes the book. Opens the assignment document again. Edits the introduction paragraph. Saves the file. Checks the time on the phone. Closes the laptop. Puts the laptop and book into the backpack. Stands up. Pushes the chair in. Walks out of the library."
+    },
+    {
+      "time": "15:30-16:10",
+      "location": "Out",
+      "activity": "Commuting home by public transport",
+      "desc": "Walks to the bus loop on campus. Stands at the bus stop. Steps onto the bus. Taps the transport card on the reader. Walks to a seat. Sits down. Puts the backpack on the lap. Takes the phone from the pocket. Opens the email application. Reads a client email. Types a short reply. Presses send. Puts the phone back into the pocket. Rides the bus to the station. Stands up. Steps off the bus. Walks to the train platform. Steps onto the train. Taps the card on the reader. Sits on a seat. Closes eyes briefly. Opens eyes. Stands up at the home station. Steps off the train. Walks down the stairs. Walks along the street to the house. Opens the front door. Steps inside. Closes the front door."
+    },
+    {
+      "time": "16:10-16:30",
+      "location": "Bathroom",
+      "activity": "Freshening up and changing into comfortable clothes",
+      "desc": "Walks into the Bathroom. Turns on the Bathroom light. Turns on the tap. Rinses both hands under the water. Turns off the tap. Takes a towel from the hook. Wipes the face and hands. Hangs the towel back on the hook. Unzips the jacket. Takes off the jacket. Hangs the jacket on the hook behind the door. Takes off the shirt. Puts on a t-shirt from the backpack. Takes off the trousers. Puts on sweatpants. Picks up the jacket and school clothes. Walks out of the Bathroom. Turns off the Bathroom light."
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner early to avoid the evening kitchen rush, then storing it for the shared dinner",
+      "desc": "Walks into the Kitchen. Turns on the Kitchen light. Opens the refrigerator door. Takes out vegetables, chicken and a jar of sauce. Closes the refrigerator door. Puts the items on the counter. Picks up a knife from the drawer. Cuts the vegetables on the cutting board. Picks up a pot. Fills the pot with water at the tap. Puts the pot on the InductionCooker. Presses the power button. Adds the chopped vegetables into the pot. Picks up a frying pan. Places the pan on the InductionCooker. Pours oil into the pan. Places the chicken into the pan. Turns the chicken with a spatula. Pours the sauce into the pan. Stirs the pan with the spatula. Turns off the InductionCooker. Picks up a container from the cupboard. Spoons the chicken and vegetables into the container. Puts the lid on the container. Opens the refrigerator door. Places the container on the shelf. Closes the refrigerator door. Washes the knife, cutting board, pot and pan under the tap. Places them on the drying rack. Wipes the counter with a cloth. Turns off the Kitchen light. Walks out."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Bedroom 4",
+      "activity": "Doing freelance web development work on the computer at the desk",
+      "desc": "Walks into Bedroom 4. Sits down on the desk chair. Presses the power button on the Computer. Turns on the Monitor. Turns on the DeskLamp. Opens the code editor. Opens the client website project folder. Reads the file structure on the screen. Types HTML markup on the keyboard. Types CSS rules into the stylesheet. Saves the file with a keyboard shortcut. Opens the browser. Presses the refresh button. Views the page layout on the screen. Adjusts the margin values in the stylesheet. Saves the file again. Refreshes the browser. Presses the browser zoom to check the mobile view. Types a JavaScript function into the script file. Saves the file. Presses the refresh button. Watches the console output. Fixes a syntax error. Saves the file. Opens the project task list on the second monitor. Ticks off two completed tasks."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the kitchen table with Member 3, Member 6, and Member 2 during the shared household dinner period",
+      "desc": "Walks into the Kitchen. Opens the refrigerator door. Takes out the container of chicken and vegetables prepared earlier. Closes the refrigerator door. Puts the container into the Microwave. Presses the timer button for two minutes. Presses start. Waits beside the Microwave. Opens the Microwave door when it beeps. Takes out the container. Picks up a plate from the cupboard. Spoons the food onto the plate. Puts the container into the sink. Carries the plate to the kitchen table. Pulls out a chair. Sits down. Says to Member 3, Member 6 and Member 2: 'How was everyone's day?' Eats the chicken and vegetables with a fork. Listens to Member 6 talk about the warehouse shift. Nods. Picks up the water glass. Drinks water. Continues eating. Puts the fork down on the plate. Stands up. Picks up the plate and glass."
+    },
+    {
+      "time": "18:45-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and cleaning the cooking area alongside Member 3",
+      "desc": "Carries the plate, glass and container to the sink. Turns on the tap. Picks up the sponge. Squeezes soap onto the sponge. Scrubs the plate under the running water. Rinses the plate. Places the plate on the drying rack. Scrubs the glass. Rinses the glass. Places the glass on the drying rack. Scrubs the container. Rinses the container. Places the container on the drying rack. Turns off the tap. Picks up the cloth. Wipes the kitchen table surface. Wipes the counter next to Member 3. Says to Member 3: 'I'll do the bench, you take the stove.' Wrings the cloth over the sink. Hangs the cloth on the rail. Pushes the chair in at the table."
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Bedroom 4",
+      "activity": "Continuing freelance client work, coding and debugging a website",
+      "desc": "Walks into Bedroom 4. Sits down on the desk chair. Wakes the Monitor by moving the mouse. Opens the code editor. Opens the script file. Reads the error log in the console panel. Types a breakpoint command. Reloads the page in the browser. Reads the console output. Finds the undefined variable line. Types the corrected variable declaration. Saves the file. Reloads the page. Presses the form submit button to test the contact form. Types test data into the input fields. Presses submit. Reads the success message on the screen. Opens the browser developer tools. Checks the network request status code. Closes the developer tools. Types a second function for form validation. Saves the file. Runs the test again. Types test data with an invalid email. Presses submit. Reads the validation error message. Fixes the regular expression. Saves the file. Runs the test a third time. Presses submit. Reads the success message. Opens the client email and types a progress note. Presses save as draft. Turns the chair toward the second monitor. Reads the project checklist. Highlights two remaining tasks in the editor."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Kitchen",
+      "activity": "Making tea and a light snack and tidying the kitchen counter",
+      "desc": "Walks into the Kitchen. Turns on the Kitchen light. Fills the kettle with water at the tap. Puts the kettle on its base. Presses the kettle switch. Opens the cupboard. Takes out a mug. Drops a tea bag into the mug. Opens the cupboard again. Takes out a packet of biscuits. Opens the packet. Takes two biscuits. Puts them on a small plate. Pours boiling water into the mug. Picks up the mug and plate. Carries them to the kitchen table. Sits down. Sips the tea. Eats a biscuit. Stands up. Picks up the cloth. Wipes the kitchen counter. Puts the biscuit packet back into the cupboard. Closes the cupboard door. Carries the mug and plate to the sink. Rinses the plate. Places it on the drying rack. Picks up the mug. Walks out of the Kitchen with the mug."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and completing night-time routine",
+      "desc": "Walks into the Bathroom. Turns on the Bathroom light. Puts the mug on the shelf. Turns on the shower tap. Steps under the water. Wets the hair and body. Picks up the shampoo bottle. Pours shampoo into the palm. Rubs the shampoo into the hair. Rinses the hair. Picks up the soap. Rubs the soap over the arms and body. Rinses the body. Turns off the shower tap. Steps out. Picks up the towel. Dries the hair and body. Picks up the toothbrush. Squeezes toothpaste onto the bristles. Brushes the teeth. Rinses the mouth at the tap. Turns off the tap. Wipes the face with the towel. Hangs the towel on the hook. Picks up the mug. Turns off the Bathroom light. Opens the door and walks out."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bedroom 4",
+      "activity": "Finishing freelance tasks, testing code and sending the update to the client",
+      "desc": "Walks into Bedroom 4. Puts the mug on the desk. Sits down on the desk chair. Moves the mouse to wake the Monitor. Opens the code editor. Types the final CSS adjustment. Saves the file. Opens the browser. Reloads the page. Clicks through each navigation link. Reads each page on the screen. Opens the developer tools. Checks the console for errors. Closes the developer tools. Opens the email client. Types a message to the client describing the completed changes and the deployment link. Attaches the screenshot file. Presses send. Closes the browser tab. Drinks the remaining tea from the mug. Puts the mug on the desk."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 4",
+      "activity": "Winding down, dimming the desk lamp and reading on the phone",
+      "desc": "Saves all open files with a keyboard shortcut. Closes the code editor. Closes the browser. Shuts down the Computer. Turns off the Monitor. Turns the DeskLamp knob to dim the light. Picks up the mug. Stands up. Walks to the door. Opens the door. Walks to the Kitchen. Rinses the mug at the sink. Places the mug on the drying rack. Walks back to Bedroom 4. Closes the bedroom door. Sits on the bed. Picks up the phone. Opens a reading application. Scrolls down the page with the thumb. Reads the article. Scrolls again. Turns onto the side on the bed."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 4",
+      "activity": "Continuing to wind down, reading quietly and setting an alarm for tomorrow",
+      "desc": "Continues scrolling the article on the phone. Puts the phone down on the nightstand. Sits up. Pulls the blanket back. Stands up. Walks to the DeskLamp. Turns the DeskLamp switch off. Walks to the door. Turns off the bedroom light. Walks back to the bed in the dim light. Sits on the bed. Picks up the phone from the nightstand. Opens the clock application. Presses the alarm time field. Sets the alarm for 06:50. Presses save. Presses the alarm toggle to on. Closes the clock application. Puts the phone on the nightstand. Lies down on the bed. Pulls the blanket over the body. Closes eyes."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lies on the bed with eyes closed. Turns onto the right side. Pulls the blanket up to the shoulder. Adjusts the pillow under the head. Remains lying still. Turns onto the left side. Extends the left arm under the pillow. Remains lying still. Turns onto the back. Breathes steadily with eyes closed. Turns onto the right side again. Pulls the blanket over the shoulder. Remains lying still without moving. Continues sleeping on the bed until the end of the hour."
+    }
+  ]
+}

@@ -15,6 +15,17 @@ import generate_world as gw
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 
+def _load_json_optional(path):
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError) as exc:
+        print(f"[Warning] could not read {path}: {exc}")
+        return None
+
+
 def run_step(world_id, house=0, seed=42):
     world_dir = os.path.join(gw.WORLDS_DIR, world_id)
     if not os.path.isdir(world_dir):
@@ -41,7 +52,28 @@ def run_step(world_id, house=0, seed=42):
     with open(hpath, "w", encoding="utf-8") as f:
         json.dump(household, f, ensure_ascii=False, indent=2)
 
-    gw.save_household_artifacts(world_id, house, [], [], 0, household)
+    aligned = _load_json_optional(os.path.join(house_dir, "aligned_texts.json"))
+    if not isinstance(aligned, list):
+        aligned = []
+    provenance = _load_json_optional(os.path.join(house_dir, "persona_provenance.json"))
+    if isinstance(provenance, dict):
+        canonical = provenance.get("canonical_persona_texts")
+        if not isinstance(canonical, list):
+            canonical = []
+        persona_seed = provenance.get("seed")
+        if not isinstance(persona_seed, int) or isinstance(persona_seed, bool):
+            persona_seed = 0
+        if not aligned and isinstance(provenance.get("aligned_texts"), list):
+            aligned = provenance["aligned_texts"]
+    else:
+        canonical = []
+        persona_seed = 0
+        print(f"[Warning] persona_provenance.json missing for house {house}; "
+              f"personas.json will use seed 0 and no canonical texts")
+    if not aligned:
+        print(f"[Warning] no aligned persona texts found for house {house}; personas.json will be empty")
+
+    gw.save_household_artifacts(world_id, house, aligned, canonical, persona_seed, household)
     house_meta = {
         "house_id": f"house_{house + 1:04d}",
         "type": household.get("type", "?"),

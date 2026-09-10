@@ -1,0 +1,101 @@
+{
+  "member": "Member 6",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 6",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe steadily. Turn over. Pull blanket up. Remain asleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Wake up, wash face, brush teeth and get dressed for the day, finishing before Member 4's 07:00 bathroom slot",
+      "desc": "Wake up. Sit up in bed. Swing legs out of bed. Stand up. Walk to bathroom. Turn on bathroom light. Turn on tap. Wet face. Apply soap. Rinse face. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit into sink. Turn off tap. Dry face with towel. Turn off light. Walk to bedroom. Open wardrobe. Take out clothes. Put on shirt. Put on pants. Put on socks. Put on shoes. Check time on phone."
+    },
+    {
+      "time": "07:00-07:15",
+      "location": "Bedroom 6",
+      "activity": "Checking the shared house calendar and public transit timetable, skimming X and Messenger",
+      "desc": "Pick up phone. Unlock phone. Open calendar app. Scroll through shared house calendar. Open transit app. Check timetable for Monash University. Close transit app. Open X app. Scroll through feed. Close X app. Open Messenger app. Read messages. Type a reply. Put down phone."
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating a keto breakfast and packing a low-carb lunch and snacks for the day, having breakfast together with Member 4",
+      "desc": "Walk to kitchen. Open refrigerator. Take out eggs, cheese, spinach. Place on counter. Open cupboard. Take out frying pan. Place pan on stove. Turn on stove. Crack eggs into bowl. Whisk eggs. Pour into pan. Add cheese and spinach. Cook. Turn off stove. Slide omelette onto plate. Place plate on table. Sit at table. Greet Member 4. Eat breakfast. Drink water. Open lunchbox. Pack remaining omelette. Add nuts and cheese. Close lunchbox. Place in bag."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 6",
+      "activity": "Packing study materials and finalising the bag before leaving",
+      "desc": "Open backpack. Place laptop inside. Add notebook. Add textbook. Add pen case. Add charger. Zip backpack. Put on jacket. Pick up backpack. Put on shoes. Check phone for time. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-08:50",
+      "location": "Out",
+      "activity": "Commuting by public transit to Monash University",
+      "desc": "Walk to bus stop. Wait at stop. Check phone. Bus arrives. Board bus. Tap transit card. Find seat. Sit down. Put backpack on lap. Look out window. Check phone. Bus arrives at train station. Stand up. Exit bus. Walk to train platform. Wait for train. Train arrives. Board train. Find seat. Sit down. Read course notes. Train arrives at Monash. Stand up. Exit train. Walk to campus."
+    },
+    {
+      "time": "08:50-12:30",
+      "location": "Out",
+      "activity": "Attending Bachelor of Commerce and Engineering lectures and tutorials, sitting in a quiet low-motion seat",
+      "desc": "Enter lecture hall. Find quiet low-motion seat. Sit down. Take out laptop. Open laptop. Take out notebook. Open notebook. Listen to lecture. Type notes. Write notes. Raise hand. Ask question. Listen to answer. Continue typing. Lecture ends. Pack laptop. Walk to tutorial room. Enter room. Sit down. Take out notebook. Listen to tutor. Participate in discussion. Take notes. Tutorial ends. Pack bag."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Eating the packed keto lunch on campus",
+      "desc": "Walk to campus seating area. Find table. Sit down. Open backpack. Take out lunchbox. Open lunchbox. Take out fork. Eat lunch. Drink water from bottle. Close lunchbox. Put lunchbox in backpack. Wipe mouth with napkin."
+    },
+    {
+      "time": "13:00-13:45",
+      "location": "Out",
+      "activity": "Studying and reading course readings in the campus library quiet space",
+      "desc": "Walk to library. Enter library. Find quiet space. Sit at desk. Take out textbook. Open textbook. Read chapter. Highlight key points. Take out notebook. Write notes. Turn page. Continue reading. Check phone for time. Close textbook. Pack bag."
+    },
+    {
+      "time": "13:45-14:30",
+      "location": "Out",
+      "activity": "Commuting by public transit to the retail workplace",
+      "desc": "Walk to bus stop. Wait. Check phone. Bus arrives. Board. Tap card. Find seat. Sit. Look out window. Bus arrives at stop. Stand. Exit. Walk to retail store. Enter store."
+    },
+    {
+      "time": "14:30-21:00",
+      "location": "Out",
+      "activity": "Working the retail shift",
+      "desc": "Clock in. Greet manager. Walk to shop floor. Straighten shelves. Help customer find item. Operate cash register. Scan items. Take payment. Bag items. Say 'Thank you'. Stock shelves. Take inventory. Assist customer with return. Process return. Clean counter. Take break. Eat snack. Drink water. Return to floor. Help another customer. Clock out."
+    },
+    {
+      "time": "21:00-21:40",
+      "location": "Out",
+      "activity": "Commuting home by public transit",
+      "desc": "Walk to bus stop. Wait. Check phone. Bus arrives. Board. Tap card. Find seat. Sit. Look out window. Check messages. Bus arrives at stop. Stand. Exit. Walk home. Enter house."
+    },
+    {
+      "time": "21:40-22:10",
+      "location": "Kitchen",
+      "activity": "Cooking and eating a low-carb dinner and starting to batch-cook low-carb meals for the coming days, sharing the kitchen with Member 1 who is preparing his overnight bag and herbal tea",
+      "desc": "Walk to kitchen. Greet Member 1. Open fridge. Take out chicken and vegetables. Place on counter. Open cupboard. Take out pan. Place on stove. Turn on stove. Cut chicken. Cut vegetables. Cook chicken and vegetables. Turn off stove. Slide onto plate. Sit at table. Eat dinner. Talk to Member 1. Finish eating. Wash plate. Start batch-cooking: take out containers. Fill with cooked food. Seal containers. Place in fridge."
+    },
+    {
+      "time": "22:10-22:25",
+      "location": "Bathroom",
+      "activity": "Showering and washing up (bathroom free before Member 4's 22:30 bathroom slot)",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Undress. Step into shower. Wash body. Wash hair. Rinse. Turn off shower. Step out. Dry with towel. Put on pajamas. Brush teeth. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "22:25-22:55",
+      "location": "Bedroom 6",
+      "activity": "Reading a book in bed and noting down questions about health and insurance paperwork for later face-to-face help",
+      "desc": "Lie down in bed. Pick up book. Open book. Read page. Turn page. Read more. Put down book. Pick up pen. Open notebook. Write question about health insurance. Write another question about paperwork. Close notebook. Put down pen. Pick up book. Read again."
+    },
+    {
+      "time": "22:55-24:00",
+      "location": "Bedroom 6",
+      "activity": "Sleeping",
+      "desc": "Turn off light. Lie in bed. Close eyes. Breathe slowly. Turn onto side. Pull blanket up. Remain asleep."
+    }
+  ]
+}

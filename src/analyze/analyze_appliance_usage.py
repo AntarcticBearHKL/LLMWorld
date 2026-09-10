@@ -8,48 +8,46 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import iter_house_days, list_dates
+from simulate import create_home_from_household
 
-from analyze_nilm import load_true_appliances
+
+def appliance_name_map(household):
+    home = create_home_from_household(household)
+    names = {}
+    for unique_id, appliance in home.appliance_registry.items():
+        names[unique_id] = getattr(appliance, "name", None) or unique_id
+    return names
 
 
-def scan_house_dirs(world_id, scenario, date_str):
-    simulation_root = os.path.join(sim_root(world_id))
-    house_dirs = []
-    if not os.path.isdir(simulation_root):
-        return house_dirs
-    for postcode_dir in sorted(os.listdir(simulation_root)):
-        postcode_path = os.path.join(simulation_root, postcode_dir)
-        if not os.path.isdir(postcode_path) or postcode_dir == "population":
-            continue
-        for house_id in sorted(os.listdir(postcode_path)):
-            scenario_dir = os.path.join(postcode_path, house_id, scenario)
-            if not os.path.isdir(scenario_dir):
-                continue
-            date_dirs = [d for d in sorted(os.listdir(scenario_dir))
-                         if os.path.isdir(os.path.join(scenario_dir, d))]
-            if date_str:
-                date_dirs = [d for d in date_dirs
-                             if d == date_str.replace("-", "")]
-            if date_dirs:
-                house_dirs.append((house_id,
-                                   os.path.join(scenario_dir, date_dirs[-1])))
-    return house_dirs
+def scan_house_records(world_id, scenario, date_str):
+    dates = list_dates(world_id)
+    if date_str:
+        date = date_str
+    elif dates:
+        date = dates[-1]
+    else:
+        return []
+    return list(iter_house_days(world_id, date=date, policy=scenario))
 
 
 def build_report(world_id, scenario, date_str):
-    house_dirs = scan_house_dirs(world_id, scenario, date_str)
-    if not house_dirs:
+    records = scan_house_records(world_id, scenario, date_str)
+    if not records:
         raise ValueError("No household data found")
     appliance_totals = {}
     per_house = []
-    for house_id, house_dir in house_dirs:
-        appliances = load_true_appliances(house_dir)
+    for record in records:
+        names = appliance_name_map(record["household"])
+        appliances = [{"name": names.get(unique_id, unique_id),
+                       "total_energy_kwh": kwh}
+                      for unique_id, kwh in record["per_appliance_kwh"].items()]
         if not appliances:
             continue
         total_kwh = sum(a["total_energy_kwh"] for a in appliances)
         top = max(appliances, key=lambda a: a["total_energy_kwh"]) if appliances else None
         per_house.append({
-            "house_id": house_id,
+            "house_id": record["house_id"],
             "appliance_count": len(appliances),
             "total_kwh": round(total_kwh, 4),
             "top_appliance": top["name"] if top else None,
@@ -88,7 +86,11 @@ def main():
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
-    report = build_report(args.world_id, args.scenario, args.date)
+    try:
+        report = build_report(args.world_id, args.scenario, args.date)
+    except ValueError as exc:
+        print(f"[Error] {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
     report["date"] = args.date or "latest"

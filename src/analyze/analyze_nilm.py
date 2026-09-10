@@ -8,29 +8,20 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import iter_house_days, list_dates
+from simulate import create_home_from_household
 
 
-def load_true_appliances(house_dir):
-    info_dir = os.path.join(house_dir, "ElectricityInfo")
+def load_true_appliances(record):
+    home = create_home_from_household(record.get("household", {}))
+    per_appliance_kwh = record.get("per_appliance_kwh", {})
     appliances = []
-    if not os.path.isdir(info_dir):
-        return appliances
-    for name in sorted(os.listdir(info_dir)):
-        if not name.endswith(".json") or name.startswith("house_load_profile") \
-                or name == "TotalEnergySummary.json":
-            continue
-        try:
-            with open(os.path.join(info_dir, name), "r", encoding="utf-8") as f:
-                data = json.load(f)
-        except Exception:
-            continue
-        info = data.get("appliance_info", {})
-        usage = data.get("usage_summary", {})
+    for unique_id, appliance in home.appliance_registry.items():
         appliances.append({
-            "unique_id": info.get("unique_id", name),
-            "name": info.get("name", name),
-            "power_watts": info.get("power_watts", 0),
-            "total_energy_kwh": usage.get("total_energy_kwh", 0.0),
+            "unique_id": unique_id,
+            "name": appliance.name,
+            "power_watts": appliance.power_watts,
+            "total_energy_kwh": per_appliance_kwh.get(unique_id, 0.0),
         })
     return appliances
 
@@ -120,38 +111,24 @@ def main():
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
-    simulation_root = os.path.join(sim_root(args.world_id))
-    house_dirs = []
-    for postcode_dir in sorted(os.listdir(simulation_root)) if os.path.isdir(simulation_root) else []:
-        postcode_path = os.path.join(simulation_root, postcode_dir)
-        if not os.path.isdir(postcode_path) or postcode_dir == "population":
-            continue
-        for house_id in sorted(os.listdir(postcode_path)):
-            scenario_dir = os.path.join(postcode_path, house_id, args.scenario)
-            if not os.path.isdir(scenario_dir):
-                continue
-            date_dirs = [d for d in sorted(os.listdir(scenario_dir))
-                         if os.path.isdir(os.path.join(scenario_dir, d))]
-            if args.date:
-                date_dirs = [d for d in date_dirs if d == args.date.replace("-", "")]
-            if date_dirs:
-                house_dirs.append((house_id, os.path.join(scenario_dir, date_dirs[-1])))
+    if not args.date:
+        dates = list_dates(args.world_id)
+        args.date = dates[-1] if dates else None
 
     reports = []
-    for house_id, house_dir in house_dirs:
-        appliances = load_true_appliances(house_dir)
-        profile_path = os.path.join(house_dir, "ElectricityInfo",
-                                    "house_load_profile_1440min.json")
-        if not os.path.exists(profile_path):
+    for record in iter_house_days(args.world_id, date=args.date, policy=args.scenario):
+        appliances = load_true_appliances(record)
+        try:
+            report = build_report(record["load_profile_watts"], appliances)
+        except ValueError as exc:
+            print(f"Skipping {record['house_id']}: {exc}")
             continue
-        with open(profile_path, "r", encoding="utf-8") as f:
-            profile = json.load(f)
-        report = build_report(profile.get("load_profile_watts", []), appliances)
-        report["house_id"] = house_id
+        report["house_id"] = record["house_id"]
         reports.append(report)
 
     if not reports:
-        raise ValueError("No disaggregatable household data found")
+        print(f"No disaggregatable household data found for {args.world_id}")
+        sys.exit(1)
     report = {
         "world_id": args.world_id,
         "scenario": args.scenario,

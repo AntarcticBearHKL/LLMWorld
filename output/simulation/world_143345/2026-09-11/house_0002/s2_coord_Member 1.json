@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and showering"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to hospital by bus (using other transport; Member 2 is driving the EV to the clinic)"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist at the hospital"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home by bus (using other transport; Member 2 is driving the EV home)"
+    },
+    {
+      "time": "18:00-18:15",
+      "location": "Bedroom 1",
+      "activity": "Changing into comfortable clothes and unpacking"
+    },
+    {
+      "time": "18:15-18:30",
+      "location": "Bathroom",
+      "activity": "Washing up (after Member 2 finishes in the bathroom)"
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Helping Member 2 finish cooking and eating dinner together"
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Clearing the table and tidying the kitchen together with Member 2"
+    },
+    {
+      "time": "19:45-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing and doing a stretching session with Member 2"
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Study",
+      "activity": "Using computer for personal tasks alongside Member 2's study"
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine"
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

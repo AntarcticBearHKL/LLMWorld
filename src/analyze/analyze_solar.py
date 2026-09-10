@@ -130,8 +130,12 @@ def main():
     weather = args.weather or "Sunny"
     for p in profiles:
         p["weather"] = weather
-    report = build_report(profiles, args.capacity * 1000.0, season,
-                          args.battery, args.battery_power)
+    try:
+        report = build_report(profiles, args.capacity * 1000.0, season,
+                              args.battery, args.battery_power)
+    except ValueError as exc:
+        print(f"No simulation curves found for {args.world_id}: {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
     report["date"] = args.date or "latest"

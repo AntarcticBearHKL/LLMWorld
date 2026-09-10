@@ -1,0 +1,321 @@
+{
+  "member": "Member 4",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:00",
+      "location": "Bedroom 4",
+      "activity": "Waking up and getting dressed (bathroom is occupied by Member 6 until 07:00)",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:15",
+      "location": "Bathroom",
+      "activity": "Brushing teeth, quick wash and finishing getting ready (bathroom free before Member 1's 07:15 bathroom slot)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making tea",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:45",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:45-12:30",
+      "location": "Out",
+      "activity": "Attending cybersecurity lectures and working in the computer lab at Monash University",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Eating lunch and reviewing lecture notes on campus",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:15-14:00",
+      "location": "Out",
+      "activity": "Commuting home from Monash University by public transport",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "14:00-17:30",
+      "location": "Bedroom 4",
+      "activity": "Working remotely on freelance web development projects using computer and monitor",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 4",
+      "activity": "Finishing up work tasks and wrapping up for the day",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the kitchen table together with Member 1, Member 2 and Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:10",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen counters, sharing the kitchen tidy-up with Member 1, Member 2 and Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:10-21:30",
+      "location": "Bedroom 4",
+      "activity": "Studying coursework and coding personal projects on the computer",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 4",
+      "activity": "Relaxing in bed, browsing on the phone and watching videos",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Evening shower, wash and brushing teeth (finishing before Member 5's 23:00 bathroom slot)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

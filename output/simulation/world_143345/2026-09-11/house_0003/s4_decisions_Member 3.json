@@ -1,0 +1,351 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:25",
+      "start_minutes": 0,
+      "end_minutes": 385,
+      "location": "Bedroom 3",
+      "activity": "Sleeping restlessly with the fan on low; brief wakeful periods typical of poor sleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:25-06:50",
+      "start_minutes": 385,
+      "end_minutes": 410,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and showering with hot water; steady, unhurried morning routine (Bathroom free after Member 1 finishes at 06:25)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:50-07:00",
+      "start_minutes": 410,
+      "end_minutes": 420,
+      "location": "Bedroom 3",
+      "activity": "Getting dressed in school uniform and checking the school bag and planner",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "start_minutes": 420,
+      "end_minutes": 450,
+      "location": "Kitchen",
+      "activity": "Toasting bread and boiling the kettle; refilling the cat's food and water bowls (Kitchen free after Member 1 leaves at 07:00)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:50",
+      "start_minutes": 450,
+      "end_minutes": 470,
+      "location": "Dining Room",
+      "activity": "Eating breakfast quietly while taking the daily chronic-condition medication",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:05",
+      "start_minutes": 470,
+      "end_minutes": 485,
+      "location": "Kitchen",
+      "activity": "Washing up breakfast dishes and packing a lunch and water bottle; clearing the Kitchen before Member 2 uses it at 08:05",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:05-08:35",
+      "start_minutes": 485,
+      "end_minutes": 515,
+      "location": "Out",
+      "activity": "Commuting to secondary school by public transport, pacing carefully due to mild mobility limitation (no EV needed; Member 2 drives the EV alone at 08:35)",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:35-15:15",
+      "start_minutes": 515,
+      "end_minutes": 915,
+      "location": "Out",
+      "activity": "Attending full-day secondary school classes, taking notes and completing set work",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:15-15:45",
+      "start_minutes": 915,
+      "end_minutes": 945,
+      "location": "Out",
+      "activity": "Walking to the nearby grandparent's house for after-school caregiving duties",
+      "operations": []
+    },
+    {
+      "time": "15:45-17:15",
+      "start_minutes": 945,
+      "end_minutes": 1035,
+      "location": "Out",
+      "activity": "Caring for grandparent: preparing a light afternoon meal, sorting medication, tidying and keeping company",
+      "operations": []
+    },
+    {
+      "time": "17:15-17:45",
+      "start_minutes": 1035,
+      "end_minutes": 1065,
+      "location": "Out",
+      "activity": "Walking home from grandparent's house",
+      "operations": []
+    },
+    {
+      "time": "17:45-17:55",
+      "start_minutes": 1065,
+      "end_minutes": 1075,
+      "location": "Bedroom 3",
+      "activity": "Unpacking the school bag, changing into home clothes and greeting the cat",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:55-18:20",
+      "start_minutes": 1075,
+      "end_minutes": 1100,
+      "location": "Kitchen",
+      "activity": "Cooking dinner together with Member 1 and Member 2, using the induction cooker and rice cooker, preparing a meal compatible with everyone's dietary needs",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "18:20-18:50",
+      "start_minutes": 1100,
+      "end_minutes": 1130,
+      "location": "Dining Room",
+      "activity": "Eating dinner at the table with Member 1 and Member 2, air conditioner on, phone face-down for a calm meal",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "dining_room_airconditioner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:50-19:15",
+      "start_minutes": 1130,
+      "end_minutes": 1155,
+      "location": "Kitchen",
+      "activity": "Washing dishes with Member 1 and Member 2, wiping the counters and storing leftovers",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:15-19:50",
+      "start_minutes": 1155,
+      "end_minutes": 1190,
+      "location": "Laundry",
+      "activity": "Sorting and running a load of washing, then hanging items to dry (Member 1 and Member 2 are out walking the dog)",
+      "operations": [
+        {
+          "unique_id": "laundry_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "laundry_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:50-20:15",
+      "start_minutes": 1190,
+      "end_minutes": 1215,
+      "location": "Living Room",
+      "activity": "Sitting with Member 1 and Member 2 on the sofa, listening to music on the phone and sending one-on-one messages to a close friend",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:15-21:45",
+      "start_minutes": 1215,
+      "end_minutes": 1305,
+      "location": "Study",
+      "activity": "Completing homework and structured study at the computer with the desk lamp on (Study free; Member 2 uses it later at 21:45)",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:15",
+      "start_minutes": 1305,
+      "end_minutes": 1335,
+      "location": "Bedroom 3",
+      "activity": "Reading a book and listening to calm music to wind down and ease anxiety",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:40",
+      "start_minutes": 1335,
+      "end_minutes": 1360,
+      "location": "Bathroom",
+      "activity": "Showering and completing night-time hygiene routine before bed (Bathroom free until Member 2 at 22:45)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:40-24:00",
+      "start_minutes": 1360,
+      "end_minutes": 1440,
+      "location": "Bedroom 3",
+      "activity": "Lying in bed with the light off and the fan running, trying to fall asleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

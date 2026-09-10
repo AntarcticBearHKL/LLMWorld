@@ -3,7 +3,9 @@ import json
 import os
 import random
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "src"))
 
@@ -12,6 +14,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 import config
+import generate_world as gw
+from engine import policy as engine_policy
 from steps.world import s1_household_types, s2_persona_align, s3_household_build, s4_world_assemble
 from steps.simulate import s1_macro_plan, s2_coordinate, s3_enrich, s4_appliance_decision
 
@@ -43,9 +47,9 @@ def run_house(world_id, house, seed):
     return True
 
 
-def run_world(world_id, count, seed, workers=4):
-    print(f"\n########## WORLD {world_id} (count={count}, workers={workers}) ##########")
-    ok, r = s1_household_types.run_step(world_id, count, seed)
+def run_world(world_id, count, seed, workers=4, world_config=None):
+    print(f"\n########## WORLD {world_id} (count={count}, workers={workers}, config={world_config or 'default'}) ##########")
+    ok, r = s1_household_types.run_step(world_id, count, seed, world_config)
     if not ok:
         print(f"[Abort] s1 failed: {r}")
         return 1
@@ -57,53 +61,111 @@ def run_world(world_id, count, seed, workers=4):
     return 0 if all(results) else 1
 
 
-def get_member_names(world_id):
-    home = s1_macro_plan.load_home(world_id)
+def get_member_names(world_id, house="house_0001"):
+    home = s1_macro_plan.load_home(world_id, house)
     if home is None:
         return []
     members = list(home.members.values()) if isinstance(home.members, dict) else home.members
     return [m.name for m in members]
 
 
-def run_simulate(world_id, date, env, workers, member=None):
-    print(f"\n########## SIMULATE world={world_id} date={date} env={env} workers={workers} ##########")
-    names = get_member_names(world_id)
-    if not names:
-        print("[Abort] no members found")
-        return 1
-    targets = [member] if member else names
-    if member and str(member).isdigit():
-        targets = [names[int(member)]]
-    for m in targets:
-        if m not in names:
-            print(f"[Abort] member '{m}' not in {names}")
-            return 1
-    print(f"[Members] {targets}")
+def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4_only=False,
+                 houses=None, days=1):
+    print(f"\n########## SIMULATE world={world_id} env={env} workers={workers} "
+          f"policy={policy_spec or 'none'} s4_only={s4_only} days={days} houses={houses or 'all'} ##########")
+    policy_text, policy_tag = engine_policy.parse_policy_arg(policy_spec)
 
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        results = list(ex.map(lambda m: s1_macro_plan.run_step(world_id, m, date, env), targets))
-    if any(not r[0] for r in results):
-        print("[Abort] s1 failed for some members")
+    if days < 1:
+        print("[Abort] --days must be >= 1")
         return 1
-
-    results = [s2_coordinate.run_step(world_id, m, date, env) for m in targets]
-    if any(not r[0] for r in results):
-        print("[Abort] s2 failed for some members")
+    start = date or time.strftime("%Y-%m-%d")
+    try:
+        start_dt = datetime.strptime(start, "%Y-%m-%d")
+    except ValueError:
+        print(f"[Abort] invalid --date '{start}' (expected YYYY-MM-DD)")
         return 1
+    dates = [(start_dt + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(days)]
 
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        results = list(ex.map(lambda m: s3_enrich.run_step(world_id, m, date, env), targets))
-    if any(not r[0] for r in results):
-        print("[Abort] s3 failed for some members")
+    if isinstance(houses, str):
+        house_list = [h.strip() for h in houses.split(",") if h.strip()]
+    elif houses:
+        house_list = list(houses)
+    else:
+        house_list = gw.list_houses(world_id)
+    if not house_list:
+        print(f"[Abort] no houses found for world {world_id} (looked under {gw.WORLDS_DIR})")
         return 1
+    print(f"[Houses] {house_list}")
+    print(f"[Dates] {dates}")
 
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        results = list(ex.map(lambda m: s4_appliance_decision.run_step(world_id, m, date, env), targets))
-    if any(not r[0] for r in results):
-        print("[Abort] s4 failed for some members")
+    failed = []
+    for house in house_list:
+        names = get_member_names(world_id, house)
+        if not names:
+            print(f"[WARN] no members found world={world_id} house={house}; skipping")
+            failed.append((house, None))
+            continue
+        targets = [member] if member else names
+        if member and str(member).isdigit():
+            idx = int(member)
+            if 0 <= idx < len(names):
+                targets = [names[idx]]
+            else:
+                print(f"[WARN] member index {idx} out of range (0-{len(names)-1}) for house={house}; skipping")
+                failed.append((house, None))
+                continue
+        unknown = [m for m in targets if m not in names]
+        if unknown:
+            print(f"[WARN] member(s) {unknown} not in {names} for house={house}; skipping")
+            failed.append((house, None))
+            continue
+
+        for d in dates:
+            print(f"\n########## SIMULATE world={world_id} house={house} date={d} env={env} "
+                  f"workers={workers} policy={policy_spec or 'none'} s4_only={s4_only} ##########")
+            print(f"[Members] {targets}")
+
+            if not s4_only:
+                with ThreadPoolExecutor(max_workers=workers) as ex:
+                    results = list(ex.map(lambda m: s1_macro_plan.run_step(world_id, m, d, env, house=house), targets))
+                if any(not r[0] for r in results):
+                    print(f"[WARN] s1 failed for some members (house={house} date={d})")
+                    failed.append((house, d))
+                    continue
+
+                results = [s2_coordinate.run_step(world_id, m, d, env, house=house) for m in targets]
+                if any(not r[0] for r in results):
+                    print(f"[WARN] s2 failed for some members (house={house} date={d})")
+                    failed.append((house, d))
+                    continue
+
+                with ThreadPoolExecutor(max_workers=workers) as ex:
+                    results = list(ex.map(lambda m: s3_enrich.run_step(world_id, m, d, env, house=house), targets))
+                if any(not r[0] for r in results):
+                    print(f"[WARN] s3 failed for some members (house={house} date={d})")
+                    failed.append((house, d))
+                    continue
+            else:
+                print("[s4_only] skipping s1/s2/s3; reusing existing timelines")
+
+            with ThreadPoolExecutor(max_workers=workers) as ex:
+                results = list(ex.map(
+                    lambda m: s4_appliance_decision.run_step(
+                        world_id, m, d, env, policy_text=policy_text, policy_tag=policy_tag, house=house),
+                    targets))
+            if any(not r[0] for r in results):
+                print(f"[WARN] s4 failed for some members (house={house} date={d})")
+                failed.append((house, d))
+                continue
+
+            print(f"[Done] world={world_id} house={house} date={d} ({len(targets)} members)")
+
+    if failed:
+        print(f"\n########## SIMULATE FINISHED WITH {len(failed)} FAILURE(S) ##########")
+        for house, d in failed:
+            print(f"  [FAILED] house={house} date={d or '(setup)'}")
         return 1
-
-    print(f"\n########## SIMULATE DONE ({len(targets)} members) ##########")
+    print(f"\n########## SIMULATE DONE ({len(house_list)} houses x {len(dates)} days) ##########")
     return 0
 
 
@@ -111,18 +173,24 @@ def main():
     parser = argparse.ArgumentParser(description="LLMWorld single entry")
     parser.add_argument("--mode", choices=["world", "simulate"], required=True)
     parser.add_argument("--world", default=None, help="world ID (auto if omitted)")
+    parser.add_argument("--world-config", default=None, help="world config name under import/world/ (default Melbourne)")
     parser.add_argument("--count", type=int, default=1, help="world: number of household types")
     parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED)
     parser.add_argument("--date", default=None, help="simulate: start date")
+    parser.add_argument("--days", type=int, default=1, help="simulate: number of consecutive days (default: 1)")
+    parser.add_argument("--house", default=None, help="simulate: house id or comma-separated list (default: all houses)")
     parser.add_argument("--env", default=None, help="simulate: env id (default world id)")
     parser.add_argument("--workers", type=int, default=4, help="simulate: thread count")
     parser.add_argument("--member", default=None, help="simulate: only this member (name or index)")
+    parser.add_argument("--policy", default=None, help="simulate: policy to inject (tou | tou:<peak>,<valley>[,<shoulder>])")
+    parser.add_argument("--s4-only", action="store_true", help="simulate: skip s1-s3, re-run appliance decisions only (policy comparison runs)")
     args = parser.parse_args()
 
     world_id = args.world or auto_world_id()
     if args.mode == "world":
-        return run_world(world_id, args.count, args.seed, args.workers)
-    return run_simulate(world_id, args.date, args.env, args.workers, args.member)
+        return run_world(world_id, args.count, args.seed, args.workers, args.world_config)
+    return run_simulate(world_id, args.date, args.env, args.workers, args.member,
+                        args.policy, args.s4_only, args.house, args.days)
 
 
 if __name__ == "__main__":

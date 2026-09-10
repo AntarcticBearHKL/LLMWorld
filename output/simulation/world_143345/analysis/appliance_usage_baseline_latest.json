@@ -1,0 +1,191 @@
+{
+  "households": 3,
+  "grand_total_kwh": 100.2639,
+  "ranking": [
+    {
+      "name": "ElectricVehicle",
+      "total_kwh": 42.0,
+      "share_pct": 41.89,
+      "households": 3
+    },
+    {
+      "name": "AirConditioner",
+      "total_kwh": 8.6,
+      "share_pct": 8.58,
+      "households": 6
+    },
+    {
+      "name": "Computer",
+      "total_kwh": 8.3757,
+      "share_pct": 8.35,
+      "households": 13
+    },
+    {
+      "name": "InductionCooker",
+      "total_kwh": 7.5683,
+      "share_pct": 7.55,
+      "households": 3
+    },
+    {
+      "name": "WaterHeater",
+      "total_kwh": 6.75,
+      "share_pct": 6.73,
+      "households": 3
+    },
+    {
+      "name": "SpaceHeater",
+      "total_kwh": 4.5,
+      "share_pct": 4.49,
+      "households": 3
+    },
+    {
+      "name": "Refrigerator",
+      "total_kwh": 3.6,
+      "share_pct": 3.59,
+      "households": 3
+    },
+    {
+      "name": "Kettle",
+      "total_kwh": 2.7613,
+      "share_pct": 2.75,
+      "households": 4
+    },
+    {
+      "name": "Freezer",
+      "total_kwh": 2.0,
+      "share_pct": 1.99,
+      "households": 2
+    },
+    {
+      "name": "Light",
+      "total_kwh": 1.9867,
+      "share_pct": 1.98,
+      "households": 24
+    },
+    {
+      "name": "Fan",
+      "total_kwh": 1.92,
+      "share_pct": 1.91,
+      "households": 7
+    },
+    {
+      "name": "Oven",
+      "total_kwh": 1.594,
+      "share_pct": 1.59,
+      "households": 2
+    },
+    {
+      "name": "Microwave",
+      "total_kwh": 1.3915,
+      "share_pct": 1.39,
+      "households": 3
+    },
+    {
+      "name": "Toaster",
+      "total_kwh": 1.2,
+      "share_pct": 1.2,
+      "households": 3
+    },
+    {
+      "name": "Router",
+      "total_kwh": 0.87,
+      "share_pct": 0.87,
+      "households": 3
+    },
+    {
+      "name": "Monitor",
+      "total_kwh": 0.7965,
+      "share_pct": 0.79,
+      "households": 6
+    },
+    {
+      "name": "RangeHood",
+      "total_kwh": 0.75,
+      "share_pct": 0.75,
+      "households": 3
+    },
+    {
+      "name": "TV",
+      "total_kwh": 0.6937,
+      "share_pct": 0.69,
+      "households": 3
+    },
+    {
+      "name": "Dishwasher",
+      "total_kwh": 0.692,
+      "share_pct": 0.69,
+      "households": 3
+    },
+    {
+      "name": "WashingMachine",
+      "total_kwh": 0.6333,
+      "share_pct": 0.63,
+      "households": 3
+    },
+    {
+      "name": "VacuumCleaner",
+      "total_kwh": 0.6,
+      "share_pct": 0.6,
+      "households": 2
+    },
+    {
+      "name": "Phone",
+      "total_kwh": 0.3267,
+      "share_pct": 0.33,
+      "households": 12
+    },
+    {
+      "name": "DeskLamp",
+      "total_kwh": 0.275,
+      "share_pct": 0.27,
+      "households": 13
+    },
+    {
+      "name": "Dehumidifier",
+      "total_kwh": 0.175,
+      "share_pct": 0.17,
+      "households": 3
+    },
+    {
+      "name": "RiceCooker",
+      "total_kwh": 0.1562,
+      "share_pct": 0.16,
+      "households": 3
+    },
+    {
+      "name": "GameConsole",
+      "total_kwh": 0.048,
+      "share_pct": 0.05,
+      "households": 2
+    },
+    {
+      "name": "ClothesDryer",
+      "total_kwh": 0.0,
+      "share_pct": 0.0,
+      "households": 3
+    }
+  ],
+  "per_house": [
+    {
+      "house_id": "house_0001",
+      "appliance_count": 50,
+      "total_kwh": 52.9642,
+      "top_appliance": "ElectricVehicle"
+    },
+    {
+      "house_id": "house_0002",
+      "appliance_count": 38,
+      "total_kwh": 24.9226,
+      "top_appliance": "ElectricVehicle"
+    },
+    {
+      "house_id": "house_0003",
+      "appliance_count": 50,
+      "total_kwh": 22.3772,
+      "top_appliance": "AirConditioner"
+    }
+  ],
+  "world_id": "world_143345",
+  "scenario": "baseline",
+  "date": "latest"
+}

@@ -3,6 +3,8 @@ import os
 import random
 from datetime import datetime
 
+from appliances.catalog import ID_TYPE_SYNONYMS, appliance_family
+
 
 
 
@@ -157,7 +159,7 @@ def clean_json_text(text):
 
 def parse_json_response(text):
 
-    return json.loads(clean_json_text(text))
+    return json.loads(clean_json_text(text), strict=False)
 
 
 def parse_json_with_retry(prompt, raw_text, json_mode=True, thinking=False):
@@ -226,3 +228,270 @@ def validate_appliance_decisions(decision_data, home, warnings):
             warnings.append(f"Decision parse failed: {e} -> this time segment was skipped")
 
     return cleaned_decisions
+
+
+def _snake_token(text):
+
+    import re
+    text = str(text or "").strip()
+    text = re.sub(r'[^\w\s-]', '', text)
+    text = re.sub(r'[\s-]+', '_', text)
+    return text.lower()
+
+
+def _parse_uid_type(unique_id):
+
+    text = str(unique_id or "").strip().lower()
+    if not text:
+        return None
+    tokens = text.split("_")
+    candidates = []
+    if tokens and tokens[-1]:
+        candidates.append(("_".join(tokens[:-1]), tokens[-1]))
+    if len(tokens) >= 2:
+        candidates.append(("_".join(tokens[:-2]), "_".join(tokens[-2:])))
+    for prefix, fragment in candidates:
+        if fragment in ID_TYPE_SYNONYMS:
+            return ID_TYPE_SYNONYMS[fragment], prefix
+    return None
+
+
+def _appliance_prefix(appliance):
+
+    unique_id = str(getattr(appliance, "unique_id", "") or "")
+    name = getattr(appliance, "name", "") or ""
+    suffix = "_" + _snake_token(name)
+    if name and unique_id.endswith(suffix):
+        return unique_id[: -len(suffix)]
+    if "_" in unique_id:
+        return unique_id.rsplit("_", 1)[0]
+    return ""
+
+
+def repair_appliance_operations(operations, home, member_name=None):
+
+    clean_operations = []
+    repairs = []
+    unknowns = []
+    registry = getattr(home, "appliance_registry", None) or {}
+
+    for operation in operations or []:
+        if not isinstance(operation, dict):
+            continue
+        unique_id = operation.get("unique_id", "")
+        action = operation.get("action", "")
+
+        appliance = home.get_appliance(unique_id)
+        if appliance is not None:
+            if action in appliance.get_available_actions():
+                clean_operations.append({"unique_id": unique_id, "action": action})
+            else:
+                unknowns.append({"unique_id": unique_id, "action": action})
+            continue
+
+        replacement = None
+        parsed = _parse_uid_type(unique_id)
+        if parsed is not None:
+            type_token, prefix = parsed
+            family = appliance_family(type_token)
+            candidates = []
+            for candidate in registry.values():
+                if _appliance_prefix(candidate) != prefix:
+                    continue
+                if appliance_family(getattr(candidate, "name", None)) == family:
+                    candidates.append(candidate)
+            if len(candidates) == 1:
+                replacement = candidates[0]
+
+        if replacement is None:
+            if parsed is not None:
+                prefix = parsed[1]
+            elif "_" in str(unique_id):
+                prefix = str(unique_id).rsplit("_", 1)[0]
+            else:
+                prefix = ""
+            candidates = [c for c in registry.values() if _appliance_prefix(c) == prefix]
+            if len(candidates) == 1:
+                replacement = candidates[0]
+
+        if replacement is None:
+            unknowns.append({"unique_id": unique_id, "action": action})
+            continue
+
+        if action in replacement.get_available_actions():
+            repairs.append({"from": unique_id, "to": replacement.unique_id})
+            clean_operations.append({"unique_id": replacement.unique_id, "action": action})
+        else:
+            unknowns.append({"unique_id": unique_id, "action": action})
+
+    return clean_operations, repairs, unknowns
+
+
+def validate_and_clean_decisions(decision_data, home, member_name=None, rooms=None):
+
+    room_names = set(rooms) if rooms is not None else set(getattr(home, "rooms", {}) or {})
+    raw_decisions = decision_data.get("appliance_decisions", []) if isinstance(decision_data, dict) else []
+
+    cleaned_decisions = []
+    repaired_all = []
+    dropped_all = []
+    operations_in = 0
+    operations_kept = 0
+
+    for decision in raw_decisions:
+        if not isinstance(decision, dict):
+            continue
+        time_range = decision.get("time", "")
+        location = decision.get("location", "")
+        start_min, end_min = parse_time_range(time_range)
+
+        operations = decision.get("operations", []) or []
+        operations_in += len(operations)
+
+        clean_operations, repairs, unknowns = repair_appliance_operations(
+            operations, home, member_name=member_name)
+        repaired_all.extend(repairs)
+
+        final_operations = []
+        outside_home = location not in room_names
+        for operation in clean_operations:
+            if outside_home:
+                appliance = home.get_appliance(operation["unique_id"])
+                owner = getattr(appliance, "owner", None) if appliance is not None else None
+                if owner != member_name:
+                    dropped_all.append({"unique_id": operation["unique_id"], "action": operation["action"],
+                                        "reason": "out of home: room appliance not allowed"})
+                    continue
+                if operation["action"] == "charge_home":
+                    dropped_all.append({"unique_id": operation["unique_id"], "action": operation["action"],
+                                        "reason": "out of home: charge_home not allowed"})
+                    continue
+                if operation["action"] not in ("use", "charge_external", "idle"):
+                    dropped_all.append({"unique_id": operation["unique_id"], "action": operation["action"],
+                                        "reason": "out of home: action not allowed"})
+                    continue
+            final_operations.append(operation)
+
+        for unknown in unknowns:
+            dropped_all.append({"unique_id": unknown.get("unique_id"), "action": unknown.get("action"),
+                                "reason": "unknown appliance id or invalid action"})
+
+        operations_kept += len(final_operations)
+        cleaned_decisions.append({
+            "time": time_range,
+            "start_minutes": start_min,
+            "end_minutes": end_min,
+            "location": location,
+            "activity": decision.get("activity", ""),
+            "operations": final_operations,
+        })
+
+    report = {
+        "segments": len(cleaned_decisions),
+        "operations_in": operations_in,
+        "operations_kept": operations_kept,
+        "repaired": repaired_all,
+        "dropped": dropped_all,
+        "valid": not repaired_all and not dropped_all,
+    }
+    return cleaned_decisions, report
+
+
+def _normalize_hhmm(value):
+
+    text = str(value).strip().replace("：", ":")
+    if ":" not in text:
+        return None
+    hour_text, minute_text = text.split(":", 1)
+    if not hour_text.isdigit() or not minute_text.isdigit():
+        return None
+    hour = int(hour_text)
+    minute = int(minute_text)
+    if hour > 24 or minute > 59:
+        return None
+    if hour == 24 and minute != 0:
+        return None
+    return f"{hour:02d}:{minute:02d}"
+
+
+def _hhmm_to_minutes(hhmm):
+
+    hour, minute = hhmm.split(":")
+    return int(hour) * 60 + int(minute)
+
+
+def _minutes_to_hhmm(minutes):
+
+    if minutes >= 1440:
+        return "24:00"
+    return f"{minutes // 60:02d}:{minutes % 60:02d}"
+
+
+_DASH_VARIANTS = ("–", "—", "−", "－")
+
+
+def normalize_time_range(time_str, next_start=None, prev_end=None):
+
+    if time_str is None:
+        return time_str
+    text = str(time_str).strip()
+    for dash in _DASH_VARIANTS:
+        text = text.replace(dash, "-")
+    text = text.replace("：", ":")
+    text = "".join(text.split())
+    if not text:
+        return time_str
+
+    parts = text.split("-")
+    if len(parts) == 2:
+        start = _normalize_hhmm(parts[0])
+        end = _normalize_hhmm(parts[1])
+        if start is not None and end is not None:
+            return f"{start}-{end}"
+        return time_str
+    if len(parts) > 2:
+        return time_str
+
+    start = _normalize_hhmm(text)
+    if start is None:
+        return time_str
+
+    start_minutes = _hhmm_to_minutes(start)
+    end_minutes = None
+    if next_start is not None:
+        next_text = str(next_start).strip()
+        for dash in _DASH_VARIANTS:
+            next_text = next_text.replace(dash, "-")
+        next_text = next_text.replace("：", ":").split("-")[0].strip()
+        next_value = _normalize_hhmm(next_text)
+        if next_value is not None:
+            end_minutes = _hhmm_to_minutes(next_value)
+    if end_minutes is None or end_minutes <= start_minutes:
+        end_minutes = start_minutes + 60
+    if end_minutes > 1440:
+        end_minutes = 1440
+    return f"{start}-{_minutes_to_hhmm(end_minutes)}"
+
+
+def normalize_activity_times(items, key="time", repair_log=None):
+
+    result = []
+    if not items:
+        return result
+    for index, item in enumerate(items):
+        if not isinstance(item, dict):
+            result.append(item)
+            continue
+        original = item.get(key)
+        next_start = None
+        if index + 1 < len(items):
+            next_item = items[index + 1]
+            if isinstance(next_item, dict):
+                next_start = next_item.get(key)
+        normalized = normalize_time_range(original, next_start=next_start)
+        new_item = dict(item)
+        new_item[key] = normalized
+        if normalized != original and repair_log is not None:
+            repair_log.append(f"segment {index + 1}: '{original}' -> '{normalized}'")
+        result.append(new_item)
+    return result

@@ -1,0 +1,306 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-00:50",
+      "start_minutes": 0,
+      "end_minutes": 50,
+      "location": "Bedroom 2",
+      "activity": "Lying in bed winding down, sketching art ideas in a notebook and scrolling phone, not yet sleepy",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "00:50-07:15",
+      "start_minutes": 50,
+      "end_minutes": 435,
+      "location": "Bedroom 2",
+      "activity": "Sleeping (night-owl schedule, short night before a workday)",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:40",
+      "start_minutes": 435,
+      "end_minutes": 460,
+      "location": "Bathroom",
+      "activity": "Showering, washing up and getting ready, running behind schedule (Bathroom is free: Member 1 has already left and Member 3 is at breakfast)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:00",
+      "start_minutes": 460,
+      "end_minutes": 480,
+      "location": "Kitchen",
+      "activity": "Making and eating a quick breakfast that follows the medically restricted diet (Kitchen is free after Member 3's 07:00-07:30 breakfast)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:10",
+      "start_minutes": 480,
+      "end_minutes": 490,
+      "location": "Bedroom 2",
+      "activity": "Getting dressed, packing work bag and art supplies",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:15",
+      "start_minutes": 490,
+      "end_minutes": 495,
+      "location": "Garage",
+      "activity": "Unplugging and starting the personal electric vehicle, loading bags",
+      "operations": [
+        {
+          "unique_id": "garage_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:15-09:10",
+      "start_minutes": 495,
+      "end_minutes": 550,
+      "location": "Out",
+      "activity": "Drive the EV to work, arriving late due to a rushed start",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:10-12:40",
+      "start_minutes": 550,
+      "end_minutes": 760,
+      "location": "Out",
+      "activity": "Working in retail management and healthcare administration: store operations, staff rostering, inventory reconciliation and admin paperwork",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:40-13:10",
+      "start_minutes": 760,
+      "end_minutes": 790,
+      "location": "Out",
+      "activity": "Lunch break at work eating a packed meal that fits the medically restricted diet",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:10-17:45",
+      "start_minutes": 790,
+      "end_minutes": 1065,
+      "location": "Out",
+      "activity": "Continuing work duties: team supervision, budget and cost reviews, client scheduling and healthcare records compliance",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:35",
+      "start_minutes": 1065,
+      "end_minutes": 1115,
+      "location": "Out",
+      "activity": "Drive the EV back home from work",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:35-19:00",
+      "start_minutes": 1115,
+      "end_minutes": 1140,
+      "location": "Dining Room",
+      "activity": "Joining the family dinner with Member 1 and Member 3, eating the portion that respects the medically restricted diet and catching up on the day",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:40",
+      "start_minutes": 1140,
+      "end_minutes": 1180,
+      "location": "Kitchen",
+      "activity": "Clearing the table, loading the dishwasher and wiping down the counters as part of the shared household cleanup",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:40-20:20",
+      "start_minutes": 1180,
+      "end_minutes": 1220,
+      "location": "Bedroom 2",
+      "activity": "Unpacking the work bag, organising art supplies, changing into comfortable clothes and resting",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:20-21:15",
+      "start_minutes": 1220,
+      "end_minutes": 1275,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV and catching up on messages on the phone, sharing the living room with Member 1 from 20:30",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-23:30",
+      "start_minutes": 1275,
+      "end_minutes": 1410,
+      "location": "Study",
+      "activity": "Creative art session on the computer and monitor: digital illustration and print design work under the desk lamp, working alongside Member 3 who is studying",
+      "operations": [
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "start_minutes": 1410,
+      "end_minutes": 1440,
+      "location": "Bathroom",
+      "activity": "Night-time washing up, brushing teeth and preparing for bed (Bathroom is free after Member 3's 22:30-23:00 wash-up)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}

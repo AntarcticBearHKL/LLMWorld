@@ -1,0 +1,20 @@
+{
+  "world": "world_143345",
+  "scenario": "baseline",
+  "date": "2026-09-11",
+  "households": 3,
+  "total_kwh": 100.2639,
+  "mean_household_kwh": 33.4213,
+  "by_type": {
+    "International Student Share House": 52.964,
+    "Young Professional Couple (DINK)": 24.923,
+    "Family with Children (Migrant Family)": 22.377
+  },
+  "by_members_count": {
+    "6 persons": 52.964,
+    "2 persons": 24.923,
+    "3 persons": 22.377
+  },
+  "big_five_corr_with_kwh": {},
+  "members_kwh_corr": 0.95
+}

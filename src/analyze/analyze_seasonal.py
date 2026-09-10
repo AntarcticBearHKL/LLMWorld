@@ -8,9 +8,23 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import iter_house_days
 
-from analyze_variability import scan_house_daily_profiles
 from engine import utils
+
+
+def scan_house_daily_profiles(world_id, scenario):
+    per_house = {}
+    for record in iter_house_days(world_id, policy=scenario):
+        hourly = [sum(record["load_profile_watts"][h * 60:(h + 1) * 60]) / 60.0
+                  for h in range(24)]
+        per_house.setdefault(record["house_id"], []).append({
+            "date": record["date"],
+            "kwh": record["total_energy_kwh"],
+            "hourly": hourly,
+        })
+    return [{"house_id": house_id, "days": days}
+            for house_id, days in sorted(per_house.items())]
 
 
 def season_of(date_dir):
@@ -74,8 +88,12 @@ def main():
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
-    per_house = scan_house_daily_profiles(args.world_id, args.scenario)
-    report = build_report(per_house)
+    try:
+        per_house = scan_house_daily_profiles(args.world_id, args.scenario)
+        report = build_report(per_house)
+    except ValueError as exc:
+        print(f"[Error] {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
 

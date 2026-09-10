@@ -1,0 +1,320 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-05:15",
+      "start_minutes": 0,
+      "end_minutes": 315,
+      "location": "Bedroom 2",
+      "activity": "Sleeping, resting for the early cafe opening shift",
+      "operations": []
+    },
+    {
+      "time": "05:15-05:35",
+      "start_minutes": 315,
+      "end_minutes": 335,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and changing into barista work clothes (bathroom free, as Member 1 is still out on the night shift and Members 3 and 6 are asleep)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "05:35-05:55",
+      "start_minutes": 335,
+      "end_minutes": 355,
+      "location": "Kitchen",
+      "activity": "Quick breakfast with tea, and packing a clearly labelled lunch box for the shift",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "05:55-06:20",
+      "start_minutes": 355,
+      "end_minutes": 380,
+      "location": "Out",
+      "activity": "drive the EV to the cafe for the opening shift (no other member is using the electric vehicle at this time)",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:20-13:30",
+      "start_minutes": 380,
+      "end_minutes": 810,
+      "location": "Out",
+      "activity": "Working the barista opening shift: setting up, pulling espresso shots, serving the morning rush and cleaning down the machine",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:30-14:00",
+      "start_minutes": 810,
+      "end_minutes": 840,
+      "location": "Out",
+      "activity": "drive the EV back home from the cafe with a box of leftover food to share",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:00-14:40",
+      "start_minutes": 840,
+      "end_minutes": 880,
+      "location": "Kitchen",
+      "activity": "Eating a late leftover-food lunch with Member 1 and labelling the leftover food before storing it in the fridge",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:40-15:00",
+      "start_minutes": 880,
+      "end_minutes": 900,
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes (Member 1 is studying in Bedroom 1, so the bathroom is free)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:15",
+      "start_minutes": 900,
+      "end_minutes": 915,
+      "location": "Bedroom 2",
+      "activity": "Daily prayer and a quiet moment to reset",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:15-17:00",
+      "start_minutes": 915,
+      "end_minutes": 1020,
+      "location": "Bedroom 2",
+      "activity": "Working on design studio coursework on the computer under the desk lamp",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:20",
+      "start_minutes": 1020,
+      "end_minutes": 1040,
+      "location": "Kitchen",
+      "activity": "Tea and a snack break, checking the tea shelf stock",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:20-18:00",
+      "start_minutes": 1040,
+      "end_minutes": 1080,
+      "location": "Kitchen",
+      "activity": "Cooking her own medically safe dinner using her clearly labelled ingredients; also quickly adding her work clothes to Member 1's shared load of laundry in the washing machine so one load washes both",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "start_minutes": 1080,
+      "end_minutes": 1110,
+      "location": "Kitchen",
+      "activity": "Eating dinner at the kitchen table together with Member 1, Member 3 and Member 4",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "start_minutes": 1110,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping the bench, sharing the kitchen tidy-up with Member 1 and Member 4",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:30",
+      "start_minutes": 1140,
+      "end_minutes": 1230,
+      "location": "Bedroom 2",
+      "activity": "Continuing design deadline work on the computer and tidying her desk area",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:00",
+      "start_minutes": 1230,
+      "end_minutes": 1260,
+      "location": "Out",
+      "activity": "Short walk to the local shop to buy tea and milk",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "start_minutes": 1260,
+      "end_minutes": 1290,
+      "location": "Bathroom",
+      "activity": "Evening shower and wash-up before bed, timed to finish before Member 1's 21:30 bathroom slot",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bedroom 2",
+      "activity": "Evening prayer and quiet reflection",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-23:00",
+      "start_minutes": 1320,
+      "end_minutes": 1380,
+      "location": "Bedroom 2",
+      "activity": "Winding down: reading, checking phone and planning tomorrow's shifts, keeping quiet hours",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

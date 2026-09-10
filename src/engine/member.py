@@ -4,12 +4,19 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from appliances import create_appliance
 
 class Member:
-    def __init__(self, name, age, occupation, personality, habits):
+    def __init__(self, name, age, occupation, personality, habits,
+                 bedroom=None, cultural_background=None, source_persona_index=None,
+                 work_schedule=None, health=None):
         self.name = name
         self.age = age
         self.occupation = occupation
         self.personality = personality
         self.habits = habits
+        self.bedroom = bedroom
+        self.cultural_background = cultural_background
+        self.source_persona_index = source_persona_index
+        self.work_schedule = work_schedule
+        self.health = health
         self.personal_appliances = []
     
     def add_personal_appliance(self, appliance):

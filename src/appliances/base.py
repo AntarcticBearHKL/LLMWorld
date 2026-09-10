@@ -2,7 +2,8 @@ from abc import ABC, abstractmethod
 
 class BaseAppliance(ABC):
     def __init__(self, name, power_watts, appliance_type, brand=None, age=0, 
-                 is_exclusive=False, location=None, owner=None, location_id=None, owner_id=None):
+                 is_exclusive=False, location=None, owner=None, location_id=None, owner_id=None,
+                 standby_watts=0, duty_cycle=1.0, flexible=False, season="annual", preferred_window=""):
         self.name = name
         self.power_watts = power_watts
         self.appliance_type = appliance_type
@@ -13,6 +14,11 @@ class BaseAppliance(ABC):
         self.owner = owner
         self.location_id = location_id
         self.owner_id = owner_id
+        self.standby_watts = standby_watts
+        self.duty_cycle = duty_cycle
+        self.flexible = flexible
+        self.season = season
+        self.preferred_window = preferred_window
         self.usage_log = []
         self.unique_id = self._generate_unique_id()
     
@@ -88,15 +94,20 @@ class BaseAppliance(ABC):
             "brand": self.brand,
             "age": self.age,
             "is_exclusive": self.is_exclusive,
+            "standby_watts": self.standby_watts,
+            "duty_cycle": self.duty_cycle,
+            "flexible": self.flexible,
+            "season": self.season,
+            "preferred_window": self.preferred_window,
             "available_actions": self.get_available_actions()
         }
 
 
 class OnDemandAppliance(BaseAppliance):
     def __init__(self, name, power_watts, brand=None, age=0, is_exclusive=False, 
-                 location=None, owner=None, location_id=None, owner_id=None):
+                 location=None, owner=None, location_id=None, owner_id=None, **meta):
         super().__init__(name, power_watts, "on_demand", brand, age, is_exclusive,
-                        location, owner, location_id, owner_id)
+                        location, owner, location_id, owner_id, **meta)
     
     def get_available_actions(self):
         return ["use", "idle"]
@@ -115,9 +126,9 @@ class OnDemandAppliance(BaseAppliance):
 
 class ChargingAppliance(BaseAppliance):
     def __init__(self, name, power_watts, brand=None, age=0, is_exclusive=False,
-                 location=None, owner=None, location_id=None, owner_id=None):
+                 location=None, owner=None, location_id=None, owner_id=None, **meta):
         super().__init__(name, power_watts, "charging", brand, age, is_exclusive,
-                        location, owner, location_id, owner_id)
+                        location, owner, location_id, owner_id, **meta)
     
     def get_available_actions(self):
         return ["charge_home", "charge_external", "use", "idle"]
@@ -140,9 +151,9 @@ class ChargingAppliance(BaseAppliance):
 
 class AlwaysOnAppliance(BaseAppliance):
     def __init__(self, name, power_watts, daily_energy_kwh=None, brand=None, age=0, 
-                 location=None, owner=None, location_id=None, owner_id=None):
+                 location=None, owner=None, location_id=None, owner_id=None, **meta):
         super().__init__(name, power_watts, "always_on", brand, age, False,
-                        location, owner, location_id, owner_id)
+                        location, owner, location_id, owner_id, **meta)
         self.daily_energy_kwh = daily_energy_kwh if daily_energy_kwh is not None else (power_watts / 1000.0) * 24
     
     def _calculate_energy_logic(self, duration_hours, **kwargs):
@@ -157,5 +168,33 @@ class AlwaysOnAppliance(BaseAppliance):
             "description": "Always-on device (runs automatically, no operation needed)",
             "daily_energy_kwh": self.daily_energy_kwh,
             "action_description": {}
+        })
+        return base
+
+
+class CycleAppliance(BaseAppliance):
+    def __init__(self, name, power_watts, energy_per_cycle_kwh, cycle_minutes=60, brand=None, age=0,
+                 is_exclusive=False, location=None, owner=None, location_id=None, owner_id=None, **meta):
+        super().__init__(name, power_watts, "cycle", brand, age, is_exclusive,
+                        location, owner, location_id, owner_id, **meta)
+        self.energy_per_cycle_kwh = energy_per_cycle_kwh
+        self.cycle_minutes = cycle_minutes
+    
+    def get_available_actions(self):
+        return ["run", "idle"]
+    
+    def _calculate_energy_logic(self, duration_hours, **kwargs):
+        cycle_hours = self.cycle_minutes / 60.0
+        return self.energy_per_cycle_kwh * min(1.0, duration_hours / cycle_hours)
+    
+    def to_dict(self):
+        base = super().to_dict()
+        base.update({
+            "energy_per_cycle_kwh": self.energy_per_cycle_kwh,
+            "cycle_minutes": self.cycle_minutes,
+            "action_description": {
+                "run": "run one cycle (consumes cycle energy)",
+                "idle": "not running"
+            }
         })
         return base

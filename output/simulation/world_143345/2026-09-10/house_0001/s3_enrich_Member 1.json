@@ -1,0 +1,119 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Out",
+      "activity": "Working a night shift as an aged-care support worker at the residential care facility, assisting residents with overnight care and documentation",
+      "desc": "Checks resident list on clipboard. Walks to resident room 1. Knocks on door. Enters room. Assists resident with repositioning in bed. Adjusts pillow. Checks catheter bag. Empties and measures urine. Records output on chart. Washes hands. Moves to next resident. Knocks on door. Enters room. Helps resident to bathroom. Waits outside. Assists resident back to bed. Covers resident with blanket. Turns off light. Exits room. Returns to nurses' station. Updates care notes on computer. Answers call bell. Walks to resident room. Provides blanket. Offers water. Checks vitals. Records blood pressure. Administers medication as per chart. Documents time. Washes hands. Continues rounds."
+    },
+    {
+      "time": "06:00-06:45",
+      "location": "Out",
+      "activity": "Commuting home from the night shift by train and bus",
+      "desc": "Walks out of facility. Walks to train station. Waits on platform. Boards train. Sits down. Looks at phone. Reads messages. Alights at transfer station. Walks to bus stop. Waits. Boards bus. Sits. Alights at bus stop near home. Walks to front door. Unlocks door. Enters house."
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Kitchen",
+      "activity": "Unpacking work bag, making a light flexitarian breakfast and a cup of tea while checking written reminders on his phone; having breakfast alongside Member 3",
+      "desc": "Places work bag on kitchen counter. Unzips bag. Takes out lunch containers. Places containers in sink. Takes out water bottle. Places bottle on counter. Opens fridge. Puts water bottle in fridge. Closes fridge. Takes out bread from pantry. Places bread on counter. Opens fridge. Takes out margarine and cheese. Closes fridge. Opens cupboard. Takes out plate. Places plate on counter. Spreads margarine on bread. Places cheese on bread. Cuts sandwich. Places sandwich on plate. Opens cupboard. Takes out cup. Places cup on counter. Fills kettle with water. Turns on kettle. Opens cupboard. Takes out tea bag. Places tea bag in cup. Pours hot water into cup. Adds milk from fridge. Stirs tea. Sits at table. Member 3 enters. Says 'Good morning' to Member 3. Eats sandwich. Drinks tea. Checks written reminders on phone."
+    },
+    {
+      "time": "07:15-07:30",
+      "location": "Bathroom",
+      "activity": "Quick shower and wash-up after the night shift, timed to finish before Member 5's 07:30 bathroom slot",
+      "desc": "Walks into bathroom. Turns on light. Turns on shower. Takes off clothes. Steps into shower. Washes body with soap. Rinses. Turns off shower. Steps out. Picks up towel. Dries body. Wraps towel around waist. Walks to sink. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns off tap. Wipes face with towel. Turns off light. Exits bathroom."
+    },
+    {
+      "time": "07:30-07:50",
+      "location": "Bedroom 1",
+      "activity": "Setting an alarm and a written reminder for the afternoon, closing the curtains and turning on the fan to wind down before day sleep",
+      "desc": "Walks into Bedroom 1. Picks up phone from desk. Opens clock app. Sets alarm for 13:30. Places phone on bedside table. Picks up pen and paper. Writes reminder note. Places note on desk. Walks to window. Pulls curtains closed. Walks to fan. Presses power button. Adjusts fan speed. Lies down on bed. Pulls blanket over body. Closes eyes."
+    },
+    {
+      "time": "07:50-14:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping after the night shift in a quiet, darkened room",
+      "desc": "Lies in bed. Eyes closed. Breathes deeply. Turns onto side. Adjusts pillow. Remains still. Turns onto back. Pulls blanket up. Remains still. Turns onto other side. Remains still. Continues sleeping."
+    },
+    {
+      "time": "14:00-14:40",
+      "location": "Kitchen",
+      "activity": "Eating a late flexitarian lunch and drinking tea while reading over notes; having a late lunch with Member 2 who is also eating her leftover-food lunch",
+      "desc": "Wakes up. Turns off alarm. Gets out of bed. Puts on slippers. Walks to kitchen. Greets Member 2. Opens fridge. Takes out lunch container. Opens container. Places container in microwave. Sets timer. Presses start. Waits. Microwave beeps. Opens microwave. Takes out container. Places container on table. Sits down. Member 2 sits opposite. Eats lunch with fork. Drinks tea. Reads notes. Talks to Member 2 about shift. Finishes eating. Picks up container. Walks to sink. Rinses container. Places container in dishwasher."
+    },
+    {
+      "time": "14:40-16:00",
+      "location": "Bedroom 1",
+      "activity": "Studying Master of Social Work coursework at the desk, reading set texts and typing detailed notes on the computer",
+      "desc": "Walks to Bedroom 1. Sits at desk. Turns on desk lamp. Opens laptop. Turns on computer. Opens textbook. Reads chapter. Highlights text. Types notes on computer. Pauses. Reads more. Types more notes. Checks reference. Writes citation. Saves document. Stretches arms. Continues reading. Takes notes. Closes textbook. Turns off computer."
+    },
+    {
+      "time": "16:00-16:20",
+      "location": "Kitchen",
+      "activity": "Making a cup of tea and a small snack while Member 5 cooks a simple early dinner",
+      "desc": "Walks to kitchen. Member 5 is cooking. Says 'Hello' to Member 5. Fills kettle with water. Turns on kettle. Opens cupboard. Takes out tea bag. Places tea bag in cup. Opens fridge. Takes out milk. Opens cupboard. Takes out biscuits. Places biscuits on plate. Kettle boils. Pours water into cup. Adds milk. Picks up cup and plate. Walks to table. Sits down. Eats biscuit. Drinks tea."
+    },
+    {
+      "time": "16:20-17:30",
+      "location": "Bedroom 1",
+      "activity": "Attending an online tutorial for his social work coursework on the computer and monitor",
+      "desc": "Walks to Bedroom 1. Sits at desk. Turns on computer. Opens video conferencing app. Joins tutorial. Puts on headphones. Adjusts microphone. Takes notes. Types in chat. Raises hand. Speaks. Mutes microphone. Listens. Unmutes. Speaks again. Shares screen. Shows document. Stops sharing. Takes more notes. Leaves meeting. Closes app. Turns off computer."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bathroom",
+      "activity": "Putting on a load of laundry in the washing machine and tidying up",
+      "desc": "Walks to bathroom. Opens washing machine door. Picks up laundry basket. Sorts clothes. Places clothes in washing machine. Adds detergent. Closes door. Turns dial to setting. Presses start. Wipes sink with cloth. Wipes mirror. Picks up towel. Hangs towel on rack. Turns off light. Exits bathroom."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating a flexitarian dinner using the induction cooker, with no alcohol; having dinner with Member 3 and Member 4",
+      "desc": "Walks to kitchen. Opens fridge. Takes out vegetables. Places vegetables on cutting board. Picks up knife. Chops vegetables. Turns on induction cooker. Places pan on cooker. Pours oil. Adds vegetables. Stirs with spatula. Adds tofu. Stirs. Adds sauce. Turns off cooker. Places food on plate. Sits at table. Member 3, Member 4 join. Says 'Enjoy your meal'. Eats with fork. Drinks water. Talks about day. Finishes eating. Picks up plate. Walks to sink. Rinses plate."
+    },
+    {
+      "time": "18:45-19:10",
+      "location": "Kitchen",
+      "activity": "Washing up and loading the dishwasher, wiping down the bench, sharing the kitchen tidy-up with Member 4",
+      "desc": "Scrapes food into bin. Rinses plates. Loads plates into dishwasher. Rinses cups. Loads cups into dishwasher. Picks up sponge. Wipes bench. Rinses sponge. Wipes stove. Washes pan by hand. Rinses pan. Places pan on drying rack. Dries hands with towel. Member 4 helps. Says 'Thank you' to Member 4."
+    },
+    {
+      "time": "19:10-20:00",
+      "location": "Bedroom 1",
+      "activity": "Writing a detailed to-do list and setting phone reminders for his rotating shift roster and assignment deadlines",
+      "desc": "Walks to Bedroom 1. Sits at desk. Picks up pen. Opens notebook. Writes date. Lists tasks. Writes 'Shift 22:00-06:00'. Writes 'Assignment due Friday'. Writes 'Buy groceries'. Picks up phone. Opens reminders app. Adds reminder for shift. Adds reminder for assignment. Sets due date. Adds reminder for groceries. Closes app. Places phone on desk. Reads over list."
+    },
+    {
+      "time": "20:00-20:45",
+      "location": "Bedroom 1",
+      "activity": "Checking his weekly budget on paper, counting cash for the week and reviewing upcoming rent and bills",
+      "desc": "Opens drawer. Takes out budget book. Places book on desk. Opens book. Picks up pen. Writes income. Writes expenses. Calculates total. Opens wallet. Takes out cash. Counts notes. Counts coins. Writes total cash. Checks rent due date. Checks electricity bill. Writes amounts. Closes book. Places book in drawer. Places wallet on desk."
+    },
+    {
+      "time": "20:45-21:30",
+      "location": "Bedroom 1",
+      "activity": "Quiet leisure at the desk: looking at the photo of his family dog in China and reading",
+      "desc": "Picks up photo frame. Looks at photo of family dog. Places photo frame back on desk. Picks up book. Opens to bookmark. Reads page. Turns page. Reads more. Closes book. Places book on desk. Stretches. Picks up phone. Checks messages. Puts phone down. Adjusts desk lamp. Continues reading."
+    },
+    {
+      "time": "21:30-21:55",
+      "location": "Bathroom",
+      "activity": "Evening wash and brushing teeth, and moving laundry to the dryer",
+      "desc": "Walks to bathroom. Turns on light. Turns on tap. Washes face. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns off tap. Dries face. Opens washing machine. Takes out wet laundry. Places laundry in dryer. Closes dryer door. Turns on dryer. Turns off light. Exits bathroom."
+    },
+    {
+      "time": "21:55-22:30",
+      "location": "Kitchen",
+      "activity": "Drinking herbal tea and preparing his overnight bag, lunch and snacks for tomorrow's shift, while Member 6 batch-cooks low-carb meals",
+      "desc": "Walks to kitchen. Fills kettle. Turns on kettle. Opens cupboard. Takes out herbal tea bag. Places tea bag in cup. Kettle boils. Pours water into cup. Steeps tea. Opens bag. Packs overnight bag. Places uniform in bag. Packs lunch box with sandwich. Packs snacks. Zips bag. Picks up cup. Sips tea. Member 6 is cooking. Says 'Good night' to Member 6. Finishes tea. Rinses cup. Places cup in dishwasher."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down with the light dimmed and the fan on, then sleeping",
+      "desc": "Walks to Bedroom 1. Turns on desk lamp. Dims light. Turns on fan. Lies on bed. Picks up book. Reads page. Closes book. Places book on bedside table. Turns off desk lamp. Pulls blanket up. Closes eyes. Breathes deeply. Turns onto side. Remains still. Sleeps."
+    }
+  ]
+}

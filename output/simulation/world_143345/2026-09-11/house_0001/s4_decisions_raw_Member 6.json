@@ -1,0 +1,321 @@
+{
+  "member": "Member 6",
+  "appliance_decisions": [
+    {
+      "time": "00:00-05:00",
+      "location": "Bedroom 6",
+      "activity": "Sleeping, with the fan on for air circulation and quiet hours respected",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "05:00-05:30",
+      "location": "Bathroom",
+      "activity": "Showering and dressing, plus morning chronic condition self-care routine (Bathroom is free before Member 1 starts at 05:50)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "05:30-05:50",
+      "location": "Kitchen",
+      "activity": "Eating a quick keto breakfast of eggs and avocado and packing a low-carb lunch for the warehouse shift (kitchen is free before Member 1 and Member 2 have breakfast at 06:30)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "05:50-06:40",
+      "location": "Out",
+      "activity": "Commuting by public transit to the warehouse shift",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:40-11:00",
+      "location": "Out",
+      "activity": "Warehouse shift: picking, packing and manual handling of stock",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:00-11:30",
+      "location": "Out",
+      "activity": "Break in the staff area, eating the packed keto lunch",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:30-14:30",
+      "location": "Out",
+      "activity": "Warehouse shift: moving stock and preparing orders",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "14:30-15:20",
+      "location": "Out",
+      "activity": "Bargain-hunting groceries at a discount supermarket and comparing prices",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:20-16:00",
+      "location": "Out",
+      "activity": "Commuting home by public transit with the groceries",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:30",
+      "location": "Bedroom 6",
+      "activity": "Unwinding quietly with dim lighting and reduced-motion settings; resting mild chronic pain",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Bedroom 6",
+      "activity": "Daily reading in the quiet study space",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Kitchen",
+      "activity": "Batch-cooking keto meals for the week and labelling containers, working in her own clearly labelled kitchen section and coordinating space with Member 3's 17:00-17:30 cooking slot and Member 2's 17:30-18:30 cooking slot",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Eating a low-carb dinner at the kitchen table with Member 2, Member 3 and Member 4 during the shared household dinner period",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the cooking area alongside Member 3 and Member 4, leaving the shared space clean",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bedroom 6",
+      "activity": "Reviewing budget and subscriptions on the neobank and mobile wallet; checking X and Messenger",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Bedroom 6",
+      "activity": "Studying university coursework at the desk in a quiet space",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bedroom 6",
+      "activity": "Sorting health and insurance paperwork and noting questions to ask for help with",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Washing up and completing the night routine (Bathroom is free after Member 4 finishes at 21:30 and before Member 5 starts at 22:15)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 6",
+      "activity": "Laying out clothes for tomorrow, setting alarms and light reading before bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 6",
+      "activity": "Sleeping, with the fan on and quiet hours respected",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

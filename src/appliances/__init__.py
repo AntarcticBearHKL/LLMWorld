@@ -14,6 +14,20 @@ from .electric_vehicle import ElectricVehicle
 from .water_heater import WaterHeater
 from .washing_machine import WashingMachine
 from .vacuum_cleaner import VacuumCleaner
+from .space_heater import SpaceHeater
+from .fan import Fan
+from .dehumidifier import Dehumidifier
+from .clothes_dryer import ClothesDryer
+from .dishwasher import Dishwasher
+from .kettle import Kettle
+from .toaster import Toaster
+from .oven import Oven
+from .freezer import Freezer
+from .router import Router
+from .game_console import GameConsole
+from .monitor import Monitor
+from .ebike import Ebike
+from .catalog import apply_appliance_meta
 
 APPLIANCE_REGISTRY = {
     "TV": TV,
@@ -26,11 +40,25 @@ APPLIANCE_REGISTRY = {
     "Light": Light,
     "DeskLamp": Lamp,
     "Computer": Computer,
+    "Laptop": Computer,
     "Phone": Phone,
     "ElectricVehicle": ElectricVehicle,
     "WaterHeater": WaterHeater,
     "WashingMachine": WashingMachine,
     "VacuumCleaner": VacuumCleaner,
+    "SpaceHeater": SpaceHeater,
+    "Fan": Fan,
+    "Dehumidifier": Dehumidifier,
+    "ClothesDryer": ClothesDryer,
+    "Dishwasher": Dishwasher,
+    "Kettle": Kettle,
+    "Toaster": Toaster,
+    "Oven": Oven,
+    "Freezer": Freezer,
+    "Router": Router,
+    "GameConsole": GameConsole,
+    "Monitor": Monitor,
+    "Ebike": Ebike,
 }
 
 def create_appliance(name, location=None, owner=None, location_id=None, owner_id=None):
@@ -38,15 +66,17 @@ def create_appliance(name, location=None, owner=None, location_id=None, owner_id
         raise ValueError(f"Unknown appliance type: {name}")
     
     appliance_class = APPLIANCE_REGISTRY[name]
-    return appliance_class(location=location, owner=owner, location_id=location_id, owner_id=owner_id)
+    appliance = appliance_class(location=location, owner=owner, location_id=location_id, owner_id=owner_id)
+    return apply_appliance_meta(appliance, name)
 
 def create_appliance_from_config(appliance_type, config, location=None, owner=None, location_id=None, owner_id=None):
     if appliance_type not in APPLIANCE_REGISTRY:
         raise ValueError(f"Unknown appliance type: {appliance_type}")
     
     appliance_class = APPLIANCE_REGISTRY[appliance_type]
-    return appliance_class.from_config(config, location=location, owner=owner, 
-                                      location_id=location_id, owner_id=owner_id)
+    appliance = appliance_class.from_config(config, location=location, owner=owner, 
+                                            location_id=location_id, owner_id=owner_id)
+    return apply_appliance_meta(appliance, appliance_type)
 
 def get_supported_appliances():
     return list(APPLIANCE_REGISTRY.keys())

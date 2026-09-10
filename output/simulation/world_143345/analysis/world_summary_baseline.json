@@ -1,0 +1,31 @@
+{
+  "households": 3,
+  "per_house": [
+    {
+      "house_id": "house_0001",
+      "cluster": 2,
+      "variability_group": "Variable",
+      "anomaly_flags": [],
+      "load_consistent": true,
+      "total_kwh": 52.964166666666664
+    },
+    {
+      "house_id": "house_0002",
+      "cluster": 0,
+      "variability_group": "Regular",
+      "anomaly_flags": [],
+      "load_consistent": true,
+      "total_kwh": 24.922583333333204
+    },
+    {
+      "house_id": "house_0003",
+      "cluster": 1,
+      "variability_group": "Variable",
+      "anomaly_flags": [],
+      "load_consistent": true,
+      "total_kwh": 22.377166666666668
+    }
+  ],
+  "world_id": "world_143345",
+  "scenario": "baseline"
+}

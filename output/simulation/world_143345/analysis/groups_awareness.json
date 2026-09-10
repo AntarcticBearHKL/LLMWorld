@@ -1,0 +1,22 @@
+{
+  "label_source": "awareness",
+  "labels": {
+    "house_0001": "Unknown",
+    "house_0002": "Unknown",
+    "house_0003": "Unknown"
+  },
+  "scenarios": {
+    "baseline": {
+      "house_0001": 43.916125,
+      "house_0002": 21.35987500000011,
+      "house_0003": 36.388916666666724
+    }
+  },
+  "groups": [
+    {
+      "group": "Unknown",
+      "households": 3,
+      "baseline_mean_kwh": 33.888
+    }
+  ]
+}

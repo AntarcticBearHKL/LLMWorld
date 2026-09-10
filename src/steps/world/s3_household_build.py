@@ -10,9 +10,11 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 from engine import SubAgent, utils
+from engine.json_parse import parse as parse_llm_json
 from engine.prompt import Prompt
 from engine.subagent import LLMCallError
 from appliances import get_supported_appliances_text, get_appliance_schemas_text
+from appliances.catalog import backfill_power
 import generate_world as gw
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -75,7 +77,19 @@ HOUSEHOLD_SCHEMA = {
                     "personality": {"type": "object"},
                     "habits": {"type": "object"},
                     "health": {"type": "object"},
-                    "personal_appliances": {"type": "array"},
+                    "personal_appliances": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": ["type"],
+                            "properties": {
+                                "type": {"type": "string"},
+                                "brand": {"type": "string"},
+                                "power": {"type": "number"},
+                                "age": {"type": "number"},
+                            },
+                        },
+                    },
                 },
             },
         },
@@ -87,6 +101,16 @@ HOME_SCHEMA = {
     "required": ["home"],
     "properties": {"home": HOUSEHOLD_SCHEMA["properties"]["home"]},
 }
+
+
+def _home_schema(member_count):
+    s = {
+        "type": "object",
+        "required": ["home"],
+        "properties": {"home": HOUSEHOLD_SCHEMA["properties"]["home"]},
+    }
+    s["properties"]["home"]["properties"]["rooms"]["minItems"] = member_count + 2
+    return s
 
 MEMBER_SCHEMA = {
     "type": "object",
@@ -123,6 +147,27 @@ def normalize_type(t):
     return t
 
 
+def _normalize_appliance_entry(entry):
+    if isinstance(entry, str):
+        token = entry.strip()
+        return {"type": token} if token else None
+    if isinstance(entry, dict) and entry.get("type"):
+        return entry
+    return None
+
+
+def _normalize_personal_appliances(members):
+    for member in members:
+        if not isinstance(member, dict):
+            continue
+        personal = member.get("personal_appliances")
+        if isinstance(personal, list):
+            member["personal_appliances"] = [
+                norm for norm in (_normalize_appliance_entry(x) for x in personal) if norm
+            ]
+    return members
+
+
 def _call_json_with_retries(label, prompt, schema, logger, prefix, shape_check=None):
     print(f"================ {label} INPUT ================")
     print(prompt)
@@ -130,19 +175,21 @@ def _call_json_with_retries(label, prompt, schema, logger, prefix, shape_check=N
     print(f"================ {label} OUTPUT ================")
     print(resp["content"])
     try:
-        data = utils.parse_json_response(resp["content"])
+        data = parse_llm_json(resp["content"])
     except Exception as exc:
         logger.record(label.lower().replace(" ", "_"), prompt, resp["content"], reasoning="",
-                      ok=False, error=f"JSON parse failed: {exc}", attempt=1, prefix=prefix)
+                      ok=False, error=f"JSON parse failed: {exc}", attempt=1, prefix=prefix,
+                      schema=schema)
         raise LLMCallError(f"{label} response is not valid JSON: {exc}") from exc
     if shape_check is not None:
         shape_ok, shape_err = shape_check(data)
         if not shape_ok:
             logger.record(label.lower().replace(" ", "_"), prompt, resp["content"], reasoning="",
-                          ok=False, error=shape_err, attempt=1, prefix=prefix)
+                          ok=False, error=shape_err, attempt=1, prefix=prefix,
+                          schema=schema)
             raise LLMCallError(f"{label} structure rejected: {shape_err}")
     logger.record(label.lower().replace(" ", "_"), prompt, resp["content"], reasoning="",
-                  ok=True, attempt=1, prefix=prefix)
+                  ok=True, attempt=1, prefix=prefix, schema=schema, parsed=data)
     return data
 
 
@@ -167,7 +214,7 @@ def _run_decomposed(htype, aligned, logger, prefix):
         return True, None
 
     home_data = _call_json_with_retries(
-        "HOME", home_prompt, HOME_SCHEMA, logger, prefix,
+        "HOME", home_prompt, _home_schema(len(aligned)), logger, prefix,
         shape_check=_home_check,
     )
     home = home_data["home"]
@@ -199,6 +246,8 @@ def _run_decomposed(htype, aligned, logger, prefix):
         member = member_data["member"]
         member["name"] = f"Member {index}"
         members.append(member)
+
+    _normalize_personal_appliances(members)
 
     data = {
         "type": htype["type"],
@@ -237,6 +286,29 @@ def run_step(world_id, house=0, seed=42):
         print(f"[Error] decomposed household generation failed: {result}")
         return False, result
     data = result
+    filled_room = 0
+    for room in data.get("home", {}).get("rooms", []):
+        if not isinstance(room, dict):
+            continue
+        appliances = room.get("appliances")
+        if not isinstance(appliances, list):
+            continue
+        for i, cfg in enumerate(appliances):
+            if isinstance(cfg, dict):
+                appliances[i] = backfill_power(cfg, location=room.get("name"))
+                filled_room += 1
+    filled_personal = 0
+    for member in data.get("members", []):
+        if not isinstance(member, dict):
+            continue
+        personal = member.get("personal_appliances")
+        if not isinstance(personal, list):
+            continue
+        for i, cfg in enumerate(personal):
+            if isinstance(cfg, dict):
+                personal[i] = backfill_power(cfg, location=None)
+                filled_personal += 1
+    print(f"[Appliances] power backfilled for {filled_room} room + {filled_personal} personal configs")
     out_path = os.path.join(house_dir, "household.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
