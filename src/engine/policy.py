@@ -64,6 +64,36 @@ def render_nudge_loss_policy(rebate=30.0):
             f"and lose the {rebate:.0f} AUD energy-saving rebate.")
 
 
+def render_subsidy_policy(rate=0.18):
+    """Off-peak EV charging subsidy (guide §2.2)."""
+    return (f"An off-peak charging subsidy is available: charging your electric vehicle between "
+            f"22:00 and 07:00 earns a rebate of {rate:.2f} AUD/kWh.")
+
+
+def render_peak_demand_policy(rate=12.0):
+    """Demand charge on the daily peak hour (guide §2.3)."""
+    return (f"Your household is on a demand charge: the highest 60 minutes of electricity use each "
+            f"day is billed at {rate:.0f} AUD/kW, so spreading high-power appliances apart lowers it.")
+
+
+def render_ev_delay_policy(step=0.02):
+    """EV charging-delay incentive (guide §2.4)."""
+    return (f"Delaying electric-vehicle charging earns a discount: the charging price drops "
+            f"{step:.2f} AUD/kWh for each hour of delay, up to 8 hours.")
+
+
+def render_night_setback_policy():
+    """Night setback recommendation (guide §4.1)."""
+    return ("Recommendation for tonight: set heating/cooling back while you sleep (for example "
+            "2-3C lower heating or higher cooling) to reduce overnight energy use.")
+
+
+def render_in_home_display_policy():
+    """Real-time in-home-display feedback (guide §4.2)."""
+    return ("Your home has a smart meter with an in-home display showing real-time electricity use "
+            "and price, so you can see how much you are using right now.")
+
+
 def parse_policy_arg(spec):
     """Parse a --policy CLI value into (policy_text, tag).
 
@@ -90,8 +120,23 @@ def parse_policy_arg(spec):
     if name == "nudge_loss":
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         return (render_nudge_loss_policy(float(rest)) if rest else render_nudge_loss_policy()), "nudge_loss"
+    if name == "subsidy":
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        return (render_subsidy_policy(float(rest)) if rest else render_subsidy_policy()), "subsidy"
+    if name == "peak_demand":
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        return (render_peak_demand_policy(float(rest)) if rest else render_peak_demand_policy()), "peak_demand"
+    if name == "ev_delay":
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        return (render_ev_delay_policy(float(rest)) if rest else render_ev_delay_policy()), "ev_delay"
+    if name == "night_setback":
+        return render_night_setback_policy(), "night_setback"
+    if name == "in_home_display":
+        return render_in_home_display_policy(), "in_home_display"
     raise ValueError(
-        f"Unknown policy '{spec}'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>], nudge[:<kwh>], nudge_loss[:<aud>]"
+        "Unknown policy '%s'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>], "
+        "nudge[:<kwh>], nudge_loss[:<aud>], subsidy[:<rate>], peak_demand[:<rate>], "
+        "ev_delay[:<step>], night_setback, in_home_display" % spec
     )
 
 
