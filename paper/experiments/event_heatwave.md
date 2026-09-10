@@ -83,17 +83,18 @@
 - **baseline 三成员 AC 恒 0**；**heatwave 下 2/3 成员启用空调**（M3 未用）→ 方向成立且**个体异质性可观测**；
 - 提示：单成员**总电量**非稳健信号（伴随其它家电随机波动），应看 **AC on/off** 这一二进制信号。
 
-**Aggregate binary statistic (R059, 0 token)**
+**Aggregate binary statistic (R059/R060, 0 token)**
 
 汇总所有（R15 修复后）baseline 与 heatwave 运行，按 `AirConditioner` 分项 >0 记为"启用"：
 
 | 条件 | AC 启用率 |
 |---|---|
-| baseline（无事件） | **0/4** |
-| heatwave | **6/7** |
+| baseline（无事件） | **0/5** |
+| heatwave | **7/8** |
 
-**Fisher 精确检验：单侧 p ≈ 0.015（双侧 ≈ 0.03）→ 显著。** 效应量接近 100%，
+**Fisher 精确检验：单侧 p ≈ 0.0047（双侧 ≈ 0.01）→ 显著。** 效应量接近 100%，
 因此在 CV≈12% 的连续噪声下**仍可达显著**——是本平台**唯一 p<0.05** 的结论类型（二值/大效应）。
+唯一未启用者为 house_0001 Member 3（个体异质性）。
 
 ## 6. Comparison with Literature
 
