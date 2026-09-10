@@ -72,6 +72,17 @@
 - **第二个住户**同样复现：control AC=0、heatwave AC=3.6 kWh，总量 **+36.8%**；
 - 汇总：**2 户 × 3 个 event-day / 3 个 control-day 全部满足 "control AC=0、heatwave AC>0"**。
 
+**Window 4 — house_0001 多成员（M1/M2/M3，2026-09-11，R049）**
+
+| 成员 | baseline AC kWh | heatwave AC kWh | AC 操作 |
+|---|---|---|---|
+| Member 1 | 0.000 | 3.600 | use（19:30–22:30） |
+| Member 2 | 0.000 | 1.500 | use（21:00–22:15） |
+| Member 3 | 0.000 | 0.000 | — |
+
+- **baseline 三成员 AC 恒 0**；**heatwave 下 2/3 成员启用空调**（M3 未用）→ 方向成立且**个体异质性可观测**；
+- 提示：单成员**总电量**非稳健信号（伴随其它家电随机波动），应看 **AC on/off** 这一二进制信号。
+
 ## 6. Comparison with Literature
 
 - **方向一致**：热浪 → 降温负荷上升、负荷上扬，符合 Xia et al. (2026) 与 guide §5.1 预期。
@@ -86,8 +97,8 @@
 
 ## 8. Conclusion
 
-- **初步（2 户、3 个 event-day 复现）**：以自然语言注入的热浪事件可使 LLM 居民自发启用空调、抬升日总电量
-  （+17%~+64%），方向与文献一致；**2 个住户、3 个事件日**均复现"control AC=0 / heatwave AC>0"。
-  前提是新闻与环境天气**一致**（否则 agent 忽略新闻，见 R014）。
+- **初步（2 户、3 个 event-day 复现 + 多成员）**：以自然语言注入的热浪事件可使 LLM 居民自发启用空调；
+  baseline 侧 AC 恒为 0，heatwave 侧多数启用（house_0001 三成员中 2/3）。方向与文献一致，
+  且**个体异质性可观测**（个别成员不启用）。前提是新闻与环境天气**一致**（否则 agent 忽略新闻，见 R014）。
 - **可复现命令**：见第 3 节（窗口 2 用 `--date 2026-10-17 --env heatwave_rep/ctrl_rep`）。
 - **下一步（升格为正式结果前）**：多人户 × 多种子复现；用 `analyze_event_response.py` 度量事件日模式转移。
