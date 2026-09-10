@@ -15,7 +15,7 @@ TOU_DEFAULT = {
 }
 
 
-def render_tou_policy(peak_rate=None, valley_rate=None, shoulder_rate=None):
+def _tou_config(peak_rate, valley_rate, shoulder_rate):
     cfg = dict(TOU_DEFAULT)
     if peak_rate is not None:
         cfg["peak_rate"] = peak_rate
@@ -23,19 +23,33 @@ def render_tou_policy(peak_rate=None, valley_rate=None, shoulder_rate=None):
         cfg["valley_rate"] = valley_rate
     if shoulder_rate is not None:
         cfg["shoulder_rate"] = shoulder_rate
+    return cfg
 
+
+def _tou_tariff_sentence(cfg):
     peak_from, peak_to = cfg["peak_window"]
     valley_from, valley_to = cfg["valley_window"]
     return (
         "Today your household is on a time-of-use (TOU) electricity tariff: "
         f"peak period {peak_from}-{peak_to} at {cfg['peak_rate']:.2f} AUD/kWh; "
         f"valley period {valley_from}-{valley_to} at {cfg['valley_rate']:.2f} AUD/kWh; "
-        f"shoulder period (all other times) at {cfg['shoulder_rate']:.2f} AUD/kWh. "
-        "To reduce your bill, shift flexible appliances (electric vehicle charging, "
+        f"shoulder period (all other times) at {cfg['shoulder_rate']:.2f} AUD/kWh."
+    )
+
+
+def render_tou_policy(peak_rate=None, valley_rate=None, shoulder_rate=None):
+    cfg = _tou_config(peak_rate, valley_rate, shoulder_rate)
+    return _tou_tariff_sentence(cfg) + (
+        " To reduce your bill, shift flexible appliances (electric vehicle charging, "
         "washing machine, dishwasher-free routines like hot water use) into the valley "
         "period, and avoid running high-power appliances during the peak period unless "
         "necessary."
     )
+
+
+def render_tou_policy_soft(peak_rate=None, valley_rate=None, shoulder_rate=None):
+    """Tariff facts only, with no 'shift/avoid' directive (prompt-bias control)."""
+    return _tou_tariff_sentence(_tou_config(peak_rate, valley_rate, shoulder_rate))
 
 
 def parse_policy_arg(spec):
@@ -47,7 +61,7 @@ def parse_policy_arg(spec):
     if not spec:
         return "", None
     name = spec.strip().lower().split(":", 1)[0]
-    if name == "tou":
+    if name in ("tou", "tou_soft"):
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         peak = valley = shoulder = None
         if rest:
@@ -56,7 +70,8 @@ def parse_policy_arg(spec):
                 peak, valley = nums[0], nums[1]
             if len(nums) >= 3:
                 shoulder = nums[2]
-        return render_tou_policy(peak, valley, shoulder), "tou"
+        render = render_tou_policy if name == "tou" else render_tou_policy_soft
+        return render(peak, valley, shoulder), name
     raise ValueError(
-        f"Unknown policy '{spec}'. Supported: tou, tou:<peak>,<valley>[,<shoulder>]"
+        f"Unknown policy '{spec}'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>]"
     )
