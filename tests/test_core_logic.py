@@ -91,7 +91,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_unknown_policy_raises(self):
         with self.assertRaises(ValueError):
-            policy.parse_policy_arg("nudge")
+            policy.parse_policy_arg("meteor")
 
     def test_tou_soft_has_no_directive(self):
         text, tag = policy.parse_policy_arg("tou_soft")
@@ -106,6 +106,27 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(tag, "tou_soft")
         self.assertIn("0.50 AUD/kWh", text)
         self.assertIn("0.30 AUD/kWh", text)
+
+    def test_nudge_default(self):
+        text, tag = policy.parse_policy_arg("nudge")
+        self.assertEqual(tag, "nudge")
+        self.assertIn("neighbours", text)
+        self.assertIn("18", text)
+
+    def test_nudge_custom_average(self):
+        text, tag = policy.parse_policy_arg("nudge:12")
+        self.assertEqual(tag, "nudge")
+        self.assertIn("12 kWh", text)
+
+    def test_nudge_loss_default(self):
+        text, tag = policy.parse_policy_arg("nudge_loss")
+        self.assertEqual(tag, "nudge_loss")
+        self.assertIn("rebate", text)
+        self.assertIn("30 AUD", text)
+
+    def test_nudge_loss_custom_rebate(self):
+        _text, tag = policy.parse_policy_arg("nudge_loss:50")
+        self.assertEqual(tag, "nudge_loss")
 
 
 class PolicyScheduleTests(unittest.TestCase):
