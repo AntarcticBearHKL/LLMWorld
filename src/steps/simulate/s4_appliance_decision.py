@@ -90,7 +90,7 @@ def build_decision_schema(allowed):
     return schema
 
 
-def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001"):
+def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news=""):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -119,7 +119,7 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
                            allowed_appliance_ids=allowed_ids_text(allowed, always_on),
                            season=w["season"], weather=w["weather"],
                            temperature=w["temperature"],
-                           policy_context=policy_text, world_news="")
+                           policy_context=policy_text, world_news=world_news)
 
     log_dir = os.path.join(gw.SIMULATION_DIR, env, date, house, "log")
     os.makedirs(log_dir, exist_ok=True)

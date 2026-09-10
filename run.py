@@ -15,7 +15,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import config
 import generate_world as gw
-from engine import policy as engine_policy
+from engine import policy as engine_policy, news
 from steps.world import s1_household_types, s2_persona_align, s3_household_build, s4_world_assemble
 from steps.simulate import s1_macro_plan, s2_coordinate, s3_enrich, s4_appliance_decision, day_state
 
@@ -70,10 +70,15 @@ def get_member_names(world_id, house="house_0001"):
 
 
 def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4_only=False,
-                 houses=None, days=1):
+                 houses=None, days=1, events=None):
     print(f"\n########## SIMULATE world={world_id} env={env} workers={workers} "
           f"policy={policy_spec or 'none'} s4_only={s4_only} days={days} houses={houses or 'all'} ##########")
     policy_text, policy_tag = engine_policy.parse_policy_arg(policy_spec)
+
+    events = list(events or [])
+    if events:
+        events_path = news.write_events_json(os.path.join(gw.WORLDS_DIR, world_id), events)
+        print(f"[Events] registered {len(events)} event(s) -> {events_path}")
 
     if days < 1:
         print("[Abort] --days must be >= 1")
@@ -125,6 +130,10 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
             print(f"\n########## SIMULATE world={world_id} house={house} date={d} env={env} "
                   f"workers={workers} policy={policy_spec or 'none'} s4_only={s4_only} ##########")
             print(f"[Members] {targets}")
+            day_news = news.render_world_news(
+                news.events_for_date(events, d, config.NEWS_MEMORY_KEEP))
+            if day_news:
+                print(f"[News] {len(news.events_for_date(events, d, config.NEWS_MEMORY_KEEP))} active event(s) for {d}")
 
             if not s4_only:
                 prev_states = {}
@@ -138,7 +147,8 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
                 with ThreadPoolExecutor(max_workers=workers) as ex:
                     results = list(ex.map(
                         lambda m: s1_macro_plan.run_step(world_id, m, d, env, house=house,
-                                                         prev_state=prev_states.get(m)),
+                                                         prev_state=prev_states.get(m),
+                                                         world_news=day_news),
                         targets))
                 if any(not r[0] for r in results):
                     print(f"[WARN] s1 failed for some members (house={house} date={d})")
@@ -163,7 +173,8 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
             with ThreadPoolExecutor(max_workers=workers) as ex:
                 results = list(ex.map(
                     lambda m: s4_appliance_decision.run_step(
-                        world_id, m, d, env, policy_text=policy_text, policy_tag=policy_tag, house=house),
+                        world_id, m, d, env, policy_text=policy_text, policy_tag=policy_tag,
+                        house=house, world_news=day_news),
                     targets))
             if any(not r[0] for r in results):
                 print(f"[WARN] s4 failed for some members (house={house} date={d})")
@@ -196,13 +207,20 @@ def main():
     parser.add_argument("--member", default=None, help="simulate: only this member (name or index)")
     parser.add_argument("--policy", default=None, help="simulate: policy to inject (tou | tou:<peak>,<valley>[,<shoulder>])")
     parser.add_argument("--s4-only", action="store_true", help="simulate: skip s1-s3, re-run appliance decisions only (policy comparison runs)")
+    parser.add_argument("--event", action="append", default=None, help="simulate: custom event 'date|title|content' (repeatable)")
+    parser.add_argument("--event-template", action="append", default=None, help="simulate: preset event 'date|template' (repeatable)")
     args = parser.parse_args()
 
     world_id = args.world or auto_world_id()
     if args.mode == "world":
         return run_world(world_id, args.count, args.seed, args.workers, args.world_config)
+    try:
+        events = news.parse_events(args.event, args.event_template)
+    except ValueError as exc:
+        print(f"[Abort] {exc}")
+        return 1
     return run_simulate(world_id, args.date, args.env, args.workers, args.member,
-                        args.policy, args.s4_only, args.house, args.days)
+                        args.policy, args.s4_only, args.house, args.days, events)
 
 
 if __name__ == "__main__":
