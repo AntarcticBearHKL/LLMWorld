@@ -39,13 +39,32 @@
 - Parallel scheduling (`ThreadPoolExecutor`), `--s4-only` reuse, `--member/--house/--days` scoping,
   and prompt caching are in place; distillation not yet implemented.
 
+## Threats to validity — prompt over-compliance
+
+Across interventions the simulated **magnitude tends to exceed the empirical benchmark even when the
+direction is right**: TOU peak −18%~−26% vs the −3~6% plain-TOU range (R23/R24/R26), and fixed-nudge
+total −6%~−10% vs −1~3% (R37). Two observations:
+
+1. **Fragility**: for TOU the direction *reverses* under a low-variance / no-thinking setting (R26),
+   so single-member magnitudes are not trustworthy.
+2. **Over-compliance**: this pattern is consistent with LLM agents over-complying with explicit
+   natural-language directives, rather than the smaller, habit-bound responses of real households
+   (cf. Wang et al. 2021, who find habits dominate price effects).
+
+**Mitigation**: provide de-instructionalized variants (`tou_soft`, `nudge_soft`) and compare; and, for
+any magnitude claim, average across multiple households/members at a fixed weekday. Accordingly, this
+work treats the platform as suited to **direction** and **heterogeneity** claims, with absolute
+magnitude calibration left as future work.
+
 ## Limitations
 
 - Heatwave result so far is **single-household** (n=1) with `temperature=1.0`; needs multi-member/
   multi-seed replication before being treated as a final result.
 - Weather is currently a stub; event effects use a fixed temperature offset.
-- Some guide-referenced tools were missing after a refactor; restored so far: `engine/news.py`,
-  `compare_worlds.py`. Still missing: `population_runner.py` (policy schedule / peer-nudge).
+- Refactor-era drift is resolved: `engine/news.py`, `compare_worlds.py`, all documented policies
+  (`tou`/`tou_soft`/`nudge`/`nudge_soft`/`nudge_loss`/`subsidy`/`peak_demand`/`ev_delay`/
+  `night_setback`/`in_home_display`), `--community-notice`, `--policy-schedule`, and `--peer-nudge`
+  are restored (the guide's `population_runner.py` role is now covered by `run.py`).
 
 ## Next steps
 
