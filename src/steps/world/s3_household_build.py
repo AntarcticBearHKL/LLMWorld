@@ -221,6 +221,58 @@ ENERGY_LEVEL_AWARENESS = {
     "excellent": "High",
 }
 
+# Energy-awareness label is a *construct* (attitude to energy + conscientiousness),
+# not the wellness "Energy level" cell alone: in the persona bank the latter is
+# almost always "Moderate", which collapses analyze_groups --label-source awareness
+# into a single group (intervention_experiment_guide.md §3.4 groups high-awareness /
+# high-conscientiousness households). Composite = mean of available components.
+ATTITUDE_ENERGY_SCORES = {
+    "opposed": 0.1,
+    "very negative": 0.1,
+    "negative": 0.25,
+    "skeptical": 0.25,
+    "neutral": 0.5,
+    "positive": 0.8,
+    "enthusiast": 0.9,
+    "very positive": 0.9,
+}
+ENERGY_AWARENESS_LOW_BELOW = 0.4
+ENERGY_AWARENESS_HIGH_AT = 0.65
+
+
+def _score_attitude(value):
+    if value is None:
+        return None
+    return ATTITUDE_ENERGY_SCORES.get(str(value).strip().lower())
+
+
+def _row_energy_awareness(row):
+    """Derive Low/Medium/High from the persona row's energy construct fields."""
+    if not isinstance(row, dict):
+        return None
+    components = []
+    for column in ("Attitude: Renewable energy", "Attitude: Climate action"):
+        score = _score_attitude(row.get(column))
+        if score is not None:
+            components.append(score)
+            break
+    score = _level_to_score(row.get("BFI-2 Conscientiousness"))
+    if score is not None:
+        components.append(score)
+    for column in ("Energy level", "BFI-2 Energy Level"):
+        score = _level_to_score(row.get(column))
+        if score is not None:
+            components.append(score)
+            break
+    if not components:
+        return None
+    composite = sum(components) / len(components)
+    if composite < ENERGY_AWARENESS_LOW_BELOW:
+        return "Low"
+    if composite < ENERGY_AWARENESS_HIGH_AT:
+        return "Medium"
+    return "High"
+
 # Deterministic fallback for rows without BFI-2 columns: each marker hit shifts
 # the 0.5 baseline by +-0.1, clamped to [0.1, 0.9]. Same portrait -> same score.
 PORTRAIT_BIG_FIVE_MARKERS = {
@@ -309,7 +361,7 @@ def _apply_personality(member, row, portrait):
             score = _level_to_score(row.get(column))
             if score is not None:
                 big_five[dimension] = score
-        energy_awareness = _level_to_awareness(row.get("Energy level"))
+        energy_awareness = _row_energy_awareness(row)
     if len(big_five) < len(BIG_FIVE_DIMENSIONS) or energy_awareness is None:
         fallback = _portrait_big_five(portrait)
         for dimension in BIG_FIVE_DIMENSIONS:

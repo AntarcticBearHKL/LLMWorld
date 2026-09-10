@@ -218,5 +218,44 @@ class LoadPersonaRowsTests(unittest.TestCase):
             self.assertEqual(rows, [{"id": 1}])
 
 
+class RowEnergyAwarenessTests(unittest.TestCase):
+    def test_high_composite(self):
+        row = {"Attitude: Renewable energy": "Enthusiast",
+               "BFI-2 Conscientiousness": "Very high", "Energy level": "High"}
+        self.assertEqual(s3._row_energy_awareness(row), "High")
+
+    def test_low_composite(self):
+        row = {"Attitude: Climate action": "Opposed",
+               "BFI-2 Conscientiousness": "Very low"}
+        self.assertEqual(s3._row_energy_awareness(row), "Low")
+
+    def test_energy_only_moderate_is_medium(self):
+        self.assertEqual(s3._row_energy_awareness({"Energy level": "Moderate"}), "Medium")
+
+    def test_falls_back_to_bfi_energy_level(self):
+        self.assertEqual(s3._row_energy_awareness({"BFI-2 Energy Level": "Very high"}), "High")
+
+    def test_renewable_attitude_preferred_over_climate(self):
+        row = {"Attitude: Renewable energy": "Opposed",
+               "Attitude: Climate action": "Enthusiast",
+               "BFI-2 Conscientiousness": "Average"}
+        self.assertEqual(s3._row_energy_awareness(row), "Low")
+
+    def test_no_components_returns_none(self):
+        self.assertIsNone(s3._row_energy_awareness({}))
+        self.assertIsNone(s3._row_energy_awareness(None))
+
+    def test_conscientiousness_gives_variance_on_flat_energy_level(self):
+        rows = [{"Energy level": "Moderate", "BFI-2 Conscientiousness": "Very high"},
+                {"Energy level": "Moderate", "BFI-2 Conscientiousness": "Very low"}]
+        self.assertEqual([s3._row_energy_awareness(r) for r in rows], ["High", "Low"])
+
+    def test_attitude_scores(self):
+        self.assertEqual(s3._score_attitude("Enthusiast"), 0.9)
+        self.assertEqual(s3._score_attitude("neutral"), 0.5)
+        self.assertIsNone(s3._score_attitude(None))
+        self.assertIsNone(s3._score_attitude("unknown"))
+
+
 if __name__ == "__main__":
     unittest.main()
