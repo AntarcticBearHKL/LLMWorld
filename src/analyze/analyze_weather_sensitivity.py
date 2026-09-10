@@ -8,6 +8,8 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import list_dates, population_profile
+from engine.weather import get_weather
 
 
 def pearson(a, b):
@@ -38,32 +40,21 @@ def linear_slope(a, b):
 
 
 def load_daily_points(world_id, scenario):
-    pop_dir = os.path.join(sim_root(world_id), "population",
-                           scenario)
     points = []
-    if not os.path.isdir(pop_dir):
-        return points
-    for date_dir in sorted(os.listdir(pop_dir)):
-        path = os.path.join(pop_dir, date_dir,
-                            "population_profile_1440min.json")
-        if not os.path.exists(path):
+    for date in list_dates(world_id):
+        profile = population_profile(world_id, scenario, date)
+        if not profile.get("per_house"):
             continue
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-        except Exception:
+        weather = get_weather(date)
+        temperature = weather.get("temperature")
+        if temperature is None:
             continue
-        env = data.get("environment") or {}
-        temps = [v.get("temperature") for v in env.values()
-                 if isinstance(v, dict) and v.get("temperature") is not None]
-        if not temps:
-            continue
+        condition = weather.get("weather")
         points.append({
-            "date": date_dir,
-            "temperature": sum(temps) / len(temps),
-            "kwh": data.get("total_energy_kwh"),
-            "conditions": {v.get("condition") for v in env.values()
-                           if isinstance(v, dict) and v.get("condition")},
+            "date": date,
+            "temperature": float(temperature),
+            "kwh": profile.get("total_energy_kwh"),
+            "conditions": {condition} if condition else set(),
         })
     return points
 
@@ -108,7 +99,11 @@ def main():
     args = parser.parse_args()
 
     points = load_daily_points(args.world_id, args.scenario)
-    report = build_report(points)
+    try:
+        report = build_report(points)
+    except ValueError as exc:
+        print(f"[Error] {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
 

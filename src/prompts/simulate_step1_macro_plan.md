@@ -37,6 +37,8 @@ Typical schedule anchors (Australian population time-use baseline, empirically a
 
 Generate this member's activities from 00:00 to 24:00 for the full day. Requirements:
 - Each time segment must include: time, location, activity description
+- The `time` value MUST be the range form HH:MM-HH:MM (zero-padded 24-hour clock), for example "06:50-07:00". A single timestamp such as "06:50" is INVALID. Use only the hyphen "-" as the separator (no en dashes, no spaces, no other characters).
+- Time values must span 00:00 to 24:00: the first segment starts at 00:00 and the last segment ends at 24:00.
 - Location requirements:
   - If at home, must specify the actual room name, and the room must be a real room that exists in the household structure
   - If out, write the English value Out (out)
@@ -60,8 +62,8 @@ Output JSON format (return ONLY the JSON, nothing else):
 {
   "member": "{member_name}",
   "activities": [
-    {"time": "...", "location": "...", "activity": "..."},
-    {"time": "...", "location": "...", "activity": "..."},
-    {"time": "...", "location": "...", "activity": "..."}
+    {"time": "00:00-06:30", "location": "...", "activity": "..."},
+    {"time": "06:30-07:00", "location": "...", "activity": "..."},
+    {"time": "07:00-07:30", "location": "...", "activity": "..."}
   ]
 }

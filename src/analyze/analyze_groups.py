@@ -7,29 +7,23 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import (list_dates, list_houses, read_household,
+                     household_features, discover_policy_tags,
+                     population_profile)
 
 
 def load_household_labels(world_id):
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    base = os.path.join(project_root, "output", "worlds", world_id, "3168")
     labels = {}
-    has_any = False
-    if not os.path.isdir(base):
-        return labels
-    for house_id in sorted(os.listdir(base)):
-        hpath = os.path.join(base, house_id, "household.json")
-        if not os.path.isfile(hpath):
-            continue
-        with open(hpath, "r", encoding="utf-8") as f:
-            household = json.load(f)
-        members = household.get("members", [])
-        if members:
-            awareness = members[0].get("personality", {}).get("energy_awareness")
-            if awareness:
-                has_any = True
-            labels[house_id] = awareness or "Unknown"
-        else:
-            labels[house_id] = "Unknown"
+    for date in list_dates(world_id):
+        for house_id in list_houses(world_id, world_id, date):
+            if house_id in labels:
+                continue
+            household = read_household(world_id, house_id)
+            if not household:
+                labels[house_id] = "Unknown"
+                continue
+            awareness = household_features(household).get("energy_awareness")
+            labels[house_id] = awareness if awareness not in (None, "?") else "Unknown"
     return labels
 
 
@@ -50,24 +44,25 @@ def load_variability_labels(world_id, scenario="baseline"):
 
 
 def load_scenario_house_kwh(world_id):
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    pop_dir = os.path.join(sim_root(world_id), "population")
-    scenarios = {}
-    if not os.path.isdir(pop_dir):
-        return scenarios
+    dates = list_dates(world_id)
+    policies = set()
+    for date in dates:
+        for house_id in list_houses(world_id, world_id, date):
+            house_dir = os.path.join(sim_root(world_id), date, house_id)
+            for tag in discover_policy_tags(house_dir):
+                policies.add(tag)
 
-    def classify_and_merge(path):
-        with open(path, "r", encoding="utf-8") as fh:
-            data = json.load(fh)
-        policy = data.get("policy", "baseline")
-        per_house = {h["house_id"]: h["total_energy_kwh"] for h in data.get("per_house", [])}
+    scenarios = {}
+    for policy in ["baseline"] + sorted(policies):
+        totals = {}
+        for date in dates:
+            profile = population_profile(world_id, policy, date)
+            for item in profile.get("per_house", []):
+                totals.setdefault(item["house_id"], []).append(item["total_energy_kwh"])
+        per_house = {house_id: sum(values) / len(values)
+                     for house_id, values in totals.items() if values}
         if per_house:
             scenarios[policy] = per_house
-
-    for root, _, files in os.walk(pop_dir):
-        for f in files:
-            if f.endswith(".json"):
-                classify_and_merge(os.path.join(root, f))
     return scenarios
 
 
@@ -124,6 +119,9 @@ def main():
     if not scenarios:
         print(f"No aggregated data found for {args.world}")
         sys.exit(1)
+    if "baseline" not in scenarios:
+        print(f"No baseline data found for {args.world}")
+        sys.exit(1)
 
     print(f"Household labels: {labels}")
     print(f"Available scenarios: {list(scenarios.keys())}")
@@ -143,7 +141,6 @@ def main():
                 line += f"{r[s + '_mean_kwh']} ({r[s + '_change_pct']:+.1f}%)".ljust(18)
         print(line)
 
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     out_dir = os.path.join(sim_root(args.world), "analysis")
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"groups_{args.label_source}.json")

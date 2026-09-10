@@ -1,0 +1,4 @@
+﻿house_id,members,at_home_minutes,at_home_mean_watts,away_mean_watts,load_consistent,peak_hour,busy_hour,peak_aligned,flags
+house_0001,6,4765,3446.47,682.5,True,0,22,False,"["""", ""peak 0:00 vs activity peak 22:00 misaligned""]"
+house_0002,2,1715,1553.3,280.51,True,22,7,False,"["""", ""peak 22:00 vs activity peak 7:00 misaligned""]"
+house_0003,3,2460,1343.03,389.27,True,6,18,False,"["""", ""peak 6:00 vs activity peak 18:00 misaligned""]"

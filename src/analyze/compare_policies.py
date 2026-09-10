@@ -9,6 +9,8 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import (SIMULATION_DIR, population_profile, list_dates, list_houses,
+                     discover_policy_tags)
 
 import pandas as pd
 
@@ -56,24 +58,32 @@ def high_overlap_minutes(profile_watts, threshold=30000):
     return sum(1 for w in profile_watts if w >= threshold)
 
 
+def all_policy_tags(world_id):
+
+    tags = set()
+    for date in list_dates(world_id):
+        for house_id in list_houses(world_id, world_id, date):
+            house_dir = os.path.join(SIMULATION_DIR, world_id, date, house_id)
+            tags.update(discover_policy_tags(house_dir))
+    return sorted(tags)
+
+
 def load_population(world_id, policy_filter=None):
 
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    pop_dir = os.path.join(sim_root(world_id), "population")
     results = []
-    if not os.path.isdir(pop_dir):
-        return results
-    for root, _, files in os.walk(pop_dir):
-        for f in files:
-            if not f.endswith(".json"):
+    dates = list_dates(world_id)
+    if policy_filter:
+        policies = [policy_filter]
+    else:
+        policies = ["baseline"] + all_policy_tags(world_id)
+    for policy in policies:
+        for date in dates:
+            data = population_profile(world_id, policy, date)
+            if not data["per_house"]:
                 continue
-            path = os.path.join(root, f)
-            with open(path, "r", encoding="utf-8") as fh:
-                data = json.load(fh)
-            policy = data.get("policy", "baseline")
-            if policy_filter and policy != policy_filter:
-                continue
-            results.append((policy, path, data))
+            path = os.path.join(sim_root(world_id), "population", policy, date,
+                                "population_profile_1440min.json")
+            results.append((data["policy"], path, data))
     return results
 
 
@@ -211,7 +221,8 @@ def main():
     interventions = load_population(args.world, args.intervention)
 
     if not baselines:
-        print(f"No baseline aggregate curve found（output/simulation/{args.world}/population/)")
+        print(f"No baseline aggregate curve found for {args.world} "
+              f"(output/simulation/{args.world}/<date>/<house>/s4_decisions_*.json)")
         sys.exit(1)
     if not interventions:
         print(f"No intervention curve found for {args.intervention} (run the simulation with --policy {args.intervention} first)")

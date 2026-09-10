@@ -8,41 +8,23 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import iter_house_days
 
-from engine.load_features import (hourly_means, normalize_shape,
+from load_profile_cluster import (hourly_means, normalize_shape,
                                   kmeans, auto_k)
 
 
 def scan_household_days(world_id, scenario):
-    simulation_root = os.path.join(sim_root(world_id))
-    if not os.path.isdir(simulation_root):
-        return []
     samples = []
-    for postcode_dir in sorted(os.listdir(simulation_root)):
-        postcode_path = os.path.join(simulation_root, postcode_dir)
-        if not os.path.isdir(postcode_path) or postcode_dir == "population":
-            continue
-        for house_id in sorted(os.listdir(postcode_path)):
-            scenario_dir = os.path.join(postcode_path, house_id, scenario)
-            if not os.path.isdir(scenario_dir):
-                continue
-            dates = sorted(d for d in os.listdir(scenario_dir)
-                           if os.path.isdir(os.path.join(scenario_dir, d)))
-            for date_dir in dates:
-                path = os.path.join(scenario_dir, date_dir, "ElectricityInfo",
-                                    "house_load_profile_1440min.json")
-                if not os.path.exists(path):
-                    continue
-                with open(path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                hourly = hourly_means(data.get("load_profile_watts", []))
-                samples.append({
-                    "house_id": house_id,
-                    "date": date_dir,
-                    "kwh": data.get("total_energy_kwh", 0.0),
-                    "shape": normalize_shape(hourly),
-                    "hourly": hourly,
-                })
+    for record in iter_house_days(world_id, policy=scenario):
+        hourly = hourly_means(record["load_profile_watts"])
+        samples.append({
+            "house_id": record["house_id"],
+            "date": record["date"],
+            "kwh": record["total_energy_kwh"],
+            "shape": normalize_shape(hourly),
+            "hourly": hourly,
+        })
     return samples
 
 
@@ -112,7 +94,11 @@ def main():
     args = parser.parse_args()
 
     samples = scan_household_days(args.world_id, args.scenario)
-    report = build_report(samples, args.k)
+    try:
+        report = build_report(samples, args.k)
+    except ValueError as exc:
+        print(f"No simulation curves found for {args.world_id}: {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
 

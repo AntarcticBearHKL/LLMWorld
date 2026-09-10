@@ -1,0 +1,107 @@
+{
+  "member": "Member 3",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "desc": "Lies down on bed. Pulls blanket up to chest. Closes eyes. Turns to left side. Bends knees. Adjusts pillow. Takes slow breaths. Turns to right side. Extends legs. Remains still. Breathes deeply. Turns to back. Sleeps."
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting ready, finishing before Member 6's 06:30 bathroom slot",
+      "desc": "Opens eyes. Sits up on bed. Swings legs over side. Stands up. Walks to bathroom. Turns on bathroom light. Turns on shower tap. Adjusts water temperature. Steps into shower. Washes body with soap. Rinses off. Turns off shower tap. Steps out of shower. Picks up towel. Dries body. Wraps towel around hair. Wipes mirror. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Spits into sink. Turns off tap. Hangs towel. Turns off light. Walks out of bathroom before 06:30."
+    },
+    {
+      "time": "06:30-06:45",
+      "location": "Bedroom 3",
+      "activity": "Dressing and starting to pack nursing study notes and clinical placement bag",
+      "desc": "Walks into bedroom. Opens wardrobe. Takes out nursing uniform. Puts on uniform. Buttons up. Puts on socks. Puts on shoes. Opens backpack. Places nursing study notes inside. Zips backpack. Opens clinical placement bag. Checks contents. Zips bag."
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and making tea, having breakfast alongside Member 1 who is also eating and checking his reminders",
+      "desc": "Walks into kitchen. Opens cupboard. Takes out bowl. Takes out cereal box. Pours cereal into bowl. Opens refrigerator. Takes out milk. Pours milk into bowl. Closes refrigerator. Picks up spoon. Eats cereal. Fills kettle with water. Places kettle on base. Presses switch to boil. Takes out mug. Places tea bag in mug. Pours boiling water into mug. Adds milk. Stirs tea. Picks up mug. Sits at table. Eats breakfast. Talks to Member 1: 'Good morning, how was your shift?' Drinks tea. Finishes breakfast. Picks up bowl and spoon. Walks to sink. Rinses bowl and spoon. Places in dishwasher. Returns to table. Picks up mug. Drinks remaining tea. Places mug in sink."
+    },
+    {
+      "time": "07:15-08:00",
+      "location": "Bedroom 3",
+      "activity": "Reviewing nursing notes and finalising the clinical placement bag for the day",
+      "desc": "Walks into bedroom. Sits at desk. Opens nursing notes. Reads notes. Turns page. Highlights key points. Closes notes. Opens clinical placement bag. Checks stethoscope. Checks blood pressure cuff. Checks penlight. Checks notebook. Adds hand sanitizer. Zips bag. Stands up. Places bag by door. Sits on bed. Puts on watch. Checks phone for time. Stands up. Picks up bag. Walks out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University",
+      "desc": "Walks to bus stop. Waits. Boards bus. Taps card. Sits. Rides bus. Alights. Walks to train station. Boards train. Sits. Reads notes. Alights. Walks to university."
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Attending Bachelor of Nursing lectures and clinical simulation labs",
+      "desc": "Enters lecture hall. Sits at desk. Takes out notebook. Takes out pen. Faces lecturer. Writes notes. Looks at slides. Raises hand. Speaks to lecturer. Writes more notes. Lecture ends. Stands up. Walks to simulation lab. Puts on lab coat. Washes hands. Puts on gloves. Picks up syringe. Inserts needle into vial. Draws liquid. Injects into mannequin. Disposes syringe. Removes gloves. Washes hands. Removes lab coat. Walks to next lecture. Sits. Takes out notes. Faces lecturer. Writes."
+    },
+    {
+      "time": "13:00-14:00",
+      "location": "Out",
+      "activity": "Eating lunch on campus and reviewing lecture notes",
+      "desc": "Walks to campus cafeteria. Picks up tray. Selects food. Pays at register. Carries tray to table. Sits down. Opens lunch box. Takes out sandwich. Unwraps sandwich. Takes bite. Chews. Swallows. Opens notebook. Reads notes. Highlights key points. Takes another bite. Drinks water. Closes notebook. Stands up. Clears tray. Walks to library."
+    },
+    {
+      "time": "14:00-17:00",
+      "location": "Out",
+      "activity": "Attending nursing tutorials and practising clinical skills",
+      "desc": "Enters tutorial room. Sits at table. Opens textbook. Discusses case study. Writes notes. Moves to clinical skills lab. Washes hands. Puts on gloves. Practices wound dressing on mannequin. Removes old dressing. Cleans wound. Applies new dressing. Removes gloves. Washes hands. Practices bed making. Adjusts sheets. Folds corners. Places pillow. Practices patient transfer. Uses gait belt. Assists mannequin to stand. Returns to tutorial room. Sits. Discusses. Writes."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home by public transport",
+      "desc": "Walks to bus stop. Waits. Boards bus. Taps card. Sits. Rides bus. Alights. Walks to train station. Boards train. Sits. Reads notes. Alights. Walks home. Enters house."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner together with Member 1, Member 2 and Member 4",
+      "desc": "Walks into kitchen. Washes hands. Opens refrigerator. Takes out vegetables. Places on cutting board. Picks up knife. Chops vegetables. Turns on induction cooker. Places pan on cooker. Pours oil. Adds vegetables. Stirs with spatula. Adds spices. Cooks. Turns off cooker. Plates food. Carries plate to table. Sits down. Member 1, Member 2, Member 4 sit. Eats dinner. Talks to Member 2: 'How was work?' Drinks water. Finishes meal. Picks up plate. Walks to sink."
+    },
+    {
+      "time": "18:45-19:10",
+      "location": "Kitchen",
+      "activity": "Washing up and tidying the kitchen, sharing the kitchen tidy-up with Member 1, Member 2 and Member 4",
+      "desc": "Picks up plates. Scrapes food into bin. Rinses plates. Loads plates into dishwasher. Picks up glasses. Rinses. Loads into dishwasher. Wipes counter with cloth. Rinses cloth. Wrings cloth. Wipes stove. Picks up broom. Sweeps floor. Empties dustpan into bin. Puts broom away."
+    },
+    {
+      "time": "19:10-19:30",
+      "location": "Bathroom",
+      "activity": "Doing a load of laundry and evening wash-up",
+      "desc": "Walks into bathroom. Opens washing machine. Picks up laundry basket. Sorts clothes. Places clothes into washing machine. Adds detergent. Closes door. Turns dial to set cycle. Presses start button. Turns on tap. Washes face. Applies soap. Rinses face. Dries face with towel. Brushes teeth. Rinses mouth. Turns off tap. Turns off light. Walks out."
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Bedroom 3",
+      "activity": "Organising study notes and preparing for the next day",
+      "desc": "Walks into bedroom. Sits at desk. Opens backpack. Takes out nursing notes. Sorts notes by subject. Places notes in folders. Opens laptop. Turns on computer. Checks email. Opens calendar. Reviews schedule. Writes to-do list. Checks clinical placement bag. Adds pens. Adds notebook. Zips bag. Places bag by door. Stands up. Stretches. Sits on bed. Takes off shoes. Puts on slippers."
+    },
+    {
+      "time": "20:00-22:30",
+      "location": "Bedroom 3",
+      "activity": "Studying nursing coursework and writing assignments on the computer",
+      "desc": "Sits at desk. Opens laptop. Turns on computer. Opens word processor. Opens textbook. Reads chapter. Takes notes. Types essay. Pauses. Reads notes. Continues typing. Saves document. Checks references. Opens browser. Searches for article. Reads article. Takes notes. Types more. Saves document. Closes laptop. Stands up. Stretches."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 3",
+      "activity": "Winding down: reading and checking phone reminders for placement",
+      "desc": "Picks up book. Sits on bed. Opens book. Reads page. Turns page. Reads more. Puts bookmark. Closes book. Places book on nightstand. Picks up phone. Unlocks phone. Opens reminders app. Checks placement reminders. Adds reminder for tomorrow. Checks weather app. Locks phone. Places phone on nightstand. Turns off desk lamp. Lies down on bed. Pulls blanket up. Closes eyes."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Eyes closed. Breathes slowly. Turns to left side. Adjusts pillow. Turns to right side. Remains still. Pulls blanket up. Bends knees. Extends legs. Turns to back. Breathes deeply. Sleeps."
+    }
+  ]
+}

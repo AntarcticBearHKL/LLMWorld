@@ -1,0 +1,306 @@
+
+########## WORLD world_764879 (count=1, workers=4, config=default) ##########
+[Info] world directory created: D:\研究项目\LLMWorld\output\worlds\world_764879
+================ INPUT: PROMPT ================
+You are a demographic statistics expert. Based on the district description below, generate a list of the household types most likely to appear in this community.
+
+## District Description (ABS 2021 census summary)
+
+In the southeastern part of the Melbourne metropolitan area, the Clayton 3168 postcode district presents a distinctive demographic profile. According to the 2021 census, the district has a usual resident population of 21,880 — 11,681 males and 10,201 females, a slight male skew. The most striking feature is its extremely young age structure: the district's median age is only 28, well below the Australian national average. The 20-24 age group alone has 4,638 residents and the 25-34 group 6,640 — together more than half of the total population — making this an area dominated by young students and early-career professionals. By contrast, there are only 1,934 children aged 0-14 and about 1,486 residents aged 65 and over, a classic "large middle, small ends" structure.
+
+This age structure deeply shapes the local household landscape. The district has 4,009 households with an average size of 2.5 people. Couple-only households are the largest group at 1,768, alongside 1,891 couples with children and 434 single-parent families. Because the population is young and student-heavy, living alone or sharing is very common: 1,893 households are one-person non-family dwellings and another 3,263 are non-family households, meaning many people do not live in traditional family units. Marital status reflects this too: among 25-34 year-olds, 2,838 men have never married and 1,183 women are unmarried.
+
+Economically, Clayton shows a typical "student economy". The median personal weekly income is AUD 606 — below the Greater Melbourne level — reflecting the large number of full-time students and part-time workers. The median household weekly income is AUD 1,778 and the median family weekly income AUD 1,508. The unemployment rate is 9.3% and the labour force participation rate 60.7% (63.5% for men, 57.4% for women). Among employed residents, 5,386 work full-time and 4,761 part-time — a notably high part-time share. Education is one of the largest employers, with 1,216 people working in education and training, followed by health care and social assistance, and professional, scientific and technical services.
+
+Housing in Clayton is diverse. Of the 8,606 private dwellings, 2,640 are separate houses, 2,703 are semi-detached, row or terrace houses, and 1,794 are flats or units. Home ownership rates are relatively low: only 1,358 households fully own their home, while 3,305 rent through a real estate agent and 618 rent from a private landlord. The median weekly rent is AUD 396 and the median monthly mortgage repayment AUD 2,000. On average 0.9 people live per bedroom — not especially crowded. Notably, 1,452 dwellings are unoccupied, likely including investor properties and short-term student rentals.
+
+Education is the district's most defining feature. 4,797 residents hold a bachelor's degree, 3,485 a postgraduate qualification, and 1,577 an advanced diploma or diploma — an exceptionally dense concentration of highly educated people. Student numbers are striking: 3,337 residents aged 15-24 are enrolled in education and 2,517 aged 25 and over are still studying, confirming Clayton's identity as a university town adjacent to Monash University. The cultural diversity is equally marked: only 6,488 residents speak only English at home, while 13,724 speak a language other than English — including 5,406 of Chinese ancestry and about 2,800 of Indian ancestry, plus large numbers of migrants from Sri Lanka, Malaysia, Vietnam and elsewhere. 7,541 residents have no religious affiliation, 1,617 are Buddhists, 1,145 Orthodox Christians, and there is a substantial Hindu community. For commuting, driving dominates: 4,631 people drive to work alone, while close to 670 rely on trains and buses, with a notable number walking or cycling.
+
+In summary, Clayton 3168 is a dynamic, multicultural community formed by international students, young professionals and newly arrived migrant families. It lacks the quiet ageing typical of traditional Australian suburbs; instead it is full of the bustle of study, work and mobility. High education levels, multilingualism, a high rental share and young residents clustering together are its defining traits — and its vitality. As a residential area it functions more like a "talent incubator" for the future: large numbers of young people receive higher education and start their careers here, continuously supplying fresh energy to Melbourne.
+
+## Generation Requirements
+
+1. Generate exactly **1** distinct household types (covering the most typical and most common household forms in this community)
+2. For each household type provide: a type name, a detailed description, the member count minimum and maximum, and a typical housing hint
+3. Household types must match the district's age structure, income level, housing types, and cultural composition
+   (e.g., a student area should feature share-house/student households, not large numbers of retired households)
+4. Output language: all generated VALUES (type names, descriptions, housing hints) MUST be written in English, because the downstream system matches English tokens. Example type names: Young DINK Couple, Family with Children, International Student Share House, Single Professional Living Alone, Single-Parent Family, Multigenerational Household, Retired Couple
+5. Return ONLY a valid JSON object matching the required schema (no markdown fences, no commentary).
+
+================ CALL ================
+================ OUTPUT: RESPONSE ================
+{
+  "household_types": [
+    {
+      "type": "Student Share House",
+      "description": "A group of unrelated young adults, typically full-time students or recent graduates, sharing rented accommodation to reduce living costs. This household type is common in university-adjacent areas, with members often from diverse cultural backgrounds including international students from China, India, Sri Lanka, Malaysia, and Vietnam. Household size varies from two to five individuals, reflecting flexible and transient living arrangements.",
+      "members_min": 2,
+      "members_max": 5,
+      "housing_hint": "Rented flats, units, or semi-detached houses near Monash University or along public transport routes."
+    }
+  ]
+}
+========================================================================
+  type=Student Share House | members=2-5 | hint=Rented flats, units, or semi-detached houses near Monash University or along public transport routes.
+========================================================================
+[Saved] D:\研究项目\LLMWorld\output\worlds\world_764879\3168\household_types.json
+
+########## HOUSE 0 ##########
+[House 0] Student Share House | member range 2-5 -> decided 3
+================ INPUT ================
+You are a persona adaptation expert. Rewrite the sampled personas so they fit the household type while remaining coherent and useful for a household simulation.
+
+## Household Type
+
+- Type: Student Share House
+- Description: A group of unrelated young adults, typically full-time students or recent graduates, sharing rented accommodation to reduce living costs. This household type is common in university-adjacent areas, with members often from diverse cultural backgrounds including international students from China, India, Sri Lanka, Malaysia, and Vietnam. Household size varies from two to five individuals, reflecting flexible and transient living arrangements.
+- Total people: 3
+
+## Sampled Personas
+
+Member 1:
+Personality & behavioral style: Tech savviness: Comfortable; Dominant trait: High extraversion; Risk tolerance: Cautious; Decision style: Consensus-driven; Core value: Community; Political lean: Center; Religiosity: Secular; Emotional state: Calm; Trust level: Verifying; Safety sensitivity: Sensitive personal; MBTI type: ENFJ — Protagonist; Adventurousness: High; Intellect: High; Dutifulness: High; Cautiousness: High; Assertiveness: High; Activity level: High; Cheerfulness: High; Modesty: High; Sympathy: Very low; Anxiety: Very high; Depression: Very high; Immoderation: High; Vulnerability: High; Social battery: Ambivert; Character: Creativity: Absent; Character: Perspective: Strong; Character: Perseverance: Absent; Character: Honesty: Strong; Character: Kindness: Strong; Character: Fairness: Strong; Character: Playfulness: Strong; Character: Spirituality: Strong; Character: Empathy: Absent; Character: Loyalty: Strong; Office vs remote: Hybrid; Team vs solo work: Mixed; City vs nature: Prefers city; Speed vs accuracy: Speed first; Quality vs quantity: Quality first; Logic vs intuition: Pure logic; Lead vs follow: Situational; Indoor vs outdoor: Outdoor-leaning; Early vs late adopter: Laggard; Texting vs calling: Text only; Big group vs one-on-one: 1-on-1 leaning; Brief vs full detail: Every detail; Stability vs change: Change-leaning; BFI-2 Agreeableness: High; BFI-2 Conscientiousness: Very low; BFI-2 Sociability: High; BFI-2 Trust: Very high; BFI-2 Emotional Volatility: Very low; Attachment Anxiety: High; Attachment Avoidance: High. Values: values Family; Wealth is a core value; values Personal freedom; values Adventure; values Tradition; Community is a core value; values Spirituality / faith; values Social status; values Helping others; values Privacy; Schwartz Power: Very high; Schwartz Security: High; Schwartz Conformity: High; Schwartz Benevolence: High; Schwartz Universalism: High; SDT Competence Need: Very high. Attitudes: toward Data privacy: Opposed; toward Free markets: Skeptical; toward Government regulation: Skeptical; toward Climate action: Positive; toward Nuclear energy: Enthusiast; toward Renewable energy: Skeptical; toward Homeownership: Skeptical; toward Taking on debt: Positive; toward Risk-taking: Skeptical; toward New technology: Positive; toward Subscription services: Positive; toward Minimalism: Positive; toward Fast fashion: Positive; toward Electric vehicles: Skeptical; Moral Foundation Fairness/Cheating: Very low; Moral Foundation Sanctity/Degradation: High; Moral Foundation Liberty/Oppression: High; DOSPERT Financial Risk Tolerance: Very low; DOSPERT Social Risk Tolerance: Very low. Lifestyle: Economic motivation: Cost-sensitive; Sleep schedule: Irregular; Exercise frequency: Monthly; Diet type: Flexitarian; Alcohol use: Never; Smoking / vaping: Never; Shopping style: Impulse buyer; Commute mode: Public transit; Pet ownership: Dog; Work schedule: Shift work; Daily screen time: 8+ hrs; Planning horizon: Weekly; Punctuality: Always early; Charitable giving: Rare; Reading frequency: Daily; Gaming frequency: Never; Streaming hours/week: 0-2; Music listening: Sometimes; Podcast listening: Monthly; Primary social platform: X / Twitter; Primary messenger: Telegram; Device ecosystem: Apple; Primary browser: Chrome; Payment preference: Cash; Banking style: Mostly cash; Active subscriptions: 3-5; Coffee ritual: Tea instead; Vacation style: Culture; Morning routine: Rushed. Health: General health: Good; Chronic condition: Managed; Mobility: Full; Vision: Corrected; Hearing: Normal; Color vision: Typical; Manual dexterity: Full; Mental health: Stable; Sleep quality: Good; Neurodivergence: Neurotypical; Caregiver status: Not a caregiver; Insurance status: Minimal; High-contrast need: No; Large-text need: No; Motion sensitivity: Mild; Attention condition: Diagnosed. Daily habits: Habit: Meditation: Monthly; Habit: To-do lists: Never; Habit: Goal setting: Never; Habit: Budget tracking: Never; Habit: Morning walk: Monthly; Habit: Phone-free downtime: Weekly; Habit: Gratitude practice: Never; Habit: Reading before bed: Never; Habit: Power-snoozing alarm: Monthly; Habit: Skipping breakfast: Monthly; Habit: Nail-biting / fidgeting: Never; Habit: Multitab browsing: Never; Habit: Inbox-zero discipline: Weekly; Habit: Talking to oneself: Monthly; Habit: Humming / whistling: Weekly; Habit: Cold showers: Never; Habit: Hydration tracking: Monthly; Habit: Backing up files: Daily; Habit: Re-reading texts before sending: Weekly; Habit: Procrasti-cleaning: Never.
+
+Member 2:
+Personality & behavioral style: Tech savviness: Avoidant; Dominant trait: High neuroticism; Risk tolerance: Risk-averse; Decision style: Directive; Core value: Autonomy; Political lean: Apolitical; Religiosity: Devout; Emotional state: Excited; Trust level: Skeptical; Safety sensitivity: High-stakes (medical/legal/financial); MBTI type: ENFP — Campaigner; Artistic interest: Very high; Intellect: Very high; Liberalism: Very low; Orderliness: Very low; Self-discipline: High; Cautiousness: Very low; Excitement-seeking: High; Cheerfulness: High; Trust: High; Altruism: High; Modesty: High; Immoderation: High; Social battery: Strong extrovert; Character: Love of learning: Strong; Character: Open-mindedness: Strong; Character: Perspective: Signature; Character: Leadership: Strong; Character: Prudence: Absent; Character: Self-regulation: Strong; Character: Appreciation of beauty: Signature; Character: Hope / optimism: Strong; Character: Spirituality: Strong; Character: Resilience: Strong; Character: Discipline: Strong; Character: Competitiveness: Strong; Office vs remote: Remote-leaning; Team vs solo work: Mixed; City vs nature: Prefers city; Routine vs variety: Variety-leaning; Logic vs intuition: Intuition-leaning; Save vs spend: Free spender; Lead vs follow: Leans support; Indoor vs outdoor: Outdoor-leaning; Early vs late adopter: Early adopter; Texting vs calling: Either; Big group vs one-on-one: Loves big groups; Novelty vs familiarity: Novelty-leaning; Competition vs collaboration: Highly competitive; BFI-2 Negative Emotionality: High; BFI-2 Sociability: High; BFI-2 Responsibility: High; BFI-2 Depression: High; BFI-2 Creative Imagination: High; Need for Cognition: High; Need for Closure: High; Attachment Anxiety: High. Values: Health is a core value; values Power & influence; values Achievement; values Creativity & self-expression; values Social status; values Independence; Helping others is a core value; Schwartz Benevolence: Very high; SDT Autonomy Need: High; SDT Competence Need: High; SDT Relatedness Need: High. Attitudes: toward Data privacy: Skeptical; toward Free markets: Positive; toward Government regulation: Positive; toward Climate action: Skeptical; toward Nuclear energy: Positive; toward Homeownership: Positive; toward Risk-taking: Enthusiast; toward New technology: Skeptical; toward Subscription services: Positive; toward Consumerism: Skeptical; toward Fast fashion: Skeptical; toward Privacy vs security: Skeptical; toward Working from office: Positive; toward Electric vehicles: Enthusiast; toward Urban density: Skeptical; Moral Foundation Care/Harm: High; DOSPERT Ethical Risk Tolerance: Very low. Lifestyle: Economic motivation: Cost-sensitive; Sleep schedule: Night owl; Exercise frequency: Monthly; Diet type: Omnivore; Alcohol use: Never; Smoking / vaping: Never; Caffeine intake: High; Cooking frequency: Daily; Shopping style: Impulse buyer; Travel frequency: Rare; Commute mode: Car; Work schedule: 9-to-5; Daily screen time: 4-8 hrs; Planning horizon: Weekly; Punctuality: Usually late; Tidiness: Tidy; Spending vs saving: Frugal saver; Charitable giving: Never; News consumption: Weekly; Reading frequency: Monthly; Streaming hours/week: 8-15; Music listening: Sometimes; Primary social platform: YouTube; Primary messenger: WhatsApp; Device ecosystem: Mixed; Primary browser: Chrome; Payment preference: Cash; Banking style: Traditional bank; Active subscriptions: 0-2; Coffee ritual: Tea instead; Fashion sense: Classic; Hobby intensity: Dabbler; Vacation style: Culture; Morning routine: Rushed; Volunteering: Never. Health: General health: Excellent; Mobility: Full; Vision: Corrected; Hearing: Normal; Color vision: Typical; Manual dexterity: Reduced; Mental health: Struggling; Dietary restriction: Medical; Neurodivergence: Neurotypical; Caregiver status: Not a caregiver; Health literacy: Very high; Insurance status: Comprehensive; Cognitive load capacity: High; High-contrast need: No; Large-text need: No; Motion sensitivity: Mild; Attention condition: Mild. Daily habits: Habit: Meditation: Monthly; Habit: Goal setting: Never; Habit: Daily reflection: Monthly; Habit: Budget tracking: Weekly; Habit: Meal prepping: Never; Habit: Stretching / mobility: Daily; Habit: Phone-free downtime: Never; Habit: Gratitude practice: Never; Habit: Reading before bed: Weekly; Habit: Power-snoozing alarm: Weekly; Habit: Skipping breakfast: Monthly; Habit: Late-night snacking: Weekly; Habit: Doomscrolling: Weekly; Habit: Multitab browsing: Never; Habit: Inbox-zero discipline: Never; Habit: Talking to oneself: Weekly; Habit: Humming / whistling: Never; Habit: Cold showers: Monthly; Habit: Hydration tracking: Never; Habit: Backing up files: Weekly; Habit: Re-reading texts before sending: Never.
+
+Member 3:
+Personality & behavioral style: Tech savviness: Reluctant; Dominant trait: High conscientiousness; Risk tolerance: Risk-tolerant; Decision style: Consensus-driven; Core value: Community; Political lean: Center-left; Religiosity: Devout; Emotional state: Frustrated; Trust level: Trusting; Safety sensitivity: Benign; MBTI type: ISFJ — Defender; Intellect: High; Gregariousness: High; Activity level: High; Excitement-seeking: High; Trust: Very low; Depression: Very low; Vulnerability: Very high; Social battery: Extrovert; Character: Love of learning: Strong; Character: Zest: Absent; Character: Capacity for love: Strong; Character: Fairness: Absent; Character: Leadership: Strong; Character: Spirituality: Strong; Character: Discipline: Strong; Character: Competitiveness: Strong; Office vs remote: Remote-leaning; Team vs solo work: Mixed; City vs nature: Prefers city; Routine vs variety: Routine-leaning; Quality vs quantity: Quality first; Logic vs intuition: Pure logic; Save vs spend: Saver-leaning; Lead vs follow: Always leads; Indoor vs outdoor: Either; Early vs late adopter: Mainstream; Texting vs calling: Either; Big group vs one-on-one: 1-on-1 leaning; Novelty vs familiarity: Comfort-leaning; Brief vs full detail: Every detail; Stability vs change: Stability-leaning; BFI-2 Agreeableness: Very low; BFI-2 Sociability: Very low; BFI-2 Productiveness: High; BFI-2 Depression: Very high; Need for Closure: High; Interpersonal Agency/Dominance: Very high. Values: values Wealth; values Personal freedom; values Adventure; values Tradition; values Achievement; Creativity & self-expression is a core value; values Community; values Knowledge & truth; values Social status; Recognition is a core value; values Helping others; values Personal growth; Integrity & honesty is a core value; Schwartz Hedonism: Very high; Schwartz Power: High; SDT Autonomy Need: Very low; SDT Competence Need: Very low. Attitudes: toward Data privacy: Positive; toward Free markets: Positive; toward Government regulation: Positive; toward Nuclear energy: Enthusiast; toward Renewable energy: Opposed; toward Taking on debt: Positive; toward New technology: Positive; toward Minimalism: Positive; toward Privacy vs security: Opposed; toward Electric vehicles: Positive; toward Public transit: Positive; DOSPERT Ethical Risk Tolerance: Very low; DOSPERT Financial Risk Tolerance: Very low; DOSPERT Health/Safety Risk Tolerance: Very high; DOSPERT Social Risk Tolerance: Very low. Lifestyle: Economic motivation: Cost-sensitive; Sleep schedule: Flexible; Exercise frequency: Monthly; Diet type: Omnivore; Alcohol use: Never; Smoking / vaping: Never; Caffeine intake: Low; Cooking frequency: Daily; Shopping style: Brand loyal; Travel frequency: Homebody; Commute mode: Walk; Pet ownership: Cat; Work schedule: Flexible hours; Daily screen time: 2-4 hrs; Planning horizon: Yearly; Punctuality: On time; Tidiness: Chaotic; Charitable giving: Never; News consumption: Weekly; Reading frequency: Weekly; Gaming frequency: Never; Streaming hours/week: 3-7; Music listening: Daily; Podcast listening: Never; Primary social platform: Instagram; Primary messenger: Messenger; Device ecosystem: Android/Google; Primary browser: Safari; Payment preference: Mobile wallet; Banking style: Traditional bank; Active subscriptions: 0-2; Coffee ritual: Office coffee; Fashion sense: Practical; Vacation style: Adventure; Morning routine: Slow; Volunteering: Never. Health: General health: Excellent; Chronic condition: Managed; Mobility: Mild limitation; Vision: Corrected; Hearing: Normal; Color vision: Typical; Manual dexterity: Full; Mental health: Stable; Stress level: High; Sleep quality: Poor; Chronic pain: Mild; Medication use: Daily; Neurodivergence: Neurotypical; Caregiver status: Elder caregiver; Insurance status: Basic; High-contrast need: No; Large-text need: No; Motion sensitivity: Mild; Attention condition: Diagnosed. Daily habits: Habit: Meditation: Weekly; Habit: Daily reflection: Monthly; Habit: Budget tracking: Never; Habit: Stretching / mobility: Never; Habit: Morning walk: Weekly; Habit: Phone-free downtime: Weekly; Habit: Gratitude practice: Monthly; Habit: Reading before bed: Weekly; Habit: Skipping breakfast: Never; Habit: Late-night snacking: Never; Habit: Nail-biting / fidgeting: Weekly; Habit: Multitab browsing: Weekly; Habit: Inbox-zero discipline: Never; Habit: Saving receipts: Monthly; Habit: Pre-trip overpacking: Never; Habit: Talking to oneself: Monthly; Habit: Cold showers: Monthly; Habit: Step counting: Never; Habit: Hydration tracking: Never; Habit: Backing up files: Weekly.
+
+Rewrite them into complete English portraits, one per person, in the same order, written in third person and consistent with the household type and location.
+Then return ONLY a valid JSON object (no markdown fences, no commentary).
+
+================ OUTPUT ================
+{
+  "members": [
+    {
+      "portrait": "Jordan is a 24-year-old postgraduate student from Malaysia, renting a room in a shared house near the university. As an ENFJ, Jordan is the natural organizer of the household, always bringing housemates together for communal meals or study sessions. Despite an outwardly calm and cheerful demeanor, Jordan grapples with significant anxiety and depressive tendencies, often overthinking decisions and seeking validation from others. This internal struggle is masked by a strong sense of duty and a desire to help everyone else succeed. Jordan is cautious by nature, both financially and socially, preferring to build consensus before making any decision that affects the group. They are deeply invested in community values, often volunteering for student organizations, but can be surprisingly unsympathetic when someone deviates from their ethical code. As a student, Jordan balances a heavy course load with a part-time job, and their irregular sleep schedule reflects this. With a high need for order and a love for every detail, Jordan often takes meticulous notes and manages the household shared expenses, though they themselves are an impulse buyer. In terms of lifestyle, Jordan is a technological laggard, using an old laptop and texting only when necessary, while spending over eight hours daily on screens for research and reading. Despite their many responsibilities, Jordan finds time for daily reading and monthly meditation, though they never make to-do lists and forget meal prepping. Their cautious and consensus-driven approach sometimes frustrates their more spontaneous housemates, but Jordan's fairness and loyalty make them an indispensable part of the house."
+    },
+    {
+      "portrait": "Jamie is a 21-year-old undergraduate student from India, sharing the house with two other students. An ENFP with a strong artistic streak, Jamie is the heart of the household, always full of ideas for creative projects and social events. They are highly extraverted and seek excitement, often dragging their housemates on spontaneous adventures. However, beneath their cheerful and optimistic exterior lies high neuroticism; Jamie worries about grades, relationships, and their future, and their mood can swing rapidly. Despite this, they are remarkably self-disciplined when it comes to their studies, maintaining a rigorous study schedule even while skipping breakfast and staying up late. Jamie is risk-averse in financial matters, preferring to save money, but they are impulsive buyers when it comes to art supplies. They are devout in their faith, which provides them comfort during stressful times. As a student, Jamie juggles multiple commitments, including a part-time job at a café and an art club presidency. They have a high need for cognition and love learning, often watching documentaries in their downtime. Their idealistic nature makes them passionate about helping others, but they are skeptical of new technologies and prefer face-to-face communication. In the share house, Jamie is the one who initiates movie nights and group dinners, though their chaotic schedule and tendency to be late can frustrate their more punctual housemates. They are an early adopter in fashion but a laggard in tech. Jamie's emotional intensity is both a blessing and a curse; they feel deeply and love fiercely, making them a loyal friend but also prone to burnout. Their compassion and creativity enrich the household, even if their occasional moodiness tests everyone's patience."
+    },
+    {
+      "portrait": "Taylor is a 23-year-old recent graduate from China, working part-time while saving for further studies, and sharing the house to cut costs. An ISFJ, Taylor is extremely conscientious and value-driven, though they can be surprisingly aggressive in their opinions. They are a natural leader, always taking charge in house meetings, yet they struggle with trust and often prefer to do things themselves. Taylor is deeply committed to the community, volunteering at local shelters, and enjoys helping others, but their low agreeableness means they can be blunt and judgmental. They are a creature of habit, valuing routine and stability, and they maintain a meticulous schedule for their jobs and studies. Despite their high conscientiousness, Taylor has a chaotic living space, with clothes on the floor and a desk covered in papers. They are also risk-tolerant when it comes to health and safety, often eating expired food and ignoring minor injuries. In the household, Taylor handles the maintenance and coordinating with the landlord, using their excellent organizational skills. They are tech-savvy in a reluctant way, preferring traditional methods, and they spend only two to four hours daily on screens. Taylor's frustration stems from financial pressure and caregiving duties for an elder relative, which often leaves them stressed and sleep-deprived. However, they are resilient and rarely show vulnerability, masking their worries with a determined smile. Their competitiveness pushes them to excel academically and professionally, but it can also create tension with their more laid-back housemates. Despite their faults, Taylor's dedication and reliability make them a pillar of the share house, even if they often forget to participate in fun activities."
+    }
+  ]
+}
+[Saved] D:\研究项目\LLMWorld\output\worlds\world_764879\3168\house_0001\aligned_texts.json
+  member 1: 1680 chars, 253 words
+  member 2: 1781 chars, 274 words
+  member 3: 1764 chars, 267 words
+[House 0] Student Share House | members 3
+================ HOME INPUT ================
+Generate only the physical home for this Clayton household. Do not generate people.
+
+Household type: Student Share House
+Description: A group of unrelated young adults, typically full-time students or recent graduates, sharing rented accommodation to reduce living costs. This household type is common in university-adjacent areas, with members often from diverse cultural backgrounds including international students from China, India, Sri Lanka, Malaysia, and Vietnam. Household size varies from two to five individuals, reflecting flexible and transient living arrangements.
+Housing hint: Rented flats, units, or semi-detached houses near Monash University or along public transport routes.
+Residents: 3
+
+Supported appliance types (use exact tokens only):
+TV, AirConditioner, Refrigerator, RiceCooker, Microwave, InductionCooker, RangeHood, Light, DeskLamp, Computer, Laptop, Phone, ElectricVehicle, WaterHeater, WashingMachine, VacuumCleaner
+
+Appliance fields:
+TV: brand(string), power(number)[default:150], age(number)[default:0]
+AirConditioner: brand(string), power(number)[default:2000], age(number)[default:0]
+Refrigerator: brand(string), power(number)[default:100], daily_energy_kwh(number)[default:1.2], age(number)[default:0]
+RiceCooker: brand(string), power(number)[default:800], age(number)[default:0]
+Microwave: brand(string), power(number)[default:1000], age(number)[default:0]
+InductionCooker: brand(string), power(number)[default:2000], age(number)[default:0]
+RangeHood: brand(string), power(number)[default:200], age(number)[default:0]
+Light: brand(string), power(number)[default:40], age(number)[default:0]
+DeskLamp: brand(string), power(number)[default:15], age(number)[default:0]
+Computer: brand(string), power(number)[default:200], age(number)[default:0]
+Laptop: brand(string), power(number)[default:200], age(number)[default:0]
+Phone: brand(string), power(number)[default:20], age(number)[default:0]
+ElectricVehicle: brand(string), power(number)[default:7000], age(number)[default:0]
+WaterHeater: brand(string), power(number)[default:3000], age(number)[default:0]
+WashingMachine: brand(string), power(number)[default:500], age(number)[default:0]
+VacuumCleaner: brand(string), power(number)[default:1200], age(number)[default:0]
+
+The home MUST include exactly 3 separately named bedroom rooms, named exactly "Bedroom 1" through "Bedroom 3" (one per resident), plus a Kitchen and a Bathroom. Every appliance requires type, brand, power, and age. Copy appliance type tokens exactly from the supported list. Do not output synonyms such as Television, Kettle, Dryer, RangeCooker, or ElectricWaterHeater. This is a low-cost student share home: do not add an ElectricVehicle. List every room explicitly; do not omit the bedrooms.
+Return ONLY a valid JSON object (no markdown fences, no commentary).
+
+================ HOME OUTPUT ================
+{"home":{"name":"Clayton Student Share","type":"Student Share House","size":3,"rooms":[{"name":"Bedroom 1","appliances":[{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"DeskLamp","brand":"Generic","power":15,"age":1},{"type":"Laptop","brand":"Generic","power":200,"age":3},{"type":"Phone","brand":"Generic","power":20,"age":2},{"type":"Computer","brand":"Generic","power":200,"age":4}]},{"name":"Bedroom 2","appliances":[{"type":"Light","brand":"Generic","power":40,"age":3},{"type":"DeskLamp","brand":"Generic","power":15,"age":2},{"type":"Laptop","brand":"Generic","power":200,"age":1},{"type":"Phone","brand":"Generic","power":20,"age":2}]},{"name":"Bedroom 3","appliances":[{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"DeskLamp","brand":"Generic","power":15,"age":1},{"type":"Laptop","brand":"Generic","power":200,"age":2},{"type":"Phone","brand":"Generic","power":20,"age":3}]},{"name":"Kitchen","appliances":[{"type":"Refrigerator","brand":"Generic","power":100,"age":4},{"type":"Microwave","brand":"Generic","power":1000,"age":3},{"type":"RiceCooker","brand":"Generic","power":800,"age":2},{"type":"InductionCooker","brand":"Generic","power":2000,"age":1},{"type":"RangeHood","brand":"Generic","power":200,"age":2},{"type":"TV","brand":"Generic","power":150,"age":3},{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"VacuumCleaner","brand":"Generic","power":1200,"age":1}]},{"name":"Bathroom","appliances":[{"type":"WaterHeater","brand":"Generic","power":3000,"age":5},{"type":"WashingMachine","brand":"Generic","power":500,"age":4},{"type":"Light","brand":"Generic","power":40,"age":2}]}]}}
+================ MEMBER 1 INPUT ================
+Generate exactly one member profile for an existing household. Preserve the supplied portrait; do not substitute another person.
+
+Household type: Student Share House
+This is source persona 1 of 3.
+Assigned bedroom (copy exactly): Bedroom 1
+
+Canonical portrait:
+Jordan is a 24-year-old postgraduate student from Malaysia, renting a room in a shared house near the university. As an ENFJ, Jordan is the natural organizer of the household, always bringing housemates together for communal meals or study sessions. Despite an outwardly calm and cheerful demeanor, Jordan grapples with significant anxiety and depressive tendencies, often overthinking decisions and seeking validation from others. This internal struggle is masked by a strong sense of duty and a desire to help everyone else succeed. Jordan is cautious by nature, both financially and socially, preferring to build consensus before making any decision that affects the group. They are deeply invested in community values, often volunteering for student organizations, but can be surprisingly unsympathetic when someone deviates from their ethical code. As a student, Jordan balances a heavy course load with a part-time job, and their irregular sleep schedule reflects this. With a high need for order and a love for every detail, Jordan often takes meticulous notes and manages the household shared expenses, though they themselves are an impulse buyer. In terms of lifestyle, Jordan is a technological laggard, using an old laptop and texting only when necessary, while spending over eight hours daily on screens for research and reading. Despite their many responsibilities, Jordan finds time for daily reading and monthly meditation, though they never make to-do lists and forget meal prepping. Their cautious and consensus-driven approach sometimes frustrates their more spontaneous housemates, but Jordan's fairness and loyalty make them an indispensable part of the house.
+
+Existing home (reference only):
+{"name":"Clayton Student Share","type":"Student Share House","size":3,"rooms":[{"name":"Bedroom 1","appliances":[{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"DeskLamp","brand":"Generic","power":15,"age":1},{"type":"Laptop","brand":"Generic","power":200,"age":3},{"type":"Phone","brand":"Generic","power":20,"age":2},{"type":"Computer","brand":"Generic","power":200,"age":4}]},{"name":"Bedroom 2","appliances":[{"type":"Light","brand":"Generic","power":40,"age":3},{"type":"DeskLamp","brand":"Generic","power":15,"age":2},{"type":"Laptop","brand":"Generic","power":200,"age":1},{"type":"Phone","brand":"Generic","power":20,"age":2}]},{"name":"Bedroom 3","appliances":[{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"DeskLamp","brand":"Generic","power":15,"age":1},{"type":"Laptop","brand":"Generic","power":200,"age":2},{"type":"Phone","brand":"Generic","power":20,"age":3}]},{"name":"Kitchen","appliances":[{"type":"Refrigerator","brand":"Generic","power":100,"age":4},{"type":"Microwave","brand":"Generic","power":1000,"age":3},{"type":"RiceCooker","brand":"Generic","power":800,"age":2},{"type":"InductionCooker","brand":"Generic","power":2000,"age":1},{"type":"RangeHood","brand":"Generic","power":200,"age":2},{"type":"TV","brand":"Generic","power":150,"age":3},{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"VacuumCleaner","brand":"Generic","power":1200,"age":1}]},{"name":"Bathroom","appliances":[{"type":"WaterHeater","brand":"Generic","power":3000,"age":5},{"type":"WashingMachine","brand":"Generic","power":500,"age":4},{"type":"Light","brand":"Generic","power":40,"age":2}]}]}
+
+Supported personal appliance types (use exact tokens only):
+TV, AirConditioner, Refrigerator, RiceCooker, Microwave, InductionCooker, RangeHood, Light, DeskLamp, Computer, Laptop, Phone, ElectricVehicle, WaterHeater, WashingMachine, VacuumCleaner
+
+Preserve stated age, origin, student/work status, routine, personality and faith. Do not introduce energy-saving behaviour. The "name" field is assigned by the system (it will be "Member 1"); you may set it to any placeholder value.
+Return ONLY a valid JSON object (no markdown fences, no commentary).
+
+================ MEMBER 1 OUTPUT ================
+{
+  "member": {
+    "source_persona_index": 1,
+    "name": "Member 1",
+    "age": 24,
+    "cultural_background": "Malaysian",
+    "bedroom": "Bedroom 1",
+    "gender": "Non-binary",
+    "occupation": "Postgraduate student and part-time worker",
+    "work_schedule": {
+      "study": "Full-time postgraduate student",
+      "part_time_job": "Evenings and weekends",
+      "sleep": "Irregular due to workload"
+    },
+    "personality": {
+      "mbti": "ENFJ",
+      "traits": [
+        "outwardly calm and cheerful",
+        "anxious",
+        "depressive tendencies",
+        "overthinks decisions",
+        "seeks validation from others",
+        "strong sense of duty",
+        "helper",
+        "cautious",
+        "consensus-driven",
+        "principled",
+        "unsympathetic to ethical violations",
+        "high need for order",
+        "meticulous",
+        "loyal",
+        "fair"
+      ]
+    },
+    "habits": {
+      "reading": "Daily",
+      "meditation": "Monthly",
+      "to_do_lists": "Never",
+      "meal_prepping": "Forgets",
+      "spending": "Impulse buyer",
+      "technology": "Technological laggard, old laptop, texting only when necessary",
+      "screen_time": "Over 8 hours daily for research and reading",
+      "household_role": "Organizer, manages shared expenses, meticulous notes"
+    },
+    "health": {
+      "anxiety": true,
+      "depression": "Depressive tendencies",
+      "sleep": "Irregular sleep schedule",
+      "cautions": "Financial and social caution"
+    },
+    "personal_appliances": [
+      "Light",
+      "DeskLamp",
+      "Laptop",
+      "Phone",
+      "Computer"
+    ]
+  }
+}
+================ MEMBER 2 INPUT ================
+Generate exactly one member profile for an existing household. Preserve the supplied portrait; do not substitute another person.
+
+Household type: Student Share House
+This is source persona 2 of 3.
+Assigned bedroom (copy exactly): Bedroom 2
+
+Canonical portrait:
+Jamie is a 21-year-old undergraduate student from India, sharing the house with two other students. An ENFP with a strong artistic streak, Jamie is the heart of the household, always full of ideas for creative projects and social events. They are highly extraverted and seek excitement, often dragging their housemates on spontaneous adventures. However, beneath their cheerful and optimistic exterior lies high neuroticism; Jamie worries about grades, relationships, and their future, and their mood can swing rapidly. Despite this, they are remarkably self-disciplined when it comes to their studies, maintaining a rigorous study schedule even while skipping breakfast and staying up late. Jamie is risk-averse in financial matters, preferring to save money, but they are impulsive buyers when it comes to art supplies. They are devout in their faith, which provides them comfort during stressful times. As a student, Jamie juggles multiple commitments, including a part-time job at a café and an art club presidency. They have a high need for cognition and love learning, often watching documentaries in their downtime. Their idealistic nature makes them passionate about helping others, but they are skeptical of new technologies and prefer face-to-face communication. In the share house, Jamie is the one who initiates movie nights and group dinners, though their chaotic schedule and tendency to be late can frustrate their more punctual housemates. They are an early adopter in fashion but a laggard in tech. Jamie's emotional intensity is both a blessing and a curse; they feel deeply and love fiercely, making them a loyal friend but also prone to burnout. Their compassion and creativity enrich the household, even if their occasional moodiness tests everyone's patience.
+
+Existing home (reference only):
+{"name":"Clayton Student Share","type":"Student Share House","size":3,"rooms":[{"name":"Bedroom 1","appliances":[{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"DeskLamp","brand":"Generic","power":15,"age":1},{"type":"Laptop","brand":"Generic","power":200,"age":3},{"type":"Phone","brand":"Generic","power":20,"age":2},{"type":"Computer","brand":"Generic","power":200,"age":4}]},{"name":"Bedroom 2","appliances":[{"type":"Light","brand":"Generic","power":40,"age":3},{"type":"DeskLamp","brand":"Generic","power":15,"age":2},{"type":"Laptop","brand":"Generic","power":200,"age":1},{"type":"Phone","brand":"Generic","power":20,"age":2}]},{"name":"Bedroom 3","appliances":[{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"DeskLamp","brand":"Generic","power":15,"age":1},{"type":"Laptop","brand":"Generic","power":200,"age":2},{"type":"Phone","brand":"Generic","power":20,"age":3}]},{"name":"Kitchen","appliances":[{"type":"Refrigerator","brand":"Generic","power":100,"age":4},{"type":"Microwave","brand":"Generic","power":1000,"age":3},{"type":"RiceCooker","brand":"Generic","power":800,"age":2},{"type":"InductionCooker","brand":"Generic","power":2000,"age":1},{"type":"RangeHood","brand":"Generic","power":200,"age":2},{"type":"TV","brand":"Generic","power":150,"age":3},{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"VacuumCleaner","brand":"Generic","power":1200,"age":1}]},{"name":"Bathroom","appliances":[{"type":"WaterHeater","brand":"Generic","power":3000,"age":5},{"type":"WashingMachine","brand":"Generic","power":500,"age":4},{"type":"Light","brand":"Generic","power":40,"age":2}]}]}
+
+Supported personal appliance types (use exact tokens only):
+TV, AirConditioner, Refrigerator, RiceCooker, Microwave, InductionCooker, RangeHood, Light, DeskLamp, Computer, Laptop, Phone, ElectricVehicle, WaterHeater, WashingMachine, VacuumCleaner
+
+Preserve stated age, origin, student/work status, routine, personality and faith. Do not introduce energy-saving behaviour. The "name" field is assigned by the system (it will be "Member 2"); you may set it to any placeholder value.
+Return ONLY a valid JSON object (no markdown fences, no commentary).
+
+================ MEMBER 2 OUTPUT ================
+{
+  "member": {
+    "source_persona_index": 2,
+    "name": "Jamie",
+    "age": 21,
+    "cultural_background": "Indian",
+    "bedroom": "Bedroom 2",
+    "gender": "Non-binary",
+    "occupation": "Undergraduate student, part-time barista, and President of Art Club",
+    "work_schedule": {
+      "Monday": "Classes 10-12, café shift 13-17, study 20-24",
+      "Tuesday": "Classes 9-11, art club meeting 16-18, study 21-24",
+      "Wednesday": "Classes 11-14, café shift 15-19, study 21-24",
+      "Thursday": "Classes 9-12, study 14-18, art club planning 20-22",
+      "Friday": "Classes 10-15, café shift 16-20, social evening",
+      "Saturday": "Café shift 10-14, study 15-19, movie night with housemates",
+      "Sunday": "Religious service morning, study 15-20, prepare for week"
+    },
+    "personality": {
+      "type": "ENFP",
+      "extraversion": "high",
+      "neuroticism": "high",
+      "openness": "high",
+      "conscientiousness": "moderate",
+      "agreeableness": "high",
+      "financial_risk_aversion": "high",
+      "impulsive_art_supplies": "high",
+      "need_for_cognition": "high",
+      "idealism": "high",
+      "tech_skepticism": true,
+      "prefers_face_to_face": true,
+      "emotional_intensity": "high"
+    },
+    "habits": {
+      "skips_breakfast": true,
+      "stays_up_late": true,
+      "initiates_movie_nights": true,
+      "initiates_group_dinners": true,
+      "often_late": true,
+      "saves_money": true,
+      "impulsive_buying_art_supplies": true,
+      "rigorous_study_schedule": true,
+      "frequent_documentaries": true,
+      "devout_faith": true,
+      "fashion_early_adopter": true,
+      "tech_laggard": true
+    },
+    "health": {
+      "sleep_pattern": "irregular, sleeps late and wakes late, often using alarms",
+      "meals": "often skips breakfast, erratic meal times",
+      "stress_level": "high due to academic and social pressures",
+      "mental_health": "prone to mood swings, burnout, but manages with faith and creative outlets",
+      "physical_health": "generally good, but tiredness from irregular sleep",
+      "faith_practice": "practicing, provides comfort"
+    },
+    "personal_appliances": [
+      "Light",
+      "DeskLamp",
+      "Laptop",
+      "Phone"
+    ]
+  }
+}
+================ MEMBER 3 INPUT ================
+Generate exactly one member profile for an existing household. Preserve the supplied portrait; do not substitute another person.
+
+Household type: Student Share House
+This is source persona 3 of 3.
+Assigned bedroom (copy exactly): Bedroom 3
+
+Canonical portrait:
+Taylor is a 23-year-old recent graduate from China, working part-time while saving for further studies, and sharing the house to cut costs. An ISFJ, Taylor is extremely conscientious and value-driven, though they can be surprisingly aggressive in their opinions. They are a natural leader, always taking charge in house meetings, yet they struggle with trust and often prefer to do things themselves. Taylor is deeply committed to the community, volunteering at local shelters, and enjoys helping others, but their low agreeableness means they can be blunt and judgmental. They are a creature of habit, valuing routine and stability, and they maintain a meticulous schedule for their jobs and studies. Despite their high conscientiousness, Taylor has a chaotic living space, with clothes on the floor and a desk covered in papers. They are also risk-tolerant when it comes to health and safety, often eating expired food and ignoring minor injuries. In the household, Taylor handles the maintenance and coordinating with the landlord, using their excellent organizational skills. They are tech-savvy in a reluctant way, preferring traditional methods, and they spend only two to four hours daily on screens. Taylor's frustration stems from financial pressure and caregiving duties for an elder relative, which often leaves them stressed and sleep-deprived. However, they are resilient and rarely show vulnerability, masking their worries with a determined smile. Their competitiveness pushes them to excel academically and professionally, but it can also create tension with their more laid-back housemates. Despite their faults, Taylor's dedication and reliability make them a pillar of the share house, even if they often forget to participate in fun activities.
+
+Existing home (reference only):
+{"name":"Clayton Student Share","type":"Student Share House","size":3,"rooms":[{"name":"Bedroom 1","appliances":[{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"DeskLamp","brand":"Generic","power":15,"age":1},{"type":"Laptop","brand":"Generic","power":200,"age":3},{"type":"Phone","brand":"Generic","power":20,"age":2},{"type":"Computer","brand":"Generic","power":200,"age":4}]},{"name":"Bedroom 2","appliances":[{"type":"Light","brand":"Generic","power":40,"age":3},{"type":"DeskLamp","brand":"Generic","power":15,"age":2},{"type":"Laptop","brand":"Generic","power":200,"age":1},{"type":"Phone","brand":"Generic","power":20,"age":2}]},{"name":"Bedroom 3","appliances":[{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"DeskLamp","brand":"Generic","power":15,"age":1},{"type":"Laptop","brand":"Generic","power":200,"age":2},{"type":"Phone","brand":"Generic","power":20,"age":3}]},{"name":"Kitchen","appliances":[{"type":"Refrigerator","brand":"Generic","power":100,"age":4},{"type":"Microwave","brand":"Generic","power":1000,"age":3},{"type":"RiceCooker","brand":"Generic","power":800,"age":2},{"type":"InductionCooker","brand":"Generic","power":2000,"age":1},{"type":"RangeHood","brand":"Generic","power":200,"age":2},{"type":"TV","brand":"Generic","power":150,"age":3},{"type":"Light","brand":"Generic","power":40,"age":2},{"type":"VacuumCleaner","brand":"Generic","power":1200,"age":1}]},{"name":"Bathroom","appliances":[{"type":"WaterHeater","brand":"Generic","power":3000,"age":5},{"type":"WashingMachine","brand":"Generic","power":500,"age":4},{"type":"Light","brand":"Generic","power":40,"age":2}]}]}
+
+Supported personal appliance types (use exact tokens only):
+TV, AirConditioner, Refrigerator, RiceCooker, Microwave, InductionCooker, RangeHood, Light, DeskLamp, Computer, Laptop, Phone, ElectricVehicle, WaterHeater, WashingMachine, VacuumCleaner
+
+Preserve stated age, origin, student/work status, routine, personality and faith. Do not introduce energy-saving behaviour. The "name" field is assigned by the system (it will be "Member 3"); you may set it to any placeholder value.
+Return ONLY a valid JSON object (no markdown fences, no commentary).
+

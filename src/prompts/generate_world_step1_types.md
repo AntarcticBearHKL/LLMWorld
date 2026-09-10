@@ -11,3 +11,4 @@ You are a demographic statistics expert. Based on the district description below
 3. Household types must match the district's age structure, income level, housing types, and cultural composition
    (e.g., a student area should feature share-house/student households, not large numbers of retired households)
 4. Output language: all generated VALUES (type names, descriptions, housing hints) MUST be written in English, because the downstream system matches English tokens. Example type names: Young DINK Couple, Family with Children, International Student Share House, Single Professional Living Alone, Single-Parent Family, Multigenerational Household, Retired Couple
+5. Return ONLY a valid JSON object matching the required schema (no markdown fences, no commentary).

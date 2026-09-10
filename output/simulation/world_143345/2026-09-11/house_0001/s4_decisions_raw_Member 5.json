@@ -1,0 +1,207 @@
+{
+  "member": "Member 5",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "07:00-07:25",
+      "location": "Bedroom 5",
+      "activity": "Waking up slowly, taking daily medication with a glass of water, and getting dressed for the day",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:25-07:55",
+      "location": "Kitchen",
+      "activity": "Skipping breakfast as usual, boiling the kettle for a quick tea, checking the shift roster and the written chore agreement on the phone via WhatsApp, and having tea while Member 4 has breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:55-08:00",
+      "location": "Kitchen",
+      "activity": "Rinsing tea cup and quick tidy up",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Walking to the bus stop and taking public transit to Monash University campus",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-11:00",
+      "location": "Out",
+      "activity": "Attending Bachelor of Business lectures at Monash University",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:00-12:00",
+      "location": "Out",
+      "activity": "Studying in the campus library and working through group project material with classmates",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Out",
+      "activity": "Buying a cheap lunch on campus and eating it while catching up on messages",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:45-15:00",
+      "location": "Out",
+      "activity": "Attending a business tutorial and continuing group project work on campus",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:30",
+      "location": "Out",
+      "activity": "Paying a utility bill in cash at the post office to keep bill payments simple and low-friction",
+      "operations": []
+    },
+    {
+      "time": "15:30-16:00",
+      "location": "Out",
+      "activity": "Taking public transit to the hospitality workplace",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-18:00",
+      "location": "Out",
+      "activity": "Working a hospitality shift, serving customers and helping in the front of house",
+      "operations": []
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Taking a staff meal break during the hospitality shift",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-21:30",
+      "location": "Out",
+      "activity": "Continuing the hospitality shift, clearing tables and restocking",
+      "operations": []
+    },
+    {
+      "time": "21:30-22:15",
+      "location": "Out",
+      "activity": "Walking and taking public transit home after the shift",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and washing up before bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-23:30",
+      "location": "Bedroom 5",
+      "activity": "Reading a book in bed to wind down, with the space heater on low",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_5_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

@@ -76,7 +76,11 @@ def main():
     parser.add_argument("world_id")
     args = parser.parse_args()
 
-    exported = export_world(args.world_id)
+    try:
+        exported = export_world(args.world_id)
+    except ValueError as exc:
+        print(f"[Error] {exc}")
+        sys.exit(1)
     print(f"CSV export done ({len(exported)} files)")
     for path in exported:
         print(f"  {path}")

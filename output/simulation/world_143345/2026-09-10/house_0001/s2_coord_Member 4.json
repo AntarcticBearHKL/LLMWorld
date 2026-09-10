@@ -1,0 +1,85 @@
+{
+  "member": "Member 4",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 4",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:45-07:00",
+      "location": "Bedroom 4",
+      "activity": "Waking up and getting dressed (bathroom is occupied by Member 6 until 07:00)"
+    },
+    {
+      "time": "07:00-07:15",
+      "location": "Bathroom",
+      "activity": "Brushing teeth, quick wash and finishing getting ready (bathroom free before Member 1's 07:15 bathroom slot)"
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making tea"
+    },
+    {
+      "time": "07:45-08:45",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Clayton campus"
+    },
+    {
+      "time": "08:45-12:30",
+      "location": "Out",
+      "activity": "Attending cybersecurity lectures and working in the computer lab at Monash University"
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Eating lunch and reviewing lecture notes on campus"
+    },
+    {
+      "time": "13:15-14:00",
+      "location": "Out",
+      "activity": "Commuting home from Monash University by public transport"
+    },
+    {
+      "time": "14:00-17:30",
+      "location": "Bedroom 4",
+      "activity": "Working remotely on freelance web development projects using computer and monitor"
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 4",
+      "activity": "Finishing up work tasks and wrapping up for the day"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the kitchen table together with Member 1, Member 2 and Member 3"
+    },
+    {
+      "time": "18:45-19:10",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen counters, sharing the kitchen tidy-up with Member 1, Member 2 and Member 3"
+    },
+    {
+      "time": "19:10-21:30",
+      "location": "Bedroom 4",
+      "activity": "Studying coursework and coding personal projects on the computer"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 4",
+      "activity": "Relaxing in bed, browsing on the phone and watching videos"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Evening shower, wash and brushing teeth (finishing before Member 5's 23:00 bathroom slot)"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping"
+    }
+  ]
+}

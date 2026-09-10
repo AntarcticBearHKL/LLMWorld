@@ -12,6 +12,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import config
 from engine import SubAgent, utils
+from engine.json_parse import parse as parse_llm_json
 from engine.subagent import LLMCallError
 from engine.prompt import Prompt
 import generate_world as gw
@@ -74,11 +75,10 @@ def _contract_household_types(types):
     return out
 
 
-def run_step(world_id, count=1, seed=config.DEFAULT_SEED):
+def run_step(world_id, count=1, seed=config.DEFAULT_SEED, world_config=None):
     world_dir = os.path.join(gw.WORLDS_DIR, world_id)
     if not os.path.isdir(world_dir):
-        district_text = gw.load_district_text(None)
-        world_dir, _ = gw.init_world(world_id, district_text, seed)
+        world_dir, _ = gw.init_world(world_id, world_config, seed)
         print(f"[Info] world directory created: {world_dir}")
 
     log_dir = os.path.join(world_dir, gw.CLAYTON_POSTCODE, "log")
@@ -86,7 +86,7 @@ def run_step(world_id, count=1, seed=config.DEFAULT_SEED):
     logger = gw.ChatLogger(log_dir)
     prompt = Prompt().load(
         "generate_world_step1_types",
-        district_info=gw.load_district_text(None),
+        district_info=gw.load_district_text(gw.CLAYTON_POSTCODE, world_config),
         count=count,
     )
 
@@ -98,27 +98,31 @@ def run_step(world_id, count=1, seed=config.DEFAULT_SEED):
     except LLMCallError as exc:
         print(f"[JSON output failed] {exc}")
         logger.record("step1_types", prompt, "", reasoning="", ok=False,
-                      error=str(exc), attempt=1, prefix="global_")
+                      error=str(exc), attempt=1, prefix="global_",
+                      schema=_household_types_schema(count))
         return False, str(exc)
     print("================ OUTPUT: RESPONSE ================")
     print(resp["content"])
     try:
-        data = utils.parse_json_response(resp["content"])
+        data = parse_llm_json(resp["content"])
     except Exception as exc:
         print(f"[JSON output failed] {exc}")
         logger.record("step1_types", prompt, resp["content"], reasoning="",
                       ok=False, error=f"JSON parse failed: {exc}",
-                      attempt=1, prefix="global_")
+                      attempt=1, prefix="global_",
+                      schema=_household_types_schema(count))
         return False, f"JSON parse failed: {exc}"
     if not isinstance(data, dict) or not isinstance(data.get("household_types"), list):
         print("[Content] response lacks household_types list")
         logger.record("step1_types", prompt, resp["content"], reasoning="",
                       ok=False, error="response lacks household_types list",
-                      attempt=1, prefix="global_")
+                      attempt=1, prefix="global_",
+                      schema=_household_types_schema(count))
         return False, "response lacks household_types list"
     data["household_types"] = _contract_household_types(data["household_types"])
     logger.record("step1_types", prompt, resp["content"], reasoning="",
-                  ok=True, attempt=1, prefix="global_")
+                  ok=True, attempt=1, prefix="global_",
+                  schema=_household_types_schema(count), parsed=data)
     out_path = os.path.join(world_dir, gw.CLAYTON_POSTCODE, "household_types.json")
     with open(out_path, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=2)

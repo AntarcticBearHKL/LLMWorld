@@ -11,6 +11,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import config
 from engine import SubAgent, utils
+from engine.json_parse import parse as parse_llm_json
 from engine.prompt import Prompt
 from engine.environment import Time
 from simulate import create_home_from_household
@@ -39,8 +40,8 @@ PLAN_SCHEMA = {
 }
 
 
-def load_home(world_id):
-    path = os.path.join(gw.WORLDS_DIR, world_id, "3168", "house_0001", "household.json")
+def load_home(world_id, house="house_0001"):
+    path = os.path.join(gw.WORLDS_DIR, world_id, "3168", house, "household.json")
     if not os.path.exists(path):
         alt = os.path.join(gw.WORLDS_DIR, world_id, "household.json")
         if not os.path.exists(alt):
@@ -67,8 +68,8 @@ def resolve_member(home, member_arg):
     return None
 
 
-def run_step(world_id, member_arg, date=None, env=None):
-    home = load_home(world_id)
+def run_step(world_id, member_arg, date=None, env=None, house="house_0001"):
+    home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
     member = resolve_member(home, member_arg)
@@ -94,7 +95,7 @@ def run_step(world_id, member_arg, date=None, env=None):
                            home_structure=home_structure, members_info=members_info,
                            memory_context="", world_news="", community_notice="")
 
-    log_dir = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001", "log")
+    log_dir = os.path.join(gw.SIMULATION_DIR, env, date, house, "log")
     os.makedirs(log_dir, exist_ok=True)
     logger = gw.ChatLogger(log_dir)
     print("================ INPUT: PROMPT ================")
@@ -105,7 +106,7 @@ def run_step(world_id, member_arg, date=None, env=None):
     print("================ OUTPUT: RESPONSE ================")
     print(resp["content"])
     try:
-        data = utils.parse_json_response(resp["content"])
+        data = parse_llm_json(resp["content"])
     except Exception as exc:
         logger.record("s1_macro_plan", base_prompt, resp["content"], reasoning="",
                       ok=False, error=f"JSON parse failed: {exc}", attempt=1, prefix=f"{member.name}_")
@@ -114,11 +115,20 @@ def run_step(world_id, member_arg, date=None, env=None):
     logger.record("s1_macro_plan", base_prompt, resp["content"], reasoning="",
                   ok=True, attempt=1, prefix=f"{member.name}_")
 
+    if isinstance(data, dict):
+        repair_log = []
+        data["activities"] = utils.normalize_activity_times(
+            data.get("activities", []), repair_log=repair_log)
+        activities = data["activities"]
+        for note in repair_log:
+            print(f"[TimeRepair] {note}")
+        print(f"[TimeRepair] repaired {len(repair_log)} timestamps")
+
     print(f"[Check] {len(activities)} activity segments")
     for a in activities[:5]:
         print(f"  {a.get('time')} | {a.get('location')} | {str(a.get('activity'))[:60]}")
 
-    out_dir = os.path.join(gw.SIMULATION_DIR, env, date, "house_0001")
+    out_dir = os.path.join(gw.SIMULATION_DIR, env, date, house)
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"s1_macro_{member.name}.json")
     with open(out_path, "w", encoding="utf-8") as f:
@@ -133,8 +143,9 @@ def main():
     parser.add_argument("--member", required=True, help="member name or index")
     parser.add_argument("--date", default=None, help="start date (default config)")
     parser.add_argument("--env", default=None, help="simulation env id (default: world id)")
+    parser.add_argument("--house", default="house_0001", help="house id (default: house_0001)")
     args = parser.parse_args()
-    ok, result = run_step(args.world, args.member, args.date, args.env)
+    ok, result = run_step(args.world, args.member, args.date, args.env, args.house)
     sys.exit(0 if ok else 1)
 
 

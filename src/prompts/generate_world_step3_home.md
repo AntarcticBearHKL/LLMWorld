@@ -11,4 +11,6 @@ Supported appliance types (use exact tokens only):
 Appliance fields:
 {appliance_schemas}
 
-The home needs unique room names, a Kitchen, a Bathroom, at least {member_count} separately named Bedroom rooms, and realistic controllable appliances. Every appliance requires type, brand, power, and age. Copy appliance type tokens exactly from the supported list. Do not output synonyms such as Laptop, Television, Kettle, Dryer, RangeCooker, or ElectricWaterHeater. This is a low-cost student share home: do not add an ElectricVehicle.
+The home MUST include exactly {member_count} separately named bedroom rooms, named exactly "Bedroom 1" through "Bedroom {member_count}" (one per resident), plus a Kitchen and a Bathroom. Every appliance requires type, brand, power, and age. Copy appliance type tokens exactly from the supported list. Do not output synonyms such as Television, Dryer, RangeCooker, or ElectricWaterHeater. Include an ElectricVehicle only when the housing hint or household type plausibly implies car ownership (e.g. a family with a driveway); otherwise omit it. List every room explicitly; do not omit the bedrooms.
+Never invent appliance types that are not in the supported list (no PV/solar panels, no home battery).
+Return ONLY a valid JSON object (no markdown fences, no commentary).

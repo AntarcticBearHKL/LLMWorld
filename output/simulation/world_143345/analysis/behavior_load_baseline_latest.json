@@ -1,0 +1,75 @@
+{
+  "households": 3,
+  "consistent_count": 0,
+  "anomaly_count": 3,
+  "per_house": [
+    {
+      "house_id": "house_0001",
+      "members": 6,
+      "at_home_minutes": 4765,
+      "at_home_mean_watts": 3446.47,
+      "away_mean_watts": 682.5,
+      "load_consistent": true,
+      "peak_hour": 0,
+      "busy_hour": 22,
+      "peak_aligned": false,
+      "flags": [
+        "",
+        "peak 0:00 vs activity peak 22:00 misaligned"
+      ]
+    },
+    {
+      "house_id": "house_0002",
+      "members": 2,
+      "at_home_minutes": 1715,
+      "at_home_mean_watts": 1553.3,
+      "away_mean_watts": 280.51,
+      "load_consistent": true,
+      "peak_hour": 22,
+      "busy_hour": 7,
+      "peak_aligned": false,
+      "flags": [
+        "",
+        "peak 22:00 vs activity peak 7:00 misaligned"
+      ]
+    },
+    {
+      "house_id": "house_0003",
+      "members": 3,
+      "at_home_minutes": 2460,
+      "at_home_mean_watts": 1343.03,
+      "away_mean_watts": 389.27,
+      "load_consistent": true,
+      "peak_hour": 6,
+      "busy_hour": 18,
+      "peak_aligned": false,
+      "flags": [
+        "",
+        "peak 6:00 vs activity peak 18:00 misaligned"
+      ]
+    }
+  ],
+  "anomalies": [
+    {
+      "house_id": "house_0001",
+      "flags": [
+        "peak 0:00 vs activity peak 22:00 misaligned"
+      ]
+    },
+    {
+      "house_id": "house_0002",
+      "flags": [
+        "peak 22:00 vs activity peak 7:00 misaligned"
+      ]
+    },
+    {
+      "house_id": "house_0003",
+      "flags": [
+        "peak 6:00 vs activity peak 18:00 misaligned"
+      ]
+    }
+  ],
+  "world_id": "world_143345",
+  "scenario": "baseline",
+  "date": "latest"
+}

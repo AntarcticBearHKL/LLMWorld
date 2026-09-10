@@ -1,0 +1,512 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-11 00:07:23
+- seq: 1
+- prefix: Member 2_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 2's day.
+
+Member information:
+- Name: Member 2
+- Age: 31
+- Occupation: Clinical psychologist and telehealth consultant
+- Personality: inventive, artistic, devoutly religious, highly intuitive, strong need for learning and cognition, directive, competitive, prefers to support rather than lead in groups
+
+This member's timeline:
+[
+  {
+    "time": "00:00-07:15",
+    "location": "Bedroom 2",
+    "activity": "Sleeping soundly after a late night-owl bedtime"
+  },
+  {
+    "time": "07:15-07:30",
+    "location": "Bedroom 2",
+    "activity": "Waking slowly and completing a daily stretching routine beside the bed"
+  },
+  {
+    "time": "07:30-07:50",
+    "location": "Bathroom",
+    "activity": "Showering, washing, and grooming for the workday"
+  },
+  {
+    "time": "07:50-08:10",
+    "location": "Kitchen",
+    "activity": "Preparing and eating a breakfast that respects the medical dietary restriction, with strong coffee"
+  },
+  {
+    "time": "08:10-08:20",
+    "location": "Bedroom 2",
+    "activity": "Dressing in professional work clothes and packing the work bag"
+  },
+  {
+    "time": "08:20-09:00",
+    "location": "Out",
+    "activity": "Drive the EV to the clinic for the day's appointments"
+  },
+  {
+    "time": "09:00-12:30",
+    "location": "Out",
+    "activity": "Conducting in-person clinical psychology assessment and therapy sessions with clients"
+  },
+  {
+    "time": "12:30-13:15",
+    "location": "Out",
+    "activity": "Taking a lunch break and eating a restriction-appropriate meal nearby"
+  },
+  {
+    "time": "13:15-16:00",
+    "location": "Out",
+    "activity": "Running afternoon clinical sessions and remote telehealth consultations from the office"
+  },
+  {
+    "time": "16:00-16:15",
+    "location": "Out",
+    "activity": "Stepping away briefly for a strong coffee and mental reset"
+  },
+  {
+    "time": "16:15-17:00",
+    "location": "Out",
+    "activity": "Finishing case notes, treatment planning, and administrative documentation"
+  },
+  {
+    "time": "17:00-17:45",
+    "location": "Out",
+    "activity": "Drive the EV back home through evening traffic"
+  },
+  {
+    "time": "17:45-18:15",
+    "location": "Bathroom",
+    "activity": "Washing up and changing into comfortable casual clothes (finishing before Member 1 uses the bathroom at 18:15)"
+  },
+  {
+    "time": "18:15-19:15",
+    "location": "Kitchen",
+    "activity": "Cooking a from-scratch dinner that fits the medical dietary restriction; Member 1 helps finish cooking and eats dinner together from 18:30"
+  },
+  {
+    "time": "19:15-19:45",
+    "location": "Kitchen",
+    "activity": "Clearing the table, loading the dishwasher, and wiping down the counters together with Member 1"
+  },
+  {
+    "time": "19:45-20:30",
+    "location": "Living Room",
+    "activity": "Relaxing and doing a stretching session with Member 1 (watching YouTube videos while stretching)"
+  },
+  {
+    "time": "20:30-21:15",
+    "location": "Study",
+    "activity": "Studying cognitive psychology material on the computer with the desk lamp on, alongside Member 1 who is using the computer for personal tasks"
+  },
+  {
+    "time": "21:15-22:00",
+    "location": "Study",
+    "activity": "Quiet devotional reading, reflection, and prayer"
+  },
+  {
+    "time": "22:00-22:45",
+    "location": "Living Room",
+    "activity": "Streaming a television show to unwind before bed"
+  },
+  {
+    "time": "22:45-23:10",
+    "location": "Bathroom",
+    "activity": "Nightly wash-up, skincare, and oral care routine"
+  },
+  {
+    "time": "23:10-23:30",
+    "location": "Bedroom 2",
+    "activity": "Tidying the room, laying out tomorrow's clothes, and dimming the lights"
+  },
+  {
+    "time": "23:30-24:00",
+    "location": "Bedroom 2",
+    "activity": "Falling asleep to end the day"
+  }
+]
+
+Other household members' timelines:
+{
+  "Member 1": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and showering"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to hospital by bus (using other transport; Member 2 is driving the EV to the clinic)"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist at the hospital"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home by bus (using other transport; Member 2 is driving the EV home)"
+    },
+    {
+      "time": "18:00-18:15",
+      "location": "Bedroom 1",
+      "activity": "Changing into comfortable clothes and unpacking"
+    },
+    {
+      "time": "18:15-18:30",
+      "location": "Bathroom",
+      "activity": "Washing up (after Member 2 finishes in the bathroom)"
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Helping Member 2 finish cooking and eating dinner together"
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Clearing the table and tidying the kitchen together with Member 2"
+    },
+    {
+      "time": "19:45-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing and doing a stretching session with Member 2"
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Study",
+      "activity": "Using computer for personal tasks alongside Member 2's study"
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine"
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "AirConditioner",
+      "Light"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "AirConditioner",
+      "Light"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "InductionCooker",
+      "RangeHood",
+      "Microwave",
+      "Kettle",
+      "Toaster",
+      "Dishwasher",
+      "Light",
+      "RiceCooker"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "Light",
+      "Fan",
+      "WashingMachine"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "Light",
+      "Router",
+      "GameConsole",
+      "VacuumCleaner",
+      "SpaceHeater",
+      "Dehumidifier",
+      "ClothesDryer"
+    ]
+  },
+  "Study": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Monitor",
+      "Light"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "ElectricVehicle",
+      "Computer",
+      "Monitor",
+      "Phone",
+      "DeskLamp"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 2" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:15",
+      "location": "Bedroom 2",
+      "activity": "Sleeping soundly after a late night-owl bedtime",
+      "desc": "Lying in bed. Eyes closed. Breathing regularly. Occasionally turning over. Pulling blanket up."
+    },
+    {
+      "time": "07:15-07:30",
+      "location": "Bedroom 2",
+      "activity": "Waking slowly and completing a daily stretching routine beside the bed",
+      "desc": "Open eyes. Blink. Sit up. Swing legs to floor. Stand up. Raise arms overhead. Bend forward to touch toes. Stretch left leg. Stretch right leg. Roll shoulders. Return to standing."
+    },
+    {
+      "time": "07:30-07:50",
+      "location": "Bathroom",
+      "activity": "Showering, washing, and grooming for the workday",
+      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Adjust water temperature. Step into shower. Wet body. Apply soap to washcloth. Scrub body. Rinse off. Turn off water. Step out. Pick up towel. Dry body. Wrap towel around waist. Walk to sink. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Put down toothbrush. Pick up comb. Comb hair. Apply deodorant."
+    },
+    {
+      "time": "07:50-08:10",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a breakfast that respects the medical dietary restriction, with strong coffee",
+      "desc": "Walk to kitchen. Open refrigerator. Take out eggs and spinach. Close refrigerator. Place items on counter. Turn on induction cooker. Place pan on cooker. Crack eggs into bowl. Whisk eggs. Pour into pan. Stir. Turn off cooker. Slide eggs onto plate. Open cabinet. Take out mug. Fill kettle with water. Turn on kettle. Wait for boil. Pour water over coffee grounds in French press. Press plunger. Pour coffee into mug. Sit at table. Pick up fork. Eat eggs. Drink coffee."
+    },
+    {
+      "time": "08:10-08:20",
+      "location": "Bedroom 2",
+      "activity": "Dressing in professional work clothes and packing the work bag",
+      "desc": "Walk to bedroom. Open closet. Take out shirt. Take out pants. Take out jacket. Lay on bed. Remove pajamas. Put on shirt. Button shirt. Put on pants. Zip pants. Put on jacket. Walk to dresser. Open drawer. Take out socks. Put on socks. Take out shoes. Put on shoes. Tie laces. Walk to desk. Pick up work bag. Open bag. Place laptop in bag. Place folder in bag. Place pen in bag. Close bag."
+    },
+    {
+      "time": "08:20-09:00",
+      "location": "Out",
+      "activity": "Drive the EV to the clinic for the day's appointments",
+      "desc": "Walk to EV. Unlock EV with key fob. Open driver door. Sit in driver seat. Close door. Fasten seatbelt. Press start button. Adjust rearview mirror. Adjust side mirrors. Shift gear to drive. Release parking brake. Press accelerator. Steer wheel. Stop at red light. Press brake. Wait. Press accelerator. Continue. Arrive at clinic. Park EV. Turn off EV. Unfasten seatbelt. Open door. Step out. Close door. Lock EV with key fob. Walk to clinic entrance."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Conducting in-person clinical psychology assessment and therapy sessions with clients",
+      "desc": "Greet client in waiting room. Shake hands. Walk to office. Gesture to chair. Sit in own chair. Open notebook. Pick up pen. Ask client questions. Listen to responses. Write notes. Nod head. Turn page. Use computer to pull up assessment. Type notes. Administer test. Score test. Discuss results. Schedule next appointment. Stand up. Shake hands. Walk client to door."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating a restriction-appropriate meal nearby",
+      "desc": "Leave office. Walk to nearby cafe. Open door. Approach counter. Order salad. Pay cashier. Take receipt. Wait for order. Pick up tray. Walk to table. Sit down. Pick up fork. Eat salad. Drink water. Wipe mouth with napkin. Stand up. Return tray. Walk back to office."
+    },
+    {
+      "time": "13:15-16:00",
+      "location": "Out",
+      "activity": "Running afternoon clinical sessions and remote telehealth consultations from the office",
+      "desc": "Sit at desk. Open computer. Launch telehealth software. Adjust webcam. Put on headset. Greet client on video. Listen. Type notes. Nod. End call. Close software. Open next client file. Call next client. Repeat. Conduct in-person session. Walk to waiting room. Greet client. Walk back. Sit. Talk. Take notes."
+    },
+    {
+      "time": "16:00-16:15",
+      "location": "Out",
+      "activity": "Stepping away briefly for a strong coffee and mental reset",
+      "desc": "Stand up. Walk to break room. Pick up mug. Pour coffee from pot. Add sugar. Stir. Pick up mug. Walk to window. Sip coffee. Look out window. Finish coffee. Walk back to office."
+    },
+    {
+      "time": "16:15-17:00",
+      "location": "Out",
+      "activity": "Finishing case notes, treatment planning, and administrative documentation",
+      "desc": "Sit at desk. Open computer. Open case notes file. Review notes. Type additional notes. Open treatment plan template. Fill in details. Save file. Close file. Open email. Reply to emails. Log out. Shut down computer."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Drive the EV back home through evening traffic",
+      "desc": "Walk to EV. Unlock EV. Open door. Sit. Close door. Fasten seatbelt. Press start. Shift gear. Release brake. Press accelerator. Steer. Stop at red light. Wait. Accelerate. Turn onto home street. Park in driveway. Turn off EV. Unfasten seatbelt. Open door. Step out. Lock EV. Walk to front door."
+    },
+    {
+      "time": "17:45-18:15",
+      "location": "Bathroom",
+      "activity": "Washing up and changing into comfortable casual clothes (finishing before Member 1 uses the bathroom at 18:15)",
+      "desc": "Enter home. Walk to bathroom. Turn on light. Turn on tap. Wet hands. Apply soap. Rub hands. Rinse hands. Turn off tap. Dry hands. Walk to bedroom. Open dresser. Take out t-shirt and sweatpants. Remove work clothes. Put on t-shirt. Put on sweatpants. Walk back to bathroom. Pick up towel. Wipe face. Hang towel. Turn off light. Walk out."
+    },
+    {
+      "time": "18:15-19:15",
+      "location": "Kitchen",
+      "activity": "Cooking a from-scratch dinner that fits the medical dietary restriction; Member 1 helps finish cooking and eats dinner together from 18:30",
+      "desc": "Walk to kitchen. Open refrigerator. Take out chicken and vegetables. Close refrigerator. Place on counter. Turn on induction cooker. Place pan. Add oil. Chop vegetables. Add chicken to pan. Stir. Member 1 enters kitchen. Member 1 says: 'Need help?' Member 2 replies: 'Yes, please chop the carrots.' Member 1 picks up knife. Chops carrots. Member 2 stirs pan. Add spices. Turn off cooker. Member 1 sets table. Member 2 plates food. Both sit at table. Pick up forks. Eat. Member 1 says: 'This is good.' Member 2 nods."
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Clearing the table, loading the dishwasher, and wiping down the counters together with Member 1",
+      "desc": "Stand up. Pick up plates. Walk to sink. Scrape food into trash. Place plates in dishwasher. Member 1 picks up glasses. Hands to Member 2. Member 2 places glasses in dishwasher. Member 1 picks up utensils. Places in dishwasher. Member 2 closes dishwasher door. Press start button. Pick up sponge. Wet sponge. Apply soap. Wipe counter. Rinse sponge. Wipe again. Member 1 dries counter with towel. Member 2 wrings sponge. Hang sponge."
+    },
+    {
+      "time": "19:45-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing and doing a stretching session with Member 1 (watching YouTube videos while stretching)",
+      "desc": "Walk to living room. Sit on floor. Member 1 sits nearby. Pick up remote. Turn on TV. Open YouTube. Select stretching video. Place remote down. Raise arms overhead. Bend forward. Stretch legs. Member 1 stretches too. Hold pose. Release. Turn to other side. Repeat. Member 1 says: 'This feels good.' Member 2 nods."
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Study",
+      "activity": "Studying cognitive psychology material on the computer with the desk lamp on, alongside Member 1 who is using the computer for personal tasks",
+      "desc": "Walk to study. Turn on desk lamp. Sit at desk. Open computer. Open textbook. Read chapter. Highlight text. Take notes in notebook. Member 1 enters study. Member 1 sits at other computer. Member 1 uses computer. Member 2 types notes. Flip page. Read more."
+    },
+    {
+      "time": "21:15-22:00",
+      "location": "Study",
+      "activity": "Quiet devotional reading, reflection, and prayer",
+      "desc": "Close textbook. Pick up Bible. Open to passage. Read silently. Close Bible. Fold hands. Bow head. Pray. Remain silent. Open eyes. Stand up."
+    },
+    {
+      "time": "22:00-22:45",
+      "location": "Living Room",
+      "activity": "Streaming a television show to unwind before bed",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Open streaming app. Select show. Press play. Watch. Pick up phone. Check messages. Put down phone. Watch. Pause show. Stand up. Walk to kitchen. Get water. Return. Sit. Resume show."
+    },
+    {
+      "time": "22:45-23:10",
+      "location": "Bathroom",
+      "activity": "Nightly wash-up, skincare, and oral care routine",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wet face. Apply cleanser. Rub face. Rinse. Pat dry. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Apply moisturizer. Turn off tap. Turn off light. Walk out."
+    },
+    {
+      "time": "23:10-23:30",
+      "location": "Bedroom 2",
+      "activity": "Tidying the room, laying out tomorrow's clothes, and dimming the lights",
+      "desc": "Walk to bedroom. Pick up clothes from floor. Put in hamper. Open closet. Select shirt. Select pants. Lay on chair. Pick up phone. Set alarm. Place phone on nightstand. Turn off main light. Turn on bedside lamp. Dim lamp."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 2",
+      "activity": "Falling asleep to end the day",
+      "desc": "Lie in bed. Pull blanket up. Close eyes. Breathe deeply. Turn to side. Adjust pillow. Fall asleep."
+    }
+  ]
+}
+```
+

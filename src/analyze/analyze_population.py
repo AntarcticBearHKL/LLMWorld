@@ -7,44 +7,26 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import (list_dates, list_houses, read_household,
+                     household_features, population_profile)
 
 
 def load_households(world_id):
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    base = os.path.join(project_root, "output", "worlds", world_id, "3168")
     households = {}
-    if not os.path.isdir(base):
-        return households
-    for house_id in sorted(os.listdir(base)):
-        p = os.path.join(base, house_id, "household.json")
-        if os.path.isfile(p):
-            with open(p, "r", encoding="utf-8") as f:
-                households[house_id] = json.load(f)
+    for date in list_dates(world_id):
+        for house_id in list_houses(world_id, world_id, date):
+            if house_id in households:
+                continue
+            household = read_household(world_id, house_id)
+            if household:
+                households[house_id] = household
     return households
 
 
 def load_per_house_kwh(world_id, scenario, date):
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    p = os.path.join(sim_root(world_id), "population",
-                     scenario, date, "population_profile_1440min.json")
-    if not os.path.exists(p):
-        return {}
-    with open(p, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return {h["house_id"]: h["total_energy_kwh"] for h in data.get("per_house", [])}
-
-
-def household_features(household):
-    members = household.get("members", [])
-    first = members[0] if members else {}
-    pers = first.get("personality", {})
-    return {
-        "household_type": household.get("type", "?"),
-        "members_count": len(members),
-        "energy_awareness": pers.get("energy_awareness", "?"),
-        "big_five": pers.get("big_five", {}),
-        "age": first.get("age", 0),
-    }
+    profile = population_profile(world_id, scenario, date)
+    return {h["house_id"]: h["total_energy_kwh"]
+            for h in profile.get("per_house", [])}
 
 
 def group_mean(items):
@@ -118,27 +100,42 @@ def main():
     parser = argparse.ArgumentParser(description="Population behavior attribution analysis")
     parser.add_argument("--world", required=True)
     parser.add_argument("--scenario", default="baseline")
-    parser.add_argument("--date", default="2026-04-21")
+    parser.add_argument("--date", default=None, help="YYYY-MM-DD; defaults to the latest simulation date")
     parser.add_argument("--dates", nargs="+", default=None,
                         help="Multi-date comparison (e.g. --dates 2026-04-21 2026-04-22); prints per-day mean/total energy")
     args = parser.parse_args()
 
     if args.dates:
-        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         print("=== Multi-day trajectory (mean kWh) ===")
         print(f"{'Date':<14}{'Mean':<10}{'Total':<12}Households")
         for d in args.dates:
-            report, rows = analyze(args.world, args.scenario, d)
+            try:
+                report, rows = analyze(args.world, args.scenario, d)
+            except ValueError as exc:
+                print(f"[Error] {d}: {exc}")
+                continue
             print(f"{d:<14}{report['mean_household_kwh']:<10}{report['total_kwh']:<12}{report['households']}")
         return
 
-    report, rows = analyze(args.world, args.scenario, args.date)
+    if args.date:
+        date = args.date
+    else:
+        dates = list_dates(args.world)
+        if not dates:
+            print(f"No simulation data found for {args.world}")
+            sys.exit(1)
+        date = dates[-1]
+    try:
+        report, rows = analyze(args.world, args.scenario, date)
+    except ValueError as exc:
+        print(f"[Error] {exc}")
+        sys.exit(1)
 
     print("=== Household type vs mean energy ===")
     for k, v in report["by_type"].items():
         print(f"  {k}: {v} kWh")
     print("=== Energy awareness vs mean energy ===")
-    for k, v in report["by_awareness"].items():
+    for k, v in report.get("by_awareness", {}).items():
         print(f"  {k}: {v} kWh")
     print("=== Member count vs mean energy ===")
     for k, v in report["by_members_count"].items():

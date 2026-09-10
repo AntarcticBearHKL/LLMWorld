@@ -99,7 +99,11 @@ def main():
     args = parser.parse_args()
 
     profiles = scan_house_profiles(args.world_id, args.scenario, args.date)
-    report = build_report(profiles, args.ev_kw, args.hp_kw)
+    try:
+        report = build_report(profiles, args.ev_kw, args.hp_kw)
+    except ValueError as exc:
+        print(f"No simulation curves found for {args.world_id}: {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
     report["date"] = args.date or "latest"

@@ -11,11 +11,17 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 from engine import SubAgent, utils
+from engine.json_parse import parse as parse_llm_json
 from engine.subagent import LLMCallError
 from engine.prompt import Prompt
 import generate_world as gw
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+# DeepSeek does not enforce json_schema, so the exact member count must be
+# validated here and retried / replaced with canonical personas on mismatch.
+MAX_MEMBER_ATTEMPTS = 3
+
 
 def _members_schema(member_count):
     return {
@@ -60,34 +66,85 @@ def normalize_type(value):
     return value
 
 
-def _call_members(prompt, logger, prefix, member_count):
-    print("================ INPUT ================")
-    print(prompt)
-    resp = SubAgent.single_call(prompt, json_mode=True, json_schema=_members_schema(member_count))
-    print("================ OUTPUT ================")
-    print(resp["content"])
-    try:
-        data = utils.parse_json_response(resp["content"])
-    except Exception as exc:
-        logger.record("step2_members", prompt, resp["content"], reasoning="",
-                      ok=False, error=f"JSON parse failed: {exc}", attempt=1, prefix=prefix)
-        raise LLMCallError(f"step2 response is not valid JSON: {exc}") from exc
-    members = data.get("members") if isinstance(data, dict) else data
-    if not isinstance(members, list) or not members:
-        logger.record("step2_members", prompt, resp["content"], reasoning="",
-                      ok=False, error="response lacks members list", attempt=1, prefix=prefix)
-        raise LLMCallError("step2 response lacks members list")
-    portraits = []
-    for m in members:
-        p = m.get("portrait") if isinstance(m, dict) else None
-        if not (isinstance(p, str) and p.strip()):
+def _portrait_problem(portraits, member_count):
+    if len(portraits) != member_count:
+        return f"returned {len(portraits)} portraits, expected exactly {member_count}"
+    if any(not p for p in portraits):
+        return "returned an empty portrait"
+    if len(set(portraits)) != len(portraits):
+        return "returned duplicate portraits"
+    return None
+
+
+def _clean_fallback(fallback_texts, member_count):
+    cleaned = []
+    seen = set()
+    for text in fallback_texts or []:
+        if not isinstance(text, str):
+            continue
+        text = text.strip()
+        if not text or text in seen:
+            continue
+        cleaned.append(text)
+        seen.add(text)
+        if len(cleaned) >= member_count:
+            break
+    return cleaned
+
+
+def _call_members(prompt, logger, prefix, member_count, fallback_texts=None):
+    schema = _members_schema(member_count)
+    last_error = None
+    last_content = ""
+    for attempt in range(1, MAX_MEMBER_ATTEMPTS + 1):
+        print("================ INPUT ================")
+        print(prompt)
+        resp = SubAgent.single_call(prompt, json_mode=True, json_schema=schema)
+        print("================ OUTPUT ================")
+        print(resp["content"])
+        last_content = resp["content"]
+        try:
+            data = parse_llm_json(resp["content"])
+        except Exception as exc:
             logger.record("step2_members", prompt, resp["content"], reasoning="",
-                          ok=False, error="member entry has no portrait string", attempt=1, prefix=prefix)
-            raise LLMCallError("step2 response has a member with no portrait string")
-        portraits.append(p.strip())
-    logger.record("step2_members", prompt, resp["content"], reasoning="",
-                  ok=True, attempt=1, prefix=prefix)
-    return portraits
+                          ok=False, error=f"JSON parse failed: {exc}", attempt=attempt, prefix=prefix,
+                          schema=schema)
+            raise LLMCallError(f"step2 response is not valid JSON: {exc}") from exc
+        members = data.get("members") if isinstance(data, dict) else data
+        if not isinstance(members, list) or not members:
+            logger.record("step2_members", prompt, resp["content"], reasoning="",
+                          ok=False, error="response lacks members list", attempt=attempt, prefix=prefix,
+                          schema=schema)
+            raise LLMCallError("step2 response lacks members list")
+        portraits = []
+        for m in members:
+            p = m.get("portrait") if isinstance(m, dict) else None
+            portraits.append(p.strip() if isinstance(p, str) else "")
+        problem = _portrait_problem(portraits, member_count)
+        if problem is None:
+            logger.record("step2_members", prompt, resp["content"], reasoning="",
+                          ok=True, attempt=attempt, prefix=prefix, schema=schema, parsed=data)
+            return portraits, "llm"
+        last_error = problem
+        logger.record("step2_members", prompt, resp["content"], reasoning="",
+                      ok=False, error=problem, attempt=attempt, prefix=prefix, schema=schema, parsed=data)
+        if attempt >= MAX_MEMBER_ATTEMPTS:
+            break
+        prompt = prompt + (
+            "\n\n## Correction\n"
+            f"You returned {len(portraits)} portraits but EXACTLY {member_count} are required. "
+            f"Return exactly {member_count} distinct English third-person portraits in the same order, "
+            f"one per person, as {{\"members\":[{{\"portrait\":\"...\"}}, ...]}} with exactly {member_count} items."
+        )
+    fallback = _clean_fallback(fallback_texts, member_count)
+    if len(fallback) < member_count:
+        raise LLMCallError(f"step2 member count mismatch after {MAX_MEMBER_ATTEMPTS} attempts: {last_error}")
+    print(f"[Fallback] LLM member alignment failed after {MAX_MEMBER_ATTEMPTS} attempts "
+          f"({last_error}); using {len(fallback)} canonical personas")
+    logger.record("step2_members_fallback", prompt, last_content, reasoning="",
+                  ok=False, error=f"LLM count mismatch after {MAX_MEMBER_ATTEMPTS} attempts: {last_error}",
+                  attempt=MAX_MEMBER_ATTEMPTS, prefix=prefix, schema=schema)
+    return fallback, "fallback"
 
 
 def run_step(world_id, house=0, seed=42):
@@ -122,12 +179,23 @@ def run_step(world_id, house=0, seed=42):
         household_member_count=member_count,
         persona_texts="\n\n".join(persona_texts),
     )
-    portraits = _call_members(prompt, logger, prefix, member_count)
+    portraits, align_source = _call_members(prompt, logger, prefix, member_count, persona_texts)
 
     out_path = os.path.join(house_dir, "aligned_texts.json")
     with open(out_path, "w", encoding="utf-8") as file:
         json.dump(portraits, file, ensure_ascii=False, indent=2)
     print(f"[Saved] {out_path}")
+    prov_path = os.path.join(house_dir, "persona_provenance.json")
+    provenance = {
+        "seed": seed,
+        "member_count": member_count,
+        "canonical_persona_texts": persona_texts,
+        "aligned_texts": portraits,
+        "source": align_source,
+    }
+    with open(prov_path, "w", encoding="utf-8") as file:
+        json.dump(provenance, file, ensure_ascii=False, indent=2)
+    print(f"[Saved] {prov_path} (source={align_source})")
     for i, p in enumerate(portraits, 1):
         print(f"  member {i}: {len(p)} chars, {len(p.split())} words")
     return True, portraits

@@ -1,0 +1,95 @@
+{
+  "member": "Member 3",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 3",
+      "activity": "Asleep for the night, phone on silent on the nightstand",
+      "desc": "Lies in bed. Eyes closed. Breathes steadily. Remains asleep. Turns onto right side. Pulls blanket up. Remains asleep. Turns onto left side. Adjusts pillow. Remains asleep. Phone on nightstand, silent mode on. Does not get up. Continues sleeping. Breathes. Remains in bed."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bedroom 3",
+      "activity": "Waking up, taking morning medication, light stretching due to mild mobility limitation",
+      "desc": "Opens eyes. Blinks. Sits up in bed. Rubs eyes. Swings legs over edge of bed. Places feet on floor. Stands up slowly. Walks to nightstand. Picks up medication bottle. Opens cap. Shakes out one pill. Puts pill in mouth. Picks up water glass. Drinks water. Swallows pill. Puts glass down. Closes medication bottle. Places bottle back on nightstand. Raises arms overhead. Stretches. Bends forward to stretch back. Straightens up. Rotates torso. Tilts head side to side. Sits on edge of bed. Puts on slippers. Stands up. Walks to door."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast at the counter (kitchen is free: Member 1 has already left for the dog walk and Member 2 is still asleep)",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator. Takes out milk, cereal, bowl, spoon. Closes refrigerator. Places bowl on counter. Pours cereal into bowl. Pours milk over cereal. Picks up spoon. Eats cereal. Chews. Swallows. Takes another bite. Drinks milk from bowl. Places spoon in bowl. Picks up bowl. Walks to sink. Rinses bowl. Places bowl in dishwasher. Wipes counter with cloth. Turns off light. Walks out."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 3",
+      "activity": "Getting dressed, packing the school bag, feeding the cat",
+      "desc": "Walks into bedroom. Opens closet. Takes out school uniform. Lays uniform on bed. Takes off pajamas. Puts on shirt. Puts on trousers. Puts on socks. Puts on shoes. Picks up school bag. Opens bag. Places notebooks inside. Places pencil case inside. Zips bag. Walks to cat bowl. Picks up cat food bag. Scoops food into bowl. Places bowl on floor. Watches cat eat. Refills water bowl. Places water bowl on floor. Picks up phone. Puts phone in bag. Picks up bag. Walks to door."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Out",
+      "activity": "Commuting to school on foot and by bus (the electric vehicle is with Member 2 at work, so public transport is used instead of riding along)",
+      "desc": "Walks out of house. Closes door. Walks to bus stop. Waits at bus stop. Checks phone. Bus arrives. Steps onto bus. Taps transit card. Walks to seat. Sits down. Holds bag on lap. Looks out window. Bus stops. Stands up. Walks to exit. Steps off bus. Walks to school. Enters school gate."
+    },
+    {
+      "time": "08:30-15:30",
+      "location": "Out",
+      "activity": "Attending school: classes, note-taking and student welfare activities",
+      "desc": "Enters classroom. Sits at desk. Takes out textbook. Opens notebook. Listens to teacher. Writes notes. Raises hand. Answers question. Closes notebook. Walks to next class. Repeats note-taking. During break, walks to student welfare office. Signs in. Talks to counselor. Fills out form. Returns form. Eats lunch in cafeteria. Studies in library. Returns to class. Packs bag. Walks out of school."
+    },
+    {
+      "time": "15:30-16:00",
+      "location": "Out",
+      "activity": "Commuting to grandparent's house on foot and by bus",
+      "desc": "Walks out of school. Walks to bus stop. Waits. Bus arrives. Boards bus. Taps card. Finds seat. Sits. Holds bag. Looks out window. Bus stops. Stands. Walks to exit. Steps off. Walks to grandparent's house. Arrives. Knocks on door. Waits. Door opens. Enters house."
+    },
+    {
+      "time": "16:00-18:00",
+      "location": "Out",
+      "activity": "Providing care for grandparent: assisting with meals and medication, light housekeeping, and companionship",
+      "desc": "Greets grandparent. Prepares meal. Cooks. Places food on plate. Carries to table. Helps grandparent sit. Eats together. Clears table. Washes dishes. Wipes counter. Sits with grandparent. Turns on TV. Opens medication box. Counts pills. Fills water glass. Hands glass to grandparent. Sweeps floor. Reads aloud. Says goodbye. Walks to door."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Commuting home from grandparent's house on foot and by bus",
+      "desc": "Walks out of grandparent's house. Walks to bus stop. Waits. Bus arrives. Boards bus. Taps card. Finds seat. Sits. Holds bag. Looks out window. Bus stops. Stands. Walks to exit. Steps off. Walks home. Arrives home. Opens door. Enters house."
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Dining Room",
+      "activity": "Eating dinner at the table with Member 1 and Member 2, sharing an unhurried meal and catching up on the day",
+      "desc": "Walks into dining room. Greets Member 1 and Member 2. Sits down. Picks up fork. Eats. Drinks water. Listens to Member 1. Speaks. Listens to Member 2. Laughs. Finishes meal. Carries plate to kitchen. Returns. Continues conversation. Stands up. Pushes chair in. Walks out."
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Study",
+      "activity": "Doing homework and studying, working alongside Member 1 who is doing remote paperwork and outreach scheduling from 19:00 to 20:00",
+      "desc": "Walks into study. Turns on desk lamp. Sits down. Opens backpack. Takes out textbook. Opens textbook. Picks up pen. Writes notes. Reads textbook. Turns page. Highlights text. Writes more notes. Stretches arms. Reads. Writes. Responds to Member 1. Closes textbook. Opens laptop. Types. Saves file. Closes laptop."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Living Room",
+      "activity": "Taking a break: listening to music and playing with the cat while sharing the room with Member 2 relaxing on the sofa and Member 1 doing phone check-ins with relatives",
+      "desc": "Walks into living room. Greets Member 2 and Member 1. Picks up phone. Opens music app. Selects playlist. Plays music. Picks up cat toy. Waves toy. Pets cat. Picks up cat. Sits on floor. Continues petting cat. Listens to music. Stands up. Sits on sofa. Talks to Member 2. Watches cat. Plays with cat. Stands up. Walks out."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Study",
+      "activity": "Continuing homework and studying, working alongside Member 2 from 21:15 onward during their creative art session",
+      "desc": "Walks into study. Turns on desk lamp. Sits down. Opens textbook. Picks up pen. Writes. Reads. Greets Member 2. Turns page. Highlights. Writes. Picks up calculator. Opens laptop. Types. Saves. Closes laptop. Closes textbook. Packs bag. Turns off desk lamp. Walks out."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Washing up, taking evening medication, preparing for bed (bathroom is free: Member 1 has finished and Member 2 uses it later)",
+      "desc": "Walks into bathroom. Turns on light. Turns on tap. Picks up soap. Lathers hands. Rubs face. Rinses face. Turns off tap. Dries face. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Picks up medication bottle. Shakes out pill. Puts pill in mouth. Drinks water. Swallows pill. Turns off light. Walks out."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 3",
+      "activity": "Sleeping (or attempting to sleep due to poor sleep)",
+      "desc": "Walks into bedroom. Closes door. Turns off light. Lies down on bed. Pulls blanket up. Closes eyes. Breathes. Turns onto side. Adjusts pillow. Remains still. Opens eyes. Turns onto back. Closes eyes. Turns onto other side. Pulls blanket. Breathes. Turns again. Adjusts pillow. Closes eyes. Remains in bed."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+﻿scenario,total_kwh,peak_watts,evening_kwh,peak_to_mean,total_change_pct,peak_change_pct,evening_change_pct
+baseline,100.2639,7321.75,16.806,5.26,,,
+ev,163.2639,14321.75,16.806,6.32,62.83,95.61,0.0
+hp,172.2639,9405.75,52.806,3.93,71.81,28.46,214.21
+ev_hp,235.2639,14321.75,52.806,4.38,134.64,95.61,214.21

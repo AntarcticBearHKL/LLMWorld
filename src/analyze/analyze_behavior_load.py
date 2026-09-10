@@ -1,5 +1,6 @@
 import argparse
 from simulation_env import sim_root
+from dataset import iter_house_days, list_dates, read_household
 import json
 import os
 import sys
@@ -8,36 +9,22 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 
 
 def _load_household_rooms(world_id, house_id):
-    path = os.path.join(PROJECT_ROOT, "output", "worlds", world_id, "3168", house_id,
-                        "household.json")
-    if not os.path.exists(path):
+    household = read_household(world_id, house_id)
+    if not isinstance(household, dict):
         return set()
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            household = json.load(f)
-        rooms = set()
-        for room in household.get("home", {}).get("rooms", []):
-            rooms.add(room.get("name", ""))
-        return {r for r in rooms if r}
-    except Exception:
-        return set()
+    rooms = set()
+    for room in household.get("home", {}).get("rooms", []):
+        rooms.add(room.get("name", ""))
+    return {r for r in rooms if r}
 
 
-def _parse_activities(house_dir, house_id, rooms):
+def _parse_activities(record, rooms):
     activities = []
-    member_count = 0
-    if not os.path.isdir(house_dir):
-        return activities, member_count
-    for name in sorted(os.listdir(house_dir)):
-        if not (name.startswith("02_SecondLayer_ProgressiveCoordination_") and name.endswith(".json")):
-            continue
-        member_count += 1
-        try:
-            with open(os.path.join(house_dir, name), "r", encoding="utf-8") as f:
-                data = json.load(f)
-        except Exception:
-            continue
-        for item in data.get("coordinated_activities", []):
+    members = record.get("members", [])
+    member_count = len(members)
+    activities_by_member = record.get("activities", {}) or {}
+    for member in members:
+        for item in activities_by_member.get(member, []):
             time_range = item.get("time", "")
             location = item.get("location", "")
             if not time_range:
@@ -120,44 +107,21 @@ def build_report(house_results):
 
 
 def scan_world(world_id, scenario, date_str):
-    simulation_root = os.path.join(sim_root(world_id))
-    if not os.path.isdir(simulation_root):
-        return []
+    if not date_str:
+        dates = list_dates(world_id)
+        date_str = dates[-1] if dates else None
     house_results = []
-    for postcode_dir in sorted(os.listdir(simulation_root)):
-        postcode_path = os.path.join(simulation_root, postcode_dir)
-        if not os.path.isdir(postcode_path) or postcode_dir == "population":
+    for record in iter_house_days(world_id, date=date_str, policy=scenario):
+        rooms = _load_household_rooms(world_id, record["house_id"])
+        activities, member_count = _parse_activities(record, rooms)
+        if not activities:
             continue
-        for house_id in sorted(os.listdir(postcode_path)):
-            scenario_dir = os.path.join(postcode_path, house_id, scenario)
-            if not os.path.isdir(scenario_dir):
-                continue
-            if date_str:
-                date_dirs = [d for d in os.listdir(scenario_dir)
-                             if d == date_str.replace("-", "")]
-            else:
-                date_dirs = [d for d in sorted(os.listdir(scenario_dir))
-                             if os.path.isdir(os.path.join(scenario_dir, d))]
-            if not date_dirs:
-                continue
-            date_dir = date_dirs[-1]
-            house_dir = os.path.join(scenario_dir, date_dir)
-            profile_path = os.path.join(house_dir, "ElectricityInfo",
-                                        "house_load_profile_1440min.json")
-            if not os.path.exists(profile_path):
-                continue
-            with open(profile_path, "r", encoding="utf-8") as f:
-                profile = json.load(f)
-            rooms = _load_household_rooms(world_id, house_id)
-            activities, member_count = _parse_activities(house_dir, house_id, rooms)
-            if not activities:
-                continue
-            house_results.append({
-                "house_id": house_id,
-                "member_count": member_count,
-                "activities": activities,
-                "load_profile_watts": profile.get("load_profile_watts", []),
-            })
+        house_results.append({
+            "house_id": record["house_id"],
+            "member_count": member_count,
+            "activities": activities,
+            "load_profile_watts": record["load_profile_watts"],
+        })
     return house_results
 
 
@@ -170,7 +134,11 @@ def main():
     args = parser.parse_args()
 
     house_results = scan_world(args.world_id, args.scenario, args.date)
-    report = build_report(house_results)
+    try:
+        report = build_report(house_results)
+    except ValueError as exc:
+        print(f"No activity/load data found for {args.world_id}: {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
     report["date"] = args.date or "latest"

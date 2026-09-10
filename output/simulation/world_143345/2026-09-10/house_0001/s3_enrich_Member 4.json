@@ -1,0 +1,101 @@
+{
+  "member": "Member 4",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed in Bedroom 4. Pull the blanket up over the body. Place the phone on the nightstand. Reach to the bedside light switch. Turn off the light. Close eyes. Sleep. Turn onto the other side during the night. Pull the blanket back over the shoulder. Remain asleep. At 06:45 the phone alarm rings on the nightstand."
+    },
+    {
+      "time": "06:45-07:00",
+      "location": "Bedroom 4",
+      "activity": "Waking up and getting dressed (bathroom is occupied by Member 6 until 07:00)",
+      "desc": "Reach out the right hand to the nightstand. Pick up the phone. Press the screen to stop the alarm. Sit up on the edge of the bed. Put both feet on the floor. Stand up. Walk to the wardrobe. Open the wardrobe door. Take out a t-shirt and trousers. Pull on the trousers. Pull the t-shirt over the head. Take socks from the drawer. Pull on the socks. Pick up the phone again. Look at the time. Sit on the bed. Wait for the bathroom to be free at 07:00 (Member 6 is inside until 07:00)."
+    },
+    {
+      "time": "07:00-07:15",
+      "location": "Bathroom",
+      "activity": "Brushing teeth, quick wash and finishing getting ready (bathroom free before Member 1's 07:15 bathroom slot)",
+      "desc": "Stand up from the bed. Walk from Bedroom 4 to the Bathroom. Push the bathroom door open. Step inside. Turn on the bathroom light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush teeth. Rinse the mouth with water. Turn off the tap. Pick up the towel. Wet the towel under the water. Wipe the face and neck. Hang the towel back on the hook. Turn off the bathroom light. Pull the door open. Step out. Close the door behind."
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making tea",
+      "desc": "Walk to the Kitchen. Turn on the kitchen light. Open the refrigerator door. Take out milk and eggs. Close the refrigerator door. Open the cupboard. Take out a bowl and a plate. Set them on the counter. Crack two eggs into the bowl. Turn on the induction cooker. Place a pan on the cooker. Pour the eggs into the pan. Stir with a spatula. Turn off the induction cooker. Slide the eggs onto the plate. Pick up a mug from the shelf. Fill the kettle with water. Turn on the kettle. Pour boiling water into the mug over a tea bag. Sit down at the kitchen table. Eat the eggs with a fork. Drink the tea. Member 6 sits at the table with the keto breakfast and says 'Good morning'. Reply 'Morning' and continue eating. Finish the tea. Stand up. Carry the plate and mug to the sink."
+    },
+    {
+      "time": "07:45-08:45",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Clayton campus",
+      "desc": "Pick up the backpack from Bedroom 4. Put both arms through the straps. Walk out the front door. Close the door. Walk to the bus stop. Stand at the stop. Take the phone out of the pocket. Check the timetable on the phone. Put the phone back in the pocket. Board the bus. Tap the travel card on the card reader. Sit down on a seat. Place the backpack on the lap. Get off the bus at the station. Walk to the platform. Wait for the train. Board the train. Tap the card again. Sit down. Take the phone out. Scroll the phone. Put the phone away. Get off at Clayton station. Walk to the Monash University Clayton campus entrance."
+    },
+    {
+      "time": "08:45-12:30",
+      "location": "Out",
+      "activity": "Attending cybersecurity lectures and working in the computer lab at Monash University",
+      "desc": "Walk into the lecture theatre. Walk down the row. Sit down on a seat. Take the laptop out of the backpack. Open the laptop lid. Press the power button. Type the login password. Open the note-taking application. Type lecture notes on the keyboard. Raise the right hand to ask a question. Write the answer on the notes. Close the laptop at the end of the lecture. Stand up. Put the laptop into the backpack. Walk to the computer lab. Sit down at a lab computer. Press the power button on the lab computer. Log in with the student account. Type commands into the terminal window. Open the browser. Read the lab instructions on the screen. Type more commands. Save the files to the network drive. Log out of the lab computer. Stand up. Walk to the campus cafe."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Eating lunch and reviewing lecture notes on campus",
+      "desc": "Walk into the campus food outlet. Take a tray. Pick up a sandwich and a bottle of water. Pay at the counter with the card. Walk to a table. Sit down. Open the sandwich wrapper. Eat the sandwich. Open the bottle. Drink water. Take the laptop out of the backpack. Open the laptop lid. Open the lecture notes file. Scroll through the notes on the screen. Type a few corrections into the notes. Close the laptop. Stand up. Throw the wrapper into the bin. Walk to the bus stop."
+    },
+    {
+      "time": "13:15-14:00",
+      "location": "Out",
+      "activity": "Commuting home from Monash University by public transport",
+      "desc": "Walk to the bus stop outside the campus. Stand and wait. Board the bus. Tap the travel card on the reader. Sit down. Take the phone out of the pocket. Check messages on the phone. Put the phone back. Get off at the station. Walk to the platform. Board the train. Tap the card. Sit down. Hold the backpack on the lap. Get off at the home station. Walk out of the station. Walk to the house. Open the front door. Close the door. Walk to Bedroom 4."
+    },
+    {
+      "time": "14:00-17:30",
+      "location": "Bedroom 4",
+      "activity": "Working remotely on freelance web development projects using computer and monitor",
+      "desc": "Walk into Bedroom 4. Put the backpack down on the floor. Sit down at the desk. Turn on the desk lamp. Press the power button on the computer. Turn on the monitor with the power button. Type the login password on the keyboard. Open the code editor. Open the web browser. Click the client project bookmark. Type code on the keyboard. Move the mouse to switch between windows. Scroll the code with the mouse wheel. Open the terminal window. Type the local server command. Press Enter. Click into the browser and refresh the page. Type more code. Save the file with Ctrl+S. Open the messaging app on the phone. Type a reply to the client and send it. Put the phone down. Continue typing code. Run the tests in the terminal. Fix an error and save again. Reach for the mug on the desk and drink water from the bottle. Open a new browser tab and read the framework documentation. Type notes in a separate text file. Save all files."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 4",
+      "activity": "Finishing up work tasks and wrapping up for the day",
+      "desc": "Save the last file with Ctrl+S. Close the code editor window. Close the browser tabs one by one. Type a short status message to the client and press send. Click the shutdown option on the screen. Watch the computer power down. Press the power button on the monitor. Turn off the desk lamp. Pick up the phone. Stand up from the desk chair. Stretch both arms. Walk out of Bedroom 4. Close the door. Walk to the Kitchen."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the kitchen table together with Member 1, Member 2 and Member 3",
+      "desc": "Walk into the Kitchen. Take a plate from the cupboard. Take a fork from the drawer. Fill the plate with food from the pots on the induction cooker. Carry the plate to the kitchen table. Sit down on a chair. Member 1, Member 2 and Member 3 sit down at the table with their plates. Eat the food with the fork. Cut the food with the side of the fork. Member 3 says 'How was the lab today?'. Answer briefly and continue eating. Drink water from the glass. Finish the meal. Stand up. Carry the plate and fork to the sink. Return to the table and pick up the glass."
+    },
+    {
+      "time": "18:45-19:10",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen counters, sharing the kitchen tidy-up with Member 1, Member 2 and Member 3",
+      "desc": "Stand at the sink. Turn on the tap. Pick up the sponge. Squeeze washing-up liquid onto the sponge. Wipe the plate with the sponge. Rinse the plate under the tap. Place the plate in the drying rack. Wipe the fork and rinse it. Place the fork in the rack. Take the next plate from the counter and repeat. Turn off the tap. Pick up a cloth. Wipe the kitchen counter with the cloth. Wipe the table surface. Wipe the induction cooker top. Wring the cloth over the sink. Hang the cloth on the hook. Move the chairs back under the table. Member 1 loads the dishwasher beside the sink and says 'Thanks'. Nod and pick up the phone. Walk out of the Kitchen."
+    },
+    {
+      "time": "19:10-21:30",
+      "location": "Bedroom 4",
+      "activity": "Studying coursework and coding personal projects on the computer",
+      "desc": "Walk into Bedroom 4. Close the door. Sit down at the desk. Turn on the desk lamp. Press the power button on the computer. Turn on the monitor. Type the login password. Open the university learning platform in the browser. Open the lecture slides. Read the slides on the screen. Scroll down through the slides with the mouse. Open the assignment document. Type notes on the keyboard. Open the code editor. Open the personal project folder. Type code for the personal project. Run the code in the terminal. Read the error output on the monitor. Fix the line of code and save. Re-run the code. Open the phone and check a message. Put the phone down. Continue typing code. Open a documentation page in a browser tab and read it. Type more code. Save all files. Open the notes file and type a to-do list for tomorrow. Save the file. Look at the time on the monitor."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 4",
+      "activity": "Relaxing in bed, browsing on the phone and watching videos",
+      "desc": "Stand up from the desk chair. Press the monitor power button. Click shut down on the computer. Turn off the desk lamp. Walk to the bed. Sit on the bed. Pull the blanket back. Lie down on the bed. Pull the blanket over the legs. Pick up the phone from the nightstand. Unlock the phone with the fingerprint. Open a social media app. Scroll the feed with the thumb. Tap a video. Watch the video. Scroll to the next video. Tap the like button on one post. Type a short comment and post it. Close the app. Open a messaging app. Read messages. Reply to one message. Close the app. Put the phone on the nightstand."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Evening shower, wash and brushing teeth (finishing before Member 5's 23:00 bathroom slot)",
+      "desc": "Stand up from the bed. Take a towel from the hook. Walk to the Bathroom. Push the door open. Step in. Turn on the bathroom light. Turn on the shower. Step under the water. Wet the hair and body. Pick up the shampoo bottle. Squeeze shampoo into the hand. Rub the shampoo into the hair. Rinse the hair under the water. Pick up the soap and wash the body. Rinse off. Turn off the shower. Take the towel and dry the hair and body. Wrap the towel around the waist. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush teeth. Rinse the mouth. Turn off the tap. Take the pyjamas from the hook and put them on. Turn off the bathroom light. Open the door. Step out. Close the door."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Walk from the Bathroom to Bedroom 4. Open the bedroom door. Step in. Close the door. Walk to the bed. Pull the blanket back. Lie down on the bed. Pull the blanket over the body. Place the phone on the nightstand. Reach out and turn off the bedroom light. Close eyes. Remain in bed. Sleep."
+    }
+  ]
+}

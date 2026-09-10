@@ -8,9 +8,34 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
+from dataset import iter_house_days
 
-from analyze_behavior_patterns import (scan_household_days, build_report)
-from engine.load_features import hourly_means, normalize_shape
+from analyze_behavior_patterns import build_report
+
+
+def hourly_means(load_watts):
+    return [sum(load_watts[h * 60:(h + 1) * 60]) / 60.0 for h in range(24)]
+
+
+def normalize_shape(hourly):
+    total = sum(hourly)
+    if not total:
+        return [0.0] * len(hourly)
+    return [value / total for value in hourly]
+
+
+def scan_household_days(world_id, scenario):
+    samples = []
+    for record in iter_house_days(world_id, policy=scenario):
+        hourly = hourly_means(record["load_profile_watts"])
+        samples.append({
+            "house_id": record["house_id"],
+            "date": record["date"],
+            "kwh": record["total_energy_kwh"],
+            "shape": normalize_shape(hourly),
+            "hourly": hourly,
+        })
+    return samples
 
 
 def load_event_dates(world_id):
@@ -130,7 +155,11 @@ def main():
 
     samples = scan_household_days(args.world_id, args.scenario)
     events = load_event_dates(args.world_id)
-    report = build_event_response(samples, events, args.k)
+    try:
+        report = build_event_response(samples, events, args.k)
+    except ValueError as exc:
+        print(f"[Error] {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
 

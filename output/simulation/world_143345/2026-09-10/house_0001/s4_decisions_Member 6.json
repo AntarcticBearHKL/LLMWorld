@@ -1,0 +1,252 @@
+{
+  "member": "Member 6",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "start_minutes": 0,
+      "end_minutes": 390,
+      "location": "Bedroom 6",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:30-07:00",
+      "start_minutes": 390,
+      "end_minutes": 420,
+      "location": "Bathroom",
+      "activity": "Wake up, wash face, brush teeth and get dressed for the day, finishing before Member 4's 07:00 bathroom slot",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:15",
+      "start_minutes": 420,
+      "end_minutes": 435,
+      "location": "Bedroom 6",
+      "activity": "Checking the shared house calendar and public transit timetable, skimming X and Messenger",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:45",
+      "start_minutes": 435,
+      "end_minutes": 465,
+      "location": "Kitchen",
+      "activity": "Cooking and eating a keto breakfast and packing a low-carb lunch and snacks for the day, having breakfast together with Member 4",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:00",
+      "start_minutes": 465,
+      "end_minutes": 480,
+      "location": "Bedroom 6",
+      "activity": "Packing study materials and finalising the bag before leaving",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:50",
+      "start_minutes": 480,
+      "end_minutes": 530,
+      "location": "Out",
+      "activity": "Commuting by public transit to Monash University",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:50-12:30",
+      "start_minutes": 530,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Attending Bachelor of Commerce and Engineering lectures and tutorials, sitting in a quiet low-motion seat",
+      "operations": [
+        {
+          "unique_id": "member_6_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "start_minutes": 750,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Eating the packed keto lunch on campus",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:45",
+      "start_minutes": 780,
+      "end_minutes": 825,
+      "location": "Out",
+      "activity": "Studying and reading course readings in the campus library quiet space",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:45-14:30",
+      "start_minutes": 825,
+      "end_minutes": 870,
+      "location": "Out",
+      "activity": "Commuting by public transit to the retail workplace",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:30-21:00",
+      "start_minutes": 870,
+      "end_minutes": 1260,
+      "location": "Out",
+      "activity": "Working the retail shift",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:40",
+      "start_minutes": 1260,
+      "end_minutes": 1300,
+      "location": "Out",
+      "activity": "Commuting home by public transit",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:40-22:10",
+      "start_minutes": 1300,
+      "end_minutes": 1330,
+      "location": "Kitchen",
+      "activity": "Cooking and eating a low-carb dinner and starting to batch-cook low-carb meals for the coming days, sharing the kitchen with Member 1 who is preparing his overnight bag and herbal tea",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "22:10-22:25",
+      "start_minutes": 1330,
+      "end_minutes": 1345,
+      "location": "Bathroom",
+      "activity": "Showering and washing up (bathroom free before Member 4's 22:30 bathroom slot)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:25-22:55",
+      "start_minutes": 1345,
+      "end_minutes": 1375,
+      "location": "Bedroom 6",
+      "activity": "Reading a book in bed and noting down questions about health and insurance paperwork for later face-to-face help",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "22:55-24:00",
+      "start_minutes": 1375,
+      "end_minutes": 1440,
+      "location": "Bedroom 6",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

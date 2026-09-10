@@ -9,9 +9,8 @@ sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 from simulation_env import sim_root
 
-from load_profile_cluster import scan_house_profiles
-from engine.load_features import (hourly_means, load_factor, peak_to_mean,
-                                  peak_overlap_count)
+from load_profile_cluster import (scan_house_profiles, hourly_means, load_factor,
+                                  peak_to_mean, peak_overlap_count)
 
 
 def zscore(values):
@@ -76,7 +75,11 @@ def main():
     args = parser.parse_args()
 
     profiles = scan_house_profiles(args.world_id, args.scenario, args.date)
-    report = build_report(profiles)
+    try:
+        report = build_report(profiles)
+    except ValueError as exc:
+        print(f"No simulation curves found for {args.world_id}: {exc}")
+        sys.exit(1)
     report["world_id"] = args.world_id
     report["scenario"] = args.scenario
     report["date"] = args.date or "latest"

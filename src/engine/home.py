@@ -59,33 +59,34 @@ class Home:
         
         return structure
     
+    def _appliance_details(self, appliance):
+        details = {
+            "unique_id": appliance.unique_id,
+            "name": appliance.name,
+            "type": appliance.appliance_type,
+            "power_watts": appliance.power_watts,
+            "standby_watts": appliance.standby_watts,
+            "duty_cycle": appliance.duty_cycle,
+            "flexible": appliance.flexible,
+            "season": appliance.season
+        }
+        if hasattr(appliance, "energy_per_cycle_kwh"):
+            details["energy_per_cycle_kwh"] = appliance.energy_per_cycle_kwh
+        if hasattr(appliance, "cycle_minutes"):
+            details["cycle_minutes"] = appliance.cycle_minutes
+        return details
+
     def get_home_structure_with_details(self):
         structure = {}
         for room_name, room in self.rooms.items():
             structure[room_name] = {
-                "appliances": [
-                    {
-                        "unique_id": a.unique_id,
-                        "name": a.name,
-                        "type": a.appliance_type,
-                        "power_watts": a.power_watts
-                    }
-                    for a in room.appliances
-                ]
+                "appliances": [self._appliance_details(a) for a in room.appliances]
             }
         
         for member in self.members:
             if member.personal_appliances:
                 structure[f"{member.name} personal appliances"] = {
-                    "appliances": [
-                        {
-                            "unique_id": a.unique_id,
-                            "name": a.name,
-                            "type": a.appliance_type,
-                            "power_watts": a.power_watts
-                        }
-                        for a in member.personal_appliances
-                    ]
+                    "appliances": [self._appliance_details(a) for a in member.personal_appliances]
                 }
         
         return structure

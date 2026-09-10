@@ -1,0 +1,26 @@
+{
+  "households": 3,
+  "per_house": [
+    {
+      "house_id": "house_0001",
+      "advice": [
+        "Energy usage pattern is healthy; keep current habits"
+      ]
+    },
+    {
+      "house_id": "house_0002",
+      "advice": [
+        "Large peak-to-valley gap: spread electricity usage across hours and avoid instantaneous high power"
+      ]
+    },
+    {
+      "house_id": "house_0003",
+      "advice": [
+        "Energy usage pattern is healthy; keep current habits"
+      ]
+    }
+  ],
+  "world_id": "world_143345",
+  "scenario": "baseline",
+  "date": "latest"
+}
