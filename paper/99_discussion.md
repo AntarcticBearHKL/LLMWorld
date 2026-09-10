@@ -28,6 +28,10 @@
   baseline **7/7** member-days had out-of-home activity vs **0/7** under lockdown (Fisher one-sided
   **p ≈ 0.0003**), across two worlds; daytime (9–17) load rose (+294% in the single-instance case,
   R068/R069). The clearest causal chain in this work.
+- **Event-type boundary**: only events that change behaviour *structure* (appliance demand, or
+  home/out-of-home time) produced detectable effects — heatwave, cold-snap, lockdown; a purely
+  informational warning (`storm`) produced none (total −1.5%, no daytime/out-time change, R074).
+  This bounds which interventions the platform can evaluate.
 - Pricing interventions: **TOU not robust** — the peak-shaving direction *reverses* with sampling:
   reasoning mode gave peak −18%~−26%, while the low-variance no-thinking retest (R026) gave peak
   **+8%~+30%**; the de-instructionalized `tou_soft` ablation (R024) was self-contradictory. With n=1,
