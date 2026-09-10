@@ -18,7 +18,7 @@
 
 | 实验 | 对应 RQ | 文献基准 | 期望区间 | 状态 | 文件 |
 |---|---|---|---|---|---|
-| TOU 分时电价 | RQ2 | Faruqui & Sergici 2010 | 峰值 −3~6% | 初步(幅度超基准→疑prompt偏置) | `experiments/tou.md` |
+| TOU 分时电价 | RQ2 | Faruqui & Sergici 2010 | 峰值 −3~6% | 初步(方向可,幅度方差大不可定论) | `experiments/tou.md` |
 | 谷期补贴 subsidy | RQ2 | Alexeenko & Bitar 2023 | EV 峰移 30~60% | 待做 | `experiments/subsidy.md` |
 | 需量电费 peak_demand | RQ2 | Escarrega et al. 2025 | 峰值 −10~20% | 待做 | `experiments/peak_demand.md` |
 | EV 延迟激励 ev_delay | RQ2 | Alexeenko & Bitar 2023 | 异质性可观测 | 待做 | `experiments/ev_delay.md` |

@@ -93,6 +93,20 @@ class PolicyTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             policy.parse_policy_arg("nudge")
 
+    def test_tou_soft_has_no_directive(self):
+        text, tag = policy.parse_policy_arg("tou_soft")
+        self.assertEqual(tag, "tou_soft")
+        self.assertIn("0.60 AUD/kWh", text)
+        self.assertIn("16:00-21:00", text)
+        self.assertNotIn("shift", text.lower())
+        self.assertNotIn("avoid", text.lower())
+
+    def test_tou_soft_custom_rates(self):
+        text, tag = policy.parse_policy_arg("tou_soft:0.5,0.2,0.3")
+        self.assertEqual(tag, "tou_soft")
+        self.assertIn("0.50 AUD/kWh", text)
+        self.assertIn("0.30 AUD/kWh", text)
+
 
 class NormalizeTimeRangeTests(unittest.TestCase):
     def test_pads_hours(self):
