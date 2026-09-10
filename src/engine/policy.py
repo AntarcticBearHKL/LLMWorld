@@ -75,3 +75,32 @@ def parse_policy_arg(spec):
     raise ValueError(
         f"Unknown policy '{spec}'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>]"
     )
+
+
+def parse_policy_schedule(specs):
+    """Parse 'start,end,policy' entries into a schedule (end may be empty = open).
+
+    Only simple policy names are allowed inside a schedule (no comma-bearing
+    rate arguments), so entries stay comma-free.
+    """
+    schedule = []
+    for spec in specs or []:
+        if not spec:
+            continue
+        parts = [part.strip() for part in str(spec).split(",")]
+        if len(parts) < 3 or not parts[0] or not parts[2]:
+            raise ValueError(
+                f"Bad policy-schedule '{spec}'; expected 'start,end,policy' (end may be empty)")
+        schedule.append({"start": parts[0], "end": parts[1] or None, "policy": parts[2].lower()})
+    return schedule
+
+
+def active_policy_spec(schedule, date):
+    """Policy name active on *date* (last matching entry wins), else None."""
+    active = None
+    for entry in schedule or []:
+        start = entry.get("start")
+        end = entry.get("end")
+        if start and date >= start and (end is None or date <= end):
+            active = entry.get("policy")
+    return active

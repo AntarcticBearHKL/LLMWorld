@@ -108,6 +108,40 @@ class PolicyTests(unittest.TestCase):
         self.assertIn("0.30 AUD/kWh", text)
 
 
+class PolicyScheduleTests(unittest.TestCase):
+    def test_parse_entries(self):
+        schedule = policy.parse_policy_schedule(["2026-04-25,2026-04-28,tou"])
+        self.assertEqual(schedule, [{"start": "2026-04-25", "end": "2026-04-28", "policy": "tou"}])
+
+    def test_open_ended_entry(self):
+        schedule = policy.parse_policy_schedule(["2026-04-25,,tou"])
+        self.assertIsNone(schedule[0]["end"])
+
+    def test_empty_input(self):
+        self.assertEqual(policy.parse_policy_schedule([]), [])
+        self.assertEqual(policy.parse_policy_schedule(None), [])
+        self.assertEqual(policy.parse_policy_schedule([""]), [])
+
+    def test_malformed_raises(self):
+        with self.assertRaises(ValueError):
+            policy.parse_policy_schedule(["2026-04-25,tou"])
+        with self.assertRaises(ValueError):
+            policy.parse_policy_schedule([",,tou"])
+
+    def test_active_policy_within_windows(self):
+        schedule = policy.parse_policy_schedule(
+            ["2026-04-25,2026-04-28,tou", "2026-04-29,,tou_soft"])
+        self.assertEqual(policy.active_policy_spec(schedule, "2026-04-25"), "tou")
+        self.assertEqual(policy.active_policy_spec(schedule, "2026-04-28"), "tou")
+        self.assertEqual(policy.active_policy_spec(schedule, "2026-04-29"), "tou_soft")
+        self.assertEqual(policy.active_policy_spec(schedule, "2027-01-01"), "tou_soft")
+
+    def test_active_policy_gap_is_none(self):
+        schedule = policy.parse_policy_schedule(["2026-04-25,2026-04-28,tou"])
+        self.assertIsNone(policy.active_policy_spec(schedule, "2026-04-24"))
+        self.assertIsNone(policy.active_policy_spec(schedule, "2026-04-29"))
+
+
 class NormalizeTimeRangeTests(unittest.TestCase):
     def test_pads_hours(self):
         self.assertEqual(utils.normalize_time_range("8:00-8:30"), "08:00-08:30")
