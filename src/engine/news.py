@@ -54,12 +54,37 @@ NEWS_TEMPLATES = {
 }
 
 
+# Preset events also shift the environment so the text and the structured
+# weather fields agree; otherwise agents may ignore the news (see R014 finding).
+EVENT_WEATHER_EFFECTS = {
+    "heatwave": {"weather": "Heatwave", "temperature_delta": 12},
+    "cold_snap": {"weather": "ColdSnap", "temperature_delta": -10},
+}
+
+
 def list_templates():
     return sorted(NEWS_TEMPLATES)
 
 
 def _event(date, title, content):
     return {"date": str(date).strip(), "title": str(title).strip(), "content": str(content).strip()}
+
+
+def weather_override_for(active_events):
+    """Merged weather override implied by active preset events (None if none)."""
+    weather = None
+    delta = 0
+    found = False
+    for event in active_events or []:
+        effect = EVENT_WEATHER_EFFECTS.get((event or {}).get("template"))
+        if not effect:
+            continue
+        found = True
+        weather = effect["weather"]
+        delta += effect["temperature_delta"]
+    if not found:
+        return None
+    return {"weather": weather, "temperature_delta": delta}
 
 
 def parse_event_spec(spec):
@@ -83,7 +108,9 @@ def parse_event_template_spec(spec):
     template = NEWS_TEMPLATES.get(name)
     if template is None:
         raise ValueError(f"Unknown event template '{name}'. Known: {', '.join(list_templates())}")
-    return _event(parts[0], template["title"], template["content"])
+    event = _event(parts[0], template["title"], template["content"])
+    event["template"] = name
+    return event
 
 
 def parse_events(event_specs=None, template_specs=None):
