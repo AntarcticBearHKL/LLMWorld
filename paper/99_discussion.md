@@ -58,6 +58,11 @@ total −6%~−10% vs −1~3% (R37). Two observations:
    normative phrasing from `nudge` (`nudge_soft`, R040) collapsed the total-energy effect from
    −6%~−10% to ≈0, so the response is driven by the directive, not the information.
 
+**Quantified noise floor**: three *identical* baseline runs (same world/house/member/date; no policy/event)
+gave total energy 7.37 / 8.19 / 9.80 kWh — mean 8.45, std 1.01 (CV ≈12%), max **+33%** above min (R057).
+Any single-run treatment difference below this scale is uninterpretable, which is why single-sample
+"effects" (nudge 5/5, TOU reversals, the R045 rebound) did not survive replication.
+
 **Mitigation**: provide de-instructionalized variants (`tou_soft`, `nudge_soft`) and compare; and, for
 any magnitude claim, average across multiple households/members at a fixed weekday. Accordingly, this
 work treats the platform as suited to **direction** and **heterogeneity** claims, with absolute
