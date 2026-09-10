@@ -20,9 +20,10 @@
   otherwise agents ignore it (observed failure → fixed by event↔weather linkage). Note that the
   single-sample *total-energy* increases (+17%~+64%) are noise-dominated (cf. noise floor, R057) and
   are not claimed.
-- **Cold-snap (preliminary, n=1)**: a `cold_snap` event switched heating devices from off to on
-  (SpaceHeater 3.0 + AC 7.2 kWh; total +158%, R062) — a second large-effect binary signal symmetric
-  to the heatwave; needs replication.
+- **Cold-snap (binary signal, significant)**: a `cold_snap` event switched heating devices from off
+  to on; across 8 member-days the heating activation was **0/8** baseline vs **4/8** cold-snap
+  (Fisher one-sided **p ≈ 0.038**). Activation probability (50%) is lower than the heatwave's (90%) —
+  i.e. response robustness **differs by event type**.
 - Pricing interventions: **TOU not robust** — the peak-shaving direction *reverses* with sampling:
   reasoning mode gave peak −18%~−26%, while the low-variance no-thinking retest (R026) gave peak
   **+8%~+30%**; the de-instructionalized `tou_soft` ablation (R024) was self-contradictory. With n=1,
