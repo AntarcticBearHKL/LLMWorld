@@ -24,6 +24,9 @@
   to on; across 8 member-days the heating activation was **0/8** baseline vs **4/8** cold-snap
   (Fisher one-sided **p ≈ 0.038**). Activation probability (50%) is lower than the heatwave's (90%) —
   i.e. response robustness **differs by event type**.
+- **Lockdown (preliminary, large effect)**: a `lockdown` event removed all out-of-home time
+  (615 → 0 min) and raised daytime (9–17) load 0.649 → 2.558 kWh (+294%; total +47.8%, R068) —
+  a third large-effect, mechanism-clear signal; needs replication.
 - Pricing interventions: **TOU not robust** — the peak-shaving direction *reverses* with sampling:
   reasoning mode gave peak −18%~−26%, while the low-variance no-thinking retest (R026) gave peak
   **+8%~+30%**; the de-instructionalized `tou_soft` ablation (R024) was self-contradictory. With n=1,
