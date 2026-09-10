@@ -52,6 +52,18 @@ def render_tou_policy_soft(peak_rate=None, valley_rate=None, shoulder_rate=None)
     return _tou_tariff_sentence(_tou_config(peak_rate, valley_rate, shoulder_rate))
 
 
+def render_nudge_policy(neighbor_kwh=18.0):
+    """Social-norm comparison with a fixed neighbour average (guide §3.1)."""
+    return (f"Your neighbours use about {neighbor_kwh:.0f} kWh of electricity per day on average. "
+            "Most households in your area try to keep their usage near or below this level.")
+
+
+def render_nudge_loss_policy(rebate=30.0):
+    """Loss-framed social norm (guide §3.2): lose a rebate if flagged high-usage."""
+    return (f"Households that do not reduce their electricity use will be flagged as high-usage "
+            f"and lose the {rebate:.0f} AUD energy-saving rebate.")
+
+
 def parse_policy_arg(spec):
     """Parse a --policy CLI value into (policy_text, tag).
 
@@ -72,8 +84,14 @@ def parse_policy_arg(spec):
                 shoulder = nums[2]
         render = render_tou_policy if name == "tou" else render_tou_policy_soft
         return render(peak, valley, shoulder), name
+    if name == "nudge":
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        return (render_nudge_policy(float(rest)) if rest else render_nudge_policy()), "nudge"
+    if name == "nudge_loss":
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        return (render_nudge_loss_policy(float(rest)) if rest else render_nudge_loss_policy()), "nudge_loss"
     raise ValueError(
-        f"Unknown policy '{spec}'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>]"
+        f"Unknown policy '{spec}'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>], nudge[:<kwh>], nudge_loss[:<aud>]"
     )
 
 
