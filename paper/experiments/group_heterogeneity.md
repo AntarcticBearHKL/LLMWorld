@@ -36,7 +36,11 @@
 | Member 2 | Medium | 9.589 | 7.920 | −17.41% |
 
 Medium（较高意识）降幅大于 Low——**方向与 Costa & Kahn (2010) 及 guide §3.4 预期一致**，
-但每组 n=1，**纯描述性**，须在 house_0001/house_0003（各 3 Low + 2 Medium）上扩大样本。
+但每组 n=1，纯描述性。
+
+**扩大样本（R054，world_172148 两户）**：Low（n=4）均值 **+3.44%**，Medium（n=3）均值 **−18.00%**；
+组内离散度（Low: −25~+39pp；Medium: −45~+9pp）**远超组间差**
+→ **不具统计意义**。分组方向**名义一致但被方差压倒**，**不能**作为 RQ3 结论；须大规模平均。
 
 ## 6. Comparison with Literature
 
@@ -48,4 +52,5 @@ Medium（较高意识）降幅大于 Low——**方向与 Costa & Kahn (2010) �
 
 ## 8. Conclusion
 
-待填。
+- **不可定论**：分组方向名义一致（Medium 更负），但 R054 显示**组内方差压倒组间差**；须大规模多种子平均。
+- **可复现命令**：`run.py --mode simulate --world world_172148 --house house_0001 --days 1 --policy nudge`（对照 `--env ...` 无政策）。
