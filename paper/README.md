@@ -42,7 +42,7 @@
 | 夜间回温 night_setback | RQ2 | Cabezas-Riviere 2025 | 采暖 −5~10% | 占位(待跑) | `experiments/night_setback.md` |
 | 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | 占位(待跑) | `experiments/in_home_display.md` |
 | 封锁事件 lockdown | RQ2 | Xia et al. 2026 | 日间用量上升 | 有效果(二值跨3世界:Out>0 13/13→1/13, Fisher 双侧 p≈0.000003) | `experiments/event_lockdown.md` |
-| 停电预警 blackout_risk | RQ2 | Xia et al. 2026 | 避开晚峰 | 初步-强(峰段 −31.7%, N=3, 单世界待复现) | `experiments/event_blackout_risk.md` |
+| 停电预警 blackout_risk | RQ2 | Xia et al. 2026 | 避开晚峰 | 有效果(方向跨2世界:峰段 −11.7%~−31.7%) | `experiments/event_blackout_risk.md` |
 | 电价上涨 price_hike | RQ2 | Faruqui & Sergici 2010 | 削峰省电 | 初步(峰段 −17.9%, N=3, 单世界待复现) | `experiments/event_price_hike.md` |
 | 寒潮事件 cold_snap | RQ2 | Xia et al. 2026 | 采暖上升 | 有效果(二值:采暖 0/10 vs 6/10, 双侧 p≈0.011) | `experiments/event_cold_snap.md` |
 | 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(二值跨3世界:baseline AC 0/9 vs heatwave 11/12, Fisher 双侧 p≈0.00003) | `experiments/event_heatwave.md` |
