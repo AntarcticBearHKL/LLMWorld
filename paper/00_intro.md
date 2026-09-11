@@ -29,9 +29,10 @@ events — are injected **only as natural language**; aggregate behaviour is eme
 1. An end-to-end pipeline **behaviour → appliance decision → minute-resolution load**.
 2. A natural-language intervention surface (pricing / norms / events) with emergent effects.
 3. Alignment experiments against empirical benchmarks (Faruqui & Sergici 2010; Allcott 2011;
-   Costa & Kahn 2010; Xia et al. 2026; …), yielding **three statistically significant natural-language
-   event results** — heatwave → cooling (two-sided p≈0.00003), lockdown → stay-home (p≈0.000003), and
-   cold-snap → heating (p≈0.011) — replicated across three synthetic worlds.
+   Costa & Kahn 2010; Xia et al. 2026; …), yielding **four statistically significant natural-language
+   event results** — heatwave → cooling (two-sided p≈0.00003), lockdown → stay-home (p≈0.000003),
+   cold-snap → heating (p≈0.011; replicated across three synthetic worlds), and **air-conditioner peak
+   tax → AC-off/peak-shaving** under heatwave (AC-on 15/15→7/15, p≈0.0022, n=15).
 
 ## Notes
 

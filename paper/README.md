@@ -11,6 +11,7 @@
 | **封锁事件 → 外出归零** | baseline Out>0 13/13 vs lockdown 1/13 | **≈0.000003** |
 | **封锁事件 → 日间负荷 +122%** | 13 对配对 **+2.183 kWh**（13/13, t≈8.04） | 可判幅度（>噪声地板） |
 | **寒潮事件 → 采暖启用** | baseline 0/10 vs cold_snap 6/10 | **≈0.011** |
+| **空调峰税 ac_tax → 关空调/削峰** | 热浪背景 AC 启用 15/15 vs +ac_tax 7/15 | **≈0.0022** |
 | ~~停电预警/电价上涨 → 峰段削减~~ | **已撤回**：连续指标跨时段基线漂移伪影（R104） | — |
 
 **方法学**：运行间噪声地板 std≈1.0 kWh（CV≈12%，R057）；单次/单臂不可信；功效分析表明文献尺度
@@ -45,6 +46,7 @@
 | 电价上涨 price_hike | RQ2 | Faruqui & Sergici 2010 | 削峰省电 | 撤回(基线漂移伪影,R104) | `experiments/event_price_hike.md` |
 | 寒潮事件 cold_snap | RQ2 | Xia et al. 2026 | 采暖上升 | 有效果(二值:采暖 0/10 vs 6/10, 双侧 p≈0.011) | `experiments/event_cold_snap.md` |
 | 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(二值跨3世界:baseline AC 0/9 vs heatwave 11/12, Fisher 双侧 p≈0.00003) | `experiments/event_heatwave.md` |
+| 空调峰税 ac_tax | RQ2 | Faruqui & Sergici 2010 | 峰段 −5~20% | 有效果(热浪背景:AC 15/15→7/15 p≈0.0022;峰段−22.5%,n=15) | `experiments/event_ac_tax.md` |
 | 邻居比较 peer_nudge | RQ2 | Ayres 2013 | −1~3%，高耗家庭更强 | 初步(不一致：−6.6~+11.6%) | `experiments/peer_nudge.md` |
 | 群体异质性 | RQ3 | Costa & Kahn 2010 | 环境派 2~4% / 保守派 ~0 | 名义方向但方差压倒(不可定论) | `experiments/group_heterogeneity.md` |
 | 政策组合/多目标权衡 | RQ2/RQ3 | CoRenew 2026 | 峰削减 vs 负担 vs 公平 | 工具可用/TOU混杂(不可定论) | `experiments/policy_tradeoffs.md` |
