@@ -1,6 +1,6 @@
 # Experiment: In-home display / real-time feedback (`in_home_display`)
 
-> 状态：**占位（待验证）**。第 1–4 节就绪；第 5 节待跑后填。
+> 状态：**初步（不显著）**：总量 −5.2%、峰段 −8.4%（N=3），方向与 guide 3~10% 一致但在噪声内。数值来自 R098。
 
 ## 1. Research Question
 
@@ -22,9 +22,16 @@
 
 总电量变化 %、峰段削减 %、IHD 单独 vs 叠加 TOU 的增量。
 
-## 5. Results
+## 5. Results（初步；N=3）
 
-**待验证。**
+world_172148 house_0002 M1，baseline×3 vs `in_home_display`×3：
+
+| 指标 | baseline (n=3) | in_home_display (n=3) | 变化 |
+|---|---|---|---|
+| 总电量 kWh | 9.340 ± 1.388 | 8.850 ± 0.792 | −5.2% |
+| 峰段 kWh (16–21) | 3.461 ± 0.187 | 3.169 ± 0.475 | −8.4% |
+
+**方向一致（节能）但 N=3 不显著**（变化在噪声内；z<1）。
 
 ## 6. Comparison with Literature
 
@@ -36,4 +43,5 @@
 
 ## 8. Conclusion
 
-待填。
+- **方向一致但不显著**：IHD 反馈节能 −5.2%（N=3，噪声内）；需更大 N 方能判定（C1）。
+
