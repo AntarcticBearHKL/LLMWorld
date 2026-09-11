@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the fan running to stay cool through the warm night",
+      "desc": "Lie on back. Close eyes. Breathe slowly. Turn to left side. Bend knees. Adjust pillow. Pull sheet up. Turn to right side. Stretch arm. Adjust fan speed. Turn fan direction. Continue sleeping. Wake briefly. Turn over. Adjust fan direction. Go back to sleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Wake up. Sit up. Swing legs out of bed. Stand up. Walk to bathroom. Turn on bathroom light. Turn on tap. Splash water on face. Turn off tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wipe face with towel. Turn off bathroom light. Walk out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, drinking plenty of cold water before the hot day",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk and bread. Close refrigerator. Open cupboard. Take out bowl and glass. Place on counter. Pour cereal into bowl. Pour milk into bowl. Open refrigerator again. Take out water bottle. Pour water into glass. Close refrigerator. Pick up spoon. Sit at table. Eat breakfast. Drink water. Finish eating. Pick up bowl and glass. Walk to sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in light clothing and packing a bag for work",
+      "desc": "Walk to bedroom. Open wardrobe. Take out light shirt and pants. Close wardrobe. Take off pajamas. Put on shirt. Put on pants. Open drawer. Take out socks. Put on socks. Put on shoes. Open bag. Place laptop and notebook in bag. Zip bag. Pick up bag. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit community center for work",
+      "desc": "Walk out of house. Walk to bus stop. Check phone for time. Put phone in pocket. Stand at bus stop. See bus approaching. Board bus. Tap transit card. Walk to seat. Sit down. Put bag on lap. Look out window. Arrive at stop. Stand up. Walk to exit. Get off bus. Walk to community center. Open door. Enter building."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working at the community center, coordinating program schedules and meeting partner organizations",
+      "desc": "Sit at desk. Turn on computer. Log in. Open email program. Read emails. Reply to emails. Open calendar. Schedule meeting. Pick up phone. Call partner organization. Speak on phone. Hang up. Stand up. Walk to meeting room. Greet partner. Shake hands. Sit down. Discuss program schedules. Take notes. Stand up. Walk back to desk."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break at a nearby air-conditioned cafe",
+      "desc": "Walk to cafe. Open door. Enter cafe. Walk to counter. Read menu. Order sandwich and drink. Pay cashier. Receive food. Walk to table. Sit down. Unwrap sandwich. Eat sandwich. Drink water. Wipe mouth with napkin. Stand up. Throw away trash. Walk out of cafe."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Continuing work at the community center, running a program planning session and answering emails",
+      "desc": "Sit at desk. Open email. Read new emails. Reply to emails. Open program planning document. Print copies. Walk to meeting room. Arrange chairs. Set up projector. Greet attendees. Start meeting. Present program plan. Answer questions. Take notes. End meeting. Collect papers. Walk back to desk. Check emails again. Reply to urgent email."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home during the heatwave",
+      "desc": "Leave community center. Walk to bus stop. Wait for bus. Check phone. Board bus. Tap card. Find seat. Sit down. Put bag on lap. Look out window. Get off bus. Walk home. Open front door. Enter house."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk into kitchen. Open refrigerator. Take out vegetables and meat. Close refrigerator. Place on counter. Wash vegetables. Chop vegetables. Turn on induction cooker. Place pan on cooker. Add oil. Add vegetables. Stir. Add meat. Stir. Turn off cooker. Take plate. Serve food onto plate. Walk to table. Sit down. Eat dinner. Drink water. Finish eating. Pick up plate. Walk to sink."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing up dishes and tidying the kitchen",
+      "desc": "Turn on tap. Pick up sponge. Add soap. Wash plate. Rinse plate. Place plate in drying rack. Wash glass. Rinse glass. Place glass in rack. Turn off tap. Wipe counter with cloth. Put away dishes."
+    },
+    {
+      "time": "19:30-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing with the air conditioner on and watching TV",
+      "desc": "Walk to living room. Pick up remote. Turn on TV. Turn on air conditioner. Sit on couch. Change channel. Watch TV. Pick up phone. Check messages. Put down phone. Watch TV. Stand up. Walk to kitchen. Get snack. Walk back. Sit down. Change channel. Watch TV. Turn off TV. Turn off air conditioner. Stand up."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and getting ready for bed",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel around body. Walk out of bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Reading in bed with the fan on before falling asleep",
+      "desc": "Walk to bedroom. Turn on fan. Pick up book from nightstand. Lie down on bed. Open book. Read page. Turn page. Read page. Turn page. Read page. Close book. Place book on nightstand. Reach for lamp. Turn off lamp. Turn to side. Close eyes. Breathe. Adjust fan. Sleep."
+    }
+  ]
+}

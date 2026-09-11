@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, fan running to keep the room cool during the warm night",
+      "desc": "Lies in bed. Fan is on. Eyes closed. Turns to left side. Pulls blanket up to shoulders. Remains still. Breathes regularly. Turns to right side. Adjusts pillow. Moves arm under pillow. Remains asleep. Fan continues running."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and showering",
+      "desc": "Wakes up. Sits up in bed. Turns off fan. Stands up. Walks to bathroom. Turns on bathroom light. Turns on shower. Steps into shower. Washes body. Turns off shower. Dries body with towel. Turns on tap. Washes face. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns off tap. Wipes face with towel. Turns off light. Walks out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with toast and kettle-boiled tea",
+      "desc": "Walks into kitchen. Turns on light. Opens refrigerator. Takes out bread and butter. Places bread in toaster. Presses toaster lever. Fills kettle with water. Turns on kettle. Removes toast when done. Spreads butter. Pours boiling water into cup with tea bag. Eats toast and drinks tea."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in light work clothes and packing a bag with water bottle and laptop",
+      "desc": "Walks to bedroom. Opens closet. Selects light work clothes. Takes off pajamas. Puts on shirt. Puts on pants. Puts on socks and shoes. Picks up bag. Opens bag. Puts water bottle and laptop in bag. Zips bag. Picks up phone and keys. Walks out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit community centre, walking to the transit stop in the already hot morning",
+      "desc": "Walks out of apartment. Locks door. Walks down stairs. Walks to transit stop. Waits at stop. Checks phone. Boards bus. Pays fare. Finds seat. Sits down. Rides bus. Gets off at stop. Walks to community centre. Enters building."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as community program coordinator: running activity planning meetings, coordinating volunteers and answering participant enquiries",
+      "desc": "Enters community centre. Walks to desk. Turns on computer. Checks emails. Opens calendar. Attends activity planning meeting. Says: 'Let's review next week's schedule.' Takes notes. Assigns tasks to volunteers. Calls volunteer. Says: 'Can you help with the event?' Answers participant enquiry. Says: 'The program starts at 10 AM.' Updates schedule. Sends emails. Attends another meeting. Coordinates with team. Answers phone call. Organizes materials. Ends workday."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the community centre during the peak heat of the day",
+      "desc": "Walks out of community centre. Walks to transit stop. Waits at stop. Checks phone. Boards bus. Pays fare. Finds seat. Sits down. Rides bus. Gets off at stop. Walks to apartment. Unlocks door. Enters apartment."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking a simple dinner on the induction cooker and eating it",
+      "desc": "Walks into kitchen. Turns on light. Opens refrigerator. Takes out ingredients. Closes refrigerator. Places ingredients on counter. Turns on range hood. Turns on induction cooker. Places pan on cooker. Adds oil. Adds ingredients. Stirs with spatula. Turns off induction cooker. Transfers food to plate. Turns off range hood. Sits at table. Eats dinner. Drinks water."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading dishes into the dishwasher",
+      "desc": "Stands up from table. Picks up plates. Scrapes food into trash. Opens dishwasher. Loads plates. Loads utensils. Closes dishwasher. Wipes table with cloth. Turns off kitchen light. Walks out."
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV with the air conditioner on to escape the heatwave",
+      "desc": "Walks into living room. Turns on air conditioner. Picks up remote. Turns on TV. Sits on sofa. Changes channels. Watches TV. Adjusts volume. Gets up to get snack. Sits back down. Watches more TV. Turns off TV. Turns off air conditioner. Walks out."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and getting ready for bed",
+      "desc": "Walks to bathroom. Turns on light. Turns on shower. Steps into shower. Washes body. Turns off shower. Dries body with towel. Puts on pajamas. Brushes teeth. Turns off light. Walks out."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Sitting at the desk with the desk lamp on, using the computer and phone to review next week's program schedule and reply to emails",
+      "desc": "Walks to bedroom. Turns on desk lamp. Sits at desk. Opens laptop. Turns on computer. Opens email program. Reads emails. Replies to emails. Checks phone. Opens calendar. Reviews next week's program schedule. Makes notes. Updates schedule. Sends emails. Closes computer. Turns off desk lamp. Stands up. Walks to bed."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the fan on for ventilation",
+      "desc": "Lies down on bed. Turns on fan. Pulls blanket up. Closes eyes. Turns to side. Remains asleep. Fan continues running. Adjusts pillow. Moves arm. Remains still. Breathes regularly. Sleeps."
+    }
+  ]
+}
