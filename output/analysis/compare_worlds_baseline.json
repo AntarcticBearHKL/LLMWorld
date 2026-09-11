@@ -1,0 +1,28 @@
+{
+  "scenario": "baseline",
+  "date": null,
+  "worlds": {
+    "world_838587": {
+      "date": "2026-09-12",
+      "households": 2,
+      "total_kwh": 29.689,
+      "peak_watts": 8637.8,
+      "peak_hour": 8,
+      "peak_to_mean": 6.98,
+      "morning_kwh": 6.869,
+      "evening_kwh": 5.797,
+      "evening_morning_ratio": 0.84
+    },
+    "world_143345": {
+      "date": "2026-09-11",
+      "households": 3,
+      "total_kwh": 100.083,
+      "peak_watts": 12925.6,
+      "peak_hour": 6,
+      "peak_to_mean": 3.1,
+      "morning_kwh": 12.396,
+      "evening_kwh": 14.672,
+      "evening_morning_ratio": 1.18
+    }
+  }
+}
