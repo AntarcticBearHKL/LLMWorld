@@ -1,0 +1,349 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-11 15:27:06
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Community program coordinator at a nonprofit
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping, with the fan running to cope with the warm night"
+  },
+  {
+    "time": "06:30-07:00",
+    "location": "Bathroom",
+    "activity": "Waking up, washing face and brushing teeth, taking a cool shower to start the hot day"
+  },
+  {
+    "time": "07:00-07:30",
+    "location": "Kitchen",
+    "activity": "Making and eating breakfast - toast, fruit and coffee - while listening to the morning news"
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Bedroom 1",
+    "activity": "Getting dressed in light clothing, packing a water bottle and checking the day's program schedule on the computer"
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Out",
+    "activity": "Commuting to the nonprofit community centre during the morning heat"
+  },
+  {
+    "time": "09:00-12:30",
+    "location": "Out",
+    "activity": "Working at the community centre: setting up the hall, coordinating volunteers and running the morning community program"
+  },
+  {
+    "time": "12:30-13:15",
+    "location": "Out",
+    "activity": "Taking a lunch break in the shaded staff area and rehydrating"
+  },
+  {
+    "time": "13:15-17:00",
+    "location": "Out",
+    "activity": "Working at the community centre: running afternoon workshops, meeting partner organisations and updating program records"
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Out",
+    "activity": "Commuting home from the community centre in the late afternoon heat"
+  },
+  {
+    "time": "18:00-18:30",
+    "location": "Bathroom",
+    "activity": "Cooling shower and changing into fresh clothes after the hot commute"
+  },
+  {
+    "time": "18:30-19:15",
+    "location": "Kitchen",
+    "activity": "Cooking a light dinner on the induction cooker and eating at the kitchen table"
+  },
+  {
+    "time": "19:15-19:45",
+    "location": "Kitchen",
+    "activity": "Clearing the table, washing up and loading the dishwasher"
+  },
+  {
+    "time": "19:45-21:30",
+    "location": "Living Room",
+    "activity": "Relaxing in front of the TV with the air conditioner on to escape the heatwave"
+  },
+  {
+    "time": "21:30-22:30",
+    "location": "Bedroom 1",
+    "activity": "Using the computer with the desk lamp on to plan tomorrow's community program and reply to messages"
+  },
+  {
+    "time": "22:30-23:00",
+    "location": "Bathroom",
+    "activity": "Washing up and getting ready for bed"
+  },
+  {
+    "time": "23:00-24:00",
+    "location": "Bedroom 1",
+    "activity": "Reading briefly and falling asleep with the fan running"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "Fan"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "DeskLamp",
+      "SpaceHeater"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Oven",
+      "Toaster",
+      "Kettle",
+      "Dishwasher",
+      "Light"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "Light",
+      "Dehumidifier",
+      "Fan"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "Router",
+      "GameConsole",
+      "Light",
+      "VacuumCleaner"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "Monitor"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the fan running to cope with the warm night",
+      "desc": "Lies on the bed on the back. Pulls the sheet up to the chest with the right hand. Turns the head to the left. Bends the left arm and places it under the pillow. Turns onto the right side. Pulls the pillow toward the head. Stretches the legs down. Turns onto the left side. Pulls the sheet off the right shoulder. Bends the knees. Places the right arm along the body. Turns onto the back. Turns the head to the right. Lifts the right hand and places it on the chest. Keeps the eyes closed. Breathes steadily. The fan stays switched on and oscillating at the foot of the bed throughout the night."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth, taking a cool shower to start the hot day",
+      "desc": "Opens the eyes. Sits up on the edge of the bed. Swings both legs to the floor. Stands up. Walks to the bathroom door. Opens the door. Walks in. Turns on the bathroom light. Turns on the tap. Bends over the sink. Cups both hands and scoops water. Splashes water on the face. Picks up the towel and wipes the face. Turns off the tap. Picks up the toothbrush. Squeezes toothpaste onto the bristles. Brushes the teeth. Rinses the mouth with water. Spits into the sink. Replaces the toothbrush. Turns on the shower tap. Adjusts the water temperature with the knob. Steps into the shower. Washes the body with soap. Washes the hair. Turns off the tap. Steps out of the shower. Picks up the towel and dries the body and hair. Turns off the light. Walks out of the bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast - toast, fruit and coffee - while listening to the morning news",
+      "desc": "Walks into the kitchen. Turns on the kitchen light. Opens the refrigerator door. Takes out the bread, fruit and milk. Closes the refrigerator door. Places the items on the counter. Picks up the bread and puts two slices into the toaster. Presses the toaster lever down. Picks up the kettle and fills it with water from the tap. Sets the kettle on the base. Presses the kettle switch. Opens the fruit container. Takes a knife from the drawer. Cuts the fruit on the board. Places the fruit pieces into a bowl. Opens the cupboard and takes out a cup and a plate. Picks up the coffee jar and spoons coffee into the cup. Pours hot water from the kettle into the cup. Pours milk into the cup. Stirs the coffee with a spoon. Takes the toast out of the toaster and places it on the plate. Sits down on the chair at the kitchen table. Picks up the toast and eats it. Picks up the fork and eats the fruit. Picks up the cup and drinks the coffee. Turns on the radio on the counter and listens to the morning news. Stands up. Carries the plate, bowl and cup to the sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in light clothing, packing a water bottle and checking the day's program schedule on the computer",
+      "desc": "Walks to Bedroom 1. Opens the wardrobe door. Takes out a light shirt and trousers. Lays them on the bed. Takes off the sleepwear. Puts on the shirt. Puts on the trousers. Puts on the socks. Sits on the bed and puts on the shoes. Ties the laces. Stands up. Walks to the kitchen. Opens the cupboard. Takes out the water bottle. Opens the tap and fills the bottle. Closes the cap. Walks back to Bedroom 1 with the bottle. Places the bottle into the bag. Sits down at the desk. Turns on the desk lamp. Opens the laptop. Presses the power button. Moves the mouse and clicks the program schedule file. Reads the schedule on the screen. Types notes into the file. Saves the file. Closes the laptop. Turns off the desk lamp. Stands up. Picks up the bag. Walks to the front door. Opens the door. Steps outside. Closes and locks the door."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit community centre during the morning heat",
+      "desc": "Walks along the pavement to the bus stop. Stands at the bus stop. Takes the phone out of the pocket. Looks at the phone screen. Presses the screen to check the bus time. Puts the phone back into the pocket. Steps onto the bus. Takes the card out of the pocket. Taps the card on the reader. Walks down the aisle. Holds the handrail. Stands by the door. Pulls the water bottle out of the bag. Opens the cap. Drinks. Closes the cap. Puts the bottle back into the bag. Presses the stop button. Steps off the bus. Walks the remaining blocks to the community centre. Pushes the entrance door open. Walks in."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working at the community centre: setting up the hall, coordinating volunteers and running the morning community program",
+      "desc": "Walks into the hall. Turns on the hall lights. Picks up chairs and sets them in rows. Unfolds the tables and places them at the front. Carries the boxes of materials from the store room. Opens the boxes. Lays out the materials on the tables. Picks up the microphone and switches it on. Tests the microphone with a spoken greeting. Greets the volunteers arriving at the door. Shakes hands with two volunteers. Hands out the task sheets. Points to the tables and gives instructions on the seating set-up. Picks up the sign-in clipboard and places it at the entrance. Stands at the door and greets each participant. Directs participants to the seats. Walks to the front and picks up the microphone. Speaks to the room and opens the program. Runs the first group activity. Walks between the tables and assists participants. Picks up the water bottle and drinks. Answers questions from participants. Closes the morning session. Thanks the participants. Walks to the volunteers and gives them the next instructions."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break in the shaded staff area and rehydrating",
+      "desc": "Walks to the staff area. Pulls out a chair. Sits down at the table. Opens the lunch box. Picks up the fork and eats the food. Picks up the water bottle. Opens the cap. Drinks from the bottle. Closes the cap. Picks up the phone. Presses the screen. Types replies to messages. Puts the phone face down on the table. Stands up. Carries the lunch box to the bin. Scrapes the leftovers into the bin. Walks to the tap and rinses the lunch box. Refills the water bottle at the tap. Closes the cap. Walks back to the hall."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Working at the community centre: running afternoon workshops, meeting partner organisations and updating program records",
+      "desc": "Walks into the hall. Rearranges the chairs into a circle. Sets up the projector on the table. Connects the laptop cable to the projector. Presses the projector power button. Opens the laptop. Clicks the workshop slide file. Greets the afternoon participants at the door. Hands out the worksheets. Picks up the microphone. Starts the workshop. Demonstrates the activity at the front. Walks around the circle and checks each participant's work. Answers questions. Turns off the projector. Closes the laptop. Walks to the meeting room. Sits down with the partner organisation representatives. Opens the notebook. Writes down the agreed points. Shakes hands with the partners at the door. Walks back to the office desk. Sits down. Opens the laptop. Types the program records into the spreadsheet. Saves the file. Picks up the phone and replies to two messages. Picks up the water bottle. Drinks. Closes the laptop. Stands up. Picks up the bag."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the community centre in the late afternoon heat",
+      "desc": "Walks out of the community centre. Closes the entrance door behind. Walks to the bus stop. Stands at the bus stop. Takes the phone out. Presses the screen. Puts the phone back into the pocket. Opens the water bottle. Drinks. Closes the cap. Steps onto the bus. Taps the card on the reader. Walks down the aisle. Sits down on a seat. Puts the bag on the lap. Looks out of the window. Presses the stop button. Stands up. Steps off the bus. Walks along the pavement to the building. Walks up the stairs. Takes out the key. Unlocks the front door. Opens the door. Steps inside. Closes and locks the door."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Bathroom",
+      "activity": "Cooling shower and changing into fresh clothes after the hot commute",
+      "desc": "Walks into Bedroom 1. Takes off the shirt and trousers. Places them in the laundry basket. Walks to the bathroom. Turns on the bathroom light. Turns on the shower tap. Adjusts the temperature knob. Steps into the shower. Washes the body with soap. Rinses the body under the water. Turns off the tap. Steps out. Picks up the towel and dries the body and hair. Hangs the towel on the rail. Walks to Bedroom 1. Opens the drawer. Takes out a fresh shirt and shorts. Puts on the shirt. Puts on the shorts. Walks to the bathroom. Picks up the used towel. Hangs it on the hook. Turns off the light. Walks out."
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Cooking a light dinner on the induction cooker and eating at the kitchen table",
+      "desc": "Walks into the kitchen. Turns on the kitchen light. Opens the refrigerator door. Takes out the vegetables, eggs and tofu. Closes the refrigerator door. Places the items on the counter. Picks up the knife and cuts the vegetables on the board. Places the pot on the induction cooker. Presses the power button. Presses the heat setting button. Pours oil into the pot. Puts the vegetables into the pot. Stirs with the spatula. Adds the tofu. Adds salt from the shaker. Presses the power button to switch off the cooker. Picks up a plate from the cupboard. Pours the food onto the plate. Carries the plate to the kitchen table. Sits down on the chair. Picks up the chopsticks and eats. Drinks water from the glass. Stands up. Carries the plate and glass to the sink."
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Clearing the table, washing up and loading the dishwasher",
+      "desc": "Picks up the plate from the table. Carries it to the sink. Picks up the glass and carries it to the sink. Wipes the table surface with a cloth. Wrings the cloth over the sink. Opens the dishwasher door. Pulls out the lower rack. Loads the plate into the rack. Loads the glass into the rack. Loads the pot and spatula into the rack. Pushes the rack back in. Picks up the detergent box. Opens the lid. Pours detergent into the dispenser. Closes the lid. Closes the dishwasher door. Presses the start button. Turns on the tap. Rinses the cloth under the water. Turns off the tap. Wrings the cloth. Hangs the cloth on the hook. Wipes the counter with a dry cloth. Turns off the kitchen light. Walks out."
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing in front of the TV with the air conditioner on to escape the heatwave",
+      "desc": "Walks into the living room. Picks up the air conditioner remote from the table. Points it at the air conditioner. Presses the power button. Presses the temperature button. Puts the remote back on the table. Picks up the TV remote. Presses the power button. Sits down on the sofa. Presses the channel button. Watches the screen. Picks up the phone from the table. Presses the screen. Scrolls the screen. Puts the phone down on the sofa cushion. Stands up. Walks to the kitchen. Opens the refrigerator. Takes out a bottle of water and a fruit. Closes the door. Walks back to the living room. Sits on the sofa. Opens the bottle cap. Drinks. Eats the fruit. Puts the fruit peel on a napkin on the table. Presses the channel button on the remote. Leans back on the sofa. Crosses the legs. Presses the volume button. Stands up. Picks up the napkin and the bottle. Carries them to the kitchen bin. Drops the peel into the bin. Washes hands at the sink. Walks back to the living room. Picks up the TV remote. Presses the power button. Picks up the air conditioner remote. Presses the power button. Puts both remotes on the table. Walks to Bedroom 1."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using the computer with the desk lamp on to plan tomorrow's community program and reply to messages",
+      "desc": "Walks into Bedroom 1. Turns on the fan with the switch. Pulls out the chair at the desk. Sits down. Turns on the desk lamp. Opens the laptop lid. Presses the power button. Types the password on the keyboard. Moves the mouse and opens the program planning file. Types the activity list for tomorrow into the file. Presses Ctrl+S to save. Picks up the phone. Presses the screen. Opens the message app. Types a reply to the first message. Presses send. Types a reply to the second message. Presses send. Picks up the water bottle and drinks. Puts the phone down on the desk. Opens the email page on the laptop. Clicks the reply button on two emails. Types the replies on the keyboard. Clicks send. Closes the browser. Closes the planning file. Picks up the phone. Presses the screen. Checks the alarm setting. Sets the alarm for 06:30. Puts the phone on the bedside table. Presses the laptop power button to shut it down. Closes the lid. Turns off the desk lamp. Stands up. Pushes the chair under the desk. Walks to the bathroom."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for bed",
+      "desc": "Walks into the bathroom. Turns on the bathroom light. Turns on the tap. Cups both hands and splashes water on the face. Picks up the towel and wipes the face. Turns off the tap. Picks up the toothbrush. Squeezes toothpaste onto the bristles. Brushes the teeth. Rinses the mouth. Spits into the sink. Rinses the toothbrush under the tap. Turns off the tap. Places the toothbrush in the holder. Wipes the mouth with the towel. Turns on the exhaust fan switch. Turns off the bathroom light. Walks out. Walks to Bedroom 1."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Reading briefly and falling asleep with the fan running",
+      "desc": "Walks into Bedroom 1. Pulls back the sheet with the right hand. Sits on the edge of the bed. Picks up the book from the bedside table. Opens the book to the bookmark. Reads two pages. Closes the book. Places the book back on the bedside table. Turns on the desk lamp. Turns it off again. Turns on the fan with the switch. Lies down on the bed. Pulls the sheet up to the chest. Turns onto the right side. Bends the knees. Places the left arm under the pillow. Turns onto the back. Turns the head to the left. Places both arms along the body. Closes the eyes. Breathes slowly. Stays still. The fan stays switched on and oscillating through the night."
+    }
+  ]
+}
+```
+

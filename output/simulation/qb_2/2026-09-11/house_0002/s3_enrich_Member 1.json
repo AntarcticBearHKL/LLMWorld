@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the fan running to cope with the warm night",
+      "desc": "Lie down on bed. Close eyes. Breathe. Turn to left side. Adjust pillow. Pull sheet over body. Move legs. Stretch arms. Yawn. Turn to right side. Adjust sheet. Sleep. Wake briefly. Turn over. Adjust pillow. Sleep again."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, using the toilet and taking a cool shower to start the day",
+      "desc": "Open eyes. Get out of bed. Walk to bathroom. Turn on light. Lift toilet lid. Urinate. Flush toilet. Turn on shower tap. Adjust water temperature to cool. Step into shower. Wash body with soap. Rinse body. Turn off shower tap. Step out of shower. Pick up towel. Dry body. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:40",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, boiling water with the kettle and making toast",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out bread, butter, jam, and milk. Plug in toaster. Insert bread slices into toaster. Press lever down. Fill kettle with water. Place kettle on base. Press power button. Take out plate, mug, and knife. Place tea bag in mug. Pour boiled water into mug. Stir tea. Remove tea bag. Pick up toast from toaster. Place toast on plate. Spread butter and jam on toast. Sit at table. Eat toast and drink tea."
+    },
+    {
+      "time": "07:40-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, checking the heatwave warning on the phone and packing a water bottle and sun hat for the day",
+      "desc": "Enter bedroom. Open wardrobe. Take out shirt and trousers. Take off pajamas. Put on shirt and trousers. Pick up phone. Unlock phone. Check heatwave warning. Pick up water bottle and sun hat. Place in bag. Pick up bag. Leave bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit community centre, walking to transport in the already hot morning air",
+      "desc": "Walk out of house. Lock door. Put on sun hat. Walk to bus stop. Wait for bus. Check phone for time. Board bus. Tap transit card. Find seat. Sit down. Ride bus. Drink water from bottle. Stand up. Exit bus. Walk to community centre. Enter building."
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Working as community program coordinator, setting up and running morning community programs and meeting with volunteers",
+      "desc": "Arrive at centre. Greet volunteers. Set up tables. Arrange chairs. Place materials on tables. Check equipment. Start program. Welcome participants. Introduce volunteers. Facilitate activity. Answer questions. Hand out supplies. Collect feedback forms. Meet with volunteers. Discuss program schedule. Assign tasks. Break for lunch."
+    },
+    {
+      "time": "13:00-13:45",
+      "location": "Out",
+      "activity": "Taking a lunch break in a cool indoor area near the centre, eating and rehydrating",
+      "desc": "Enter indoor area. Sit at table. Open lunch bag. Take out sandwich. Unwrap sandwich. Eat sandwich. Take out water bottle. Open water bottle. Drink water. Close water bottle. Take out fruit. Peel fruit. Eat fruit. Wipe mouth with napkin. Dispose of trash. Stand up. Leave indoor area."
+    },
+    {
+      "time": "13:45-17:00",
+      "location": "Out",
+      "activity": "Continuing work, coordinating afternoon programs, doing admin and checking in with partner organisations",
+      "desc": "Return to desk. Open computer. Log in. Check email. Reply to emails. Make phone calls to partner organisations. Discuss program details. Write report. Print documents. File documents. Attend afternoon program. Assist participants. Clean up after program. Meet with staff. Review schedule. Update calendar. Close computer."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home after work, stopping briefly to pick up groceries for dinner",
+      "desc": "Leave office. Walk to bus stop. Wait for bus. Board bus. Tap transit card. Sit down. Ride bus. Exit bus. Walk to grocery store. Enter store. Pick up basket. Select vegetables. Select protein. Select bread. Walk to checkout. Pay for groceries. Bag groceries. Leave store. Walk home. Enter house."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner using the induction cooker, keeping the range hood on",
+      "desc": "Enter kitchen. Turn on light. Turn on range hood. Open refrigerator. Take out ingredients. Turn on induction cooker. Place pan on cooker. Add oil and ingredients. Stir ingredients. Cook food. Turn off induction cooker. Turn off range hood. Take out plate. Place food on plate. Sit at table. Eat dinner. Stand up. Rinse plate. Place in sink. Turn off light."
+    },
+    {
+      "time": "18:45-19:10",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Pick up plates. Pick up utensils. Scrape food into trash. Open dishwasher. Load plates into dishwasher. Load utensils into basket. Close dishwasher. Wipe table with cloth. Rinse cloth. Hang cloth. Turn off kitchen light. Leave kitchen."
+    },
+    {
+      "time": "19:10-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing in front of the TV with the air conditioner on, cooling down after the hot day",
+      "desc": "Enter living room. Turn on air conditioner. Pick up remote. Turn on TV. Sit on sofa. Watch TV. Change channel. Get up. Go to kitchen. Open refrigerator. Take out drink. Close refrigerator. Return to living room. Sit on sofa. Drink. Watch TV. Get up. Turn off TV. Turn off air conditioner. Leave living room."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower and completing evening hygiene routine",
+      "desc": "Enter bathroom. Turn on light. Turn on shower tap. Adjust water temperature. Step into shower. Wet body. Apply soap. Rub body. Rinse body. Turn off shower tap. Step out of shower. Pick up towel. Dry body. Apply toothpaste to toothbrush. Brush teeth. Rinse mouth. Spit. Wipe face. Turn off light. Leave bathroom."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down with the desk lamp on, using the computer and phone to plan tomorrow's programs before bed",
+      "desc": "Enter bedroom. Turn on desk lamp. Sit at desk. Open computer. Log in. Open calendar. Plan tomorrow's programs. Type notes. Open phone. Check messages. Reply to messages. Set alarm. Close phone. Close computer. Turn off desk lamp. Lie down on bed. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the fan running for air circulation through the hot night",
+      "desc": "Lie down on bed. Close eyes. Breathe. Turn to left side. Adjust pillow. Pull sheet over body. Shift legs. Turn head. Adjust blanket. Sleep. Turn to right side. Adjust sheet. Continue sleeping. Wake briefly. Turn over. Adjust pillow. Sleep again."
+    }
+  ]
+}

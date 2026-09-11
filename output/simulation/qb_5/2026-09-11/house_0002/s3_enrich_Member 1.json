@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the fan running to stay cool through the hot night",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Sleep. Turn to left side. Adjust pillow. Sleep. Turn to right side. Pull sheet up. Sleep. Turn on back. Sleep. Adjust fan direction. Sleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and using the toilet",
+      "desc": "Wake up. Sit up. Stand up. Walk to bathroom. Turn on light. Use toilet. Flush toilet. Wash face. Brush teeth. Rinse mouth. Wipe face. Turn off light."
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, toasting bread and boiling the kettle for tea",
+      "desc": "Enter kitchen. Open refrigerator. Take out bread and butter. Place bread in toaster. Fill kettle with water. Turn on kettle. Take out plate, mug, and tea bag. Toast pops up. Remove toast. Place on plate. Spread butter. Pour hot water into mug. Add tea bag. Remove tea bag. Add milk. Stir. Sit at table. Eat toast. Drink tea."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and checking phone for messages before leaving",
+      "desc": "Walk to bedroom. Open wardrobe. Take out shirt and pants. Close wardrobe. Remove pajamas. Put on shirt. Put on pants. Pick up phone. Check messages. Put phone in pocket. Pick up bag. Walk out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit office in the early heat of the day",
+      "desc": "Walk to bus stop. Wait for bus. Bus arrives. Board bus. Swipe card. Find seat. Sit down. Look out window. Bus stops. Stand up. Exit bus. Walk to office. Enter building."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working at the community nonprofit office, coordinating programs and answering emails",
+      "desc": "Enter office. Turn on computer. Log in. Open email. Read email. Reply to email. Open calendar. Check schedule. Make phone call. Talk to colleague. Type document. Print document. Attend meeting. Take notes. File documents."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating a meal in a shaded spot near the office",
+      "desc": "Leave office. Walk to shaded spot. Sit on bench. Open lunch bag. Take out sandwich. Unwrap sandwich. Eat sandwich. Drink water. Wipe mouth. Put trash in bag. Stand up. Walk back to office."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Continuing work at the office, meeting community partners and preparing program materials",
+      "desc": "Enter office. Sit at desk. Open file. Review notes. Call partner. Meet partner in lobby. Shake hands. Discuss program. Take notes. Prepare materials. Print flyers. Staple papers. Organize folders. Label folders. File materials."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home in the peak heat of the day",
+      "desc": "Leave office. Walk to bus stop. Wait for bus. Board bus. Swipe card. Find seat. Sit down. Wipe sweat. Drink water. Bus stops. Stand up. Exit bus. Walk home. Enter home."
+    },
+    {
+      "time": "18:00-18:20",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower to wash off sweat and cool down",
+      "desc": "Enter bathroom. Remove clothes. Turn on shower. Step into shower. Wet body. Apply soap. Rub body. Rinse body. Turn off shower. Step out. Dry body. Turn off light."
+    },
+    {
+      "time": "18:20-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking a light dinner using the induction cooker and oven, keeping the range hood on",
+      "desc": "Enter kitchen. Turn on range hood. Open refrigerator. Take out vegetables and chicken. Close refrigerator. Wash vegetables. Chop vegetables. Place pan on induction cooker. Turn on induction cooker. Add oil. Add vegetables. Stir. Add chicken. Stir. Turn on oven. Place tray in oven. Set timer. Turn off induction cooker. Serve food. Turn off oven."
+    },
+    {
+      "time": "19:00-19:45",
+      "location": "Living Room",
+      "activity": "Eating dinner while watching TV with the air conditioner running",
+      "desc": "Carry plate to living room. Place plate on table. Sit on sofa. Pick up remote. Turn on TV. Turn on air conditioner. Select channel. Pick up fork. Eat food. Chew. Swallow. Drink water. Continue eating. Finish meal. Put fork down. Lean back. Watch TV."
+    },
+    {
+      "time": "19:45-20:10",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Stand up. Pick up plate. Carry plate to kitchen. Scrape food into trash. Rinse plate. Open dishwasher. Place plate in dishwasher. Pick up glass. Rinse glass. Place glass in dishwasher. Close dishwasher. Turn on dishwasher."
+    },
+    {
+      "time": "20:10-22:00",
+      "location": "Living Room",
+      "activity": "Relaxing with TV and personal computer, staying in the cooled living room",
+      "desc": "Sit on sofa. Pick up remote. Change channel. Pick up laptop. Open laptop. Turn on laptop. Check email. Browse internet. Watch TV. Pick up phone. Check social media. Put phone down. Watch TV. Pick up remote. Turn off TV. Close laptop. Stand up."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Night routine: washing up, brushing teeth and getting ready for bed",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wet face. Apply cleanser. Rub face. Rinse face. Turn off tap. Brush teeth. Rinse mouth. Wipe face. Turn off light."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the fan on for ventilation during the hot night",
+      "desc": "Enter bedroom. Turn on fan. Lie down on bed. Close eyes. Pull sheet. Sleep. Turn to side. Adjust pillow. Sleep. Turn to other side. Sleep. Turn on back. Sleep."
+    }
+  ]
+}
