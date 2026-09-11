@@ -25,6 +25,7 @@
 | 引言 / 研究问题（RQ1–RQ4） | `00_intro.md` | 草稿 |
 | 方法：五阶段管线 + 领域模型 + 调度 | `01_method.md` | 草稿 |
 | 实验 | `experiments/*.md` | 见下表 |
+| 对齐表（结果 vs 实证基准） | `02_alignment.md` | 草稿 |
 | 讨论：与 RQ1–RQ4 / 实证对齐 | `99_discussion.md` | 草稿 |
 
 ## 实验清单
