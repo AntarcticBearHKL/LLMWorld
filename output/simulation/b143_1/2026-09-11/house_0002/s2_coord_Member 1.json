@@ -1,0 +1,90 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, brushing teeth and washing face, using the toilet"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, boiling water with the kettle and toasting bread"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Dressing in work uniform and packing bag for the hospital shift"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital by public transport (bus/train)"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist at the hospital: assessing and treating patients, supervising exercise sessions"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy work at the hospital: rehabilitation sessions, patient documentation and handover notes"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital by public transport (bus/train)"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating dinner"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower and changing into casual clothes"
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV"
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Study",
+      "activity": "Using the computer to read physiotherapy literature and review clinical notes"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Living Room",
+      "activity": "Doing stretching and mobility exercises on the floor"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Evening wash-up and getting ready for bed"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down in bed, checking the phone and setting the alarm"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

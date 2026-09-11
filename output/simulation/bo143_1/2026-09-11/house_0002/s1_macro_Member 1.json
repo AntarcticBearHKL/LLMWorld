@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth, showering with hot water"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and drinking water, light meal preparation"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag and supplies"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for work"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist, conducting morning patient rehabilitation sessions"
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital cafeteria"
+    },
+    {
+      "time": "12:45-17:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist, afternoon patient sessions and clinical notes"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:50",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner, using the induction cooker and range hood"
+    },
+    {
+      "time": "18:50-19:40",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV while charging the phone ahead of the possible evening rolling blackout"
+    },
+    {
+      "time": "19:40-20:20",
+      "location": "Bathroom",
+      "activity": "Showering and washing up after work"
+    },
+    {
+      "time": "20:20-21:30",
+      "location": "Study",
+      "activity": "Reviewing patient treatment notes and reading physiotherapy references on the computer, using the desk lamp"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Wind-down time, browsing the phone and listening to quiet audio with the light dimmed"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

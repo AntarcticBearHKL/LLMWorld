@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping overnight"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Morning shower and personal grooming"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and packing bag for the day"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital"
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working as a physiotherapist: assessing and treating patients on the ward"
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions and writing patient notes at the hospital"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "18:45-19:20",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying up the kitchen"
+    },
+    {
+      "time": "19:20-19:50",
+      "location": "Bathroom",
+      "activity": "Evening wash and changing into comfortable clothes"
+    },
+    {
+      "time": "19:50-20:30",
+      "location": "Living Room",
+      "activity": "Charging phone and devices, preparing for the possible evening rolling blackout"
+    },
+    {
+      "time": "20:30-21:45",
+      "location": "Study",
+      "activity": "Reviewing clinical notes and reading physiotherapy literature on the computer"
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Living Room",
+      "activity": "Light stretching and winding down"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
