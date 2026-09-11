@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down in bed. Pull blanket over body. Close eyes. Sleep. Turn to side. Adjust pillow. Continue sleeping."
+    },
+    {
+      "time": "06:40-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, showering, brushing teeth and getting ready for the workday",
+      "desc": "Wake up. Walk to bathroom. Turn on light. Use toilet. Flush toilet. Turn on shower. Adjust temperature. Step into shower. Wash body. Shampoo hair. Rinse off. Turn off shower. Step out. Dry with towel. Brush teeth. Rinse mouth. Turn off light. Walk out."
+    },
+    {
+      "time": "07:10-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast and making a coffee",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out ingredients. Close refrigerator. Take out frying pan. Place on stove. Turn on stove. Cook eggs. Toast bread. Eat breakfast. Fill kettle with water. Turn on kettle. Make coffee. Drink coffee. Wash dishes."
+    },
+    {
+      "time": "07:45-08:30",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Ride bus. Get off bus. Walk to hospital entrance. Enter hospital."
+    },
+    {
+      "time": "08:30-17:00",
+      "location": "Out",
+      "activity": "Working a day shift as a health care professional, caring for patients and completing clinical duties",
+      "desc": "Enter hospital. Put on scrubs. Attend morning briefing. Check patient charts. Visit patients. Take vitals. Administer medication. Update records. Assist doctors. Take lunch break. Eat lunch. Return to duties. Attend meetings. Complete paperwork. Handover to next shift. Leave hospital."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Ride bus. Get off bus. Walk home."
+    },
+    {
+      "time": "17:45-18:15",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes",
+      "desc": "Enter bathroom. Turn on light. Undress. Turn on shower. Adjust water temperature. Step into shower. Wash body. Rinse off. Turn off shower. Step out. Dry with towel. Put on clean clothes. Turn off light. Leave bathroom."
+    },
+    {
+      "time": "18:15-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out ingredients. Close refrigerator. Prepare ingredients. Turn on stove. Cook dinner. Eat dinner. Drink water. Wash dishes. Put away dishes. Turn off light. Leave kitchen."
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV with the fan running to stay cool and avoid air-conditioner peak tax",
+      "desc": "Walk to living room. Turn on TV. Turn on fan. Adjust fan speed. Sit on sofa. Watch TV. Change channel. Get up. Go to kitchen. Get snack. Return to living room. Sit on sofa. Continue watching TV."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen",
+      "desc": "Walk to kitchen. Turn on light. Put on gloves. Turn on tap. Wash dishes. Rinse dishes. Dry dishes. Put away dishes. Wipe counter. Turn off tap. Remove gloves. Turn off light. Leave kitchen."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Living Room",
+      "activity": "Using the computer and watching TV while cooling down with the fan",
+      "desc": "Walk to living room. Turn on computer. Turn on TV. Turn on fan. Sit at desk. Use computer. Check email. Browse internet. Watch TV. Adjust fan speed. Get up. Stretch. Sit back down. Continue using computer."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night routine, brushing teeth and washing up",
+      "desc": "Walk to bathroom. Turn on light. Use toilet. Flush toilet. Turn on tap. Wet toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Wash face. Dry face. Turn off tap. Turn off light. Leave bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Reading in bed with the desk lamp on, then falling asleep",
+      "desc": "Walk to bedroom. Turn on desk lamp. Pick up book. Lie on bed. Open book. Read. Turn page. Close book. Put book on nightstand. Turn off desk lamp. Lie down. Close eyes. Sleep."
+    }
+  ]
+}

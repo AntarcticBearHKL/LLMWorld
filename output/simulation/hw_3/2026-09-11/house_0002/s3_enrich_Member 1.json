@@ -1,0 +1,71 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed. Pull the blanket over the body. Close eyes. Turn to the left side. Pull the pillow under the head. Turn to the right side. Push the blanket down with the left hand. Pull the blanket up again. Roll onto the back. Place both arms on the chest. Turn head to the left. Turn head to the right. Bend the right leg. Straighten the right leg. Reach the right hand toward the edge of the bed. Pull the blanket over the shoulder. Roll onto the left side again. Keep lying still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up and washing",
+      "desc": "Open both eyes. Sit up on the bed. Swing both legs off the bed. Stand up. Walk to the bathroom door. Push the door open. Step inside. Reach the right hand to the wall. Press the light switch. Turn on the tap. Put both hands under the water. Rub the hands together. Pick up the toothbrush from the holder. Squeeze toothpaste onto the brush. Lift the brush to the mouth. Brush the teeth. Spit into the sink. Turn on the tap again. Rinse the mouth. Put the toothbrush back into the holder. Turn off the tap. Pull a towel off the rack. Wipe the face with the towel. Hang the towel on the rack. Press the light switch off. Walk out of the bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "desc": "Walk into the kitchen. Reach the right hand to the wall. Press the light switch on. Walk to the refrigerator. Pull the refrigerator door open. Take out a carton of milk. Take out a loaf of bread. Push the refrigerator door closed. Place the bread on the counter. Pull the cupboard door open. Take out a plate. Put the plate on the counter. Close the cupboard door. Pick up a knife from the drawer. Cut two slices of bread. Place the slices on the plate. Open the microwave door. Put the plate inside. Close the microwave door. Press the start button. Wait for the beep. Open the microwave door. Take the plate out. Close the microwave door. Set the plate on the table. Pull the chair back. Sit down on the chair. Pick up a slice of bread. Lift it to the mouth. Bite the bread. Chew and swallow. Pick up the milk carton. Pour milk into a glass. Lift the glass to the mouth. Drink the milk. Put the glass down. Stand up. Pick up the plate. Walk to the sink. Rinse the plate under the tap. Place the plate in the dishwasher. Walk out of the kitchen."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Open the wardrobe door. Take out a shirt. Take out a pair of trousers. Lay both on the bed. Take off the pajama top. Take off the pajama trousers. Put on the shirt. Button the shirt. Put on the trousers. Pull up the zipper. Fasten the belt. Walk to the desk. Pick up the phone from the desk. Press the power button. Swipe the screen. Check the time. Open the bag on the desk. Put the phone into the bag. Zip the bag closed. Pick up the bag. Walk to the bedroom door. Turn the door handle. Open the door. Step out. Close the door behind."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk out of the front door. Close the door. Lock the door with the key. Put the key into the bag. Walk along the path to the bus stop. Stand at the bus stop. Take the phone out of the bag. Look at the phone screen. Put the phone back into the bag. Step onto the bus. Tap the card on the reader. Walk along the aisle. Grab the overhead rail with the right hand. Hold the rail. Step off the bus at the stop. Walk along the sidewalk. Turn right at the corner. Walk to the building entrance. Push the glass door open. Step inside. Walk to the elevator. Press the up button. Step into the elevator. Press the floor button. Step out of the elevator."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional",
+      "desc": "Walk to the locker room. Open the locker door. Take out the work coat. Put on the work coat. Close the locker door. Walk to the nurses station. Pick up the clipboard. Read the patient list. Put the clipboard down. Walk to the first patient room. Push the door open. Greet the patient. Pick up the blood pressure cuff. Wrap the cuff around the patient's arm. Press the start button on the monitor. Read the numbers on the screen. Remove the cuff. Write the reading on the chart. Attach the chart to the bed rail. Walk to the next room. Pick up the medication tray. Hand the cup to the patient. Write on the chart. Answer the phone at the station. Pick up the receiver. Say \"Health care unit, how can I help?\". Put the receiver down. Sit at the desk. Type notes on the keyboard. Stand up. Walk to the supply cabinet. Open the cabinet door. Take out a box of gloves. Close the cabinet door. Walk back to the station. Sit down again. Type more notes. Stand up. Walk to the break room. Pick up a cup. Fill the cup at the water dispenser. Drink the water."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Stand up from the desk. Pick up the bag. Walk to the locker room. Open the locker door. Take off the work coat. Hang the coat inside. Close the locker door. Walk to the elevator. Press the down button. Step into the elevator. Press the ground floor button. Step out of the elevator. Push the glass door open. Walk to the bus stop. Stand at the bus stop. Take the phone out of the bag. Look at the phone screen. Put the phone into the bag. Step onto the bus. Tap the card on the reader. Grab the overhead rail. Hold the rail. Step off the bus. Walk along the sidewalk. Turn left at the corner. Walk to the front door. Take the key out of the bag. Insert the key into the lock. Turn the key. Push the door open. Step inside. Close the door."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk into the kitchen. Press the light switch on. Open the refrigerator door. Take out vegetables. Take out a chicken breast. Close the refrigerator door. Place the items on the counter. Open the drawer. Take out a knife. Take out a cutting board. Place the cutting board on the counter. Cut the vegetables into pieces. Cut the chicken into strips. Turn on the induction cooker. Place a pan on the cooker. Pour oil into the pan. Pick up the vegetables. Put the vegetables into the pan. Stir with a spatula. Add the chicken strips. Stir again. Add salt from the shaker. Turn off the induction cooker. Pick up a plate. Spoon the food onto the plate. Carry the plate to the table. Pull the chair back. Sit down. Pick up the chopsticks. Lift the food to the mouth. Chew and swallow. Drink water from a glass. Stand up. Carry the plate to the sink. Rinse the plate. Place the plate in the dishwasher. Wipe the counter with a cloth."
+    },
+    {
+      "time": "19:00-22:00",
+      "location": "Bedroom 1",
+      "activity": "Relaxing and watching TV with air conditioning",
+      "desc": "Walk into the bedroom. Press the light switch on. Pick up the remote control from the desk. Point the remote at the TV. Press the power button. Sit down on the bed. Pick up the phone from the bag. Swipe the screen. Type a message. Put the phone down. Pick up the remote again. Press the channel button. Watch the screen. Press the volume button. Reach the right hand to the air conditioner remote. Pick up the air conditioner remote from the desk. Point it at the air conditioner. Press the power button. Press the temperature down button. Put the air conditioner remote on the desk. Turn to the TV screen. Press the channel button again. Stand up. Walk to the desk. Pick up the computer. Open the lid. Click the mouse. Type on the keyboard. Close the lid. Put the computer down. Pick up the phone. Scroll the screen. Put the phone down. Lie down on the bed. Pull the blanket over the legs. Press the TV power button off with the remote. Put the remote on the nightstand."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Nighttime washing up",
+      "desc": "Stand up from the bed. Walk to the bathroom door. Push the door open. Step inside. Press the light switch on. Turn on the tap. Put both hands under the water. Rub the hands together. Pick up the soap. Rub the soap between the hands. Put the soap back on the dish. Rub the hands again. Rinse the hands under the water. Turn off the tap. Pull a towel off the rack. Wipe the face with the towel. Wipe the hands. Hang the towel on the rack. Pick up the toothbrush from the holder. Squeeze toothpaste onto the brush. Lift the brush to the mouth. Brush the teeth. Spit into the sink. Turn on the tap. Rinse the mouth. Put the toothbrush back into the holder. Turn off the tap. Press the light switch off. Walk out of the bathroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Walk into the bedroom. Pull the blanket back. Sit down on the bed. Lie down on the bed. Pull the blanket over the body. Place the head on the pillow. Reach the right hand to the air conditioner remote. Point it at the air conditioner. Press the power button off. Put the remote on the nightstand. Turn to the left side. Pull the blanket up to the shoulder. Close the eyes. Turn to the right side. Bend the left leg. Straighten the left leg. Turn onto the back. Place both arms on the chest. Turn to the left side again. Keep lying still."
+    }
+  ]
+}
