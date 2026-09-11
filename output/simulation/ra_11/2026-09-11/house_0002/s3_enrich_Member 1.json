@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the air conditioner set to a low cooling mode to cope with the ongoing heatwave",
+      "desc": "Lie on back. Close eyes. Breathe in. Breathe out. Turn to left side. Pull blanket up to chest. Adjust pillow under head. Turn to right side. Bend knees. Breathe slowly. Turn to back. Stretch arms. Adjust air conditioner remote. Turn to left side. Pull blanket. Breathe deeply."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and taking a quick cool shower before the hot day begins",
+      "desc": "Wake up. Sit up. Stand up. Walk to bathroom. Turn on light. Turn on tap. Wash face. Brush teeth. Rinse mouth. Turn off tap. Turn on shower. Step in. Wet body. Apply soap. Rinse. Turn off shower. Step out. Dry with towel."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating a light breakfast with toast and coffee, checking the heatwave warning on the phone",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out bread and butter. Place bread on counter. Take out plate. Put bread on plate. Take out knife. Spread butter on bread. Take out coffee mug. Scoop coffee. Fill with water. Microwave. Take out. Pick up phone. Check warning. Sit. Eat. Drink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Packing a cold lunch and a large water bottle for the hospital shift, then wiping down the counter",
+      "desc": "Open refrigerator. Take out lettuce, tomatoes, cold cuts. Place on counter. Take out lunch box. Open lunch box. Place lettuce in lunch box. Slice tomatoes. Place tomatoes in lunch box. Place cold cuts in lunch box. Close lunch box. Take out water bottle. Fill water bottle. Close water bottle. Put lunch box and water bottle in bag. Pick up cloth. Wipe counter. Rinse cloth. Hang cloth."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital by public transport, avoiding prolonged sun exposure during the heatwave",
+      "desc": "Pick up bag. Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Check phone. Get off bus. Walk to subway station. Enter station. Tap card. Walk to platform. Wait for train. Board train. Find seat. Sit down. Get off train. Walk to hospital. Enter hospital."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist, assessing and treating patients in the rehabilitation ward",
+      "desc": "Enter hospital. Walk to locker room. Change into scrubs. Walk to rehabilitation ward. Greet colleagues. Pick up patient list. Review patient notes. Call first patient. Escort patient to treatment area. Assess patient's mobility. Ask patient to perform exercises. Demonstrate exercises. Guide patient. Take notes. Call next patient. Repeat."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break in the hospital staff room, eating the packed lunch and rehydrating",
+      "desc": "Walk to staff room. Open locker. Take out lunch bag. Sit at table. Open lunch box. Pick up fork. Eat salad. Chew. Swallow. Pick up water bottle. Open cap. Drink water. Close cap. Continue eating. Finish lunch. Clean up. Put lunch box in bag."
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions, guiding patients through exercise programs and updating clinical notes",
+      "desc": "Call next patient. Escort to gym. Set up equipment. Demonstrate exercise. Spot patient. Provide feedback. Update notes on computer. Call next patient. Guide through exercise. Adjust equipment. Take notes. Repeat."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital by public transport during the hot late afternoon",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Check phone. Get off bus. Walk to subway station. Enter station. Tap card. Walk to platform. Wait for train. Board train. Find seat. Sit down. Get off train. Walk home. Enter home."
+    },
+    {
+      "time": "18:00-18:50",
+      "location": "Kitchen",
+      "activity": "Cooking a simple cool dinner such as a salad and cold noodles, then eating it at the table",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out vegetables. Wash vegetables. Chop vegetables. Boil water. Cook noodles. Drain noodles. Rinse with cold water. Mix salad. Place in bowl. Sit at table. Eat salad. Eat noodles. Drink water."
+    },
+    {
+      "time": "18:50-19:00",
+      "location": "Kitchen",
+      "activity": "Clearing the dishes and loading the dishwasher",
+      "desc": "Pick up plates. Scrape food into trash. Rinse plates. Open dishwasher. Load plates. Load utensils. Add detergent. Close dishwasher. Press start."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Watching TV and resting on the sofa, delaying air-conditioner use until the evening peak tax period ends",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channels. Watch. Adjust volume. Shift position. Pick up phone. Check messages. Put phone down. Continue watching. Stretch arms. Yawn."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Taking a cooling shower and starting a load of laundry in the washing machine",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step in. Wet body. Apply soap. Rinse. Turn off shower. Step out. Dry with towel. Put on clothes. Pick up laundry basket. Open washing machine. Put clothes in. Add detergent. Close door. Press start."
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Study",
+      "activity": "Using the computer to review patient notes and complete continuing education modules for physiotherapy",
+      "desc": "Walk to study. Turn on light. Sit at desk. Turn on computer. Wait for boot. Open patient notes. Read. Scroll. Take notes. Open continuing education module. Watch video. Answer questions. Submit module. Close computer."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Kitchen",
+      "activity": "Preparing tomorrow's lunch and a cold drink, then tidying the kitchen",
+      "desc": "Walk to kitchen. Open refrigerator. Take out ingredients. Prepare lunch. Make cold drink. Put lunch in refrigerator. Clean counter. Wipe stove. Rinse cloth. Hang cloth. Turn off light."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Doing light stretching and winding down, switching on the bedroom air conditioner now that peak pricing has ended",
+      "desc": "Walk to bedroom. Turn on light. Do stretching exercises. Touch toes. Stretch arms. Stretch legs. Roll shoulders. Twist torso. Bend forward. Turn on air conditioner. Adjust temperature. Sit on bed. Take off shoes. Turn off light. Lie down on bed."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping through the warm night under air conditioning",
+      "desc": "Lie down on bed. Close eyes. Breathe in. Breathe out. Turn to left side. Pull blanket up. Adjust pillow. Turn to right side. Stretch legs. Breathe deeply. Turn to back. Adjust air conditioner remote. Continue sleeping. Turn to left side. Pull blanket. Breathe slowly."
+    }
+  ]
+}

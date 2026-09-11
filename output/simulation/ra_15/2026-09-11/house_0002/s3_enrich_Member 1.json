@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed with eyes closed. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket over shoulder. Remain asleep. Turn to right side. Adjust pillow. Pull blanket. Remain asleep. Stretch legs. Remain asleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and taking a quick morning shower",
+      "desc": "Wake up. Sit up and stand. Walk to bathroom. Turn on light and tap. Wash face. Brush teeth. Rinse mouth. Turn off tap. Take quick shower. Dry off. Get dressed. Turn off light and walk out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast while checking the day's schedule on the phone",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk, bread, and butter. Place bread in toaster and press lever. Take out bowl and cereal box. Pour cereal into bowl. Pour milk over cereal. Pick up phone and unlock. Open calendar app and check schedule. Take toast from toaster and spread butter. Eat cereal and toast. Drink milk and wipe mouth."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Dressing in work clothes and packing a bag with lunch, water bottle and work notes",
+      "desc": "Walk to bedroom. Open wardrobe. Take out work clothes. Take off pajamas. Put on work clothes. Put on socks and shoes. Open bag. Place lunch box, water bottle, and work notes in bag. Zip bag. Pick up bag. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital by public transport in the already hot morning air",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Check phone. Get off bus. Walk to subway station. Enter station. Tap card. Board train. Hold handrail. Get off train. Exit station. Walk to hospital entrance."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working at the hospital: assessing patients, running individual physiotherapy sessions and demonstrating rehabilitation exercises",
+      "desc": "Greet patient in waiting area. Escort patient to treatment room. Ask patient to sit on treatment table. Ask patient about symptoms. Palpate patient's shoulder joint. Instruct patient to raise arm. Say: 'Please lift your arm.' Demonstrate shoulder exercise. Guide patient's arm through range of motion. Apply resistance to patient's arm. Instruct patient to perform exercise independently. Observe patient's movement. Correct patient's posture. Record treatment notes. Escort patient to waiting area. Call in next patient."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital, eating and resting in a cool staff room",
+      "desc": "Walk to staff room. Open refrigerator. Take out lunch box. Sit at table. Open lunch box. Pick up fork and eat. Drink water. Close lunch box. Wipe mouth. Stand up and walk to sofa. Lie down on sofa and close eyes. Rest for remaining time."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Continuing clinical work: afternoon physiotherapy treatments, mobility training with patients and updating treatment notes",
+      "desc": "Greet patient. Escort to gym area. Assist patient with walking. Demonstrate use of walker. Adjust patient's gait. Provide manual resistance. Instruct patient on balance exercise. Say: 'Try to keep your balance.' Observe patient's movement. Correct patient's technique. Record progress notes. Escort patient back to ward. Call in next patient. Repeat mobility training. Update treatment notes."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital during the heatwave",
+      "desc": "Walk to subway station. Enter station. Tap card. Board train. Hold handrail. Get off train. Walk to bus stop. Wait for bus. Board bus. Tap card. Sit down. Check phone. Get off bus. Walk home. Open door. Enter home."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables and meat. Wash and chop vegetables. Turn on stove. Place pan on stove. Add oil and meat. Stir. Add vegetables and seasoning. Stir. Turn off stove. Serve food on plate. Sit at table. Eat dinner. Drink water."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Stand up from table. Pick up plates. Scrape food into trash. Rinse plates. Open dishwasher. Place plates in dishwasher. Pick up cups. Place cups in dishwasher. Pick up utensils. Place utensils in basket. Close dishwasher. Wipe table with cloth."
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV and browsing the phone, keeping cooling use minimal during the evening air-conditioner peak tax window",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Flip channels. Settle on program. Pick up phone. Unlock phone. Open social media. Scroll. Put down phone. Watch TV. Pick up phone again. Check messages. Put down phone. Continue watching TV."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and cooling down before bed",
+      "desc": "Walk to bathroom. Turn on light. Take off clothes. Turn on shower. Wet body. Apply soap. Rinse body. Turn off shower. Dry with towel. Put on pajamas. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down: stretching tight shoulders, reading and setting the bedroom air conditioner for the night now that peak pricing has ended",
+      "desc": "Walk to bedroom. Sit on bed. Stretch shoulders. Stand and do shoulder rolls. Pick up book. Open book. Read. Put down book. Pick up remote. Turn on air conditioner. Set temperature. Turn off light. Lie down. Adjust pillow. Pull blanket."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe deeply. Turn to side. Adjust pillow. Pull blanket. Remain asleep. Turn to other side. Adjust pillow. Pull blanket. Remain asleep. Shift legs. Remain asleep."
+    }
+  ]
+}
