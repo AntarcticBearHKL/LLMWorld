@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:45-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting ready for the day"
+    },
+    {
+      "time": "07:10-07:40",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, packing lunch and snacks for the day"
+    },
+    {
+      "time": "07:40-08:30",
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus via public transport"
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Attending business lectures and tutorials at Clayton campus"
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Out",
+      "activity": "Eating lunch on campus and taking a short break"
+    },
+    {
+      "time": "12:45-16:30",
+      "location": "Out",
+      "activity": "Studying in the campus library and working on group assignment tasks"
+    },
+    {
+      "time": "16:30-17:15",
+      "location": "Out",
+      "activity": "Commuting home from Clayton campus"
+    },
+    {
+      "time": "17:15-18:00",
+      "location": "Living Room",
+      "activity": "Relaxing after class, checking phone and messages"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Heating up a pre-prepared dinner in the microwave to avoid using the induction cooker during the peak grid hours"
+    },
+    {
+      "time": "18:45-19:10",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying up the kitchen bench"
+    },
+    {
+      "time": "19:10-21:30",
+      "location": "Bedroom 1",
+      "activity": "Studying on the computer with the desk lamp on, working on weekly readings and retail roster planning"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Living Room",
+      "activity": "Watching TV to unwind"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Evening wash and brushing teeth"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Wind down on the phone and sleep"
+    }
+  ]
+}
