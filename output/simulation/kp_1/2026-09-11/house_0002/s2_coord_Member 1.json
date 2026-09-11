@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Showering and washing up"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Dressing in work clothes and packing bag"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift on a hot morning"
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Working the morning shift, caring for patients"
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Taking a lunch break"
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Working the afternoon shift, caring for patients"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home during the heatwave"
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower to recover from the heat"
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "19:15-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing in front of the TV with the air conditioner on"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Washing up and running a load of laundry"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Browsing on the computer and phone"
+    },
+    {
+      "time": "22:30-22:50",
+      "location": "Bathroom",
+      "activity": "Night-time wash and brushing teeth"
+    },
+    {
+      "time": "22:50-24:00",
+      "location": "Bedroom 1",
+      "activity": "Reading in bed and going to sleep"
+    }
+  ]
+}

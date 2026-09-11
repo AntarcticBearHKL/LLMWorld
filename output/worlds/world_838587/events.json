@@ -2,15 +2,14 @@
   "events": [
     {
       "date": "2026-09-11",
-      "title": "Heatwave warning",
-      "content": "A severe heatwave is forecast, with daytime temperatures above 38C for the next three days.",
-      "template": "heatwave"
+      "title": "Peak air-conditioner request",
+      "content": "To help balance the grid this evening, please avoid using your air conditioner between 5pm and 8pm today."
     },
     {
       "date": "2026-09-11",
-      "title": "Supply margin warning",
-      "content": "The grid operator has warned of a tight electricity supply margin this week.",
-      "template": "energy_crisis"
+      "title": "Heatwave warning",
+      "content": "A severe heatwave is forecast, with daytime temperatures above 38C for the next three days.",
+      "template": "heatwave"
     }
   ]
 }
