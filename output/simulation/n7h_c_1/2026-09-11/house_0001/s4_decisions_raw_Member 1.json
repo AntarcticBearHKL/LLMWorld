@@ -1,0 +1,189 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in own private bedroom",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and washing (exclusive bathroom use)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast using the toaster and kettle",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Packing study materials and getting ready for the day",
+      "operations": []
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and tutorial workshops on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Eating lunch on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:15-16:30",
+      "location": "Out",
+      "activity": "Studying in the campus library and completing coursework readings and assignments",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:30",
+      "location": "Out",
+      "activity": "Commuting home by public transport",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 1",
+      "activity": "Unpacking, changing into comfortable clothes and resting",
+      "operations": []
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner using the microwave, rice cooker and oven, avoiding the induction cooker during the peak period",
+      "operations": [
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing dishes and cleaning up the kitchen",
+      "operations": []
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Bedroom 1",
+      "activity": "Studying on the computer under the desk lamp and writing assignment drafts",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night routine, brushing teeth and washing up (exclusive bathroom use)",
+      "operations": []
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down on the phone and sleeping in own private bedroom",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

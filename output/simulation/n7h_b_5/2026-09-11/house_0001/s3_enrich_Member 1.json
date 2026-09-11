@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Closes eyes. Breathes slowly. Turns to right side. Pulls blanket up. Adjusts pillow. Remains still. Turns to left side. Moves arm under pillow. Remains still. Breathes deeply. Continues sleeping."
+    },
+    {
+      "time": "06:40-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, showering, brushing teeth and getting dressed",
+      "desc": "Wakes up. Gets out of bed. Walks to bathroom. Turns on light. Turns on water heater. Takes off clothes. Steps into shower. Turns on shower. Washes body. Shampoos hair. Rinses. Turns off shower. Steps out. Dries body. Wraps towel. Brushes teeth. Rinses mouth. Puts on clothes. Turns off light. Walks out."
+    },
+    {
+      "time": "07:10-07:40",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, packing lunch and study materials",
+      "desc": "Enters kitchen. Opens refrigerator. Takes out milk, eggs, and bread. Closes refrigerator. Places bread in toaster. Turns on toaster. Cracks eggs into bowl. Beats eggs. Turns on induction cooker. Pours eggs into pan. Cooks eggs. Turns off induction cooker. Takes toast from toaster. Places toast on plate. Adds eggs to plate. Eats breakfast. Drinks milk. Opens refrigerator. Takes out lunch container. Places rice into container. Closes container. Places container in backpack. Places notebook and pen in backpack. Zips backpack. Turns off kitchen light. Exits kitchen."
+    },
+    {
+      "time": "07:40-08:30",
+      "location": "Out",
+      "activity": "Commuting to Monash University campus",
+      "desc": "Walks to bus stop. Waits for bus. Checks phone. Boards bus. Taps Myki card. Finds seat. Sits down. Looks out window. Gets off bus. Walks to train station. Boards train. Taps Myki card. Finds seat. Sits down. Reads notes on phone. Gets off train. Walks to campus. Enters campus building."
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and taking notes on campus",
+      "desc": "Enters lecture hall. Finds seat. Sits down. Takes out notebook and pen. Opens notebook. Picks up pen. Writes notes. Listens to lecturer. Nods head. Raises hand. Asks question. Writes more notes. Turns page. Checks phone. Puts phone away. Continues writing. Stretches arms. Takes out laptop. Opens laptop. Types notes on laptop. Closes laptop. Packs notebook and pen into backpack. Stands up. Exits lecture hall."
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Out",
+      "activity": "Eating lunch on campus and chatting with classmates",
+      "desc": "Walks to campus cafeteria. Stands in line. Orders sandwich. Pays cashier. Takes sandwich. Finds table. Sits down. Unwraps sandwich. Eats sandwich. Drinks water from bottle. Classmate sits down. Says 'Hello'. Talks about lecture. Laughs. Finishes sandwich. Throws wrapper in bin. Stands up. Says 'Goodbye'. Walks away."
+    },
+    {
+      "time": "12:45-16:00",
+      "location": "Out",
+      "activity": "Attending tutorials and studying readings in the campus library",
+      "desc": "Walks to tutorial room. Enters room. Finds seat. Sits down. Takes out notebook. Writes notes. Participates in discussion. Raises hand. Answers question. Packs bag. Exits tutorial room. Walks to library. Enters library. Finds book on shelf. Takes book. Finds desk. Sits down. Opens book. Reads pages. Takes notes. Closes book. Returns book to shelf. Packs bag. Exits library."
+    },
+    {
+      "time": "16:00-16:45",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "desc": "Walks to train station. Boards train. Taps Myki card. Finds seat. Sits down. Checks phone. Reads messages. Gets off train. Walks to bus stop. Waits for bus. Boards bus. Taps Myki card. Finds seat. Sits down. Looks out window. Gets off bus. Walks home. Enters house."
+    },
+    {
+      "time": "16:45-17:30",
+      "location": "Kitchen",
+      "activity": "Making a snack and preparing a quick meal for later",
+      "desc": "Enters kitchen. Opens refrigerator. Takes out yogurt and fruit. Closes refrigerator. Takes spoon from drawer. Opens yogurt container. Eats yogurt with spoon. Cuts fruit with knife. Eats fruit. Opens refrigerator. Takes out vegetables and chicken. Closes refrigerator. Places vegetables on cutting board. Cuts vegetables. Places chicken in pan. Turns on induction cooker. Cooks chicken. Turns off induction cooker. Places cooked meal in container. Closes container. Places container in refrigerator. Washes dishes. Dries hands."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work uniform and resting briefly",
+      "desc": "Enters bedroom. Takes off shirt. Takes off pants. Opens wardrobe. Takes out work uniform. Puts on work shirt. Puts on work pants. Puts on socks. Puts on shoes. Lies on bed. Closes eyes. Rests for 10 minutes. Opens eyes. Sits up. Stands up. Checks phone. Puts phone in pocket. Exits bedroom."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Commuting to the hospitality and retail workplace",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps Myki card. Finds seat. Sits down. Checks phone. Gets off bus. Walks to workplace. Enters workplace. Clocks in."
+    },
+    {
+      "time": "18:30-22:15",
+      "location": "Out",
+      "activity": "Working a part-time hospitality and retail shift",
+      "desc": "Greets customers. Operates cash register. Scans items. Takes payment. Gives change. Bags items. Stocks shelves. Faces products. Cleans counter. Answers customer questions. Helps customer find item. Takes break. Drinks water. Returns to work. Continues serving customers. Counts cash drawer. Closes register. Clocks out."
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Out",
+      "activity": "Commuting home after the work shift",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps Myki card. Finds seat. Sits down. Checks phone. Gets off bus. Walks home. Enters house."
+    },
+    {
+      "time": "22:45-23:15",
+      "location": "Bathroom",
+      "activity": "Showering and washing up after work",
+      "desc": "Enters bathroom. Turns on bathroom light. Turns on water heater. Takes off clothes. Steps into shower. Turns on shower tap. Washes body. Shampoos hair. Rinses hair. Turns off shower tap. Steps out of shower. Picks up towel. Dries body. Wraps towel around. Brushes teeth. Rinses mouth. Turns off bathroom light. Exits bathroom."
+    },
+    {
+      "time": "23:15-23:30",
+      "location": "Kitchen",
+      "activity": "Having a light late snack and a glass of water",
+      "desc": "Enters kitchen. Opens refrigerator. Takes out cheese and crackers. Closes refrigerator. Takes plate from cupboard. Places cheese and crackers on plate. Eats cheese and crackers. Drinks water from glass. Washes plate and glass. Dries hands. Turns off kitchen light. Exits kitchen."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down, reviewing notes on phone and falling asleep",
+      "desc": "Enters bedroom. Takes off clothes. Puts on pajamas. Lies on bed. Picks up phone. Opens notes app. Reviews notes. Scrolls through pages. Closes notes app. Places phone on bedside table. Turns off bedside lamp. Closes eyes. Pulls blanket up. Turns to side. Remains still. Falls asleep."
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:45-07:15",
+      "start_minutes": 405,
+      "end_minutes": 435,
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting dressed for the day",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:45",
+      "start_minutes": 435,
+      "end_minutes": 465,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making toast with the toaster and boiling water in the kettle for tea",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:45",
+      "start_minutes": 465,
+      "end_minutes": 525,
+      "location": "Out",
+      "activity": "Commuting to Monash University for the day's classes",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:45-09:00",
+      "start_minutes": 525,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Arriving on campus and walking to the lecture room",
+      "operations": []
+    },
+    {
+      "time": "09:00-11:00",
+      "start_minutes": 540,
+      "end_minutes": 660,
+      "location": "Out",
+      "activity": "Attending Master of Education lectures",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:00-11:30",
+      "start_minutes": 660,
+      "end_minutes": 690,
+      "location": "Out",
+      "activity": "Taking a short break on campus and having a snack",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:30-13:00",
+      "start_minutes": 690,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Attending a tutorial and participating in group discussion",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-14:00",
+      "start_minutes": 780,
+      "end_minutes": 840,
+      "location": "Out",
+      "activity": "Eating lunch on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:00-16:00",
+      "start_minutes": 840,
+      "end_minutes": 960,
+      "location": "Out",
+      "activity": "Studying in the campus library on the computer, working on assignment readings",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-17:00",
+      "start_minutes": 960,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Attending a seminar and finishing coursework notes",
+      "operations": []
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home from university",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner using the oven and microwave instead of the induction cooker to avoid the evening peak",
+      "operations": [
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "start_minutes": 1140,
+      "end_minutes": 1200,
+      "location": "Living Room",
+      "activity": "Relaxing by watching TV and checking the phone",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:30",
+      "start_minutes": 1200,
+      "end_minutes": 1290,
+      "location": "Bedroom 1",
+      "activity": "Studying at the desk with the desk lamp on, completing university readings and assignment work on the computer",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bathroom",
+      "activity": "Showering and completing the evening personal care routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:45",
+      "start_minutes": 1320,
+      "end_minutes": 1365,
+      "location": "Living Room",
+      "activity": "Unwinding with light TV and phone browsing before bed",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Wind-down routine and sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
