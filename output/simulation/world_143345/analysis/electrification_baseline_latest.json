@@ -3,38 +3,38 @@
   "scenarios": [
     {
       "scenario": "baseline",
-      "total_kwh": 100.2639,
+      "total_kwh": 100.0826,
       "peak_watts": 7321.75,
       "evening_kwh": 16.806,
-      "peak_to_mean": 5.26
+      "peak_to_mean": 5.27
     },
     {
       "scenario": "ev",
-      "total_kwh": 163.2639,
+      "total_kwh": 163.0826,
       "peak_watts": 14321.75,
       "evening_kwh": 16.806,
       "peak_to_mean": 6.32,
-      "total_change_pct": 62.83,
+      "total_change_pct": 62.95,
       "peak_change_pct": 95.61,
       "evening_change_pct": 0.0
     },
     {
       "scenario": "hp",
-      "total_kwh": 172.2639,
+      "total_kwh": 172.0826,
       "peak_watts": 9405.75,
       "evening_kwh": 52.806,
-      "peak_to_mean": 3.93,
-      "total_change_pct": 71.81,
+      "peak_to_mean": 3.94,
+      "total_change_pct": 71.94,
       "peak_change_pct": 28.46,
       "evening_change_pct": 214.21
     },
     {
       "scenario": "ev_hp",
-      "total_kwh": 235.2639,
+      "total_kwh": 235.0826,
       "peak_watts": 14321.75,
       "evening_kwh": 52.806,
-      "peak_to_mean": 4.38,
-      "total_change_pct": 134.64,
+      "peak_to_mean": 4.39,
+      "total_change_pct": 134.89,
       "peak_change_pct": 95.61,
       "evening_change_pct": 214.21
     }

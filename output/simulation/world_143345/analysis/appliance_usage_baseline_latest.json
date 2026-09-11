@@ -1,71 +1,71 @@
 {
   "households": 3,
-  "grand_total_kwh": 100.2639,
+  "grand_total_kwh": 100.0826,
   "ranking": [
     {
       "name": "ElectricVehicle",
       "total_kwh": 42.0,
-      "share_pct": 41.89,
+      "share_pct": 41.97,
       "households": 3
     },
     {
       "name": "AirConditioner",
       "total_kwh": 8.6,
-      "share_pct": 8.58,
+      "share_pct": 8.59,
       "households": 6
     },
     {
       "name": "Computer",
       "total_kwh": 8.3757,
-      "share_pct": 8.35,
+      "share_pct": 8.37,
       "households": 13
     },
     {
       "name": "InductionCooker",
       "total_kwh": 7.5683,
-      "share_pct": 7.55,
+      "share_pct": 7.56,
       "households": 3
     },
     {
       "name": "WaterHeater",
       "total_kwh": 6.75,
-      "share_pct": 6.73,
+      "share_pct": 6.74,
       "households": 3
     },
     {
       "name": "SpaceHeater",
       "total_kwh": 4.5,
-      "share_pct": 4.49,
+      "share_pct": 4.5,
       "households": 3
     },
     {
       "name": "Refrigerator",
       "total_kwh": 3.6,
-      "share_pct": 3.59,
+      "share_pct": 3.6,
       "households": 3
     },
     {
       "name": "Kettle",
       "total_kwh": 2.7613,
-      "share_pct": 2.75,
+      "share_pct": 2.76,
       "households": 4
     },
     {
       "name": "Freezer",
       "total_kwh": 2.0,
-      "share_pct": 1.99,
+      "share_pct": 2.0,
       "households": 2
     },
     {
       "name": "Light",
       "total_kwh": 1.9867,
-      "share_pct": 1.98,
+      "share_pct": 1.99,
       "households": 24
     },
     {
       "name": "Fan",
       "total_kwh": 1.92,
-      "share_pct": 1.91,
+      "share_pct": 1.92,
       "households": 7
     },
     {
@@ -95,7 +95,7 @@
     {
       "name": "Monitor",
       "total_kwh": 0.7965,
-      "share_pct": 0.79,
+      "share_pct": 0.8,
       "households": 6
     },
     {
@@ -129,12 +129,6 @@
       "households": 2
     },
     {
-      "name": "Phone",
-      "total_kwh": 0.3267,
-      "share_pct": 0.33,
-      "households": 12
-    },
-    {
       "name": "DeskLamp",
       "total_kwh": 0.275,
       "share_pct": 0.27,
@@ -153,6 +147,12 @@
       "households": 3
     },
     {
+      "name": "Phone",
+      "total_kwh": 0.1453,
+      "share_pct": 0.15,
+      "households": 12
+    },
+    {
       "name": "GameConsole",
       "total_kwh": 0.048,
       "share_pct": 0.05,
@@ -169,19 +169,19 @@
     {
       "house_id": "house_0001",
       "appliance_count": 50,
-      "total_kwh": 52.9642,
+      "total_kwh": 52.8242,
       "top_appliance": "ElectricVehicle"
     },
     {
       "house_id": "house_0002",
       "appliance_count": 38,
-      "total_kwh": 24.9226,
+      "total_kwh": 24.8939,
       "top_appliance": "ElectricVehicle"
     },
     {
       "house_id": "house_0003",
       "appliance_count": 50,
-      "total_kwh": 22.3772,
+      "total_kwh": 22.3645,
       "top_appliance": "AirConditioner"
     }
   ],
