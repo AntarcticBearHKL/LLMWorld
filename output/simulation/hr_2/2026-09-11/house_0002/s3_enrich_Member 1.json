@@ -1,0 +1,77 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in Bedroom 1, with the air conditioner set to a cool but energy-efficient temperature during the heatwave night",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe deeply. Turn to left side. Adjust pillow. Bend knees. Remain still. Turn to right side. Stretch arms. Pull blanket up. Roll onto back. Place hands on chest. Continue sleeping. Stir slightly. Turn head to left. Turn head to right. Remain motionless."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and getting ready for the workday",
+      "desc": "Open eyes. Sit up in bed. Swing legs off bed. Stand up. Walk to bathroom. Turn on bathroom light. Turn on tap. Wet hands. Pick up soap. Rub hands together. Rinse hands. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit into sink. Wipe mouth with towel. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, boiling water with the kettle and making a cold drink for the hot day",
+      "desc": "Walk to kitchen. Turn on kitchen light. Open refrigerator. Take out eggs and bread. Close refrigerator. Crack eggs into bowl. Whisk eggs. Turn on stove. Place pan on stove. Pour eggs into pan. Stir eggs. Turn off stove. Place eggs on plate. Put bread in toaster. Press toaster lever. Fill kettle with water. Place kettle on stove. Turn on stove. Wait for water to boil. Pour hot water into mug. Add tea bag. Stir. Pour cold drink mix into glass. Add water. Stir. Sit at table. Eat breakfast. Drink tea and cold drink. Place dishes in sink."
+    },
+    {
+      "time": "07:45-08:45",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Look out window. Get off bus. Walk to hospital. Enter hospital. Walk to locker room. Change into scrubs. Put on ID badge. Walk to ward."
+    },
+    {
+      "time": "08:45-17:15",
+      "location": "Out",
+      "activity": "Working a clinical shift as a health care professional, caring for patients and completing ward duties",
+      "desc": "Walk to patient room. Greet patient. Check vital signs. Use stethoscope. Take notes on computer. Administer medication. Wash hands. Walk to next patient. Assist with procedure. Talk to doctor. Attend meeting. Eat lunch. Walk to break room. Sit down. Eat sandwich. Drink water. Return to ward. Check patient charts. Update records. Talk to nurse."
+    },
+    {
+      "time": "17:15-18:00",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Look out window. Get off bus. Walk home. Enter home. Remove shoes. Hang up coat."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner at home",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables. Take out meat. Close refrigerator. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add meat. Stir. Add vegetables. Cook. Turn off stove. Place food on plate. Sit at table. Eat dinner. Drink water. Place dishes in sink."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and changing into comfortable clothes after the hot commute",
+      "desc": "Walk to bathroom. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Wrap towel around waist. Walk to bedroom. Open closet. Pick out clothes. Put on clothes."
+    },
+    {
+      "time": "19:15-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and checking the phone, keeping high-power appliances off during the evening peak to help lower household use",
+      "desc": "Walk to living room. Sit on sofa. Pick up phone. Unlock phone. Scroll through apps. Check messages. Reply to message. Put phone down. Pick up remote. Turn on TV. Watch TV. Change channel. Turn off TV. Put remote down. Pick up phone again. Check social media. Put phone down."
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Bedroom 1",
+      "activity": "Watching TV and using the computer at the desk under the lamp, with the air conditioner running now that peak hours are over",
+      "desc": "Walk to bedroom. Turn on light. Sit on bed. Pick up remote. Turn on TV. Watch TV. Walk to desk. Sit at desk. Turn on computer. Type on keyboard. Move mouse. Turn on desk lamp. Adjust air conditioner. Open web browser. Check email. Watch video. Type document. Turn off computer. Turn off desk lamp."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Kitchen",
+      "activity": "Making a light evening snack and refilling a water bottle for overnight hydration",
+      "desc": "Walk to kitchen. Open refrigerator. Take out snack. Close refrigerator. Open cupboard. Take out plate. Place snack on plate. Eat snack. Pick up water bottle. Walk to sink. Turn on tap. Fill bottle. Turn off tap. Walk back to bedroom. Place water bottle on nightstand."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down, setting an alarm and going to sleep in the cooled bedroom",
+      "desc": "Walk to bedroom. Turn off TV. Turn off computer. Turn off desk lamp. Pick up phone. Set alarm. Place phone on nightstand. Turn off light. Lie on bed. Pull blanket over body. Close eyes. Breathe deeply. Turn to left side. Adjust pillow. Remain still."
+    }
+  ]
+}
