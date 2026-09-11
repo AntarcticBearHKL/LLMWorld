@@ -78,6 +78,11 @@
   (+0.70 kWh)**, leaving the total peak unchanged (−0.2%). Non-substitutable cooling (AC) does shave the
   peak; substitutable cooking does not. The dose law is therefore bounded by appliance substitutability.
   (Replicated on a second household, R149: cooker −1.64 → oven +1.02 / microwave +0.76, total peak +0.23.)
+  **Population-level composition (R151)**: scanning every house, the evening peak is **cooking-dominated
+  in most of them** (InductionCooker 27–54% of the window), so those peaks are substitution-bound;
+  only AC-dominated houses (e.g. world_143345 house_0003, AC 28%) expose a shaveable peak. This unifies
+  the mechanism: *whether a house's peak can be shaved depends on whether its dominant peak device is
+  substitutable.*
 - **Future-oriented notices (world-specific, R141/R142/R146)**: on `world_838587` house_0002 a *future*
   TOU-tariff announcement and a community notice **increased** current total energy (+20.8%, p≈0.0001,
   n=15; +11.0%, p≈0.026, n=15) with no peak change, while a neutral custom event did not (+7.9%, n.s.).
@@ -102,6 +107,10 @@
   was **not statistically meaningful** — within-group variance dominated the between-group difference
   (R053/R054). Group experiments require large samples.
 - Multi-world comparison tool restored (`compare_worlds.py`).
+- **Household scale economies (R150)**: per-capita daily energy falls with household size (1→9.74,
+  2→~7.1, 4→4.96, 5→3.12, 6→5.33 kWh), qualitatively aligning with Schröder et al. (2013).
+- **Cross-day variability (R152)**: households differ widely in regularity (variability index
+  0.26–0.44; peak-hour shift 0.5–11 h) — supporting heterogeneous behaviour.
 - Pending: systematic alignment tables vs the benchmarks in `FIT5216/研究计划.md` §2.7.
 
 ## RQ4 — Scalability
