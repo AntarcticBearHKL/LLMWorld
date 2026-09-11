@@ -47,6 +47,7 @@
 | 寒潮事件 cold_snap | RQ2 | Xia et al. 2026 | 采暖上升 | 有效果(二值:采暖 0/10 vs 6/10, 双侧 p≈0.011) | `experiments/event_cold_snap.md` |
 | 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(二值跨3世界:baseline AC 0/9 vs heatwave 11/12, Fisher 双侧 p≈0.00003) | `experiments/event_heatwave.md` |
 | 空调峰税 ac_tax | RQ2 | Faruqui & Sergici 2010 | 峰段 −5~20% | 有效果(热浪背景:AC 15/15→7/15 p≈0.0022;峰段−22.5%,n=15) | `experiments/event_ac_tax.md` |
+| 节能返利 rebate | RQ2 | Faruqui & Sergici 2010 | 峰段 −3~6% | partial(峰段null −6.0% n.s.;但AC −40.8%/总电量 −21.2%,n=15) | `experiments/event_rebate.md` |
 | 邻居比较 peer_nudge | RQ2 | Ayres 2013 | −1~3%，高耗家庭更强 | 初步(不一致：−6.6~+11.6%) | `experiments/peer_nudge.md` |
 | 群体异质性 | RQ3 | Costa & Kahn 2010 | 环境派 2~4% / 保守派 ~0 | 名义方向但方差压倒(不可定论) | `experiments/group_heterogeneity.md` |
 | 政策组合/多目标权衡 | RQ2/RQ3 | CoRenew 2026 | 峰削减 vs 负担 vs 公平 | 工具可用/TOU混杂(不可定论) | `experiments/policy_tradeoffs.md` |
