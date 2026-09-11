@@ -1,0 +1,60 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:00-06:20",
+      "location": "Bathroom",
+      "activity": "Washing up and taking a quick morning shower"
+    },
+    {
+      "time": "06:20-06:50",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, drinking water and packing a cool drink for the hot day"
+    },
+    {
+      "time": "06:50-07:20",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "07:20-19:30",
+      "location": "Out",
+      "activity": "Working as a health care professional, attending to patients and clinical duties"
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Out",
+      "activity": "Commuting home after the shift"
+    },
+    {
+      "time": "20:00-20:45",
+      "location": "Kitchen",
+      "activity": "Reheating and eating dinner, hydrating after the hot day"
+    },
+    {
+      "time": "20:45-21:15",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower to cool down"
+    },
+    {
+      "time": "21:15-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down for bed, using the fan instead of the air conditioner to avoid the evening peak tax"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
