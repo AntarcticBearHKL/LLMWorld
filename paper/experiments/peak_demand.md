@@ -1,6 +1,6 @@
 # Experiment: Demand charge (`peak_demand`)
 
-> 状态：**占位（待验证）**。第 1–4 节就绪；第 5 节待跑后填。
+> 状态：**null（N=3 交错）**：需量电费未削峰（峰值 +4.2%、峰段 −3.2%，均在噪声内）。数值来自 R092。
 
 ## 1. Research Question
 

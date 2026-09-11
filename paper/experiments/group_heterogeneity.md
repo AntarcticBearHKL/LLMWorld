@@ -1,6 +1,6 @@
 # Experiment: Group heterogeneity (grouped policy response)
 
-> 状态：**占位（待验证）**。第 1–4 节就绪；第 5 节待跑后填。
+> 状态：**不可定论（方差压倒）**：R053 名义方向一致（Medium 降幅 > Low），但 R054 显示组内离散（±25~45pp）**远超**组间差，7 人中 3 人反增。
 
 ## 1. Research Question
 
