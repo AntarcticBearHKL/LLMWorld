@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:20",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down in bed. Close eyes. Breathe steadily. Turn to left side. Pull blanket up. Turn to right side. Adjust pillow. Remain still. Occasionally shift legs. Pull blanket down. Turn onto back. Breathe deeply. Continue sleeping."
+    },
+    {
+      "time": "06:20-06:50",
+      "location": "Bathroom",
+      "activity": "Washing up, brushing teeth and showering",
+      "desc": "Open eyes. Sit up in bed. Swing legs over edge. Stand up. Walk to bathroom. Turn on light. Use toilet. Flush toilet. Turn on shower. Adjust water temperature. Step into shower. Wet body. Apply soap. Wash arms. Wash torso. Wash legs. Rinse body. Apply shampoo. Wash hair. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel around body. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit in sink. Wipe face. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "06:50-07:15",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making coffee with the kettle",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk. Close refrigerator. Take bread from cupboard. Put bread in toaster. Press toaster lever. Fill kettle with water. Turn on kettle. Pour coffee into mug. Add hot water and milk. Take toast from toaster. Spread butter on toast. Sit at table. Eat toast and drink coffee. Stand up. Put dishes in sink."
+    },
+    {
+      "time": "07:15-08:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift",
+      "desc": "Put on shoes. Pick up bag. Open door. Walk out. Close door. Lock door. Walk to bus stop. Wait for bus. Board bus. Pay fare. Sit down. Look out window. Get off bus. Walk to hospital entrance. Enter hospital."
+    },
+    {
+      "time": "08:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional: patient assessments, medication administration, handovers and clinical documentation",
+      "desc": "Put on scrubs. Attend handover meeting. Receive patient assignments. Walk to patient room. Check patient vitals. Record blood pressure. Administer medication. Update patient chart. Talk to patient. Assist with mobility. Walk to next patient. Check IV. Adjust flow rate. Document in computer. Attend team meeting. Break for lunch. Eat lunch. Return to unit. Continue patient care. Give handover to next shift."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Sit down. Look out window. Get off bus. Walk home. Open door. Enter home. Close door."
+    },
+    {
+      "time": "17:45-18:00",
+      "location": "Bathroom",
+      "activity": "Washing hands and changing out of work clothes",
+      "desc": "Walk to bathroom. Turn on tap. Wet hands. Apply soap. Rub hands. Rinse hands. Turn off tap. Dry hands with towel. Walk to bedroom. Take off shoes. Take off work clothes. Put work clothes in hamper. Open closet. Take out casual clothes. Put on casual clothes."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables. Close refrigerator. Take out cutting board. Take knife. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add vegetables. Stir. Cook. Turn off stove. Take plate. Serve food. Sit at table. Eat dinner. Stand up. Put plate in sink."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Pick up plates. Scrape food into bin. Rinse plates. Open dishwasher. Place plates in dishwasher. Pick up cups. Place cups in dishwasher. Pick up cutlery. Place cutlery in basket. Close dishwasher. Wipe table with cloth. Turn on dishwasher."
+    },
+    {
+      "time": "19:15-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channel. Watch TV. Adjust volume. Change channel again. Watch TV. Stand up. Go to kitchen. Take snack. Return to sofa. Sit down. Continue watching TV. Turn off TV. Put down remote."
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Living Room",
+      "activity": "Completing continuing education modules on the computer",
+      "desc": "Walk to living room. Sit at desk. Open laptop. Turn on laptop. Log in. Open browser. Navigate to module. Read module. Take notes. Watch video. Complete quiz. Submit quiz. Close browser. Close laptop."
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "Bathroom",
+      "activity": "Showering and starting a load of laundry in the washing machine",
+      "desc": "Walk to bathroom. Turn on shower. Adjust temperature. Step in. Wet body. Apply soap. Wash body. Rinse. Turn off shower. Step out. Pick up towel. Dry body. Wrap towel. Pick up dirty clothes. Walk to washing machine. Open washing machine. Put clothes in. Add detergent. Close washing machine. Press start button."
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down with the phone and setting an alarm",
+      "desc": "Walk to bedroom. Sit on bed. Pick up phone. Unlock phone. Open app. Scroll through feed. Watch video. Open alarm app. Set alarm time. Turn off phone. Put phone on nightstand. Lie down in bed. Pull blanket up. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe steadily. Turn to side. Pull blanket. Remain still. Occasionally shift. Adjust pillow. Turn onto back. Breathe deeply. Pull blanket down. Turn onto stomach. Breathe. Pull blanket up. Continue sleeping."
+    }
+  ]
+}

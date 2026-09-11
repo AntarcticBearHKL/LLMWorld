@@ -1,0 +1,176 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-05:50",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "05:50-06:10",
+      "location": "Bedroom 1",
+      "activity": "Waking up, checking phone and stretching in bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:10-06:35",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for work",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:35-07:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift",
+      "operations": []
+    },
+    {
+      "time": "07:30-19:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, caring for patients on the ward",
+      "operations": []
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "operations": []
+    },
+    {
+      "time": "19:30-19:50",
+      "location": "Bathroom",
+      "activity": "Washing up and changing out of work clothes",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:50-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:40",
+      "location": "Kitchen",
+      "activity": "Washing dishes and preparing lunch for tomorrow",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "21:40-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using computer and reading to wind down",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
