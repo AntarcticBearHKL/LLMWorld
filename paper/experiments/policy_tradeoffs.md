@@ -1,6 +1,7 @@
 # Experiment: Policy multi-objective trade-offs
 
 > 状态：**初步（工具可用；TOU 结果混杂）**：峰值 −9.9% 但峰段 +18.9%、平台 +28.6%（world_838587）。数值来自 R102。
+> ⚠️ **R104 caveat**：baseline 为**跨时段** → 连续指标（峰段/平台）不可靠；须**同批次紧邻**重做。
 
 ## 1. Research Question
 
