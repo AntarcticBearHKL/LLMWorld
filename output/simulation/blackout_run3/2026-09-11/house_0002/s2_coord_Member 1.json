@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting ready for the work shift"
+    },
+    {
+      "time": "07:00-07:40",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making a thermos of coffee for the shift"
+    },
+    {
+      "time": "07:40-08:20",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "08:20-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional: patient care, medication rounds, charting and handover with colleagues"
+    },
+    {
+      "time": "17:00-17:40",
+      "location": "Out",
+      "activity": "Commuting home after the shift"
+    },
+    {
+      "time": "17:40-18:00",
+      "location": "Bedroom 1",
+      "activity": "Changing out of work clothes and putting items away"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen, keeping power use low during the blackout warning window"
+    },
+    {
+      "time": "19:15-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing with a book and phone, deliberately avoiding heavy appliances during the evening peak blackout warning"
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and washing up"
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Bedroom 1",
+      "activity": "Watching TV with the fan on instead of the air conditioner"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Charging the phone and computer, reviewing tomorrow's shift notes and winding down"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Brushing teeth and final bedtime routine"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

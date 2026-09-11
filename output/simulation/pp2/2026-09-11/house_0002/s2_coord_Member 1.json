@@ -1,0 +1,90 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and taking a shower"
+    },
+    {
+      "time": "07:00-07:35",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast while checking the news on Phone"
+    },
+    {
+      "time": "07:35-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing the work bag"
+    },
+    {
+      "time": "08:00-08:50",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit office"
+    },
+    {
+      "time": "08:50-12:30",
+      "location": "Out",
+      "activity": "Working at the nonprofit office, coordinating community programs and answering emails"
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating lunch near the office"
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Back at the office, running program planning meetings and preparing community event materials"
+    },
+    {
+      "time": "17:00-17:50",
+      "location": "Out",
+      "activity": "Commuting home from work"
+    },
+    {
+      "time": "17:50-18:25",
+      "location": "Kitchen",
+      "activity": "Cooking dinner"
+    },
+    {
+      "time": "18:25-19:05",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "19:05-19:30",
+      "location": "Kitchen",
+      "activity": "Washing dishes and loading the dishwasher"
+    },
+    {
+      "time": "19:30-20:45",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing on the sofa"
+    },
+    {
+      "time": "20:45-21:30",
+      "location": "Bedroom 1",
+      "activity": "Using Computer at the desk for personal emails and planning the next day's program tasks"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and brushing teeth"
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down with Phone, reading and preparing for sleep"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
