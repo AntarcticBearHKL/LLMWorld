@@ -1,0 +1,242 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in on a Saturday morning, fan on for air circulation",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and taking a warm shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with the kettle and toaster, brewing tea",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:45-09:30",
+      "location": "Kitchen",
+      "activity": "Clearing breakfast dishes, wiping counters and running the dishwasher",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "09:30-10:30",
+      "location": "Living Room",
+      "activity": "Weekend chores: vacuuming floors and tidying the living area",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:30-12:00",
+      "location": "Out",
+      "activity": "Walking to the local market for the weekly grocery shopping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Unpacking and organising groceries into the refrigerator and cupboards",
+      "operations": []
+    },
+    {
+      "time": "12:30-13:30",
+      "location": "Kitchen",
+      "activity": "Cooking a light midday meal on the induction cooker and eating it",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:30-14:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV with the air conditioner on",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:30-16:30",
+      "location": "Out",
+      "activity": "Afternoon leisure: brisk walk and casual sports at the neighbourhood park",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of sweaty clothes after exercise",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:40",
+      "location": "Bedroom 1",
+      "activity": "Using the computer to review next week's community program schedule and note the new peak electricity hours (16:00-21:00) from Monday",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:40-18:45",
+      "location": "Kitchen",
+      "activity": "Preparing dinner, chopping vegetables and cooking on the induction cooker while the range hood runs",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner and cleaning up the table",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing with TV and light reading under the air conditioner",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down with the desk lamp on, browsing the phone and reading before bed",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night routine: washing face, brushing teeth and preparing for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, fan running at low speed for comfort",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}
