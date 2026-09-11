@@ -11,6 +11,11 @@
 
 ## RQ2 — Behavioural transmission of external inputs
 
+> **Summary**: two results are statistically significant across three worlds — **heatwave → cooling**
+> (baseline AC 0/9 vs 11/12, two-sided p≈0.00003) and **lockdown → stay-home** (Out 13/13 → 1/13,
+> p≈0.000003, plus a judgeable **+122% daytime-load magnitude**). Other interventions are directional,
+> inconclusive, or null (below).
+
 - **Heatwave (binary signal, statistically significant)**: a natural-language heatwave event causes
   agents to switch the air-conditioner on. Aggregating all post-fix runs **across three independent
   worlds**, the AC was active in **0/9** baseline vs **11/12** heatwave member-days (Fisher two-sided
