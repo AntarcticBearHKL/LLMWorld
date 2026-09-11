@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Wake up, wash face and take a cool shower to start the day"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Prepare and eat breakfast with a large glass of water and refill a water bottle for the day"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Get dressed in work uniform and pack bag for the day shift"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commute to the hospital, walking in the shade to avoid the heatwave"
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Work clinical day shift: patient care, observations and charting"
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Lunch break, eating and rehydrating during the heatwave"
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Continue clinical duties and complete shift handover"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commute home after the day shift"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cook and eat a simple dinner while keeping appliance use minimal due to the grid supply warning"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Bathroom",
+      "activity": "Take a cool shower and freshen up after the hot commute"
+    },
+    {
+      "time": "19:15-21:00",
+      "location": "Living Room",
+      "activity": "Relax and unwind, watching TV and using the computer with lights kept off"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Kitchen",
+      "activity": "Prepare a light snack and next-day water bottle, then tidy the kitchen"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Wind down on the bed, reading and checking the phone while the air conditioner runs on an energy-saving setting"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

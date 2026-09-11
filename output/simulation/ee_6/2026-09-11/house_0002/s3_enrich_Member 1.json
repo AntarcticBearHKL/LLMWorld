@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Closes eyes. Turns to right side. Pulls blanket over shoulders. Adjusts pillow. Turns to left side. Moves arm. Breathes deeply. Remains still. Turns onto back. Kicks off blanket. Pulls blanket back up. Adjusts position. Turns to side. Remains still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and taking a quick cool shower before the hot day begins",
+      "desc": "Opens eyes. Sits up. Swings legs over side. Stands up. Walks to bathroom. Turns on bathroom light. Turns on tap. Washes face. Turns off tap. Turns on shower. Adjusts temperature. Steps into shower. Washes body. Turns off shower. Steps out. Picks up towel. Dries body. Turns off light. Walks out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, drinking water to stay hydrated",
+      "desc": "Enters kitchen. Turns on light. Opens refrigerator. Takes out eggs and milk. Closes refrigerator. Opens cabinet. Takes out plate. Opens drawer. Takes out fork. Cracks eggs into bowl. Beats eggs. Turns on stove. Places pan on stove. Pours eggs into pan. Cooks eggs. Turns off stove. Places eggs on plate. Sits at table. Eats breakfast. Drinks water."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work clothes and packing bag for the work shift",
+      "desc": "Enters bedroom. Opens closet. Takes out work clothes. Lays clothes on bed. Takes off pajamas. Puts on shirt. Puts on pants. Puts on socks. Puts on shoes. Opens drawer. Takes out stethoscope. Places stethoscope in bag. Opens bag. Puts in notebook. Puts in pen. Zips bag. Picks up bag. Walks out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift",
+      "desc": "Walks to bus stop. Waits for bus. Checks phone. Bus arrives. Boards bus. Pays fare. Finds seat. Sits down. Looks out window. Bus stops. Gets off bus. Walks to hospital. Enters hospital. Walks to elevator. Presses button. Enters elevator. Exits elevator. Walks to ward."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, attending to patients and clinical duties on the ward",
+      "desc": "Arrives at ward. Puts on scrubs. Washes hands. Picks up clipboard. Reviews patient charts. Walks to patient room. Knocks on door. Enters room. Greets patient. Checks vital signs. Uses stethoscope. Adjusts IV drip. Administers medication. Writes notes. Walks to nurses' station. Discusses with colleague. Answers phone. Attends meeting. Washes hands. Ends shift."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Walks to bus stop. Waits for bus. Checks phone. Bus arrives. Boards bus. Pays fare. Finds seat. Sits down. Looks out window. Bus stops. Gets off bus. Walks home. Enters home. Walks to kitchen."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Enters kitchen. Turns on light. Opens refrigerator. Takes out vegetables and chicken. Closes refrigerator. Places on counter. Opens drawer. Takes out knife. Cuts vegetables. Turns on stove. Places pan on stove. Pours oil. Adds chicken. Stir-fries. Adds vegetables. Cooks. Turns off stove. Places food on plate. Sits at table. Eats dinner. Drinks water."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying up the kitchen",
+      "desc": "Clears table. Scrapes food into trash. Turns on tap. Picks up sponge. Adds soap. Washes dishes. Rinses dishes. Places dishes in drying rack. Turns off tap. Wipes counter with cloth. Puts away dishes. Sweeps floor. Takes out trash. Turns off light."
+    },
+    {
+      "time": "19:15-21:00",
+      "location": "Bedroom 1",
+      "activity": "Relaxing in the cooled bedroom with the air conditioner on, watching TV",
+      "desc": "Enters bedroom. Turns on air conditioner. Adjusts temperature. Turns on TV. Picks up remote. Changes channel. Sits on bed. Watches TV. Gets up. Goes to kitchen. Returns with snack. Sits down. Eats snack. Watches TV. Turns off TV. Turns off air conditioner."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and getting ready for bed",
+      "desc": "Enters bathroom. Turns on light. Turns on shower. Adjusts temperature. Steps into shower. Washes body. Washes hair. Turns off shower. Steps out. Picks up towel. Dries body. Dries hair. Puts on pajamas. Brushes teeth. Turns off light. Exits bathroom."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down, checking phone and setting an alarm for the next shift",
+      "desc": "Enters bedroom. Picks up phone. Unlocks phone. Checks messages. Scrolls through phone. Sets alarm. Places phone on nightstand. Turns off light. Lies down. Adjusts pillow. Closes eyes. Turns to side. Pulls blanket up."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Closes eyes. Turns to right side. Pulls blanket over shoulders. Adjusts pillow. Turns to left side. Moves arm. Breathes deeply. Remains still. Turns onto back. Kicks off blanket. Pulls blanket back up. Adjusts position. Turns to side. Remains still."
+    }
+  ]
+}
