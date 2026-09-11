@@ -1,8 +1,8 @@
 # Experiment: Air-conditioner peak tax (`ac_tax`)
 
-> 状态：**定稿（有效果；跨 2 世界复现）**：热浪背景下 ac_tax 使 **AC 启用 15/15 → 7/15**（Fisher 双侧 **p≈0.0022**，漂移免疫），
+> 状态：**定稿（有效果；跨 3 世界复现）**：热浪背景下 ac_tax 使 **AC 启用 15/15 → 7/15**（Fisher 双侧 **p≈0.0022**，漂移免疫），
 > 峰段 **−22.5%（t=−2.36, p≈0.033）**、AC kWh **−53.8%（p≈0.009）**（world_838587, n=15，same-era 交错）；
-> **world_172148 复现**：峰段 **−24.6%（p≈0.034）**、AC-on **9/9→3/9（p≈0.009）**（R120, n=9）。数值来自 R118/R120。
+> **world_172148（−24.6%）/ world_143345（−17.2%）复现**（R120/R122, n=9）。数值来自 R118/R120/R122。
 
 ## 1. Research Question
 
@@ -75,3 +75,18 @@ Replicated on `world_172148` house_0002 Member 1 (AC = `living_room_aircondition
 
 Peak effect **nearly identical across worlds (−22.5% vs −24.6%)**; AC-on significant in both
 (Fisher p≈0.0022 and ≈0.009). `ac_tax` is thus a **2-world-replicated** effective event.
+
+### Third world (R122)
+
+Replicated on `world_143345` house_0002 Member 1 (3 ACs), n=9:
+
+| 世界 | n | 峰段 Δ | AC Δ | AC-on | 峰段 t |
+|---|---|---|---|---|---|
+| world_838587 (R118) | 15 | **−22.5%** | −53.8% | 15/15→7/15 | −2.36 |
+| world_172148 (R120) | 9 | **−24.6%** | −67.0% | 9/9→3/9 | −2.56 |
+| **world_143345 (R122)** | 9 | **−17.2%** | −23.7% | 9/9→9/9 | −2.27 |
+
+**Peak effect negative in all three worlds** (−22.5% / −24.6% / −17.2%, mean ≈ −21.4%). The form is
+heterogeneous: W1/W2 turn AC *off* (binary significant), W3 only *reduces* AC (binary unchanged) —
+consistent with "event effects condition on baseline appliance configuration" (R082/R083). `ac_tax` is
+thus a **3-world-replicated** effective event, on par with heatwave/lockdown/cold-snap.
