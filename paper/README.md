@@ -10,7 +10,7 @@
 | **热浪事件 → 空调启用** | baseline AC 0/9 vs heatwave 11/12 | **≈0.00003** |
 | **封锁事件 → 外出归零** | baseline Out>0 13/13 vs lockdown 1/13 | **≈0.000003** |
 | **封锁事件 → 日间负荷 +122%** | 13 对配对 **+2.183 kWh**（13/13, t≈8.04） | 可判幅度（>噪声地板） |
-| 寒潮事件 → 采暖启用 | baseline 0/8 vs cold_snap 4/8 | 0.077（仅单侧 0.038；跨世界未复现） |
+| **寒潮事件 → 采暖启用** | baseline 0/10 vs cold_snap 6/10 | **≈0.011** |
 
 **方法学**：运行间噪声地板 std≈1.0 kWh（CV≈12%，R057）；单次/单臂不可信；功效分析表明文献尺度
 幅度（~3%）不可行，仅大效应（≥10–20%）可判（R058）。平台适合**定性/方向、异质性、大效应二值**结论。
@@ -40,7 +40,7 @@
 | 夜间回温 night_setback | RQ2 | Cabezas-Riviere 2025 | 采暖 −5~10% | 占位(待跑) | `experiments/night_setback.md` |
 | 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | 占位(待跑) | `experiments/in_home_display.md` |
 | 封锁事件 lockdown | RQ2 | Xia et al. 2026 | 日间用量上升 | 有效果(二值跨3世界:Out>0 13/13→1/13, Fisher 双侧 p≈0.000003) | `experiments/event_lockdown.md` |
-| 寒潮事件 cold_snap | RQ2 | Xia et al. 2026 | 采暖上升 | 初步(采暖 0/8 vs 4/8;单侧 p=0.038,双侧 0.077 未显著) | `experiments/event_cold_snap.md` |
+| 寒潮事件 cold_snap | RQ2 | Xia et al. 2026 | 采暖上升 | 有效果(二值:采暖 0/10 vs 6/10, 双侧 p≈0.011) | `experiments/event_cold_snap.md` |
 | 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(二值跨3世界:baseline AC 0/9 vs heatwave 11/12, Fisher 双侧 p≈0.00003) | `experiments/event_heatwave.md` |
 | 邻居比较 peer_nudge | RQ2 | Ayres 2013 | −1~3%，高耗家庭更强 | 初步(不一致：−6.6~+11.6%) | `experiments/peer_nudge.md` |
 | 群体异质性 | RQ3 | Costa & Kahn 2010 | 环境派 2~4% / 保守派 ~0 | 名义方向但方差压倒(不可定论) | `experiments/group_heterogeneity.md` |

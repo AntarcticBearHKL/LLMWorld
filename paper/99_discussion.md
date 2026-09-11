@@ -11,10 +11,10 @@
 
 ## RQ2 — Behavioural transmission of external inputs
 
-> **Summary**: two results are statistically significant across three worlds — **heatwave → cooling**
-> (baseline AC 0/9 vs 11/12, two-sided p≈0.00003) and **lockdown → stay-home** (Out 13/13 → 1/13,
-> p≈0.000003, plus a judgeable **+122% daytime-load magnitude**). Other interventions are directional,
-> inconclusive, or null (below).
+> **Summary**: **three** results are statistically significant across three worlds — **heatwave → cooling**
+> (baseline AC 0/9 vs 11/12, two-sided p≈0.00003), **lockdown → stay-home** (Out 13/13 → 1/13,
+> p≈0.000003, plus a judgeable **+122% daytime-load magnitude**), and **cold-snap → heating**
+> (0/10 vs 6/10, two-sided p≈0.011). Other interventions are directional, inconclusive, or null (below).
 
 - **Heatwave (binary signal, statistically significant)**: a natural-language heatwave event causes
   agents to switch the air-conditioner on. Aggregating all post-fix runs **across three independent
@@ -25,10 +25,9 @@
   otherwise agents ignore it (observed failure → fixed by event↔weather linkage). Note that the
   single-sample *total-energy* increases (+17%~+64%) are noise-dominated (cf. noise floor, R057) and
   are not claimed.
-- **Cold-snap (binary, one-sided only)**: a `cold_snap` event switched heating devices from off to on
-  (baseline **0/8** vs **4/8**). Fisher **one-sided p ≈ 0.038 but two-sided p ≈ 0.077** (exact, R072),
-  so it does **not** reach the conventional two-sided α=0.05 — direction consistent, evidence
-  insufficient. Activation probability (50%) is also lower than the heatwave's (90%).
+- **Cold-snap (binary signal, significant)**: a `cold_snap` event switched heating devices from off to
+  on — baseline **0/10** vs **6/10** (Fisher two-sided **p ≈ 0.011**, across three worlds, R093).
+  Activation probability (60%) is lower than the heatwave's (~92%) — response robustness differs by event.
 - **Lockdown (binary signal, strongest)**: a `lockdown` event removed almost all out-of-home time —
   baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
   **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
