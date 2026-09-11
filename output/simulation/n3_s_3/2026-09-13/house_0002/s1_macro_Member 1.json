@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-08:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Bathroom",
+      "activity": "Morning hygiene and washing up"
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "Kitchen",
+      "activity": "Eating breakfast"
+    },
+    {
+      "time": "09:00-10:30",
+      "location": "Out",
+      "activity": "Grocery shopping"
+    },
+    {
+      "time": "10:30-11:00",
+      "location": "Kitchen",
+      "activity": "Unpacking groceries and organizing"
+    },
+    {
+      "time": "11:00-12:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch"
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "Out",
+      "activity": "Exercising and walking in the park"
+    },
+    {
+      "time": "15:00-17:00",
+      "location": "Living Room",
+      "activity": "Watching TV or leisure reading"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Bedroom 1",
+      "activity": "Using computer and browsing internet"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "20:00-22:00",
+      "location": "Living Room",
+      "activity": "Watching TV or movie"
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down with phone and reading"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

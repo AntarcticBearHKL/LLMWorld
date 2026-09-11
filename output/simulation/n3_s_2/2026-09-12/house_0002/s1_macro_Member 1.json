@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "07:30-07:45",
+      "location": "Bedroom 1",
+      "activity": "Waking up and getting out of bed"
+    },
+    {
+      "time": "07:45-08:15",
+      "location": "Bathroom",
+      "activity": "Showering and morning hygiene"
+    },
+    {
+      "time": "08:15-08:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "08:45-09:30",
+      "location": "Kitchen",
+      "activity": "Cleaning up after breakfast"
+    },
+    {
+      "time": "09:30-11:00",
+      "location": "Out (out)",
+      "activity": "Grocery shopping and running errands"
+    },
+    {
+      "time": "11:00-12:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch"
+    },
+    {
+      "time": "13:00-14:30",
+      "location": "Out (out)",
+      "activity": "Jogging in the park"
+    },
+    {
+      "time": "14:30-15:00",
+      "location": "Bathroom",
+      "activity": "Showering after exercise"
+    },
+    {
+      "time": "15:00-17:00",
+      "location": "Living Room",
+      "activity": "Leisure time watching TV and using computer"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "Reading"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and cooking dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "20:00-22:00",
+      "location": "Living Room",
+      "activity": "Watching TV and playing games"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Evening hygiene"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

@@ -1,0 +1,677 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-08:00",
+      "start_minutes": 0,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "start_minutes": 480,
+      "end_minutes": 510,
+      "location": "Bathroom",
+      "activity": "Morning hygiene",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_clothesdryer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:00",
+      "start_minutes": 510,
+      "end_minutes": 540,
+      "location": "Kitchen",
+      "activity": "Breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:00-09:30",
+      "start_minutes": 540,
+      "end_minutes": 570,
+      "location": "Living Room",
+      "activity": "Vacuuming",
+      "operations": [
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:30-10:30",
+      "start_minutes": 570,
+      "end_minutes": 630,
+      "location": "Out",
+      "activity": "Grocery shopping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "10:30-11:00",
+      "start_minutes": 630,
+      "end_minutes": 660,
+      "location": "Kitchen",
+      "activity": "Unpacking groceries",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:00-12:00",
+      "start_minutes": 660,
+      "end_minutes": 720,
+      "location": "Living Room",
+      "activity": "Watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Kitchen",
+      "activity": "Lunch",
+      "operations": [
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-14:00",
+      "start_minutes": 780,
+      "end_minutes": 840,
+      "location": "Living Room",
+      "activity": "Using computer",
+      "operations": [
+        {
+          "unique_id": "living_room_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "14:00-15:30",
+      "start_minutes": 840,
+      "end_minutes": 930,
+      "location": "Out",
+      "activity": "Outdoor exercise",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:30-16:00",
+      "start_minutes": 930,
+      "end_minutes": 960,
+      "location": "Bathroom",
+      "activity": "Shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_clothesdryer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:00-17:00",
+      "start_minutes": 960,
+      "end_minutes": 1020,
+      "location": "Living Room",
+      "activity": "Reading",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Bedroom 1",
+      "activity": "Phone call",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Living Room",
+      "activity": "Watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "start_minutes": 1140,
+      "end_minutes": 1200,
+      "location": "Kitchen",
+      "activity": "Dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "start_minutes": 1200,
+      "end_minutes": 1230,
+      "location": "Kitchen",
+      "activity": "Cleaning kitchen",
+      "operations": [
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:00",
+      "start_minutes": 1230,
+      "end_minutes": 1320,
+      "location": "Living Room",
+      "activity": "Watching movie",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bathroom",
+      "activity": "Evening hygiene",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_clothesdryer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bedroom 1",
+      "activity": "Reading",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}
