@@ -1,0 +1,276 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:30",
+      "start_minutes": 0,
+      "end_minutes": 450,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "start_minutes": 450,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Waking up, stretching, and getting out of bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "start_minutes": 480,
+      "end_minutes": 510,
+      "location": "Bathroom",
+      "activity": "Showering and personal hygiene",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:00",
+      "start_minutes": 510,
+      "end_minutes": 540,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "09:00-10:30",
+      "start_minutes": 540,
+      "end_minutes": 630,
+      "location": "Out",
+      "activity": "Grocery shopping",
+      "operations": []
+    },
+    {
+      "time": "10:30-11:00",
+      "start_minutes": 630,
+      "end_minutes": 660,
+      "location": "Kitchen",
+      "activity": "Unpacking groceries and organizing",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:00-12:00",
+      "start_minutes": 660,
+      "end_minutes": 720,
+      "location": "Living Room",
+      "activity": "Vacuuming and tidying the living room",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-14:30",
+      "start_minutes": 780,
+      "end_minutes": 870,
+      "location": "Living Room",
+      "activity": "Watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:30-16:00",
+      "start_minutes": 870,
+      "end_minutes": 960,
+      "location": "Out",
+      "activity": "Going for a run",
+      "operations": []
+    },
+    {
+      "time": "16:00-16:30",
+      "start_minutes": 960,
+      "end_minutes": 990,
+      "location": "Bathroom",
+      "activity": "Cooling down and showering",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:30",
+      "start_minutes": 990,
+      "end_minutes": 1050,
+      "location": "Bedroom 1",
+      "activity": "Using computer for personal projects",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-19:00",
+      "start_minutes": 1050,
+      "end_minutes": 1140,
+      "location": "Living Room",
+      "activity": "Reading and relaxing",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "start_minutes": 1140,
+      "end_minutes": 1200,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:30",
+      "start_minutes": 1200,
+      "end_minutes": 1290,
+      "location": "Living Room",
+      "activity": "Watching a movie",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "start_minutes": 1290,
+      "end_minutes": 1350,
+      "location": "Bedroom 1",
+      "activity": "Using computer or phone",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:30",
+      "start_minutes": 0,
+      "end_minutes": 450,
+      "location": "Bedroom 1",
+      "activity": "Sleeping in on the weekend",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "start_minutes": 450,
+      "end_minutes": 480,
+      "location": "Bathroom",
+      "activity": "Showering and washing up with hot water",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:45",
+      "start_minutes": 480,
+      "end_minutes": 525,
+      "location": "Kitchen",
+      "activity": "Boiling the kettle and toasting bread for a relaxed weekend breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:45-09:20",
+      "start_minutes": 525,
+      "end_minutes": 560,
+      "location": "Kitchen",
+      "activity": "Washing the dishes and loading the dishwasher, running it now while power is still off-peak",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "09:20-10:30",
+      "start_minutes": 560,
+      "end_minutes": 630,
+      "location": "Living Room",
+      "activity": "Vacuuming the living room and doing weekend tidying",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:30-12:15",
+      "start_minutes": 630,
+      "end_minutes": 735,
+      "location": "Out",
+      "activity": "Grocery shopping and running errands in the neighbourhood",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:15-13:15",
+      "start_minutes": 735,
+      "end_minutes": 795,
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch at home",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:15-14:30",
+      "start_minutes": 795,
+      "end_minutes": 870,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:30-16:00",
+      "start_minutes": 870,
+      "end_minutes": 960,
+      "location": "Out",
+      "activity": "Afternoon walk in the park and a coffee stop",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:45",
+      "start_minutes": 960,
+      "end_minutes": 1005,
+      "location": "Kitchen",
+      "activity": "Batch cooking and prepping vegetables for the coming week",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:45-18:00",
+      "start_minutes": 1005,
+      "end_minutes": 1080,
+      "location": "Bedroom 1",
+      "activity": "Reading and drafting next week's community program notes under the desk lamp",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Living Room",
+      "activity": "Watching TV before dinner",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "start_minutes": 1140,
+      "end_minutes": 1200,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "start_minutes": 1200,
+      "end_minutes": 1230,
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher, setting a delayed start so it runs after the evening peak",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:30",
+      "start_minutes": 1230,
+      "end_minutes": 1350,
+      "location": "Living Room",
+      "activity": "Watching TV and playing video games",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bathroom",
+      "activity": "Brushing teeth and washing up before bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Winding down on the phone with the fan on, then going to sleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
