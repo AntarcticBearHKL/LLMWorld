@@ -1,7 +1,7 @@
 # Experiment: Time-of-use pricing (TOU)
 
-> 状态：**不可定论（same-era 名义 −17.5% 削峰，n.s.）**：早期"方向翻转"（R023/R026）受**跨时段漂移**污染；
-> **同批次交错**重测（R111）方向稳定为削峰（峰段 −17.5%、总电量持平），但 n=3 不显著（t≈−1.39），需大 N。
+> 状态：**null（峰段）+ 总电量 +13.1%（borderline）**：n=3 曾见 −17.5% 削峰，但**扩样 n=9 塌缩为 −2.2%（n.s., t=−0.28）**——R111 系小样本假象；
+> 且总电量 **+13.1%**（7/9 对为正，t=2.11，**非漂移**，斜率≈0）。数值来自 R112。
 
 ## 1. Research Question
 
@@ -91,3 +91,18 @@ Paired peak diffs = [−1.588, +0.182, −0.374] → mean −0.593, std 0.739, *
 earlier apparent "flip", which was a cross-time artifact. Nominal magnitude (−17.5%) exceeds the guide's
 −3~6%, but n=3 with paired std≈0.74 kWh → needs **n≥15** to reach significance. Total load is flat
 (−0.0%), consistent with pure peak-shifting. **Status: inconclusive (underpowered), not contradicted.**
+
+### R112 — extended to n=9: the −17.5% was a small-sample fluke
+
+Adding 6 more interleaved pairs (`tb_4..9`/`tt_4..9`, same batch) → **n=9**:
+
+| 指标 | baseline | tou | Δ | paired mean ± std | t(df=8) |
+|---|---|---|---|---|---|
+| 总电量 kWh | 7.754 ± 1.065 | 8.771 ± 0.911 | **+13.1%** | **+1.018 ± 1.444** | **+2.11** |
+| 峰段 (16–21) kWh | 3.580 ± 0.519 | 3.502 ± 1.038 | **−2.2%** | −0.079 ± 0.838 | **−0.28** |
+
+- **峰段效应塌缩到 −2.2% (n.s.)** → R111 的 −17.5% 是小样本假象；**TOU 不削峰**；
+- **总电量 +13.1%**（7/9 对为正，t=2.11，双侧 p≈0.067）：**非漂移**（总电量–次序回归斜率 ≈ 0），
+  提示 TOU 文本触发**过度遵从**（为峰移多开家电）→ 能耗净增；
+- Consistent with R026 (unstable), R040 (over-compliance), and the mainline "soft/price interventions
+  are weak or adverse on LLM agents".
