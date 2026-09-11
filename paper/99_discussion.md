@@ -77,6 +77,7 @@
   peak-window load by **−99.7%** but the agent switched to the **oven (+0.93 kWh) and microwave
   (+0.70 kWh)**, leaving the total peak unchanged (−0.2%). Non-substitutable cooling (AC) does shave the
   peak; substitutable cooking does not. The dose law is therefore bounded by appliance substitutability.
+  (Replicated on a second household, R149: cooker −1.64 → oven +1.02 / microwave +0.76, total peak +0.23.)
 - **Future-oriented notices (world-specific, R141/R142/R146)**: on `world_838587` house_0002 a *future*
   TOU-tariff announcement and a community notice **increased** current total energy (+20.8%, p≈0.0001,
   n=15; +11.0%, p≈0.026, n=15) with no peak change, while a neutral custom event did not (+7.9%, n.s.).
