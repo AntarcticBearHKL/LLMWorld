@@ -1,0 +1,352 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-12 00:45:28
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 24
+- Occupation: Full-time Master of Education student at Monash University; part-time hospitality and retail worker
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping through the night"
+  },
+  {
+    "time": "06:30-07:00",
+    "location": "Bathroom",
+    "activity": "Waking up, showering and getting dressed for the day"
+  },
+  {
+    "time": "07:00-07:30",
+    "location": "Kitchen",
+    "activity": "Making and eating a quick breakfast of toast and tea using the kettle and toaster"
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Bedroom 1",
+    "activity": "Packing study materials, laptop and charger into bag and finalising notes for the day"
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Out",
+    "activity": "Commuting to Monash University for the day of study"
+  },
+  {
+    "time": "09:00-12:30",
+    "location": "Out",
+    "activity": "Attending Master of Education lectures and tutorials on campus"
+  },
+  {
+    "time": "12:30-13:30",
+    "location": "Out",
+    "activity": "Eating lunch on campus and reading assigned articles"
+  },
+  {
+    "time": "13:30-17:00",
+    "location": "Out",
+    "activity": "Studying in the campus library, working on coursework and group project tasks"
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Out",
+    "activity": "Commuting home from university"
+  },
+  {
+    "time": "18:00-19:00",
+    "location": "Kitchen",
+    "activity": "Preparing and eating dinner using the microwave and oven, avoiding the induction cooker during the evening peak grid hours"
+  },
+  {
+    "time": "19:00-21:00",
+    "location": "Bedroom 1",
+    "activity": "Completing assignment readings and coursework on the computer at the desk with the desk lamp on"
+  },
+  {
+    "time": "21:00-21:45",
+    "location": "Living Room",
+    "activity": "Relaxing on the couch watching TV"
+  },
+  {
+    "time": "21:45-22:15",
+    "location": "Bathroom",
+    "activity": "Evening wash, brushing teeth and skincare routine"
+  },
+  {
+    "time": "22:15-23:00",
+    "location": "Bedroom 1",
+    "activity": "Reviewing tomorrow's schedule on the phone and winding down before sleep"
+  },
+  {
+    "time": "23:00-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": []
+  },
+  "Bedroom 2": {
+    "appliances": []
+  },
+  "Bedroom 3": {
+    "appliances": []
+  },
+  "Bedroom 4": {
+    "appliances": []
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "RiceCooker",
+      "InductionCooker",
+      "RangeHood",
+      "Kettle",
+      "Toaster",
+      "Oven",
+      "Freezer"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "WashingMachine"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "GameConsole",
+      "Router",
+      "AirConditioner",
+      "Fan",
+      "Light"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp",
+      "Monitor"
+    ]
+  },
+  "Member 3 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp"
+    ]
+  },
+  "Member 4 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping through the night",
+      "desc": "Lie down on the bed. Pull the blanket over the body. Close eyes. Remain still. Turn onto the left side. Pull the blanket up to the shoulder. Remain still. Turn onto the right side. Push the pillow with the hand. Remain still. Turn onto the back. Move the arm under the blanket. Remain still. Turn onto the left side again. Pull the blanket up. Remain still until the alarm sounds."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting dressed for the day",
+      "desc": "Open eyes. Reach the arm to the phone on the bedside table. Pick up the phone. Press the phone screen to stop the alarm. Put the phone down. Sit up on the bed. Swing both legs to the floor. Stand up. Walk to the bathroom. Push the bathroom door open. Turn on the bathroom light. Turn on the shower tap. Step into the shower. Wet the hair and body with water. Pick up the shampoo bottle. Squeeze shampoo into the hand. Rub shampoo into the hair. Rinse the hair. Pick up the soap. Rub soap over the body. Rinse the body. Turn off the shower tap. Step out of the shower. Pick up the towel from the rail. Wipe the hair with the towel. Wipe the body with the towel. Hang the towel back on the rail. Pick up the clothes. Put on the shirt. Put on the trousers. Turn off the bathroom light. Open the bathroom door."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating a quick breakfast of toast and tea using the kettle and toaster",
+      "desc": "Walk into the kitchen. Open the refrigerator door. Take out the bread and the milk. Close the refrigerator door. Put the bread bag on the counter. Open the bread bag. Take out two slices of bread. Put the slices into the toaster. Press the toaster lever down. Open the cupboard door. Take out a mug and a plate. Put the mug on the counter. Put the plate on the counter. Close the cupboard door. Pick up the kettle. Fill the kettle with water from the tap. Put the kettle on the base. Press the kettle switch on. Open the cupboard door. Take out a tea bag. Close the cupboard door. Drop the tea bag into the mug. Pour milk from the carton into the mug. Put the carton back. Wait beside the counter. Hear the toaster click. Pick up the toast slices with the hand. Put the toast onto the plate. Pick up the kettle. Pour hot water into the mug. Put the kettle down. Pick up the plate. Carry the plate and mug to the table. Sit down on the chair. Pick up a toast slice. Bite the toast. Chew and swallow. Pick up the mug. Sip the tea. Put the mug down. Pick up the second toast slice. Bite and chew. Pick up the mug. Finish the tea. Stand up. Carry the plate and mug to the sink. Put the plate and mug into the sink. Pick up a cloth. Wipe the table. Put the cloth down."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Packing study materials, laptop and charger into bag and finalising notes for the day",
+      "desc": "Walk to Bedroom 1. Open the bedroom door. Walk to the desk. Pull the chair out. Sit down on the chair. Open the laptop lid. Press the power button. Wait for the screen to light up. Move the hand on the touchpad. Open the notes file. Read the notes on the screen. Type several lines on the keyboard. Press the save key. Close the notes file. Shut down the laptop. Close the laptop lid. Pick up the charger from the desk. Wrap the charger cable with the hand. Pick up the laptop. Put the laptop into the bag. Put the charger into the bag. Pick up the notebook and the pen from the desk. Put the notebook and pen into the bag. Zip the bag closed. Pick up the phone from the desk. Put the phone into the pocket. Stand up. Push the chair back under the desk. Pick up the bag. Put the bag on the shoulder. Walk to the bedroom door. Open the door. Walk out. Close the door."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University for the day of study",
+      "desc": "Walk from the front door to the street. Walk along the footpath to the bus stop. Stop at the bus stop. Take the phone out of the pocket. Press the phone screen. Check the bus timetable on the phone. Put the phone back into the pocket. Stand and wait. Step onto the bus. Take the travel card out of the pocket. Tap the card on the card reader. Put the card back into the pocket. Walk down the aisle. Sit down on a seat. Put the bag on the lap. Hold the bag with both hands. Look through the window. Stand up when the stop nears. Pull the stop cord. Walk to the bus door. Step off the bus. Walk to the tram stop. Wait at the tram stop. Step onto the tram. Tap the travel card on the reader. Sit down on a seat. Stand up at the university stop. Step off the tram. Walk along the campus path to the lecture building. Push the building door open. Walk into the corridor."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and tutorials on campus",
+      "desc": "Walk into the lecture theatre. Walk down the steps. Sit down on a seat. Put the bag on the floor. Take the laptop out of the bag. Open the laptop lid. Press the power button. Take the notebook and the pen out of the bag. Put the notebook on the desk. Open the notebook. Pick up the pen. Write the lecture title in the notebook. Look at the lecturer at the front. Write notes in the notebook. Turn the page. Type notes on the laptop keyboard. Raise the hand. Ask the lecturer a question. Speak to the lecturer. Put the hand down. Write the answer in the notebook. Close the laptop lid. Pack the laptop into the bag. Pack the notebook and pen into the bag. Zip the bag. Stand up. Pick up the bag. Walk to the next tutorial room. Push the door open. Sit down on a chair at the table. Take the notebook out of the bag. Open the notebook. Join the group discussion. Speak to the group members. Point at the notebook page with the pen. Take the printed handout from the tutor. Read the handout. Write on the handout with the pen. Stand up. Pick up the bag. Walk out of the room. Walk to the campus cafe. Stand in the queue."
+    },
+    {
+      "time": "12:30-13:30",
+      "location": "Out",
+      "activity": "Eating lunch on campus and reading assigned articles",
+      "desc": "Walk to the food counter. Pick up a tray. Point at the sandwich. Pick up the sandwich. Put the sandwich on the tray. Pick up a bottle of water. Put the bottle on the tray. Walk to the cashier. Take the bank card out of the wallet. Tap the card on the payment terminal. Put the card back into the wallet. Pick up the tray. Walk to a table. Put the tray down on the table. Pull the chair out. Sit down on the chair. Pick up the sandwich. Unwrap the sandwich. Bite the sandwich. Chew and swallow. Take the phone out of the pocket. Put the phone on the table. Take the laptop out of the bag. Open the laptop lid. Press the power button. Open the reading file on the screen. Scroll the page with the touchpad. Pick up the sandwich again. Bite and chew. Pick up the water bottle. Twist the cap open. Drink from the bottle. Twist the cap closed. Put the bottle down. Scroll the reading page again. Highlight a paragraph with the cursor. Pick up the last piece of sandwich. Bite and chew. Push the tray to the side. Close the laptop lid. Put the laptop into the bag. Zip the bag. Stand up. Push the chair in. Pick up the bag. Walk to the library."
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Studying in the campus library, working on coursework and group project tasks",
+      "desc": "Walk into the library. Push the door open. Walk between the shelves. Sit down at an empty desk. Put the bag on the floor. Take the laptop out of the bag. Open the laptop lid. Press the power button. Take the charger out of the bag. Plug the charger into the wall socket. Plug the charger cable into the laptop. Take the notebook and pen out of the bag. Open the notebook. Open the coursework file on the screen. Type on the keyboard. Stop typing. Pick up the pen. Write notes in the notebook. Stand up. Walk to the bookshelf. Pull a book from the shelf. Open the book. Read a page. Close the book. Carry the book back to the desk. Put the book on the desk. Sit down. Open the book. Read the chapter. Type a paragraph on the laptop. Turn the book page. Look up at a group member approaching. Speak to the group member about the group project task. Point at the laptop screen. Nod the head. Type the agreed points on the keyboard. Stand up. Walk to the printer. Press the print button on the computer. Pick up the printed pages from the tray. Walk back to the desk. Sit down. Staples are not used; the pages are placed in the folder. Open the folder. Put the pages into the folder. Close the folder. Save the file. Shut down the laptop. Unplug the charger. Wrap the cable. Put the laptop and charger into the bag. Put the notebook and pen into the bag. Zip the bag. Stand up. Push the chair in. Pick up the bag. Walk out of the library."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from university",
+      "desc": "Walk from the library to the tram stop. Stand at the tram stop. Take the phone out of the pocket. Press the phone screen. Check the tram arrival time on the phone. Put the phone back into the pocket. Step onto the tram. Take the travel card out of the pocket. Tap the card on the reader. Put the card back into the pocket. Walk down the aisle. Sit down on a seat. Put the bag on the lap. Hold the bag with both hands. Look out of the window. Stand up at the stop. Step off the tram. Walk to the bus stop. Wait at the bus stop. Step onto the bus. Tap the travel card on the reader. Sit down on a seat. Stand up at the local stop. Step off the bus. Walk along the footpath. Walk up the steps to the front door. Take the keys out of the bag. Insert the key into the lock. Turn the key. Push the front door open. Walk inside. Close the door. Turn the key to lock the door. Put the keys into the bag. Take off the shoes. Put the shoes on the shoe rack. Walk to the kitchen."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner using the microwave and oven, avoiding the induction cooker during the evening peak grid hours",
+      "desc": "Walk into the kitchen. Put the bag on the floor. Open the refrigerator door. Take out the vegetables and the container of leftovers. Close the refrigerator door. Put the vegetables on the counter. Put the container on the counter. Open the cupboard door. Take out a plate and a bowl. Close the cupboard door. Put the plate on the counter. Open the freezer door. Take out the frozen meal box. Close the freezer door. Open the meal box. Take the meal out of the box. Put the meal on the plate. Open the oven door. Slide the plate into the oven. Close the oven door. Twist the oven dial to set the temperature. Press the oven start button. Pick up the vegetables. Open the refrigerator door. Put the vegetables back. Close the refrigerator door. Open the microwave door. Put the bowl of soup inside. Close the microwave door. Press the microwave button. Wait for the microwave beep. Open the microwave door. Take the bowl out. Put the bowl on the counter. Wait for the oven timer. Open the oven door. Take the plate out with the oven mitt. Put the plate on the counter. Carry the plate and the bowl to the table. Sit down on the chair. Pick up the fork. Cut the food with the fork. Lift the food to the mouth. Chew and swallow. Pick up the spoon. Stir the soup. Drink the soup. Put the spoon down. Pick up the fork again. Finish the food. Stand up. Carry the plate and bowl to the sink. Put the plate and bowl into the sink. Turn on the tap. Rinse the plate. Turn off the tap."
+    },
+    {
+      "time": "19:00-21:00",
+      "location": "Bedroom 1",
+      "activity": "Completing assignment readings and coursework on the computer at the desk with the desk lamp on",
+      "desc": "Walk to Bedroom 1. Push the bedroom door open. Walk to the desk. Pull the chair out. Sit down on the chair. Press the desk lamp switch on. Take the laptop out of the bag. Open the laptop lid. Press the power button. Take the charger out of the bag. Plug the charger into the wall socket. Plug the charger cable into the laptop. Open the assignment file on the screen. Scroll the page with the touchpad. Type on the keyboard. Stop typing. Pick up the notebook from the desk. Open the notebook. Pick up the pen. Write notes in the notebook. Put the pen down. Type another paragraph on the keyboard. Pick up the phone from the desk. Press the phone screen. Read a message on the phone. Put the phone down. Open the reading PDF on the screen. Scroll the reading page. Highlight a sentence with the cursor. Copy the sentence. Paste the sentence into the assignment file. Type the reference at the end of the sentence. Pick up the pen. Write the reference in the notebook. Put the pen down. Stretch both arms above the head. Stand up. Walk to the kitchen door. Open the door. Walk to the kitchen. Open the refrigerator door. Take out a water bottle. Close the refrigerator door. Walk back to Bedroom 1. Sit down on the chair. Twist the bottle cap open. Drink from the bottle. Twist the cap closed. Put the bottle on the desk. Continue typing on the keyboard. Press the save key. Close the assignment file. Shut down the laptop. Close the laptop lid. Push the chair back. Stand up."
+    },
+    {
+      "time": "21:00-21:45",
+      "location": "Living Room",
+      "activity": "Relaxing on the couch watching TV",
+      "desc": "Walk from Bedroom 1 to the Living Room. Walk to the couch. Sit down on the couch. Reach the arm to the coffee table. Pick up the TV remote. Point the remote at the TV. Press the power button on the remote. Press the channel button. Put the remote down on the couch cushion. Lean back on the couch. Pick up the phone from the pocket. Press the phone screen. Scroll the phone screen with the thumb. Put the phone down on the couch. Look at the TV screen. Pick up the remote. Press the volume up button. Put the remote down. Stretch both legs out. Pick up the phone again. Scroll the phone screen. Put the phone down. Pick up the remote. Press the power button. Stand up from the couch. Walk to the Living Room light switch. Press the light switch off."
+    },
+    {
+      "time": "21:45-22:15",
+      "location": "Bathroom",
+      "activity": "Evening wash, brushing teeth and skincare routine",
+      "desc": "Walk to the bathroom. Push the bathroom door open. Turn on the bathroom light. Turn on the tap. Wet both hands under the water. Turn off the tap. Pick up the facial cleanser bottle. Press the pump. Rub the cleanser over the face with both hands. Turn on the tap. Rinse the face with water. Turn off the tap. Pick up the towel. Wipe the face with the towel. Hang the towel on the rail. Pick up the toothbrush. Turn on the tap. Wet the toothbrush. Turn off the tap. Pick up the toothpaste tube. Twist the cap open. Squeeze toothpaste onto the toothbrush. Twist the cap closed. Put the toothpaste tube down. Lift the toothbrush to the mouth. Brush the teeth. Turn on the tap. Rinse the mouth with water. Spit into the sink. Turn off the tap. Put the toothbrush into the holder. Pick up the moisturiser jar. Twist the lid open. Take cream with the finger. Rub the cream over the face. Twist the lid closed. Put the jar down. Turn off the bathroom light. Walk out of the bathroom. Pull the bathroom door closed."
+    },
+    {
+      "time": "22:15-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reviewing tomorrow's schedule on the phone and winding down before sleep",
+      "desc": "Walk into Bedroom 1. Walk to the desk. Pick up the phone from the desk. Press the phone screen. Open the calendar app. Scroll the calendar with the thumb. Read the timetable entries on the phone. Press the screen to add a note. Type the note text with both thumbs. Press the save button. Close the calendar app. Open the notes app. Scroll the notes list. Close the phone screen. Put the phone on the bedside table. Walk to the wardrobe. Open the wardrobe door. Take out the clothes for tomorrow. Fold the shirt with both hands. Put the folded shirt on the chair. Close the wardrobe door. Walk to the desk. Press the desk lamp switch off. Walk to the bed. Pull the blanket back. Sit down on the bed. Lie down on the bed. Pull the blanket over the body. Turn onto the right side. Reach the arm to the phone on the bedside table. Press the phone screen to check the alarm. Put the phone down. Turn onto the back. Close eyes."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie still on the bed. Pull the blanket up to the shoulder. Turn onto the left side. Adjust the pillow with the hand. Remain still. Turn onto the right side. Move the arm under the blanket. Remain still. Turn onto the back. Remain still. Turn onto the left side. Pull the blanket over the body. Remain still. Breathe steadily. Remain still until midnight."
+    }
+  ]
+}
+```
+

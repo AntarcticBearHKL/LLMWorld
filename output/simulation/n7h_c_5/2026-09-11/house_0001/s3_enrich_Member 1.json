@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Turn onto right side. Adjust pillow. Remain lying with eyes closed. Turn onto left side. Pull blanket up. Remain lying. Turn onto back. Place arm under pillow. Remain lying. Turn onto right side. Pull blanket. Remain lying. At 06:30 open eyes."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and personal hygiene",
+      "desc": "Get out of bed. Walk to Bathroom. Turn on Light. Use toilet. Flush toilet. Turn on tap. Wet hands. Pick up soap. Rub hands. Rinse hands. Turn off tap. Pick up toothbrush. Squeeze toothpaste onto toothbrush. Brush teeth. Rinse mouth. Spit into sink. Turn off tap. Wipe mouth with towel. Turn off Light. Walk out of Bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Enter Kitchen. Turn on Light. Open Refrigerator. Take out milk. Close Refrigerator. Take bowl from cupboard. Pour cereal into bowl. Pour milk into bowl. Put milk back in Refrigerator. Close Refrigerator. Pick up spoon. Sit at table. Eat cereal. Carry bowl and spoon to sink. Rinse bowl. Rinse spoon. Place bowl in sink. Place spoon in sink. Wipe table with cloth. Walk out of Kitchen."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing bag for university",
+      "desc": "Enter Bedroom 1. Open wardrobe. Take out shirt. Take out trousers. Close wardrobe. Take off sleepwear. Put on shirt. Put on trousers. Open drawer. Take out socks. Put on socks. Put on shoes. Place Computer into bag. Place charger into bag. Place notebook into bag. Zip bag. Pick up Phone. Place Phone into pocket. Pick up bag. Walk out of Bedroom 1."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University (public transport)",
+      "desc": "Walk from Bedroom 1 to front door. Open front door. Close front door. Walk to bus stop. Stand at bus stop. Board bus. Tap transit card on reader. Walk to seat. Sit down. Hold bag on lap. Stand up. Walk to bus door. Exit bus. Walk to train station. Tap transit card on reader. Walk to platform. Board train. Sit down. Exit train at station. Walk to Monash University campus."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending lectures and studying at Monash University",
+      "desc": "Enter lecture hall. Walk to seat. Sit down. Take out Computer. Open Computer. Turn on Computer. Type login password. Open note-taking application. Pick up pen. Write notes in notebook. Type notes on Computer. Raise hand. Ask lecturer a question. Listen to answer. Continue typing notes. Save notes. Close Computer. Pack Computer into bag. Stand up. Walk out of lecture hall."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break at university",
+      "desc": "Walk to university cafeteria. Stand in queue. Pick up tray. Take sandwich. Place sandwich on tray. Pick up drink bottle. Place drink bottle on tray. Walk to table. Sit down. Drink water. Eat sandwich. Wipe mouth with napkin. Pick up Phone. Unlock Phone. Type reply. Put Phone down. Stand up. Carry tray to return area. Place tray on stack. Walk out of cafeteria."
+    },
+    {
+      "time": "13:00-16:00",
+      "location": "Out",
+      "activity": "Attending seminars and continuing studies at Monash University",
+      "desc": "Enter seminar room. Walk to seat. Sit down. Take out Computer. Open Computer. Turn on Computer. Open seminar slides. Type notes. Raise hand. Speak in discussion. Listen to classmates. Type notes. Open course reading. Read article. Save notes. Close Computer. Pack Computer into bag. Stand up. Walk out of seminar room."
+    },
+    {
+      "time": "16:00-17:00",
+      "location": "Out",
+      "activity": "Commuting to part-time hospitality/retail job",
+      "desc": "Walk from seminar room to campus exit. Walk to bus stop. Stand at bus stop. Board bus. Tap transit card. Walk to seat. Sit down. Hold bag. Stand up. Walk to bus door. Exit bus. Walk to workplace. Open workplace door. Greet coworker. Walk to staff room. Put bag in locker. Clock in."
+    },
+    {
+      "time": "17:00-21:00",
+      "location": "Out",
+      "activity": "Working part-time shift in hospitality/retail",
+      "desc": "Put on apron. Wash hands. Walk to counter. Greet customer by saying Hello. Ask for order. Press buttons on POS terminal. Process payment. Hand receipt to customer. Pick up cup. Fill cup with drink. Place cup on tray. Carry tray to table. Serve customer. Clear plates from table. Wipe table with cloth. Carry dishes to kitchen. Rinse dishes. Restock cups. Sweep floor. Clock out."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk out of workplace. Walk to bus stop. Stand at bus stop. Board bus. Tap transit card. Walk to seat. Sit down. Hold bag. Stand up. Walk to bus door. Exit bus. Walk to home. Open front door. Close front door. Walk to Kitchen."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a late dinner (using microwave or other appliances)",
+      "desc": "Enter Kitchen. Turn on Light. Open Refrigerator. Take out leftovers container. Close Refrigerator. Open Microwave door. Place container inside Microwave. Close Microwave door. Press start button. Wait for Microwave beep. Open Microwave door. Take out container. Place container on counter. Pick up fork. Sit at table. Eat dinner. Carry container and fork to sink. Rinse container. Rinse fork. Turn off Light. Walk out of Kitchen."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV or using phone",
+      "desc": "Enter Living Room. Sit on sofa. Pick up remote control. Press power button on TV. Watch TV. Press channel button. Change channel. Pick up Phone. Unlock Phone. Scroll through phone. Open message application. Type message. Send message. Put Phone down. Watch TV. Press volume button. Adjust volume. Press power button on TV. Stand up. Walk out of Living Room."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Showering and personal hygiene",
+      "desc": "Enter Bathroom. Turn on Light. Turn on WaterHeater. Turn on shower tap. Take off clothes. Step into shower. Wet body. Pick up soap. Rub soap on body. Rinse body. Pick up shampoo. Pour shampoo into hand. Rub shampoo into hair. Rinse hair. Turn off shower tap. Step out of shower. Pick up towel. Dry body with towel. Turn off Light. Walk out of Bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Getting ready for bed and sleeping",
+      "desc": "Enter Bedroom 1. Close bedroom door. Turn on DeskLamp. Take off clothes. Put on pajamas. Pick up Phone. Open alarm application. Set alarm. Place Phone on bedside table. Plug Phone into charger. Turn off DeskLamp. Lie down on bed. Pull blanket over body. Close eyes. Remain lying with eyes closed. Turn onto right side. Adjust pillow. Remain lying with eyes closed."
+    }
+  ]
+}

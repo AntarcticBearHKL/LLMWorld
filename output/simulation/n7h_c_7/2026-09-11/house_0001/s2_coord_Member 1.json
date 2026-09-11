@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Wake up, shower and morning wash"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Make and eat breakfast using the kettle and toaster"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Get dressed, pack study materials and check the day's class timetable on the computer"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commute to the Monash University campus"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attend Master of Education lectures and seminars on campus"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Study in the campus library and review lecture notes on the laptop"
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Eat lunch on campus"
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Attend afternoon tutorials and work on education coursework assignments"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commute home from campus"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Prepare and eat dinner using the microwave and oven, avoiding the induction cooker during the evening grid peak"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bathroom",
+      "activity": "Shower and freshen up"
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Bedroom 1",
+      "activity": "Study course readings and complete assignment work on the computer under the desk lamp"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Relax watching TV"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Brush teeth and complete nightly wash routine"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Wind down and sleep"
+    }
+  ]
+}

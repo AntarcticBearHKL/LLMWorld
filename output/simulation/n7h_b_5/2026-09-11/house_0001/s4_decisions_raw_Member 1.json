@@ -1,0 +1,191 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:40-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, showering, brushing teeth and getting dressed",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:40",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, packing lunch and study materials",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:30",
+      "location": "Out",
+      "activity": "Commuting to Monash University campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and taking notes on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Out",
+      "activity": "Eating lunch on campus and chatting with classmates",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:45-16:00",
+      "location": "Out",
+      "activity": "Attending tutorials and studying readings in the campus library",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:45",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:45-17:30",
+      "location": "Kitchen",
+      "activity": "Making a snack and preparing a quick meal for later",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work uniform and resting briefly",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Commuting to the hospitality and retail workplace",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-22:15",
+      "location": "Out",
+      "activity": "Working a part-time hospitality and retail shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Out",
+      "activity": "Commuting home after the work shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-23:15",
+      "location": "Bathroom",
+      "activity": "Showering and washing up after work",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:15-23:30",
+      "location": "Kitchen",
+      "activity": "Having a light late snack and a glass of water",
+      "operations": []
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down, reviewing notes on phone and falling asleep",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

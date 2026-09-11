@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in own private bedroom"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Morning wash, brushing teeth and getting dressed (exclusive bathroom use)"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast using the kettle and toaster"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Packing study bag, checking emails and unit notes on the computer at the desk"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University by public transport"
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and seminars on campus"
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Eating lunch on campus"
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Studying in the campus library and attending tutorials"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from campus by public transport"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Heating and eating dinner using the oven and microwave, avoiding the induction cooker during the 5pm-8pm grid peak"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and resting briefly"
+    },
+    {
+      "time": "19:15-19:30",
+      "location": "Out",
+      "activity": "Commuting to the hospitality job"
+    },
+    {
+      "time": "19:30-23:00",
+      "location": "Out",
+      "activity": "Working the evening hospitality and retail shift"
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Out",
+      "activity": "Commuting home from the work shift"
+    },
+    {
+      "time": "23:30-23:50",
+      "location": "Bathroom",
+      "activity": "Quick evening shower and wash (exclusive bathroom use)"
+    },
+    {
+      "time": "23:50-24:00",
+      "location": "Bedroom 1",
+      "activity": "Settling into bed to sleep"
+    }
+  ]
+}
