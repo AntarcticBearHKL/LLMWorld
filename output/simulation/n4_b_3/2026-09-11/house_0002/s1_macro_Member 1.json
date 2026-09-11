@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-06:55",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "06:55-07:20",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a quick breakfast, boiling water with the kettle and toasting bread"
+    },
+    {
+      "time": "07:20-07:55",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift"
+    },
+    {
+      "time": "07:55-17:05",
+      "location": "Out",
+      "activity": "Working as a health care professional, attending to patients and clinical duties at the hospital"
+    },
+    {
+      "time": "17:05-17:35",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "17:35-18:00",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating"
+    },
+    {
+      "time": "18:45-19:10",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher"
+    },
+    {
+      "time": "19:10-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV and browsing the phone"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine, washing up before bed"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using the computer and reading quietly under the desk lamp"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
