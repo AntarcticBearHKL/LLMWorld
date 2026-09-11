@@ -167,6 +167,19 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(tag, "in_home_display")
         self.assertIn("in-home display", text)
 
+    def test_policy_combination(self):
+        text, tag = policy.parse_policy_arg("tou,nudge")
+        self.assertEqual(tag, "tou+nudge")
+        self.assertIn("time-of-use", text)
+        self.assertIn("neighbours", text)
+
+    def test_policy_combination_with_rate_arg(self):
+        text, tag = policy.parse_policy_arg("tou:0.5,0.2,nudge")
+        self.assertEqual(tag, "tou+nudge")
+        self.assertIn("0.50 AUD/kWh", text)
+        self.assertIn("0.20 AUD/kWh", text)
+        self.assertIn("neighbours", text)
+
 
 class PolicyScheduleTests(unittest.TestCase):
     def test_parse_entries(self):
