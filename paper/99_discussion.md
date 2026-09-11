@@ -11,10 +11,12 @@
 
 ## RQ2 — Behavioural transmission of external inputs
 
-> **Summary**: **three** results are statistically significant across three worlds — **heatwave → cooling**
+> **Summary**: **four** results are statistically significant across three worlds — **heatwave → cooling**
 > (baseline AC 0/9 vs 11/12, two-sided p≈0.00003), **lockdown → stay-home** (Out 13/13 → 1/13,
-> p≈0.000003, plus a judgeable **+122% daytime-load magnitude**), and **cold-snap → heating**
-> (0/10 vs 6/10, two-sided p≈0.011). Other interventions are directional, inconclusive, or null (below).
+> p≈0.000003, plus a judgeable **+122% daytime-load magnitude**), **cold-snap → heating**
+> (0/10 vs 6/10, two-sided p≈0.011), and **air-conditioner peak tax → AC-off/peak-shaving** under
+> heatwave (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−17.2% across three worlds, R118/R120/R122).
+> Other interventions are directional, inconclusive, or null (below).
 
 - **Heatwave (binary signal, statistically significant)**: a natural-language heatwave event causes
   agents to switch the air-conditioner on. Aggregating all post-fix runs **across three independent
@@ -43,15 +45,19 @@
   baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
   **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
   R068/R069/R086). The clearest causal chain in this work.
-- **Event-type boundary**: only events that change behaviour *structure* (appliance demand, or
-  home/out-of-home time) produced detectable effects — heatwave, cold-snap, lockdown; a purely
-  informational warning (`storm`) produced none (total −1.5%, no daytime/out-time change, R074).
-  This bounds which interventions the platform can evaluate.
-- Pricing interventions: **TOU not robust** — the peak-shaving direction *reverses* with sampling:
-  reasoning mode gave peak −18%~−26%, while the low-variance no-thinking retest (R026) gave peak
-  **+8%~+30%**; the de-instructionalized `tou_soft` ablation (R024) was self-contradictory. With n=1,
-  the effect is not separable from run/day variance, so no alignment claim is made. Requires
-  multi-household averaging.
+- **Event-type boundary (refined)**: detectability follows a **targeting gradient** — pure
+  **information** < generic **incentive** < **targeted (time-window × appliance)**. A purely
+  informational warning (`storm` R074; `energy_crisis` R123, all three metrics n.s.) changed nothing;
+  a generic peak incentive (`rebate`) cut AC/total (−40.8%/−21.2%) but **not the peak** (−6.0%, n.s.);
+  only the text that jointly anchors *evening peak* **and** *air-conditioner* (`ac_tax`) significantly
+  shaved the peak (−22.5%/−24.6%/−17.2% across three worlds). Events that change behaviour *structure*
+  (heatwave, cold-snap, lockdown) also produce large effects. This bounds which interventions the
+  platform can evaluate and *how to phrase them*.
+- Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
+  design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
+  **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
+  direction-reversal under different sampling (R026) was confounded by cross-time drift. Net: no TOU
+  effect is resolvable at this noise floor.
 - Social norms: **nudge not robust** — an initial small sample looked consistent (5/5 member-days
   negative, −5.8%~−23.3%), but a larger sample on a fresh world (7 members) had **3 members increase**
   and within-group spread (±25~45pp) far exceeding any group difference (R054). The de-instructionalized
@@ -110,10 +116,10 @@ information/psychology-driven behaviour in the current agents.
 
 ## Limitations
 
-- Event results are **binary / large-effect** (device on/off; out-of-home yes/no) and hold across two
+- Event results are **binary / large-effect** (device on/off; out-of-home yes/no) and hold across three
   worlds, but **continuous magnitudes cannot be resolved** at the observed noise floor (CV≈12%,
   R057/R058) — only large effects (≳10–20%) are detectable, so literature-scale (~3%) magnitudes are
-  not claimed.
+  not claimed. Continuous claims additionally require **n≥15** (R112/R114).
 - Weather is currently a stub; event effects use a fixed temperature offset.
 - Refactor-era drift is resolved: `engine/news.py`, `compare_worlds.py`, all documented policies
   (`tou`/`tou_soft`/`nudge`/`nudge_soft`/`nudge_loss`/`subsidy`/`peak_demand`/`ev_delay`/
