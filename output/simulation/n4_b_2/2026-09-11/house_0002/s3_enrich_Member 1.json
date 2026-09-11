@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe in. Breathe out. Turn to left side. Adjust pillow. Turn to right side. Pull blanket up. Remain still. Breathe slowly. Turn to back. Stretch legs. Pull blanket down slightly. Turn to left side again. Remain still. Breathe deeply."
+    },
+    {
+      "time": "06:30-07:10",
+      "location": "Bathroom",
+      "activity": "Morning wash, shower, and oral care",
+      "desc": "Get out of bed. Walk to bathroom. Turn on bathroom light. Turn on water heater. Open shower door. Step into shower. Turn on shower tap and adjust water temperature. Wet body and apply soap. Rub soap on body and rinse body. Turn off shower tap and step out of shower. Pick up towel and dry body. Wrap towel around body. Turn on sink tap. Pick up toothbrush and apply toothpaste. Brush teeth. Rinse mouth. Turn off sink tap. Hang towel. Turn off bathroom light. Walk out of bathroom."
+    },
+    {
+      "time": "07:10-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out eggs, milk, and bread. Close refrigerator. Place bread in toaster. Press toaster lever. Crack eggs into bowl. Whisk eggs. Turn on induction cooker. Place pan on cooker. Pour oil and eggs into pan. Stir and flip eggs. Turn off induction cooker. Place eggs on plate and take toast from toaster. Spread butter on toast and pour milk into glass. Sit at table. Eat breakfast. Drink milk. Stand up. Place dishes in sink."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag",
+      "desc": "Walk to bedroom. Open wardrobe. Take out clothes. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Open work bag. Place stethoscope and ID badge into bag. Close work bag. Pick up bag."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift (taking public transport)",
+      "desc": "Walk to bus stop. Check phone for time. Put phone in pocket. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Hold handrail. Look out window. Stand up. Walk to exit. Tap transit card. Get off bus. Walk to hospital. Enter hospital."
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Working: patient care, clinical assessments, and medication rounds",
+      "desc": "Enter ward. Wash hands. Greet patient. Check patient chart. Take vital signs. Record vital signs. Administer medication. Adjust IV drip. Assist patient with mobility. Consult with doctor. Update patient records. Attend handover meeting. Prepare medication. Respond to call light. Document care."
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Lunch break at the hospital cafeteria",
+      "desc": "Walk to cafeteria. Pick up tray. Choose food. Pay for food. Find table. Sit down. Eat food. Drink water. Talk to colleague. Wipe mouth with napkin. Clean up tray. Return tray. Leave cafeteria."
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Working: continuing patient care, charting, and handover preparation",
+      "desc": "Enter ward. Wash hands. Check patient charts. Administer medication. Take vital signs. Record data. Assist patient with needs. Consult with healthcare team. Update patient records. Prepare handover report. Attend handover meeting. Document care. Respond to call light. Sanitize hands. Check equipment. Talk to patient's family."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from work (taking public transport)",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Look out window. Check phone. Stand up. Walk to exit. Tap transit card. Get off bus. Walk home. Enter home."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Enter kitchen. Open refrigerator. Take out ingredients. Close refrigerator. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Pour oil. Add vegetables. Stir. Add seasoning. Turn off stove. Place food on plate. Sit at table. Eat dinner. Drink water. Stand up. Place dishes in sink."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bathroom",
+      "activity": "Showering and personal hygiene",
+      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Open shower door. Step into shower. Turn on shower tap. Adjust water temperature. Wet body. Apply soap. Rub soap on body. Rinse body. Turn off shower tap. Step out of shower. Pick up towel. Dry body. Wrap towel. Hang towel. Turn off light. Walk out."
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing while watching TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channel. Watch TV. Pick up phone. Check messages. Put down phone. Adjust volume. Stand up. Walk to kitchen. Open refrigerator. Take out drink. Close refrigerator. Walk back to living room. Sit on sofa. Drink. Put down drink. Watch TV."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Bedroom 1",
+      "activity": "Reviewing clinical notes and completing continuing education on the computer",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open computer. Log in. Open clinical notes. Read notes. Type notes. Open continuing education module. Watch video. Take quiz. Submit quiz. Close computer. Turn off desk lamp. Stand up. Walk to bed. Sit on bed."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Kitchen",
+      "activity": "Preparing a light snack and herbal tea",
+      "desc": "Walk to kitchen. Open refrigerator. Take out snack items. Close refrigerator. Open cupboard. Take out tea bag. Close cupboard. Fill kettle with water. Turn on kettle. Place tea bag in mug. Pour hot water into mug. Wait. Take snack. Sit at table. Eat snack. Drink tea. Stand up. Wash mug. Place mug in drying rack."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Walk to bedroom. Lie down on bed. Pull blanket over body. Close eyes. Breathe in. Breathe out. Turn to side. Adjust pillow. Pull blanket up. Remain still. Breathe slowly. Turn to back. Stretch legs. Pull blanket down slightly. Turn to side again. Remain still. Breathe deeply."
+    }
+  ]
+}
