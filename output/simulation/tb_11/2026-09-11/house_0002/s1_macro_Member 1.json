@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-05:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "05:30-06:00",
+      "location": "Bathroom",
+      "activity": "Showering and washing up"
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital"
+    },
+    {
+      "time": "08:00-17:00",
+      "location": "Out",
+      "activity": "Working a clinical shift at the hospital"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen"
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV"
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Showering and washing up"
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using the computer and winding down before bed"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

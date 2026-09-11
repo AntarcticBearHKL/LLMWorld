@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Showering, washing up, and getting dressed for work"
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making a hot drink"
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Gathering work bag and personal items, final check before leaving"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the work shift"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, attending to patients and clinical duties"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner, cleaning up the counter"
+    },
+    {
+      "time": "18:45-19:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV"
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Using the computer for continuing education and reviewing clinical notes"
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and doing personal hygiene routine"
+    },
+    {
+      "time": "21:15-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down, watching TV, and reading before bed"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
