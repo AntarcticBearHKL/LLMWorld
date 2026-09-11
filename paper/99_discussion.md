@@ -28,12 +28,12 @@
 - **Cold-snap (binary signal, significant)**: a `cold_snap` event switched heating devices from off to
   on — baseline **0/10** vs **6/10** (Fisher two-sided **p ≈ 0.011**, across three worlds, R093).
   Activation probability (60%) is lower than the heatwave's (~92%) — response robustness differs by event.
-- **Economic / warning events (peak shaving)**: `blackout_risk` ("possible rolling blackouts at peak")
-  cut peak-window (16–21) energy by **−31.7%** in world A and **−11.7%** in world B — **direction
-  replicated across worlds** (R094/R096). In contrast, `price_hike` (electricity +8%) gave −17.9% in
-  world A but **+6.8%** in world B — **not replicated** (world-specific; R097). The peak-window metric
-  is low-noise (baseline CV≈3.3% vs total-energy CV≈12%), making it the better metric for moderate
-  effects.
+- **Economic / warning events — WITHDRAWN (baseline-drift artifact)**: apparent peak-window cuts
+  (`blackout_risk` −31.7%, `price_hike` −17.9%) were an artifact of comparing against **older baseline
+  runs**: fresh identical baselines (mean 3.441 kWh) overlap the event runs (2.9–3.8), and even a
+  **neutral** event cut "peak-window" by −32.9% (R104). **Continuous metrics drift systematically
+  across session time**; only **binary/structural** signals (device on/off, home/out) are drift-immune.
+  This is a core methodological finding.
 - **Lockdown (binary signal, strongest)**: a `lockdown` event removed almost all out-of-home time —
   baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
   **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
