@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with air conditioner on due to heatwave",
+      "desc": "Lie on bed. Close eyes. Breathe deeply. Turn to left side. Bend knees. Adjust pillow. Sleep. Turn to right side. Stretch arm. Pull blanket. Sleep. Turn to back. Move legs. Adjust air conditioner remote. Sleep. Turn head. Open eyes briefly. Close eyes. Sleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed",
+      "desc": "Wake up. Sit up. Stand up. Walk to bathroom. Turn on light. Use toilet. Flush toilet. Turn on tap. Wash hands. Brush teeth. Rinse mouth. Wash face. Dry face. Apply deodorant. Put on clothes."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk and eggs. Close refrigerator. Take out pan. Place pan on stove. Turn on stove. Crack eggs into pan. Stir eggs. Turn off stove. Place eggs on plate. Put bread in toaster. Press lever. Take toast. Spread butter. Pour milk. Sit at table. Eat breakfast. Drink milk. Stand up. Carry dishes to sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Checking phone and preparing for work",
+      "desc": "Sit on bed. Pick up phone. Unlock phone. Scroll messages. Type reply. Open email. Read email. Close email. Check weather. Put down phone. Stand up. Open wardrobe. Take out uniform. Put on uniform. Pick up bag. Pack stethoscope. Pack notebook. Zip bag. Pick up phone. Put phone in pocket. Walk out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work, staying hydrated in heat",
+      "desc": "Walk to bus stop. Wait for bus. Check phone. Bus arrives. Board bus. Tap card. Find seat. Sit down. Take out water bottle. Open cap. Drink water. Close cap. Put bottle in bag. Look out window. Bus stops. Stand up. Walk to exit. Step off bus. Walk to hospital. Enter hospital."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working at hospital as health care professional",
+      "desc": "Walk to locker room. Open locker. Take out scrubs. Change into scrubs. Put on stethoscope. Walk to nurse station. Pick up patient chart. Read chart. Walk to patient room. Knock on door. Enter room. Greet patient. Check vital signs. Measure blood pressure. Listen to heart. Listen to lungs. Adjust IV drip. Talk to patient. Write notes. Walk to next patient room."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break",
+      "desc": "Walk to cafeteria. Pick up tray. Choose food. Place on tray. Pay at cashier. Find table. Sit down. Unwrap sandwich. Take bite. Chew. Swallow. Drink water. Talk to colleague. Continue eating. Finish meal. Stand up. Carry tray to disposal. Scrape food into bin. Stack tray. Walk out of cafeteria."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Working at hospital as health care professional",
+      "desc": "Walk to patient room. Check patient. Administer medication. Record data. Walk to nurse station. Use computer. Type notes. Talk to doctor. Walk to lab. Pick up samples. Walk to patient room. Draw blood. Label vial. Walk to lab. Hand over samples. Walk to break room. Wash hands. Drink water. Walk to next patient."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home, staying hydrated in heat",
+      "desc": "Walk to bus stop. Wait for bus. Check phone. Bus arrives. Board bus. Tap card. Find seat. Sit down. Take out water bottle. Open cap. Drink water. Close cap. Put bottle in bag. Look out window. Bus stops. Stand up. Walk to exit. Step off bus. Walk home. Enter home."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Bathroom",
+      "activity": "Washing up after work",
+      "desc": "Walk to bathroom. Turn on light. Take off clothes. Turn on shower. Step into shower. Wet body. Apply soap. Rub body. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel. Walk to bedroom. Put on clean clothes. Walk back to bathroom. Hang towel. Turn off light. Walk out."
+    },
+    {
+      "time": "18:30-19:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables and chicken. Close refrigerator. Take out cutting board. Chop vegetables. Cut chicken. Take out pan. Place on stove. Turn on stove. Add oil. Add chicken. Stir. Add vegetables. Stir. Add sauce. Stir. Turn off stove. Serve food. Sit down. Eat dinner. Drink water. Stand up. Carry plate to sink."
+    },
+    {
+      "time": "19:30-22:00",
+      "location": "Living Room",
+      "activity": "Relaxing, watching TV or using computer with air conditioning",
+      "desc": "Walk to living room. Turn on air conditioner. Pick up remote. Turn on TV. Sit on sofa. Flip channels. Watch TV. Pick up computer. Open laptop. Check email. Browse internet. Put down computer. Pick up phone. Check social media. Put down phone. Watch TV. Stand up. Get snack. Sit down. Eat snack. Turn off TV. Turn off air conditioner."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Nighttime hygiene",
+      "desc": "Walk to bathroom. Turn on light. Use toilet. Flush. Turn on tap. Wet toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Turn off tap. Wash face. Dry face. Apply moisturizer. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with air conditioner on due to heatwave",
+      "desc": "Lie on bed. Close eyes. Sleep. Turn to left side. Adjust pillow. Sleep. Turn to right side. Pull blanket. Sleep. Turn to back. Stretch. Sleep. Breathe deeply. Sleep. Turn head. Sleep."
+    }
+  ]
+}
