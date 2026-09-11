@@ -1,7 +1,7 @@
 # Experiment: Time-of-use pricing (TOU)
 
-> 状态：**null（峰段）+ 总电量 +13.1%（borderline）**：n=3 曾见 −17.5% 削峰，但**扩样 n=9 塌缩为 −2.2%（n.s., t=−0.28）**——R111 系小样本假象；
-> 且总电量 **+13.1%**（7/9 对为正，t=2.11，**非漂移**，斜率≈0）。数值来自 R112。
+> 状态：**null（n=15 充分功效）**：峰段 **−3.2%（t=−0.41）**、总电量 **+5.4%（t=0.98）**，均不显著。
+> 小样本曾给出 n=3 −17.5% 峰段、n=9 +13.1% 总电量，**扩样后均塌缩** → 皆系**小样本假象**。数值来自 R114。
 
 ## 1. Research Question
 
@@ -106,3 +106,23 @@ Adding 6 more interleaved pairs (`tb_4..9`/`tt_4..9`, same batch) → **n=9**:
   提示 TOU 文本触发**过度遵从**（为峰移多开家电）→ 能耗净增；
 - Consistent with R026 (unstable), R040 (over-compliance), and the mainline "soft/price interventions
   are weak or adverse on LLM agents".
+
+### R114 — extended to n=15: **null** (both n=3 and n=9 were small-sample fluctuations)
+
+Adding 6 more interleaved pairs (`tb_10..15`/`tt_10..15`) → **n=15**:
+
+| 指标 | baseline | tou | Δ | paired mean ± std | t(df=14) |
+|---|---|---|---|---|---|
+| 总电量 kWh | 8.215 | 8.658 | **+5.4%** | +0.443 ± 1.760 | **+0.98** |
+| 峰段 (16–21) kWh | 3.715 | 3.598 | **−3.2%** | −0.117 ± 1.109 | **−0.41** |
+
+Three-stage comparison:
+
+| N | peak Δ | total Δ |
+|---|---|---|
+| **3** (R111) | **−17.5%** (n.s.) | −0.0% |
+| **9** (R112) | −2.2% | **+13.1%** (t=2.11, borderline) |
+| **15** (R114) | **−3.2%** (n.s.) | **+5.4%** (n.s.) |
+
+**Final verdict: TOU has no significant effect on peak or total load** (both |t|<1 at n=15). Both prior
+"large effects" collapsed under larger n — a decisive demonstration of the small-sample hazard (R112/R114).
