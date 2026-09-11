@@ -65,3 +65,8 @@ Outputs are JSON/CSV under `output/.../analysis/`.
 
 - Offline **L1** tests (mock `SubAgent`) over pure logic; **L2** small real runs (≤5 households,
   ≤3 days); L3 only when necessary. See `tests/` and `reports/`.
+- **Validity controls (R104–R116)**: (i) LLM-agent **continuous** behaviour drifts across session time
+  → always compare against a **same-batch (same-era) baseline**, or rely on **binary/structural**
+  signals (appliance on/off, out-of-home), which are drift-immune; (ii) continuous-effect magnitudes
+  are unreliable below **n≈15** (TOU: −17.5% → +13.1% → −3.2% as n grew 3→9→15); (iii) the noise floor
+  is std≈1.0 kWh (**CV≈12%**), so only large effects (≥10–20%) are judgeable. See `99_discussion.md`.
