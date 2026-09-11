@@ -1,6 +1,7 @@
 # Experiment: Time-of-use pricing (TOU)
 
-> 状态：**不可定论**：方向对采样/推理模式敏感——推理模式峰段 −18~−26%，低方差无思考模式峰段 **+8~+30%**（方向翻转）。数值来自 R023/R024/R026。
+> 状态：**不可定论（same-era 名义 −17.5% 削峰，n.s.）**：早期"方向翻转"（R023/R026）受**跨时段漂移**污染；
+> **同批次交错**重测（R111）方向稳定为削峰（峰段 −17.5%、总电量持平），但 n=3 不显著（t≈−1.39），需大 N。
 
 ## 1. Research Question
 
@@ -74,3 +75,19 @@ days, including the removed days (Δpeak: policy days ≈−1.54, removed days �
 rebound was a within-arm artifact, not a policy effect.
 **Conclusion**: single-run-per-arm DiD is not trustworthy; the habit-stickiness question requires
 multi-seed / multi-household averaging.
+
+## 10. Same-era interleaved re-test (R111) — direction stable, still underpowered
+
+world_838587 house_0002 Member 1, **interleaved** baseline (`tb_1..3`) vs `tou` (`tt_1..3`) in one batch:
+
+| 指标 | baseline | tou | Δ |
+|---|---|---|---|
+| 总电量 kWh | 8.137 ± 0.926 | 8.134 ± 0.441 | **−0.0%** |
+| 峰段 (16–21) kWh | 3.398 ± 0.238 | 2.805 ± 0.532 | **−17.5%** |
+
+Paired peak diffs = [−1.588, +0.182, −0.374] → mean −0.593, std 0.739, **t≈−1.39 (n.s., p≈0.30)**.
+
+**Reading**: with a drift-free design, TOU's direction is **stably 削峰** (2/3 pairs down) — unlike the
+earlier apparent "flip", which was a cross-time artifact. Nominal magnitude (−17.5%) exceeds the guide's
+−3~6%, but n=3 with paired std≈0.74 kWh → needs **n≥15** to reach significance. Total load is flat
+(−0.0%), consistent with pure peak-shifting. **Status: inconclusive (underpowered), not contradicted.**
