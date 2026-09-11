@@ -30,10 +30,17 @@ events — are injected **only as natural language**; aggregate behaviour is eme
 2. A natural-language intervention surface (pricing / norms / events) with emergent effects.
 3. Alignment experiments against empirical benchmarks (Faruqui & Sergici 2010; Allcott 2011;
    Costa & Kahn 2010; Xia et al. 2026; …), yielding **four statistically significant natural-language
-   event results** — heatwave → cooling (two-sided p≈0.00003), lockdown → stay-home (p≈0.000003),
-   cold-snap → heating (p≈0.011; replicated across three synthetic worlds), and **air-conditioner peak
-   tax → AC-off/peak-shaving** under heatwave (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−17.2%
-   across three worlds).
+   event results**, each replicated across three synthetic worlds — heatwave → cooling (two-sided
+   p≈0.00003), lockdown → stay-home (p≈0.000003) **plus a judgeable daytime-load magnitude
+   (+220.7%, same-era n=9, p≈0.010)**, cold-snap → heating (p≈0.011), and **air-conditioner peak tax
+   → AC-off/peak-shaving** (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−20.6%).
+4. A **mechanistic account of peak-shaving** — the effect of a device-targeted intervention scales with
+   the device's **peak-window load × behaviour-change rate** (a 3-world dose–response), with a distinct
+   *window+price* path (`ac_tax`) that additionally shifts non-AC evening load. **Energy-saving ≠
+   peak-shaving.**
+5. Three **validity red lines** for LLM-agent energy simulation: (i) continuous metrics **drift across
+   session time** → use same-era baselines or binary/structural signals; (ii) continuous magnitudes are
+   unreliable below **n≈15**; (iii) mechanistic claims require **cross-world** replication.
 
 ## Notes
 
