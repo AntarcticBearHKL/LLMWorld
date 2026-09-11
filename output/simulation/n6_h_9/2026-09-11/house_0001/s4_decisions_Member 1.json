@@ -1,0 +1,212 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "start_minutes": 0,
+      "end_minutes": 390,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:30-07:00",
+      "start_minutes": 390,
+      "end_minutes": 420,
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready",
+      "operations": []
+    },
+    {
+      "time": "07:00-07:30",
+      "start_minutes": 420,
+      "end_minutes": 450,
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "start_minutes": 450,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing bag",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting to university",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending Master of Education classes at Monash University",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Lunch break at university",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-15:00",
+      "start_minutes": 780,
+      "end_minutes": 900,
+      "location": "Out",
+      "activity": "Attending afternoon classes at university",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-17:00",
+      "start_minutes": 900,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Studying in the university library",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home",
+      "operations": []
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-22:00",
+      "start_minutes": 1140,
+      "end_minutes": 1320,
+      "location": "Out",
+      "activity": "Working part-time hospitality/retail shift",
+      "operations": []
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Out",
+      "activity": "Commuting home",
+      "operations": []
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Living Room",
+      "activity": "Cooling down with fan/AC and relaxing",
+      "operations": [
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:30",
+      "start_minutes": 1380,
+      "end_minutes": 1410,
+      "location": "Bathroom",
+      "activity": "Washing up and showering",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "start_minutes": 1410,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Winding down and sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

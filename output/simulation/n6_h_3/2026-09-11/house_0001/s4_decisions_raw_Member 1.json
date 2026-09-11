@@ -1,0 +1,187 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Morning wash and personal hygiene",
+      "operations": []
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and studying at Monash University",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Having lunch at university",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-16:00",
+      "location": "Out",
+      "activity": "Studying and completing assignments at university library",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-17:00",
+      "location": "Out",
+      "activity": "Commuting home from university",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "Relaxing and cooling down with fan due to heatwave",
+      "operations": [
+        {
+          "unique_id": "living_room_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-23:00",
+      "location": "Out",
+      "activity": "Working part-time hospitality shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Unwinding and preparing for bed",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}

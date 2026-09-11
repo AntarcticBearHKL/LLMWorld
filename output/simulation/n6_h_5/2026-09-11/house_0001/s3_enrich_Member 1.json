@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping overnight in own bedroom, with the desk lamp off and the room kept as cool as possible ahead of the forecast heatwave",
+      "desc": "Lies in bed on back. Closes eyes. Breathes slowly. Turns body to left side. Adjusts pillow under head. Pulls blanket over shoulders. Remains still. Turns body to right side. Bends knees. Stretches arms. Turns onto back. Pulls blanket down to waist. Turns to left side. Remains still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and dressing for a hot day in light clothing",
+      "desc": "Opens eyes. Sits up in bed. Swings legs over the side. Stands up. Walks to bathroom. Turns on bathroom light. Turns on tap. Cups water in hands. Splashes water on face. Turns off tap. Picks up toothbrush. Squeezes toothpaste onto toothbrush. Brushes teeth. Rinses mouth with water. Spits into sink. Turns off tap. Picks up towel. Wipes face. Hangs towel on rack. Opens wardrobe. Takes out light shirt. Puts on shirt. Takes out light pants. Puts on pants. Puts on socks. Puts on shoes. Turns off bathroom light. Walks out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a quick breakfast with the kettle and toaster, and filling a water bottle for the day",
+      "desc": "Enters kitchen. Turns on kitchen light. Opens refrigerator. Takes out bread. Takes out butter. Takes out jam. Places bread in toaster. Presses toaster lever. Fills kettle with water. Turns on kettle. Opens cupboard. Takes out plate. Takes out knife. Waits for toast. Toast pops up. Takes toast from toaster. Places on plate. Spreads butter on toast. Spreads jam on toast. Eats toast. Opens cupboard. Takes out water bottle. Opens tap. Fills water bottle. Turns off tap. Closes water bottle. Puts water bottle in bag. Wipes counter. Turns off kitchen light. Leaves kitchen."
+    },
+    {
+      "time": "07:30-08:30",
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus for the day's Master of Education classes",
+      "desc": "Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps transport card. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Looks out window. Bus arrives at campus. Stands up. Walks to bus door. Exits bus. Walks to campus building."
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and tutorials on campus, taking notes on the computer",
+      "desc": "Enters lecture hall. Walks to seat. Sits down. Opens backpack. Takes out laptop. Opens laptop. Turns on laptop. Logs in. Opens note-taking application. Listens to lecturer. Types notes. Highlights key points. Raises hand. Asks question. Listens to answer. Continues typing notes. Checks time. Opens tutorial materials. Reads tutorial questions. Discusses with peer. Writes answers. Saves document. Closes laptop. Puts laptop in backpack. Stands up. Walks to next class."
+    },
+    {
+      "time": "12:00-12:40",
+      "location": "Out",
+      "activity": "Eating lunch on campus in a shaded indoor area and hydrating during the heatwave",
+      "desc": "Walks to campus cafeteria. Stands in line. Selects sandwich. Pays at register. Takes sandwich. Walks to shaded indoor area. Sits at table. Opens sandwich wrapper. Takes bite of sandwich. Chews. Swallows. Opens water bottle. Drinks water. Closes water bottle. Continues eating sandwich. Finishes sandwich. Wipes mouth with napkin. Throws wrapper in bin. Stands up. Walks to library."
+    },
+    {
+      "time": "12:40-16:30",
+      "location": "Out",
+      "activity": "Attending afternoon classes and working on assignment research in the campus library",
+      "desc": "Enters classroom. Sits at desk. Opens laptop. Opens lecture slides. Takes notes. Participates in group discussion. Closes laptop. Packs backpack. Walks to library. Enters library. Finds quiet study area. Sits at desk. Opens laptop. Opens browser. Searches academic database. Reads articles. Takes notes. Downloads PDFs. Organizes references. Writes draft. Saves document. Closes laptop. Packs backpack. Leaves library."
+    },
+    {
+      "time": "16:30-17:30",
+      "location": "Out",
+      "activity": "Commuting home from campus during the hottest part of the day, staying hydrated",
+      "desc": "Walks to bus stop. Waits for bus. Opens water bottle. Drinks water. Closes water bottle. Bus arrives. Boards bus. Taps transport card. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Looks out window. Bus arrives at stop. Stands up. Walks to bus door. Exits bus. Walks home."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bathroom",
+      "activity": "Cooling down with a shower and changing out of the day's clothes",
+      "desc": "Enters bathroom. Turns on bathroom light. Turns on shower tap. Adjusts water temperature. Steps into shower. Washes body with soap. Rinses body. Turns off shower tap. Steps out of shower. Picks up towel. Dries body. Wraps towel around waist. Opens bathroom cabinet. Takes out clean shirt. Puts on clean shirt. Takes out clean pants. Puts on clean pants. Puts on socks. Hangs towel on rack. Turns off bathroom light. Walks out."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner at home using the induction cooker, then rinsing the dishes",
+      "desc": "Enters kitchen. Turns on kitchen light. Opens refrigerator. Takes out vegetables. Takes out meat. Places vegetables on cutting board. Picks up knife. Chops vegetables. Places chopped vegetables in bowl. Turns on induction cooker. Places pan on cooker. Pours oil into pan. Adds vegetables to pan. Adds meat to pan. Stirs with spatula. Adds soy sauce. Turns off induction cooker. Picks up plate. Scoops food onto plate. Carries plate to table. Sits down. Eats dinner with fork. Finishes eating. Picks up plate. Walks to sink. Turns on tap. Rinses plate. Turns off tap. Places plate in drying rack. Wipes counter. Turns off kitchen light. Leaves kitchen."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Out",
+      "activity": "Travelling to the evening hospitality shift at the venue",
+      "desc": "Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps transport card. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Looks out window. Bus arrives at stop. Stands up. Walks to bus door. Exits bus. Walks to venue. Enters venue."
+    },
+    {
+      "time": "19:15-22:30",
+      "location": "Out",
+      "activity": "Working the part-time hospitality shift, serving customers and restocking during a busy Friday evening",
+      "desc": "Clocks in. Puts on apron. Greets customers. Takes orders. Enters orders into POS system. Pours drinks. Serves drinks to customers. Clears tables. Wipes tables. Carries dirty dishes to kitchen. Washes dishes. Stacks clean dishes. Restocks refrigerator with drinks. Restocks shelves with snacks. Takes out trash. Sweeps floor. Mops floor. Clocks out. Removes apron."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Out",
+      "activity": "Travelling home after finishing the hospitality shift",
+      "desc": "Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps transport card. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Looks out window. Bus arrives at stop. Stands up. Walks to bus door. Exits bus. Walks home. Enters home."
+    },
+    {
+      "time": "23:00-23:20",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for bed after the late shift",
+      "desc": "Enters bathroom. Turns on bathroom light. Turns on tap. Cups water in hands. Splashes water on face. Turns off tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Spits. Turns off tap. Picks up towel. Wipes face. Hangs towel. Turns off bathroom light. Walks out."
+    },
+    {
+      "time": "23:20-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down in own bedroom, setting an alarm and checking the phone before falling asleep",
+      "desc": "Enters bedroom. Turns on desk lamp. Closes bedroom door. Walks to bed. Sits on bed. Takes out phone. Unlocks phone. Opens alarm app. Sets alarm for 6:30 AM. Checks messages. Scrolls through social media. Puts phone on bedside table. Turns off desk lamp. Lies down in bed. Pulls blanket over body. Closes eyes. Falls asleep."
+    }
+  ]
+}

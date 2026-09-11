@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing bag"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to university"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education classes at Monash University"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break at university"
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "Out",
+      "activity": "Attending afternoon classes at university"
+    },
+    {
+      "time": "15:00-17:00",
+      "location": "Out",
+      "activity": "Studying in the university library"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "19:00-22:00",
+      "location": "Out",
+      "activity": "Working part-time hospitality/retail shift"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Out",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Living Room",
+      "activity": "Cooling down with fan/AC and relaxing"
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bathroom",
+      "activity": "Washing up and showering"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and sleeping"
+    }
+  ]
+}

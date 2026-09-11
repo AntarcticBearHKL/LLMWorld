@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bathroom",
+      "activity": "Waking up and personal hygiene"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out (out)",
+      "activity": "Commuting to university"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out (out)",
+      "activity": "Attending classes and studying at university"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out (out)",
+      "activity": "Lunch break at university"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out (out)",
+      "activity": "Attending classes and studying at university"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out (out)",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out (out)",
+      "activity": "Commuting to part-time work"
+    },
+    {
+      "time": "19:30-23:00",
+      "location": "Out (out)",
+      "activity": "Working part-time shift in hospitality/retail"
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Out (out)",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and getting ready for bed"
+    }
+  ]
+}

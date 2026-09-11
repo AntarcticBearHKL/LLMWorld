@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Eyes closed. Breathes deeply. Turns to left side. Pulls blanket up. Adjusts pillow. Turns to right side. Stretches legs. Bends arms. Turns back. Remains still. Breathes regularly."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bathroom",
+      "activity": "Waking up and personal hygiene",
+      "desc": "Wakes up. Opens eyes. Sits up. Swings legs out of bed. Stands up. Walks to bathroom. Turns on light. Uses toilet. Flushes toilet. Washes hands. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Wipes face with towel. Turns off tap. Turns off light. Walks out of bathroom."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out milk. Takes out yogurt. Closes refrigerator. Opens cupboard. Takes out bowl. Takes out spoon. Pours cereal into bowl. Pours milk into bowl. Puts milk back in refrigerator. Sits at table. Eats cereal. Drinks milk. Stands up. Rinses bowl. Places bowl in sink. Rinses spoon. Places spoon in sink."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to university",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps card. Finds seat. Sits down. Looks out window. Checks phone. Gets off bus. Walks to university. Enters building. Walks to classroom. Opens door. Enters classroom."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending classes and studying at university",
+      "desc": "Sits at desk. Opens laptop. Turns on laptop. Takes notes. Raises hand. Asks question. Writes notes. Reads textbook. Highlights text. Opens notebook. Writes summary. Checks phone. Opens email. Replies to email. Opens presentation. Watches presentation. Takes more notes. Closes laptop. Stands up. Stretches."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break at university",
+      "desc": "Walks to cafeteria. Stands in line. Buys sandwich. Buys drink. Pays cashier. Takes tray. Finds table. Sits down. Eats sandwich. Drinks water. Talks to friend. Laughs. Cleans table. Stands up. Throws trash. Returns tray. Walks to library."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Attending classes and studying at university",
+      "desc": "Enters classroom. Sits at desk. Opens laptop. Takes notes. Participates in discussion. Raises hand. Answers question. Writes on board. Returns to seat. Reads article. Annotates article. Opens software. Completes assignment. Saves file. Closes laptop. Packs bag. Stands up. Walks out of classroom."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps card. Finds seat. Sits down. Listens to music. Checks phone. Gets off bus. Walks home. Opens door. Enters house. Takes off shoes. Hangs up coat."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out vegetables. Closes refrigerator. Washes vegetables. Chops vegetables. Turns on stove. Places pan on stove. Pours oil. Adds vegetables. Stirs with spoon. Turns off stove. Opens cupboard. Takes out plate. Serves food onto plate. Sits at table. Eats dinner. Stands up. Rinses plate. Places plate in sink."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Commuting to part-time work",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps card. Finds seat. Sits down. Checks phone. Gets off bus. Walks to workplace. Enters building. Clocks in. Puts on apron."
+    },
+    {
+      "time": "19:30-23:00",
+      "location": "Out",
+      "activity": "Working part-time shift in hospitality/retail",
+      "desc": "Stands at counter. Greets customer. Scans items. Takes payment. Gives receipt. Bags items. Restocks shelves. Folds clothes. Assists customer. Answers phone. Checks inventory. Cleans counter. Sweeps floor. Empties trash. Takes break. Drinks water. Returns to counter. Serves next customer. Clocks out. Removes apron."
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps card. Finds seat. Sits down. Listens to music. Checks phone. Gets off bus. Walks home. Opens door. Enters house. Takes off shoes."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and getting ready for bed",
+      "desc": "Walks into bedroom. Turns on light. Takes off clothes. Puts on pajamas. Picks up phone. Sets alarm. Places phone on nightstand. Turns off light. Lies down. Pulls blanket up. Adjusts pillow. Closes eyes. Turns to side. Remains still."
+    }
+  ]
+}
