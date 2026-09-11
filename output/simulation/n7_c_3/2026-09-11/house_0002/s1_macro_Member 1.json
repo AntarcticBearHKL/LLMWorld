@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:10",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:10-06:35",
+      "location": "Bathroom",
+      "activity": "Morning wash, brushing teeth, and getting dressed for work"
+    },
+    {
+      "time": "06:35-07:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a quick breakfast with toast and tea from the kettle"
+    },
+    {
+      "time": "07:00-07:40",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift"
+    },
+    {
+      "time": "07:40-16:40",
+      "location": "Out",
+      "activity": "Working a clinical shift as a health care professional, including patient care and handover"
+    },
+    {
+      "time": "16:40-17:20",
+      "location": "Out",
+      "activity": "Commuting home after the shift"
+    },
+    {
+      "time": "17:20-17:50",
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and freshening up after work"
+    },
+    {
+      "time": "17:50-18:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and checking phone messages"
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner using the microwave and oven only, avoiding the induction cooker during the 5pm-8pm peak period"
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Cleaning up the kitchen and loading the dishwasher"
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV to unwind"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Using the computer to review notes and plan the next day's shift"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night wash up and brushing teeth"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-06:55",
+      "location": "Bathroom",
+      "activity": "Morning wash: shower, brush teeth, use toilet"
+    },
+    {
+      "time": "06:55-07:20",
+      "location": "Kitchen",
+      "activity": "Prepare and eat breakfast using kettle and toaster"
+    },
+    {
+      "time": "07:20-07:40",
+      "location": "Bedroom 1",
+      "activity": "Change into work clothes, check phone for shift messages, pack bag"
+    },
+    {
+      "time": "07:40-08:20",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "08:20-17:00",
+      "location": "Out",
+      "activity": "Working day shift as a health care professional: patient care, ward rounds, charting and handover"
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home after the shift"
+    },
+    {
+      "time": "17:45-18:00",
+      "location": "Bathroom",
+      "activity": "Wash up and change out of work clothes"
+    },
+    {
+      "time": "18:00-18:50",
+      "location": "Kitchen",
+      "activity": "Cook and eat dinner using oven and microwave (deliberately avoiding the induction cooker during the 5pm-8pm grid peak request)"
+    },
+    {
+      "time": "18:50-19:10",
+      "location": "Bathroom",
+      "activity": "Load the washing machine and start a laundry cycle"
+    },
+    {
+      "time": "19:10-20:30",
+      "location": "Living Room",
+      "activity": "Watch TV and relax on the sofa"
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Take an evening shower"
+    },
+    {
+      "time": "21:00-21:15",
+      "location": "Bathroom",
+      "activity": "Transfer laundry to the clothes dryer and start drying"
+    },
+    {
+      "time": "21:15-22:30",
+      "location": "Living Room",
+      "activity": "Use the computer to check rosters and messages, then watch TV"
+    },
+    {
+      "time": "22:30-22:45",
+      "location": "Bathroom",
+      "activity": "Night routine: brush teeth and wash face"
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Wind down with phone, then sleep"
+    }
+  ]
+}
