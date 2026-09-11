@@ -2,8 +2,9 @@
   "events": [
     {
       "date": "2026-09-11",
-      "title": "Routine notice",
-      "content": "This is a routine community information notice with no special instructions."
+      "title": "Rolling blackout warning",
+      "content": "The grid operator warns of possible rolling blackouts during the evening peak.",
+      "template": "blackout_risk"
     }
   ]
 }
