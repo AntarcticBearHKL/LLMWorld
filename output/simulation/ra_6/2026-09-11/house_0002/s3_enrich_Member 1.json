@@ -1,0 +1,113 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the air conditioner set to a mild overnight temperature",
+      "desc": "Lies in bed in Bedroom 1. Closes eyes. Breathes slowly. Turns onto left side. Pulls blanket over shoulder. Adjusts pillow. Remains lying. Turns onto back. Extends legs. Bends knees. Turns onto right side. Rests head on pillow. Air conditioner remains on at mild overnight setting. Bedroom light remains off."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and taking a quick cool shower before the hot day begins",
+      "desc": "Wakes up. Sits up on edge of bed. Stands. Walks to Bathroom. Turns on Bathroom Light. Turns on tap. Adjusts water to cool. Steps into shower. Washes body. Turns off tap. Steps out of shower. Picks up toothbrush. Squeezes toothpaste onto toothbrush. Brushes teeth. Rinses mouth. Washes face. Dries face with towel. Turns off Bathroom Light. Walks out of Bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast using the kettle and toaster, drinking water early because of the heatwave forecast",
+      "desc": "Walks into Kitchen. Turns on Kitchen Light. Fills Kettle with water. Places Kettle on base. Presses Kettle switch. Opens Refrigerator. Takes out bread and food items. Places bread in Toaster. Presses Toaster lever. Pours water into glass. Drinks water. Waits for Kettle. Pours hot water into cup. Prepares breakfast. Eats breakfast. Clears plate. Puts plate in sink. Turns off Kitchen Light. Walks out of Kitchen."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the workday, travelling during the cooler early morning hours",
+      "desc": "Picks up bag. Puts on shoes. Opens door. Walks out. Closes door. Locks door. Walks to bus stop. Waits at bus stop. Boards bus. Taps transit card. Sits down. Rides bus toward hospital. Stands up. Exits bus. Walks to hospital entrance. Opens hospital door. Enters hospital."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist: assessing inpatients, running rehabilitation sessions and supervising exercise programmes",
+      "desc": "Walks to physiotherapy department. Clocks in. Turns on computer. Opens inpatient list. Reads patient notes. Washes hands. Greets patient. Says good morning to patient. Assists patient to sit. Checks patient chart. Measures joint range. Guides patient through exercise. Holds gait belt. Walks alongside patient. Adjusts walker. Demonstrates exercise. Counts repetitions. Records treatment notes on computer. Answers phone. Attends team huddle. Washes hands again. Prepares next patient."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital, eating a packed meal and rehydrating in an air-conditioned staff area",
+      "desc": "Walks to staff area. Sits at table. Opens bag. Takes out packed meal. Opens meal container. Picks up fork. Eats packed meal. Drinks water. Wipes mouth with napkin. Closes container. Puts container in bag. Throws napkin in bin. Washes hands. Returns to seat."
+    },
+    {
+      "time": "12:30-16:30",
+      "location": "Out",
+      "activity": "Continuing physiotherapy work: outpatient appointments, manual therapy and updating patient treatment notes",
+      "desc": "Greets outpatient. Escorts patient to treatment room. Reviews referral. Palpates muscle. Applies manual therapy. Instructs exercise. Adjusts resistance band. Supervises repetitions. Uses computer. Types treatment notes. Schedules follow-up. Answers phone. Cleans treatment bed. Washes hands. Prepares equipment. Assists patient standing. Walks patient to waiting area. Updates patient list."
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Out",
+      "activity": "Finishing clinical documentation and handing over patient updates to the afternoon team",
+      "desc": "Opens computer. Opens patient files. Types clinical notes. Saves files. Prints handover sheet. Collects notes. Walks to afternoon team. Hands over sheet. Reports patient updates. Listens to team questions. Returns to desk. Shuts down computer. Packs bag. Clocks out."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home after the shift, moving slowly through the peak afternoon heat",
+      "desc": "Leaves hospital. Walks to bus stop. Waits at bus stop. Wipes sweat with tissue. Drinks water from bottle. Boards bus. Taps transit card. Sits down. Rides bus toward home. Exits bus. Walks to home. Unlocks door. Opens door. Enters home. Closes door. Locks door. Removes shoes. Puts down bag."
+    },
+    {
+      "time": "17:45-18:10",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower to recover from the heat and changing into light home clothes",
+      "desc": "Walks to Bathroom. Turns on Bathroom Light. Turns on tap. Adjusts water to cool. Steps into shower. Washes body. Turns off tap. Steps out of shower. Dries body with towel. Picks up light shirt. Puts on light shirt. Picks up shorts. Puts on shorts. Hangs towel. Turns off Bathroom Light. Walks out of Bathroom."
+    },
+    {
+      "time": "18:10-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner on the induction cooker while using the range hood, keeping the kitchen cool",
+      "desc": "Walks into Kitchen. Turns on Kitchen Light. Opens Refrigerator. Takes out vegetables and meat. Places vegetables on counter. Places meat on counter. Washes vegetables. Cuts vegetables. Cuts meat. Turns on RangeHood. Places pan on InductionCooker. Presses InductionCooker power. Pours oil into pan. Adds ingredients. Stirs with spatula. Adjusts InductionCooker heat. Adds seasoning. Turns off InductionCooker. Turns off RangeHood. Moves food to plate."
+    },
+    {
+      "time": "19:00-19:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner and washing up, loading the dishwasher afterwards",
+      "desc": "Sits at table. Picks up fork. Eats dinner. Drinks water. Picks up plate. Walks to sink. Scrapes food into bin. Opens Dishwasher. Loads plate into Dishwasher. Loads glass into Dishwasher. Loads utensils into Dishwasher. Adds detergent. Closes Dishwasher. Presses Dishwasher start. Wipes counter. Washes hands. Turns off Kitchen Light. Walks out of Kitchen."
+    },
+    {
+      "time": "19:45-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV with the air conditioner off during the evening peak tax period, using the fan instead",
+      "desc": "Walks to Living Room. Sits on sofa. Picks up remote. Presses TV power. Turns on fan. Adjusts fan direction. Changes TV channel. Watches TV. Picks up phone. Checks phone. Puts phone down. Stands. Picks up water glass. Drinks water. Sits down. Watches TV. Presses TV volume. Watches TV. Presses TV power off. Turns off fan. Stands. Walks out of Living Room."
+    },
+    {
+      "time": "21:00-21:20",
+      "location": "Living Room",
+      "activity": "Doing a short daily stretching and mobility routine on the floor",
+      "desc": "Stands in Living Room. Lowers to floor. Sits on mat. Extends legs. Reaches toward toes. Holds position. Bends knees. Lies on back. Pulls knee to chest. Switches leg. Rotates head. Rolls shoulders. Stands up. Rolls mat. Puts mat away."
+    },
+    {
+      "time": "21:20-22:00",
+      "location": "Study",
+      "activity": "Using the computer and desk lamp to answer messages, review tomorrow's patient list and read professional notes",
+      "desc": "Walks to Study. Sits at desk. Turns on DeskLamp. Turns on Computer. Turns on Monitor. Opens messaging app. Types replies. Sends messages. Opens patient list. Scrolls through list. Opens professional notes. Reads notes. Highlights text. Opens document. Types notes. Saves document. Closes applications. Shuts down Computer. Turns off Monitor. Turns off DeskLamp. Stands. Walks out of Study."
+    },
+    {
+      "time": "22:00-22:40",
+      "location": "Bedroom 1",
+      "activity": "Winding down in bed with the phone and light reading, air conditioner back on at a comfortable setting",
+      "desc": "Walks into Bedroom 1. Turns on Bedroom Light. Picks up phone. Sits on bed. Turns on AirConditioner. Sets AirConditioner temperature. Lies on bed. Opens phone. Scrolls phone. Reads phone. Picks up book. Opens book. Reads pages. Turns page. Puts book down. Picks up phone. Checks phone. Puts phone on nightstand. Turns off Bedroom Light. Lies down."
+    },
+    {
+      "time": "22:40-23:00",
+      "location": "Bathroom",
+      "activity": "Night-time routine: brushing teeth, washing and preparing for sleep",
+      "desc": "Gets out of bed. Walks to Bathroom. Turns on Bathroom Light. Turns on tap. Picks up toothbrush. Squeezes toothpaste onto toothbrush. Brushes teeth. Rinses mouth. Washes face. Turns off tap. Dries face with towel. Hangs towel. Turns off Bathroom Light. Walks to Bedroom 1."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the light off and the air conditioner on a low overnight setting",
+      "desc": "Lies in bed in Bedroom 1. Turns off Bedroom Light. Adjusts AirConditioner to low overnight setting. Pulls blanket over body. Closes eyes. Breathes slowly. Turns onto side. Adjusts pillow. Remains lying. Turns onto back. Extends legs. Sleeps. Air conditioner runs at low overnight setting. Bedroom light remains off."
+    }
+  ]
+}

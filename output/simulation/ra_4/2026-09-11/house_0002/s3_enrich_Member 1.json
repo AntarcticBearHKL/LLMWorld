@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe slowly. Sleep. Turn to left side. Adjust pillow. Pull blanket. Sleep. Turn to right side. Bend knees. Sleep. Stretch arms. Turn to back. Open eyes at 06:30. Sit up in bed. Swing legs to floor. Stand up."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed",
+      "desc": "Walk to bathroom. Open door. Turn on light. Turn on water heater. Turn on tap. Pick up toothbrush. Squeeze toothpaste. Brush teeth. Rinse mouth. Turn off tap. Pick up towel. Wipe face. Put towel on rack. Pick up clothes. Put on shirt. Put on trousers. Put on socks. Put on shoes. Turn off light. Open door. Walk out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out milk and food container. Close refrigerator. Open cupboard. Take out bowl and spoon. Place bowl on counter. Pour cereal into bowl. Pour milk into bowl. Pick up spoon. Sit on chair. Eat cereal. Drink milk. Stand up. Pick up bowl. Walk to sink. Rinse bowl. Place bowl in dishwasher. Wipe table. Turn off light."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Preparing for work",
+      "desc": "Walk to bedroom. Open wardrobe. Pick up shirt. Pick up trousers. Put on shirt. Button shirt. Put on trousers. Zip trousers. Put on socks. Put on shoes. Pick up bag. Open bag. Put phone in bag. Put keys in bag. Close bag. Pick up bag. Open bedroom door. Walk out. Turn off light. Lock door."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to hospital",
+      "desc": "Leave home. Lock door. Walk to bus stop. Stand at bus stop. Wait for bus. Bus arrives. Board bus. Tap transit card. Walk to seat. Sit down. Hold handrail. Look at phone. Bus stops. Stand up. Walk to exit. Get off bus. Walk to hospital entrance. Push door. Enter hospital. Walk to department."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist at the hospital",
+      "desc": "Arrive at physiotherapy department. Put bag in locker. Turn on computer. Log in. Check patient schedule. Call patient name. Guide patient to treatment room. Adjust treatment bed height. Ask patient to sit on bed. Demonstrate arm exercise. Hold patient's arm. Count repetitions. Say: 'Please lift your arm.' Apply heat pack. Adjust equipment. Write patient notes on computer. Talk to colleague about patient. Stand up. Walk to waiting area. Call next patient. Guide patient to treatment room. Repeat exercises. Write notes. Save file."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from hospital",
+      "desc": "Leave department. Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Hold handrail. Look out window. Bus stops. Stand up. Walk to exit. Get off bus. Walk to home. Unlock door. Enter home. Close door. Remove shoes. Hang coat. Walk to kitchen."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out vegetables and meat. Close refrigerator. Open cupboard. Take out pot. Fill pot with water. Place pot on induction cooker. Turn on induction cooker. Wash and cut vegetables. Cut meat. Put vegetables and meat in pot. Stir with spoon. Turn off induction cooker. Take out plate. Serve food onto plate. Sit on chair. Eat dinner. Drink water. Stand up. Pick up plate. Walk to sink. Rinse plate. Place plate in dishwasher. Wipe table. Turn off light."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Press power button. Select channel. Watch TV. Adjust volume. Change channel. Pick up phone. Check phone. Put phone down. Lean back. Cross legs. Stand up. Walk to kitchen. Open refrigerator. Take out water bottle. Close refrigerator. Walk to living room. Sit on sofa. Drink water. Put bottle on table. Watch TV. Pick up remote. Press power button. Stand up. Walk out."
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Study",
+      "activity": "Using computer",
+      "desc": "Walk to study. Turn on light. Sit at desk. Open laptop. Press power button. Type password. Open browser. Check email. Open document. Type text. Move mouse. Click save. Open file. Read document. Type more text. Save file. Close browser. Shut down computer. Turn off desk lamp. Stand up. Walk out."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Bathroom",
+      "activity": "Showering",
+      "desc": "Walk to bathroom. Open door. Turn on light. Turn on water heater. Turn on fan. Remove clothes. Place clothes in hamper. Turn on shower tap. Adjust water temperature. Step into shower. Wet body. Apply soap. Wash body. Rinse body. Apply shampoo. Rinse hair. Turn off shower. Pick up towel. Dry body. Dry hair. Wrap towel. Turn off fan. Turn off light. Walk out."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down and reading",
+      "desc": "Walk to bedroom. Turn on light. Sit on bed. Pick up book from nightstand. Open book. Read. Turn page. Read. Turn page. Close book. Put book on nightstand. Turn off light. Lie down. Pull blanket over body. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Sleep. Turn to left side. Adjust pillow. Pull blanket. Sleep. Turn to right side. Bend knees. Sleep. Turn to back. Stretch arms. Sleep."
+    }
+  ]
+}
