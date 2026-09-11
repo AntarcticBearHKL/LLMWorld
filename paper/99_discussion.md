@@ -72,6 +72,16 @@
   n=9), world_172148 (AC-peak 1.62 kWh, AC-peak −63%) → −25.5% (significant). Monotone across worlds,
   supporting the mechanism; the worlds differ in AC location (bedroom/living-room) and hence in the
   AC's peak-window dose.
+  **Substitution constraint (R144)**: targeting a device shaves the *total* peak only if that device is
+  **not substitutable**. Requesting avoidance of the induction cooker (49.8% of the peak) cut its own
+  peak-window load by **−99.7%** but the agent switched to the **oven (+0.93 kWh) and microwave
+  (+0.70 kWh)**, leaving the total peak unchanged (−0.2%). Non-substitutable cooling (AC) does shave the
+  peak; substitutable cooking does not. The dose law is therefore bounded by appliance substitutability.
+- **Future-oriented notices raise current consumption (R141/R142)**: a *future* TOU-tariff announcement
+  and a community outage notice both **increased** current total energy (+20.8%, p≈0.0001, n=15;
+  +11.0%, p≈0.026, n=15) with no peak change, whereas a neutral custom event did not (+7.9%, n.s.).
+  "Plan-ahead" notices thus perturb behaviour toward *more* current use — the opposite of conservation,
+  and distinct from the null grid-information events (`energy_crisis`/`storm`).
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
