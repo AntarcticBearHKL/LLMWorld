@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping under extra blankets during the cold snap",
+      "desc": "Lie on bed. Pull extra blanket over body. Tuck feet under blanket. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket up to chin. Remain still. Turn to right side. Stretch arms. Pull blanket over shoulder. Remain still."
+    },
+    {
+      "time": "06:30-06:50",
+      "location": "Bathroom",
+      "activity": "Waking up and washing face with warm water",
+      "desc": "Open eyes. Sit up in bed. Swing legs over edge. Stand up. Walk to bathroom. Turn on light. Turn on tap. Adjust water temperature to warm. Cup hands under water. Splash water on face. Rub face with hands. Turn off tap. Pick up towel. Wipe face. Hang towel. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "06:50-07:10",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in warm layers for the cold morning",
+      "desc": "Walk into bedroom. Open wardrobe. Take out thermal shirt. Take out sweater. Take out pants. Take out socks. Close wardrobe. Remove pajamas. Put on thermal shirt. Put on sweater. Put on pants. Put on socks. Put on shoes."
+    },
+    {
+      "time": "07:10-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating a hot breakfast with tea from the kettle",
+      "desc": "Walk into kitchen. Turn on light. Open refrigerator. Take out eggs, bread, butter. Close refrigerator. Place bread in toaster. Press toaster lever. Crack eggs into bowl. Whisk eggs. Turn on induction cooker. Place pan on cooker. Add butter to pan. Pour eggs into pan. Stir eggs. Turn off cooker. Remove eggs to plate. Toast pops up. Remove toast. Butter toast. Fill kettle with water. Turn on kettle. Pour boiling water into cup. Add tea bag. Steep. Remove tea bag. Sit at table. Eat eggs and toast. Drink tea."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the early shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Check phone. Look out window. Stand up. Pull cord. Exit bus. Walk to hospital. Enter hospital."
+    },
+    {
+      "time": "08:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, providing patient care on the ward",
+      "desc": "Arrive at ward. Put on scrubs. Attend handover meeting. Check patient list. Enter patient room. Wash hands. Check patient's blood pressure. Record in chart. Administer medication. Adjust IV drip. Assist patient to bathroom. Change bed linens. Clean equipment. Take lunch break. Eat sandwich. Return to ward. Respond to call bell. Consult with doctor. Update patient records. Prepare for next shift."
+    },
+    {
+      "time": "17:00-17:40",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Sit down. Check phone. Listen to music. Look out window. Stand up. Pull cord. Exit bus. Walk home. Enter house."
+    },
+    {
+      "time": "17:40-18:10",
+      "location": "Bathroom",
+      "activity": "Taking a hot shower to warm up and change out of work clothes",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Turn on shower. Adjust temperature. Remove work clothes. Place in hamper. Step into shower. Wet body. Apply soap. Lather. Rinse. Shampoo hair. Rinse. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel. Put on clean clothes."
+    },
+    {
+      "time": "18:10-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating a hot dinner",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out vegetables and meat. Close refrigerator. Wash vegetables. Chop vegetables. Turn on induction cooker. Place pan. Add oil. Add meat. Stir. Add vegetables. Stir. Add sauce. Simmer. Turn off cooker. Serve onto plate. Sit at table. Eat. Drink water. Clear plate."
+    },
+    {
+      "time": "19:00-19:45",
+      "location": "Kitchen",
+      "activity": "Cleaning up the kitchen and loading the dishwasher",
+      "desc": "Scrape food off plates. Rinse plates. Open dishwasher. Load plates. Load glasses. Load cutlery. Add detergent. Close dishwasher. Press start button. Wipe counter with cloth. Wipe stove. Sweep floor. Take out trash. Tie trash bag. Carry to bin. Return."
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the couch watching TV",
+      "desc": "Walk to living room. Turn on light. Pick up remote. Turn on TV. Sit on couch. Adjust cushion. Cross legs. Watch TV. Change channel. Get up. Go to kitchen. Get snack. Return. Sit down. Eat snack. Watch more TV. Turn off TV. Stand up."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Evening wash and brushing teeth",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wet toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Wash face. Dry face. Apply moisturizer. Turn off tap. Turn off light. Walk out."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Unwinding in bed, checking phone and setting the alarm",
+      "desc": "Walk into bedroom. Turn on light. Take off clothes. Put on pajamas. Sit on bed. Pick up phone. Unlock phone. Scroll through apps. Open alarm app. Set alarm time. Turn off phone. Place phone on nightstand. Turn off light. Lie down. Pull blanket up. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Pull blanket over body. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket up to chin. Remain still. Turn to right side. Stretch arms. Pull blanket over shoulder. Remain still."
+    }
+  ]
+}
