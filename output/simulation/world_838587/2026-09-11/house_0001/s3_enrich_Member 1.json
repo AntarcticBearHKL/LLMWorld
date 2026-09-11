@@ -2,106 +2,106 @@
   "member": "Member 1",
   "enriched_activities": [
     {
-      "time": "00:00-06:00",
+      "time": "00:00-06:05",
       "location": "Bedroom 1",
-      "activity": "Sleeping",
-      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Remain still. Turn to right side. Adjust pillow. Continue sleeping."
+      "activity": "Sleeping overnight",
+      "desc": "Lies on the bed with eyes closed. Breathes slowly. Turns onto the right side. Pulls the blanket up to the shoulders. Extends the left arm under the pillow. Turns onto the back. Remains still with arms at the sides. Turns onto the left side. Pulls the blanket over the legs. Remains motionless. Rolls onto the back. Moves the head to the right on the pillow. Remains still. Shifts the legs slightly. Remains asleep with eyes closed until the alarm sounds."
     },
     {
-      "time": "06:00-06:35",
+      "time": "06:05-06:35",
       "location": "Bathroom",
-      "activity": "Waking up early, showering and getting dressed (using the bathroom before Member 4's 06:45-07:15 slot to avoid the shared-bathroom clash)",
-      "desc": "Wake up. Sit up. Stand. Walk to bathroom. Turn on light. Use toilet. Flush. Wash hands. Turn on shower. Adjust temperature. Step in. Wash body. Shampoo hair. Rinse. Turn off shower. Step out. Dry with towel. Get dressed. Brush teeth."
+      "activity": "Waking up, showering and getting washed for the day (bathroom used early so it is free for Member 4's 06:45-07:15 slot)",
+      "desc": "Hears the phone alarm. Reaches the right arm to the phone on the bedside table. Presses the stop button. Sits up on the edge of the bed. Places both feet on the floor. Stands up. Walks to the bedroom door. Opens the door. Walks along the hallway to the bathroom. Pushes the bathroom door open. Turns on the bathroom light. Closes the door. Turns on the shower tap. Tests the water temperature with the right hand. Adjusts the tap. Steps into the shower. Washes the hair with shampoo. Rinses the hair. Rubs soap on the body with both hands. Rinses the body. Turns off the shower tap. Steps out of the shower. Picks up the towel from the hook. Dries the hair. Dries the body. Wraps the towel around the waist. Turns on the basin tap. Picks up the toothbrush. Squeezes toothpaste onto the brush. Brushes the teeth. Rinses the mouth. Spits into the basin. Turns off the basin tap. Hangs the towel back on the hook. Turns off the bathroom light. Opens the door. Walks back to Bedroom 1."
     },
     {
       "time": "06:35-07:15",
       "location": "Bedroom 1",
-      "activity": "Reviewing course readings, organising notes and study materials for the day",
-      "desc": "Sit at desk. Turn on desk lamp. Open computer. Open course readings PDF. Read text. Highlight key points. Open notebook. Write notes. Organize papers. Stack books. Put pens in pencil case. Close computer. Turn off desk lamp. Stand up."
+      "activity": "Getting dressed for the day, packing the study bag and reviewing the day's schedule",
+      "desc": "Opens the wardrobe door. Takes out a shirt and trousers. Closes the wardrobe door. Takes underwear and socks from the drawer. Puts on the underwear. Puts on the shirt. Puts on the trousers. Puts on the socks. Opens the second drawer. Takes out a jumper. Puts the jumper on. Picks up the backpack from the chair. Unzips the main compartment. Places the laptop into the compartment. Places the charger beside the laptop. Places two notebooks into the front pocket. Places a pen and a highlighter into the side pocket. Zips the backpack closed. Picks up the phone from the bedside table. Unlocks the screen. Opens the university timetable app. Scrolls through the lecture and tutorial times. Opens the email app. Reads two new messages. Locks the phone. Places the phone into the trousers pocket. Picks up the water bottle from the desk. Puts the water bottle into the side mesh pocket of the backpack. Lifts the backpack onto the left shoulder. Walks to the bedroom door. Opens the door. Walks to the kitchen."
     },
     {
       "time": "07:15-07:50",
       "location": "Kitchen",
-      "activity": "Making and eating breakfast together with Member 4, packing lunch and study snacks",
-      "desc": "Walk to kitchen. Greet Member 4. Open refrigerator. Take out ingredients. Prepare breakfast. Cook eggs. Toast bread. Set table. Eat breakfast. Talk with Member 4. Clear dishes. Wash dishes. Pack lunch. Pack snacks. Close refrigerator."
+      "activity": "Making and eating breakfast (toast and tea) together with Member 4 while checking phone messages",
+      "desc": "Places the backpack on the kitchen floor beside the chair. Opens the cupboard door. Takes out the bread bag. Places two slices of bread into the toaster. Presses the lever down. Takes a mug from the shelf. Fills the kettle with water from the tap. Places the kettle on the base. Presses the switch to start the kettle. Opens the refrigerator door. Takes out the butter and the milk. Closes the refrigerator door. Says to Member 4: 'Morning, kettle's on.' Places the butter tub and the milk bottle on the counter. Waits beside the toaster. Takes the toast out when it pops up. Places the toast on a plate. Spreads butter on the toast with a knife. Pours hot water from the kettle into the mug. Adds milk to the mug from the bottle. Carries the plate and mug to the table. Sits on the chair. Picks up the phone from the trouser pocket. Unlocks the screen. Opens the messaging app. Reads three messages. Types a short reply with both thumbs. Places the phone face up on the table. Picks up a slice of toast. Eats the toast. Drinks tea from the mug. Picks up the second slice of toast. Eats the second slice. Drinks the rest of the tea. Says to Member 4: 'Ready to head off at ten to eight.' Stands up. Carries the plate and mug to the sink. Rinses the plate under the tap. Places the plate on the drying rack. Rinses the mug. Places the mug on the drying rack. Closes the tap. Puts the butter and the milk back into the refrigerator. Closes the refrigerator door. Picks up the backpack from the floor. Lifts it onto the left shoulder."
     },
     {
-      "time": "07:50-08:35",
+      "time": "07:50-08:30",
       "location": "Out",
-      "activity": "Commuting by public transport to Monash University campus",
-      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look at phone. Check messages. Put phone away. Look out window. Get off bus. Walk to campus."
+      "activity": "Commuting to Monash University campus by public transport, departing at the same time as Member 4",
+      "desc": "Walks out of the front door together with Member 4. Pulls the door closed behind them. Walks down the front steps to the footpath. Turns left and walks along the footpath to the bus stop. Stands at the bus stop beside Member 4. Takes the phone from the trouser pocket. Checks the real-time bus arrival screen. Puts the phone back into the pocket. Steps onto the bus when it arrives. Taps the travel card on the reader. Walks down the aisle. Sits on a seat near the window. Places the backpack on the lap. Looks out of the window. Stands up when the bus approaches the interchange. Walks to the rear door. Steps off the bus. Walks to the train platform. Walks up the stairs. Stands on the platform. Steps onto the train. Taps the travel card on the reader. Sits on a seat. Places the backpack on the lap. Stands up at the university station. Steps off the train. Walks up the stairs to the exit. Taps the travel card on the gate reader. Walks along the campus path to the teaching building."
     },
     {
-      "time": "08:35-12:00",
+      "time": "08:30-12:00",
       "location": "Out",
       "activity": "Attending Master of Education lectures and tutorials on campus",
-      "desc": "Enter lecture hall. Sit at desk. Take out notebook. Take out pen. Listen to lecturer. Write notes. Raise hand. Ask question. Listen to answer. Turn page. Write more notes. Check time. Pack up. Stand. Walk to next class."
+      "desc": "Walks into the lecture theatre. Walks down the steps between the rows. Sits on a seat in the middle row. Takes the backpack off the shoulder. Places the backpack on the floor. Unzips the front pocket. Takes out a notebook and a pen. Places the notebook on the fold-out desk. Places the pen on the notebook. Opens the laptop. Presses the power button. Types the login password. Opens the lecture slides file. Reads the slides on the screen. Writes headings in the notebook with the pen. Writes three bullet points under the first heading. Raises the right hand. Asks the lecturer a question about the assessment criteria. Writes the answer into the notebook. Types notes into a document on the laptop. Checks the time on the laptop screen. Closes the laptop at the end of the lecture. Stands up. Picks up the notebook and pen. Places them into the front pocket of the backpack. Zips the pocket closed. Lifts the backpack onto the left shoulder. Walks out of the lecture theatre. Walks along the corridor to the tutorial room. Walks into the tutorial room. Sits on a chair at a group table. Opens the laptop. Opens the tutorial worksheet file. Discusses the worksheet questions with two classmates. Types answers into the worksheet document. Saves the file. Closes the laptop. Stands up. Lifts the backpack onto the shoulder. Walks out of the tutorial room."
     },
     {
       "time": "12:00-13:00",
       "location": "Out",
-      "activity": "Eating lunch on campus while reading set course texts",
-      "desc": "Walk to cafeteria. Buy lunch. Carry tray to table. Sit down. Open book. Take bite of food. Read page. Turn page. Take another bite. Drink water. Continue reading. Close book. Throw away trash."
+      "activity": "Eating lunch on campus and reviewing lecture notes",
+      "desc": "Walks into the campus food court. Stands in the queue at the counter. Orders a sandwich and a bottle of water. Taps the bank card on the payment terminal. Picks up the sandwich and the water bottle from the counter. Carries them to an empty table. Takes the backpack off the shoulder. Places the backpack on the chair. Sits down. Opens the sandwich wrapper. Eats the sandwich. Uncaps the water bottle. Drinks from the bottle. Caps the bottle. Opens the backpack. Takes out the notebook. Places the notebook on the table. Turns the pages back to the morning lecture notes. Reads the notes. Underlines two lines with the pen. Takes out the phone from the pocket. Opens the lecture slides file on the phone. Compares the slide content with the notebook. Types a question into the notes app. Closes the notes app. Puts the phone back into the pocket. Places the notebook into the backpack. Zips the backpack. Stands up. Lifts the backpack onto the left shoulder. Carries the water bottle in the right hand. Walks out of the food court towards the library."
     },
     {
-      "time": "13:00-16:00",
+      "time": "13:00-17:00",
       "location": "Out",
-      "activity": "Studying in the campus library and drafting assignment work on computer",
-      "desc": "Walk to library. Find empty desk. Sit down. Open laptop. Open assignment document. Type sentences. Pause. Read text. Delete sentence. Type more. Open browser. Search for reference. Copy citation. Paste into document. Format text. Save document. Stretch arms."
+      "activity": "Studying in the campus library, reading research papers and working on assignment drafts on the computer",
+      "desc": "Walks through the library entrance gates. Shows the student card to the staff member at the desk. Walks between the bookshelves to an empty desk near the window. Places the backpack on the desk. Pulls out the chair. Sits down. Opens the backpack. Takes out the laptop. Opens the laptop lid. Presses the power button. Types the login password. Opens the library search page in the browser. Types a keyword into the search box. Presses Enter. Scrolls through the result list. Opens a research paper PDF. Reads the abstract. Scrolls down the page. Highlights two sentences with the cursor. Opens the assignment draft document. Types a paragraph in the introduction section. Saves the file. Stands up. Walks to the bookshelf. Takes two books off the shelf. Carries the books back to the desk. Sits down. Opens the first book. Reads the chapter. Writes three lines of notes in the notebook. Opens the second book. Reads the relevant section. Types a citation into the reference list of the draft. Checks the reference format against the style guide page. Saves the file. Places both books into the backpack. Stands up. Walks to the shelf. Puts the books back on the shelf. Walks back to the desk. Sits down. Types the conclusion section of the draft. Saves the file. Closes the laptop. Places the laptop into the backpack. Zips the backpack. Stands up. Pushes the chair under the desk. Lifts the backpack onto the left shoulder. Walks out of the library."
     },
     {
-      "time": "16:00-16:50",
+      "time": "17:00-17:45",
       "location": "Out",
-      "activity": "Commuting home from campus",
-      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look at phone. Scroll social media. Put phone away. Get off bus. Walk home."
+      "activity": "Commuting home from campus by public transport",
+      "desc": "Walks along the campus path to the train station. Walks up the stairs to the platform. Stands on the platform. Steps onto the train when it arrives. Taps the travel card on the reader. Sits on a seat near the door. Places the backpack on the lap. Takes the phone from the pocket. Opens the messaging app. Reads a message from Member 2 about dinner timing. Types a reply: 'Home about quarter to six.' Puts the phone back into the pocket. Stands up at the interchange station. Steps off the train. Walks down the stairs. Walks to the bus stop. Stands at the stop. Steps onto the bus. Taps the travel card on the reader. Sits on a seat. Stands up at the local stop. Steps off the bus. Walks along the footpath to the house. Walks up the front steps. Opens the front door. Steps inside. Closes the door."
     },
     {
-      "time": "16:50-17:20",
-      "location": "Bathroom",
-      "activity": "Freshening up and changing into part-time work uniform (bathroom is free at this time)",
-      "desc": "Enter home. Remove shoes. Walk to bathroom. Turn on tap. Wash face. Dry face. Walk to bedroom. Take off day clothes. Put on work uniform. Look in mirror. Adjust collar. Walk to kitchen."
-    },
-    {
-      "time": "17:20-17:55",
+      "time": "17:45-18:30",
       "location": "Kitchen",
-      "activity": "Cooking and eating an early dinner before the evening shift, coordinating kitchen use with Member 4 who starts cooking around 17:40",
-      "desc": "Enter kitchen. Greet Member 4. Open refrigerator. Take out ingredients. Chop vegetables. Turn on induction cooker. Place pan on cooker. Pour oil. Add vegetables. Stir. Add sauce. Turn off cooker. Put food on plate. Sit at table. Eat dinner. Talk with Member 4. Finish eating. Wash dishes."
+      "activity": "Cooking and eating dinner together with Member 2 and Member 4",
+      "desc": "Takes off the backpack. Places the backpack on the floor beside the kitchen door. Says to Member 2 and Member 4: 'I'll do the rice and the vegetables.' Opens the refrigerator door. Takes out the vegetables and the eggs. Closes the refrigerator door. Places the vegetables on the cutting board. Opens the drawer. Takes out a knife. Washes the vegetables under the tap. Cuts the vegetables into pieces on the board. Opens the cupboard door. Takes out the rice bag. Measures two cups of rice into the rice cooker pot. Rinses the rice under the tap. Adds water to the pot. Places the pot into the rice cooker. Closes the lid. Presses the cook button. Turns on the induction cooker. Pours oil into the pan. Adds the chopped vegetables to the pan. Stirs the vegetables with a spatula. Adds salt from the container. Turns off the induction cooker. Carries the pan to the table. Places the pan on the table mat. Picks up the plates from the shelf. Places three plates on the table. Picks up three sets of cutlery. Places the cutlery beside the plates. Opens the rice cooker lid when it beeps. Spoons rice onto the three plates. Sits down at the table. Eats dinner with Member 2 and Member 4. Talks with Member 4 about the timetable for tomorrow. Drinks water from the glass. Finishes the food on the plate. Places the fork and knife on the plate."
     },
     {
-      "time": "17:55-18:20",
-      "location": "Out",
-      "activity": "Walking to the part-time hospitality and retail job",
-      "desc": "Walk out front door. Close door. Walk down street. Cross road. Wait for traffic light. Continue walking. Arrive at workplace."
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down shared kitchen counters together with Member 2",
+      "desc": "Stands up from the table. Carries the three plates to the sink. Places the plates in the sink. Carries the pan to the sink. Picks up the sponge. Squeezes dish soap onto the sponge. Turns on the tap. Washes the plates under the running water. Places the plates on the drying rack. Washes the pan. Places the pan on the drying rack. Washes the cutlery. Places the cutlery in the rack. Says to Member 2: 'I'll do the counters.' Turns off the tap. Picks up the cloth from the hook. Wets the cloth under the tap. Wipes the countertop with the cloth. Wipes the area around the rice cooker. Wipes the stove top. Rinses the cloth under the tap. Wrings the cloth out. Hangs the cloth back on the hook. Wipes both hands on the towel. Puts the leftover vegetables into a container. Places the container into the refrigerator. Closes the refrigerator door. Turns off the kitchen light."
     },
     {
-      "time": "18:20-22:20",
-      "location": "Out",
-      "activity": "Working the evening hospitality and retail shift",
-      "desc": "Enter workplace. Clock in. Put on apron. Greet customers. Take orders. Operate cash register. Process payments. Serve food. Clear tables. Wipe tables. Restock shelves. Sweep floor. Take break. Drink water. Return to work. Clock out."
-    },
-    {
-      "time": "22:20-22:50",
-      "location": "Out",
-      "activity": "Commuting home after the shift",
-      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look at phone. Check messages. Put phone away. Get off bus. Walk home."
-    },
-    {
-      "time": "22:50-23:00",
+      "time": "19:00-19:15",
       "location": "Bedroom 1",
-      "activity": "Settling in and changing out of work clothes, waiting for Member 4 to finish in the bathroom before showering",
-      "desc": "Enter home. Remove shoes. Walk to bedroom. Take off work uniform. Put on casual clothes. Sit on bed. Look at phone. Wait for bathroom."
+      "activity": "Changing into part-time work uniform and packing a small bag for the shift",
+      "desc": "Walks into Bedroom 1. Closes the door. Takes off the jumper. Takes off the shirt. Takes off the trousers. Opens the wardrobe door. Takes out the work uniform shirt. Puts on the work uniform shirt. Takes out the work trousers. Puts on the work trousers. Closes the wardrobe door. Takes the name badge from the desk drawer. Pins the badge onto the shirt. Picks up the small bag from the chair. Unzips the bag. Places the phone into the bag. Places the wallet into the bag. Places a water bottle into the bag. Zips the bag closed. Picks up the apron from the hook behind the door. Folds the apron. Places the apron into the bag. Lifts the bag onto the left shoulder. Opens the bedroom door. Turns off the bedroom light. Walks to the front door."
+    },
+    {
+      "time": "19:15-19:30",
+      "location": "Out",
+      "activity": "Traveling to the part-time hospitality and retail job",
+      "desc": "Opens the front door. Steps outside. Closes the door behind. Walks down the front steps. Walks along the footpath to the bus stop. Stands at the bus stop. Takes the phone out of the bag. Checks the bus arrival time on the screen. Puts the phone back into the bag. Steps onto the bus when it arrives. Taps the travel card on the reader. Walks down the aisle. Sits on a seat. Places the bag on the lap. Stands up at the stop near the shop. Steps off the bus. Walks along the street to the shop entrance. Pushes the staff entrance door open. Walks inside."
+    },
+    {
+      "time": "19:30-23:00",
+      "location": "Out",
+      "activity": "Working the evening shift in hospitality and retail (serving customers, restocking, closing tasks)",
+      "desc": "Walks into the staff room. Places the bag in the locker. Takes out the apron. Ties the apron around the waist. Clocks in on the time terminal with the staff card. Walks to the front counter. Greets the shift supervisor and two coworkers. Stands behind the counter. Takes an order from the first customer. Presses the order into the register. Takes payment by card on the terminal. Hands the receipt to the customer. Prepares the order behind the counter. Places the items on the tray. Hands the tray to the customer. Says: 'Thank you, have a good evening.' Wipes the counter with a cloth. Walks to the storeroom. Picks up a box of stock. Carries the box to the shelf. Opens the box with a box cutter. Places items onto the shelf one by one. Folds the empty box flat. Places the flat box in the recycling bin. Returns to the counter. Serves four more customers in the same way. Restocks the display fridge with bottles. Checks the date labels on the items. Removes two expired items. Places them in the waste bin. Sweeps the floor with the broom and dustpan. Empties the dustpan into the bin. Wipes the tables with a cloth. Stacks the chairs on two tables. Counts the cash in the register drawer. Places the cash into the deposit bag. Records the closing total on the shift sheet. Turns off the front lights. Turns off the register. Locks the front door. Says to the supervisor: 'All closed up.' Clocks out on the time terminal. Takes the bag from the locker."
     },
     {
       "time": "23:00-23:30",
-      "location": "Bathroom",
-      "activity": "Showering and winding down after work (bathroom free after Member 4's 22:30-23:00 night routine)",
-      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step in. Wash body. Shampoo hair. Rinse. Turn off shower. Step out. Dry with towel. Walk to bedroom. Put on pajamas."
+      "location": "Out",
+      "activity": "Traveling home after finishing the shift",
+      "desc": "Walks out of the staff entrance. Closes the door behind. Walks along the street to the bus stop. Stands at the bus stop. Takes the phone out of the bag. Opens the messaging app. Reads a message from Member 2 about the bathroom schedule. Types a reply: 'On the bus now, will be quick.' Puts the phone back into the bag. Steps onto the bus when it arrives. Taps the travel card on the reader. Sits on a seat near the door. Places the bag on the lap. Stands up at the local stop. Steps off the bus. Walks along the footpath to the house. Walks up the front steps. Takes the keys from the bag. Unlocks the front door. Opens the door quietly. Steps inside. Closes the door. Locks the door behind. Walks to Bedroom 1. Places the bag on the floor. Takes off the uniform shirt. Takes off the uniform trousers. Hangs the uniform on the chair. Puts on a t-shirt and shorts."
     },
     {
-      "time": "23:30-24:00",
+      "time": "23:30-23:45",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth before bed (bathroom free after Member 4 finished at 23:00 and before Member 3 goes to sleep)",
+      "desc": "Walks along the hallway to the bathroom. Pushes the bathroom door open. Turns on the bathroom light. Closes the door. Turns on the basin tap. Wets both hands under the water. Rubs soap onto the hands. Rubs the hands together. Rinses the hands under the tap. Turns off the tap. Picks up the towel from the hook. Dries the face. Dries both hands. Hangs the towel back on the hook. Picks up the toothbrush from the holder. Squeezes toothpaste onto the brush. Turns on the tap. Brushes the teeth. Rinses the mouth with water. Spits into the basin. Rinses the toothbrush under the tap. Places the toothbrush back in the holder. Turns off the tap. Turns off the bathroom light. Opens the door. Walks back to Bedroom 1."
+    },
+    {
+      "time": "23:45-24:00",
       "location": "Bedroom 1",
-      "activity": "Preparing for bed, briefly checking phone and going to sleep",
-      "desc": "Walk to bathroom. Brush teeth. Rinse mouth. Walk to bedroom. Set alarm on phone. Plug phone into charger. Lie down on bed. Pull blanket up. Check phone. Put phone on bedside table. Close eyes. Fall asleep."
+      "activity": "Winding down on the phone and setting an alarm before sleeping",
+      "desc": "Walks into Bedroom 1. Closes the door. Sits on the edge of the bed. Picks up the phone from the bedside table. Unlocks the screen. Opens the alarm app. Sets the alarm for 06:05. Presses the save button. Opens the messaging app. Reads two messages. Types a short reply. Scrolls through a news feed with the right thumb. Opens a short video. Watches the video. Closes the app. Places the phone face down on the bedside table. Turns off the desk lamp. Lies down on the bed. Pulls the blanket up to the shoulders. Closes the eyes."
     }
   ]
 }

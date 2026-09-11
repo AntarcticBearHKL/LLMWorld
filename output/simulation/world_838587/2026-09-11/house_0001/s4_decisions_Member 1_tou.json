@@ -1,0 +1,244 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:05",
+      "start_minutes": 0,
+      "end_minutes": 365,
+      "location": "Bedroom 1",
+      "activity": "Sleeping overnight",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:05-06:35",
+      "start_minutes": 365,
+      "end_minutes": 395,
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting washed for the day (bathroom used early so it is free for Member 4's 06:45-07:15 slot)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:35-07:15",
+      "start_minutes": 395,
+      "end_minutes": 435,
+      "location": "Bedroom 1",
+      "activity": "Getting dressed for the day, packing the study bag and reviewing the day's schedule",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:50",
+      "start_minutes": 435,
+      "end_minutes": 470,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast (toast and tea) together with Member 4 while checking phone messages",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:30",
+      "start_minutes": 470,
+      "end_minutes": 510,
+      "location": "Out",
+      "activity": "Commuting to Monash University campus by public transport, departing at the same time as Member 4",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-12:00",
+      "start_minutes": 510,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and tutorials on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Eating lunch on campus and reviewing lecture notes",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "start_minutes": 780,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Studying in the campus library, reading research papers and working on assignment drafts on the computer",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:45",
+      "start_minutes": 1020,
+      "end_minutes": 1065,
+      "location": "Out",
+      "activity": "Commuting home from campus by public transport",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:30",
+      "start_minutes": 1065,
+      "end_minutes": 1110,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner together with Member 2 and Member 4",
+      "operations": [
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "start_minutes": 1110,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down shared kitchen counters together with Member 2",
+      "operations": []
+    },
+    {
+      "time": "19:00-19:15",
+      "start_minutes": 1140,
+      "end_minutes": 1155,
+      "location": "Bedroom 1",
+      "activity": "Changing into part-time work uniform and packing a small bag for the shift",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:15-19:30",
+      "start_minutes": 1155,
+      "end_minutes": 1170,
+      "location": "Out",
+      "activity": "Traveling to the part-time hospitality and retail job",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-23:00",
+      "start_minutes": 1170,
+      "end_minutes": 1380,
+      "location": "Out",
+      "activity": "Working the evening shift in hospitality and retail (serving customers, restocking, closing tasks)",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:30",
+      "start_minutes": 1380,
+      "end_minutes": 1410,
+      "location": "Out",
+      "activity": "Traveling home after finishing the shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-23:45",
+      "start_minutes": 1410,
+      "end_minutes": 1425,
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth before bed (bathroom free after Member 4 finished at 23:00 and before Member 3 goes to sleep)",
+      "operations": []
+    },
+    {
+      "time": "23:45-24:00",
+      "start_minutes": 1425,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Winding down on the phone and setting an alarm before sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}

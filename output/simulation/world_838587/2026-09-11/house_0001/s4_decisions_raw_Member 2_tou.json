@@ -1,0 +1,228 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-01:30",
+      "location": "Bedroom 2",
+      "activity": "Lying in bed doomscrolling YouTube videos and replying to WhatsApp messages, unable to settle for sleep",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "01:30-07:45",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "07:45-07:55",
+      "location": "Bedroom 2",
+      "activity": "Waking up after oversleeping, checking the phone and gathering clothes while waiting for the shared bathroom to become free after Member 3 finishes",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:55-08:10",
+      "location": "Bathroom",
+      "activity": "Quick rushed shower, brushing teeth and getting dressed for the day (bathroom free after Member 3 finished at 07:55)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:25",
+      "location": "Kitchen",
+      "activity": "Making a quick breakfast of toast and a strong cup of tea with the kettle and toaster, eating together with Member 3 while they have their caffeine-free breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:25-08:55",
+      "location": "Bedroom 2",
+      "activity": "Throwing studio materials, laptop and charger into a bag while checking Monash emails on the phone",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:55-09:30",
+      "location": "Out",
+      "activity": "Driving to Caulfield campus, running late in morning traffic",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:30-12:30",
+      "location": "Out",
+      "activity": "Attending Master of Design studio class at Monash Caulfield, working on a group design brief",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:10",
+      "location": "Out",
+      "activity": "Eating a packed lunch on campus and sketching layout ideas in a notebook",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:10-16:20",
+      "location": "Out",
+      "activity": "Continuing studio work, printing prototypes and taking part in a design critique",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:20-16:55",
+      "location": "Out",
+      "activity": "Driving home from campus instead of going straight to the cafe, so as to be home for the household dinner",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:55-17:45",
+      "location": "Bedroom 2",
+      "activity": "Doing freelance creative work on the computer with the monitor and desk lamp on",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner together with Member 1 and Member 4",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the shared kitchen counters together with Member 1",
+      "operations": []
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Driving to the cafe for the rescheduled evening shift",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:30-22:30",
+      "location": "Out",
+      "activity": "Working the evening shift at the cafe, taking orders, preparing drinks, cleaning the counter and closing up",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Out",
+      "activity": "Driving home from the cafe",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth before bed (bathroom free after Member 4 finished at 23:00 and before Member 1 starts at 23:30)",
+      "operations": []
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 2",
+      "activity": "Winding down on the phone, doomscrolling YouTube and WhatsApp instead of sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}

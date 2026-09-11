@@ -2,79 +2,79 @@
   "member": "Member 1",
   "activities": [
     {
-      "time": "00:00-06:40",
+      "time": "00:00-06:30",
       "location": "Bedroom 1",
-      "activity": "Sleeping"
+      "activity": "Sleeping overnight"
     },
     {
-      "time": "06:40-07:15",
+      "time": "06:30-07:00",
       "location": "Bathroom",
-      "activity": "Waking up, showering and getting dressed"
+      "activity": "Waking up, showering and getting washed for the day"
     },
     {
-      "time": "07:15-07:50",
+      "time": "07:00-07:30",
       "location": "Kitchen",
-      "activity": "Making and eating breakfast, packing lunch and study snacks"
+      "activity": "Making and eating breakfast (toast and tea) while checking phone messages"
     },
     {
-      "time": "07:50-08:35",
+      "time": "07:30-08:30",
       "location": "Out",
-      "activity": "Commuting by public transport to Monash University campus"
+      "activity": "Commuting to Monash University campus by public transport for the study day"
     },
     {
-      "time": "08:35-12:00",
+      "time": "08:30-12:00",
       "location": "Out",
       "activity": "Attending Master of Education lectures and tutorials on campus"
     },
     {
       "time": "12:00-13:00",
       "location": "Out",
-      "activity": "Eating lunch on campus while reading set course texts"
+      "activity": "Eating lunch on campus and reviewing lecture notes"
     },
     {
-      "time": "13:00-16:00",
+      "time": "13:00-17:00",
       "location": "Out",
-      "activity": "Studying in the campus library and drafting assignment work on computer"
+      "activity": "Studying in the campus library, reading research papers and working on assignment drafts on the computer"
     },
     {
-      "time": "16:00-16:50",
+      "time": "17:00-18:00",
       "location": "Out",
-      "activity": "Commuting home from campus"
+      "activity": "Commuting home from campus by public transport"
     },
     {
-      "time": "16:50-17:20",
-      "location": "Bathroom",
-      "activity": "Freshening up and changing into part-time work uniform"
-    },
-    {
-      "time": "17:20-17:55",
+      "time": "18:00-18:45",
       "location": "Kitchen",
-      "activity": "Cooking and eating an early dinner before the evening shift"
+      "activity": "Cooking and eating dinner, then washing up dishes"
     },
     {
-      "time": "17:55-18:20",
-      "location": "Out",
-      "activity": "Walking to the part-time hospitality and retail job"
-    },
-    {
-      "time": "18:20-22:20",
-      "location": "Out",
-      "activity": "Working the evening hospitality and retail shift"
-    },
-    {
-      "time": "22:20-22:50",
-      "location": "Out",
-      "activity": "Commuting home after the shift"
-    },
-    {
-      "time": "22:50-23:20",
-      "location": "Bathroom",
-      "activity": "Showering and winding down after work"
-    },
-    {
-      "time": "23:20-24:00",
+      "time": "18:45-19:15",
       "location": "Bedroom 1",
-      "activity": "Preparing for bed, briefly checking phone and going to sleep"
+      "activity": "Changing into part-time work uniform and packing a small bag for the shift"
+    },
+    {
+      "time": "19:15-19:30",
+      "location": "Out",
+      "activity": "Traveling to the part-time hospitality and retail job"
+    },
+    {
+      "time": "19:30-23:00",
+      "location": "Out",
+      "activity": "Working the evening shift in hospitality and retail (serving customers, restocking, closing tasks)"
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Out",
+      "activity": "Traveling home after finishing the shift"
+    },
+    {
+      "time": "23:30-23:45",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth before bed"
+    },
+    {
+      "time": "23:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down on the phone and setting an alarm before sleeping"
     }
   ]
 }

@@ -2,9 +2,9 @@
 
 ## 对话信息
 
-- time: 2026-09-11 00:48:41
+- time: 2026-09-11 13:05:19
 - seq: 1
-- prefix: Member 3_
+- prefix: Member 4_
 - stage: s4_appliance_decision
 - attempt: 1
 - ok: True
@@ -12,168 +12,117 @@
 ## 输入
 
 ```
-You are a household electricity behavior expert. Generate the complete appliance usage decisions for Member 3's day.
+You are a household electricity behavior expert. Generate the complete appliance usage decisions for Member 4's day.
 
 Member information:
-- Name: Member 3
-- Age: 27
-- Occupation: PhD candidate in public health, Monash University; part-time disability and aged-care support worker
-- Habits: {
-  "cooking": "Cooks daily at home",
-  "substances": "Avoids alcohol, smoking and caffeine",
-  "mornings": "Slow morning routine",
-  "tidiness": "Chaotic tidiness",
-  "commute": "Walks as main commute",
-  "household_role": "De facto manager: handles bills, rosters and maintenance, and leads structured group activity",
-  "social": "Reserved outwardly but energised by structured group activity; uses Android, Instagram and Messenger; pays by mobile wallet",
-  "planning_horizon": "Yearly horizon shaped by elder caregiving from a distance"
-}
+- Name: Member 4
+- Age: 22
+- Occupation: International student (Bachelor of Commerce and IT) and part-time online tutor/freelance analyst
+- Habits: {}
 
 This member's complete timeline:
 [
   {
-    "time": "00:00-03:15",
-    "location": "Bedroom 3",
-    "activity": "Sleeping, though sleep is restless and frequently broken",
-    "desc": "Lie in bed. Close eyes. Turn onto right side. Pull blanket up to shoulders. Shift legs. Open eyes. Look at ceiling. Turn onto left side. Adjust pillow. Close eyes. Breathe deeply. Turn onto back. Move arm. Turn onto right side again. Open eyes briefly. Close eyes. Shift position. Pull blanket. Turn onto left side. Close eyes."
+    "time": "00:00-06:45",
+    "location": "Bedroom 4",
+    "activity": "Sleeping overnight",
+    "desc": "Lie down on the bed with eyes closed. Pull the blanket up over the shoulders. Turn onto the right side. Keep the phone on the bedside table face down. Turn onto the left side. Adjust the pillow under the head. Extend the legs under the blanket. Pull the blanket back up. Turn onto the back. Remain motionless with slow steady breathing. Turn onto the right side again. Stretch the right arm out to the side of the bed. Pull the arm back under the blanket. Roll onto the left side. Keep eyes closed and body still. Turn onto the back. Remain lying still until the alarm goes off."
   },
   {
-    "time": "03:15-03:45",
-    "location": "Bedroom 3",
-    "activity": "Waking with mild chronic pain, lying still and doing slow gentle stretches and breathing to settle back down",
-    "desc": "Open eyes. Lie still on back. Inhale slowly. Exhale slowly. Lift right arm. Rotate wrist clockwise. Rotate wrist counterclockwise. Lower right arm. Lift left arm. Rotate wrist clockwise. Rotate wrist counterclockwise. Lower left arm. Bend right knee. Straighten right leg. Bend left knee. Straighten left leg. Inhale deeply. Exhale slowly. Close eyes."
-  },
-  {
-    "time": "03:45-06:55",
-    "location": "Bedroom 3",
-    "activity": "Sleeping again after the pain settles",
-    "desc": "Close eyes. Turn onto right side. Pull blanket. Breathe slowly. Shift legs. Turn onto left side. Adjust pillow. Sleep. Open eyes briefly. Turn onto back. Close eyes. Turn onto right side. Pull blanket. Shift position. Open eyes. Look at clock. Close eyes. Turn onto left side. Breathe deeply. Sleep."
-  },
-  {
-    "time": "06:55-07:10",
-    "location": "Bedroom 3",
-    "activity": "Slow waking, lying in bed and scrolling Instagram and Messenger on phone",
-    "desc": "Open eyes. Stretch arms. Reach for phone on bedside table. Pick up phone. Press power button. Swipe screen. Enter passcode. Open Instagram. Scroll feed. Tap like on post. Open Messenger. Read message from friend. Tap reply. Type message. Send. Put phone down on chest. Close eyes briefly. Open eyes. Pick up phone again. Scroll Instagram. Put phone down."
-  },
-  {
-    "time": "07:10-07:25",
-    "location": "Bedroom 3",
-    "activity": "Taking daily medication with water and doing gentle mobility stretches for chronic pain and stiff joints",
-    "desc": "Sit up. Pick up medication bottle. Open cap. Take pill. Drink water. Stand up. Stretch arms overhead. Bend forward. Straighten up. Sit on bed. Rotate ankles."
-  },
-  {
-    "time": "07:25-07:55",
+    "time": "06:45-07:15",
     "location": "Bathroom",
-    "activity": "Showering, washing and getting dressed at an unhurried pace",
-    "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust water. Step in. Wet body. Apply soap. Wash body. Rinse. Shampoo hair. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Walk to bedroom. Open wardrobe. Pick clothes. Put on underwear, shirt, pants. Comb hair."
+    "activity": "Washing up, brushing teeth and getting dressed for the day",
+    "desc": "Open eyes. Sit up on the edge of the bed. Put both feet on the floor. Stand up. Pick up the phone from the bedside table. Walk out of Bedroom 4 to the bathroom. Push the bathroom door open. Reach in and turn on the bathroom light. Step in front of the sink. Turn on the tap. Put both hands under the running water. Pick up the soap. Rub the soap between the hands. Rub the soap over the face. Rinse the face with both hands. Turn off the tap. Pick up the towel from the hook. Wipe the face with the towel. Hang the towel back on the hook. Pick up the toothbrush from the cup. Squeeze toothpaste onto the toothbrush. Put the toothpaste tube down on the sink edge. Brush the teeth. Spit into the sink. Turn on the tap. Rinse the mouth with a handful of water. Spit again. Turn off the tap. Pick up the cup. Rinse the toothbrush under the water. Put the toothbrush back in the cup. Turn towards the shower area. Reach into the shower and turn on the water. Take off the sleepwear. Step into the shower. Wet the body under the water. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub the shampoo into the hair. Rinse the hair under the water. Pick up the body wash. Rub the body wash over the body with the hand. Rinse the body. Turn off the shower tap. Step out of the shower. Pick up the towel. Rub the hair with the towel. Rub the body dry with the towel. Hang the towel on the hook. Pull the clothes bag from the hook. Take out the shirt. Put both arms into the shirt. Button up the shirt. Put on the trousers. Pull the trousers up to the waist. Put on the socks. Pick up the comb. Comb the hair. Put the comb down. Pick up the soiled clothes. Put them in the laundry basket. Turn off the bathroom light. Open the bathroom door. Walk out to the kitchen."
   },
   {
-    "time": "07:55-08:40",
+    "time": "07:15-07:50",
     "location": "Kitchen",
-    "activity": "Cooking and eating a caffeine-free breakfast while listening to a public health podcast (joined by Member 2 for tea and toast from 08:10-08:25)",
-    "desc": "Walk to kitchen. Open refrigerator. Take out eggs and bread. Place pan on induction cooker. Turn on cooker. Crack eggs. Cook eggs. Toast bread. Pour herbal tea. Sit at table. Open podcast on phone. Play podcast. Eat breakfast. At 08:10, Member 2 enters. Greet Member 2. Pour tea for Member 2. Share toast. Talk with Member 2. At 08:25, Member 2 leaves. Finish eating. Clear dishes."
+    "activity": "Preparing and eating breakfast together with Member 1 while checking emails and the university timetable on the phone",
+    "desc": "Step into the kitchen. Say \"Good morning\" to Member 1. Walk to the refrigerator. Pull the refrigerator door open. Take out the milk and the bread. Close the refrigerator door. Walk to the counter. Put the milk and bread down on the counter. Pick up the kettle. Fill the kettle with water at the sink. Put the kettle down on its base. Press the kettle switch on. Pick up the toaster plug. Push the plug into the socket. Pick up two slices of bread. Put the slices into the toaster slots. Press the toaster lever down. Open the cupboard door. Take out a bowl and a cup. Close the cupboard door. Put the bowl and cup on the table. Pick up the cereal box from the cupboard. Pour cereal into the bowl. Put the cereal box back on the shelf. Open the refrigerator door again. Take out the butter. Close the door. Put the butter on the counter. Wait by the toaster. Pick up the phone from the pocket. Unlock the phone with the thumb. Tap the email app. Scroll through the inbox with the finger. Tap an email to open it. Read the email. Tap back to the inbox. Tap the university timetable app. Scroll the timetable with the finger. Read the room number for the first lecture. Lock the phone. Put the phone down on the table. Pick up the toast when it pops up. Put the toast on a plate. Spread butter on the toast with a knife. Sit down on the chair next to Member 1. Pick up the spoon. Eat the cereal. Bite the toast. Drink from the cup. Talk with Member 1 about the day's classes and the departure time. Stand up. Pick up the plate, bowl and cup. Carry them to the sink. Rinse them under the tap. Put them in the dish rack."
   },
   {
-    "time": "08:40-09:00",
-    "location": "Kitchen",
-    "activity": "Washing dishes and tidying up the kitchen bench",
-    "desc": "Collect plates and cups. Carry to sink. Turn on tap. Rinse dishes. Apply dish soap to sponge. Scrub plates. Scrub cups. Rinse dishes. Place in drying rack. Wipe counter with cloth. Turn off tap."
-  },
-  {
-    "time": "09:00-10:45",
-    "location": "Bedroom 3",
-    "activity": "PhD research work: literature review and thesis drafting on Computer at desk",
-    "desc": "Walk to bedroom 3. Sit at desk. Turn on desk lamp. Open laptop. Log in. Open browser. Go to academic database. Search for articles. Read abstract. Download PDF. Open PDF. Read article. Take notes in notebook. Open Word document. Type thesis section. Save document. Open second article. Read. Summarize. Type more. Check references. Save again."
-  },
-  {
-    "time": "10:45-11:00",
-    "location": "Kitchen",
-    "activity": "Making herbal tea and a small snack, no caffeine",
-    "desc": "Walk to kitchen. Fill kettle. Boil water. Place tea bag in mug. Pour water. Wait. Remove tea bag. Take biscuits from pantry. Sit. Drink tea. Eat biscuits."
-  },
-  {
-    "time": "11:00-12:30",
-    "location": "Bedroom 3",
-    "activity": "PhD data analysis and reference management on Computer",
-    "desc": "Return to desk. Open statistical software. Import dataset. Run descriptive statistics. Check output. Run regression. Check results. Open reference manager. Add new reference. Edit citation. Format bibliography. Open thesis document. Insert citation. Save document. Run another analysis. Check for errors. Save again. Close software."
-  },
-  {
-    "time": "12:30-13:15",
-    "location": "Kitchen",
-    "activity": "Cooking and eating lunch at home",
-    "desc": "Walk to kitchen. Open refrigerator. Take out vegetables, tofu, rice. Wash vegetables. Chop vegetables. Place pan on induction cooker. Turn on cooker. Add oil. Add vegetables. Stir. Add tofu. Add soy sauce. Stir. Turn off cooker. Place rice in bowl. Add cooked vegetables. Sit at table. Eat lunch. Drink water. Clear dishes."
-  },
-  {
-    "time": "13:15-13:45",
+    "time": "07:50-08:20",
     "location": "Out",
-    "activity": "Walking through the neighbourhood as a midday break and mobility routine",
-    "desc": "Put on shoes. Open front door. Step outside. Close door. Walk along sidewalk. Turn left at corner. Walk past park. Continue walking. Turn right at next street. Walk uphill. Reach top. Turn around. Walk back downhill. Turn left. Walk past shops. Turn right. Walk home. Open front door. Enter. Close door. Remove shoes."
+    "activity": "Commuting to university campus (departing together with Member 1)",
+    "desc": "Walk back to Bedroom 4. Pick up the backpack from the chair. Open the backpack zip. Put the laptop into the backpack. Put the charger into the backpack. Put the notebook and pen case into the backpack. Zip the backpack closed. Pick up the phone from the desk. Put the phone into the jacket pocket. Pick up the water bottle. Put the water bottle into the side pocket of the backpack. Put the backpack on both shoulders. Walk to the front door. Say \"Ready?\" to Member 1. Open the front door. Step out. Hold the door open for Member 1. Close the door behind. Lock the door with the key. Walk with Member 1 to the bus stop. Stand at the bus stop. Take the phone out. Check the bus arrival time on the app. Put the phone back into the pocket. Step onto the bus when it arrives. Tap the transport card on the card reader. Walk down the aisle. Sit down on a seat. Put the backpack on the lap. Look out of the window. Get up when the campus stop is announced. Tap the card on the reader again. Step off the bus. Walk towards the campus entrance alongside Member 1."
   },
   {
-    "time": "13:45-14:15",
-    "location": "Bedroom 3",
-    "activity": "Reviewing the support shift roster and client care notes on phone, packing a small bag",
-    "desc": "Sit on bed. Pick up phone. Open roster app. Read shift times. Open notes app. Read client care notes. Put phone down. Open backpack. Place water bottle inside. Place snacks inside. Place gloves inside. Place hand sanitizer inside. Zip backpack. Pick up phone again. Check messages. Put phone down. Stand up."
-  },
-  {
-    "time": "14:15-14:45",
+    "time": "08:20-12:00",
     "location": "Out",
-    "activity": "Walking to the client's home for the disability and aged-care support shift",
-    "desc": "Pick up backpack. Walk to front door. Open door. Step outside. Close door. Lock door. Walk along sidewalk. Turn left at corner. Cross street. Walk past supermarket. Turn right. Walk two blocks. Arrive at client's house. Walk up driveway. Knock on door."
+    "activity": "Attending Bachelor of Commerce and IT lectures and tutorials on campus",
+    "desc": "Walk into the lecture hall. Pick a seat in the middle row. Take the backpack off the shoulders. Put the backpack on the floor beside the chair. Sit down. Pull out the laptop from the backpack. Open the laptop lid. Press the power button. Type the login password on the keyboard. Open the lecture slides file. Pick up the notebook. Open the notebook to a blank page. Pick up the pen. Write the lecture title at the top of the page. Write down the key points from the slides. Hold the pen still and look at the projector screen. Type a note on the laptop keyboard. Raise the hand to ask a question. Ask the lecturer a question about the accounting entry. Write the answer in the notebook. Close the notebook. Stand up when the lecture ends. Put the notebook into the backpack. Wait for the tutorial room to open. Walk to the tutorial room. Sit down at a desk. Open the laptop again. Open the tutorial exercise file. Work through the exercise questions on the spreadsheet. Type formulas into the cells. Compare answers with the student sitting next to the desk. Say \"I got the same figure\". Save the file with Ctrl+S. Close the laptop lid. Stand up. Pack the laptop into the backpack. Walk out of the tutorial room. Walk to the campus food court."
   },
   {
-    "time": "14:45-20:15",
+    "time": "12:00-13:00",
     "location": "Out",
-    "activity": "Working a disability and aged-care support shift: personal care assistance, meal preparation, medication prompting and companionship",
-    "desc": "Enter client's home. Greet client. Assist with shower. Help dress. Prepare lunch. Cook meal. Serve meal. Sit with client. Prompt medication. Give medication. Wash dishes. Sit in living room. Talk. Play cards. Prepare afternoon tea. Serve tea. Assist with walking. Prepare dinner. Cook dinner. Serve dinner. Prompt evening medication. Assist to bed. Say goodbye."
+    "activity": "Taking a lunch break and eating a packed meal between classes",
+    "desc": "Walk to an empty table in the food court. Take the backpack off the shoulders. Put the backpack on the table edge. Pull the lunch container out of the backpack. Open the container lid. Take out the fork from the container pocket. Sit down on the chair. Eat the packed meal with the fork. Pick up the water bottle. Twist the cap open. Drink from the bottle. Twist the cap closed. Put the water bottle down. Take the phone out of the pocket. Unlock the phone. Open the messaging app. Read new messages. Type a reply message with both thumbs. Send the reply. Open the university email app. Read two new emails. Lock the phone. Put the phone down on the table. Continue eating with the fork. Finish the meal. Close the container lid. Wipe the table spot with a napkin. Pick up the container. Put the container back into the backpack. Stand up. Push the chair back under the table. Pick up the backpack. Put the backpack on both shoulders. Walk towards the campus library."
   },
   {
-    "time": "20:15-20:45",
+    "time": "13:00-16:30",
     "location": "Out",
-    "activity": "Walking home from the support shift",
-    "desc": "Say goodbye to client. Walk out front door. Close door. Walk down driveway. Turn left. Walk along sidewalk. Cross street. Walk past supermarket. Turn right at corner. Walk two blocks. Turn left. Walk along park. Turn right. Walk home. Open front door. Enter. Close door."
+    "activity": "Studying in the campus library and working on group assignments and coursework",
+    "desc": "Walk through the library entrance gate. Swipe the student card at the turnstile. Walk to an empty desk near a power socket. Take the backpack off. Put the backpack on a chair. Sit down on the desk chair. Take out the laptop. Open the laptop lid. Press the power button. Type the login password. Plug the charger into the wall socket. Plug the charger into the laptop. Open the library Wi-Fi page and log in. Open the group assignment document. Read the latest comments from group members. Type replies to the comments. Open the spreadsheet with the collected data. Sort the data rows using the menu. Type new formulas into the cells. Check the totals against the calculator. Open the library catalogue in the browser. Type a keyword into the search box. Press Enter. Read the search results list. Write down two call numbers in the notebook. Stand up. Walk to the shelf. Scan the shelf labels with the eyes. Pull out a book from the shelf. Flip through the pages. Carry the book back to the desk. Put the book down on the desk. Read two chapters. Take notes on the laptop keyboard. Talk quietly with a group member who arrives at the desk. Say \"Let's meet Friday to finish this section\". Save the document. Close the laptop lid. Unplug the charger. Coil the charger cable. Put the charger into the backpack. Put the laptop into the backpack. Stand up. Push the chair under the desk. Put the backpack on. Walk out of the library. Walk to the campus bus stop."
   },
   {
-    "time": "20:45-21:20",
-    "location": "Bedroom 3",
-    "activity": "Resting and doing gentle stretches to manage chronic pain after the shift",
-    "desc": "Walk to bedroom 3. Sit on bed. Lie down on back. Inhale deeply. Exhale slowly. Lift right leg. Stretch hamstring. Lower leg. Lift left leg. Stretch hamstring. Lower leg. Bend knees. Rotate hips. Straighten legs. Sit up. Rotate neck left. Rotate neck right. Roll shoulders. Stand up. Walk to kitchen."
+    "time": "16:30-17:10",
+    "location": "Out",
+    "activity": "Commuting home from campus",
+    "desc": "Stand at the bus stop. Take the phone out of the pocket. Check the bus arrival time. Put the phone back. Step onto the bus. Tap the transport card on the reader. Walk down the aisle. Sit down on a vacant seat. Put the backpack on the lap. Hold the handrail when the bus turns. Look out of the window. Take the phone out again. Scroll through the study notes on the phone. Put the phone back into the pocket. Press the stop request button. Stand up. Walk to the front door. Tap the card on the reader again. Step off the bus. Walk along the street to the house. Take out the house key. Push the key into the front door lock. Turn the key. Push the door open. Step inside. Close the door. Turn the key in the lock to lock it from inside. Take off the shoes. Put the shoes on the shoe rack. Put the backpack down on the floor. Walk to Bedroom 4."
   },
   {
-    "time": "21:20-21:50",
-    "location": "Kitchen",
-    "activity": "Cooking and eating a late dinner at home",
-    "desc": "Open refrigerator. Take out leftovers. Place on plate. Put plate in microwave. Close door. Press start. Wait. Remove plate. Sit at table. Eat dinner. Drink water. Clear plate. Wash plate. Put away leftovers. Wipe table."
-  },
-  {
-    "time": "21:50-22:20",
+    "time": "17:10-17:45",
     "location": "Bathroom",
-    "activity": "Evening wash and preparing for bed",
-    "desc": "Walk to bathroom. Turn on tap. Wet face. Apply cleanser. Rinse face. Pat dry. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Turn off tap. Walk to bedroom. Open wardrobe. Take out pajamas. Put on pajamas. Fold day clothes. Place on chair."
+    "activity": "Showering and freshening up after the day on campus",
+    "desc": "Walk into Bedroom 4. Open the wardrobe door. Take out the clean shirt and trousers. Close the wardrobe door. Take out the bath towel from the hook. Walk to the bathroom. Push the bathroom door open. Turn on the bathroom light. Turn on the shower tap. Test the water temperature with the hand. Adjust the tap handle. Wait for the water to warm up. Take off the shirt. Take off the trousers. Take off the socks. Put the dirty clothes in the laundry basket. Step into the shower. Wet the body. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub the shampoo into the hair. Rinse the hair. Pick up the body wash. Rub the body wash over the shoulders, arms and legs with the hand. Rinse the body under the water. Turn off the shower tap. Step out of the shower. Pick up the towel. Rub the hair with the towel. Rub the body dry. Wrap the towel around the waist. Pull the sink drawer open. Take out the deodorant. Spray the deodorant under both arms. Put the deodorant back. Close the drawer. Pick up the face cream. Apply the cream to the face with the fingers. Put the cream down. Put on the clean shirt. Put on the clean trousers. Hang the towel back on the hook. Pick up the dirty socks. Put them in the laundry basket. Turn off the bathroom light. Open the door. Walk out of the bathroom."
   },
   {
-    "time": "22:20-22:35",
+    "time": "17:45-18:30",
     "location": "Kitchen",
-    "activity": "Cleaning up after dinner and wiping down the kitchen surfaces",
-    "desc": "Walk to kitchen. Collect dishes. Carry to sink. Wash dishes. Rinse. Place in drying rack. Spray counter with cleaner. Wipe counter with cloth. Turn off light."
+    "activity": "Cooking and eating dinner together with Member 1 and Member 2",
+    "desc": "Walk into the kitchen. Say \"Hi\" to Member 1 and Member 2. Walk to the refrigerator. Pull the refrigerator door open. Take out the vegetables and the chicken. Close the refrigerator door. Put the ingredients on the counter. Open the cupboard door. Take out the cutting board. Close the cupboard door. Put the cutting board on the counter. Pick up the knife. Cut the vegetables into pieces. Cut the chicken into pieces. Push the cut pieces to the side of the board with the knife. Pick up the frying pan. Put the pan on the induction cooker. Press the power button on the induction cooker. Pour oil into the pan. Wait for the oil to heat. Put the chicken into the pan. Stir the chicken with the spatula. Put the vegetables into the pan. Add the sauce with the measuring spoon. Stir the mixture. Turn off the induction cooker. Pick up three plates from the cupboard. Put the plates on the counter. Spoon the food onto the three plates. Pick up the plates. Carry them to the table. Sit down on the chair between Member 1 and Member 2. Pick up the fork. Eat the dinner. Talk with Member 1 and Member 2 about the group assignment progress and the evening shifts. Drink water from the glass. Finish the meal. Stand up. Pick up the empty plates."
   },
   {
-    "time": "22:35-23:05",
-    "location": "Bedroom 3",
-    "activity": "Household administration: paying bills by mobile wallet, updating the shared roster and logging maintenance tasks on Computer and phone",
-    "desc": "Walk to bedroom 3. Sit at desk. Open laptop. Log in. Open banking website. Pay electricity bill. Pay internet bill. Open shared roster document. Update roster. Open maintenance log. Add task. Save. Pick up phone. Open mobile wallet. Confirm payment. Put phone down. Close laptop."
+    "time": "18:30-19:00",
+    "location": "Kitchen",
+    "activity": "Washing dishes and wiping down shared kitchen counters together with Member 1 and Member 2",
+    "desc": "Carry the plates and cutlery to the sink. Put the plates in the sink. Pick up the sponge. Squeeze dish soap onto the sponge. Turn on the tap. Rub the sponge over the first plate. Rinse the plate under the running water. Put the plate into the dish rack. Wash the second plate. Rinse it. Put it into the dish rack. Wash the forks and spoons. Rinse them. Put them into the dish rack. Wash the frying pan. Rinse it. Put it into the dish rack. Wash the cooking utensils. Rinse them. Put them into the dish rack. Turn off the tap. Take the dish towel from the hook. Wipe the plate dry. Put the plate into the cupboard. Wipe the frying pan dry. Put the pan into the cupboard. Pick up the dish towel again. Wipe the counter surface with the towel. Wipe the area around the induction cooker with the towel. Take the cutting board. Wash it under the tap. Put the cutting board in the drying rack. Take out the rubbish bag. Tie the bag closed. Carry the bag to the bin outside the kitchen. Put the bag into the bin. Walk back into the kitchen. Wash the hands under the tap. Dry the hands with the towel. Hang the towel back on the hook. Say \"I will be in my room tutoring\" to Member 1 and Member 2. Walk to Bedroom 4."
   },
   {
-    "time": "23:05-23:35",
-    "location": "Bedroom 3",
-    "activity": "Winding down: planning tomorrow, checking distant elder-care arrangements and reading quietly",
-    "desc": "Open planner. Write tomorrow's tasks. Check calendar. Pick up phone. Open messaging app. Send message to elder-care facility. Read reply. Put phone down. Pick up book. Open book. Read pages. Close book. Place book on bedside table."
+    "time": "19:00-19:30",
+    "location": "Bedroom 4",
+    "activity": "Preparing for online tutoring sessions, reviewing materials",
+    "desc": "Walk into Bedroom 4. Push the door closed. Sit down at the desk. Press the desk lamp switch on. Open the laptop lid. Press the power button. Type the login password on the keyboard. Open the tutoring folder on the desktop. Open the lesson plan document for the first student. Read the lesson plan. Open the practice worksheet file. Check the answers against the answer key file. Open the online tutoring platform in the browser. Type the username in the login field. Type the password. Click the login button. Open the scheduled session list. Check the start time of the first session. Pick up the phone. Unlock the phone. Check the message from the student's parent. Type a short reply. Put the phone down on the desk. Pick up the pen. Write the key points for the session on the notepad. Put the pen down. Adjust the desk chair height. Adjust the laptop screen angle. Pick up the headset from the desk. Plug the headset into the laptop audio port. Put the headset on the head. Test the microphone by speaking. Adjust the microphone position. Open the shared whiteboard file. Wait for the session to start."
   },
   {
-    "time": "23:35-24:00",
-    "location": "Bedroom 3",
-    "activity": "Lights out and going to sleep",
-    "desc": "Turn off desk lamp. Lie down in bed. Pull blanket up. Close eyes. Breathe slowly. Turn onto side. Adjust pillow. Close eyes. Sleep."
+    "time": "19:30-21:00",
+    "location": "Bedroom 4",
+    "activity": "Running online tutoring sessions with students via the computer",
+    "desc": "Click the start session button on the screen. Say \"Hi, can you hear me?\" into the headset microphone. Share the screen with the student. Open the math worksheet file on the screen. Point at the first question with the mouse cursor. Explain the steps while typing the working into the shared document. Type the student's answers into the document. Say \"Try the next one on your own\". Wait while the student types. Read the student's answer on the screen. Correct the mistake by typing the correct step in red. Ask the student to repeat the step aloud. Listen to the student's answer through the headset. Say \"Correct, well done\". Click the next page of the worksheet. Continue with the next question. Highlight the key formula on the screen with the mouse. Check the time on the laptop clock. Say \"Two minutes left, let's summarise\". Type the summary points into the chat box. Say \"Goodbye, see you Thursday\". Click the end session button. Take off the headset. Put the headset down on the desk. Stand up. Walk to the kitchen. Fill a glass with water at the sink. Drink the water. Walk back to Bedroom 4. Sit down at the desk. Put the headset back on. Open the next scheduled session. Click the start session button. Greet the second student by name. Open the accounting exercise file. Read the first question aloud. Annotate the balance sheet on the shared screen with the mouse. Type the corrections into the student's document. Answer the student's question about depreciation. Dictate a practice question. Wait while the student answers. Mark the answer on the screen. Say \"Goodbye, see you next week\". Click the end session button. Take off the headset. Put the headset down on the desk. Close the session window. Log out of the tutoring platform."
+  },
+  {
+    "time": "21:00-22:15",
+    "location": "Bedroom 4",
+    "activity": "Doing freelance analyst work and preparing data reports on the computer",
+    "desc": "Open the email inbox in the browser. Read the new message from the freelance client. Open the attached data file. Save the attachment to the work folder. Open the data file in the spreadsheet program. Scroll through the rows with the mouse wheel. Select the data range with the mouse. Click the sort menu. Sort the data by date. Insert a new column. Type the header name into the new column cell. Type the calculation formula into the first cell. Drag the fill handle down the column. Check the results against the totals row. Open the presentation template file. Paste the summary table into slide two. Paste the chart into slide three. Resize the chart with the mouse. Type the slide titles. Type the bullet points in the findings slide. Open the client brief document. Read the reporting requirements. Add a new slide with the recommendation points. Type the recommendation text. Save the report file with Ctrl+S. Pick up the phone. Unlock the phone. Check the client message asking about the delivery deadline. Type a reply \"I will send the report tonight\". Send the message. Put the phone down on the desk. Open the email app. Type the client's address in the recipient field. Type the subject line. Type a short message body. Click the attach file button. Select the report file. Click the send button. Open the data file again. Check the last three figures. Write the final figures into the notepad with the pen. Put the pen down. Close the spreadsheet window. Close the browser tab."
+  },
+  {
+    "time": "22:15-22:40",
+    "location": "Living Room",
+    "activity": "Relaxing with some TV and unwinding before bed",
+    "desc": "Stand up from the desk chair. Push the chair back under the desk. Walk out of Bedroom 4 to the living room. Sit down on the sofa. Pick up the TV remote from the coffee table. Press the power button on the remote. Scroll the channel list with the arrow button. Select a programme and press OK. Put the remote down on the sofa arm. Lean back on the sofa. Watch the screen. Pick up the phone. Unlock the phone. Scroll through social media with the finger. Put the phone down on the sofa. Pick up the remote again. Change the channel. Adjust the volume with the volume button. Put the remote down. Watch the programme. Stretch both arms above the head. Stand up when the programme ends. Pick up the remote. Press the power button to switch off the TV. Put the remote back on the coffee table. Walk to the bathroom."
+  },
+  {
+    "time": "22:40-23:00",
+    "location": "Bathroom",
+    "activity": "Washing up and brushing teeth for bedtime",
+    "desc": "Push the bathroom door open. Turn on the bathroom light. Step in front of the sink. Turn on the tap. Put both hands under the water. Pick up the soap. Rub the soap between the hands. Rub the soap over the face and neck. Rinse the face with both hands. Turn off the tap. Pick up the towel from the hook. Wipe the face dry. Hang the towel back on the hook. Pick up the toothbrush from the cup. Squeeze toothpaste onto the toothbrush. Put the toothpaste tube down. Brush the teeth. Spit into the sink. Turn on the tap. Rinse the mouth with water. Spit again. Turn off the tap. Rinse the toothbrush under the water. Put the toothbrush back into the cup. Pick up the hand towel. Wipe the mouth. Put the hand towel back on the hook. Turn off the bathroom light. Open the door. Walk out to Bedroom 4."
+  },
+  {
+    "time": "23:00-24:00",
+    "location": "Bedroom 4",
+    "activity": "Sleeping",
+    "desc": "Walk into Bedroom 4. Push the door closed. Pick up the phone from the desk. Plug the charger cable into the phone. Plug the charger into the wall socket. Put the phone down on the bedside table. Press the desk lamp switch off. Pull back the blanket. Sit down on the bed. Lie down. Pull the blanket up over the body. Adjust the pillow under the head. Turn onto the right side. Pull the blanket up to the shoulders. Turn onto the back. Extend the legs under the blanket. Turn onto the left side. Close the eyes. Keep the body still. Remain lying still with slow breathing until sleep."
   }
 ]
 
@@ -532,7 +481,7 @@ Environment information:
 - Weather: Sunny
 - Temperature: 20 degrees
 
-
+Today your household is on a time-of-use (TOU) electricity tariff: peak period 16:00-21:00 at 0.60 AUD/kWh; valley period 22:00-07:00 at 0.18 AUD/kWh; shoulder period (all other times) at 0.35 AUD/kWh. To reduce your bill, shift flexible appliances (electric vehicle charging, washing machine, dishwasher-free routines like hot water use) into the valley period, and avoid running high-power appliances during the peak period unless necessary.
 
 
 
@@ -670,7 +619,7 @@ Always-on appliances (do NOT create operations for these):
 Output JSON format (return ONLY the JSON, nothing else):
 - Output language: all generated VALUES (location room names, activity descriptions) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
 {
-  "member": "Member 3",
+  "member": "Member 4",
   "appliance_decisions": [
     {
       "time": "time segment (e.g., 08:00-09:00)",
@@ -695,7 +644,7 @@ Output JSON format (return ONLY the JSON, nothing else):
 5. **Decide appliances by location**: decide the appliances of the specific room when in a room; decide personal appliances when out
 6. Activity descriptions must be in English
 7. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend segments. Only add the operations array.
-8. The member field must exactly equal "Member 3".
+8. The member field must exactly equal "Member 4".
 9. For room appliances, use only appliances belonging to that exact room. When Out, use only this member's personal appliances, or an actual ElectricVehicle if one is supplied.
 10. An empty operations array is valid when the activity does not use electricity. Never invent an operation merely to make the list non-empty.
 11. Never substitute aliases or synonyms: `computer` vs `laptop` and `tv` vs `television` are different strings. Only the exact unique_ids from the allowed list are valid; aliased ids will be discarded.
@@ -712,47 +661,31 @@ Output JSON format (return ONLY the JSON, nothing else):
 
 ```
 {
-  "member": "Member 3",
+  "member": "Member 4",
   "appliance_decisions": [
     {
-      "time": "00:00-03:15",
-      "location": "Bedroom 3",
-      "activity": "Sleeping, though sleep is restless and frequently broken",
-      "operations": []
-    },
-    {
-      "time": "03:15-03:45",
-      "location": "Bedroom 3",
-      "activity": "Waking with mild chronic pain, lying still and doing slow gentle stretches and breathing to settle back down",
-      "operations": []
-    },
-    {
-      "time": "03:45-06:55",
-      "location": "Bedroom 3",
-      "activity": "Sleeping again after the pain settles",
-      "operations": []
-    },
-    {
-      "time": "06:55-07:10",
-      "location": "Bedroom 3",
-      "activity": "Slow waking, lying in bed and scrolling Instagram and Messenger on phone",
+      "time": "00:00-06:45",
+      "location": "Bedroom 4",
+      "activity": "Sleeping overnight",
       "operations": [
         {
-          "unique_id": "member_3_phone",
-          "action": "use"
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "idle"
         }
       ]
     },
     {
-      "time": "07:10-07:25",
-      "location": "Bedroom 3",
-      "activity": "Taking daily medication with water and doing gentle mobility stretches for chronic pain and stiff joints",
-      "operations": []
-    },
-    {
-      "time": "07:25-07:55",
+      "time": "06:45-07:15",
       "location": "Bathroom",
-      "activity": "Showering, washing and getting dressed at an unhurried pace",
+      "activity": "Washing up, brushing teeth and getting dressed for the day",
       "operations": [
         {
           "unique_id": "bathroom_waterheater",
@@ -761,83 +694,90 @@ Output JSON format (return ONLY the JSON, nothing else):
       ]
     },
     {
-      "time": "07:55-08:40",
+      "time": "07:15-07:50",
       "location": "Kitchen",
-      "activity": "Cooking and eating a caffeine-free breakfast while listening to a public health podcast (joined by Member 2 for tea and toast from 08:10-08:25)",
+      "activity": "Preparing and eating breakfast together with Member 1 while checking emails and the university timetable on the phone",
       "operations": [
         {
-          "unique_id": "kitchen_inductioncooker",
-          "action": "use"
-        },
-        {
-          "unique_id": "kitchen_rangehood",
+          "unique_id": "kitchen_kettle",
           "action": "use"
         },
         {
           "unique_id": "kitchen_toaster",
           "action": "use"
-        },
-        {
-          "unique_id": "kitchen_kettle",
-          "action": "use"
-        },
-        {
-          "unique_id": "member_3_phone",
-          "action": "use"
         }
       ]
     },
     {
-      "time": "08:40-09:00",
-      "location": "Kitchen",
-      "activity": "Washing dishes and tidying up the kitchen bench",
-      "operations": []
-    },
-    {
-      "time": "09:00-10:45",
-      "location": "Bedroom 3",
-      "activity": "PhD research work: literature review and thesis drafting on Computer at desk",
+      "time": "07:50-08:20",
+      "location": "Out",
+      "activity": "Commuting to university campus (departing together with Member 1)",
       "operations": [
         {
-          "unique_id": "member_3_computer",
-          "action": "use"
-        },
-        {
-          "unique_id": "member_3_desklamp",
+          "unique_id": "member_4_phone",
           "action": "use"
         }
       ]
     },
     {
-      "time": "10:45-11:00",
-      "location": "Kitchen",
-      "activity": "Making herbal tea and a small snack, no caffeine",
+      "time": "08:20-12:00",
+      "location": "Out",
+      "activity": "Attending Bachelor of Commerce and IT lectures and tutorials on campus",
       "operations": [
         {
-          "unique_id": "kitchen_kettle",
+          "unique_id": "member_4_computer",
           "action": "use"
         }
       ]
     },
     {
-      "time": "11:00-12:30",
-      "location": "Bedroom 3",
-      "activity": "PhD data analysis and reference management on Computer",
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating a packed meal between classes",
       "operations": [
         {
-          "unique_id": "member_3_computer",
-          "action": "use"
-        },
-        {
-          "unique_id": "member_3_desklamp",
+          "unique_id": "member_4_phone",
           "action": "use"
         }
       ]
     },
     {
-      "time": "12:30-13:15",
+      "time": "13:00-16:30",
+      "location": "Out",
+      "activity": "Studying in the campus library and working on group assignments and coursework",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:10",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:10-17:45",
+      "location": "Bathroom",
+      "activity": "Showering and freshening up after the day on campus",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:30",
       "location": "Kitchen",
-      "activity": "Cooking and eating lunch at home",
+      "activity": "Cooking and eating dinner together with Member 1 and Member 2",
       "operations": [
         {
           "unique_id": "kitchen_inductioncooker",
@@ -850,134 +790,96 @@ Output JSON format (return ONLY the JSON, nothing else):
       ]
     },
     {
-      "time": "13:15-13:45",
-      "location": "Out",
-      "activity": "Walking through the neighbourhood as a midday break and mobility routine",
-      "operations": [
-        {
-          "unique_id": "member_3_phone",
-          "action": "idle"
-        }
-      ]
-    },
-    {
-      "time": "13:45-14:15",
-      "location": "Bedroom 3",
-      "activity": "Reviewing the support shift roster and client care notes on phone, packing a small bag",
-      "operations": [
-        {
-          "unique_id": "member_3_phone",
-          "action": "use"
-        }
-      ]
-    },
-    {
-      "time": "14:15-14:45",
-      "location": "Out",
-      "activity": "Walking to the client's home for the disability and aged-care support shift",
-      "operations": [
-        {
-          "unique_id": "member_3_phone",
-          "action": "idle"
-        }
-      ]
-    },
-    {
-      "time": "14:45-20:15",
-      "location": "Out",
-      "activity": "Working a disability and aged-care support shift: personal care assistance, meal preparation, medication prompting and companionship",
-      "operations": [
-        {
-          "unique_id": "member_3_phone",
-          "action": "idle"
-        }
-      ]
-    },
-    {
-      "time": "20:15-20:45",
-      "location": "Out",
-      "activity": "Walking home from the support shift",
-      "operations": [
-        {
-          "unique_id": "member_3_phone",
-          "action": "idle"
-        }
-      ]
-    },
-    {
-      "time": "20:45-21:20",
-      "location": "Bedroom 3",
-      "activity": "Resting and doing gentle stretches to manage chronic pain after the shift",
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down shared kitchen counters together with Member 1 and Member 2",
       "operations": []
     },
     {
-      "time": "21:20-21:50",
-      "location": "Kitchen",
-      "activity": "Cooking and eating a late dinner at home",
+      "time": "19:00-19:30",
+      "location": "Bedroom 4",
+      "activity": "Preparing for online tutoring sessions, reviewing materials",
       "operations": [
         {
-          "unique_id": "kitchen_microwave",
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
           "action": "use"
         }
       ]
     },
     {
-      "time": "21:50-22:20",
+      "time": "19:30-21:00",
+      "location": "Bedroom 4",
+      "activity": "Running online tutoring sessions with students via the computer",
+      "operations": [
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-22:15",
+      "location": "Bedroom 4",
+      "activity": "Doing freelance analyst work and preparing data reports on the computer",
+      "operations": [
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:40",
+      "location": "Living Room",
+      "activity": "Relaxing with some TV and unwinding before bed",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:40-23:00",
       "location": "Bathroom",
-      "activity": "Evening wash and preparing for bed",
+      "activity": "Washing up and brushing teeth for bedtime",
       "operations": []
     },
     {
-      "time": "22:20-22:35",
-      "location": "Kitchen",
-      "activity": "Cleaning up after dinner and wiping down the kitchen surfaces",
-      "operations": []
-    },
-    {
-      "time": "22:35-23:05",
-      "location": "Bedroom 3",
-      "activity": "Household administration: paying bills by mobile wallet, updating the shared roster and logging maintenance tasks on Computer and phone",
+      "time": "23:00-24:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
       "operations": [
         {
-          "unique_id": "member_3_computer",
-          "action": "use"
-        },
-        {
-          "unique_id": "member_3_desklamp",
-          "action": "use"
-        },
-        {
-          "unique_id": "member_3_phone",
-          "action": "use"
-        }
-      ]
-    },
-    {
-      "time": "23:05-23:35",
-      "location": "Bedroom 3",
-      "activity": "Winding down: planning tomorrow, checking distant elder-care arrangements and reading quietly",
-      "operations": [
-        {
-          "unique_id": "member_3_phone",
-          "action": "use"
-        },
-        {
-          "unique_id": "member_3_desklamp",
-          "action": "use"
-        }
-      ]
-    },
-    {
-      "time": "23:35-24:00",
-      "location": "Bedroom 3",
-      "activity": "Lights out and going to sleep",
-      "operations": [
-        {
-          "unique_id": "member_3_desklamp",
+          "unique_id": "member_4_desklamp",
           "action": "idle"
         },
         {
-          "unique_id": "member_3_phone",
+          "unique_id": "member_4_phone",
           "action": "charge_home"
         }
       ]

@@ -2,7 +2,7 @@
 
 ## 对话信息
 
-- time: 2026-09-11 00:48:31
+- time: 2026-09-11 13:05:07
 - seq: 1
 - prefix: Member 3_
 - stage: s3_enrich
@@ -23,124 +23,104 @@ Member information:
 This member's timeline:
 [
   {
-    "time": "00:00-03:15",
+    "time": "00:00-06:20",
     "location": "Bedroom 3",
-    "activity": "Sleeping, though sleep is restless and frequently broken"
+    "activity": "Sleeping, with intermittent waking due to poor sleep"
   },
   {
-    "time": "03:15-03:45",
+    "time": "06:20-07:25",
     "location": "Bedroom 3",
-    "activity": "Waking with mild chronic pain, lying still and doing slow gentle stretches and breathing to settle back down"
-  },
-  {
-    "time": "03:45-06:55",
-    "location": "Bedroom 3",
-    "activity": "Sleeping again after the pain settles"
-  },
-  {
-    "time": "06:55-07:10",
-    "location": "Bedroom 3",
-    "activity": "Slow waking, lying in bed and scrolling Instagram and Messenger on phone"
-  },
-  {
-    "time": "07:10-07:25",
-    "location": "Bedroom 3",
-    "activity": "Taking daily medication with water and doing gentle mobility stretches for chronic pain and stiff joints"
+    "activity": "Slow wake-up: lying in bed, checking Messenger and Instagram on phone, easing into the day"
   },
   {
     "time": "07:25-07:55",
     "location": "Bathroom",
-    "activity": "Showering, washing and getting dressed at an unhurried pace"
+    "activity": "Shower and personal hygiene, taking daily medication"
   },
   {
-    "time": "07:55-08:40",
+    "time": "07:55-08:10",
     "location": "Kitchen",
-    "activity": "Cooking and eating a caffeine-free breakfast while listening to a public health podcast (joined by Member 2 for tea and toast from 08:10-08:25)"
+    "activity": "Preparing a caffeine-free breakfast and packing a lunch container"
   },
   {
-    "time": "08:40-09:00",
+    "time": "08:10-08:25",
     "location": "Kitchen",
-    "activity": "Washing dishes and tidying up the kitchen bench"
+    "activity": "Eating breakfast together with Member 2"
   },
   {
-    "time": "09:00-10:45",
+    "time": "08:25-09:10",
+    "location": "Out",
+    "activity": "Morning walk at a gentle pace for exercise and pain management, picking up a few groceries"
+  },
+  {
+    "time": "09:10-11:40",
     "location": "Bedroom 3",
-    "activity": "PhD research work: literature review and thesis drafting on Computer at desk"
+    "activity": "PhD research: systematic review screening and public health data cleaning on computer"
   },
   {
-    "time": "10:45-11:00",
-    "location": "Kitchen",
-    "activity": "Making herbal tea and a small snack, no caffeine"
-  },
-  {
-    "time": "11:00-12:30",
+    "time": "11:40-11:50",
     "location": "Bedroom 3",
-    "activity": "PhD data analysis and reference management on Computer"
+    "activity": "Short stretch and movement break for mild chronic pain and attention reset"
   },
   {
-    "time": "12:30-13:15",
+    "time": "11:50-12:30",
     "location": "Kitchen",
     "activity": "Cooking and eating lunch at home"
   },
   {
-    "time": "13:15-13:45",
+    "time": "12:30-13:00",
+    "location": "Living Room",
+    "activity": "Household admin on phone: paying bills, updating support shift roster, logging maintenance requests, and coordinating household rosters"
+  },
+  {
+    "time": "13:00-13:30",
     "location": "Out",
-    "activity": "Walking through the neighbourhood as a midday break and mobility routine"
+    "activity": "Walking to the disability and aged-care support shift"
   },
   {
-    "time": "13:45-14:15",
-    "location": "Bedroom 3",
-    "activity": "Reviewing the support shift roster and client care notes on phone, packing a small bag"
-  },
-  {
-    "time": "14:15-14:45",
+    "time": "13:30-18:00",
     "location": "Out",
-    "activity": "Walking to the client's home for the disability and aged-care support shift"
+    "activity": "Part-time disability and aged-care support work: assisting clients with daily routines and community access"
   },
   {
-    "time": "14:45-20:15",
-    "location": "Out",
-    "activity": "Working a disability and aged-care support shift: personal care assistance, meal preparation, medication prompting and companionship"
-  },
-  {
-    "time": "20:15-20:45",
+    "time": "18:00-18:30",
     "location": "Out",
     "activity": "Walking home from the support shift"
   },
   {
-    "time": "20:45-21:20",
+    "time": "18:30-19:00",
     "location": "Bedroom 3",
-    "activity": "Resting and doing gentle stretches to manage chronic pain after the shift"
+    "activity": "Unwinding after the support shift, changing into comfortable clothes and reviewing the evening's tasks"
   },
   {
-    "time": "21:20-21:50",
+    "time": "19:00-19:30",
     "location": "Kitchen",
-    "activity": "Cooking and eating a late dinner at home"
+    "activity": "Cooking and eating dinner at home, then quickly cleaning up"
   },
   {
-    "time": "21:50-22:20",
-    "location": "Bathroom",
-    "activity": "Evening wash and preparing for bed"
+    "time": "19:30-20:30",
+    "location": "Living Room",
+    "activity": "Leading a structured group activity session with the household game console (solo session as other members are occupied)"
   },
   {
-    "time": "22:20-22:35",
-    "location": "Kitchen",
-    "activity": "Cleaning up after dinner and wiping down the kitchen surfaces"
-  },
-  {
-    "time": "22:35-23:05",
+    "time": "20:30-21:00",
     "location": "Bedroom 3",
-    "activity": "Household administration: paying bills by mobile wallet, updating the shared roster and logging maintenance tasks on Computer and phone"
+    "activity": "Remote elder caregiving coordination: phone calls and paperwork about care arrangements"
   },
   {
-    "time": "23:05-23:35",
+    "time": "21:00-22:15",
     "location": "Bedroom 3",
-    "activity": "Winding down: planning tomorrow, checking distant elder-care arrangements and reading quietly"
+    "activity": "PhD writing and reading on computer"
   },
   {
-    "time": "23:35-24:00",
+    "time": "22:15-22:45",
     "location": "Bedroom 3",
-    "activity": "Lights out and going to sleep"
+    "activity": "Wind-down: gentle stretching, setting out next day's medication, dimming the desk lamp"
+  },
+  {
+    "time": "22:45-24:00",
+    "location": "Bedroom 3",
+    "activity": "Sleeping"
   }
 ]
 
@@ -148,96 +128,96 @@ Other household members' timelines:
 {
   "Member 1": [
     {
-      "time": "00:00-06:00",
+      "time": "00:00-06:05",
       "location": "Bedroom 1",
-      "activity": "Sleeping"
+      "activity": "Sleeping overnight"
     },
     {
-      "time": "06:00-06:35",
+      "time": "06:05-06:35",
       "location": "Bathroom",
-      "activity": "Waking up early, showering and getting dressed (using the bathroom before Member 4's 06:45-07:15 slot to avoid the shared-bathroom clash)"
+      "activity": "Waking up, showering and getting washed for the day (bathroom used early so it is free for Member 4's 06:45-07:15 slot)"
     },
     {
       "time": "06:35-07:15",
       "location": "Bedroom 1",
-      "activity": "Reviewing course readings, organising notes and study materials for the day"
+      "activity": "Getting dressed for the day, packing the study bag and reviewing the day's schedule"
     },
     {
       "time": "07:15-07:50",
       "location": "Kitchen",
-      "activity": "Making and eating breakfast together with Member 4, packing lunch and study snacks"
+      "activity": "Making and eating breakfast (toast and tea) together with Member 4 while checking phone messages"
     },
     {
-      "time": "07:50-08:35",
+      "time": "07:50-08:30",
       "location": "Out",
-      "activity": "Commuting by public transport to Monash University campus"
+      "activity": "Commuting to Monash University campus by public transport, departing at the same time as Member 4"
     },
     {
-      "time": "08:35-12:00",
+      "time": "08:30-12:00",
       "location": "Out",
       "activity": "Attending Master of Education lectures and tutorials on campus"
     },
     {
       "time": "12:00-13:00",
       "location": "Out",
-      "activity": "Eating lunch on campus while reading set course texts"
+      "activity": "Eating lunch on campus and reviewing lecture notes"
     },
     {
-      "time": "13:00-16:00",
+      "time": "13:00-17:00",
       "location": "Out",
-      "activity": "Studying in the campus library and drafting assignment work on computer"
+      "activity": "Studying in the campus library, reading research papers and working on assignment drafts on the computer"
     },
     {
-      "time": "16:00-16:50",
+      "time": "17:00-17:45",
       "location": "Out",
-      "activity": "Commuting home from campus"
+      "activity": "Commuting home from campus by public transport"
     },
     {
-      "time": "16:50-17:20",
-      "location": "Bathroom",
-      "activity": "Freshening up and changing into part-time work uniform (bathroom is free at this time)"
-    },
-    {
-      "time": "17:20-17:55",
+      "time": "17:45-18:30",
       "location": "Kitchen",
-      "activity": "Cooking and eating an early dinner before the evening shift, coordinating kitchen use with Member 4 who starts cooking around 17:40"
+      "activity": "Cooking and eating dinner together with Member 2 and Member 4"
     },
     {
-      "time": "17:55-18:20",
-      "location": "Out",
-      "activity": "Walking to the part-time hospitality and retail job"
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down shared kitchen counters together with Member 2"
     },
     {
-      "time": "18:20-22:20",
-      "location": "Out",
-      "activity": "Working the evening hospitality and retail shift"
-    },
-    {
-      "time": "22:20-22:50",
-      "location": "Out",
-      "activity": "Commuting home after the shift"
-    },
-    {
-      "time": "22:50-23:00",
+      "time": "19:00-19:15",
       "location": "Bedroom 1",
-      "activity": "Settling in and changing out of work clothes, waiting for Member 4 to finish in the bathroom before showering"
+      "activity": "Changing into part-time work uniform and packing a small bag for the shift"
+    },
+    {
+      "time": "19:15-19:30",
+      "location": "Out",
+      "activity": "Traveling to the part-time hospitality and retail job"
+    },
+    {
+      "time": "19:30-23:00",
+      "location": "Out",
+      "activity": "Working the evening shift in hospitality and retail (serving customers, restocking, closing tasks)"
     },
     {
       "time": "23:00-23:30",
-      "location": "Bathroom",
-      "activity": "Showering and winding down after work (bathroom free after Member 4's 22:30-23:00 night routine)"
+      "location": "Out",
+      "activity": "Traveling home after finishing the shift"
     },
     {
-      "time": "23:30-24:00",
+      "time": "23:30-23:45",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth before bed (bathroom free after Member 4 finished at 23:00 and before Member 3 goes to sleep)"
+    },
+    {
+      "time": "23:45-24:00",
       "location": "Bedroom 1",
-      "activity": "Preparing for bed, briefly checking phone and going to sleep"
+      "activity": "Winding down on the phone and setting an alarm before sleeping"
     }
   ],
   "Member 2": [
     {
       "time": "00:00-01:30",
       "location": "Bedroom 2",
-      "activity": "Late-night doomscrolling YouTube and WhatsApp on phone instead of sleeping"
+      "activity": "Lying in bed doomscrolling YouTube videos and replying to WhatsApp messages, unable to settle for sleep"
     },
     {
       "time": "01:30-07:45",
@@ -247,154 +227,174 @@ Other household members' timelines:
     {
       "time": "07:45-07:55",
       "location": "Bedroom 2",
-      "activity": "Waking up late, slow start and light stretching in bed while waiting for the shared bathroom to free up after Member 3's 07:25-07:55 morning slot"
+      "activity": "Waking up after oversleeping, checking the phone and gathering clothes while waiting for the shared bathroom to become free after Member 3 finishes"
     },
     {
       "time": "07:55-08:10",
       "location": "Bathroom",
-      "activity": "Quick wash and brushing teeth (bathroom now free after Member 3, avoiding the 06:45-07:15 Member 4 and 07:25-07:55 Member 3 slots)"
+      "activity": "Quick rushed shower, brushing teeth and getting dressed for the day (bathroom free after Member 3 finished at 07:55)"
     },
     {
       "time": "08:10-08:25",
       "location": "Kitchen",
-      "activity": "Rushed breakfast of tea and toast shared with Member 3 in the kitchen, packing a thermos of tea for the day"
+      "activity": "Making a quick breakfast of toast and a strong cup of tea with the kettle and toaster, eating together with Member 3 while they have their caffeine-free breakfast"
     },
     {
-      "time": "08:25-09:10",
-      "location": "Out",
-      "activity": "Commuting by public transport to Monash University Caulfield campus, running behind schedule"
-    },
-    {
-      "time": "09:10-12:30",
-      "location": "Out",
-      "activity": "Attending Master of Design studio classes and critique sessions at Caulfield campus"
-    },
-    {
-      "time": "12:30-13:15",
-      "location": "Out",
-      "activity": "Buying and eating a budget-friendly lunch on campus that fits dietary restrictions"
-    },
-    {
-      "time": "13:15-16:30",
-      "location": "Out",
-      "activity": "Working on design studio projects and print/workshop tasks on campus"
-    },
-    {
-      "time": "16:30-17:15",
-      "location": "Out",
-      "activity": "Commuting home from Caulfield campus in afternoon traffic"
-    },
-    {
-      "time": "17:15-17:45",
+      "time": "08:25-08:55",
       "location": "Bedroom 2",
-      "activity": "Changing out of day clothes and doing the daily stretching routine"
+      "activity": "Throwing studio materials, laptop and charger into a bag while checking Monash emails on the phone"
+    },
+    {
+      "time": "08:55-09:30",
+      "location": "Out",
+      "activity": "Driving to Caulfield campus, running late in morning traffic"
+    },
+    {
+      "time": "09:30-12:30",
+      "location": "Out",
+      "activity": "Attending Master of Design studio class at Monash Caulfield, working on a group design brief"
+    },
+    {
+      "time": "12:30-13:10",
+      "location": "Out",
+      "activity": "Eating a packed lunch on campus and sketching layout ideas in a notebook"
+    },
+    {
+      "time": "13:10-16:20",
+      "location": "Out",
+      "activity": "Continuing studio work, printing prototypes and taking part in a design critique"
+    },
+    {
+      "time": "16:20-16:55",
+      "location": "Out",
+      "activity": "Driving home from campus instead of going straight to the cafe, so as to be home for the household dinner"
+    },
+    {
+      "time": "16:55-17:45",
+      "location": "Bedroom 2",
+      "activity": "Doing freelance creative work on the computer with the monitor and desk lamp on"
     },
     {
       "time": "17:45-18:30",
       "location": "Kitchen",
-      "activity": "Cooking a daily homemade dinner that meets dietary restrictions and eating it in the kitchen alongside Member 4, who is cooking and eating dinner from 17:40"
+      "activity": "Cooking and eating dinner together with Member 1 and Member 4"
     },
     {
       "time": "18:30-19:00",
       "location": "Kitchen",
-      "activity": "Washing dishes and wiping down shared kitchen counters after cooking"
+      "activity": "Washing dishes and wiping down the shared kitchen counters together with Member 1"
     },
     {
-      "time": "19:00-21:00",
-      "location": "Bedroom 2",
-      "activity": "Doing freelance creative work on computer and monitor at desk"
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Driving to the cafe for the rescheduled evening shift"
     },
     {
-      "time": "21:00-21:40",
+      "time": "19:30-22:30",
+      "location": "Out",
+      "activity": "Working the evening shift at the cafe, taking orders, preparing drinks, cleaning the counter and closing up"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Out",
+      "activity": "Driving home from the cafe"
+    },
+    {
+      "time": "23:00-23:30",
       "location": "Bathroom",
-      "activity": "Showering and putting a load of laundry in the washing machine (bathroom free before Member 3's 22:20-22:50, Member 4's 22:30-23:00 and Member 1's 23:00-23:30 slots)"
+      "activity": "Washing up and brushing teeth before bed (bathroom free after Member 4 finished at 23:00 and before Member 1 starts at 23:30)"
     },
     {
-      "time": "21:40-22:40",
-      "location": "Living Room",
-      "activity": "Relaxing with TV and game console to unwind"
-    },
-    {
-      "time": "22:40-24:00",
+      "time": "23:30-24:00",
       "location": "Bedroom 2",
-      "activity": "Lying in bed browsing YouTube and WhatsApp on phone before settling down to sleep"
+      "activity": "Winding down on the phone, doomscrolling YouTube and WhatsApp instead of sleeping"
     }
   ],
   "Member 4": [
     {
       "time": "00:00-06:45",
       "location": "Bedroom 4",
-      "activity": "Sleeping"
+      "activity": "Sleeping overnight"
     },
     {
       "time": "06:45-07:15",
       "location": "Bathroom",
-      "activity": "Shower, brushing teeth and getting dressed for the day (bathroom free: Member 1 finished at 06:35 and Member 3 starts at 07:25)"
+      "activity": "Washing up, brushing teeth and getting dressed for the day"
     },
     {
       "time": "07:15-07:50",
       "location": "Kitchen",
-      "activity": "Preparing and eating breakfast together with Member 1"
+      "activity": "Preparing and eating breakfast together with Member 1 while checking emails and the university timetable on the phone"
     },
     {
       "time": "07:50-08:20",
       "location": "Out",
-      "activity": "Commuting to university campus (Member 1 departs at the same time)"
+      "activity": "Commuting to university campus (departing together with Member 1)"
     },
     {
       "time": "08:20-12:00",
       "location": "Out",
-      "activity": "Attending Bachelor of Commerce and IT lectures and tutorials"
+      "activity": "Attending Bachelor of Commerce and IT lectures and tutorials on campus"
     },
     {
-      "time": "12:00-12:40",
+      "time": "12:00-13:00",
       "location": "Out",
-      "activity": "Eating lunch on campus"
+      "activity": "Taking a lunch break and eating a packed meal between classes"
     },
     {
-      "time": "12:40-17:00",
+      "time": "13:00-16:30",
       "location": "Out",
-      "activity": "Studying in the library and attending afternoon classes"
+      "activity": "Studying in the campus library and working on group assignments and coursework"
     },
     {
-      "time": "17:00-17:40",
+      "time": "16:30-17:10",
       "location": "Out",
       "activity": "Commuting home from campus"
     },
     {
-      "time": "17:40-18:20",
-      "location": "Kitchen",
-      "activity": "Cooking and eating dinner (joined by Member 1 until 17:55 and Member 2 from 17:45)"
-    },
-    {
-      "time": "18:20-19:00",
-      "location": "Living Room",
-      "activity": "Relaxing and watching TV"
-    },
-    {
-      "time": "19:00-21:00",
-      "location": "Bedroom 4",
-      "activity": "Conducting online tutoring sessions using the computer"
-    },
-    {
-      "time": "21:00-21:20",
-      "location": "Kitchen",
-      "activity": "Making a hot drink and having a snack (kitchen free before Member 3's dinner at 21:20)"
-    },
-    {
-      "time": "21:20-22:30",
-      "location": "Bedroom 4",
-      "activity": "Doing freelance analyst work on the computer"
-    },
-    {
-      "time": "22:30-23:00",
+      "time": "17:10-17:45",
       "location": "Bathroom",
-      "activity": "Showering and completing night routine (bathroom free: Member 3 finished at 22:20 and Member 1 starts at 23:00)"
+      "activity": "Showering and freshening up after the day on campus"
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner together with Member 1 and Member 2"
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down shared kitchen counters together with Member 1 and Member 2"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bedroom 4",
+      "activity": "Preparing for online tutoring sessions, reviewing materials"
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Bedroom 4",
+      "activity": "Running online tutoring sessions with students via the computer"
+    },
+    {
+      "time": "21:00-22:15",
+      "location": "Bedroom 4",
+      "activity": "Doing freelance analyst work and preparing data reports on the computer"
+    },
+    {
+      "time": "22:15-22:40",
+      "location": "Living Room",
+      "activity": "Relaxing with some TV and unwinding before bed"
+    },
+    {
+      "time": "22:40-23:00",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth for bedtime"
     },
     {
       "time": "23:00-24:00",
       "location": "Bedroom 4",
-      "activity": "Winding down on the phone and falling asleep"
+      "activity": "Sleeping"
     }
   ]
 }
@@ -550,154 +550,6 @@ Output JSON format (return ONLY the JSON, nothing else):
 ## 返回(原始)
 
 ```
-{
-  "member": "Member 3",
-  "enriched_activities": [
-    {
-      "time": "00:00-03:15",
-      "location": "Bedroom 3",
-      "activity": "Sleeping, though sleep is restless and frequently broken",
-      "desc": "Lie in bed. Close eyes. Turn onto right side. Pull blanket up to shoulders. Shift legs. Open eyes. Look at ceiling. Turn onto left side. Adjust pillow. Close eyes. Breathe deeply. Turn onto back. Move arm. Turn onto right side again. Open eyes briefly. Close eyes. Shift position. Pull blanket. Turn onto left side. Close eyes."
-    },
-    {
-      "time": "03:15-03:45",
-      "location": "Bedroom 3",
-      "activity": "Waking with mild chronic pain, lying still and doing slow gentle stretches and breathing to settle back down",
-      "desc": "Open eyes. Lie still on back. Inhale slowly. Exhale slowly. Lift right arm. Rotate wrist clockwise. Rotate wrist counterclockwise. Lower right arm. Lift left arm. Rotate wrist clockwise. Rotate wrist counterclockwise. Lower left arm. Bend right knee. Straighten right leg. Bend left knee. Straighten left leg. Inhale deeply. Exhale slowly. Close eyes."
-    },
-    {
-      "time": "03:45-06:55",
-      "location": "Bedroom 3",
-      "activity": "Sleeping again after the pain settles",
-      "desc": "Close eyes. Turn onto right side. Pull blanket. Breathe slowly. Shift legs. Turn onto left side. Adjust pillow. Sleep. Open eyes briefly. Turn onto back. Close eyes. Turn onto right side. Pull blanket. Shift position. Open eyes. Look at clock. Close eyes. Turn onto left side. Breathe deeply. Sleep."
-    },
-    {
-      "time": "06:55-07:10",
-      "location": "Bedroom 3",
-      "activity": "Slow waking, lying in bed and scrolling Instagram and Messenger on phone",
-      "desc": "Open eyes. Stretch arms. Reach for phone on bedside table. Pick up phone. Press power button. Swipe screen. Enter passcode. Open Instagram. Scroll feed. Tap like on post. Open Messenger. Read message from friend. Tap reply. Type message. Send. Put phone down on chest. Close eyes briefly. Open eyes. Pick up phone again. Scroll Instagram. Put phone down."
-    },
-    {
-      "time": "07:10-07:25",
-      "location": "Bedroom 3",
-      "activity": "Taking daily medication with water and doing gentle mobility stretches for chronic pain and stiff joints",
-      "desc": "Sit up. Pick up medication bottle. Open cap. Take pill. Drink water. Stand up. Stretch arms overhead. Bend forward. Straighten up. Sit on bed. Rotate ankles."
-    },
-    {
-      "time": "07:25-07:55",
-      "location": "Bathroom",
-      "activity": "Showering, washing and getting dressed at an unhurried pace",
-      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust water. Step in. Wet body. Apply soap. Wash body. Rinse. Shampoo hair. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Walk to bedroom. Open wardrobe. Pick clothes. Put on underwear, shirt, pants. Comb hair."
-    },
-    {
-      "time": "07:55-08:40",
-      "location": "Kitchen",
-      "activity": "Cooking and eating a caffeine-free breakfast while listening to a public health podcast (joined by Member 2 for tea and toast from 08:10-08:25)",
-      "desc": "Walk to kitchen. Open refrigerator. Take out eggs and bread. Place pan on induction cooker. Turn on cooker. Crack eggs. Cook eggs. Toast bread. Pour herbal tea. Sit at table. Open podcast on phone. Play podcast. Eat breakfast. At 08:10, Member 2 enters. Greet Member 2. Pour tea for Member 2. Share toast. Talk with Member 2. At 08:25, Member 2 leaves. Finish eating. Clear dishes."
-    },
-    {
-      "time": "08:40-09:00",
-      "location": "Kitchen",
-      "activity": "Washing dishes and tidying up the kitchen bench",
-      "desc": "Collect plates and cups. Carry to sink. Turn on tap. Rinse dishes. Apply dish soap to sponge. Scrub plates. Scrub cups. Rinse dishes. Place in drying rack. Wipe counter with cloth. Turn off tap."
-    },
-    {
-      "time": "09:00-10:45",
-      "location": "Bedroom 3",
-      "activity": "PhD research work: literature review and thesis drafting on Computer at desk",
-      "desc": "Walk to bedroom 3. Sit at desk. Turn on desk lamp. Open laptop. Log in. Open browser. Go to academic database. Search for articles. Read abstract. Download PDF. Open PDF. Read article. Take notes in notebook. Open Word document. Type thesis section. Save document. Open second article. Read. Summarize. Type more. Check references. Save again."
-    },
-    {
-      "time": "10:45-11:00",
-      "location": "Kitchen",
-      "activity": "Making herbal tea and a small snack, no caffeine",
-      "desc": "Walk to kitchen. Fill kettle. Boil water. Place tea bag in mug. Pour water. Wait. Remove tea bag. Take biscuits from pantry. Sit. Drink tea. Eat biscuits."
-    },
-    {
-      "time": "11:00-12:30",
-      "location": "Bedroom 3",
-      "activity": "PhD data analysis and reference management on Computer",
-      "desc": "Return to desk. Open statistical software. Import dataset. Run descriptive statistics. Check output. Run regression. Check results. Open reference manager. Add new reference. Edit citation. Format bibliography. Open thesis document. Insert citation. Save document. Run another analysis. Check for errors. Save again. Close software."
-    },
-    {
-      "time": "12:30-13:15",
-      "location": "Kitchen",
-      "activity": "Cooking and eating lunch at home",
-      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables, tofu, rice. Wash vegetables. Chop vegetables. Place pan on induction cooker. Turn on cooker. Add oil. Add vegetables. Stir. Add tofu. Add soy sauce. Stir. Turn off cooker. Place rice in bowl. Add cooked vegetables. Sit at table. Eat lunch. Drink water. Clear dishes."
-    },
-    {
-      "time": "13:15-13:45",
-      "location": "Out",
-      "activity": "Walking through the neighbourhood as a midday break and mobility routine",
-      "desc": "Put on shoes. Open front door. Step outside. Close door. Walk along sidewalk. Turn left at corner. Walk past park. Continue walking. Turn right at next street. Walk uphill. Reach top. Turn around. Walk back downhill. Turn left. Walk past shops. Turn right. Walk home. Open front door. Enter. Close door. Remove shoes."
-    },
-    {
-      "time": "13:45-14:15",
-      "location": "Bedroom 3",
-      "activity": "Reviewing the support shift roster and client care notes on phone, packing a small bag",
-      "desc": "Sit on bed. Pick up phone. Open roster app. Read shift times. Open notes app. Read client care notes. Put phone down. Open backpack. Place water bottle inside. Place snacks inside. Place gloves inside. Place hand sanitizer inside. Zip backpack. Pick up phone again. Check messages. Put phone down. Stand up."
-    },
-    {
-      "time": "14:15-14:45",
-      "location": "Out",
-      "activity": "Walking to the client's home for the disability and aged-care support shift",
-      "desc": "Pick up backpack. Walk to front door. Open door. Step outside. Close door. Lock door. Walk along sidewalk. Turn left at corner. Cross street. Walk past supermarket. Turn right. Walk two blocks. Arrive at client's house. Walk up driveway. Knock on door."
-    },
-    {
-      "time": "14:45-20:15",
-      "location": "Out",
-      "activity": "Working a disability and aged-care support shift: personal care assistance, meal preparation, medication prompting and companionship",
-      "desc": "Enter client's home. Greet client. Assist with shower. Help dress. Prepare lunch. Cook meal. Serve meal. Sit with client. Prompt medication. Give medication. Wash dishes. Sit in living room. Talk. Play cards. Prepare afternoon tea. Serve tea. Assist with walking. Prepare dinner. Cook dinner. Serve dinner. Prompt evening medication. Assist to bed. Say goodbye."
-    },
-    {
-      "time": "20:15-20:45",
-      "location": "Out",
-      "activity": "Walking home from the support shift",
-      "desc": "Say goodbye to client. Walk out front door. Close door. Walk down driveway. Turn left. Walk along sidewalk. Cross street. Walk past supermarket. Turn right at corner. Walk two blocks. Turn left. Walk along park. Turn right. Walk home. Open front door. Enter. Close door."
-    },
-    {
-      "time": "20:45-21:20",
-      "location": "Bedroom 3",
-      "activity": "Resting and doing gentle stretches to manage chronic pain after the shift",
-      "desc": "Walk to bedroom 3. Sit on bed. Lie down on back. Inhale deeply. Exhale slowly. Lift right leg. Stretch hamstring. Lower leg. Lift left leg. Stretch hamstring. Lower leg. Bend knees. Rotate hips. Straighten legs. Sit up. Rotate neck left. Rotate neck right. Roll shoulders. Stand up. Walk to kitchen."
-    },
-    {
-      "time": "21:20-21:50",
-      "location": "Kitchen",
-      "activity": "Cooking and eating a late dinner at home",
-      "desc": "Open refrigerator. Take out leftovers. Place on plate. Put plate in microwave. Close door. Press start. Wait. Remove plate. Sit at table. Eat dinner. Drink water. Clear plate. Wash plate. Put away leftovers. Wipe table."
-    },
-    {
-      "time": "21:50-22:20",
-      "location": "Bathroom",
-      "activity": "Evening wash and preparing for bed",
-      "desc": "Walk to bathroom. Turn on tap. Wet face. Apply cleanser. Rinse face. Pat dry. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Turn off tap. Walk to bedroom. Open wardrobe. Take out pajamas. Put on pajamas. Fold day clothes. Place on chair."
-    },
-    {
-      "time": "22:20-22:35",
-      "location": "Kitchen",
-      "activity": "Cleaning up after dinner and wiping down the kitchen surfaces",
-      "desc": "Walk to kitchen. Collect dishes. Carry to sink. Wash dishes. Rinse. Place in drying rack. Spray counter with cleaner. Wipe counter with cloth. Turn off light."
-    },
-    {
-      "time": "22:35-23:05",
-      "location": "Bedroom 3",
-      "activity": "Household administration: paying bills by mobile wallet, updating the shared roster and logging maintenance tasks on Computer and phone",
-      "desc": "Walk to bedroom 3. Sit at desk. Open laptop. Log in. Open banking website. Pay electricity bill. Pay internet bill. Open shared roster document. Update roster. Open maintenance log. Add task. Save. Pick up phone. Open mobile wallet. Confirm payment. Put phone down. Close laptop."
-    },
-    {
-      "time": "23:05-23:35",
-      "location": "Bedroom 3",
-      "activity": "Winding down: planning tomorrow, checking distant elder-care arrangements and reading quietly",
-      "desc": "Open planner. Write tomorrow's tasks. Check calendar. Pick up phone. Open messaging app. Send message to elder-care facility. Read reply. Put phone down. Pick up book. Open book. Read pages. Close book. Place book on bedside table."
-    },
-    {
-      "time": "23:35-24:00",
-      "location": "Bedroom 3",
-      "activity": "Lights out and going to sleep",
-      "desc": "Turn off desk lamp. Lie down in bed. Pull blanket up. Close eyes. Breathe slowly. Turn onto side. Adjust pillow. Close eyes. Sleep."
-    }
-  ]
-}
+{"member":"Member 3","enriched_activities":[{"time":"00:00-06:20","location":"Bedroom 3","activity":"Sleeping, with intermittent waking due to poor sleep","desc":"Lies on bed. Closes eyes. Pulls blanket over chest. Turns onto left side. Bends right arm under pillow. Opens eyes. Turns onto back. Adjusts pillow. Closes eyes. Turns onto right side. Pulls blanket up. Bends knees. Stretches legs. Turns onto back. Closes eyes. Repeats turning and adjusting blanket."},{"time":"06:20-07:25","location":"Bedroom 3","activity":"Slow wake-up: lying in bed, checking Messenger and Instagram on phone, easing into the day","desc":"Opens eyes. Turns onto back. Reaches right arm to bedside table. Picks up phone. Unlocks phone with thumb. Taps Messenger icon. Scrolls message list. Opens a chat. Types a reply. Sends message. Taps back. Opens Instagram. Scrolls feed. Double-taps a post. Watches a video. Puts phone face down on bed. Stretches arms above head. Bends knees. Sits up on edge of bed. Places feet on floor. Stands up."},{"time":"07:25-07:55","location":"Bathroom","activity":"Shower and personal hygiene, taking daily medication","desc":"Walks to bathroom. Turns on light. Turns on tap. Adjusts water temperature. Steps into shower. Wets body. Picks up soap. Rubs soap on arms. Washes torso. Washes legs. Rinses body. Turns off tap. Picks up towel. Dries face. Dries body. Wraps towel around waist. Steps out. Opens medicine cabinet. Takes medication bottle. Opens cap. Pours one pill into palm. Puts pill in mouth. Fills cup with water. Drinks water. Swallows pill. Closes bottle. Puts bottle back. Closes cabinet."},{"time":"07:55-08:10","location":"Kitchen","activity":"Preparing a caffeine-free breakfast and packing a lunch container","desc":"Walks to kitchen. Opens fridge. Takes oats and plant milk. Closes fridge. Takes bowl and spoon. Pours oats and plant milk into bowl. Opens microwave. Places bowl inside. Presses start. Opens fridge. Takes lunch container. Fills container with leftovers. Closes container. Places container in bag."},{"time":"08:10-08:25","location":"Kitchen","activity":"Eating breakfast together with Member 2","desc":"Sits at table. Member 2 sits opposite. Says 'Good morning' to Member 2. Picks up spoon. Eats oatmeal. Member 2 says 'Morning.' Drinks water. Picks up bowl. Eats last spoonful. Puts spoon in bowl. Stands up. Carries bowl to sink."},{"time":"08:25-09:10","location":"Out","activity":"Morning walk at a gentle pace for exercise and pain management, picking up a few groceries","desc":"Puts on shoes. Picks up reusable bag. Opens front door. Steps outside. Closes door. Walks along footpath. Turns left at corner. Continues walking at gentle pace. Stops at pedestrian crossing. Presses crossing button. Waits. Crosses street. Walks to grocery store. Opens store door. Picks up shopping basket. Walks to produce aisle. Selects apples. Places apples in basket. Selects bananas. Places bananas in basket. Walks to checkout. Places basket on counter. Pays with card. Puts groceries in reusable bag. Walks out. Walks home."},{"time":"09:10-11:40","location":"Bedroom 3","activity":"PhD research: systematic review screening and public health data cleaning on computer","desc":"Walks to bedroom. Closes door. Sits at desk. Turns on desk lamp. Opens laptop. Presses power button. Logs in with password. Opens systematic review software. Opens screening spreadsheet. Reads title and abstract. Clicks include button. Reads next record. Clicks exclude button. Opens data cleaning file. Types data into cells. Scrolls down. Checks for missing values. Highlights row. Opens reference manager. Adds citation. Saves file."},{"time":"11:40-11:50","location":"Bedroom 3","activity":"Short stretch and movement break for mild chronic pain and attention reset","desc":"Stands up from chair. Raises both arms overhead. Bends forward. Reaches toward floor. Straightens up. Twists torso left. Twists torso right. Walks to window. Walks back to desk. Sits down."},{"time":"11:50-12:30","location":"Kitchen","activity":"Cooking and eating lunch at home","desc":"Walks to kitchen. Opens fridge. Takes out vegetables and tofu. Closes fridge. Opens cupboard. Takes pot. Places pot on induction cooker. Presses power button. Pours oil into pot. Cuts tofu. Adds tofu to pot. Stirs with spatula. Adds vegetables. Pours water. Closes lid. Waits. Turns off cooker. Opens lid. Takes bowl. Scoops food into bowl. Sits at table. Eats with chopsticks. Drinks water. Carries bowl to sink. Washes bowl."},{"time":"12:30-13:00","location":"Living Room","activity":"Household admin on phone: paying bills, updating support shift roster, logging maintenance requests, and coordinating household rosters","desc":"Walks to living room. Sits on sofa. Picks up phone. Unlocks phone. Opens banking app. Taps bill payment. Enters amount. Confirms payment. Opens roster app. Updates support shift times. Sends message to supervisor. Opens email. Writes maintenance request. Sends email. Opens household group chat. Types roster message. Sends message. Puts phone down. Stands up."},{"time":"13:00-13:30","location":"Out","activity":"Walking to the disability and aged-care support shift","desc":"Picks up work bag. Puts on shoes. Opens front door. Steps outside. Closes door. Walks along footpath. Turns right at intersection. Crosses street. Waits for traffic light. Crosses second street. Continues walking. Checks phone for time. Puts phone in pocket. Walks to client's house. Opens gate. Walks to front door. Rings doorbell."},{"time":"13:30-18:00","location":"Out","activity":"Part-time disability and aged-care support work: assisting clients with daily routines and community access","desc":"Greets client. Enters house. Removes shoes. Washes hands. Assists client with daily routine. Helps client dress. Prepares lunch in kitchen. Opens fridge. Takes out ingredients. Cuts vegetables. Cooks meal. Serves lunch. Sits with client. Eats lunch. Cleans dishes. Wipes counter. Accompanies client for community access. Pushes wheelchair. Walks to bus stop. Boards bus. Rides bus. Walks to park. Sits on bench. Returns home. Assists with evening routine. Documents shift notes. Says goodbye."},{"time":"18:00-18:30","location":"Out","activity":"Walking home from the support shift","desc":"Picks up bag. Says goodbye to client. Opens front door. Steps outside. Closes door. Walks along footpath. Turns left at corner. Crosses street. Walks past shops. Checks phone. Puts phone in pocket. Continues walking. Turns right at intersection. Crosses second street. Walks to home. Opens gate. Walks to front door. Unlocks door. Enters house. Closes door."},{"time":"18:30-19:00","location":"Bedroom 3","activity":"Unwinding after the support shift, changing into comfortable clothes and reviewing the evening's tasks","desc":"Walks to bedroom. Closes door. Puts bag on floor. Takes off shoes. Places shoes by door. Takes off work shirt. Hangs shirt in closet. Takes off pants. Hangs pants. Opens drawer. Takes out t-shirt. Puts on t-shirt. Takes out shorts. Puts on shorts. Sits on bed. Picks up phone. Opens task list. Reviews evening tasks. Puts phone on bedside table. Stands up."},{"time":"19:00-19:30","location":"Kitchen","activity":"Cooking and eating dinner at home, then quickly cleaning up","desc":"Walks to kitchen. Opens fridge. Takes out vegetables and noodles. Closes fridge. Opens cupboard. Takes pot. Places pot on induction cooker. Presses power. Pours water. Adds noodles. Cuts vegetables. Adds vegetables to pot. Stirs. Turns off cooker. Takes bowl. Scoops noodles into bowl. Sits at table. Eats with chopsticks. Drinks water. Carries bowl to sink. Washes bowl. Wipes counter."},{"time":"19:30-20:30","location":"Living Room","activity":"Leading a structured group activity session with the household game console (solo session as other members are occupied)","desc":"Walks to living room. Turns on TV. Picks up remote. Presses power button. Turns on game console. Picks up controller. Presses home button. Selects game. Starts game. Plays. Presses buttons. Moves controller. Pauses game. Drinks water. Resumes game. Plays. Reaches checkpoint. Saves game. Presses pause. Puts controller down. Turns off console. Turns off TV. Stands up."},{"time":"20:30-21:00","location":"Bedroom 3","activity":"Remote elder caregiving coordination: phone calls and paperwork about care arrangements","desc":"Walks to bedroom. Sits at desk. Picks up phone. Opens contacts. Selects elder care contact. Taps call. Holds phone to ear. Speaks about care schedule. Writes notes on paper. Ends call. Opens paperwork folder. Reads care plan. Fills in form. Signs name. Scans form with phone. Sends email with attachment. Puts phone down. Closes folder."},{"time":"21:00-22:15","location":"Bedroom 3","activity":"PhD writing and reading on computer","desc":"Opens laptop. Presses power. Logs in. Opens document. Types paragraph. Reads reference article. Highlights sentence. Copies citation. Pastes citation into document. Types more text. Scrolls up. Edits sentence. Saves document. Opens PDF. Reads methods section. Takes notes on paper. Types notes into document. Checks word count. Saves again. Closes laptop."},{"time":"22:15-22:45","location":"Bedroom 3","activity":"Wind-down: gentle stretching, setting out next day's medication, dimming the desk lamp","desc":"Stands up. Raises arms overhead. Bends forward. Reaches toward floor. Straightens up. Twists torso left. Twists torso right. Sits on floor. Stretches legs. Touches toes. Stands up. Walks to desk. Opens medication organizer. Takes out tomorrow's pills. Places pills in organizer. Closes organizer. Turns desk lamp knob. Dims lamp. Turns off overhead light. Lies on bed. Pulls blanket up. Closes eyes."},{"time":"22:45-24:00","location":"Bedroom 3","activity":"Sleeping","desc":"Lies on bed. Closes eyes. Pulls blanket over chest. Turns onto left side. Bends knees. Adjusts pillow. Turns onto back. Breathes slowly. Turns onto right side. Pulls blanket up. Stretches legs. Turns onto back. Closes eyes. Remains still."}]}
 ```
 

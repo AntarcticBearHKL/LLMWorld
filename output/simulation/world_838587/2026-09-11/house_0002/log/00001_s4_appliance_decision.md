@@ -2,7 +2,7 @@
 
 ## 对话信息
 
-- time: 2026-09-11 00:52:20
+- time: 2026-09-11 13:06:12
 - seq: 1
 - prefix: Member 1_
 - stage: s4_appliance_decision
@@ -25,98 +25,92 @@ This member's complete timeline:
   {
     "time": "00:00-06:30",
     "location": "Bedroom 1",
-    "activity": "sleeping",
-    "desc": "Remain lying in bed. Pull blanket up. Adjust pillow. Turn to left side. Remain still. Breathe. Turn to right side. Pull blanket. Adjust pillow. Remain still. Breathe. Turn to back. Pull blanket. Adjust pillow. Remain still. Breathe. Turn to left side. Pull blanket. Adjust pillow. Remain still."
+    "activity": "Sleeping",
+    "desc": "Lie down in bed. Close eyes. Breathe. Turn to left side. Pull blanket up. Adjust pillow. Remain still. Turn to right side. Push blanket down. Stretch legs. Stretch arms. Turn onto back. Breathe. Remain still."
   },
   {
     "time": "06:30-07:00",
     "location": "Bathroom",
-    "activity": "washing up and showering",
-    "desc": "Walk to bathroom. Turn on light. Turn on tap. Pick up toothbrush. Squeeze toothpaste. Brush teeth. Rinse mouth. Turn off tap. Turn on shower. Step into shower. Wet body. Apply soap. Rinse body. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Wrap towel. Turn off light."
+    "activity": "Waking up, washing face and brushing teeth",
+    "desc": "Wake up. Sit up in bed. Swing legs out of bed. Stand up. Walk to bathroom. Open bathroom door. Turn on light. Turn on tap. Pick up toothbrush. Squeeze toothpaste onto toothbrush. Brush teeth. Rinse mouth. Put down toothbrush. Wash face with water. Dry face with towel. Turn off tap. Turn off light. Walk out of bathroom."
   },
   {
     "time": "07:00-07:30",
     "location": "Kitchen",
-    "activity": "preparing and eating breakfast",
-    "desc": "Walk to kitchen. Open refrigerator. Take out milk. Take out eggs. Close refrigerator. Pick up pan. Place pan on stove. Turn on stove. Crack eggs into pan. Stir eggs. Place bread in toaster. Press toaster lever. Pour milk into glass. Place eggs on plate. Place toast on plate. Sit at table. Pick up fork. Eat eggs. Drink milk. Stand up."
+    "activity": "Preparing and eating breakfast",
+    "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out milk and bread. Close refrigerator. Place items on counter. Open cupboard. Take out plate and glass. Close cupboard. Open microwave. Place bread on plate. Close microwave. Press start button. Microwave beeps. Open microwave. Take out plate. Close microwave. Pour milk into glass. Sit at table. Eat breakfast. Drink milk. Finish eating. Pick up plate and glass. Walk to sink. Put plate and glass in sink."
   },
   {
     "time": "07:30-08:00",
     "location": "Bedroom 1",
-    "activity": "getting dressed and preparing for work",
-    "desc": "Walk to bedroom. Open closet. Take out shirt. Take out pants. Take out socks. Take out shoes. Close closet. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Walk to mirror. Adjust collar. Comb hair. Pick up bag. Walk out of bedroom."
+    "activity": "Changing into work clothes and packing work bag",
+    "desc": "Walk to bedroom. Open wardrobe. Take out work clothes. Close wardrobe. Take off pajamas. Put on work shirt. Put on work pants. Button shirt. Zip pants. Put on socks. Put on shoes. Open drawer. Take out work bag. Close drawer. Open work bag. Put in laptop. Put in notebook. Put in pen. Zip work bag. Pick up work bag. Walk out of bedroom."
   },
   {
     "time": "08:00-09:00",
     "location": "Out",
-    "activity": "commuting to work",
-    "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Hold handrail. Look out window. Pick up phone. Check messages. Put phone in pocket. Press stop button. Stand up. Walk to exit. Step off bus. Walk to workplace. Enter building."
+    "activity": "Commuting to the hospital for work",
+    "desc": "Walk out of house. Lock door. Walk to bus stop. Wait for bus. Check phone for time. Put phone in pocket. Bus arrives. Board bus. Swipe card. Find seat. Sit down. Put bag on lap. Look out window. Get off bus. Walk to hospital. Enter hospital. Walk to department."
   },
   {
-    "time": "09:00-13:00",
+    "time": "09:00-12:30",
     "location": "Out",
-    "activity": "providing patient care and attending meetings",
-    "desc": "Wash hands. Pick up clipboard. Read patient chart. Walk to patient room. Knock on door. Enter room. Say 'Good morning' to patient. Check blood pressure. Check temperature. Pick up stethoscope. Listen to heartbeat. Administer medication. Record notes. Walk to nurse station. Attend meeting. Sit in chair. Discuss cases. Take notes. Walk back to patient area."
+    "activity": "Working as a health care professional, caring for patients",
+    "desc": "Walk to hospital ward. Check patient list on computer. Wash hands. Enter patient room 1. Greet patient. Check vital signs. Measure blood pressure. Listen to heartbeat. Administer medication. Change bandage. Talk to patient. Exit room. Wash hands. Walk to nurses station. Update patient records on computer. Answer phone. Talk to doctor. Walk to patient room 2. Repeat patient care tasks. Walk to nurses station."
   },
   {
-    "time": "13:00-13:30",
+    "time": "12:30-13:00",
     "location": "Out",
-    "activity": "eating lunch",
-    "desc": "Walk to cafeteria. Pick up tray. Select food. Pay for food. Carry tray to table. Sit down. Pick up fork. Eat food. Chew. Swallow. Drink water. Pick up napkin. Wipe mouth. Stand up. Return tray. Walk out."
+    "activity": "Taking a lunch break at work",
+    "desc": "Walk to cafeteria. Pick up tray. Choose food. Pay for food. Sit at table. Pick up utensils. Unwrap food. Eat food. Drink water. Open drink bottle. Drink. Wipe mouth with napkin. Talk to colleague. Finish eating. Return tray. Stand up. Push chair in. Walk back to ward."
   },
   {
-    "time": "13:30-17:00",
+    "time": "13:00-17:00",
     "location": "Out",
-    "activity": "continuing patient care and charting",
-    "desc": "Wash hands. Check patient list. Enter room. Check IV. Adjust IV. Monitor patient. Write notes. Use computer. Type chart. Save. Print. Walk to another room. Check patient. Administer medication. Record notes. Walk to nurse station. Use computer. Type chart. Save."
+    "activity": "Continuing patient care and clinical duties at the hospital",
+    "desc": "Check patient charts. Wash hands. Enter patient room 3. Check vital signs. Administer medication. Talk to patient. Change IV bag. Exit room. Wash hands. Walk to lab. Collect test results. Walk to doctors office. Discuss treatment. Walk to patient room 4. Perform procedure. Talk to patient. Exit room. Wash hands. Update patient records."
   },
   {
     "time": "17:00-18:00",
     "location": "Out",
-    "activity": "commuting home",
-    "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Hold handrail. Look out window. Pick up phone. Check messages. Put phone in pocket. Press stop button. Stand up. Walk to exit. Step off bus. Walk to home. Enter home."
+    "activity": "Commuting home from work",
+    "desc": "Walk out of hospital. Walk to bus stop. Wait for bus. Check phone. Put phone away. Bus arrives. Board bus. Swipe card. Find seat. Sit down. Put bag on lap. Look out window. Get off bus. Walk home. Enter house. Take off shoes."
   },
   {
     "time": "18:00-19:00",
     "location": "Kitchen",
-    "activity": "cooking and eating dinner",
-    "desc": "Walk into kitchen. Open refrigerator. Take out vegetables. Take out meat. Close refrigerator. Pick up knife. Chop vegetables. Turn on stove. Place pan. Add vegetables. Add meat. Stir. Turn off stove. Serve food. Sit at table. Pick up fork. Eat. Drink. Wipe mouth. Stand up."
+    "activity": "Cooking and eating dinner",
+    "desc": "Walk to kitchen. Wash hands. Open refrigerator. Take out ingredients. Close refrigerator. Place on counter. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add vegetables. Stir. Add seasoning. Turn off stove. Place food on plate. Sit at table. Eat dinner. Drink water. Finish eating. Pick up plate. Walk to sink. Put plate in sink."
   },
   {
     "time": "19:00-20:00",
+    "location": "Kitchen",
+    "activity": "Cleaning up dishes and tidying the kitchen",
+    "desc": "Pick up dishes. Scrape food into trash. Open dishwasher. Load dishes. Close dishwasher. Turn on dishwasher. Wipe counter. Sweep floor. Take out trash. Replace trash bag. Wipe table. Put away leftovers. Close refrigerator. Turn off light."
+  },
+  {
+    "time": "20:00-21:30",
     "location": "Living Room",
-    "activity": "watching TV and browsing on phone",
-    "desc": "Walk to living room. Pick up remote. Press power button. Point remote at TV. Press channel up. Press volume up. Put remote down. Sit on couch. Pick up phone. Swipe screen. Tap icon. Scroll. Type message. Send. Put phone down. Watch TV. Pick up phone. Check notification. Put phone down. Watch TV."
+    "activity": "Watching TV and relaxing on the sofa",
+    "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channels. Watch TV. Adjust volume. Pick up phone. Check phone. Put down phone. Watch TV. Stand up. Walk to kitchen. Get snack. Walk back. Sit on sofa. Eat snack. Watch TV. Stand up. Walk to bedroom."
   },
   {
-    "time": "20:00-21:00",
+    "time": "21:30-22:00",
     "location": "Bathroom",
-    "activity": "doing laundry",
-    "desc": "Walk to bathroom. Open washing machine. Put clothes in. Add detergent. Close door. Turn dial. Press start. Wait. Open washing machine. Remove clothes. Put in dryer. Close dryer door. Turn dial. Press start. Wait. Open dryer. Remove clothes. Fold clothes. Put away clothes."
+    "activity": "Taking a shower",
+    "desc": "Walk to bathroom. Turn on light. Turn on water heater. Take off clothes. Step into shower. Turn on water. Adjust temperature. Wet body. Apply soap. Wash body. Rinse body. Wash hair. Rinse hair. Turn off water. Step out. Pick up towel. Dry body. Dry hair. Put on clothes. Turn off light. Walk out."
   },
   {
-    "time": "21:00-22:30",
-    "location": "Living Room",
-    "activity": "watching TV and using computer",
-    "desc": "Walk to living room. Sit on couch. Pick up laptop. Open laptop. Turn on. Type password. Open browser. Watch TV. Change channel. Type on keyboard. Click mouse. Pick up phone. Check messages. Put phone down. Watch TV. Type on keyboard. Click mouse. Watch TV."
-  },
-  {
-    "time": "22:30-23:00",
-    "location": "Bathroom",
-    "activity": "washing up and brushing teeth",
-    "desc": "Walk to bathroom. Turn on light. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Turn off tap. Pick up soap. Lather hands. Rinse hands. Pick up towel. Dry face. Dry hands. Turn off light."
-  },
-  {
-    "time": "23:00-23:30",
+    "time": "22:00-22:30",
     "location": "Bedroom 1",
-    "activity": "winding down and reading",
-    "desc": "Walk to bedroom. Turn on lamp. Pick up book. Open book. Read. Turn page. Read. Turn page. Read. Close book. Put book down. Turn off lamp. Lie down. Pull blanket. Close eyes."
+    "activity": "Winding down and preparing for bed",
+    "desc": "Walk to bedroom. Turn on light. Change into pajamas. Put dirty clothes in hamper. Turn on TV. Watch TV. Turn off TV. Pick up book. Read book. Put down book. Turn off light. Lie down. Pull blanket. Close eyes."
   },
   {
-    "time": "23:30-24:00",
+    "time": "22:30-24:00",
     "location": "Bedroom 1",
-    "activity": "sleeping",
-    "desc": "Lie down. Close eyes. Breathe. Turn to left side. Pull blanket. Adjust pillow. Remain still. Breathe. Turn to right side. Pull blanket. Adjust pillow. Remain still. Breathe. Turn to back. Pull blanket. Adjust pillow. Remain still."
+    "activity": "Sleeping",
+    "desc": "Lie in bed. Close eyes. Breathe. Turn to left side. Pull blanket up. Adjust pillow. Remain still. Turn to right side. Push blanket down. Stretch legs. Stretch arms. Turn onto back. Breathe. Remain still."
   }
 ]
 
@@ -447,7 +441,7 @@ Environment information:
 - Weather: Sunny
 - Temperature: 20 degrees
 
-
+Today your household is on a time-of-use (TOU) electricity tariff: peak period 16:00-21:00 at 0.60 AUD/kWh; valley period 22:00-07:00 at 0.18 AUD/kWh; shoulder period (all other times) at 0.35 AUD/kWh. To reduce your bill, shift flexible appliances (electric vehicle charging, washing machine, dishwasher-free routines like hot water use) into the valley period, and avoid running high-power appliances during the peak period unless necessary.
 
 
 
@@ -625,6 +619,198 @@ Output JSON format (return ONLY the JSON, nothing else):
 ## 返回(原始)
 
 ```
-{"member": "Member 1", "appliance_decisions": [{"time": "00:00-06:30", "location": "Bedroom 1", "activity": "sleeping", "operations": [{"unique_id": "bedroom_1_light", "action": "idle"}, {"unique_id": "bedroom_1_tv", "action": "idle"}, {"unique_id": "bedroom_1_desklamp", "action": "idle"}, {"unique_id": "member_1_phone", "action": "idle"}]}, {"time": "06:30-07:00", "location": "Bathroom", "activity": "washing up and showering", "operations": [{"unique_id": "bathroom_light", "action": "use"}, {"unique_id": "bathroom_waterheater", "action": "use"}]}, {"time": "07:00-07:30", "location": "Kitchen", "activity": "preparing and eating breakfast", "operations": [{"unique_id": "bathroom_light", "action": "idle"}, {"unique_id": "bathroom_waterheater", "action": "idle"}, {"unique_id": "kitchen_light", "action": "use"}, {"unique_id": "kitchen_inductioncooker", "action": "use"}, {"unique_id": "kitchen_toaster", "action": "use"}, {"unique_id": "kitchen_rangehood", "action": "use"}]}, {"time": "07:30-08:00", "location": "Bedroom 1", "activity": "getting dressed and preparing for work", "operations": [{"unique_id": "kitchen_light", "action": "idle"}, {"unique_id": "kitchen_inductioncooker", "action": "idle"}, {"unique_id": "kitchen_toaster", "action": "idle"}, {"unique_id": "kitchen_rangehood", "action": "idle"}, {"unique_id": "bedroom_1_light", "action": "use"}]}, {"time": "08:00-09:00", "location": "Out", "activity": "commuting to work", "operations": [{"unique_id": "bedroom_1_light", "action": "idle"}, {"unique_id": "member_1_phone", "action": "use"}]}, {"time": "09:00-13:00", "location": "Out", "activity": "providing patient care and attending meetings", "operations": [{"unique_id": "member_1_phone", "action": "idle"}, {"unique_id": "member_1_computer", "action": "idle"}]}, {"time": "13:00-13:30", "location": "Out", "activity": "eating lunch", "operations": [{"unique_id": "member_1_phone", "action": "idle"}]}, {"time": "13:30-17:00", "location": "Out", "activity": "continuing patient care and charting", "operations": [{"unique_id": "member_1_phone", "action": "idle"}]}, {"time": "17:00-18:00", "location": "Out", "activity": "commuting home", "operations": [{"unique_id": "member_1_phone", "action": "use"}]}, {"time": "18:00-19:00", "location": "Kitchen", "activity": "cooking and eating dinner", "operations": [{"unique_id": "member_1_phone", "action": "idle"}, {"unique_id": "kitchen_light", "action": "use"}, {"unique_id": "kitchen_inductioncooker", "action": "use"}, {"unique_id": "kitchen_rangehood", "action": "use"}]}, {"time": "19:00-20:00", "location": "Living Room", "activity": "watching TV and browsing on phone", "operations": [{"unique_id": "kitchen_light", "action": "idle"}, {"unique_id": "kitchen_inductioncooker", "action": "idle"}, {"unique_id": "kitchen_rangehood", "action": "idle"}, {"unique_id": "living_room_light", "action": "use"}, {"unique_id": "living_room_tv", "action": "use"}, {"unique_id": "member_1_phone", "action": "use"}]}, {"time": "20:00-21:00", "location": "Bathroom", "activity": "doing laundry", "operations": [{"unique_id": "living_room_light", "action": "idle"}, {"unique_id": "living_room_tv", "action": "idle"}, {"unique_id": "member_1_phone", "action": "idle"}, {"unique_id": "bathroom_light", "action": "use"}, {"unique_id": "bathroom_washingmachine", "action": "run"}, {"unique_id": "bathroom_clothesdryer", "action": "run"}]}, {"time": "21:00-22:30", "location": "Living Room", "activity": "watching TV and using computer", "operations": [{"unique_id": "bathroom_light", "action": "idle"}, {"unique_id": "bathroom_washingmachine", "action": "idle"}, {"unique_id": "bathroom_clothesdryer", "action": "idle"}, {"unique_id": "living_room_light", "action": "use"}, {"unique_id": "living_room_tv", "action": "use"}, {"unique_id": "living_room_computer", "action": "use"}, {"unique_id": "living_room_monitor", "action": "use"}, {"unique_id": "member_1_phone", "action": "use"}]}, {"time": "22:30-23:00", "location": "Bathroom", "activity": "washing up and brushing teeth", "operations": [{"unique_id": "living_room_light", "action": "idle"}, {"unique_id": "living_room_tv", "action": "idle"}, {"unique_id": "living_room_computer", "action": "idle"}, {"unique_id": "living_room_monitor", "action": "idle"}, {"unique_id": "member_1_phone", "action": "idle"}, {"unique_id": "bathroom_light", "action": "use"}]}, {"time": "23:00-23:30", "location": "Bedroom 1", "activity": "winding down and reading", "operations": [{"unique_id": "bathroom_light", "action": "idle"}, {"unique_id": "bedroom_1_light", "action": "use"}, {"unique_id": "bedroom_1_desklamp", "action": "use"}]}, {"time": "23:30-24:00", "location": "Bedroom 1", "activity": "sleeping", "operations": [{"unique_id": "bedroom_1_light", "action": "idle"}, {"unique_id": "bedroom_1_desklamp", "action": "idle"}, {"unique_id": "member_1_phone", "action": "charge_home"}]}]}
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and packing work bag",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for work",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working as a health care professional, caring for patients",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break at work",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Continuing patient care and clinical duties at the hospital",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Cleaning up dishes and tidying the kitchen",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing on the sofa",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down and preparing for bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
 ```
 

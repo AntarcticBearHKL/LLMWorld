@@ -1,0 +1,247 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:20",
+      "location": "Bedroom 3",
+      "activity": "Sleeping, with intermittent waking due to poor sleep",
+      "operations": []
+    },
+    {
+      "time": "06:20-07:25",
+      "location": "Bedroom 3",
+      "activity": "Slow wake-up: lying in bed, checking Messenger and Instagram on phone, easing into the day",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:25-07:55",
+      "location": "Bathroom",
+      "activity": "Shower and personal hygiene, taking daily medication",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:55-08:10",
+      "location": "Kitchen",
+      "activity": "Preparing a caffeine-free breakfast and packing a lunch container",
+      "operations": [
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:25",
+      "location": "Kitchen",
+      "activity": "Eating breakfast together with Member 2",
+      "operations": []
+    },
+    {
+      "time": "08:25-09:10",
+      "location": "Out",
+      "activity": "Morning walk at a gentle pace for exercise and pain management, picking up a few groceries",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:10-11:40",
+      "location": "Bedroom 3",
+      "activity": "PhD research: systematic review screening and public health data cleaning on computer",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:40-11:50",
+      "location": "Bedroom 3",
+      "activity": "Short stretch and movement break for mild chronic pain and attention reset",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:50-12:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch at home",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Household admin on phone: paying bills, updating support shift roster, logging maintenance requests, and coordinating household rosters",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Walking to the disability and aged-care support shift",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:30-18:00",
+      "location": "Out",
+      "activity": "Part-time disability and aged-care support work: assisting clients with daily routines and community access",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Walking home from the support shift",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Bedroom 3",
+      "activity": "Unwinding after the support shift, changing into comfortable clothes and reviewing the evening's tasks",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner at home, then quickly cleaning up",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Leading a structured group activity session with the household game console (solo session as other members are occupied)",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bedroom 3",
+      "activity": "Remote elder caregiving coordination: phone calls and paperwork about care arrangements",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-22:15",
+      "location": "Bedroom 3",
+      "activity": "PhD writing and reading on computer",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bedroom 3",
+      "activity": "Wind-down: gentle stretching, setting out next day's medication, dimming the desk lamp",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
