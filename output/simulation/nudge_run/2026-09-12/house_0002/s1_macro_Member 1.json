@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast"
+    },
+    {
+      "time": "08:45-10:00",
+      "location": "Living Room",
+      "activity": "Doing morning chores, vacuuming and tidying up"
+    },
+    {
+      "time": "10:00-12:00",
+      "location": "Out",
+      "activity": "Shopping for groceries and household supplies"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch"
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV"
+    },
+    {
+      "time": "15:00-17:00",
+      "location": "Out",
+      "activity": "Doing outdoor exercise and walking in the park"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Bedroom 1",
+      "activity": "Resting and using phone"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "20:00-22:30",
+      "location": "Living Room",
+      "activity": "Leisure time watching TV and browsing on computer"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower and washing up"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Wind down and going to sleep"
+    }
+  ]
+}

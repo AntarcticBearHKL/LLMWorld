@@ -1,0 +1,243 @@
+{
+  "member": "Member 4",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 4",
+      "activity": "Sleeping through the night before a hot weekday",
+      "operations": []
+    },
+    {
+      "time": "06:45-07:15",
+      "start_minutes": 405,
+      "end_minutes": 435,
+      "location": "Bathroom",
+      "activity": "Morning wash-up and shower using the water heater",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:50",
+      "start_minutes": 435,
+      "end_minutes": 470,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with kettle and toaster, packing water bottles for the heatwave day",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:45",
+      "start_minutes": 470,
+      "end_minutes": 525,
+      "location": "Out",
+      "activity": "Commuting to university campus by public transport during the morning heat",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:45-12:00",
+      "start_minutes": 525,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending Bachelor of Commerce and IT lectures and tutorials on campus",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "start_minutes": 720,
+      "end_minutes": 765,
+      "location": "Out",
+      "activity": "Lunch break on campus, eating in a cool indoor area and rehydrating",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:45-16:00",
+      "start_minutes": 765,
+      "end_minutes": 960,
+      "location": "Out",
+      "activity": "Studying in the campus library and working on group coursework for commerce and IT units",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-17:00",
+      "start_minutes": 960,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Commuting home from campus in the late afternoon heat",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "start_minutes": 1020,
+      "end_minutes": 1050,
+      "location": "Bathroom",
+      "activity": "Cool shower and freshening up after the hot commute",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:00",
+      "start_minutes": 1050,
+      "end_minutes": 1080,
+      "location": "Bedroom 4",
+      "activity": "Resting in the air-cooled room and reviewing lecture notes on the computer",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner using the induction cooker and rice cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:20",
+      "start_minutes": 1140,
+      "end_minutes": 1160,
+      "location": "Kitchen",
+      "activity": "Washing dishes and cleaning up the cooking area",
+      "operations": []
+    },
+    {
+      "time": "19:20-21:00",
+      "start_minutes": 1160,
+      "end_minutes": 1260,
+      "location": "Bedroom 4",
+      "activity": "Conducting an online tutoring session for students using the computer and desk lamp",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-22:15",
+      "start_minutes": 1260,
+      "end_minutes": 1335,
+      "location": "Bedroom 4",
+      "activity": "Doing freelance analyst work and completing assignments on the computer",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "start_minutes": 1335,
+      "end_minutes": 1365,
+      "location": "Living Room",
+      "activity": "Watching TV and cooling down under the air conditioner and fan before bed",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-23:10",
+      "start_minutes": 1365,
+      "end_minutes": 1390,
+      "location": "Bathroom",
+      "activity": "Night wash-up and brushing teeth",
+      "operations": []
+    },
+    {
+      "time": "23:10-24:00",
+      "start_minutes": 1390,
+      "end_minutes": 1440,
+      "location": "Bedroom 4",
+      "activity": "Winding down on the phone and going to sleep",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

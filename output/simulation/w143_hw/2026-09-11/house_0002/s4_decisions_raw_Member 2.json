@@ -1,0 +1,382 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:15",
+      "location": "Bedroom 2",
+      "activity": "Sleeping (night owl, late bedtime); air conditioner running for the heatwave night",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:30",
+      "location": "Bedroom 2",
+      "activity": "Waking up slowly and completing daily stretching routine on the floor mat",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:50",
+      "location": "Bathroom",
+      "activity": "Showering and washing with hot water, brushing teeth (Bathroom free after Member 1's 06:30-07:00 wash)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:20",
+      "location": "Kitchen",
+      "activity": "Cooking a diet-restriction-friendly breakfast and brewing strong coffee with the kettle (after Member 1 has finished breakfast and left for work)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:20-08:45",
+      "location": "Kitchen",
+      "activity": "Eating breakfast while reading scripture and journaling devotional notes",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:45-09:00",
+      "location": "Study",
+      "activity": "Setting up desk lamp and monitor, reviewing client files and the day's telehealth schedule",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Study",
+      "activity": "Conducting remote telehealth therapy sessions and writing clinical documentation",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:35",
+      "location": "Kitchen",
+      "activity": "Cooking and eating a simple lunch that respects the medical dietary restriction",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:35-12:50",
+      "location": "Living Room",
+      "activity": "Resting indoors away from the heatwave, doing light stretching and eye rest",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:50-13:00",
+      "location": "Kitchen",
+      "activity": "Refilling water bottle and making another coffee",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Study",
+      "activity": "Afternoon telehealth consultations, case notes, and preparation for clinical supervision",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Living Room",
+      "activity": "Tidying the living area, vacuuming, and playing quiet music in the background",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Kitchen",
+      "activity": "Cooking dinner from scratch using the induction cooker and rice cooker; Member 1 joins at 18:00 to help with cooking dinner (joint activity)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "18:15-18:40",
+      "location": "Kitchen",
+      "activity": "Eating dinner with Member 1 while listening to music on the phone (joint activity)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:40-19:00",
+      "location": "Kitchen",
+      "activity": "Cleaning up the counter and loading the dishwasher together with Member 1 (joint activity)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Watching TV with Member 1 to unwind (joint activity)",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:25",
+      "location": "Bedroom 2",
+      "activity": "Daily stretching and gentle mobility work adapted for reduced manual dexterity",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:25-21:00",
+      "location": "Living Room",
+      "activity": "Sketching and drawing with music playing",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Study",
+      "activity": "Personal journaling and evening prayer and reflection",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Streaming YouTube videos and replying to messages on WhatsApp",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-22:50",
+      "location": "Kitchen",
+      "activity": "Making a low-caffeine herbal tea and preparing tomorrow's meals",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:50-23:15",
+      "location": "Bathroom",
+      "activity": "Night washing up and brushing teeth (after Member 1's 22:00-22:30 evening wash)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:15-24:00",
+      "location": "Bedroom 2",
+      "activity": "Winding down with a book, turning off the light at midnight to sleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

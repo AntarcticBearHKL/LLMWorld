@@ -1,0 +1,267 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "start_minutes": 0,
+      "end_minutes": 390,
+      "location": "Bedroom 2",
+      "activity": "Sleeping through the night",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "start_minutes": 390,
+      "end_minutes": 420,
+      "location": "Bathroom",
+      "activity": "Waking up, brushing teeth and taking a quick cool shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "start_minutes": 420,
+      "end_minutes": 450,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with toast and tea from the kettle, checking the morning news, and having breakfast with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:10",
+      "start_minutes": 450,
+      "end_minutes": 490,
+      "location": "Bedroom 2",
+      "activity": "Getting dressed, applying sunscreen for the heatwave, packing a work bag and reviewing the day's schedule under the desk lamp",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:10-09:00",
+      "start_minutes": 490,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Walking to the arts centre for work, keeping to the shaded side of the street because of the extreme heat",
+      "operations": []
+    },
+    {
+      "time": "09:00-12:30",
+      "start_minutes": 540,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Arts administration work at the arts centre: answering emails, preparing grant reports and coordinating the upcoming exhibition schedule",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "start_minutes": 750,
+      "end_minutes": 795,
+      "location": "Out",
+      "activity": "Taking a lunch break at a cafe near the arts centre and cooling down in the air conditioning",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:15-17:00",
+      "start_minutes": 795,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Afternoon arts administration work: staff meeting, drafting artist contracts and planning exhibition installation logistics",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:50",
+      "start_minutes": 1020,
+      "end_minutes": 1070,
+      "location": "Out",
+      "activity": "Walking home from the arts centre in the late afternoon heat",
+      "operations": []
+    },
+    {
+      "time": "17:50-18:15",
+      "start_minutes": 1070,
+      "end_minutes": 1095,
+      "location": "Bathroom",
+      "activity": "Taking a cool shower to freshen up after the hot commute",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:15-19:00",
+      "start_minutes": 1095,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1 using the induction cooker and oven",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:20",
+      "start_minutes": 1140,
+      "end_minutes": 1160,
+      "location": "Kitchen",
+      "activity": "Washing up and loading the dishwasher with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:20-21:30",
+      "start_minutes": 1160,
+      "end_minutes": 1290,
+      "location": "Bedroom 2",
+      "activity": "Working on freelance illustration commissions at the desk with the computer, monitor and desk lamp",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:15",
+      "start_minutes": 1290,
+      "end_minutes": 1335,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV with the air conditioner running to escape the heatwave",
+      "operations": [
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:40",
+      "start_minutes": 1335,
+      "end_minutes": 1360,
+      "location": "Bathroom",
+      "activity": "Night-time wash up and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:40-23:00",
+      "start_minutes": 1360,
+      "end_minutes": 1380,
+      "location": "Bedroom 2",
+      "activity": "Reading and winding down before sleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": []
+    }
+  ]
+}

@@ -1,0 +1,286 @@
+{
+  "member": "Member 4",
+  "appliance_decisions": [
+    {
+      "time": "00:00-02:30",
+      "location": "Bedroom 4",
+      "activity": "Working late on the laptop on freelance translation and online gig tasks, desk lamp on and space heater running to keep the room warm during the cold snap",
+      "operations": [
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_4_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "02:30-02:50",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth before bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "02:50-09:30",
+      "location": "Bedroom 4",
+      "activity": "Sleeping in after a late night, with the space heater on low against the overnight cold",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "09:30-10:00",
+      "location": "Bathroom",
+      "activity": "Showering and getting dressed for the day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:00-10:25",
+      "location": "Kitchen",
+      "activity": "Making a quick breakfast using the kettle and toaster and eating it standing up",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:25-11:05",
+      "location": "Bedroom 4",
+      "activity": "Reviewing class notes and checking the college portal and Telegram messages on the laptop",
+      "operations": [
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_4_spaceheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:05-11:45",
+      "location": "Out",
+      "activity": "Commuting to college campus in the cold morning air",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:45-13:15",
+      "location": "Out",
+      "activity": "Attending lectures on campus",
+      "operations": []
+    },
+    {
+      "time": "13:15-13:50",
+      "location": "Out",
+      "activity": "Eating a packed lunch and studying quietly in the campus library",
+      "operations": []
+    },
+    {
+      "time": "13:50-16:10",
+      "location": "Out",
+      "activity": "Attending a tutorial and continuing study in the campus library",
+      "operations": []
+    },
+    {
+      "time": "16:10-16:50",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "operations": []
+    },
+    {
+      "time": "16:50-17:30",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle for hot tea and putting together a light snack after coming in from the cold",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Bedroom 4",
+      "activity": "Resting in her room with YouTube playing and the space heater warming the space",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:15-18:50",
+      "location": "Kitchen",
+      "activity": "Heating up and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:50-19:40",
+      "location": "Bedroom 4",
+      "activity": "Translating family paperwork and filling in forms on the laptop at her desk",
+      "operations": [
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_4_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:40-21:30",
+      "location": "Bedroom 4",
+      "activity": "Doing freelance remote work on translation and online gig tasks on the laptop",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-21:50",
+      "location": "Bathroom",
+      "activity": "Evening wash and getting ready for the night",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:50-22:30",
+      "location": "Bedroom 4",
+      "activity": "Quiet gratitude practice and occasional journaling at her desk",
+      "operations": [
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 4",
+      "activity": "Continued coursework and freelance work on the laptop, with Telegram and YouTube breaks in between",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "segments": 16,
+  "operations_in": 60,
+  "operations_kept": 59,
+  "repaired": [],
+  "dropped": [
+    {
+      "unique_id": "bedroom_1_light",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    }
+  ],
+  "valid": false
+}

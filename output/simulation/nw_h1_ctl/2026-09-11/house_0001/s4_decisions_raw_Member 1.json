@@ -1,0 +1,246 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bathroom",
+      "activity": "Washing up and showering",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:30-06:50",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for the day",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:50-07:10",
+      "location": "Kitchen",
+      "activity": "Eating breakfast with Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:30",
+      "location": "Bedroom 1",
+      "activity": "Final check of bag and laptop before leaving",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Studying and reviewing course notes",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Out",
+      "activity": "Commuting to Chadstone shopping centre",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-12:30",
+      "location": "Out",
+      "activity": "Working a retail shift at Chadstone",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Having lunch on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Attending lectures and studying at university",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Bathroom",
+      "activity": "Washing up after the day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-20:00",
+      "location": "Bedroom 1",
+      "activity": "Studying and using computer",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Studying and using computer",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Brushing teeth and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

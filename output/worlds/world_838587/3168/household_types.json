@@ -1,0 +1,18 @@
+{
+  "household_types": [
+    {
+      "type": "International Student Share House",
+      "description": "A group of international students, often from China, India, Sri Lanka, Malaysia, or Vietnam, sharing a rental property to reduce housing costs. Members are typically aged 20-30, enrolled full-time at Monash University or other nearby institutions, with many working part-time in retail, hospitality, or education. They speak multiple languages, have low to moderate personal incomes, and live together in a communal setting with shared kitchen and living areas.",
+      "members_min": 2,
+      "members_max": 6,
+      "housing_hint": "Semi-detached house, terrace, or apartment (flat/unit) with three or more bedrooms, usually rented through a real estate agent or private landlord."
+    },
+    {
+      "type": "Single Professional Living Alone",
+      "description": "A young professional, typically aged 25-34, working in education, health care, or professional services, and often never married. They live alone in a rental unit, may be studying part-time, and have a moderate income (around the median personal weekly income of AUD 606). They value proximity to work, transport, and amenities, and represent the significant one-person non-family household segment in the district.",
+      "members_min": 1,
+      "members_max": 1,
+      "housing_hint": "One-bedroom apartment or flat, often in a block of units, rented from a real estate agent or private landlord."
+    }
+  ]
+}

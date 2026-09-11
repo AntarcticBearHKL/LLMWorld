@@ -1,0 +1,125 @@
+{
+  "member": "Member 6",
+  "enriched_activities": [
+    {
+      "time": "00:00-05:00",
+      "location": "Bedroom 6",
+      "activity": "Sleeping, with the fan on for air circulation and quiet hours respected",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Fan is on. Turn to side. Pull blanket up. Adjust pillow. Turn head. Move arm. Shift legs. Sleep. Wake briefly. Turn over. Adjust fan speed. Sleep."
+    },
+    {
+      "time": "05:00-05:30",
+      "location": "Bathroom",
+      "activity": "Showering and dressing, plus morning chronic condition self-care routine (Bathroom is free before Member 1 starts at 05:50)",
+      "desc": "Wake up. Get out of bed. Turn off fan. Walk to bathroom. Turn on light. Turn on shower. Step into shower. Apply soap. Wash body. Rinse body. Apply shampoo. Wash hair. Rinse hair. Turn off shower. Step out. Dry body with towel. Put on clothes. Perform self-care: take medication, apply cream. Turn off light. Walk out."
+    },
+    {
+      "time": "05:30-05:50",
+      "location": "Kitchen",
+      "activity": "Eating a quick keto breakfast of eggs and avocado and packing a low-carb lunch for the warehouse shift (kitchen is free before Member 1 and Member 2 have breakfast at 06:30)",
+      "desc": "Walk to kitchen. Turn on light. Open fridge. Take out eggs, avocado, and lunch container. Crack eggs into bowl. Heat pan on stove. Pour eggs into pan. Cook eggs. Cut avocado. Put eggs and avocado on plate. Eat with fork. Put food in lunch container. Close container. Put container in bag. Wash dishes. Wipe counter. Turn off light."
+    },
+    {
+      "time": "05:50-06:40",
+      "location": "Out",
+      "activity": "Commuting by public transit to the warehouse shift",
+      "desc": "Put on shoes. Pick up bag. Walk out of house. Walk to bus stop. Stand at bus stop. Check phone for bus arrival. Bus arrives. Board bus. Tap transit card. Find seat. Sit down. Place bag on lap. Look out window. Check phone. Ride bus. Get off bus. Walk to warehouse. Enter warehouse."
+    },
+    {
+      "time": "06:40-11:00",
+      "location": "Out",
+      "activity": "Warehouse shift: picking, packing and manual handling of stock",
+      "desc": "Arrive at warehouse. Clock in. Put on safety vest. Pick up scanner. Walk to aisle. Scan item barcode. Pick item. Place item in cart. Push cart. Repeat picking. Move to packing station. Scan items. Place items in box. Seal box. Label box. Lift box onto pallet. Move pallet with pallet jack. Repeat."
+    },
+    {
+      "time": "11:00-11:30",
+      "location": "Out",
+      "activity": "Break in the staff area, eating the packed keto lunch",
+      "desc": "Walk to staff area. Sit at table. Open lunch bag. Take out lunch container. Open container. Pick up fork. Eat food. Drink water. Close container. Put container in bag. Wipe mouth. Stand up. Walk back to work area."
+    },
+    {
+      "time": "11:30-14:30",
+      "location": "Out",
+      "activity": "Warehouse shift: moving stock and preparing orders",
+      "desc": "Clock in from break. Pick up scanner. Walk to storage area. Scan item. Lift box. Carry box to packing area. Place box on table. Scan order. Pick items. Place in box. Seal box. Label box. Move box to shipping area. Repeat."
+    },
+    {
+      "time": "14:30-15:20",
+      "location": "Out",
+      "activity": "Bargain-hunting groceries at a discount supermarket and comparing prices",
+      "desc": "Walk to supermarket. Enter supermarket. Pick up basket. Walk to produce section. Pick up item. Check price tag. Compare with another brand. Place in basket. Walk to dairy section. Pick up item. Check price. Place in basket. Walk to checkout. Place items on conveyor. Pay cashier. Put items in bag. Walk out."
+    },
+    {
+      "time": "15:20-16:00",
+      "location": "Out",
+      "activity": "Commuting home by public transit with the groceries",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit. Place groceries on lap. Ride bus. Get off. Walk home. Enter house. Take off shoes. Put groceries on kitchen counter."
+    },
+    {
+      "time": "16:00-16:30",
+      "location": "Bedroom 6",
+      "activity": "Unwinding quietly with dim lighting and reduced-motion settings; resting mild chronic pain",
+      "desc": "Enter bedroom. Turn on dim light. Turn on fan. Lie on bed. Close eyes. Take pain relief medication. Apply heat pack. Adjust position. Rest. Turn to side. Pull blanket. Rest."
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Bedroom 6",
+      "activity": "Daily reading in the quiet study space",
+      "desc": "Sit at desk. Pick up book. Open book to page. Read. Turn page. Read. Close book. Put book down."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Kitchen",
+      "activity": "Batch-cooking keto meals for the week and labelling containers, working in her own clearly labelled kitchen section and coordinating space with Member 3's 17:00-17:30 cooking slot and Member 2's 17:30-18:30 cooking slot",
+      "desc": "Walk to kitchen. Open fridge. Take out ingredients. Wash and chop vegetables. Heat pan. Add oil. Add vegetables. Add protein. Cook. Turn off heat. Take out containers. Spoon food into containers. Close lids. Write labels. Stick labels on containers. Put containers in fridge. Wash dishes. Wipe counter. Say to Member 3: 'I'll be done with the stove in 15 minutes.'"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Eating a low-carb dinner at the kitchen table with Member 2, Member 3 and Member 4 during the shared household dinner period",
+      "desc": "Sit at kitchen table. Place plate on table. Pick up fork. Eat food. Talk to Member 2, Member 3, Member 4. Drink water. Continue eating. Finish meal. Pick up plate. Stand up. Walk to sink. Rinse plate. Place plate in dishwasher. Return to table. Talk. Drink water."
+    },
+    {
+      "time": "18:45-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the cooking area alongside Member 3 and Member 4, leaving the shared space clean",
+      "desc": "Pick up sponge. Apply soap. Wash dishes. Rinse dishes. Place in drying rack. Wipe counter with cloth. Wipe stove. Wipe table. Wring cloth. Hang cloth. Talk to Member 3 and Member 4."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bedroom 6",
+      "activity": "Reviewing budget and subscriptions on the neobank and mobile wallet; checking X and Messenger",
+      "desc": "Sit at desk. Open laptop. Log into neobank. Review transactions. Check budget. Open mobile wallet. Check subscriptions. Close wallet. Open X. Scroll feed. Open Messenger. Read messages. Reply to messages. Close apps. Close laptop."
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Bedroom 6",
+      "activity": "Studying university coursework at the desk in a quiet space",
+      "desc": "Sit at desk. Open laptop. Open textbook. Read chapter. Take notes. Highlight text. Write summary. Open assignment file. Type answers. Check notes. Close textbook. Review work. Save file. Close laptop."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bedroom 6",
+      "activity": "Sorting health and insurance paperwork and noting questions to ask for help with",
+      "desc": "Open drawer. Take out papers. Sort into piles. Read documents. Write notes on paper. Highlight questions. Put papers in folders. Label folders. Put folders in drawer. Close drawer."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Washing up and completing the night routine (Bathroom is free after Member 4 finishes at 21:30 and before Member 5 starts at 22:15)",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wet face. Apply cleanser. Rinse face. Pat dry. Brush teeth. Apply toothpaste. Rinse mouth. Apply night cream. Take medication. Turn off light. Walk out."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 6",
+      "activity": "Laying out clothes for tomorrow, setting alarms and light reading before bed",
+      "desc": "Open closet. Take out shirt. Take out pants. Lay on chair. Take out socks. Lay on chair. Pick up phone. Set alarm. Open book. Read. Close book. Put book down. Turn off light."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 6",
+      "activity": "Sleeping, with the fan on and quiet hours respected",
+      "desc": "Lie in bed. Close eyes. Fan on. Turn to side. Pull blanket. Adjust pillow. Breathe. Sleep. Turn over. Adjust fan. Turn head. Move arm. Sleep."
+    }
+  ]
+}

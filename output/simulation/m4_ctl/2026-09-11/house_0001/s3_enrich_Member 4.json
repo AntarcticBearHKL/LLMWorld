@@ -1,0 +1,101 @@
+{
+  "member": "Member 4",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Close eyes. Turn to left side. Pull blanket up. Adjust pillow. Sleep. Turn to right side. Kick off blanket. Pull blanket back. Sleep. At 06:45, open eyes. Stretch arms. Sit up. Swing legs over edge of bed. Stand up."
+    },
+    {
+      "time": "06:45-07:20",
+      "location": "Bathroom",
+      "activity": "Showering, brushing teeth and getting dressed for the day",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Step into shower. Wet body. Apply soap and rub body. Rinse body. Turn off water. Step out of shower. Pick up towel. Dry body and hair. Wrap towel around waist. Pick up toothbrush and apply toothpaste. Brush teeth. Rinse mouth and spit. Wipe mouth. Hang towel. Pick up clothes. Put on underwear, shirt, pants, socks, and shoes."
+    },
+    {
+      "time": "07:20-07:50",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making a hot drink",
+      "desc": "Walk to kitchen. Open refrigerator and take out milk, eggs, and bread. Open cupboard and take out bowl, plate, and mug. Crack eggs into bowl and whisk. Turn on induction cooker. Place pan on cooker. Add oil and eggs. Stir. Turn off cooker and place eggs on plate. Toast bread and spread butter. Pour milk into mug and heat in microwave. Take mug out. Sit at table. Eat eggs. Eat toast. Drink milk. Wash dishes. Dry dishes. Put away dishes."
+    },
+    {
+      "time": "07:50-08:15",
+      "location": "Bedroom 4",
+      "activity": "Packing the university bag and reviewing the class timetable",
+      "desc": "Walk to bedroom. Open backpack. Place laptop, charger, notebooks, and pens inside. Zip backpack. Pick up phone. Open timetable app. Review schedule. Close app. Put phone in pocket. Pick up backpack. Walk out."
+    },
+    {
+      "time": "08:15-09:00",
+      "location": "Out",
+      "activity": "Commuting to the university campus",
+      "desc": "Walk to bus stop. Check phone for bus time. Wait for bus. Board bus. Tap card on reader. Find seat. Sit down. Put backpack on lap. Look out window. Check phone. Get off bus. Walk to campus. Enter building. Walk to lecture hall."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending Bachelor of Commerce and IT lectures and tutorials",
+      "desc": "Enter lecture hall. Sit down. Take out notebook and pen. Listen to lecturer. Write notes. Raise hand. Ask question. Take out laptop. Open laptop. Type notes. Close laptop. Pack up. Stand up. Walk to next class. Enter tutorial room. Sit down. Discuss with peers. Work on exercise. Pack up. Walk out."
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Out",
+      "activity": "Eating lunch on campus",
+      "desc": "Walk to cafeteria. Join queue. Pick up tray. Choose food. Pay at cashier. Take tray to table. Sit down. Unwrap sandwich. Take bite. Chew. Swallow. Drink water. Check phone. Reply to message. Finish sandwich. Throw trash. Return tray. Stand up. Walk out."
+    },
+    {
+      "time": "12:45-15:00",
+      "location": "Out",
+      "activity": "Studying in the library and working on a group project",
+      "desc": "Walk to library. Find group. Sit down. Open laptop. Open project file. Discuss with group. Take notes. Brainstorm ideas. Type on laptop. Share screen. Point at screen. Suggest modification. Group agrees. Write down tasks. Check time. Pack up. Stand up. Push chair in. Walk out."
+    },
+    {
+      "time": "15:00-17:00",
+      "location": "Out",
+      "activity": "Attending afternoon seminars and finishing coursework tasks",
+      "desc": "Walk to seminar room. Sit down. Listen to speaker. Take notes. Raise hand. Ask question. Open laptop. Work on coursework. Type essay. Cite sources. Save file. Close laptop. Pack bag. Stand up. Walk to next task."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "desc": "Walk to bus stop. Check phone for bus time. Wait for bus. Board bus. Tap card on reader. Find seat. Sit down. Put backpack on lap. Look out window. Check phone. Get off bus. Walk home. Enter house."
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables and meat. Wash vegetables. Chop vegetables. Turn on induction cooker. Place pan on cooker. Add oil. Add meat. Stir. Add vegetables and sauce. Stir. Turn off cooker. Place food on plate. Sit at table. Eat dinner. Drink water. Wash dishes. Dry dishes. Put away."
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk to living room. Pick up remote. Turn on TV. Sit on sofa. Flip channels. Stop on show. Watch. Pick up phone. Scroll social media. Put phone down. Watch more. Get up. Walk to kitchen. Get snack. Return. Sit. Eat snack. Watch. Turn off TV. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "19:15-21:15",
+      "location": "Bedroom 4",
+      "activity": "Conducting online tutoring sessions with students",
+      "desc": "Walk to bedroom. Sit at desk. Open laptop. Turn on desk lamp. Open tutoring platform. Log in. Wait for student. Greet student. Share screen. Explain concept. Write on whiteboard. Ask student to solve problem. Listen. Provide feedback. Assign homework. End session. Log out. Close laptop. Turn off lamp."
+    },
+    {
+      "time": "21:15-22:15",
+      "location": "Bedroom 4",
+      "activity": "Doing freelance analyst data work and coursework on the computer",
+      "desc": "Open laptop. Open data analysis software. Import data. Clean data. Run analysis. Create charts. Write report. Save file. Open coursework file. Write essay. Check word count. Save. Close laptop."
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and brushing teeth",
+      "desc": "Walk to bathroom. Turn on shower. Step in. Wet body. Apply soap. Rub body. Rinse. Turn off water. Step out. Pick up towel. Dry body. Wrap towel. Pick up toothbrush and apply toothpaste. Brush teeth. Rinse mouth and spit. Wipe mouth. Hang towel. Walk to bedroom."
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 4",
+      "activity": "Winding down on the phone and going to sleep",
+      "desc": "Walk to bedroom. Sit on bed. Pick up phone. Open social media. Scroll. Watch video. Like post. Comment. Put phone on charger. Plug in charger. Lie down. Pull blanket. Close eyes. Sleep."
+    }
+  ]
+}

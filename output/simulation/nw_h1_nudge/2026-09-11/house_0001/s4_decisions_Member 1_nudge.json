@@ -1,0 +1,327 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:00",
+      "start_minutes": 0,
+      "end_minutes": 360,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:00-06:30",
+      "start_minutes": 360,
+      "end_minutes": 390,
+      "location": "Bathroom",
+      "activity": "Waking up, showering, washing face, brushing teeth",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:30-06:55",
+      "start_minutes": 390,
+      "end_minutes": 415,
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing university bag",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:55-07:25",
+      "start_minutes": 415,
+      "end_minutes": 445,
+      "location": "Kitchen",
+      "activity": "Having breakfast with Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:25-08:00",
+      "start_minutes": 445,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Reviewing business notes and preparing for classes",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending business classes at Monash University Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Having lunch at Monash University Clayton campus with Member 3 and Member 4",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-14:00",
+      "start_minutes": 780,
+      "end_minutes": 840,
+      "location": "Out",
+      "activity": "Commuting to Chadstone retail workplace",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:00-18:00",
+      "start_minutes": 840,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "start_minutes": 1080,
+      "end_minutes": 1110,
+      "location": "Out",
+      "activity": "Commuting home from Chadstone",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "start_minutes": 1110,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Having dinner with Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "start_minutes": 1140,
+      "end_minutes": 1170,
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV with Member 5",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-22:30",
+      "start_minutes": 1200,
+      "end_minutes": 1350,
+      "location": "Bedroom 1",
+      "activity": "Studying and completing assignments on computer",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-22:50",
+      "start_minutes": 1350,
+      "end_minutes": 1370,
+      "location": "Bedroom 1",
+      "activity": "Organizing study materials and winding down",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "22:50-23:00",
+      "start_minutes": 1370,
+      "end_minutes": 1380,
+      "location": "Bathroom",
+      "activity": "Washing face and brushing teeth",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

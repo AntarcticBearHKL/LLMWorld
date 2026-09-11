@@ -1,0 +1,27 @@
+{
+  "world": "world_838587",
+  "scenario": "baseline",
+  "date": "2026-09-12",
+  "households": 2,
+  "total_kwh": 29.6894,
+  "mean_household_kwh": 14.8447,
+  "by_type": {
+    "International Student Share House": 16.207,
+    "Single Professional Living Alone": 13.482
+  },
+  "by_members_count": {
+    "4 persons": 16.207,
+    "1 persons": 13.482
+  },
+  "by_awareness": {
+    "Medium": 14.845
+  },
+  "big_five_corr_with_kwh": {
+    "openness": null,
+    "conscientiousness": null,
+    "extraversion": null,
+    "agreeableness": null,
+    "neuroticism": null
+  },
+  "members_kwh_corr": 1.0
+}

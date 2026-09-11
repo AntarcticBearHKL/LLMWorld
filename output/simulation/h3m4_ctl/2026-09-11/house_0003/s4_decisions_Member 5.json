@@ -1,0 +1,239 @@
+{
+  "member": "Member 5",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:45-07:10",
+      "start_minutes": 405,
+      "end_minutes": 430,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and getting dressed for school",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:35",
+      "start_minutes": 430,
+      "end_minutes": 455,
+      "location": "Kitchen",
+      "activity": "Eating breakfast and packing a lunch snack",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:35-08:00",
+      "start_minutes": 455,
+      "end_minutes": 480,
+      "location": "Bedroom 5",
+      "activity": "Checking school bag, notebooks and phone before leaving",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:45",
+      "start_minutes": 480,
+      "end_minutes": 525,
+      "location": "Out",
+      "activity": "Commuting to school",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:45-15:15",
+      "start_minutes": 525,
+      "end_minutes": 915,
+      "location": "Out",
+      "activity": "Attending high-school classes, listening to lessons and taking notes",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:15-16:00",
+      "start_minutes": 915,
+      "end_minutes": 960,
+      "location": "Out",
+      "activity": "Commuting home from school",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:30",
+      "start_minutes": 960,
+      "end_minutes": 990,
+      "location": "Kitchen",
+      "activity": "Having an after-school snack and a drink",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-18:00",
+      "start_minutes": 990,
+      "end_minutes": 1080,
+      "location": "Bedroom 5",
+      "activity": "Doing homework and reviewing class notes at the desk",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:30",
+      "start_minutes": 1125,
+      "end_minutes": 1170,
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-21:30",
+      "start_minutes": 1170,
+      "end_minutes": 1290,
+      "location": "Bedroom 5",
+      "activity": "Studying for upcoming tests and finishing assignments",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bathroom",
+      "activity": "Taking a shower and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:45",
+      "start_minutes": 1320,
+      "end_minutes": 1365,
+      "location": "Bedroom 5",
+      "activity": "Using phone for messaging and leisure before sleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

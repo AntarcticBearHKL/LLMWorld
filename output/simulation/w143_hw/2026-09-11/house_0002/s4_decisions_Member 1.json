@@ -1,0 +1,347 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "start_minutes": 0,
+      "end_minutes": 390,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "start_minutes": 390,
+      "end_minutes": 420,
+      "location": "Bathroom",
+      "activity": "Morning wash and grooming",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "start_minutes": 420,
+      "end_minutes": 450,
+      "location": "Kitchen",
+      "activity": "Breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "start_minutes": 450,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Get dressed and prepare for work",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commute to hospital",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Work as physiotherapist at hospital",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Lunch break at hospital",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "start_minutes": 780,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Work as physiotherapist at hospital",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commute home",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:15",
+      "start_minutes": 1080,
+      "end_minutes": 1095,
+      "location": "Kitchen",
+      "activity": "Help Member 2 with cooking dinner (joint activity)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:15-18:40",
+      "start_minutes": 1095,
+      "end_minutes": 1120,
+      "location": "Kitchen",
+      "activity": "Eating dinner with Member 2 (joint activity)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:40-19:00",
+      "start_minutes": 1120,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Cleaning up with Member 2 (joint activity)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "start_minutes": 1140,
+      "end_minutes": 1200,
+      "location": "Living Room",
+      "activity": "Watching TV with Member 2 (joint activity)",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:30",
+      "start_minutes": 1200,
+      "end_minutes": 1290,
+      "location": "Bedroom 1",
+      "activity": "Use computer and unwind",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bedroom 1",
+      "activity": "Wind down and read",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bathroom",
+      "activity": "Evening wash and brush teeth",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:30",
+      "start_minutes": 1350,
+      "end_minutes": 1410,
+      "location": "Bedroom 1",
+      "activity": "Wind down and read",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "start_minutes": 1410,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

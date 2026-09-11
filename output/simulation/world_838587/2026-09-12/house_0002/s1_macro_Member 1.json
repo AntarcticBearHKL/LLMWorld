@@ -1,0 +1,90 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "sleeping"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Kitchen",
+      "activity": "cooking and eating breakfast"
+    },
+    {
+      "time": "08:45-09:15",
+      "location": "Kitchen",
+      "activity": "cleaning up kitchen and washing dishes"
+    },
+    {
+      "time": "09:15-10:30",
+      "location": "Living Room",
+      "activity": "vacuuming and tidying the living room"
+    },
+    {
+      "time": "10:30-12:00",
+      "location": "Out",
+      "activity": "grocery shopping and running errands"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "cooking and eating lunch"
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "Out",
+      "activity": "afternoon leisure and outdoor exercise"
+    },
+    {
+      "time": "15:00-16:30",
+      "location": "Living Room",
+      "activity": "relaxing, watching TV"
+    },
+    {
+      "time": "16:30-17:15",
+      "location": "Bathroom",
+      "activity": "doing laundry with the washing machine"
+    },
+    {
+      "time": "17:15-18:00",
+      "location": "Living Room",
+      "activity": "using computer and browsing online"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "cooking dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "eating dinner"
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Living Room",
+      "activity": "watching TV"
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Bathroom",
+      "activity": "taking a shower and washing up"
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Bedroom 1",
+      "activity": "watching TV and using phone before bed"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "sleeping"
+    }
+  ]
+}

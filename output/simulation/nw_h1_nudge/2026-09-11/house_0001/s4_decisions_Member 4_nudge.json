@@ -1,0 +1,278 @@
+{
+  "member": "Member 4",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "start_minutes": 0,
+      "end_minutes": 400,
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_4_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:40-07:00",
+      "start_minutes": 400,
+      "end_minutes": 420,
+      "location": "Bedroom 4",
+      "activity": "Waking up, tidying bed and gathering toiletries, waiting for the bathroom to be free after Member 5's 06:30-07:00 shower",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:20",
+      "start_minutes": 420,
+      "end_minutes": 440,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and getting dressed after Member 5 finishes in the bathroom",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:20-07:40",
+      "start_minutes": 440,
+      "end_minutes": 460,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast (toast and cereal), briefly joining Member 1, Member 2 and Member 3 before they leave for campus",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:00",
+      "start_minutes": 460,
+      "end_minutes": 480,
+      "location": "Bedroom 4",
+      "activity": "Packing backpack with laptop, lab coat and study notes for the day",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Travelling to Monash Clayton campus for classes",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending chemistry lectures and laboratory practical sessions at Monash Clayton",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Having lunch at Monash Clayton campus with Member 1 and Member 3, aligned with their 12:00-13:00 lunch",
+      "operations": []
+    },
+    {
+      "time": "13:00-17:00",
+      "start_minutes": 780,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Working a part-time lab assistant shift, preparing reagents and cleaning glassware",
+      "operations": []
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Travelling home from campus",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "start_minutes": 1080,
+      "end_minutes": 1110,
+      "location": "Bedroom 4",
+      "activity": "Unpacking backpack, changing into comfortable clothes and relaxing after campus",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "start_minutes": 1110,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Having dinner with Member 1 and Member 3, sharing the dinner cooked by Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "start_minutes": 1140,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the kitchen counters after dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-21:30",
+      "start_minutes": 1170,
+      "end_minutes": 1290,
+      "location": "Bedroom 4",
+      "activity": "Studying chemistry notes and completing assignments on the computer with the desk lamp on",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bathroom",
+      "activity": "Loading and running the washing machine for a load of laundry, with the wash cycle ending at 22:00 before Member 2 uses the bathroom",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-22:50",
+      "start_minutes": 1350,
+      "end_minutes": 1370,
+      "location": "Bathroom",
+      "activity": "Showering before Member 1's 22:50 bathroom use",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:50-23:00",
+      "start_minutes": 1370,
+      "end_minutes": 1380,
+      "location": "Bedroom 4",
+      "activity": "Charging phone and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}

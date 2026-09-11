@@ -1,0 +1,119 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed. Pull the quilt over the body. Close eyes. Turn onto the left side. Pull the pillow under the head. Shift the legs. Turn onto the right side. Pull the quilt up to the shoulder. Turn onto the back. Move the arm under the pillow. Turn onto the left side again. Stretch both legs. Roll onto the right side. Pull the quilt to the chin. Open eyes at 07:25. Turn the head toward the nightstand. Push the quilt down. Sit up on the edge of the bed."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Stand up from the bed. Walk to the bathroom door. Push the door open. Step inside. Turn on the light. Turn on the tap. Cup both hands under the water. Rinse the face. Turn off the tap. Pick up the towel from the rack. Wipe the face. Hang the towel back on the rack. Pick up the toothbrush from the cup. Squeeze toothpaste onto the brush. Turn on the tap. Rinse the brush under the water. Brush teeth. Spit into the sink. Rinse the mouth with water. Turn off the tap. Put the toothbrush back into the cup. Turn off the light. Walk out of the bathroom."
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk into the kitchen. Turn on the light. Open the refrigerator door. Take out eggs and milk. Close the refrigerator door. Place the eggs and milk on the counter. Open the cupboard. Take out a bowl. Place the bowl on the counter. Open the drawer. Take out a spoon. Crack the egg against the bowl rim. Pour the egg into the bowl. Beat the egg with chopsticks. Turn on the induction cooker. Place a pan on the cooker. Pour oil into the pan. Pour the egg mixture into the pan. Stir with a spatula. Turn off the induction cooker. Slide the egg onto a plate. Pick up the plate. Walk to the table. Sit down on the chair. Pick up the spoon. Eat the egg. Drink the milk. Stand up. Carry the plate to the sink. Turn on the tap. Rinse the plate. Place the plate in the drying rack. Turn off the tap."
+    },
+    {
+      "time": "08:45-09:30",
+      "location": "Bathroom",
+      "activity": "Doing laundry with the washing machine and tidying up",
+      "desc": "Walk into the bathroom. Open the washing machine lid. Pick up the laundry basket. Take out the clothes. Put the clothes into the drum. Close the lid. Press the power button. Press the start button. Walk to the sink. Pick up a cloth. Wipe the counter surface. Rinse the cloth under the tap. Wring the cloth. Wipe the mirror. Wipe the sink edge. Put the cloth on the rack. Pick up the bottles from the floor. Place the bottles on the shelf. Pick up the towel from the floor. Fold the towel. Hang the towel on the rack. Pick up the mop. Mop the floor. Put the mop back in the corner. Walk out of the bathroom."
+    },
+    {
+      "time": "09:30-11:00",
+      "location": "Out",
+      "activity": "Grocery shopping and running errands outside",
+      "desc": "Pick up the phone. Put the phone into the pocket. Pick up the shopping bag. Walk to the door. Open the door. Step out. Close the door. Walk to the elevator. Press the elevator button. Step into the elevator. Press the ground floor button. Walk out of the elevator. Walk out of the building. Walk along the street to the supermarket. Push a shopping cart. Pick up vegetables. Place vegetables in the cart. Pick up milk. Place the milk in the cart. Pick up bread. Place the bread in the cart. Pick up a carton of eggs. Place the eggs in the cart. Push the cart to the checkout counter. Take out the phone. Scan the payment code. Place the items into the shopping bag. Pick up the shopping bag. Walk out of the supermarket. Walk back to the building. Press the elevator button. Step into the elevator. Press the floor button. Walk to the door. Take out the key. Open the door. Step inside. Close the door."
+    },
+    {
+      "time": "11:00-11:45",
+      "location": "Kitchen",
+      "activity": "Unpacking groceries and organizing the refrigerator",
+      "desc": "Place the shopping bag on the counter. Open the bag. Take out the vegetables. Place the vegetables on the counter. Take out the milk. Open the refrigerator door. Place the milk on the shelf. Take out the eggs. Place the egg carton on the shelf. Take out the bread. Place the bread on the shelf. Take out the fruit. Place the fruit in the drawer. Close the refrigerator door. Fold the empty bag. Put the bag into the drawer. Open the cupboard. Place the canned food on the shelf. Close the cupboard. Pick up the cloth. Wipe the counter. Hang the cloth on the hook."
+    },
+    {
+      "time": "11:45-12:30",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing",
+      "desc": "Walk to the living room. Sit down on the sofa. Pick up the remote control from the table. Press the power button. Press the channel button. Watch the TV screen. Pick up the phone from the pocket. Scroll the screen with the finger. Put the phone down on the sofa. Lean back against the cushion. Press the volume button. Cross the legs. Press the channel button again. Put the remote control on the table. Stand up. Walk to the kitchen."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "desc": "Walk into the kitchen. Open the refrigerator door. Take out vegetables and noodles. Close the refrigerator door. Place the items on the counter. Turn on the induction cooker. Pour water into a pot. Place the pot on the cooker. Wait for the water to boil. Put the noodles into the pot. Add the vegetables. Stir with chopsticks. Turn off the induction cooker. Pour the noodles into a bowl. Pick up the bowl. Carry the bowl to the table. Sit down on the chair. Pick up the chopsticks. Eat the noodles. Drink the soup. Stand up. Carry the bowl to the sink. Turn on the tap. Rinse the bowl. Place the bowl in the drying rack. Turn off the tap."
+    },
+    {
+      "time": "13:15-14:00",
+      "location": "Bathroom",
+      "activity": "Folding laundry and putting clothes away",
+      "desc": "Walk into the bathroom. Open the washing machine lid. Take out the clothes. Place the clothes into the basket. Pick up a shirt. Spread the shirt on the counter. Fold the sleeves. Fold the shirt in half. Place the shirt in the basket. Pick up a towel. Fold the towel in half. Fold the towel again. Place the towel on the shelf. Pick up the trousers. Fold the trousers lengthwise. Fold the trousers in half. Stack the trousers on the shelf. Pick up the socks. Roll the socks into a pair. Place the socks in the drawer. Open the cabinet door. Place the folded clothes inside. Close the cabinet door. Carry the basket to the corner."
+    },
+    {
+      "time": "14:00-15:30",
+      "location": "Out",
+      "activity": "Outdoor jogging and exercise in the park",
+      "desc": "Walk into the bedroom. Open the wardrobe. Take out the sportswear. Put on the sportswear. Put on the running shoes. Pick up the phone. Put the phone into the pocket. Put on the earphones. Walk to the door. Open the door. Step out. Close the door. Walk to the elevator. Press the elevator button. Step into the elevator. Press the ground floor button. Walk out of the building. Walk to the park. Start jogging along the path. Turn left at the fork. Run up the slope. Run past the bench. Stop near the tree. Stretch both arms. Stretch the legs. Drink water from the bottle. Jog back along the path. Walk out of the park. Walk back to the building. Press the elevator button. Step into the elevator. Press the floor button. Walk to the door. Open the door. Step inside. Take off the running shoes."
+    },
+    {
+      "time": "15:30-16:30",
+      "location": "Living Room",
+      "activity": "Vacuuming and tidying the living room",
+      "desc": "Walk to the living room. Open the closet door. Take out the vacuum cleaner. Plug the cord into the socket. Press the power button. Push the vacuum across the floor. Pull the vacuum back. Push the vacuum under the table. Pick up the cushions from the sofa. Place the cushions on the chair. Vacuum under the sofa. Push the vacuum to the corner. Press the power button off. Pull the plug out of the socket. Wind the cord around the hook. Put the vacuum cleaner into the closet. Close the closet door. Pick up the cushions. Place the cushions back on the sofa. Pick up the cloth. Wipe the table. Arrange the magazines on the shelf. Stand up. Walk out of the living room."
+    },
+    {
+      "time": "16:30-17:30",
+      "location": "Bedroom 1",
+      "activity": "Using the computer to read and catch up on personal matters",
+      "desc": "Walk into the bedroom. Pull out the chair. Sit down on the chair. Open the laptop lid. Press the power button. Wait for the screen to light up. Type the password on the keyboard. Move the mouse. Open the browser. Scroll the news page. Type a keyword in the search box. Press the Enter key. Read the article. Pick up the phone from the desk. Open the message app. Scroll the messages. Type a reply. Put the phone down on the desk. Open a document file. Type notes on the keyboard. Save the file. Close the browser. Close the laptop lid. Stand up. Push the chair back."
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Kitchen",
+      "activity": "Cooking dinner",
+      "desc": "Walk into the kitchen. Turn on the light. Open the refrigerator door. Take out meat and vegetables. Close the refrigerator door. Place the meat and vegetables on the cutting board. Turn on the tap. Rinse the vegetables under the water. Turn off the tap. Pick up the knife. Cut the vegetables into pieces. Cut the meat into slices. Turn on the induction cooker. Pour oil into the pan. Put the meat into the pan. Stir with the spatula. Add the vegetables. Add salt. Stir the food. Pour water into the pan. Cover the pan with the lid. Wait for the food to cook. Turn off the induction cooker. Slide the dish onto a plate. Place the plate on the counter."
+    },
+    {
+      "time": "18:15-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "desc": "Pick up the plate. Carry the plate to the table. Place the plate on the table. Pull out the chair. Sit down on the chair. Pick up the bowl. Pick up the chopsticks. Eat rice from the bowl. Pick up the meat with the chopsticks. Chew the food. Pick up the vegetables. Drink water from the cup. Put down the chopsticks. Push the chair back. Stand up. Carry the plate to the sink. Place the plate in the sink."
+    },
+    {
+      "time": "19:00-19:45",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Pick up the plates from the table. Carry the plates to the sink. Scrape the leftovers into the bin. Turn on the tap. Rinse the plates under the water. Turn off the tap. Open the dishwasher door. Pull out the lower rack. Place the plates in the rack. Place the bowls in the rack. Place the chopsticks in the basket. Push the rack into the dishwasher. Close the dishwasher door. Press the power button. Press the start button. Pick up the cloth from the hook. Wipe the table surface. Wipe the counter. Rinse the cloth under the tap. Wring the cloth. Hang the cloth on the hook."
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing",
+      "desc": "Walk to the living room. Sit down on the sofa. Pick up the remote control. Press the power button. Press the channel button. Watch the TV screen. Pick up the phone. Scroll the screen with the finger. Put the phone down on the sofa. Lean back against the cushion. Press the volume button. Stand up. Walk to the kitchen. Pick up a cup from the shelf. Pour water into the cup. Walk back to the living room. Sit down on the sofa. Drink water. Place the cup on the table. Pick up the remote control. Press the channel button. Watch the TV screen. Put the remote control on the table."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower",
+      "desc": "Walk into the bathroom. Turn on the light. Press the water heater switch. Open the shower door. Turn on the tap. Adjust the water temperature with the handle. Step into the shower area. Wet the body under the water. Pick up the shampoo bottle. Pour shampoo into the palm. Rub the hair. Rinse the hair under the water. Pick up the soap. Rub the soap on the body. Rinse the body. Turn off the tap. Step out of the shower area. Pick up the towel from the rack. Dry the body with the towel. Dry the hair with the towel. Hang the towel on the rack. Turn off the light. Walk out of the bathroom."
+    },
+    {
+      "time": "22:00-23:15",
+      "location": "Bedroom 1",
+      "activity": "Watching TV and winding down before bed",
+      "desc": "Walk into the bedroom. Sit down on the bed. Pick up the remote control from the nightstand. Press the TV power button. Watch the TV screen. Pick up the phone from the nightstand. Scroll the screen with the finger. Put the phone down on the nightstand. Adjust the pillow. Pull the quilt down. Lie down on the bed. Pull the quilt over the legs. Press the volume button on the remote. Turn the head toward the TV. Press the channel button. Press the power button to turn off the TV. Place the remote control on the nightstand."
+    },
+    {
+      "time": "23:15-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Reach out the hand to the desk lamp. Press the lamp switch. Pull the hand back under the quilt. Turn onto the left side. Pull the quilt up to the chin. Close the eyes. Move the arm under the pillow. Turn onto the right side. Stretch both legs. Turn onto the back. Breathe steadily. Lie still on the bed."
+    }
+  ]
+}

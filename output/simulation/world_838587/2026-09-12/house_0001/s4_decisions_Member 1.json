@@ -1,0 +1,244 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:30",
+      "start_minutes": 0,
+      "end_minutes": 450,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "start_minutes": 450,
+      "end_minutes": 480,
+      "location": "Bathroom",
+      "activity": "Morning routine (washing, brushing teeth) - scheduled early to avoid the bathroom being occupied by Member 4 (08:00-08:40) and Member 3 (08:30-09:00)",
+      "operations": []
+    },
+    {
+      "time": "08:00-08:30",
+      "start_minutes": 480,
+      "end_minutes": 510,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, ahead of Member 4 and Member 3's breakfast slots",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-10:00",
+      "start_minutes": 510,
+      "end_minutes": 600,
+      "location": "Bedroom 1",
+      "activity": "Studying Master of Education coursework on computer",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:00-10:30",
+      "start_minutes": 600,
+      "end_minutes": 630,
+      "location": "Bathroom",
+      "activity": "Doing laundry using the washing machine (free slot, no conflict with Member 3, Member 4 or Member 2's laundry times)",
+      "operations": [
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "10:30-11:00",
+      "start_minutes": 630,
+      "end_minutes": 660,
+      "location": "Bedroom 1",
+      "activity": "Tidying room and organizing study materials",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:00-11:30",
+      "start_minutes": 660,
+      "end_minutes": 690,
+      "location": "Bedroom 1",
+      "activity": "Reviewing study notes quietly while the kitchen is busy with Member 3 and Member 4's grocery unloading",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:30-12:30",
+      "start_minutes": 690,
+      "end_minutes": 750,
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch, sharing the kitchen with Member 3 unpacking groceries and Member 4 prepping lunch ingredients",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "start_minutes": 750,
+      "end_minutes": 780,
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV before the work shift",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-18:00",
+      "start_minutes": 780,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Working part-time shift at hospitality/retail job",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_external"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "start_minutes": 1080,
+      "end_minutes": 1110,
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:30",
+      "start_minutes": 1110,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Cooking dinner from scratch and eating it together with Member 2, Member 3 and Member 4, who are also preparing dinner at this time",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-21:30",
+      "start_minutes": 1170,
+      "end_minutes": 1290,
+      "location": "Living Room",
+      "activity": "Watching TV or playing video games together with Member 2 and Member 4 to unwind",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine (showering) - timed before Member 3 and Member 4's 22:15-22:45 bathroom use",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-23:00",
+      "start_minutes": 1320,
+      "end_minutes": 1380,
+      "location": "Bedroom 1",
+      "activity": "Reading or listening to music before bed",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Preparing for bed and going to sleep",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

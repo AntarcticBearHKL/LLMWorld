@@ -1,0 +1,407 @@
+{
+  "member": "Member 4",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:50",
+      "start_minutes": 0,
+      "end_minutes": 410,
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:50-07:00",
+      "start_minutes": 410,
+      "end_minutes": 420,
+      "location": "Bedroom 4",
+      "activity": "Waking up and waiting for the bathroom to be free (Member 3 finishes at 07:00)",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:25",
+      "start_minutes": 420,
+      "end_minutes": 445,
+      "location": "Bathroom",
+      "activity": "Showering and brushing teeth",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:25-07:55",
+      "start_minutes": 445,
+      "end_minutes": 475,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, preparing tea and packing lunch, overlapping with Member 5's tea time",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:55-08:20",
+      "start_minutes": 475,
+      "end_minutes": 500,
+      "location": "Bedroom 4",
+      "activity": "Checking university timetable and replying to freelance client emails at the desk",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:20-08:50",
+      "start_minutes": 500,
+      "end_minutes": 530,
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University campus",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:50-12:00",
+      "start_minutes": 530,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending cybersecurity lectures and laboratory sessions at Monash University",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:40",
+      "start_minutes": 720,
+      "end_minutes": 760,
+      "location": "Out",
+      "activity": "Eating lunch on campus",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:40-15:30",
+      "start_minutes": 760,
+      "end_minutes": 930,
+      "location": "Out",
+      "activity": "Studying in the campus library and working on a group assignment",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:30-16:10",
+      "start_minutes": 930,
+      "end_minutes": 970,
+      "location": "Out",
+      "activity": "Commuting home by public transport",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:10-16:30",
+      "start_minutes": 970,
+      "end_minutes": 990,
+      "location": "Bathroom",
+      "activity": "Freshening up and changing into comfortable clothes",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:00",
+      "start_minutes": 990,
+      "end_minutes": 1020,
+      "location": "Kitchen",
+      "activity": "Cooking dinner early to avoid the evening kitchen rush, then storing it for the shared dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Bedroom 4",
+      "activity": "Doing freelance web development work on the computer at the desk",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Kitchen",
+      "activity": "Eating dinner at the kitchen table with Member 3, Member 6, and Member 2 during the shared household dinner period",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:00",
+      "start_minutes": 1125,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Washing dishes and cleaning the cooking area alongside Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:30",
+      "start_minutes": 1140,
+      "end_minutes": 1230,
+      "location": "Bedroom 4",
+      "activity": "Continuing freelance client work, coding and debugging a website",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:00",
+      "start_minutes": 1230,
+      "end_minutes": 1260,
+      "location": "Kitchen",
+      "activity": "Making tea and a light snack and tidying the kitchen counter",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "start_minutes": 1260,
+      "end_minutes": 1290,
+      "location": "Bathroom",
+      "activity": "Showering and completing night-time routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bedroom 4",
+      "activity": "Finishing freelance tasks, testing code and sending the update to the client",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bedroom 4",
+      "activity": "Winding down, dimming the desk lamp and reading on the phone",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bedroom 4",
+      "activity": "Continuing to wind down, reading quietly and setting an alarm for tomorrow",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

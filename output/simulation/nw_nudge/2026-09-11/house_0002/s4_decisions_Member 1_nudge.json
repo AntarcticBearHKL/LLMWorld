@@ -1,0 +1,244 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "start_minutes": 0,
+      "end_minutes": 400,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:40-07:10",
+      "start_minutes": 400,
+      "end_minutes": 430,
+      "location": "Bedroom 1",
+      "activity": "Waking up, checking phone and laying out work clothes while waiting for the bathroom to be free (Member 2 is using the bathroom)",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:40",
+      "start_minutes": 430,
+      "end_minutes": 460,
+      "location": "Bathroom",
+      "activity": "Showering, brushing teeth and getting ready for work",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-07:55",
+      "start_minutes": 460,
+      "end_minutes": 475,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, boiling water for tea, having breakfast with Member 2",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:55-08:00",
+      "start_minutes": 475,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and packing bag for the day",
+      "operations": []
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting to the nonprofit office",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:30",
+      "start_minutes": 540,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Working at the nonprofit office: coordinating community programs, answering emails and attending planning meetings",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "start_minutes": 750,
+      "end_minutes": 795,
+      "location": "Out",
+      "activity": "Taking a lunch break and eating lunch",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:15-17:00",
+      "start_minutes": 795,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Continuing work at the office: preparing program materials, meeting with partner organisations and updating community schedules",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner together with Member 2",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:30",
+      "start_minutes": 1125,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying up the kitchen",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:30",
+      "start_minutes": 1170,
+      "end_minutes": 1230,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:05",
+      "start_minutes": 1230,
+      "end_minutes": 1265,
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and completing night-time hygiene routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:05-22:00",
+      "start_minutes": 1265,
+      "end_minutes": 1320,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa, reading and winding down",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:45",
+      "start_minutes": 1320,
+      "end_minutes": 1365,
+      "location": "Bedroom 1",
+      "activity": "Winding down in bed, using the desk lamp to read and check the next day's schedule",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

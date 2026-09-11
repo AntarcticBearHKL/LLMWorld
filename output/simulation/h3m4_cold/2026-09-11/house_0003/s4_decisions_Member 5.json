@@ -1,0 +1,251 @@
+{
+  "member": "Member 5",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 5",
+      "activity": "Sleeping under a thick blanket to stay warm during the cold snap",
+      "operations": []
+    },
+    {
+      "time": "06:45-07:05",
+      "start_minutes": 405,
+      "end_minutes": 425,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and getting dressed in warm school clothes",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:05-07:35",
+      "start_minutes": 425,
+      "end_minutes": 455,
+      "location": "Kitchen",
+      "activity": "Eating a hot breakfast and preparing a packed lunch",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:35-08:10",
+      "start_minutes": 455,
+      "end_minutes": 490,
+      "location": "Bedroom 5",
+      "activity": "Packing school bag, checking phone for messages and putting on a jacket",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:40",
+      "start_minutes": 490,
+      "end_minutes": 520,
+      "location": "Out",
+      "activity": "Travelling to school",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:40-15:20",
+      "start_minutes": 520,
+      "end_minutes": 920,
+      "location": "Out",
+      "activity": "Attending high-school classes and lessons",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:20-15:50",
+      "start_minutes": 920,
+      "end_minutes": 950,
+      "location": "Out",
+      "activity": "Travelling home from school",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:50-16:20",
+      "start_minutes": 950,
+      "end_minutes": 980,
+      "location": "Kitchen",
+      "activity": "Eating an afternoon snack and drinking something warm after the cold walk home",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:20-18:00",
+      "start_minutes": 980,
+      "end_minutes": 1080,
+      "location": "Bedroom 5",
+      "activity": "Doing homework and studying at the desk",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:15",
+      "start_minutes": 1125,
+      "end_minutes": 1155,
+      "location": "Kitchen",
+      "activity": "Washing up dishes and tidying the kitchen counter",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:15-21:00",
+      "start_minutes": 1155,
+      "end_minutes": 1260,
+      "location": "Living Room",
+      "activity": "Relaxing on the couch, watching TV and scrolling on the phone",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "start_minutes": 1260,
+      "end_minutes": 1290,
+      "location": "Bathroom",
+      "activity": "Taking a hot shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:45",
+      "start_minutes": 1290,
+      "end_minutes": 1365,
+      "location": "Bedroom 5",
+      "activity": "Reviewing class notes and checking phone before bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

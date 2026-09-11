@@ -1,0 +1,169 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "operations": []
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast (toast and tea)",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing study materials, laptop and notes for university",
+      "operations": []
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and tutorials",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Out",
+      "activity": "Buying and eating lunch on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:45-17:00",
+      "location": "Out",
+      "activity": "Studying in the campus library and attending a research methods seminar",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner, washing up dishes",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-21:30",
+      "location": "Bedroom 1",
+      "activity": "Working on assignment drafts on the computer under the desk lamp",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:15",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Showering and night-time hygiene routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Reading course notes and going to sleep",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

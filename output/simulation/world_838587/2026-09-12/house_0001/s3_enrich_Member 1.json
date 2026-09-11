@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed in Bedroom 1. Close eyes. Pull the blanket over the body. Remain lying still with eyes closed. Turn body to the side. Adjust the pillow under the head. Remain asleep without moving. Breathe steadily. Shift arm under the pillow. Keep eyes closed until the alarm sounds at 07:30."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Morning routine (washing, brushing teeth) - scheduled early to avoid the bathroom being occupied by Member 4 (08:00-08:40) and Member 3 (08:30-09:00)",
+      "desc": "Open eyes when the alarm rings. Sit up on the bed. Turn off the alarm on the phone. Stand up from the bed. Walk out of Bedroom 1 to the Bathroom. Push the bathroom door open. Turn on the bathroom light. Turn on the tap. Cup hands under the water. Splash water on the face. Pick up the toothbrush from the holder. Squeeze toothpaste onto the bristles. Brush teeth up and down. Rinse the mouth with water. Spit into the sink. Place the toothbrush back in the holder. Pick up the towel. Wipe the face with the towel. Turn off the tap. Turn off the light. Walk out of the Bathroom."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, ahead of Member 4 and Member 3's breakfast slots",
+      "desc": "Walk from the Bathroom to the Kitchen. Turn on the kitchen light. Open the refrigerator door. Take out milk and bread. Close the refrigerator door. Place the items on the counter. Pick up the bread. Put slices into the toaster. Press the toaster lever down. Open the cupboard. Take out a bowl and a plate. Place them on the counter. Open the refrigerator again. Take out butter. Close the door. Pick up a knife. Spread butter on the toasted bread. Pick up the bowl. Pour milk into the bowl. Pick up a spoon. Sit down at the table. Lift the spoon. Eat the cereal. Pick up the toast. Bite the toast. Chew and swallow. Drink the milk from the bowl. Stand up. Carry the plate and bowl to the sink. Rinse the dishes under the tap. Place them on the drying rack."
+    },
+    {
+      "time": "08:30-10:00",
+      "location": "Bedroom 1",
+      "activity": "Studying Master of Education coursework on computer",
+      "desc": "Walk from the Kitchen to Bedroom 1. Close the bedroom door. Walk to the desk. Pull out the chair. Sit down. Press the computer power button. Wait for the screen to load. Move the mouse to open the browser. Click on the university portal. Log in with the student ID and password. Open the course reading PDF. Scroll down the pages with the mouse wheel. Pick up a pen. Write notes in the notebook. Highlight key sentences on the screen. Open a second browser tab. Type search terms into the search bar. Read the results. Switch back to the reading tab. Type notes into a Word document. Save the document with Ctrl+S. Scroll up to re-read the earlier section. Adjust the desk lamp switch. Continue typing for the remainder of the session."
+    },
+    {
+      "time": "10:00-10:30",
+      "location": "Bathroom",
+      "activity": "Doing laundry using the washing machine (free slot, no conflict with Member 3, Member 4 or Member 2's laundry times)",
+      "desc": "Stand up from the desk chair. Walk out of Bedroom 1 to the Bathroom. Carry the laundry basket. Push the bathroom door open. Turn on the bathroom light. Open the washing machine lid. Pick up clothing items from the basket. Drop them into the drum one by one. Close the lid. Pull the detergent drawer open. Pour detergent into the compartment. Push the drawer closed. Turn the program dial to a wash cycle. Press the start button. Listen for the water filling. Pick up the empty basket. Walk out of the Bathroom. Turn off the light."
+    },
+    {
+      "time": "10:30-11:00",
+      "location": "Bedroom 1",
+      "activity": "Tidying room and organizing study materials",
+      "desc": "Walk back into Bedroom 1. Place the laundry basket on the floor. Pick up the clothes on the chair. Fold each item. Stack them in the wardrobe. Push the wardrobe door closed. Pick up loose papers from the desk. Tap them on the desk edge to align. Place them in a folder. Clip the folder shut. Put the folder on the shelf. Pick up the pen. Put it into the pen holder. Straighten the computer keyboard. Wipe the desk surface with a cloth. Pick up empty cups. Walk to the door. Put the cups outside the door. Walk back to the desk. Sit down."
+    },
+    {
+      "time": "11:00-11:30",
+      "location": "Bedroom 1",
+      "activity": "Reviewing study notes quietly while the kitchen is busy with Member 3 and Member 4's grocery unloading",
+      "desc": "Open the notebook on the desk. Turn the pages back to the morning notes. Read each line silently. Pick up the phone. Open the study app. Scroll through the digital flashcards. Tap the screen to flip a card. Read the answer. Tap again to move to the next card. Put the phone face down on the desk. Pick up the pen. Underline a key point in the notebook. Turn the page. Re-read the summary section. Close the notebook. Place it on top of the folder. Adjust the desk lamp angle. Keep the bedroom door closed. Remain seated at the desk."
+    },
+    {
+      "time": "11:30-12:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch, sharing the kitchen with Member 3 unpacking groceries and Member 4 prepping lunch ingredients",
+      "desc": "Stand up. Walk from Bedroom 1 to the Kitchen. Say \"Hello\" to Member 3 and Member 4. Open the cupboard. Take out a pot. Place it on the induction cooker. Open the refrigerator. Take out vegetables and eggs. Close the door. Walk to the sink. Turn on the tap. Rinse the vegetables under the water. Pick up a knife. Cut the vegetables on the chopping board. Crack the eggs into a bowl. Pick up chopsticks. Beat the eggs. Press the induction cooker power button. Pour oil into the pot. Pour the egg mixture in. Stir with a spatula. Add the vegetables. Stir again. Turn off the induction cooker. Pick up a plate. Scoop the food onto the plate. Carry the plate to the table. Sit down. Eat the lunch with chopsticks. Drink water from a glass. Stand up. Carry the plate to the sink. Rinse the plate. Say \"Excuse me\" to Member 3 while passing behind them."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV before the work shift",
+      "desc": "Walk from the Kitchen to the Living Room. Pick up the TV remote from the table. Press the power button. Sit down on the couch. Lean back against the cushion. Press the channel button. Watch the screen. Pick up the phone. Scroll through messages. Press the volume down button. Place the remote on the armrest. Cross the legs. Watch the program. Check the phone clock. Stand up from the couch. Walk to Bedroom 1 to get the work bag."
+    },
+    {
+      "time": "13:00-18:00",
+      "location": "Out",
+      "activity": "Working part-time shift at hospitality/retail job",
+      "desc": "Pick up the work bag from Bedroom 1. Walk to the front door. Put on the shoes. Open the door. Step outside. Pull the door closed. Walk to the bus stop or station. Board the transport. Ride to the workplace. Arrive at the workplace. Enter through the staff door. Put the bag in the staff room. Clock in on the time system. Put on the work uniform or apron. Walk to the counter or floor station. Greet customers. Take orders. Operate the till or register. Press the buttons to enter the order. Take payment by card. Hand the receipt to the customer. Prepare or hand over items. Wipe the counter with a cloth. Restock shelves or supplies. Carry trays or boxes. Serve customers at tables. Clear tables into the tub. Carry the tub to the wash area. Repeat the service tasks through the shift. Take a short break. Clock out at the end of the shift. Change out of the uniform. Pick up the bag. Walk out of the staff door."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "desc": "Walk from the workplace to the bus stop or station. Wait on the platform or at the stop. Board the transport. Sit down or hold the handrail. Check the phone for messages. Watch the stops. Stand up when the stop is near. Step off the transport. Walk along the street toward home. Walk up to the front door. Take out the keys. Insert the key into the lock. Turn the key. Push the door open. Step inside. Close the door behind. Take off the shoes. Place them on the shoe rack."
+    },
+    {
+      "time": "18:30-19:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner from scratch and eating it together with Member 2, Member 3 and Member 4, who are also preparing dinner at this time",
+      "desc": "Walk into the Kitchen. Greet Member 2, Member 3 and Member 4. Open the refrigerator. Take out meat and vegetables. Close the door. Walk to the sink. Turn on the tap. Rinse the vegetables. Place them on the chopping board. Pick up the knife. Chop the vegetables. Cut the meat into pieces. Pick up a pan. Place it on the induction cooker. Press the power button. Pour oil into the pan. Add the meat. Stir with the spatula. Add the vegetables. Add sauce from the bottle. Stir again. Turn off the induction cooker. Pick up plates from the cupboard. Scoop the food onto the plates. Carry the plates to the table. Sit down with Member 2, Member 3 and Member 4. Eat dinner with chopsticks. Talk about the day with Member 2. Drink water. Finish the meal. Stand up. Carry the plate to the sink."
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV or playing video games together with Member 2 and Member 4 to unwind",
+      "desc": "Walk from the Kitchen to the Living Room. Sit down on the couch. Pick up the game controller. Press the power button on the console. Hand a controller to Member 4. Press the buttons to start the game. Play the game with Member 2 and Member 4. Move the controller and press the buttons. Talk to Member 2 about the game. Pause the game. Put the controller on the table. Pick up the TV remote. Switch to a TV channel. Watch the screen. Pick up the phone. Scroll through messages. Put the phone down. Pick up the controller again. Continue playing. Check the clock. Pause the game. Stand up from the couch."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine (showering) - timed before Member 3 and Member 4's 22:15-22:45 bathroom use",
+      "desc": "Walk from the Living Room to the Bathroom. Push the door open. Turn on the bathroom light. Turn on the water heater switch. Open the shower tap. Test the water temperature with the hand. Adjust the tap. Step into the shower. Wet the body under the water. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub the shampoo into the hair. Rinse the hair. Pick up the soap. Rub the soap over the body. Rinse the body. Turn off the shower tap. Pick up the towel from the hook. Dry the hair with the towel. Dry the body. Wrap the towel around the body. Step out of the shower. Turn off the bathroom light. Walk out of the Bathroom."
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reading or listening to music before bed",
+      "desc": "Walk from the Bathroom to Bedroom 1. Close the bedroom door. Put on the sleepwear. Walk to the desk. Sit down. Pick up the phone. Open the music app. Select a playlist. Press play. Put the phone on the desk. Pick up the novel from the shelf. Open to the bookmark. Read the pages. Turn a page. Read on. Reach for the water bottle. Unscrew the cap. Drink water. Screw the cap back on. Put the bottle down. Turn another page. Read to the end of the chapter. Close the book. Place it on the shelf. Pick up the phone. Stop the music. Turn off the desk lamp."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Preparing for bed and going to sleep",
+      "desc": "Stand up from the desk chair. Walk to the bed. Pull back the blanket. Place the phone on the bedside table. Plug the charger into the phone. Turn off the main bedroom light. Lie down on the bed. Pull the blanket over the body. Adjust the pillow under the head. Turn onto the side. Close eyes. Remain lying still. Breathe steadily until falling asleep."
+    }
+  ]
+}

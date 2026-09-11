@@ -1,0 +1,246 @@
+{
+  "member": "Member 5",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "start_minutes": 0,
+      "end_minutes": 400,
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:40-07:15",
+      "start_minutes": 400,
+      "end_minutes": 435,
+      "location": "Out",
+      "activity": "Morning walk with his dog around the neighbourhood park",
+      "operations": []
+    },
+    {
+      "time": "07:15-07:40",
+      "start_minutes": 435,
+      "end_minutes": 460,
+      "location": "Bathroom",
+      "activity": "Cold shower and grooming before heading out",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:20",
+      "start_minutes": 460,
+      "end_minutes": 500,
+      "location": "Out",
+      "activity": "Commuting by public transit to Monash Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:20-12:00",
+      "start_minutes": 500,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending Master of Business Information Systems classes and tutorials at Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "start_minutes": 720,
+      "end_minutes": 765,
+      "location": "Out",
+      "activity": "Buying and eating lunch on campus, paying with cash (brief overlap with Member 4 who has lunch from 12:30)",
+      "operations": []
+    },
+    {
+      "time": "12:45-13:00",
+      "start_minutes": 765,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Walking to the IT support office for his part-time shift",
+      "operations": []
+    },
+    {
+      "time": "13:00-17:00",
+      "start_minutes": 780,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Working as a part-time IT support assistant, handling helpdesk tickets and troubleshooting devices",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home by public transit",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Bedroom 5",
+      "activity": "Working on coursework assignments and readings on his computer",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:30",
+      "start_minutes": 1125,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 4 (Member 4 is also cooking and eating dinner 18:45-19:30)",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Bedroom 5",
+      "activity": "Continuing coursework assignments and readings on his computer",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "start_minutes": 1200,
+      "end_minutes": 1230,
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:30",
+      "start_minutes": 1230,
+      "end_minutes": 1290,
+      "location": "Living Room",
+      "activity": "Watching TV and browsing on his phone",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "start_minutes": 1290,
+      "end_minutes": 1350,
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing with Member 3 and Member 4 (shared living room time)",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bedroom 5",
+      "activity": "Reading a book before bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

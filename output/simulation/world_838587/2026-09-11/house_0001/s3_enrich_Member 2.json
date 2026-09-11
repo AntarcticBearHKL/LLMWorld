@@ -1,0 +1,107 @@
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "00:00-01:30",
+      "location": "Bedroom 2",
+      "activity": "Late-night doomscrolling YouTube and WhatsApp on phone instead of sleeping",
+      "desc": "Lies in bed. Holds phone. Unlocks phone. Opens YouTube app. Scrolls through video feed. Taps on a video. Watches video. Swipes to next video. Taps like button. Opens comments section. Scrolls through comments. Closes comments. Continues watching videos. Opens WhatsApp. Reads messages. Taps on a chat. Types a reply. Sends message. Scrolls through other chats. Checks status updates. Continues browsing. Puts phone down. Picks phone up again. Scrolls more. Sets phone aside."
+    },
+    {
+      "time": "01:30-07:45",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Puts phone on nightstand. Lies down. Closes eyes. Sleeps."
+    },
+    {
+      "time": "07:45-07:55",
+      "location": "Bedroom 2",
+      "activity": "Waking up late, slow start and light stretching in bed while waiting for the shared bathroom to free up after Member 3's 07:25-07:55 morning slot",
+      "desc": "Opens eyes. Stretches arms overhead. Yawns. Turns head to look at phone. Picks up phone. Checks time. Puts phone down. Sits up in bed. Rotates neck. Extends legs. Bends forward to stretch back. Hears bathroom door open. Listens for Member 3 to leave. Continues stretching. Checks phone again. Gets out of bed."
+    },
+    {
+      "time": "07:55-08:10",
+      "location": "Bathroom",
+      "activity": "Quick wash and brushing teeth (bathroom now free after Member 3, avoiding the 06:45-07:15 Member 4 and 07:25-07:55 Member 3 slots)",
+      "desc": "Walks to bathroom. Opens bathroom door. Turns on light. Turns on tap. Wets hands. Picks up soap. Lathers hands. Washes face. Rinses face. Turns off tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns on tap. Washes toothbrush. Turns off tap. Picks up towel. Wipes face. Hangs towel. Turns off light. Walks out."
+    },
+    {
+      "time": "08:10-08:25",
+      "location": "Kitchen",
+      "activity": "Rushed breakfast of tea and toast shared with Member 3 in the kitchen, packing a thermos of tea for the day",
+      "desc": "Walks into kitchen. Greets Member 3. Opens cupboard. Takes out bread. Puts bread in toaster. Pushes toaster lever down. Opens fridge. Takes out butter. Takes out jam. Puts on counter. Takes out plate. Waits for toast. Pours water into kettle. Turns on kettle. Takes out mug. Puts tea bag in mug. Pours hot water into mug. Adds milk. Stirs tea. Toaster pops. Takes out toast. Butters toast. Spreads jam. Puts toast on plate. Sits at table with Member 3. Eats toast. Drinks tea. Talks with Member 3. Finishes eating. Picks up thermos. Fills thermos with tea. Closes thermos. Puts thermos in bag. Clears plate. Puts plate in sink. Says goodbye to Member 3. Walks out."
+    },
+    {
+      "time": "08:25-09:10",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Caulfield campus, running behind schedule",
+      "desc": "Puts on shoes. Picks up bag. Opens door. Walks to bus stop. Checks phone for time. Waits for bus. Bus arrives. Boards bus. Taps Myki card. Finds seat. Sits down. Holds bag. Looks out window. Checks phone. Bus stops. Gets off bus. Walks to train station. Waits for train. Train arrives. Boards train. Finds seat. Sits. Checks phone. Train arrives at station. Gets off. Walks to campus. Enters campus. Walks to classroom."
+    },
+    {
+      "time": "09:10-12:30",
+      "location": "Out",
+      "activity": "Attending Master of Design studio classes and critique sessions at Caulfield campus",
+      "desc": "Enters classroom. Sits at desk. Takes out laptop. Opens laptop. Turns on laptop. Takes out notebook. Takes out pen. Listens to lecturer. Takes notes. Raises hand. Asks question. Shows work to peers. Receives feedback. Discusses with group. Sketches ideas. Uses software on laptop. Presents work to class. Listens to critique. Answers questions. Takes more notes. Packs up laptop. Stands up. Walks to next class."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Buying and eating a budget-friendly lunch on campus that fits dietary restrictions",
+      "desc": "Walks to campus food court. Approaches food stall. Reads menu. Asks staff about ingredients. Orders meal. Pays with card. Receives food. Carries tray to table. Sits down. Opens container. Picks up fork. Eats food. Drinks water. Checks phone. Finishes eating. Cleans up. Throws trash. Returns tray. Walks to next location."
+    },
+    {
+      "time": "13:15-16:30",
+      "location": "Out",
+      "activity": "Working on design studio projects and print/workshop tasks on campus",
+      "desc": "Walks to studio. Sits at desk. Opens laptop. Opens design software. Works on project. Saves file. Connects laptop to printer. Sends print job. Walks to printer. Collects printout. Examines print. Walks to workshop. Uses cutting tools. Measures material. Cuts material. Assembles parts. Glues pieces. Cleans work area. Returns to studio. Continues working on laptop. Takes breaks."
+    },
+    {
+      "time": "16:30-17:15",
+      "location": "Out",
+      "activity": "Commuting home from Caulfield campus in afternoon traffic",
+      "desc": "Packs bag. Leaves studio. Walks to bus stop. Checks phone for schedule. Waits for bus. Bus arrives. Boards bus. Taps card. Finds seat. Sits. Holds bag. Looks out window. Checks phone. Bus stops. Gets off. Walks to train station. Waits for train. Train arrives. Boards. Finds seat. Sits. Checks phone. Train arrives at station. Gets off. Walks home."
+    },
+    {
+      "time": "17:15-17:45",
+      "location": "Bedroom 2",
+      "activity": "Changing out of day clothes and doing the daily stretching routine",
+      "desc": "Enters bedroom. Puts bag down. Takes off shoes. Takes off jacket. Takes off shirt. Takes off pants. Puts clothes in laundry basket. Opens wardrobe. Takes out t-shirt. Puts on t-shirt. Takes out shorts. Puts on shorts. Stands on mat. Raises arms overhead. Bends forward. Touches toes. Stretches left leg. Stretches right leg. Rotates torso. Does lunges. Does squats. Sits on floor. Stretches hamstrings. Lies on back. Does bicycle kicks. Sits up. Stands."
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking a daily homemade dinner that meets dietary restrictions and eating it in the kitchen alongside Member 4, who is cooking and eating dinner from 17:40",
+      "desc": "Walks to kitchen. Greets Member 4. Opens fridge. Takes out vegetables. Takes out protein. Places on cutting board. Washes vegetables. Cuts vegetables. Turns on stove. Places pan on stove. Adds oil. Adds ingredients. Stirs with spatula. Adds spices. Cooks. Turns off stove. Takes out plate. Serves food. Sits at table. Picks up fork. Eats. Talks with Member 4. Drinks water. Finishes. Picks up plate."
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down shared kitchen counters after cooking",
+      "desc": "Picks up dishes. Scrapes food into bin. Turns on tap. Fills sink with water. Adds dish soap. Picks up sponge. Scrubs dishes. Rinses dishes. Places in drying rack. Turns off tap. Picks up cloth. Wipes counter. Wipes stove. Wipes table. Rinses cloth. Hangs cloth. Dries hands."
+    },
+    {
+      "time": "19:00-21:00",
+      "location": "Bedroom 2",
+      "activity": "Doing freelance creative work on computer and monitor at desk",
+      "desc": "Sits at desk. Turns on computer. Turns on monitor. Opens design software. Opens project file. Works on design. Uses mouse. Types on keyboard. Saves file. Checks email. Replies to client. Opens browser. Does research. Takes notes. Sketches on paper. Scans sketch. Adds to digital file. Adjusts colors. Exports file. Sends file. Closes software. Turns off monitor. Turns off computer."
+    },
+    {
+      "time": "21:00-21:40",
+      "location": "Bathroom",
+      "activity": "Showering and putting a load of laundry in the washing machine (bathroom free before Member 3's 22:20-22:50, Member 4's 22:30-23:00 and Member 1's 23:00-23:30 slots)",
+      "desc": "Walks to bathroom. Takes off clothes. Puts clothes in laundry basket. Opens washing machine door. Puts clothes in washing machine. Adds detergent. Closes door. Sets cycle. Turns on washing machine. Turns on shower. Steps into shower. Washes body. Washes hair. Rinses. Turns off shower. Steps out. Picks up towel. Dries body. Wraps towel around. Walks to bedroom."
+    },
+    {
+      "time": "21:40-22:40",
+      "location": "Living Room",
+      "activity": "Relaxing with TV and game console to unwind",
+      "desc": "Walks to living room. Turns on TV. Picks up game controller. Turns on game console. Selects game. Plays game. Uses controller. Pauses game. Checks phone. Resumes game. Plays more. Turns off game console. Turns off TV. Puts controller down. Stands up. Walks to bedroom."
+    },
+    {
+      "time": "22:40-24:00",
+      "location": "Bedroom 2",
+      "activity": "Lying in bed browsing YouTube and WhatsApp on phone before settling down to sleep",
+      "desc": "Enters bedroom. Takes off towel. Puts on pajamas. Lies on bed. Picks up phone. Unlocks phone. Opens YouTube. Scrolls videos. Watches video. Opens WhatsApp. Reads messages. Sends message. Continues browsing. Checks time. Puts phone on nightstand. Turns off light. Lies down. Closes eyes. Sleeps."
+    }
+  ]
+}

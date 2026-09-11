@@ -1,0 +1,500 @@
+{
+  "world_id": "world_838587",
+  "scenario": "baseline",
+  "date": "2026-09-12",
+  "households": 2,
+  "per_house": [
+    {
+      "households": 1,
+      "total_true_kwh": 16.2074,
+      "total_estimated_kwh": 9.865,
+      "total_mae_kwh": 18.5004,
+      "disaggregation_rate": 0.6087,
+      "per_appliance": [
+        {
+          "name": "Refrigerator",
+          "power_watts": 100,
+          "true_kwh": 1.2,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 1.2,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Microwave",
+          "power_watts": 1000,
+          "true_kwh": 0.048,
+          "estimated_kwh": 0.1667,
+          "mae_kwh": 0.1187,
+          "relative_error": 2.4722
+        },
+        {
+          "name": "RiceCooker",
+          "power_watts": 800,
+          "true_kwh": 0.25,
+          "estimated_kwh": 1.8,
+          "mae_kwh": 1.55,
+          "relative_error": 6.2
+        },
+        {
+          "name": "InductionCooker",
+          "power_watts": 2000,
+          "true_kwh": 4.022,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 4.022,
+          "relative_error": 1.0
+        },
+        {
+          "name": "RangeHood",
+          "power_watts": 200,
+          "true_kwh": 0.4,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.4,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Kettle",
+          "power_watts": 2000,
+          "true_kwh": 1.0235,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 1.0235,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Toaster",
+          "power_watts": 1200,
+          "true_kwh": 0.4,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.4,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Oven",
+          "power_watts": 2200,
+          "true_kwh": 0.048,
+          "estimated_kwh": 2.3833,
+          "mae_kwh": 2.3353,
+          "relative_error": 48.6528
+        },
+        {
+          "name": "Freezer",
+          "power_watts": 100,
+          "true_kwh": 1.0,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 1.0,
+          "relative_error": 1.0
+        },
+        {
+          "name": "WaterHeater",
+          "power_watts": 3000,
+          "true_kwh": 2.25,
+          "estimated_kwh": 4.0,
+          "mae_kwh": 1.75,
+          "relative_error": 0.7778
+        },
+        {
+          "name": "WashingMachine",
+          "power_watts": 500,
+          "true_kwh": 0.8,
+          "estimated_kwh": 1.125,
+          "mae_kwh": 0.325,
+          "relative_error": 0.4063
+        },
+        {
+          "name": "TV",
+          "power_watts": 150,
+          "true_kwh": 0.6967,
+          "estimated_kwh": 0.39,
+          "mae_kwh": 0.3067,
+          "relative_error": 0.4403
+        },
+        {
+          "name": "GameConsole",
+          "power_watts": 150,
+          "true_kwh": 0.471,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.471,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Router",
+          "power_watts": 12,
+          "true_kwh": 0.29,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.29,
+          "relative_error": 1.0
+        },
+        {
+          "name": "AirConditioner",
+          "power_watts": 2000,
+          "true_kwh": 0.0,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0,
+          "relative_error": null
+        },
+        {
+          "name": "Fan",
+          "power_watts": 60,
+          "true_kwh": 0.045,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.045,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Light",
+          "power_watts": 40,
+          "true_kwh": 0.1467,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.1467,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Computer",
+          "power_watts": 200,
+          "true_kwh": 0.3225,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.3225,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Phone",
+          "power_watts": 20,
+          "true_kwh": 0.014,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.014,
+          "relative_error": 1.0
+        },
+        {
+          "name": "DeskLamp",
+          "power_watts": 15,
+          "true_kwh": 0.045,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.045,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Computer",
+          "power_watts": 200,
+          "true_kwh": 0.7702,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.7702,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Phone",
+          "power_watts": 20,
+          "true_kwh": 0.014,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.014,
+          "relative_error": 1.0
+        },
+        {
+          "name": "DeskLamp",
+          "power_watts": 15,
+          "true_kwh": 0.0563,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0563,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Monitor",
+          "power_watts": 25,
+          "true_kwh": 0.114,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.114,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Computer",
+          "power_watts": 200,
+          "true_kwh": 0.621,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.621,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Phone",
+          "power_watts": 20,
+          "true_kwh": 0.014,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.014,
+          "relative_error": 1.0
+        },
+        {
+          "name": "DeskLamp",
+          "power_watts": 15,
+          "true_kwh": 0.0375,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0375,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Computer",
+          "power_watts": 200,
+          "true_kwh": 1.019,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 1.019,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Phone",
+          "power_watts": 20,
+          "true_kwh": 0.014,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.014,
+          "relative_error": 1.0
+        },
+        {
+          "name": "DeskLamp",
+          "power_watts": 15,
+          "true_kwh": 0.075,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.075,
+          "relative_error": 1.0
+        }
+      ],
+      "house_id": "house_0001"
+    },
+    {
+      "households": 1,
+      "total_true_kwh": 13.482,
+      "total_estimated_kwh": 6.42,
+      "total_mae_kwh": 13.426,
+      "disaggregation_rate": 0.4762,
+      "per_appliance": [
+        {
+          "name": "TV",
+          "power_watts": 150,
+          "true_kwh": 0.219,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.219,
+          "relative_error": 1.0
+        },
+        {
+          "name": "AirConditioner",
+          "power_watts": 2000,
+          "true_kwh": 0.0,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0,
+          "relative_error": null
+        },
+        {
+          "name": "DeskLamp",
+          "power_watts": 15,
+          "true_kwh": 0.0,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0,
+          "relative_error": null
+        },
+        {
+          "name": "Light",
+          "power_watts": 40,
+          "true_kwh": 0.04,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.04,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Fan",
+          "power_watts": 60,
+          "true_kwh": 0.0,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0,
+          "relative_error": null
+        },
+        {
+          "name": "Refrigerator",
+          "power_watts": 100,
+          "true_kwh": 1.2,
+          "estimated_kwh": 0.07,
+          "mae_kwh": 1.13,
+          "relative_error": 0.9417
+        },
+        {
+          "name": "Microwave",
+          "power_watts": 1000,
+          "true_kwh": 0.048,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.048,
+          "relative_error": 1.0
+        },
+        {
+          "name": "InductionCooker",
+          "power_watts": 2000,
+          "true_kwh": 3.5223,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 3.5223,
+          "relative_error": 1.0
+        },
+        {
+          "name": "RangeHood",
+          "power_watts": 200,
+          "true_kwh": 0.35,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.35,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Kettle",
+          "power_watts": 2000,
+          "true_kwh": 1.0235,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 1.0235,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Toaster",
+          "power_watts": 1200,
+          "true_kwh": 0.0,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0,
+          "relative_error": null
+        },
+        {
+          "name": "Oven",
+          "power_watts": 2200,
+          "true_kwh": 0.048,
+          "estimated_kwh": 2.75,
+          "mae_kwh": 2.702,
+          "relative_error": 56.2917
+        },
+        {
+          "name": "Dishwasher",
+          "power_watts": 1800,
+          "true_kwh": 0.87,
+          "estimated_kwh": 1.35,
+          "mae_kwh": 0.48,
+          "relative_error": 0.5517
+        },
+        {
+          "name": "Light",
+          "power_watts": 40,
+          "true_kwh": 0.17,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.17,
+          "relative_error": 1.0
+        },
+        {
+          "name": "TV",
+          "power_watts": 150,
+          "true_kwh": 0.4395,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.4395,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Computer",
+          "power_watts": 200,
+          "true_kwh": 0.1965,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.1965,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Monitor",
+          "power_watts": 30,
+          "true_kwh": 0.0457,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0457,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Router",
+          "power_watts": 12,
+          "true_kwh": 0.29,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.29,
+          "relative_error": 1.0
+        },
+        {
+          "name": "GameConsole",
+          "power_watts": 150,
+          "true_kwh": 0.024,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.024,
+          "relative_error": 1.0
+        },
+        {
+          "name": "SpaceHeater",
+          "power_watts": 2000,
+          "true_kwh": 0.0,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0,
+          "relative_error": null
+        },
+        {
+          "name": "Light",
+          "power_watts": 40,
+          "true_kwh": 0.18,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.18,
+          "relative_error": 1.0
+        },
+        {
+          "name": "VacuumCleaner",
+          "power_watts": 1200,
+          "true_kwh": 1.2,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 1.2,
+          "relative_error": 1.0
+        },
+        {
+          "name": "WaterHeater",
+          "power_watts": 3000,
+          "true_kwh": 2.25,
+          "estimated_kwh": 2.25,
+          "mae_kwh": 0.0,
+          "relative_error": 0.0
+        },
+        {
+          "name": "WashingMachine",
+          "power_watts": 500,
+          "true_kwh": 0.3,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.3,
+          "relative_error": 1.0
+        },
+        {
+          "name": "ClothesDryer",
+          "power_watts": 2500,
+          "true_kwh": 0.9375,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.9375,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Light",
+          "power_watts": 40,
+          "true_kwh": 0.09,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.09,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Dehumidifier",
+          "power_watts": 500,
+          "true_kwh": 0.0,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.0,
+          "relative_error": null
+        },
+        {
+          "name": "Phone",
+          "power_watts": 20,
+          "true_kwh": 0.014,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.014,
+          "relative_error": 1.0
+        },
+        {
+          "name": "Computer",
+          "power_watts": 60,
+          "true_kwh": 0.024,
+          "estimated_kwh": 0.0,
+          "mae_kwh": 0.024,
+          "relative_error": 1.0
+        }
+      ],
+      "house_id": "house_0002"
+    }
+  ]
+}

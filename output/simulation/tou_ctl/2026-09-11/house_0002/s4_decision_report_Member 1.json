@@ -1,0 +1,24 @@
+{
+  "segments": 13,
+  "operations_in": 47,
+  "operations_kept": 44,
+  "repaired": [],
+  "dropped": [
+    {
+      "unique_id": "kitchen_light",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    },
+    {
+      "unique_id": "kitchen_toaster",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    },
+    {
+      "unique_id": "kitchen_kettle",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    }
+  ],
+  "valid": false
+}

@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "group": "Weekday",
+      "samples": 2,
+      "mean_kwh": 13.6717,
+      "mean_peak_watts": 2678.92,
+      "mean_evening_kwh": 193.27,
+      "mean_peak_hour": 12.5
+    },
+    {
+      "group": "Weekend",
+      "samples": 2,
+      "mean_kwh": 14.8447,
+      "mean_peak_watts": 3224.46,
+      "mean_evening_kwh": 227.66,
+      "mean_peak_hour": 8.0
+    }
+  ],
+  "world_id": "world_838587",
+  "scenario": "baseline"
+}

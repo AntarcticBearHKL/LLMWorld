@@ -1,0 +1,271 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 3",
+      "activity": "Sleeping through the night with the fan on for air circulation, respecting quiet hours",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting ready for the clinical placement day (Bathroom is free after Member 2 finishes at 06:30)",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and making a thermos of tea for the day (using the kitchen after Member 1 and Member 2 have cleared their breakfast space)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 3",
+      "activity": "Reviewing clinical placement notes and packing nursing uniform, ID badge and study bag",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting by public transport to the hospital clinical placement site",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Nursing clinical placement: patient observations, medication rounds under supervision and documenting care",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the placement site",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-16:00",
+      "location": "Out",
+      "activity": "Continuing clinical placement duties, assisting with personal care and handover preparation",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:00-17:00",
+      "location": "Out",
+      "activity": "Commuting home by public transport after placement",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Kitchen",
+      "activity": "Preparing a simple dinner using the induction cooker and microwave right after arriving home, cooking before Member 2's 17:30-18:30 cooking slot and the shared 18:00 dinner period",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of the clinical uniform after the shift",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the kitchen table during the shared household dinner period, overlapping with Member 2's and Member 6's evening meals",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the kitchen bench, leaving the shared space clean before Member 2 washes up at 19:15",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Bathroom",
+      "activity": "Loading and running a load of laundry in the washing machine (finishing before Member 2's 19:45 shower)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Bedroom 3",
+      "activity": "Studying Bachelor of Nursing coursework on the computer and writing up placement reflections under the desk lamp",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Kitchen",
+      "activity": "Making a light snack and herbal tea and joining Member 1 at the kitchen table while he eats his pre-prepared flexitarian dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 3",
+      "activity": "Winding down, checking phone messages and setting an alarm for tomorrow",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 3",
+      "activity": "Sleeping with the fan on for quiet, uninterrupted rest",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

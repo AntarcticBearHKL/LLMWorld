@@ -1,0 +1,119 @@
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Sleep."
+    },
+    {
+      "time": "06:40-06:55",
+      "location": "Bedroom 2",
+      "activity": "Waking up, tidying the room and skim-reading set art history readings before breakfast",
+      "desc": "Open eyes. Sit up in bed. Swing legs to floor. Stand up. Fold blanket. Place pillow on bed. Pick up clothes from floor. Put clothes in laundry basket. Straighten desk items. Pick up art history reading. Open book to assigned pages. Skim pages with eyes. Turn page. Close book. Place book on desk."
+    },
+    {
+      "time": "06:55-07:25",
+      "location": "Kitchen",
+      "activity": "Breakfast (toast and coffee) with Member 1 and Member 3, catching up on the day while skim-reading set art history readings",
+      "desc": "Walk to kitchen. Greet Member 1 and Member 3. Take bread from pantry. Place bread in toaster. Press toaster lever. Take mug from cupboard. Pour coffee from pot into mug. Pick up toast when ready. Spread butter on toast. Sit at table. Sip coffee. Eat toast. Ask Member 1 about business classes. Ask Member 3 about engineering lab. Open art history reading. Skim pages while eating. Turn page. Close book. Stand up. Carry plate and mug to sink."
+    },
+    {
+      "time": "07:25-07:50",
+      "location": "Bathroom",
+      "activity": "Morning shower, washing face and brushing teeth, then getting dressed (bathroom free after Member 3, Member 4 and Member 5 finish their morning routines)",
+      "desc": "Walk to bathroom. Close door. Turn on light. Turn on shower. Adjust water temperature. Step into shower. Wet body. Apply soap. Wash body. Shampoo hair. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel around waist. Walk to sink. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Spit into sink. Rinse mouth. Turn off tap. Wipe face with towel. Put on underwear. Put on shirt. Put on pants. Put on socks. Comb hair. Turn off light. Open door. Walk out."
+    },
+    {
+      "time": "07:50-08:00",
+      "location": "Bedroom 2",
+      "activity": "Packing laptop, notebook and creative writing drafts into bag and final check",
+      "desc": "Walk to bedroom. Open backpack. Pick up laptop from desk. Place laptop in backpack. Pick up notebook. Place notebook in backpack. Pick up creative writing drafts. Place drafts in backpack. Zip backpack. Check phone for time. Check wallet in pocket. Check keys in pocket. Pick up backpack. Put on shoes. Stand up. Walk to door."
+    },
+    {
+      "time": "08:00-08:50",
+      "location": "Out",
+      "activity": "Commuting by train to Monash Caulfield campus",
+      "desc": "Walk to train station. Enter station. Tap Myki card on reader. Walk to platform. Wait for train. Board train. Find seat. Sit down. Place backpack on lap. Look out window. Check phone. Arrive at station. Stand up. Walk to exit. Tap Myki card off. Walk to campus."
+    },
+    {
+      "time": "08:50-10:20",
+      "location": "Out",
+      "activity": "Art History lecture and tutorial at Monash Caulfield",
+      "desc": "Enter lecture hall. Sit at desk. Take out notebook and pen. Open notebook. Listen to lecturer. Write notes. Raise hand to ask question. Pack up after lecture. Walk to tutorial room. Sit at table. Discuss art history topic with group. Take notes. Participate in tutorial activities. Pack up. Walk out."
+    },
+    {
+      "time": "10:20-10:40",
+      "location": "Out",
+      "activity": "Coffee break on campus between classes",
+      "desc": "Walk to campus café. Join queue. Order coffee. Pay with phone. Wait for coffee. Pick up coffee cup. Walk to seating area. Sit down. Sip coffee. Check phone. Check messages. Finish coffee. Throw cup in bin. Stand up. Walk to next class."
+    },
+    {
+      "time": "10:40-12:10",
+      "location": "Out",
+      "activity": "Creative Writing workshop at Monash Caulfield",
+      "desc": "Enter workshop room. Sit in circle. Take out creative writing drafts. Open notebook. Listen to instructor. Read draft aloud. Receive feedback. Write notes. Provide feedback to peers. Participate in writing exercise. Write in notebook. Pack up. Walk out."
+    },
+    {
+      "time": "12:10-12:50",
+      "location": "Out",
+      "activity": "Lunch on campus with course readings",
+      "desc": "Walk to campus eatery. Buy lunch. Pay. Carry tray to table. Sit down. Open course reading. Read while eating. Take notes in notebook. Finish eating. Close book. Stand up. Throw rubbish in bin. Walk to library."
+    },
+    {
+      "time": "12:50-15:20",
+      "location": "Out",
+      "activity": "Library study session: drafting essay and revising workshop notes",
+      "desc": "Enter library. Find empty desk. Sit down. Open backpack. Take out laptop. Open laptop. Turn on laptop. Open essay document. Type sentences. Pause. Read over paragraph. Edit. Open workshop notes. Review notes. Highlight key points. Write additional notes in notebook. Take a break. Walk to water fountain. Drink water. Return to desk. Continue typing. Save document. Close laptop. Pack up. Walk out."
+    },
+    {
+      "time": "15:20-15:50",
+      "location": "Out",
+      "activity": "Commuting by train and tram to the café",
+      "desc": "Walk to train station. Tap on. Board train. Sit down. Check phone. Arrive at station. Tap off. Walk to tram stop. Wait for tram. Board tram. Tap on. Sit down. Arrive at café stop. Tap off. Walk to café."
+    },
+    {
+      "time": "15:50-20:30",
+      "location": "Out",
+      "activity": "Part-time café shift: taking orders, making coffee and closing the counter",
+      "desc": "Enter café. Clock in. Put on apron. Wash hands. Greet customers. Take orders. Write order on cup. Operate espresso machine. Grind coffee beans. Tamp grounds. Pull espresso shot. Steam milk. Pour milk into cup. Create latte art. Serve coffee. Handle cash. Use POS system. Wipe tables. Clean counters. Restock cups and lids. Empty cash register. Count money. Close counter. Clean espresso machine. Turn off lights. Clock out."
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Out",
+      "activity": "Commuting home by tram and train",
+      "desc": "Walk to tram stop. Tap on. Board tram. Sit down. Check phone. Arrive at train station. Tap off. Walk to train platform. Wait for train. Board train. Sit down. Check phone. Arrive at station. Stand up. Walk to exit. Tap off. Walk home."
+    },
+    {
+      "time": "21:15-21:50",
+      "location": "Kitchen",
+      "activity": "Late dinner: reheating leftovers and washing up (kitchen free after Member 5 finishes tidying at 20:00)",
+      "desc": "Walk into kitchen. Open fridge. Take out leftover container. Open microwave. Place container inside. Close microwave door. Press buttons to reheat. Wait. Open microwave. Take out container. Sit at table. Eat dinner. Stand up. Carry plate to sink. Turn on tap. Pick up sponge. Apply soap. Wash plate. Rinse plate. Place plate in drying rack. Turn off tap."
+    },
+    {
+      "time": "21:50-22:00",
+      "location": "Bedroom 2",
+      "activity": "Changing out of day clothes and gathering a small load of laundry",
+      "desc": "Walk to bedroom. Take off shirt. Take off pants. Take off socks. Put on pajama top. Put on pajama pants. Pick up dirty clothes. Place dirty clothes in laundry basket. Pick up laundry basket. Walk to bathroom."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Shower and loading a small load of laundry into the washing machine (scheduled right after Member 4's wash cycle ends at 22:00 and before Member 4 showers at 22:30)",
+      "desc": "Enter bathroom. Turn on light. Open washing machine door. Load dirty clothes into washing machine. Add detergent. Close washing machine door. Set wash cycle. Press start button. Turn on shower. Adjust water temperature. Step into shower. Wet body. Apply soap. Wash body. Shampoo hair. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Wrap towel around. Walk to sink. Brush teeth. Rinse mouth. Put on pajamas. Turn off light. Open door. Walk out."
+    },
+    {
+      "time": "22:30-23:15",
+      "location": "Bedroom 2",
+      "activity": "Reading a novel and jotting notes in a writing journal under the desk lamp",
+      "desc": "Walk to desk. Sit down. Turn on desk lamp. Pick up novel. Open to bookmarked page. Read pages. Pick up pen. Open writing journal. Write notes. Close journal. Continue reading. Turn page. Read more. Close novel. Turn off desk lamp. Stand up. Walk to bed."
+    },
+    {
+      "time": "23:15-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket up. Close eyes. Sleep."
+    }
+  ]
+}

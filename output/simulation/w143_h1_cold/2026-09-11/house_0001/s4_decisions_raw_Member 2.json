@@ -1,0 +1,260 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-05:50",
+      "location": "Bedroom 2",
+      "activity": "Sleeping in her own room with the door closed and quiet hours respected for rest and recovery",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "05:50-06:10",
+      "location": "Bedroom 2",
+      "activity": "Waking slowly, sitting up in bed and saying her morning prayers before starting the day",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:10-06:30",
+      "location": "Bathroom",
+      "activity": "Washing her face, brushing her teeth and getting dressed for her early cafe opening shift (Bathroom is free after Member 1 finishes at 06:10)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:30-06:55",
+      "location": "Kitchen",
+      "activity": "Making and eating a quick breakfast together with Member 1 before he leaves, with a strong cup of tea from her labelled tea shelf",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:55-07:25",
+      "location": "Out",
+      "activity": "Drive the EV to the cafe for the early opening shift",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:25-13:00",
+      "location": "Out",
+      "activity": "Working her barista shift: opening the cafe, pulling espresso, serving customers and packing up leftover food to take home (EV parked at the cafe)",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:40",
+      "location": "Out",
+      "activity": "Drive the EV to the Monash University campus and eating a quick self-prepared lunch before class",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:40-17:00",
+      "location": "Out",
+      "activity": "Attending design studio class at Monash University, working on critique and project development",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Out",
+      "activity": "Drive the EV back home from campus, carrying the cafe leftovers she plans to share",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking her own dinner in a cleared, clearly labelled section of the kitchen while sipping tea (shared kitchen, coordinating space with other residents cooking around 18:00)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Eating her dinner and putting the shared cafe leftovers in the labelled fridge container, overlapping with the household dinner period",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Washing up her pans, wiping her bench space and loading the dishwasher",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:45-20:10",
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and winding down after a long day of work and study (showered earlier to avoid the late-evening Bathroom queue)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:10-22:15",
+      "location": "Bedroom 2",
+      "activity": "Working on her design deadline at her desk with the desk lamp on, sketching ideas and refining files on her computer",
+      "operations": [
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:30",
+      "location": "Kitchen",
+      "activity": "Making and drinking a last caffeine-free herbal tea before quiet hours begin",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 2",
+      "activity": "Saying her evening prayers and reading quietly under the lamp with the space heater on low",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 2",
+      "activity": "Going to sleep in her own room with the light off and quiet hours kept around her room",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and taking a shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bedroom 2",
+      "activity": "Getting dressed, packing work bag and sketchbook",
+      "operations": []
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with coffee together with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the arts organization office",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working as arts administrator: meetings, program coordination and emails",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating lunch nearby",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Continuing arts administration work and exhibition planning",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner together with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Bedroom 2",
+      "activity": "Working on freelance illustration commissions at the desk using the computer, monitor and desk lamp",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV together with Member 1",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "Bathroom",
+      "activity": "Taking a shower and washing up",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Bedroom 2",
+      "activity": "Sketching personal illustration ideas at the desk",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 2",
+      "activity": "Winding down, reading and preparing for bed",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-03:20",
+      "start_minutes": 0,
+      "end_minutes": 200,
+      "location": "Bedroom 3",
+      "activity": "Sleeping, slightly restless with mild chronic pain",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "03:20-03:50",
+      "start_minutes": 200,
+      "end_minutes": 230,
+      "location": "Bedroom 3",
+      "activity": "Waking briefly, repositioning for joint pain, unable to fall back asleep immediately",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "03:50-06:45",
+      "start_minutes": 230,
+      "end_minutes": 405,
+      "location": "Bedroom 3",
+      "activity": "Sleeping again after a broken night",
+      "operations": []
+    },
+    {
+      "time": "06:45-07:20",
+      "start_minutes": 405,
+      "end_minutes": 440,
+      "location": "Bedroom 3",
+      "activity": "Slow wake-up in bed, scrolling Instagram and checking Messenger messages",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:20-07:50",
+      "start_minutes": 440,
+      "end_minutes": 470,
+      "location": "Bathroom",
+      "activity": "Slow morning routine: showering, washing and taking daily medication",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:30",
+      "start_minutes": 470,
+      "end_minutes": 510,
+      "location": "Kitchen",
+      "activity": "Cooking and eating a slow breakfast with herbal tea, no caffeine",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:10",
+      "start_minutes": 510,
+      "end_minutes": 550,
+      "location": "Out",
+      "activity": "Walking commute to Monash University",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:10-12:30",
+      "start_minutes": 550,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "PhD research in public health: literature review and data analysis at the university",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:10",
+      "start_minutes": 750,
+      "end_minutes": 790,
+      "location": "Out",
+      "activity": "Walking home from campus",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:10-13:50",
+      "start_minutes": 790,
+      "end_minutes": 830,
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch at home",
+      "operations": [
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:50-14:10",
+      "start_minutes": 830,
+      "end_minutes": 850,
+      "location": "Bedroom 3",
+      "activity": "Resting with gentle stretching for mild chronic pain",
+      "operations": []
+    },
+    {
+      "time": "14:10-17:00",
+      "start_minutes": 850,
+      "end_minutes": 1020,
+      "location": "Bedroom 3",
+      "activity": "Remote PhD work on computer: coding survey data and drafting thesis chapters",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:45",
+      "start_minutes": 1020,
+      "end_minutes": 1065,
+      "location": "Bedroom 3",
+      "activity": "Household admin on phone: paying bills by mobile wallet and updating the disability and aged-care support shift roster",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-19:00",
+      "start_minutes": 1065,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner at home",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "start_minutes": 1140,
+      "end_minutes": 1200,
+      "location": "Living Room",
+      "activity": "Leading a structured group activity: virtual trivia and catch-up with friends via Messenger",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:25",
+      "start_minutes": 1200,
+      "end_minutes": 1225,
+      "location": "Bathroom",
+      "activity": "Showering and washing up in the evening",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:25-20:50",
+      "start_minutes": 1225,
+      "end_minutes": 1250,
+      "location": "Kitchen",
+      "activity": "Clearing dishes and resetting the kitchen after dinner",
+      "operations": []
+    },
+    {
+      "time": "20:50-21:20",
+      "start_minutes": 1250,
+      "end_minutes": 1280,
+      "location": "Living Room",
+      "activity": "Watching TV to unwind",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:20-21:50",
+      "start_minutes": 1280,
+      "end_minutes": 1310,
+      "location": "Bedroom 3",
+      "activity": "Messenger video call with family overseas to coordinate elder caregiving arrangements",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:50-22:40",
+      "start_minutes": 1310,
+      "end_minutes": 1360,
+      "location": "Living Room",
+      "activity": "Scrolling Instagram while doing gentle stretching for chronic pain",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:40-23:00",
+      "start_minutes": 1360,
+      "end_minutes": 1380,
+      "location": "Bathroom",
+      "activity": "Night routine: brushing teeth and washing face",
+      "operations": []
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 3",
+      "activity": "Going to bed and sleeping",
+      "operations": [
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

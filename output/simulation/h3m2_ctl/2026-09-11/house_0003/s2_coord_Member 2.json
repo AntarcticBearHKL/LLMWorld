@@ -1,0 +1,70 @@
+{
+  "member": "Member 2",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 2",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing and dressing"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 2",
+      "activity": "Preparing for work and checking phone"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to office"
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Working at office"
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Lunch break"
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Working at office"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "19:00-21:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing"
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Bedroom 2",
+      "activity": "Using computer and winding down"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping"
+    }
+  ]
+}

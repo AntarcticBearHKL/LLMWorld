@@ -1,0 +1,179 @@
+{
+  "households": 2,
+  "grand_total_kwh": 29.6894,
+  "ranking": [
+    {
+      "name": "InductionCooker",
+      "total_kwh": 7.5442,
+      "share_pct": 25.41,
+      "households": 2
+    },
+    {
+      "name": "WaterHeater",
+      "total_kwh": 4.5,
+      "share_pct": 15.16,
+      "households": 2
+    },
+    {
+      "name": "Computer",
+      "total_kwh": 2.9533,
+      "share_pct": 9.95,
+      "households": 6
+    },
+    {
+      "name": "Refrigerator",
+      "total_kwh": 2.4,
+      "share_pct": 8.08,
+      "households": 2
+    },
+    {
+      "name": "Kettle",
+      "total_kwh": 2.047,
+      "share_pct": 6.89,
+      "households": 2
+    },
+    {
+      "name": "TV",
+      "total_kwh": 1.3552,
+      "share_pct": 4.56,
+      "households": 3
+    },
+    {
+      "name": "VacuumCleaner",
+      "total_kwh": 1.2,
+      "share_pct": 4.04,
+      "households": 1
+    },
+    {
+      "name": "WashingMachine",
+      "total_kwh": 1.1,
+      "share_pct": 3.71,
+      "households": 2
+    },
+    {
+      "name": "Freezer",
+      "total_kwh": 1.0,
+      "share_pct": 3.37,
+      "households": 1
+    },
+    {
+      "name": "ClothesDryer",
+      "total_kwh": 0.9375,
+      "share_pct": 3.16,
+      "households": 1
+    },
+    {
+      "name": "Dishwasher",
+      "total_kwh": 0.87,
+      "share_pct": 2.93,
+      "households": 1
+    },
+    {
+      "name": "RangeHood",
+      "total_kwh": 0.75,
+      "share_pct": 2.53,
+      "households": 2
+    },
+    {
+      "name": "Light",
+      "total_kwh": 0.6267,
+      "share_pct": 2.11,
+      "households": 5
+    },
+    {
+      "name": "Router",
+      "total_kwh": 0.58,
+      "share_pct": 1.95,
+      "households": 2
+    },
+    {
+      "name": "GameConsole",
+      "total_kwh": 0.495,
+      "share_pct": 1.67,
+      "households": 2
+    },
+    {
+      "name": "Toaster",
+      "total_kwh": 0.4,
+      "share_pct": 1.35,
+      "households": 2
+    },
+    {
+      "name": "RiceCooker",
+      "total_kwh": 0.25,
+      "share_pct": 0.84,
+      "households": 1
+    },
+    {
+      "name": "DeskLamp",
+      "total_kwh": 0.2137,
+      "share_pct": 0.72,
+      "households": 5
+    },
+    {
+      "name": "Monitor",
+      "total_kwh": 0.1598,
+      "share_pct": 0.54,
+      "households": 2
+    },
+    {
+      "name": "Microwave",
+      "total_kwh": 0.096,
+      "share_pct": 0.32,
+      "households": 2
+    },
+    {
+      "name": "Oven",
+      "total_kwh": 0.096,
+      "share_pct": 0.32,
+      "households": 2
+    },
+    {
+      "name": "Phone",
+      "total_kwh": 0.07,
+      "share_pct": 0.24,
+      "households": 5
+    },
+    {
+      "name": "Fan",
+      "total_kwh": 0.045,
+      "share_pct": 0.15,
+      "households": 2
+    },
+    {
+      "name": "AirConditioner",
+      "total_kwh": 0.0,
+      "share_pct": 0.0,
+      "households": 2
+    },
+    {
+      "name": "SpaceHeater",
+      "total_kwh": 0.0,
+      "share_pct": 0.0,
+      "households": 1
+    },
+    {
+      "name": "Dehumidifier",
+      "total_kwh": 0.0,
+      "share_pct": 0.0,
+      "households": 1
+    }
+  ],
+  "per_house": [
+    {
+      "house_id": "house_0001",
+      "appliance_count": 30,
+      "total_kwh": 16.2074,
+      "top_appliance": "InductionCooker"
+    },
+    {
+      "house_id": "house_0002",
+      "appliance_count": 29,
+      "total_kwh": 13.482,
+      "top_appliance": "InductionCooker"
+    }
+  ],
+  "world_id": "world_838587",
+  "scenario": "baseline",
+  "date": "latest"
+}
