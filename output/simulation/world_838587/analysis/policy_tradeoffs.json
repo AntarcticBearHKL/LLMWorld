@@ -7,6 +7,14 @@
       "peak_load_cut_pct": null,
       "peak_plateau_cut_pct": null,
       "peak_to_mean": 4.64
+    },
+    {
+      "scenario": "tou",
+      "total_change_pct": -13.39,
+      "peak_hours_change_pct": 18.92,
+      "peak_load_cut_pct": -9.92,
+      "peak_plateau_cut_pct": 28.57,
+      "peak_to_mean": 4.83
     }
   ],
   "world_id": "world_838587"

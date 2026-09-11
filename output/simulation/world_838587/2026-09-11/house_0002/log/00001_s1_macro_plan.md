@@ -2,7 +2,7 @@
 
 ## 对话信息
 
-- time: 2026-09-11 00:51:34
+- time: 2026-09-11 13:05:24
 - seq: 1
 - prefix: Member 1_
 - stage: s1_macro_plan
@@ -161,22 +161,21 @@ Output JSON format (return ONLY the JSON, nothing else):
 {
   "member": "Member 1",
   "activities": [
-    {"time": "00:00-06:30", "location": "Bedroom 1", "activity": "sleeping"},
-    {"time": "06:30-07:00", "location": "Bathroom", "activity": "washing up and showering"},
-    {"time": "07:00-07:30", "location": "Kitchen", "activity": "preparing and eating breakfast"},
-    {"time": "07:30-08:00", "location": "Bedroom 1", "activity": "getting dressed and preparing for work"},
-    {"time": "08:00-09:00", "location": "Out", "activity": "commuting to work"},
-    {"time": "09:00-13:00", "location": "Out", "activity": "providing patient care and attending meetings"},
-    {"time": "13:00-13:30", "location": "Out", "activity": "eating lunch"},
-    {"time": "13:30-17:00", "location": "Out", "activity": "continuing patient care and charting"},
-    {"time": "17:00-18:00", "location": "Out", "activity": "commuting home"},
-    {"time": "18:00-19:00", "location": "Kitchen", "activity": "cooking and eating dinner"},
-    {"time": "19:00-20:00", "location": "Living Room", "activity": "watching TV and browsing on phone"},
-    {"time": "20:00-21:00", "location": "Bathroom", "activity": "doing laundry"},
-    {"time": "21:00-22:30", "location": "Living Room", "activity": "watching TV and using computer"},
-    {"time": "22:30-23:00", "location": "Bathroom", "activity": "washing up and brushing teeth"},
-    {"time": "23:00-23:30", "location": "Bedroom 1", "activity": "winding down and reading"},
-    {"time": "23:30-24:00", "location": "Bedroom 1", "activity": "sleeping"}
+    {"time": "00:00-06:30", "location": "Bedroom 1", "activity": "Sleeping"},
+    {"time": "06:30-07:00", "location": "Bathroom", "activity": "Waking up, washing face and brushing teeth"},
+    {"time": "07:00-07:30", "location": "Kitchen", "activity": "Preparing and eating breakfast"},
+    {"time": "07:30-08:00", "location": "Bedroom 1", "activity": "Changing into work clothes and packing work bag"},
+    {"time": "08:00-09:00", "location": "Out", "activity": "Commuting to the hospital for work"},
+    {"time": "09:00-12:30", "location": "Out", "activity": "Working as a health care professional, caring for patients"},
+    {"time": "12:30-13:00", "location": "Out", "activity": "Taking a lunch break at work"},
+    {"time": "13:00-17:00", "location": "Out", "activity": "Continuing patient care and clinical duties at the hospital"},
+    {"time": "17:00-18:00", "location": "Out", "activity": "Commuting home from work"},
+    {"time": "18:00-19:00", "location": "Kitchen", "activity": "Cooking and eating dinner"},
+    {"time": "19:00-20:00", "location": "Kitchen", "activity": "Cleaning up dishes and tidying the kitchen"},
+    {"time": "20:00-21:30", "location": "Living Room", "activity": "Watching TV and relaxing on the sofa"},
+    {"time": "21:30-22:00", "location": "Bathroom", "activity": "Taking a shower"},
+    {"time": "22:00-22:30", "location": "Bedroom 1", "activity": "Winding down and preparing for bed"},
+    {"time": "22:30-24:00", "location": "Bedroom 1", "activity": "Sleeping"}
   ]
 }
 ```

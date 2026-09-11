@@ -4,77 +4,87 @@
     {
       "time": "00:00-06:45",
       "location": "Bedroom 4",
-      "activity": "Sleeping"
+      "activity": "Sleeping overnight"
     },
     {
       "time": "06:45-07:15",
       "location": "Bathroom",
-      "activity": "Shower, brushing teeth and getting dressed for the day (bathroom free: Member 1 finished at 06:35 and Member 3 starts at 07:25)"
+      "activity": "Washing up, brushing teeth and getting dressed for the day"
     },
     {
       "time": "07:15-07:50",
       "location": "Kitchen",
-      "activity": "Preparing and eating breakfast together with Member 1"
+      "activity": "Preparing and eating breakfast together with Member 1 while checking emails and the university timetable on the phone"
     },
     {
       "time": "07:50-08:20",
       "location": "Out",
-      "activity": "Commuting to university campus (Member 1 departs at the same time)"
+      "activity": "Commuting to university campus (departing together with Member 1)"
     },
     {
       "time": "08:20-12:00",
       "location": "Out",
-      "activity": "Attending Bachelor of Commerce and IT lectures and tutorials"
+      "activity": "Attending Bachelor of Commerce and IT lectures and tutorials on campus"
     },
     {
-      "time": "12:00-12:40",
+      "time": "12:00-13:00",
       "location": "Out",
-      "activity": "Eating lunch on campus"
+      "activity": "Taking a lunch break and eating a packed meal between classes"
     },
     {
-      "time": "12:40-17:00",
+      "time": "13:00-16:30",
       "location": "Out",
-      "activity": "Studying in the library and attending afternoon classes"
+      "activity": "Studying in the campus library and working on group assignments and coursework"
     },
     {
-      "time": "17:00-17:40",
+      "time": "16:30-17:10",
       "location": "Out",
       "activity": "Commuting home from campus"
     },
     {
-      "time": "17:40-18:20",
-      "location": "Kitchen",
-      "activity": "Cooking and eating dinner (joined by Member 1 until 17:55 and Member 2 from 17:45)"
-    },
-    {
-      "time": "18:20-19:00",
-      "location": "Living Room",
-      "activity": "Relaxing and watching TV"
-    },
-    {
-      "time": "19:00-21:00",
-      "location": "Bedroom 4",
-      "activity": "Conducting online tutoring sessions using the computer"
-    },
-    {
-      "time": "21:00-21:20",
-      "location": "Kitchen",
-      "activity": "Making a hot drink and having a snack (kitchen free before Member 3's dinner at 21:20)"
-    },
-    {
-      "time": "21:20-22:30",
-      "location": "Bedroom 4",
-      "activity": "Doing freelance analyst work on the computer"
-    },
-    {
-      "time": "22:30-23:00",
+      "time": "17:10-17:45",
       "location": "Bathroom",
-      "activity": "Showering and completing night routine (bathroom free: Member 3 finished at 22:20 and Member 1 starts at 23:00)"
+      "activity": "Showering and freshening up after the day on campus"
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner together with Member 1 and Member 2"
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down shared kitchen counters together with Member 1 and Member 2"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bedroom 4",
+      "activity": "Preparing for online tutoring sessions, reviewing materials"
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Bedroom 4",
+      "activity": "Running online tutoring sessions with students via the computer"
+    },
+    {
+      "time": "21:00-22:15",
+      "location": "Bedroom 4",
+      "activity": "Doing freelance analyst work and preparing data reports on the computer"
+    },
+    {
+      "time": "22:15-22:40",
+      "location": "Living Room",
+      "activity": "Relaxing with some TV and unwinding before bed"
+    },
+    {
+      "time": "22:40-23:00",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth for bedtime"
     },
     {
       "time": "23:00-24:00",
       "location": "Bedroom 4",
-      "activity": "Winding down on the phone and falling asleep"
+      "activity": "Sleeping"
     }
   ]
 }

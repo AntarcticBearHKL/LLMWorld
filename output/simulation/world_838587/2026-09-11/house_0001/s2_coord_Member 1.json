@@ -2,89 +2,89 @@
   "member": "Member 1",
   "coordinated_activities": [
     {
-      "time": "00:00-06:00",
+      "time": "00:00-06:05",
       "location": "Bedroom 1",
-      "activity": "Sleeping"
+      "activity": "Sleeping overnight"
     },
     {
-      "time": "06:00-06:35",
+      "time": "06:05-06:35",
       "location": "Bathroom",
-      "activity": "Waking up early, showering and getting dressed (using the bathroom before Member 4's 06:45-07:15 slot to avoid the shared-bathroom clash)"
+      "activity": "Waking up, showering and getting washed for the day (bathroom used early so it is free for Member 4's 06:45-07:15 slot)"
     },
     {
       "time": "06:35-07:15",
       "location": "Bedroom 1",
-      "activity": "Reviewing course readings, organising notes and study materials for the day"
+      "activity": "Getting dressed for the day, packing the study bag and reviewing the day's schedule"
     },
     {
       "time": "07:15-07:50",
       "location": "Kitchen",
-      "activity": "Making and eating breakfast together with Member 4, packing lunch and study snacks"
+      "activity": "Making and eating breakfast (toast and tea) together with Member 4 while checking phone messages"
     },
     {
-      "time": "07:50-08:35",
+      "time": "07:50-08:30",
       "location": "Out",
-      "activity": "Commuting by public transport to Monash University campus"
+      "activity": "Commuting to Monash University campus by public transport, departing at the same time as Member 4"
     },
     {
-      "time": "08:35-12:00",
+      "time": "08:30-12:00",
       "location": "Out",
       "activity": "Attending Master of Education lectures and tutorials on campus"
     },
     {
       "time": "12:00-13:00",
       "location": "Out",
-      "activity": "Eating lunch on campus while reading set course texts"
+      "activity": "Eating lunch on campus and reviewing lecture notes"
     },
     {
-      "time": "13:00-16:00",
+      "time": "13:00-17:00",
       "location": "Out",
-      "activity": "Studying in the campus library and drafting assignment work on computer"
+      "activity": "Studying in the campus library, reading research papers and working on assignment drafts on the computer"
     },
     {
-      "time": "16:00-16:50",
+      "time": "17:00-17:45",
       "location": "Out",
-      "activity": "Commuting home from campus"
+      "activity": "Commuting home from campus by public transport"
     },
     {
-      "time": "16:50-17:20",
-      "location": "Bathroom",
-      "activity": "Freshening up and changing into part-time work uniform (bathroom is free at this time)"
-    },
-    {
-      "time": "17:20-17:55",
+      "time": "17:45-18:30",
       "location": "Kitchen",
-      "activity": "Cooking and eating an early dinner before the evening shift, coordinating kitchen use with Member 4 who starts cooking around 17:40"
+      "activity": "Cooking and eating dinner together with Member 2 and Member 4"
     },
     {
-      "time": "17:55-18:20",
-      "location": "Out",
-      "activity": "Walking to the part-time hospitality and retail job"
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down shared kitchen counters together with Member 2"
     },
     {
-      "time": "18:20-22:20",
-      "location": "Out",
-      "activity": "Working the evening hospitality and retail shift"
-    },
-    {
-      "time": "22:20-22:50",
-      "location": "Out",
-      "activity": "Commuting home after the shift"
-    },
-    {
-      "time": "22:50-23:00",
+      "time": "19:00-19:15",
       "location": "Bedroom 1",
-      "activity": "Settling in and changing out of work clothes, waiting for Member 4 to finish in the bathroom before showering"
+      "activity": "Changing into part-time work uniform and packing a small bag for the shift"
+    },
+    {
+      "time": "19:15-19:30",
+      "location": "Out",
+      "activity": "Traveling to the part-time hospitality and retail job"
+    },
+    {
+      "time": "19:30-23:00",
+      "location": "Out",
+      "activity": "Working the evening shift in hospitality and retail (serving customers, restocking, closing tasks)"
     },
     {
       "time": "23:00-23:30",
-      "location": "Bathroom",
-      "activity": "Showering and winding down after work (bathroom free after Member 4's 22:30-23:00 night routine)"
+      "location": "Out",
+      "activity": "Traveling home after finishing the shift"
     },
     {
-      "time": "23:30-24:00",
+      "time": "23:30-23:45",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth before bed (bathroom free after Member 4 finished at 23:00 and before Member 3 goes to sleep)"
+    },
+    {
+      "time": "23:45-24:00",
       "location": "Bedroom 1",
-      "activity": "Preparing for bed, briefly checking phone and going to sleep"
+      "activity": "Winding down on the phone and setting an alarm before sleeping"
     }
   ]
 }

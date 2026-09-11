@@ -2,124 +2,104 @@
   "member": "Member 3",
   "coordinated_activities": [
     {
-      "time": "00:00-03:15",
+      "time": "00:00-06:20",
       "location": "Bedroom 3",
-      "activity": "Sleeping, though sleep is restless and frequently broken"
+      "activity": "Sleeping, with intermittent waking due to poor sleep"
     },
     {
-      "time": "03:15-03:45",
+      "time": "06:20-07:25",
       "location": "Bedroom 3",
-      "activity": "Waking with mild chronic pain, lying still and doing slow gentle stretches and breathing to settle back down"
-    },
-    {
-      "time": "03:45-06:55",
-      "location": "Bedroom 3",
-      "activity": "Sleeping again after the pain settles"
-    },
-    {
-      "time": "06:55-07:10",
-      "location": "Bedroom 3",
-      "activity": "Slow waking, lying in bed and scrolling Instagram and Messenger on phone"
-    },
-    {
-      "time": "07:10-07:25",
-      "location": "Bedroom 3",
-      "activity": "Taking daily medication with water and doing gentle mobility stretches for chronic pain and stiff joints"
+      "activity": "Slow wake-up: lying in bed, checking Messenger and Instagram on phone, easing into the day"
     },
     {
       "time": "07:25-07:55",
       "location": "Bathroom",
-      "activity": "Showering, washing and getting dressed at an unhurried pace"
+      "activity": "Shower and personal hygiene, taking daily medication"
     },
     {
-      "time": "07:55-08:40",
+      "time": "07:55-08:10",
       "location": "Kitchen",
-      "activity": "Cooking and eating a caffeine-free breakfast while listening to a public health podcast (joined by Member 2 for tea and toast from 08:10-08:25)"
+      "activity": "Preparing a caffeine-free breakfast and packing a lunch container"
     },
     {
-      "time": "08:40-09:00",
+      "time": "08:10-08:25",
       "location": "Kitchen",
-      "activity": "Washing dishes and tidying up the kitchen bench"
+      "activity": "Eating breakfast together with Member 2"
     },
     {
-      "time": "09:00-10:45",
+      "time": "08:25-09:10",
+      "location": "Out",
+      "activity": "Morning walk at a gentle pace for exercise and pain management, picking up a few groceries"
+    },
+    {
+      "time": "09:10-11:40",
       "location": "Bedroom 3",
-      "activity": "PhD research work: literature review and thesis drafting on Computer at desk"
+      "activity": "PhD research: systematic review screening and public health data cleaning on computer"
     },
     {
-      "time": "10:45-11:00",
-      "location": "Kitchen",
-      "activity": "Making herbal tea and a small snack, no caffeine"
-    },
-    {
-      "time": "11:00-12:30",
+      "time": "11:40-11:50",
       "location": "Bedroom 3",
-      "activity": "PhD data analysis and reference management on Computer"
+      "activity": "Short stretch and movement break for mild chronic pain and attention reset"
     },
     {
-      "time": "12:30-13:15",
+      "time": "11:50-12:30",
       "location": "Kitchen",
       "activity": "Cooking and eating lunch at home"
     },
     {
-      "time": "13:15-13:45",
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Household admin on phone: paying bills, updating support shift roster, logging maintenance requests, and coordinating household rosters"
+    },
+    {
+      "time": "13:00-13:30",
       "location": "Out",
-      "activity": "Walking through the neighbourhood as a midday break and mobility routine"
+      "activity": "Walking to the disability and aged-care support shift"
     },
     {
-      "time": "13:45-14:15",
-      "location": "Bedroom 3",
-      "activity": "Reviewing the support shift roster and client care notes on phone, packing a small bag"
-    },
-    {
-      "time": "14:15-14:45",
+      "time": "13:30-18:00",
       "location": "Out",
-      "activity": "Walking to the client's home for the disability and aged-care support shift"
+      "activity": "Part-time disability and aged-care support work: assisting clients with daily routines and community access"
     },
     {
-      "time": "14:45-20:15",
-      "location": "Out",
-      "activity": "Working a disability and aged-care support shift: personal care assistance, meal preparation, medication prompting and companionship"
-    },
-    {
-      "time": "20:15-20:45",
+      "time": "18:00-18:30",
       "location": "Out",
       "activity": "Walking home from the support shift"
     },
     {
-      "time": "20:45-21:20",
+      "time": "18:30-19:00",
       "location": "Bedroom 3",
-      "activity": "Resting and doing gentle stretches to manage chronic pain after the shift"
+      "activity": "Unwinding after the support shift, changing into comfortable clothes and reviewing the evening's tasks"
     },
     {
-      "time": "21:20-21:50",
+      "time": "19:00-19:30",
       "location": "Kitchen",
-      "activity": "Cooking and eating a late dinner at home"
+      "activity": "Cooking and eating dinner at home, then quickly cleaning up"
     },
     {
-      "time": "21:50-22:20",
-      "location": "Bathroom",
-      "activity": "Evening wash and preparing for bed"
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Leading a structured group activity session with the household game console (solo session as other members are occupied)"
     },
     {
-      "time": "22:20-22:35",
-      "location": "Kitchen",
-      "activity": "Cleaning up after dinner and wiping down the kitchen surfaces"
-    },
-    {
-      "time": "22:35-23:05",
+      "time": "20:30-21:00",
       "location": "Bedroom 3",
-      "activity": "Household administration: paying bills by mobile wallet, updating the shared roster and logging maintenance tasks on Computer and phone"
+      "activity": "Remote elder caregiving coordination: phone calls and paperwork about care arrangements"
     },
     {
-      "time": "23:05-23:35",
+      "time": "21:00-22:15",
       "location": "Bedroom 3",
-      "activity": "Winding down: planning tomorrow, checking distant elder-care arrangements and reading quietly"
+      "activity": "PhD writing and reading on computer"
     },
     {
-      "time": "23:35-24:00",
+      "time": "22:15-22:45",
       "location": "Bedroom 3",
-      "activity": "Lights out and going to sleep"
+      "activity": "Wind-down: gentle stretching, setting out next day's medication, dimming the desk lamp"
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 3",
+      "activity": "Sleeping"
     }
   ]
 }
