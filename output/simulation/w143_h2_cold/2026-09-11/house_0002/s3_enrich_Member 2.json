@@ -1,0 +1,125 @@
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping (night-owl schedule, late bedtime the night before)",
+      "desc": "Lie in bed. Eyes closed. Breathe slowly. Remain still. Turn to left side. Sleep. Turn to right side. Sleep. Stretch legs. Sleep. Turn to back. Sleep. Pull blanket. Sleep."
+    },
+    {
+      "time": "07:00-07:20",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, long warm shower to counter the cold snap, dental care",
+      "desc": "Open eyes. Sit up. Stand up. Walk to bathroom. Turn on light. Turn on water heater. Adjust temperature. Step into shower. Wash body. Wash hair. Step out. Dry with towel. Turn off water. Walk to sink. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wipe face. Turn off light. Walk out."
+    },
+    {
+      "time": "07:20-07:40",
+      "location": "Bedroom 2",
+      "activity": "Daily stretching routine followed by quiet morning devotional prayer and scripture reflection",
+      "desc": "Walk to bedroom. Roll out yoga mat. Sit on mat. Stretch arms overhead. Bend forward. Stretch legs. Stand up. Fold mat. Put mat away. Kneel beside bed. Close eyes. Pray. Open bible. Read scripture. Reflect. Close bible. Stand up."
+    },
+    {
+      "time": "07:40-08:05",
+      "location": "Kitchen",
+      "activity": "Cooking and eating breakfast that fits the medical dietary restriction, strong coffee, and packing a restricted-diet lunch to take along (using kitchen after Member 1 finishes)",
+      "desc": "Walk to kitchen. Open refrigerator. Take out eggs and vegetables. Place on counter. Turn on induction cooker. Crack eggs into bowl. Whisk. Pour into pan. Cook. Stir. Turn off cooker. Transfer to plate. Sit at table. Eat with fork. Drink coffee. Pack lunch: open fridge. Take out containers. Fill with food. Close lid. Put in bag. Wash dishes. Wipe counter."
+    },
+    {
+      "time": "08:05-08:15",
+      "location": "Bedroom 2",
+      "activity": "Dressing in warm layers, tidying the room, packing work bag and coat for the cold snap",
+      "desc": "Open wardrobe. Take out sweater. Put on sweater. Take out pants. Put on pants. Take out socks. Put on socks. Take out coat. Put on coat. Make bed. Pick up clothes from floor. Put in hamper. Open work bag. Place laptop inside. Place notes inside. Zip bag. Pick up bag. Walk to door."
+    },
+    {
+      "time": "08:15-09:00",
+      "location": "Out",
+      "activity": "drive the EV to the clinic, defrosting the windscreen in the near-freezing morning air",
+      "desc": "Walk to EV. Unlock EV. Open door. Sit in driver seat. Close door. Fasten seatbelt. Insert key. Start EV. Turn on defroster. Turn on heater. Wait for windscreen to clear. Turn on wipers. Spray de-icer. Wipe windscreen with scraper. Check mirrors. Shift gear. Release parking brake. Drive. Stop at traffic lights. Continue driving. Park at clinic. Turn off EV. Unfasten seatbelt. Open door. Step out. Lock EV. Walk to clinic entrance."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Conducting in-person clinical psychology assessment and therapy sessions with clients",
+      "desc": "Greet client in waiting room. Walk to office. Sit in chair. Open notebook. Ask questions. Listen. Write notes. Administer assessment. Score responses. Discuss results. Provide therapy. Use reflective listening. Nod. Take breaks between sessions. Walk client to door. Schedule next appointment. Repeat with next client."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating the packed restricted-diet meal, brief walk to reset attention",
+      "desc": "Open lunch bag. Take out container. Open lid. Pick up fork. Eat food. Drink water. Close container. Put back in bag. Stand up. Walk outside. Walk around block. Breathe deeply. Return to clinic. Sit down. Prepare for next session."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Afternoon telehealth consultations and client sessions, writing clinical case notes and treatment plans",
+      "desc": "Turn on computer. Open telehealth software. Log in. Check schedule. Start video call. Greet client. Discuss progress. Take notes. End call. Write case notes. Type on keyboard. Save file. Prepare treatment plan. Print plan. File plan. Take break. Drink water. Start next call. Repeat."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "drive the EV back home in the cold evening air, listening to music on the way",
+      "desc": "Walk to EV. Unlock. Open door. Sit. Close door. Fasten seatbelt. Start EV. Turn on heater. Turn on music. Select playlist. Adjust volume. Drive. Stop at lights. Continue. Park at home. Turn off EV. Unfasten seatbelt. Open door. Step out. Lock EV. Walk to house."
+    },
+    {
+      "time": "17:45-18:10",
+      "location": "Bathroom",
+      "activity": "Washing up and changing out of work clothes after the commute",
+      "desc": "Enter bathroom. Turn on light. Turn on tap. Wash hands. Turn off tap. Take off coat. Hang coat. Take off shoes. Place shoes. Take off work clothes. Place in hamper. Turn on shower. Adjust temperature. Step in. Wash body. Step out. Dry with towel. Put on casual clothes. Turn off light. Walk out."
+    },
+    {
+      "time": "18:10-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner together with Member 1 and eating the joint meal, coordinating on shared kitchen use",
+      "desc": "Walk to kitchen. Greet Member 1. Discuss menu. Open fridge. Take out ingredients. Wash vegetables. Chop vegetables. Member 1 stirs pot. Turn on induction cooker. Add oil. Add vegetables. Stir. Add spices. Cover. Simmer. Set table. Place plates. Place utensils. Serve food. Sit at table. Eat. Talk with Member 1. Finish eating. Clear plates."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Cleaning the kitchen surfaces and loading the dishwasher, keeping the space orderly",
+      "desc": "Pick up sponge. Wet sponge. Apply soap. Wipe counter. Rinse sponge. Wipe again. Open dishwasher. Load plates. Load cups. Load utensils. Close dishwasher. Turn on dishwasher. Wipe stove. Sweep floor. Empty trash. Tie bag. Take to bin."
+    },
+    {
+      "time": "19:30-20:15",
+      "location": "Study",
+      "activity": "Professional development reading and reflective journaling at the desk to satisfy the need for learning and cognition",
+      "desc": "Walk to study. Turn on desk lamp. Sit at desk. Open book. Read pages. Highlight text. Take notes. Open journal. Pick up pen. Write reflections. Close book. Close journal. Turn off lamp. Stand up."
+    },
+    {
+      "time": "20:15-21:00",
+      "location": "Living Room",
+      "activity": "Watching a streaming show with Member 1 on the TV while the room is kept warm during the cold snap",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Open streaming app. Select show. Press play. Adjust volume. Talk with Member 1 about show. Watch. Laugh. Change position. Pause show. Get up. Get snack. Sit back down. Resume show. Watch. Turn off TV."
+    },
+    {
+      "time": "21:00-21:25",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle for herbal tea and preparing the next day's restricted-diet lunch",
+      "desc": "Walk to kitchen. Fill kettle with water. Place kettle on base. Turn on kettle. Open cupboard. Take out tea bag. Place in mug. Open fridge. Take out lunch ingredients. Chop vegetables. Cook protein. Place in container. Close container. Pour hot water into mug. Add tea bag. Stir. Sit and drink tea."
+    },
+    {
+      "time": "21:25-22:30",
+      "location": "Study",
+      "activity": "Working on a personal artistic and creative project at the desk with quiet music playing",
+      "desc": "Walk to study. Turn on desk lamp. Sit at desk. Open laptop. Open music app. Play playlist. Open design software. Sketch design. Use stylus. Draw shapes. Adjust colors. Save file. Take break. Stretch. Return to desk. Continue design. Save again. Close software. Close laptop. Turn off lamp. Stand up."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night routine: washing, skincare and preparing for bed",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wash face. Apply cleanser. Rinse. Apply toner. Apply moisturizer. Brush teeth. Rinse mouth. Use floss. Turn off tap. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "23:00-23:20",
+      "location": "Bedroom 2",
+      "activity": "Evening devotional prayer and reading in bed before sleep",
+      "desc": "Walk to bedroom. Sit on bed. Pick up bible. Open to passage. Read. Close bible. Place on nightstand. Kneel beside bed. Pray. Make sign of cross. Stand up. Lie down in bed. Pull blanket. Close eyes."
+    },
+    {
+      "time": "23:20-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Remain still. Turn to left side. Sleep. Turn to right side. Sleep. Stretch legs. Sleep. Turn to back. Sleep. Pull blanket. Sleep. Adjust pillow. Sleep."
+    }
+  ]
+}
