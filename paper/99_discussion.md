@@ -28,6 +28,12 @@
 - **Cold-snap (binary signal, significant)**: a `cold_snap` event switched heating devices from off to
   on — baseline **0/10** vs **6/10** (Fisher two-sided **p ≈ 0.011**, across three worlds, R093).
   Activation probability (60%) is lower than the heatwave's (~92%) — response robustness differs by event.
+- **Economic / warning events (peak shaving)**: `blackout_risk` ("possible rolling blackouts at peak")
+  cut peak-window (16–21) energy by **−31.7%**, and `price_hike` (electricity +8%) by **−17.9%**
+  (N=3 each, vs 4.686 ± 0.154 baseline; R094). This refines the event-type boundary: events that
+  create a *timing motive* (price, outage warning) work, not only structural ones. **Note**: the
+  peak-window metric is low-noise (baseline CV≈3.3% vs total-energy CV≈12%) — a better metric for
+  moderate effects.
 - **Lockdown (binary signal, strongest)**: a `lockdown` event removed almost all out-of-home time —
   baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
   **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
