@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in bed",
+      "desc": "Lie on back in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up to chin. Adjust pillow. Remain still. Turn to right side. Bend knees. Stretch legs. Turn to back. Continue sleeping."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, using the toilet, washing face and brushing teeth",
+      "desc": "Open eyes. Sit up. Stand up. Walk to bathroom. Turn on light. Use toilet. Flush toilet. Wash hands. Wash face. Brush teeth. Rinse mouth. Turn off light."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating a quick breakfast, boiling water with the kettle and toasting bread",
+      "desc": "Walk to kitchen. Turn on light. Fill kettle with water. Turn on kettle. Take bread from refrigerator. Place bread in toaster. Press toaster lever. Pour boiled water into cup. Take toast from toaster. Spread butter on toast. Eat toast. Drink tea."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes, checking phone messages and packing work bag",
+      "desc": "Walk to bedroom. Open wardrobe. Take out work clothes. Take off pajamas. Put on work clothes. Pick up phone. Unlock phone. Check messages. Put phone down. Open work bag. Place items in bag. Zip bag."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Look out window. Get off bus. Walk to hospital. Enter hospital. Walk to locker room. Change into scrubs. Put on ID badge. Walk to nurse station. Check patient list."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a health care professional: patient check-ups, charting and coordinating with the care team",
+      "desc": "Enter patient room. Greet patient. Check vital signs. Use stethoscope. Record notes. Exit patient room. Walk to next patient room. Administer medication. Check IV drip. Adjust bed. Talk to patient. Exit patient room. Walk to nurse station. Update charts. Discuss with care team."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating a packed meal",
+      "desc": "Walk to break room. Open bag. Take out lunch box. Open lunch box. Take out utensils. Eat food. Drink water. Clean up. Put lunch box back in bag."
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing clinical duties: patient care, medication rounds and record keeping",
+      "desc": "Walk to patient room. Check patient. Administer medication. Record medication. Move to next patient. Assist with mobility. Change dressing. Monitor vital signs. Update records. Answer call light. Respond to patient request. Coordinate with doctor. Talk to family. Update care plan. Attend team meeting."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Look out window. Get off bus. Walk to home. Enter home. Take off shoes. Hang up coat."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner and eating it while listening to music",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out ingredients. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil and vegetables. Stir vegetables. Turn off stove. Plate food. Sit at table. Turn on music. Eat dinner."
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV after the shift",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channels. Watch TV. Adjust volume. Get up. Get snack. Return to sofa. Sit down. Continue watching TV."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and washing up",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step into shower. Wash body. Wash hair. Rinse body. Turn off shower. Step out of shower. Dry with towel. Put on clothes."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down on the computer, reviewing the next day's schedule under the desk lamp",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Turn on computer. Open calendar. Review schedule. Check emails. Close calendar. Turn off computer. Turn off desk lamp. Stand up."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in bed",
+      "desc": "Change into pajamas. Get into bed. Lie down. Pull blanket up. Adjust pillow. Close eyes. Breathe slowly. Turn to left side. Remain still. Turn to right side. Pull blanket. Continue sleeping."
+    }
+  ]
+}
