@@ -50,6 +50,7 @@
 | 节能返利 rebate | RQ2 | Faruqui & Sergici 2010 | 峰段 −3~6% | partial(峰段null −6.0% n.s.;但AC −40.8%/总电量 −21.2%,n=15) | `experiments/event_rebate.md` |
 | 靶向信息请求(无价格) | RQ2 | — | 峰段下降 | **世界特异**(world_172148峰段−25.5%显著;world_838587峰段null;AC −43~58%) | — |
 | 供应紧张预警 energy_crisis | RQ2 | Xia et al. 2026 | 负荷下降 | null(信息型:AC/峰段/总电量皆n.s.,n=9) | — |
+| 光伏补贴公告 solar_incentive | RQ2 | — | 负荷下降 | null(未来取向信息型:峰段−13.2% n.s.,总电量+2.3% n.s.,n=15) | — |
 | 邻居比较 peer_nudge | RQ2 | Ayres 2013 | −1~3%，高耗家庭更强 | 初步(不一致：−6.6~+11.6%) | `experiments/peer_nudge.md` |
 | 群体异质性 | RQ3 | Costa & Kahn 2010 | 环境派 2~4% / 保守派 ~0 | 名义方向但方差压倒(不可定论) | `experiments/group_heterogeneity.md` |
 | 政策组合/多目标权衡 | RQ2/RQ3 | CoRenew 2026 | 峰削减 vs 负担 vs 公平 | 工具可用/TOU混杂(不可定论) | `experiments/policy_tradeoffs.md` |
