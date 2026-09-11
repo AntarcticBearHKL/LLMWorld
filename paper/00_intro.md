@@ -32,7 +32,8 @@ events — are injected **only as natural language**; aggregate behaviour is eme
    Costa & Kahn 2010; Xia et al. 2026; …), yielding **four statistically significant natural-language
    event results** — heatwave → cooling (two-sided p≈0.00003), lockdown → stay-home (p≈0.000003),
    cold-snap → heating (p≈0.011; replicated across three synthetic worlds), and **air-conditioner peak
-   tax → AC-off/peak-shaving** under heatwave (AC-on 15/15→7/15, p≈0.0022, n=15).
+   tax → AC-off/peak-shaving** under heatwave (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−17.2%
+   across three worlds).
 
 ## Notes
 
