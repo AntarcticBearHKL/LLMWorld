@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Eyes closed. Breathe regularly. Turn to left side. Adjust pillow. Pull blanket up. Turn to right side. Stretch legs. Adjust pillow. Pull blanket. Turn to back. Breathe deeply. Remain still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed",
+      "desc": "Wake up. Sit up on bed. Stand up. Walk to bathroom. Turn on bathroom light. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Dry face with towel. Turn off tap. Turn off light. Walk to bedroom. Open wardrobe. Pick out clothes. Put on clothes."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk and eggs. Close refrigerator. Place items on counter. Open cupboard. Take out bowl and pan. Close cupboard. Crack eggs into bowl. Whisk eggs. Place pan on stove. Turn on stove. Pour eggs into pan. Cook eggs. Turn off stove. Transfer eggs to plate. Pour milk into glass. Sit at table. Eat breakfast. Drink milk. Stand up. Place dishes in sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Packing bag and getting ready to leave",
+      "desc": "Walk to bedroom. Open backpack. Place laptop in backpack. Place notebook in backpack. Place pen in backpack. Zip backpack. Pick up phone. Check phone. Put phone in pocket. Pick up keys. Put keys in pocket. Put on shoes. Tie shoelaces. Pick up backpack. Put on backpack. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University by public transport",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Look out window. Check phone. Arrive at train station. Get off bus. Walk to train platform. Wait for train. Board train. Find seat. Sit down. Read notes. Arrive at university station. Get off train. Walk to campus."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending classes and studying at university",
+      "desc": "Enter classroom. Sit at desk. Take out notebook. Take out pen. Listen to lecture. Write notes. Raise hand. Ask question. Pack up notebook. Walk to library. Find study table. Sit down. Open laptop. Open textbook. Read chapter. Highlight text. Write summary. Take break. Walk to café. Buy coffee. Return to table. Continue studying."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break at university",
+      "desc": "Walk to cafeteria. Join queue. Order sandwich. Pay for sandwich. Take sandwich. Find table. Sit down. Unwrap sandwich. Eat sandwich. Drink water. Check phone. Throw away trash. Walk to bathroom. Use bathroom. Wash hands. Exit bathroom. Walk to outdoor area. Sit on bench. Read book."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Attending classes and studying at university",
+      "desc": "Walk to classroom. Sit at desk. Take out laptop. Open laptop. Listen to lecture. Type notes. Participate in group discussion. Talk to classmates. Pack up laptop. Walk to library. Find study room. Sit down. Open textbook. Read chapter. Complete assignment. Print assignment. Submit assignment. Walk to café. Buy snack. Return to library. Continue studying."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home by public transport",
+      "desc": "Walk to train station. Tap transit card. Board train. Find seat. Sit down. Check phone. Read messages. Arrive at bus stop. Get off train. Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Look out window. Arrive at home stop. Get off bus. Walk home."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk into kitchen. Open refrigerator. Take out vegetables and meat. Close refrigerator. Place on counter. Open cupboard. Take out pot and pan. Close cupboard. Wash vegetables. Chop vegetables. Place pot on stove. Turn on stove. Add oil to pan. Add meat to pan. Stir meat. Add vegetables. Stir vegetables. Add sauce. Cook dinner. Turn off stove. Transfer dinner to plate. Sit at table. Eat dinner. Drink water. Stand up. Place dishes in sink."
+    },
+    {
+      "time": "19:00-22:00",
+      "location": "Out",
+      "activity": "Working part-time shift in hospitality/retail",
+      "desc": "Arrive at workplace. Clock in. Put on apron. Greet customers. Take orders. Operate cash register. Process payments. Serve food. Clean tables. Wipe counters. Restock shelves. Assist customers. Answer phone. Take reservations. Clean up spill. Empty trash. Clock out. Remove apron."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Check phone. Arrive at home stop. Get off bus. Walk home."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust water temperature. Step into shower. Wash body. Wash hair. Rinse body. Turn off shower. Step out. Dry body with towel. Dry hair. Wrap towel around body. Walk to bedroom. Put on pajamas."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Relaxing and going to sleep",
+      "desc": "Lie on bed. Open book. Read book. Close book. Put book on nightstand. Turn off lamp. Lie down. Pull blanket up. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Turn to right side. Stretch legs. Breathe deeply. Remain still."
+    }
+  ]
+}
