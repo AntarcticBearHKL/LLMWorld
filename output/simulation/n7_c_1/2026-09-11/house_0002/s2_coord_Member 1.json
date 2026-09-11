@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering, and getting dressed for the workday"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast using the toaster and kettle"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Packing work bag and checking shift notes on phone before leaving"
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "08:45-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, providing patient care, attending rounds, and completing clinical documentation"
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "17:45-18:15",
+      "location": "Bathroom",
+      "activity": "Washing up and freshening up after the shift"
+    },
+    {
+      "time": "18:15-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner using the oven and microwave instead of the induction cooker during the peak grid period"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher"
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing by watching TV and browsing on the computer"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and getting ready for bed"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down and reading on the phone under the desk lamp"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
