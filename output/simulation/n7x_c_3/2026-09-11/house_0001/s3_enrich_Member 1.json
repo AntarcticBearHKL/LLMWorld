@@ -2,94 +2,100 @@
   "member": "Member 1",
   "enriched_activities": [
     {
-      "time": "00:00-06:45",
+      "time": "00:00-06:40",
       "location": "Bedroom 1",
       "activity": "Sleeping",
-      "desc": "Lie down on the bed. Pull the blanket up over the body. Close eyes. Turn onto the right side. Pull the blanket up to the shoulder. Turn onto the left side. Stretch the left arm out. Roll onto the back. Turn head to the side. Remain lying on the bed. Turn onto the right side again. Pull the blanket down to the waist."
+      "desc": "Lying in bed. Eyes closed. Breathing steadily. Turns to left side. Adjusts pillow. Pulls blanket up. Turns to right side. Moves arm under pillow. Lies still. Breathes deeply. Turns onto back. Stretches legs. At 06:40, opens eyes. Blinks. Rubs eyes. Sits up. Swings legs out of bed. Stands up."
     },
     {
-      "time": "06:45-07:10",
+      "time": "06:40-07:10",
       "location": "Bathroom",
-      "activity": "Waking up, showering and getting ready for the day",
-      "desc": "Open eyes. Sit up on the edge of the bed. Stand up. Walk to the bathroom. Push the bathroom door open. Turn on the bathroom light. Turn on the shower tap. Step into the shower. Pick up the soap. Rub the soap over the arms and body. Rinse off. Turn off the tap. Step out of the shower. Pick up the towel. Wipe the face. Dry the body and hair with the towel. Hang the towel on the rack. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush teeth. Rinse mouth with water. Put the toothbrush back. Walk to the bedroom."
+      "activity": "Showering and getting ready for the day",
+      "desc": "Walks to bathroom. Turns on light. Turns on water heater. Turns on tap. Steps into shower. Picks up soap. Rubs soap on body. Rinses body. Picks up shampoo. Applies shampoo to hair. Rinses hair. Turns off tap. Steps out of shower. Picks up towel. Dries body and hair. Walks to sink. Picks up toothbrush and applies toothpaste. Brushes teeth. Rinses mouth. Walks to bedroom."
     },
     {
       "time": "07:10-07:40",
       "location": "Kitchen",
-      "activity": "Preparing and eating breakfast, packing lunch and snacks for the day",
-      "desc": "Walk into the kitchen. Open the refrigerator door. Take out the milk. Take out the bread. Close the refrigerator door. Put the bread into the toaster. Press the toaster lever down. Open the cupboard. Take out a bowl and a plate. Put the bowl on the counter. Pour cereal into the bowl. Pour milk into the bowl. Pick up a spoon. Sit down at the table. Eat the cereal with the spoon. Take the toast out of the toaster. Put the toast on the plate. Spread butter on the toast. Eat the toast. Stand up. Carry the bowl and plate to the sink. Open the refrigerator door. Take out the lunch box and the fruit. Close the refrigerator door. Open the cupboard. Take out the snack packet. Put the fruit into the lunch box. Put the lunch box into the backpack. Put the snack packet into the backpack. Zip the backpack closed. Pick up the backpack. Walk out of the kitchen."
+      "activity": "Preparing and eating breakfast with the toaster and kettle",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator. Takes out bread, butter, and jam. Places bread in toaster. Presses toaster lever. Fills kettle with water. Turns on kettle. Takes toast out of toaster. Places toast on plate. Spreads butter on toast. Spreads jam on toast. Pours hot water over tea bag into mug. Sits at table. Eats toast. Drinks tea. Cleans dishes. Puts dishes in sink. Turns off kitchen light. Walks out of kitchen."
     },
     {
       "time": "07:40-08:30",
       "location": "Out",
-      "activity": "Commuting to Monash University Clayton campus via public transport",
-      "desc": "Walk out of the front door. Close the door. Walk along the footpath to the bus stop. Stop at the bus stop. Take the phone out of the pocket. Look at the phone screen. Put the phone back into the pocket. Step onto the bus. Tap the transport card on the card reader. Walk down the aisle. Sit down on a seat. Put the backpack on the lap. Look out of the window. Stand up when the stop is announced. Walk to the door. Step off the bus. Walk to the train station entrance. Tap the card on the gate reader. Walk to the platform. Wait on the platform. Step onto the train. Sit down. Take the phone out. Check the phone. Put the phone away. Stand up at Clayton station. Step off the train. Walk up the stairs. Tap the card on the gate reader. Walk out of the station."
+      "activity": "Commuting by public transport to Monash University Clayton campus",
+      "desc": "Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps Myki card. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Exits bus at train station. Walks to train platform. Waits for train. Train arrives. Boards train. Finds seat. Sits down. Takes out notes. Reviews notes. Exits train at Clayton station. Walks to campus."
     },
     {
-      "time": "08:30-12:00",
+      "time": "08:30-10:00",
       "location": "Out",
-      "activity": "Attending business lectures and tutorials at Clayton campus",
-      "desc": "Walk into the lecture theatre. Walk down the steps. Sit down on a seat. Take the laptop out of the backpack. Open the laptop lid. Press the power button. Log in. Open the lecture slide file. Take the notebook out of the backpack. Pick up a pen. Write notes in the notebook. Type notes on the laptop keyboard. Raise the hand. Ask the lecturer a question. Lower the hand. Continue typing notes. Close the laptop lid. Stand up. Pick up the backpack. Walk out of the lecture theatre. Walk along the corridor to the tutorial room. Push the door open. Sit down at a table. Take the laptop out. Open the laptop. Discuss the case with the group members. Write on the whiteboard with a marker. Put the marker down. Close the laptop. Pack the laptop into the backpack. Stand up. Walk out of the room."
+      "activity": "Attending a morning business lecture at the Clayton campus",
+      "desc": "Walks into lecture hall. Finds seat. Sits down. Takes out laptop. Opens laptop. Turns on laptop. Takes out notebook. Takes out pen. Listens to lecturer. Types notes on laptop. Writes notes in notebook. Raises hand. Asks question. Lecturer answers. Writes answer. Packs up laptop. Packs up notebook. Stands up. Walks out of lecture hall."
+    },
+    {
+      "time": "10:00-12:00",
+      "location": "Out",
+      "activity": "Studying in the campus library and preparing tutorial notes",
+      "desc": "Walks to library. Finds table. Sits down. Takes out laptop. Opens laptop. Turns on laptop. Takes out textbook. Opens textbook. Reads textbook. Takes notes on laptop. Highlights text. Uses phone to check references. Writes tutorial notes. Answers practice questions. Packs up laptop. Packs up textbook. Stands up. Walks out of library."
     },
     {
       "time": "12:00-12:45",
       "location": "Out",
-      "activity": "Eating lunch on campus and taking a short break",
-      "desc": "Walk to the campus food court. Stand in the queue. Take the phone out of the pocket. Open the banking app. Put the phone back. Order a meal at the counter. Tap the card on the payment terminal. Pick up the food tray. Walk to an empty table. Sit down. Open the lunch box from the backpack. Eat the sandwich with both hands. Drink water from the bottle. Open the snack packet. Eat the snack. Wipe the mouth with a napkin. Put the empty container back into the backpack. Pick up the tray. Stand up. Carry the tray to the return rack. Put the tray down. Take the phone out. Scroll the phone screen. Put the phone back into the pocket. Stand up. Pick up the backpack. Walk out of the food court."
+      "activity": "Buying and eating lunch on campus",
+      "desc": "Walks to cafeteria. Joins queue. Orders sandwich. Pays with card. Receives sandwich. Finds table. Sits down. Unwraps sandwich. Eats sandwich. Drinks water. Cleans up trash. Throws trash in bin. Stands up. Walks out of cafeteria."
     },
     {
-      "time": "12:45-16:30",
+      "time": "12:45-15:00",
       "location": "Out",
-      "activity": "Studying in the campus library and working on group assignment tasks",
-      "desc": "Walk into the library. Walk through the entry gate. Walk to an empty desk. Put the backpack on the chair. Sit down. Take the laptop out. Open the laptop lid. Press the power button. Log in. Open the assignment document. Type on the keyboard. Pick up the phone. Send a message to the group chat. Put the phone down on the desk. Continue typing. Stand up. Walk to the bookshelf. Pull a book off the shelf. Open the book. Flip through the pages. Close the book. Walk back to the desk. Sit down. Open the book. Read the pages. Type notes on the laptop. Pick up the phone. Reply to a group message. Put the phone down. Walk to the printer. Press the print button. Pick up the printed pages. Walk back to the desk. Sit down. Staple the pages together. Put the pages into a folder. Close the laptop lid. Pack the laptop and the book into the backpack. Stand up. Push the chair in. Walk out of the library."
+      "activity": "Attending afternoon business tutorials and workshops",
+      "desc": "Walks to tutorial room. Finds seat. Sits down. Takes out notebook. Takes out pen. Listens to tutor. Participates in discussion. Writes notes. Works in group. Shares ideas. Listens to group members. Takes more notes. Asks question. Tutor answers. Packs up notebook. Stands up. Walks out of room."
     },
     {
-      "time": "16:30-17:15",
+      "time": "15:00-16:00",
       "location": "Out",
-      "activity": "Commuting home from Clayton campus",
-      "desc": "Walk to the bus loop. Stand at the bus stop. Take the phone out of the pocket. Check the timetable. Put the phone back. Step onto the bus. Tap the transport card on the reader. Walk down the aisle. Sit down. Put the backpack on the lap. Take out the earphones. Put the earphones into the ears. Take the phone out. Press play on the music app. Look out of the window. Take out the earphones. Stand up. Walk to the door. Step off the bus. Walk to the train station. Tap the card on the gate. Walk to the platform. Step onto the train. Sit down. Stand up at the destination station. Step off the train. Tap the card on the gate. Walk out of the station. Walk along the street to the house. Open the front gate. Walk to the front door. Unlock the door with the key. Open the door. Step inside. Close the door."
+      "activity": "Working on a group assignment in a campus study room",
+      "desc": "Walks to study room. Meets group members. Greets group. Sits down. Opens laptop. Discusses assignment. Writes on whiteboard. Types on laptop. Shares screen. Reviews group member's work. Makes suggestions. Takes notes. Agrees on tasks. Packs up laptop. Stands up. Says goodbye. Walks out of study room."
     },
     {
-      "time": "17:15-18:00",
-      "location": "Living Room",
-      "activity": "Relaxing after class, checking phone and messages",
-      "desc": "Walk into the living room. Take the backpack off the shoulders. Put the backpack down on the floor. Sit down on the sofa. Lean back. Take the phone out of the pocket. Unlock the phone with the fingerprint. Open the messaging app. Scroll through the message list. Tap on a conversation. Type a reply. Press send. Tap on another conversation. Type a reply. Press send. Open the social media app. Scroll the feed with the thumb. Double-tap a post. Close the app. Put the phone down on the sofa. Pick up the TV remote. Point the remote at the TV. Press the power button. Put the remote down. Pick up the phone again. Open the email app. Read an email. Close the email app. Put the phone down. Stand up."
+      "time": "16:00-16:45",
+      "location": "Out",
+      "activity": "Commuting to Chadstone shopping centre",
+      "desc": "Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps Myki card. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Bus arrives at Chadstone. Exits bus. Walks to shopping centre. Enters shopping centre. Walks to store."
     },
     {
-      "time": "18:00-18:45",
-      "location": "Kitchen",
-      "activity": "Heating up a pre-prepared dinner in the microwave to avoid using the induction cooker during the peak grid hours",
-      "desc": "Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the pre-prepared dinner container. Close the refrigerator door. Open the microwave door. Put the container into the microwave. Close the microwave door. Press the time buttons on the microwave panel. Press the start button. Walk to the table. Sit down. Take the phone out of the pocket. Scroll the phone while waiting. Stand up when the microwave beeps. Open the microwave door. Take the container out. Put the container on the counter. Close the microwave door. Pick up a plate. Take the lid off the container. Put the food onto the plate. Put the container into the sink. Carry the plate to the table. Sit down. Pick up the fork. Eat the dinner with the fork. Drink water from the cup. Stand up. Carry the plate and the cup to the sink. Put them down in the sink. Do not turn on the induction cooker."
+      "time": "16:45-21:00",
+      "location": "Out",
+      "activity": "Working a part-time retail shift at Chadstone",
+      "desc": "Walks into store. Clocks in. Puts on uniform. Greets manager. Receives tasks. Stocks shelves. Folds clothes. Assists customer. Answers questions. Operates cash register. Processes payment. Wraps item. Hands receipt. Cleans counter. Continues stocking. Folds more clothes. Assists another customer. Operates cash register. Clocks out. Takes off uniform. Walks out of store."
     },
     {
-      "time": "18:45-19:10",
-      "location": "Kitchen",
-      "activity": "Washing dishes and tidying up the kitchen bench",
-      "desc": "Stand at the sink. Turn on the tap. Pick up the sponge. Squeeze dishwashing liquid onto the sponge. Pick up the plate. Scrub the plate with the sponge. Rinse the plate under the tap. Put the plate on the drying rack. Pick up the bowl. Scrub the bowl. Rinse the bowl. Put the bowl on the drying rack. Pick up the fork and the spoon. Scrub them. Rinse them. Put them on the drying rack. Pick up the cup. Scrub the cup. Rinse the cup. Put the cup on the drying rack. Turn off the tap. Pick up the cloth. Wipe the kitchen bench. Wipe the table surface. Put the cloth back. Turn off the kitchen light. Walk out of the kitchen."
-    },
-    {
-      "time": "19:10-21:30",
-      "location": "Bedroom 1",
-      "activity": "Studying on the computer with the desk lamp on, working on weekly readings and retail roster planning",
-      "desc": "Walk into the bedroom. Sit down on the chair at the desk. Turn on the desk lamp. Open the laptop lid. Press the power button. Log in. Open the reading PDF file. Scroll down the document with the mouse. Highlight a paragraph. Type notes in a document. Open the university portal in the browser. Download the week reading file. Read the file on the screen. Pick up the phone. Open the roster app. Check the shift list. Type the shift times into the calendar. Put the phone down on the desk. Open the spreadsheet file. Type the shift times into the spreadsheet. Save the file. Continue reading. Take a drink from the water bottle. Put the bottle down. Open another reading file. Read the pages. Type more notes. Close the reading files. Open the assignment draft. Type several paragraphs. Save the document. Close the browser tabs. Close the laptop lid. Turn off the desk lamp. Stand up."
+      "time": "21:00-21:30",
+      "location": "Out",
+      "activity": "Commuting home after the retail shift",
+      "desc": "Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps Myki card. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Bus arrives at home station. Exits bus. Walks home. Enters house. Walks to kitchen."
     },
     {
       "time": "21:30-22:00",
-      "location": "Living Room",
-      "activity": "Watching TV to unwind",
-      "desc": "Walk into the living room. Sit down on the sofa. Pick up the TV remote. Point the remote at the TV. Press the power button. Press the channel button. Put the remote down on the sofa arm. Watch the TV screen. Pick up the phone. Open a message. Type a reply. Put the phone down. Pick up the remote. Press the volume button. Put the remote down. Pick up the water bottle. Drink water. Put the bottle down. Pick up the remote. Press the power button to turn off the TV. Put the remote down. Stand up. Walk out of the living room."
+      "location": "Kitchen",
+      "activity": "Preparing and eating a light dinner using the microwave to avoid the induction cooker during peak hours",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator. Takes out leftovers. Places leftovers in microwave. Closes microwave door. Sets timer. Presses start. Waits for microwave. Microwave beeps. Opens microwave door. Takes out food. Places food on plate. Sits at table. Eats dinner. Drinks water. Cleans dishes. Puts dishes in sink. Turns off kitchen light. Walks out of kitchen."
     },
     {
-      "time": "22:00-22:30",
+      "time": "22:00-22:20",
       "location": "Bathroom",
-      "activity": "Evening wash and brushing teeth",
-      "desc": "Walk into the bathroom. Turn on the bathroom light. Turn on the tap. Wet both hands. Pick up the face wash. Squeeze the face wash onto the hand. Rub the face with both hands. Rinse the face with water. Turn off the tap. Pick up the towel. Wipe the face. Hang the towel on the rack. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush teeth. Rinse mouth with water from the cup. Spit into the sink. Put the toothbrush back into the holder. Turn on the tap. Rinse the cup. Turn off the tap. Put the cup down. Turn off the bathroom light. Walk out of the bathroom."
+      "activity": "Showering before bed",
+      "desc": "Walks to bathroom. Turns on light. Turns on tap. Steps into shower. Rubs soap on body. Rinses body. Turns off tap. Steps out of shower. Picks up towel. Dries body. Wraps towel around body. Walks to bedroom."
     },
     {
-      "time": "22:30-24:00",
+      "time": "22:20-23:15",
       "location": "Bedroom 1",
-      "activity": "Wind down on the phone and sleep",
-      "desc": "Walk into the bedroom. Turn on the bedroom light. Take the phone out of the pocket. Sit down on the bed. Open the video app. Scroll the recommended list. Tap a video. Watch the video on the phone screen. Tap the next video. Scroll the social media feed. Press the phone lock button. Put the phone on the bedside table. Stand up. Pull the blanket back. Lie down on the bed. Pull the blanket over the body. Turn onto the right side. Turn onto the left side. Close eyes. Turn off the bedroom light. Lie still on the bed. Turn onto the back. Remain lying on the bed."
+      "activity": "Reviewing lecture notes and checking emails under the desk lamp",
+      "desc": "Walks to bedroom. Sits at desk. Turns on desk lamp. Opens laptop. Turns on laptop. Opens lecture notes. Reads notes. Types on laptop. Opens email. Reads emails. Replies to email. Closes email. Continues reviewing notes. Highlights key points. Checks phone. Puts phone down. Closes laptop. Turns off desk lamp. Stands up. Walks to bed."
+    },
+    {
+      "time": "23:15-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down with the fan on and going to sleep",
+      "desc": "Turns on fan. Turns off light. Lies down on bed. Pulls blanket up. Closes eyes. Turns to left side. Adjusts pillow. Turns to right side. Moves arm under pillow. Breathes deeply. Turns onto back. Stretches legs. Remains still. Falls asleep."
     }
   ]
 }

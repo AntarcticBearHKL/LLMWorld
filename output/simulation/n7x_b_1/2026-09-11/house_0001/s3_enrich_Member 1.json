@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies down on bed. Pulls blanket over body. Closes eyes. Turns to right side. Remains asleep. At 06:45, opens eyes. Stretches arms. Yawns. Sits up on bed. Swings legs over edge of bed. Places feet on floor. Stands up."
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Showering, brushing teeth and getting dressed for the day",
+      "desc": "Walks to bathroom. Turns on light. Turns on shower. Steps into shower. Washes body. Rinses. Turns off shower. Steps out. Dries with towel. Brushes teeth. Rinses mouth. Walks to bedroom. Opens wardrobe. Puts on clothes."
+    },
+    {
+      "time": "07:15-07:50",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast (toast and coffee) while checking the day's class and shift timetable on phone",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator. Takes out bread and milk. Puts bread in toaster. Presses lever. Takes mug. Makes coffee. Picks up phone. Checks timetable. Eats toast. Drinks coffee. Puts dishes in sink. Turns off light. Walks out."
+    },
+    {
+      "time": "07:50-08:35",
+      "location": "Out",
+      "activity": "Commuting by train and bus to Monash University Clayton campus",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps Myki card. Finds seat. Sits down. Rides bus to train station. Gets off bus. Walks to train platform. Waits for train. Boards train. Taps Myki card. Finds seat. Sits down. Rides train to Clayton. Gets off train. Walks to campus. Enters campus."
+    },
+    {
+      "time": "08:35-12:30",
+      "location": "Out",
+      "activity": "Attending Bachelor of Business lectures and tutorials at Monash Clayton",
+      "desc": "Walks to lecture hall. Enters lecture hall. Finds seat. Sits down. Takes out laptop. Opens laptop. Takes notes. Listens to lecturer. Raises hand. Asks question. Packs laptop. Walks to tutorial room. Enters tutorial room. Sits down. Participates in discussion. Takes notes. Packs bag. Walks out."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Buying and eating lunch on campus, then a short walk between buildings",
+      "desc": "Walks to campus cafeteria. Joins queue. Orders sandwich. Pays with card. Takes sandwich. Finds table. Sits down. Unwraps sandwich. Eats sandwich. Drinks water from bottle. Throws wrapper in bin. Picks up bag. Walks to next building. Exits building. Walks across campus."
+    },
+    {
+      "time": "13:15-15:20",
+      "location": "Out",
+      "activity": "Studying in the campus library and attending an afternoon tutorial",
+      "desc": "Walks to library. Enters library. Finds empty desk. Sits down. Takes out laptop. Opens laptop. Takes out notebook. Opens notebook. Reads textbook. Writes notes. Highlights text. Closes laptop. Packs bag. Walks to tutorial room. Enters room. Sits down. Participates in tutorial. Takes notes. Packs bag. Walks out."
+    },
+    {
+      "time": "15:20-16:00",
+      "location": "Out",
+      "activity": "Commuting by bus and train from Clayton to Chadstone shopping centre",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps Myki card. Finds seat. Sits down. Rides bus to train station. Gets off bus. Walks to train platform. Waits for train. Boards train. Taps Myki card. Finds seat. Sits down. Rides train to Chadstone. Gets off train. Walks to Chadstone shopping centre. Enters shopping centre."
+    },
+    {
+      "time": "16:00-20:00",
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone, serving customers and restocking",
+      "desc": "Walks to store. Enters staff room. Puts bag in locker. Clocks in. Walks to shop floor. Greets customers. Assists customer with size. Walks to stockroom. Picks up box. Carries box to shop floor. Opens box. Restocks shelves. Folds clothes. Helps another customer. Uses cash register. Processes payment. Clocks out. Picks up bag. Walks out."
+    },
+    {
+      "time": "20:00-20:45",
+      "location": "Out",
+      "activity": "Commuting home from Chadstone by bus and train",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps Myki card. Finds seat. Sits down. Rides bus to train station. Gets off bus. Walks to train platform. Waits for train. Boards train. Taps Myki card. Finds seat. Sits down. Rides train home. Gets off train. Walks home. Enters house."
+    },
+    {
+      "time": "20:45-21:30",
+      "location": "Kitchen",
+      "activity": "Making and eating a simple dinner while reviewing notes and tomorrow's schedule",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator. Takes out leftovers. Puts leftovers in microwave. Closes microwave door. Presses start button. Microwave beeps. Takes out container. Picks up fork. Sits at table. Eats dinner. Opens phone. Checks notes. Reviews tomorrow's schedule. Finishes eating. Puts container in sink. Turns off light. Walks out."
+    },
+    {
+      "time": "21:30-22:45",
+      "location": "Living Room",
+      "activity": "Relaxing and doing light study/assignment reading",
+      "desc": "Walks to living room. Turns on TV. Picks up remote. Changes channel. Sits on sofa. Opens laptop. Reads assignment brief. Takes notes. Picks up phone. Checks social media. Puts phone down. Watches TV. Gets up. Walks to kitchen. Gets glass of water. Returns to living room. Sits down. Reads more notes. Turns off TV. Closes laptop. Walks to bathroom."
+    },
+    {
+      "time": "22:45-23:15",
+      "location": "Bathroom",
+      "activity": "Evening shower and brushing teeth",
+      "desc": "Walks to bathroom. Turns on light. Turns on shower. Steps into shower. Washes body. Rinses. Turns off shower. Steps out. Dries with towel. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Puts toothbrush down. Turns off light. Walks out."
+    },
+    {
+      "time": "23:15-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down, preparing for sleep",
+      "desc": "Walks to bedroom. Turns on bedroom light. Changes into pajamas. Picks up phone. Sets alarm. Puts phone on bedside table. Turns off bedroom light. Turns on fan. Lies down on bed. Pulls blanket over body. Adjusts pillow. Turns to side. Closes eyes."
+    }
+  ]
+}

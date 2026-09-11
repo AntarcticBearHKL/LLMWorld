@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting ready for the day"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and preparing a packed lunch"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Clayton campus"
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Attending Bachelor of Business lectures and tutorials at Clayton campus"
+    },
+    {
+      "time": "13:00-13:40",
+      "location": "Out",
+      "activity": "Eating lunch on campus and taking a short break"
+    },
+    {
+      "time": "13:40-16:00",
+      "location": "Out",
+      "activity": "Studying and working on assignments at the campus library"
+    },
+    {
+      "time": "16:00-17:00",
+      "location": "Out",
+      "activity": "Commuting to Chadstone for the retail shift"
+    },
+    {
+      "time": "17:00-21:00",
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone"
+    },
+    {
+      "time": "21:00-21:45",
+      "location": "Out",
+      "activity": "Commuting home from Chadstone"
+    },
+    {
+      "time": "21:45-22:15",
+      "location": "Kitchen",
+      "activity": "Reheating and eating a late light dinner using the microwave, avoiding the induction cooker during peak hours"
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for bed"
+    },
+    {
+      "time": "22:45-23:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down, reviewing notes on the computer and phone under the desk lamp"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
