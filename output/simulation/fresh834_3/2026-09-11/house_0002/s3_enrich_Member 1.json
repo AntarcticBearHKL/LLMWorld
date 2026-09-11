@@ -1,0 +1,71 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Turn to left side. Adjust pillow. Breathe slowly. Turn to right side. Move arm. Pull blanket up. Remain still. Sleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing, and getting dressed",
+      "desc": "Wake up. Sit up. Stand up. Walk to bathroom. Turn on light. Use toilet. Flush. Turn on tap. Wash hands and face. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth and spit. Dry face. Turn off tap. Turn off light. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Walk out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out eggs, milk, bread. Crack eggs into bowl. Beat eggs. Place pan on stove. Turn on stove. Pour eggs into pan. Stir eggs. Place eggs on plate. Place bread in toaster. Press toaster lever. Take out toast. Sit at table. Pick up fork. Eat eggs. Drink milk. Finish meal. Stand up. Pick up plate. Walk to sink. Rinse plate."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk to bus stop. Wait for bus. Get on bus. Pay fare. Find seat. Sit down. Look out window. Get off bus. Walk to workplace."
+    },
+    {
+      "time": "08:00-16:00",
+      "location": "Out",
+      "activity": "Working as a health care professional",
+      "desc": "Arrive at workplace. Change into scrubs. Check schedule. Attend morning meeting. See patients. Take vitals. Administer medication. Write notes. Use computer. Make phone calls. Eat lunch. See more patients. Consult with colleagues. Update records. Prepare for next day. Change out of scrubs. Leave workplace."
+    },
+    {
+      "time": "16:00-16:30",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk to bus stop. Wait for bus. Get on bus. Pay fare. Find seat. Sit down. Look out window. Get off bus. Walk home."
+    },
+    {
+      "time": "16:30-18:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk into living room. Sit on couch. Pick up remote. Turn on TV. Change channels. Watch TV. Pick up phone. Check messages. Put down phone. Get up. Walk to kitchen. Open refrigerator. Take out snack. Close refrigerator. Walk back to living room. Sit on couch. Continue watching TV. Turn off TV."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables, meat. Wash vegetables. Chop vegetables. Chop meat. Place pan on stove. Turn on stove. Add meat. Add vegetables. Cook. Place food on plate. Sit at table. Eat dinner. Finish meal. Stand up. Pick up plate. Walk to sink."
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Living Room",
+      "activity": "Leisure activities, using computer or watching TV",
+      "desc": "Sit on couch. Pick up remote. Turn on TV. Watch TV. Pick up laptop. Open laptop. Type on keyboard. Browse internet. Close laptop. Put down laptop. Pick up phone. Check social media. Put down phone. Get up. Walk to kitchen. Get water. Walk back. Sit on couch. Continue watching TV. Turn off TV."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Washing up and preparing for bed",
+      "desc": "Walk to bathroom. Turn on light. Use toilet. Flush. Wash hands. Brush teeth. Wash face. Dry face. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket. Close eyes. Turn to side. Adjust pillow. Breathe slowly. Turn to other side. Move arm. Pull blanket. Remain still. Sleep."
+    }
+  ]
+}

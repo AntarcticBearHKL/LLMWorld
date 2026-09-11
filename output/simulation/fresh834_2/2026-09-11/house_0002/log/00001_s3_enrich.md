@@ -1,0 +1,353 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-11 13:23:19
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Health Care Professional
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  },
+  {
+    "time": "06:30-06:45",
+    "location": "Bedroom 1",
+    "activity": "Waking up and getting out of bed"
+  },
+  {
+    "time": "06:45-07:00",
+    "location": "Bathroom",
+    "activity": "Washing face and brushing teeth"
+  },
+  {
+    "time": "07:00-07:30",
+    "location": "Kitchen",
+    "activity": "Preparing and eating breakfast"
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Bedroom 1",
+    "activity": "Getting dressed and preparing for work"
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Out",
+    "activity": "Commuting to work"
+  },
+  {
+    "time": "09:00-12:00",
+    "location": "Out",
+    "activity": "Working as a health care professional, providing patient care"
+  },
+  {
+    "time": "12:00-12:30",
+    "location": "Out",
+    "activity": "Taking a lunch break"
+  },
+  {
+    "time": "12:30-17:00",
+    "location": "Out",
+    "activity": "Working as a health care professional, providing patient care"
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Out",
+    "activity": "Commuting home from work"
+  },
+  {
+    "time": "18:00-19:00",
+    "location": "Kitchen",
+    "activity": "Cooking and eating dinner"
+  },
+  {
+    "time": "19:00-20:00",
+    "location": "Living Room",
+    "activity": "Watching TV"
+  },
+  {
+    "time": "20:00-21:00",
+    "location": "Living Room",
+    "activity": "Using computer"
+  },
+  {
+    "time": "21:00-21:30",
+    "location": "Bathroom",
+    "activity": "Showering"
+  },
+  {
+    "time": "21:30-22:30",
+    "location": "Bedroom 1",
+    "activity": "Relaxing and reading"
+  },
+  {
+    "time": "22:30-23:00",
+    "location": "Bathroom",
+    "activity": "Brushing teeth and washing face"
+  },
+  {
+    "time": "23:00-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "DeskLamp",
+      "Light",
+      "Fan"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Kettle",
+      "Toaster",
+      "Oven",
+      "Dishwasher",
+      "Light"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "Computer",
+      "Monitor",
+      "Router",
+      "GameConsole",
+      "SpaceHeater",
+      "Light",
+      "VacuumCleaner"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "WashingMachine",
+      "ClothesDryer",
+      "Light",
+      "Dehumidifier"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed on back. Closes eyes. Breathes slowly and regularly. Turns to left side. Bends knees. Pulls blanket up to chin. Remains motionless. Turns to right side. Adjusts pillow under head. Extends left arm. Breathes deeply. Turns onto stomach. Moves right leg. Turns back onto back. Snores lightly."
+    },
+    {
+      "time": "06:30-06:45",
+      "location": "Bedroom 1",
+      "activity": "Waking up and getting out of bed",
+      "desc": "Opens eyes. Stretches arms. Yawns. Sits up in bed. Swings legs to side of bed. Places feet on floor. Stands up. Walks toward bedroom door. Opens door. Walks out of bedroom."
+    },
+    {
+      "time": "06:45-07:00",
+      "location": "Bathroom",
+      "activity": "Washing face and brushing teeth",
+      "desc": "Walks into bathroom. Turns on light. Turns on tap. Picks up toothbrush. Applies toothpaste to toothbrush. Brushes teeth. Rinses mouth with water. Spits into sink. Puts down toothbrush. Turns off tap. Picks up towel. Wipes face with towel. Turns off light. Walks out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walks into kitchen. Opens refrigerator. Takes out milk and eggs. Closes refrigerator. Opens cupboard. Takes out bowl and plate. Closes cupboard. Opens drawer. Takes out fork and knife. Closes drawer. Cracks eggs into bowl. Whispers eggs with fork. Turns on stove. Places pan on stove. Pours egg mixture into pan. Cooks eggs. Turns off stove. Slides eggs onto plate. Places plate on table. Sits down at table. Picks up fork. Eats eggs. Drinks milk. Stands up. Picks up plate and glass. Places them in sink. Turns on tap. Rinses plate and glass. Turns off tap."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Walks into bedroom. Opens wardrobe. Takes out shirt and pants. Closes wardrobe. Takes off pajamas. Puts on shirt. Puts on pants. Opens drawer. Takes out socks. Closes drawer. Puts on socks. Picks up shoes. Puts on shoes. Ties shoelaces. Walks to desk. Picks up bag. Opens bag. Places phone and wallet into bag. Closes bag. Picks up bag. Walks out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walks out of house. Walks to bus stop. Stands at bus stop. Checks phone. Bus arrives. Steps onto bus. Taps card on reader. Walks to seat. Sits down. Places bag on lap. Looks out window. Bus moves. Reaches destination. Stands up. Walks to exit. Steps off bus. Walks to workplace. Enters workplace."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, providing patient care",
+      "desc": "Washes hands. Puts on gloves. Enters patient room. Greets patient: 'Good morning.' Checks patient's vital signs. Uses stethoscope. Records information on chart. Adjusts IV drip. Administers medication. Talks to patient. Answers patient questions. Consults with colleague. Updates patient records. Uses computer. Answers phone. Attends to another patient. Washes hands. Removes gloves. Enters another patient room. Greets patient: 'Hello.'"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break",
+      "desc": "Walks to cafeteria. Picks up tray. Selects food. Pays for food. Carries tray to table. Sits down. Eats food. Drinks water. Talks to colleague: 'How is your day?' Finishes eating. Stands up. Picks up tray. Returns tray to rack. Walks out of cafeteria. Walks back to work area."
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, providing patient care",
+      "desc": "Washes hands. Puts on gloves. Enters patient room. Checks patient's blood pressure. Listens to patient's heart. Records information. Adjusts patient's bed. Administers injection. Talks to patient. Answers patient questions. Consults with doctor. Updates patient records. Uses computer. Answers phone. Attends to another patient. Washes hands. Removes gloves. Enters another patient room. Greets patient: 'Good afternoon.' Checks patient's temperature. Records information."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "desc": "Walks out of workplace. Walks to bus stop. Stands at bus stop. Checks phone. Bus arrives. Steps onto bus. Taps card on reader. Walks to seat. Sits down. Places bag on lap. Looks out window. Bus moves. Reaches destination. Stands up. Walks to exit. Steps off bus. Walks home. Enters home."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walks into kitchen. Washes hands. Opens refrigerator. Takes out vegetables and meat. Closes refrigerator. Places items on counter. Opens cupboard. Takes out cutting board and knife. Closes cupboard. Chops vegetables. Cuts meat. Turns on stove. Places pan on stove. Adds oil to pan. Adds meat to pan. Cooks meat. Adds vegetables to pan. Cooks vegetables. Turns off stove. Slides food onto plate. Places plate on table. Sits down at table. Picks up fork. Eats dinner. Drinks water. Stands up. Picks up plate and glass. Places them in sink. Turns on tap. Rinses plate and glass. Turns off tap."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Watching TV",
+      "desc": "Walks into living room. Picks up remote. Turns on TV. Sits on couch. Changes channel. Watches TV. Adjusts volume. Changes channel again. Watches TV. Stands up. Walks to kitchen. Opens refrigerator. Takes out snack. Closes refrigerator. Walks back to living room. Sits on couch. Eats snack. Watches TV. Turns off TV. Stands up. Walks out of living room."
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Living Room",
+      "activity": "Using computer",
+      "desc": "Sits at desk. Turns on computer. Waits for computer to start. Types password. Opens browser. Types website address. Presses enter. Browses website. Clicks links. Types email. Sends email. Opens document. Edits document. Saves document. Closes document. Opens game. Plays game. Uses keyboard. Uses mouse. Closes game. Turns off computer. Stands up. Walks out of living room."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering",
+      "desc": "Walks into bathroom. Turns on light. Turns on water heater. Takes off clothes. Places clothes in hamper. Steps into shower. Turns on water. Adjusts water temperature. Wets body. Applies soap to sponge. Scrubs body. Rinses body. Applies shampoo to hair. Scrubs hair. Rinses hair. Turns off water. Steps out of shower. Picks up towel. Dries body. Dries hair. Wraps towel around body. Turns off light. Walks out of bathroom."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Relaxing and reading",
+      "desc": "Walks into bedroom. Turns on desk lamp. Picks up book. Sits on bed. Opens book to page. Reads page. Turns page. Reads next page. Turns page. Reads next page. Adjusts sitting position. Continues reading. Turns page. Reads next page. Closes book. Places book on nightstand. Turns off desk lamp. Lies down on bed. Closes eyes."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Brushing teeth and washing face",
+      "desc": "Walks into bathroom. Turns on light. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Spits into sink. Puts down toothbrush. Picks up face wash. Applies face wash to hands. Rubs face. Rinses face with water. Picks up towel. Dries face. Turns off tap. Turns off light. Walks out of bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed on back. Closes eyes. Breathes slowly. Turns to left side. Pulls blanket up. Remains motionless. Turns to right side. Adjusts pillow. Breathes deeply. Turns onto stomach. Moves leg. Turns back onto back. Snores lightly. Remains still. Breathes regularly."
+    }
+  ]
+}
+```
+

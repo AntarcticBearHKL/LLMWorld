@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket up. Turn to right side. Snore. Pause breathing. Resume breathing. Turn to back. Adjust pillow. Pull blanket down. Kick leg. Turn to left side. Remain still. Breathe deeply."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Showering and morning hygiene routine",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater and adjust shower temperature. Step into shower. Apply soap. Wash body. Turn off shower. Grab towel. Dry body. Dry hair. Wrap towel. Turn on sink tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth and spit. Turn off tap. Apply deodorant. Comb hair. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Boiling water in the kettle, toasting bread, and eating breakfast",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out bread and butter. Close refrigerator. Place bread in toaster. Press toaster lever. Open cabinet. Take out mug. Fill kettle with water and turn on. Toast pops up. Remove toast. Spread butter. Pour boiling water into mug. Add tea bag. Stir. Sit at table. Eat toast. Drink tea. Clear dishes. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes, checking the phone, and packing the work bag",
+      "desc": "Enter bedroom. Open closet. Take out work clothes. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Pick up phone. Press power button. Look at screen. Put down phone. Open work bag. Place laptop. Place notebook. Place pen. Place stethoscope. Zip bag. Pick up phone. Put in pocket. Turn off light. Exit bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift",
+      "desc": "Walk out of house. Lock door. Walk to bus stop. Wait for bus. Board bus. Pay fare. Sit down. Look out window. Check phone. Get off bus. Walk to hospital. Enter hospital."
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Working clinical duties and caring for patients",
+      "desc": "Enter ward. Check patient list. Wash hands. Enter patient room. Greet patient. Check vital signs. Use stethoscope. Adjust IV drip. Take notes. Exit room. Wash hands. Enter next patient room. Greet patient. Check vital signs. Administer medication. Update chart. Exit room. Wash hands. Consult with colleague. Review patient notes."
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at work",
+      "desc": "Go to break room. Open refrigerator. Take out lunch bag. Sit at table. Open lunch bag. Take out sandwich. Unwrap. Eat sandwich. Drink water. Wipe mouth. Throw trash. Wash hands. Return to ward."
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Continuing clinical duties, charting, and handing over patient notes",
+      "desc": "Check patient charts. Use computer. Type notes. Review medications. Consult with colleague. Hand over notes to next shift. Discuss patient status. Update records. Attend team meeting. Review test results. Consult with doctor. Chart patient progress. Prepare handover summary. Give report to nurse. Answer phone. Respond to page. Assist colleague. Clean workstation. Organize files. Exit ward."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Walk out of hospital. Walk to bus stop. Wait for bus. Board bus. Sit down. Check phone. Look out window. Get off bus. Walk home. Unlock door. Enter house. Remove shoes."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out vegetables and meat. Close refrigerator. Wash vegetables. Chop vegetables. Chop meat. Place pan on induction cooker. Turn on induction cooker. Add oil. Add meat. Stir. Add vegetables. Stir. Add sauce. Stir. Turn off induction cooker. Serve food. Sit at table. Eat. Drink water. Clear and wash dishes. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV, running the fan instead of the air conditioner to avoid the evening peak air-conditioner tax",
+      "desc": "Enter living room. Turn on light. Sit on sofa. Pick up remote. Press power button. Turn on TV. Change channels and adjust volume. Pick up fan. Turn on fan. Adjust fan speed. Lean back. Watch TV. Pick up phone. Check messages. Put down phone. Watch TV. Turn off TV. Turn off fan. Turn off light. Exit living room."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Adjust shower temperature. Step into shower. Apply soap. Wash body. Rinse. Turn off shower. Grab towel. Dry body. Dry hair. Wrap towel. Apply lotion. Brush teeth. Rinse mouth. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Living Room",
+      "activity": "Using the computer for continuing education modules and personal admin",
+      "desc": "Enter living room. Sit at desk. Turn on computer. Turn on monitor. Log in. Open browser. Navigate to education module. Read. Take notes. Type. Complete quiz. Open email. Check personal admin. Pay bills. Type. Close browser. Shut down computer. Turn off monitor. Turn off light. Exit living room."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Kitchen",
+      "activity": "Preparing lunch for the next shift and tidying the kitchen",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out ingredients. Place on counter. Wash vegetables. Chop vegetables. Cook ingredients. Place in lunch container. Close container. Place in refrigerator. Wipe counter. Wash dishes. Dry dishes. Put away. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and sleeping",
+      "desc": "Enter bedroom. Turn on desk lamp. Take off clothes. Put on pajamas. Pick up phone. Check messages. Put down phone. Turn off desk lamp. Lie down on bed. Pull blanket. Close eyes. Turn to side. Adjust pillow. Sleep."
+    }
+  ]
+}
