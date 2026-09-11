@@ -1,6 +1,6 @@
 # Experiment: Night setback (`night_setback`)
 
-> 状态：**占位（待验证）**。第 1–4 节就绪；第 5 节待跑后填。
+> 状态：**初步（null）**：cold_snap 背景下 night_setback 未降采暖（10.2→14.2 kWh，单例）。数值来自 R099。
 
 ## 1. Research Question
 
@@ -22,9 +22,16 @@
 
 采暖能耗变化 %、按温度偏好分组的差异、夜间温度设定行为。
 
-## 5. Results
+## 5. Results（初步；单例）
 
-**待验证。**
+world_838587 house_0002，cold_snap 背景下：
+
+| 臂 | 采暖 kWh | 总 kWh |
+|---|---|---|
+| cold_snap only | 10.200 | 21.140 |
+| cold_snap + night_setback | 14.200 | 25.341 |
+
+**未降采暖**（反而 +39%；单例，噪声内）→ **null**。
 
 ## 6. Comparison with Literature
 
@@ -36,4 +43,5 @@
 
 ## 8. Conclusion
 
-待填。
+- **null**：night_setback 未产生回温节能（单例 +39%，与 guide −5~10% 不符）；软引导效应弱/不稳。
+
