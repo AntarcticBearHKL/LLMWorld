@@ -6,10 +6,10 @@
   "per_house": [
     {
       "households": 1,
-      "total_true_kwh": 52.9642,
+      "total_true_kwh": 52.8242,
       "total_estimated_kwh": 39.6417,
-      "total_mae_kwh": 25.8952,
-      "disaggregation_rate": 0.7485,
+      "total_mae_kwh": 25.7552,
+      "disaggregation_rate": 0.7504,
       "per_appliance": [
         {
           "name": "Light",
@@ -262,9 +262,9 @@
         {
           "name": "Phone",
           "power_watts": 20,
-          "true_kwh": 0.03,
+          "true_kwh": 0.014,
           "estimated_kwh": 0.0,
-          "mae_kwh": 0.03,
+          "mae_kwh": 0.014,
           "relative_error": 1.0
         },
         {
@@ -286,9 +286,9 @@
         {
           "name": "Phone",
           "power_watts": 20,
-          "true_kwh": 0.08,
+          "true_kwh": 0.014,
           "estimated_kwh": 0.0,
-          "mae_kwh": 0.08,
+          "mae_kwh": 0.014,
           "relative_error": 1.0
         },
         {
@@ -318,9 +318,9 @@
         {
           "name": "Phone",
           "power_watts": 20,
-          "true_kwh": 0.03,
+          "true_kwh": 0.014,
           "estimated_kwh": 0.0,
-          "mae_kwh": 0.03,
+          "mae_kwh": 0.014,
           "relative_error": 1.0
         },
         {
@@ -358,9 +358,9 @@
         {
           "name": "Phone",
           "power_watts": 20,
-          "true_kwh": 0.03,
+          "true_kwh": 0.014,
           "estimated_kwh": 0.0,
-          "mae_kwh": 0.03,
+          "mae_kwh": 0.014,
           "relative_error": 1.0
         },
         {
@@ -406,9 +406,9 @@
         {
           "name": "Phone",
           "power_watts": 20,
-          "true_kwh": 0.04,
+          "true_kwh": 0.014,
           "estimated_kwh": 0.0,
-          "mae_kwh": 0.04,
+          "mae_kwh": 0.014,
           "relative_error": 1.0
         }
       ],
@@ -416,10 +416,10 @@
     },
     {
       "households": 1,
-      "total_true_kwh": 24.9226,
+      "total_true_kwh": 24.8939,
       "total_estimated_kwh": 19.2625,
-      "total_mae_kwh": 10.6601,
-      "disaggregation_rate": 0.7729,
+      "total_mae_kwh": 10.6314,
+      "disaggregation_rate": 0.7738,
       "per_appliance": [
         {
           "name": "AirConditioner",
@@ -664,9 +664,9 @@
         {
           "name": "Phone",
           "power_watts": 20,
-          "true_kwh": 0.04,
+          "true_kwh": 0.014,
           "estimated_kwh": 0.0,
-          "mae_kwh": 0.04,
+          "mae_kwh": 0.014,
           "relative_error": 1.0
         },
         {
@@ -712,9 +712,9 @@
         {
           "name": "Phone",
           "power_watts": 20,
-          "true_kwh": 0.0167,
+          "true_kwh": 0.014,
           "estimated_kwh": 0.0,
-          "mae_kwh": 0.0167,
+          "mae_kwh": 0.014,
           "relative_error": 1.0
         },
         {
@@ -730,10 +730,10 @@
     },
     {
       "households": 1,
-      "total_true_kwh": 22.3772,
-      "total_estimated_kwh": 9.325,
-      "total_mae_kwh": 27.0977,
-      "disaggregation_rate": 0.4167,
+      "total_true_kwh": 22.3645,
+      "total_estimated_kwh": 9.425,
+      "total_mae_kwh": 27.0183,
+      "disaggregation_rate": 0.4214,
       "per_appliance": [
         {
           "name": "Light",
@@ -843,9 +843,9 @@
           "name": "RangeHood",
           "power_watts": 200,
           "true_kwh": 0.0833,
-          "estimated_kwh": 0.0,
-          "mae_kwh": 0.0833,
-          "relative_error": 1.0
+          "estimated_kwh": 0.1,
+          "mae_kwh": 0.0167,
+          "relative_error": 0.2
         },
         {
           "name": "Kettle",
@@ -1130,9 +1130,9 @@
         {
           "name": "Phone",
           "power_watts": 20,
-          "true_kwh": 0.0267,
+          "true_kwh": 0.014,
           "estimated_kwh": 0.0,
-          "mae_kwh": 0.0267,
+          "mae_kwh": 0.014,
           "relative_error": 1.0
         }
       ],
