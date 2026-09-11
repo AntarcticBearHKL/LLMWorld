@@ -1,6 +1,7 @@
 # Experiment: Night setback (`night_setback`)
 
 > 状态：**初步（null）**：cold_snap 背景下 night_setback 未降采暖（10.2→14.2 kWh，单例）。数值来自 R099。
+> ⚠️ **单例**（R112/R114：连续幅度须 **n≥15**）——仅无证据支持，不能断言有害。
 
 ## 1. Research Question
 

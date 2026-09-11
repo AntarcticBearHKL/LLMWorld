@@ -1,6 +1,7 @@
 # Experiment: In-home display / real-time feedback (`in_home_display`)
 
 > 状态：**null（same-era 交错确证）**：峰段名义 −10.3%（t≈−1.55，n.s.），总电量 **+4.2%**（无节能）。数值来自 R109。
+> ⚠️ **N=3 小样本**（R112/R114：连续幅度须 **n≥15**）——此 null 未足功效。
 > ⚠️ 早前 −5.2%/−8.4%（R098）为**跨时段**比较，受 R104 漂移影响，已作废。
 
 ## 1. Research Question
