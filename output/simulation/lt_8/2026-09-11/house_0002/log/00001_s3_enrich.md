@@ -1,0 +1,327 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-11 17:16:41
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Community program coordinator at a nonprofit
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping, with the fan running to stay cool through the warm night"
+  },
+  {
+    "time": "06:30-07:00",
+    "location": "Bathroom",
+    "activity": "Waking up, washing face, brushing teeth, and getting dressed"
+  },
+  {
+    "time": "07:00-08:00",
+    "location": "Kitchen",
+    "activity": "Making and eating breakfast while preparing a packed lunch and refilling a water bottle for the hot day"
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Out",
+    "activity": "Commuting to the nonprofit office for work"
+  },
+  {
+    "time": "09:00-12:30",
+    "location": "Out",
+    "activity": "Working at the nonprofit office, coordinating community programs, answering emails, and meeting with partner organisations"
+  },
+  {
+    "time": "12:30-13:30",
+    "location": "Out",
+    "activity": "Taking a lunch break nearby and resting in the shade away from the heat"
+  },
+  {
+    "time": "13:30-17:00",
+    "location": "Out",
+    "activity": "Continuing work at the nonprofit office, planning upcoming community events and updating program schedules"
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Out",
+    "activity": "Commuting home from work during the heatwave"
+  },
+  {
+    "time": "18:00-18:20",
+    "location": "Bathroom",
+    "activity": "Rinsing off with a cool shower after the hot commute"
+  },
+  {
+    "time": "18:20-19:00",
+    "location": "Kitchen",
+    "activity": "Cooking and eating a simple dinner, keeping the range hood on"
+  },
+  {
+    "time": "19:00-20:30",
+    "location": "Living Room",
+    "activity": "Relaxing with a book and the fan, keeping the air conditioner off to help balance the grid during peak hours"
+  },
+  {
+    "time": "20:30-21:00",
+    "location": "Bathroom",
+    "activity": "Taking an evening shower and getting ready for bed"
+  },
+  {
+    "time": "21:00-22:30",
+    "location": "Bedroom 1",
+    "activity": "Using the computer and phone with the desk lamp on, planning tomorrow's program tasks"
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Going to sleep with the fan on for ventilation"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "Fan"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "DeskLamp",
+      "SpaceHeater"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Oven",
+      "Toaster",
+      "Kettle",
+      "Dishwasher",
+      "Light"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "Light",
+      "Dehumidifier",
+      "Fan"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "Router",
+      "GameConsole",
+      "Light",
+      "VacuumCleaner"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "Monitor"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the fan running to stay cool through the warm night",
+      "desc": "Lie on bed. Close eyes. Breathe. Turn body to left side. Pull sheet up. Turn body to right side. Adjust pillow. Turn fan speed dial. Extend arm. Retract arm. Bend knees. Straighten legs. Turn body to back. Stretch arms. Continue sleeping."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth, and getting dressed",
+      "desc": "Wake up. Sit up. Stand up. Walk to bathroom. Turn on light. Turn on tap. Wash face. Turn off tap. Brush teeth. Rinse mouth. Put on clothes. Walk out."
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast while preparing a packed lunch and refilling a water bottle for the hot day",
+      "desc": "Walk to kitchen. Open refrigerator. Take out eggs, bread, lettuce, ham, cheese. Close refrigerator. Place bread in toaster. Press toaster lever. Crack eggs into bowl and whisk. Turn on induction cooker. Pour eggs into pan. Stir eggs. Turn off induction cooker. Remove toast from toaster and spread butter. Eat breakfast. Take out lunchbox from cabinet. Assemble sandwich with lettuce, ham, cheese. Close lunchbox. Open refrigerator and take out water bottle. Fill water bottle from tap. Close water bottle. Place water bottle and lunchbox in bag."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit office for work",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Hold bag. Look out window. Stand up. Walk to exit. Tap card. Exit bus. Walk to office. Enter building. Walk to desk. Sit down."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working at the nonprofit office, coordinating community programs, answering emails, and meeting with partner organisations",
+      "desc": "Sit at desk. Turn on computer. Open email client. Read emails. Reply to emails. Open calendar. Check schedule. Open program documents. Edit program plan. Make phone calls. Discuss with colleague. Attend meeting. Take notes. Present updates. Talk to partner organization. Write meeting minutes. Update program schedule. Print documents. File documents. Organize desk."
+    },
+    {
+      "time": "12:30-13:30",
+      "location": "Out",
+      "activity": "Taking a lunch break nearby and resting in the shade away from the heat",
+      "desc": "Walk to nearby park. Find shaded bench. Sit down. Open lunch bag. Take out sandwich. Unwrap sandwich. Eat sandwich. Drink water. Close water bottle. Put trash in bag. Open book. Read book. Close book. Stand up. Walk back to office."
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Continuing work at the nonprofit office, planning upcoming community events and updating program schedules",
+      "desc": "Sit at desk. Open computer. Open event planning software. Create new event. Set date and time. Add location. Add description. Invite team members. Send invitation. Open program schedule. Update schedule. Add tasks. Assign tasks. Send schedule to team. Make phone calls to vendors. Negotiate prices. Confirm orders. Write emails to partners. Update budget spreadsheet. Save file."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from work during the heatwave",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Hold bag. Fan self with paper. Drink water from bottle. Stand up. Walk to exit. Tap card. Exit bus. Walk home. Enter home."
+    },
+    {
+      "time": "18:00-18:20",
+      "location": "Bathroom",
+      "activity": "Rinsing off with a cool shower after the hot commute",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Rinse body. Turn off shower. Step out. Pick up towel. Dry body."
+    },
+    {
+      "time": "18:20-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating a simple dinner, keeping the range hood on",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out vegetables and tofu. Close refrigerator. Place vegetables on cutting board. Chop vegetables. Turn on range hood. Turn on induction cooker. Pour oil into pan. Add vegetables. Stir vegetables. Add tofu. Stir. Add sauce. Turn off induction cooker. Turn off range hood. Place food on plate. Sit at table. Eat dinner."
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing with a book and the fan, keeping the air conditioner off to help balance the grid during peak hours",
+      "desc": "Walk to living room. Turn on fan. Pick up book. Sit on sofa. Open book. Read page. Turn page. Read page. Turn page. Adjust fan speed. Read page. Turn page. Close book. Put book down. Stand up. Turn off fan. Walk out."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and getting ready for bed",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Step in. Wet body. Apply soap. Rinse body. Turn off shower. Step out. Dry body. Put on pajamas. Brush teeth."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using the computer and phone with the desk lamp on, planning tomorrow's program tasks",
+      "desc": "Walk to bedroom. Turn on desk lamp. Sit at desk. Open computer. Turn on computer. Open calendar. Open task list. Add tasks for tomorrow. Prioritize tasks. Open phone. Check messages. Reply to messages. Set alarm. Turn off phone. Save computer file. Close computer. Turn off desk lamp."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Going to sleep with the fan on for ventilation",
+      "desc": "Lie on bed. Close eyes. Turn fan on. Adjust fan speed. Pull sheet up. Turn body to left. Adjust pillow. Turn body to right. Bend knees. Straighten legs. Turn body to back. Continue sleeping."
+    }
+  ]
+}
+```
+

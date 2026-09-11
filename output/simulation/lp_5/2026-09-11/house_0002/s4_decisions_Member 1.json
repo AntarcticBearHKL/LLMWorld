@@ -1,0 +1,306 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "start_minutes": 0,
+      "end_minutes": 400,
+      "location": "Bedroom 1",
+      "activity": "Sleeping through the night with the fan running to cope with the warm conditions",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:40-07:10",
+      "start_minutes": 400,
+      "end_minutes": 430,
+      "location": "Bathroom",
+      "activity": "Waking up, using the toilet and taking a cool shower, brushing teeth and washing up",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:45",
+      "start_minutes": 430,
+      "end_minutes": 465,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast (toast with the toaster, fruit, iced water) and boiling the kettle for tea",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:15",
+      "start_minutes": 465,
+      "end_minutes": 495,
+      "location": "Bedroom 1",
+      "activity": "Changing into light work clothes, packing a bag with a water bottle, hat and sunscreen, and checking phone messages",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:15-09:00",
+      "start_minutes": 495,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting to the nonprofit office by walking and public transport, taking shade breaks in the heat",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:30",
+      "start_minutes": 540,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Working at the nonprofit office: coordinating community programs, answering calls and emails, and meeting with partner organisations",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "start_minutes": 750,
+      "end_minutes": 795,
+      "location": "Out",
+      "activity": "Taking a lunch break, eating a packed meal in a cool indoor spot and drinking plenty of water",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:15-17:00",
+      "start_minutes": 795,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Continuing office work: finalising the weekend community event plan, drafting schedules and updating program records on the computer",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:50",
+      "start_minutes": 1020,
+      "end_minutes": 1070,
+      "location": "Out",
+      "activity": "Commuting home from the office by public transport and walking, avoiding the hottest part of the day where possible",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:50-18:10",
+      "start_minutes": 1070,
+      "end_minutes": 1090,
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and changing into light house clothes after the hot commute",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:10-19:00",
+      "start_minutes": 1090,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner using the induction cooker, then leaving the range hood running while cooking",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:30",
+      "start_minutes": 1140,
+      "end_minutes": 1230,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV with the air conditioner on to stay cool",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:15",
+      "start_minutes": 1230,
+      "end_minutes": 1275,
+      "location": "Kitchen",
+      "activity": "Clearing the table, loading the dishwasher and preparing iced tea and tomorrow's lunch supplies",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-22:15",
+      "start_minutes": 1275,
+      "end_minutes": 1335,
+      "location": "Bedroom 1",
+      "activity": "Sitting at the desk with the desk lamp on, using the computer to review community program emails and volunteer rosters",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "start_minutes": 1335,
+      "end_minutes": 1365,
+      "location": "Bathroom",
+      "activity": "Night-time wash: brushing teeth, washing face and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-23:10",
+      "start_minutes": 1365,
+      "end_minutes": 1390,
+      "location": "Bedroom 1",
+      "activity": "Winding down in bed, checking the phone and setting an alarm for tomorrow",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:10-24:00",
+      "start_minutes": 1390,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the fan on and the door ajar to keep the room ventilated",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
