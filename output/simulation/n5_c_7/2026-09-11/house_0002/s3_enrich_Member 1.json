@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Sleep. At 06:30, wake up."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and personal hygiene",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Adjust water temperature. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Put down toothbrush. Pick up face wash. Apply face wash. Rinse face. Pick up towel. Dry face. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out eggs, milk, bread. Close refrigerator. Place items on counter. Take out frying pan. Place on stove. Turn on stove. Crack eggs into pan. Cook eggs. Toast bread. Pour milk into glass. Turn off stove. Transfer eggs to plate. Place bread on plate. Sit at table. Eat breakfast. Drink milk. Pick up plate and glass. Walk to sink. Rinse plate and glass. Place in dishwasher."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Walk to bedroom. Open wardrobe. Select shirt and pants. Take off sleepwear. Put on shirt. Put on pants. Put on socks. Put on shoes. Pick up watch. Put on watch. Pick up phone. Check phone. Pick up bag. Put items in bag. Pick up keys. Walk to door. Open door. Walk out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Look out window. Check phone. Get off bus. Walk to workplace. Enter building. Walk to office."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a health care professional",
+      "desc": "Arrive at desk. Turn on computer. Log in. Check emails. Review patient files. Walk to examination room. Wash hands. Put on gloves. Examine patient. Take notes. Remove gloves. Wash hands. Walk to desk. Update patient records. Attend meeting. Discuss cases with colleagues. Make phone calls. Write prescriptions."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break",
+      "desc": "Walk to cafeteria. Pick up tray. Select food. Pay for food. Find table. Sit down. Eat food. Drink water. Talk to colleagues. Clear tray. Walk outside. Walk back to office."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional",
+      "desc": "See patients. Perform procedures. Consult with doctors. Write reports. Attend training. Check emails. Make phone calls. Review test results. Update patient records. Talk to nurses. Walk to different rooms. Wash hands. Put on gloves. Remove gloves. Wash hands. Sit at desk. Type on computer. Print documents."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Look out window. Check phone. Get off bus. Walk home. Enter house. Walk to living room."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables, meat. Close refrigerator. Place items on counter. Take out cutting board. Chop vegetables. Take out pan. Place on stove. Turn on stove. Cook meat. Add vegetables. Stir. Turn off stove. Transfer to plate. Sit at table. Eat dinner. Drink water. Pick up plate. Walk to sink. Rinse plate. Place in dishwasher."
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Change channels. Watch TV. Pick up phone. Scroll. Get up. Walk to kitchen. Get snack. Walk back. Sit down. Watch more TV. Pick up remote. Turn off TV. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "22:30-23:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down and preparing for bed",
+      "desc": "Walk to bedroom. Turn on light. Change into pajamas. Walk to bathroom. Brush teeth. Wash face. Walk back to bedroom. Set alarm. Turn off light. Lie down. Close eyes. Sleep."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Sleep."
+    }
+  ]
+}

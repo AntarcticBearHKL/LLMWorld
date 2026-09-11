@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-05:50",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down in bed. Pull blanket over body. Close eyes. Breathe slowly. Remain asleep."
+    },
+    {
+      "time": "05:50-06:10",
+      "location": "Bedroom 1",
+      "activity": "Waking up, checking phone and stretching in bed",
+      "desc": "Open eyes. Rub eyes. Sit up. Reach for phone. Pick up phone. Press power button. Look at screen. Scroll through messages. Put down phone. Stretch arms. Stretch legs. Yawn. Stand up."
+    },
+    {
+      "time": "06:10-06:35",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for work",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Remove clothes. Step into shower. Wash body. Shampoo hair. Rinse. Turn off shower. Dry with towel. Put on clothes. Brush teeth. Turn off light."
+    },
+    {
+      "time": "06:35-07:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk and cereal. Close refrigerator. Take out bowl and spoon. Pour cereal. Pour milk. Eat cereal. Drink milk. Rinse bowl. Place in dishwasher. Walk out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift",
+      "desc": "Walk to bus stop. Wait for bus. Bus arrives. Board bus. Pay fare. Find seat. Sit down. Look out window. Bus stops. Stand up. Exit bus. Walk to hospital entrance. Enter hospital."
+    },
+    {
+      "time": "07:30-19:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, caring for patients on the ward",
+      "desc": "Arrive at hospital. Change into scrubs. Attend handover meeting. Review patient charts. Walk to patient rooms. Check vital signs. Administer medications. Assist patients with meals. Communicate with colleagues. Document care. Take lunch break. Eat lunch. Continue patient care. Handover to next shift. Leave hospital."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "desc": "Walk to bus stop. Wait for bus. Bus arrives. Board bus. Pay fare. Find seat. Sit down. Look out window. Bus stops. Stand up. Exit bus. Walk home. Enter home."
+    },
+    {
+      "time": "19:30-19:50",
+      "location": "Bathroom",
+      "activity": "Washing up and changing out of work clothes",
+      "desc": "Walk into bathroom. Turn on light. Take off work clothes. Place in laundry basket. Turn on shower. Wash body. Turn off shower. Dry off. Put on casual clothes. Turn off light. Walk out."
+    },
+    {
+      "time": "19:50-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out ingredients. Close refrigerator. Turn on stove. Chop vegetables. Cook food. Stir. Taste. Turn off stove. Serve on plate. Sit at table. Eat. Drink. Clear table. Rinse plate. Place in dishwasher. Walk out."
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channels. Watch TV. Adjust volume. Get up. Walk to kitchen. Open refrigerator. Take out snack. Close refrigerator. Return to living room. Sit on sofa. Eat snack. Continue watching TV. Turn off TV. Stand up. Walk out."
+    },
+    {
+      "time": "21:15-21:40",
+      "location": "Kitchen",
+      "activity": "Washing dishes and preparing lunch for tomorrow",
+      "desc": "Walk to kitchen. Turn on sink. Wash dishes. Rinse. Place in drying rack. Turn off sink. Open refrigerator. Take out ingredients. Prepare lunch. Put in container. Close refrigerator. Put container in bag. Walk out."
+    },
+    {
+      "time": "21:40-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using computer and reading to wind down",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Type. Move mouse. Read on screen. Close laptop. Pick up book. Read. Turn page. Put down book. Turn off lamp. Lie down in bed. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down in bed. Pull blanket over body. Close eyes. Breathe slowly. Remain asleep."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-05:50",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "05:50-06:10",
+      "location": "Bedroom 1",
+      "activity": "Waking up, checking phone and stretching in bed"
+    },
+    {
+      "time": "06:10-06:35",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for work"
+    },
+    {
+      "time": "06:35-07:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift"
+    },
+    {
+      "time": "07:30-19:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, caring for patients on the ward"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Commuting home after the shift"
+    },
+    {
+      "time": "19:30-19:50",
+      "location": "Bathroom",
+      "activity": "Washing up and changing out of work clothes"
+    },
+    {
+      "time": "19:50-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV"
+    },
+    {
+      "time": "21:15-21:40",
+      "location": "Kitchen",
+      "activity": "Washing dishes and preparing lunch for tomorrow"
+    },
+    {
+      "time": "21:40-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using computer and reading to wind down"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
