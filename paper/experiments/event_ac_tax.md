@@ -1,7 +1,8 @@
 # Experiment: Air-conditioner peak tax (`ac_tax`)
 
-> 状态：**定稿（有效果）**：热浪背景下 ac_tax 使 **AC 启用 15/15 → 7/15**（Fisher 双侧 **p≈0.0022**，漂移免疫），
-> 峰段 **−22.5%（t=−2.36, p≈0.033）**、AC kWh **−53.8%（p≈0.009）**（n=15，same-era 交错）。数值来自 R118。
+> 状态：**定稿（有效果；跨 2 世界复现）**：热浪背景下 ac_tax 使 **AC 启用 15/15 → 7/15**（Fisher 双侧 **p≈0.0022**，漂移免疫），
+> 峰段 **−22.5%（t=−2.36, p≈0.033）**、AC kWh **−53.8%（p≈0.009）**（world_838587, n=15，same-era 交错）；
+> **world_172148 复现**：峰段 **−24.6%（p≈0.034）**、AC-on **9/9→3/9（p≈0.009）**（R120, n=9）。数值来自 R118/R120。
 
 ## 1. Research Question
 
@@ -62,3 +63,15 @@ AC 启用（二值，AC kWh>0）、AC kWh、峰段 kWh、总电量 kWh，各取�
   AC 启用 15/15→7/15（p≈0.0022）、峰段 −22.5%、AC −53.8%、总电量 −24.5%（n=15）；
 - **四个大效应事件**之一（热浪/封锁/寒潮/ac_tax），且**首个通过 n≥15 连续功效检验**的事件；
 - **可复现命令**：见第 3 节。
+
+## 9. Cross-world replication (R120)
+
+Replicated on `world_172148` house_0002 Member 1 (AC = `living_room_airconditioner`), n=9, same-era interleaved:
+
+| 世界 | n | 峰段 Δ | AC Δ | AC-on | 峰段 t |
+|---|---|---|---|---|---|
+| world_838587 (R118) | 15 | **−22.5%** | −53.8% | 15/15→7/15 | −2.36 |
+| **world_172148 (R120)** | 9 | **−24.6%** | −67.0% | 9/9→3/9 | −2.56 |
+
+Peak effect **nearly identical across worlds (−22.5% vs −24.6%)**; AC-on significant in both
+(Fisher p≈0.0022 and ≈0.009). `ac_tax` is thus a **2-world-replicated** effective event.
