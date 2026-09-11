@@ -45,14 +45,17 @@
   baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
   **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
   R068/R069/R086). The clearest causal chain in this work.
-- **Event-type boundary (refined)**: detectability follows a **targeting gradient** — pure
-  **information** < generic **incentive** < **targeted (time-window × appliance)**. A purely
-  informational warning (`storm` R074; `energy_crisis` R123, all three metrics n.s.) changed nothing;
-  a generic peak incentive (`rebate`) cut AC/total (−40.8%/−21.2%) but **not the peak** (−6.0%, n.s.);
-  only the text that jointly anchors *evening peak* **and** *air-conditioner* (`ac_tax`) significantly
-  shaved the peak (−22.5%/−24.6%/−17.2% across three worlds). Events that change behaviour *structure*
-  (heatwave, cold-snap, lockdown) also produce large effects. This bounds which interventions the
-  platform can evaluate and *how to phrase them*.
+- **Peak-shaving mechanism: price × targeting (2×2)**: reducing the *peak* requires **both** a price
+  signal **and** specific targeting (time-window × appliance). A purely informational warning
+  (`storm` R074; `energy_crisis` R123, all metrics n.s.) changed nothing. A **generic** peak incentive
+  (`rebate`, price only) cut AC/total (−40.8%/−21.2%) but **not the peak** (−6.0%, n.s.). A
+  **targeted non-price** request (avoid the AC 5–8pm, R126) cut AC/total (−58.3%/−28.4%) but again
+  **not the peak** (+12.2%, n.s.). **Only the targeted tax** (`ac_tax`, both price and targeting)
+  significantly shaved the peak (−22.5%/−24.6%/−20.6% across three worlds; pooled p≈1e-7). Key
+  distinction: **energy-saving ≠ peak-shaving** — a request can slash total AC use while leaving the
+  peak (dominated by non-AC loads) unmoved. Events that change behaviour *structure* (heatwave,
+  cold-snap, lockdown) also produce large effects. This bounds which interventions the platform can
+  evaluate and *how to phrase them*.
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
