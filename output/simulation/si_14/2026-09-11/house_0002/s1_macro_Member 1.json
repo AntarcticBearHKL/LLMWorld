@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth, showering"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making a hot drink with the kettle"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work scrubs and packing work bag"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional: patient rounds, clinical assessments, charting and coordinating care"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:40",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating dinner"
+    },
+    {
+      "time": "18:40-19:10",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading dishes into the dishwasher"
+    },
+    {
+      "time": "19:10-19:25",
+      "location": "Bathroom",
+      "activity": "Sorting laundry and starting the washing machine"
+    },
+    {
+      "time": "19:25-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching the evening news on TV"
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Living Room",
+      "activity": "Reading news about the rooftop solar subsidy on the computer and browsing household information"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down, using the phone, setting the air conditioner and planning tomorrow's shift"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

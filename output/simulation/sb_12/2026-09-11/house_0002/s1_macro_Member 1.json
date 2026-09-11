@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:20",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:20-06:50",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed for work"
+    },
+    {
+      "time": "06:50-07:20",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:20-07:50",
+      "location": "Kitchen",
+      "activity": "Packing lunch and work bag for the shift"
+    },
+    {
+      "time": "07:50-08:40",
+      "location": "Out",
+      "activity": "Commuting to work"
+    },
+    {
+      "time": "08:40-17:00",
+      "location": "Out",
+      "activity": "Working a daytime shift as a health care professional"
+    },
+    {
+      "time": "17:00-17:50",
+      "location": "Out",
+      "activity": "Commuting home from work"
+    },
+    {
+      "time": "17:50-18:20",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes"
+    },
+    {
+      "time": "18:20-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "19:00-19:25",
+      "location": "Kitchen",
+      "activity": "Cleaning up after dinner and loading the dishwasher"
+    },
+    {
+      "time": "19:25-20:30",
+      "location": "Living Room",
+      "activity": "Watching TV to relax"
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Living Room",
+      "activity": "Using the computer for personal admin and messages"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Doing laundry and hanging clothes to dry"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down and checking phone before bed"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

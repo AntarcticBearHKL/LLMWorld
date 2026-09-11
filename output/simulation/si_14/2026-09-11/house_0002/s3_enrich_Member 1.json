@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Sleep. Turn to side. Adjust pillow. Continue sleeping."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth, showering",
+      "desc": "Wake up. Sit up on bed. Stand up. Walk to bathroom. Turn on bathroom light. Turn on tap. Wet hands. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Put down toothbrush. Turn on shower. Adjust water temperature. Step into shower. Wash body. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Wrap towel around body. Wipe face with towel. Hang towel. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making a hot drink with the kettle",
+      "desc": "Walk into kitchen. Open refrigerator. Take out eggs and milk. Place on counter. Open cupboard. Take out bowl and plate. Crack eggs into bowl. Whisk eggs. Place pan on induction cooker. Turn on induction cooker. Pour eggs into pan. Stir eggs. Turn off induction cooker. Transfer eggs to plate. Place plate on table. Fill kettle with water. Place kettle on base. Turn on kettle. Open cupboard. Take out mug. Place tea bag in mug. Wait for kettle to boil. Pour hot water into mug. Stir tea. Sit down at table. Eat eggs. Drink tea. Stand up. Pick up plate and mug. Walk to sink. Rinse plate and mug. Place in dishwasher."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work scrubs and packing work bag",
+      "desc": "Walk to bedroom. Open wardrobe. Take out work scrubs. Take off pajamas. Put on scrubs. Put on socks. Put on shoes. Open drawer. Take out stethoscope. Place stethoscope in bag. Open closet. Take out work bag. Open bag. Place wallet, keys, phone into bag. Zip bag. Pick up bag. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift",
+      "desc": "Walk out of front door. Lock door. Walk to bus stop. Stand and wait. Bus arrives. Board bus. Tap transit card. Find seat. Sit down. Ride bus. Bus stops. Stand up. Exit bus. Walk to hospital entrance. Enter hospital. Walk to locker room. Open locker. Place bag in locker. Close locker. Walk to nursing station."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional: patient rounds, clinical assessments, charting and coordinating care",
+      "desc": "Log into computer. Check patient list. Walk to patient room. Wash hands. Enter room. Greet patient: 'Good morning.' Check vital signs. Listen to heart. Listen to lungs. Palpate abdomen. Ask patient questions. Record notes. Walk to next patient. Repeat. Return to station. Update charts. Call doctor. Coordinate with nurse. Attend meeting. Break for lunch. Return to work. Continue rounds. End shift."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Ride bus. Get off bus. Walk home. Unlock door. Enter house."
+    },
+    {
+      "time": "18:00-18:40",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating dinner",
+      "desc": "Walk into kitchen. Open refrigerator. Take out vegetables and meat. Place on counter. Open cupboard. Take out cutting board and knife. Wash vegetables. Chop vegetables. Chop meat. Place pan on induction cooker. Turn on induction cooker. Pour oil into pan. Add meat. Stir meat. Add vegetables. Stir vegetables. Add sauce. Stir. Turn off induction cooker. Transfer food to plate. Place plate on table. Sit down. Eat dinner. Drink water. Stand up. Pick up plate. Walk to sink. Rinse plate. Place in dishwasher."
+    },
+    {
+      "time": "18:40-19:10",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading dishes into the dishwasher",
+      "desc": "Pick up plates from table. Scrape food into trash. Rinse plates. Open dishwasher. Load plates into dishwasher. Pick up glasses. Rinse glasses. Load glasses into dishwasher. Pick up utensils. Rinse utensils. Load utensils into dishwasher. Close dishwasher. Wipe table with sponge. Wipe counters. Turn off kitchen light."
+    },
+    {
+      "time": "19:10-19:25",
+      "location": "Bathroom",
+      "activity": "Sorting laundry and starting the washing machine",
+      "desc": "Walk to bathroom. Open hamper. Take out clothes. Sort clothes into piles (whites, colors). Pick up whites. Open washing machine. Place whites into washing machine. Close washing machine. Open detergent drawer. Pour detergent. Close drawer. Turn dial to select cycle. Press start button. Walk out of bathroom."
+    },
+    {
+      "time": "19:25-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching the evening news on TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote control. Press power button to turn on TV. Change channel to news. Put down remote. Watch TV. Pick up phone. Check messages. Put down phone. Watch TV. Stand up. Walk to kitchen. Get a glass of water. Return to living room. Sit on sofa. Drink water. Put glass down. Watch TV. Pick up remote. Turn off TV. Stand up."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Living Room",
+      "activity": "Reading news about the rooftop solar subsidy on the computer and browsing household information",
+      "desc": "Sit at desk. Open laptop. Turn on computer. Enter password. Open web browser. Type 'rooftop solar subsidy' in search bar. Press enter. Click on first link. Read article. Scroll down. Click on another link. Read. Open new tab. Type 'household energy saving tips'. Press enter. Read. Close browser. Shut down computer. Close laptop."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed",
+      "desc": "Walk to bathroom. Turn on bathroom light. Turn on shower. Adjust water temperature. Step into shower. Wash hair. Rinse hair. Wash body. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel around body. Walk to bedroom."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down, using the phone, setting the air conditioner and planning tomorrow's shift",
+      "desc": "Walk into bedroom. Open wardrobe. Take out pajamas. Put on pajamas. Sit on bed. Pick up phone. Unlock phone. Open messaging app. Send text messages. Open calendar app. Check tomorrow's schedule. Open notes app. Write reminders. Put down phone. Stand up. Walk to air conditioner. Pick up remote. Press power button. Adjust temperature. Press swing button. Put down remote. Walk to bed. Lie down. Pull blanket over body. Pick up phone. Check social media. Put down phone. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Sleep. Turn over. Adjust pillow. Continue sleeping."
+    }
+  ]
+}

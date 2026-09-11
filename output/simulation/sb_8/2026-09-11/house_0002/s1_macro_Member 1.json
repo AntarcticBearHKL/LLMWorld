@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and taking a shower"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Boiling water with the kettle, toasting bread and eating breakfast"
+    },
+    {
+      "time": "07:30-08:30",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, attending to patients and clinical duties"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating a packed meal"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, continuing patient care and charting"
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "17:45-18:00",
+      "location": "Bedroom 1",
+      "activity": "Changing out of work clothes and freshening up"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher"
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa, watching TV and browsing on the computer"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and completing night hygiene routine"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading and checking the phone before bed with the desk lamp on"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
