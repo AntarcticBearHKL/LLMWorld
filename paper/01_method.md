@@ -61,6 +61,11 @@ consistency, grouped response (`analyze_groups.py`, by awareness/conscientiousne
 policy trade-offs, multi-world comparison (`compare_worlds.py`), TOU window attribution, …
 Outputs are JSON/CSV under `output/.../analysis/`.
 
+**Peak decomposition (used for the shaving mechanism, R130/R131/R135)**: `build_load_profile` accepts
+`exclude_families` (an appliance-family set), so the profile of any single device family is obtained as
+`full − exclude_family`. This isolates, e.g., the air-conditioner's contribution to the peak window and
+lets us decompose a total-peak change into device vs non-device components.
+
 ## 7. Reproducibility & cost control
 
 - Offline **L1** tests (mock `SubAgent`) over pure logic; **L2** small real runs (≤5 households,
