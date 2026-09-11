@@ -1,6 +1,6 @@
 # Experiment: Policy multi-objective trade-offs
 
-> 状态：**占位（待验证）**。第 1–4 节就绪；第 5 节待跑后填。
+> 状态：**初步（工具可用；TOU 结果混杂）**：峰值 −9.9% 但峰段 +18.9%、平台 +28.6%（world_838587）。数值来自 R102。
 
 ## 1. Research Question
 
@@ -24,9 +24,17 @@
 峰段削减 %（`peak_hours_change_pct`/`peak_load_cut_pct`）、总电量变化 %、
 平台率（`peak_plateau_cut_pct`）、峰均比（`peak_to_mean`）；负担/公平（需扩展）。
 
-## 5. Results
+## 5. Results（初步）
 
-**待验证。**
+`python run.py --mode simulate --world world_838587 --days 1 --env world_838587 --policy tou --workers 4`
+后运行 `analyze_policy_tradeoffs.py world_838587`（% vs baseline；越负越好）：
+
+| Policy | Total | Peak hrs | Peak | Plateau | P/M |
+|---|---|---|---|---|---|
+| baseline | — | — | — | — | 4.64 |
+| tou | −13.4% | +18.9% | −9.9% | +28.6% | 4.83 |
+
+**混杂**：最大峰值下降，但峰段总电量与平台率上升 → 不可定论（与 TOU 采样敏感一致）。
 
 ## 6. Comparison with Literature
 
@@ -38,4 +46,5 @@
 
 ## 8. Conclusion
 
-待填。
+- **初步（混杂）**：多目标权衡工具可用；TOU 在此显示"峰值↓但峰段/平台↑"的混杂结果，不作有效结论。
+
