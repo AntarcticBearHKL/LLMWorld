@@ -1,0 +1,37 @@
+{
+  "households": 2,
+  "capacity_kw": 5.0,
+  "battery_kwh": 0.0,
+  "season": "Summer",
+  "mean_self_consumption_rate": 0.238,
+  "mean_solar_coverage": 0.7081,
+  "per_house": [
+    {
+      "house_id": "house_0001",
+      "total_load_kwh": 16.2074,
+      "solar_gen_kwh": 44.5633,
+      "self_consumption_rate": 0.2826,
+      "solar_coverage": 0.7769,
+      "grid_import_kwh": 3.6155,
+      "grid_export_kwh": 31.9714,
+      "battery_cycle_kwh": 0.0,
+      "peak_import_cut_pct": 0.0,
+      "net_peak_watts": 2995.41
+    },
+    {
+      "house_id": "house_0002",
+      "total_load_kwh": 13.482,
+      "solar_gen_kwh": 44.5633,
+      "self_consumption_rate": 0.1934,
+      "solar_coverage": 0.6393,
+      "grid_import_kwh": 4.863,
+      "grid_export_kwh": 35.9444,
+      "battery_cycle_kwh": 0.0,
+      "peak_import_cut_pct": 0.0,
+      "net_peak_watts": 3121.08
+    }
+  ],
+  "world_id": "world_838587",
+  "scenario": "baseline",
+  "date": "latest"
+}

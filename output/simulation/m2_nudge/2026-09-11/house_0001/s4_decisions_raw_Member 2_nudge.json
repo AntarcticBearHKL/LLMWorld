@@ -1,0 +1,214 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-01:30",
+      "location": "Bedroom 2",
+      "activity": "Lying in bed doomscrolling YouTube and replying to WhatsApp messages",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "01:30-08:10",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:30",
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and getting dressed for the day",
+      "operations": []
+    },
+    {
+      "time": "08:30-08:55",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle for tea and preparing a quick dietary-safe breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:55-09:05",
+      "location": "Bedroom 2",
+      "activity": "Packing laptop, monitor cable and art supplies into a bag for campus",
+      "operations": [
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:05-09:45",
+      "location": "Out",
+      "activity": "Commuting to Monash Caulfield campus",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:45-12:30",
+      "location": "Out",
+      "activity": "Attending design studio class and working on coursework at Caulfield campus",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:10",
+      "location": "Out",
+      "activity": "Eating a packed lunch and taking a short break on campus",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:10-16:30",
+      "location": "Out",
+      "activity": "Continuing studio project work and print workshop tasks on campus",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Out",
+      "activity": "Answering freelance client emails and reviewing design drafts in the campus library",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home from Caulfield campus",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner from scratch and preparing lunch for the next day",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "operations": []
+    },
+    {
+      "time": "19:15-20:30",
+      "location": "Living Room",
+      "activity": "Watching TV to unwind",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:30",
+      "location": "Bedroom 2",
+      "activity": "Doing freelance creative work on the computer, editing files on the monitor",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Showering and doing daily stretching routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 2",
+      "activity": "Winding down in bed, scrolling YouTube and WhatsApp before sleep",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}

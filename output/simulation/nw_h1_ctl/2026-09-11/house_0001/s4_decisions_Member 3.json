@@ -1,0 +1,319 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "start_minutes": 0,
+      "end_minutes": 390,
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-06:45",
+      "start_minutes": 390,
+      "end_minutes": 405,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, and taking daily medication (bathroom slot before Member 4's 06:45 shower)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:45-06:50",
+      "start_minutes": 405,
+      "end_minutes": 410,
+      "location": "Bedroom 3",
+      "activity": "Getting dressed and quick tidy of the room",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:50-07:10",
+      "start_minutes": 410,
+      "end_minutes": 430,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with Member 1 and Member 2",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:20",
+      "start_minutes": 430,
+      "end_minutes": 440,
+      "location": "Kitchen",
+      "activity": "Feeding the cat and cleaning up the breakfast dishes",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:20-07:30",
+      "start_minutes": 440,
+      "end_minutes": 450,
+      "location": "Bedroom 3",
+      "activity": "Packing bag and getting ready to leave",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "start_minutes": 450,
+      "end_minutes": 480,
+      "location": "Out",
+      "activity": "Walking to the supermarket for shift",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-12:00",
+      "start_minutes": 480,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Working part-time at supermarket",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:30",
+      "start_minutes": 720,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Eating lunch during break",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "start_minutes": 750,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Walking to university",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "start_minutes": 780,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Attending engineering classes at university",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "start_minutes": 1020,
+      "end_minutes": 1050,
+      "location": "Out",
+      "activity": "Walking to tutoring location",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:30-19:30",
+      "start_minutes": 1050,
+      "end_minutes": 1170,
+      "location": "Out",
+      "activity": "Tutoring students part-time",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Out",
+      "activity": "Walking home",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "start_minutes": 1200,
+      "end_minutes": 1230,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-20:45",
+      "start_minutes": 1230,
+      "end_minutes": 1245,
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying up the kitchen",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:45-21:15",
+      "start_minutes": 1245,
+      "end_minutes": 1275,
+      "location": "Kitchen",
+      "activity": "Having a late dinner and chatting with Member 2",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:30",
+      "start_minutes": 1275,
+      "end_minutes": 1290,
+      "location": "Kitchen",
+      "activity": "Finishing kitchen clean-up and putting away leftovers",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "start_minutes": 1290,
+      "end_minutes": 1350,
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV (shared living room time with Member 4 and Member 5)",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bedroom 3",
+      "activity": "Organizing chores and rent using computer",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:30",
+      "start_minutes": 1380,
+      "end_minutes": 1410,
+      "location": "Bathroom",
+      "activity": "Personal care and washing up (bathroom free after Member 2 finishes at 22:55)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "start_minutes": 1410,
+      "end_minutes": 1440,
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

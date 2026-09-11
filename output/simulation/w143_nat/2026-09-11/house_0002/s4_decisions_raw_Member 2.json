@@ -1,0 +1,387 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:15",
+      "location": "Bedroom 2",
+      "activity": "Sleeping soundly after a late night-owl bedtime",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:30",
+      "location": "Bedroom 2",
+      "activity": "Waking slowly and completing a daily stretching routine beside the bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:50",
+      "location": "Bathroom",
+      "activity": "Showering, washing, and grooming for the workday",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:10",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a breakfast that respects the medical dietary restriction, with strong coffee",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:20",
+      "location": "Bedroom 2",
+      "activity": "Dressing in professional work clothes and packing the work bag",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:20-09:00",
+      "location": "Out",
+      "activity": "Drive the EV to the clinic for the day's appointments",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Conducting in-person clinical psychology assessment and therapy sessions with clients",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating a restriction-appropriate meal nearby",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:15-16:00",
+      "location": "Out",
+      "activity": "Running afternoon clinical sessions and remote telehealth consultations from the office",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:15",
+      "location": "Out",
+      "activity": "Stepping away briefly for a strong coffee and mental reset",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:15-17:00",
+      "location": "Out",
+      "activity": "Finishing case notes, treatment planning, and administrative documentation",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Drive the EV back home through evening traffic",
+      "operations": [
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:15",
+      "location": "Bathroom",
+      "activity": "Washing up and changing into comfortable casual clothes (finishing before Member 1 uses the bathroom at 18:15)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:15-19:15",
+      "location": "Kitchen",
+      "activity": "Cooking a from-scratch dinner that fits the medical dietary restriction; Member 1 helps finish cooking and eats dinner together from 18:30",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Clearing the table, loading the dishwasher, and wiping down the counters together with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:45-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing and doing a stretching session with Member 1 (watching YouTube videos while stretching)",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Study",
+      "activity": "Studying cognitive psychology material on the computer with the desk lamp on, alongside Member 1 who is using the computer for personal tasks",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-22:00",
+      "location": "Study",
+      "activity": "Quiet devotional reading, reflection, and prayer",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:45",
+      "location": "Living Room",
+      "activity": "Streaming a television show to unwind before bed",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:45-23:10",
+      "location": "Bathroom",
+      "activity": "Nightly wash-up, skincare, and oral care routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:10-23:30",
+      "location": "Bedroom 2",
+      "activity": "Tidying the room, laying out tomorrow's clothes, and dimming the lights",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 2",
+      "activity": "Falling asleep to end the day",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "member_2_electricvehicle",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

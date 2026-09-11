@@ -1,0 +1,113 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Body relaxed. Breathing steadily. Occasionally turning to the side. Remaining asleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up early, showering and personal hygiene (scheduled before Member 4's 07:00 shower and Member 3's 07:20 wash to avoid the shared bathroom clash)",
+      "desc": "Wake up. Open eyes. Sit up in bed. Swing legs over the side. Stand up. Walk to bathroom. Open bathroom door. Turn on light. Turn on tap. Adjust water temperature. Step into shower. Wet body. Apply soap to body. Wash body. Rinse body. Turn off shower. Step out of shower. Pick up towel. Dry body. Dry hair. Wrap towel around body. Pick up toothbrush. Apply toothpaste to toothbrush. Brush teeth. Rinse mouth. Spit into sink. Wipe face with towel. Turn off tap. Turn off light. Walk out of bathroom. Return to Bedroom 1."
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast and making tea with the kettle and toaster; Member 4 joins from 07:30 to prepare breakfast, so they chat while sharing the kitchen",
+      "desc": "Walk to kitchen. Open refrigerator. Take out bread. Place bread in toaster. Press toaster lever down. Open cupboard. Take out mug. Take out tea bag. Place tea bag in mug. Fill kettle with water. Turn on kettle. Wait for kettle to boil. Toast pops up. Take toast out of toaster. Place toast on plate. Spread butter on toast. Pour hot water into mug. Add milk to mug. Stir tea with spoon. Pick up toast. Eat toast. Drink tea. Member 4 enters kitchen. Member 1 says 'Good morning' to Member 4. Member 4 says 'Morning' to Member 1. Member 1 continues eating. Member 4 prepares breakfast. Member 1 finishes eating. Rinse plate. Place plate in sink. Rinse mug. Place mug in sink."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Setting up the desk and reviewing today's study plan",
+      "desc": "Walk to Bedroom 1. Sit at desk. Turn on desk lamp. Open computer. Log in to computer. Open study plan document. Read study plan. Make notes on paper. Highlight tasks. Close document. Stand up."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Studying online for the Master of Education at the desk using the computer and desk lamp, attending remote lectures and reading course materials",
+      "desc": "Sit at desk. Open laptop. Turn on desk lamp. Log into university portal. Join online lecture. Listen to lecturer. Type notes on laptop. Scroll through slides. Write in notebook. Adjust desk lamp. Attend lecture. Read course materials on screen. Highlight key points. Write summary. Take short break. Stand up. Stretch arms. Sit back down. Continue studying. Open additional course materials. Read. Take notes. Save notes."
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch, reheating food with the microwave while Member 2 cooks her own lunch on the induction cooker",
+      "desc": "Walk to kitchen. Open refrigerator. Take out lunch container. Remove lid. Place container in microwave. Close microwave door. Set timer. Press start. Microwave beeps. Open microwave door. Take out container. Stir food. Walk to table. Sit down. Eat lunch. Member 2 enters kitchen. Member 1 says 'Hi' to Member 2. Member 2 says 'Hi' to Member 1. Member 2 starts cooking on induction cooker. Member 1 continues eating. Finish eating. Rinse container. Place container in sink. Stand up."
+    },
+    {
+      "time": "12:45-13:15",
+      "location": "Living Room",
+      "activity": "Taking a short break, checking the phone and resting on the sofa",
+      "desc": "Walk to living room. Sit on sofa. Pick up phone. Unlock phone. Scroll through social media. Read messages. Reply to message. Put phone down on sofa. Lean back. Close eyes. Rest."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Bedroom 1",
+      "activity": "Continuing online study and coursework, writing assignments on the computer and reviewing notes",
+      "desc": "Walk to Bedroom 1. Sit at desk. Open computer. Open assignment document. Type on keyboard. Read notes. Highlight text. Write paragraphs. Pause. Stretch arms. Continue typing. Save document. Open browser. Research topic. Read article. Take notes. Close browser. Open notes app. Review notes. Edit notes. Save notes."
+    },
+    {
+      "time": "17:00-17:40",
+      "location": "Living Room",
+      "activity": "Doing light stretching and indoor exercise together with Member 2, then resting with the fan on",
+      "desc": "Walk to living room. Member 2 is there. Member 1 says 'Ready to stretch?' Member 2 says 'Yes'. Spread exercise mat on floor. Sit down on mat. Stretch arms. Stretch legs. Do yoga poses. Member 2 does same. After exercise, stand up. Roll up mat. Turn on fan. Sit on sofa. Lean back. Rest."
+    },
+    {
+      "time": "17:40-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and rice cooker, sharing the kitchen with Member 3 who is also cooking",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables. Wash vegetables in sink. Chop vegetables on cutting board. Turn on induction cooker. Place pan on cooker. Add oil to pan. Add chopped vegetables to pan. Stir with spatula. Turn on rice cooker. Add rice to rice cooker. Add water to rice cooker. Close rice cooker lid. Press cook button. Member 3 enters kitchen. Member 1 says 'Hi' to Member 3. Member 3 says 'Hi' to Member 1. Member 1 continues cooking. Stir vegetables. Taste food. Add salt. Turn off induction cooker. Wait for rice cooker."
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner together with Member 2 and Member 3",
+      "desc": "Sit at table. Serve food onto plate. Pick up fork. Eat food. Chew. Swallow. Talk to Member 2. Ask 'How was your day?' Member 2 replies. Talk to Member 3. Member 3 replies. Continue eating. Drink water from glass. Finish meal. Push plate away. Stand up."
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the kitchen benches together with Member 2 and Member 3",
+      "desc": "Stand up. Collect plates from table. Carry plates to sink. Turn on tap. Pick up sponge. Apply soap to sponge. Wash plate. Rinse plate under tap. Place plate in drying rack. Wash utensils. Rinse utensils. Place utensils in drying rack. Pick up cloth. Wipe kitchen bench. Member 2 washes dishes. Member 3 dries dishes. Member 1 wipes bench. Rinse cloth. Hang cloth on hook. Turn off tap."
+    },
+    {
+      "time": "19:45-20:15",
+      "location": "Bathroom",
+      "activity": "Doing laundry with the washing machine and tidying up",
+      "desc": "Walk to bathroom. Open washing machine door. Put dirty clothes into washing machine. Add detergent to dispenser. Close washing machine door. Set wash cycle. Press start button. Pick up clothes from floor. Place clothes in laundry basket. Wipe bathroom sink with cloth. Rinse cloth. Hang cloth on hook. Walk out of bathroom."
+    },
+    {
+      "time": "20:15-21:15",
+      "location": "Bedroom 1",
+      "activity": "Relaxing, browsing the phone and reading in the bedroom while Member 2 and Member 3 use the Living Room for video calls",
+      "desc": "Walk to Bedroom 1. Sit on bed. Pick up phone. Unlock phone. Browse social media. Read article on phone. Put phone down on bed. Pick up book. Open book. Read. Turn page. Continue reading. Put book down. Pick up phone. Check messages. Reply to message. Put phone down. Lean back on bed."
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "Kitchen",
+      "activity": "Making a hot drink and preparing a light evening snack",
+      "desc": "Walk to kitchen. Open cupboard. Take out mug. Take out tea bag. Place tea bag in mug. Fill kettle with water. Turn on kettle. Wait for kettle to boil. Open refrigerator. Take out snack. Place snack on plate. Pour hot water into mug. Add milk to mug. Stir tea with spoon. Pick up plate and mug. Walk to Bedroom 1. Sit at desk. Place plate and mug on desk."
+    },
+    {
+      "time": "21:45-22:45",
+      "location": "Bedroom 1",
+      "activity": "Reading course materials and planning the next day's study tasks at the desk",
+      "desc": "Sit at desk. Open computer. Open course materials. Read course materials on screen. Highlight key points. Open planner. Write tasks for next day. Check calendar. Write notes. Close planner. Close computer. Drink tea. Eat snack. Stand up."
+    },
+    {
+      "time": "22:45-23:15",
+      "location": "Bathroom",
+      "activity": "Night routine: washing up and brushing teeth (after Member 2's evening shower and laundry finish at 22:40)",
+      "desc": "Walk to bathroom. Turn on tap. Wash face with water. Pick up toothbrush. Apply toothpaste to toothbrush. Brush teeth. Rinse mouth. Spit into sink. Wipe face with towel. Turn off tap. Turn off light. Walk out of bathroom. Return to Bedroom 1."
+    },
+    {
+      "time": "23:15-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down, dimming the desk lamp and going to sleep",
+      "desc": "Walk to Bedroom 1. Sit on bed. Dim desk lamp. Pick up phone. Set alarm on phone. Put phone down on bedside table. Lie down on bed. Pull blanket over body. Close eyes. Remain still. Fall asleep."
+    }
+  ]
+}

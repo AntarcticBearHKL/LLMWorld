@@ -1,0 +1,287 @@
+{
+  "member": "Member 5",
+  "appliance_decisions": [
+    {
+      "time": "00:00-05:30",
+      "start_minutes": 0,
+      "end_minutes": 330,
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "05:30-06:00",
+      "start_minutes": 330,
+      "end_minutes": 360,
+      "location": "Bathroom",
+      "activity": "Waking up and taking his weekly cold shower, washing and brushing teeth (bathroom used before Member 1's 06:00-06:30 morning routine, avoiding the locked 06:30-07:50 bathroom block of Member 3, Member 4 and Member 2)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:00-06:30",
+      "start_minutes": 360,
+      "end_minutes": 390,
+      "location": "Out",
+      "activity": "Morning walk around the neighbourhood with his dog",
+      "operations": []
+    },
+    {
+      "time": "06:30-06:55",
+      "start_minutes": 390,
+      "end_minutes": 415,
+      "location": "Bedroom 5",
+      "activity": "Getting dressed and packing his university bag and laptop",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:55-07:25",
+      "start_minutes": 415,
+      "end_minutes": 445,
+      "location": "Kitchen",
+      "activity": "Boiling the kettle for tea, skipping breakfast, packing a lunch and checking WhatsApp on his phone while joining breakfast with Member 1, Member 2 and Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:25-08:00",
+      "start_minutes": 445,
+      "end_minutes": 480,
+      "location": "Bedroom 5",
+      "activity": "Reviewing coursework notes and preparing for campus",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Taking public transit to Monash Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-11:00",
+      "start_minutes": 540,
+      "end_minutes": 660,
+      "location": "Out",
+      "activity": "Attending Master of Business Information Systems lectures at Monash Clayton",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:00-12:00",
+      "start_minutes": 660,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Studying in the campus library and working on coursework with his laptop",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Having lunch at Monash Clayton campus together with Member 1, Member 3 and Member 4, paying in cash",
+      "operations": []
+    },
+    {
+      "time": "13:00-17:00",
+      "start_minutes": 780,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Working his part-time IT support assistant shift at the campus IT service desk",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Taking public transit home from Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "start_minutes": 1080,
+      "end_minutes": 1110,
+      "location": "Kitchen",
+      "activity": "Helping Member 3 finish cooking dinner and setting the table",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "start_minutes": 1110,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Having dinner with Member 1, Member 3 and Member 4, sharing the meal cooked by Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "start_minutes": 1140,
+      "end_minutes": 1170,
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV to unwind with Member 1",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Kitchen",
+      "activity": "Washing the dishes and tidying up the kitchen after dinner (after Member 4's 19:00-19:30 dishwashing, kitchen free)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:00",
+      "start_minutes": 1200,
+      "end_minutes": 1260,
+      "location": "Bedroom 5",
+      "activity": "Using his computer to catch up on assignments and emails, with the desk lamp on",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "start_minutes": 1260,
+      "end_minutes": 1290,
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for bed (bathroom free before Member 4's 21:30-22:00 laundry cycle)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "start_minutes": 1290,
+      "end_minutes": 1350,
+      "location": "Bedroom 5",
+      "activity": "Reading a book before bed with the light on",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-22:45",
+      "start_minutes": 1350,
+      "end_minutes": 1365,
+      "location": "Bedroom 5",
+      "activity": "Winding down and turning off the light",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-08:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Adjust pillow. Turn to right side. Stretch legs. Turn to back. Open eyes. Look at clock. Close eyes. Turn to left side. Stretch arms. Sit up. Swing legs over edge of bed. Stand up."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Bathroom",
+      "activity": "Washing up and taking a morning shower",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Remove clothes. Place clothes in hamper. Turn on shower. Step into shower. Apply soap. Scrub body. Rinse body. Apply shampoo. Scrub hair. Rinse hair. Turn off shower. Step out of shower. Pick up towel. Dry body. Dry hair. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "08:30-09:10",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Enter kitchen. Open refrigerator. Take out eggs, milk, and bread. Close refrigerator. Turn on stove. Crack eggs into pan. Cook eggs. Turn off stove. Place eggs on plate. Toast bread. Pour milk into glass. Sit down. Eat breakfast. Drink milk. Stand up. Pick up plate and glass. Walk to sink. Wash plate and glass. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "09:10-09:50",
+      "location": "Bathroom",
+      "activity": "Doing laundry and washing clothes",
+      "desc": "Enter bathroom. Turn on light. Open washing machine. Load clothes into washing machine. Add detergent. Close washing machine. Set cycle. Start washing machine. Open washing machine. Take out clothes. Put clothes into dryer. Set dryer. Start dryer. Take out clothes. Fold clothes. Put away clothes. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "09:50-10:30",
+      "location": "Living Room",
+      "activity": "Vacuuming and tidying the living room",
+      "desc": "Enter living room. Turn on light. Pick up vacuum cleaner. Plug in vacuum cleaner. Turn on vacuum. Vacuum floor. Move furniture. Vacuum under furniture. Turn off vacuum. Unplug vacuum cleaner. Put away vacuum cleaner. Pick up items on floor. Place items in closet. Dust furniture. Arrange cushions. Turn off light. Exit living room."
+    },
+    {
+      "time": "10:30-11:30",
+      "location": "Out",
+      "activity": "Grocery shopping at the supermarket",
+      "desc": "Leave house. Walk to supermarket. Enter supermarket. Pick up shopping cart. Push cart through aisles. Pick up items from shelves. Place items in cart. Check shopping list on phone. Go to checkout. Pay for items. Bag items. Leave supermarket. Walk home. Enter house."
+    },
+    {
+      "time": "11:30-12:30",
+      "location": "Kitchen",
+      "activity": "Putting away groceries, cooking and eating lunch",
+      "desc": "Enter kitchen. Place groceries on counter. Open refrigerator. Place perishables inside. Close refrigerator. Open cabinets. Place dry goods in cabinets. Close cabinets. Take out ingredients for lunch. Prepare lunch. Cook lunch. Place lunch on plate. Sit down. Eat lunch. Drink water. Stand up. Pick up plate. Walk to sink. Wash plate. Exit kitchen."
+    },
+    {
+      "time": "12:30-13:30",
+      "location": "Bedroom 1",
+      "activity": "Resting and watching TV",
+      "desc": "Enter bedroom. Turn on TV. Sit on bed. Pick up remote. Turn on TV. Change channels. Watch TV. Lie down. Adjust pillow. Pull blanket. Close eyes. Open eyes. Watch TV. Change channels. Turn off TV. Stand up. Turn off light. Exit bedroom."
+    },
+    {
+      "time": "13:30-15:30",
+      "location": "Out",
+      "activity": "Outdoor exercise and jogging in the park",
+      "desc": "Change into exercise clothes. Leave house. Walk to park. Stretch arms. Stretch legs. Start jogging. Run at moderate pace. Stop at bench. Drink water. Continue jogging. Sprint for 1 minute. Slow down to walk. Catch breath. Stretch again. Walk home. Enter house."
+    },
+    {
+      "time": "15:30-16:00",
+      "location": "Bathroom",
+      "activity": "Showering after exercise",
+      "desc": "Enter bathroom. Turn on light. Remove clothes. Place clothes in hamper. Turn on shower. Step into shower. Wet body. Apply soap. Scrub body. Rinse body. Apply shampoo. Scrub hair. Rinse hair. Turn off shower. Step out of shower. Pick up towel. Dry body. Dry hair. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "16:00-17:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Enter living room. Sit on sofa. Pick up remote. Turn on TV. Watch TV. Change channels. Adjust volume. Put down remote. Pick up magazine. Read magazine. Put down magazine. Pick up remote. Change channels. Watch TV. Turn off TV. Stand up. Exit living room."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Bedroom 1",
+      "activity": "Using the computer for personal reading and professional development",
+      "desc": "Enter bedroom. Sit at desk. Open laptop. Turn on computer. Open web browser. Navigate to reading material. Read article. Take notes. Scroll down. Click link. Read another article. Watch educational video. Pause video. Take notes. Close web browser. Shut down computer. Close laptop. Stand up."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out ingredients. Close refrigerator. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add vegetables. Stir vegetables. Add spices. Cook dinner. Turn off stove. Place dinner on plate. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "desc": "Enter kitchen. Sit at table. Pick up fork. Eat food. Pick up knife. Cut food. Eat food. Drink water. Pick up napkin. Wipe mouth. Continue eating. Finish meal. Stand up. Pick up plate. Walk to sink. Wash plate. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing",
+      "desc": "Enter living room. Sit on sofa. Pick up remote. Turn on TV. Watch TV. Change channels. Adjust volume. Put down remote. Pick up book. Read book. Put down book. Pick up remote. Change channels. Watch TV. Turn off TV. Stand up. Turn off light. Exit living room."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Using the computer to browse and check messages",
+      "desc": "Enter bedroom. Sit at desk. Open laptop. Turn on computer. Open web browser. Browse websites. Check email. Read messages. Reply to messages. Close email. Browse social media. Scroll through feed. Close web browser. Shut down computer. Close laptop. Stand up."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Night routine and washing up",
+      "desc": "Enter bathroom. Turn on light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit in sink. Wash face. Dry face. Use toilet. Flush toilet. Wash hands. Dry hands. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and preparing for bed",
+      "desc": "Enter bedroom. Turn on light. Remove clothes. Put on pajamas. Pick up phone. Set alarm. Place phone on nightstand. Pull back blanket. Lie down on bed. Pull blanket over body. Adjust pillow. Close eyes. Turn off light. Sleep."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Adjust pillow. Turn to right side. Stretch legs. Turn to back. Move arm under pillow. Turn to left side. Sleep."
+    }
+  ]
+}

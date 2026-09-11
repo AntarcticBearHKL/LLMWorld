@@ -1,0 +1,20 @@
+{
+  "label_source": "awareness",
+  "labels": {
+    "house_0001": "Medium",
+    "house_0002": "Medium"
+  },
+  "scenarios": {
+    "baseline": {
+      "house_0001": 16.875416666666666,
+      "house_0002": 11.641000000000082
+    }
+  },
+  "groups": [
+    {
+      "group": "Medium",
+      "households": 2,
+      "baseline_mean_kwh": 14.258
+    }
+  ]
+}

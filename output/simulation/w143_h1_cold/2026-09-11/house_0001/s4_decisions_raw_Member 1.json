@@ -1,0 +1,267 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-05:40",
+      "location": "Bedroom 1",
+      "activity": "Sleeping quietly in his own room with the fan on low, phone alarms set for the study day ahead",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "05:40-05:50",
+      "location": "Bedroom 1",
+      "activity": "Waking up slowly, turning on the light, and checking his written to-do list and shift roster notes on his phone",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "05:50-06:10",
+      "location": "Bathroom",
+      "activity": "Showering, shaving and dressing in clean clothes for university",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:10-06:30",
+      "location": "Bedroom 1",
+      "activity": "Packing his backpack, checking his placement handover notes and confirming travel times on his phone",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:30-06:55",
+      "location": "Kitchen",
+      "activity": "Making and eating a flexitarian breakfast of oats, toast and tea with Member 2, and packing a packed lunch and thermos of tea for the day",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:55-07:00",
+      "location": "Kitchen",
+      "activity": "Rinsing his breakfast dishes and clearing his kitchen space",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Bedroom 1",
+      "activity": "Studying quietly and reading printed lecture notes for the day",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Out",
+      "activity": "Commuting by bus to the Monash University Clayton campus while reading printed lecture notes",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Social Work lectures and tutorials, taking detailed handwritten notes",
+      "operations": []
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Out",
+      "activity": "Eating a packed flexitarian lunch on campus and drinking tea away from alcohol",
+      "operations": []
+    },
+    {
+      "time": "12:45-15:00",
+      "location": "Out",
+      "activity": "Studying in the campus library, drafting written assessment work and organising group project tasks",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:45",
+      "location": "Out",
+      "activity": "Commuting by train and bus from campus to the aged-care facility for his support shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:45-20:00",
+      "location": "Out",
+      "activity": "Working a part-time aged-care support shift: assisting residents with personal care and meals, documenting care notes and following the handover procedure",
+      "operations": []
+    },
+    {
+      "time": "20:00-20:45",
+      "location": "Out",
+      "activity": "Commuting home from the aged-care facility by train and bus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:45-21:15",
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and washing up after the shift",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:30",
+      "location": "Kitchen",
+      "activity": "Preparing tomorrow's lunch and setting out breakfast items",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Kitchen",
+      "activity": "Reheating and eating a pre-prepared flexitarian dinner at the kitchen table with Member 3, and drinking a cup of tea",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down in his room, reading quietly, sending text-only messages and setting reminders and alarms for tomorrow",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the door closed and the fan on low for quiet, uninterrupted rest",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Morning routine (washing, brushing teeth) - scheduled early to avoid the bathroom being occupied by Member 4 (08:00-08:40) and Member 3 (08:30-09:00)"
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, ahead of Member 4 and Member 3's breakfast slots"
+    },
+    {
+      "time": "08:30-10:00",
+      "location": "Bedroom 1",
+      "activity": "Studying Master of Education coursework on computer"
+    },
+    {
+      "time": "10:00-10:30",
+      "location": "Bathroom",
+      "activity": "Doing laundry using the washing machine (free slot, no conflict with Member 3, Member 4 or Member 2's laundry times)"
+    },
+    {
+      "time": "10:30-11:00",
+      "location": "Bedroom 1",
+      "activity": "Tidying room and organizing study materials"
+    },
+    {
+      "time": "11:00-11:30",
+      "location": "Bedroom 1",
+      "activity": "Reviewing study notes quietly while the kitchen is busy with Member 3 and Member 4's grocery unloading"
+    },
+    {
+      "time": "11:30-12:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch, sharing the kitchen with Member 3 unpacking groceries and Member 4 prepping lunch ingredients"
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV before the work shift"
+    },
+    {
+      "time": "13:00-18:00",
+      "location": "Out",
+      "activity": "Working part-time shift at hospitality/retail job"
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Commuting home from work"
+    },
+    {
+      "time": "18:30-19:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner from scratch and eating it together with Member 2, Member 3 and Member 4, who are also preparing dinner at this time"
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV or playing video games together with Member 2 and Member 4 to unwind"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine (showering) - timed before Member 3 and Member 4's 22:15-22:45 bathroom use"
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reading or listening to music before bed"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Preparing for bed and going to sleep"
+    }
+  ]
+}

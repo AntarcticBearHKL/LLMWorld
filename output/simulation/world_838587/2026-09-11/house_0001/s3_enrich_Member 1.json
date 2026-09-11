@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Remain still. Turn to right side. Adjust pillow. Continue sleeping."
+    },
+    {
+      "time": "06:00-06:35",
+      "location": "Bathroom",
+      "activity": "Waking up early, showering and getting dressed (using the bathroom before Member 4's 06:45-07:15 slot to avoid the shared-bathroom clash)",
+      "desc": "Wake up. Sit up. Stand. Walk to bathroom. Turn on light. Use toilet. Flush. Wash hands. Turn on shower. Adjust temperature. Step in. Wash body. Shampoo hair. Rinse. Turn off shower. Step out. Dry with towel. Get dressed. Brush teeth."
+    },
+    {
+      "time": "06:35-07:15",
+      "location": "Bedroom 1",
+      "activity": "Reviewing course readings, organising notes and study materials for the day",
+      "desc": "Sit at desk. Turn on desk lamp. Open computer. Open course readings PDF. Read text. Highlight key points. Open notebook. Write notes. Organize papers. Stack books. Put pens in pencil case. Close computer. Turn off desk lamp. Stand up."
+    },
+    {
+      "time": "07:15-07:50",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast together with Member 4, packing lunch and study snacks",
+      "desc": "Walk to kitchen. Greet Member 4. Open refrigerator. Take out ingredients. Prepare breakfast. Cook eggs. Toast bread. Set table. Eat breakfast. Talk with Member 4. Clear dishes. Wash dishes. Pack lunch. Pack snacks. Close refrigerator."
+    },
+    {
+      "time": "07:50-08:35",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University campus",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look at phone. Check messages. Put phone away. Look out window. Get off bus. Walk to campus."
+    },
+    {
+      "time": "08:35-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and tutorials on campus",
+      "desc": "Enter lecture hall. Sit at desk. Take out notebook. Take out pen. Listen to lecturer. Write notes. Raise hand. Ask question. Listen to answer. Turn page. Write more notes. Check time. Pack up. Stand. Walk to next class."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Eating lunch on campus while reading set course texts",
+      "desc": "Walk to cafeteria. Buy lunch. Carry tray to table. Sit down. Open book. Take bite of food. Read page. Turn page. Take another bite. Drink water. Continue reading. Close book. Throw away trash."
+    },
+    {
+      "time": "13:00-16:00",
+      "location": "Out",
+      "activity": "Studying in the campus library and drafting assignment work on computer",
+      "desc": "Walk to library. Find empty desk. Sit down. Open laptop. Open assignment document. Type sentences. Pause. Read text. Delete sentence. Type more. Open browser. Search for reference. Copy citation. Paste into document. Format text. Save document. Stretch arms."
+    },
+    {
+      "time": "16:00-16:50",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look at phone. Scroll social media. Put phone away. Get off bus. Walk home."
+    },
+    {
+      "time": "16:50-17:20",
+      "location": "Bathroom",
+      "activity": "Freshening up and changing into part-time work uniform (bathroom is free at this time)",
+      "desc": "Enter home. Remove shoes. Walk to bathroom. Turn on tap. Wash face. Dry face. Walk to bedroom. Take off day clothes. Put on work uniform. Look in mirror. Adjust collar. Walk to kitchen."
+    },
+    {
+      "time": "17:20-17:55",
+      "location": "Kitchen",
+      "activity": "Cooking and eating an early dinner before the evening shift, coordinating kitchen use with Member 4 who starts cooking around 17:40",
+      "desc": "Enter kitchen. Greet Member 4. Open refrigerator. Take out ingredients. Chop vegetables. Turn on induction cooker. Place pan on cooker. Pour oil. Add vegetables. Stir. Add sauce. Turn off cooker. Put food on plate. Sit at table. Eat dinner. Talk with Member 4. Finish eating. Wash dishes."
+    },
+    {
+      "time": "17:55-18:20",
+      "location": "Out",
+      "activity": "Walking to the part-time hospitality and retail job",
+      "desc": "Walk out front door. Close door. Walk down street. Cross road. Wait for traffic light. Continue walking. Arrive at workplace."
+    },
+    {
+      "time": "18:20-22:20",
+      "location": "Out",
+      "activity": "Working the evening hospitality and retail shift",
+      "desc": "Enter workplace. Clock in. Put on apron. Greet customers. Take orders. Operate cash register. Process payments. Serve food. Clear tables. Wipe tables. Restock shelves. Sweep floor. Take break. Drink water. Return to work. Clock out."
+    },
+    {
+      "time": "22:20-22:50",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look at phone. Check messages. Put phone away. Get off bus. Walk home."
+    },
+    {
+      "time": "22:50-23:00",
+      "location": "Bedroom 1",
+      "activity": "Settling in and changing out of work clothes, waiting for Member 4 to finish in the bathroom before showering",
+      "desc": "Enter home. Remove shoes. Walk to bedroom. Take off work uniform. Put on casual clothes. Sit on bed. Look at phone. Wait for bathroom."
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bathroom",
+      "activity": "Showering and winding down after work (bathroom free after Member 4's 22:30-23:00 night routine)",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step in. Wash body. Shampoo hair. Rinse. Turn off shower. Step out. Dry with towel. Walk to bedroom. Put on pajamas."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Preparing for bed, briefly checking phone and going to sleep",
+      "desc": "Walk to bathroom. Brush teeth. Rinse mouth. Walk to bedroom. Set alarm on phone. Plug phone into charger. Lie down on bed. Pull blanket up. Check phone. Put phone on bedside table. Close eyes. Fall asleep."
+    }
+  ]
+}

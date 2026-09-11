@@ -1,0 +1,231 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:00",
+      "start_minutes": 0,
+      "end_minutes": 360,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:00-06:35",
+      "start_minutes": 360,
+      "end_minutes": 395,
+      "location": "Bathroom",
+      "activity": "Waking up early, showering and getting dressed (using the bathroom before Member 4's 06:45-07:15 slot to avoid the shared-bathroom clash)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:35-07:15",
+      "start_minutes": 395,
+      "end_minutes": 435,
+      "location": "Bedroom 1",
+      "activity": "Reviewing course readings, organising notes and study materials for the day",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:50",
+      "start_minutes": 435,
+      "end_minutes": 470,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast together with Member 4, packing lunch and study snacks",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:35",
+      "start_minutes": 470,
+      "end_minutes": 515,
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:35-12:00",
+      "start_minutes": 515,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and tutorials on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Eating lunch on campus while reading set course texts",
+      "operations": []
+    },
+    {
+      "time": "13:00-16:00",
+      "start_minutes": 780,
+      "end_minutes": 960,
+      "location": "Out",
+      "activity": "Studying in the campus library and drafting assignment work on computer",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:50",
+      "start_minutes": 960,
+      "end_minutes": 1010,
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:50-17:20",
+      "start_minutes": 1010,
+      "end_minutes": 1040,
+      "location": "Bathroom",
+      "activity": "Freshening up and changing into part-time work uniform (bathroom is free at this time)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:20-17:55",
+      "start_minutes": 1040,
+      "end_minutes": 1075,
+      "location": "Kitchen",
+      "activity": "Cooking and eating an early dinner before the evening shift, coordinating kitchen use with Member 4 who starts cooking around 17:40",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:55-18:20",
+      "start_minutes": 1075,
+      "end_minutes": 1100,
+      "location": "Out",
+      "activity": "Walking to the part-time hospitality and retail job",
+      "operations": []
+    },
+    {
+      "time": "18:20-22:20",
+      "start_minutes": 1100,
+      "end_minutes": 1340,
+      "location": "Out",
+      "activity": "Working the evening hospitality and retail shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:20-22:50",
+      "start_minutes": 1340,
+      "end_minutes": 1370,
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:50-23:00",
+      "start_minutes": 1370,
+      "end_minutes": 1380,
+      "location": "Bedroom 1",
+      "activity": "Settling in and changing out of work clothes, waiting for Member 4 to finish in the bathroom before showering",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-23:30",
+      "start_minutes": 1380,
+      "end_minutes": 1410,
+      "location": "Bathroom",
+      "activity": "Showering and winding down after work (bathroom free after Member 4's 22:30-23:00 night routine)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "start_minutes": 1410,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Preparing for bed, briefly checking phone and going to sleep",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

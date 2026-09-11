@@ -1,0 +1,267 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-00:45",
+      "location": "Bedroom 3",
+      "activity": "Lying awake in bed with poor sleep, scrolling Instagram and Messenger on phone",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "00:45-06:30",
+      "location": "Bedroom 3",
+      "activity": "Sleeping, with brief wakeful periods through the night",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:20",
+      "location": "Bathroom",
+      "activity": "Slow morning wash: long shower, shaving and grooming at an unhurried pace (exclusive bathroom use)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:20-08:00",
+      "location": "Kitchen",
+      "activity": "Slow breakfast at home: boiling kettle, toasting bread, taking daily medication",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:20",
+      "location": "Bedroom 3",
+      "activity": "Getting dressed and checking messages to plan the day's study and support shift work",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:20-09:30",
+      "location": "Bedroom 3",
+      "activity": "PhD study at desk lamp: reviewing public health literature and coding data on computer",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:30-10:15",
+      "location": "Out",
+      "activity": "Walking to local shops early to buy groceries before the heatwave peak",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:15-10:45",
+      "location": "Kitchen",
+      "activity": "Unpacking groceries into refrigerator and freezer, rinsing and prepping vegetables",
+      "operations": []
+    },
+    {
+      "time": "10:45-12:30",
+      "location": "Bedroom 3",
+      "activity": "Continuing PhD writing and analysis on computer, scheduling reminders for focus breaks",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Kitchen",
+      "activity": "Cooking lunch at home using induction cooker and rice cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Kitchen",
+      "activity": "Eating lunch and drinking water to stay hydrated during the heatwave",
+      "operations": []
+    },
+    {
+      "time": "13:30-14:00",
+      "location": "Bathroom",
+      "activity": "Loading washing machine and hanging laundry to dry indoors away from the heat",
+      "operations": [
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "14:00-14:30",
+      "location": "Bedroom 3",
+      "activity": "Resting and doing gentle stretches to ease mild chronic pain",
+      "operations": []
+    },
+    {
+      "time": "14:30-15:00",
+      "location": "Out",
+      "activity": "Walking in the shade to the support work client's home",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:00-19:00",
+      "location": "Out",
+      "activity": "Disability and aged-care support shift: assisting clients with meals, mobility and daily routines",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Walking home after the support shift in the cooler evening air",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:15",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner at home",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:15-21:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying kitchen surfaces in a loose chaotic-tidiness style",
+      "operations": []
+    },
+    {
+      "time": "21:00-21:45",
+      "location": "Bedroom 3",
+      "activity": "Household admin at computer: paying bills by mobile wallet, updating shift rosters and messaging family about distant elder caregiving",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing with TV on and fan running to cool down before bed",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night routine: washing face, brushing teeth and preparing for sleep (exclusive bathroom use)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 3",
+      "activity": "Lying in bed reading on phone, winding down slowly with poor sleep",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}

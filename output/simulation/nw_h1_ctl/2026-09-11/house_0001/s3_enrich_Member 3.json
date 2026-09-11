@@ -1,0 +1,137 @@
+{
+  "member": "Member 3",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "desc": "Lie on back on bed. Pull blanket up to chest with both hands. Close eyes. Breathe slowly. Turn head to the left. Turn body onto right side. Bend knees. Pull blanket edge with left hand. Turn onto left side. Stretch right leg. Roll back onto back. Slide left arm under pillow. Turn onto right side again. Grip blanket corner. Relax grip. Remain motionless with eyes closed."
+    },
+    {
+      "time": "06:30-06:45",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, and taking daily medication (bathroom slot before Member 4's 06:45 shower)",
+      "desc": "Open eyes. Sit up on bed. Swing both legs over the edge. Stand up. Walk to the bathroom. Open bathroom door. Turn on bathroom light. Turn on tap. Bend over the sink. Cup water in both hands. Splash water onto face. Rub face with hands. Pick up towel from rail. Wipe face with towel. Hang towel back on rail. Pick up medicine bottle from shelf. Twist cap open. Tip one tablet into left palm. Place tablet in mouth. Fill cup with water from tap. Drink water and swallow tablet. Turn off tap. Turn off bathroom light. Walk out of bathroom."
+    },
+    {
+      "time": "06:45-06:50",
+      "location": "Bedroom 3",
+      "activity": "Getting dressed and quick tidy of the room",
+      "desc": "Open wardrobe door. Take out shirt. Put on shirt. Take out trousers. Put on trousers. Put on socks. Pick up pajamas from bed. Fold pajamas. Place folded pajamas on bed. Smooth blanket with both hands. Pick up stray clothes from floor. Place them on chair. Straighten pillow."
+    },
+    {
+      "time": "06:50-07:10",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with Member 1 and Member 2",
+      "desc": "Walk into kitchen. Open refrigerator door. Take out milk carton. Place carton on counter. Close refrigerator door. Open cupboard. Take out bowl. Place bowl on counter. Take out cereal box. Pour cereal into bowl. Pour milk into bowl. Place carton down. Say \"Good morning\" to Member 1 and Member 2. Pull chair out. Sit down. Pick up spoon. Scoop cereal. Put spoon in mouth. Chew. Repeat scooping and eating. Lift bowl with both hands. Drink remaining milk. Place bowl on table."
+    },
+    {
+      "time": "07:10-07:20",
+      "location": "Kitchen",
+      "activity": "Feeding the cat and cleaning up the breakfast dishes",
+      "desc": "Stand up. Pick up bowl from table. Open cupboard door. Take out cat food can. Pull ring tab to open can. Scoop food into cat bowl with spoon. Place cat bowl on floor. Open tap. Pick up sponge. Scrub bowl under running water. Rinse bowl. Place bowl in drying rack. Pick up Member 1 and Member 2's dishes. Scrub and rinse them. Place them in rack. Turn off tap. Wipe counter with cloth."
+    },
+    {
+      "time": "07:20-07:30",
+      "location": "Bedroom 3",
+      "activity": "Packing bag and getting ready to leave",
+      "desc": "Walk to bedroom. Pick up backpack from floor. Unzip backpack. Open laptop. Place laptop into backpack. Place notebook and pen into backpack. Pick up charger. Wrap cable around hand. Place charger into backpack. Zip backpack closed. Pick up phone from desk. Put phone into pocket. Put on jacket. Pick up backpack. Turn off bedroom light. Walk out of bedroom."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Out",
+      "activity": "Walking to the supermarket for shift",
+      "desc": "Walk to front door. Open front door. Step outside. Close door. Turn key to lock door. Walk down driveway. Turn left onto footpath. Walk along street. Reach pedestrian crossing. Press button on pole. Wait at curb. Cross road when signal changes. Continue walking along footpath. Pass shops. Turn right at corner. Walk along main road. Reach supermarket entrance. Push glass door open. Walk inside."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Out",
+      "activity": "Working part-time at supermarket",
+      "desc": "Walk to staff room. Open locker. Place backpack inside. Close locker. Put on work vest. Clip name badge onto vest. Walk to checkout counter. Log into register with code. Stand behind counter. Greet customer \"Hello, how are you?\". Take items from conveyor belt. Scan each barcode. Place items into shopping bag. Press total button. State price to customer. Take cash from customer. Count change. Hand change and receipt to customer. Say \"Thank you, have a good day\". Straighten bags on rack. Wipe counter with cloth. Repeat for next customer."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Eating lunch during break",
+      "desc": "Walk to break room. Sit on chair. Open lunchbox. Take out sandwich. Pick up sandwich with both hands. Bite sandwich. Chew. Take out water bottle. Unscrew cap. Lift bottle to mouth. Drink. Screw cap back on. Pick up sandwich again. Bite and chew. Wipe mouth with napkin. Close lunchbox lid. Stand up. Throw napkin into bin."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Walking to university",
+      "desc": "Walk out of supermarket. Turn right onto footpath. Walk along street. Stop at traffic light. Press pedestrian button. Cross road when signal changes. Walk past car park. Cross second intersection. Walk through campus gate. Walk along main path. Reach engineering building. Push door open. Walk into corridor."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Attending engineering classes at university",
+      "desc": "Walk into lecture hall. Take seat at desk. Sit down. Take out laptop. Open lid. Type password. Open notes file. Look at projector screen. Type notes with both hands. Raise right hand. Ask lecturer a question. Lower hand. Pick up pen. Write formula in notebook. Underline heading. Turn page. Attend tutorial session. Turn to classmate. Discuss problem. Pick up calculator. Enter numbers. Write answer. Close laptop. Pack laptop and notebook into backpack. Stand up. Walk to next classroom."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Out",
+      "activity": "Walking to tutoring location",
+      "desc": "Walk out of university building. Turn left onto street. Walk along footpath. Stop at traffic lights. Cross road. Continue walking along main road. Pass bus stop. Turn right at corner. Walk half a block. Reach tutoring centre entrance. Push door open. Walk inside. Climb stairs to first floor. Open classroom door. Walk in."
+    },
+    {
+      "time": "17:30-19:30",
+      "location": "Out",
+      "activity": "Tutoring students part-time",
+      "desc": "Greet student \"Hi, ready to start?\". Sit at table. Open textbook. Point at exercise with finger. Explain steps aloud. Take pencil. Write calculation on paper. Show working to student. Hand worksheet to student. Wait while student works. Look at student's answer. Mark with red pen. Say \"Good, but check this step\". Answer student's question. Stand up. Walk to whiteboard. Pick up marker. Draw diagram. Cap marker. Wipe board with eraser. Sit down again. Assign homework. Say \"See you next week\"."
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Out",
+      "activity": "Walking home",
+      "desc": "Pick up backpack. Stand up. Walk out of classroom. Walk down stairs. Push door open. Step outside. Walk along street. Cross road at lights. Walk up residential street. Reach front gate. Open gate. Walk to front door. Take keys from pocket. Unlock door. Open door. Step inside. Close door. Take off shoes. Place shoes on rack."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1",
+      "desc": "Walk into kitchen. Open refrigerator door. Take out vegetables. Place vegetables on cutting board. Pick up knife. Chop vegetables. Turn on induction cooker. Pour oil into pan. Add vegetables to pan. Stir with spatula. Add noodles to pan. Stir again. Turn off induction cooker. Take out two plates. Serve food onto plates. Carry plates to table. Sit down on chair. Say to Member 1 \"How was your day?\". Pick up chopsticks. Eat noodles. Lift bowl. Drink soup. Place bowl down."
+    },
+    {
+      "time": "20:30-20:45",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying up the kitchen",
+      "desc": "Stand up. Stack plates. Carry stack to sink. Turn on tap. Pick up sponge. Squeeze soap onto sponge. Scrub plate. Rinse plate under water. Place plate in drying rack. Scrub pan. Rinse pan. Place pan in rack. Turn off tap. Wipe counter with cloth. Wring out cloth over sink."
+    },
+    {
+      "time": "20:45-21:15",
+      "location": "Kitchen",
+      "activity": "Having a late dinner and chatting with Member 2",
+      "desc": "Hear Member 2 enter kitchen. Turn around. Say \"Hi, dinner's on the stove\". Take out bowl from cupboard. Fill bowl with rice from cooker. Place bowl on table. Pull chair out. Sit down. Pick up chopsticks. Eat rice. Ask Member 2 \"How was the cafe shift?\". Listen. Nod head. Take another bite. Lift water glass. Drink. Place glass down. Push bowl forward slightly."
+    },
+    {
+      "time": "21:15-21:30",
+      "location": "Kitchen",
+      "activity": "Finishing kitchen clean-up and putting away leftovers",
+      "desc": "Stand up. Pick up bowls from table. Carry bowls to sink. Scrape leftovers into container with spoon. Put lid on container. Open refrigerator door. Place container inside. Close refrigerator door. Turn on tap. Rinse bowls. Scrub bowls with sponge. Place bowls in drying rack. Turn off tap. Wipe table with cloth. Wipe stove surface."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV (shared living room time with Member 4 and Member 5)",
+      "desc": "Walk into living room. Sit down on sofa. Pick up remote from table. Press power button. Press channel button. Watch screen. Say to Member 4 and Member 5 \"What are you watching?\". Put remote on cushion. Pick up phone. Scroll screen. Place phone down. Reach for remote again. Press channel button. Lean back. Laugh at program. Stand up. Stretch arms. Sit down again. Press power button. Place remote on table. Stand up."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 3",
+      "activity": "Organizing chores and rent using computer",
+      "desc": "Walk into bedroom. Pull chair out. Sit at desk. Turn on desk lamp. Open laptop lid. Press power button. Type password. Open spreadsheet file. Type numbers in rent column. Add column total. Open browser. Log into bank account. Enter transfer amount. Click confirm. Take screenshot. Open shared notes file. Type chore list for the week. Save file. Close browser window. Press shutdown. Close laptop lid. Turn off desk lamp."
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bathroom",
+      "activity": "Personal care and washing up (bathroom free after Member 2 finishes at 22:55)",
+      "desc": "Walk to bathroom. Open door. Turn on light. Turn on tap. Pick up toothbrush. Squeeze toothpaste onto brush. Brush teeth. Rinse mouth with water. Spit into sink. Turn off tap. Pick up towel. Dry face. Take off clothes. Place clothes on rack. Turn on shower. Step into shower. Wet hair. Apply shampoo. Rub scalp. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Put on pajamas. Hang towel on rail. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "desc": "Walk to bed. Pull back blanket with right hand. Lie down on bed. Pull blanket over body. Turn onto right side. Adjust pillow with left hand. Close eyes. Turn onto back. Breathe slowly. Turn onto left side. Pull blanket up to shoulders. Place arm under pillow. Remain still with eyes closed."
+    }
+  ]
+}

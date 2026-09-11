@@ -1,0 +1,295 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-01:30",
+      "start_minutes": 0,
+      "end_minutes": 90,
+      "location": "Bedroom 2",
+      "activity": "Lying in bed scrolling YouTube and WhatsApp, delaying sleep despite an early alarm habit",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "01:30-09:30",
+      "start_minutes": 90,
+      "end_minutes": 570,
+      "location": "Bedroom 2",
+      "activity": "Sleeping in after a late night, catching up on rest on a weekend morning",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "09:30-09:55",
+      "start_minutes": 570,
+      "end_minutes": 595,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and taking a warm shower to wake up slowly (bathroom free, Member 3 finished at 09:00 and Member 4 at 08:40)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:55-10:30",
+      "start_minutes": 595,
+      "end_minutes": 630,
+      "location": "Kitchen",
+      "activity": "Boiling the kettle and brewing a strong cup of tea, then cooking a breakfast that fits dietary restrictions",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:30-10:50",
+      "start_minutes": 630,
+      "end_minutes": 650,
+      "location": "Bedroom 2",
+      "activity": "Doing daily stretching routine and getting dressed for the day",
+      "operations": []
+    },
+    {
+      "time": "10:50-11:30",
+      "start_minutes": 650,
+      "end_minutes": 690,
+      "location": "Living Room",
+      "activity": "Tidying the shared living space and catching up on overdue cleaning chores while Member 3 and Member 4 are out grocery shopping",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:30-12:30",
+      "start_minutes": 690,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Grocery shopping at the local market, checking prices carefully and picking up weekly staples",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "start_minutes": 750,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Driving back home with the groceries",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:45",
+      "start_minutes": 780,
+      "end_minutes": 825,
+      "location": "Kitchen",
+      "activity": "Cooking a simple lunch at home and eating it together with Member 3 while checking messages",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:45-15:45",
+      "start_minutes": 825,
+      "end_minutes": 945,
+      "location": "Bedroom 2",
+      "activity": "Working on freelance design projects at the computer and monitor, refining a client layout",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:45-16:15",
+      "start_minutes": 945,
+      "end_minutes": 975,
+      "location": "Kitchen",
+      "activity": "Making another cup of tea and having a small snack while standing at the counter",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:15-18:00",
+      "start_minutes": 975,
+      "end_minutes": 1080,
+      "location": "Bedroom 2",
+      "activity": "Continuing freelance creative work and sketching concepts with art supplies on the desk",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "start_minutes": 1080,
+      "end_minutes": 1110,
+      "location": "Living Room",
+      "activity": "Doing a slow stretching session and resting the eyes away from screens",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:30",
+      "start_minutes": 1110,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Cooking dinner from scratch and eating it together with Member 1, Member 3 and Member 4",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-21:00",
+      "start_minutes": 1170,
+      "end_minutes": 1260,
+      "location": "Living Room",
+      "activity": "Watching TV and playing a game on the console with Member 1 and Member 4 to unwind",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "start_minutes": 1260,
+      "end_minutes": 1290,
+      "location": "Bathroom",
+      "activity": "Taking a quick shower and starting a load of laundry in the washing machine (bathroom and washing machine free, before Member 1's 21:30 shower)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "21:30-23:15",
+      "start_minutes": 1290,
+      "end_minutes": 1395,
+      "location": "Out",
+      "activity": "Meeting a large group of friends at a cafe and live music event, staying out socially",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:15-23:30",
+      "start_minutes": 1395,
+      "end_minutes": 1410,
+      "location": "Out",
+      "activity": "Driving home from the social event",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "start_minutes": 1410,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Lying in bed browsing YouTube and WhatsApp, catching up on messages before sleep",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}

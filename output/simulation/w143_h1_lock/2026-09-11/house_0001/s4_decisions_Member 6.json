@@ -1,0 +1,430 @@
+{
+  "member": "Member 6",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:00",
+      "start_minutes": 0,
+      "end_minutes": 360,
+      "location": "Bedroom 6",
+      "activity": "Sleeping, fan running for air circulation, room kept quiet and dark.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:00-06:30",
+      "start_minutes": 360,
+      "end_minutes": 390,
+      "location": "Bathroom",
+      "activity": "Waking up, showering, washing face, brushing teeth and getting dressed, using the shared bathroom before Member 3's 06:30 slot.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:15",
+      "start_minutes": 390,
+      "end_minutes": 435,
+      "location": "Bedroom 6",
+      "activity": "Daily reading of a book and light stretching, keeping quiet while other members use the bathroom and kitchen.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:45",
+      "start_minutes": 435,
+      "end_minutes": 465,
+      "location": "Kitchen",
+      "activity": "Preparing and eating a keto breakfast of eggs and avocado, checking the shared house calendar while eating, having breakfast alongside Member 1, Member 2 and Member 3.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:15",
+      "start_minutes": 465,
+      "end_minutes": 495,
+      "location": "Bedroom 6",
+      "activity": "Scrolling X and replying to Messenger messages about cancelled shifts under the lockdown.",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:15-09:00",
+      "start_minutes": 495,
+      "end_minutes": 540,
+      "location": "Bedroom 6",
+      "activity": "Quiet desk study with the desk lamp on, reviewing Commerce and Engineering lecture notes on the computer.",
+      "operations": [
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-10:30",
+      "start_minutes": 540,
+      "end_minutes": 630,
+      "location": "Bedroom 6",
+      "activity": "Attending an online university lecture remotely because of the public-health lockdown, taking written notes.",
+      "operations": [
+        {
+          "unique_id": "member_6_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:30-10:45",
+      "start_minutes": 630,
+      "end_minutes": 645,
+      "location": "Kitchen",
+      "activity": "Boiling the kettle for tea and making a low-carb snack, sharing a short tea break with Member 1 and Member 2.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:45-12:00",
+      "start_minutes": 645,
+      "end_minutes": 720,
+      "location": "Bedroom 6",
+      "activity": "Working on a Commerce and Engineering assignment at the desk computer in the quiet study space.",
+      "operations": [
+        {
+          "unique_id": "member_6_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "start_minutes": 720,
+      "end_minutes": 765,
+      "location": "Kitchen",
+      "activity": "Cooking and eating a keto lunch of leftovers from the freezer, checking prices on a bargain-hunting app, eating alongside Member 1, Member 3, Member 4 and Member 5.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:45-13:15",
+      "start_minutes": 765,
+      "end_minutes": 795,
+      "location": "Kitchen",
+      "activity": "Washing up and loading the dishwasher and wiping down shared kitchen surfaces alongside Member 2 and Member 3.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "13:15-14:15",
+      "start_minutes": 795,
+      "end_minutes": 855,
+      "location": "Bedroom 6",
+      "activity": "Joining an online tutorial and posting questions in the unit group chat.",
+      "operations": [
+        {
+          "unique_id": "member_6_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:15-15:00",
+      "start_minutes": 855,
+      "end_minutes": 900,
+      "location": "Bedroom 6",
+      "activity": "Reviewing the neobank budget on the phone, checking the list of six to ten subscriptions and cancelling unwanted ones.",
+      "operations": [
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:30",
+      "start_minutes": 900,
+      "end_minutes": 930,
+      "location": "Bedroom 6",
+      "activity": "Updating the monthly paper planner and noting upcoming assignment due dates and possible shift changes.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:30-17:00",
+      "start_minutes": 930,
+      "end_minutes": 1020,
+      "location": "Bedroom 6",
+      "activity": "Revising for exams and drafting assignment sections at the desk.",
+      "operations": [
+        {
+          "unique_id": "member_6_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "start_minutes": 1020,
+      "end_minutes": 1050,
+      "location": "Bedroom 6",
+      "activity": "Reading a book to unwind in a quiet, low-stimulation space.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:15",
+      "start_minutes": 1050,
+      "end_minutes": 1095,
+      "location": "Kitchen",
+      "activity": "Batch cooking keto meals for the week and preparing dinner, sharing the kitchen with Member 1, Member 3, Member 4 and Member 5 who are also cooking.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:15-19:00",
+      "start_minutes": 1095,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Eating dinner and reading news updates about the lockdown on the phone, alongside Member 1, Member 3, Member 4 and Member 5.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "start_minutes": 1140,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Portioning and freezing the low-carb keto servings and washing up, alongside Member 1, Member 4 and Member 5 who are also cleaning up.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Bathroom",
+      "activity": "Loading the washing machine with a load of laundry and starting it, using the bathroom right after Member 3's shower slot.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:00",
+      "start_minutes": 1200,
+      "end_minutes": 1260,
+      "location": "Bedroom 6",
+      "activity": "Sorting health and insurance paperwork, organising documents into labelled folders and writing down questions about the forms.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:45",
+      "start_minutes": 1260,
+      "end_minutes": 1305,
+      "location": "Bedroom 6",
+      "activity": "Reading quietly with reduced-motion settings on the phone to wind down while Member 1 uses the bathroom.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:00",
+      "start_minutes": 1305,
+      "end_minutes": 1320,
+      "location": "Bathroom",
+      "activity": "Quick evening wash, brushing teeth and getting ready for bed, using the bathroom after Member 1's evening wash and before Member 5's slot.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bedroom 6",
+      "activity": "Reading in bed with reduced-motion settings on the phone before sleep.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "start_minutes": 1350,
+      "end_minutes": 1440,
+      "location": "Bedroom 6",
+      "activity": "Sleeping, with the room kept quiet and dark for the night.",
+      "operations": [
+        {
+          "unique_id": "bedroom_6_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_6_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_6_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

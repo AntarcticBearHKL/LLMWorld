@@ -1,0 +1,52 @@
+{
+  "households": 2,
+  "consistent_count": 2,
+  "anomaly_count": 0,
+  "exclude_families": [
+    "Ebike",
+    "ElectricVehicle",
+    "Freezer",
+    "Refrigerator",
+    "Router"
+  ],
+  "per_house": [
+    {
+      "house_id": "house_0001",
+      "members": 4,
+      "at_home_minutes": 4980,
+      "at_home_mean_watts": 575.97,
+      "away_mean_watts": 543.37,
+      "load_consistent": true,
+      "peak_hour": 8,
+      "busy_hour": 9,
+      "peak_aligned": true,
+      "total_kwh": 16.207,
+      "behavior_total_kwh": 13.717,
+      "flags": [
+        "",
+        ""
+      ]
+    },
+    {
+      "house_id": "house_0002",
+      "members": 1,
+      "at_home_minutes": 1230,
+      "at_home_mean_watts": 581.73,
+      "away_mean_watts": 19.0,
+      "load_consistent": true,
+      "peak_hour": 8,
+      "busy_hour": 7,
+      "peak_aligned": true,
+      "total_kwh": 13.482,
+      "behavior_total_kwh": 11.992,
+      "flags": [
+        "",
+        ""
+      ]
+    }
+  ],
+  "anomalies": [],
+  "world_id": "world_838587",
+  "scenario": "baseline",
+  "date": "latest"
+}

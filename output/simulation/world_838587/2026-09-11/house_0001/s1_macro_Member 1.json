@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:40-07:15",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting dressed"
+    },
+    {
+      "time": "07:15-07:50",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, packing lunch and study snacks"
+    },
+    {
+      "time": "07:50-08:35",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University campus"
+    },
+    {
+      "time": "08:35-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and tutorials on campus"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Eating lunch on campus while reading set course texts"
+    },
+    {
+      "time": "13:00-16:00",
+      "location": "Out",
+      "activity": "Studying in the campus library and drafting assignment work on computer"
+    },
+    {
+      "time": "16:00-16:50",
+      "location": "Out",
+      "activity": "Commuting home from campus"
+    },
+    {
+      "time": "16:50-17:20",
+      "location": "Bathroom",
+      "activity": "Freshening up and changing into part-time work uniform"
+    },
+    {
+      "time": "17:20-17:55",
+      "location": "Kitchen",
+      "activity": "Cooking and eating an early dinner before the evening shift"
+    },
+    {
+      "time": "17:55-18:20",
+      "location": "Out",
+      "activity": "Walking to the part-time hospitality and retail job"
+    },
+    {
+      "time": "18:20-22:20",
+      "location": "Out",
+      "activity": "Working the evening hospitality and retail shift"
+    },
+    {
+      "time": "22:20-22:50",
+      "location": "Out",
+      "activity": "Commuting home after the shift"
+    },
+    {
+      "time": "22:50-23:20",
+      "location": "Bathroom",
+      "activity": "Showering and winding down after work"
+    },
+    {
+      "time": "23:20-24:00",
+      "location": "Bedroom 1",
+      "activity": "Preparing for bed, briefly checking phone and going to sleep"
+    }
+  ]
+}

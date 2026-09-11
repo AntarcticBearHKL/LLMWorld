@@ -1,0 +1,292 @@
+{
+  "type": "Young Professional Couple",
+  "season": "Autumn",
+  "story": "A young professional couple in Clayton, assembled from ordered canonical personas.",
+  "home": {
+    "name": "Clayton Apartment",
+    "type": "Apartment",
+    "size": 85,
+    "rooms": [
+      {
+        "name": "Bedroom 1",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "DeskLamp",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 1
+          },
+          {
+            "type": "Laptop",
+            "brand": "Apple",
+            "power": 200,
+            "age": 2
+          },
+          {
+            "type": "Phone",
+            "brand": "Samsung",
+            "power": 20,
+            "age": 1
+          },
+          {
+            "type": "Fan",
+            "brand": "Dyson",
+            "power": 60,
+            "age": 1
+          }
+        ]
+      },
+      {
+        "name": "Bedroom 2",
+        "size": 12,
+        "appliances": [
+          {
+            "type": "DeskLamp",
+            "brand": "Xiaomi",
+            "power": 15,
+            "age": 0
+          },
+          {
+            "type": "Computer",
+            "brand": "Dell",
+            "power": 200,
+            "age": 1
+          },
+          {
+            "type": "Phone",
+            "brand": "Apple",
+            "power": 20,
+            "age": 2
+          },
+          {
+            "type": "SpaceHeater",
+            "brand": "De'Longhi",
+            "power": 2000,
+            "age": 1
+          }
+        ]
+      },
+      {
+        "name": "Kitchen",
+        "size": 10,
+        "appliances": [
+          {
+            "type": "Refrigerator",
+            "brand": "Samsung",
+            "power": 100,
+            "age": 2,
+            "daily_energy_kwh": 1.2
+          },
+          {
+            "type": "Microwave",
+            "brand": "Panasonic",
+            "power": 1000,
+            "age": 1
+          },
+          {
+            "type": "InductionCooker",
+            "brand": "Philips",
+            "power": 2000,
+            "age": 1
+          },
+          {
+            "type": "RangeHood",
+            "brand": "Bosch",
+            "power": 200,
+            "age": 1
+          },
+          {
+            "type": "Oven",
+            "brand": "Whirlpool",
+            "power": 2200,
+            "age": 2
+          },
+          {
+            "type": "Toaster",
+            "brand": "Breville",
+            "power": 1200,
+            "age": 1
+          },
+          {
+            "type": "Kettle",
+            "brand": "Tefal",
+            "power": 2000,
+            "age": 1
+          },
+          {
+            "type": "Dishwasher",
+            "brand": "Siemens",
+            "power": 1800,
+            "age": 2
+          },
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 0
+          }
+        ]
+      },
+      {
+        "name": "Bathroom",
+        "size": 5,
+        "appliances": [
+          {
+            "type": "WaterHeater",
+            "brand": "Bosch",
+            "power": 3000,
+            "age": 3
+          },
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 1
+          },
+          {
+            "type": "Dehumidifier",
+            "brand": "Pro Breeze",
+            "power": 500,
+            "age": 1
+          },
+          {
+            "type": "Fan",
+            "brand": "Xpelair",
+            "power": 60,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "Living Room",
+        "size": 20,
+        "appliances": [
+          {
+            "type": "TV",
+            "brand": "LG",
+            "power": 150,
+            "age": 1
+          },
+          {
+            "type": "AirConditioner",
+            "brand": "Daikin",
+            "power": 2000,
+            "age": 2
+          },
+          {
+            "type": "Router",
+            "brand": "TP-Link",
+            "power": 12,
+            "age": 1
+          },
+          {
+            "type": "GameConsole",
+            "brand": "Sony",
+            "power": 150,
+            "age": 2
+          },
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 0
+          },
+          {
+            "type": "VacuumCleaner",
+            "brand": "Dyson",
+            "power": 1200,
+            "age": 1
+          }
+        ]
+      }
+    ]
+  },
+  "members": [
+    {
+      "source_persona_index": 1,
+      "name": "Member 1",
+      "age": 29,
+      "cultural_background": "American (urban, unspecified ethnicity)",
+      "bedroom": "Bedroom 1",
+      "gender": "Non-binary",
+      "occupation": "Community program coordinator at a nonprofit",
+      "work_schedule": {},
+      "personality": {
+        "energy_awareness": "Low",
+        "big_five": {
+          "openness": 0.5,
+          "conscientiousness": 0.1,
+          "extraversion": 0.5,
+          "agreeableness": 0.8,
+          "neuroticism": 0.5
+        }
+      },
+      "habits": {},
+      "health": {},
+      "personal_appliances": [
+        {
+          "type": "Laptop",
+          "brand": "Apple",
+          "power": 200,
+          "age": 2
+        },
+        {
+          "type": "Phone",
+          "brand": "Apple",
+          "power": 20,
+          "age": 1
+        },
+        {
+          "type": "DeskLamp",
+          "brand": "IKEA",
+          "power": 15,
+          "age": 1
+        }
+      ]
+    },
+    {
+      "source_persona_index": 2,
+      "name": "Member 2",
+      "age": 31,
+      "cultural_background": "Western, spiritually grounded and devout",
+      "bedroom": "Bedroom 2",
+      "gender": "Female",
+      "occupation": "Arts administrator and freelance illustrator",
+      "work_schedule": {},
+      "personality": {
+        "energy_awareness": "Medium",
+        "big_five": {
+          "openness": 0.5,
+          "conscientiousness": 0.25,
+          "extraversion": 0.25,
+          "agreeableness": 0.25,
+          "neuroticism": 0.8
+        }
+      },
+      "habits": {},
+      "health": {},
+      "personal_appliances": [
+        {
+          "type": "Laptop",
+          "brand": "Lenovo",
+          "power": 65,
+          "age": 3
+        },
+        {
+          "type": "Phone",
+          "brand": "Google",
+          "power": 20,
+          "age": 3
+        },
+        {
+          "type": "Monitor",
+          "brand": "Dell",
+          "power": 30,
+          "age": 2
+        }
+      ]
+    }
+  ],
+  "llm_generated": true
+}

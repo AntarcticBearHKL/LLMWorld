@@ -1,0 +1,251 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "start_minutes": 0,
+      "end_minutes": 400,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:40-06:55",
+      "start_minutes": 400,
+      "end_minutes": 415,
+      "location": "Bedroom 2",
+      "activity": "Waking up, tidying the room and skim-reading set art history readings before breakfast",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:55-07:25",
+      "start_minutes": 415,
+      "end_minutes": 445,
+      "location": "Kitchen",
+      "activity": "Breakfast (toast and coffee) with Member 1 and Member 3, catching up on the day while skim-reading set art history readings",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:25-07:50",
+      "start_minutes": 445,
+      "end_minutes": 470,
+      "location": "Bathroom",
+      "activity": "Morning shower, washing face and brushing teeth, then getting dressed (bathroom free after Member 3, Member 4 and Member 5 finish their morning routines)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:00",
+      "start_minutes": 470,
+      "end_minutes": 480,
+      "location": "Bedroom 2",
+      "activity": "Packing laptop, notebook and creative writing drafts into bag and final check",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:50",
+      "start_minutes": 480,
+      "end_minutes": 530,
+      "location": "Out",
+      "activity": "Commuting by train to Monash Caulfield campus",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:50-10:20",
+      "start_minutes": 530,
+      "end_minutes": 620,
+      "location": "Out",
+      "activity": "Art History lecture and tutorial at Monash Caulfield",
+      "operations": []
+    },
+    {
+      "time": "10:20-10:40",
+      "start_minutes": 620,
+      "end_minutes": 640,
+      "location": "Out",
+      "activity": "Coffee break on campus between classes",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:40-12:10",
+      "start_minutes": 640,
+      "end_minutes": 730,
+      "location": "Out",
+      "activity": "Creative Writing workshop at Monash Caulfield",
+      "operations": []
+    },
+    {
+      "time": "12:10-12:50",
+      "start_minutes": 730,
+      "end_minutes": 770,
+      "location": "Out",
+      "activity": "Lunch on campus with course readings",
+      "operations": []
+    },
+    {
+      "time": "12:50-15:20",
+      "start_minutes": 770,
+      "end_minutes": 920,
+      "location": "Out",
+      "activity": "Library study session: drafting essay and revising workshop notes",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:20-15:50",
+      "start_minutes": 920,
+      "end_minutes": 950,
+      "location": "Out",
+      "activity": "Commuting by train and tram to the café",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:50-20:30",
+      "start_minutes": 950,
+      "end_minutes": 1230,
+      "location": "Out",
+      "activity": "Part-time café shift: taking orders, making coffee and closing the counter",
+      "operations": []
+    },
+    {
+      "time": "20:30-21:15",
+      "start_minutes": 1230,
+      "end_minutes": 1275,
+      "location": "Out",
+      "activity": "Commuting home by tram and train",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:50",
+      "start_minutes": 1275,
+      "end_minutes": 1310,
+      "location": "Kitchen",
+      "activity": "Late dinner: reheating leftovers and washing up (kitchen free after Member 5 finishes tidying at 20:00)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:50-22:00",
+      "start_minutes": 1310,
+      "end_minutes": 1320,
+      "location": "Bedroom 2",
+      "activity": "Changing out of day clothes and gathering a small load of laundry",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bathroom",
+      "activity": "Shower and loading a small load of laundry into the washing machine (scheduled right after Member 4's wash cycle ends at 22:00 and before Member 4 showers at 22:30)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:15",
+      "start_minutes": 1350,
+      "end_minutes": 1395,
+      "location": "Bedroom 2",
+      "activity": "Reading a novel and jotting notes in a writing journal under the desk lamp",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:15-24:00",
+      "start_minutes": 1395,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

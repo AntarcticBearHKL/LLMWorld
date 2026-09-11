@@ -1,0 +1,131 @@
+{
+  "member": "Member 4",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed. Close eyes. Remain asleep. Turn over occasionally in the bed. Keep the bedroom light off."
+    },
+    {
+      "time": "07:00-07:40",
+      "location": "Bedroom 4",
+      "activity": "Waking up, reviewing schedule on phone, light stretching (waiting for bathroom to free up)",
+      "desc": "Open eyes. Sit up on the bed. Reach to the bedside table. Pick up the phone. Press the side button to wake the screen. Swipe up to unlock. Open the calendar app. Scroll through the day's schedule. Tap on entries. Open the messaging app and read unread messages. Put the phone down on the bed. Raise both arms overhead and stretch. Rotate the neck side to side. Bend forward and stretch the back. Swing legs off the bed. Sit on the edge. Pick the phone up again and check the time. Stand up. Listen at the door for the bathroom."
+    },
+    {
+      "time": "07:40-08:05",
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and morning shower",
+      "desc": "Walk to the bathroom. Open the bathroom door. Enter. Turn on the bathroom light. Turn on the tap. Cup water in both hands. Splash water onto the face. Pick up the soap and rub it between the palms. Rub the soap over the face. Rinse the face with water. Turn off the tap. Pick up the towel and pat the face dry. Hang the towel back on the hook. Pick up the toothbrush. Squeeze toothpaste from the tube onto the bristles. Brush the teeth. Spit into the sink. Rinse the mouth with water. Put the toothbrush back in the holder. Turn on the shower tap. Adjust the water temperature with the dial. Step under the water. Wet the hair and body. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub it into the hair. Pick up the body wash. Lather the body with a sponge. Rinse off under the water. Turn off the shower tap. Step out. Pick up the towel and dry the hair and body. Wrap the towel around the body. Push the shower curtain aside."
+    },
+    {
+      "time": "08:05-08:40",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with tea while checking news and work messages (sharing kitchen with Member 2 until 08:10)",
+      "desc": "Walk to the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the milk and the bread. Close the refrigerator door. Set the bread on the counter. Open the bread bag. Take out two slices. Put them on a plate. Open the cupboard. Take out a bowl and a mug. Place them on the counter. Pour cereal into the bowl. Pour milk over the cereal. Fill the kettle with water. Press the kettle switch down. Wait for the kettle to boil. Pick up the plate and the bowl. Carry them to the table. Sit down at the table. Pick up the spoon. Eat the cereal. Pick up a slice of bread and eat it. See Member 2 at the counter and say \"Good morning\". Pick up the phone and open the news app. Scroll through headlines. Open the work messaging app. Read client messages. Press the kettle switch. Pour hot water into the mug. Add a tea bag. Stir with the spoon. Drink the tea. Stand up. Carry the plate, bowl and mug to the sink. Rinse them under the tap. Place them on the drying rack."
+    },
+    {
+      "time": "08:40-08:50",
+      "location": "Bedroom 4",
+      "activity": "Turning on desk lamp and setting up computer and monitor for the day",
+      "desc": "Walk to Bedroom 4. Open the door. Enter. Close the door. Walk to the desk. Press the desk lamp switch. Sit down on the desk chair. Press the power button on the computer tower. Wait for the computer to boot. Press the power button on the monitor. Adjust the monitor tilt. Arrange the keyboard and mouse on the desk mat. Plug the headset into the computer. Slide the chair closer to the desk. Log in to the computer with the password. Open the browser."
+    },
+    {
+      "time": "08:50-09:00",
+      "location": "Bedroom 4",
+      "activity": "Freelance web development: reviewing client tickets and pushing code from the home desk",
+      "desc": "Open the ticket management website in the browser. Log in to the account. Scroll through the open client tickets. Click on a ticket. Read the description. Open the code editor. Open the project folder. Read the code files. Edit a few lines of code. Save the file. Open the terminal window. Type the git commit and push commands. Press Enter. Wait for the push confirmation. Close the terminal window."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Bedroom 4",
+      "activity": "Attending online cybersecurity lectures and working through coursework and lab exercises on the computer",
+      "desc": "Open the online learning platform in the browser. Log in with the university account. Click on the live lecture link. Join the video session. Turn on the headset microphone. Listen to the lecturer. Type notes in the text editor. Open the lecture slides in a second tab. Scroll through the slides. Click on the hands-up button to ask a question. Type in the chat box. Leave the video session. Open the lab exercise page. Read the instructions. Open the virtual machine console. Type commands into the terminal. Press Enter. Copy the output into the worksheet. Scroll down the page. Type answers into the lab form. Save the file."
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Kitchen",
+      "activity": "Cooking a quick lunch with the induction cooker and eating it while staying home under the lockdown (with Member 3, and Member 1 and Member 2 later)",
+      "desc": "Walk to the kitchen. Open the refrigerator door. Take out vegetables, eggs and cooked rice. Close the door. Set them on the counter. Take a knife and a chopping board. Cut the vegetables into pieces. Place the pan on the induction cooker. Press the power button. Press the heat setting button. Pour oil into the pan. Add the vegetables. Stir with a spatula. Add the rice. Crack an egg on the edge of the pan and drop it in. Stir again. Turn off the induction cooker. Take a plate from the cupboard. Spoon the food onto the plate. Carry the plate to the table. Sit down. Pick up chopsticks. Eat the lunch. Say \"Hi\" to Member 3 who sits down nearby. Nod to Member 1 and Member 2 as they enter the kitchen. Stand up. Carry the plate to the sink."
+    },
+    {
+      "time": "12:45-13:00",
+      "location": "Bedroom 4",
+      "activity": "Clearing lunch dishes aside and tidying the desk before the afternoon block",
+      "desc": "Walk to Bedroom 4. Open the door. Enter. Carry the plate and cup to the side of the desk. Stack the plate and cup. Pick up the used napkin and drop it into the bin. Wipe the desk surface with a cloth. Straighten the keyboard and mouse. Coil the headset cable. Put the pen back into the pen holder. Align the notebook on the desk. Sit down on the chair."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Bedroom 4",
+      "activity": "Freelance web development: building a client site, debugging code and joining remote stand-up calls",
+      "desc": "Open the code editor. Open the client site project folder. Open the HTML file. Type markup for the new page section. Save the file. Open the CSS file. Add style rules. Save the file. Switch to the browser. Reload the local preview page. Scroll through the page. Click on the buttons to test them. Switch back to the code editor. Open the JavaScript file. Read the console error message. Add a breakpoint. Run the debugger. Step through the code lines. Fix the variable name. Save the file. Reload the page. Open the meeting link in the browser. Join the stand-up call. Turn on the microphone. Say \"Morning, here's my update\". Report the ticket progress. Listen to the team. Mute the microphone. Leave the call. Continue editing the code. Save and commit the changes."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle for tea and having an afternoon snack while stretching away from screens (sharing kitchen with Member 2 cooking)",
+      "desc": "Stand up from the chair. Stretch both arms above the head. Walk out of Bedroom 4. Walk to the kitchen. Fill the kettle with water. Press the kettle switch down. Open the cupboard. Take out a mug and a tea bag. Open the snack packet. Take out a biscuit. Chew the biscuit. Pour hot water into the mug. Add the tea bag. Stir with a spoon. Pick up the mug. Sit on the kitchen chair. Drink the tea. Roll the shoulders backward. Stretch the neck to both sides. Stand up. Carry the mug to the sink. Rinse the mug. Nod to Member 2 at the cooker."
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and oven, sharing the kitchen with Member 1 and Member 3 who are also cooking",
+      "desc": "Open the refrigerator door. Take out the vegetables, tofu and noodles. Close the door. Set the items on the counter. Take the chopping board and knife. Cut the vegetables into slices. Cut the tofu into cubes. Place the pan on the induction cooker. Press the power button. Pour oil into the pan. Add the vegetables. Stir with the spatula. Add the tofu. Pour soy sauce into the pan. Stir again. Press the oven button. Open the oven door. Place the tray inside. Close the oven door. Set the timer. Turn off the induction cooker. Take a bowl from the cupboard. Spoon the food into the bowl. Step aside to let Member 1 pass and say \"Kitchen's all yours\". Nod to Member 3."
+    },
+    {
+      "time": "18:15-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the kitchen table with Member 1 and Member 3",
+      "desc": "Carry the bowl to the kitchen table. Pull out the chair. Sit down. Pick up the chopsticks. Eat the noodles and vegetables. Pick up the mug of tea. Drink. Turn to Member 1 and ask about his assignment. Listen to the reply. Turn to Member 3 and ask about the nursing placement. Nod. Pick up more food with the chopsticks. Finish the food in the bowl. Place the chopsticks on the bowl. Stand up. Push the chair back in. Carry the bowl to the sink."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing up dishes and wiping down the kitchen counters with Member 1",
+      "desc": "Turn on the kitchen tap. Pick up the sponge. Squeeze dish soap onto the sponge. Scrub the bowl and plate. Rinse them under the running water. Place them on the drying rack. Pick up the pan. Scrub it with the sponge. Rinse the pan. Place it on the rack. Turn off the tap. Pick up the cloth. Wipe the counter surface. Wipe the induction cooker top. Wipe the table surface. Wring the cloth out. Hang the cloth on the hook. Turn to Member 1 and say \"Done with the counters\". Step back to the door."
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Bedroom 4",
+      "activity": "Studying for the cybersecurity master's: reading security papers and completing an assignment on the computer",
+      "desc": "Walk to Bedroom 4. Open the door. Enter. Close the door. Sit down on the desk chair. Press the keyboard key to wake the computer. Open the browser. Log in to the university library. Search for a security paper. Download the PDF. Open the PDF and scroll through the pages. Highlight a paragraph. Open a new document in the text editor. Type assignment notes. Open the reference manager. Copy the citation. Paste it into the document. Type the next paragraph. Save the document. Open the assignment submission page. Upload the draft file. Click the save button."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Loading the washing machine with a load of laundry and tidying personal bathroom items",
+      "desc": "Stand up. Walk to Bedroom 4 and pick up the laundry basket. Walk to the bathroom. Open the bathroom door. Enter. Turn on the bathroom light. Open the washing machine door. Pick up the clothes one by one. Drop them into the drum. Close the washing machine door. Open the detergent drawer. Pour detergent into the drawer. Close the drawer. Press the start button. Wait for the drum to begin turning. Pick up the toothbrush holder and set it straight. Line up the shampoo and body wash bottles on the shelf. Hang the towel straight on the hook. Pick up the laundry basket."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bedroom 4",
+      "activity": "Continuing cybersecurity study: reviewing security papers and assignment",
+      "desc": "Walk to Bedroom 4. Open the door. Enter. Close the door. Place the laundry basket on the floor. Sit down on the desk chair. Scroll down the PDF paper. Read the next section. Highlight another paragraph. Switch to the text editor. Type additional notes. Open the reference list. Check the citation format. Correct the entry. Save the document. Scroll back to the top of the paper. Re-read the abstract."
+    },
+    {
+      "time": "21:30-22:15",
+      "location": "Bedroom 4",
+      "activity": "Leisure time: watching a show on the monitor and chatting with friends on the phone",
+      "desc": "Close the PDF and the document. Open the streaming website in the browser. Click on a show. Press play. Lean back in the chair. Pick up the phone. Open the messaging app. Type a message to a friend. Send it. Read the reply. Type another message. Laugh. Put the phone on the desk. Watch the show. Pick up the mug and drink. Pause the show. Stand up and stretch. Sit back down. Resume the show. Close the browser tab."
+    },
+    {
+      "time": "22:15-22:30",
+      "location": "Bedroom 4",
+      "activity": "Preparing for bed and winding down",
+      "desc": "Stand up from the chair. Push the chair under the desk. Press the monitor power button. Shut down the computer. Press the desk lamp switch off. Fold the day's clothes and place them on the chair. Pick up the pyjamas from the drawer. Lay them on the bed. Pick up the phone and set the morning alarm. Plug the phone into the charger. Pull back the duvet. Pick up the towel and the toiletry pouch."
+    },
+    {
+      "time": "22:30-22:55",
+      "location": "Bathroom",
+      "activity": "Evening wash, brushing teeth and getting ready for bed",
+      "desc": "Walk to the bathroom. Open the bathroom door. Enter. Turn on the bathroom light. Turn on the tap. Cup water and splash the face. Pick up the soap. Rub the soap over the face. Rinse the face. Turn off the tap. Pick up the towel and pat the face dry. Pick up the toothbrush. Squeeze toothpaste onto the bristles. Brush the teeth. Spit into the sink. Rinse the mouth. Rinse the toothbrush. Put it back in the holder. Place the towel on the hook. Check the washing machine drum is turning. Turn off the bathroom light. Walk out and close the door."
+    },
+    {
+      "time": "22:55-24:00",
+      "location": "Bedroom 4",
+      "activity": "Wind-down reading in bed with the light dimmed, then sleeping",
+      "desc": "Walk to Bedroom 4. Open the door. Enter. Close the door. Change into the pyjamas. Fold the day's clothes. Turn the room light to the dim setting. Pull back the duvet. Lie down on the bed. Pick up the book from the bedside table. Open to the bookmark. Read two pages. Turn the page. Read another page. Close the book. Place it on the bedside table. Check the phone alarm one more time. Place the phone face down on the bedside table. Press the light switch off. Pull the duvet up. Close eyes. Remain still and fall asleep."
+    }
+  ]
+}

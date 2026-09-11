@@ -1,0 +1,346 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 3",
+      "activity": "Sleeping in his own room, keeping the room quiet and dark.",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-06:45",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth quickly before Member 1's shower slot starts.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:30",
+      "location": "Bedroom 3",
+      "activity": "Reviewing nursing lecture notes and checking lockdown news and university emails on phone while the bathroom and kitchen are occupied by Member 1 and Member 2.",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:55",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast while having breakfast with Member 1 and Member 2, checking university emails on phone.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:55-08:00",
+      "location": "Bedroom 3",
+      "activity": "Setting up desk lamp and computer for a day of remote study in the bedroom.",
+      "operations": [
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Bedroom 3",
+      "activity": "Attending online nursing lecture via computer.",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Bedroom 3",
+      "activity": "Studying nursing coursework and taking notes on medication administration and patient care.",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch, reheating food with microwave, eating lunch alongside Member 1 and Member 2.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:45-13:00",
+      "location": "Kitchen",
+      "activity": "Washing up dishes and wiping the kitchen counter after lunch.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "Bedroom 3",
+      "activity": "Joining online nursing tutorial and participating in case discussion.",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-17:00",
+      "location": "Bedroom 3",
+      "activity": "Completing written nursing assignment and reviewing clinical placement notes on computer.",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Kitchen",
+      "activity": "Boiling kettle for tea and preparing a light afternoon snack while Member 2 cooks dinner nearby.",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Kitchen",
+      "activity": "Cooking dinner using induction cooker and rice cooker, sharing the kitchen with Member 1 who is also cooking dinner.",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:15-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the table with Member 1.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bathroom",
+      "activity": "Showering and washing up after the study day.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Bedroom 3",
+      "activity": "Working on online pharmacy assistant training modules and refreshing aged-care aide skills.",
+      "operations": [
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Kitchen",
+      "activity": "Making a cup of tea and tidying the kitchen counter.",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 3",
+      "activity": "Reading nursing textbook and scrolling phone before bed.",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 3",
+      "activity": "Sleeping.",
+      "operations": [
+        {
+          "unique_id": "bedroom_3_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_3_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

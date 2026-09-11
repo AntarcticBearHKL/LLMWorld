@@ -1,0 +1,25 @@
+{
+  "household_types": [
+    {
+      "type": "International Student Share House",
+      "description": "A group of international students, often from China, India, Sri Lanka, Malaysia, or Vietnam, sharing a rented apartment or house to reduce living costs. Typical ages 20-24, enrolled at Monash University. High multilingualism and education levels, with part-time work common.",
+      "members_min": 3,
+      "members_max": 6,
+      "housing_hint": "Rented apartment or house with multiple bedrooms, often in high-rise or older units, near public transport and university."
+    },
+    {
+      "type": "Young Professional Couple",
+      "description": "Young couples without children, often early-career professionals or postgraduate students, living together in a rented or mortgaged unit. Both partners may work full-time or part-time, with median age 25-34 and moderate income.",
+      "members_min": 2,
+      "members_max": 2,
+      "housing_hint": "Rented or owner-occupied apartment or townhouse, typically 2 bedrooms, close to amenities and transport."
+    },
+    {
+      "type": "Migrant Family with Children",
+      "description": "A family with children, often of Chinese or Indian ancestry, where parents may be recent migrants or established residents. Home ownership or renting a separate house. Children may be in school or younger, and education is highly valued.",
+      "members_min": 3,
+      "members_max": 5,
+      "housing_hint": "Separate house or townhouse, often with 3 or more bedrooms, either owned with a mortgage or rented, in a quiet street."
+    }
+  ]
+}

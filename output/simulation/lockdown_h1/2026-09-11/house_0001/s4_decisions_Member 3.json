@@ -1,0 +1,328 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:50",
+      "start_minutes": 0,
+      "end_minutes": 410,
+      "location": "Bedroom 3",
+      "activity": "Sleeping restlessly, waking briefly several times with mild chronic pain and stress",
+      "operations": []
+    },
+    {
+      "time": "06:50-07:30",
+      "start_minutes": 410,
+      "end_minutes": 450,
+      "location": "Bedroom 3",
+      "activity": "Slow morning start: lying in bed, checking phone, scrolling Instagram and Messenger",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:15",
+      "start_minutes": 450,
+      "end_minutes": 495,
+      "location": "Bathroom",
+      "activity": "Showering, washing and taking daily medication (after Member 4's 07:00-07:30 bathroom slot; before Member 2's 08:30 bathroom slot)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:15-08:50",
+      "start_minutes": 495,
+      "end_minutes": 530,
+      "location": "Kitchen",
+      "activity": "Cooking and eating a slow breakfast, boiling the kettle for herbal tea, no caffeine (after Member 4 finishes in the kitchen; before Member 2's 08:50 breakfast)",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:50-09:20",
+      "start_minutes": 530,
+      "end_minutes": 560,
+      "location": "Bedroom 3",
+      "activity": "Sorting the desk and papers in a chaotic-tidiness way and planning the research day",
+      "operations": []
+    },
+    {
+      "time": "09:20-10:45",
+      "start_minutes": 560,
+      "end_minutes": 645,
+      "location": "Bedroom 3",
+      "activity": "PhD work: drafting a systematic review chapter on the computer",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:45-11:00",
+      "start_minutes": 645,
+      "end_minutes": 660,
+      "location": "Living Room",
+      "activity": "Gentle stretching and mobility break for chronic pain and mobility limitation",
+      "operations": []
+    },
+    {
+      "time": "11:00-12:20",
+      "start_minutes": 660,
+      "end_minutes": 740,
+      "location": "Bedroom 3",
+      "activity": "PhD work: analysing public health data and organising references on the computer",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:20-13:00",
+      "start_minutes": 740,
+      "end_minutes": 780,
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch, sharing the kitchen and joining Member 1 and Member 2 during their lunch period",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:30",
+      "start_minutes": 780,
+      "end_minutes": 810,
+      "location": "Living Room",
+      "activity": "Resting on the couch with the TV on quietly, overlapping with Member 1's short break",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:30-14:00",
+      "start_minutes": 810,
+      "end_minutes": 840,
+      "location": "Bedroom 3",
+      "activity": "Reviewing supervision notes and preparing for the online PhD supervision meeting",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:00-15:00",
+      "start_minutes": 840,
+      "end_minutes": 900,
+      "location": "Bedroom 3",
+      "activity": "Online PhD supervision meeting with the research team over video call",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-16:30",
+      "start_minutes": 900,
+      "end_minutes": 990,
+      "location": "Bedroom 3",
+      "activity": "Writing and editing thesis sections on the computer",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:00",
+      "start_minutes": 990,
+      "end_minutes": 1020,
+      "location": "Kitchen",
+      "activity": "Afternoon snack and herbal tea break",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:40",
+      "start_minutes": 1020,
+      "end_minutes": 1060,
+      "location": "Bedroom 3",
+      "activity": "Household management: paying bills by mobile wallet, updating the support-shift roster, checking whether today's rostered shift was cancelled by the lockdown, and logging maintenance tasks",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:40-18:30",
+      "start_minutes": 1060,
+      "end_minutes": 1110,
+      "location": "Kitchen",
+      "activity": "Cooking dinner with Member 1 and Member 2, sharing the kitchen",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:15",
+      "start_minutes": 1110,
+      "end_minutes": 1155,
+      "location": "Kitchen",
+      "activity": "Eating dinner together with Member 1 and Member 2",
+      "operations": []
+    },
+    {
+      "time": "19:15-19:45",
+      "start_minutes": 1155,
+      "end_minutes": 1185,
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down kitchen surfaces together with Member 1 and Member 2",
+      "operations": []
+    },
+    {
+      "time": "19:45-20:15",
+      "start_minutes": 1185,
+      "end_minutes": 1215,
+      "location": "Living Room",
+      "activity": "Joining the structured online group video call with Member 2",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:15-20:45",
+      "start_minutes": 1215,
+      "end_minutes": 1245,
+      "location": "Bathroom",
+      "activity": "Evening wash and taking night medication (after Member 1's 19:45-20:15 bathroom laundry; before Member 4's 21:00 shower)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:45-21:15",
+      "start_minutes": 1245,
+      "end_minutes": 1275,
+      "location": "Living Room",
+      "activity": "Rejoining the structured online group video call with Member 2",
+      "operations": [
+        {
+          "unique_id": "member_3_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-22:00",
+      "start_minutes": 1275,
+      "end_minutes": 1320,
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing to wind down",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-23:00",
+      "start_minutes": 1320,
+      "end_minutes": 1380,
+      "location": "Bedroom 3",
+      "activity": "Wind-down: reading, setting out tomorrow's things, and switching off the phone",
+      "operations": [
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

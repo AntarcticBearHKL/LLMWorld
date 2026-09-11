@@ -1,0 +1,119 @@
+{
+  "member": "Member 4",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up to chin. Extend right arm. Bend knees. Shift to right side. Adjust pillow under head. Remain still. Breathe deeply. Turn onto back. Stretch legs. Yawn. Turn to left side again. Remain asleep."
+    },
+    {
+      "time": "06:40-07:00",
+      "location": "Bedroom 4",
+      "activity": "Waking up, tidying bed and gathering toiletries, waiting for the bathroom to be free after Member 5's 06:30-07:00 shower",
+      "desc": "Open eyes. Sit up. Stretch arms above head. Swing legs out of bed. Stand up. Fold blanket. Fluff pillow. Place pillow on bed. Pick up toiletries bag. Walk to bathroom door. Knock on door. Say 'Are you almost done, Member 5?' Wait. Step back. Check phone. Wait again."
+    },
+    {
+      "time": "07:00-07:20",
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and getting dressed after Member 5 finishes in the bathroom",
+      "desc": "Enter bathroom. Turn on light. Turn on tap. Wet face. Apply cleanser. Rinse face. Pat dry with towel. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Turn off tap. Put on shirt. Put on pants. Put on socks."
+    },
+    {
+      "time": "07:20-07:40",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast (toast and cereal), briefly joining Member 1, Member 2 and Member 3 before they leave for campus",
+      "desc": "Enter kitchen. Say 'Good morning' to Member 1, Member 2, Member 3. Take bread from counter. Place bread in toaster. Press lever. Take bowl from cabinet. Pour cereal into bowl. Open refrigerator. Take milk. Pour milk into bowl. Close refrigerator. Take spoon. Sit at table. Eat cereal. Eat toast. Drink water. Talk to Member 1."
+    },
+    {
+      "time": "07:40-08:00",
+      "location": "Bedroom 4",
+      "activity": "Packing backpack with laptop, lab coat and study notes for the day",
+      "desc": "Pick up backpack. Unzip backpack. Place laptop inside. Place lab coat inside. Place study notes inside. Zip backpack. Pick up phone. Put phone in pocket. Pick up keys. Put keys in pocket. Put on shoes. Tie shoelaces. Stand up."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Travelling to Monash Clayton campus for classes",
+      "desc": "Walk out of house. Walk to bus stop. Wait at bus stop. Check phone. Board bus. Tap card. Find seat. Sit down. Look out window. Get off bus. Walk to campus. Enter campus. Walk to lecture hall."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending chemistry lectures and laboratory practical sessions at Monash Clayton",
+      "desc": "Enter lecture hall. Sit down. Take out notebook. Take out pen. Listen to lecturer. Write notes. Raise hand. Ask question. Pack up. Walk to lab. Put on lab coat. Put on safety goggles. Listen to lab instructions. Pick up beaker. Pour chemical. Stir with glass rod. Clean beaker."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Having lunch at Monash Clayton campus with Member 1 and Member 3, aligned with their 12:00-13:00 lunch",
+      "desc": "Walk to cafeteria. Pick up tray. Select sandwich. Select fruit. Pay cashier. Carry tray to table. Sit with Member 1 and Member 3. Say 'Hi' to Member 1. Say 'Hi' to Member 3. Eat sandwich. Talk to Member 1. Talk to Member 3. Drink water. Clear tray."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Working a part-time lab assistant shift, preparing reagents and cleaning glassware",
+      "desc": "Enter lab. Put on lab coat. Put on gloves. Pick up reagent bottle. Measure reagent. Pour into flask. Stir. Label flask. Clean glassware. Wash beaker. Rinse test tubes. Place on drying rack. Repeat."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Travelling home from campus",
+      "desc": "Walk to bus stop. Wait. Board bus. Tap card. Sit. Look out window. Get off bus. Walk home. Enter house."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Bedroom 4",
+      "activity": "Unpacking backpack, changing into comfortable clothes and relaxing after campus",
+      "desc": "Enter bedroom. Put down backpack. Unzip backpack. Take out laptop. Place on desk. Take out lab coat. Hang lab coat. Take out study notes. Place on desk. Take off shoes. Take off socks. Take off shirt. Take off pants. Put on t-shirt. Put on sweatpants. Sit on bed."
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Having dinner with Member 1 and Member 3, sharing the dinner cooked by Member 3",
+      "desc": "Walk to kitchen. Sit at table. Serve rice. Serve vegetables. Pick up fork. Eat rice. Eat vegetables. Talk to Member 1. Talk to Member 3. Drink water."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the kitchen counters after dinner",
+      "desc": "Stand up. Collect plates. Scrape food into bin. Stack plates. Fill sink with water. Add dish soap. Pick up sponge. Wash plate. Rinse plate. Place in drying rack. Wash fork. Rinse fork. Place in drying rack. Drain sink. Wipe counter with cloth."
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Bedroom 4",
+      "activity": "Studying chemistry notes and completing assignments on the computer with the desk lamp on",
+      "desc": "Sit at desk. Turn on desk lamp. Open laptop. Open chemistry notes. Read notes. Highlight text. Write equations. Type on keyboard. Click mouse. Open assignment. Read assignment. Write answers. Check periodic table."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Loading and running the washing machine for a load of laundry, with the wash cycle ending at 22:00 before Member 2 uses the bathroom",
+      "desc": "Gather dirty clothes. Walk to bathroom. Open washing machine. Put clothes in. Add detergent. Close door. Select cycle. Press start. Listen to machine start. Wait. Check time. Leave bathroom."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Change channel. Watch TV. Adjust volume. Change channel again. Stand up. Sit down."
+    },
+    {
+      "time": "22:30-22:50",
+      "location": "Bathroom",
+      "activity": "Showering before Member 1's 22:50 bathroom use",
+      "desc": "Enter bathroom. Take off clothes. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Rub soap. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel."
+    },
+    {
+      "time": "22:50-23:00",
+      "location": "Bedroom 4",
+      "activity": "Charging phone and getting ready for bed",
+      "desc": "Enter bedroom. Pick up phone. Plug charger into phone. Plug charger into wall. Place phone on nightstand. Set alarm. Take off towel. Put on pajamas. Put on pajama top. Put on pajama bottoms. Pull back blanket."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lie down. Close eyes. Breathe slowly. Pull blanket up. Turn to side. Adjust pillow. Remain still."
+    }
+  ]
+}

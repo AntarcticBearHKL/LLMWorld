@@ -1,0 +1,119 @@
+{
+  "member": "Member 4",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping through the night",
+      "desc": "Lies down on the bed. Pulls the blanket over the body. Closes eyes. Remains lying in bed asleep. Turns from one side to the other during the night. Remains asleep until the alarm."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and washing up (own bathroom slot, after Member 1's 06:30-07:00 shower and before Member 3's 07:30 slot)",
+      "desc": "Turns off the phone alarm. Sits up on the bed. Stands up. Walks to the bathroom door. Opens the door. Enters the bathroom. Turns on the light. Turns on the water heater. Turns on the shower tap. Steps into the shower. Washes the body with soap. Rinses off. Turns off the shower tap. Picks up the towel. Dries the body. Picks up the toothbrush. Squeezes toothpaste onto the toothbrush. Brushes teeth. Rinses the mouth. Turns on the tap. Washes the face. Turns off the tap. Hangs the towel back on the hook. Turns off the light. Turns off the water heater. Opens the door. Walks out of the bathroom. Walks back to Bedroom 4."
+    },
+    {
+      "time": "07:30-08:15",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast and making a hot drink with the kettle, sharing the kitchen and chatting with Member 1 who is finishing her breakfast until 07:45",
+      "desc": "Walks from Bedroom 4 to the Kitchen. Opens the refrigerator door. Takes out milk and bread. Closes the refrigerator door. Places the items on the counter. Opens the cupboard. Takes out a bowl and a plate. Closes the cupboard. Pours cereal into the bowl. Places bread on the plate. Fills the kettle with water at the sink. Places the kettle on its base. Presses the kettle switch to boil. Sits down at the kitchen counter. Picks up the spoon. Eats the cereal. Picks up the bread. Eats the bread. Says to Member 1: 'Good morning, how's your study going?' Listens to Member 1's reply. Stands up. Picks up the mug. Pours hot water from the kettle into the mug. Adds a tea bag. Picks up the mug. Puts the bowl and plate in the sink. Says goodbye to Member 1 as she leaves at 07:45. Picks up the mug. Walks out of the Kitchen."
+    },
+    {
+      "time": "08:15-09:00",
+      "location": "Bedroom 4",
+      "activity": "Checking university emails and reviewing lecture notes on the computer at the desk",
+      "desc": "Walks into Bedroom 4. Places the mug on the desk. Pulls out the desk chair. Sits down. Turns on the desk lamp. Presses the computer power button. Waits for the computer to start. Moves the mouse. Clicks on the email browser tab. Opens the university email inbox. Scrolls through the email list. Clicks open two emails. Reads each email. Closes the emails. Opens the lecture notes folder. Opens the PDF file. Scrolls down the pages. Reads the notes. Picks up the mug. Takes a sip of tea. Puts the mug down."
+    },
+    {
+      "time": "09:00-11:00",
+      "location": "Bedroom 4",
+      "activity": "Attending an online Bachelor of Commerce lecture via video call on the computer",
+      "desc": "Clicks the meeting link in the email. Joins the video call. Turns on the computer microphone. Adjusts the camera angle. Puts on the earphones. Listens to the lecturer. Opens a blank document. Types notes on the keyboard. Scrolls through the shared slides. Writes down formulas. Answers a poll question on screen. Clicks the raise-hand button. Asks the lecturer a question about the assignment. Clicks off the raise-hand button. Continues typing notes. Checks the time on the computer. Opens the chat box. Types a short reply. Sits back in the chair and listens. Types the last few notes. Clicks the leave call button. Closes the video call window."
+    },
+    {
+      "time": "11:00-11:15",
+      "location": "Kitchen",
+      "activity": "Taking a short break and boiling water for tea",
+      "desc": "Stands up from the desk chair. Walks out of Bedroom 4 to the Kitchen. Fills the kettle with water at the sink. Places the kettle on its base. Presses the kettle switch to boil. Opens the cupboard. Takes out a mug and a tea bag. Closes the cupboard. Places the tea bag in the mug. Pours hot water from the kettle into the mug. Picks up the mug. Walks back out of the Kitchen to Bedroom 4."
+    },
+    {
+      "time": "11:15-13:00",
+      "location": "Bedroom 4",
+      "activity": "Studying IT coursework and completing online assignments on the computer",
+      "desc": "Sits down at the desk. Places the mug beside the keyboard. Opens the IT coursework folder. Opens the assignment file. Reads the task description. Opens a code editor window. Types code on the keyboard. Runs the code. Reads the output on screen. Deletes a line of code. Types a correction. Runs the code again. Saves the file. Opens the learning platform in the browser. Clicks the assignment submission tab. Uploads the answer file. Clicks the submit button. Reads the confirmation message. Picks up the mug. Drinks the tea. Puts the mug down. Opens the next lecture slide."
+    },
+    {
+      "time": "13:00-13:45",
+      "location": "Kitchen",
+      "activity": "Cooking lunch on the induction cooker and eating it (kitchen free after Member 3 finishes at 13:00)",
+      "desc": "Stands up from the desk chair. Walks to the Kitchen. Opens the refrigerator door. Takes out vegetables and eggs. Closes the refrigerator door. Places the items on the counter. Opens the cupboard. Takes out a pan and a plate. Closes the cupboard. Turns on the range hood. Presses the induction cooker power button. Sets the heat level. Pours oil into the pan. Puts the pan on the induction cooker. Cuts the vegetables on the chopping board. Puts the vegetables into the pan. Stirs with a spatula. Picks up the eggs. Cracks the eggs into the pan. Stirs again. Presses the induction cooker off button. Turns off the range hood. Picks up the pan. Slides the food onto the plate. Carries the plate to the counter. Sits down. Picks up the fork. Eats the lunch. Picks up the plate. Puts the plate in the sink. Rinses the pan briefly. Washes hands."
+    },
+    {
+      "time": "13:45-14:15",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching news on the TV",
+      "desc": "Walks from the Kitchen to the Living Room. Picks up the TV remote from the table. Presses the power button. Points the remote at the TV. Presses the channel button. Sits down on the sofa. Presses the volume button. Watches the news on the screen. Picks up the phone. Scrolls through messages briefly. Puts the phone down. Leans back on the sofa. Presses the remote to change the channel. Stands up. Presses the TV power button off. Puts the remote back on the table. Walks out of the Living Room."
+    },
+    {
+      "time": "14:15-16:00",
+      "location": "Bedroom 4",
+      "activity": "Conducting a paid online tutoring session from the desk",
+      "desc": "Walks into Bedroom 4. Pulls out the desk chair. Sits down. Turns on the desk lamp. Clicks the tutoring platform link. Joins the video call. Turns on the microphone. Puts on the earphones. Greets the student: 'Hi, ready to start?' Opens the shared whiteboard. Types the lesson heading. Explains a concept while pointing at the screen. Opens a maths worksheet. Works through a sample problem on the whiteboard. Watches the student's answer appear. Says 'That's correct.' Corrects one step on the whiteboard. Opens the next worksheet. Types more examples. Answers the student's question about homework. Types a summary at the end of the whiteboard. Says goodbye to the student. Clicks the leave call button. Closes the window. Removes the earphones."
+    },
+    {
+      "time": "16:00-16:15",
+      "location": "Kitchen",
+      "activity": "Making a quick snack and a warm drink",
+      "desc": "Stands up from the desk chair. Walks out of Bedroom 4 to the Kitchen. Opens the cupboard. Takes out a packet of biscuits and a mug. Closes the cupboard. Opens the refrigerator door. Takes out milk. Closes the refrigerator door. Places the items on the counter. Fills the kettle with water. Presses the kettle switch to boil. Pours hot water into the mug with a tea bag. Adds milk. Picks up the mug and the biscuits. Walks back to Bedroom 4."
+    },
+    {
+      "time": "16:15-17:40",
+      "location": "Bedroom 4",
+      "activity": "Working on freelance analyst tasks and spreadsheet reports on the computer",
+      "desc": "Sits down at the desk. Places the mug beside the keyboard. Opens the spreadsheet software. Opens the client data file. Scrolls through the rows of data. Types a formula into a cell. Presses enter. Copies the formula down the column. Highlights a block of cells. Inserts a chart. Adjusts the chart title. Clicks into the report document. Types the summary paragraph. Opens the client email. Attaches the report file. Types the email message. Clicks send. Eats a biscuit from the packet. Picks up the mug. Drinks the tea. Opens the next data file. Types more formulas."
+    },
+    {
+      "time": "17:40-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner together with Member 1, Member 2 and Member 3, sharing the kitchen and the induction cooker and rice cooker",
+      "desc": "Stands up from the desk chair. Walks out of Bedroom 4 to the Kitchen. Greets Member 1, Member 2 and Member 3. Opens the refrigerator door. Takes out vegetables and tofu. Closes the refrigerator door. Places the items on the counter. Opens the cupboard. Takes out a chopping board and a knife. Cuts the vegetables on the board. Rinses the rice in a bowl. Pours the rice into the rice cooker. Adds water. Presses the rice cooker cook button. Waits until Member 1 finishes with the induction cooker. Presses the induction cooker power button on. Pours oil into the pan. Adds the vegetables to the pan. Stirs with a spatula. Adds the tofu. Stirs again. Asks Member 3: 'Can I use the cooker for a few more minutes?' Steps aside to let Member 2 reach the counter. Presses the induction cooker off button. Picks up the pan. Slides the food into a serving dish. Carries the dish to the table."
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner together with Member 1, Member 2 and Member 3",
+      "desc": "Pulls out a chair at the kitchen table. Sits down. Picks up the chopsticks. Picks food from the serving dish. Eats the rice. Eats the vegetables. Turns to Member 2 and asks: 'How was your studio class today?' Listens to the reply. Nods the head. Picks up the cup. Drinks water. Picks up more food from the dish. Continues eating. Chats with Member 1 about tomorrow's dinner plan. Puts the chopsticks down on the plate. Leans back in the chair. Stands up from the table."
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the kitchen benches together with Member 1, Member 2 and Member 3",
+      "desc": "Picks up the plates and bowls from the table. Carries them to the sink. Turns on the tap. Picks up the sponge. Squeezes dish soap onto the sponge. Scrubs the plates under the running water. Rinses the plates. Places the plates in the drying rack. Picks up the chopsticks and cups. Scrubs and rinses them. Places them in the drying rack. Picks up a cloth. Wipes down the kitchen counter. Wipes the induction cooker surface. Wipes the rice cooker exterior. Hands the cloth to Member 1. Rinses the sink. Turns off the tap. Dries hands on the towel. Says 'Goodnight' to Member 1, Member 2 and Member 3. Walks out of the Kitchen."
+    },
+    {
+      "time": "19:45-21:00",
+      "location": "Bedroom 4",
+      "activity": "Relaxing in the bedroom with a game on the phone and reading, since Member 2 and Member 3 are using the Living Room for their video call",
+      "desc": "Walks into Bedroom 4. Sits down on the bed. Picks up the phone from the bedside table. Unlocks the phone. Opens a game app. Taps the screen to play. Plays for several rounds. Closes the game app. Puts the phone down. Picks up a book from the desk. Opens the book. Lies back on the bed. Reads several pages. Turns a page. Continues reading. Closes the book. Places the book on the bedside table. Stands up from the bed. Walks to the desk. Presses the desk lamp off."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and getting ready for bed (own reserved slot, before Member 2's 21:30 shower and laundry)",
+      "desc": "Walks from Bedroom 4 to the bathroom door. Opens the door. Enters the bathroom. Turns on the light. Turns on the water heater. Turns on the shower tap. Steps into the shower. Washes the body with soap. Rinses off. Turns off the shower tap. Picks up the towel. Dries the body. Wraps the towel. Picks up the toothbrush. Squeezes toothpaste onto it. Brushes teeth. Rinses the mouth. Turns on the tap. Washes the face. Turns off the tap. Hangs the towel on the hook. Turns off the light. Turns off the water heater. Opens the door. Walks out of the bathroom. Walks to Bedroom 4."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 4",
+      "activity": "Chatting with family online on the phone and reading course material",
+      "desc": "Walks into Bedroom 4. Sits down on the bed. Picks up the phone. Opens the messaging app. Calls family members. Holds the phone to the ear. Says 'Hello, how are you all?' Talks about university and coursework. Listens to family replies. Laughs. Says 'I'll send photos later.' Ends the call. Puts the phone down. Picks up the course textbook from the desk. Opens the book. Lies back on the bed. Reads pages. Turns pages. Underlines a line with a pen. Continues reading. Closes the book. Places it on the bedside table."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Stands up from the bed. Turns off the main light. Turns off the desk lamp. Pulls back the blanket. Lies down on the bed. Pulls the blanket over the body. Turns onto one side. Closes eyes. Remains asleep until 24:00."
+    }
+  ]
+}

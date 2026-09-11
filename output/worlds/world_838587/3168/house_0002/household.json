@@ -1,0 +1,259 @@
+{
+  "type": "Single Professional Living Alone",
+  "season": "Autumn",
+  "story": "A single professional living alone in Clayton, assembled from ordered canonical personas.",
+  "home": {
+    "name": "Clayton One-Bedroom Unit",
+    "type": "Apartment",
+    "size": 55,
+    "rooms": [
+      {
+        "name": "Bedroom 1",
+        "size": 14,
+        "appliances": [
+          {
+            "type": "TV",
+            "brand": "Samsung",
+            "power": 150,
+            "age": 2
+          },
+          {
+            "type": "AirConditioner",
+            "brand": "Mitsubishi",
+            "power": 2000,
+            "age": 3
+          },
+          {
+            "type": "Laptop",
+            "brand": "Dell",
+            "power": 200,
+            "age": 1
+          },
+          {
+            "type": "Phone",
+            "brand": "Apple",
+            "power": 20,
+            "age": 1
+          },
+          {
+            "type": "DeskLamp",
+            "brand": "IKEA",
+            "power": 15,
+            "age": 2
+          },
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 3
+          },
+          {
+            "type": "Fan",
+            "brand": "Dyson",
+            "power": 60,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "Kitchen",
+        "size": 9,
+        "appliances": [
+          {
+            "type": "Refrigerator",
+            "brand": "LG",
+            "power": 100,
+            "daily_energy_kwh": 1.2,
+            "age": 4
+          },
+          {
+            "type": "Microwave",
+            "brand": "Panasonic",
+            "power": 1000,
+            "age": 3
+          },
+          {
+            "type": "InductionCooker",
+            "brand": "Bosch",
+            "power": 2000,
+            "age": 2
+          },
+          {
+            "type": "RangeHood",
+            "brand": "Electrolux",
+            "power": 200,
+            "age": 4
+          },
+          {
+            "type": "Kettle",
+            "brand": "Russell Hobbs",
+            "power": 2000,
+            "age": 2
+          },
+          {
+            "type": "Toaster",
+            "brand": "Breville",
+            "power": 1200,
+            "age": 3
+          },
+          {
+            "type": "Oven",
+            "brand": "Westinghouse",
+            "power": 2200,
+            "energy_per_cycle_kwh": 1.5,
+            "cycle_minutes": 60,
+            "age": 5
+          },
+          {
+            "type": "Dishwasher",
+            "brand": "Fisher & Paykel",
+            "power": 1800,
+            "energy_per_cycle_kwh": 1.1,
+            "cycle_minutes": 120,
+            "age": 4
+          },
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 3
+          }
+        ]
+      },
+      {
+        "name": "Living Room",
+        "size": 18,
+        "appliances": [
+          {
+            "type": "TV",
+            "brand": "LG",
+            "power": 150,
+            "age": 3
+          },
+          {
+            "type": "Computer",
+            "brand": "HP",
+            "power": 200,
+            "age": 2
+          },
+          {
+            "type": "Monitor",
+            "brand": "AOC",
+            "power": 30,
+            "age": 2
+          },
+          {
+            "type": "Router",
+            "brand": "TP-Link",
+            "power": 12,
+            "daily_energy_kwh": 0.29,
+            "age": 1
+          },
+          {
+            "type": "GameConsole",
+            "brand": "Sony",
+            "power": 150,
+            "age": 2
+          },
+          {
+            "type": "SpaceHeater",
+            "brand": "Kambrook",
+            "power": 2000,
+            "age": 3
+          },
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 3
+          },
+          {
+            "type": "VacuumCleaner",
+            "brand": "Dyson",
+            "power": 1200,
+            "age": 2
+          }
+        ]
+      },
+      {
+        "name": "Bathroom",
+        "size": 6,
+        "appliances": [
+          {
+            "type": "WaterHeater",
+            "brand": "Rheem",
+            "power": 3000,
+            "age": 5
+          },
+          {
+            "type": "WashingMachine",
+            "brand": "Samsung",
+            "power": 500,
+            "energy_per_cycle_kwh": 0.6,
+            "cycle_minutes": 90,
+            "age": 4
+          },
+          {
+            "type": "ClothesDryer",
+            "brand": "Hoover",
+            "power": 2500,
+            "energy_per_cycle_kwh": 2.5,
+            "cycle_minutes": 120,
+            "age": 4
+          },
+          {
+            "type": "Light",
+            "brand": "Philips",
+            "power": 40,
+            "age": 3
+          },
+          {
+            "type": "Dehumidifier",
+            "brand": "De'Longhi",
+            "power": 500,
+            "age": 2
+          }
+        ]
+      }
+    ]
+  },
+  "members": [
+    {
+      "source_persona_index": 1,
+      "name": "Member 1",
+      "age": 29,
+      "cultural_background": "Australian",
+      "bedroom": "Bedroom 1",
+      "gender": "Female",
+      "occupation": "Health Care Professional",
+      "work_schedule": {},
+      "personality": {
+        "energy_awareness": "Medium",
+        "big_five": {
+          "openness": 0.5,
+          "conscientiousness": 0.1,
+          "extraversion": 0.5,
+          "agreeableness": 0.8,
+          "neuroticism": 0.5
+        }
+      },
+      "habits": {},
+      "health": {},
+      "personal_appliances": [
+        {
+          "type": "Phone",
+          "brand": "Apple",
+          "power": 20,
+          "age": 1
+        },
+        {
+          "type": "Laptop",
+          "brand": "Apple",
+          "power": 60,
+          "age": 2
+        }
+      ]
+    }
+  ],
+  "llm_generated": true
+}

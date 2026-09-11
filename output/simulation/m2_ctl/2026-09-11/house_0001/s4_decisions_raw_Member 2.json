@@ -1,0 +1,244 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-01:30",
+      "location": "Bedroom 2",
+      "activity": "Lying in bed doomscrolling YouTube and replying to WhatsApp messages, unable to wind down",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "01:30-08:30",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:30-08:55",
+      "location": "Bathroom",
+      "activity": "Rushing through a shower and wash, brushing teeth and getting dressed while already running late",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:55-09:15",
+      "location": "Kitchen",
+      "activity": "Making a quick breakfast and brewing a strong cup of tea, packing the laptop and studio supplies into a bag",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:15-09:45",
+      "location": "Out",
+      "activity": "Driving to Monash University Caulfield campus, stuck in morning traffic",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:45-12:30",
+      "location": "Out",
+      "activity": "Attending Master of Design studio class at Caulfield campus, working on critique and design development",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Eating a dietary-restriction-friendly lunch on campus while scrolling the phone",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:15-16:30",
+      "location": "Out",
+      "activity": "Working on design project files in the campus library and attending a tutorial, with frequent tea breaks",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Out",
+      "activity": "Driving home from Caulfield campus",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:20",
+      "location": "Kitchen",
+      "activity": "Making a cup of tea and a snack, checking messages and rent or cleaning reminders",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:20-18:20",
+      "location": "Kitchen",
+      "activity": "Cooking dinner from scratch, working around the medical dietary restriction",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:20-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner and wiping down the benches, clearing own dishes and shared space",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-21:00",
+      "location": "Bedroom 2",
+      "activity": "Freelance creative work at the computer and monitor, preparing illustration files for a client",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:20",
+      "location": "Living Room",
+      "activity": "Daily stretching routine on the floor",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:20-22:00",
+      "location": "Living Room",
+      "activity": "Watching TV and half-heartedly tidying up personal clutter in the shared space",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Night wash, skincare and changing into sleep clothes",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 2",
+      "activity": "In bed doomscrolling YouTube and WhatsApp, procrastinating on sleep despite an early class",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}

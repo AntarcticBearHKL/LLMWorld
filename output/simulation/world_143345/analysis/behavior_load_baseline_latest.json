@@ -1,48 +1,61 @@
 {
   "households": 3,
-  "consistent_count": 0,
-  "anomaly_count": 3,
+  "consistent_count": 1,
+  "anomaly_count": 2,
+  "exclude_families": [
+    "Ebike",
+    "ElectricVehicle",
+    "Freezer",
+    "Refrigerator",
+    "Router"
+  ],
   "per_house": [
     {
       "house_id": "house_0001",
       "members": 6,
       "at_home_minutes": 4765,
-      "at_home_mean_watts": 3446.47,
-      "away_mean_watts": 682.5,
+      "at_home_mean_watts": 1216.72,
+      "away_mean_watts": 578.75,
       "load_consistent": true,
-      "peak_hour": 0,
+      "peak_hour": 17,
       "busy_hour": 22,
       "peak_aligned": false,
+      "total_kwh": 52.824,
+      "behavior_total_kwh": 22.334,
       "flags": [
         "",
-        "peak 0:00 vs activity peak 22:00 misaligned"
+        "peak 17:00 vs activity peak 22:00 misaligned"
       ]
     },
     {
       "house_id": "house_0002",
       "members": 2,
       "at_home_minutes": 1715,
-      "at_home_mean_watts": 1553.3,
-      "away_mean_watts": 280.51,
+      "at_home_mean_watts": 509.62,
+      "away_mean_watts": 218.42,
       "load_consistent": true,
-      "peak_hour": 22,
+      "peak_hour": 7,
       "busy_hour": 7,
-      "peak_aligned": false,
+      "peak_aligned": true,
+      "total_kwh": 24.894,
+      "behavior_total_kwh": 9.404,
       "flags": [
         "",
-        "peak 22:00 vs activity peak 7:00 misaligned"
+        ""
       ]
     },
     {
       "house_id": "house_0003",
       "members": 3,
       "at_home_minutes": 2460,
-      "at_home_mean_watts": 1343.03,
-      "away_mean_watts": 389.27,
+      "at_home_mean_watts": 1238.35,
+      "away_mean_watts": 285.52,
       "load_consistent": true,
       "peak_hour": 6,
       "busy_hour": 18,
       "peak_aligned": false,
+      "total_kwh": 22.364,
+      "behavior_total_kwh": 19.875,
       "flags": [
         "",
         "peak 6:00 vs activity peak 18:00 misaligned"
@@ -53,13 +66,7 @@
     {
       "house_id": "house_0001",
       "flags": [
-        "peak 0:00 vs activity peak 22:00 misaligned"
-      ]
-    },
-    {
-      "house_id": "house_0002",
-      "flags": [
-        "peak 22:00 vs activity peak 7:00 misaligned"
+        "peak 17:00 vs activity peak 22:00 misaligned"
       ]
     },
     {

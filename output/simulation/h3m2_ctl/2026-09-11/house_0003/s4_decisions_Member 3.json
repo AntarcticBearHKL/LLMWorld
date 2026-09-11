@@ -1,0 +1,328 @@
+{
+  "member": "Member 3",
+  "appliance_decisions": [
+    {
+      "time": "00:00-05:30",
+      "start_minutes": 0,
+      "end_minutes": 330,
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "05:30-06:00",
+      "start_minutes": 330,
+      "end_minutes": 360,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and getting dressed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:00-07:00",
+      "start_minutes": 360,
+      "end_minutes": 420,
+      "location": "Kitchen",
+      "activity": "Preparing breakfast for the household, boiling water in the kettle and toasting bread",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:40",
+      "start_minutes": 420,
+      "end_minutes": 460,
+      "location": "Kitchen",
+      "activity": "Eating breakfast with Member 2 (Member 2 eats 07:00-07:30), then tidying the kitchen counter",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:30",
+      "start_minutes": 460,
+      "end_minutes": 510,
+      "location": "Living Room",
+      "activity": "Sweeping and vacuuming the living room floor",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:30",
+      "start_minutes": 510,
+      "end_minutes": 570,
+      "location": "Bathroom",
+      "activity": "Loading the washing machine, washing clothes and hanging them to dry",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "09:30-10:40",
+      "start_minutes": 570,
+      "end_minutes": 640,
+      "location": "Out",
+      "activity": "Walking to the local market and grocery shopping for fresh vegetables and household supplies",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "10:40-11:40",
+      "start_minutes": 640,
+      "end_minutes": 700,
+      "location": "Kitchen",
+      "activity": "Putting away groceries and washing and chopping vegetables for lunch",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:40-12:30",
+      "start_minutes": 700,
+      "end_minutes": 750,
+      "location": "Kitchen",
+      "activity": "Cooking lunch on the induction cooker and steaming rice in the rice cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:10",
+      "start_minutes": 750,
+      "end_minutes": 790,
+      "location": "Kitchen",
+      "activity": "Eating lunch and clearing the dishes",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:10-14:30",
+      "start_minutes": 790,
+      "end_minutes": 870,
+      "location": "Bedroom 3",
+      "activity": "Resting and taking an afternoon nap",
+      "operations": []
+    },
+    {
+      "time": "14:30-15:30",
+      "start_minutes": 870,
+      "end_minutes": 930,
+      "location": "Living Room",
+      "activity": "Dusting furniture, folding laundry and tidying the shared living space",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:30-16:10",
+      "start_minutes": 930,
+      "end_minutes": 970,
+      "location": "Bedroom 3",
+      "activity": "Sitting at the desk with the lamp on, checking the phone and making calls to organise household matters",
+      "operations": [
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:10-17:20",
+      "start_minutes": 970,
+      "end_minutes": 1040,
+      "location": "Kitchen",
+      "activity": "Preparing and cooking dinner, using the oven and range hood",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:20-18:00",
+      "start_minutes": 1040,
+      "end_minutes": 1080,
+      "location": "Kitchen",
+      "activity": "Finishing dinner preparation and setting the table",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Eating dinner with Member 2, aligned with Member 2's dinner time",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "start_minutes": 1140,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the counters and stove",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-21:00",
+      "start_minutes": 1170,
+      "end_minutes": 1260,
+      "location": "Living Room",
+      "activity": "Watching television and relaxing on the sofa with Member 2",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "start_minutes": 1260,
+      "end_minutes": 1290,
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and washing up before bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "start_minutes": 1290,
+      "end_minutes": 1350,
+      "location": "Bedroom 3",
+      "activity": "Reading and using the phone under the desk lamp with the fan running",
+      "operations": [
+        {
+          "unique_id": "member_3_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_3_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "start_minutes": 1350,
+      "end_minutes": 1440,
+      "location": "Bedroom 3",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_3_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "households": [
+    {
+      "house_id": "house_0002",
+      "type": "Young Professional Couple",
+      "members_count": 2,
+      "rooms_count": 5,
+      "llm_generated": true
+    },
+    {
+      "house_id": "house_0003",
+      "type": "Migrant Family with Children",
+      "members_count": 5,
+      "rooms_count": 8,
+      "llm_generated": true
+    },
+    {
+      "house_id": "house_0001",
+      "type": "International Student Share House",
+      "members_count": 5,
+      "rooms_count": 8,
+      "llm_generated": true
+    }
+  ]
+}

@@ -1,0 +1,311 @@
+{
+  "member": "Member 5",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bedroom 5",
+      "activity": "Waking up, checking online university portal, reviewing schedule, and setting reminders for appointments while waiting for the shared bathroom to free up.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:05",
+      "location": "Bedroom 5",
+      "activity": "Counting cash and setting aside bill money for upcoming expenses, keeping quiet while others use the bathroom and kitchen.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:05-08:35",
+      "location": "Bathroom",
+      "activity": "Washing and taking daily medication after Member 4's shower slot.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:35-08:40",
+      "location": "Bedroom 5",
+      "activity": "Quick transition and gathering study materials.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:40-09:00",
+      "location": "Kitchen",
+      "activity": "Making and drinking tea (skips breakfast) after the kitchen frees up.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Bedroom 5",
+      "activity": "Attending online lectures and studying for business degree.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:15",
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch with Member 1, Member 2, Member 3, Member 4 and Member 6 in the shared kitchen during the lockdown.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:15-14:00",
+      "location": "Kitchen",
+      "activity": "Doing household chores (dishes, cleaning counters) following written chore chart.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:00-15:00",
+      "location": "Bedroom 5",
+      "activity": "Participating in virtual group project meeting with classmates.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:30",
+      "location": "Bedroom 5",
+      "activity": "Continuing studying and working on assignments.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:30-15:45",
+      "location": "Kitchen",
+      "activity": "Making a cup of tea and having a small snack with Member 1 and Member 2.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:45-16:30",
+      "location": "Bedroom 5",
+      "activity": "Continuing studying and working on assignments.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:30",
+      "location": "Bedroom 5",
+      "activity": "Taking a break, listening to music or watching a show.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Kitchen",
+      "activity": "Preparing dinner with Member 1, Member 3 and Member 4 in the shared kitchen.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:15-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the table with Member 1, Member 3 and Member 4.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing up dishes and wiping down counters with Member 1 and Member 4.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Bedroom 5",
+      "activity": "Leisure time, video calling friends or family.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Bedroom 5",
+      "activity": "Reading before bed.",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_5_spaceheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Evening routine and taking medication.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

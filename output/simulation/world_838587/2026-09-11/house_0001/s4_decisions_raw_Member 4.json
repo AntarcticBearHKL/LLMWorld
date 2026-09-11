@@ -1,0 +1,189 @@
+{
+  "member": "Member 4",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Shower, brushing teeth and getting dressed for the day (bathroom free: Member 1 finished at 06:35 and Member 3 starts at 07:25)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:50",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast together with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:20",
+      "location": "Out",
+      "activity": "Commuting to university campus (Member 1 departs at the same time)",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:20-12:00",
+      "location": "Out",
+      "activity": "Attending Bachelor of Commerce and IT lectures and tutorials",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:40",
+      "location": "Out",
+      "activity": "Eating lunch on campus",
+      "operations": []
+    },
+    {
+      "time": "12:40-17:00",
+      "location": "Out",
+      "activity": "Studying in the library and attending afternoon classes",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:40",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:40-18:20",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner (joined by Member 1 until 17:55 and Member 2 from 17:45)",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:20-19:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-21:00",
+      "location": "Bedroom 4",
+      "activity": "Conducting online tutoring sessions using the computer",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:20",
+      "location": "Kitchen",
+      "activity": "Making a hot drink and having a snack (kitchen free before Member 3's dinner at 21:20)",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:20-22:30",
+      "location": "Bedroom 4",
+      "activity": "Doing freelance analyst work on the computer",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Showering and completing night routine (bathroom free: Member 3 finished at 22:20 and Member 1 starts at 23:00)",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 4",
+      "activity": "Winding down on the phone and falling asleep",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "households": 2,
+  "scenarios": [
+    {
+      "scenario": "baseline",
+      "total_kwh": 29.6894,
+      "peak_watts": 5331.75,
+      "evening_kwh": 7.5887,
+      "peak_to_mean": 8.62
+    },
+    {
+      "scenario": "ev",
+      "total_kwh": 71.6894,
+      "peak_watts": 7561.75,
+      "evening_kwh": 7.5887,
+      "peak_to_mean": 5.06,
+      "total_change_pct": 141.46,
+      "peak_change_pct": 41.82,
+      "evening_change_pct": 0.0
+    },
+    {
+      "scenario": "hp",
+      "total_kwh": 77.6894,
+      "peak_watts": 8331.75,
+      "evening_kwh": 31.5887,
+      "peak_to_mean": 5.15,
+      "total_change_pct": 161.67,
+      "peak_change_pct": 56.27,
+      "evening_change_pct": 316.26
+    },
+    {
+      "scenario": "ev_hp",
+      "total_kwh": 119.6894,
+      "peak_watts": 8331.75,
+      "evening_kwh": 31.5887,
+      "peak_to_mean": 3.34,
+      "total_change_pct": 303.14,
+      "peak_change_pct": 56.27,
+      "evening_change_pct": 316.26
+    }
+  ],
+  "world_id": "world_838587",
+  "scenario": "baseline",
+  "date": "latest"
+}

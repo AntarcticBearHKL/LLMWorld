@@ -1,0 +1,36 @@
+{
+  "households": 2,
+  "anomaly_count": 0,
+  "anomalies": [],
+  "per_house": [
+    {
+      "house_id": "house_0001",
+      "total_kwh": 16.207416666666667,
+      "peak_to_mean": 5.245129544601494,
+      "load_factor": 0.19065306042426383,
+      "overlap_count": 0,
+      "z_total_kwh": null,
+      "z_peak_to_mean": null,
+      "z_load_factor": null,
+      "z_overlap_count": null,
+      "anomaly_flags": [],
+      "max_abs_z": 0.0
+    },
+    {
+      "house_id": "house_0002",
+      "total_kwh": 13.482000000000053,
+      "peak_to_mean": 5.174603174603178,
+      "load_factor": 0.19325153374233114,
+      "overlap_count": 0,
+      "z_total_kwh": null,
+      "z_peak_to_mean": null,
+      "z_load_factor": null,
+      "z_overlap_count": null,
+      "anomaly_flags": [],
+      "max_abs_z": 0.0
+    }
+  ],
+  "world_id": "world_838587",
+  "scenario": "baseline",
+  "date": "latest"
+}

@@ -1,0 +1,113 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on the bed in Bedroom 1. Pull the blanket over the body. Close the eyes. Turn onto the left side. Adjust the pillow with the left hand. Remain still. Turn onto the right side. Pull the blanket up to the shoulder. Remain still. Turn onto the back. Slide the arm under the pillow. Remain still. Turn onto the left side again. Pull the blanket over the shoulder. Remain still until 06:00."
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bathroom",
+      "activity": "Washing up and showering",
+      "desc": "Open the eyes. Sit up on the bed. Stand up. Walk to the Bathroom. Turn on the Light. Turn on the tap of the sink. Rinse both hands under the water. Pick up the soap. Rub the soap on the hands. Rinse the hands. Turn off the tap. Turn on the WaterHeater. Take off the clothes. Step into the shower area. Turn on the shower tap. Wet the hair under the water. Pour shampoo into the palm. Rub the shampoo into the hair. Rinse the hair. Pick up the shower gel. Rub the gel on the arms and body. Rinse the body. Turn off the shower tap. Pick up the towel. Dry the hair with the towel. Dry the body. Wrap the towel around the body. Step out of the shower area."
+    },
+    {
+      "time": "06:30-06:50",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for the day",
+      "desc": "Walk into Bedroom 1. Open the wardrobe door. Pick up the shirt. Put on the shirt. Button the shirt. Open the drawer. Pick up the underwear. Put on the underwear. Pick up the trousers. Put on the trousers. Pull up the zip. Fasten the button. Pick up the socks. Put on the socks. Pick up the shoes. Put on the shoes. Tie the shoelaces. Hang the towel on the hook. Close the wardrobe door. Close the drawer. Pick up the phone. Check the time on the screen. Put the phone on the desk."
+    },
+    {
+      "time": "06:50-07:10",
+      "location": "Kitchen",
+      "activity": "Eating breakfast with Member 3",
+      "desc": "Walk into the Kitchen. Say 'Morning' to Member 3. Open the Refrigerator door. Take out the milk carton. Put the milk on the counter. Close the Refrigerator door. Open the cupboard. Take out the bowl and the cereal box. Put the bowl on the counter. Pour cereal into the bowl. Pour milk into the bowl. Pick up the spoon. Sit on the chair at the table. Eat the cereal with the spoon. Drink the milk from the cup. Talk with Member 3 about the shift and the classes of the day. Stand up. Carry the bowl to the sink. Rinse the bowl. Put the bowl in the drying rack."
+    },
+    {
+      "time": "07:10-07:30",
+      "location": "Bedroom 1",
+      "activity": "Final check of bag and laptop before leaving",
+      "desc": "Walk into Bedroom 1. Pick up the backpack from the chair. Unzip the backpack. Take out the laptop. Open the laptop lid. Press the power button. Look at the timetable on the screen. Close the laptop lid. Put the laptop into the backpack. Put the charger into the backpack. Put the notebook and the pen into the backpack. Zip the backpack. Pick up the student ID card. Put the card into the pocket. Pick up the phone. Check the messages on the screen. Put the phone into the pocket. Put the backpack on the back."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Studying and reviewing course notes",
+      "desc": "Put the backpack down on the floor. Sit on the chair at the desk. Turn on the DeskLamp. Open the laptop lid. Press the power button. Type the password. Open the course notes file. Read the notes on the screen. Scroll the page with the trackpad. Pick up the pen. Write the key points into the notebook. Turn the page of the notebook. Underline a definition with the pen. Look at the screen again. Write the summary line in the notebook. Close the notes file. Close the laptop lid. Turn off the DeskLamp. Stand up. Pick up the backpack."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Out",
+      "activity": "Commuting to Chadstone shopping centre",
+      "desc": "Open the front door. Step out of the house. Close the door. Walk along the street to the bus stop. Stand at the bus stop. Take the phone out of the pocket. Open the bus timetable app. Check the arrival time. Put the phone back into the pocket. Step onto the 900 bus. Tap the Myki card on the reader. Sit on the seat. Hold the backpack on the knees. Look out of the window. Pull the stop cord. Stand up. Walk to the rear door. Tap the Myki card on the reader again. Step off the bus. Walk to the entrance of Chadstone shopping centre. Push the glass door open."
+    },
+    {
+      "time": "08:30-12:30",
+      "location": "Out",
+      "activity": "Working a retail shift at Chadstone",
+      "desc": "Walk through the staff entrance. Put the backpack into the staff locker. Take off the jacket. Put on the uniform shirt. Attach the name badge to the shirt. Press the clock-in button at the terminal. Walk to the shop floor. Greet the store manager. Take the position behind the counter. Turn on the register. Scan barcode labels with the barcode scanner. Press the total button. Take the cash from the customer. Count the change. Give the change to the customer. Put the items into the paper bag. Hand the bag to the customer. Say 'Thanks, have a good day.' Fold the shirts on the display table. Pick up the hangers. Hang the returned items on the rack. Carry the empty cartons to the storage room. Answer a customer's question about sizes. Walk to the fitting room. Count the number of garments. Straighten the shelves. Take the break at 12:30. Press the clock-out button at the terminal. Take the backpack out of the locker."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus",
+      "desc": "Walk out of the store. Walk to the bus stop on the main road. Stand at the stop. Take the phone out of the pocket. Open the transport app. Check the bus time. Put the phone back. Step onto the 900 bus. Tap the Myki card on the reader. Sit on the seat. Put the backpack on the knees. Look out of the window. Pull the stop cord. Stand up. Walk to the rear door. Tap the Myki card on the reader. Step off the bus. Walk along the path to the campus food court."
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Having lunch on campus",
+      "desc": "Walk into the campus food court. Line up at the counter. Order a sandwich. Tap the bank card on the payment terminal. Take the receipt. Pick up the sandwich. Walk to the empty table. Put the backpack on the chair. Sit down. Unwrap the sandwich. Eat the sandwich. Open the water bottle. Drink the water. Wipe the mouth with the napkin. Stand up. Pick up the tray. Put the tray on the return rack. Pick up the backpack. Put the backpack on the back."
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Attending lectures and studying at university",
+      "desc": "Walk into the lecture theatre. Sit in the middle row. Take the laptop out of the backpack. Open the laptop lid. Press the power button. Type the password. Open the lecture slides file. Type the notes on the keyboard. Look at the projector screen. Raise the right hand. Ask the lecturer a question. Write the answer in the notebook. Close the laptop lid. Walk to the tutorial room. Sit at the table. Discuss the case study with the group members. Write the group answer on the whiteboard. Return to the seat. Take the phone out. Check the time. Put the phone back. Walk to the campus library. Sit at the desk. Open the textbook. Read the chapter. Highlight lines with the pen. Write the summary in the notebook. Stand up. Pack the laptop into the backpack. Zip the backpack."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk out of the library. Walk to the bus loop. Stand in the queue. Step onto the 900 bus. Tap the Myki card on the reader. Sit near the window. Take the phone out of the pocket. Plug the earphones into the phone. Listen to music. Look at the traffic outside. Pull the stop cord. Stand up. Walk to the front door. Tap the Myki card on the reader. Step off the bus. Walk along the street. Open the front gate. Walk to the front door. Take out the keys. Insert the key into the lock. Turn the key. Push the door open. Step inside. Close the door. Lock the door."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Bathroom",
+      "activity": "Washing up after the day",
+      "desc": "Walk into the Bathroom. Turn on the Light. Put the backpack on the floor. Take off the clothes. Turn on the WaterHeater. Step into the shower area. Turn on the shower tap. Wet the body under the water. Pick up the shower gel. Rub the gel on the body. Rinse the body. Turn off the shower tap. Pick up the towel. Dry the hair with the towel. Dry the body. Put on the clean clothes. Pick up the dirty clothes. Turn off the Light. Walk out of the Bathroom."
+    },
+    {
+      "time": "18:30-20:00",
+      "location": "Bedroom 1",
+      "activity": "Studying and using computer",
+      "desc": "Walk into Bedroom 1. Put the dirty clothes into the laundry basket. Put the backpack on the floor. Sit on the chair at the desk. Turn on the DeskLamp. Open the laptop lid. Press the power button. Type the password. Open the assignment document. Read the question on the screen. Type the first paragraph on the keyboard. Open the browser. Search for a journal article. Download the PDF file. Read the abstract on the screen. Copy the citation into the reference list. Type the second paragraph. Save the document with Ctrl+S. Pick up the phone. Check the time on the screen. Put the phone on the desk."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 3",
+      "desc": "Walk into the Kitchen. Say 'Hi' to Member 3. Open the Refrigerator door. Take out the vegetables and the chicken. Put them on the cutting board. Close the Refrigerator door. Pick up the knife. Cut the vegetables on the board. Turn on the InductionCooker. Pour oil into the pan. Put the vegetables into the pan. Stir with the spatula. Put the chicken into the pan. Add salt. Turn off the InductionCooker. Pick up two plates. Put the food on the plates. Carry the plates to the table. Sit on the chair. Eat the dinner with Member 3. Talk about the retail shift and the lectures. Stand up. Pick up the plate. Carry the plate to the sink."
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Studying and using computer",
+      "desc": "Walk into Bedroom 1. Sit on the chair at the desk. Turn on the DeskLamp. Open the laptop lid. Open the notes file. Type the summary on the keyboard. Open the online quiz in the browser. Answer the questions. Click the submit button. Read the score on the screen. Open the group chat window. Type a message to the group members. Send the message. Close the chat window. Open the textbook. Read the chapter. Highlight lines with the pen. Write the key terms into the notebook. Save the file. Close the laptop lid. Turn off the DeskLamp. Stand up."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Brushing teeth and getting ready for bed",
+      "desc": "Walk into the Bathroom. Turn on the Light. Pick up the toothbrush. Turn on the tap. Wet the toothbrush under the water. Squeeze toothpaste onto the brush. Brush the teeth. Rinse the mouth with water. Spit into the sink. Turn off the tap. Wipe the mouth with the towel. Put the toothbrush into the cup. Turn off the Light. Walk out of the Bathroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Walk into Bedroom 1. Take off the clothes. Put on the pajamas. Turn off the Light. Lie down on the bed. Pull the blanket over the body. Turn on the Fan. Press the speed button to set the Fan to low. Put the phone on the nightstand. Close the eyes. Turn onto the left side. Adjust the pillow with the left hand. Remain still. Turn onto the back. Pull the blanket up to the shoulder. Remain still. Turn onto the right side. Remain still until 24:00."
+    }
+  ]
+}
