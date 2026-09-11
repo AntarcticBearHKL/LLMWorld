@@ -1,7 +1,7 @@
 # Experiment: Heatwave event (环境类事件 → 降温负荷)
 
-> 状态：**初步有效果（2 户、3 个 event-day 复现；仍为小样本 n）**。数值来自 R016/R020/R022；
-> 在多种子/更大样本复现前，不应作为最终论文结论。
+> 状态：**定稿（有效果）**：热浪使空调由关转开——**跨 3 世界 baseline AC 0/9 vs heatwave 11/12
+> （Fisher 双侧 p≈0.00003）**。数值来自 R014–R022/R049/R059–R061/R070/R085。
 
 ## 1. Research Question
 
