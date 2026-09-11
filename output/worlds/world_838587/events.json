@@ -2,14 +2,9 @@
   "events": [
     {
       "date": "2026-09-11",
-      "title": "Peak air-conditioner request",
-      "content": "To help balance the grid this evening, please avoid using your air conditioner between 5pm and 8pm today."
-    },
-    {
-      "date": "2026-09-11",
-      "title": "Heatwave warning",
-      "content": "A severe heatwave is forecast, with daytime temperatures above 38C for the next three days.",
-      "template": "heatwave"
+      "title": "Public-health lockdown",
+      "content": "A public-health lockdown begins today; residents are asked to stay at home.",
+      "template": "lockdown"
     }
   ]
 }

@@ -1,0 +1,331 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-11 17:25:58
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Health Care Professional
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  },
+  {
+    "time": "06:30-07:00",
+    "location": "Bathroom",
+    "activity": "Waking up, washing face, showering and brushing teeth"
+  },
+  {
+    "time": "07:00-07:30",
+    "location": "Kitchen",
+    "activity": "Preparing and eating breakfast while checking phone for shift updates"
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Bedroom 1",
+    "activity": "Changing into work scrubs, packing work bag and personal protective equipment"
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Out",
+    "activity": "Commuting to the hospital for the essential-worker day shift during the public-health lockdown"
+  },
+  {
+    "time": "09:00-13:00",
+    "location": "Out",
+    "activity": "Working clinical duties at the hospital, monitoring patients and following infection-control protocols"
+  },
+  {
+    "time": "13:00-13:30",
+    "location": "Out",
+    "activity": "Taking a short lunch break at the hospital staff area"
+  },
+  {
+    "time": "13:30-17:00",
+    "location": "Out",
+    "activity": "Continuing clinical duties, updating patient records and handing over care notes"
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Out",
+    "activity": "Commuting home after the shift"
+  },
+  {
+    "time": "18:00-19:00",
+    "location": "Kitchen",
+    "activity": "Cooking and eating dinner, using the microwave, oven and kettle"
+  },
+  {
+    "time": "19:00-20:00",
+    "location": "Living Room",
+    "activity": "Relaxing on the sofa and watching TV"
+  },
+  {
+    "time": "20:00-20:30",
+    "location": "Bathroom",
+    "activity": "Taking a warm shower and washing up after the shift"
+  },
+  {
+    "time": "20:30-22:00",
+    "location": "Living Room",
+    "activity": "Leisure time watching TV and browsing news on the phone about the lockdown"
+  },
+  {
+    "time": "22:00-22:30",
+    "location": "Bedroom 1",
+    "activity": "Setting out work clothes, turning on the desk lamp and winding down"
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "DeskLamp",
+      "Light",
+      "Fan"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Kettle",
+      "Toaster",
+      "Oven",
+      "Dishwasher",
+      "Light"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "Computer",
+      "Monitor",
+      "Router",
+      "GameConsole",
+      "SpaceHeater",
+      "Light",
+      "VacuumCleaner"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "WashingMachine",
+      "ClothesDryer",
+      "Light",
+      "Dehumidifier"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Pulls blanket over body. Closes eyes. Breathes steadily. Turns from back to side. Adjusts pillow. Remains asleep. Turns to other side. Pulls blanket up. Remains asleep. Turns again. Remains still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, showering and brushing teeth",
+      "desc": "Opens eyes. Sits up in bed. Swings legs over side. Stands up. Walks to bathroom. Turns on bathroom light. Turns on shower. Adjusts water temperature. Steps into shower. Wets body. Applies soap. Rinses body. Turns off shower. Steps out. Picks up towel. Dries body. Wraps towel around. Turns on sink tap. Wets face. Applies facial cleanser. Rinses face. Turns off tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Spits. Turns off tap. Turns off light. Walks out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast while checking phone for shift updates",
+      "desc": "Walks into kitchen. Turns on kitchen light. Opens refrigerator. Takes out milk and cereal. Closes refrigerator. Places items on counter. Opens cupboard. Takes out bowl and spoon. Closes cupboard. Pours cereal into bowl. Pours milk into bowl. Picks up bowl and spoon. Walks to table. Sits down. Picks up spoon. Scoops cereal. Brings spoon to mouth. Chews. Swallows. Picks up phone. Unlocks phone. Taps screen. Scrolls through shift updates. Reads. Puts down phone. Continues eating. Finishes meal. Stands up. Picks up bowl and spoon. Walks to sink. Places bowl and spoon in sink. Turns on tap. Rinses bowl. Turns off tap."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work scrubs, packing work bag and personal protective equipment",
+      "desc": "Walks to bedroom. Opens wardrobe. Takes out scrubs. Closes wardrobe. Takes off sleepwear. Puts on scrub top. Puts on scrub pants. Opens drawer. Takes out socks. Puts on socks. Puts on shoes. Opens closet. Takes out work bag. Unzips bag. Picks up PPE mask. Picks up gloves. Picks up goggles. Places PPE in bag. Zips bag. Picks up bag. Walks out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the essential-worker day shift during the public-health lockdown",
+      "desc": "Walks out of house. Locks door. Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps transit card. Finds seat. Sits down. Holds handrail. Looks out window. Bus stops. Stands up. Walks to exit. Steps off bus. Walks to hospital entrance. Enters hospital."
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Working clinical duties at the hospital, monitoring patients and following infection-control protocols",
+      "desc": "Walks to locker room. Puts on PPE. Sanitizes hands. Walks to patient ward. Enters patient room. Checks patient vital signs. Records data on chart. Administers medication. Adjusts IV drip. Monitors patient. Asks patient: 'How are you feeling?' Listens to response. Updates record. Walks to next patient. Sanitizes hands. Checks vital signs. Administers medication. Updates records. Follows infection control. Removes PPE. Washes hands."
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Taking a short lunch break at the hospital staff area",
+      "desc": "Walks to staff area. Opens locker. Takes out lunch bag. Closes locker. Walks to table. Sits down. Opens lunch bag. Takes out food container. Opens container. Picks up fork. Eats food. Drinks water from bottle. Finishes meal. Closes container. Places container in bag. Stands up. Picks up bag. Walks to locker. Opens locker. Places bag inside. Closes locker. Washes hands. Walks back to ward."
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Continuing clinical duties, updating patient records and handing over care notes",
+      "desc": "Walks to patient ward. Sanitizes hands. Enters patient room. Checks vital signs. Administers medication. Asks patient: 'I'm going to check your blood pressure.' Listens to response. Updates patient record on computer. Saves file. Walks to next patient. Repeats tasks. Gathers care notes. Walks to nurses' station. Hands over notes to colleague. Says 'Here are the care notes for the next shift.' Listens to colleague. Answers questions. Sanitizes hands. Removes PPE. Washes hands. Walks to locker room."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "desc": "Walks out of hospital. Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps card. Finds seat. Sits down. Holds handrail. Looks out window. Bus stops. Stands up. Walks to exit. Steps off bus. Walks to house. Unlocks door. Enters house."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner, using the microwave, oven and kettle",
+      "desc": "Walks into kitchen. Turns on light. Opens refrigerator. Takes out ingredients. Closes refrigerator. Places on counter. Opens cupboard. Takes out pot and pan. Closes cupboard. Turns on stove. Places pot on stove. Adds water. Turns on tap. Fills pot. Turns off tap. Places pot on stove. Turns on burner. Cuts vegetables. Adds to pot. Stirs. Turns on oven. Places food in oven. Sets timer. Turns on kettle. Boils water. Makes tea. Turns off stove. Turns off oven. Takes out food. Places on plate. Sits at table. Eats dinner. Drinks tea. Finishes. Stands up. Places dishes in sink. Turns on tap. Rinses dishes. Turns off tap."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Changes channels. Watches program. Adjusts volume. Leans back. Puts feet on coffee table. Continues watching. Picks up phone. Checks messages. Puts down phone. Watches more TV. Changes channel. Watches. Turns off TV. Stands up."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and washing up after the shift",
+      "desc": "Walks to bathroom. Turns on light. Turns on shower. Adjusts temperature. Steps into shower. Wets body. Applies soap. Washes body. Rinses. Washes hair. Rinses hair. Turns off shower. Steps out. Picks up towel. Dries body. Dries hair. Wraps towel around. Turns off light. Walks out."
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Living Room",
+      "activity": "Leisure time watching TV and browsing news on the phone about the lockdown",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Changes channels. Watches. Picks up phone. Unlocks phone. Opens news app. Scrolls. Reads. Puts down phone. Watches TV. Picks up phone again. Scrolls. Reads. Puts down phone. Watches TV. Changes channel. Watches. Turns off TV. Stands up."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Setting out work clothes, turning on the desk lamp and winding down",
+      "desc": "Walks to bedroom. Opens wardrobe. Takes out work clothes. Closes wardrobe. Lays clothes on chair. Turns on desk lamp. Adjusts lamp. Opens drawer. Takes out pajamas. Closes drawer. Takes off day clothes. Puts on pajamas. Picks up phone. Sets alarm. Puts down phone. Turns off desk lamp. Walks to bed."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies down in bed. Pulls blanket over body. Closes eyes. Breathes steadily. Turns to side. Adjusts pillow. Remains asleep. Turns to back. Pulls blanket up. Remains asleep. Turns to other side. Remains asleep."
+    }
+  ]
+}
+```
+
