@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-08:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Bathroom",
+      "activity": "Washing up and morning hygiene"
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "09:00-10:30",
+      "location": "Living Room",
+      "activity": "Doing household chores such as vacuuming and tidying up"
+    },
+    {
+      "time": "10:30-12:00",
+      "location": "Out",
+      "activity": "Grocery shopping and running errands"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch"
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "Living Room",
+      "activity": "Leisure time watching TV and using computer"
+    },
+    {
+      "time": "15:00-16:30",
+      "location": "Out",
+      "activity": "Outdoor exercise such as walking or jogging"
+    },
+    {
+      "time": "16:30-17:30",
+      "location": "Bathroom",
+      "activity": "Showering and personal care"
+    },
+    {
+      "time": "17:30-19:00",
+      "location": "Living Room",
+      "activity": "Leisure time reading or watching TV"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner"
+    },
+    {
+      "time": "20:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing, watching TV, or using computer"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Nighttime routine and getting ready for bed"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
