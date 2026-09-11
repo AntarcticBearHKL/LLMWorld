@@ -34,6 +34,9 @@
   **neutral** event cut "peak-window" by −32.9% (R104). **Continuous metrics drift systematically
   across session time**; only **binary/structural** signals (device on/off, home/out) are drift-immune.
   This is a core methodological finding.
+  **Same-era re-verification (R106)**: the three binary event results — heatwave → AC, cold-snap →
+  heating, lockdown → out-of-home=0 — all reproduce against fresh same-era baselines, confirming
+  **binary/structural signals are drift-immune** while continuous ones are not.
 - **Lockdown (binary signal, strongest)**: a `lockdown` event removed almost all out-of-home time —
   baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
   **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
