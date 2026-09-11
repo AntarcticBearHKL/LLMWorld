@@ -11,7 +11,7 @@
 | **封锁事件 → 外出归零** | baseline Out>0 13/13 vs lockdown 1/13 | **≈0.000003** |
 | **封锁事件 → 日间负荷 +122%** | 13 对配对 **+2.183 kWh**（13/13, t≈8.04） | 可判幅度（>噪声地板） |
 | **寒潮事件 → 采暖启用** | baseline 0/10 vs cold_snap 6/10 | **≈0.011** |
-| **停电预警 → 峰段削减** | N=3：4.686→3.203 kWh | **−31.7%**（z≈−9.6；跨2世界方向复现 −11.7%~−31.7%） |
+| **停电预警 → 峰段削减** | N=3：4.686→3.203 kWh | **−31.7%**（z≈−9.6；跨3世界方向复现 −7.3%~−31.7%） |
 | 电价上涨 → 峰段削减 | N=3：4.686→3.849 kWh | −17.9% → **未复现**（world_172148 +6.8%） |
 
 **方法学**：运行间噪声地板 std≈1.0 kWh（CV≈12%，R057）；单次/单臂不可信；功效分析表明文献尺度
@@ -42,7 +42,7 @@
 | 夜间回温 night_setback | RQ2 | Cabezas-Riviere 2025 | 采暖 −5~10% | 占位(待跑) | `experiments/night_setback.md` |
 | 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | 占位(待跑) | `experiments/in_home_display.md` |
 | 封锁事件 lockdown | RQ2 | Xia et al. 2026 | 日间用量上升 | 有效果(二值跨3世界:Out>0 13/13→1/13, Fisher 双侧 p≈0.000003) | `experiments/event_lockdown.md` |
-| 停电预警 blackout_risk | RQ2 | Xia et al. 2026 | 避开晚峰 | 有效果(方向跨2世界:峰段 −11.7%~−31.7%) | `experiments/event_blackout_risk.md` |
+| 停电预警 blackout_risk | RQ2 | Xia et al. 2026 | 避开晚峰 | 有效果(方向跨3世界:峰段 −7.3%~−31.7%) | `experiments/event_blackout_risk.md` |
 | 电价上涨 price_hike | RQ2 | Faruqui & Sergici 2010 | 削峰省电 | 未复现(峰段 −17.9%→+6.8%,世界特异) | `experiments/event_price_hike.md` |
 | 寒潮事件 cold_snap | RQ2 | Xia et al. 2026 | 采暖上升 | 有效果(二值:采暖 0/10 vs 6/10, 双侧 p≈0.011) | `experiments/event_cold_snap.md` |
 | 热浪事件 heatwave | RQ2/RQ3 | Xia et al. 2026 | 峰值 +20~40% | 有效果(二值跨3世界:baseline AC 0/9 vs heatwave 11/12, Fisher 双侧 p≈0.00003) | `experiments/event_heatwave.md` |
