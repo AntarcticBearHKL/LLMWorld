@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and drinking water before the hot day"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work clothes and packing the work bag"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist at the hospital, treating rehabilitation patients"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Lunch break at the hospital cafeteria"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions and writing patient progress notes at the hospital"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home in the heatwave"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner and eating while the kitchen range hood runs"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Resting after work without using the air conditioner, listening to music and stretching to ease the heat and relieve muscle tension"
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and washing up"
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Living Room",
+      "activity": "Watching TV and browsing the phone, air conditioner now allowed again"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down, setting the alarm and dimming the light"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and showering"
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, packing a cold lunch and water bottle for the heatwave day"
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and collecting bag and work badge"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital"
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist: assessing patients, running rehabilitation and mobility treatment sessions"
+    },
+    {
+      "time": "12:30-13:10",
+      "location": "Out",
+      "activity": "Lunch break at the hospital, eating and resting in a cool area"
+    },
+    {
+      "time": "13:10-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy work: patient treatment sessions, exercise programs and clinical notes"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner while keeping the air conditioner off during the grid peak"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen"
+    },
+    {
+      "time": "19:15-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing with cool drinks and watching TV, keeping the air conditioner off until the 8pm grid peak ends"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and getting ready for bed"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Study",
+      "activity": "Reviewing physiotherapy clinical notes and reading professional material on the computer"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down with light reading and preparing the room for sleep"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
