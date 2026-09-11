@@ -13,9 +13,9 @@
 
 > **Summary**: **four** results are statistically significant across three worlds — **heatwave → cooling**
 > (baseline AC 0/9 vs 11/12, two-sided p≈0.00003), **lockdown → stay-home** (Out 13/13 → 1/13,
-> p≈0.000003, plus a judgeable **+122% daytime-load magnitude**), **cold-snap → heating**
+> p≈0.000003, plus a judgeable **+220.7% daytime-load magnitude**, same-era n=9, p≈0.010), **cold-snap → heating**
 > (0/10 vs 6/10, two-sided p≈0.011), and **air-conditioner peak tax → AC-off/peak-shaving** under
-> heatwave (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−17.2% across three worlds, R118/R120/R122).
+> heatwave (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−20.6% across three worlds, R118/R120/R122/R125).
 > Other interventions are directional, inconclusive, or null (below).
 
 - **Heatwave (binary signal, statistically significant)**: a natural-language heatwave event causes
