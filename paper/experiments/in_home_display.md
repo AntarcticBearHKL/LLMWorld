@@ -1,6 +1,7 @@
 # Experiment: In-home display / real-time feedback (`in_home_display`)
 
 > 状态：**初步（不显著）**：总量 −5.2%、峰段 −8.4%（N=3），方向与 guide 3~10% 一致但在噪声内。数值来自 R098。
+> ⚠️ **R104 caveat**：baseline 为**跨时段**（nw_ctl/bp172）→ 连续指标不可靠；须**同批次紧邻**重做。
 
 ## 1. Research Question
 
