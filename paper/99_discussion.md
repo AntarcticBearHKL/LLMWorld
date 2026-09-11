@@ -66,6 +66,12 @@
   Caveat: the device's peak share is itself **batch-stochastic** (world_838587 baseline AC-peak share
   was 5% in one batch, 15% in another) — another instance of the drift red line. The earlier
   "price × targeting" 2×2 is thus a special case, not the mechanism.
+  **3-world dose–response (R135)**: the *total*-peak effect of a device-targeted request tracks the
+  device's **absolute peak-window load × achieved behaviour-change rate** — world_838587 (AC-peak
+  0.16 kWh) → no effect (+12.2%), world_143345 (AC-peak 1.27 kWh, AC-peak −44.7%) → −10.0% (n.s. at
+  n=9), world_172148 (AC-peak 1.62 kWh, AC-peak −63%) → −25.5% (significant). Monotone across worlds,
+  supporting the mechanism; the worlds differ in AC location (bedroom/living-room) and hence in the
+  AC's peak-window dose.
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
