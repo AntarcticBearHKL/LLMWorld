@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Breathing steadily. Occasional turning. Sleeping."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Wake up. Open eyes. Sit up in bed. Swing legs out of bed. Stand up. Walk to bathroom. Turn on bathroom light. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Pick up towel. Wipe face. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and drinking water before the hot day",
+      "desc": "Enter kitchen. Turn on kitchen light. Open refrigerator. Take out milk and bread. Close refrigerator. Open cabinet. Take out plate and glass. Close cabinet. Place bread on plate. Pour milk into glass. Sit at table. Eat bread. Drink milk. Drink water. Stand up. Put dishes in sink. Turn off kitchen light. Walk out of kitchen."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work clothes and packing the work bag",
+      "desc": "Enter bedroom. Open wardrobe. Take out work clothes. Close wardrobe. Take off pajamas. Put on work shirt. Put on work pants. Put on socks. Put on shoes. Open work bag. Place laptop into bag. Place water bottle into bag. Zip up bag. Pick up bag. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital",
+      "desc": "Walk out of house. Lock door. Walk to bus stop. Wait for bus. Board bus. Swipe card. Find seat. Sit down. Look at phone. Check time on phone. Adjust bag on shoulder. Get off bus. Walk to hospital. Enter hospital."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist at the hospital, treating rehabilitation patients",
+      "desc": "Greet patient. Review patient chart. Guide patient to exercise area. Demonstrate exercise. Assist patient with exercise. Monitor patient. Take notes. Walk to next patient. Greet next patient. Review chart. Guide to exercise area. Demonstrate exercise. Assist with exercise. Monitor patient. Take notes."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Lunch break at the hospital cafeteria",
+      "desc": "Walk to cafeteria. Pick up tray. Select food. Pay cashier. Carry tray to table. Sit down. Eat food. Drink water. Wipe mouth with napkin. Stand up. Return tray. Walk out of cafeteria."
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions and writing patient progress notes at the hospital",
+      "desc": "Treat next patient. Guide exercises. Assist with equipment. Observe progress. Write notes on computer. Save notes. Walk to next patient. Greet patient. Review chart. Guide to exercise area. Demonstrate exercise. Assist with exercise. Monitor patient. Take notes."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home in the heatwave",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Swipe card. Find seat. Sit down. Look at phone. Check time on phone. Get off bus. Walk home. Unlock door. Enter house."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner and eating while the kitchen range hood runs",
+      "desc": "Enter kitchen. Turn on kitchen light. Open refrigerator. Take out ingredients. Close refrigerator. Turn on range hood. Turn on induction cooker. Place pan on cooker. Add oil. Chop vegetables. Put vegetables in pan. Stir. Add seasoning. Turn off cooker. Turn off range hood. Put food on plate. Sit at table. Eat. Drink water."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Resting after work without using the air conditioner, listening to music and stretching to ease the heat and relieve muscle tension",
+      "desc": "Enter living room. Sit on sofa. Pick up phone. Open music app. Select song. Play music. Put phone on table. Raise arms. Stretch. Lower arms. Bend forward. Touch toes. Stand up. Walk to window. Walk back. Sit on sofa."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and washing up",
+      "desc": "Enter bathroom. Turn on bathroom light. Turn on water heater. Take off clothes. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Scrub body. Rinse body. Turn off shower. Pick up towel. Dry body. Put on clothes. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Living Room",
+      "activity": "Watching TV and browsing the phone, air conditioner now allowed again",
+      "desc": "Enter living room. Pick up remote. Turn on TV. Turn on air conditioner. Sit on sofa. Browse phone. Watch TV. Change channel. Put phone down. Pick up phone. Browse again. Stand up. Walk to kitchen. Drink water. Walk back. Sit on sofa."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down, setting the alarm and dimming the light",
+      "desc": "Enter bedroom. Turn on bedroom light. Change into pajamas. Pick up phone. Set alarm. Place phone on nightstand. Turn off main light. Turn on bedside lamp. Dim lamp. Lie down on bed. Pull up blanket. Close eyes. Sleep."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Breathing steadily. Occasional turning. Sleeping."
+    }
+  ]
+}

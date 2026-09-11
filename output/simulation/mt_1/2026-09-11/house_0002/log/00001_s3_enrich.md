@@ -1,0 +1,352 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-11 18:10:11
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Hospital physiotherapist
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  },
+  {
+    "time": "06:30-07:00",
+    "location": "Bathroom",
+    "activity": "Waking up, showering and getting ready for work"
+  },
+  {
+    "time": "07:00-07:30",
+    "location": "Kitchen",
+    "activity": "Preparing and eating breakfast, making coffee"
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Bedroom 1",
+    "activity": "Getting dressed, packing work bag and checking the day's patient schedule on phone"
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Out",
+    "activity": "Commuting to the hospital for work"
+  },
+  {
+    "time": "09:00-12:00",
+    "location": "Out",
+    "activity": "Working as a hospital physiotherapist: morning patient assessments and rehabilitation sessions"
+  },
+  {
+    "time": "12:00-13:00",
+    "location": "Out",
+    "activity": "Lunch break at the hospital"
+  },
+  {
+    "time": "13:00-17:00",
+    "location": "Out",
+    "activity": "Working as a hospital physiotherapist: afternoon treatment sessions and patient documentation"
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Out",
+    "activity": "Commuting home from the hospital"
+  },
+  {
+    "time": "18:00-19:00",
+    "location": "Kitchen",
+    "activity": "Cooking and eating dinner"
+  },
+  {
+    "time": "19:00-20:00",
+    "location": "Living Room",
+    "activity": "Relaxing on the sofa watching TV with the air conditioner switched off during the grid peak"
+  },
+  {
+    "time": "20:00-20:30",
+    "location": "Bathroom",
+    "activity": "Taking a cool shower and washing up"
+  },
+  {
+    "time": "20:30-21:30",
+    "location": "Study",
+    "activity": "Reviewing patient notes and doing professional development reading on the computer"
+  },
+  {
+    "time": "21:30-22:30",
+    "location": "Bedroom 1",
+    "activity": "Turning on the air conditioner, winding down and scrolling on the phone"
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "AirConditioner",
+      "Light"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "AirConditioner",
+      "Light"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "InductionCooker",
+      "RangeHood",
+      "Microwave",
+      "Kettle",
+      "Toaster",
+      "Dishwasher",
+      "Light",
+      "RiceCooker"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "Light",
+      "Fan",
+      "WashingMachine"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "Light",
+      "Router",
+      "GameConsole",
+      "VacuumCleaner",
+      "SpaceHeater",
+      "Dehumidifier",
+      "ClothesDryer"
+    ]
+  },
+  "Study": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Monitor",
+      "Light"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "ElectricVehicle",
+      "Computer",
+      "Monitor",
+      "Phone",
+      "DeskLamp"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Eyes closed. Sleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting ready for work",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Use toilet. Flush toilet. Turn on shower. Adjust water temperature. Wet body. Apply soap. Wash body. Rinse body. Turn off shower. Step out of shower. Pick up towel. Dry body. Wrap towel. Brush teeth. Rinse mouth. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making coffee",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out eggs, bread, milk. Close refrigerator. Take frying pan. Crack eggs into pan. Fry eggs. Turn off stove. Toast bread. Butter toast. Brew coffee. Pour coffee into mug. Sit at table. Eat eggs and toast. Drink coffee. Clear dishes. Rinse dishes. Load dishwasher. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, packing work bag and checking the day's patient schedule on phone",
+      "desc": "Enter bedroom. Open wardrobe. Take out shirt, trousers, socks, underwear. Close wardrobe. Remove towel. Put on underwear. Put on shirt. Put on trousers. Put on socks. Put on shoes. Put on belt. Open work bag. Place stethoscope, notebook, pen in bag. Close bag. Pick up phone. Unlock phone. Open schedule app. Scroll through patient list. Lock phone. Put phone in pocket. Pick up bag. Exit bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for work",
+      "desc": "Leave home. Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit. Check phone. Arrive at hospital stop. Stand up. Walk to exit. Tap card. Exit bus. Walk to hospital entrance. Enter hospital. Walk to locker room. Change into scrubs. Put on ID badge. Walk to physiotherapy department."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist: morning patient assessments and rehabilitation sessions",
+      "desc": "Greet patient. Review patient chart. Assess range of motion. Measure muscle strength. Test balance. Discuss treatment plan. Demonstrate exercises. Assist patient with exercises. Provide manual therapy. Apply modalities. Set up equipment. Adjust bed height. Document progress. Clean equipment. Wash hands. Repeat with next patient."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break at the hospital",
+      "desc": "Walk to cafeteria. Pick up tray. Select food. Pay. Find table. Sit. Eat. Drink. Check phone. Talk to colleague. Clear tray. Return tray. Walk to break room. Sit. Read. Walk back to department."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist: afternoon treatment sessions and patient documentation",
+      "desc": "Greet patient. Review patient chart. Conduct treatment session. Demonstrate exercises. Assist patient with exercises. Provide manual therapy. Apply modalities. Monitor patient response. Adjust treatment plan. Document session. Update patient records. Communicate with other healthcare professionals. Clean equipment. Wash hands. Repeat with next patient."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Leave hospital. Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit. Check phone. Arrive at home stop. Stand up. Walk to exit. Tap card. Exit bus. Walk home. Enter home. Remove shoes."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out ingredients. Close refrigerator. Wash vegetables. Chop vegetables. Chop meat. Turn on stove. Place pan. Add oil. Add meat. Stir-fry. Add vegetables. Add sauce. Turn off stove. Place food on plate. Sit at table. Eat dinner. Drink water. Clear dishes. Rinse dishes. Load dishwasher. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV with the air conditioner switched off during the grid peak",
+      "desc": "Enter living room. Turn on light. Turn on TV. Pick up remote. Sit on sofa. Change channels. Watch TV. Check phone. Adjust volume. Stand up. Walk to kitchen. Open refrigerator. Take out snack. Close refrigerator. Walk back to living room. Sit on sofa. Continue watching TV. Turn off TV. Stand up. Turn off light. Walk out of living room."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower and washing up",
+      "desc": "Enter bathroom. Turn on light. Turn on shower. Adjust water temperature to cool. Step into shower. Wet body. Apply soap. Wash body. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Wrap towel. Walk to sink. Wash face. Brush teeth. Rinse mouth. Hang towel. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Study",
+      "activity": "Reviewing patient notes and doing professional development reading on the computer",
+      "desc": "Enter study. Turn on light. Turn on desk lamp. Sit at desk. Turn on computer. Open patient notes. Read notes. Make annotations. Open web browser. Search for professional articles. Read article. Take notes. Close browser. Close patient notes. Shut down computer. Turn off desk lamp. Turn off light. Exit study."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Turning on the air conditioner, winding down and scrolling on the phone",
+      "desc": "Enter bedroom. Turn on light. Pick up remote. Turn on air conditioner. Adjust temperature. Sit on bed. Pick up phone. Unlock phone. Open social media. Scroll. Watch videos. Like posts. Comment. Lock phone. Put phone on nightstand. Turn off light. Lie down. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Eyes closed. Sleep."
+    }
+  ]
+}
+```
+

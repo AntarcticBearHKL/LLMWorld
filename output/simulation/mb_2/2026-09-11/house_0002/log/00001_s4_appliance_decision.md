@@ -1,0 +1,1043 @@
+# s4_appliance_decision  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-11 18:11:24
+- seq: 1
+- prefix: Member 1_
+- stage: s4_appliance_decision
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a household electricity behavior expert. Generate the complete appliance usage decisions for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Hospital physiotherapist
+- Habits: {}
+
+This member's complete timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping with the air conditioner set on a low cooling cycle during the hot night",
+    "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe slowly. Remain still. Turn to side. Adjust pillow. Pull blanket. Breathe. Turn to back. Adjust pillow. Remain still. Turn to side. Breathe. Pull blanket. Sleep."
+  },
+  {
+    "time": "06:30-07:00",
+    "location": "Bathroom",
+    "activity": "Waking up, using the toilet, brushing teeth and taking a quick cool shower before the day heats up",
+    "desc": "Wake up. Sit up. Stand up. Walk to bathroom. Turn on light. Use toilet and flush. Wash hands. Pick up toothbrush and apply toothpaste. Brush teeth. Rinse mouth. Turn on shower and adjust temperature. Step into shower. Wet body. Apply soap. Rinse body. Turn off shower. Step out. Dry with towel. Turn off light. Walk out."
+  },
+  {
+    "time": "07:00-07:30",
+    "location": "Kitchen",
+    "activity": "Making breakfast with the kettle and toaster and eating it while checking the phone for the day's schedule",
+    "desc": "Enter kitchen. Turn on light. Fill kettle and turn on. Take out bread and place in toaster. Press toaster lever. Take out plate, butter, knife. Pick up phone. Check schedule. Remove toast. Butter toast. Pour hot water into cup. Add tea bag. Stir. Sit at table. Eat toast. Drink tea. Clear table. Rinse plate. Put plate in dishwasher. Turn off light."
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Bedroom 1",
+    "activity": "Dressing in light hospital work clothes, packing a water bottle and sun protection for the heatwave",
+    "desc": "Enter bedroom. Open wardrobe. Take out shirt, trousers, socks, underwear. Close wardrobe. Remove pajamas. Put on underwear, shirt, trousers, socks. Open drawer. Take out sunscreen. Apply sunscreen to face and arms. Take out hat and sunglasses. Pack water bottle, sunscreen, hat, sunglasses in bag. Pick up bag. Walk out."
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Out",
+    "activity": "Commuting to the hospital on foot and by public transport during the already hot morning",
+    "desc": "Walk out of house. Lock door. Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look out window. Get off bus. Walk to hospital. Enter hospital. Walk to changing room. Change into work shoes. Walk to ward."
+  },
+  {
+    "time": "09:00-12:00",
+    "location": "Out",
+    "activity": "Working as a hospital physiotherapist, assessing and treating rehab patients on the ward and in the gym area",
+    "desc": "Enter ward. Greet patient. Check patient chart. Assist patient to stand. Guide patient to walk. Use gait belt. Instruct patient on exercises. Demonstrate exercise. Spot patient during exercise. Write notes. Move to gym area. Set up equipment. Adjust weights. Assist patient with resistance training. Monitor patient. Answer patient questions. Document progress. Hand over to colleague."
+  },
+  {
+    "time": "12:00-12:30",
+    "location": "Out",
+    "activity": "Taking a lunch break in the staff room, eating and rehydrating in the air conditioned area",
+    "desc": "Enter staff room. Open fridge. Take out lunch box. Open lunch box. Sit at table. Open water bottle. Drink water. Eat food. Use fork. Use spoon. Wipe mouth with napkin. Close lunch box. Put lunch box in fridge. Drink more water. Throw away napkin. Stand up. Walk out of staff room."
+  },
+  {
+    "time": "12:30-17:00",
+    "location": "Out",
+    "activity": "Continuing physiotherapy sessions, writing clinical notes and handing over patients to the afternoon team",
+    "desc": "Return to ward. Greet patient. Assist patient with transfer. Guide patient through exercises. Use therapy ball. Spot patient. Measure range of motion. Record measurements. Sit at desk. Open computer. Type clinical notes. Save notes. Review notes. Print notes. File notes. Meet afternoon team. Discuss patient status. Hand over patient list. Answer questions. Return to ward."
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Out",
+    "activity": "Commuting home from the hospital in the late afternoon heat",
+    "desc": "Walk out of hospital. Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look out window. Get off bus. Walk home. Unlock door. Enter house. Close door."
+  },
+  {
+    "time": "18:00-18:20",
+    "location": "Bathroom",
+    "activity": "Taking a cool shower to wash off sweat and cool down after the hot commute",
+    "desc": "Enter bathroom. Turn on light and shower. Adjust temperature. Step into shower. Wet body. Apply soap. Rinse body. Turn off shower. Step out. Dry with towel. Turn off light. Walk out."
+  },
+  {
+    "time": "18:20-19:00",
+    "location": "Kitchen",
+    "activity": "Cooking a simple dinner using the induction cooker and range hood, then eating at the table",
+    "desc": "Enter kitchen. Turn on light and range hood. Open fridge. Take out vegetables and meat. Close fridge. Wash and chop vegetables and meat. Turn on induction cooker. Place pan on cooker. Add oil, meat, vegetables, sauce. Stir. Turn off induction cooker and range hood. Take out plate. Serve food. Sit at table. Eat food. Drink water. Clear table. Rinse plate. Put plate in dishwasher. Turn off light."
+  },
+  {
+    "time": "19:00-20:00",
+    "location": "Living Room",
+    "activity": "Relaxing on the sofa with the air conditioner on, watching TV and unwinding",
+    "desc": "Enter living room. Turn on air conditioner and TV. Pick up remote. Sit on sofa. Change channel. Adjust volume. Lean back. Put feet on coffee table. Pick up phone. Check messages. Put down phone. Watch TV. Stand up. Get water from kitchen. Return. Sit down. Watch TV. Turn off TV and air conditioner. Stand up. Walk out."
+  },
+  {
+    "time": "20:00-20:30",
+    "location": "Bathroom",
+    "activity": "Loading and starting the washing machine with the day's work clothes",
+    "desc": "Enter bathroom. Turn on light. Pick up work clothes. Open washing machine. Place clothes in washing machine. Add detergent. Close washing machine. Turn on washing machine. Select cycle. Press start. Wait. Turn off light. Walk out."
+  },
+  {
+    "time": "20:30-21:30",
+    "location": "Study",
+    "activity": "Using the computer and desk lamp to review professional reading and update personal notes",
+    "desc": "Enter study. Turn on desk lamp. Turn on computer. Sit at desk. Open reading material. Read. Highlight text. Open note-taking software. Type notes. Save notes. Open browser. Search for additional information. Read. Close browser. Review notes. Turn off computer. Turn off desk lamp. Stand up. Walk out."
+  },
+  {
+    "time": "21:30-22:00",
+    "location": "Living Room",
+    "activity": "Doing light stretching and mobility exercises on the floor to ease the body after work",
+    "desc": "Enter living room. Turn on light. Lay out yoga mat. Sit on mat. Stretch arms. Stretch legs. Bend forward. Hold stretch. Stand up. Do shoulder rolls. Do neck stretches. Do torso twists. Lie on back. Do knee to chest. Do spinal twist. Sit up. Roll up mat. Turn off light. Walk out."
+  },
+  {
+    "time": "22:00-22:30",
+    "location": "Bathroom",
+    "activity": "Night routine: brushing teeth, washing face and preparing for bed",
+    "desc": "Enter bathroom. Turn on light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Put down toothbrush. Turn on tap. Wet face. Apply cleanser. Rub face. Rinse face. Pat dry with towel. Apply moisturizer. Turn off tap. Turn off light. Walk out."
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Going to bed and sleeping with the air conditioner on for the hot night",
+    "desc": "Enter bedroom. Turn on air conditioner. Turn off light. Remove clothes. Put on pajamas. Pull back blanket. Lie down on bed. Pull blanket over body. Adjust pillow. Close eyes. Breathe slowly. Turn to side. Adjust blanket. Remain still. Turn again. Breathe. Sleep."
+  }
+]
+
+Household structure and appliances:
+{
+  "Bedroom 1": {
+    "appliances": [
+      {
+        "unique_id": "bedroom_1_airconditioner",
+        "name": "AirConditioner",
+        "type": "on_demand",
+        "power_watts": 2000,
+        "standby_watts": 0,
+        "duty_cycle": 0.6,
+        "flexible": true,
+        "season": "annual"
+      },
+      {
+        "unique_id": "bedroom_1_light",
+        "name": "Light",
+        "type": "on_demand",
+        "power_watts": 40,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      }
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      {
+        "unique_id": "bedroom_2_airconditioner",
+        "name": "AirConditioner",
+        "type": "on_demand",
+        "power_watts": 2000,
+        "standby_watts": 0,
+        "duty_cycle": 0.6,
+        "flexible": true,
+        "season": "annual"
+      },
+      {
+        "unique_id": "bedroom_2_light",
+        "name": "Light",
+        "type": "on_demand",
+        "power_watts": 40,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      }
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      {
+        "unique_id": "kitchen_refrigerator",
+        "name": "Refrigerator",
+        "type": "always_on",
+        "power_watts": 100,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "kitchen_inductioncooker",
+        "name": "InductionCooker",
+        "type": "on_demand",
+        "power_watts": 2000,
+        "standby_watts": 1,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "kitchen_rangehood",
+        "name": "RangeHood",
+        "type": "on_demand",
+        "power_watts": 200,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "kitchen_microwave",
+        "name": "Microwave",
+        "type": "on_demand",
+        "power_watts": 1000,
+        "standby_watts": 2,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "kitchen_kettle",
+        "name": "Kettle",
+        "type": "on_demand",
+        "power_watts": 2000,
+        "standby_watts": 1,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "kitchen_toaster",
+        "name": "Toaster",
+        "type": "on_demand",
+        "power_watts": 1200,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "kitchen_dishwasher",
+        "name": "Dishwasher",
+        "type": "cycle",
+        "power_watts": 1800,
+        "standby_watts": 2,
+        "duty_cycle": 1.0,
+        "flexible": true,
+        "season": "annual",
+        "energy_per_cycle_kwh": 1.1,
+        "cycle_minutes": 120
+      },
+      {
+        "unique_id": "kitchen_light",
+        "name": "Light",
+        "type": "on_demand",
+        "power_watts": 40,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "kitchen_ricecooker",
+        "name": "RiceCooker",
+        "type": "cycle",
+        "power_watts": 800,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual",
+        "energy_per_cycle_kwh": 0.25,
+        "cycle_minutes": 40
+      }
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      {
+        "unique_id": "bathroom_waterheater",
+        "name": "WaterHeater",
+        "type": "on_demand",
+        "power_watts": 3000,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": true,
+        "season": "annual"
+      },
+      {
+        "unique_id": "bathroom_light",
+        "name": "Light",
+        "type": "on_demand",
+        "power_watts": 40,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "bathroom_fan",
+        "name": "Fan",
+        "type": "on_demand",
+        "power_watts": 60,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "cooling"
+      },
+      {
+        "unique_id": "bathroom_washingmachine",
+        "name": "WashingMachine",
+        "type": "cycle",
+        "power_watts": 500,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": true,
+        "season": "annual",
+        "energy_per_cycle_kwh": 0.6,
+        "cycle_minutes": 90
+      }
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      {
+        "unique_id": "living_room_tv",
+        "name": "TV",
+        "type": "on_demand",
+        "power_watts": 150,
+        "standby_watts": 3,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "living_room_airconditioner",
+        "name": "AirConditioner",
+        "type": "on_demand",
+        "power_watts": 2000,
+        "standby_watts": 0,
+        "duty_cycle": 0.6,
+        "flexible": true,
+        "season": "annual"
+      },
+      {
+        "unique_id": "living_room_light",
+        "name": "Light",
+        "type": "on_demand",
+        "power_watts": 40,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "living_room_router",
+        "name": "Router",
+        "type": "always_on",
+        "power_watts": 12,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "living_room_gameconsole",
+        "name": "GameConsole",
+        "type": "on_demand",
+        "power_watts": 150,
+        "standby_watts": 1,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "living_room_vacuumcleaner",
+        "name": "VacuumCleaner",
+        "type": "on_demand",
+        "power_watts": 1200,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "living_room_spaceheater",
+        "name": "SpaceHeater",
+        "type": "on_demand",
+        "power_watts": 2000,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "heating"
+      },
+      {
+        "unique_id": "living_room_dehumidifier",
+        "name": "Dehumidifier",
+        "type": "on_demand",
+        "power_watts": 500,
+        "standby_watts": 0,
+        "duty_cycle": 0.7,
+        "flexible": false,
+        "season": "heating"
+      },
+      {
+        "unique_id": "living_room_clothesdryer",
+        "name": "ClothesDryer",
+        "type": "cycle",
+        "power_watts": 2500,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": true,
+        "season": "annual",
+        "energy_per_cycle_kwh": 2.5,
+        "cycle_minutes": 120
+      }
+    ]
+  },
+  "Study": {
+    "appliances": [
+      {
+        "unique_id": "study_desklamp",
+        "name": "DeskLamp",
+        "type": "on_demand",
+        "power_watts": 15,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "study_computer",
+        "name": "Computer",
+        "type": "on_demand",
+        "power_watts": 200,
+        "standby_watts": 2,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "study_monitor",
+        "name": "Monitor",
+        "type": "on_demand",
+        "power_watts": 30,
+        "standby_watts": 1,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "study_light",
+        "name": "Light",
+        "type": "on_demand",
+        "power_watts": 40,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      }
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      {
+        "unique_id": "member_1_phone",
+        "name": "Phone",
+        "type": "charging",
+        "power_watts": 20,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": true,
+        "season": "annual"
+      },
+      {
+        "unique_id": "member_1_computer",
+        "name": "Computer",
+        "type": "on_demand",
+        "power_watts": 200,
+        "standby_watts": 1,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "member_1_desklamp",
+        "name": "DeskLamp",
+        "type": "on_demand",
+        "power_watts": 15,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      }
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      {
+        "unique_id": "member_2_electricvehicle",
+        "name": "ElectricVehicle",
+        "type": "charging",
+        "power_watts": 7000,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": true,
+        "season": "annual"
+      },
+      {
+        "unique_id": "member_2_computer",
+        "name": "Computer",
+        "type": "on_demand",
+        "power_watts": 200,
+        "standby_watts": 2,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "member_2_monitor",
+        "name": "Monitor",
+        "type": "on_demand",
+        "power_watts": 30,
+        "standby_watts": 1,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      },
+      {
+        "unique_id": "member_2_phone",
+        "name": "Phone",
+        "type": "charging",
+        "power_watts": 20,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": true,
+        "season": "annual"
+      },
+      {
+        "unique_id": "member_2_desklamp",
+        "name": "DeskLamp",
+        "type": "on_demand",
+        "power_watts": 15,
+        "standby_watts": 0,
+        "duty_cycle": 1.0,
+        "flexible": false,
+        "season": "annual"
+      }
+    ]
+  }
+}
+
+Environment information:
+- Season: Spring
+- Weather: Heatwave
+- Temperature: 32 degrees
+
+
+
+Recent news and events in your area:
+- (2026-09-11) Heatwave warning: A severe heatwave is forecast, with daytime temperatures above 38C for the next three days.
+
+## Appliance type explanation
+
+### 1. on_demand (use-on-demand appliances)
+- Description: devices that only consume power when used (e.g., desk lamp, TV, A/C)
+- Available actions:
+  - "use": use the device (consumes power)
+  - "idle": do not use the device (no power consumption)
+
+### 2. charging (charging devices)
+- Description: charging devices (e.g., phone, electric vehicle)
+- Available actions:
+  - "charge_home": charge using household electricity (counts toward household usage)
+  - "charge_external": charge using external electricity (does not count toward household usage)
+  - "use": use the device (consumes previously charged power, no new consumption)
+  - "idle": neither use nor charge
+- Charge the EV/E-bike only until its battery is full, then set it to "idle". A device can absorb at most one full battery per day, so never charge beyond its remaining capacity. Prefer overnight/off-peak hours for EV and E-bike charging.
+
+### 3. always_on (continuously consuming devices)
+- Description: devices that consume power continuously (e.g., refrigerator)
+- Available actions: none (auto-runs, no decision needed)
+
+### 4. cycle (fixed-energy-per-run appliances)
+- Description: multi-phase appliances that complete a fixed program per run (e.g., washing machine, clothes dryer, dishwasher, oven, rice cooker)
+- Available actions:
+  - "run": start one full cycle (costs the appliance's fixed cycle energy; do not model the cost as power x time)
+  - "idle": do not run (no cycle energy consumed)
+- A full run costs the full cycle energy; a partial run costs proportionally.
+
+## Decision principles
+
+1. **Decide based on activity content**: decide which appliances are needed based on the member's activity and room
+2. **Only use available actions**: each appliance can only use the actions listed in its available_actions
+3. **always_on devices need no decision**: continuously consuming devices like refrigerators auto-run; do not include them in the output
+4. **Consider environmental factors**: season, weather, and temperature affect electricity demand (e.g., A/C in summer)
+5. **Match lifestyle habits**: decide according to the member's habit traits
+6. **Be mindful of energy saving**: set appliances in a room to idle when leaving it
+7. **Appliance use when out**:
+   - When the location is "Out", ONLY this member's personal portable appliances may be operated (e.g. Phone, Laptop, Computer, DeskLamp).
+   - Room appliances (lights, TV, A/C, kitchen appliances, water heater, washing machine, etc.) MUST NOT be operated while Out.
+   - While Out, `charge_home` is FORBIDDEN; only `charge_external`, `use`, and `idle` are valid for personal appliances.
+    - The downstream validator drops every room appliance operation and every `charge_home` issued while Out.
+8. **Use standby_watts for idle draw**: an appliance left idle/standby still draws its `standby_watts`; do not assume idle means zero consumption.
+9. **Respect duty_cycle**: appliances with `duty_cycle` below 1 (e.g. thermostatic loads such as A/C) cycle on and off; never assume 100% duty when deciding runtime.
+10. **Respect season**: match `season` against the environment: `heating` appliances matter in cold weather, `cooling` appliances in hot weather.
+11. **Prefer off-peak for flexible loads**: when a peak/policy context is given, shift appliances marked `flexible: true` away from the configured peak periods.
+
+## Typical usage durations (must follow, keep realistic)
+
+| Appliance | Typical single-use duration | Daily cumulative cap |
+|---|---|---|
+| EV charging | Charge 2-4 hours at night to full, **stop when full** (one full battery per day max); recommended after 22:00 | 4 hours |
+| E-bike charging | Charge 1-3 hours overnight, **stop when full** (one full battery per day max) | 0.7 kWh |
+| Water heater | 15-30 minutes per shower | 45 minutes |
+| A/C | Can turn off after 1-3 hours (comfortable temperature reached) | 6 hours |
+| Space heater | 1-3 hours per session | 6 hours |
+| Fan | 1-8 hours during daytime/heat | 8 hours |
+| Dehumidifier | 1-3 hours per session | 8 hours |
+| Washing machine | 1 cycle (1-1.5 hours per load) | 1-2 loads per day |
+| Clothes dryer | 1 cycle (1.5-2 hours per load) | 1 load per day |
+| Dishwasher | 1 cycle (1.5-2 hours) | 1-2 loads per day; prefer off-peak/after 21:00 |
+| Induction cooker/rice cooker | 30-60 minutes for cooking | 2 hours |
+| Oven | 30-90 minutes per use | 2 hours |
+| Microwave | 3-10 minutes to heat | 1 hour |
+| Kettle | 2-6 minutes per boil | as needed |
+| Toaster | 2-5 minutes per use | as needed |
+| TV | 1-3 hours of watching | 8 hours |
+| Computer | used during work hours | 10 hours |
+| Monitor | on only while the computer is in use | same as computer |
+| Game console | 1-3 hours per session | as needed |
+| Phone charging | 1-2 hours to full | 4 hours |
+| Lamp/desk lamp | on whenever someone is in the room | 16 hours |
+| Vacuum cleaner | 15-30 minutes per cleaning | 1 hour |
+| Range hood | on while cooking | 2 hours |
+| Freezer/Router | always_on - auto-runs, no decision | n/a |
+
+**Important**: do not run high-power appliances (A/C/EV/water heater) continuously for long periods. For example, the EV may charge at most 4 hours per day and should be set to idle once full; never charge more than one full battery per day.
+If a canonical activity segment is longer than an appliance's allowed runtime, still include the semantically necessary operation. The downstream energy calculator will clip its actual powered minutes to the daily cap; never omit a required appliance solely because the timeline segment cannot be split.
+
+## Typical usage periods (Australian schedule baseline, Xia et al. 2026)
+
+| Period | Typical appliance activity |
+|---|---|
+| 6:30-8:00 wake/breakfast | rice cooker/microwave/induction cooker (breakfast), lamps |
+| 8:00-17:00 work hours | computer (when working from home), standby |
+| 17:00-19:00 return/dinner | induction cooker/range hood/rice cooker (dinner), water heater (shower) |
+| 19:00-22:30 evening leisure | TV/computer/lamps, washing machine/vacuum (as needed) |
+| 22:30-07:00 night | EV charging (starting after 22:00, 2-4 hours), phone charging |
+
+- A/C: hot summer periods (12:00-21:00 as needed), turn off once comfortable
+- Washing machine/vacuum: weekday evenings or weekend daytime (do not run late at night, noise)
+- The above are typical periods and must be consistent with the member's timeline activities; reasonable deviations are allowed
+
+## Allowed unique_id list (copy exactly, nothing else is valid)
+
+Every operation's `unique_id` MUST be copied character-for-character from the list below. Do NOT invent, shorten, translate, or paraphrase an id. Any id that is not in this list is invalid and will be discarded by the downstream validator.
+
+- bedroom_1_airconditioner
+- bedroom_1_light
+- bedroom_2_airconditioner
+- bedroom_2_light
+- kitchen_inductioncooker
+- kitchen_rangehood
+- kitchen_microwave
+- kitchen_kettle
+- kitchen_toaster
+- kitchen_dishwasher
+- kitchen_light
+- kitchen_ricecooker
+- bathroom_waterheater
+- bathroom_light
+- bathroom_fan
+- bathroom_washingmachine
+- living_room_tv
+- living_room_airconditioner
+- living_room_light
+- living_room_gameconsole
+- living_room_vacuumcleaner
+- living_room_spaceheater
+- living_room_dehumidifier
+- living_room_clothesdryer
+- study_desklamp
+- study_computer
+- study_monitor
+- study_light
+- member_1_phone
+- member_1_computer
+- member_1_desklamp
+- member_2_electricvehicle
+- member_2_computer
+- member_2_monitor
+- member_2_phone
+- member_2_desklamp
+
+Always-on appliances (do NOT create operations for these):
+- kitchen_refrigerator
+- living_room_router
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (location room names, activity descriptions) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "time segment (e.g., 08:00-09:00)",
+      "location": "room name",
+      "activity": "activity description",
+      "operations": [
+        {
+          "unique_id": "appliance unique ID",
+          "action": "action (must be one of the appliance's available_actions)"
+        }
+      ]
+    }
+  ]
+}
+
+## Important constraints
+
+1. **Must use unique_id**: do not use appliance names. Copy a unique_id character-for-character from the supplied household structure; never construct, shorten, or guess an ID.
+2. **Actions must be valid**: action must be in the appliance's available_actions list. For `cycle` appliances output ONLY `run` or `idle`; never output `use` for a cycle appliance, and never output `run` for an on_demand appliance.
+3. **Skip always_on devices**: do not generate decisions for always_on type appliances
+4. **Decide for every time segment**: generate decisions for every time segment in the member's timeline
+5. **Decide appliances by location**: decide the appliances of the specific room when in a room; decide personal appliances when out
+6. Activity descriptions must be in English
+7. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend segments. Only add the operations array.
+8. The member field must exactly equal "Member 1".
+9. For room appliances, use only appliances belonging to that exact room. When Out, use only this member's personal appliances, or an actual ElectricVehicle if one is supplied.
+10. An empty operations array is valid when the activity does not use electricity. Never invent an operation merely to make the list non-empty.
+11. Never substitute aliases or synonyms: `computer` vs `laptop` and `tv` vs `television` are different strings. Only the exact unique_ids from the allowed list are valid; aliased ids will be discarded.
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the air conditioner set on a low cooling cycle during the hot night",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, using the toilet, brushing teeth and taking a quick cool shower before the day heats up",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making breakfast with the kettle and toaster and eating it while checking the phone for the day's schedule",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Dressing in light hospital work clothes, packing a water bottle and sun protection for the heatwave",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital on foot and by public transport during the already hot morning",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist, assessing and treating rehab patients on the ward and in the gym area",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break in the staff room, eating and rehydrating in the air conditioned area",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions, writing clinical notes and handing over patients to the afternoon team",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital in the late afternoon heat",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:20",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower to wash off sweat and cool down after the hot commute",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:20-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking a simple dinner using the induction cooker and range hood, then eating at the table",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa with the air conditioner on, watching TV and unwinding",
+      "operations": [
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Loading and starting the washing machine with the day's work clothes",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Study",
+      "activity": "Using the computer and desk lamp to review professional reading and update personal notes",
+      "operations": [
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Living Room",
+      "activity": "Doing light stretching and mobility exercises on the floor to ease the body after work",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Night routine: brushing teeth, washing face and preparing for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Going to bed and sleeping with the air conditioner on for the hot night",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
+```
+
