@@ -99,14 +99,17 @@ def render_in_home_display_policy():
             "and price, so you can see how much you are using right now.")
 
 
-def parse_policy_arg(spec):
-    """Parse a --policy CLI value into (policy_text, tag).
+_POLICY_NAMES = frozenset({
+    "tou", "tou_soft", "nudge", "nudge_soft", "nudge_loss",
+    "subsidy", "peak_demand", "ev_delay", "night_setback", "in_home_display",
+})
 
-    Supported: "tou" or "tou:<peak_rate>,<valley_rate>" (AUD/kWh, optional shoulder via third value).
-    Returns ("", None) when spec is empty/None.
-    """
-    if not spec:
-        return "", None
+
+def _policy_head(spec):
+    return spec.strip().lower().split(":", 1)[0]
+
+
+def _parse_single_policy(spec):
     name = spec.strip().lower().split(":", 1)[0]
     if name in ("tou", "tou_soft"):
         rest = spec.split(":", 1)[1] if ":" in spec else ""
@@ -144,8 +147,37 @@ def parse_policy_arg(spec):
     raise ValueError(
         "Unknown policy '%s'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>], "
         "nudge[:<kwh>], nudge_soft[:<kwh>], nudge_loss[:<aud>], subsidy[:<rate>], peak_demand[:<rate>], "
-        "ev_delay[:<step>], night_setback, in_home_display" % spec
+        "ev_delay[:<step>], night_setback, in_home_display; combine with commas e.g. 'tou,nudge'." % spec
     )
+
+
+def parse_policy_arg(spec):
+    """Parse a --policy CLI value into (policy_text, tag).
+
+    Supports single policies, rate arguments (e.g. "tou:0.6,0.18,0.35"), and
+    comma-combinations of several policies (e.g. "tou,nudge"). A comma starts a
+    new *policy* only when the next token names a known policy; otherwise it is a
+    rate argument belonging to the current policy. The combined tag joins the
+    individual tags with "+" (e.g. "tou+nudge"). Returns ("", None) when empty.
+    """
+    if not spec:
+        return "", None
+    groups = []
+    for token in (t.strip() for t in spec.split(",")):
+        if not token:
+            continue
+        if groups and _policy_head(token) not in _POLICY_NAMES:
+            groups[-1] = groups[-1] + "," + token
+        else:
+            groups.append(token)
+    texts = []
+    tags = []
+    for group in groups:
+        text, tag = _parse_single_policy(group)
+        if text:
+            texts.append(text)
+        tags.append(tag)
+    return " ".join(texts), "+".join(tags)
 
 
 def parse_policy_schedule(specs):
