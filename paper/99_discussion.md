@@ -57,10 +57,15 @@
   the baseline-specificity of event effects (R082/R083) and reinforces the **cross-world-replication
   requirement** (alongside R104 drift and R114 small-sample). Note also **energy-saving ≠ peak-shaving**:
   a request can slash total AC use while leaving the peak (dominated by non-AC loads) unmoved.
-  **Quantified (R130)**: the AC's share of the peak window is **5%** on world_838587 (a nocturnal
-  bedroom AC — 6.76/7.0 kWh run at night) vs **30%** on world_172148 (an evening living-room AC); the
-  peak effect of an AC-targeted intervention tracks this share, giving a measurable predictor of the
-  shaving ceiling (≈ peak share × behaviour-change rate).
+  **Quantified (R130/R131)**: peak-decomposition (total peak minus non-AC peak) reveals **two shaving
+  paths**. (A) *Device-targeted* signals (e.g. avoid the AC 5–8pm) can only remove the device's own
+  peak-window load, so their ceiling is the **device's peak share** — 5% on world_838587 (nocturnal
+  bedroom AC) → no peak effect, vs 30% on world_172148 (evening living-room AC) → peak −25.5%.
+  (B) *Window+price* signals (`ac_tax`) additionally move **non-AC** evening load (non-AC peak
+  −0.30 kWh), so they shave the peak even when the device share is modest (−22.5% on world_838587).
+  Caveat: the device's peak share is itself **batch-stochastic** (world_838587 baseline AC-peak share
+  was 5% in one batch, 15% in another) — another instance of the drift red line. The earlier
+  "price × targeting" 2×2 is thus a special case, not the mechanism.
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
