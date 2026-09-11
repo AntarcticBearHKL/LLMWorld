@@ -1,6 +1,7 @@
 # Experiment: Demand charge (`peak_demand`)
 
 > 状态：**null（N=3 交错）**：需量电费未削峰（峰值 +4.2%、峰段 −3.2%，均在噪声内）。数值来自 R092。
+> ⚠️ **N=3 小样本**（R112/R114：连续幅度须 **n≥15** 方稳）——此 null 未足功效，方向可能不稳。
 
 ## 1. Research Question
 

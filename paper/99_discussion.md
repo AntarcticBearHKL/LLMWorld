@@ -37,6 +37,8 @@
   **Same-era re-verification (R106)**: the three binary event results — heatwave → AC, cold-snap →
   heating, lockdown → out-of-home=0 — all reproduce against fresh same-era baselines, confirming
   **binary/structural signals are drift-immune** while continuous ones are not.
+  **Small-sample hazard (R112/R114)**: continuous-effect magnitudes are unreliable at n=3 or n=9 —
+  TOU gave −17.5% (n=3) → +13.1% (n=9) → −3.2% (n=15, n.s.). Continuous magnitudes require **n≥15**.
 - **Lockdown (binary signal, strongest)**: a `lockdown` event removed almost all out-of-home time —
   baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
   **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
