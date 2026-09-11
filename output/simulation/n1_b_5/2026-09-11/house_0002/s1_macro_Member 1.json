@@ -1,0 +1,90 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-06:50",
+      "location": "Bedroom 1",
+      "activity": "Waking up, turning off the phone alarm and stretching in bed"
+    },
+    {
+      "time": "06:50-07:15",
+      "location": "Bathroom",
+      "activity": "Showering, brushing teeth and grooming"
+    },
+    {
+      "time": "07:15-07:35",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and checking the phone"
+    },
+    {
+      "time": "07:35-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with the kettle and toaster"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a health care professional: patient rounds, assessments and charting"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing clinical duties, patient care and shift handover preparation"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen"
+    },
+    {
+      "time": "19:15-20:15",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing"
+    },
+    {
+      "time": "20:15-20:45",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and personal care"
+    },
+    {
+      "time": "20:45-21:45",
+      "location": "Living Room",
+      "activity": "Using the computer for personal tasks"
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down, reading and setting the alarm"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
