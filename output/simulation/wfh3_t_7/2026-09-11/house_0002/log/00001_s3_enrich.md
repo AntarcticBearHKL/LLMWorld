@@ -1,0 +1,374 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-13 06:13:52
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Hospital physiotherapist
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:45",
+    "location": "Bedroom 1",
+    "activity": "Sleeping in bed with the air conditioner on low"
+  },
+  {
+    "time": "06:45-07:15",
+    "location": "Bathroom",
+    "activity": "Waking up, using the toilet, showering with the water heater, and brushing teeth"
+  },
+  {
+    "time": "07:15-08:00",
+    "location": "Kitchen",
+    "activity": "Making and eating breakfast: toast, fruit, and tea boiled with the kettle, then rinsing dishes and loading the dishwasher"
+  },
+  {
+    "time": "08:00-08:30",
+    "location": "Living Room",
+    "activity": "Doing a morning mobility and stretching routine on the floor mat"
+  },
+  {
+    "time": "08:30-09:00",
+    "location": "Study",
+    "activity": "Reviewing today's patient notes and home-exercise plans on the computer with the desk lamp on, setting up the work-from-home station"
+  },
+  {
+    "time": "09:00-12:00",
+    "location": "Study",
+    "activity": "Working from home: conducting telehealth physiotherapy consultations on the computer and updating clinical documentation"
+  },
+  {
+    "time": "12:00-12:30",
+    "location": "Kitchen",
+    "activity": "Heating leftovers in the microwave and eating lunch alone at the table"
+  },
+  {
+    "time": "12:30-13:00",
+    "location": "Out",
+    "activity": "Taking a short brisk walk around the neighbourhood for fresh air and a break from screens"
+  },
+  {
+    "time": "13:00-17:00",
+    "location": "Study",
+    "activity": "Working from home: afternoon telehealth physiotherapy sessions, prescribing exercise progressions, and answering patient messages on the computer"
+  },
+  {
+    "time": "17:00-17:30",
+    "location": "Living Room",
+    "activity": "Winding down from work by vacuuming the living room floor and tidying up"
+  },
+  {
+    "time": "17:30-18:15",
+    "location": "Living Room",
+    "activity": "Doing a resistance-band and bodyweight strength session with post-exercise stretching"
+  },
+  {
+    "time": "18:15-19:00",
+    "location": "Kitchen",
+    "activity": "Cooking dinner on the induction cooker with the range hood running"
+  },
+  {
+    "time": "19:00-19:45",
+    "location": "Kitchen",
+    "activity": "Eating dinner at the table and cleaning up the dishes afterwards"
+  },
+  {
+    "time": "19:45-21:00",
+    "location": "Living Room",
+    "activity": "Watching TV on the sofa with the air conditioner running"
+  },
+  {
+    "time": "21:00-21:45",
+    "location": "Bathroom",
+    "activity": "Taking a warm evening shower and getting ready for bed"
+  },
+  {
+    "time": "21:45-22:30",
+    "location": "Bedroom 1",
+    "activity": "Reading and scrolling on the phone in bed under the bedside light while winding down"
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping with the light off and the air conditioner set to a comfortable temperature"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "AirConditioner",
+      "Light"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "AirConditioner",
+      "Light"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "InductionCooker",
+      "RangeHood",
+      "Microwave",
+      "Kettle",
+      "Toaster",
+      "Dishwasher",
+      "Light",
+      "RiceCooker"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "Light",
+      "Fan",
+      "WashingMachine"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "Light",
+      "Router",
+      "GameConsole",
+      "VacuumCleaner",
+      "SpaceHeater",
+      "Dehumidifier",
+      "ClothesDryer"
+    ]
+  },
+  "Study": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Monitor",
+      "Light"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "ElectricVehicle",
+      "Computer",
+      "Monitor",
+      "Phone",
+      "DeskLamp"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in bed with the air conditioner on low",
+      "desc": "Lie in bed on the mattress. Pull the quilt up over the shoulders. Turn the body to the left side. Place the arm under the pillow. Straighten the legs. Turn the body to the right side. Push the pillow with the hand. Pull the quilt down to the waist. Lie on the back. Place both arms at the sides. Turn the head to the left. Turn the head to the right. Pull the quilt back up. Keep the eyes closed. Remain lying still on the bed. Air conditioner runs at low setting through the night."
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Waking up, using the toilet, showering with the water heater, and brushing teeth",
+      "desc": "Open the eyes. Sit up on the edge of the bed. Put both feet on the floor. Stand up. Walk to the bathroom door. Push the door open. Step inside. Turn on the bathroom light. Sit on the toilet. Stand up from the toilet. Press the flush button. Walk to the shower area. Turn on the water heater switch. Turn on the shower tap. Test the water temperature with the hand. Step under the water. Wet the hair and body. Pick up the soap. Rub the soap over the arms and body. Rinse the body under the water. Pick up the shampoo bottle. Open the cap. Pour shampoo into the palm. Rub the shampoo into the hair. Rinse the hair. Turn off the shower tap. Step out of the shower. Pick up the towel from the hook. Wipe the face. Wipe the hair. Wipe the arms and body. Wrap the towel around the body. Turn off the water heater switch. Pick up the toothbrush. Squeeze toothpaste onto the brush. Brush the teeth. Rinse the mouth with water. Turn off the tap. Hang the towel back on the hook. Turn off the bathroom light. Open the door. Walk out of the bathroom."
+    },
+    {
+      "time": "07:15-08:00",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast: toast, fruit, and tea boiled with the kettle, then rinsing dishes and loading the dishwasher",
+      "desc": "Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out bread, fruit, and milk. Close the refrigerator door. Place the items on the countertop. Open the bread bag. Take out two slices of bread. Place the slices into the toaster. Press the toaster lever down. Pick up the kettle. Walk to the sink. Turn on the tap. Fill the kettle with water. Turn off the tap. Place the kettle on its base. Press the kettle switch on. Pick up a knife from the drawer. Place the fruit on the cutting board. Cut the fruit into pieces. Push the pieces onto a plate. Pick up a cup from the cupboard. Place a tea bag into the cup. Pick up the kettle when it clicks off. Pour hot water into the cup. Put the kettle back on its base. Take the toast out of the toaster. Place the toast on a plate. Carry the plate, the fruit plate, and the cup to the kitchen table. Sit on the chair. Pick up the toast. Take bites of the toast. Pick up the fork. Eat the fruit pieces. Pick up the cup. Drink the tea. Put the cup down. Stand up. Carry the plates and cup to the sink. Turn on the tap. Rinse the plates under the water. Rinse the cup. Turn off the tap. Open the dishwasher door. Pull out the lower rack. Place the plates on the rack. Place the cup on the rack. Place the knife and fork in the cutlery basket. Push the rack in. Close the dishwasher door. Press the start button. Wipe the countertop with a cloth. Turn off the kitchen light. Walk out of the kitchen."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Living Room",
+      "activity": "Doing a morning mobility and stretching routine on the floor mat",
+      "desc": "Walk into the living room. Turn on the living room light. Pick up the floor mat from the corner. Unroll the mat on the floor. Sit down on the mat. Extend both legs forward. Bend forward with both hands toward the feet. Hold the position. Sit up. Raise the right arm overhead. Bend the torso to the left. Hold the position. Sit up. Raise the left arm overhead. Bend the torso to the right. Hold the position. Turn onto the hands and knees. Round the back upward. Lower the back down. Sit back on the heels. Extend the arms forward. Hold the position. Lie down on the back on the mat. Pull the right knee to the chest with both hands. Hold the position. Release the right leg. Pull the left knee to the chest. Hold the position. Release the left leg. Roll to the right side. Push up with the hands. Stand up. Bend down and pick up the mat. Roll up the mat. Place the mat back in the corner. Turn off the living room light. Walk out of the living room."
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "Study",
+      "activity": "Reviewing today's patient notes and home-exercise plans on the computer with the desk lamp on, setting up the work-from-home station",
+      "desc": "Walk into the study. Sit on the desk chair. Press the computer power button. Press the monitor power button. Turn on the desk lamp switch. Turn on the study light. Adjust the desk lamp head toward the desk. Open the patient notes folder on the screen. Scroll down the patient list with the mouse. Click on the first patient file. Read the notes on the screen. Scroll through the home-exercise plans. Type notes into the document with the keyboard. Click on the next patient file. Scroll through the file. Open the exercise plan template. Type the patient name into the template. Type the exercise list into the template. Save the file. Close the template. Adjust the chair height with the lever. Move the mouse mat to the right side of the desk. Place the phone on the desk. Connect the headset cable to the computer. Put the headset on the desk. Open the telehealth meeting link on the screen. Leave the browser tab open."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Study",
+      "activity": "Working from home: conducting telehealth physiotherapy consultations on the computer and updating clinical documentation",
+      "desc": "Sit on the desk chair facing the monitor. Put the headset on the head. Click the meeting start button with the mouse. Speak into the headset microphone. Turn the head toward the screen. Watch the patient on the screen. Nod the head. Write notes with the keyboard. Click the mute button. Unmute the microphone. Raise the right arm to demonstrate an exercise to the camera. Lower the arm. Stand up from the chair. Demonstrate a squat movement in front of the camera. Sit back on the chair. Click the screen-share button. Open the exercise plan document. Scroll the document on the screen. Type the exercise progressions into the document. Click the end meeting button. Take the headset off. Place the headset on the desk. Open the clinical documentation page. Type the patient notes into the fields. Press the save button. Open the next patient file. Click the next meeting link. Put the headset back on. Speak into the microphone. Type notes during the call. Click the end meeting button. Take the headset off. Pick up the water bottle from the desk. Unscrew the cap. Drink water. Screw the cap back on. Place the bottle on the desk. Open the patient message inbox. Type a reply with the keyboard. Press the send button. Repeat the documentation steps for the next patient. Save the file."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Heating leftovers in the microwave and eating lunch alone at the table",
+      "desc": "Stand up from the desk chair. Walk out of the study. Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the leftover container. Close the refrigerator door. Open the microwave door. Place the container inside. Close the microwave door. Press the timer buttons. Press the start button. Stand beside the counter. Wait for the microwave beep. Open the microwave door. Take out the container. Close the microwave door. Carry the container to the kitchen table. Pull out the chair. Sit down. Open the container lid. Pick up the fork. Eat the leftovers with the fork. Pick up the cup of water. Drink the water. Put the cup down. Close the container lid. Stand up. Push the chair in. Carry the container to the sink. Turn off the kitchen light. Walk out of the kitchen."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Taking a short brisk walk around the neighbourhood for fresh air and a break from screens",
+      "desc": "Walk to the front door. Pick up the keys from the hook. Pick up the phone from the table. Put the phone into the pocket. Open the front door. Step outside. Close the door behind. Lock the door with the key. Put the keys into the pocket. Walk down the path to the pavement. Turn left. Walk at a brisk pace along the street. Swing both arms while walking. Pass the first block. Cross the road at the crossing. Turn right at the corner. Continue walking along the pavement. Walk past the park entrance. Turn around at the end of the street. Walk back along the same route. Cross the road at the crossing. Walk up the path to the front door. Take the keys out of the pocket. Unlock the door. Open the door. Step inside. Close the door. Lock the door with the key. Hang the keys back on the hook. Take the phone out of the pocket. Place the phone on the table."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Study",
+      "activity": "Working from home: afternoon telehealth physiotherapy sessions, prescribing exercise progressions, and answering patient messages on the computer",
+      "desc": "Walk into the study. Sit on the desk chair. Move the mouse to wake the monitor. Open the afternoon appointment list. Click the first meeting link. Put the headset on. Speak into the microphone. Watch the patient on the screen. Type notes with the keyboard. Raise the left arm to demonstrate an exercise. Lower the arm. Stand up. Demonstrate a resistance-band pull in front of the camera. Sit back down. Click the screen-share button. Open the exercise progression sheet. Scroll the sheet on the screen. Highlight an exercise row with the mouse. Type the new progression into the document. Press the save button. Click the end meeting button. Take the headset off. Open the patient message inbox. Read the messages on the screen. Type a reply with the keyboard. Press the send button. Open the next message. Type a reply. Press the send button. Click the next meeting link. Put the headset back on. Speak into the microphone. Type documentation notes. Click the end meeting button. Take the headset off. Pick up the water bottle. Drink water. Place the bottle on the desk. Open the next patient file. Update the clinical documentation. Press the save button. Lean back on the chair. Straighten the back. Lean forward to the keyboard. Continue typing the notes. Close the browser tabs."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Living Room",
+      "activity": "Winding down from work by vacuuming the living room floor and tidying up",
+      "desc": "Stand up from the desk chair. Walk out of the study. Walk into the living room. Turn on the living room light. Open the storage cupboard. Take out the vacuum cleaner. Unwind the power cord. Plug the cord into the wall socket. Press the vacuum power button. Push the vacuum head across the floor. Pull the vacuum back. Push the vacuum along the sofa edge. Move the sofa cushions aside with the hand. Vacuum under the cushions. Push the vacuum along the rug. Pull the vacuum around the table legs. Bend down to reach under the table with the vacuum head. Push the vacuum along the skirting board. Press the vacuum power button off. Pull the plug from the wall socket. Wind the cord around the hooks. Carry the vacuum cleaner to the cupboard. Place it inside. Close the cupboard door. Pick up the cushions from the floor. Place the cushions back on the sofa. Pick up the remote control from the table. Place the remote on the side table. Pick up a mug from the coffee table. Carry the mug to the kitchen counter. Walk back to the living room. Straighten the rug with both hands. Turn off the living room light. Walk out of the living room."
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Living Room",
+      "activity": "Doing a resistance-band and bodyweight strength session with post-exercise stretching",
+      "desc": "Walk into the living room. Turn on the living room light. Turn on the air conditioner with the remote. Open the drawer of the side cabinet. Take out the resistance band. Close the drawer. Unroll the floor mat. Take off the shoes. Stand on the mat with feet apart. Hold the band with both hands at chest height. Pull the band apart with both arms. Release the band back. Repeat the pull. Raise both arms overhead with the band. Lower the arms. Step on the band with both feet. Pull the band handles up to the shoulders. Lower the handles. Turn the body to face the side. Pull the band with the right arm. Pull the band with the left arm. Put the band down on the mat. Stand with feet shoulder-width apart. Bend the knees into a squat. Stand up. Repeat the squat. Place both hands on the floor. Step the feet back into a plank. Hold the plank position. Step the feet forward. Stand up. Sit down on the mat. Extend both legs forward. Bend forward toward the feet. Hold the position. Sit up. Pull the right leg toward the chest with both hands. Hold the position. Release the leg. Pull the left leg toward the chest. Hold the position. Release the leg. Stand up. Pick up the band. Roll the band up. Place the band back in the drawer. Roll up the floor mat. Place the mat in the corner. Wipe the face with a towel. Pick up the water bottle. Drink water. Press the air conditioner off button on the remote."
+    },
+    {
+      "time": "18:15-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner on the induction cooker with the range hood running",
+      "desc": "Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out vegetables, meat, and eggs. Close the refrigerator door. Place the items on the countertop. Open the drawer. Take out a knife and a cutting board. Place the cutting board on the countertop. Place the vegetables on the cutting board. Hold the vegetables with the left hand. Cut the vegetables with the knife. Push the pieces to the side of the board. Place the meat on the board. Cut the meat into pieces. Pick up the pan from the hook. Place the pan on the induction cooker. Press the induction cooker power button. Press the heat-level button. Pour oil into the pan. Pick up the chopped vegetables. Put the vegetables into the pan. Pick up the spatula. Stir the vegetables in the pan. Add the meat to the pan. Stir the mixture. Pick up the salt shaker. Shake salt into the pan. Stir the mixture again. Press the range hood power button. Press the induction cooker power button off. Pick up a plate from the cupboard. Spoon the food onto the plate. Turn off the range hood. Carry the plate to the kitchen table."
+    },
+    {
+      "time": "19:00-19:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the table and cleaning up the dishes afterwards",
+      "desc": "Pull out the chair at the kitchen table. Sit down on the chair. Pick up the fork. Pick up the knife. Cut the food on the plate with the knife. Lift the food with the fork. Eat the food. Put the knife and fork down. Pick up the cup. Drink water. Put the cup down. Pick up the fork again. Continue eating the food. Put the fork down on the plate. Stand up. Push the chair in. Carry the plate and cutlery to the sink. Turn on the tap. Rinse the plate under the water. Rinse the fork and knife under the water. Turn off the tap. Pick up the sponge. Wipe the countertop with the sponge. Open the dishwasher door. Pull out the lower rack. Place the plate on the rack. Place the fork and knife in the cutlery basket. Push the rack in. Close the dishwasher door. Press the start button. Wipe the table with a cloth. Rinse the cloth under the tap. Turn off the tap. Wring the cloth with both hands. Hang the cloth on the hook. Turn off the kitchen light. Walk out of the kitchen."
+    },
+    {
+      "time": "19:45-21:00",
+      "location": "Living Room",
+      "activity": "Watching TV on the sofa with the air conditioner running",
+      "desc": "Walk into the living room. Turn on the living room light. Turn on the air conditioner with the remote. Press the temperature buttons on the remote. Sit down on the sofa. Pick up the TV remote from the side table. Press the TV power button. Point the remote at the TV. Press the channel button. Press the volume button. Place the remote on the sofa beside the body. Lean back on the sofa. Cross the legs. Pick up the phone from the side table. Scroll the phone screen with the thumb. Place the phone face down on the sofa. Pick up the remote again. Press the channel button. Put the remote down. Stand up from the sofa. Walk to the kitchen. Open the refrigerator door. Take out a bottle of water. Close the refrigerator door. Walk back to the living room. Sit down on the sofa. Unscrew the bottle cap. Drink water. Screw the cap back on. Place the bottle on the side table. Pick up the remote. Press the volume button down. Put the remote down. Lean back on the sofa. Watch the TV screen. Press the TV power button off with the remote. Press the air conditioner off button with the remote. Stand up. Turn off the living room light. Walk out of the living room."
+    },
+    {
+      "time": "21:00-21:45",
+      "location": "Bathroom",
+      "activity": "Taking a warm evening shower and getting ready for bed",
+      "desc": "Walk into the bathroom. Turn on the bathroom light. Turn on the bathroom fan. Turn on the water heater switch. Turn on the shower tap. Test the water temperature with the hand. Step under the water. Wet the hair and body. Pick up the soap. Rub the soap over the arms and shoulders. Rub the soap over the legs. Rinse the body under the water. Pick up the shampoo bottle. Open the cap. Pour shampoo into the palm. Rub the shampoo into the hair. Rinse the hair. Turn off the shower tap. Step out of the shower. Pick up the towel from the hook. Wipe the face. Wipe the hair. Wipe the arms and legs. Wipe the feet. Wrap the towel around the body. Turn off the water heater switch. Pick up the toothbrush. Squeeze toothpaste onto the brush. Brush the teeth. Rinse the mouth with water. Turn off the tap. Hang the towel on the hook. Turn off the bathroom fan. Turn off the bathroom light. Open the bathroom door. Walk out of the bathroom."
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading and scrolling on the phone in bed under the bedside light while winding down",
+      "desc": "Walk into the bedroom. Turn on the bedroom light. Turn on the bedside light switch. Sit on the edge of the bed. Pick up the phone from the nightstand. Press the phone power button. Scroll the phone screen with the thumb. Open a reading app. Scroll through the page. Turn the page on the screen. Place the phone face down on the nightstand. Pick up the book from the nightstand. Open the book. Turn the pages of the book. Hold the book with both hands. Turn the page. Close the book. Place the book back on the nightstand. Pick up the phone again. Scroll the phone screen with the thumb. Press the phone power button off. Place the phone on the nightstand. Pull back the quilt. Lie down on the bed. Pull the quilt over the body. Turn the body to the right side. Turn the body to the left side. Straighten the legs. Place the head on the pillow. Reach over and press the bedside light switch off. Press the bedroom light switch off."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the light off and the air conditioner set to a comfortable temperature",
+      "desc": "Lie on the bed in the dark. Pull the quilt up to the shoulders. Turn the body to the left side. Place the arm under the pillow. Straighten the legs. Turn the body to the right side. Push the pillow with the hand to shape it. Pull the quilt down to the chest. Turn the body onto the back. Place both arms at the sides. Turn the head to the left. Turn the head to the right. Pull the quilt back up to the shoulders. Reach out to the nightstand and pick up the air conditioner remote. Press the temperature button on the remote. Place the remote back on the nightstand. Put the arm back under the quilt. Remain lying still on the bed with the eyes closed. Air conditioner runs through the night."
+    }
+  ]
+}
+```
+

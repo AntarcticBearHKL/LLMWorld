@@ -1,0 +1,256 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "start_minutes": 0,
+      "end_minutes": 400,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:40-07:10",
+      "start_minutes": 400,
+      "end_minutes": 430,
+      "location": "Bathroom",
+      "activity": "Showering and washing up",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:45",
+      "start_minutes": 430,
+      "end_minutes": 465,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making coffee",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:00",
+      "start_minutes": 465,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Dressing in work clothes and packing bag",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting to the hospital by public transport (no EV use)",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:30",
+      "start_minutes": 540,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Working as a physiotherapist treating patients and running rehabilitation sessions",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "start_minutes": 750,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Lunch break at the hospital",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "start_minutes": 780,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Working as a physiotherapist: patient assessments, exercise therapy and clinical notes",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home from the hospital by public transport (no EV use)",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:25",
+      "start_minutes": 1080,
+      "end_minutes": 1105,
+      "location": "Bathroom",
+      "activity": "Washing hands and changing out of work clothes",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:25-19:10",
+      "start_minutes": 1105,
+      "end_minutes": 1150,
+      "location": "Kitchen",
+      "activity": "Cooking dinner and eating",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:10-19:45",
+      "start_minutes": 1150,
+      "end_minutes": 1185,
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:45-21:00",
+      "start_minutes": 1185,
+      "end_minutes": 1260,
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing on the sofa",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-22:00",
+      "start_minutes": 1260,
+      "end_minutes": 1320,
+      "location": "Study",
+      "activity": "Reading and browsing on the computer",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bathroom",
+      "activity": "Night routine: brushing teeth and washing face",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "start_minutes": 1350,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

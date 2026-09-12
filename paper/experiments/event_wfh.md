@@ -18,12 +18,14 @@ use (lighting, cooking, computers) and **higher total** energy; the same mechani
 Total energy (kWh), evening-peak 16–21h energy, valley 22–07h energy, max power (W).
 
 ## 5 Results (n=15, paired t, df=14)
-| Metric | W1 `838587` h002 | W2 `172148` h002 |
-|---|---|---|
-| **Total energy** | **+30.6%** (t=3.25, p=0.006) | **+28.7%** (t=5.62, p=6.3e-5) |
-| Peak 16–21 | +17.5% (p=0.044) | +27.4% (p=0.007) |
-| Valley 22–7 | −9.0% (n.s.) | −15.8% (n.s.) |
-| Max power | −8.9% (n.s.) | +21.0% (p=0.039) |
+| Metric | W1 `838587` h002 | W2 `172148` h002 | W3 `143345` h002 |
+|---|---|---|---|
+| **Total energy** | **+30.6%** (p=0.006) | **+28.7%** (p=6.3e-5) | **+30.6%** (p=0.014) |
+| Peak 16–21 | +17.5% (p=0.044) | +27.4% (p=0.007) | +8.1% (n.s.) |
+| Valley 22–7 | −9.0% (n.s.) | −15.8% (n.s.) | +0.2% (n.s.) |
+| Max power | −8.9% (n.s.) | +21.0% (p=0.039) | +6.2% (n.s.) |
+
+Total energy is **+28.7% … +30.6% across all three worlds** — the most consistent event effect in the study.
 
 ## 6 Comparison with Literature
 Same **stay-home** mechanism as the holiday (R166–R188) and lockdown (R068/R107, Xia et al. 2026) events:
@@ -31,11 +33,11 @@ a structural change in time-at-home raises daytime demand. The `wfh` signal gene
 a non-mandated, non-calendar work arrangement.
 
 ## 7 Validity Check
-- same-era paired, n=15; **two worlds**; effect replicates (total +28.7%/+30.6%, both significant).
-- **Cross-world** replication pending on the 3rd world (red line 3); not yet promoted to headline.
-- Single member (M1) per household; peak direction is more consistent than for `holiday`.
+- same-era paired, n=15; **three worlds**; total effect replicates at +28.7%/+30.6%/+30.6% (all significant).
+- **Cross-world replicated (red line 3 satisfied) → promoted to headline.**
+- Single member (M1) per household; peak direction is world-dependent (assert total only).
 
 ## 8 Conclusion
-A work-from-home event significantly **raises total energy** (+28.7% / +30.6% across two worlds) — the
-second stay-home event (after `holiday`), generalising the "time-at-home → daytime load" mechanism.
-Pending a 3rd world for full cross-world headline status.
+A work-from-home event significantly **raises total energy** (+28.7% / +30.6% / +30.6% across three
+worlds) — the second stay-home event (after `holiday`), generalising the "time-at-home → daytime load"
+mechanism. This is the most **consistent** event effect in the study (three worlds within 2 pp).

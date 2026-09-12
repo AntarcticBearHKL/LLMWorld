@@ -1,0 +1,90 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and taking a shower"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, drinking water"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, packing work bag and checking the day's patient schedule on phone"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital (by public transport)"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist at the hospital, assessing and treating patients"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions, writing patient notes and handing over cases"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital (by public transport)"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking dinner"
+    },
+    {
+      "time": "18:45-19:30",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Kitchen",
+      "activity": "Washing dishes and wiping down the kitchen counters"
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower and doing evening personal care"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using computer to read clinical notes, doing light stretching and preparing clothes for tomorrow"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Dimming the light, winding down and setting the phone alarm"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

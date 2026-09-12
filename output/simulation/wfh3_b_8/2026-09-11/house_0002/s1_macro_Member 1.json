@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making tea"
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist, treating and rehabilitating patients"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen counters"
+    },
+    {
+      "time": "19:15-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and scrolling on the phone"
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Study",
+      "activity": "Reading clinical physiotherapy notes and reviewing patient exercise plans on the computer"
+    },
+    {
+      "time": "21:30-22:15",
+      "location": "Living Room",
+      "activity": "Watching TV"
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Taking a shower and getting ready for bed"
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

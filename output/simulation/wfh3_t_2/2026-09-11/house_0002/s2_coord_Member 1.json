@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "sleeping"
+    },
+    {
+      "time": "06:30-06:50",
+      "location": "Bathroom",
+      "activity": "washing up and showering"
+    },
+    {
+      "time": "06:50-07:00",
+      "location": "Bedroom 1",
+      "activity": "getting dressed"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "preparing and eating breakfast"
+    },
+    {
+      "time": "07:30-09:00",
+      "location": "Study",
+      "activity": "preparing for work and reviewing patient notes"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Study",
+      "activity": "conducting telehealth physiotherapy consultations"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "preparing and eating lunch"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Study",
+      "activity": "continuing telehealth consultations and documentation"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "doing light stretching and relaxation exercises"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "cooking and eating dinner"
+    },
+    {
+      "time": "19:00-22:00",
+      "location": "Living Room",
+      "activity": "watching TV and browsing on computer"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "showering and personal hygiene"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "reading and winding down"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "sleeping"
+    }
+  ]
+}

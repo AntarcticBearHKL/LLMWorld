@@ -1,0 +1,113 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket. Adjust pillow. Turn to right side. Stretch legs. Remain still. Snore lightly. Turn again. Continue sleeping. Shift arm. Adjust blanket. Sleep."
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Morning wash, shower and brushing teeth",
+      "desc": "Wake up. Walk to bathroom. Turn on light. Remove clothes and step into shower. Turn on water and wet body. Apply soap and rinse body. Turn off water and dry body with towel. Pick up toothbrush and apply toothpaste. Brush teeth and rinse mouth. Wipe face. Turn off light. Walk out."
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with coffee",
+      "desc": "Walk to kitchen. Open refrigerator. Take out ingredients. Close refrigerator. Crack eggs into pan. Cook eggs. Toast bread. Pour coffee. Sit at table. Eat breakfast. Drink coffee. Clear dishes."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Living Room",
+      "activity": "Stretching and mobility exercises",
+      "desc": "Walk to living room. Stand on mat. Raise arms. Bend forward. Stretch legs. Twist torso. Sit on floor. Stretch hamstrings."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Study",
+      "activity": "Working from home: telehealth physiotherapy consultations and patient documentation on the computer",
+      "desc": "Sit at desk. Turn on computer. Open telehealth software. Adjust headset. Conduct video call with patient. Speak to patient. Take notes. Type on keyboard. Review patient charts. Draft documentation. Conduct another video call. Discuss exercise plan. Type rehabilitation program. Save file. Stand up and stretch."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "desc": "Walk to kitchen. Open refrigerator. Take out lunch ingredients. Close refrigerator. Prepare lunch. Sit at table. Eat lunch. Drink water. Clear dishes. Rinse dishes."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Short walk around the neighbourhood for fresh air (walking, no electric vehicle used)",
+      "desc": "Put on shoes. Open door. Walk outside. Walk along sidewalk. Turn corner. Walk around block. Return home. Open door."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Study",
+      "activity": "Working from home: afternoon telehealth sessions and drafting exercise rehabilitation programs",
+      "desc": "Sit at desk. Turn on computer. Open telehealth software. Conduct video call. Speak to patient. Take notes. Type on keyboard. Review patient charts. Draft exercise rehabilitation program. Conduct another video call. Discuss exercise plan. Type rehabilitation program. Save file. Stand up and stretch. Walk to kitchen for water."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Bathroom",
+      "activity": "Loading the washing machine and doing laundry",
+      "desc": "Walk to bathroom. Open washing machine. Load dirty clothes. Close washing machine. Add detergent. Turn on washing machine. Wait. Remove clothes. Hang clothes to dry. Turn off light."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Living Room",
+      "activity": "Vacuuming the floor and tidying up",
+      "desc": "Walk to living room. Pick up vacuum cleaner. Plug in vacuum cleaner. Turn on vacuum. Vacuum floor. Turn off vacuum. Unplug vacuum. Put away vacuum. Pick up items from floor. Place items in storage."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out ingredients. Close refrigerator. Open cabinet. Take out pots and pans. Place pots on stove. Turn on stove. Chop vegetables. Cook vegetables. Stir pot. Turn off stove. Place food on plates. Set table. Sit at table."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "desc": "Sit at table. Eat dinner. Drink water. Clear dishes. Rinse dishes. Place dishes in dishwasher. Wipe table. Turn off light."
+    },
+    {
+      "time": "19:15-20:30",
+      "location": "Living Room",
+      "activity": "Watching TV to relax",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channel. Watch TV. Adjust volume. Pick up phone. Browse phone. Put down phone. Watch TV. Turn off TV."
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Study",
+      "activity": "Reading physiotherapy journals and reviewing online clinical courses",
+      "desc": "Walk to study. Sit at desk. Turn on desk lamp. Open journal. Read article. Take notes. Highlight text. Open laptop. Log into online course. Watch video. Take notes. Close laptop."
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "Bathroom",
+      "activity": "Evening wash and skincare routine",
+      "desc": "Walk to bathroom. Turn on light. Wash face. Apply cleanser. Rinse face. Apply toner. Apply moisturizer. Brush teeth. Turn off light."
+    },
+    {
+      "time": "21:45-22:45",
+      "location": "Living Room",
+      "activity": "Watching streaming shows and browsing the phone",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Open streaming app. Select show. Watch show. Pick up phone. Browse social media. Put down phone. Watch show. Turn off TV."
+    },
+    {
+      "time": "22:45-23:00",
+      "location": "Bedroom 1",
+      "activity": "Preparing for bed and setting the alarm",
+      "desc": "Walk to bedroom. Remove clothes. Put on pajamas. Set alarm on phone. Plug in phone. Turn off light. Lie down on bed. Pull blanket."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to side. Adjust pillow. Pull blanket. Remain still. Snore lightly. Turn again. Continue sleeping. Shift arm. Sleep."
+    }
+  ]
+}
