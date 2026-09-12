@@ -1,0 +1,249 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-12 21:51:02
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Community program coordinator at a nonprofit
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  },
+  {
+    "time": "06:30-07:00",
+    "location": "Bathroom",
+    "activity": "Waking up, washing face and brushing teeth"
+  },
+  {
+    "time": "07:00-07:30",
+    "location": "Kitchen",
+    "activity": "Making and eating breakfast (toast and tea)"
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Bedroom 1",
+    "activity": "Getting dressed and packing work bag"
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Out",
+    "activity": "Commuting to the nonprofit office"
+  },
+  {
+    "time": "09:00-12:30",
+    "location": "Out",
+    "activity": "Working at the office: coordinating community programs, emails and partner calls"
+  },
+  {
+    "time": "12:30-13:00",
+    "location": "Out",
+    "activity": "Lunch break near the office"
+  },
+  {
+    "time": "13:00-17:00",
+    "location": "Out",
+    "activity": "Working at the office: program planning, scheduling volunteers and site logistics"
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Out",
+    "activity": "Commuting home"
+  },
+  {
+    "time": "18:00-19:00",
+    "location": "Kitchen",
+    "activity": "Cooking and eating dinner"
+  },
+  {
+    "time": "19:00-20:00",
+    "location": "Living Room",
+    "activity": "Watching TV to unwind"
+  },
+  {
+    "time": "20:00-20:30",
+    "location": "Kitchen",
+    "activity": "Washing dishes and tidying the kitchen counter"
+  },
+  {
+    "time": "20:30-21:30",
+    "location": "Living Room",
+    "activity": "Relaxing and reading on the sofa"
+  },
+  {
+    "time": "21:30-22:15",
+    "location": "Bedroom 1",
+    "activity": "Using computer for personal tasks and reviewing tomorrow's schedule"
+  },
+  {
+    "time": "22:15-22:45",
+    "location": "Bathroom",
+    "activity": "Evening shower and night skincare routine"
+  },
+  {
+    "time": "22:45-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "Fan"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "DeskLamp",
+      "SpaceHeater"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Oven",
+      "Toaster",
+      "Kettle",
+      "Dishwasher",
+      "Light"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "Light",
+      "Dehumidifier",
+      "Fan"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "Router",
+      "GameConsole",
+      "Light",
+      "VacuumCleaner"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "Monitor"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{"member": "Member 1", "enriched_activities": [{"time": "00:00-06:30", "location": "Bedroom 1", "activity": "Sleeping", "desc": "Lies down on the bed. Pulls the blanket up to the chest. Closes eyes. Turns onto the right side. Adjusts the pillow under the head. Stretches the left arm out. Pulls the blanket over the shoulder. Turns onto the back. Breathes slowly. Turns onto the left side. Pulls the blanket down to the waist. Reaches out and presses the fan button to low speed. Pulls the blanket back up. Bends the knees. Rolls onto the right side. Rests the head on the pillow edge. Remains still."}, {"time": "06:30-07:00", "location": "Bathroom", "activity": "Waking up, washing face and brushing teeth", "desc": "Opens eyes. Sits up on the bed edge. Stands up. Walks to the bathroom door. Pushes the door open. Steps in. Presses the light switch on. Turns the tap handle. Cups both hands under the water. Splashes water on the face. Turns the tap off. Picks up the towel from the hook. Wipes the face. Hangs the towel back. Picks up the toothbrush from the cup. Turns the tap on. Wets the toothbrush. Turns the tap off. Picks up the toothpaste tube. Unscrews the cap. Squeezes toothpaste onto the bristles. Sets the tube down. Brushes the teeth. Spits into the sink. Turns the tap on. Rinses the mouth. Rinses the toothbrush. Turns the tap off. Puts the toothbrush back in the cup. Presses the light switch off. Walks out of the bathroom."}, {"time": "07:00-07:30", "location": "Kitchen", "activity": "Making and eating breakfast (toast and tea)", "desc": "Walks into the kitchen. Presses the light switch on. Opens the refrigerator door. Takes out the bread bag. Closes the refrigerator door. Puts the bag on the counter. Unties the bag clip. Takes out two slices of bread. Places the slices into the toaster. Presses the toaster lever down. Opens the upper cabinet. Takes out a mug. Sets the mug on the counter. Opens a lower cabinet. Takes out a plate. Fills the kettle with water. Sets the kettle on the base. Presses the kettle switch on. Picks up a tea bag. Drops it into the mug. The toaster pops. Pulls the toast out onto the plate. Pours hot water into the mug. Picks up a knife. Spreads butter on the toast. Sets the knife in the sink. Carries the plate and mug to the table. Sits down. Picks up a slice of toast. Takes a bite. Chews. Picks up the mug. Sips the tea. Sets the mug down. Takes another bite of toast. Finishes the toast. Picks up the mug. Drinks the remaining tea. Stands up. Carries the plate and mug to the sink. Sets them down."}, {"time": "07:30-08:00", "location": "Bedroom 1", "activity": "Getting dressed and packing work bag", "desc": "Walks into Bedroom 1. Opens the wardrobe door. Takes out a shirt. Lays it on the bed. Takes out trousers. Lays them on the bed. Takes off the sleepwear top. Drops it in the laundry basket. Takes off the sleepwear bottom. Drops it in the laundry basket. Picks up the shirt. Pulls the shirt on. Buttons the shirt. Picks up the trousers. Steps into them. Pulls them up. Fastens the belt. Opens the drawer. Takes out socks. Sits on the bed edge. Pulls on the left sock. Pulls on the right sock. Picks up shoes from the floor. Pulls on the left shoe. Pulls on the right shoe. Ties the laces. Stands up. Picks up the work bag from the chair. Opens the bag zipper. Puts the laptop into the bag. Puts the charger in. Zips the bag closed. Picks up the phone from the nightstand. Puts the phone into the coat pocket. Picks up the keys from the desk. Puts the keys into the bag side pocket. Carries the bag to the door. Presses the fan button off. Walks out of Bedroom 1."}, {"time": "08:00-09:00", "location": "Out", "activity": "Commuting to the nonprofit office", "desc": "Walks out of the front door. Closes the door. Turns the key in the lock. Pulls the key out. Puts the key into the bag. Walks down the stairs. Steps onto the sidewalk. Walks to the bus stop. Stands at the bus stop. Takes the phone out of the pocket. Presses the screen on. Checks the bus arrival time. Presses the screen off. Puts the phone back into the pocket. The bus arrives. Steps onto the bus. Taps the transit card on the reader. Walks down the aisle. Grips the overhead rail. Stands. The bus stops. Releases the rail. Steps off the bus. Walks two blocks. Reaches the office building. Pushes the glass door open. Walks to the elevator. Presses the up button. Enters the elevator. Presses the floor button. Exits the elevator. Walks to the office door. Pushes the door open."}, {"time": "09:00-12:30", "location": "Out", "activity": "Working at the office: coordinating community programs, emails and partner calls", "desc": "Walks to the desk. Sets the bag down beside the chair. Sits down. Opens the bag. Takes out the laptop. Opens the laptop lid. Presses the power button. Types the login password. Opens the email client. Reads new emails. Clicks reply on the first email. Types a reply. Clicks send. Opens the calendar. Checks today's meetings. Opens the program spreadsheet. Types volunteer numbers into cells. Picks up the desk phone. Dials a partner's number. Says: 'Hello, this is the community program coordinator, calling about the Saturday site logistics.' Listens. Says: 'Yes, we can deliver the materials on Friday afternoon.' Says: 'Thank you, goodbye.' Hangs up the phone. Types notes into the document. Stands up. Walks to the printer. Picks up printed sheets. Walks back to the desk. Sits down. Staples the sheets. Places them in a folder. Opens the browser. Fills in a partner registration form. Clicks submit. Picks up the phone. Dials the volunteer coordinator. Says: 'Can you confirm the volunteer roster for next week?' Listens. Says: 'Great, I will update the schedule.' Hangs up. Types the updated schedule. Closes the laptop lid."}, {"time": "12:30-13:00", "location": "Out", "activity": "Lunch break near the office", "desc": "Stands up from the chair. Pushes the chair in. Walks out of the office. Walks down the stairs. Pushes the building door open. Walks along the sidewalk. Enters the sandwich shop. Stands in the queue. Steps forward. Says: 'One chicken sandwich and a bottle of water, please.' Pays with the card. Takes the receipt. Picks up the sandwich and bottle. Walks to a table by the window. Sets the items down. Pulls out the chair. Sits down. Unwraps the sandwich. Takes a bite. Chews. Opens the bottle cap. Drinks water. Takes another bite. Finishes the sandwich. Crumples the wrapper. Stands up. Throws the wrapper into the bin. Picks up the bottle. Walks out of the shop. Walks back to the office building. Pushes the door open. Walks to the elevator. Presses the up button."}, {"time": "13:00-17:00", "location": "Out", "activity": "Working at the office: program planning, scheduling volunteers and site logistics", "desc": "Walks to the desk. Sits down. Opens the laptop lid. Wakes the screen. Opens the program planning document. Types the outline for the next community event. Opens the volunteer scheduling sheet. Enters names into the Saturday shift rows. Highlights the unfilled slots. Picks up the desk phone. Dials a volunteer. Says: 'Could you cover the Saturday morning shift?' Listens. Says: 'Thank you, I will add you to the roster.' Hangs up. Types the name into the sheet. Opens the site logistics file. Checks the equipment list. Types the delivery time. Stands up. Walks to the supply cabinet. Opens the cabinet door. Counts the boxes of materials. Writes the count on a sticky note. Closes the cabinet door. Walks back to the desk. Sits down. Types the count into the file. Sends the file by email. Opens the calendar. Moves a meeting to Friday. Stands up. Picks up the mug. Walks to the kitchenette. Refills the mug with water. Walks back. Sits down. Continues typing. Saves the document. Closes the laptop lid."}, {"time": "17:00-18:00", "location": "Out", "activity": "Commuting home", "desc": "Puts the laptop into the bag. Zips the bag. Stands up. Pushes the chair in. Picks up the bag. Walks out of the office. Presses the elevator down button. Enters the elevator. Presses the ground floor button. Exits the elevator. Pushes the building door open. Walks to the bus stop. Stands and waits. Takes the phone out. Presses the screen on. Reads a message. Presses the screen off. Puts the phone back. The bus arrives. Steps on. Taps the transit card. Walks down the aisle. Sits on an empty seat. Rests the bag on the lap. Watches the window. The bus stops. Stands up. Steps off the bus. Walks two blocks. Reaches the apartment building. Pushes the lobby door open. Presses the elevator button. Enters the elevator. Presses the floor button. Exits the elevator. Walks to the apartment door. Turns the key in the lock. Pushes the door open. Steps inside. Closes the door."}, {"time": "18:00-19:00", "location": "Kitchen", "activity": "Cooking and eating dinner", "desc": "Walks into the kitchen. Presses the light switch on. Sets the bag on a chair. Opens the refrigerator door. Takes out vegetables. Takes out eggs. Closes the refrigerator door. Sets the items on the counter. Opens the drawer. Takes out a knife and a cutting board. Sets the board on the counter. Places the vegetables on the board. Cuts the vegetables into slices. Pushes the slices to one side. Picks up a pot. Fills the pot with water. Sets the pot on the induction cooker. Presses the cooker power button. Presses the heat setting. Opens the upper cabinet. Takes out a bowl. Cracks two eggs into the bowl. Picks up chopsticks. Beats the eggs. Pours the eggs into a pan. Sets the pan on the cooker. Stirs the eggs. Adds the vegetables. Stirs again. Turns off the cooker. Picks up a plate. Scoops the food onto the plate. Carries the plate to the table. Sits down. Picks up chopsticks. Eats the food. Drinks water from the glass. Finishes the meal. Stands up. Carries the plate to the sink. Sets it down."}, {"time": "19:00-20:00", "location": "Living Room", "activity": "Watching TV to unwind", "desc": "Walks into the living room. Picks up the remote from the coffee table. Presses the power button on the remote. The TV turns on. Sits down on the sofa. Presses the channel button. Scrolls through channels. Stops on a news channel. Leans back on the sofa cushion. Crosses the legs. Watches the screen. Picks up the phone from the pocket. Presses the screen on. Scrolls a feed. Presses the screen off. Puts the phone on the cushion. Presses the volume button down. Watches the screen. Picks up the glass from the table. Drinks water. Sets the glass down. Presses the channel button. Switches to a drama channel. Watches. Presses the pause button. Stands up. Walks to the kitchen. Returns with a tissue. Sits down again. Presses play on the remote. Watches the screen. Presses the power button off. Sets the remote on the table. Stands up."}, {"time": "20:00-20:30", "location": "Kitchen", "activity": "Washing dishes and tidying the kitchen counter", "desc": "Walks into the kitchen. Opens the dishwasher door. Pulls out the lower rack. Picks up the plate from the sink. Places it in the rack. Picks up the mug. Places it in the rack. Picks up the bowl. Places it in the rack. Picks up the chopsticks. Places them in the basket. Picks up the pan. Sets it on the counter. Pushes the lower rack in. Closes the dishwasher door. Presses the start button. Picks up a sponge. Turns the tap on. Wets the sponge. Squeezes soap onto the sponge. Wipes the counter surface. Turns the tap off. Picks up a cloth. Dries the counter. Hangs the cloth on the hook. Picks up the cutting board. Rinses it under the tap. Sets it in the drying rack. Turns the tap off. Picks up the food scraps. Throws them into the bin. Wipes both hands on the towel. Presses the light switch off. Walks out of the kitchen."}, {"time": "20:30-21:30", "location": "Living Room", "activity": "Relaxing and reading on the sofa", "desc": "Walks into the living room. Picks up the book from the shelf. Walks to the sofa. Sits down. Opens the book to the bookmark. Reads the page. Turns the page. Adjusts the cushion behind the back. Reads the next page. Turns the page. Picks up the glass from the table. Drinks water. Sets the glass down. Reads the next page. Turns the page. Leans the head back on the cushion. Reads. Turns the page. Places the bookmark between the pages. Closes the book. Sets the book on the table. Stands up. Walks to the kitchen. Returns with a blanket. Sits down on the sofa. Drapes the blanket over the legs. Picks up the book again. Opens it. Reads. Turns the page. Reads. Closes the book. Sets it on the table. Folds the blanket. Stands up."}, {"time": "21:30-22:15", "location": "Bedroom 1", "activity": "Using computer for personal tasks and reviewing tomorrow's schedule", "desc": "Walks into Bedroom 1. Presses the light switch on. Walks to the desk. Pulls out the chair. Sits down. Presses the computer power button. Types the login password. Opens the browser. Opens the email page. Reads messages. Clicks reply on a message. Types a reply. Clicks send. Opens the calendar page. Checks tomorrow's meetings. Types a note into the task list. Opens the bank page. Checks the account balance. Closes the browser tab. Opens the notes app. Writes tomorrow's schedule list. Saves the note. Presses the computer shutdown button. Stands up. Pushes the chair in. Presses the desk lamp button on. Picks up the phone from the desk. Presses the screen on. Sets the alarm for 06:30. Presses the screen off. Sets the phone on the nightstand. Presses the desk lamp button off. Presses the light switch off."}, {"time": "22:15-22:45", "location": "Bathroom", "activity": "Evening shower and night skincare routine", "desc": "Walks into the bathroom. Presses the light switch on. Presses the water heater switch on. Opens the shower door. Steps in. Turns the shower handle to warm. Stands under the water. Wets the hair. Picks up the shampoo bottle. Squeezes shampoo into the palm. Rubs the hair. Rinses the hair. Picks up the soap. Rubs the body. Rinses the body. Turns the shower handle off. Opens the shower door. Steps out. Picks up the towel from the hook. Wipes the hair. Wipes the body. Wraps the towel around. Walks to the sink. Picks up the face wash. Squeezes it into the palm. Rubs the face. Turns the tap on. Rinses the face. Turns the tap off. Picks up the moisturizer bottle. Pumps cream into the palm. Applies it to the face. Puts the bottle back. Hangs the towel on the hook. Presses the light switch off. Walks out of the bathroom."}, {"time": "22:45-24:00", "location": "Bedroom 1", "activity": "Sleeping", "desc": "Walks into Bedroom 1. Pulls back the blanket. Sits on the bed edge. Lies down. Pulls the blanket over the body. Adjusts the pillow. Turns onto the right side. Bends the knees. Stretches the arm toward the nightstand. Touches the phone. Pulls the hand back. Turns onto the back. Pulls the blanket up to the chest. Turns onto the left side. Presses the fan button on. Adjusts the fan to low. Pulls the blanket over the shoulder. Closes eyes. Breathes slowly. Remains still."}]}
+```
+
