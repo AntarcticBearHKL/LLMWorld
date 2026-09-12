@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Breathing steadily. Turns to left side. Adjusts pillow. Pulls blanket up. Lies on back. Turns to right side. Bends knees. Stretches arm. Sighs. Turns to stomach. Adjusts blanket. Lies still. Turns to back. Repeats."
+    },
+    {
+      "time": "06:40-07:05",
+      "location": "Bathroom",
+      "activity": "Washing up, showering, and brushing teeth",
+      "desc": "Wake up. Walk to bathroom. Turn on light. Turn on shower. Step into shower. Wash body. Turn off shower. Dry body. Brush teeth. Rinse mouth. Turn off light. Walk out."
+    },
+    {
+      "time": "07:05-07:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, boiling water with the kettle",
+      "desc": "Walk to kitchen. Open refrigerator. Take out ingredients. Boil water with kettle. Crack eggs. Whisk eggs. Cook eggs on induction cooker. Make breakfast. Sit at table. Eat breakfast. Drink milk. Stand up. Rinse plate. Load dishwasher. Walk out."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag",
+      "desc": "Walk to bedroom. Open wardrobe. Take out clothes. Put on clothes. Put on shoes. Open work bag. Place laptop in bag. Place notebook in bag. Zip bag. Pick up bag. Walk out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Sit down. Check phone. Read messages. Exit bus. Walk to office building. Enter building. Press elevator button. Enter elevator. Exit elevator. Walk to office. Sit at desk. Turn on computer."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working at the nonprofit community center: coordinating program logistics and meeting partner organizations",
+      "desc": "Sit at desk. Open laptop. Check emails. Reply to emails. Make phone calls. Schedule meetings. Meet with partner organization representatives. Discuss program logistics. Take notes. Review program schedule. Coordinate with team members. Update calendar. Print documents. Attend meeting. Present program updates. Answer questions. Return to desk. Continue working on computer."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating lunch",
+      "desc": "Stand up. Walk to break room. Open refrigerator. Take out lunch box. Close refrigerator. Sit at table. Open lunch box. Take out sandwich. Take out apple. Take out water bottle. Eat sandwich. Drink water. Eat apple. Wipe mouth with napkin. Close lunch box. Stand up. Walk to sink. Rinse lunch box. Walk back to desk. Sit down."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Working at the nonprofit community center: running community sessions and updating program records on the computer",
+      "desc": "Walk to community room. Set up chairs. Turn on projector. Connect laptop to projector. Greet participants. Start session. Present slides. Facilitate discussion. Answer questions. Hand out materials. End session. Collect feedback forms. Walk back to office. Sit at desk. Open program database. Update records. Enter data. Save changes. Close database. Shut down computer."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Check phone. Read news. Put phone away. Look out window. Stand up. Walk to bus door. Exit bus. Walk to home. Enter home. Close door. Take off shoes. Hang up coat."
+    },
+    {
+      "time": "18:00-18:35",
+      "location": "Kitchen",
+      "activity": "Preparing dinner using the induction cooker and oven",
+      "desc": "Walk to kitchen. Open refrigerator. Take out ingredients. Chop vegetables. Season chicken. Place chicken in oven. Turn on oven. Place pan on induction cooker. Turn on induction cooker. Add oil. Add vegetables. Stir. Turn off induction cooker. Take chicken out of oven. Turn off oven. Place on plate. Walk to dining table."
+    },
+    {
+      "time": "18:35-19:10",
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "desc": "Sit at dining table. Pick up fork. Cut chicken. Lift fork to mouth. Chew. Swallow. Pick up glass. Drink water. Put down glass. Continue eating. Pick up napkin. Wipe mouth. Stand up. Pick up plate. Walk to sink. Rinse plate. Place plate in dishwasher. Pick up fork. Rinse fork. Place fork in dishwasher. Walk back to table. Sit down."
+    },
+    {
+      "time": "19:10-19:45",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen, loading the dishwasher",
+      "desc": "Stand at sink. Pick up sponge. Apply dish soap. Pick up plate. Scrub plate. Rinse plate. Place plate in dishwasher. Pick up glass. Scrub glass. Rinse glass. Place glass in dishwasher. Pick up cutlery. Scrub cutlery. Rinse cutlery. Place cutlery in dishwasher. Wipe counter with cloth. Put away leftover food. Close dishwasher door. Press start button."
+    },
+    {
+      "time": "19:45-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channel. Adjust volume. Watch TV. Check phone. Stand up. Walk to kitchen. Take snack. Return to sofa. Sit. Watch TV. Turn off TV. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "21:00-21:45",
+      "location": "Bedroom 1",
+      "activity": "Reviewing program notes and planning tomorrow's tasks on the computer",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Enter password. Open program notes. Read notes. Open calendar. Schedule tasks. Type notes. Save file. Close laptop. Turn off desk lamp. Stand up. Walk to bathroom."
+    },
+    {
+      "time": "21:45-22:15",
+      "location": "Bathroom",
+      "activity": "Showering and evening hygiene routine",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Step into shower. Wash body. Turn off shower. Dry body. Brush teeth. Rinse mouth. Apply deodorant. Turn off light. Walk out."
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bedroom 1",
+      "activity": "Reading in bed with the desk lamp on and fan running",
+      "desc": "Walk to bedroom. Turn on desk lamp. Turn on fan. Pick up book. Lie down on bed. Open book. Read pages. Turn page. Turn page. Turn page. Turn page. Close book. Place book on nightstand. Turn off desk lamp. Turn off fan. Pull blanket up. Close eyes."
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Breathing steadily. Turns to left side. Adjusts pillow. Pulls blanket up. Lies on back. Turns to right side. Bends knees. Stretches arm. Sighs. Turns to stomach. Adjusts blanket. Lies still. Turns to back. Repeats."
+    }
+  ]
+}

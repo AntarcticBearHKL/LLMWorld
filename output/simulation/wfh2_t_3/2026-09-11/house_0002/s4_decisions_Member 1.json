@@ -1,0 +1,386 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "start_minutes": 0,
+      "end_minutes": 390,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "start_minutes": 390,
+      "end_minutes": 420,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:40",
+      "start_minutes": 420,
+      "end_minutes": 460,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:00",
+      "start_minutes": 460,
+      "end_minutes": 480,
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "start_minutes": 480,
+      "end_minutes": 510,
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and checking phone messages and calendar",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:00",
+      "start_minutes": 510,
+      "end_minutes": 540,
+      "location": "Living Room",
+      "activity": "Light stretching and watching morning news on TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Bedroom 1",
+      "activity": "Working from home on computer, coordinating community program logistics",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:30",
+      "start_minutes": 720,
+      "end_minutes": 750,
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "start_minutes": 750,
+      "end_minutes": 780,
+      "location": "Living Room",
+      "activity": "Lunch break, resting on the sofa",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-15:30",
+      "start_minutes": 780,
+      "end_minutes": 930,
+      "location": "Bedroom 1",
+      "activity": "Working from home on computer, drafting program reports and emails",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:30-15:50",
+      "start_minutes": 930,
+      "end_minutes": 950,
+      "location": "Kitchen",
+      "activity": "Making tea and taking a short break",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:50-17:00",
+      "start_minutes": 950,
+      "end_minutes": 1020,
+      "location": "Bedroom 1",
+      "activity": "Working from home on computer, finishing tasks and returning calls",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "start_minutes": 1020,
+      "end_minutes": 1050,
+      "location": "Living Room",
+      "activity": "Winding down after work, relaxing on the sofa",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:00",
+      "start_minutes": 1050,
+      "end_minutes": 1080,
+      "location": "Kitchen",
+      "activity": "Cooking dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:30",
+      "start_minutes": 1125,
+      "end_minutes": 1170,
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Bathroom",
+      "activity": "Taking a shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:30",
+      "start_minutes": 1200,
+      "end_minutes": 1290,
+      "location": "Living Room",
+      "activity": "Watching TV and playing games on the game console",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down for the night",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bathroom",
+      "activity": "Nighttime washing and brushing teeth",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "start_minutes": 1350,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}
