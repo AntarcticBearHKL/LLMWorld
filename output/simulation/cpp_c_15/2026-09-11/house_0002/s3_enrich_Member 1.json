@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Eyes closed. Breathes regularly. Turns to left side. Pulls blanket up. Turns to right side. Adjusts pillow. Remains still. Breathes deeply. Moves arm. Turns again. Snores."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and taking a morning shower",
+      "desc": "Walks to bathroom. Turns on light. Turns on water heater. Removes clothes. Turns on shower. Adjusts temperature. Steps into shower. Wets body. Applies soap. Scrubs body. Rinses body. Washes hair with shampoo. Rinses hair. Turns off shower. Steps out. Dries body with towel. Wraps towel. Turns off light. Walks out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out milk. Opens cabinet. Takes out cereal box. Takes out bowl. Pours cereal into bowl. Opens milk carton. Pours milk into bowl. Puts milk back in refrigerator. Takes spoon from drawer. Sits at table. Eats cereal with spoon. Drinks milk from bowl. Places spoon in bowl. Stands up. Takes bowl to sink. Rinses bowl."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and reviewing shift handover notes on phone",
+      "desc": "Walks to bedroom. Opens wardrobe. Takes out shirt. Takes out pants. Takes out socks. Closes wardrobe. Puts on shirt. Puts on pants. Puts on socks. Puts on shoes. Picks up phone. Unlocks phone. Opens notes app. Scrolls through notes. Reads handover notes. Picks up bag. Puts phone in bag. Walks out of bedroom."
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Out",
+      "activity": "Commuting to the hospital",
+      "desc": "Walks out of house. Locks door. Walks to car. Unlocks car. Opens car door. Sits in driver's seat. Closes door. Fastens seatbelt. Starts engine. Drives out of driveway. Drives. Arrives at hospital parking lot. Parks car. Turns off engine. Unfastens seatbelt. Opens door. Gets out. Locks car. Walks to hospital entrance."
+    },
+    {
+      "time": "08:45-12:30",
+      "location": "Out",
+      "activity": "Working a clinical shift at the hospital, caring for patients",
+      "desc": "Enters hospital. Walks to locker room. Changes into scrubs. Walks to ward. Washes hands. Picks up patient chart. Checks patient's vital signs. Takes temperature. Measures blood pressure. Administers medication. Adjusts IV drip. Talks to patient. Writes notes in chart. Moves to next patient. Checks patient's condition. Changes dressing. Assists patient with mobility. Responds to call bell. Washes hands. Moves to next patient."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break at work",
+      "desc": "Walks to cafeteria. Picks up tray. Selects food. Pays for food. Finds table. Sits down. Eats food. Drinks water. Talks to colleague. Finishes eating. Picks up tray. Returns tray. Throws away trash. Walks out of cafeteria. Walks back to ward."
+    },
+    {
+      "time": "13:00-17:15",
+      "location": "Out",
+      "activity": "Working a clinical shift at the hospital, caring for patients",
+      "desc": "Returns to ward. Washes hands. Checks patient's chart. Monitors patient's condition. Takes blood sample. Sends sample to lab. Administers medication. Talks to patient's family. Updates patient records. Assists doctor with procedure. Changes patient's bedding. Helps patient eat. Washes hands. Moves to next patient. Checks IV. Adjusts oxygen. Responds to emergency call. Talks to colleague. Writes notes. Washes hands."
+    },
+    {
+      "time": "17:15-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Walks to parking lot. Unlocks car. Opens car door. Sits in driver's seat. Closes door. Fastens seatbelt. Starts engine. Drives out of parking lot. Drives. Arrives home. Parks car. Turns off engine. Unfastens seatbelt. Opens door. Gets out. Locks car. Walks to house. Unlocks door. Enters house."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out vegetables and meat. Places vegetables on cutting board. Chops vegetables. Takes out pan. Places pan on stove. Turns on stove. Pours oil into pan. Adds vegetables and meat. Stirs with spatula. Adds seasoning. Turns off stove. Takes out plate. Serves food onto plate. Sits at table. Eats dinner with fork and knife. Drinks water."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen",
+      "desc": "Picks up plates. Scrapes food into trash. Opens dishwasher. Loads plates into dishwasher. Loads utensils. Closes dishwasher. Turns on dishwasher. Picks up sponge. Wipes counter. Wipes stove. Sweeps floor. Puts broom away. Turns off kitchen light. Walks out of kitchen."
+    },
+    {
+      "time": "19:15-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Presses power button. Turns on TV. Changes channel. Watches TV. Adjusts volume. Gets up. Walks to kitchen. Opens refrigerator. Takes out drink. Returns to living room. Sits on sofa. Drinks. Watches TV. Changes channel. Turns off TV. Stands up. Walks out of living room."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Living Room",
+      "activity": "Using computer for continuing professional education",
+      "desc": "Walks to living room. Sits at desk. Opens laptop. Turns on laptop. Logs in. Opens browser. Navigates to course website. Watches video lecture. Takes notes in notebook. Pauses video. Rewinds video. Watches again. Closes browser. Shuts down laptop. Closes laptop. Stands up. Walks out of living room."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and night hygiene routine",
+      "desc": "Walks to bathroom. Turns on light. Turns on water heater. Removes clothes. Turns on shower. Adjusts temperature. Steps into shower. Wets body. Applies soap. Scrubs body. Rinses body. Washes hair with shampoo. Rinses hair. Turns off shower. Steps out. Dries body with towel. Wraps towel. Brushes teeth. Washes face. Turns off light."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading under the desk lamp and winding down",
+      "desc": "Walks to bedroom. Turns on desk lamp. Picks up book from nightstand. Sits on bed. Opens book. Reads page. Turns page. Reads next page. Turns page. Reads. Adjusts lamp. Continues reading. Closes book. Places book on nightstand. Turns off desk lamp. Lies down. Pulls blanket up. Closes eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Eyes closed. Breathes regularly. Turns to left side. Pulls blanket up. Turns to right side. Adjusts pillow. Remains still. Breathes deeply. Moves arm. Turns again. Snores."
+    }
+  ]
+}

@@ -167,6 +167,33 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(tag, "in_home_display")
         self.assertIn("in-home display", text)
 
+    def test_cpp_default_and_custom_rate(self):
+        text, tag = policy.parse_policy_arg("cpp")
+        self.assertEqual(tag, "cpp")
+        self.assertIn("critical peak pricing", text)
+        self.assertIn("17:00-20:00", text)
+        self.assertIn("0.90 AUD/kWh", text)
+        self.assertIn("1.20 AUD/kWh", policy.parse_policy_arg("cpp:1.2")[0])
+
+    def test_cpp_soft_has_no_directive(self):
+        text, tag = policy.parse_policy_arg("cpp_soft")
+        self.assertEqual(tag, "cpp_soft")
+        self.assertIn("critical peak pricing", text)
+        self.assertIn("0.90 AUD/kWh", text)
+        self.assertNotIn("shift", text.lower())
+        self.assertNotIn("avoid", text.lower())
+
+    def test_cpp_custom_rate_soft(self):
+        text, tag = policy.parse_policy_arg("cpp_soft:1.5")
+        self.assertEqual(tag, "cpp_soft")
+        self.assertIn("1.50 AUD/kWh", text)
+
+    def test_cpp_combination(self):
+        text, tag = policy.parse_policy_arg("cpp,nudge")
+        self.assertEqual(tag, "cpp+nudge")
+        self.assertIn("critical peak pricing", text)
+        self.assertIn("neighbours", text)
+
     def test_policy_combination(self):
         text, tag = policy.parse_policy_arg("tou,nudge")
         self.assertEqual(tag, "tou+nudge")

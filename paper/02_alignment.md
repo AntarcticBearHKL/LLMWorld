@@ -8,6 +8,7 @@
 | 干预 | 文献基准（来源） | 本研究结果 | 对齐 |
 |---|---|---|---|
 | TOU 纯电价 | 峰 −3~6%（Faruqui & Sergici 2010） | **n=15 null**（峰 −3.2%；n=3/n=9 为小样本假象） | ⚪ |
+| **尖峰电价 CPP** | 峰 −13~20%（Faruqui & Sergici 2010） | **峰 null**（−2.7%, n.s., n=15）；但**总电量 −14.4%（p=0.007）**；cpp_soft 总 −10.9%（p=0.034） | ⚪ |
 | 需量电费 peak_demand | 峰 −10~20%（Escarrega 2025） | same-era n=3 null（未足功效） | ⚪ |
 | EV 谷期补贴 subsidy | EV 峰移 30~60%（Alexeenko & Bitar 2023） | 受 EV 谷期天花板阻塞（不可测） | ⛔ |
 | EV 延迟 ev_delay | 同上 | 同上 | ⛔ |
