@@ -1,0 +1,71 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Place head on pillow. Pull blanket over body. Close eyes. Breathe slowly. Turn to left side. Bend knees. Place right arm under pillow. Adjust blanket. Turn to right side. Extend left arm. Remain still. Turn onto back. Place both hands on abdomen. Turn to left side again. Pull blanket up to chin. Remain still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up and washing",
+      "desc": "Open eyes. Sit up on bed. Swing legs to floor. Stand up. Walk to bathroom. Turn on bathroom light. Walk to sink. Turn on tap. Wet hands. Pick up soap. Rub soap on hands. Rinse hands. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit into sink. Pick up towel. Wipe face. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "desc": "Walk into kitchen. Open refrigerator. Take out milk. Take out eggs. Take out butter. Close refrigerator. Place items on counter. Open cabinet. Take out plate. Take out glass. Take out frying pan. Place frying pan on induction cooker. Turn on induction cooker. Add oil to pan. Crack eggs into pan. Fry eggs. Turn off induction cooker. Place eggs on plate. Pour milk into glass. Carry plate and glass to table. Sit on chair. Pick up fork. Cut egg. Eat egg. Drink milk. Stand up. Carry plate and glass to sink. Place plate and glass in sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Walk into bedroom. Open wardrobe. Take out shirt. Take out trousers. Take out socks. Take out jacket. Close wardrobe. Place clothes on bed. Remove sleepwear. Put on shirt. Put on trousers. Put on socks. Put on jacket. Walk to mirror. Pick up comb. Comb hair. Put down comb. Pick up work bag. Open work bag. Put phone into bag. Put keys into bag. Close work bag. Pick up bag. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk out of building. Walk to bus stop. Stand at bus stop. Take out phone. Check time on phone. Put phone in pocket. Board bus. Tap transit card on reader. Walk to empty seat. Sit down. Place bag on lap. Hold handrail. Look at window. Stand up. Walk to bus door. Step off bus. Walk to workplace entrance. Push door open. Walk into building."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional",
+      "desc": "Enter clinic. Walk to locker room. Open locker. Take out scrubs. Change into scrubs. Close locker. Walk to handwashing sink. Turn on tap. Wet hands. Apply soap. Rub hands. Rinse hands. Turn off tap. Dry hands. Walk to nurses station. Pick up patient chart. Walk to patient room. Open door. Greet patient. Check vital signs. Measure blood pressure. Record readings. Administer medication. Walk to computer. Type patient notes. Save file. Walk to break room. Sit on chair. Eat lunch. Stand up. Walk to handwashing sink. Wash hands. Walk to locker room. Change out of scrubs. Close locker. Walk out of clinic."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk out of workplace. Walk to bus stop. Stand at bus stop. Take out phone. Check bus schedule. Put phone in pocket. Board bus. Tap transit card. Walk to seat. Sit down. Place bag on lap. Hold handrail. Look out window. Stand up. Walk to bus door. Step off bus. Walk to home building. Open building door. Walk to apartment door. Unlock apartment door. Open apartment door. Walk inside. Close apartment door."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk into kitchen. Wash hands. Open refrigerator. Take out vegetables. Take out chicken. Close refrigerator. Place items on cutting board. Pick up knife. Cut vegetables. Cut chicken. Turn on induction cooker. Place pan on cooker. Add oil. Add vegetables. Add chicken. Stir with spatula. Add salt. Turn off cooker. Take out plate. Serve food onto plate. Carry plate to table. Sit on chair. Pick up fork. Eat food. Drink water. Stand up. Carry plate to sink. Place plate in sink."
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk into living room. Sit on sofa. Pick up remote. Press power button. Turn on TV. Press channel button. Change channel. Press volume button. Adjust volume. Put remote on sofa. Watch TV. Pick up phone. Unlock phone. Scroll screen. Put phone down. Stand up. Walk to kitchen. Open refrigerator. Take out water bottle. Close refrigerator. Drink water. Walk to living room. Sit on sofa. Pick up remote. Press power button. Turn off TV. Stand up. Walk to bathroom."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Personal hygiene and getting ready for bed",
+      "desc": "Walk into bathroom. Turn on light. Walk to sink. Turn on tap. Wet face. Pick up soap. Rub soap on hands. Wash face. Rinse face. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit into sink. Pick up towel. Dry face. Hang towel. Turn off tap. Turn off light. Walk out of bathroom. Walk to bedroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Walk into bedroom. Close bedroom door. Walk to bed. Pull blanket down. Sit on bed. Remove slippers. Lie on bed. Place head on pillow. Pull blanket over body. Close eyes. Breathe slowly. Turn to left side. Bend knees. Place right arm under pillow. Adjust blanket. Turn to right side. Extend left arm. Remain still. Turn onto back. Place hands on abdomen. Remain still."
+    }
+  ]
+}
