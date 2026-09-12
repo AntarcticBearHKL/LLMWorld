@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bathroom",
+      "activity": "Washing up and showering to start the day"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Clayton campus"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending Bachelor of Business lectures and tutorials at Clayton campus"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Eating lunch on campus"
+    },
+    {
+      "time": "12:30-15:30",
+      "location": "Out",
+      "activity": "Studying and working on assignments in the campus library"
+    },
+    {
+      "time": "15:30-16:30",
+      "location": "Out",
+      "activity": "Commuting by public transport to Chadstone"
+    },
+    {
+      "time": "16:30-21:00",
+      "location": "Out",
+      "activity": "Working a part-time retail shift at Chadstone"
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Out",
+      "activity": "Commuting home by public transport after the retail shift"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Kitchen",
+      "activity": "Heating up and eating a late dinner"
+    },
+    {
+      "time": "22:30-23:30",
+      "location": "Living Room",
+      "activity": "Unwinding with TV and reviewing notes on the phone"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Night routine and going to sleep"
+    }
+  ]
+}

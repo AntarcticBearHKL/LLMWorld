@@ -37,8 +37,18 @@ up) is the same mechanism as `lockdown` (daytime **+220.7%**, R107) but milder. 
 names public holidays as a target event — this fills that gap.
 
 ## 7 Validity Check — **cross-3-world + cross-household replicated**
-- **Household 1 (world_838587 h001, 4-person, R174)**: total **+20.8%** (t=3.21, p=0.0063), peak **+63.0%**
-  (p=0.0024), valley **−46.1%** (p=6.6e-5) → the **total** effect replicates on a second household.
+- **Cross-household (5 households, 3 worlds; all n=15)** — the **total** effect is positive and significant
+  in **5/5** households (+20.8% … +59.1%, p≤0.0063); the **peak** effect is strongly household-dependent
+  (−15.2% n.s. … +232.4%) and is **not asserted**:
+
+| Household | Total energy Δ | p | Peak 16–21 Δ |
+|---|---|---|---|
+| W1 h002 (1-person) | +48.3% | 3.5e-4 | +7.8% n.s. |
+| W1 h001 (4-person) | +20.8% | 0.0063 | +63.0% |
+| W2 h002 (2-person) | +31.9% | 3.8e-7 | +24.9% |
+| W2 h001 (5-person) | **+59.1%** | **5.3e-7** | **+232.4%** |
+| W3 h002 (2-person) | +39.8% | 0.0014 | −15.2% n.s. |
+
 - same-era paired, n=15, **three worlds** (red line 3 satisfied):
 
 | Metric | W1 `838587` | W2 `172148` | W3 `143345` |
