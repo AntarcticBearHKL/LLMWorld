@@ -52,6 +52,41 @@ def render_tou_policy_soft(peak_rate=None, valley_rate=None, shoulder_rate=None)
     return _tou_tariff_sentence(_tou_config(peak_rate, valley_rate, shoulder_rate))
 
 
+CPP_DEFAULT = {
+    "window": ("17:00", "20:00"),
+    "peak_rate": 0.90,
+}
+
+
+def _cpp_sentence(peak_rate=None):
+    """Facts-only critical-peak sentence (no behavioural directive)."""
+    rate = CPP_DEFAULT["peak_rate"] if peak_rate is None else peak_rate
+    start, end = CPP_DEFAULT["window"]
+    return (
+        f"Today is a critical peak pricing (CPP) event: electricity used during the critical "
+        f"peak window {start}-{end} is charged at {rate:.2f} AUD/kWh, several times the normal rate."
+    )
+
+
+def render_cpp_policy(peak_rate=None):
+    """Critical-peak-pricing event with an explicit shift directive (guide §2.1).
+
+    Faruqui & Sergici (2010) benchmark: critical-peak pricing cuts peak load 13-20%,
+    far more than plain TOU (3-6%). This renderer injects a narrow, very-high-price
+    critical-peak window as natural language, mirroring the ``ac_tax`` event but
+    belonging to the *pricing* capability family rather than the news templates.
+    """
+    return _cpp_sentence(peak_rate) + (
+        " To avoid the high critical-peak price, shift flexible high-power use outside "
+        "17:00-20:00 where possible."
+    )
+
+
+def render_cpp_soft_policy(peak_rate=None):
+    """Critical-peak facts only, with no 'shift/avoid' directive (prompt-bias control)."""
+    return _cpp_sentence(peak_rate)
+
+
 def render_nudge_policy(neighbor_kwh=18.0):
     """Social-norm comparison with a fixed neighbour average (guide §3.1)."""
     return (f"Your neighbours use about {neighbor_kwh:.0f} kWh of electricity per day on average. "
@@ -100,7 +135,7 @@ def render_in_home_display_policy():
 
 
 _POLICY_NAMES = frozenset({
-    "tou", "tou_soft", "nudge", "nudge_soft", "nudge_loss",
+    "tou", "tou_soft", "cpp", "cpp_soft", "nudge", "nudge_soft", "nudge_loss",
     "subsidy", "peak_demand", "ev_delay", "night_setback", "in_home_display",
 })
 
@@ -122,6 +157,11 @@ def _parse_single_policy(spec):
                 shoulder = nums[2]
         render = render_tou_policy if name == "tou" else render_tou_policy_soft
         return render(peak, valley, shoulder), name
+    if name in ("cpp", "cpp_soft"):
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        rate = float(rest) if rest else None
+        render = render_cpp_policy if name == "cpp" else render_cpp_soft_policy
+        return render(rate), name
     if name == "nudge":
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         return (render_nudge_policy(float(rest)) if rest else render_nudge_policy()), "nudge"
@@ -146,7 +186,8 @@ def _parse_single_policy(spec):
         return render_in_home_display_policy(), "in_home_display"
     raise ValueError(
         "Unknown policy '%s'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>], "
-        "nudge[:<kwh>], nudge_soft[:<kwh>], nudge_loss[:<aud>], subsidy[:<rate>], peak_demand[:<rate>], "
+        "cpp[:<peak_rate>], cpp_soft[:<peak_rate>], nudge[:<kwh>], nudge_soft[:<kwh>], "
+        "nudge_loss[:<aud>], subsidy[:<rate>], peak_demand[:<rate>], "
         "ev_delay[:<step>], night_setback, in_home_display; combine with commas e.g. 'tou,nudge'." % spec
     )
 
