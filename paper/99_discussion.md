@@ -11,13 +11,15 @@
 
 ## RQ2 — Behavioural transmission of external inputs
 
-> **Summary**: **five** results are statistically significant across three worlds — **heatwave → cooling**
+> **Summary**: **seven** results are statistically significant across three worlds — **heatwave → cooling**
 > (baseline AC 0/9 vs 11/12, two-sided p≈0.00003), **lockdown → stay-home** (Out 13/13 → 1/13,
 > p≈0.000003, plus a judgeable **+220.7% daytime-load magnitude**, same-era n=9, p≈0.010), **cold-snap → heating**
 > (0/10 vs 6/10, two-sided p≈0.011), **air-conditioner peak tax → AC-off/peak-shaving** under
 > heatwave (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−20.6% across three worlds, R118/R120/R122/R125),
-> and **public holiday → higher total energy (stay-home)** (+48.3%/+31.9%/+39.8% across three worlds,
-> p≤0.0014, R166/R167/R168). Other interventions are directional, inconclusive, or null (below).
+> and a **stay-home family** of structural shocks that raise total energy across three worlds —
+> **public holiday** (+19%…+65%, p≤0.019, R166–R186), **work-from-home** (+28.7%/+30.6%/+30.6%, p≤0.014,
+> R191–R193) and **transport strike** (+22.2%/+29.3%/+33.9%, p≤0.039, R196–R198). Other interventions are
+> directional, inconclusive, or null (below).
 
 - **Heatwave (binary signal, statistically significant)**: a natural-language heatwave event causes
   agents to switch the air-conditioner on. Aggregating all post-fix runs **across three independent
