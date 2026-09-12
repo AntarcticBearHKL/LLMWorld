@@ -11,12 +11,13 @@
 
 ## RQ2 — Behavioural transmission of external inputs
 
-> **Summary**: **four** results are statistically significant across three worlds — **heatwave → cooling**
+> **Summary**: **five** results are statistically significant across three worlds — **heatwave → cooling**
 > (baseline AC 0/9 vs 11/12, two-sided p≈0.00003), **lockdown → stay-home** (Out 13/13 → 1/13,
 > p≈0.000003, plus a judgeable **+220.7% daytime-load magnitude**, same-era n=9, p≈0.010), **cold-snap → heating**
-> (0/10 vs 6/10, two-sided p≈0.011), and **air-conditioner peak tax → AC-off/peak-shaving** under
-> heatwave (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−20.6% across three worlds, R118/R120/R122/R125).
-> Other interventions are directional, inconclusive, or null (below).
+> (0/10 vs 6/10, two-sided p≈0.011), **air-conditioner peak tax → AC-off/peak-shaving** under
+> heatwave (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−20.6% across three worlds, R118/R120/R122/R125),
+> and **public holiday → higher total energy (stay-home)** (+48.3%/+31.9%/+39.8% across three worlds,
+> p≤0.0014, R166/R167/R168). Other interventions are directional, inconclusive, or null (below).
 
 - **Heatwave (binary signal, statistically significant)**: a natural-language heatwave event causes
   agents to switch the air-conditioner on. Aggregating all post-fix runs **across three independent
@@ -44,7 +45,12 @@
 - **Lockdown (binary signal, strongest)**: a `lockdown` event removed almost all out-of-home time —
   baseline **13/13** member-days had out-of-home activity vs **1/13** under lockdown (Fisher two-sided
   **p ≈ 0.000003**), across three worlds; daytime (9–17) load rose (+294% in the single-instance case,
-  R068/R069/R086). The clearest causal chain in this work.
+   R068/R069/R086). The clearest causal chain in this work.
+- **Public holiday (cross-world, significant)**: a factual `holiday` event (no stay-home mandate) raised
+   **total energy** by +48.3% / +31.9% / +39.8% across three worlds (n=15 each; p=3.5e-4 / 3.8e-7 / 0.0014),
+   driven by **stay-home** appliance use (kitchen light +93%/+93%, living-room TV +65%/+109%, induction
+   cooker +34%/+36%). Same mechanism as lockdown, milder. The **peak effect is not robust** (three worlds:
+   +7.8% n.s. / +24.9% / −15.2% n.s.) and is deliberately **not claimed**.
 - **Peak-shaving is conditional on the house's appliance-time structure**: reducing the *peak*
   requires the intervention to actually lower **peak-window** load, and whether it does is
   house-specific. On `world_838587` (bedroom AC, used mostly overnight) a targeted non-price request
@@ -95,6 +101,18 @@
   (R157)**: a *generic* evening-peak tax raised the total peak +18.9% (n=9) — the same house-specific
   reactivity — further confirming that `ac_tax`'s peak-shaving requires **device+window joint
   anchoring**, not a generic window signal.
+- **Critical-peak pricing (`cpp`) — peak null, world-specific saving (R161/R163)**: a 17:00–20:00
+  high-price event **did not shave the peak** on either of two worlds (W1 −2.7%, W2 +13.0%, both n.s.,
+  n=15) — misaligning with Faruqui & Sergici (2010)'s 13–20% CPP benchmark. Its **total-energy** drop was
+  **world-specific** (−14.4%, p=0.007 on world_838587; −4.3% n.s. on world_172148) and left the valley
+  unfilled → load **conserved, not shifted** (R162). A facts-only control (`cpp_soft`) gave the same
+  qualitative result (−10.9% total, peak n.s.), so the effect is driven by the high-price fact.
+- **Uniform electricity tax (`tax_uniform`, Gunkel et al. 2023) — null (R164)**: total +5.6%, peak +10.7%
+  (both n.s., n=15) → a generic tax framing does not change behaviour (consistent with `price_hike`
+  withdrawal and the generic-tax rebound, R157).
+- **Injection-path confound ruled out (R165)**: preset vs custom injection with **byte-identical** content
+  differed on **no** metric (n=15) → the path is not a confound; earlier preset/custom divergence reflects
+  **content + small samples** (R159/R165).
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
