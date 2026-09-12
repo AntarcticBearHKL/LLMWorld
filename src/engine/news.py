@@ -55,6 +55,10 @@ NEWS_TEMPLATES = {
         "title": "Public holiday",
         "content": "Today is a public holiday; most workplaces and schools are closed and people are staying at home.",
     },
+    "wfh": {
+        "title": "Work-from-home day",
+        "content": "Today is a work-from-home day; many residents are working from home instead of commuting to the office.",
+    },
 }
 
 

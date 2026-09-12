@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Sleeps in bed."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed",
+      "desc": "Wakes up. Gets out of bed. Walks to bathroom. Turns on bathroom light. Uses toilet. Flushes toilet. Turns on tap. Wets hands. Picks up soap. Rubs hands together. Rinses hands. Turns off tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Washes face. Dries face with towel. Removes pajamas. Puts on underwear. Puts on shirt. Puts on pants. Puts on socks."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walks to kitchen. Turns on kitchen light. Opens refrigerator. Takes out milk and eggs. Closes refrigerator. Opens cupboard. Takes out bowl and plate. Cracks eggs into bowl. Whisk eggs with fork. Turns on induction cooker. Places pan on cooker. Pours oil into pan. Pours eggs into pan. Stirs eggs. Turns off induction cooker. Places eggs on plate. Puts bread in toaster. Presses toaster lever. Waits for toast. Takes toast out. Spreads butter on toast. Pours milk into glass. Sits at table. Eats breakfast. Drinks milk. Clears dishes. Puts dishes in sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Living Room",
+      "activity": "Light stretching while watching the morning news on TV",
+      "desc": "Walks to living room. Picks up TV remote. Turns on TV. Changes channel to news. Puts down remote. Stands with feet apart. Raises arms overhead. Bends forward. Touches toes. Straightens up. Rotates torso left. Rotates torso right. Stretches arms across chest. Watches TV. Listens to news. Continues stretching. Sits on sofa. Watches TV."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Bedroom 1",
+      "activity": "Reviewing patient schedules and setting up the telehealth workstation on the computer",
+      "desc": "Walks to bedroom. Sits at desk. Turns on desk lamp. Turns on computer. Opens scheduling software. Reviews patient schedules. Makes notes on paper. Opens telehealth application. Adjusts webcam. Tests microphone. Tests speakers. Arranges desk items. Checks internet connection. Opens patient records. Reviews patient history. Prepares notes for consultations. Adjusts chair height."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Conducting telehealth consultations and updating patient records on the computer",
+      "desc": "Starts video call. Greets patient. Discusses symptoms. Takes notes. Types in patient record. Answers patient questions. Provides advice. Ends call. Saves record. Starts next call. Greets next patient. Discusses treatment plan. Updates medication list. Schedules follow-up. Ends call. Saves record. Repeats for multiple patients."
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out salad ingredients. Closes refrigerator. Opens cupboard. Takes out plate. Washes vegetables. Chops vegetables. Places vegetables on plate. Adds dressing. Sits at table. Eats lunch. Drinks water. Clears dishes. Puts dishes in dishwasher."
+    },
+    {
+      "time": "12:45-13:15",
+      "location": "Out",
+      "activity": "Taking a short walk around the neighborhood",
+      "desc": "Walks out of house. Closes door. Walks down sidewalk. Turns left. Continues walking. Passes houses. Turns right. Walks to end of block. Turns around. Walks back. Enters house. Closes door."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Bedroom 1",
+      "activity": "Continuing patient consultations, charting, and care coordination on the computer",
+      "desc": "Starts video call. Greets patient. Discusses symptoms. Takes notes. Types in patient record. Coordinates care with other providers. Sends referrals. Updates patient charts. Ends call. Saves record. Starts next call. Greets next patient. Reviews lab results. Discusses treatment options. Updates medication list. Schedules follow-up. Ends call. Saves record."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Changes channel. Puts down remote. Leans back. Watches TV. Adjusts position. Grabs blanket. Continues watching. Checks phone. Puts phone down. Watches TV."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out chicken and vegetables. Closes refrigerator. Opens cupboard. Takes out pan. Washes vegetables. Chops vegetables. Turns on induction cooker. Places pan on cooker. Pours oil into pan. Adds chicken to pan. Stirs chicken. Adds vegetables. Stirs mixture. Adds spices. Turns off induction cooker. Places food on plate."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "desc": "Sits at table. Picks up fork. Takes bite of food. Chews. Swallows. Takes another bite. Drinks water. Continues eating. Finishes meal. Clears dishes. Puts dishes in sink. Wipes table."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Watching TV and unwinding",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Changes channel. Puts down remote. Watches TV. Checks phone. Browses phone. Puts phone down. Watches TV. Adjusts position. Continues watching. Turns off TV. Stands up."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Showering",
+      "desc": "Walks to bathroom. Turns on bathroom light. Turns on water heater. Adjusts water temperature. Removes clothes. Steps into shower. Wets body. Picks up soap. Applies soap to body. Scrubs body. Rinses body. Picks up shampoo. Applies shampoo to hair. Scrubs hair. Rinses hair. Turns off water. Steps out of shower. Picks up towel. Dries body. Dries hair. Wraps towel around body. Turns off bathroom light."
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Bedroom 1",
+      "activity": "Watching TV and browsing on the phone",
+      "desc": "Walks to bedroom. Sits on bed. Picks up remote. Turns on TV. Changes channel. Puts down remote. Picks up phone. Unlocks phone. Opens social media app. Scrolls through feed. Likes posts. Watches TV. Continues browsing. Puts down phone. Watches TV. Picks up phone again. Browses more. Puts down phone."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down with the phone",
+      "desc": "Picks up book. Opens book to bookmark. Reads page. Turns page. Continues reading. Puts down book. Picks up phone. Unlocks phone. Checks messages. Reads news. Puts down phone. Picks up book. Reads more. Turns page. Closes book. Puts book on nightstand. Turns off light."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Sleeps in bed."
+    }
+  ]
+}
