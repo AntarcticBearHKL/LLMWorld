@@ -1,0 +1,77 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Remain asleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Morning hygiene routine",
+      "desc": "Turn on bathroom light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit in sink. Turn on tap. Wash face. Pick up towel. Dry face. Put down towel. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Open refrigerator. Take out milk. Take out eggs. Close refrigerator. Open cupboard. Take out bowl. Take out pan. Place pan on stove. Turn on stove. Crack eggs into bowl. Beat eggs. Pour eggs into pan. Cook eggs. Turn off stove. Transfer eggs to plate. Place plate on table. Sit down. Eat breakfast. Drink milk. Stand up. Pick up plate. Place plate in sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Open closet. Select shirt. Select pants. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Pick up bag. Check bag contents. Pick up phone. Put phone in pocket. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Ride bus. Look out window. Check phone. Arrive at stop. Stand up. Exit bus. Walk to workplace. Enter building."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as community program coordinator at nonprofit",
+      "desc": "Turn on computer. Check emails. Attend meeting. Make phone calls. Organize files. Schedule events. Meet with volunteers. Write reports. Take notes. Print documents. Attend lunch. Return to desk. Continue working. Pack up at end of day."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Ride bus. Look out window. Check phone. Arrive at stop. Stand up. Exit bus. Walk home. Enter home."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner",
+      "desc": "Open refrigerator. Take out vegetables. Take out meat. Close refrigerator. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add meat. Stir meat. Add vegetables. Cook dinner. Turn off stove. Transfer food to plate. Place plate on table. Sit down. Eat dinner. Drink water. Stand up. Pick up plate. Place plate in sink."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying up kitchen",
+      "desc": "Turn on tap. Pick up sponge. Apply soap. Wash plate. Rinse plate. Place plate in drying rack. Wash utensils. Rinse utensils. Place utensils in drying rack. Turn off tap. Wipe counter. Sweep floor. Put away items. Turn off light."
+    },
+    {
+      "time": "19:30-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing, watching TV, and using computer",
+      "desc": "Sit on couch. Pick up remote. Turn on TV. Browse channels. Settle on show. Watch TV. Pick up laptop. Open laptop. Turn on laptop. Browse internet. Check social media. Watch video. Close laptop. Pick up phone. Check messages. Play game. Put down phone. Watch more TV. Turn off TV. Stand up."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine",
+      "desc": "Turn on bathroom light. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit in sink. Wash face. Pick up towel. Dry face. Put down towel. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Enter bedroom. Turn off light. Lie down on bed. Pull blanket over. Close eyes. Sleep."
+    }
+  ]
+}
