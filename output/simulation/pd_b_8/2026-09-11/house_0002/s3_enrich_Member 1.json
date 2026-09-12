@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Close eyes. Pull blanket over body. Turn to left side. Bend knees. Place arm under pillow. Adjust pillow. Turn to right side. Stretch legs. Move arm. Adjust blanket. Remain still. Breathe rhythmically. Turn to back. Place hands on chest. Turn head to side. Continue sleeping."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and showering",
+      "desc": "Open eyes. Sit up in bed and stand up. Walk to bathroom. Turn on bathroom light. Step into shower. Pick up soap. Rub soap on body. Pick up shampoo. Apply shampoo to hair. Turn off shower. Step out. Pick up towel. Dry body and hair. Wrap towel around body. Walk to sink. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Turn off light."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, having coffee",
+      "desc": "Enter kitchen. Open refrigerator. Take out eggs, milk, and butter. Place items on counter. Take out pan. Place pan on stove. Turn on stove. Crack eggs into pan. Stir eggs. Transfer eggs to plate. Place bread in toaster. Remove toast. Spread butter on toast. Pour milk into glass. Make coffee. Pour coffee into mug. Sit at table. Eat breakfast. Drink coffee. Clear dishes."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work uniform and packing work bag",
+      "desc": "Walk to bedroom. Open wardrobe. Take out work uniform and undergarments. Put on undergarments. Put on scrub pants. Put on scrub top. Put on socks. Put on shoes. Brush hair. Tie hair back. Take out ID badge. Clip badge to uniform. Take out work bag. Open bag. Place stethoscope in bag. Place water bottle in bag. Zip bag. Place bag by door. Pick up phone. Put phone in pocket."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift",
+      "desc": "Walk out of bedroom. Pick up work bag. Walk to front door. Open door. Step outside. Close and lock door. Walk to car. Open car door. Sit in driver seat. Close car door. Fasten seatbelt. Start engine. Drive out of driveway. Drive to hospital. Park car in hospital parking lot. Turn off engine. Unfasten seatbelt. Step out of car. Lock car. Walk into hospital."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a health care professional: patient assessment, medication rounds and clinical documentation",
+      "desc": "Enter hospital ward. Put on gloves. Pick up patient chart. Walk to patient room. Check patient's vital signs. Use stethoscope to listen to heart and lungs. Measure blood pressure. Record findings in chart. Administer medication. Walk to next patient room. Repeat assessment. Return to nurses station. Open computer. Log into system. Review patient records. Update patient charts. Write progress notes. Consult with doctor. Make phone calls to lab. Prepare medication for next round."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital staff room",
+      "desc": "Walk to staff room. Open refrigerator. Take out lunch bag. Sit at table. Open lunch bag. Take out sandwich. Take out apple. Unwrap sandwich. Take bite of sandwich. Chew and swallow. Take bite of apple. Chew and swallow. Drink water. Wipe mouth with napkin. Throw away trash. Put water bottle back in bag. Stand up. Walk to locker. Place lunch bag inside. Close locker."
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing clinical duties: patient care, monitoring vitals and handover preparation",
+      "desc": "Return to ward. Check patient vital signs. Adjust IV drips. Administer medications. Assist patient with mobility. Change wound dressings. Monitor patient comfort. Document observations. Respond to call bells. Communicate with nurses. Prepare handover report. Gather patient charts. Summarize patient status. Review medication orders. Update care plans. Attend handover meeting. Present patient updates. Answer questions. Hand over patient charts. Sign out."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Walk to car. Unlock car. Open car door. Sit in driver seat. Close car door. Fasten seatbelt. Start engine. Drive out of parking lot. Drive to home. Park car in driveway. Turn off engine. Unfasten seatbelt. Open car door. Step out. Close car door. Lock car. Walk to front door. Unlock door. Enter house. Close door."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out vegetables, chicken, sauce. Place on counter. Take out pot. Place pot on stove. Turn on stove. Add oil to pot. Add chicken. Add vegetables. Add sauce. Cover pot. Turn off stove. Transfer food to plate. Place plate on table. Sit at table. Eat dinner. Clear table. Wash dishes."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "desc": "Walk to living room. Pick up remote control. Press power button on TV. Sit on sofa. Recline. Place feet on ottoman. Pick up phone. Scroll through phone. Put phone down. Watch TV. Stand up. Walk to kitchen. Open refrigerator. Take out drink. Return to sofa. Sit down. Drink. Watch TV. Press power button to turn off TV. Walk to bedroom."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Loading and running the washing machine for laundry",
+      "desc": "Walk to bathroom. Pick up laundry basket. Open washing machine door. Place clothes into washing machine. Close door. Open detergent drawer. Pour detergent and fabric softener. Close drawer. Turn dial to select cycle. Press start button. Walk to bedroom. Pick up more clothes. Return to bathroom. Open washing machine door. Add clothes. Close door. Wait for cycle completion. Open washing machine door. Remove wet clothes. Place in dryer."
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Studying on the computer for professional development and reviewing case notes",
+      "desc": "Walk to bedroom. Sit at desk. Open laptop. Turn on laptop. Enter password. Open study materials. Read on screen. Take notes in notebook. Highlight text. Open case notes file. Review patient cases. Type notes. Save file. Close laptop. Stand up. Stretch. Walk to bathroom."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Night hygiene routine: brushing teeth and washing up",
+      "desc": "Enter bathroom. Turn on light. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face with cleanser. Rinse face. Dry face with towel. Apply moisturizer. Turn off tap. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Close eyes. Pull blanket over body. Turn to side. Adjust pillow. Remain still. Breathe rhythmically. Turn to other side. Adjust blanket. Move arm. Bend knees. Turn to back. Place hands on chest. Continue sleeping."
+    }
+  ]
+}

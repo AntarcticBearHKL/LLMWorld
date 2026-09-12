@@ -1,0 +1,65 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Close eyes. Breathe regularly. Turn to left side. Pull blanket up. Turn to right side. Adjust pillow. Bend knees. Stretch legs. Turn to back. Move arm under pillow. Breathe deeply. Remain still. Turn to left side. Pull blanket. Remain still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Morning hygiene routine",
+      "desc": "Enter bathroom. Turn on light. Lift toilet lid. Urinate. Flush toilet. Walk to sink. Turn on tap. Wet hands. Pick up soap. Rub hands together. Rinse hands. Turn off tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Dry face with towel. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Enter kitchen. Open refrigerator. Take out eggs. Take out milk. Close refrigerator. Place items on counter. Open cabinet. Take out frying pan. Place pan on stove. Turn on stove. Crack eggs into pan. Fry eggs. Turn off stove. Pick up plate. Slide eggs onto plate. Place plate on table. Sit at table. Pick up fork. Eat eggs. Drink milk."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk out of house. Lock door. Walk to bus stop. Stand at bus stop. Check phone. Put phone in pocket. Bus arrives. Board bus. Tap card. Find seat. Sit down. Look out window. Stand up. Walk to exit. Get off bus. Walk to workplace. Enter building."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional",
+      "desc": "Walk to locker room. Open locker. Take out scrubs. Change into scrubs. Close locker. Walk to nurses' station. Clock in. Pick up clipboard. Review patient charts. Walk to patient room 1. Knock on door. Enter room. Greet patient. Check vital signs. Measure blood pressure. Measure temperature. Measure pulse. Record data on clipboard. Administer medication. Talk to patient."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk out of workplace. Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Look out window. Stand up. Walk to exit. Get off bus. Walk to house. Unlock door. Enter house. Close door."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Enter kitchen. Open refrigerator. Take out chicken. Take out vegetables. Close refrigerator. Open cabinet. Take out pot. Place pot on stove. Turn on stove. Add water to pot. Boil water. Add chicken. Add vegetables. Turn off stove. Pick up bowl. Pour soup into bowl. Place bowl on table. Sit at table. Pick up spoon. Eat soup."
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing, watching TV and using computer",
+      "desc": "Enter living room. Turn on TV. Pick up remote. Sit on sofa. Change channel. Watch TV. Pick up laptop. Open laptop. Turn on laptop. Type on keyboard. Use mouse. Click on browser. Browse internet. Pick up phone. Check messages. Put down phone. Continue watching TV. Use computer."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine",
+      "desc": "Enter bathroom. Turn on light. Urinate. Wash hands. Pick up toothbrush. Apply toothpaste. Brush teeth. Wash face. Dry face with towel. Take off clothes. Turn on shower. Step into shower. Wash body. Rinse body. Turn off shower. Step out. Dry body with towel. Put on pajamas. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Enter bedroom. Turn on light. Walk to bed. Pull back blanket. Lie down. Pull blanket up. Turn off light. Close eyes. Breathe regularly. Turn to left side. Adjust pillow. Turn to right side. Pull blanket. Breathe deeply. Remain still."
+    }
+  ]
+}
