@@ -143,8 +143,9 @@
   2→~7.1, 4→4.96, 5→3.12, 6→5.33 kWh), qualitatively aligning with Schröder et al. (2013).
 - **Cross-day variability (R152)**: households differ widely in regularity (variability index
   0.26–0.44; peak-hour shift 0.5–11 h) — supporting heterogeneous behaviour.
-- **Weekday/weekend (R176)**: a genuine 7-day run (world_838587 h002) gives **weekend +40.7%** vs weekday
-  (11.06 vs 7.86 kWh) — the same **stay-home** mechanism as the holiday event, at a milder level.
+- **Weekday/weekend (R176/R195)**: 5 households × 7 days give weekend-vs-weekday changes of **+3.1% … +44.9%**,
+  and the weekend effect **correlates with the household's holiday effect (r=0.82, n=5)** — both share the
+  same **stay-home dose** (time normally away on weekdays). Weekend = a periodic holiday.
 - **Household load-shape archetypes (N9, R178)**: six baseline households split into **evening-peak (18h,
   eve 45%) / morning-peak (7h, 37–41%) / late-night (21h)** types — real inter-household heterogeneity
   (RQ3); still descriptive (6 households, single member each).

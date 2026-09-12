@@ -1,0 +1,113 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping quietly through the night",
+      "desc": "Lies in bed. Closes eyes. Breathes slowly. Remains still. Turns to left side. Pulls blanket up. Adjusts pillow. Remains still. Turns to right side. Stretches arm. Remains still. Continues sleeping."
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Washing face, showering and getting dressed",
+      "desc": "Wakes up. Sits up in bed. Swings legs out of bed. Stands up. Walks to bathroom. Turns on bathroom light. Turns on water heater. Steps into shower. Turns on shower tap. Adjusts water temperature. Washes face. Applies soap. Rinses body. Turns off shower tap. Steps out of shower. Picks up towel. Dries body. Puts on underwear. Puts on shirt. Puts on pants. Turns off bathroom light."
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a flexitarian breakfast with tea",
+      "desc": "Walks to kitchen. Turns on kitchen light. Opens refrigerator. Takes out milk, bread, eggs, vegetables. Closes refrigerator. Places items on counter. Opens cupboard. Takes out bowl, plate, knife, fork, mug. Closes cupboard. Cracks eggs into bowl. Adds milk. Whisk eggs. Turns on induction cooker. Places pan on cooker. Pours egg mixture into pan. Cooks omelette. Turns off induction cooker. Slides omelette onto plate. Toasts bread. Spreads butter. Pours tea into mug. Sits at table. Eats breakfast. Drinks tea. Washes dishes."
+    },
+    {
+      "time": "07:45-08:15",
+      "location": "Bedroom 1",
+      "activity": "Checking written reminders and packing the study bag for the day",
+      "desc": "Walks to bedroom. Turns on bedroom light. Picks up notebook from desk. Opens notebook. Reads reminders. Closes notebook. Picks up backpack. Opens backpack. Inserts notebook. Inserts textbooks. Inserts laptop. Inserts charger. Inserts pencil case. Inserts water bottle. Zips backpack. Places backpack near door. Turns off bedroom light. Walks out."
+    },
+    {
+      "time": "08:15-09:00",
+      "location": "Out",
+      "activity": "Commuting by bus and train to the Monash University Clayton campus",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Taps smart card. Finds seat. Sits down. Rides bus. Alights bus at station. Walks to train platform. Waits for train. Boards train. Finds seat. Sits down. Rides train. Alights train at Clayton. Walks to campus."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Attending social work coursework lectures and tutorials",
+      "desc": "Enters lecture hall. Finds seat. Sits down. Takes out notebook. Takes out pen. Opens notebook. Listens to lecture. Writes notes. Raises hand. Asks question. Listens to answer. Writes more notes. Takes break. Walks to corridor. Drinks water. Returns to seat. Continues lecture."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Eating a packed lunch on campus",
+      "desc": "Walks to campus cafeteria. Finds table. Sits down. Opens backpack. Takes out lunch box. Opens lunch box. Takes out sandwich. Takes out apple. Takes out water bottle. Unwraps sandwich. Takes bite. Chews. Swallows. Eats apple. Drinks water. Wipes mouth. Closes lunch box. Puts lunch box in backpack. Stands up."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Working on group project tasks and course readings in the university library",
+      "desc": "Enters library. Finds study room. Sits at table. Opens laptop. Turns on laptop. Opens course readings. Reads. Highlights text. Takes notes. Opens group project document. Types. Discusses with group members. Listens. Responds. Writes on whiteboard. Erases whiteboard. Checks phone. Sends message. Continues reading. Closes laptop. Packs bag. Leaves library."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home by train and bus",
+      "desc": "Walks to train station. Boards train. Finds seat. Sits down. Rides train. Alights train. Walks to bus stop. Waits for bus. Boards bus. Taps card. Finds seat. Sits down. Rides bus. Alights bus. Walks home."
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating a flexitarian dinner with tea",
+      "desc": "Walks into kitchen. Turns on kitchen light. Opens refrigerator. Takes out vegetables, tofu, rice. Closes refrigerator. Places on counter. Opens cupboard. Takes out pot, pan, knife, cutting board. Closes cupboard. Washes vegetables. Cuts vegetables. Turns on induction cooker. Places pan on cooker. Pours oil. Adds vegetables. Adds tofu. Stirs. Cooks rice. Turns off cooker. Serves food on plate. Pours tea. Sits at table. Eats dinner. Drinks tea. Washes dishes."
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Bedroom 1",
+      "activity": "Recording the weekly budget and cash spending in a notebook",
+      "desc": "Walks to bedroom. Turns on bedroom light. Sits at desk. Opens drawer. Takes out notebook. Takes out pen. Opens notebook. Reviews receipts. Writes down expenses. Calculates total. Closes notebook. Puts notebook in drawer. Closes drawer. Turns off bedroom light."
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Bathroom",
+      "activity": "Doing laundry and folding clean clothes",
+      "desc": "Walks to bathroom. Turns on bathroom light. Opens washing machine. Loads dirty clothes. Adds detergent. Closes washing machine. Turns on washing machine. Waits. Opens dryer. Takes out clean clothes. Folds clothes. Puts folded clothes in basket. Turns off bathroom light."
+    },
+    {
+      "time": "19:45-20:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and preparing lunch and tea for the next day",
+      "desc": "Walks to kitchen. Turns on kitchen light. Opens dishwasher. Loads dirty dishes. Adds detergent. Closes dishwasher. Turns on dishwasher. Opens refrigerator. Takes out ingredients for lunch. Closes refrigerator. Places ingredients on counter. Prepares sandwich. Packs lunch box. Prepares tea. Pours tea into thermos. Closes lunch box. Places in refrigerator. Turns off kitchen light."
+    },
+    {
+      "time": "20:15-21:30",
+      "location": "Bedroom 1",
+      "activity": "Studying course readings on the Computer with the DeskLamp on",
+      "desc": "Walks to bedroom. Sits at desk. Turns on desk lamp. Turns on computer. Opens course readings. Reads. Highlights text. Takes notes. Opens browser. Searches for references. Reads articles. Writes summary. Saves document. Closes computer. Turns off desk lamp."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Writing reminders and sending text messages to confirm plans in advance",
+      "desc": "Opens notebook. Takes out pen. Writes reminders. Opens phone. Opens messaging app. Types message: 'Confirming our meeting tomorrow at 10am.' Sends message. Receives reply. Types reply. Sends. Closes messaging app. Closes notebook. Puts away pen."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Night routine, brushing teeth and washing up",
+      "desc": "Walks to bathroom. Turns on bathroom light. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns off tap. Washes face. Dries face. Turns off bathroom light. Walks out."
+    },
+    {
+      "time": "22:30-23:30",
+      "location": "Bedroom 1",
+      "activity": "Quiet wind-down, looking at the photo of the family dog",
+      "desc": "Walks to bedroom. Turns on bedroom light. Sits on bed. Picks up photo frame. Looks at photo. Smiles. Puts down photo. Turns off bedroom light. Lies down. Closes eyes. Adjusts pillow. Pulls blanket. Turns to side. Remains still. Breathes slowly."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Eyes closed. Breathing slow. Remains still. Turns to side. Pulls blanket. Adjusts pillow. Remains still. Continues sleeping. Slight movement of leg. Turns head. Remains still. Breathes deeply."
+    }
+  ]
+}

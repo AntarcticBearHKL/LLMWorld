@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Eyes closed. Breathes deeply. Turns to right side. Pulls blanket up. Adjusts pillow. Bends left knee. Stretches right arm. Turns to left side. Shifts legs. Remains still. Breathes steadily. Moves right hand. Turns head. Pulls blanket. Continues sleeping."
+    },
+    {
+      "time": "06:45-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and taking a shower",
+      "desc": "Wakes up. Sits up. Stands up. Walks to bathroom. Turns on light and shower. Steps into shower. Washes body and hair. Turns off shower. Steps out. Dries with towel. Washes face at sink. Dries face."
+    },
+    {
+      "time": "07:10-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making tea with the kettle",
+      "desc": "Walks to kitchen. Opens refrigerator, takes out eggs and milk, closes refrigerator. Opens cupboard, takes out frying pan, places on stove. Turns on stove. Cracks eggs into pan. Adds milk, stirs. Turns off stove, slides eggs onto plate, places plate on table. Opens cupboard, takes out tea bag, places in mug. Fills kettle with water, turns on kettle. Waits for kettle to boil. Pours hot water into mug. Adds milk to tea, stirs. Sits down at table. Eats breakfast. Drinks tea."
+    },
+    {
+      "time": "07:45-08:15",
+      "location": "Bedroom 1",
+      "activity": "Packing study bag and reviewing today's lecture notes on the computer",
+      "desc": "Walks to bedroom. Opens study bag. Places notebook in bag. Places pen in bag. Places laptop in bag. Places charger in bag. Zips bag. Sits at desk. Opens computer. Turns on computer. Opens lecture notes file. Reads notes. Scrolls down. Highlights key points. Closes file. Shuts down computer. Stands up. Picks up bag. Walks to door."
+    },
+    {
+      "time": "08:15-09:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University campus",
+      "desc": "Walks out of house. Closes door. Walks to bus stop. Waits for bus. Gets on bus. Swipes card. Finds seat. Sits down. Looks out window. Gets off bus. Walks to campus. Enters campus building. Checks phone. Puts on headphones. Listens to music. Arrives at lecture hall."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and taking notes",
+      "desc": "Enters lecture hall. Finds seat. Sits down. Takes out notebook and pen. Opens notebook. Listens to lecturer. Writes notes. Highlights key points. Raises hand. Asks question. Writes more notes. Stretches. Takes out laptop. Opens laptop. Types notes. Closes laptop. Packs up. Stands up. Walks out."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Eating lunch on campus and chatting with coursemates",
+      "desc": "Walks to cafeteria. Gets tray. Picks up sandwich. Picks up drink. Pays at register. Finds table. Sits down. Unwraps sandwich. Eats sandwich. Drinks drink. Talks to coursemate. Laughs. Nods head. Continues eating. Finishes meal. Clears tray. Stands up. Walks away."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Attending tutorials and studying in the campus library",
+      "desc": "Walks to tutorial room. Enters. Sits down. Takes out notebook and writes notes. Participates in discussion. Raises hand. Asks question. Walks to library. Enters library. Finds desk. Sits down. Opens laptop. Opens textbook. Reads. Takes notes. Highlights text. Closes laptop. Packs bag. Stands up. Walks out."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "desc": "Walks to bus stop. Waits for bus. Gets on bus. Swipes card. Finds seat. Sits down. Looks out window. Checks phone. Listens to music. Gets off bus. Walks home. Opens door. Enters house. Closes door."
+    },
+    {
+      "time": "18:00-18:50",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out vegetables and meat. Closes refrigerator. Opens cupboard. Takes out cutting board and knife. Cuts vegetables and meat. Places induction cooker on counter. Turns on induction cooker. Places pan on cooker. Adds oil. Adds vegetables and meat. Stirs. Adds sauce. Stirs. Turns off cooker. Slides food onto plate. Places plate on table. Sits down. Eats dinner. Drinks water."
+    },
+    {
+      "time": "18:50-19:10",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen counter",
+      "desc": "Picks up dishes. Scrapes food into bin. Turns on tap. Rinses dishes. Applies soap. Scrubs dishes. Rinses again. Places dishes in drying rack. Turns off tap. Wipes counter with cloth. Puts away cleaning supplies."
+    },
+    {
+      "time": "19:10-19:45",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Changes channel. Watches TV. Leans back. Puts feet on coffee table. Picks up phone. Checks messages. Puts phone down. Changes channel again. Watches more TV. Stretches. Turns off TV. Stands up."
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Bedroom 1",
+      "activity": "Working on assignment readings and writing on the computer at the desk",
+      "desc": "Walks to bedroom. Sits at desk. Opens laptop. Turns on laptop. Opens assignment file. Opens reading PDF. Reads. Highlights. Takes notes. Opens document. Types. Reads more. Types more. Saves document. Checks phone. Puts phone down. Continues typing. Closes laptop. Stands up."
+    },
+    {
+      "time": "21:30-21:50",
+      "location": "Kitchen",
+      "activity": "Making a light snack and hot drink",
+      "desc": "Walks to kitchen. Opens refrigerator, takes out yogurt, closes refrigerator. Opens cupboard, takes out bowl and spoon. Opens yogurt, spoons into bowl. Opens cupboard, takes out tea bag, places in mug. Fills kettle, turns on. Pours hot water into mug. Adds milk, stirs. Eats yogurt, drinks tea."
+    },
+    {
+      "time": "21:50-22:15",
+      "location": "Bathroom",
+      "activity": "Showering and brushing teeth",
+      "desc": "Walks to bathroom. Turns on light and shower. Steps into shower. Washes body and hair. Turns off shower. Steps out. Dries with towel. Brushes teeth at sink. Rinses mouth. Turns off light. Walks out."
+    },
+    {
+      "time": "22:15-22:50",
+      "location": "Bedroom 1",
+      "activity": "Organising tomorrow's timetable and checking phone messages",
+      "desc": "Walks to bedroom. Sits at desk. Opens planner. Writes down appointments. Opens phone. Checks messages. Replies to messages. Checks email. Closes phone. Picks up book. Reads. Puts book down. Turns off desk lamp. Lies down. Closes eyes."
+    },
+    {
+      "time": "22:50-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down with the desk lamp on and going to sleep",
+      "desc": "Lies in bed. Adjusts pillow. Pulls blanket up. Turns off desk lamp. Closes eyes. Breathes deeply. Turns to side. Adjusts blanket. Remains still. Continues sleeping. Occasional movement. Shifts legs. Turns head. Pulls blanket. Breathes steadily. Falls asleep."
+    }
+  ]
+}
