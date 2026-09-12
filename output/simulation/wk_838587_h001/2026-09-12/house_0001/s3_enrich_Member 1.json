@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-08:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies down on bed. Closes eyes. Pulls blanket over body. Sleeps."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed",
+      "desc": "Walks to bathroom. Turns on light. Turns on tap. Washes face. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns off tap. Dries face with towel. Walks to bedroom. Opens wardrobe. Picks out clothes. Puts on shirt. Puts on pants. Puts on socks. Puts on shoes. Returns to bathroom. Looks in mirror. Combs hair."
+    },
+    {
+      "time": "08:30-09:10",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast while reading the news on phone",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out milk and eggs. Closes refrigerator. Opens cupboard. Takes out bowl and cereal. Pours cereal into bowl. Pours milk into bowl. Picks up spoon. Eats cereal. Picks up phone. Unlocks phone. Opens news app. Scrolls through news articles. Takes bites of cereal. Drinks milk from bowl. Places spoon in sink. Rinses bowl. Places bowl in dishwasher. Wipes counter with cloth. Picks up phone again. Continues reading news."
+    },
+    {
+      "time": "09:10-09:50",
+      "location": "Bathroom",
+      "activity": "Doing laundry with the washing machine",
+      "desc": "Walks to bathroom. Opens washing machine door. Picks up laundry basket. Sorts white clothes from colored clothes. Loads white clothes into washing machine. Closes door. Opens detergent drawer. Pours detergent into drawer. Closes drawer. Turns dial to select cycle. Presses start button. Machine starts. Leaves bathroom. Returns after 30 minutes. Opens washing machine door. Takes out wet clothes. Places wet clothes into laundry basket. Closes washing machine door. Carries basket to bedroom. Hangs clothes on drying rack."
+    },
+    {
+      "time": "09:50-11:00",
+      "location": "Bedroom 1",
+      "activity": "Reading course materials for Master of Education on computer",
+      "desc": "Walks to bedroom. Sits at desk. Opens laptop. Turns on computer. Enters password. Opens web browser. Navigates to university portal. Opens course materials PDF. Scrolls through pages. Highlights text. Takes notes in notebook. Picks up pen. Writes notes. Pauses reading. Drinks water from bottle. Continues reading. Types comments in document. Saves document. Closes laptop."
+    },
+    {
+      "time": "11:00-11:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a light lunch",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out lettuce, tomato, cheese. Closes refrigerator. Opens cupboard. Takes out bread. Places bread on cutting board. Picks up knife. Slices bread. Slices tomato. Slices cheese. Places lettuce on bread. Places tomato on bread. Places cheese on bread. Closes sandwich. Picks up plate. Places sandwich on plate. Carries plate to table. Sits down. Eats sandwich. Drinks water from glass. Picks up plate. Places plate in sink. Rinses plate. Places plate in dishwasher. Wipes counter."
+    },
+    {
+      "time": "11:45-12:15",
+      "location": "Out",
+      "activity": "Commuting to part-time hospitality and retail shift",
+      "desc": "Picks up bag. Puts on shoes. Opens door. Walks out. Closes door. Locks door. Walks to bus stop. Checks watch. Waits. Bus arrives. Steps onto bus. Swipes card. Walks to seat. Sits. Looks at phone. Bus stops. Gets up. Walks to door. Steps off. Walks to work."
+    },
+    {
+      "time": "12:15-18:00",
+      "location": "Out",
+      "activity": "Working part-time hospitality and retail shift",
+      "desc": "Stands at counter. Greets customer. Scans items. Takes payment. Gives receipt. Bags items. Hands bag to customer. Bids farewell. Restocks shelves. Checks inventory. Cleans counter. Assists customer with query. Walks to storage room. Carries boxes. Opens boxes. Arranges items on shelves. Takes break. Eats snack. Drinks water. Returns to counter. Serves next customer."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Commuting home after shift",
+      "desc": "Clocks out. Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps card. Finds seat. Sits. Checks phone. Bus arrives at stop. Gets off. Walks home. Opens door. Enters. Closes door. Locks door. Takes off shoes."
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes",
+      "desc": "Walks to bathroom. Turns on light. Turns on shower. Adjusts water temperature. Takes off work clothes. Steps into shower. Washes body with soap. Shampoos hair. Rinses hair. Turns off shower. Steps out. Picks up towel. Dries body. Wraps towel around hair. Walks to bedroom. Opens wardrobe. Picks out casual clothes. Puts on t-shirt. Puts on shorts. Puts on socks. Returns to bathroom. Hangs towel. Turns off light. Walks to living room."
+    },
+    {
+      "time": "19:00-19:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out vegetables, meat. Closes refrigerator. Opens cupboard. Takes out rice. Washes rice. Places rice in rice cooker. Adds water. Turns on rice cooker. Picks up knife. Chops vegetables. Chops meat. Turns on induction cooker. Pours oil into pan. Adds vegetables. Stirs with spatula. Adds meat. Adds sauce. Cooks. Turns off induction cooker. Places food on plate. Scoops rice from rice cooker. Sits at table. Eats dinner. Drinks water. Picks up plate. Places plate in sink. Rinses plate. Places plate in dishwasher. Wipes counter."
+    },
+    {
+      "time": "19:45-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Switches to news channel. Watches news. Changes channel to movie. Watches movie. Picks up phone. Scrolls social media. Puts down phone. Watches TV. Gets up. Walks to kitchen. Opens refrigerator. Takes out ice cream. Scoops ice cream into bowl. Returns to living room. Sits on sofa. Eats ice cream. Watches TV. Finishes ice cream. Places bowl on coffee table. Continues watching TV."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Working on university assignment on computer",
+      "desc": "Walks to bedroom. Sits at desk. Opens laptop. Turns on computer. Enters password. Opens Word document. Types assignment. Pauses. Opens web browser. Searches for references. Copies citation. Pastes into document. Continues typing. Checks word count. Saves document. Opens email. Attaches document. Sends email to professor. Closes laptop. Stretches arms."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Kitchen",
+      "activity": "Having an evening snack and tidying the kitchen",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out yogurt. Closes refrigerator. Opens drawer. Takes out spoon. Opens yogurt container. Eats yogurt. Places empty container in trash. Rinses spoon. Places spoon in dishwasher. Wipes counter with cloth. Opens dishwasher. Loads dirty dishes. Closes dishwasher. Turns on dishwasher. Wipes table. Picks up crumbs. Throws crumbs in trash. Turns off kitchen light. Walks to bedroom."
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down and preparing for bed",
+      "desc": "Walks to bedroom. Turns on desk lamp. Picks up phone. Sets alarm. Checks messages. Puts down phone. Changes into pajamas. Folds clothes. Places clothes in wardrobe. Reads book. Picks up book. Opens to page. Reads. Closes book. Places book on nightstand. Turns off desk lamp. Lies down on bed. Pulls blanket. Closes eyes."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Closes eyes. Pulls blanket. Sleeps."
+    }
+  ]
+}
