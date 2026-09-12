@@ -1,0 +1,232 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-12 11:59:36
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Health Care Professional
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  },
+  {
+    "time": "06:30-07:00",
+    "location": "Bathroom",
+    "activity": "Morning wash, shower, and brushing teeth"
+  },
+  {
+    "time": "07:00-07:30",
+    "location": "Kitchen",
+    "activity": "Preparing and eating breakfast, drinking coffee"
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Out",
+    "activity": "Commuting to the hospital for the morning shift"
+  },
+  {
+    "time": "08:00-17:00",
+    "location": "Out",
+    "activity": "Working as a health care professional, seeing patients, charting, and coordinating with the clinical team"
+  },
+  {
+    "time": "17:00-17:30",
+    "location": "Out",
+    "activity": "Commuting home from the hospital"
+  },
+  {
+    "time": "17:30-18:00",
+    "location": "Bathroom",
+    "activity": "Showering and changing out of work clothes"
+  },
+  {
+    "time": "18:00-18:45",
+    "location": "Kitchen",
+    "activity": "Cooking and eating dinner"
+  },
+  {
+    "time": "18:45-19:15",
+    "location": "Kitchen",
+    "activity": "Clearing the table and loading the dishwasher"
+  },
+  {
+    "time": "19:15-20:30",
+    "location": "Living Room",
+    "activity": "Watching TV and relaxing"
+  },
+  {
+    "time": "20:30-21:15",
+    "location": "Living Room",
+    "activity": "Using the computer for professional reading and email"
+  },
+  {
+    "time": "21:15-21:45",
+    "location": "Bathroom",
+    "activity": "Nighttime hygiene routine and preparing for bed"
+  },
+  {
+    "time": "21:45-22:30",
+    "location": "Bedroom 1",
+    "activity": "Watching TV and reading to wind down"
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "DeskLamp",
+      "Light",
+      "Fan"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Kettle",
+      "Toaster",
+      "Oven",
+      "Dishwasher",
+      "Light"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "Computer",
+      "Monitor",
+      "Router",
+      "GameConsole",
+      "SpaceHeater",
+      "Light",
+      "VacuumCleaner"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "WashingMachine",
+      "ClothesDryer",
+      "Light",
+      "Dehumidifier"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{"member": "Member 1", "enriched_activities": [{"time": "00:00-06:30", "location": "Bedroom 1", "activity": "Sleeping", "desc": "Lie down on the bed. Pull the blanket up over the chest. Close eyes. Turn onto the right side. Place both hands under the pillow. Turn onto the left side. Pull the blanket up to the shoulder. Bend knees. Straighten legs. Turn onto the back. Move the arm out from under the blanket. Turn onto the right side again. Pull the blanket down to the waist. Stretch both legs. Turn onto the left side. Place the arm over the pillow. Remain lying still. Keep eyes closed until the alarm sounds."}, {"time": "06:30-07:00", "location": "Bathroom", "activity": "Morning wash, shower, and brushing teeth", "desc": "Sit up on the bed. Swing both legs off the bed. Stand up. Walk to the bathroom door. Push the door open. Reach for the light switch. Press the light switch on. Walk to the toilet. Use the toilet. Stand up. Walk to the shower area. Turn the water heater switch on. Turn the shower tap on. Step under the water. Wet the hair. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub shampoo into the hair. Rinse the hair. Pick up the soap. Rub the soap over the arms, chest, and legs. Rinse the body. Turn the shower tap off. Step out of the shower. Pick up the towel. Wipe the hair with the towel. Wipe the face. Wipe the body. Wrap the towel around the waist. Pick up the toothbrush. Turn the tap on. Wet the toothbrush. Squeeze toothpaste onto the brush. Brush the teeth. Spit into the sink. Rinse the mouth with water. Turn the tap off. Put the toothbrush back in the holder. Hang the towel on the hook. Press the light switch off. Pull the door open. Walk out of the bathroom."}, {"time": "07:00-07:30", "location": "Kitchen", "activity": "Preparing and eating breakfast, drinking coffee", "desc": "Walk to the kitchen. Pull the door open. Press the light switch on. Walk to the refrigerator. Pull the refrigerator door open. Take the milk carton out. Take the eggs out. Take the bread out. Close the refrigerator door. Put the items on the counter. Pick up the kettle. Fill the kettle with water at the tap. Put the kettle on the base. Press the kettle switch on. Pick up the toaster. Plug the toaster in. Put two slices of bread into the toaster. Press the toaster lever down. Crack two eggs into a bowl. Pick up the chopsticks. Beat the eggs. Place the frying pan on the induction cooker. Press the induction cooker power button. Pour oil into the pan. Pour the eggs into the pan. Stir the eggs with the chopsticks. Turn the induction cooker off. Slide the eggs onto a plate. Pick up the plate. Carry the plate to the table. Pick up the bread from the toaster. Put the bread on the plate. Pick up a cup from the shelf. Pour coffee powder into the cup. Pour hot water from the kettle into the cup. Stir the coffee with a spoon. Sit down on the chair. Eat the eggs and bread with the chopsticks. Pick up the cup. Drink the coffee. Put the cup down. Stand up. Carry the plate and cup to the sink. Put them into the sink. Wipe the mouth with a paper towel."}, {"time": "07:30-08:00", "location": "Out", "activity": "Commuting to the hospital for the morning shift", "desc": "Walk to the entryway. Pick up the bag from the hook. Open the bag. Put the phone into the bag. Close the bag. Put on the shoes. Bend down. Tie the shoelaces. Stand up. Open the door. Step outside. Close the door. Lock the door with the key. Put the key into the pocket. Walk to the elevator. Press the elevator call button. Step into the elevator. Press the ground floor button. Step out of the elevator. Walk out of the building. Walk to the bus stop. Take out the phone. Check the bus arrival time on the phone. Put the phone into the pocket. Step onto the bus. Take out the transit card. Tap the card on the reader. Walk to an empty seat. Sit down. Put the bag on the lap. Hold the handrail. Stand up at the stop. Walk to the bus door. Step off the bus. Walk toward the hospital entrance. Push the hospital door open."}, {"time": "08:00-17:00", "location": "Out", "activity": "Working as a health care professional, seeing patients, charting, and coordinating with the clinical team", "desc": "Walk into the locker room. Open the locker. Take out the work uniform. Take off the jacket. Put on the work uniform. Close the locker. Walk to the nurse station. Sit down at the desk. Pick up the handover sheet. Read the handover sheet. Stand up. Walk to the patient room. Push the room door open. Pick up the blood pressure cuff. Wrap the cuff around the patient's arm. Press the start button on the monitor. Read the blood pressure value. Write the value on the chart. Pick up the thermometer. Place it under the patient's tongue. Take the thermometer out. Read the temperature. Write the temperature on the chart. Walk to the next patient room. Knock on the door. Push the door open. Greet the patient. 'Good morning, how are you feeling today?' Ask the patient about pain. Adjust the IV drip rate. Check the IV line. Walk back to the nurse station. Sit down at the computer. Type the patient notes into the computer. Press the save button. Pick up the phone. Call the pharmacy. Say 'Please prepare the medication for bed 12.' Put the phone down. Stand up. Walk to the supply room. Open the cabinet. Take out the dressing set. Close the cabinet. Walk to the patient room. Open the dressing set. Put on the gloves. Clean the wound with a swab. Apply the new dressing. Take off the gloves. Throw the gloves into the bin. Walk to the meeting room. Sit down. Open the notebook. Take notes during the team meeting. Say 'I will follow up with bed 12 this afternoon.' Stand up. Walk back to the nurse station. Type the remaining chart entries. Press the log out button. Stand up. Walk to the locker room. Open the locker. Take off the work uniform. Put on the jacket. Close the locker. Walk out of the hospital."}, {"time": "17:00-17:30", "location": "Out", "activity": "Commuting home from the hospital", "desc": "Walk out of the hospital entrance. Walk to the bus stop. Stand at the bus stop. Take out the phone. Look at the phone screen. Put the phone back into the pocket. Step onto the bus. Take out the transit card. Tap the card on the reader. Walk down the aisle. Sit down on an empty seat. Put the bag on the lap. Lean back against the seat. Look out of the window. Stand up at the stop. Walk to the bus door. Step off the bus. Walk along the sidewalk. Walk to the building entrance. Push the door open. Walk to the elevator. Press the elevator call button. Step into the elevator. Press the floor button. Step out of the elevator. Walk to the apartment door. Take out the key. Insert the key into the lock. Turn the key. Push the door open. Step inside. Close the door. Lock the door. Put the key on the hook."}, {"time": "17:30-18:00", "location": "Bathroom", "activity": "Showering and changing out of work clothes", "desc": "Walk to the bathroom. Push the door open. Press the light switch on. Take off the jacket. Hang the jacket on the hook. Take off the shirt. Take off the trousers. Put the clothes into the laundry basket. Turn the water heater switch on. Turn the shower tap on. Step under the water. Wet the hair. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub shampoo into the hair. Rinse the hair. Pick up the soap. Rub the soap over the body. Rinse the body. Turn the shower tap off. Step out of the shower. Pick up the towel. Wipe the hair. Wipe the body. Wrap the towel around the body. Walk to the bedroom. Pull open the wardrobe door. Take out a T-shirt and trousers. Put on the T-shirt. Put on the trousers. Close the wardrobe door. Walk back to the bathroom. Hang the towel on the hook. Press the light switch off. Walk out of the bathroom."}, {"time": "18:00-18:45", "location": "Kitchen", "activity": "Cooking and eating dinner", "desc": "Walk to the kitchen. Press the light switch on. Open the refrigerator door. Take out the vegetables. Take out the chicken. Close the refrigerator door. Put the items on the counter. Turn the tap on. Rinse the vegetables under the water. Turn the tap off. Place the vegetables on the cutting board. Pick up the knife. Cut the vegetables into pieces. Put the knife down. Place the frying pan on the induction cooker. Press the induction cooker power button. Pour oil into the pan. Add the chicken into the pan. Stir the chicken with the spatula. Add the vegetables into the pan. Add salt from the salt box. Stir the food with the spatula. Turn the induction cooker off. Slide the food onto a plate. Pick up the plate. Carry the plate to the table. Pick up the bowl from the shelf. Fill the bowl with rice from the rice cooker. Carry the bowl to the table. Sit down on the chair. Pick up the chopsticks. Eat the rice and the food. Put the chopsticks down. Pick up the cup. Drink water. Put the cup down. Stand up. Carry the plate and bowl to the sink. Put them into the sink."}, {"time": "18:45-19:15", "location": "Kitchen", "activity": "Clearing the table and loading the dishwasher", "desc": "Pick up the plates from the table. Carry the plates to the sink. Pick up the chopsticks. Carry the chopsticks to the sink. Pick up the cups. Carry the cups to the sink. Wipe the table surface with a cloth. Rinse the plates under the tap. Turn the tap off. Open the dishwasher door. Pull out the lower rack. Place the plates into the rack. Place the bowls into the rack. Place the cups into the rack. Place the chopsticks into the basket. Push the lower rack in. Pull out the upper rack. Place the spatula and knife into the upper rack. Push the upper rack in. Add dishwashing powder into the dispenser. Close the dispenser lid. Close the dishwasher door. Press the dishwasher start button. Wipe the counter with the cloth. Rinse the cloth under the tap. Turn the tap off. Wring the cloth. Hang the cloth on the hook. Press the light switch off. Walk out of the kitchen."}, {"time": "19:15-20:30", "location": "Living Room", "activity": "Watching TV and relaxing", "desc": "Walk to the living room. Press the light switch on. Walk to the sofa. Sit down on the sofa. Pick up the TV remote control from the table. Press the power button on the remote. Point the remote at the TV. Press the channel button. Put the remote on the sofa armrest. Lean back against the sofa. Pick up the cushion. Place the cushion behind the back. Cross the legs. Pick up the remote. Press the volume button. Put the remote down. Watch the TV screen. Pick up the phone from the pocket. Look at the phone screen. Put the phone on the table. Pick up the remote. Press the channel button again. Put the remote down. Stand up. Walk to the kitchen. Open the refrigerator door. Take out a bottle of water. Close the refrigerator door. Walk back to the living room. Sit down on the sofa. Open the bottle cap. Drink water. Close the bottle cap. Put the bottle on the table. Pick up the remote. Press the power button to turn the TV off. Put the remote on the table."}, {"time": "20:30-21:15", "location": "Living Room", "activity": "Using the computer for professional reading and email", "desc": "Stand up from the sofa. Walk to the desk. Pull out the chair. Sit down on the chair. Press the computer power button. Wait for the screen to light up. Place both hands on the keyboard. Type the login password. Press the Enter key. Move the mouse. Click the email icon. Open the inbox. Click the first email. Read the email text. Click the reply button. Type a reply on the keyboard. Click the send button. Click the browser icon. Type the address of the medical journal. Press the Enter key. Scroll the page with the mouse. Read the article text. Click the bookmark button. Click the browser close button. Click the shutdown option on the computer. Stand up. Push the chair under the desk. Press the router switch off. Walk back to the sofa."}, {"time": "21:15-21:45", "location": "Bathroom", "activity": "Nighttime hygiene routine and preparing for bed", "desc": "Walk to the bathroom. Push the door open. Press the light switch on. Turn the tap on. Wet the toothbrush. Squeeze toothpaste onto the brush. Brush the teeth. Spit into the sink. Rinse the mouth with water. Turn the tap off. Put the toothbrush back into the holder. Pick up the face towel. Wet the face towel under the tap. Wipe the face with the towel. Turn the tap off. Wring the towel. Hang the towel on the hook. Pick up the hairbrush. Brush the hair. Put the hairbrush down. Open the cabinet door. Take out the skincare bottle. Open the cap. Pour lotion into the palm. Apply the lotion to the face. Close the cap. Put the bottle back into the cabinet. Close the cabinet door. Press the dehumidifier switch on. Press the light switch off. Pull the door open. Walk out of the bathroom. Close the door."}, {"time": "21:45-22:30", "location": "Bedroom 1", "activity": "Watching TV and reading to wind down", "desc": "Walk into Bedroom 1. Press the light switch on. Walk to the bed. Sit down on the bed. Pick up the TV remote from the bedside table. Press the power button on the remote. Point the remote at the TV. Press the channel button. Put the remote on the bedside table. Pick up the book from the bedside table. Open the book at the bookmark. Read the pages. Turn the page. Turn the page again. Close the book. Put the book back on the bedside table. Pick up the remote. Press the volume down button. Put the remote down. Stand up. Walk to the desk. Press the desk lamp switch on. Walk back to the bed. Sit down on the bed. Pick up the book again. Open the book. Read several pages. Turn the page. Close the book. Put the book on the bedside table. Pick up the remote. Press the power button to turn the TV off. Put the remote on the bedside table. Walk to the desk. Press the desk lamp switch off. Press the room light switch off. Walk to the bed."}, {"time": "22:30-24:00", "location": "Bedroom 1", "activity": "Sleeping", "desc": "Pull back the blanket. Lie down on the bed. Pull the blanket over the body. Turn onto the right side. Place the arm under the pillow. Adjust the pillow with the hand. Turn onto the left side. Bend the knees. Straighten the legs. Turn onto the back. Pull the blanket up to the shoulder. Turn onto the right side. Place the hand on the mattress. Keep the eyes closed. Remain lying still. Turn onto the left side. Pull the blanket up to the chin. Remain lying still with the eyes closed until the end of the segment."}]}
+```
+
