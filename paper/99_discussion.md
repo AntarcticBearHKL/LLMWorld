@@ -91,7 +91,10 @@
   n=15; +11.0%, p≈0.026, n=15) with no peak change, while a neutral custom event did not (+7.9%, n.s.).
   **However the announcement did not replicate on `world_172148` (−1.6%, n.s., R146)** — it is a
   **house/world-specific** effect, not a general mechanism, and is **excluded from headline claims**
-  (cross-world replication requirement, R128).
+  (cross-world replication requirement, R128). **Generic custom events inflate load on that house
+  (R157)**: a *generic* evening-peak tax raised the total peak +18.9% (n=9) — the same house-specific
+  reactivity — further confirming that `ac_tax`'s peak-shaving requires **device+window joint
+  anchoring**, not a generic window signal.
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
