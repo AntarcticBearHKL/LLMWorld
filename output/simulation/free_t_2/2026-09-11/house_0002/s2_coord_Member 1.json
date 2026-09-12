@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-06:50",
+      "location": "Bathroom",
+      "activity": "Shower and brush teeth"
+    },
+    {
+      "time": "06:50-07:00",
+      "location": "Bedroom 1",
+      "activity": "Get dressed"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Prepare and eat breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Clean up kitchen and prepare lunch for work"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commute to work"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Work as a health care professional"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commute home from work"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Prepare and eat dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Watch TV or relax"
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Bedroom 1",
+      "activity": "Use computer for personal tasks"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Take a shower and get ready for bed"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Wind down and prepare for sleep"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

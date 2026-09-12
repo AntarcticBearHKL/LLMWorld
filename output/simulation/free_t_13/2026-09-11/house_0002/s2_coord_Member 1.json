@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-08:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Bathroom",
+      "activity": "Waking up and washing"
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "09:00-09:30",
+      "location": "Living Room",
+      "activity": "Watching morning news on TV"
+    },
+    {
+      "time": "09:30-10:00",
+      "location": "Living Room",
+      "activity": "Using computer for personal tasks"
+    },
+    {
+      "time": "10:00-11:00",
+      "location": "Bedroom 1",
+      "activity": "Reading and relaxing"
+    },
+    {
+      "time": "11:00-12:00",
+      "location": "Living Room",
+      "activity": "Light household chores and tidying up"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch using microwave and kettle"
+    },
+    {
+      "time": "12:30-13:30",
+      "location": "Bathroom",
+      "activity": "Doing laundry with washing machine and clothes dryer"
+    },
+    {
+      "time": "13:30-14:00",
+      "location": "Kitchen",
+      "activity": "Running dishwasher and cleaning up"
+    },
+    {
+      "time": "14:00-14:30",
+      "location": "Bedroom 1",
+      "activity": "Getting ready for work and packing bag"
+    },
+    {
+      "time": "14:30-15:00",
+      "location": "Out",
+      "activity": "Commuting to work"
+    },
+    {
+      "time": "15:00-23:00",
+      "location": "Out",
+      "activity": "Working at hospital/clinic"
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Out",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "23:30-23:45",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth"
+    },
+    {
+      "time": "23:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and going to sleep"
+    }
+  ]
+}
