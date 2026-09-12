@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and showering"
+    },
+    {
+      "time": "07:00-07:40",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making coffee with the kettle"
+    },
+    {
+      "time": "07:40-08:40",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift"
+    },
+    {
+      "time": "08:40-17:15",
+      "location": "Out",
+      "activity": "Working as a health care professional, attending to patients, doing clinical rounds and charting"
+    },
+    {
+      "time": "17:15-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:40",
+      "location": "Kitchen",
+      "activity": "Cooking dinner and preparing ingredients"
+    },
+    {
+      "time": "18:40-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher"
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and getting ready for bed"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading on the phone under the desk lamp before sleeping"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

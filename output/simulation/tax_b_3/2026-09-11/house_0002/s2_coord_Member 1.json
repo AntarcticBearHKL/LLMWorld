@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-05:50",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "05:50-06:20",
+      "location": "Bathroom",
+      "activity": "Waking up and taking a shower"
+    },
+    {
+      "time": "06:20-06:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "06:45-07:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing the work bag"
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Out",
+      "activity": "Commuting to the hospital"
+    },
+    {
+      "time": "07:45-12:00",
+      "location": "Out",
+      "activity": "Working a clinical shift at the hospital"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at work"
+    },
+    {
+      "time": "12:30-18:00",
+      "location": "Out",
+      "activity": "Working a clinical shift at the hospital"
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen"
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Using the computer and winding down"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Washing up before bed"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reading in bed"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

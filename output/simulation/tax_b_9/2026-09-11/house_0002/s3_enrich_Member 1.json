@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on back in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up to shoulders. Bend knees. Adjust pillow under head. Remain motionless. Turn to right side. Extend left arm. Pull blanket down slightly. Turn to back. Stretch legs. Place hands on chest. Continue sleeping."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Rub eyes. Turn on bathroom light. Walk to sink. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Put down toothbrush. Pick up face wash. Apply to face. Rinse face. Dry face with towel. Turn off tap. Turn off bathroom light."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out eggs and milk. Close refrigerator. Place items on counter. Take out frying pan. Place pan on stove. Turn on stove. Crack eggs into pan. Stir eggs. Turn off stove. Place eggs on plate. Pour milk into glass. Sit at table. Eat breakfast. Drink milk. Stand up. Pick up plate and glass. Walk to sink. Place dishes in sink."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag",
+      "desc": "Walk to bedroom. Open closet. Take out shirt. Take out pants. Close closet. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Walk to desk. Pick up work bag. Open work bag. Place laptop inside. Place notebook inside. Zip work bag. Pick up phone. Place phone in pocket. Pick up keys. Place keys in bag."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for work",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Sit down. Look out window. Check phone. Put phone away. Stand up. Pull cord. Exit bus. Walk to hospital entrance. Open door. Walk to locker room. Change into scrubs. Walk to nurses' station."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, providing patient care and completing clinical duties",
+      "desc": "Arrive at nurses' station. Check patient charts. Walk to patient room. Wash hands. Put on gloves. Check vital signs. Administer medication. Talk to patient. Remove gloves. Wash hands. Walk to next patient room. Wash hands. Put on gloves. Check blood pressure. Administer medication. Talk to patient. Remove gloves. Wash hands. Walk to break room. Eat lunch. Walk back to nurses' station."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Sit down. Look out window. Check phone. Put phone away. Stand up. Pull cord. Exit bus. Walk home. Open door. Enter home. Close door."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables and meat. Close refrigerator. Place items on counter. Take out cutting board. Take out knife. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add meat. Stir meat. Add vegetables. Stir. Add seasoning. Turn off stove. Place food on plate. Sit at table. Eat dinner."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen counters",
+      "desc": "Stand up from table. Pick up plate. Walk to sink. Place plate in sink. Pick up glass. Place glass in sink. Turn on tap. Pick up sponge. Apply dish soap. Wash plate. Rinse plate. Place plate in drying rack. Wash glass. Rinse glass. Place glass in drying rack. Turn off tap. Pick up towel. Wipe counter. Put down towel. Walk out of kitchen."
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Bathroom",
+      "activity": "Taking a shower",
+      "desc": "Walk to bathroom. Turn on bathroom light. Take off clothes. Place clothes in hamper. Turn on shower. Adjust water temperature. Step into shower. Wet body. Pick up soap. Apply soap to body. Rinse body. Pick up shampoo. Apply shampoo to hair. Rinse hair. Turn off shower. Step out of shower. Pick up towel. Dry body. Dry hair. Hang towel."
+    },
+    {
+      "time": "19:45-20:15",
+      "location": "Bathroom",
+      "activity": "Loading the washing machine and starting a laundry cycle",
+      "desc": "Open washing machine door. Pick up laundry basket. Take out clothes. Place clothes in washing machine. Close washing machine door. Open detergent drawer. Pour detergent. Close detergent drawer. Press power button. Select cycle. Press start button. Wait for machine to start."
+    },
+    {
+      "time": "20:15-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa, watching TV and using the computer",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Change channel. Pick up laptop. Open laptop. Type on keyboard. Click mouse. Watch TV. Type on keyboard. Click mouse. Watch TV. Pick up phone. Check phone. Put down phone. Watch TV. Close laptop. Turn off TV. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and sleeping",
+      "desc": "Walk to bedroom. Turn on bedroom light. Take off clothes. Put on pajamas. Turn off bedroom light. Lie down on bed. Pull blanket over body. Adjust pillow. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Turn to right side. Adjust pillow. Remain motionless. Continue sleeping."
+    }
+  ]
+}
