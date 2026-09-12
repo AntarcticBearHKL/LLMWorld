@@ -51,6 +51,10 @@ NEWS_TEMPLATES = {
         "title": "Public-health lockdown",
         "content": "A public-health lockdown begins today; residents are asked to stay at home.",
     },
+    "holiday": {
+        "title": "Public holiday",
+        "content": "Today is a public holiday; most workplaces and schools are closed and people are staying at home.",
+    },
 }
 
 
