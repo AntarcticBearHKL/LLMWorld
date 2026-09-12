@@ -68,6 +68,7 @@ def main():
     ap.add_argument("--treat-prefix", default=None, help="default: <prefix>_c")
     ap.add_argument("--n", type=int, default=9)
     ap.add_argument("--tag", default="cpp", help="policy tag used by the treatment envs")
+    ap.add_argument("--base-tag", default="baseline", help="policy tag used by the base envs")
     args = ap.parse_args()
 
     base_prefix = args.base_prefix or f"{args.prefix}_b"
@@ -75,7 +76,7 @@ def main():
 
     rows = []
     for i in range(1, args.n + 1):
-        b = one_record(args.world, f"{base_prefix}_{i}", args.date, args.house, "baseline")
+        b = one_record(args.world, f"{base_prefix}_{i}", args.date, args.house, args.base_tag)
         c = one_record(args.world, f"{treat_prefix}_{i}", args.date, args.house, args.tag)
         if b is None or c is None:
             print(f"[skip] pair {i} incomplete (base={b is not None}, treat={c is not None})")

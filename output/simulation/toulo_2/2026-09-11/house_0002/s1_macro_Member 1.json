@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and personal hygiene"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "08:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional on the hospital ward, including patient care, charting and a brief lunch break"
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "18:45-19:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa while watching TV"
+    },
+    {
+      "time": "19:30-20:15",
+      "location": "Living Room",
+      "activity": "Using the computer to check emails and read health news"
+    },
+    {
+      "time": "20:15-20:45",
+      "location": "Bathroom",
+      "activity": "Loading the washing machine and running a load of laundry"
+    },
+    {
+      "time": "20:45-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV and winding down"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine and hanging up dry laundry"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Checking phone and preparing the room for sleep"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
