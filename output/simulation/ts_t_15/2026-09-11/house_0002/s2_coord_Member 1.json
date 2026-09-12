@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Wake up, use toilet, wash face, and brush teeth"
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Kitchen",
+      "activity": "Prepare and eat breakfast"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Bedroom 1",
+      "activity": "Set up home workstation using computer and phone, review patient schedule for telehealth"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Conduct telehealth consultations, follow-up calls, and update medical records"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Prepare and eat lunch"
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Relax with coffee and light stretching"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Bedroom 1",
+      "activity": "Continue telehealth consultations and administrative tasks"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "Unwind, watch TV or browse personal computer"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cook and eat dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Wash dishes and clean kitchen"
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Living Room",
+      "activity": "Watch TV or use computer for leisure"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bathroom",
+      "activity": "Take shower and personal hygiene"
+    },
+    {
+      "time": "22:30-23:30",
+      "location": "Bedroom 1",
+      "activity": "Wind down, read or listen to music"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

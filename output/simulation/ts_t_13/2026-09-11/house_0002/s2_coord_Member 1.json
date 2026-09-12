@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and checking the day's roster on phone"
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Working from home at desk: remote patient consultations, reviewing charts and updating care notes on computer"
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch"
+    },
+    {
+      "time": "12:45-13:15",
+      "location": "Living Room",
+      "activity": "Watching TV news and resting"
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Bedroom 1",
+      "activity": "Continuing remote clinical work: telehealth calls, medication follow-ups and documentation on computer"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "Leisure time: light stretching and listening to music"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher"
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower and personal hygiene routine"
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing with TV and reading on computer"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night routine: brushing teeth and preparing for bed"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
