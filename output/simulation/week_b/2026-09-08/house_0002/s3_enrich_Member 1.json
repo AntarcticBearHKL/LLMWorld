@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe. Turn to left side. Adjust pillow. Lie still. Turn to right side. Pull blanket up. Lie still. Wake briefly. Turn to back. Adjust pillow. Lie still. Turn to left side. Pull blanket. Lie still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Open eyes. Sit up. Swing legs off bed. Stand up. Walk to bathroom. Turn on bathroom light. Turn on tap. Wet face. Apply face cleanser. Rub face. Rinse face. Pick up towel. Wipe face. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit into sink. Turn off tap. Turn off bathroom light."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk. Take out eggs. Close refrigerator. Open cupboard. Take out bowl. Take out pan. Place pan on induction cooker. Turn on induction cooker. Crack eggs into bowl. Beat eggs. Pour eggs into pan. Cook eggs. Turn off induction cooker. Place eggs on plate. Open refrigerator. Take out butter. Close refrigerator. Spread butter on toast. Eat breakfast. Drink milk."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and packing work bag",
+      "desc": "Walk to bedroom. Open wardrobe. Take out shirt. Take out pants. Take out socks. Close wardrobe. Remove pajamas. Put on shirt. Put on pants. Put on socks. Walk to dresser. Open drawer. Take out underwear. Close drawer. Put on underwear. Walk to closet. Take out shoes. Put on shoes. Open work bag. Put in laptop. Put in notebook. Put in pen. Zip work bag."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital",
+      "desc": "Walk out of house. Lock door. Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Ride bus. Get off bus. Walk to hospital. Enter hospital."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional at the hospital",
+      "desc": "Enter hospital. Walk to locker room. Change into scrubs. Put on ID badge. Walk to nurses' station. Pick up patient chart. Review chart. Walk to patient room. Knock on door. Enter room. Greet patient. Check vital signs. Administer medication. Update chart. Walk to next patient. Repeat tasks."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk out of hospital. Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Ride bus. Get off bus. Walk to house. Unlock door. Enter house. Close door. Lock door."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Wash hands. Open refrigerator. Take out vegetables. Take out meat. Close refrigerator. Place on counter. Open cupboard. Take out cutting board. Take out knife. Chop vegetables. Cut meat. Open cupboard. Take out pan. Place pan on induction cooker. Turn on induction cooker. Add oil. Add meat. Stir. Add vegetables. Stir. Turn off induction cooker. Place food on plate. Sit at table. Eat dinner."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing and putting away dishes",
+      "desc": "Clear table. Scrape plates into trash. Stack plates. Open dishwasher. Load plates. Load glasses. Load utensils. Add detergent. Close dishwasher. Press start button. Wait. Open dishwasher. Take out dishes. Dry dishes. Put dishes in cupboard. Put glasses in cupboard. Put utensils in drawer."
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Bathroom",
+      "activity": "Taking a shower",
+      "desc": "Walk to bathroom. Turn on bathroom light. Turn on water heater. Remove clothes. Step into shower. Turn on shower. Wet body. Apply soap. Scrub body. Rinse body. Apply shampoo. Scrub hair. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel around body. Turn off water heater. Turn off bathroom light."
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing on the sofa",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Press power button on TV. Watch TV. Change channel. Adjust volume. Stand up. Walk to kitchen. Open refrigerator. Take out drink. Close refrigerator. Walk back to living room. Sit on sofa. Drink. Watch TV. Change channel. Turn off TV. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Kitchen",
+      "activity": "Preparing lunch to bring to work tomorrow",
+      "desc": "Walk to kitchen. Open refrigerator. Take out bread. Take out lettuce. Take out tomato. Take out cheese. Close refrigerator. Place on counter. Open cupboard. Take out lunch box. Open lunch box. Place bread in lunch box. Add lettuce. Add tomato. Add cheese. Close lunch box. Put lunch box in refrigerator."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using the computer and winding down before bed",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Press power button. Type on keyboard. Move mouse. Click. Type. Read. Close laptop. Turn off desk lamp. Stand up. Walk to bed. Pull back blanket. Lie down. Pull blanket up. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe. Turn to left. Adjust pillow. Lie still. Turn to right. Pull blanket. Lie still. Wake briefly. Turn to back. Adjust pillow. Lie still. Turn to left. Pull blanket. Lie still."
+    }
+  ]
+}

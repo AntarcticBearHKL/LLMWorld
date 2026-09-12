@@ -135,6 +135,8 @@
   2→~7.1, 4→4.96, 5→3.12, 6→5.33 kWh), qualitatively aligning with Schröder et al. (2013).
 - **Cross-day variability (R152)**: households differ widely in regularity (variability index
   0.26–0.44; peak-hour shift 0.5–11 h) — supporting heterogeneous behaviour.
+- **Weekday/weekend (R176)**: a genuine 7-day run (world_838587 h002) gives **weekend +40.7%** vs weekday
+  (11.06 vs 7.86 kWh) — the same **stay-home** mechanism as the holiday event, at a milder level.
 - Pending: systematic alignment tables vs the benchmarks in `FIT5216/研究计划.md` §2.7.
 
 ## RQ4 — Scalability
