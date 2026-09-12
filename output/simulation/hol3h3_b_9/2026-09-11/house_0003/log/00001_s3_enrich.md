@@ -1,0 +1,320 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-13 01:17:10
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 38
+- Occupation: Community healthcare worker / primary education aide (hybrid shift)
+- Personality: consensus-driven, calm and sociable in public, emotionally anchored to family, faith-oriented, community-minded, detail-hungry in conversation, prefers one-on-one text conversations
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:15",
+    "location": "Bedroom 1",
+    "activity": "Sleeping through the night, phone on silent on the nightstand."
+  },
+  {
+    "time": "06:15-06:35",
+    "location": "Bathroom",
+    "activity": "Waking up, washing face and brushing teeth, taking morning chronic-condition medication and checking blood pressure."
+  },
+  {
+    "time": "06:35-06:50",
+    "location": "Bedroom 1",
+    "activity": "Dressing in work clothes, checking one-on-one text messages from relatives on the phone."
+  },
+  {
+    "time": "06:50-07:15",
+    "location": "Kitchen",
+    "activity": "Making a simple breakfast, boiling the kettle, packing a lunch, and feeding the dog."
+  },
+  {
+    "time": "07:15-07:40",
+    "location": "Out",
+    "activity": "Walking the dog around the block in the cool morning air."
+  },
+  {
+    "time": "07:40-08:20",
+    "location": "Out",
+    "activity": "Doing the school run and drop-off before the shift starts."
+  },
+  {
+    "time": "08:20-09:00",
+    "location": "Out",
+    "activity": "Commuting by public transit to the clinic and school site."
+  },
+  {
+    "time": "09:00-12:00",
+    "location": "Out",
+    "activity": "On-site shift at the community clinic: patient intake, blood pressure and medication checks, and classroom aide duties at the primary school."
+  },
+  {
+    "time": "12:00-12:30",
+    "location": "Out",
+    "activity": "Taking a lunch break nearby, eating the packed lunch and texting family one-on-one."
+  },
+  {
+    "time": "12:30-16:30",
+    "location": "Out",
+    "activity": "Resuming on-site clinic appointments and school aide support, logging case notes in detail."
+  },
+  {
+    "time": "16:30-17:15",
+    "location": "Out",
+    "activity": "Commuting home by public transit."
+  },
+  {
+    "time": "17:15-17:50",
+    "location": "Out",
+    "activity": "Doing the afternoon school pick-up and stopping for a few cost-sensitive grocery items paid in cash."
+  },
+  {
+    "time": "17:50-18:15",
+    "location": "Kitchen",
+    "activity": "Cooking dinner using the induction cooker and microwave, putting food in the refrigerator."
+  },
+  {
+    "time": "18:15-19:00",
+    "location": "Dining Room",
+    "activity": "Eating dinner and unwinding after the shift."
+  },
+  {
+    "time": "19:00-19:30",
+    "location": "Kitchen",
+    "activity": "Clearing the table, washing up, and loading the dishwasher."
+  },
+  {
+    "time": "19:30-20:15",
+    "location": "Study",
+    "activity": "Catching up on remote paperwork, community outreach notes, and appointment scheduling on the computer."
+  },
+  {
+    "time": "20:15-21:00",
+    "location": "Living Room",
+    "activity": "Sending one-on-one text check-ins to relatives and neighbors, with the phone nearby."
+  },
+  {
+    "time": "21:00-21:30",
+    "location": "Bathroom",
+    "activity": "Showering with the water heater and getting ready for bed."
+  },
+  {
+    "time": "21:30-22:15",
+    "location": "Bedroom 1",
+    "activity": "Winding down with the TV and desk lamp on, taking evening medication."
+  },
+  {
+    "time": "22:15-22:30",
+    "location": "Bedroom 1",
+    "activity": "Setting out tomorrow's clothes and replying to a final text message before sleep."
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping, with the light off and the air conditioner on low."
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "Light",
+      "AirConditioner",
+      "TV",
+      "DeskLamp"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "Light",
+      "Fan"
+    ]
+  },
+  "Bedroom 3": {
+    "appliances": [
+      "Light",
+      "Fan"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Light",
+      "Refrigerator",
+      "RiceCooker",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Kettle",
+      "Toaster",
+      "Oven",
+      "Dishwasher",
+      "Freezer"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "Light",
+      "WaterHeater",
+      "Fan",
+      "Dehumidifier"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "Light",
+      "TV",
+      "AirConditioner",
+      "Router",
+      "GameConsole",
+      "Phone"
+    ]
+  },
+  "Dining Room": {
+    "appliances": [
+      "Light",
+      "AirConditioner"
+    ]
+  },
+  "Study": {
+    "appliances": [
+      "Light",
+      "Computer",
+      "Monitor",
+      "DeskLamp"
+    ]
+  },
+  "Laundry": {
+    "appliances": [
+      "Light",
+      "WashingMachine",
+      "ClothesDryer",
+      "VacuumCleaner"
+    ]
+  },
+  "Garage": {
+    "appliances": [
+      "Light"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Monitor",
+      "Phone",
+      "ElectricVehicle"
+    ]
+  },
+  "Member 3 personal appliances": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Phone"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{"member": "Member 1", "enriched_activities": [{"time": "00:00-06:15", "location": "Bedroom 1", "activity": "Sleeping through the night, phone on silent on the nightstand.", "desc": "Lie down on the bed. Pull the blanket up to the chest. Close eyes. Turn onto the right side. Place the phone face-down on the nightstand with the silent switch flipped on. Sleep. Turn onto the left side. Pull the blanket over the shoulder. Sleep. Roll onto the back. Adjust the pillow under the head. Sleep. Turn onto the right side again. Stretch the left arm out. Sleep. Remain lying in Bedroom 1 until the alarm sounds."}, {"time": "06:15-06:35", "location": "Bathroom", "activity": "Waking up, washing face and brushing teeth, taking morning chronic-condition medication and checking blood pressure.", "desc": "Open eyes. Sit up on the edge of the bed. Stand up. Walk from Bedroom 1 to the Bathroom. Turn on the bathroom light. Turn on the tap. Cup water in both hands. Splash water on the face. Turn off the tap. Pick up the towel. Wipe the face dry. Hang the towel back on the hook. Pick up the toothbrush. Squeeze toothpaste onto the bristles. Brush teeth. Rinse the mouth with water. Spit into the sink. Rinse the toothbrush. Place the toothbrush in the holder. Open the medicine cabinet. Take out the chronic-condition medication bottle. Twist the cap open. Tap one pill into the palm. Swallow the pill with water. Close the cap. Put the bottle back in the cabinet. Close the cabinet door. Pick up the blood pressure cuff from the shelf. Wrap the cuff around the left upper arm. Press the start button. Wait for the reading. Read the number on the display. Remove the cuff. Put the cuff back on the shelf. Turn off the bathroom light. Walk out of the Bathroom toward Bedroom 1."}, {"time": "06:35-06:50", "location": "Bedroom 1", "activity": "Dressing in work clothes, checking one-on-one text messages from relatives on the phone.", "desc": "Walk into Bedroom 1. Open the wardrobe door. Take out a work shirt. Take out trousers. Lay the clothes on the bed. Take off the sleepwear. Put on the work shirt. Button the shirt. Put on the trousers. Zip and button the trousers. Put on socks. Put on shoes. Pick up the phone from the nightstand. Press the power button. Unlock the screen. Open the messaging app. Read the one-on-one text message from the relative. Type a reply and press send. Scroll to the next message thread. Read it. Type a short reply and press send. Lock the phone. Put the phone in the pocket. Close the wardrobe door. Walk out of Bedroom 1 toward the Kitchen."}, {"time": "06:50-07:15", "location": "Kitchen", "activity": "Making a simple breakfast, boiling the kettle, packing a lunch, and feeding the dog.", "desc": "Walk into the Kitchen. Turn on the kitchen light. Fill the kettle with water at the tap. Place the kettle on its base. Press the kettle switch on. Open the refrigerator door. Take out bread and eggs. Close the refrigerator door. Put the bread in the toaster. Press the toaster lever down. Crack the eggs into a bowl. Beat the eggs with a fork. Turn on the induction cooker. Pour the eggs into the pan. Stir the eggs with a spatula. Turn off the induction cooker. Slide the eggs onto a plate. Take the toast out of the toaster. Place the toast on the plate. Pour hot water from the kettle into a mug. Sit at the counter. Eat the breakfast. Drink the tea. Stand up. Carry the plate and mug to the sink. Open the refrigerator door. Take out the lunch container and the vegetables. Place rice and vegetables into the lunch box. Close the lunch box. Put the lunch box into the bag. Close the refrigerator door. Open the cabinet. Take out the dog food bag. Scoop one cup of dog food into the dog bowl. Place the dog bowl on the floor. Refill the water bowl at the tap. Put the water bowl on the floor. Close the dog food bag. Put the bag back in the cabinet. Turn off the kitchen light. Walk out of the Kitchen."}, {"time": "07:15-07:40", "location": "Out", "activity": "Walking the dog around the block in the cool morning air.", "desc": "Pick up the leash from the hook by the door. Clip the leash onto the dog's collar. Open the front door. Step outside. Close the front door. Walk down the front steps. Turn right onto the sidewalk. Walk along the block with the dog on the left side. Stop at the corner. Wait for the traffic light. Cross the street. Continue walking past the row of shops. Stop while the dog sniffs the grass. Pull the leash gently. Continue walking to the next corner. Turn right. Walk along the second side of the block. Greet a neighbor with 'Good morning'. Wave the right hand. Continue walking. Turn right at the third corner. Walk back toward the house. Stop at the front gate. Open the gate. Walk up the front steps. Open the front door. Unclip the leash from the collar. Hang the leash back on the hook. Close the front door."}, {"time": "07:40-08:20", "location": "Out", "activity": "Doing the school run and drop-off before the shift starts.", "desc": "Pick up the car keys from the hook. Open the front door. Step outside. Walk to the car. Press the unlock button on the key fob. Open the driver door. Sit in the driver seat. Fasten the seat belt. Press the start button. Adjust the rear-view mirror. Check the side mirrors. Release the parking brake. Drive out of the driveway. Turn right onto the main road. Stop at the first traffic light. Drive through the intersection. Pull over at the school drop-off zone. Shift the gear to park. Turn the head to the back seat. Say 'We are here, have a good day'. Unfasten the seat belt. Open the driver door. Step out. Open the rear passenger door. Help the child out of the car. Pick up the school bag. Hand the school bag to the child. Close the rear passenger door. Say 'See you this afternoon'. Watch the child walk through the school gate. Open the driver door. Sit back in the driver seat. Fasten the seat belt. Release the parking brake. Drive away from the school."}, {"time": "08:20-09:00", "location": "Out", "activity": "Commuting by public transit to the clinic and school site.", "desc": "Drive to the park-and-ride lot. Park the car in a space. Turn off the engine. Unfasten the seat belt. Open the driver door. Step out. Lock the car with the key fob. Walk to the bus stop. Stand in the queue. Take the transit card out of the pocket. Board the bus. Tap the card on the reader. Walk down the aisle. Grip the overhead handrail. Stand while the bus moves. Watch the stops pass. Pull the stop request cord. Walk to the rear door. Step off the bus. Tap the card on the exit reader. Walk to the platform. Wait for the train. Board the train. Sit in an empty seat. Place the bag on the lap. Check the phone for the time. Stand up at the transfer station. Walk to the exit. Tap the card at the gate. Walk up the stairs to the street. Walk two blocks to the clinic entrance. Push the clinic door open."}, {"time": "09:00-12:00", "location": "Out", "activity": "On-site shift at the community clinic: patient intake, blood pressure and medication checks, and classroom aide duties at the primary school.", "desc": "Walk to the reception desk. Turn on the computer. Log in with the password. Open the intake form on the screen. Call the first patient by name. Ask the patient to sit down. Ask the patient's date of birth and record it. Type the answers into the form. Pick up the blood pressure cuff. Wrap the cuff around the patient's arm. Press the start button. Read the reading on the display. Write the numbers into the form. Remove the cuff. Ask the patient about current medications. Type the medication list into the form. Print the form. Hand the form to the patient. Say 'Please take this to the doctor'. Call the next patient. Repeat the intake process for five patients. Save the files on the computer. Stand up. Walk to the primary school classroom next door. Assist the teacher by handing out worksheets to the students. Walk between the desks. Bend down to help a student with the worksheet. Point at the correct answer on the page. Return to the front of the classroom. Collect the worksheets. Hand the worksheets to the teacher. Walk back to the clinic desk. Answer the desk phone. Write down the appointment request on the notepad. Hang up the phone."}, {"time": "12:00-12:30", "location": "Out", "activity": "Taking a lunch break nearby, eating the packed lunch and texting family one-on-one.", "desc": "Stand up from the desk. Pick up the lunch bag. Walk out of the clinic. Walk to the bench in the small park nearby. Sit on the bench. Open the lunch bag. Take out the lunch box. Open the lid. Pick up the fork. Eat the rice and vegetables. Close the lunch box. Take out the phone from the pocket. Unlock the screen. Open the messaging app. Open the one-on-one chat with the relative. Type 'Had lunch, all fine here' and press send. Read the reply. Type a reply about the afternoon schedule and press send. Open the second chat. Type a short check-in message and press send. Lock the phone. Put the phone back in the pocket. Put the lunch box back in the lunch bag. Stand up. Throw the napkin into the trash bin. Walk back to the clinic. Open the clinic door. Sit down at the desk."}, {"time": "12:30-16:30", "location": "Out", "activity": "Resuming on-site clinic appointments and school aide support, logging case notes in detail.", "desc": "Open the appointment list on the computer. Call the next patient by name. Ask the patient to sit. Take the blood pressure reading. Record the reading in the system. Ask about medication adherence. Type the answers into the case note field. Check the medication box on the form. Print the prescription slip. Hand the slip to the patient. Say 'Take this to the pharmacy'. Call the next patient. Repeat the intake and note-taking for four more patients. Save each case note. Log out of the patient record system. Stand up. Walk to the school classroom. Sit beside a student. Read the reading passage aloud with the student. Point at the words on the page. Correct the pronunciation. Write three words on the whiteboard. Ask the student to copy the words into the notebook. Check the notebook. Write a note in the student's log. Walk back to the clinic. Open the case files on the computer. Type detailed notes for each visit. Spell-check the notes. Save the file. Close the file. Answer the desk phone. Write the caller's name on the notepad. Say 'I will pass this to the nurse'. Hang up the phone. Stand up. Pick up the bag. Walk to the exit. Push the clinic door open."}, {"time": "16:30-17:15", "location": "Out", "activity": "Commuting home by public transit.", "desc": "Walk two blocks to the transit station. Walk up the stairs. Tap the card at the gate. Walk to the platform. Wait for the train. Board the train. Sit in an empty seat. Place the bag on the lap. Take the phone out of the pocket. Open the messaging app. Read one incoming message. Type a short reply and press send. Put the phone back in the pocket. Stand up at the transfer station. Walk to the exit door. Step off the train. Walk to the bus bay. Board the bus. Tap the card on the reader. Stand in the aisle. Grip the overhead handrail. Pull the stop request cord. Step off the bus. Tap the card on the exit reader. Walk to the park-and-ride lot. Unlock the car with the key fob. Open the driver door. Sit in the driver seat. Fasten the seat belt. Press the start button. Drive out of the lot."}, {"time": "17:15-17:50", "location": "Out", "activity": "Doing the afternoon school pick-up and stopping for a few cost-sensitive grocery items paid in cash.", "desc": "Drive to the school. Park the car along the curb. Turn off the engine. Unfasten the seat belt. Open the driver door. Step out. Walk to the school gate. Stand with the other parents. Wait for the children. Greet the child coming out. Say 'How was school?'. Take the school bag from the child. Walk back to the car. Open the rear passenger door. Let the child sit in the back seat. Close the door. Open the driver door. Sit in the driver seat. Fasten the seat belt. Press the start button. Drive to the grocery store. Park the car. Turn off the engine. Walk into the store. Pick up a basket at the entrance. Walk to the vegetable aisle. Pick up a bag of onions. Read the price tag. Place the onions in the basket. Pick up a carton of milk. Read the price tag. Place the milk in the basket. Pick up a loaf of bread. Place it in the basket. Walk to the checkout counter. Place the basket on the counter. Take the wallet out of the pocket. Count the cash notes. Hand the notes to the cashier. Receive the change. Put the change into the wallet. Put the wallet back in the pocket. Place the items into the bag. Walk out of the store. Walk back to the car."}, {"time": "17:50-18:15", "location": "Kitchen", "activity": "Cooking dinner using the induction cooker and microwave, putting food in the refrigerator.", "desc": "Walk into the Kitchen. Turn on the kitchen light. Turn on the range hood. Take the vegetables out of the grocery bag. Rinse the vegetables at the tap. Place the vegetables on the cutting board. Cut the vegetables with the knife. Turn on the induction cooker. Pour oil into the pan. Add the vegetables to the pan. Stir with the spatula. Add salt. Turn off the induction cooker. Slide the dish onto a plate. Place the leftover container in the microwave. Press the start button on the microwave. Wait for the beep. Open the microwave door. Take out the container. Close the microwave door. Open the refrigerator door. Put the milk and the remaining vegetables inside. Close the refrigerator door. Turn off the range hood. Turn off the kitchen light. Carry the plates to the Dining Room."}, {"time": "18:15-19:00", "location": "Dining Room", "activity": "Eating dinner and unwinding after the shift.", "desc": "Walk into the Dining Room. Turn on the dining room light. Place the plates on the table. Pull out the chair. Sit down on the chair. Pick up the chopsticks. Eat the rice and vegetables. Drink water from the glass. Ask the child 'How was school today?'. Listen to the answer. Pick up more vegetables with the chopsticks. Continue eating. Put the chopsticks down. Stand up. Pick up the empty plates. Carry the plates to the Kitchen. Walk back to the Dining Room. Sit down again. Take the phone out of the pocket. Open the messaging app. Read one incoming message. Type a reply and press send. Put the phone on the table. Pick up the glass. Drink the remaining water. Stand up. Push the chair under the table."}, {"time": "19:00-19:30", "location": "Kitchen", "activity": "Clearing the table, washing up, and loading the dishwasher.", "desc": "Walk into the Kitchen. Turn on the kitchen light. Turn on the tap. Pick up the sponge. Squeeze dish soap onto the sponge. Scrub the plates. Rinse the plates under the tap. Turn off the tap. Open the dishwasher door. Pull out the lower rack. Place the plates in the rack. Place the bowls in the rack. Place the chopsticks in the basket. Push the lower rack in. Close the dishwasher door. Press the wash cycle button. Wipe the counter with the cloth. Wipe the induction cooker surface. Wring the cloth over the sink. Hang the cloth on the hook. Turn off the kitchen light. Walk out of the Kitchen."}, {"time": "19:30-20:15", "location": "Study", "activity": "Catching up on remote paperwork, community outreach notes, and appointment scheduling on the computer.", "desc": "Walk into the Study. Turn on the study light. Turn on the desk lamp. Sit on the chair. Press the computer power button. Wait for the computer to start. Type the login password. Open the paperwork folder. Open the community outreach note file. Type the notes from today's clinic visits. Type the names of the families contacted. Save the file. Open the appointment scheduling sheet. Type the appointment dates into the calendar. Check the schedule against the paper notepad. Move one appointment to the following day. Save the sheet. Open the email inbox. Open the message from the supervisor. Read it. Type a reply and press send. Close the email. Take the phone out of the pocket. Check the time on the screen. Put the phone on the desk. Save all open files. Click the shut-down option. Wait for the computer to turn off. Stand up. Push the chair under the desk. Turn off the desk lamp. Turn off the study light. Walk out of the Study."}, {"time": "20:15-21:00", "location": "Living Room", "activity": "Sending one-on-one text check-ins to relatives and neighbors, with the phone nearby.", "desc": "Walk into the Living Room. Turn on the living room light. Turn on the TV with the remote. Sit down on the sofa. Place the phone on the armrest. Pick up the phone. Unlock the screen. Open the messaging app. Open the one-on-one chat with the relative. Type 'How are you feeling today?' and press send. Read the incoming reply. Type a reply about the day and press send. Open the chat with the neighbor. Type 'Did you get the groceries?' and press send. Read the reply. Type a short reply and press send. Open the chat with the second relative. Type a check-in message and press send. Read the reply. Type 'Good night, talk tomorrow' and press send. Lower the phone volume with the side button. Place the phone on the armrest. Turn the head toward the TV. Watch the program. Press the volume-down button on the remote. Stand up. Walk to the Kitchen. Take a glass of water. Walk back to the Living Room. Sit on the sofa again. Pick up the phone. Check for new messages. Place the phone back on the armrest. Press the TV power button to turn it off. Turn off the living room light. Walk out of the Living Room."}, {"time": "21:00-21:30", "location": "Bathroom", "activity": "Showering with the water heater and getting ready for bed.", "desc": "Walk into the Bathroom. Turn on the bathroom light. Turn on the bathroom fan. Press the water heater switch on. Open the shower cabinet door. Take out the towel. Hang the towel on the hook. Take off the clothes. Place the clothes in the laundry basket. Open the shower door. Step into the shower. Turn on the shower tap. Adjust the water temperature with the handle. Wet the hair and body. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub the shampoo into the hair. Rinse the hair. Pick up the soap. Rub the soap on the body. Rinse the body. Turn off the shower tap. Open the shower door. Step out. Pick up the towel. Dry the hair. Dry the body. Hang the towel on the hook. Put on the sleepwear. Press the water heater switch off. Turn off the bathroom fan. Turn off the bathroom light. Walk out of the Bathroom."}, {"time": "21:30-22:15", "location": "Bedroom 1", "activity": "Winding down with the TV and desk lamp on, taking evening medication.", "desc": "Walk into Bedroom 1. Turn on the bedroom light. Turn on the desk lamp. Pick up the TV remote from the nightstand. Press the power button to turn the TV on. Sit on the edge of the bed. Press the channel button on the remote. Watch the program. Stand up. Walk to the bathroom door. Open the medicine cabinet. Take out the evening medication bottle. Twist the cap open. Tap one pill into the palm. Walk back to Bedroom 1. Pick up the water glass from the nightstand. Swallow the pill with water. Place the glass back on the nightstand. Walk back to the Bathroom. Close the medicine bottle cap. Put the bottle back in the cabinet. Close the cabinet door. Walk back to Bedroom 1. Sit on the bed. Pick up the phone from the nightstand. Unlock the screen. Read one message. Type a short reply and press send. Put the phone back on the nightstand. Press the TV power button to turn it off. Pick up the remote and place it on the nightstand. Turn off the bedroom light. Turn off the desk lamp."}, {"time": "22:15-22:30", "location": "Bedroom 1", "activity": "Setting out tomorrow's clothes and replying to a final text message before sleep.", "desc": "Turn on the desk lamp. Open the wardrobe door. Take out a work shirt. Take out a pair of trousers. Lay the clothes on the chair. Take out socks. Place the socks on top of the shirt. Close the wardrobe door. Walk to the bed. Pick up the phone from the nightstand. Unlock the screen. Open the one-on-one chat with the relative. Read the incoming message. Type 'Good night, I will call tomorrow morning' and press send. Lock the phone. Place the phone face-down on the nightstand. Fold the blanket back. Sit on the bed. Lie down. Pull the blanket up to the chest. Turn off the desk lamp."}, {"time": "22:30-24:00", "location": "Bedroom 1", "activity": "Sleeping, with the light off and the air conditioner on low.", "desc": "Pick up the air conditioner remote from the nightstand. Press the power button. Press the temperature-down button until the display shows the low setting. Press the fan-speed button to set it to low. Place the remote back on the nightstand. Turn onto the right side. Pull the blanket up to the shoulder. Adjust the pillow under the head. Close eyes. Sleep. Turn onto the left side. Move the left arm under the pillow. Sleep. Turn onto the back. Stretch the right leg out. Sleep. Turn onto the right side again. Pull the blanket higher. Sleep. Remain lying in Bedroom 1 with the light off and the air conditioner on low until the end of the night."}]}
+```
+

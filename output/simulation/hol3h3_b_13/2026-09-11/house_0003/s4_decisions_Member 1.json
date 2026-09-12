@@ -1,0 +1,401 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:20",
+      "start_minutes": 0,
+      "end_minutes": 380,
+      "location": "Bedroom 1",
+      "activity": "Sleeping, phone on silent on the nightstand",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:20-06:40",
+      "start_minutes": 380,
+      "end_minutes": 400,
+      "location": "Bathroom",
+      "activity": "Shower, wash up and take morning chronic-condition medication",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:40-06:55",
+      "start_minutes": 400,
+      "end_minutes": 415,
+      "location": "Bedroom 1",
+      "activity": "Dress for the on-site shift and glance through one-on-one Telegram messages",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:55-07:20",
+      "start_minutes": 415,
+      "end_minutes": 440,
+      "location": "Kitchen",
+      "activity": "Make and eat breakfast, feed the dog, pack a lunch for the shift",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:20-07:45",
+      "start_minutes": 440,
+      "end_minutes": 465,
+      "location": "Out",
+      "activity": "Walk the dog along the neighbourhood block",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:00",
+      "start_minutes": 465,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Final check of work bag, badges and phone before leaving",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:40",
+      "start_minutes": 480,
+      "end_minutes": 520,
+      "location": "Out",
+      "activity": "School run and drop-off before the shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:40-09:10",
+      "start_minutes": 520,
+      "end_minutes": 550,
+      "location": "Out",
+      "activity": "Public transit commute to the community clinic",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:10-12:30",
+      "start_minutes": 550,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "On-site clinic duties: client appointments, health checks and referrals",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:00",
+      "start_minutes": 750,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Lunch break near the clinic, cash-budget snack and text check-in",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-15:15",
+      "start_minutes": 780,
+      "end_minutes": 915,
+      "location": "Out",
+      "activity": "Primary school aide duties: classroom support, student reading groups and paperwork",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:15-16:00",
+      "start_minutes": 915,
+      "end_minutes": 960,
+      "location": "Out",
+      "activity": "Community home visit with a client family",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:35",
+      "start_minutes": 960,
+      "end_minutes": 995,
+      "location": "Out",
+      "activity": "Pharmacy pickup for medication and a small cash grocery errand",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:35-17:05",
+      "start_minutes": 995,
+      "end_minutes": 1025,
+      "location": "Out",
+      "activity": "Public transit commute home",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:05-17:35",
+      "start_minutes": 1025,
+      "end_minutes": 1055,
+      "location": "Out",
+      "activity": "Evening dog walk around the block",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:35-18:20",
+      "start_minutes": 1055,
+      "end_minutes": 1100,
+      "location": "Kitchen",
+      "activity": "Cook dinner, use the rice cooker and induction cooker, tidy as she goes",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:20-19:00",
+      "start_minutes": 1100,
+      "end_minutes": 1140,
+      "location": "Dining Room",
+      "activity": "Family dinner at the dining table",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:40",
+      "start_minutes": 1140,
+      "end_minutes": 1180,
+      "location": "Kitchen",
+      "activity": "Wash up, load the dishwasher and wipe down the counters",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:40-20:40",
+      "start_minutes": 1180,
+      "end_minutes": 1240,
+      "location": "Study",
+      "activity": "Remote paperwork: case notes, outreach scheduling and appointment confirmations on the computer",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:40-21:30",
+      "start_minutes": 1240,
+      "end_minutes": 1290,
+      "location": "Living Room",
+      "activity": "Watches TV to unwind while texting one-on-one with a neighbour",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-21:50",
+      "start_minutes": 1290,
+      "end_minutes": 1310,
+      "location": "Bathroom",
+      "activity": "Evening wash, brush teeth and take night medication",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:50-22:20",
+      "start_minutes": 1310,
+      "end_minutes": 1340,
+      "location": "Bedroom 1",
+      "activity": "One-on-one text check-ins with relatives in the bedroom",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:20-23:00",
+      "start_minutes": 1340,
+      "end_minutes": 1380,
+      "location": "Bedroom 1",
+      "activity": "Reads a few pages under the desk lamp, dog settled nearby",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping, light and TV off",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

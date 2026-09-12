@@ -48,6 +48,7 @@ names public holidays as a target event — this fills that gap.
 | W2 h002 (2-person) | +31.9% | 3.8e-7 | +24.9% |
 | W2 h001 (5-person) | **+59.1%** | **5.3e-7** | **+232.4%** |
 | W3 h002 (2-person) | +39.8% | 0.0014 | −15.2% n.s. |
+| W3 h003 (3-person, AC-led) | **+64.5%** | **2.0e-4** | **+96.4%** |
 
 - same-era paired, n=15, **three worlds** (red line 3 satisfied):
 

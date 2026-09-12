@@ -1,0 +1,119 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-05:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping through the night",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Fall asleep. Turn to left side. Bend knees. Place arm under pillow. Continue sleeping. Turn to right side. Extend legs. Sleep. Roll onto back. Place hands on chest. Sleep. Turn to left side again. Adjust pillow. Sleep."
+    },
+    {
+      "time": "05:30-05:50",
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth, and taking morning chronic-condition medication",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wet hands. Apply soap to face. Rinse face. Dry face with towel. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Take morning medication. Turn off tap. Turn off light."
+    },
+    {
+      "time": "05:50-06:20",
+      "location": "Kitchen",
+      "activity": "Preparing a simple breakfast using the kettle and toaster",
+      "desc": "Walk to kitchen. Turn on light. Fill kettle with water. Press switch. Open cupboard. Take out bread. Place two slices in toaster. Push lever down. Open refrigerator. Take out butter. Wait for toast. Toast pops up. Place toast on plate. Spread butter. Pour hot water into cup. Add tea bag. Stir. Carry plate and cup to dining room."
+    },
+    {
+      "time": "06:20-06:40",
+      "location": "Dining Room",
+      "activity": "Eating breakfast while reviewing the day's appointment list and messages on the phone",
+      "desc": "Sit at table. Eat breakfast. Pick up phone. Open appointment list. Read messages. Type replies. Put down phone. Drink tea. Stand up."
+    },
+    {
+      "time": "06:40-07:05",
+      "location": "Out",
+      "activity": "Doing the school run and drop-off before the shift",
+      "desc": "Walk to car. Open door. Sit in driver seat. Fasten seatbelt. Drive to school. Park. Assist child out. Walk child to gate. Return to car. Drive to transit stop."
+    },
+    {
+      "time": "07:05-07:45",
+      "location": "Out",
+      "activity": "Commuting by public transit to the clinic and school site",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Hold handrail. Look out window. Check phone. Read news. Arrive at stop. Stand up. Walk to exit. Tap card. Exit bus. Walk to clinic entrance."
+    },
+    {
+      "time": "07:45-12:00",
+      "location": "Out",
+      "activity": "On-site clinic duties: patient check-ins, health screening paperwork, and primary education aide tasks",
+      "desc": "Enter clinic. Greet colleagues. Put bag in locker. Pick up patient list. Call first patient. Escort to room. Measure blood pressure. Ask about symptoms. Record notes. Complete paperwork. Walk to classroom. Assist teacher. Help student with reading. Return to clinic. Call next patient. Escort to room. Review medication. Update records."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a short lunch break near the clinic",
+      "desc": "Walk to nearby cafe. Order sandwich. Pay cashier. Receive sandwich. Sit at table. Unwrap sandwich. Eat sandwich. Drink water. Wipe mouth with napkin. Throw trash in bin. Walk back to clinic."
+    },
+    {
+      "time": "12:30-16:30",
+      "location": "Out",
+      "activity": "Afternoon appointments, medication follow-ups, and classroom support duties",
+      "desc": "Return to clinic. Check schedule. Call patient. Escort to room. Review medication list. Ask about side effects. Adjust dosage instructions. Record notes. Walk to classroom. Assist with group activity. Help student with math. Return to clinic. Call next patient. Conduct follow-up. Update patient file."
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Out",
+      "activity": "Brief community outreach visit to a neighbour's home",
+      "desc": "Walk to neighbour's house. Knock on door. Greet neighbour. Enter house. Sit on chair. Discuss health concerns. Take notes. Provide advice. Say goodbye. Walk out of house. Close door. Walk to transit stop."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home by public transit",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Find seat. Sit down. Hold handrail. Check phone. Read messages. Arrive at stop. Stand up. Walk to exit. Tap card. Exit bus. Walk home."
+    },
+    {
+      "time": "17:45-18:15",
+      "location": "Out",
+      "activity": "Walking the dog around the neighbourhood",
+      "desc": "Pick up leash. Attach leash to dog collar. Open door. Walk out with dog. Walk down street. Dog pulls. Stop. Pick up dog waste with bag. Throw bag in bin. Continue walking. Turn corner. Walk around block. Return home. Open door. Remove leash."
+    },
+    {
+      "time": "18:15-18:50",
+      "location": "Kitchen",
+      "activity": "Cooking dinner and reheating side dishes",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out vegetables. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add vegetables. Stir. Open microwave. Place side dish in microwave. Press buttons. Wait. Take out side dish. Stir vegetables. Turn off stove."
+    },
+    {
+      "time": "18:50-19:30",
+      "location": "Dining Room",
+      "activity": "Eating dinner quietly",
+      "desc": "Sit at dining table. Pick up fork. Serve food onto plate. Cut food. Lift fork to mouth. Chew. Swallow. Pick up spoon. Scoop soup. Lift spoon to mouth. Sip. Chew. Swallow. Pick up cup. Drink water. Put down cup. Continue eating. Finish meal. Stand up."
+    },
+    {
+      "time": "19:30-20:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and packing tomorrow's lunch and work bag",
+      "desc": "Clear table. Carry dishes to kitchen. Fill sink with water. Add soap. Pick up dish. Scrub with sponge. Rinse dish. Place in drying rack. Repeat for all dishes. Drain sink. Dry hands. Open lunchbox. Place sandwich. Add fruit. Close lid. Open work bag. Place folder. Place pen. Zip bag."
+    },
+    {
+      "time": "20:15-21:15",
+      "location": "Living Room",
+      "activity": "Sending one-on-one text check-ins to relatives and neighbours while seated with the phone",
+      "desc": "Sit on sofa. Pick up phone. Unlock. Open messaging app. Select relative. Type message. Send message. Wait for reply. Read reply. Type response. Send. Select next relative. Type message. Send. Read reply. Type response. Send. Select neighbour. Type message. Send."
+    },
+    {
+      "time": "21:15-21:40",
+      "location": "Bathroom",
+      "activity": "Showering and taking evening medication",
+      "desc": "Walk to bathroom. Turn on light. Remove clothes. Step into shower. Wet body. Apply soap. Rinse. Dry with towel. Put on clothes. Take evening medication. Turn off light. Walk out."
+    },
+    {
+      "time": "21:40-22:30",
+      "location": "Bedroom 1",
+      "activity": "Unwinding with quiet TV and writing a short journal entry at the desk",
+      "desc": "Enter bedroom. Turn on light. Sit on bed. Pick up remote. Turn on TV. Lower volume. Watch TV. Stand up. Walk to desk. Sit on chair. Turn on desk lamp. Open drawer. Take out journal. Pick up pen. Write in journal. Close journal. Put journal in drawer. Turn off desk lamp. Stand up. Walk to bed. Turn off TV. Lie down."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Pull blanket over body. Close eyes. Fall asleep. Turn to side. Adjust pillow. Sleep. Turn to other side. Stretch legs. Sleep. Roll onto back. Sleep. Turn to left side. Sleep."
+    }
+  ]
+}

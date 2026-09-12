@@ -1,0 +1,293 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-05:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping through the night.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "05:30-05:50",
+      "location": "Bathroom",
+      "activity": "Showering, brushing teeth, and taking morning chronic-condition medication with water.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "05:50-06:20",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, checking phone messages, and reviewing the day's appointment and community visit list.",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:20-06:50",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle, making toast, eating breakfast, and feeding the dog.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:50-07:05",
+      "location": "Out",
+      "activity": "Walking the dog around the block.",
+      "operations": []
+    },
+    {
+      "time": "07:05-07:15",
+      "location": "Kitchen",
+      "activity": "Rinsing breakfast dishes, packing a lunch and school bag.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:50",
+      "location": "Out",
+      "activity": "School run and drop-off using public transit.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:40",
+      "location": "Out",
+      "activity": "Public transit commute to the clinic.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:40-12:00",
+      "location": "Out",
+      "activity": "On-site clinic shift: patient intake, vital signs checks, and medication reviews at the community health desk.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Lunch break outdoors eating a packed lunch on a park bench.",
+      "operations": []
+    },
+    {
+      "time": "12:30-15:00",
+      "location": "Out",
+      "activity": "Primary school aide duties: classroom support, reading groups, and supervising the children.",
+      "operations": []
+    },
+    {
+      "time": "15:00-16:00",
+      "location": "Out",
+      "activity": "Community health visits and follow-up check-ins with neighbours and clients.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:30",
+      "location": "Out",
+      "activity": "Buying milk and bread with cash at a local shop.",
+      "operations": []
+    },
+    {
+      "time": "16:30-17:15",
+      "location": "Out",
+      "activity": "Public transit commute home.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:15-17:45",
+      "location": "Kitchen",
+      "activity": "Unpacking groceries, starting dinner preparation, and refilling the dog's water bowl.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:00",
+      "location": "Dining Room",
+      "activity": "Setting the table for the evening meal.",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Dining Room",
+      "activity": "Eating dinner.",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table, loading the dishwasher, and wiping down the counters.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:15",
+      "location": "Out",
+      "activity": "Evening dog walk around the neighbourhood.",
+      "operations": []
+    },
+    {
+      "time": "20:15-21:30",
+      "location": "Study",
+      "activity": "Remote paperwork and community outreach scheduling, sending one-on-one text messages on the phone.",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Evening wash, taking night medication, and hanging the towel to dry with the dehumidifier running.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down under the desk lamp: reading, texting relatives and neighbours, and checking tomorrow's shift roster.",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping.",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

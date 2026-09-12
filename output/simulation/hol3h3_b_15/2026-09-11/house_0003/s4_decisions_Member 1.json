@@ -1,0 +1,402 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:20",
+      "start_minutes": 0,
+      "end_minutes": 380,
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the air conditioner off and the room dark and quiet",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:20-06:35",
+      "start_minutes": 380,
+      "end_minutes": 395,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth, and taking the morning dose of chronic-condition medication",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:35-06:55",
+      "start_minutes": 395,
+      "end_minutes": 415,
+      "location": "Out",
+      "activity": "Walking the dog around the neighborhood block on a short, familiar route",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:55-07:15",
+      "start_minutes": 415,
+      "end_minutes": 435,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast at the counter, packing a lunch, and filling a water bottle",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:35",
+      "start_minutes": 435,
+      "end_minutes": 455,
+      "location": "Bedroom 1",
+      "activity": "Getting dressed for the on-site shift and quietly reading one-on-one text messages on the phone",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:35-08:10",
+      "start_minutes": 455,
+      "end_minutes": 490,
+      "location": "Out",
+      "activity": "Doing the school run and drop-off before the shift begins",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:50",
+      "start_minutes": 490,
+      "end_minutes": 530,
+      "location": "Out",
+      "activity": "Commuting to the clinic by public transit and reviewing the day's appointment list on the phone",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:50-12:00",
+      "start_minutes": 530,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "On-site community healthcare shift: patient intake, check-ups, and medication follow-up appointments",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:25",
+      "start_minutes": 720,
+      "end_minutes": 745,
+      "location": "Out",
+      "activity": "Taking a short lunch break with a packed meal on a bench near the clinic",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:25-15:00",
+      "start_minutes": 745,
+      "end_minutes": 900,
+      "location": "Out",
+      "activity": "Continuing clinic appointments and assisting with primary-education classroom support at the school",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-16:00",
+      "start_minutes": 900,
+      "end_minutes": 960,
+      "location": "Out",
+      "activity": "Community home visits and quick errands for neighborhood clients, paying in cash on a small budget",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-16:45",
+      "start_minutes": 960,
+      "end_minutes": 1005,
+      "location": "Out",
+      "activity": "Commuting home by public transit and sending brief one-on-one texts to confirm tomorrow's arrangements",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:45-17:15",
+      "start_minutes": 1005,
+      "end_minutes": 1035,
+      "location": "Kitchen",
+      "activity": "Making tea and a snack, putting away groceries, and feeding and watering the dog",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:15-18:00",
+      "start_minutes": 1035,
+      "end_minutes": 1080,
+      "location": "Study",
+      "activity": "Catching up on remote paperwork and charting on the computer before the evening meal",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Dining Room",
+      "activity": "Eating dinner at the table and listening to the household's recap of the day",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "dining_room_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:45",
+      "start_minutes": 1140,
+      "end_minutes": 1185,
+      "location": "Study",
+      "activity": "Sending detailed one-on-one text check-ins to relatives and neighbors and updating the community contact list",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:45-20:30",
+      "start_minutes": 1185,
+      "end_minutes": 1230,
+      "location": "Out",
+      "activity": "Taking the dog for an evening walk around the local streets",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:15",
+      "start_minutes": 1230,
+      "end_minutes": 1275,
+      "location": "Living Room",
+      "activity": "Watching television on the couch to unwind and decompress",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:45",
+      "start_minutes": 1275,
+      "end_minutes": 1305,
+      "location": "Bathroom",
+      "activity": "Showering and taking evening medication, then setting out tomorrow's clothes",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:30",
+      "start_minutes": 1305,
+      "end_minutes": 1350,
+      "location": "Bedroom 1",
+      "activity": "Reading quietly in bed with the desk lamp on and checking the phone one last time for messages",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "start_minutes": 1350,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping, with the light off and the room kept cool and quiet for the night",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

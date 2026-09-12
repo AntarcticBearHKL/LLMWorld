@@ -1,0 +1,363 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 1",
+      "activity": "Sleeping through the night",
+      "operations": []
+    },
+    {
+      "time": "06:45-07:10",
+      "start_minutes": 405,
+      "end_minutes": 430,
+      "location": "Bathroom",
+      "activity": "Washing up and taking morning medication",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:45",
+      "start_minutes": 430,
+      "end_minutes": 465,
+      "location": "Out",
+      "activity": "Walking the dog along the neighborhood streets",
+      "operations": []
+    },
+    {
+      "time": "07:45-08:10",
+      "start_minutes": 465,
+      "end_minutes": 490,
+      "location": "Kitchen",
+      "activity": "Preparing breakfast and brewing tea",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:10-08:40",
+      "start_minutes": 490,
+      "end_minutes": 520,
+      "location": "Dining Room",
+      "activity": "Eating breakfast",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:40-09:20",
+      "start_minutes": 520,
+      "end_minutes": 560,
+      "location": "Bedroom 1",
+      "activity": "Quiet prayer and scripture reading at the desk",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:20-10:00",
+      "start_minutes": 560,
+      "end_minutes": 600,
+      "location": "Living Room",
+      "activity": "Sending one-on-one text check-ins to relatives and neighbors on the phone",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:00-10:45",
+      "start_minutes": 600,
+      "end_minutes": 645,
+      "location": "Laundry",
+      "activity": "Washing and drying household linens",
+      "operations": [
+        {
+          "unique_id": "laundry_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "laundry_washingmachine",
+          "action": "run"
+        },
+        {
+          "unique_id": "laundry_clothesdryer",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "10:45-11:30",
+      "start_minutes": 645,
+      "end_minutes": 690,
+      "location": "Living Room",
+      "activity": "Watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:30-12:30",
+      "start_minutes": 690,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Grocery shopping with a cash budget",
+      "operations": []
+    },
+    {
+      "time": "12:30-13:00",
+      "start_minutes": 750,
+      "end_minutes": 780,
+      "location": "Kitchen",
+      "activity": "Unpacking groceries and preparing a light lunch",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:40",
+      "start_minutes": 780,
+      "end_minutes": 820,
+      "location": "Dining Room",
+      "activity": "Eating lunch",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:40-14:20",
+      "start_minutes": 820,
+      "end_minutes": 860,
+      "location": "Out",
+      "activity": "Walking the dog and greeting neighbors",
+      "operations": []
+    },
+    {
+      "time": "14:20-15:20",
+      "start_minutes": 860,
+      "end_minutes": 920,
+      "location": "Study",
+      "activity": "Reviewing community outreach notes and answering messages on the computer",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:20-16:10",
+      "start_minutes": 920,
+      "end_minutes": 970,
+      "location": "Out",
+      "activity": "Visiting an elderly neighbor to drop off a meal",
+      "operations": []
+    },
+    {
+      "time": "16:10-17:00",
+      "start_minutes": 970,
+      "end_minutes": 1020,
+      "location": "Living Room",
+      "activity": "Watching TV and resting",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Kitchen",
+      "activity": "Cooking dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Dining Room",
+      "activity": "Eating dinner",
+      "operations": [
+        {
+          "unique_id": "dining_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:30",
+      "start_minutes": 1125,
+      "end_minutes": 1170,
+      "location": "Living Room",
+      "activity": "Watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:15",
+      "start_minutes": 1170,
+      "end_minutes": 1215,
+      "location": "Bathroom",
+      "activity": "Taking an evening shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:15-21:15",
+      "start_minutes": 1215,
+      "end_minutes": 1275,
+      "location": "Bedroom 1",
+      "activity": "Watching TV in bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-22:30",
+      "start_minutes": 1275,
+      "end_minutes": 1350,
+      "location": "Bedroom 1",
+      "activity": "Texting relatives one-on-one and doing evening prayer",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "start_minutes": 1350,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
