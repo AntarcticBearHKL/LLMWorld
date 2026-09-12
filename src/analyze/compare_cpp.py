@@ -102,6 +102,18 @@ def main():
     for a in appliances:
         metric(a, lambda r, a=a: r["per_appliance_kwh"].get(a, 0.0))
 
+    print("\nhourly mean kWh (base -> treat):")
+    base_h = [0.0] * 24
+    treat_h = [0.0] * 24
+    for b, c in rows:
+        for h in range(24):
+            base_h[h] += sum(b["load_profile_watts"][h * 60:(h + 1) * 60]) / 60.0 / 1000.0
+            treat_h[h] += sum(c["load_profile_watts"][h * 60:(h + 1) * 60]) / 60.0 / 1000.0
+    n = len(rows)
+    for h in range(24):
+        mb, mt = base_h[h] / n, treat_h[h] / n
+        print(f"  {h:02d}:00  {mb:6.3f} -> {mt:6.3f}  ({mt-mb:+6.3f})")
+
     # paired per-env peak table
     print("\nper-pair peak_16_21_kwh (base -> cpp):")
     for i, (b, c) in enumerate(rows, 1):
