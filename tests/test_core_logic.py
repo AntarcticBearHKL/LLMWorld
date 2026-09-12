@@ -188,6 +188,21 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(tag, "cpp_soft")
         self.assertIn("1.50 AUD/kWh", text)
 
+    def test_uniform_tax_default_and_custom(self):
+        text, tag = policy.parse_policy_arg("tax_uniform")
+        self.assertEqual(tag, "tax_uniform")
+        self.assertIn("uniform electricity tax", text)
+        self.assertIn("0.10 AUD/kWh", text)
+        self.assertIn("self-generated solar", text)
+        self.assertIn("0.25 AUD/kWh", policy.parse_policy_arg("tax_uniform:0.25")[0])
+
+    def test_uniform_tax_soft_has_no_directive(self):
+        text, tag = policy.parse_policy_arg("tax_uniform_soft")
+        self.assertEqual(tag, "tax_uniform_soft")
+        self.assertIn("uniform electricity tax", text)
+        self.assertNotIn("reduce", text.lower())
+        self.assertNotIn("lower the tax", text.lower())
+
     def test_cpp_combination(self):
         text, tag = policy.parse_policy_arg("cpp,nudge")
         self.assertEqual(tag, "cpp+nudge")

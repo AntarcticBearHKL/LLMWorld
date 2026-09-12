@@ -87,6 +87,34 @@ def render_cpp_soft_policy(peak_rate=None):
     return _cpp_sentence(peak_rate)
 
 
+UNIFORM_TAX_DEFAULT = 0.10
+
+
+def render_uniform_tax_policy(rate=None):
+    """Uniform electricity tax on all consumption, incl. self-generation (Gunkel et al. 2023).
+
+    Gunkel et al. (2023) study taxing all residential consumption uniformly (removing the
+    self-consumption exemption), which redistributes cost across household sizes. At the
+    behavioural level the taxable base is total consumption, so the renderer asks agents to
+    reduce total use to lower the tax.
+    """
+    r = UNIFORM_TAX_DEFAULT if rate is None else rate
+    return (
+        f"A uniform electricity tax of {r:.2f} AUD/kWh now applies to ALL the electricity your "
+        "household consumes, no matter where it comes from (including any self-generated solar). "
+        "To lower the tax you pay, reduce your total electricity consumption."
+    )
+
+
+def render_uniform_tax_policy_soft(rate=None):
+    """Factual uniform-tax statement only, no 'reduce' directive (prompt-bias control)."""
+    r = UNIFORM_TAX_DEFAULT if rate is None else rate
+    return (
+        f"A uniform electricity tax of {r:.2f} AUD/kWh applies to all the electricity your "
+        "household consumes, regardless of where it comes from."
+    )
+
+
 def render_nudge_policy(neighbor_kwh=18.0):
     """Social-norm comparison with a fixed neighbour average (guide §3.1)."""
     return (f"Your neighbours use about {neighbor_kwh:.0f} kWh of electricity per day on average. "
@@ -135,7 +163,8 @@ def render_in_home_display_policy():
 
 
 _POLICY_NAMES = frozenset({
-    "tou", "tou_soft", "cpp", "cpp_soft", "nudge", "nudge_soft", "nudge_loss",
+    "tou", "tou_soft", "cpp", "cpp_soft", "tax_uniform", "tax_uniform_soft",
+    "nudge", "nudge_soft", "nudge_loss",
     "subsidy", "peak_demand", "ev_delay", "night_setback", "in_home_display",
 })
 
@@ -162,6 +191,11 @@ def _parse_single_policy(spec):
         rate = float(rest) if rest else None
         render = render_cpp_policy if name == "cpp" else render_cpp_soft_policy
         return render(rate), name
+    if name in ("tax_uniform", "tax_uniform_soft"):
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        rate = float(rest) if rest else None
+        render = render_uniform_tax_policy if name == "tax_uniform" else render_uniform_tax_policy_soft
+        return render(rate), name
     if name == "nudge":
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         return (render_nudge_policy(float(rest)) if rest else render_nudge_policy()), "nudge"
@@ -186,7 +220,8 @@ def _parse_single_policy(spec):
         return render_in_home_display_policy(), "in_home_display"
     raise ValueError(
         "Unknown policy '%s'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>], "
-        "cpp[:<peak_rate>], cpp_soft[:<peak_rate>], nudge[:<kwh>], nudge_soft[:<kwh>], "
+        "cpp[:<peak_rate>], cpp_soft[:<peak_rate>], tax_uniform[:<rate>], tax_uniform_soft[:<rate>], "
+        "nudge[:<kwh>], nudge_soft[:<kwh>], "
         "nudge_loss[:<aud>], subsidy[:<rate>], peak_demand[:<rate>], "
         "ev_delay[:<step>], night_setback, in_home_display; combine with commas e.g. 'tou,nudge'." % spec
     )
