@@ -1,0 +1,65 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "wake up, use toilet, brush teeth, and take a quick shower"
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Kitchen",
+      "activity": "prepare and eat breakfast"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "commute to work"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "work as a health care professional"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "commute home from work"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "prepare and eat dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "relax, watch TV"
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "take a hot shower"
+    },
+    {
+      "time": "20:30-22:30",
+      "location": "Living Room",
+      "activity": "use computer, watch TV, leisure"
+    },
+    {
+      "time": "22:30-23:30",
+      "location": "Bedroom 1",
+      "activity": "get ready for bed, read, use phone"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "sleeping"
+    }
+  ]
+}
