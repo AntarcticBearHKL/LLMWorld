@@ -21,10 +21,15 @@ if _HERE not in sys.path:
 from dataset import iter_house_days  # noqa: E402
 
 PEAK_MIN = (16 * 60, 21 * 60)  # 16:00-21:00 (project's evening peak)
+VALLEY_MIN = ((0, 7 * 60), (22 * 60, 1440))  # 22:00-07:00 (project's valley)
 
 
 def peak_kwh(profile):
     return sum(profile[PEAK_MIN[0]:PEAK_MIN[1]]) / 60.0 / 1000.0
+
+
+def valley_kwh(profile):
+    return sum(sum(profile[a:b]) for a, b in VALLEY_MIN) / 60.0 / 1000.0
 
 
 def one_record(world, env, date, house, policy):
@@ -90,6 +95,7 @@ def main():
     print(f"=== CPP comparison: {args.world}/{args.house} {args.date} (n={args.n}) ===")
     metric("total_kwh", lambda r: r["total_energy_kwh"])
     metric("peak_16_21_kwh", lambda r: peak_kwh(r["load_profile_watts"]))
+    metric("valley_22_7_kwh", lambda r: valley_kwh(r["load_profile_watts"]))
     metric("max_watts", lambda r: max(r["load_profile_watts"]))
 
     appliances = sorted({a for r in rows for a in r[1]["per_appliance_kwh"]})
