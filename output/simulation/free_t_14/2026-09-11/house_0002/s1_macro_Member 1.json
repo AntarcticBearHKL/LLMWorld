@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-05:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "05:45-06:10",
+      "location": "Bathroom",
+      "activity": "Showering and morning hygiene routine"
+    },
+    {
+      "time": "06:10-06:40",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and setting the dishwasher on a delayed start for the free midday electricity window"
+    },
+    {
+      "time": "06:40-07:10",
+      "location": "Out",
+      "activity": "Commuting to the hospital"
+    },
+    {
+      "time": "07:10-12:00",
+      "location": "Out",
+      "activity": "Working a day shift at the hospital, providing patient care and updating clinical notes"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital cafeteria"
+    },
+    {
+      "time": "12:30-16:30",
+      "location": "Out",
+      "activity": "Continuing the day shift at the hospital, attending to patients and handing over cases"
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes"
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner, then emptying the dishwasher"
+    },
+    {
+      "time": "18:15-19:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV"
+    },
+    {
+      "time": "19:30-20:15",
+      "location": "Bathroom",
+      "activity": "Doing laundry, washing and drying work clothes"
+    },
+    {
+      "time": "20:15-21:15",
+      "location": "Kitchen",
+      "activity": "Preparing meals for the next day and cleaning up the kitchen"
+    },
+    {
+      "time": "21:15-22:15",
+      "location": "Bedroom 1",
+      "activity": "Studying on the computer for professional development"
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Night-time hygiene routine and preparing for bed"
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
