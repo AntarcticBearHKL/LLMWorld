@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on back in bed. Close eyes. Breathe in and out. Turn to left side. Pull blanket up to chin. Bend knees. Turn to right side. Stretch arms. Adjust pillow. Lie still. Turn to back. Move legs. Sigh. Turn to left side again. Pull blanket over shoulder. Remain still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and washing up for the day",
+      "desc": "Wake up. Sit up in bed. Stand up. Walk to bathroom. Turn on light. Turn on shower. Adjust water temperature. Step into shower. Wash body. Wash hair. Turn off shower. Step out. Pick up towel. Dry body. Walk to sink. Brush teeth. Rinse mouth. Turn off light. Walk out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast (toast and tea using the kettle)",
+      "desc": "Walk to kitchen. Open refrigerator. Take out bread. Take out butter. Take out milk. Place bread in toaster. Press toaster lever. Fill kettle with water. Turn on kettle. Take toast out. Spread butter on toast. Pour tea into cup. Add milk. Sit at table. Pick up toast. Take bite. Chew. Swallow. Sip tea. Put cup down."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, packing work bag and checking the day's patient schedule on the phone",
+      "desc": "Walk to bedroom. Open wardrobe. Take out clothes. Put on shirt. Button shirt. Put on pants. Zip pants. Put on socks. Put on shoes. Tie shoelaces. Open work bag. Put laptop in bag. Put stethoscope in bag. Put documents in bag. Zip bag. Pick up phone. Open schedule app. Scroll through patient list. Read notes. Put phone in pocket. Pick up bag. Walk out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift",
+      "desc": "Walk out of house. Lock door. Walk to bus stop. Wait for bus. Bus arrives. Board bus. Pay fare. Find seat. Sit down. Place bag on lap. Look out window. Check phone. Read news. Put phone in pocket. Close eyes. Rest head."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional: patient care, clinical rounds, charting and handover",
+      "desc": "Arrive at hospital. Enter building. Walk to locker room. Change into scrubs. Walk to ward. Attend handover meeting. Listen to report. Review patient charts. Walk to patient room. Knock on door. Enter room. Greet patient. Check vital signs. Measure blood pressure. Listen to heart. Listen to lungs. Administer medication. Update chart. Walk to next patient."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital as the storm approaches",
+      "desc": "Walk out of hospital. Walk to bus stop. Wait for bus. Bus arrives. Board bus. Pay fare. Find seat. Sit down. Look out window. Notice storm clouds. Check phone for weather updates. Put phone away. Close eyes. Rest head."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk into kitchen. Open refrigerator. Take out vegetables and meat. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add meat. Stir. Add vegetables. Stir. Add spices. Turn off stove. Serve food on plate. Walk to table. Sit down. Pick up fork. Take bite. Chew. Swallow."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing up after dinner and loading the dishwasher",
+      "desc": "Pick up plates. Scrape food into trash. Rinse plates. Open dishwasher. Load plates. Load utensils. Load glasses. Add detergent. Close dishwasher door. Press start button. Wipe counter with cloth. Rinse cloth. Wipe table. Put cloth away."
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Press power button. TV turns on. Browse channels. Select program. Put remote down. Watch TV. Adjust position. Pick up remote. Change volume. Put remote down. Watch TV. Pick up remote. Turn off TV. Put remote down. Stand up."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bedroom 1",
+      "activity": "Charging the phone and computer and preparing for the expected storm and possible power outage",
+      "desc": "Walk to bedroom. Pick up phone. Plug charger into wall outlet. Connect phone to charger. Pick up computer. Plug charger into wall outlet. Connect computer to charger. Check phone battery. Check computer battery. Open drawer. Take out flashlight. Press button to test. Put flashlight on nightstand. Fill water bottle from tap. Place water bottle on nightstand."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Watching TV and following local storm and power outage updates",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Switch to news channel. Watch storm updates. Pick up phone. Open news app. Read updates. Put phone down. Watch TV. Pick up remote. Change channel. Watch update. Put remote down. Check phone. Put phone down."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Evening wash and getting ready for bed",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wet face. Apply cleanser. Rub face. Rinse face. Pat dry with towel. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Turn off tap. Turn off light. Walk out."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Wind down away from screens and sleeping",
+      "desc": "Walk to bedroom. Put phone on nightstand. Turn off computer. Sit on bed. Take off slippers. Lie down. Pull blanket over body. Close eyes. Breathe in and out. Turn to left side. Adjust pillow. Turn to right side. Stretch legs. Lie still. Remain still."
+    }
+  ]
+}

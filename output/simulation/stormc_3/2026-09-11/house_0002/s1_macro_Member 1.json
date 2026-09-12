@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:20",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:20-06:50",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting washed"
+    },
+    {
+      "time": "06:50-07:20",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast"
+    },
+    {
+      "time": "07:20-07:50",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed for work, packing work bag and checking phone for shift updates"
+    },
+    {
+      "time": "07:50-08:50",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "08:50-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, providing patient care and clinical duties"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes and cleaning up the kitchen"
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Living Room",
+      "activity": "Checking the severe storm forecast, charging phone and computer, and preparing for possible power outages"
+    },
+    {
+      "time": "19:45-21:30",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing while the storm passes"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Evening wash, brushing teeth and getting ready for bed"
+    },
+    {
+      "time": "22:00-22:45",
+      "location": "Bedroom 1",
+      "activity": "Reading under the desk lamp and winding down before sleep"
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

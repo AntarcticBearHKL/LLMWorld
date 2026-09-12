@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket. Turn to right side. Breathe deeply. Remain still. Occasionally move arm. Shift legs. Turn again. Continue sleeping."
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and completing morning hygiene",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Adjust shower temperature. Step into shower. Wash body. Wash hair. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel around body."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, drinking water and coffee",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out milk and eggs. Close refrigerator. Crack eggs into bowl. Whisk eggs. Cook eggs on stove. Transfer eggs to plate. Eat eggs. Drink water. Drink coffee."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Changing into work scrubs, checking phone for shift updates and packing work bag",
+      "desc": "Enter bedroom. Open wardrobe. Take out scrubs. Close wardrobe. Take off clothes. Put on scrubs. Pick up phone. Check phone. Put down phone. Pick up work bag. Pack work bag."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning clinical shift",
+      "desc": "Walk out of house. Walk to car. Open car door. Sit in driver seat. Close door. Fasten seatbelt. Start engine. Drive to hospital. Park car. Step out. Walk to hospital entrance."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Out",
+      "activity": "Working clinical shift: patient care, medication rounds and charting",
+      "desc": "Enter hospital. Go to locker room. Change into scrubs. Pick up patient list. Attend handover meeting. Walk to patient room. Knock on door. Enter room. Greet patient. Check vital signs. Administer medication. Document in chart. Walk to next patient. Repeat. Take notes. Use computer. Communicate with colleagues. Prepare for handover."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital",
+      "desc": "Go to cafeteria. Pick up tray. Choose food. Pay for food. Sit at table. Eat food. Drink water. Talk to colleague. Clear tray. Return tray."
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Working clinical shift: patient assessments, handover preparation and documentation",
+      "desc": "Return to ward. Pick up patient charts. Assess patient 1. Check vital signs. Administer medication. Document findings. Assess patient 2. Check vital signs. Administer medication. Document findings. Prepare handover notes. Use computer. Communicate with team. Attend handover meeting."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Walk to car. Open car door. Sit in driver seat. Close door. Fasten seatbelt. Start engine. Drive home. Park car. Step out. Walk to house. Enter house."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes after the shift",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Adjust shower temperature. Take off work clothes. Step into shower. Wash body. Wash hair. Turn off shower. Step out. Dry body. Put on clean clothes."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out vegetables and meat. Close refrigerator. Wash vegetables. Cut vegetables. Turn on stove. Cook meat and vegetables. Turn off stove. Transfer food to plate. Eat dinner. Drink water."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing up dishes and loading the dishwasher",
+      "desc": "Pick up dishes. Scrape food into trash. Rinse dishes. Open dishwasher. Load dishes into dishwasher. Close dishwasher. Add detergent. Start dishwasher. Wipe counter. Put away leftovers."
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Living Room",
+      "activity": "Preparing for the severe storm: charging phone and computer, checking weather warnings and filling the kettle with water",
+      "desc": "Enter living room. Pick up phone. Plug phone into charger. Pick up computer. Plug computer into charger. Turn on TV. Check weather warnings. Pick up kettle. Fill kettle with water. Place kettle on table."
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV while monitoring storm and power outage updates",
+      "desc": "Sit on sofa. Pick up remote. Turn on TV. Change channel. Watch TV. Check phone for updates. Put down phone. Watch TV. Pick up remote. Change channel. Watch TV. Check phone for updates. Put down phone. Watch TV. Turn off TV."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Living Room",
+      "activity": "Using the computer to review continuing education material and clinical notes",
+      "desc": "Sit at desk. Open computer. Turn on computer. Open continuing education material. Read material. Open clinical notes. Read notes. Take notes. Close computer."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Nighttime hygiene routine before bed",
+      "desc": "Enter bathroom. Turn on light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Dry face. Use toilet. Flush toilet. Wash hands. Dry hands. Turn off light."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Reading briefly and sleeping",
+      "desc": "Enter bedroom. Turn on light. Pick up book. Open book. Read pages. Close book. Put down book. Turn off light. Lie in bed. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket. Turn to right side. Breathe deeply. Remain still. Continue sleeping."
+    }
+  ]
+}
