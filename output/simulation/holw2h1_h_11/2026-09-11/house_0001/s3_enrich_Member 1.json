@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-08:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket up. Turn to right side. Stretch arms. Remain still. Breathe. Turn to back. Adjust blanket. Continue sleeping."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Bathroom",
+      "activity": "Morning wash and getting dressed",
+      "desc": "Wake up. Get out of bed. Walk to bathroom. Turn on light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Dry face. Turn off light. Walk to bedroom. Put on clothes."
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk and cereal. Close refrigerator. Open cupboard. Take out bowl and spoon. Pour cereal into bowl. Pour milk into bowl. Sit at table. Eat cereal. Drink milk. Rinse bowl and put in sink."
+    },
+    {
+      "time": "09:00-10:30",
+      "location": "Bedroom 1",
+      "activity": "Studying and working on university assignments",
+      "desc": "Sit at desk. Turn on desk lamp. Open laptop. Press power button. Wait for login screen. Type password. Open browser. Navigate to university portal. Download assignment file. Open Word document. Read assignment instructions. Type notes. Highlight key points. Copy and paste information. Save document. Check email. Reply to email. Open PDF research article. Read article. Take notes on article."
+    },
+    {
+      "time": "10:30-11:00",
+      "location": "Bedroom 1",
+      "activity": "Taking a break and browsing phone",
+      "desc": "Pick up phone. Unlock screen. Open social media app. Scroll through feed. Double-tap to like a post. Watch a video. Read comments. Type a comment. Post comment. Switch to another app. Play a game. Put down phone."
+    },
+    {
+      "time": "11:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Continuing study and research",
+      "desc": "Sit at desk. Open laptop. Open previously saved document. Continue typing notes. Open web browser. Search for academic articles. Open an article. Read abstract. Download PDF. Highlight relevant sections. Copy citations. Paste into document. Format bibliography. Save document. Check word count. Revise introduction. Add references. Save again. Close laptop. Stand up."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "desc": "Walk to kitchen. Open refrigerator. Take out bread, lettuce, tomato, cheese. Close refrigerator. Open cupboard. Take out plate. Take out knife. Place bread on plate. Spread butter on bread. Add lettuce, tomato, cheese. Put another slice of bread on top. Cut sandwich in half. Sit at table. Eat sandwich. Drink water. Stand up. Rinse plate. Put plate in sink. Wipe counter. Walk out of kitchen."
+    },
+    {
+      "time": "13:00-14:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing",
+      "desc": "Walk to living room. Pick up remote control. Press power button on TV. Sit on couch. Change channel. Watch program. Adjust volume. Change channel again. Watch another program. Pause program. Fast-forward through commercials. Rewind to re-watch scene. Turn off TV. Stand up."
+    },
+    {
+      "time": "14:00-16:00",
+      "location": "Out",
+      "activity": "Shopping and running errands",
+      "desc": "Leave house. Walk to bus stop. Board bus. Pay fare. Get off at shopping center. Enter department store. Pick up shirt. Try on shirt. Go to checkout. Pay for shirt. Leave store. Walk to supermarket. Enter supermarket. Pick up groceries. Go to checkout. Pay for groceries. Leave supermarket. Walk to bus stop. Board bus. Return home."
+    },
+    {
+      "time": "16:00-17:00",
+      "location": "Bedroom 1",
+      "activity": "Relaxing and listening to music",
+      "desc": "Enter bedroom. Pick up headphones. Connect headphones to phone. Open music app. Select playlist. Press play. Lie on bed. Close eyes. Tap foot to beat. Change song. Adjust volume. Skip song. Open another playlist. Play song. Sing along. Pause music. Remove headphones. Sit up."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Bathroom",
+      "activity": "Doing laundry",
+      "desc": "Walk to bathroom. Pick up laundry basket. Sort clothes. Open washing machine. Put clothes into washing machine. Add detergent. Close washing machine door. Turn dial to select cycle. Press start button. Wait for machine to start. Close bathroom door. Walk to bedroom."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 1",
+      "activity": "Tidying up room",
+      "desc": "Pick up clothes from floor. Fold clothes. Put clothes in wardrobe. Arrange books on desk. Dust desk with cloth. Make bed. Fluff pillow. Straighten blanket. Pick up trash. Throw trash in bin. Open window. Close window."
+    },
+    {
+      "time": "18:00-19:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out ingredients. Close refrigerator. Open cupboard. Take out rice cooker. Rinse rice. Add water to rice cooker. Turn on rice cooker. Chop vegetables. Turn on induction cooker. Add oil to pan. Stir-fry vegetables. Add meat. Add sauce. Stir. Turn off induction cooker. Serve dishes on plates. Sit at table. Eat dinner."
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Kitchen",
+      "activity": "Cleaning up after dinner",
+      "desc": "Collect plates from table. Scrape food into bin. Stack plates. Open dishwasher. Load plates into dishwasher. Load utensils. Add detergent. Close dishwasher. Turn on dishwasher. Wipe table with cloth. Wipe counter. Turn off kitchen light."
+    },
+    {
+      "time": "20:00-22:00",
+      "location": "Bedroom 1",
+      "activity": "Studying and reviewing course materials",
+      "desc": "Sit at desk. Turn on desk lamp. Open laptop. Open course materials. Read textbook. Highlight important points. Take notes. Open lecture slides. Review slides. Watch recorded lecture. Pause video. Rewind video. Play video. Take notes. Open practice quiz. Complete quiz. Check answers. Review incorrect answers. Close laptop. Stand up."
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Living Room",
+      "activity": "Reading and winding down",
+      "desc": "Walk to living room. Pick up book. Sit on couch. Open book to page. Read pages. Turn page. Continue reading. Close book. Stand up. Walk to kitchen. Pour glass of water. Drink water. Walk back to living room. Sit on couch. Open book again. Read more pages. Turn page. Close book. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Night routine and sleeping",
+      "desc": "Enter bedroom. Take off clothes. Put on pajamas. Set alarm on phone. Plug phone into charger. Turn off desk lamp. Turn off main light. Lie on bed. Pull blanket up. Adjust pillow. Close eyes. Turn to left side. Breathe slowly. Turn to right side. Remain still. Fall asleep."
+    }
+  ]
+}

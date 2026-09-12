@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Sleep. Turn to left side. Bend knees. Adjust pillow. Turn to right side. Stretch legs. Sleep. Turn to back. Breathe slowly. Turn to left side. Pull blanket. Sleep."
+    },
+    {
+      "time": "06:45-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting dressed",
+      "desc": "Wake up. Sit up. Stand up. Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Rinse. Turn off shower. Dry with towel. Put on clothes. Brush teeth. Turn off light. Walk out."
+    },
+    {
+      "time": "07:10-07:40",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, boiling water with the kettle and toasting bread",
+      "desc": "Walk to kitchen. Open refrigerator. Take out bread, butter, milk. Close refrigerator. Fill kettle with water. Plug in kettle. Turn on kettle. Plug in toaster. Insert bread. Press lever. Wait. Kettle boils. Pour water into mug. Add tea bag. Stir. Toast pops up. Remove toast. Spread butter. Pour milk. Sit. Eat toast. Drink tea. Finish. Stand. Pick up plate and mug. Walk to sink. Rinse. Put in dish rack. Wipe hands. Walk out."
+    },
+    {
+      "time": "07:40-08:00",
+      "location": "Bedroom 1",
+      "activity": "Packing university bag, checking notes on the computer and reviewing the day's timetable",
+      "desc": "Walk to bedroom. Open backpack. Place notebook, pen, laptop in backpack. Pick up phone. Check timetable. Open computer. Turn on. Log in. Open notes file. Read. Close file. Shut down. Close backpack. Pick up backpack. Walk out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Clayton campus",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Sit down. Take out phone. Look at phone. Put phone away. Look out window. Bus arrives at station. Exit bus. Walk to train platform. Wait for train. Board train. Tap card. Sit down. Take out notes. Read notes. Put notes away. Train arrives at Clayton. Exit train. Walk to campus."
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Attending Bachelor of Business lectures and tutorials, taking notes and working on group coursework on campus",
+      "desc": "Enter lecture hall. Sit down. Take out notebook and pen. Take notes. Listen to lecturer. Ask question. Write answer. Open laptop. Work on group project. Discuss with group. Type on keyboard. Save file. Close laptop. Pack up. Walk to next class. Enter tutorial room. Sit down. Participate in discussion. Take notes. Work in group. Present findings. Pack up. Walk out."
+    },
+    {
+      "time": "13:00-13:40",
+      "location": "Out",
+      "activity": "Commuting from Clayton campus to Chadstone",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Sit down. Look at phone. Put phone away. Bus arrives at Chadstone. Stand up. Walk to door. Exit bus. Walk to shopping center."
+    },
+    {
+      "time": "13:40-14:10",
+      "location": "Out",
+      "activity": "Eating a quick lunch at Chadstone before the shift starts",
+      "desc": "Enter food court. Walk to counter. Order food. Pay. Receive food. Carry tray to table. Sit down. Unwrap food. Eat food. Drink water. Finish eating. Pick up tray. Return tray. Walk to restroom. Wash hands. Walk to store."
+    },
+    {
+      "time": "14:10-18:00",
+      "location": "Out",
+      "activity": "Working a part-time retail shift at Chadstone, serving customers and restocking shelves",
+      "desc": "Clock in. Walk to shop floor. Greet customers. Assist customer. Walk to stockroom. Pick up boxes. Carry to shop floor. Open boxes. Take out items. Place on shelves. Arrange items. Walk to register. Serve customer. Scan items. Take payment. Bag items. Hand receipt. Walk to fitting room. Clean fitting room. Walk to counter. Restock bags. Fold clothes. Hang clothes. Walk to storage. Organize storage. Clock out."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Out",
+      "activity": "Commuting home from Chadstone by public transport",
+      "desc": "Walk to bus stop. Wait. Board bus. Tap card. Sit. Look at phone. Put away. Bus arrives at station. Exit bus. Walk to train platform. Wait. Board train. Tap card. Sit. Close eyes. Train arrives. Exit train. Walk home."
+    },
+    {
+      "time": "18:45-19:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating it",
+      "desc": "Walk into kitchen. Open refrigerator. Take out vegetables, meat, rice. Close. Wash and chop vegetables. Chop meat. Turn on induction cooker. Place pan. Pour oil. Add meat. Stir. Add vegetables. Stir. Add sauce. Stir. Turn off cooker. Scoop rice onto plate. Scoop meat and vegetables. Carry plate to table. Sit. Eat dinner. Finish. Stand. Pick up plate. Walk to sink. Rinse. Put in dish rack."
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Kitchen",
+      "activity": "Washing up dishes and tidying the kitchen counters",
+      "desc": "Fill sink with water. Add dish soap. Pick up plate. Scrub plate with sponge. Rinse plate. Place plate in dish rack. Pick up pan. Scrub pan. Rinse pan. Place pan in dish rack. Pick up utensils. Scrub utensils. Rinse utensils. Place utensils in dish rack. Drain sink. Wipe counter with cloth. Wipe stove. Wipe table. Throw away trash. Wipe hands."
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Bedroom 1",
+      "activity": "Studying at the desk with the computer and desk lamp, completing assignments and readings",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open computer. Turn on. Log in. Open assignment file. Read instructions. Type on keyboard. Open textbook. Read chapter. Highlight text. Take notes. Open browser. Search reference. Copy citation. Paste into document. Save file. Close browser. Close assignment. Open reading. Read. Take notes. Save notes. Close computer. Turn off desk lamp. Stand up."
+    },
+    {
+      "time": "21:30-22:10",
+      "location": "Living Room",
+      "activity": "Relaxing on the couch watching TV",
+      "desc": "Walk to living room. Pick up remote. Turn on TV. Sit on couch. Flip through channels. Stop on show. Watch TV. Adjust volume. Put feet on coffee table. Pick up phone. Scroll social media. Put phone down. Watch TV. Stand up. Turn off TV. Put remote down. Walk to bathroom."
+    },
+    {
+      "time": "22:10-22:35",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and brushing teeth",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Rinse. Turn off shower. Dry with towel. Brush teeth. Turn off light. Walk out."
+    },
+    {
+      "time": "22:35-23:00",
+      "location": "Bedroom 1",
+      "activity": "Scrolling the phone, setting an alarm and turning on the fan before bed",
+      "desc": "Walk to bedroom. Lie on bed. Pick up phone. Open social media. Scroll. Open alarm app. Set alarm for 7:00. Turn off phone. Put phone on nightstand. Pick up fan remote. Turn on fan. Pull blanket. Close eyes. Sleep."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Sleep. Turn to left side. Bend knees. Adjust pillow. Turn to right side. Stretch legs. Sleep. Turn to back. Breathe slowly. Turn to left side. Pull blanket. Sleep."
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting ready for the day"
+    },
+    {
+      "time": "07:15-07:50",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, packing a snack and study materials"
+    },
+    {
+      "time": "07:50-08:50",
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus"
+    },
+    {
+      "time": "08:50-12:00",
+      "location": "Out",
+      "activity": "Attending business lectures and tutorials at Clayton campus"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Eating lunch on campus and chatting with classmates"
+    },
+    {
+      "time": "13:00-16:00",
+      "location": "Out",
+      "activity": "Studying in the campus library and working on assignments"
+    },
+    {
+      "time": "16:00-16:45",
+      "location": "Out",
+      "activity": "Commuting to Chadstone for the retail shift"
+    },
+    {
+      "time": "16:45-21:15",
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone, serving customers and restocking shelves"
+    },
+    {
+      "time": "21:15-22:00",
+      "location": "Out",
+      "activity": "Commuting home from Chadstone"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower and washing up after the shift"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Kitchen",
+      "activity": "Heating up and eating a late dinner"
+    },
+    {
+      "time": "23:00-23:40",
+      "location": "Bedroom 1",
+      "activity": "Using computer and phone to check emails and review notes under the desk lamp"
+    },
+    {
+      "time": "23:40-24:00",
+      "location": "Bedroom 1",
+      "activity": "Turning off the light and settling down to sleep"
+    }
+  ]
+}
