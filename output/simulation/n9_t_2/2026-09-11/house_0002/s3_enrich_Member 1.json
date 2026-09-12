@@ -1,0 +1,83 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Adjust pillow. Turn to right side. Stretch arms. Turn to back. Adjust pillow. Turn to left side. Pull blanket down. Breathe deeply. Turn to right side. Remain still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed",
+      "desc": "Turn on light. Use toilet. Flush toilet. Turn on tap. Apply soap. Rub hands. Rinse hands. Turn off tap. Dry hands. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Dry face. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes."
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and preparing for work",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out milk. Close refrigerator. Open cupboard. Take out cereal box. Take out bowl. Pour cereal into bowl. Pour milk into bowl. Put milk back in refrigerator. Sit at table. Eat cereal. Drink milk. Stand up. Place bowl in sink. Check phone. Pack bag. Put on shoes. Walk out of kitchen."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk to car. Unlock car. Open door. Sit in driver's seat. Close door. Fasten seatbelt. Start engine. Adjust mirror. Drive. Stop at traffic light. Continue driving. Park car. Turn off engine. Unfasten seatbelt. Open door. Get out. Lock car. Walk to hospital."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a health care professional at the hospital/clinic",
+      "desc": "Arrive at hospital. Enter building. Greet colleague. Put on scrubs. Check schedule. See patient. Take vitals. Administer medication. Update records. Consult with doctor. Eat lunch. Use restroom. Attend meeting. See another patient. Perform procedure. Clean equipment. Write notes. Answer phone. Talk to patient. Review lab results."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk to car. Unlock car. Open door. Sit in driver's seat. Close door. Fasten seatbelt. Start engine. Drive. Stop at traffic light. Continue driving. Park car. Turn off engine. Unfasten seatbelt. Open door. Get out. Lock car. Walk to house."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out vegetables. Take out meat. Close refrigerator. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add vegetables. Add meat. Stir. Turn off stove. Place food on plate. Sit at table. Eat dinner. Stand up. Place plate in sink."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing and reading to avoid peak electricity use",
+      "desc": "Enter living room. Turn on desk lamp. Sit on sofa. Pick up book. Open book. Read page. Turn page. Read page. Turn page. Read page. Turn page. Read page. Turn page. Close book. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Doing laundry using the washing machine",
+      "desc": "Enter bathroom. Open washing machine. Load clothes. Add detergent. Close door. Select cycle. Press start. Wait. Open washing machine. Take out clothes."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Kitchen",
+      "activity": "Cleaning up the kitchen and washing dishes",
+      "desc": "Enter kitchen. Collect dishes. Scrape food into trash. Load dishwasher. Add detergent. Close dishwasher. Start dishwasher. Wipe counters. Sweep floor. Turn off light."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Living Room",
+      "activity": "Watching TV or using the computer",
+      "desc": "Enter living room. Sit on sofa. Pick up remote. Turn on TV. Change channel. Watch TV. Change channel. Watch TV. Turn off TV. Stand up. Walk to bathroom."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed",
+      "desc": "Enter bathroom. Turn on light. Turn on shower. Adjust temperature. Step into shower. Wash body. Shampoo hair. Rinse. Turn off shower. Step out. Dry with towel. Put on pajamas. Brush teeth. Rinse mouth. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Enter bedroom. Turn off light. Lie on bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Adjust pillow. Turn to right side. Stretch legs. Turn to back. Remain still."
+    }
+  ]
+}

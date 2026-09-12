@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in bed"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and getting washed"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with the kettle and toaster"
+    },
+    {
+      "time": "07:30-07:45",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and packing the work bag"
+    },
+    {
+      "time": "07:45-08:45",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "08:45-12:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, seeing patients and updating clinical notes"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break in the staff room"
+    },
+    {
+      "time": "12:30-17:15",
+      "location": "Out",
+      "activity": "Continuing patient care, administering treatment and handing over to colleagues"
+    },
+    {
+      "time": "17:15-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing quietly with stretching and reading, keeping electricity use low during the evening peak tax window"
+    },
+    {
+      "time": "20:00-20:45",
+      "location": "Bathroom",
+      "activity": "Running a load of laundry in the washing machine and using the dryer now that the peak tax has ended"
+    },
+    {
+      "time": "20:45-21:30",
+      "location": "Kitchen",
+      "activity": "Washing up and loading the dishwasher, preparing food for tomorrow's shift"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Watching TV and browsing on the computer in leisure time"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night-time routine, brushing teeth and washing face"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Going to bed and sleeping"
+    }
+  ]
+}
