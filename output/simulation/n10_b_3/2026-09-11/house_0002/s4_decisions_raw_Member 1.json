@@ -1,0 +1,236 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies on bed. Closes eyes. Breathes slowly. Turns to left side. Pulls blanket up. Adjusts pillow. Turns to right side. Moves arm. Shifts leg. Rolls onto back. Snores. Continues sleeping.",
+      "operations": []
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth, showering",
+      "desc": "Wakes up. Sits up on bed. Swings legs over edge. Stands up. Walks to bathroom. Turns on bathroom light. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Washes face and puts toothbrush down. Turns on shower. Steps into shower. Applies soap. Scrubs body. Rinses body. Turns off shower. Steps out. Dries with towel.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making coffee with kettle and toaster",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out eggs, bread, butter. Closes refrigerator. Places bread in toaster. Presses toaster lever. Cracks eggs into bowl and whisks. Turns on induction cooker. Places pan on cooker. Pours oil and eggs into pan. Stirs eggs. Turns off induction cooker and removes eggs to plate. Takes toast from toaster and spreads butter. Fills kettle with water and turns on. Pours water into mug and adds coffee. Stirs coffee. Sits at table. Eats eggs and toast. Drinks coffee. Wipes mouth with napkin.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing work bag for the shift",
+      "desc": "Walks to bedroom. Opens wardrobe. Takes out scrubs. Takes out shoes. Takes off pajamas. Puts on scrubs. Puts on socks. Puts on shoes. Opens drawer. Takes out stethoscope. Places stethoscope in bag. Takes out badge. Places badge in bag. Takes out notebook. Places notebook in bag. Zips bag. Picks up bag. Walks to door.",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the healthcare facility",
+      "desc": "Walks to bus stop. Waits for bus. Checks phone for time. Bus arrives. Boards bus. Taps transit card. Finds seat. Sits down. Looks out window. Checks phone. Sends message. Pulls cord for stop. Stands up. Walks to door. Steps off bus. Walks to healthcare facility. Enters building. Walks to locker room.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Working as a health care professional, providing patient care and clinical duties",
+      "desc": "Washes hands. Puts on gloves. Picks up patient chart. Reads patient chart. Enters patient room. Greets patient. Takes blood pressure. Measures temperature. Listens to heart. Listens to lungs. Administers medication. Updates patient record. Types notes on computer. Discusses with colleague. Washes hands. Removes gloves. Moves to next patient. Washes hands. Puts on gloves. Picks up next patient chart.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at work",
+      "desc": "Walks to break room. Opens refrigerator. Takes out lunch bag. Closes refrigerator. Sits at table. Opens lunch bag. Takes out sandwich. Unwraps sandwich. Takes bite. Chews. Swallows. Takes out apple. Bites apple. Chews. Swallows. Drinks water. Wipes mouth. Throws away trash. Packs up lunch bag. Walks back to work area.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Out",
+      "activity": "Continuing clinical work, patient assessments and record documentation",
+      "desc": "Washes hands. Puts on gloves. Enters patient room. Interviews patient. Takes notes. Performs physical exam. Checks vital signs. Administers treatment. Updates electronic health record. Types notes. Saves record. Discusses with doctor. Washes hands. Removes gloves. Moves to next patient. Washes hands. Puts on gloves. Reviews lab results. Updates chart. Prepares for next patient.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting back home",
+      "desc": "Walks to bus stop. Waits for bus. Checks phone. Bus arrives. Boards bus. Taps transit card. Finds seat. Sits down. Looks out window. Checks phone. Listens to music. Pulls cord for stop. Stands up. Walks to door. Steps off bus. Walks home. Enters home. Takes off shoes.",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner, using induction cooker and microwave",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out vegetables, meat. Closes refrigerator. Washes and chops vegetables. Turns on induction cooker. Places pan on cooker. Pours oil into pan. Adds meat to pan. Stirs meat. Adds vegetables to pan. Stirs vegetables. Turns off induction cooker and transfers food to plate. Opens microwave. Places plate inside. Closes microwave. Sets timer and presses start. Removes plate from microwave. Sits at table and eats dinner. Drinks water and clears table.",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV and browsing phone",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Browses channels. Stops on show. Watches TV. Picks up phone. Unlocks phone. Opens app. Scrolls. Likes post. Comments. Puts phone down. Watches TV. Picks up phone again. Checks notifications. Puts phone down. Adjusts sitting position. Continues watching TV.",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Bathroom",
+      "activity": "Showering and personal hygiene routine",
+      "desc": "Walks to bathroom. Turns on bathroom light. Turns on shower. Adjusts water temperature. Steps into shower. Wets hair. Applies shampoo. Lathers hair. Rinses hair. Applies conditioner. Rinses hair. Washes face. Applies soap to body. Scrubs body. Rinses body. Turns off shower. Steps out. Dries with towel. Applies lotion. Turns off bathroom light.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-22:00",
+      "location": "Living Room",
+      "activity": "Using computer to review work emails and unwind",
+      "desc": "Walks to living room. Sits at desk. Opens laptop. Presses power button. Waits for boot. Enters password. Opens email client. Reads emails. Replies to email. Types response. Sends email. Closes email client. Opens browser. Reads news. Watches video. Closes browser. Shuts down computer. Closes laptop. Stands up. Walks to bathroom.",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Washing up and night skincare routine",
+      "desc": "Walks to bathroom. Turns on tap. Picks up face wash. Applies face wash to face. Rinses face. Pat dry with towel. Applies toner. Applies serum. Applies moisturizer. Applies eye cream. Brushes teeth. Rinses mouth. Puts toothbrush down. Turns off tap. Turns off bathroom light.",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down with phone and sleeping",
+      "desc": "Walks to bedroom. Lies on bed. Pulls blanket. Picks up phone. Unlocks phone. Browses social media. Watches video. Likes post. Comments. Puts phone on nightstand. Turns off lamp. Closes eyes. Turns to side. Adjusts pillow. Pulls blanket up. Breathes slowly. Snores. Continues sleeping.",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

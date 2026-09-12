@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Adjust pillow. Stretch legs. Turn to right side. Move arm. Lie on back. Breathe deeply. Shift position. Snore. Continue sleeping."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and taking a shower",
+      "desc": "Open eyes and sit up in bed. Stand up and walk to bathroom. Turn on bathroom light and water heater. Turn on shower and adjust temperature. Step into shower and wet body. Apply soap and rub body. Rinse body and turn off shower. Step out of shower and pick up towel. Dry body and hair. Walk to sink, turn on tap, wash face, turn off tap. Pick up toothbrush, apply toothpaste, brush teeth, rinse mouth. Turn off bathroom light and walk out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast",
+      "desc": "Turn on kitchen light. Open refrigerator, take out eggs, bread, and juice, close refrigerator. Place pan on induction cooker and turn on. Crack eggs into pan and cook. Turn off induction cooker. Place bread in toaster and turn on. Remove toast and spread butter. Pour juice into glass. Sit at table, eat breakfast, drink juice. Clear table."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the morning shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus and pay fare. Find seat and sit down. Take out phone and check messages. Put on headphones and listen to music. Look out window. Stand up and pull cord. Exit bus. Walk to hospital. Enter hospital."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Out",
+      "activity": "Working the morning shift, caring for patients and updating clinical notes",
+      "desc": "Enter hospital. Walk to locker room. Change into scrubs. Put on stethoscope. Walk to nurses' station. Pick up patient list. Review patient charts. Walk to patient room 1. Greet patient. Check vital signs. Administer medication. Update clinical notes on computer. Walk to patient room 2. Assist patient with mobility. Talk to colleague about patient status. Return to nurses' station."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital",
+      "desc": "Walk to cafeteria. Pick up tray. Choose food. Pay for food. Find table. Sit down. Eat lunch. Drink water. Check phone. Throw away trash. Return tray. Walk back to ward."
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing the afternoon shift, attending to patients and coordinating with colleagues",
+      "desc": "Attend handover meeting. Receive patient updates. Walk to patient room 3. Check patient's IV drip. Adjust flow rate. Talk to patient about symptoms. Walk to supply room. Restock medical supplies. Return to nurses' station. Call doctor for consultation. Update patient records. Coordinate with physical therapist. Assist patient with walking. Walk to patient room 4. Administer injection. Document procedure. Return to nurses' station."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Exit hospital. Walk to bus stop. Wait for bus. Board bus and pay fare. Find seat and sit down. Take out phone and check messages. Look out window. Stand up and pull cord. Exit bus. Walk to home. Enter home."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bathroom",
+      "activity": "Showering and changing into comfortable clothes",
+      "desc": "Walk to bathroom. Turn on bathroom light and water heater. Turn on shower and adjust temperature. Step into shower and wet body. Apply soap and rub body. Rinse body and turn off shower. Step out of shower and pick up towel. Dry body and hair. Walk to bedroom. Open wardrobe. Pick out comfortable clothes. Put on clothes. Return to bathroom. Turn off bathroom light."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Turn on kitchen light. Open refrigerator. Take out vegetables, meat, and oil. Close refrigerator. Place pan on induction cooker. Turn on induction cooker. Pour oil into pan. Chop vegetables. Add meat to pan. Stir ingredients. Cook dinner. Turn off induction cooker. Place food on plate. Sit at table. Eat dinner. Drink water. Clear table."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen counters",
+      "desc": "Turn on kitchen light. Pick up dishes. Scrape food into trash. Place dishes in sink. Turn on tap. Apply dish soap to sponge. Scrub dishes. Rinse dishes. Turn off tap. Place dishes in drying rack. Wipe counter with cloth. Throw away trash. Turn off kitchen light."
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing on the sofa",
+      "desc": "Walk to living room. Turn on living room light. Pick up remote. Turn on TV. Change channels. Sit on sofa. Put feet on ottoman. Watch TV. Pick up phone. Check messages. Put down phone. Adjust cushion. Change channel. Watch movie. Pick up remote. Turn off TV. Stand up. Turn off living room light."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Loading and running the washing machine for laundry",
+      "desc": "Walk to bathroom. Turn on bathroom light. Open washing machine. Load dirty clothes. Add detergent. Close washing machine door. Turn on washing machine. Set cycle. Start washing machine. Turn off bathroom light. Walk out."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Browsing the phone and reading before bed",
+      "desc": "Walk to bedroom. Turn on bedroom light. Sit on bed. Pick up phone. Unlock phone. Open social media app. Scroll through feed. Click on video. Watch video. Put down phone. Pick up book. Open book. Read pages. Turn page. Read more pages. Close book. Put down book. Turn off bedroom light."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night routine, brushing teeth and washing up",
+      "desc": "Walk to bathroom. Turn on bathroom light. Turn on tap. Wet toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Turn off tap. Wash face with cleanser. Rinse face. Pat dry with towel. Turn off bathroom light. Walk out."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Pull blanket up. Adjust pillow. Close eyes. Breathe slowly. Turn to left side. Stretch legs. Turn to right side. Move arm. Lie on back. Breathe deeply. Continue sleeping."
+    }
+  ]
+}
