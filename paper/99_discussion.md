@@ -137,6 +137,9 @@
   0.26–0.44; peak-hour shift 0.5–11 h) — supporting heterogeneous behaviour.
 - **Weekday/weekend (R176)**: a genuine 7-day run (world_838587 h002) gives **weekend +40.7%** vs weekday
   (11.06 vs 7.86 kWh) — the same **stay-home** mechanism as the holiday event, at a milder level.
+- **Household load-shape archetypes (N9, R178)**: six baseline households split into **evening-peak (18h,
+  eve 45%) / morning-peak (7h, 37–41%) / late-night (21h)** types — real inter-household heterogeneity
+  (RQ3); still descriptive (6 households, single member each).
 - Pending: systematic alignment tables vs the benchmarks in `FIT5216/研究计划.md` §2.7.
 
 ## RQ4 — Scalability
