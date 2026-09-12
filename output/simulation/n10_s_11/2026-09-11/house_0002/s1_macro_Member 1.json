@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and taking a shower"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with toast and kettle-boiled tea"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work uniform and checking phone for storm alerts and shift messages"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working a clinical day shift as a health care professional, caring for patients and updating records"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital as the storm approaches"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner while listening to storm updates on the phone"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bathroom",
+      "activity": "Showering and washing up after the shift"
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Living Room",
+      "activity": "Checking weather news on the computer and charging the phone ahead of possible power outages"
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Living Room",
+      "activity": "Watching TV to relax"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Kitchen",
+      "activity": "Preparing storm provisions, filling the kettle and setting aside non-perishable food from the refrigerator in case of an outage"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Using the computer for personal browsing and quiet leisure"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Bedtime routine: brushing teeth and washing"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, going to bed early due to the storm warning"
+    }
+  ]
+}
