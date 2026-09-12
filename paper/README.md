@@ -43,7 +43,7 @@
 | 社会规范 nudge | RQ2 | Allcott 2011 / Ayres 2013 | 总电量 −1~3% | 方向不稳定(大样本3/7增耗;方差主导) | `experiments/nudge.md` |
 | 损失框架 nudge_loss | RQ2 | Ghesla et al. 2019 | 比增益框架多 ~5% | 反例(总量+6%,方向相反) | `experiments/nudge_loss.md` |
 | 夜间回温 night_setback | RQ2 | Cabezas-Riviere 2025 | 采暖 −5~10% | null(单例:未降采暖反升) | `experiments/night_setback.md` |
-| 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | null(same-era交错:峰段−10.3% n.s.,总电量+4.2%) | `experiments/in_home_display.md` |
+| 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | null(same-era交错:峰段−10.3% n.s.,总电量+4.2%); **TOU+IHD 组合亦 null**(峰−6.8% n.s.,谷+10.5% n.s.,无×3放大,R171) | `experiments/in_home_display.md` |
 | 封锁事件 lockdown | RQ2 | Xia et al. 2026 | 日间用量上升 | 有效果(二值跨3世界:Out>0 13/13→1/13, Fisher 双侧 p≈0.000003) | `experiments/event_lockdown.md` |
 | 公共假日 holiday | RQ2 | Xia et al. 2026 (disruption) | 日间用量上升 | **有效果(跨3世界)**: 总电量 +48.3%/+31.9%/+39.8%（p≤0.0014）；照明/TV/烹饪齐升；**峰效应世界相关（不作断言）** | `experiments/event_holiday.md` |
 | 停电预警 blackout_risk | RQ2 | Xia et al. 2026 | 避开晚峰 | 撤回(连续削峰为基线漂移伪影,R104) | `experiments/event_blackout_risk.md` |
