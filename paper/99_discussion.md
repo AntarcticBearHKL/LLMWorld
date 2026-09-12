@@ -91,7 +91,10 @@
   substitutable.* **Cooking resists shaving even with a price signal (R156)**: a 10% *induction-cooker
   peak tax* cut the cooker's own peak load only −9.6% (n.s.) and left the total peak unchanged (−3.9%,
   n.s.; microwave partly substituted) — whereas the non-substitutable AC responds strongly to `ac_tax`.
-  So substitutable (cooking) peaks are hard to shave under *both* informational and price framings.
+   So substitutable (cooking) peaks are hard to shave under *both* informational and price framings.
+   **Water-heater targeting is also ineffective (R147/R182/R183)**: three tests left the water-heater
+   peak unchanged (and, on two worlds, raised the *total* peak, R182/R183) — consistent with the
+   requirement that a *device that actually responds* (AC), plus the window, is what shaves.
 - **Future-oriented notices (world-specific, R141/R142/R146)**: on `world_838587` house_0002 a *future*
   TOU-tariff announcement and a community notice **increased** current total energy (+20.8%, p≈0.0001,
   n=15; +11.0%, p≈0.026, n=15) with no peak change, while a neutral custom event did not (+7.9%, n.s.).
