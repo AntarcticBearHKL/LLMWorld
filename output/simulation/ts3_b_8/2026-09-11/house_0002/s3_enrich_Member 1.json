@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping overnight with air conditioner on low",
+      "desc": "Lie down in bed. Close eyes. Breathe steadily. Turn to left side. Pull blanket over shoulders. Bend knees. Turn to right side. Adjust pillow. Stretch arm. Remain still. Continue sleeping. Turn to back. Breathe deeply. Sleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, using the toilet, brushing teeth and washing face with warm water",
+      "desc": "Open eyes. Sit up in bed. Swing legs over side. Stand up. Walk to bathroom. Turn on bathroom light. Lift toilet lid. Urinate. Flush toilet. Lower toilet lid. Walk to sink. Turn on tap. Adjust water to warm. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Cup water. Rinse face. Pick up towel. Dry face. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, toasting bread and boiling water for tea",
+      "desc": "Walk to kitchen. Turn on kitchen light. Open refrigerator. Take out bread and butter. Close refrigerator. Place bread in toaster. Press toaster lever. Fill kettle with water. Place kettle on base. Turn on kettle. Wait for toast. Remove toast from toaster. Butter toast. Pour boiling water into cup. Add tea bag. Stir tea. Sit at table. Eat toast. Drink tea."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work clothes and packing a bag with lunch, notes and work shoes",
+      "desc": "Walk to bedroom. Open wardrobe. Take out work clothes. Close wardrobe. Take off sleepwear. Put on work clothes. Open drawer. Take out socks. Put on socks. Put on shoes. Walk to kitchen. Open refrigerator. Take out lunch box. Close refrigerator. Walk to study. Pick up notes. Walk to bedroom. Place lunch box and notes in bag. Pick up work shoes. Place work shoes in bag. Zip bag. Pick up bag."
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Out",
+      "activity": "Commuting to the hospital",
+      "desc": "Walk to bus stop. Check phone for time. Put phone in pocket. Arrive at bus stop. Stand and wait. Bus arrives. Board bus. Tap card. Walk to seat. Sit down. Hold bag. Look out window. Bus stops. Stand up. Walk to exit. Get off bus. Walk to hospital entrance. Push door open. Enter hospital."
+    },
+    {
+      "time": "08:45-12:30",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist: reviewing patient notes, assessing mobility and running individual rehabilitation sessions",
+      "desc": "Arrive at office. Put bag down. Turn on computer. Log in. Open patient notes. Read notes. Take notes. Walk to gym. Greet patient. Say: 'Good morning, how are you feeling?' Assist patient to walk. Assess range of motion. Demonstrate exercise. Say: 'Please lift your leg.' Guide patient through exercise. Provide manual therapy. Write treatment notes. Walk back to office. Update patient records. Check schedule. Prepare for next patient."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital, eating packed lunch and resting briefly",
+      "desc": "Walk to break room. Open bag. Take out lunch box. Open lunch box. Pick up fork. Eat food. Drink water. Close lunch box. Put lunch box in bag. Sit and rest. Check phone. Scroll through messages. Put phone away. Close eyes. Rest briefly."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy work: leading exercise groups, manual therapy and updating patient treatment records",
+      "desc": "Walk to gym. Set up exercise equipment. Lead group exercise session. Say: 'Let's begin with warm-up.' Demonstrate exercises. Monitor patients. Correct postures. Provide manual therapy. Write treatment notes. Walk to office. Update patient records. Schedule follow-up appointments. Communicate with colleagues. Say: 'See you tomorrow.' Pack up. Turn off computer."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home from the hospital",
+      "desc": "Walk to bus stop. Check phone for time. Put phone in pocket. Arrive at bus stop. Stand and wait. Bus arrives. Board bus. Tap card. Walk to seat. Sit down. Hold bag. Look out window. Bus stops. Stand up. Walk to exit. Get off bus. Walk home. Enter home."
+    },
+    {
+      "time": "17:45-18:00",
+      "location": "Bathroom",
+      "activity": "Washing hands and changing out of work clothes",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wash hands with soap. Rinse hands. Turn off tap. Dry hands with towel. Walk to bedroom. Take off work clothes. Put on casual clothes. Hang work clothes."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner on the induction cooker and eating it",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out ingredients. Close refrigerator. Wash vegetables. Chop vegetables. Turn on range hood. Place pan on induction cooker. Turn on induction cooker. Add oil. Add ingredients. Stir. Add seasoning. Turn off induction cooker. Plate food. Walk to table. Sit down. Eat dinner. Drink water."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Stand up. Pick up plates. Scrape food into bin. Stack plates. Carry to dishwasher. Open dishwasher. Load plates. Load cutlery. Close dishwasher. Wipe table. Wipe counter. Turn off kitchen light."
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Study",
+      "activity": "Using the computer to complete continuing professional development modules on physiotherapy techniques",
+      "desc": "Walk to study. Turn on desk lamp. Sit at desk. Turn on computer. Log in. Open browser. Navigate to CPD module. Read module. Take notes. Watch video. Complete quiz. Submit quiz. Close browser. Turn off computer. Turn off desk lamp. Walk out of study."
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching television",
+      "desc": "Walk to living room. Turn on TV. Sit on sofa. Pick up remote. Change channel. Adjust volume. Watch TV. Laugh. Pick up phone. Check messages. Put phone down. Watch TV. Adjust sitting position. Stretch arms. Turn off TV. Stand up."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and completing night-time grooming routine",
+      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Adjust water temperature. Step into shower. Wet body. Apply soap. Wash body. Rinse body. Turn off water. Step out of shower. Dry with towel. Brush teeth. Apply skincare. Turn off light. Walk out."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Wind-down in bed: checking the phone briefly and setting an alarm for the next day",
+      "desc": "Walk to bedroom. Lie on bed. Pick up phone. Check messages. Set alarm. Put phone on nightstand. Turn off light. Close eyes. Adjust pillow. Pull blanket. Breathe steadily."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping overnight",
+      "desc": "Lie in bed. Close eyes. Breathe steadily. Turn to left side. Pull blanket. Bend knees. Turn to right side. Adjust pillow. Stretch arm. Remain still. Continue sleeping. Turn to back. Breathe deeply. Sleep."
+    }
+  ]
+}

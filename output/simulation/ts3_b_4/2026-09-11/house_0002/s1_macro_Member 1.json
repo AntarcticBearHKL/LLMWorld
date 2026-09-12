@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and taking a hot shower"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making coffee with the kettle and toaster"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed in work uniform, packing work bag and checking phone for the day's patient schedule"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for work"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a physiotherapist, assessing and treating patients in the rehabilitation ward"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital cafeteria"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions, writing patient notes and handing over to colleagues"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking dinner on the induction cooker and eating it"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Cleaning up the kitchen and loading the dishwasher"
+    },
+    {
+      "time": "19:15-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV with the air conditioner on"
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and doing a short stretching routine"
+    },
+    {
+      "time": "21:00-22:15",
+      "location": "Study",
+      "activity": "Using the computer to review rehabilitation literature and plan tomorrow's patient exercises"
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bedroom 1",
+      "activity": "Winding down, browsing phone and setting tomorrow's alarm"
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

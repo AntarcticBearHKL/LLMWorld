@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on back. Close eyes. Sleep. Turn to left side. Pull blanket. Sleep. Turn to right side. Adjust pillow. Sleep. Turn to back. Adjust blanket. Sleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for the day",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Take off pajamas. Step into shower. Turn on shower. Wet body. Apply soap. Scrub body. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Put on robe. Brush teeth. Apply toothpaste. Rinse mouth. Turn off light. Walk out."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out milk and eggs. Close refrigerator. Take out bowl and pan. Crack eggs into bowl. Whisk eggs. Turn on induction cooker. Place pan on cooker. Pour oil into pan. Pour eggs into pan. Stir eggs. Turn off cooker. Place eggs on plate. Pour milk into glass. Sit at table. Eat eggs. Drink milk. Wash dishes. Turn off light."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Enter bedroom. Turn on light. Open wardrobe. Take out shirt. Take out pants. Take out socks. Take out shoes. Close wardrobe. Take off robe. Put on shirt. Put on pants. Put on socks. Put on shoes. Look in mirror. Adjust shirt. Comb hair. Pick up bag. Turn off light. Walk out."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Study",
+      "activity": "Working from home on administrative tasks and telehealth consultations",
+      "desc": "Enter study. Turn on desk lamp. Turn on computer. Sit on chair. Open email. Read emails. Type responses. Open calendar. Check appointments. Open patient files. Review patient files. Make phone calls for telehealth consultations. Talk to patients. Type notes. Open online training module. Watch training video. Take notes. Turn off computer. Turn off desk lamp."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Eating lunch",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out sandwich ingredients. Close refrigerator. Take out plate. Make sandwich. Sit at table. Eat sandwich. Drink water. Wash dishes. Turn off light."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Taking a break and relaxing",
+      "desc": "Enter living room. Turn on TV. Sit on couch. Pick up remote. Change channels. Watch TV. Pick up phone. Check messages. Play game. Put down phone. Turn off TV. Stand up."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Study",
+      "activity": "Continuing work from home on patient files and online training",
+      "desc": "Enter study. Turn on desk lamp. Turn on computer. Sit on chair. Open patient files. Review patient files. Update patient records. Open online training module. Watch training video. Take notes. Complete training quiz. Type responses. Make phone calls. Talk to patients. Type notes. Turn off computer. Turn off desk lamp."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Living Room",
+      "activity": "Relaxing after work",
+      "desc": "Enter living room. Turn on TV. Sit on couch. Pick up remote. Change channels. Watch TV. Pick up phone. Scroll social media. Put down phone. Turn off TV. Stand up. Stretch arms. Yawn."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Kitchen",
+      "activity": "Preparing dinner",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out vegetables and meat. Close refrigerator. Take out cutting board. Take out knife. Cut vegetables. Cut meat. Turn on induction cooker. Place pan on cooker. Pour oil. Add meat. Stir. Add vegetables. Stir. Turn off cooker. Place food on plate. Wash dishes. Turn off light."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "desc": "Sit at table. Pick up fork. Pick up knife. Cut food. Put food in mouth. Chew. Swallow. Take sip of water. Put down fork. Pick up napkin. Wipe mouth. Continue eating. Finish meal. Pick up plate. Stand up. Walk to sink. Place plate in sink. Turn on tap. Rinse plate. Turn off tap."
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Living Room",
+      "activity": "Leisure time watching TV and using phone",
+      "desc": "Sit on couch. Pick up remote. Turn on TV. Browse channels. Stop on a show. Watch TV. Pick up phone. Scroll social media. Put down phone. Watch TV. Get up. Go to kitchen. Get snack. Return to couch. Eat snack. Pick up phone. Play game. Put down phone. Watch TV. Turn off TV. Stand up."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Washing up before bed",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Turn on tap. Wet face. Apply cleanser. Rub face. Rinse face. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Pick up towel. Dry face. Turn off tap. Turn off light. Walk out."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Enter bedroom. Turn off light. Lie down on bed. Pull blanket. Close eyes. Sleep. Turn over. Adjust pillow. Pull blanket. Sleep. Turn over again. Adjust pillow. Sleep."
+    }
+  ]
+}

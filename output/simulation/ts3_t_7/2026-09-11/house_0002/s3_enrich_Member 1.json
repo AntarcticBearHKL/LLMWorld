@@ -1,0 +1,125 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe slowly. Remain motionless. Turn to left side. Adjust pillow. Pull blanket up. Turn to right side. Push blanket down. Stretch legs. Curl up. Breathe deeply. Remain still."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Wake up, shower and wash up",
+      "desc": "Open eyes. Sit up in bed. Swing legs over edge. Stand up. Walk to bathroom. Turn on light. Turn on water heater. Step into shower. Turn on water. Adjust temperature. Wash body with soap. Shampoo and rinse hair. Turn off water. Dry body with towel. Brush teeth. Wash face. Turn off light. Walk out."
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Eat breakfast and prepare a packed lunch",
+      "desc": "Walk to kitchen. Open refrigerator. Take out ingredients. Close refrigerator. Place ingredients on counter. Open cupboard. Take out bowl, plate, lunchbox. Prepare sandwich: spread butter, add ham, cheese, lettuce. Place sandwich in lunchbox. Add fruit. Close lunchbox. Prepare cereal: pour cereal, add milk. Sit at table. Eat breakfast. Drink juice. Clear dishes."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Kitchen",
+      "activity": "Wash up breakfast dishes and tidy the kitchen",
+      "desc": "Pick up dirty dishes. Scrape food into bin. Rinse dishes. Load dishwasher. Add detergent. Close dishwasher. Wipe counter with cloth. Wipe table. Sweep floor. Put away leftovers. Turn off kitchen light."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Study",
+      "activity": "Set up home workstation, review patient list and reschedule appointments as telehealth sessions because the public transport strike prevents commuting to the hospital",
+      "desc": "Walk to study. Turn on light. Turn on desk lamp. Open laptop. Turn on computer. Adjust chair height. Sit down. Log in. Open patient list. Read patient list. Pick up phone. Call patient 1. Say: 'Hello, due to the transport strike, we need to reschedule your appointment to a telehealth session.' Reschedule appointment. Send email to patient 2. Update calendar. Call patient 3. Reschedule. Send text message. Close patient list. Open email. Send reschedule notices. Turn off computer."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Study",
+      "activity": "Conduct telehealth physiotherapy consultations and prescribe home exercise programs",
+      "desc": "Sit at desk. Open video conferencing software. Call patient 1. Greet patient. Ask about pain. Watch patient move. Instruct: 'Lift your arm slowly.' Demonstrate exercise. Observe. Prescribe exercise: 'Do this 10 times daily.' Type notes. End call. Call patient 2. Repeat. Call patient 3. Repeat. Type prescription. Send email with exercise program. Take short break. Stretch. Sit back down. Call patient 4."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Kitchen",
+      "activity": "Cook and eat lunch",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables, chicken, rice. Close refrigerator. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Pour oil. Add chicken. Stir. Add vegetables. Stir. Add sauce. Turn off stove. Scoop rice into bowl. Place chicken and vegetables on plate. Sit at table. Eat lunch. Drink water. Clear dishes."
+    },
+    {
+      "time": "13:15-13:30",
+      "location": "Living Room",
+      "activity": "Stretching and mobility break",
+      "desc": "Stand up. Raise arms overhead. Stretch. Bend forward. Touch toes. Twist torso left. Twist torso right. Roll shoulders. Neck circles. Squat. Stand up. Walk around room."
+    },
+    {
+      "time": "13:30-17:00",
+      "location": "Study",
+      "activity": "Continue afternoon telehealth physiotherapy sessions and complete clinical documentation",
+      "desc": "Sit at desk. Open video call software. Call patient 5. Conduct consultation. Instruct exercises. End call. Type clinical notes. Update patient records. Call patient 6. Conduct consultation. Prescribe exercises. End call. Type notes. Call patient 7. Conduct consultation. Type notes. Send documentation to hospital. Close software."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Living Room",
+      "activity": "Relax with a cup of tea and watch the news on TV",
+      "desc": "Walk to kitchen. Fill kettle with water. Turn on kettle. Take out mug. Place tea bag in mug. Pour hot water into mug. Add milk. Stir. Walk to living room. Sit on sofa. Turn on TV. Change channel to news. Pick up mug. Sip tea. Watch news. Put down mug. Adjust volume. Watch more news. Pick up mug. Sip tea. Put down mug. Turn off TV."
+    },
+    {
+      "time": "17:45-18:45",
+      "location": "Kitchen",
+      "activity": "Cook and eat dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out fish, vegetables, rice. Close refrigerator. Wash fish. Season fish. Chop vegetables. Turn on stove. Place pan on stove. Pour oil. Cook fish. Stir-fry vegetables. Turn off stove. Scoop rice. Plate food. Sit at table. Eat dinner. Drink water. Clear dishes."
+    },
+    {
+      "time": "18:45-19:00",
+      "location": "Kitchen",
+      "activity": "Clean up after dinner and load the dishwasher",
+      "desc": "Pick up dirty plates. Scrape food into bin. Rinse plates. Load dishwasher. Add detergent. Close dishwasher. Wipe counter. Wipe table. Sweep floor. Turn off kitchen light."
+    },
+    {
+      "time": "19:00-19:15",
+      "location": "Bathroom",
+      "activity": "Load the washing machine with laundry and start a wash cycle",
+      "desc": "Walk to bathroom. Open washing machine door. Pick up laundry basket. Sort clothes. Load clothes into washing machine. Add detergent. Close washing machine door. Set wash cycle. Press start button. Turn off light. Walk out."
+    },
+    {
+      "time": "19:15-20:30",
+      "location": "Living Room",
+      "activity": "Watch a streaming show on TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Open streaming app. Select show. Play episode. Watch. Pause. Get up. Go to kitchen. Get snack. Return. Sit down. Resume show. Watch. Adjust volume. Watch. Pause. Go to bathroom. Return. Resume. Watch. End episode. Turn off TV."
+    },
+    {
+      "time": "20:30-20:45",
+      "location": "Living Room",
+      "activity": "Move the washed laundry into the dryer",
+      "desc": "Walk to bathroom. Open washing machine. Take out wet laundry. Place in basket. Walk to living room. Open dryer. Transfer laundry to dryer. Close dryer door. Press start button. Walk back to living room. Sit down."
+    },
+    {
+      "time": "20:45-21:15",
+      "location": "Living Room",
+      "activity": "Fold and put away the dried laundry",
+      "desc": "Open dryer. Take out dried laundry. Place on sofa. Fold shirt. Fold pants. Fold towels. Stack folded clothes. Pick up stack. Walk to bedroom. Open wardrobe. Place clothes on shelf. Close wardrobe. Walk back to living room. Sit down."
+    },
+    {
+      "time": "21:15-22:00",
+      "location": "Living Room",
+      "activity": "Read and unwind quietly",
+      "desc": "Pick up book. Sit on sofa. Open book. Read page. Turn page. Read. Turn page. Read. Close book. Place book on table. Lean back. Close eyes. Breathe deeply. Open eyes. Stretch arms. Yawn. Pick up book again. Read. Turn page. Close book."
+    },
+    {
+      "time": "22:00-22:15",
+      "location": "Bathroom",
+      "activity": "Night-time bathroom routine, brush teeth and wash face",
+      "desc": "Walk to bathroom. Turn on light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face with cleanser. Rinse face. Dry face with towel. Turn off light. Walk out."
+    },
+    {
+      "time": "22:15-22:30",
+      "location": "Bedroom 1",
+      "activity": "Prepare for bed, set alarm and check phone",
+      "desc": "Walk to bedroom. Turn on light. Take off clothes. Put on pajamas. Pull back blanket. Sit on bed. Pick up phone. Check messages. Set alarm. Place phone on nightstand. Turn off light. Lie down. Pull blanket up."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket. Turn to right side. Push blanket. Stretch legs. Curl up. Breathe deeply. Remain still."
+    }
+  ]
+}

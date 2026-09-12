@@ -1,0 +1,71 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed with eyes closed. Breathes slowly. Turns to left side. Pulls blanket up to chin. Adjusts pillow. Remains still. Turns to right side. Kicks off blanket. Pulls blanket back over legs. Remains still. Turns onto back. Stretches arms. Remains still. Turns to left side again. Pulls blanket over shoulders. Remains still. Breathes deeply."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Morning hygiene",
+      "desc": "Turns off alarm on phone. Sits up on bed. Stands up. Walks to bathroom. Turns on light. Uses toilet and flushes. Turns on sink tap. Washes hands. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns on shower. Adjusts water temperature. Steps into shower. Washes body. Shampoos hair. Rinses body. Turns off shower. Steps out of shower. Dries body with towel. Dresses. Turns off light. Exits bathroom."
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Kitchen",
+      "activity": "Breakfast",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator and takes out eggs, milk, bread. Closes refrigerator. Places items on counter. Opens cupboard and takes out bowl and pan. Closes cupboard. Cracks eggs into bowl. Turns on induction cooker. Places pan on cooker. Pours egg mixture into pan. Cooks eggs. Toasts bread in toaster. Turns off induction cooker. Transfers eggs to plate. Pours milk into glass. Sits at table. Eats breakfast and drinks milk. Clears table. Washes dishes. Turns off light. Exits kitchen."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Study",
+      "activity": "Work from home: administrative tasks and telehealth consultations",
+      "desc": "Sits at desk. Turns on computer. Turns on monitor. Turns on desk lamp. Logs into computer. Opens email client. Checks emails. Responds to emails. Opens calendar. Schedules appointments. Opens patient records. Updates patient records. Starts video call. Speaks to patient: 'Hello, how are you today?' Guides patient through exercises. Ends video call. Types report. Saves document. Turns off computer, monitor, desk lamp, and light. Exits study."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Lunch",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator. Takes out leftovers and salad. Closes refrigerator. Places items on counter. Opens cupboard. Takes out plate and utensils. Closes cupboard. Transfers food to plate. Places plate in microwave. Sets timer. Starts microwave. Waits for microwave. Removes plate from microwave. Sits at table. Eats lunch. Drinks water. Clears table. Washes dishes. Turns off light. Exits kitchen."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Study",
+      "activity": "Work from home: administrative tasks and telehealth consultations",
+      "desc": "Sits at desk. Turns on computer. Turns on monitor. Turns on desk lamp. Logs into computer. Opens email client. Checks emails. Responds to emails. Opens calendar. Schedules appointments. Opens patient records. Updates patient records. Starts video call. Speaks to patient: 'Good afternoon, please describe your pain level.' Guides patient through exercises. Ends video call. Types report. Saves document. Turns off computer, monitor, desk lamp, and light. Exits study."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "Light exercise and stretching",
+      "desc": "Walks to living room. Turns on light. Rolls out yoga mat. Stands on mat. Raises arms overhead. Stretches. Bends forward. Touches toes. Holds stretch. Returns to standing. Twists torso. Reaches to left. Reaches to right. Squats. Stands up. Does lunges. Does arm circles. Lies on mat. Does leg raises. Sits up. Rolls up mat. Turns off light. Exits living room."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator. Takes out vegetables and chicken. Closes refrigerator. Places items on counter. Opens cupboard. Takes out cutting board and knife. Closes cupboard. Cuts vegetables. Cuts chicken. Turns on induction cooker. Places pan on cooker. Adds oil. Adds chicken. Cooks chicken. Adds vegetables. Stirs. Turns off induction cooker. Transfers food to plate. Sits at table. Eats dinner. Drinks water. Clears table. Washes dishes. Turns off light. Exits kitchen."
+    },
+    {
+      "time": "19:00-22:00",
+      "location": "Living Room",
+      "activity": "Leisure: watching TV and relaxing",
+      "desc": "Walks to living room. Turns on light. Picks up remote. Turns on TV. Sits on couch. Watches TV. Picks up phone. Checks phone. Puts down phone. Adjusts TV volume. Stands up. Goes to kitchen. Returns with snack. Sits on couch. Eats snack. Watches TV. Changes channel. Watches TV. Turns off TV. Stands up. Turns off light. Exits living room."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Evening hygiene",
+      "desc": "Walks to bathroom. Turns on light. Turns on sink tap. Washes face. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns on shower. Adjusts water temperature. Steps into shower. Washes body. Rinses body. Turns off shower. Steps out of shower. Dries body with towel. Puts on pajamas. Turns off light. Exits bathroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Walks to bedroom. Turns off light. Lies down on bed. Pulls blanket over body. Closes eyes. Breathes slowly. Turns to left side. Adjusts pillow. Remains still. Turns to right side. Pulls blanket up. Remains still. Turns onto back. Remains still. Breathes deeply."
+    }
+  ]
+}
