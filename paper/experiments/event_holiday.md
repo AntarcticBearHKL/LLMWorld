@@ -36,20 +36,20 @@ disruptions (stay-home → daytime demand up). The holiday result (+48.3% total,
 up) is the same mechanism as `lockdown` (daytime **+220.7%**, R107) but milder. Plan §4.3 Phase Three
 names public holidays as a target event — this fills that gap.
 
-## 7 Validity Check — **cross-world replicated**
-- same-era paired, n=15, **two worlds** (red line 3 satisfied):
+## 7 Validity Check — **cross-3-world replicated**
+- same-era paired, n=15, **three worlds** (red line 3 satisfied):
 
-| Metric | W1 `world_838587` h002 | W2 `world_172148` h002 |
-|---|---|---|
-| Total energy | **+48.3%** (t=4.68, p=3.5e-4) | **+31.9%** (t=8.92, p=3.8e-7) |
-| Peak 16–21 | +7.8% (n.s.) | +24.9% (p=0.039) |
-| Valley 22–7 | −25.7% (n.s.) | −53.1% (p=3.7e-4) |
-| kitchen_light | +92.9% | +93.4% |
-| living_room_tv | +64.7% | +109.4% |
-| InductionCooker | +35.5% | +33.6% |
+| Metric | W1 `838587` | W2 `172148` | W3 `143345` |
+|---|---|---|---|
+| Total energy | **+48.3%** (p=3.5e-4) | **+31.9%** (p=3.8e-7) | **+39.8%** (p=0.0014) |
+| Peak 16–21 | +7.8% (n.s.) | +24.9% (p=0.039) | −15.2% (n.s.) |
+| Valley 22–7 | −25.7% (n.s.) | −53.1% | −18.3% (n.s.) |
+| kitchen_light | +92.9% | +93.4% | — |
+| living_room_tv | +64.7% | +109.4% | — |
+| InductionCooker | +35.5% | +33.6% | — |
 
-- Cross-world **✅** (total, lighting, TV, cooking all up in both worlds) → promoted to headline.
-- Open: peak magnitude is world-dependent; 3rd world / multi-household pending.
+- Total energy cross-world **✅ (3/3 significant)**; lighting/TV/cooking up.
+- **Peak effect is NOT robust** (three worlds: + / + / −) → assert **total** only, not peak.
 - No prompt directive beyond the factual holiday statement (natural-language injection only).
 
 ## 8 Conclusion
