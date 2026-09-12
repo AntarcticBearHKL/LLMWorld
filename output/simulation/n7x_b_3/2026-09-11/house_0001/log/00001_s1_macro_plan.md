@@ -2,7 +2,7 @@
 
 ## 对话信息
 
-- time: 2026-09-12 01:55:05
+- time: 2026-09-12 02:07:01
 - seq: 1
 - prefix: Member 1_
 - stage: s1_macro_plan
@@ -298,24 +298,76 @@ Output JSON format (return ONLY the JSON, nothing else):
 {
   "member": "Member 1",
   "activities": [
-    {"time": "00:00-07:00", "location": "Bedroom 1", "activity": "Sleeping"},
-    {"time": "07:00-07:25", "location": "Bathroom", "activity": "Showering, washing up and getting dressed for the day"},
-    {"time": "07:25-07:55", "location": "Kitchen", "activity": "Making and eating breakfast (toast and tea) while checking the day's timetable on the phone"},
-    {"time": "07:55-09:00", "location": "Out", "activity": "Commuting to Monash University Clayton campus"},
-    {"time": "09:00-11:00", "location": "Out", "activity": "Attending business lectures at the Clayton campus"},
-    {"time": "11:00-11:20", "location": "Out", "activity": "Short coffee break between classes on campus"},
-    {"time": "11:20-13:00", "location": "Out", "activity": "Attending a business tutorial and taking notes on the computer"},
-    {"time": "13:00-13:45", "location": "Out", "activity": "Eating lunch on campus and chatting with coursemates"},
-    {"time": "13:45-16:30", "location": "Out", "activity": "Studying in the campus library and working on assignment drafts"},
-    {"time": "16:30-17:30", "location": "Out", "activity": "Commuting home from Clayton campus"},
-    {"time": "17:30-18:00", "location": "Bedroom 1", "activity": "Unpacking bag, changing into comfortable clothes and resting"},
-    {"time": "18:00-18:50", "location": "Kitchen", "activity": "Cooking dinner (rice and stir-fry) and eating it"},
-    {"time": "18:50-19:20", "location": "Living Room", "activity": "Relaxing on the couch watching TV"},
-    {"time": "19:20-21:40", "location": "Bedroom 1", "activity": "Studying course readings and finishing assignment work on the computer under the desk lamp"},
-    {"time": "21:40-22:10", "location": "Bathroom", "activity": "Taking an evening shower and getting ready for bed"},
-    {"time": "22:10-22:40", "location": "Living Room", "activity": "Making a warm drink and winding down with the TV in the background"},
-    {"time": "22:40-23:10", "location": "Bedroom 1", "activity": "Preparing for bed: setting an alarm and browsing the phone"},
-    {"time": "23:10-24:00", "location": "Bedroom 1", "activity": "Sleeping"}
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Showering, brushing teeth and getting dressed for the day"
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, packing a snack and water bottle"
+    },
+    {
+      "time": "07:45-08:30",
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus"
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Attending business lectures and tutorials at Monash Clayton"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Eating lunch on campus and chatting with classmates"
+    },
+    {
+      "time": "13:00-16:30",
+      "location": "Out",
+      "activity": "Studying and working on assignments on the laptop in the campus library"
+    },
+    {
+      "time": "16:30-17:15",
+      "location": "Out",
+      "activity": "Commuting from Clayton to Chadstone for the retail shift"
+    },
+    {
+      "time": "17:15-21:15",
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone shopping centre"
+    },
+    {
+      "time": "21:15-22:00",
+      "location": "Out",
+      "activity": "Commuting home from Chadstone"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Kitchen",
+      "activity": "Heating and eating a late dinner"
+    },
+    {
+      "time": "22:30-23:15",
+      "location": "Living Room",
+      "activity": "Relaxing on the couch watching TV and scrolling on the phone"
+    },
+    {
+      "time": "23:15-23:35",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth before bed"
+    },
+    {
+      "time": "23:35-24:00",
+      "location": "Bedroom 1",
+      "activity": "Setting an alarm, reviewing notes briefly under the desk lamp, then going to sleep"
+    }
   ]
 }
 ```

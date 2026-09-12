@@ -1,0 +1,252 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:15",
+      "start_minutes": 405,
+      "end_minutes": 435,
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for the day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:45",
+      "start_minutes": 435,
+      "end_minutes": 465,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast (toast and tea)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:45",
+      "start_minutes": 465,
+      "end_minutes": 525,
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:45-12:30",
+      "start_minutes": 525,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Attending business lectures and tutorials at Monash Clayton",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "start_minutes": 750,
+      "end_minutes": 795,
+      "location": "Out",
+      "activity": "Lunch break at the campus food court",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:15-15:30",
+      "start_minutes": 795,
+      "end_minutes": 930,
+      "location": "Out",
+      "activity": "Studying and working on assignments in the campus library",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:30-16:10",
+      "start_minutes": 930,
+      "end_minutes": 970,
+      "location": "Out",
+      "activity": "Commuting by public transport to Chadstone",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:10-18:00",
+      "start_minutes": 970,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "start_minutes": 1080,
+      "end_minutes": 1110,
+      "location": "Out",
+      "activity": "Dinner break at the Chadstone food court",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-21:00",
+      "start_minutes": 1110,
+      "end_minutes": 1260,
+      "location": "Out",
+      "activity": "Continuing part-time retail shift at Chadstone",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:45",
+      "start_minutes": 1260,
+      "end_minutes": 1305,
+      "location": "Out",
+      "activity": "Commuting home by public transport from Chadstone",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:15",
+      "start_minutes": 1305,
+      "end_minutes": 1335,
+      "location": "Kitchen",
+      "activity": "Making a light snack and warm drink, tidying up",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "start_minutes": 1335,
+      "end_minutes": 1365,
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and washing up",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Checking phone, reviewing notes for tomorrow, then going to sleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}

@@ -5,115 +5,115 @@
       "time": "00:00-06:45",
       "location": "Bedroom 1",
       "activity": "Sleeping",
-      "desc": "Lie on bed. Close eyes. Sleep. Turn over. Adjust pillow. Sleep."
+      "desc": "Lies in bed. Closes eyes. Breathes slowly. Turns to left side. Pulls blanket up. Adjusts pillow. Turns to right side. Moves legs. Remains asleep. Snores lightly. Turns again. Pulls blanket down. Breathes deeply. Remains asleep."
     },
     {
       "time": "06:45-07:15",
       "location": "Bathroom",
-      "activity": "Washing face, brushing teeth, and taking a morning shower",
-      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Turn on shower. Adjust water temperature. Step into shower. Wash body. Turn off shower. Dry with towel. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Wipe face. Turn off tap. Turn off light. Walk out of bathroom."
+      "activity": "Waking up, showering and getting ready for the day",
+      "desc": "Wakes up. Sits up. Turns off alarm. Gets out of bed. Walks to bathroom. Turns on light. Turns on shower. Adjusts water temperature. Steps into shower. Washes body. Rinses. Washes hair. Rinses. Turns off shower. Steps out. Grabs towel. Dries body. Dries hair. Brushes teeth. Rinses mouth."
     },
     {
-      "time": "07:15-07:45",
+      "time": "07:15-07:50",
       "location": "Kitchen",
-      "activity": "Making and eating breakfast with toast from the toaster and tea from the kettle",
-      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out bread and butter. Take out tea bag. Close refrigerator. Plug in toaster. Insert bread into toaster. Press toaster lever. Fill kettle with water. Turn on kettle. Wait for toast. Butter toast. Pour tea into cup. Add milk. Stir tea. Sit at table. Eat toast. Drink tea. Clean up. Turn off light. Leave kitchen."
+      "activity": "Making and eating breakfast (toast and tea using the kettle and toaster)",
+      "desc": "Walks to kitchen. Opens fridge. Takes out bread, butter, jam, milk. Plugs in kettle. Fills kettle with water. Turns on kettle. Opens bread bag. Takes out two slices. Places in toaster. Presses lever. Waits. Toast pops. Takes out toast. Places on plate. Spreads butter. Spreads jam. Pours hot water into mug. Sits at table. Eats toast. Drinks tea."
     },
     {
-      "time": "07:45-08:15",
+      "time": "07:50-08:20",
       "location": "Bedroom 1",
-      "activity": "Getting dressed, packing university laptop and notes, and checking the day's class timetable on the phone",
-      "desc": "Enter bedroom. Turn on light. Open wardrobe. Take out clothes. Close wardrobe. Put on clothes. Open bag. Place laptop in bag. Place notebook in bag. Place pen in bag. Zip bag. Pick up phone. Unlock phone. Open timetable app. Check class schedule. Lock phone. Put phone in pocket. Turn off light. Leave bedroom."
+      "activity": "Packing university bag and checking the day's class timetable on the phone",
+      "desc": "Walks to bedroom. Opens wardrobe. Takes out backpack. Opens backpack. Takes out laptop from desk. Places laptop in backpack. Takes out charger. Places in backpack. Takes out notebook. Places in backpack. Zips backpack. Picks up phone. Unlocks. Opens timetable app. Scrolls. Checks class times. Notes room numbers. Locks phone. Places phone in pocket. Walks out."
     },
     {
-      "time": "08:15-09:00",
+      "time": "08:20-09:00",
       "location": "Out",
-      "activity": "Commuting by public transport to Monash University Clayton campus",
-      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap on with Myki card. Find seat. Sit down. Look out window. Get off bus. Walk to train station. Wait for train. Board train. Tap on. Find seat. Sit down. Get off train. Walk to campus."
+      "activity": "Commuting by train and bus to Monash University Clayton campus",
+      "desc": "Walks to bus stop. Waits. Bus arrives. Boards bus. Taps Myki card. Sits. Rides bus. Pulls cord. Gets off bus. Walks to train station. Taps card. Walks to platform. Waits for train. Train arrives. Boards train. Sits. Rides train. Gets off at Clayton. Walks to campus."
     },
     {
-      "time": "09:00-11:00",
+      "time": "09:00-10:30",
       "location": "Out",
       "activity": "Attending a business lecture at Monash Clayton",
-      "desc": "Enter lecture hall. Find seat. Sit down. Open laptop. Turn on laptop. Open notes. Take notes. Raise hand to ask question. Write answer. Close laptop. Pack bag. Stand up. Walk out."
+      "desc": "Enters lecture hall. Finds seat. Sits down. Takes out notebook. Takes out pen. Opens notebook. Listens to lecturer. Writes notes. Looks at slides. Raises hand. Asks question. Writes more notes. Checks phone. Puts phone away. Continues writing. Stretches. Yawns. Looks at clock. Packs up. Exits hall."
     },
     {
-      "time": "11:00-12:00",
+      "time": "10:30-12:00",
       "location": "Out",
-      "activity": "Studying course readings in the campus library",
-      "desc": "Enter library. Find empty desk. Sit down. Open bag. Take out textbook. Open textbook. Read pages. Highlight text. Take notes. Use laptop to search for references. Close textbook. Pack bag. Stand up. Leave library."
+      "activity": "Attending a business tutorial and taking notes",
+      "desc": "Enters tutorial room. Sits at desk. Takes out notebook. Takes out pen. Opens notebook. Listens to tutor. Writes notes. Participates in discussion. Raises hand. Answers question. Works in group. Discusses with peers. Writes on whiteboard. Returns to seat. Takes more notes. Checks time. Packs up. Exits room."
     },
     {
-      "time": "12:00-13:00",
+      "time": "12:00-12:45",
       "location": "Out",
-      "activity": "Eating lunch on campus and catching up with classmates",
-      "desc": "Walk to cafeteria. Join classmates. Say hello. Sit down. Open lunchbox. Eat sandwich. Drink water. Talk with classmates. Laugh. Finish eating. Throw away trash. Stand up. Say goodbye. Walk away."
+      "activity": "Eating lunch at the campus food court",
+      "desc": "Walks to food court. Joins queue. Orders food. Pays. Receives food. Finds empty table. Sits down. Opens food container. Picks up fork. Eats food. Drinks water. Wipes mouth with napkin. Throws trash. Returns tray. Gets up. Walks away."
     },
     {
-      "time": "13:00-15:00",
+      "time": "12:45-14:30",
       "location": "Out",
-      "activity": "Attending a tutorial and working through case study exercises",
-      "desc": "Enter tutorial room. Sit down. Open notebook. Write answers. Discuss with group. Raise hand. Ask question. Work on case study. Present findings. Pack bag. Leave room."
+      "activity": "Attending afternoon classes and working on a group assignment",
+      "desc": "Walks to classroom. Sits down. Takes out laptop. Opens laptop. Takes notes. Works on group assignment. Discusses with group members. Types on laptop. Shares ideas. Writes on paper. Asks question. Answers question. Checks phone. Continues typing. Saves file. Packs up. Exits room."
     },
     {
-      "time": "15:00-16:00",
+      "time": "14:30-16:15",
       "location": "Out",
-      "activity": "Meeting a group for a marketing group assignment",
-      "desc": "Meet group in library. Sit at table. Open laptop. Share ideas. Assign tasks. Take notes. Set deadline. Close laptop. Pack bag. Say goodbye. Leave."
+      "activity": "Studying in the campus library and preparing for upcoming assessments",
+      "desc": "Walks to library. Finds seat. Sits down. Takes out laptop. Opens laptop. Opens textbook. Reads chapter. Highlights text. Takes notes. Searches online. Writes assignment. Checks email. Responds to email. Continues writing. Stretches. Checks time. Packs up. Exits library."
     },
     {
-      "time": "16:00-17:00",
+      "time": "16:15-17:15",
       "location": "Out",
-      "activity": "Revising notes and checking the retail roster on the phone before heading home",
-      "desc": "Find quiet spot. Sit down. Open notebook. Review notes. Highlight key points. Take out phone. Unlock phone. Open roster app. Check shifts. Note schedule. Lock phone. Pack bag. Stand up. Walk to bus stop."
+      "activity": "Commuting home from Clayton campus by bus and train",
+      "desc": "Walks to bus stop. Waits. Boards bus. Taps card. Finds seat. Sits. Rides bus. Gets off. Walks to train station. Taps card. Waits. Boards train. Sits. Rides train. Gets off at home station. Walks home."
     },
     {
-      "time": "17:00-18:00",
-      "location": "Out",
-      "activity": "Commuting home from Clayton by public transport",
-      "desc": "Wait for bus. Board bus. Tap on. Find seat. Sit down. Check phone. Get off bus. Walk to train station. Wait for train. Board train. Tap on. Find seat. Sit down. Get off train. Walk home."
-    },
-    {
-      "time": "18:00-18:30",
-      "location": "Kitchen",
-      "activity": "Reheating a pre-cooked meal in the microwave to avoid using the induction cooker during the 5pm-8pm peak cooking period",
-      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out pre-cooked meal. Close refrigerator. Open microwave door. Place meal inside. Close door. Set timer. Press start. Wait for microwave. Open microwave door. Take out meal. Close door. Turn off light. Leave kitchen."
-    },
-    {
-      "time": "18:30-19:00",
-      "location": "Kitchen",
-      "activity": "Eating dinner",
-      "desc": "Sit at table. Pick up fork. Eat meal. Drink water. Finish eating. Pick up plate. Walk to sink. Rinse plate. Place plate in dishwasher. Wipe table. Stand up. Leave kitchen."
-    },
-    {
-      "time": "19:00-20:00",
-      "location": "Living Room",
-      "activity": "Relaxing and watching TV to unwind",
-      "desc": "Enter living room. Turn on TV. Pick up remote. Change channel. Sit on sofa. Watch TV. Adjust volume. Pick up phone. Check social media. Put down phone. Stand up. Turn off TV. Leave living room."
-    },
-    {
-      "time": "20:00-22:00",
+      "time": "17:15-18:00",
       "location": "Bedroom 1",
-      "activity": "Working on assignments and online coursework on the computer with the desk lamp on",
-      "desc": "Enter bedroom. Turn on light. Turn on desk lamp. Sit at desk. Open laptop. Turn on laptop. Open assignment file. Type on keyboard. Use mouse. Read online material. Take notes. Save file. Close laptop. Turn off desk lamp. Turn off light. Stand up."
+      "activity": "Unwinding, checking emails and messages on the computer at the desk",
+      "desc": "Walks to bedroom. Sits at desk. Turns on computer. Opens email. Reads emails. Replies to email. Opens messages. Reads messages. Replies to message. Closes computer. Stands up. Stretches. Walks out."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Eating dinner; reheating pre-made food in the microwave instead of the induction cooker to avoid the 5pm-8pm peak cooking window",
+      "desc": "Walks to kitchen. Opens fridge. Takes out pre-made food container. Opens microwave door. Places container inside. Closes door. Sets timer. Presses start. Waits. Microwave beeps. Opens door. Takes out container. Places on counter. Picks up fork. Eats food. Drinks water. Finishes. Clears table."
+    },
+    {
+      "time": "18:45-19:30",
+      "location": "Kitchen",
+      "activity": "Washing up dishes and wiping down the kitchen bench",
+      "desc": "Turns on tap. Fills sink with water. Adds dish soap. Picks up sponge. Scrubs dishes. Rinses dishes. Places in drying rack. Drains sink. Wipes bench with cloth. Rinses cloth. Hangs cloth. Turns off tap. Dries hands. Walks away."
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Bedroom 1",
+      "activity": "Studying course readings and working on assignments at the desk with the desk lamp on",
+      "desc": "Sits at desk. Turns on desk lamp. Opens textbook. Reads pages. Highlights important points. Takes notes in notebook. Opens laptop. Types assignment. Checks references. Writes more. Stretches. Checks time. Saves document. Closes laptop. Turns off desk lamp. Stands up. Walks out."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walks to living room. Sits on couch. Picks up remote. Turns on TV. Changes channels. Watches show. Adjusts volume. Puts feet on coffee table. Laughs. Changes channel again. Watches more. Turns off TV. Puts down remote. Stands up. Walks out."
     },
     {
       "time": "22:00-22:30",
       "location": "Bathroom",
-      "activity": "Taking an evening shower and getting ready for bed",
-      "desc": "Enter bathroom. Turn on light. Turn on water heater. Turn on shower. Adjust temperature. Step into shower. Wash body. Turn off shower. Dry with towel. Brush teeth. Rinse mouth. Wash face. Wipe face. Turn off light. Leave bathroom."
+      "activity": "Showering and washing up before bed",
+      "desc": "Walks to bathroom. Turns on light. Turns on shower. Adjusts temperature. Steps in. Applies soap. Washes body. Rinses. Applies shampoo. Washes hair. Rinses. Turns off shower. Steps out. Grabs towel. Dries body. Puts on pajamas. Brushes teeth. Rinses mouth. Turns off light. Walks out."
     },
     {
       "time": "22:30-23:00",
       "location": "Bedroom 1",
-      "activity": "Winding down with the fan on, scrolling the phone and setting an alarm",
-      "desc": "Enter bedroom. Turn on light. Turn on fan. Sit on bed. Pick up phone. Unlock phone. Scroll social media. Open alarm app. Set alarm for 6:45. Lock phone. Put phone on nightstand. Turn off light. Lie down. Pull blanket."
+      "activity": "Winding down, scrolling on the phone and setting an alarm for tomorrow",
+      "desc": "Sits on bed. Picks up phone. Unlocks. Opens social media app. Scrolls. Likes posts. Watches videos. Opens alarm app. Sets alarm for 6:45. Puts phone on bedside table. Turns off light. Lies down. Closes eyes."
     },
     {
       "time": "23:00-24:00",
       "location": "Bedroom 1",
       "activity": "Sleeping",
-      "desc": "Lie on bed. Close eyes. Sleep. Turn over. Adjust pillow. Sleep."
+      "desc": "Lies in bed. Closes eyes. Breathes slowly. Turns to left side. Pulls blanket up. Adjusts pillow. Turns to right side. Moves legs. Remains asleep. Snores lightly. Turns again. Pulls blanket down. Breathes deeply. Remains asleep."
     }
   ]
 }

@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for the day"
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast (toast and tea)"
+    },
+    {
+      "time": "07:45-08:45",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash University Clayton campus"
+    },
+    {
+      "time": "08:45-12:30",
+      "location": "Out",
+      "activity": "Attending business lectures and tutorials at Monash Clayton"
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Lunch break at the campus food court"
+    },
+    {
+      "time": "13:15-15:30",
+      "location": "Out",
+      "activity": "Studying and working on assignments in the campus library"
+    },
+    {
+      "time": "15:30-16:10",
+      "location": "Out",
+      "activity": "Commuting by public transport to Chadstone"
+    },
+    {
+      "time": "16:10-18:00",
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone"
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Dinner break at the Chadstone food court"
+    },
+    {
+      "time": "18:30-21:00",
+      "location": "Out",
+      "activity": "Continuing part-time retail shift at Chadstone"
+    },
+    {
+      "time": "21:00-21:45",
+      "location": "Out",
+      "activity": "Commuting home by public transport from Chadstone"
+    },
+    {
+      "time": "21:45-22:15",
+      "location": "Kitchen",
+      "activity": "Making a light snack and warm drink, tidying up"
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and washing up"
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 1",
+      "activity": "Checking phone, reviewing notes for tomorrow, then going to sleep"
+    }
+  ]
+}

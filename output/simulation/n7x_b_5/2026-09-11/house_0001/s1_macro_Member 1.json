@@ -2,79 +2,84 @@
   "member": "Member 1",
   "activities": [
     {
-      "time": "00:00-06:45",
+      "time": "00:00-06:30",
       "location": "Bedroom 1",
       "activity": "Sleeping"
     },
     {
-      "time": "06:45-07:15",
+      "time": "06:30-06:50",
       "location": "Bathroom",
-      "activity": "Morning wash and getting ready"
+      "activity": "Washing face, brushing teeth, using toilet"
+    },
+    {
+      "time": "06:50-07:15",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, checking phone, organizing backpack"
     },
     {
       "time": "07:15-07:45",
       "location": "Kitchen",
-      "activity": "Eating breakfast"
+      "activity": "Eating breakfast (cereal/toast), preparing coffee/tea"
     },
     {
-      "time": "07:45-08:15",
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Final preparations, packing laptop and books"
+    },
+    {
+      "time": "08:00-09:00",
       "location": "Out",
-      "activity": "Commuting to Monash Clayton campus"
+      "activity": "Commuting to Monash University Clayton campus via public transport"
     },
     {
-      "time": "08:15-12:00",
+      "time": "09:00-12:00",
       "location": "Out",
-      "activity": "Attending business lectures and tutorials at Monash Clayton"
+      "activity": "Attending lectures and tutorials at Monash Clayton"
     },
     {
-      "time": "12:00-12:45",
+      "time": "12:00-13:00",
       "location": "Out",
-      "activity": "Eating lunch on campus"
+      "activity": "Having lunch at campus cafeteria or food court"
     },
     {
-      "time": "12:45-14:30",
+      "time": "13:00-15:00",
       "location": "Out",
-      "activity": "Studying in the library at Monash Clayton"
+      "activity": "Studying in library or attending additional classes"
     },
     {
-      "time": "14:30-15:00",
+      "time": "15:00-16:00",
       "location": "Out",
-      "activity": "Commuting to Chadstone"
+      "activity": "Commuting to Chadstone Shopping Centre for work"
     },
     {
-      "time": "15:00-20:00",
+      "time": "16:00-20:00",
       "location": "Out",
       "activity": "Working retail shift at Chadstone"
     },
     {
-      "time": "20:00-20:30",
+      "time": "20:00-21:00",
       "location": "Out",
-      "activity": "Commuting home"
+      "activity": "Commuting home from Chadstone"
     },
     {
-      "time": "20:30-21:00",
+      "time": "21:00-21:30",
       "location": "Kitchen",
-      "activity": "Eating dinner"
+      "activity": "Cooking and eating dinner"
     },
     {
-      "time": "21:00-22:00",
+      "time": "21:30-22:30",
       "location": "Living Room",
-      "activity": "Relaxing and watching TV"
-    },
-    {
-      "time": "22:00-22:30",
-      "location": "Bathroom",
-      "activity": "Showering and personal hygiene"
+      "activity": "Relaxing, watching TV or browsing on phone"
     },
     {
       "time": "22:30-23:00",
-      "location": "Bedroom 1",
-      "activity": "Studying and completing assignments on computer"
+      "location": "Bathroom",
+      "activity": "Taking a shower, brushing teeth"
     },
     {
       "time": "23:00-24:00",
       "location": "Bedroom 1",
-      "activity": "Winding down and sleeping"
+      "activity": "Sleeping"
     }
   ]
 }
