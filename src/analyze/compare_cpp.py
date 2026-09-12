@@ -34,9 +34,7 @@ def valley_kwh(profile):
 
 def one_record(world, env, date, house, policy):
     recs = list(iter_house_days(world, env=env, date=date, policy=policy, houses=[house]))
-    if not recs:
-        raise SystemExit(f"[ERR] no record for env={env} policy={policy} house={house}")
-    return recs[0]
+    return recs[0] if recs else None
 
 
 def mean(xs):
@@ -79,7 +77,12 @@ def main():
     for i in range(1, args.n + 1):
         b = one_record(args.world, f"{base_prefix}_{i}", args.date, args.house, "baseline")
         c = one_record(args.world, f"{treat_prefix}_{i}", args.date, args.house, args.tag)
+        if b is None or c is None:
+            print(f"[skip] pair {i} incomplete (base={b is not None}, treat={c is not None})")
+            continue
         rows.append((b, c))
+    if not rows:
+        raise SystemExit("[ERR] no complete pairs")
 
     def series(recs, key):
         return [r[key] for r in recs]
