@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Out",
+      "activity": "Working night shift as an aged-care support worker",
+      "desc": "Clock in at nursing station. Receive handover from previous shift. Walk to resident room 101. Knock on door. Enter room. Say 'Good morning' to resident. Check resident's breathing. Adjust pillow. Assist resident to turn onto side. Walk to resident room 102. Assist resident to bathroom. Walk resident back to bed. Adjust bed height. Walk to medication room. Prepare medications. Administer medications to residents. Record administration. Respond to call bell. Assist resident with repositioning. Handover to morning shift."
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Out",
+      "activity": "Commuting home from night shift by train and bus",
+      "desc": "Walk out of workplace. Walk to train station. Tap on with phone. Wait on platform. Board train. Find seat. Sit down. Check phone. Look out window. Stand up when train arrives. Exit train. Walk to bus stop. Wait for bus. Board bus. Tap on. Find seat. Sit down. Stand up when bus arrives. Exit bus. Walk home."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Kitchen",
+      "activity": "Arriving home, making tea and a light snack",
+      "desc": "Unlock front door. Enter house. Walk to kitchen. Fill kettle with water. Turn on kettle. Open cupboard. Take out tea bag and place in mug. Open fridge. Take out yogurt. Pour hot water into mug. Sit at table. Eat yogurt and drink tea."
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "Kitchen",
+      "activity": "Eating a flexitarian breakfast and drinking tea",
+      "desc": "Sit at table. Pick up spoon. Scoop yogurt. Eat yogurt. Pick up mug. Sip tea. Put down mug. Pick up fork. Cut fruit. Eat fruit. Drink tea. Wipe mouth with napkin."
+    },
+    {
+      "time": "09:00-09:30",
+      "location": "Bathroom",
+      "activity": "Showering and completing morning hygiene routine before sleep",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Wash body. Rinse. Turn off shower. Step out and dry body with towel. Brush teeth and rinse mouth."
+    },
+    {
+      "time": "09:30-17:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping after night shift with fan on for quiet white noise",
+      "desc": "Enter Bedroom 1. Close door. Turn on fan. Adjust fan speed to low. Turn off ceiling light. Place phone on nightstand. Set alarm on phone. Lie down on bed. Pull blanket over body. Adjust pillow. Turn onto side. Close eyes and sleep."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Bedroom 1",
+      "activity": "Waking up, checking phone and reviewing written reminders for the day",
+      "desc": "Open eyes. Stretch arms. Sit up. Turn off fan. Pick up phone. Check messages. Review reminders on phone. Put phone down. Pick up notepad. Read written reminders. Put notepad down. Stand up and walk to bathroom."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating a flexitarian dinner",
+      "desc": "Walk to kitchen. Open fridge. Take out vegetables. Wash vegetables. Chop vegetables. Turn on induction cooker. Pour oil. Add vegetables. Stir and cook. Turn off cooker. Plate food. Sit at table and eat dinner."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cleaning up kitchen and meal prepping for next shift",
+      "desc": "Clear dishes. Scrape food into bin. Rinse dishes. Load dishwasher. Add detergent. Close dishwasher. Turn on dishwasher. Wipe counter. Sweep floor. Take out ingredients for next meal. Chop vegetables. Cook rice. Store in containers. Label containers. Put in fridge."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Bedroom 1",
+      "activity": "Studying for Master of Social Work, reviewing lecture notes on computer",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Log in. Open lecture notes. Scroll through notes. Highlight key points. Take notes in notebook. Write summary. Close laptop. Stand up."
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Bedroom 1",
+      "activity": "Continuing study, writing assignment with desk lamp on",
+      "desc": "Open laptop. Open assignment document. Type paragraph. Check notes. Continue typing. Save document. Open browser. Search for reference. Copy citation. Paste into document. Format text. Save and close laptop."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Bedroom 1",
+      "activity": "Relaxing, looking at photo of family dog and reading",
+      "desc": "Pick up photo frame. Look at photo. Smile. Put down photo. Pick up book. Open to bookmark. Read page. Turn page. Continue reading. Put bookmark in. Close book. Put book on nightstand."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Nighttime routine, brushing teeth and washing face",
+      "desc": "Walk to bathroom. Turn on light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Turn on tap. Wash face with cleanser. Rinse face. Pat dry with towel. Apply moisturizer. Turn off light."
+    },
+    {
+      "time": "22:30-23:30",
+      "location": "Bedroom 1",
+      "activity": "Wind down, listening to calm music and organizing tomorrow's schedule",
+      "desc": "Enter bedroom. Close door. Turn on bedside lamp. Pick up phone. Open music app. Select playlist and press play. Put phone on nightstand. Pick up planner. Open to tomorrow's date. Write down tasks. Check reminders. Close planner. Put planner on nightstand. Turn off lamp. Lie down and close eyes."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Pull blanket over body. Adjust pillow. Turn onto side. Close eyes. Fall asleep."
+    }
+  ]
+}

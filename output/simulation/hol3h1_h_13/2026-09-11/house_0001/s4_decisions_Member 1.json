@@ -1,0 +1,293 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:00",
+      "start_minutes": 0,
+      "end_minutes": 420,
+      "location": "Out",
+      "activity": "Working a night shift as an aged-care support worker at a residential care facility, assisting residents with personal care, repositioning and night checks, and writing up detailed handover notes",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-08:15",
+      "start_minutes": 420,
+      "end_minutes": 495,
+      "location": "Out",
+      "activity": "Travelling home from the night shift by train and bus, listening to nothing to keep calm and messaging ahead by text to confirm the plan for the day",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:15-08:45",
+      "start_minutes": 495,
+      "end_minutes": 525,
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes after the night shift, putting the uniform straight into the washing machine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "08:45-09:15",
+      "start_minutes": 525,
+      "end_minutes": 555,
+      "location": "Kitchen",
+      "activity": "Making a light post-shift breakfast with tea and eating quietly at the bench",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:15-14:30",
+      "start_minutes": 555,
+      "end_minutes": 870,
+      "location": "Bedroom 1",
+      "activity": "Sleeping after the night shift with the fan running for white noise and the light off, keeping the room quiet and dark",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "14:30-15:00",
+      "start_minutes": 870,
+      "end_minutes": 900,
+      "location": "Kitchen",
+      "activity": "Waking up, boiling the kettle and having a late lunch of leftovers with a cup of tea",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:40",
+      "start_minutes": 900,
+      "end_minutes": 940,
+      "location": "Bathroom",
+      "activity": "Moving the washed uniform to the clothes dryer and hand-washing smaller items, tidying the laundry area and using the dehumidifier",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_clothesdryer",
+          "action": "run"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:40-16:20",
+      "start_minutes": 940,
+      "end_minutes": 980,
+      "location": "Kitchen",
+      "activity": "Washing the dishes, wiping the benches and checking the fridge, freezer and pantry against a written shopping list",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:20-17:30",
+      "start_minutes": 980,
+      "end_minutes": 1050,
+      "location": "Out",
+      "activity": "Walking to the supermarket and doing the weekly grocery shop, comparing unit prices and paying in cash to stay within the weekly budget",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:30",
+      "start_minutes": 1050,
+      "end_minutes": 1110,
+      "location": "Kitchen",
+      "activity": "Cooking a flexitarian dinner with the rice cooker and induction cooker and eating it at the table",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:15",
+      "start_minutes": 1110,
+      "end_minutes": 1155,
+      "location": "Kitchen",
+      "activity": "Washing up, loading the dishwasher and putting the groceries away with labels on shared items",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:15-21:00",
+      "start_minutes": 1155,
+      "end_minutes": 1260,
+      "location": "Bedroom 1",
+      "activity": "Studying Master of Social Work coursework at the desk with the desk lamp on, reading set texts on the monitor and typing notes on the computer",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "start_minutes": 1260,
+      "end_minutes": 1290,
+      "location": "Kitchen",
+      "activity": "Taking a short break with a cup of tea and a light snack while re-reading the written task list for the week",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "start_minutes": 1290,
+      "end_minutes": 1350,
+      "location": "Bedroom 1",
+      "activity": "Sending text messages to family in China, looking at the photo of the family dog, recording spending in the budget sheet and setting reminders for the next shift and class",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bathroom",
+      "activity": "Completing the evening wash routine and preparing clothes and bag for the next day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the light off and the fan on low for quiet background noise",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

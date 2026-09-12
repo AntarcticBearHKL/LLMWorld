@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing and getting dressed"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast (flexitarian, tea)"
+    },
+    {
+      "time": "07:30-08:30",
+      "location": "Out",
+      "activity": "Commuting to Monash University via train and bus"
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "Out",
+      "activity": "Arriving at campus and preparing for classes"
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Attending social work classes and seminars"
+    },
+    {
+      "time": "13:00-14:00",
+      "location": "Out",
+      "activity": "Eating packed lunch and reviewing notes"
+    },
+    {
+      "time": "14:00-17:00",
+      "location": "Out",
+      "activity": "Attending more classes and group study"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting to aged-care facility for evening shift"
+    },
+    {
+      "time": "18:00-22:00",
+      "location": "Out",
+      "activity": "Working as aged-care support worker (evening shift), including a break to eat a packed flexitarian dinner"
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Out",
+      "activity": "Commuting home via public transport"
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Setting reminders and going to sleep"
+    }
+  ]
+}

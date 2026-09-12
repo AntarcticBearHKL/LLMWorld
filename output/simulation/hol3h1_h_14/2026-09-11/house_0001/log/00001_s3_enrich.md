@@ -1,0 +1,304 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-13 04:42:35
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 24
+- Occupation: Master of Social Work student at Monash University; part-time aged-care support worker
+- Personality: communal, organised, consensus-seeking, loyal, cautious about risk and money, late adopter of technology, detail-oriented
+
+This member's timeline:
+[
+  {
+    "time": "00:00-08:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping in on the public holiday, catching up on rest after recent rotating and night shifts, fan on low and light off"
+  },
+  {
+    "time": "08:00-08:30",
+    "location": "Bathroom",
+    "activity": "Waking up slowly, washing face and brushing teeth, taking medication and running through the day's reminder checklist"
+  },
+  {
+    "time": "08:30-09:15",
+    "location": "Kitchen",
+    "activity": "Making and eating a slow flexitarian breakfast of toast with eggs and vegetables, brewing a pot of tea and checking written notes about bills and the weekly budget"
+  },
+  {
+    "time": "09:15-10:00",
+    "location": "Bathroom",
+    "activity": "Loading and running the washing machine with his aged-care work uniforms and personal laundry, then hanging items to dry"
+  },
+  {
+    "time": "10:00-11:00",
+    "location": "Kitchen",
+    "activity": "Doing household chores: wiping down the benches, sorting the refrigerator and freezer, and putting shared kitchen items back in labelled places"
+  },
+  {
+    "time": "11:00-12:00",
+    "location": "Bedroom 1",
+    "activity": "Studying at his desk with the lamp on, reading assigned social work readings and typing written notes on his computer"
+  },
+  {
+    "time": "12:00-13:00",
+    "location": "Kitchen",
+    "activity": "Preparing and eating a simple vegetarian lunch, reheating rice in the rice cooker and drinking tea"
+  },
+  {
+    "time": "13:00-14:00",
+    "location": "Out",
+    "activity": "Taking a slow walk around the neighbourhood park, getting fresh air and light exercise on his day off"
+  },
+  {
+    "time": "14:00-17:00",
+    "location": "Out",
+    "activity": "Volunteering an afternoon shift at the animal shelter, feeding and socialising the animals and helping with cleaning tasks"
+  },
+  {
+    "time": "17:00-17:30",
+    "location": "Out",
+    "activity": "Travelling home by train and bus from the shelter (public transport, no electric vehicle needed)"
+  },
+  {
+    "time": "17:30-18:00",
+    "location": "Bathroom",
+    "activity": "Showering and changing into comfortable home clothes after volunteering"
+  },
+  {
+    "time": "18:00-19:00",
+    "location": "Kitchen",
+    "activity": "Cooking and eating a flexitarian dinner of stir-fried vegetables, tofu and rice, then washing up his own dishes"
+  },
+  {
+    "time": "19:00-20:00",
+    "location": "Bedroom 1",
+    "activity": "Studying at his desk, reviewing placement notes and updating his written weekly planner and reminders on his computer"
+  },
+  {
+    "time": "20:00-20:30",
+    "location": "Kitchen",
+    "activity": "Making a cup of herbal tea and checking his cash budget for the coming week"
+  },
+  {
+    "time": "20:30-22:00",
+    "location": "Bedroom 1",
+    "activity": "Quiet leisure time in his room, looking at the photo of his family dog in China and reading a book"
+  },
+  {
+    "time": "22:00-22:30",
+    "location": "Bathroom",
+    "activity": "Night-time routine: washing up, brushing teeth and setting out clothes and reminders for the next day"
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping, with the fan on low for background noise and the light off"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "Light",
+      "Fan"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "Light",
+      "SpaceHeater"
+    ]
+  },
+  "Bedroom 3": {
+    "appliances": [
+      "Light",
+      "Fan"
+    ]
+  },
+  "Bedroom 4": {
+    "appliances": [
+      "Light"
+    ]
+  },
+  "Bedroom 5": {
+    "appliances": [
+      "Light",
+      "SpaceHeater"
+    ]
+  },
+  "Bedroom 6": {
+    "appliances": [
+      "Light",
+      "Fan"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Light",
+      "Refrigerator",
+      "Freezer",
+      "RiceCooker",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Oven",
+      "Kettle",
+      "Toaster",
+      "Dishwasher",
+      "Router"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "Light",
+      "WaterHeater",
+      "WashingMachine",
+      "ClothesDryer",
+      "Dehumidifier"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Monitor",
+      "Phone"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Phone",
+      "Kettle",
+      "ElectricVehicle"
+    ]
+  },
+  "Member 3 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp"
+    ]
+  },
+  "Member 4 personal appliances": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Monitor",
+      "Phone"
+    ]
+  },
+  "Member 5 personal appliances": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Phone"
+    ]
+  },
+  "Member 6 personal appliances": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Phone"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{"member": "Member 1", "enriched_activities": [{"time": "00:00-08:00", "location": "Bedroom 1", "activity": "Sleeping in on the public holiday, catching up on rest after recent rotating and night shifts, fan on low and light off", "desc": "Lie down on the bed on the mattress with the blanket pulled up to the chest. Turn the body onto the right side. Press the fan button to low setting. Press the light switch to off. Close the eyes. Remain lying on the bed with eyes closed, breathing slowly, without moving. Turn onto the left side. Pull the blanket up over the shoulder. Remain lying still. Turn onto the back. Remain lying with eyes closed. Turn onto the right side again. Remain lying still with the fan running on low. At around 08:00, open the eyes and lie on the back. Push the blanket down to the waist. Sit up on the edge of the bed. Place both feet on the floor. Press the fan button to off."}, {"time": "08:00-08:30", "location": "Bathroom", "activity": "Waking up slowly, washing face and brushing teeth, taking medication and running through the day's reminder checklist", "desc": "Stand up from the bed. Walk to the bathroom door. Push the bathroom door open. Reach for the light switch and press it on. Turn on the tap with the right hand. Cup both hands and collect water. Bend forward and splash water onto the face. Turn off the tap. Pick up the towel from the hook and wipe the face. Hang the towel back on the hook. Pick up the toothbrush from the cup. Squeeze toothpaste onto the brush. Turn on the tap. Brush the teeth up and down for about one minute. Rinse the mouth with water. Turn off the tap. Put the toothbrush back into the cup. Open the cabinet and take out the medication strip. Push one tablet out of the strip. Put the tablet into the mouth and swallow it with water from the cup. Close the cabinet door. Pick up the phone from the sink edge and open the notes app. Scroll down the reminder checklist and read each item on the screen. Press the phone screen to close the notes app. Press the light switch off and walk out of the bathroom."}, {"time": "08:30-09:15", "location": "Kitchen", "activity": "Making and eating a slow flexitarian breakfast of toast with eggs and vegetables, brewing a pot of tea and checking written notes about bills and the weekly budget", "desc": "Walk into the kitchen. Press the kitchen light switch on. Open the refrigerator door and take out the eggs, the vegetables and the milk. Close the refrigerator door. Place the items on the bench. Open the cupboard and take out a plate and a knife. Place the plate on the bench. Pick up the knife and cut the vegetables into slices on the cutting board. Take two slices of bread from the bread bag and place them in the toaster. Press the toaster lever down. Crack two eggs on the edge of the bowl and pour them into the bowl. Pick up the fork and beat the eggs. Turn on the induction cooker. Pour oil into the pan. Pour the eggs into the pan and stir with a spatula. Move the eggs onto the plate with the spatula. Press the induction cooker off. Pick up the toast from the toaster when it pops up and put it on the plate. Fill the kettle with water and press the switch on. Pour the hot water into the teapot and add tea leaves. Sit down at the kitchen table. Pick up the fork and eat the toast, eggs and vegetables. Pick up the cup and drink the tea. Pick up the written notes on bills from the table and read down the list of amounts. Pick up the pen and write the amounts in the notebook on the weekly budget page. Stand up and carry the plate and cup to the sink."}, {"time": "09:15-10:00", "location": "Bathroom", "activity": "Loading and running the washing machine with his aged-care work uniforms and personal laundry, then hanging items to dry", "desc": "Walk into the bathroom. Press the bathroom light switch on. Lift the laundry basket lid. Pick up the work uniforms and personal laundry items from the basket and put them into the washing machine drum. Close the washing machine door. Pull open the detergent drawer. Pour detergent into the drawer. Push the detergent drawer closed. Press the power button on the washing machine. Turn the dial to the wash programme. Press the start button. Stand and listen to the machine fill with water. Pick up the empty basket and put it on the floor. Wait for the wash cycle and rinse cycle to finish. Press the pause button when the machine beeps. Open the washing machine door. Pull the wet items out one at a time into the basket. Pick up the clothes pegs from the shelf. Carry the basket to the drying rack. Shake out each uniform and shirt. Hang each item on the rack and clip a peg at the shoulder. Repeat for each item. Press the washing machine power button off. Press the light switch off and walk out."}, {"time": "10:00-11:00", "location": "Kitchen", "activity": "Doing household chores: wiping down the benches, sorting the refrigerator and freezer, and putting shared kitchen items back in labelled places", "desc": "Walk into the kitchen. Press the kitchen light switch on. Pick up the spray bottle and the cloth from the sink area. Spray the bench surface and wipe it from left to right with the cloth. Spray and wipe the second bench section. Rinse the cloth under the tap and wring it out. Open the refrigerator door. Pick up the containers inside one by one and check the lids. Take out the older vegetables and put them on the bench. Move the newer items to the front of the shelf. Pick up the labelled container and put the leftovers inside it. Place the container back on the middle shelf. Close the refrigerator door. Open the freezer door. Take out the frozen items one by one and check the labels. Move the older packet to the front. Close the freezer door. Pick up the rice cooker and put it back in its labelled spot on the bench. Pick up the kettle and place it on its labelled spot. Pick up the toaster and put it back next to the wall. Wipe the bench surface again with the cloth. Rinse the cloth and hang it on the tap. Press the kitchen light switch off and walk out."}, {"time": "11:00-12:00", "location": "Bedroom 1", "activity": "Studying at his desk with the lamp on, reading assigned social work readings and typing written notes on his computer", "desc": "Walk into Bedroom 1. Pull the desk chair out. Sit down on the chair. Reach to the desk lamp and press the switch on. Press the computer power button. Wait for the screen to load. Pick up the printed reading from the desk. Turn the pages one by one and read each page. Put the printed reading down on the desk. Place both hands on the keyboard. Type notes into the document on the screen. Stop typing and pick up the pen. Underline sentences in the printed reading. Put the pen down. Move the hand back to the mouse. Scroll down the document on the screen. Continue typing notes. Press the keys to save the document. Press the light switch of the desk lamp off. Press the computer power button off. Push the chair back and stand up."}, {"time": "12:00-13:00", "location": "Kitchen", "activity": "Preparing and eating a simple vegetarian lunch, reheating rice in the rice cooker and drinking tea", "desc": "Walk into the kitchen. Press the kitchen light switch on. Open the refrigerator door and take out the container of cooked rice and the vegetables. Close the refrigerator door. Lift the rice cooker lid. Put the rice into the rice cooker inner pot. Pour water over the rice. Close the rice cooker lid. Press the rice cooker switch down. Open the cupboard and take out a bowl and chopsticks. Place them on the bench. Wait for the rice cooker to switch to warm. Lift the lid and spoon the rice into the bowl. Close the lid. Pick up the chopsticks and sit down at the kitchen table. Pick up the chopsticks and eat the rice and vegetables from the bowl. Pick up the teapot and pour tea into the cup. Pick up the cup and drink the tea. Stand up and carry the bowl and chopsticks to the sink. Rinse the bowl and chopsticks under the tap. Place them on the drying rack. Press the kitchen light switch off and walk out."}, {"time": "13:00-14:00", "location": "Out", "activity": "Taking a slow walk around the neighbourhood park, getting fresh air and light exercise on his day off", "desc": "Walk out of the front door. Pull the door closed behind him. Turn right and walk along the footpath to the street corner. Cross the road at the crossing. Walk through the park gate. Walk along the paved path around the park perimeter. Pass the first bench and continue walking. Slow down and stop near the second bench. Stand and look at the trees. Continue walking along the path. Pass the playground area. Turn left at the fork in the path. Walk back towards the park gate. Walk out of the park gate. Cross the road at the crossing. Walk along the footpath back to the house. Open the front door and walk inside."}, {"time": "14:00-17:00", "location": "Out", "activity": "Volunteering an afternoon shift at the animal shelter, feeding and socialising the animals and helping with cleaning tasks", "desc": "Walk to the train station. Board the train and sit down. Get off at the station near the shelter. Walk to the shelter entrance. Push the door open and walk to the reception desk. Sign in on the volunteer sheet with the pen. Walk to the storage room. Pick up the bags of animal food. Carry the bags to the kennel area. Open the first kennel gate. Pour food into the bowl inside. Close the kennel gate. Repeat for the next kennels along the row. Pick up the water bowls one by one. Fill each bowl at the tap. Place each bowl back in the kennel. Open the cat room door. Pick up the cats one at a time and hold them. Sit on the floor and stroke the cats. Put the cat back into its pen. Pick up the scoop and the bucket. Scoop the waste from the pens into the bucket. Carry the bucket to the bin and tip it out. Pick up the mop and mop the floor of the kennel area. Put the mop back in the storage room. Wash both hands at the sink. Sign out on the volunteer sheet. Walk out of the shelter door."}, {"time": "17:00-17:30", "location": "Out", "activity": "Travelling home by train and bus from the shelter (public transport, no electric vehicle needed)", "desc": "Walk from the shelter to the bus stop. Stand at the bus stop and wait. Step onto the bus and tap the card on the reader. Sit down on a seat. Stand up at the train station stop and step off the bus. Walk into the station. Tap the card on the gate reader. Walk to the platform. Stand on the platform and wait for the train. Step onto the train and sit down on a seat. Stand up at the home station and step off the train. Tap the card on the gate reader. Walk out of the station. Walk along the footpath to the house. Open the front door and walk inside."}, {"time": "17:30-18:00", "location": "Bathroom", "activity": "Showering and changing into comfortable home clothes after volunteering", "desc": "Walk into Bedroom 1. Open the wardrobe door. Take out a t-shirt and trousers. Close the wardrobe door. Walk to the bathroom. Press the bathroom light switch on. Push the bathroom door closed. Turn on the water heater switch. Turn on the shower tap. Pull the shower curtain across. Step into the shower. Pick up the soap and rub it over the body. Pick up the shampoo bottle and squeeze shampoo onto the hand. Rub shampoo into the hair. Rinse the body and hair under the water. Turn off the shower tap. Push the shower curtain back. Pick up the towel from the hook and dry the body and hair. Hang the towel on the hook. Put on the clean clothes. Pick up the worn clothes and put them into the laundry basket. Press the light switch off and walk out."}, {"time": "18:00-19:00", "location": "Kitchen", "activity": "Cooking and eating a flexitarian dinner of stir-fried vegetables, tofu and rice, then washing up his own dishes", "desc": "Walk into the kitchen. Press the kitchen light switch on. Open the refrigerator door and take out the tofu, the vegetables and the container of rice. Close the refrigerator door. Place the items on the bench. Pick up the knife and cut the tofu into cubes on the cutting board. Cut the vegetables into strips. Turn on the induction cooker. Pour oil into the pan. Pour the tofu into the pan and stir with the spatula. Add the vegetables to the pan and stir. Press the range hood button on. Take the lid off the rice pot and spoon rice into a bowl. Turn off the induction cooker. Press the range hood button off. Pick up the bowl and chopsticks and sit down at the table. Pick up the chopsticks and eat the tofu, vegetables and rice. Stand up and carry the bowl, chopsticks and pan to the sink. Turn on the tap. Pick up the sponge and wash the dishes under the water. Place the dishes on the drying rack. Turn off the tap. Wipe the bench with the cloth. Press the kitchen light switch off and walk out."}, {"time": "19:00-20:00", "location": "Bedroom 1", "activity": "Studying at his desk, reviewing placement notes and updating his written weekly planner and reminders on his computer", "desc": "Walk into Bedroom 1. Pull the desk chair out and sit down. Press the desk lamp switch on. Press the computer power button on. Open the placement notes file on the screen. Move the mouse and scroll through the pages of notes. Pick up the pen and underline lines in the printed placement notes on the desk. Put the pen down. Place both hands on the keyboard and type notes into the document. Open the weekly planner document on the screen. Type the placement hours into the planner table. Type the shifts into the reminder list. Press the keys to save the document. Pick up the phone and open the calendar app. Type the same reminders into the calendar. Press the phone screen to close the app. Put the phone down on the desk. Press the computer power button off. Press the desk lamp switch off. Push the chair back and stand up."}, {"time": "20:00-20:30", "location": "Kitchen", "activity": "Making a cup of herbal tea and checking his cash budget for the coming week", "desc": "Walk into the kitchen. Press the kitchen light switch on. Fill the kettle with water and press the kettle switch on. Open the cupboard and take out the box of herbal tea. Take out one tea bag and place it in the cup. Wait for the kettle to boil. Pour the hot water into the cup. Put the kettle back on the bench. Pick up the cup and carry it to the kitchen table. Sit down on the chair. Pick up the cash budget envelope from the table. Take the notes out and count them one by one. Write the amounts down in the notebook with the pen. Put the notes back into the envelope. Close the envelope. Pick up the cup and drink the tea. Stand up and carry the cup to the sink. Rinse the cup under the tap and place it on the drying rack. Press the kitchen light switch off and walk out."}, {"time": "20:30-22:00", "location": "Bedroom 1", "activity": "Quiet leisure time in his room, looking at the photo of his family dog in China and reading a book", "desc": "Walk into Bedroom 1. Press the room light switch on. Pick up the framed photo from the bedside table. Hold the photo in both hands and look at it. Put the photo back on the bedside table. Pick up the book from the bedside table. Sit down on the bed. Open the book at the bookmark. Turn the pages one by one and read. Place the bookmark between the pages and close the book. Stand up and put the book back on the bedside table. Open the wardrobe door and take out the pyjamas. Close the wardrobe door. Lay the pyjamas on the bed. Pick up the phone from the desk and check the messages. Put the phone back down on the desk. Press the room light switch off. Walk to the bathroom."}, {"time": "22:00-22:30", "location": "Bathroom", "activity": "Night-time routine: washing up, brushing teeth and setting out clothes and reminders for the next day", "desc": "Walk into the bathroom. Press the bathroom light switch on. Turn on the tap. Cup both hands and collect water. Wash the face with water. Turn off the tap. Pick up the towel and wipe the face. Hang the towel on the hook. Pick up the toothbrush from the cup. Squeeze toothpaste onto the brush. Turn on the tap. Brush the teeth for about one minute. Rinse the mouth with water. Turn off the tap. Put the toothbrush back into the cup. Pick up the phone and open the notes app. Type the reminders for the next day. Press the phone screen to close the app. Walk to Bedroom 1. Open the wardrobe door and take out the clothes for tomorrow. Lay the clothes on the chair. Close the wardrobe door. Pick up the phone and place it on the bedside table. Press the bathroom light switch off. Walk back into Bedroom 1."}, {"time": "22:30-24:00", "location": "Bedroom 1", "activity": "Sleeping, with the fan on low for background noise and the light off", "desc": "Stand next to the bed. Pull the blanket back. Sit down on the bed. Swing both legs onto the mattress. Lie down on the back. Press the fan button to low setting. Press the room light switch off. Pull the blanket up over the body. Turn onto the right side. Close the eyes. Remain lying on the bed with eyes closed and the fan running on low. Turn onto the left side. Remain lying still. Turn onto the back. Remain lying still with eyes closed until midnight."}]}
+```
+

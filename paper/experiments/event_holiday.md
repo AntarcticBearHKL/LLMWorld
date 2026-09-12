@@ -49,6 +49,7 @@ names public holidays as a target event — this fills that gap.
 | W2 h001 (5-person) | **+59.1%** | **5.3e-7** | **+232.4%** |
 | W3 h002 (2-person) | +39.8% | 0.0014 | −15.2% n.s. |
 | W3 h003 (3-person, AC-led) | **+64.5%** | **2.0e-4** | **+96.4%** |
+| W3 h001 (6-person) | +19.3% | 0.019 | +19.7% n.s. |
 
 - **Full-household level (R181)**: simulating **all members** of a 2-person household (world_172148 h002,
   n=9) gives total **+44.9%** (t=2.84, p=0.022) — the effect is **not a member-1-only artifact**.

@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping after a late shift, phone on silent and light off",
+      "desc": "Lying in bed. Eyes closed. Breathing steadily. Phone on silent. Light off. No movement."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and showering",
+      "desc": "Wake up. Get out of bed. Walk to bathroom. Turn on light. Turn on shower. Step in. Wet body. Apply soap. Wash body. Rinse body. Turn off shower. Step out. Dry with towel. Turn on tap. Wash face. Rinse face. Turn off tap. Turn off light. Walk out."
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Kitchen",
+      "activity": "Eating a flexitarian breakfast with tea and checking the written daily reminder list",
+      "desc": "Walk to kitchen. Turn on light. Open fridge. Take out milk and yogurt. Close fridge. Open cupboard. Take out bowl and cereal. Close cupboard. Pour cereal and milk into bowl. Take spoon from drawer. Sit at table. Eat breakfast. Drink tea. Pick up reminder list. Read list. Mark items with pen. Clear dishes. Rinse dishes. Turn off light. Walk out."
+    },
+    {
+      "time": "08:45-09:30",
+      "location": "Bedroom 1",
+      "activity": "Reviewing the day plan on the computer, reading text messages and checking the weekly budget in cash envelopes",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Log in. Review day plan on computer. Open phone. Read text messages. Reply to one message. Put down phone. Open drawer. Take out cash envelopes. Count cash. Check against budget. Put cash back. Close drawer. Turn off laptop. Turn off lamp. Stand up. Walk out."
+    },
+    {
+      "time": "09:30-10:15",
+      "location": "Kitchen",
+      "activity": "Tidying the kitchen, washing dishes and labelling leftovers for the week",
+      "desc": "Walk to kitchen. Turn on light. Put on gloves. Pick up dirty dishes. Scrape food into bin. Fill sink with water. Add soap. Wash dishes. Rinse dishes. Place on rack. Dry and put away. Wipe counters. Sweep floor. Take out leftovers. Label containers with date. Put in fridge. Remove gloves. Turn off light. Walk out."
+    },
+    {
+      "time": "10:15-11:00",
+      "location": "Bathroom",
+      "activity": "Doing laundry with the washing machine and hanging clothes on the dryer",
+      "desc": "Walk to bathroom. Open washing machine. Sort clothes. Load into machine. Add detergent. Close door. Start machine. Wait for cycle. Open machine. Take out clothes. Put in dryer. Start dryer. Wait. Open dryer. Take out clothes. Fold clothes. Put in wardrobe. Walk out."
+    },
+    {
+      "time": "11:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Reading social work course materials at the desk with the lamp on",
+      "desc": "Walk to bedroom. Sit at desk. Turn on lamp. Open textbook. Read page. Turn page. Read next page. Highlight text. Take notes in notebook. Pick up pen. Write notes. Put down pen. Read more pages. Underline key points. Close book. Turn off lamp. Stand up. Walk out."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Eating a simple vegetarian lunch and drinking tea",
+      "desc": "Walk to kitchen. Open fridge. Take out leftovers. Close fridge. Open microwave. Place leftovers inside. Close door. Set timer. Start microwave. Wait. Take out container. Sit at table. Eat lunch. Drink tea. Clear dishes. Rinse dishes. Place in dishwasher. Walk out."
+    },
+    {
+      "time": "12:30-13:30",
+      "location": "Bedroom 1",
+      "activity": "Writing assignment notes on the computer and monitoring the day for a new private care work inquiry sent by text",
+      "desc": "Walk to bedroom. Sit at desk. Turn on lamp. Open laptop. Open document. Type notes. Pause. Pick up phone. Check messages. Put down phone. Continue typing. Pick up phone. Check messages. Put down phone. Type more notes. Save document. Close laptop. Turn off lamp. Stand up. Walk out."
+    },
+    {
+      "time": "13:30-14:00",
+      "location": "Kitchen",
+      "activity": "Packing a bag for the evening shift, filling a tea flask and preparing a light snack",
+      "desc": "Walk to kitchen. Open cupboard. Take out tea flask. Fill kettle with water. Place on base. Press button. Take tea bag. Place in flask. Pour boiling water into flask. Close flask. Open fridge. Take out snacks. Prepare snack. Put snack in bag. Put flask in bag. Zip bag. Walk out."
+    },
+    {
+      "time": "14:00-15:00",
+      "location": "Out",
+      "activity": "Commuting by train and bus to the aged-care facility",
+      "desc": "Walk to train station. Tap card. Wait on platform. Board train. Sit down. Ride train. Exit train. Walk to bus stop. Wait for bus. Board bus. Tap card. Sit down. Ride bus. Exit bus. Walk to facility."
+    },
+    {
+      "time": "15:00-21:00",
+      "location": "Out",
+      "activity": "Working the public holiday evening shift as an aged-care support worker",
+      "desc": "Enter facility. Clock in. Put on uniform. Attend handover. Read care notes. Assist resident with dinner. Serve food. Help feed. Clear dishes. Walk resident to bathroom. Assist with toileting. Walk resident back. Administer medication. Record in log. Respond to call bell. Check on residents. Tidy common area. Clock out."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Out",
+      "activity": "Commuting home by train and bus after the shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Sit down. Ride bus. Exit bus. Walk to train station. Wait for train. Board train. Sit down. Ride train. Exit train. Walk home. Enter house."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Kitchen",
+      "activity": "Heating and eating a light flexitarian dinner and drinking tea",
+      "desc": "Walk to kitchen. Open fridge. Take out leftovers. Close fridge. Open microwave. Place leftovers inside. Close door. Set timer. Press start. Wait. Open microwave. Take out container. Stir food. Sit at table. Eat dinner. Drink tea. Stand up. Clear dishes. Rinse dishes. Place in dishwasher. Walk out."
+    },
+    {
+      "time": "22:30-23:15",
+      "location": "Bedroom 1",
+      "activity": "Winding down quietly, keeping noise low for night-shift housemates and texting housemates to confirm the next house meeting plan",
+      "desc": "Walk quietly to bedroom. Close door gently. Sit on bed. Pick up phone. Unlock. Open messaging app. Type message. Send message to housemates. Wait. Read reply. Type reply. Put down phone. Turn off overhead light. Turn on small lamp. Pick up book. Read pages. Put down book. Turn off lamp. Lie down."
+    },
+    {
+      "time": "23:15-23:30",
+      "location": "Bathroom",
+      "activity": "Brushing teeth and preparing for bed",
+      "desc": "Walk to bathroom. Turn on light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Turn off tap. Wipe face with towel. Turn off light. Walk out."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Reading a few pages before sleeping, light off and fan on low",
+      "desc": "Lie in bed. Pick up book. Turn on book light. Read page. Turn page. Read next page. Turn off book light. Put book down. Adjust fan to low. Close eyes. Sleep."
+    }
+  ]
+}
