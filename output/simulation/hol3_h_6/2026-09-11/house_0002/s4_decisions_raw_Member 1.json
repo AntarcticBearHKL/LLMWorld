@@ -1,0 +1,372 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth, and taking a morning shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:15-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, boiling water with the kettle",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Living Room",
+      "activity": "Doing morning stretching and mobility exercises on the floor",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:45-10:00",
+      "location": "Bathroom",
+      "activity": "Sorting laundry and running the washing machine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "10:00-11:30",
+      "location": "Living Room",
+      "activity": "Vacuuming the living room and tidying up the space",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:30-12:30",
+      "location": "Kitchen",
+      "activity": "Cooking lunch on the induction cooker and using the microwave",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Kitchen",
+      "activity": "Eating lunch and washing dishes in the dishwasher",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:15-15:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing on the sofa",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:00-16:15",
+      "location": "Out",
+      "activity": "Walking in the park and getting some fresh air",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "16:15-17:45",
+      "location": "Study",
+      "activity": "Reading physiotherapy literature on the computer with the desk lamp on",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner using the induction cooker and rice cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner and cleaning up the kitchen",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:15-21:00",
+      "location": "Living Room",
+      "activity": "Streaming a show on TV and browsing the phone",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and drying off",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading on the phone with the light on before bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}

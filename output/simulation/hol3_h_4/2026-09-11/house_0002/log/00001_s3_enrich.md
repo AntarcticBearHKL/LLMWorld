@@ -1,0 +1,283 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-12 22:22:59
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Hospital physiotherapist
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-07:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping in Bedroom 1 with the air conditioner set to a comfortable overnight temperature"
+  },
+  {
+    "time": "07:00-07:20",
+    "location": "Bathroom",
+    "activity": "Waking up, using the toilet and washing face with warm water"
+  },
+  {
+    "time": "07:20-08:00",
+    "location": "Kitchen",
+    "activity": "Making and eating a leisurely holiday breakfast of toast, eggs and coffee using the toaster, induction cooker and kettle"
+  },
+  {
+    "time": "08:00-09:00",
+    "location": "Living Room",
+    "activity": "Doing a full-body mobility and stretching session on the living room floor, then checking the phone"
+  },
+  {
+    "time": "09:00-10:00",
+    "location": "Bathroom",
+    "activity": "Sorting laundry and running a load in the washing machine"
+  },
+  {
+    "time": "10:00-11:00",
+    "location": "Living Room",
+    "activity": "Tidying up the living room, vacuuming the floors and moving the wet clothes to the clothes dryer"
+  },
+  {
+    "time": "11:00-12:00",
+    "location": "Kitchen",
+    "activity": "Preparing a home-cooked lunch, chopping vegetables and using the rice cooker and induction cooker"
+  },
+  {
+    "time": "12:00-12:40",
+    "location": "Kitchen",
+    "activity": "Eating lunch at the kitchen table while listening to music on the phone"
+  },
+  {
+    "time": "12:40-13:30",
+    "location": "Living Room",
+    "activity": "Watching TV and relaxing on the sofa after the meal"
+  },
+  {
+    "time": "13:30-15:00",
+    "location": "Study",
+    "activity": "Reading clinical physiotherapy articles and reviewing professional notes on the computer with the desk lamp on"
+  },
+  {
+    "time": "15:00-16:00",
+    "location": "Out",
+    "activity": "Going out for a brisk afternoon walk around the neighbourhood park"
+  },
+  {
+    "time": "16:00-17:00",
+    "location": "Out",
+    "activity": "Shopping for groceries and household supplies at the local supermarket"
+  },
+  {
+    "time": "17:00-17:30",
+    "location": "Kitchen",
+    "activity": "Putting away the groceries and unpacking the shopping"
+  },
+  {
+    "time": "17:30-18:15",
+    "location": "Kitchen",
+    "activity": "Cooking dinner using the induction cooker, range hood and microwave"
+  },
+  {
+    "time": "18:15-19:00",
+    "location": "Kitchen",
+    "activity": "Eating dinner at the kitchen table"
+  },
+  {
+    "time": "19:00-19:30",
+    "location": "Kitchen",
+    "activity": "Clearing the table and loading the dishwasher"
+  },
+  {
+    "time": "19:30-21:30",
+    "location": "Living Room",
+    "activity": "Streaming a movie or series on the TV while relaxing on the sofa"
+  },
+  {
+    "time": "21:30-22:00",
+    "location": "Bathroom",
+    "activity": "Taking a warm shower and getting ready for bed"
+  },
+  {
+    "time": "22:00-22:30",
+    "location": "Bedroom 1",
+    "activity": "Reading a book in bed under the bedroom light"
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping in Bedroom 1"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "AirConditioner",
+      "Light"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "AirConditioner",
+      "Light"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "InductionCooker",
+      "RangeHood",
+      "Microwave",
+      "Kettle",
+      "Toaster",
+      "Dishwasher",
+      "Light",
+      "RiceCooker"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "Light",
+      "Fan",
+      "WashingMachine"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "Light",
+      "Router",
+      "GameConsole",
+      "VacuumCleaner",
+      "SpaceHeater",
+      "Dehumidifier",
+      "ClothesDryer"
+    ]
+  },
+  "Study": {
+    "appliances": [
+      "DeskLamp",
+      "Computer",
+      "Monitor",
+      "Light"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "ElectricVehicle",
+      "Computer",
+      "Monitor",
+      "Phone",
+      "DeskLamp"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{"member": "Member 1", "enriched_activities": [{"time": "00:00-07:00", "location": "Bedroom 1", "activity": "Sleeping in Bedroom 1 with the air conditioner set to a comfortable overnight temperature", "desc": "Lie down on the bed. Pull the blanket up over the body. Pick up the air conditioner remote from the nightstand. Press the remote to set the overnight temperature. Place the remote back on the nightstand. Press the bedside light switch to turn off the light. Close eyes. Lie still and sleep. Roll onto the left side. Pull the blanket up to the shoulder. Sleep. Roll onto the right side. Push the pillow into position. Sleep. Stretch one arm out. Sleep through the night."}, {"time": "07:00-07:20", "location": "Bathroom", "activity": "Waking up, using the toilet and washing face with warm water", "desc": "Open eyes. Push the blanket down. Sit up on the edge of the bed. Place both feet on the floor. Stand up. Walk to the bathroom door. Push the door open. Press the bathroom light switch on. Lift the toilet lid. Sit down on the toilet. Urinate. Stand up. Press the flush button. Walk to the sink. Turn the tap handle to warm water. Cup both hands under the water. Splash water onto the face. Rub the face with the hands. Turn the tap handle off. Pull the towel off the rack. Wipe the face with the towel. Hang the towel back on the rack. Press the bathroom light switch off. Walk out of the bathroom."}, {"time": "07:20-08:00", "location": "Kitchen", "activity": "Making and eating a leisurely holiday breakfast of toast, eggs and coffee using the toaster, induction cooker and kettle", "desc": "Walk into the kitchen. Press the kitchen light switch on. Open the refrigerator door. Take out the egg box and the butter. Place them on the counter. Close the refrigerator door. Open the bread bag. Take out two slices of bread. Place the two slices into the toaster slots. Press the toaster lever down. Plug the kettle into the socket. Fill the kettle with water from the tap. Press the kettle switch on. Place a frying pan on the induction cooker. Press the induction cooker power button. Pour oil into the pan. Crack one egg on the edge of the pan. Drop the egg into the pan. Crack the second egg into the pan. Pick up the spatula. Turn the eggs over with the spatula. Press the induction cooker button to switch off. Slide the eggs onto a plate. Take the toast out of the toaster. Spread butter on the toast with a knife. Pour hot water into a cup. Add coffee powder. Stir the coffee with a spoon. Carry the plate and the cup to the kitchen table. Sit down on the chair. Pick up the fork. Cut the egg with the fork. Lift the food to the mouth. Chew and swallow. Lift the cup. Drink the coffee. Put the cup down. Stand up."}, {"time": "08:00-09:00", "location": "Living Room", "activity": "Doing a full-body mobility and stretching session on the living room floor, then checking the phone", "desc": "Walk into the living room. Pull the yoga mat out from behind the sofa. Unroll the mat on the floor. Sit down on the mat. Extend both legs forward. Bend forward and reach both hands toward the feet. Hold the position. Sit up straight. Raise the left arm overhead. Bend the torso to the right side. Return to the centre. Bend the torso to the left side. Return to the centre. Turn onto the hands and knees. Arch the back upward. Lower the back downward. Return to sitting. Rotate the neck to the left. Rotate the neck to the right. Roll the shoulders backward. Stand up. Roll the mat up. Put the mat back behind the sofa. Pick up the phone from the coffee table. Press the phone power button. Swipe the screen. Scroll through the messages. Press the phone power button off. Place the phone on the coffee table."}, {"time": "09:00-10:00", "location": "Bathroom", "activity": "Sorting laundry and running a load in the washing machine", "desc": "Walk to the bathroom. Push the bathroom door open. Press the bathroom light switch on. Pick up the laundry basket from the floor. Carry the basket to the laundry hamper. Open the washing machine door. Pull the white clothes out of the basket. Drop the white clothes into the washing machine drum. Pull the coloured clothes out of the basket. Drop the coloured clothes into a separate pile on the floor. Close the washing machine door. Open the detergent drawer. Pour detergent into the drawer. Push the detergent drawer closed. Press the washing machine power button. Turn the program dial to the cotton cycle. Press the start button. Place the empty basket on the shelf. Press the bathroom light switch off. Walk out of the bathroom."}, {"time": "10:00-11:00", "location": "Living Room", "activity": "Tidying up the living room, vacuuming the floors and moving the wet clothes to the clothes dryer", "desc": "Walk into the living room. Pick up the cushions from the floor. Place the cushions on the sofa. Fold the blanket on the sofa. Pick up the magazines from the coffee table. Stack the magazines on the shelf. Pick up the cups from the coffee table. Carry the cups to the kitchen counter. Walk back to the living room. Open the storage cupboard. Pull out the vacuum cleaner. Plug the vacuum cleaner cord into the socket. Press the vacuum cleaner power button on. Push the vacuum cleaner across the floor. Pull the vacuum cleaner back. Move the vacuum cleaner under the coffee table. Move the vacuum cleaner along the sofa edge. Press the vacuum cleaner power button off. Unplug the cord. Wrap the cord around the hook. Push the vacuum cleaner back into the cupboard. Walk to the bathroom. Open the washing machine door. Pull the wet clothes out. Carry the wet clothes to the living room. Open the clothes dryer door. Put the wet clothes into the dryer drum. Close the dryer door. Press the dryer start button."}, {"time": "11:00-12:00", "location": "Kitchen", "activity": "Preparing a home-cooked lunch, chopping vegetables and using the rice cooker and induction cooker", "desc": "Walk into the kitchen. Open the refrigerator door. Take out the vegetables, the meat and the tofu. Place them on the counter. Close the refrigerator door. Open the cupboard. Take out the rice bag. Measure rice into a bowl with the measuring cup. Pour water into the bowl. Rinse the rice with both hands. Pour the rice into the rice cooker pot. Add water to the rice cooker pot. Place the pot into the rice cooker. Close the rice cooker lid. Press the rice cooker start button. Pick up the knife from the knife block. Pick up the cutting board. Place the cutting board on the counter. Hold the cabbage with the left hand. Cut the cabbage into strips with the knife. Push the cabbage strips into a bowl. Cut the carrot into slices. Cut the tofu into cubes. Cut the meat into pieces. Place the frying pan on the induction cooker. Press the induction cooker power button. Pour oil into the pan. Add the meat to the pan. Stir the meat with the spatula. Add the vegetables to the pan. Add salt from the salt jar. Stir the mixture with the spatula. Press the induction cooker power button off. Slide the food onto two plates."}, {"time": "12:00-12:40", "location": "Kitchen", "activity": "Eating lunch at the kitchen table while listening to music on the phone", "desc": "Carry the plates to the kitchen table. Set the plates on the table. Open the rice cooker lid. Spoon rice into a bowl. Place the bowl on the table. Pull the chair out. Sit down on the chair. Pick up the phone from the table. Press the phone power button. Open the music app. Tap a playlist. Place the phone on the table. Pick up the chopsticks. Lift rice to the mouth. Chew and swallow. Pick up a piece of vegetable with the chopsticks. Lift it to the mouth. Chew and swallow. Pick up the bowl. Drink the soup from the bowl. Put the bowl down. Tap the phone screen to skip a track. Continue eating with the chopsticks. Finish the food on the plate. Put the chopsticks down. Stand up."}, {"time": "12:40-13:30", "location": "Living Room", "activity": "Watching TV and relaxing on the sofa after the meal", "desc": "Walk into the living room. Pick up the TV remote from the coffee table. Press the TV power button. Sit down on the sofa. Lean back against the cushions. Press the remote to select a channel. Place the remote on the sofa armrest. Watch the TV screen. Cross the legs on the sofa. Reach for the remote. Press the volume button. Put the remote down. Sit up. Pick up the water glass from the coffee table. Drink water. Put the glass down. Lean back on the sofa. Stretch both arms overhead. Watch the TV screen. Press the remote to change the channel. Put the remote down."}, {"time": "13:30-15:00", "location": "Study", "activity": "Reading clinical physiotherapy articles and reviewing professional notes on the computer with the desk lamp on", "desc": "Walk into the study. Pull the chair out from the desk. Sit down on the chair. Press the desk lamp switch on. Press the computer power button. Wait for the computer to start. Move the mouse. Click the browser icon on the screen. Type keywords into the search bar. Press the Enter key. Scroll the page with the mouse wheel. Click an article link. Read the article on the monitor. Pick up the notebook from the desk. Pick up the pen. Write notes in the notebook. Put the pen down. Scroll down the article. Click the next article link. Read the second article. Open the notes folder on the computer. Scroll through the notes file. Type a summary paragraph on the keyboard. Save the file with Ctrl and S keys. Open a second browser tab. Read the abstract on the screen. Pick up the water cup from the desk. Drink water. Put the cup down. Press the desk lamp switch off. Press the computer power button off. Push the chair back. Stand up."}, {"time": "15:00-16:00", "location": "Out", "activity": "Going out for a brisk afternoon walk around the neighbourhood park", "desc": "Walk to the entrance door. Pick up the keys from the hook. Pick up the phone from the shelf. Push the shoes on with both hands. Tie the shoelaces. Open the entrance door. Step outside. Close the door behind. Walk down the stairs. Push the building door open. Walk along the pavement. Turn left at the corner. Walk through the park gate. Swing both arms while walking. Walk along the park path. Pass the pond. Turn right at the fork. Walk up the small slope. Walk past the bench. Turn around at the end of the path. Walk back along the path. Walk out of the park gate. Turn right along the pavement. Walk back to the building. Push the building door open. Walk up the stairs. Open the apartment door with the key. Step inside. Close the door."}, {"time": "16:00-17:00", "location": "Out", "activity": "Shopping for groceries and household supplies at the local supermarket", "desc": "Walk into the supermarket. Pull a shopping trolley from the stack. Push the trolley along the aisle. Pick up a bag of rice from the shelf. Place the rice bag into the trolley. Pick up a bottle of cooking oil. Place the oil bottle into the trolley. Push the trolley to the vegetable section. Pick up a cabbage. Place the cabbage into the trolley. Pick up a bag of carrots. Place the carrots into the trolley. Push the trolley to the dairy section. Open the refrigerator door. Take out a carton of milk. Place the milk into the trolley. Close the refrigerator door. Push the trolley to the meat counter. Pick up a pack of chicken. Place the chicken into the trolley. Push the trolley to the household aisle. Pick up a bottle of detergent. Place the detergent into the trolley. Push the trolley to the checkout counter. Lift the items onto the conveyor belt. Wait at the counter. Pick up the phone. Open the payment app. Show the QR code to the cashier. Say 'Thank you' to the cashier. Pick up the bags. Walk out of the supermarket."}, {"time": "17:00-17:30", "location": "Kitchen", "activity": "Putting away the groceries and unpacking the shopping", "desc": "Walk into the kitchen. Place the shopping bags on the counter. Open the refrigerator door. Take the milk carton out of the bag. Place the milk on the refrigerator shelf. Take the chicken pack out of the bag. Place the chicken in the refrigerator drawer. Take the cabbage out of the bag. Place the cabbage in the refrigerator drawer. Take the carrots out of the bag. Place the carrots in the refrigerator drawer. Close the refrigerator door. Take the rice bag out of the bag. Open the cupboard door. Place the rice bag on the shelf. Close the cupboard door. Take the cooking oil bottle out of the bag. Place the oil bottle on the counter shelf. Take the detergent bottle out of the bag. Carry the detergent to the bathroom. Place the detergent on the bathroom shelf. Walk back to the kitchen. Fold the empty shopping bags. Place the bags in the drawer. Wipe the counter with the cloth."}, {"time": "17:30-18:15", "location": "Kitchen", "activity": "Cooking dinner using the induction cooker, range hood and microwave", "desc": "Open the refrigerator door. Take out the chicken, the carrot and the tofu. Place them on the counter. Close the refrigerator door. Press the range hood power button on. Pick up the cutting board. Place the cutting board on the counter. Pick up the knife from the knife block. Cut the chicken into pieces on the board. Cut the carrot into slices. Cut the tofu into cubes. Place the frying pan on the induction cooker. Press the induction cooker power button. Pour oil into the pan. Add the chicken pieces to the pan. Stir the chicken with the spatula. Add the carrot slices to the pan. Add the tofu cubes to the pan. Add soy sauce from the bottle. Stir the mixture with the spatula. Pick up the bowl of rice. Place the bowl into the microwave. Close the microwave door. Press the microwave start button. Press the induction cooker power button off. Slide the food onto two plates. Open the microwave door. Take the bowl of rice out. Place the bowl on the table."}, {"time": "18:15-19:00", "location": "Kitchen", "activity": "Eating dinner at the kitchen table", "desc": "Carry the plates to the kitchen table. Set the plates on the table. Place the bowl of rice on the table. Pull the chair out. Sit down on the chair. Pick up the chopsticks. Lift the chicken to the mouth. Chew and swallow. Pick up a piece of tofu with the chopsticks. Lift it to the mouth. Chew and swallow. Pick up the rice bowl. Lift the bowl to the mouth. Eat rice with the chopsticks. Put the bowl down. Pick up the soup spoon. Spoon soup from the bowl. Lift the spoon to the mouth. Drink the soup. Put the spoon down. Pick up the chopsticks again. Finish the food on the plate. Put the chopsticks down on the plate. Pick up the water glass. Drink water. Put the glass down. Stand up."}, {"time": "19:00-19:30", "location": "Kitchen", "activity": "Clearing the table and loading the dishwasher", "desc": "Pick up the plates from the kitchen table. Carry the plates to the sink. Scrape the leftovers into the bin with the fork. Place the plates on the sink rack. Pick up the bowls. Carry the bowls to the sink. Rinse the bowls under the tap. Pick up the chopsticks and the spoon. Carry them to the sink. Rinse the chopsticks and the spoon. Open the dishwasher door. Pull the lower rack out. Place the plates in the rack. Place the bowls in the rack. Place the chopsticks and the spoon in the basket. Push the lower rack in. Open the detergent compartment. Add the dishwasher tablet. Close the compartment. Push the dishwasher door closed. Press the dishwasher start button. Wipe the table with the cloth. Fold the cloth over the tap."}, {"time": "19:30-21:30", "location": "Living Room", "activity": "Streaming a movie or series on the TV while relaxing on the sofa", "desc": "Walk into the living room. Pick up the TV remote from the coffee table. Press the TV power button. Sit down on the sofa. Lean back against the cushions. Press the remote to open the streaming app. Scroll the menu with the arrow buttons. Press the select button on a movie. Press the play button. Place the remote on the sofa armrest. Watch the TV screen. Cross the legs. Reach for the remote. Press the pause button. Stand up. Walk to the kitchen. Open the refrigerator door. Take out a bottle of water. Close the refrigerator door. Walk back to the living room. Sit down on the sofa. Open the bottle cap. Drink water. Close the bottle cap. Place the bottle on the coffee table. Press the remote to resume the movie. Lean back on the sofa. Watch the TV screen. Press the volume button down. Put the remote down. Watch the rest of the movie. Press the remote stop button. Press the TV power button off."}, {"time": "21:30-22:00", "location": "Bathroom", "activity": "Taking a warm shower and getting ready for bed", "desc": "Walk to the bathroom. Push the bathroom door open. Press the bathroom light switch on. Press the water heater switch on. Pull the towel off the rack. Place the towel on the hook. Pull the shirt over the head. Take off the trousers. Drop the clothes into the laundry basket. Push the shower door open. Step into the shower. Turn the shower tap to warm water. Stand under the water. Wet the hair. Pick up the shampoo bottle. Squeeze shampoo into the hand. Rub the shampoo into the hair. Rinse the hair under the water. Pick up the soap. Rub the soap over the body. Rinse the body under the water. Turn the shower tap off. Push the shower door open. Step out of the shower. Pick up the towel from the hook. Rub the hair with the towel. Wipe the body with the towel. Hang the towel on the rack. Press the water heater switch off. Press the bathroom light switch off. Walk out of the bathroom."}, {"time": "22:00-22:30", "location": "Bedroom 1", "activity": "Reading a book in bed under the bedroom light", "desc": "Walk into Bedroom 1. Press the air conditioner remote to set the overnight temperature. Place the remote on the nightstand. Press the bedroom light switch on. Pick up the book from the nightstand. Pull the blanket down. Sit on the edge of the bed. Lie down on the bed. Prop the pillow behind the back. Open the book to the bookmark. Read the page. Turn the page with the right hand. Read the next page. Turn the page again. Read the next page. Pick up the bookmark from the nightstand. Place the bookmark between the pages. Close the book. Place the book on the nightstand. Press the bedroom light switch off. Pull the blanket up over the body."}, {"time": "22:30-24:00", "location": "Bedroom 1", "activity": "Sleeping in Bedroom 1", "desc": "Lie on the bed. Pull the blanket up to the shoulder. Close eyes. Lie still. Roll onto the left side. Push the pillow into position. Sleep. Roll onto the back. Place both arms on the blanket. Sleep. Turn the head to the side. Sleep. Pull the blanket up. Sleep through the night."}]}
+```
+

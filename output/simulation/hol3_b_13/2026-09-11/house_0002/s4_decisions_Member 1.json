@@ -1,0 +1,261 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "start_minutes": 0,
+      "end_minutes": 400,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:40-07:10",
+      "start_minutes": 400,
+      "end_minutes": 430,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and showering",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:40",
+      "start_minutes": 430,
+      "end_minutes": 460,
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with coffee and toast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:15",
+      "start_minutes": 460,
+      "end_minutes": 495,
+      "location": "Out",
+      "activity": "Commuting to the hospital by public transport",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:15-12:00",
+      "start_minutes": 495,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Working as a physiotherapist, assessing and treating patients in the rehabilitation ward",
+      "operations": []
+    },
+    {
+      "time": "12:00-12:45",
+      "start_minutes": 720,
+      "end_minutes": 765,
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital cafeteria",
+      "operations": []
+    },
+    {
+      "time": "12:45-17:15",
+      "start_minutes": 765,
+      "end_minutes": 1035,
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions, writing patient progress notes and handing over to colleagues",
+      "operations": []
+    },
+    {
+      "time": "17:15-17:50",
+      "start_minutes": 1035,
+      "end_minutes": 1070,
+      "location": "Out",
+      "activity": "Commuting home from the hospital by public transport",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:50-18:20",
+      "start_minutes": 1070,
+      "end_minutes": 1100,
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:20-19:00",
+      "start_minutes": 1100,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Cooking dinner using the induction cooker and rice cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:40",
+      "start_minutes": 1140,
+      "end_minutes": 1180,
+      "location": "Kitchen",
+      "activity": "Eating dinner and cleaning up the dishes",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:40-20:20",
+      "start_minutes": 1180,
+      "end_minutes": 1220,
+      "location": "Bathroom",
+      "activity": "Loading the washing machine and doing laundry",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "20:20-20:50",
+      "start_minutes": 1220,
+      "end_minutes": 1250,
+      "location": "Study",
+      "activity": "Using the computer to review patient exercise plans and read physiotherapy research",
+      "operations": [
+        {
+          "unique_id": "study_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "study_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:50-22:10",
+      "start_minutes": 1250,
+      "end_minutes": 1330,
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing on the sofa",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:10-22:40",
+      "start_minutes": 1330,
+      "end_minutes": 1360,
+      "location": "Bedroom 1",
+      "activity": "Doing stretching exercises and reading on the phone",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:40-24:00",
+      "start_minutes": 1360,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth, and getting dressed for work"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with coffee while checking the day's patient schedule on phone"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Packing work bag, putting on shoes, and doing a short morning stretch routine"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital by public transport"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist: assessing inpatients, delivering rehabilitation exercises, and documenting treatment notes"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break in the hospital staff room"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy work: running therapy sessions, supervising mobility training, and updating care plans"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital by public transport"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table, washing dishes, and wiping down the counter"
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV and chatting on the phone"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower and doing evening personal hygiene"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Study",
+      "activity": "Using the computer to review continuing-education material and plan tomorrow's patient exercises"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Going to bed and sleeping"
+    }
+  ]
+}

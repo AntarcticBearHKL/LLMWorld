@@ -1,0 +1,90 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and brushing teeth"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and packing work bag"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital by public transport"
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working as a physiotherapist: assessing patients and running rehabilitation sessions"
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions and writing patient documentation"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Preparing and cooking dinner"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "19:15-19:45",
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen"
+    },
+    {
+      "time": "19:45-20:30",
+      "location": "Living Room",
+      "activity": "Doing stretching and mobility exercises"
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Showering and evening hygiene routine"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and reading on the phone"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
