@@ -1,0 +1,249 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:30",
+      "start_minutes": 0,
+      "end_minutes": 450,
+      "location": "Bedroom 1",
+      "activity": "Sleeping in on the public holiday",
+      "operations": []
+    },
+    {
+      "time": "07:30-08:00",
+      "start_minutes": 450,
+      "end_minutes": 480,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth and getting dressed for the day",
+      "operations": []
+    },
+    {
+      "time": "08:00-08:45",
+      "start_minutes": 480,
+      "end_minutes": 525,
+      "location": "Kitchen",
+      "activity": "Making and eating a slow breakfast of toast and tea using the toaster and kettle, then rinsing dishes",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:45-09:15",
+      "start_minutes": 525,
+      "end_minutes": 555,
+      "location": "Bathroom",
+      "activity": "Loading and running a load of laundry in the washing machine",
+      "operations": [
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "09:15-09:30",
+      "start_minutes": 555,
+      "end_minutes": 570,
+      "location": "Bedroom 1",
+      "activity": "Tidying the bedroom and making the bed",
+      "operations": []
+    },
+    {
+      "time": "09:30-11:30",
+      "start_minutes": 570,
+      "end_minutes": 690,
+      "location": "Bedroom 1",
+      "activity": "Studying at the desk on the computer: reading set texts and drafting a Master of Education assignment with the desk lamp on",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:30-12:15",
+      "start_minutes": 690,
+      "end_minutes": 735,
+      "location": "Kitchen",
+      "activity": "Cooking a simple lunch on the induction cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:15-13:00",
+      "start_minutes": 735,
+      "end_minutes": 780,
+      "location": "Kitchen",
+      "activity": "Eating lunch and cleaning up the kitchen counter",
+      "operations": []
+    },
+    {
+      "time": "13:00-14:30",
+      "start_minutes": 780,
+      "end_minutes": 870,
+      "location": "Out",
+      "activity": "Walking to the local shops for grocery shopping and a bit of fresh air on the public holiday",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "14:30-15:00",
+      "start_minutes": 870,
+      "end_minutes": 900,
+      "location": "Kitchen",
+      "activity": "Unpacking groceries and putting items into the refrigerator and freezer",
+      "operations": []
+    },
+    {
+      "time": "15:00-16:30",
+      "start_minutes": 900,
+      "end_minutes": 990,
+      "location": "Bedroom 1",
+      "activity": "Continuing study on the computer: watching recorded lecture material and taking notes",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:30-17:30",
+      "start_minutes": 990,
+      "end_minutes": 1050,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV with the fan on",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:00",
+      "start_minutes": 1050,
+      "end_minutes": 1080,
+      "location": "Kitchen",
+      "activity": "Preparing dinner ingredients and cooking on the induction cooker with the range hood on",
+      "operations": [
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Eating dinner and washing up afterwards",
+      "operations": []
+    },
+    {
+      "time": "19:00-20:30",
+      "start_minutes": 1140,
+      "end_minutes": 1230,
+      "location": "Bedroom 1",
+      "activity": "Working on assignment writing and referencing at the desk on the computer",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:30",
+      "start_minutes": 1230,
+      "end_minutes": 1290,
+      "location": "Living Room",
+      "activity": "Leisure time watching TV and playing a game on the game console",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bathroom",
+      "activity": "Taking a hot shower and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:45",
+      "start_minutes": 1320,
+      "end_minutes": 1365,
+      "location": "Bedroom 1",
+      "activity": "Winding down with light reading and checking the phone under the desk lamp",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    }
+  ]
+}

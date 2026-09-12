@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Waking up, showering, and getting dressed"
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:45-08:30",
+      "location": "Out",
+      "activity": "Commuting to Monash University"
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and studying at Monash University"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Eating lunch at university"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Attending afternoon classes and studying at Monash University"
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home from university"
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner"
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Commuting to part-time hospitality/retail job"
+    },
+    {
+      "time": "19:30-22:30",
+      "location": "Out",
+      "activity": "Working part-time shift in hospitality/retail"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Out",
+      "activity": "Commuting home from work"
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bathroom",
+      "activity": "Personal hygiene and winding down"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

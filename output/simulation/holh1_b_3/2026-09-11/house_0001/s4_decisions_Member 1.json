@@ -1,0 +1,224 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "start_minutes": 0,
+      "end_minutes": 400,
+      "location": "Bedroom 1",
+      "activity": "Sleeping in own bedroom",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:40-07:10",
+      "start_minutes": 400,
+      "end_minutes": 430,
+      "location": "Bathroom",
+      "activity": "Showering and washing up with hot water",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:40",
+      "start_minutes": 430,
+      "end_minutes": 460,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast (toast and tea) using the toaster, kettle and refrigerator",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:00",
+      "start_minutes": 460,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Packing study materials and getting ready for campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting to Monash Clayton campus for study",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and seminars on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Eating lunch and doing required reading on campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "start_minutes": 780,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Attending tutorials and group work, and researching in the campus library",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home from campus",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner using the induction cooker and rice cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:10",
+      "start_minutes": 1125,
+      "end_minutes": 1150,
+      "location": "Bedroom 1",
+      "activity": "Changing into work uniform and checking shift notes on phone",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:10-19:30",
+      "start_minutes": 1150,
+      "end_minutes": 1170,
+      "location": "Out",
+      "activity": "Commuting to the part-time hospitality venue",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-23:10",
+      "start_minutes": 1170,
+      "end_minutes": 1390,
+      "location": "Out",
+      "activity": "Working part-time hospitality shift serving customers and tidying the service area",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:10-23:30",
+      "start_minutes": 1390,
+      "end_minutes": 1410,
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:30-24:00",
+      "start_minutes": 1410,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Unwinding, charging phone, setting alarm and going to bed",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping in on the public holiday",
+      "desc": "Lie in bed. Pull blanket over shoulders. Close eyes. Breathe slowly. Turn onto left side. Adjust pillow. Continue sleeping. Turn onto right side. Pull blanket up. Shift legs. Move arm under pillow. Remain still. Sleep. Turn onto back. Stretch arms. Yawn. Turn onto side. Sleep."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Enter bathroom. Turn on bathroom light. Turn on tap. Pick up toothbrush. Squeeze toothpaste onto toothbrush. Brush teeth. Rinse mouth. Put toothbrush down. Cup hands under water. Splash water on face. Pick up towel. Wipe face. Turn off tap. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Kitchen",
+      "activity": "Making and eating a relaxed breakfast with toast and tea using the toaster and kettle",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out bread and butter. Close refrigerator. Place bread in toaster. Press toaster lever down. Fill kettle with water. Turn on kettle. Toast pops up. Remove toast. Spread butter on toast. Place tea bag in cup. Pour hot water into cup. Stir tea. Sit at table. Eat toast. Drink tea. Finish eating. Rinse plate. Place plate in sink."
+    },
+    {
+      "time": "08:45-09:15",
+      "location": "Bathroom",
+      "activity": "Sorting laundry and starting a load in the washing machine",
+      "desc": "Enter bathroom. Turn on light. Open laundry basket. Sort clothes into whites and colors. Pick up white clothes. Open washing machine door. Place white clothes into washing machine. Close washing machine door. Open detergent drawer. Pour detergent into drawer. Close detergent drawer. Turn washing machine dial to select cycle. Press start button. Wait for machine to start. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "09:15-10:45",
+      "location": "Bedroom 1",
+      "activity": "Reading education course materials on the computer at the desk with the desk lamp on",
+      "desc": "Enter bedroom. Sit at desk. Turn on desk lamp. Open laptop computer. Press power button. Wait for computer to boot. Open web browser. Navigate to course materials. Scroll through document. Read text. Highlight important points. Pick up pen. Write notes in notebook. Put pen down. Adjust desk lamp angle. Continue reading. Scroll down. Read more. Stretch arms. Continue reading."
+    },
+    {
+      "time": "10:45-11:15",
+      "location": "Out",
+      "activity": "Walking around the neighbourhood for fresh air and light exercise",
+      "desc": "Put on shoes. Put on jacket. Open front door. Step outside. Close front door. Walk down driveway. Turn left onto sidewalk. Walk along street. Swing arms. Breathe deeply. Continue walking. Turn right at corner. Walk around block. Nod to passerby. Keep walking. Turn back towards home. Walk up driveway. Open front door. Enter house. Close front door. Remove shoes. Remove jacket."
+    },
+    {
+      "time": "11:15-12:30",
+      "location": "Kitchen",
+      "activity": "Cooking a simple lunch on the induction cooker and eating it",
+      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out ingredients. Close refrigerator. Wash and chop vegetables. Place pan on induction cooker. Turn on induction cooker. Pour oil. Add vegetables. Stir. Add seasoning. Turn off induction cooker. Place food on plate. Sit at table. Eat lunch. Drink water. Rinse plate. Turn off light. Exit kitchen."
+    },
+    {
+      "time": "12:30-13:30",
+      "location": "Bedroom 1",
+      "activity": "Writing a Master of Education assignment draft on the computer",
+      "desc": "Enter bedroom. Sit at desk. Turn on desk lamp. Open laptop. Press power button. Open word processor. Create new document. Type title. Type paragraphs. Pause. Scroll up. Read text. Delete sentence. Retype. Continue typing. Use keyboard. Click mouse. Save document. Continue writing. Stretch fingers."
+    },
+    {
+      "time": "13:30-14:00",
+      "location": "Out",
+      "activity": "Travelling to the part-time hospitality and retail job",
+      "desc": "Put on shoes. Pick up bag. Open front door. Step outside. Close front door. Walk to bus stop. Wait for bus. Board bus. Tap transit card. Find seat. Sit down. Look out window. Get off bus. Walk to workplace. Enter workplace."
+    },
+    {
+      "time": "14:00-18:00",
+      "location": "Out",
+      "activity": "Working a shift serving customers at the hospitality and retail workplace",
+      "desc": "Clock in. Put on apron. Greet customers. Take orders. Write down orders. Enter orders into system. Prepare food. Serve food. Clean tables. Operate cash register. Handle money. Give change. Restock shelves. Answer phone. Assist customers. Wipe counters. Sweep floor. Take out trash. Clock out."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Out",
+      "activity": "Taking a dinner break and eating a staff meal at work",
+      "desc": "Walk to break room. Sit at table. Open staff meal container. Pick up fork. Stir food. Take bite. Chew. Swallow. Drink water. Wipe mouth with napkin. Throw away trash. Stand up. Walk back to work area."
+    },
+    {
+      "time": "18:30-21:30",
+      "location": "Out",
+      "activity": "Continuing the evening shift at the hospitality and retail workplace",
+      "desc": "Resume duties. Serve customers. Clean tables. Operate cash register. Restock items. Mop floor. Assist colleagues. Take orders. Prepare drinks. Serve drinks. Clear dishes. Wipe counters. Empty trash. Clock out."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Out",
+      "activity": "Travelling home after the shift",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap card. Sit down. Look out window. Get off bus. Walk home. Open front door. Enter house. Close front door. Remove shoes. Put bag down."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Showering and washing up after work",
+      "desc": "Enter bathroom. Turn on light. Turn on shower. Adjust water temperature. Step into shower. Wet body. Apply soap. Lather. Rinse. Wash hair with shampoo. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel around. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "22:30-23:15",
+      "location": "Living Room",
+      "activity": "Relaxing on the couch watching TV to unwind",
+      "desc": "Walk to living room. Sit on couch. Pick up remote control. Press power button to turn on TV. Change channels. Settle on program. Watch TV. Adjust volume. Put feet on coffee table. Lean back. Watch more TV. Pick up phone. Check messages. Put phone down. Continue watching TV. Stretch. Yawn. Turn off TV. Stand up."
+    },
+    {
+      "time": "23:15-24:00",
+      "location": "Bedroom 1",
+      "activity": "Dimming the desk lamp, checking the phone briefly and going to sleep",
+      "desc": "Enter bedroom. Walk to desk. Turn desk lamp knob to dim. Pick up phone. Press home button. Check notifications. Scroll through messages. Put phone down on bedside table. Plug phone into charger. Walk to bed. Pull back blanket. Lie down. Pull blanket over body. Adjust pillow. Close eyes. Turn to side. Breathe slowly. Sleep."
+    }
+  ]
+}
