@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:15",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:15-06:40",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth, using toilet"
+    },
+    {
+      "time": "06:40-07:05",
+      "location": "Kitchen",
+      "activity": "Preparing breakfast (toast and tea) for both, while Member 2 is in the bathroom"
+    },
+    {
+      "time": "07:05-07:35",
+      "location": "Kitchen",
+      "activity": "Eating breakfast with Member 2"
+    },
+    {
+      "time": "07:35-08:05",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing bag for work"
+    },
+    {
+      "time": "08:05-09:00",
+      "location": "Out",
+      "activity": "Commuting to work (leaving at the same time as Member 2)"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as community program coordinator at nonprofit"
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home (with Member 2)"
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 2"
+    },
+    {
+      "time": "18:30-19:10",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV with Member 2"
+    },
+    {
+      "time": "19:10-21:00",
+      "location": "Bedroom 1",
+      "activity": "Using computer and phone, relaxing"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and night routine"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Reading or winding down"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Living Room",
+      "activity": "Light reading and winding down with Member 2"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

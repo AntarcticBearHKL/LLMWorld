@@ -1,0 +1,137 @@
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping in bed",
+      "desc": "Lying in bed. Eyes closed. Breathing slowly. Turns to the left side. Pulls blanket up to shoulders. Turns to the right side. Adjusts pillow. Remains still. Turns to the back. Stretches legs. Yawns. Turns to the left side again. Pulls blanket down. Remains still. Breathes deeply. Turns to the right side. Pulls blanket up. Remains still."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bathroom",
+      "activity": "Washing up and taking a shower before Member 1 uses the bathroom",
+      "desc": "Wakes up. Gets out of bed. Walks to bathroom. Turns on light. Turns on water heater. Removes pajamas. Steps into shower. Turns on shower. Applies soap. Scrubs body. Rinses body. Applies shampoo. Scrubs hair. Rinses hair. Turns off shower. Steps out. Picks up towel. Dries body. Turns off light. Walks out."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 2",
+      "activity": "Getting dressed and preparing for the day",
+      "desc": "Walks into bedroom. Closes door. Opens wardrobe. Takes out shirt. Takes out trousers. Takes out underwear. Takes out socks. Removes towel. Puts on underwear. Puts on shirt. Puts on trousers. Puts on socks. Walks to mirror. Combs hair. Applies deodorant. Puts on watch. Picks up phone. Checks time. Puts phone in pocket. Opens bedroom door. Walks out."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Kitchen",
+      "activity": "Making toast and tea for breakfast",
+      "desc": "Walks to kitchen. Turns on light. Opens refrigerator. Takes out bread. Takes out butter. Takes out milk. Takes out tea bags. Closes refrigerator. Places bread in toaster. Presses toaster lever. Picks up kettle. Fills with water. Turns on kettle. Butters toast. Pours water into mug. Adds tea bag. Takes toast out. Places on plate. Carries to table."
+    },
+    {
+      "time": "08:30-09:20",
+      "location": "Kitchen",
+      "activity": "Eating breakfast with Member 1 (toast and tea)",
+      "desc": "Sits at kitchen table. Picks up knife. Spreads butter on toast. Picks up toast. Takes bite. Chews. Swallows. Picks up mug. Takes sip of tea. Puts down mug. Turns to Member 1. Says: 'Good morning, did you sleep well?' Listens to Member 1. Nods. Picks up toast again. Takes another bite. Chews. Swallows. Picks up mug. Takes sip. Puts down mug."
+    },
+    {
+      "time": "09:20-11:00",
+      "location": "Bedroom 2",
+      "activity": "Working on a freelance illustration commission at the desk",
+      "desc": "Walks to bedroom. Sits at desk. Turns on desk lamp. Presses computer power button. Waits for login screen. Types password. Opens illustration program. Opens commission file. Picks up stylus. Draws outline. Presses Ctrl+S. Adjusts brush size. Draws details. Erases mistake. Takes sip of water. Checks phone. Replies to message. Continues drawing. Saves file. Stretches arms."
+    },
+    {
+      "time": "11:00-11:20",
+      "location": "Kitchen",
+      "activity": "Making tea and preparing a light snack",
+      "desc": "Walks to kitchen. Turns on kettle. Opens cupboard. Takes out tea bag. Takes out mug. Opens refrigerator. Takes out cheese. Takes out crackers. Closes refrigerator. Places cracker on plate. Slices cheese. Places cheese on cracker. Kettle boils. Pours water into mug. Adds tea bag. Carries plate and mug to table."
+    },
+    {
+      "time": "11:20-12:30",
+      "location": "Bedroom 2",
+      "activity": "Continuing illustration work on the computer",
+      "desc": "Walks to bedroom. Sits at desk. Wakes computer. Opens file. Continues drawing. Uses stylus. Adjusts layers. Uses color picker. Zooms in. Zooms out. Saves file. Checks email. Replies to email. Takes break. Stretches arms. Continues drawing. Saves file again."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch with Member 1",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out vegetables. Closes refrigerator. Turns on induction cooker. Places pan on cooker. Adds oil. Chops vegetables. Adds vegetables to pan. Stirs. Adds spices. Cooks. Turns off cooker. Serves onto plates. Places plates on table. Sits down with Member 1. Picks up fork. Takes bite. Chews. Swallows. Says: 'This is delicious.'"
+    },
+    {
+      "time": "13:15-14:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV with Member 1",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Presses power button. Selects channel. Puts down remote. Leans back. Watches TV. Turns to Member 1. Says: 'This show is interesting.' Listens to Member 1. Laughs. Adjusts position. Picks up remote. Changes channel. Puts down remote. Continues watching."
+    },
+    {
+      "time": "14:00-15:30",
+      "location": "Out",
+      "activity": "Visiting a local art gallery exhibition",
+      "desc": "Walks out of house. Walks to art gallery. Enters gallery. Buys ticket. Walks through exhibition. Stops at painting. Looks at painting. Reads description. Moves to next painting. Takes out phone. Takes photo. Puts phone away. Continues walking. Sits on bench. Rests. Walks to next room. Looks at sculpture. Reads plaque. Walks to exit."
+    },
+    {
+      "time": "15:30-16:15",
+      "location": "Out",
+      "activity": "Shopping for art supplies and personal items",
+      "desc": "Walks to art supply store. Enters store. Picks up basket. Walks to aisle. Picks up paint brushes. Picks up paint tubes. Picks up sketchbook. Walks to personal care aisle. Picks up shampoo. Picks up toothpaste. Walks to checkout. Pays. Puts items in bag. Walks out of store."
+    },
+    {
+      "time": "16:15-16:30",
+      "location": "Bedroom 2",
+      "activity": "Putting away art supplies and personal items",
+      "desc": "Walks into bedroom. Puts bag on bed. Opens bag. Takes out paint brushes. Places on desk. Takes out paint tubes. Places in drawer. Takes out sketchbook. Places on shelf. Takes out shampoo. Places on dresser. Takes out toothpaste. Places on dresser. Closes bag. Puts bag in closet."
+    },
+    {
+      "time": "16:30-17:00",
+      "location": "Kitchen",
+      "activity": "Making and having a hot drink and light snack with Member 1",
+      "desc": "Walks to kitchen. Turns on kettle. Opens cupboard. Takes out tea bags. Opens refrigerator. Takes out milk. Takes out biscuits. Closes refrigerator. Places biscuits on plate. Kettle boils. Pours water into mugs. Adds tea bags. Carries mugs and plate to table. Sits down with Member 1. Picks up mug. Takes sip. Picks up biscuit. Takes bite. Chews. Swallows. Says: 'These biscuits are good.'"
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Living Room",
+      "activity": "Sketching in a notebook while listening to music and keeping Member 1 company during phone planning",
+      "desc": "Walks to living room. Sits on sofa. Picks up notebook. Picks up pencil. Opens notebook. Starts sketching. Turns on music on phone. Puts phone down. Continues sketching. Looks at Member 1. Nods. Sketches more. Erases. Adjusts pencil grip. Turns page. Sketches again."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 2",
+      "activity": "Checking emails and handling arts administration correspondence",
+      "desc": "Walks to bedroom. Sits at desk. Wakes computer. Opens email client. Reads email. Types reply. Sends. Opens next email. Reads. Types reply. Sends. Opens calendar. Checks schedule. Makes note. Closes email."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out vegetables. Takes out meat. Closes refrigerator. Turns on oven. Preheats. Chops vegetables. Seasons meat. Places meat in oven. Sets timer. Turns on induction cooker. Sautés vegetables. Checks oven. Takes out meat. Serves onto plates. Places on table. Sits with Member 1. Picks up fork. Takes bite. Chews. Swallows."
+    },
+    {
+      "time": "19:00-20:30",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing with Member 1",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Selects show. Puts down remote. Leans back. Watches. Turns to Member 1. Says: 'This is a good episode.' Listens. Laughs. Adjusts cushion. Picks up remote. Changes channel. Puts down remote. Continues watching."
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Bedroom 2",
+      "activity": "Updating illustration portfolio and planning upcoming arts program tasks",
+      "desc": "Walks to bedroom. Sits at desk. Turns on desk lamp. Opens computer. Opens portfolio file. Adds new illustration. Saves. Opens calendar. Plans tasks. Writes notes. Checks email. Replies. Closes computer. Turns off desk lamp."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Evening wash and brushing teeth",
+      "desc": "Walks to bathroom. Turns on light. Turns on water heater. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Washes face. Dries face. Applies moisturizer. Turns off tap. Turns off water heater. Turns off light. Walks out."
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Bedroom 2",
+      "activity": "Reading in bed and winding down",
+      "desc": "Walks to bedroom. Changes into pajamas. Gets into bed. Picks up book. Opens book. Reads. Turns page. Adjusts pillow. Continues reading. Puts book down. Turns off lamp. Closes eyes."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping in bed",
+      "desc": "Lying in bed. Eyes closed. Breathing slowly. Turns to left side. Pulls blanket up. Turns to right side. Adjusts pillow. Remains still. Turns to back. Stretches legs. Yawns. Turns to left side. Pulls blanket down. Remains still. Breathes deeply. Turns to right side. Pulls blanket up. Remains still."
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth, and getting dressed"
+    },
+    {
+      "time": "06:30-07:10",
+      "location": "Bedroom 1",
+      "activity": "Getting ready for work, checking schedule on phone, packing bag"
+    },
+    {
+      "time": "07:10-07:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with Member 2 (toast and tea, checking phone messages)"
+    },
+    {
+      "time": "07:45-08:45",
+      "location": "Out",
+      "activity": "Commuting to work"
+    },
+    {
+      "time": "08:45-09:00",
+      "location": "Out",
+      "activity": "Arriving at office and settling in"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working at nonprofit office: coordinating community programs, attending meetings, and administrative tasks"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Taking lunch break and eating lunch"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Continuing work: program planning, outreach, and reporting"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Kitchen",
+      "activity": "Having dinner with Member 2 (Member 2 cooked)"
+    },
+    {
+      "time": "18:30-19:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV with Member 2"
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Using computer for personal tasks or browsing"
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and personal hygiene"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Wind down: reading or using phone"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
