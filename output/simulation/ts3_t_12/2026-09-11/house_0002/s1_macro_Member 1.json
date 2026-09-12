@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Dressing and getting ready for the day"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Study",
+      "activity": "Reviewing patient notes and preparing for telehealth sessions"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Study",
+      "activity": "Working from home: conducting telehealth physiotherapy consultations and administrative tasks"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Study",
+      "activity": "Working from home: continuing telehealth consultations and completing documentation"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "Doing personal exercise and stretching"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner"
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing: watching TV and reading"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Showering"
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bedroom 1",
+      "activity": "Preparing for bed and winding down"
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

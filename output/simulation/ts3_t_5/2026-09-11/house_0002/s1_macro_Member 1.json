@@ -1,0 +1,75 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for the day"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work"
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Study",
+      "activity": "Working from home on administrative tasks and telehealth consultations"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Eating lunch"
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Taking a break and relaxing"
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Study",
+      "activity": "Continuing work from home on patient files and online training"
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Living Room",
+      "activity": "Relaxing after work"
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Kitchen",
+      "activity": "Preparing dinner"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Living Room",
+      "activity": "Leisure time watching TV and using phone"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Washing up before bed"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

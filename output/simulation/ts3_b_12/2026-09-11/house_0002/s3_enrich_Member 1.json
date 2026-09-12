@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies down on bed. Closes eyes. Pulls blanket over body. Turns onto left side. Remains still. Breathes slowly. Shifts to right side. Remains asleep. Adjusts pillow. Moves arm under pillow. Turns onto back. Continues sleeping."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Wakes up. Sits up on bed. Swings legs over side. Stands up. Walks to bathroom. Opens bathroom door. Turns on light. Turns on tap. Wets hands. Picks up soap. Rubs soap on hands. Applies soap to face. Rinses face with water. Turns off tap. Picks up towel. Wipes face. Hangs towel. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Spits into sink. Turns on tap. Rinses toothbrush. Turns off tap. Puts toothbrush back. Turns off light. Walks out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast while checking phone",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out milk. Takes out bread. Places bread in toaster. Presses toaster lever. Opens cabinet. Takes out cereal. Takes out bowl. Pours cereal into bowl. Pours milk into bowl. Takes spoon from drawer. Picks up phone. Unlocks phone. Checks messages. Eats cereal with spoon. Takes toast from toaster. Spreads butter on toast. Eats toast. Drinks milk. Places bowl in sink. Rinses bowl. Places bowl in dishwasher. Wipes counter. Picks up phone. Walks out of kitchen."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag for the hospital shift",
+      "desc": "Walks to bedroom. Opens wardrobe. Takes out shirt. Takes out pants. Takes out socks. Takes out underwear. Closes wardrobe. Removes pajamas. Puts on underwear. Puts on shirt. Puts on pants. Puts on socks. Opens drawer. Takes out belt. Puts on belt. Walks to closet. Takes out work bag. Opens bag. Places laptop in bag. Places stethoscope in bag. Places notebook in bag. Places pen in bag. Zips bag. Places bag by door. Picks up phone. Checks time. Walks out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital by public transport (bus/train)",
+      "desc": "Walks out of house. Walks to bus stop. Waits at bus stop. Checks phone. Bus arrives. Boards bus. Taps transit card. Finds seat. Sits down. Looks out window. Checks phone. Bus arrives at train station. Gets off bus. Walks to train platform. Waits for train. Train arrives. Boards train. Finds seat. Sits down. Reads book. Checks phone. Train arrives at hospital station. Gets off train. Walks to hospital entrance. Enters hospital."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist, assessing and treating patients",
+      "desc": "Arrives at physiotherapy department. Changes into uniform. Reviews patient schedule on computer. Calls first patient. Escorts patient to treatment room. Asks patient about pain level. Observes patient walking. Palpates patient's knee. Measures range of motion. Instructs patient on exercises. Demonstrates exercise. Adjusts patient's posture. Applies heat pack. Sets timer. Removes heat pack. Records treatment notes. Calls next patient. Repeats assessment. Teaches patient to use walker. Observes patient practice. Provides feedback. Writes progress notes. Consults with colleague."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break",
+      "desc": "Walks to hospital cafeteria. Picks up tray. Selects sandwich. Selects fruit. Selects drink. Pays at cashier. Carries tray to table. Sits down. Unwraps sandwich. Eats sandwich. Drinks beverage. Checks phone. Talks to colleague. Finishes meal. Places tray on conveyor belt. Walks out of cafeteria. Walks to break room. Sits on chair. Closes eyes. Rests."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions and writing patient notes",
+      "desc": "Returns to physiotherapy department. Reviews afternoon patient list. Calls patient. Escorts to treatment area. Assesses patient's shoulder. Performs manual therapy. Instructs on home exercises. Demonstrates with resistance band. Observes patient perform. Corrects technique. Applies ice pack. Sets timer. Removes ice pack. Documents session in computer. Writes patient notes. Saves notes. Calls next patient. Repeats assessment. Teaches patient to use crutches. Observes patient walking. Provides feedback. Writes progress notes. Updates patient records. Consults with doctor."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital by public transport (bus/train)",
+      "desc": "Walks out of hospital. Walks to train station. Enters station. Taps transit card. Walks to platform. Waits for train. Train arrives. Boards train. Finds seat. Sits down. Checks phone. Listens to music. Train arrives at bus stop. Gets off train. Walks to bus stop. Waits for bus. Bus arrives. Boards bus. Taps transit card. Finds seat. Sits down. Looks out window. Bus arrives at home stop. Gets off bus. Walks to home. Enters home."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Enters kitchen. Washes hands. Opens refrigerator. Takes out vegetables. Takes out chicken. Places chicken on cutting board. Cuts chicken. Cuts vegetables. Turns on stove. Places pan on stove. Pours oil into pan. Adds chicken. Stirs chicken. Adds vegetables. Stirs vegetables. Adds sauce. Stirs. Turns off stove. Takes plate from cabinet. Serves food onto plate. Carries plate to table. Sits down. Eats dinner. Drinks water. Clears table. Places dishes in sink. Rinses dishes. Loads dishwasher. Wipes counter."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Changes channel. Watches news. Checks phone. Changes channel. Watches show. Adjusts volume. Puts remote down. Lies back on sofa. Watches TV. Picks up remote. Turns off TV. Stands up. Walks out of living room."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower",
+      "desc": "Walks to bathroom. Turns on light. Turns on water heater. Removes clothes. Steps into shower. Turns on water. Adjusts temperature. Wets body. Picks up soap. Rubs soap on body. Rinses body. Picks up shampoo. Applies shampoo to hair. Rinses hair. Turns off water. Steps out of shower. Picks up towel. Dries body. Dries hair. Wraps towel around body. Walks to bedroom."
+    },
+    {
+      "time": "20:30-22:30",
+      "location": "Study",
+      "activity": "Reading physiotherapy references and using the computer",
+      "desc": "Walks to study. Sits at desk. Turns on desk lamp. Turns on computer. Opens book. Reads pages. Takes notes in notebook. Types on computer. Searches online database. Reads article. Takes more notes. Checks email. Replies to email. Opens presentation. Edits slides. Saves file. Closes computer. Turns off desk lamp. Stands up. Walks out of study."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and sleeping",
+      "desc": "Walks to bedroom. Changes into pajamas. Brushes teeth in bathroom. Returns to bedroom. Sets alarm on phone. Places phone on nightstand. Turns off light. Lies down on bed. Pulls blanket over body. Closes eyes. Turns to side. Remains still. Falls asleep."
+    }
+  ]
+}

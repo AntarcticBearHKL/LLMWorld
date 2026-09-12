@@ -17,21 +17,24 @@ and **higher total** energy; the same stay-home mechanism as `holiday`, `wfh`, a
 Total energy (kWh), evening-peak 16–21h energy, valley 22–07h energy, max power (W).
 
 ## 5 Results (n=15, paired t, df=14)
-| Metric | W1 `838587` h002 | W2 `172148` h002 |
-|---|---|---|
-| **Total energy** | **+33.9%** (t=2.45, p=0.028) | **+22.2%** (t=4.61, p=4.2e-4) |
-| Peak 16–21 | +5.4% (n.s.) | +17.6% (p=0.041) |
-| Valley 22–7 | −10.0% (n.s.) | −30.6% (p=0.076) |
+| Metric | W1 `838587` h002 | W2 `172148` h002 | W3 `143345` h002 |
+|---|---|---|---|
+| **Total energy** | **+33.9%** (p=0.028) | **+22.2%** (p=4.2e-4) | **+29.3%** (p=0.039) |
+| Peak 16–21 | +5.4% (n.s.) | +17.6% (p=0.041) | +15.8% (n.s.) |
+| Valley 22–7 | −10.0% (n.s.) | −30.6% (p=0.076) | −10.7% (n.s.) |
+
+Total energy is **+22% … +34% across all three worlds** (all significant).
 
 ## 6 Comparison with Literature
 Same **stay-home** mechanism as holiday (R166–R188), wfh (R191–R193) and lockdown (R068/R107, Xia et al.
 2026). A transport disruption is a non-mandated, non-calendar shock that reproduces the effect.
 
 ## 7 Validity Check
-- same-era paired, n=15; **two worlds**; total replicates (+22.2%/+33.9%, both significant).
-- **3rd-world replication pending** (red line 3); not yet promoted to headline.
+- same-era paired, n=15; **three worlds**; total replicates at +22.2%/+29.3%/+33.9% (all significant).
+- **Cross-world replicated (red line 3 satisfied) → promoted to headline.**
 - Single member (M1) per household.
 
 ## 8 Conclusion
-A transport strike significantly **raises total energy** (+22.2% / +33.9% across two worlds) — the 4th
-stay-home event, further generalising the "time-at-home → daytime load" mechanism. Pending a 3rd world.
+A transport strike significantly **raises total energy** (+22.2% / +29.3% / +33.9% across three worlds) —
+the 3rd stay-home headline (after `holiday` and `wfh`), further generalising the "time-at-home → daytime
+load" mechanism.
