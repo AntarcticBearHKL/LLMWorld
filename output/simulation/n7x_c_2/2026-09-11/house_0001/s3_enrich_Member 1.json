@@ -4,110 +4,98 @@
     {
       "time": "00:00-06:45",
       "location": "Bedroom 1",
-      "activity": "Sleeping",
-      "desc": "Lie in bed. Eyes closed. Breathe slowly. Turn to left side. Pull blanket up. Adjust pillow. Remain still. Turn to right side. Kick off blanket. Pull blanket back. Adjust pillow. Remain still. Turn to back. Breathe. Remain still. Continue sleeping."
+      "activity": "Sleeping in own bedroom",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Pull blanket up. Remain asleep. Turn to right side. Stretch legs. Remain asleep."
     },
     {
-      "time": "06:45-07:10",
+      "time": "06:45-07:15",
       "location": "Bathroom",
-      "activity": "Showering and getting ready for the day",
-      "desc": "Turn on light. Turn on shower. Step into shower. Wet body. Apply soap. Wash body. Rinse. Turn off shower. Dry with towel. Put on clothes. Brush teeth. Turn off light."
+      "activity": "Showering and getting washed up for the day",
+      "desc": "Wake up and get out of bed. Walk to bathroom. Turn on bathroom light and water heater. Turn on shower and adjust water temperature. Step into shower and wet body. Apply soap and scrub body. Rinse body. Apply shampoo, scrub hair, and rinse. Turn off shower and step out. Pick up towel and dry body and hair. Hang towel and turn off bathroom light. Walk out."
     },
     {
-      "time": "07:10-07:40",
+      "time": "07:15-07:45",
       "location": "Kitchen",
-      "activity": "Preparing and eating breakfast (toast, cereal and tea), packing lunch and study materials",
-      "desc": "Turn on kitchen light. Open refrigerator and take out milk, butter, bread. Close refrigerator. Open cupboard and take out cereal, bowl, plate, mug. Place two slices of bread in toaster and press lever. Fill kettle with water and turn on. Pour cereal into bowl. Pour milk into bowl. Eat cereal. Butter toast. Eat toast. Drink tea. Open backpack and take out lunchbox. Open refrigerator and take out cheese and ham. Close refrigerator. Make sandwich and place in lunchbox. Close lunchbox and place in backpack. Pack notebooks and laptop. Zip backpack."
+      "activity": "Making and eating a quick breakfast of toast and tea using the toaster and kettle",
+      "desc": "Enter kitchen and turn on kitchen light. Open refrigerator and take out bread and butter. Pick up toaster, plug it in, and insert bread slices. Press toaster lever down. Pick up kettle, fill with water, and plug in. Turn on kettle. Wait for toast to pop and kettle to boil. Remove toast from toaster and butter it. Pour boiling water into cup and add tea bag. Steep tea and remove tea bag. Sit at table and eat toast and drink tea. Wash dishes, turn off toaster and kettle, turn off kitchen light, and walk out."
     },
     {
-      "time": "07:40-08:40",
+      "time": "07:45-08:20",
       "location": "Out",
       "activity": "Commuting by public transport to Monash University Clayton campus",
-      "desc": "Walk to bus stop. Cross road. Arrive at bus stop. Take out phone. Check bus time. Put phone away. Bus arrives. Board bus. Tap card. Sit down. Place backpack on lap. Look out window. Bus stops. Stand up. Walk to door. Tap card. Exit bus. Walk to campus."
+      "desc": "Walk out of house. Walk to bus stop. Wait for bus. Board bus. Tap on with Myki card. Find seat and sit down. Take out phone and check messages. Look out window. Listen for stop announcement. Press stop button. Get off bus. Walk to train station. Wait for train. Board train. Find seat and sit. Read notes on phone. Arrive at Clayton station. Get off train. Walk to campus. Enter campus."
     },
     {
-      "time": "08:40-09:00",
+      "time": "08:20-09:00",
       "location": "Out",
-      "activity": "Arriving on campus and walking to the lecture theatre",
-      "desc": "Get off bus. Walk through campus. Enter building. Walk down corridor. Find lecture theatre. Open door. Enter room. Find seat. Sit down. Take out notebook and pen. Place on desk."
+      "activity": "Arriving at campus, reviewing lecture slides and notes before class",
+      "desc": "Walk into campus building. Find a seat in the common area. Take out laptop from backpack. Open laptop and turn it on. Log in to university portal. Open lecture slides PDF. Scroll through slides. Read slide content. Take notes in notebook. Highlight key points on laptop. Check phone for messages. Chat with classmate about upcoming lecture. Review tutorial questions. Pack up laptop and notebook. Walk to lecture hall. Enter lecture hall. Find a seat. Sit down. Open laptop again. Wait for lecture to start."
     },
     {
-      "time": "09:00-11:00",
+      "time": "09:00-12:00",
       "location": "Out",
-      "activity": "Attending business lectures at Monash Clayton",
-      "desc": "Sit at desk. Take out notebook. Open notebook. Pick up pen. Write notes. Look at slides. Put down pen. Stretch arms. Pick up pen. Write more notes. Open laptop. Type notes. Close laptop. Check phone. Put phone away. Pack notebook and pen in backpack. Close backpack. Stand up. Walk out."
+      "activity": "Attending business lectures and tutorials at Monash Clayton",
+      "desc": "Sit in lecture hall. Listen to lecturer. Type notes on laptop. Raise hand to ask question. Speak to lecturer. Listen to answer. Write down answer. Participate in tutorial discussion. Turn to classmate to discuss. Work on group exercise. Present group findings. Listen to other presentations. Take notes on feedback. Pack up laptop and notebook. Walk to next class. Enter tutorial room. Sit at table. Open textbook. Follow along with tutorial problems. Ask tutor for clarification."
     },
     {
-      "time": "11:00-11:20",
+      "time": "12:00-13:00",
       "location": "Out",
-      "activity": "Coffee break between classes on campus",
-      "desc": "Walk to cafe. Stand in queue. Order coffee. Pay. Take coffee. Sit at table. Drink coffee. Finish coffee. Throw cup in bin. Walk to next class."
+      "activity": "Eating lunch on campus and chatting with classmates between classes",
+      "desc": "Walk to campus cafeteria. Join queue. Order food. Pay for food. Carry tray to table. Sit down with classmates. Eat lunch. Talk about assignments. Listen to classmate's story. Laugh at joke. Check phone for messages. Reply to text. Discuss group project. Finish eating. Clear tray. Walk to next class with classmates. Say goodbye. Enter building. Walk to classroom. Sit down."
     },
     {
-      "time": "11:20-13:00",
+      "time": "13:00-16:00",
       "location": "Out",
-      "activity": "Attending a business tutorial and workshop",
-      "desc": "Enter room. Sit at table. Take out notebook. Open notebook. Listen to tutor. Write notes. Raise hand. Ask question. Work in group. Discuss with group members. Write on whiteboard. Present findings. Return to seat. Pack backpack. Stand up. Walk out."
+      "activity": "Attending afternoon classes and working on a group business project in the library",
+      "desc": "Enter classroom. Sit at desk. Listen to lecture. Take notes. Ask question. Participate in class discussion. Pack up after class. Walk to library. Find group table. Sit with group members. Open laptop. Discuss project tasks. Assign roles. Research on laptop. Write document. Share screen with group. Edit document collaboratively. Review progress. Save work. Pack up and leave library."
     },
     {
-      "time": "13:00-13:40",
+      "time": "16:00-17:00",
       "location": "Out",
-      "activity": "Eating packed lunch on campus",
-      "desc": "Find seat. Sit down. Open backpack. Take out lunchbox. Open lunchbox. Take out sandwich. Unwrap sandwich. Eat sandwich. Take out apple. Bite apple. Chew. Swallow. Drink water. Wipe mouth. Close lunchbox. Put lunchbox in backpack. Check phone."
+      "activity": "Commuting home by public transport from Clayton",
+      "desc": "Walk to Clayton station. Wait for train. Board train. Find seat. Sit down. Take out phone. Check messages. Look out window. Arrive at station. Get off train. Walk to bus stop. Wait for bus. Board bus. Tap on. Find seat. Sit down. Check phone again. Get off at stop near home. Walk home. Enter house."
     },
     {
-      "time": "13:40-15:10",
-      "location": "Out",
-      "activity": "Studying in the campus library and working on group assignment",
-      "desc": "Walk to library. Enter library. Find table. Sit down. Take out laptop. Open laptop. Turn on laptop. Open assignment document. Type. Read. Highlight text. Open book. Take notes. Talk to group members. Share screen. Edit document. Save. Close laptop. Pack backpack. Walk out."
+      "time": "17:00-17:30",
+      "location": "Bedroom 1",
+      "activity": "Unwinding after campus, changing into comfortable clothes and checking phone messages",
+      "desc": "Enter bedroom. Put backpack on floor. Take off shoes. Take off outer clothes. Put on comfortable clothes. Pick up phone from desk. Unlock phone. Check messages. Reply to messages. Sit on bed. Turn on fan. Scroll through phone."
     },
     {
-      "time": "15:10-16:00",
-      "location": "Out",
-      "activity": "Commuting to Chadstone for the retail shift",
-      "desc": "Walk to bus stop. Cross road. Arrive at bus stop. Take out phone. Check bus time. Put phone away. Bus arrives. Board bus. Tap card. Sit down. Place backpack on lap. Look out window. Bus stops. Stand up. Walk to door. Tap card. Exit bus. Walk to Chadstone. Enter shopping centre. Walk to store."
-    },
-    {
-      "time": "16:00-20:00",
-      "location": "Out",
-      "activity": "Working part-time retail shift at Chadstone",
-      "desc": "Clock in. Greet customers. Fold clothes. Arrange shelves. Operate cash register. Scan items. Take payment. Bag items. Help customer find size. Restock shelves. Clean counter. Talk to manager. Take break. Eat snack. Return to floor. Assist customer. Close store. Clock out."
-    },
-    {
-      "time": "20:00-20:45",
-      "location": "Out",
-      "activity": "Commuting home from Chadstone",
-      "desc": "Walk to bus stop. Wait for bus. Bus arrives. Board bus. Tap card. Sit down. Place backpack on lap. Look out window. Bus stops. Stand up. Walk to door. Tap card. Exit bus. Walk home. Enter house."
-    },
-    {
-      "time": "20:45-21:20",
+      "time": "17:30-18:15",
       "location": "Kitchen",
-      "activity": "Heating and eating a quick dinner after the shift",
-      "desc": "Enter kitchen. Turn on light. Open refrigerator. Take out leftovers. Close refrigerator. Open microwave. Place container in microwave. Close microwave. Press buttons. Microwave beeps. Open microwave. Take out container. Stir food. Sit at table. Eat food. Drink water. Stand up. Wash dishes. Wipe counter. Turn off light."
+      "activity": "Preparing and eating dinner with the microwave and toaster only, avoiding the induction cooker during the 5pm-8pm peak",
+      "desc": "Enter kitchen. Turn on kitchen light. Open refrigerator. Take out leftovers. Place leftovers in microwave. Set microwave timer. Start microwave. Take bread from cupboard. Place bread in toaster. Press toaster lever. Wait for microwave and toaster. Remove food from microwave. Remove toast from toaster. Sit at table. Eat dinner. Drink water. Clear dishes. Wash dishes. Turn off kitchen light. Walk out."
     },
     {
-      "time": "21:20-21:50",
+      "time": "18:15-19:00",
       "location": "Bathroom",
-      "activity": "Showering and winding down after work",
-      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Turn on shower. Adjust water temperature. Step into shower. Wet body. Apply soap. Wash body. Rinse. Turn off shower. Pick up towel. Dry body. Put on pajamas. Brush teeth. Rinse mouth. Wash face. Turn off light. Walk out."
+      "activity": "Running a load of laundry in the washing machine and tidying up",
+      "desc": "Enter bathroom. Turn on bathroom light. Open washing machine door. Load dirty clothes into washing machine. Add detergent. Close washing machine door. Set washing cycle. Press start button. Tidy up bathroom counter. Wipe sink with cloth. Arrange toiletries. Sweep floor. Check washing machine progress. Take out phone and check messages. Sit on edge of bathtub. Wipe mirror. Empty trash. Turn off bathroom light and walk out."
     },
     {
-      "time": "21:50-22:45",
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Enter living room. Pick up TV remote. Press power button on TV. Scroll through channels. Select a show. Sit on couch. Watch TV. Adjust volume. Check phone during commercials. Reply to message. Put phone down. Continue watching. Change channel again. Watch another show. Stretch arms. Adjust sitting position. Turn off TV. Put remote down. Stand up. Walk out of living room."
+    },
+    {
+      "time": "20:00-22:15",
       "location": "Bedroom 1",
-      "activity": "Reviewing lecture notes and finishing assignment work on the computer with the desk lamp on",
-      "desc": "Enter bedroom. Turn on desk lamp. Sit at desk. Open laptop. Turn on laptop. Open lecture notes. Read notes. Type summary. Open assignment document. Write. Edit. Save. Check phone. Put phone down. Stretch arms. Close laptop. Turn off desk lamp. Turn off light. Lie down."
+      "activity": "Studying on the computer under the desk lamp, completing assignment work and readings",
+      "desc": "Enter bedroom. Sit at desk. Turn on desk lamp. Open laptop. Turn on laptop. Log in. Open assignment file. Read assignment instructions. Open textbook. Read chapter. Type notes on laptop. Research online. Write assignment. Save work. Check phone. Reply to message. Continue writing. Review work. Close laptop. Turn off desk lamp."
     },
     {
-      "time": "22:45-23:15",
-      "location": "Bedroom 1",
-      "activity": "Relaxing with phone, checking messages and setting an alarm",
-      "desc": "Pick up phone. Unlock phone. Open messaging app. Read messages. Type reply. Send. Open social media. Scroll. Watch video. Open clock app. Set alarm. Place phone on nightstand. Turn off light. Lie down. Close eyes."
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Brushing teeth and washing up before bed",
+      "desc": "Enter bathroom. Turn on bathroom light. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Dry face with towel. Turn off bathroom light. Walk out."
     },
     {
-      "time": "23:15-24:00",
+      "time": "22:45-24:00",
       "location": "Bedroom 1",
       "activity": "Sleeping",
-      "desc": "Lie in bed. Pull blanket. Turn to side. Adjust pillow. Breathe slowly. Remain still. Turn to other side. Kick off blanket. Pull blanket back. Adjust pillow. Remain still. Turn to back. Breathe. Remain still. Continue sleeping."
+      "desc": "Lie down in bed. Pull blanket over body. Adjust pillow. Close eyes. Breathe slowly. Turn to left side. Adjust blanket. Turn to right side. Stretch legs. Remain asleep. Breathe deeply. Continue sleeping."
     }
   ]
 }
