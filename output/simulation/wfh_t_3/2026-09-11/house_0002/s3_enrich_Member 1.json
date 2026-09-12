@@ -1,0 +1,107 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Close eyes. Pull blanket over body. Breathe in. Breathe out. Turn to left side. Adjust pillow. Turn to right side. Stretch legs. Bend knees. Turn onto back. Pull blanket up. Breathe slowly. Remain motionless. Sleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed for the day",
+      "desc": "Wake up. Sit up on bed. Swing legs off bed. Stand up. Walk to bathroom. Turn on light. Turn on tap. Wet hands. Apply soap. Rub hands. Rinse hands. Turn off tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Wipe mouth with towel. Remove pajamas. Put on underwear. Put on shirt. Put on pants. Put on socks. Put on shoes. Comb hair. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk to kitchen. Turn on light. Open refrigerator. Take out milk. Take out eggs. Take out bread. Close refrigerator. Place items on counter. Open cabinet. Take out bowl. Take out plate. Take out pan. Place pan on stove. Turn on stove. Crack eggs into bowl. Beat eggs. Pour eggs into pan. Cook eggs. Stir eggs. Turn off stove. Toast bread. Butter toast. Pour milk into glass. Sit at table. Eat eggs. Eat toast. Drink milk. Stand up. Clear dishes. Rinse dishes. Place in sink."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Living Room",
+      "activity": "Setting up the home workstation and checking the day's schedule on the computer",
+      "desc": "Walk to living room. Turn on light. Open laptop. Press power button. Wait for boot. Enter password. Open calendar. Check schedule. Open email. Check emails. Open work application. Log in. Adjust chair. Sit down."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Living Room",
+      "activity": "Reviewing patient notes and preparing for the work-from-home day",
+      "desc": "Open patient notes file. Read notes. Highlight important information. Take notes in notebook. Open previous patient records. Compare data. Update patient information. Organize papers. Prepare list of tasks. Check schedule again. Make phone calls to confirm appointments. Write down messages."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Living Room",
+      "activity": "Working from home on telehealth consultations and patient care coordination",
+      "desc": "Open video conferencing software. Join meeting. Greet patient. Discuss symptoms. Take notes. Advise patient. End call. Document call. Send prescription to pharmacy. Call patient. Follow up. Send email to colleague. Update patient records. Schedule next appointment."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "desc": "Walk to kitchen. Open refrigerator. Take out salad. Take out dressing. Close refrigerator. Place on counter. Open cabinet. Take out plate. Take out fork. Open salad container. Pour salad onto plate. Add dressing. Sit at table. Eat salad. Drink water. Stand up. Clear plate. Rinse plate. Place in sink."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Taking a short break and resting",
+      "desc": "Walk to living room. Sit on couch. Recline. Close eyes. Breathe deeply. Turn on TV. Watch news. Change channel. Turn off TV. Adjust cushion. Lie down. Close eyes. Rest."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Living Room",
+      "activity": "Continuing work-from-home duties including patient follow-ups and record keeping",
+      "desc": "Open laptop. Wake from sleep. Enter password. Open patient records. Call patient. Discuss test results. Update records. Send email to doctor. Review lab reports. Enter data. Call insurance company. Verify coverage. Update billing. File documents. Organize desk."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower and freshening up after work",
+      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Wait for hot water. Remove clothes. Step into shower. Turn on shower. Wet body. Apply soap. Rub body. Rinse body. Shampoo hair. Rinse hair. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Wrap towel around waist."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Change to favorite channel. Watch show. Adjust volume. Change channel. Watch another show."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk to kitchen. Open refrigerator. Take out vegetables. Take out meat. Close refrigerator. Place on counter. Open cabinet. Take out pot. Take out pan. Place pot on stove. Turn on stove. Add oil. Chop vegetables. Add vegetables to pan. Stir. Add meat. Cook. Turn off stove. Serve food onto plate. Sit at table. Eat dinner. Drink water. Stand up. Clear table. Rinse dishes. Place in sink."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Pick up plates. Scrape food into trash. Rinse plates. Open dishwasher. Load plates. Load glasses. Load utensils. Add detergent. Close dishwasher. Turn on dishwasher. Wipe table. Wipe counters."
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Living Room",
+      "activity": "Watching TV and browsing on the computer",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Open laptop. Check social media. Read news. Watch TV. Comment on post. Change channel. Continue browsing. Watch movie."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Living Room",
+      "activity": "Leisure time reading and chatting online",
+      "desc": "Pick up book. Open book. Read pages. Turn pages. Put down book. Pick up phone. Open messaging app. Send message to friend. Receive reply. Type response. Send message. Continue chatting. Put down phone. Pick up book. Read more."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Evening wash and getting ready for bed",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wet face. Apply cleanser. Rub face. Rinse face. Pat dry with towel. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Spit. Wipe mouth. Turn off tap. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Walk to bedroom. Turn on light. Remove clothes. Put on pajamas. Turn off light. Lie down on bed. Pull blanket over body. Close eyes. Breathe. Turn to left side. Adjust pillow. Turn to right side. Stretch legs. Remain still. Sleep."
+    }
+  ]
+}

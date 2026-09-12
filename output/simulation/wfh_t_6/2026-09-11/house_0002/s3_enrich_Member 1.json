@@ -1,0 +1,77 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Eyes closed. Breathe slowly. Turn to left side. Pull blanket up. Bend knees. Remain still. Turn to right side. Adjust pillow. Turn to back. Open eyes briefly. Look at clock. Close eyes. Turn to left side. Wake up. Open eyes. Sit up. Swing legs out of bed. Stand up. Walk to bathroom."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Showering and brushing teeth",
+      "desc": "Enter bathroom. Turn on light. Remove clothes. Turn on shower. Step into shower. Wet body. Pick up soap. Apply soap to body. Scrub body. Rinse body. Turn off shower. Step out of shower. Pick up towel. Dry body. Wrap towel around body. Pick up toothbrush and apply toothpaste. Brush teeth. Rinse mouth. Spit in sink. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Enter kitchen. Open refrigerator. Take out eggs, milk, and bread. Close refrigerator. Take out frying pan. Place pan on induction cooker. Turn on induction cooker. Crack eggs into bowl. Whisk eggs. Pour eggs into pan. Cook eggs. Flip eggs. Turn off induction cooker. Place eggs on plate. Sit at table. Eat eggs. Drink milk. Finish eating. Stand up. Place plate in sink. Walk out of kitchen."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Living Room",
+      "activity": "Reviewing work schedule and setting up workstation",
+      "desc": "Enter living room. Turn on light. Sit at desk. Turn on computer. Turn on monitor. Open calendar application. Check work schedule. Open email application. Read emails. Reply to emails. Turn on router. Connect computer to internet. Adjust chair height. Arrange desk items. Plug in phone. Open work documents. Review tasks. Close applications. Stand up."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Living Room",
+      "activity": "Working on computer, attending virtual meetings",
+      "desc": "Sit at desk. Type on keyboard. Click mouse. Look at monitor. Open video conferencing application. Join meeting. Greet colleagues. Mute microphone. Listen to speaker. Unmute microphone. Speak. Share screen. Type notes. Mute microphone. End meeting. Open work document. Edit document. Save document. Check email. Reply to email. Stand up. Stretch."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "desc": "Enter kitchen. Open refrigerator. Take out salad ingredients. Close refrigerator. Take out cutting board. Place on counter. Chop vegetables. Take out plate. Place vegetables on plate. Sit at table. Eat salad. Drink water. Finish eating. Stand up. Place plate in sink. Walk out of kitchen."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Living Room",
+      "activity": "Working on computer, attending virtual meetings",
+      "desc": "Sit at desk. Type on keyboard. Click mouse. Look at monitor. Open video conferencing application. Join meeting. Mute microphone. Listen to speaker. Unmute microphone. Speak. Type notes. Share screen. End meeting. Open work document. Edit document. Save document. Check email. Reply to email. Stand up. Stretch."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing",
+      "desc": "Sit on couch. Pick up remote. Turn on TV. Change channels. Watch TV. Adjust volume. Put down remote. Pick up phone. Check social media. Put down phone. Pick up remote. Change channel. Watch TV. Turn off TV. Stand up."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner",
+      "desc": "Enter kitchen. Open refrigerator. Take out chicken and vegetables. Close refrigerator. Take out cutting board. Chop vegetables. Take out pan. Place pan on induction cooker. Turn on induction cooker. Cook chicken and vegetables. Turn off induction cooker. Place food on plate. Sit at table. Eat dinner. Drink water. Finish eating. Stand up. Place plate in sink. Walk out of kitchen."
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Living Room",
+      "activity": "Watching TV and browsing internet",
+      "desc": "Sit on couch. Pick up remote. Turn on TV. Watch TV. Pick up phone. Open browser. Scroll through news. Type search query. Read article. Put down phone. Change channel. Watch TV. Pick up phone. Check email. Put down phone. Watch TV. Turn off TV. Stand up."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Brushing teeth and washing up",
+      "desc": "Enter bathroom. Turn on light. Turn on water heater. Turn on tap. Wet face. Apply face wash. Scrub face. Rinse face. Turn off tap. Pick up toothbrush and apply toothpaste. Brush teeth. Rinse mouth. Spit in sink. Wipe face with towel. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Reading and going to sleep",
+      "desc": "Enter bedroom. Turn on light. Pick up book. Sit on bed. Open book. Read pages. Turn page. Read. Turn page. Close book. Put book on nightstand. Turn off light. Lie down. Pull blanket up. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Sleep."
+    }
+  ]
+}
