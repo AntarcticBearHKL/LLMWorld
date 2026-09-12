@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Remain still. Turn to right side. Pull blanket up. Continue sleeping. Turn again. Adjust position. Sleep."
+    },
+    {
+      "time": "06:40-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth, and showering",
+      "desc": "Turn off alarm. Sit up on bed. Stand up. Walk to bathroom. Turn on bathroom light. Turn on water heater. Turn on tap. Rinse face. Apply soap. Wash face. Rinse. Turn off tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Turn on shower. Adjust temperature. Step into shower. Wash body. Rinse. Turn off shower. Step out. Dry body with towel. Turn off light. Walk out."
+    },
+    {
+      "time": "07:10-07:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with kettle and toaster",
+      "desc": "Walk into kitchen. Turn on light. Open refrigerator. Take out bread and butter. Close refrigerator. Place bread in toaster. Press lever. Fill kettle with water. Turn on kettle. Turn on range hood. Wait for toast. Toast pops. Remove toast. Butter toast. Pour hot water into mug. Add tea bag. Stir. Sit at table. Eat toast. Drink tea."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag",
+      "desc": "Walk to bedroom. Open wardrobe. Take out shirt. Put on shirt. Take out pants. Put on pants. Put on socks. Put on shoes. Pick up work bag. Open bag. Put laptop in bag. Put phone in bag. Zip bag."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit office",
+      "desc": "Walk out of house. Lock door. Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Look out window. Get off bus. Walk to office. Enter building. Greet receptionist. Walk to desk."
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Working as community program coordinator: planning programs, emailing partners, and coordinating volunteers",
+      "desc": "Sit at desk. Turn on computer. Log in. Open email. Read emails. Reply to emails. Open calendar. Schedule meeting. Write program plan. Make phone calls. Coordinate volunteers. Attend meeting. Take notes. Return to desk. Update database. Send emails."
+    },
+    {
+      "time": "13:00-13:45",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating lunch",
+      "desc": "Leave office. Walk to cafeteria. Order food. Pay. Receive food. Find table. Sit down. Eat lunch. Drink water. Wipe mouth. Throw away trash. Walk back to office."
+    },
+    {
+      "time": "13:45-17:00",
+      "location": "Out",
+      "activity": "Working as community program coordinator: meetings with community partners and program admin tasks",
+      "desc": "Return to office. Sit at desk. Open laptop. Check schedule. Attend meeting. Discuss with partner. Take notes. Return to desk. Update volunteer database. Send emails. Make phone calls. File documents. Print materials. Organize files. Review program budget. Respond to emails."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "desc": "Leave office. Check phone. Put phone in pocket. Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Look out window. Get off bus. Walk home. Unlock door. Enter house."
+    },
+    {
+      "time": "18:00-18:50",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner using induction cooker and oven",
+      "desc": "Walk into kitchen. Turn on light. Open refrigerator. Take out ingredients. Close refrigerator. Place pot on induction cooker. Turn on induction cooker. Add oil. Add vegetables. Stir. Preheat oven. Place tray in oven. Set timer. Turn on range hood. Wait. Stir food. Turn off induction cooker. Remove pot. Take tray out of oven. Plate food. Sit at table. Eat dinner."
+    },
+    {
+      "time": "18:50-19:20",
+      "location": "Kitchen",
+      "activity": "Cleaning up and loading the dishwasher",
+      "desc": "Stand up. Collect plates. Scrape food into trash. Rinse plates. Open dishwasher. Load plates. Load utensils. Add detergent. Close dishwasher. Press start button. Wipe counter. Wipe stove. Turn off light."
+    },
+    {
+      "time": "19:20-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Browse channels. Select program. Watch TV. Adjust volume. Change channel. Pick up phone. Check messages. Put down phone. Watch TV. Get up. Get water. Sit down. Watch TV."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and evening hygiene routine",
+      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Turn on shower. Adjust temperature. Step into shower. Wash body. Wash hair. Rinse. Turn off shower. Step out. Dry with towel. Apply deodorant. Brush teeth. Rinse mouth. Turn off light. Walk out."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down: using phone and reading under desk lamp",
+      "desc": "Walk to bedroom. Turn on desk lamp. Sit on bed. Pick up phone. Unlock phone. Check social media. Read news. Put down phone. Pick up book. Open book. Read pages. Turn page. Read more. Close book. Put down book. Turn off desk lamp. Lie down."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe slowly. Turn to left side. Adjust pillow. Remain still. Turn to right side. Pull blanket up. Continue sleeping. Turn again. Adjust position. Sleep."
+    }
+  ]
+}
