@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Closes eyes. Breathes slowly. Turns to left side. Pulls blanket up. Adjusts pillow. Bends knees. Straightens legs. Turns to right side. Pulls blanket down. Adjusts pillow again. Stretches arms. Turns to back. Pulls blanket to chest. Remains still. Breathes deeply. Turns to left side. Sleeps."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for the day",
+      "desc": "Gets out of bed. Walks to bathroom. Turns on light. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Washes face. Dries face with towel. Turns off tap and light. Walks out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walks into kitchen. Turns on kitchen light. Opens refrigerator. Takes out milk and eggs. Closes refrigerator. Takes out bowl and pan from cabinet. Cracks eggs into bowl. Turns on induction cooker. Pours eggs into pan. Cooks eggs. Toasts bread. Eats breakfast."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag",
+      "desc": "Walks to bedroom. Opens closet. Takes out clothes. Takes off pajamas. Puts on clothes. Opens drawer. Takes out socks. Puts on socks and shoes. Opens bag. Places laptop, notebook, pen, wallet, keys into bag. Zips bag. Picks up bag and walks out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walks out of house. Locks door. Walks to bus stop. Waits for bus. Boards bus. Taps transit card. Finds seat. Sits down. Looks out window. Checks phone. Puts phone in pocket. Stands up. Pulls cord. Exits bus. Walks to office. Enters building."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a community program coordinator at the nonprofit office",
+      "desc": "Turns on computer. Logs in. Opens email. Reads emails. Replies to emails. Opens calendar. Checks meetings. Attends meeting. Takes notes. Discusses with colleagues. Returns to desk. Makes phone calls. Writes reports. Prints documents. Files documents. Sends emails."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Taking a lunch break",
+      "desc": "Stands up from desk. Walks to break room. Opens refrigerator. Takes out lunch bag. Closes refrigerator. Sits at table. Opens lunch bag. Takes out sandwich. Unwraps sandwich. Eats sandwich. Takes out apple. Bites apple. Drinks water. Throws away trash. Walks outside. Walks around block. Returns to office. Uses restroom. Washes hands. Returns to desk."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Working as a community program coordinator at the nonprofit office",
+      "desc": "Continues work. Attends afternoon meeting. Makes phone calls. Coordinates volunteers. Updates database. Sends emails. Prints documents. Files documents. Reviews reports. Meets with supervisor. Takes notes. Returns to desk. Writes proposal. Checks calendar. Prepares for next day."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Leaves office. Walks to bus stop. Waits for bus. Boards bus. Taps transit card. Finds seat. Sits down. Checks phone. Looks out window. Stands up. Pulls cord. Exits bus. Walks home. Unlocks door. Enters house. Closes door."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walks into kitchen. Turns on light. Opens refrigerator. Takes out vegetables and meat. Closes refrigerator. Washes vegetables. Chops vegetables. Turns on induction cooker. Places pan on cooker. Adds oil. Adds meat. Stirs meat. Adds vegetables. Stirs vegetables. Adds sauce. Turns off cooker. Places food on plate. Sits at table. Eats dinner. Drinks water."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walks to living room. Sits on couch. Picks up remote. Turns on TV. Changes channels. Settles on show. Watches TV. Adjusts volume. Stands up. Walks to kitchen. Opens refrigerator. Takes out snack. Closes refrigerator. Returns to couch. Sits down. Eats snack. Watches TV."
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Kitchen",
+      "activity": "Cleaning up after dinner",
+      "desc": "Walks to kitchen. Opens dishwasher. Loads dishes. Closes dishwasher. Turns on dishwasher. Wipes counter with cloth. Sweeps floor. Takes out trash. Ties trash bag. Carries trash to outside bin. Returns to kitchen. Washes hands. Dries hands. Turns off kitchen light. Walks to living room."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Personal time on computer and phone",
+      "desc": "Walks to bedroom. Sits at desk. Turns on desk lamp. Opens computer. Logs in. Opens browser. Browses internet. Checks social media. Watches videos. Picks up phone. Checks messages. Replies to messages. Puts phone down. Continues computer. Stands up. Stretches. Sits down. Opens game. Plays game. Closes computer."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Nighttime washing up and preparing for bed",
+      "desc": "Walks to bathroom. Turns on light. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Washes face. Dries face with towel. Turns off tap. Turns off light. Walks to bedroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Pulls blanket up. Closes eyes. Breathes slowly. Turns to left side. Adjusts pillow. Pulls blanket to chin. Bends knees. Straightens legs. Turns to right side. Pulls blanket down. Adjusts pillow again. Stretches arms. Turns to back. Remains still. Breathes deeply."
+    }
+  ]
+}
