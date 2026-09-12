@@ -1,0 +1,24 @@
+{
+  "segments": 13,
+  "operations_in": 39,
+  "operations_kept": 36,
+  "repaired": [],
+  "dropped": [
+    {
+      "unique_id": "kitchen_light",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    },
+    {
+      "unique_id": "kitchen_inductioncooker",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    },
+    {
+      "unique_id": "kitchen_rangehood",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    }
+  ],
+  "valid": false
+}
