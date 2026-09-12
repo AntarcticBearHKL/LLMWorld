@@ -1,0 +1,207 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping through the night with the fan on low for white noise, phone on silent to protect rest",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and changing into clean clothes for the day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:40",
+      "location": "Kitchen",
+      "activity": "Making and eating a flexitarian breakfast of oats, toast and tea, then packing a lunch container and refilling a water bottle",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:40",
+      "location": "Out",
+      "activity": "Commuting by train and bus from Clayton to the Monash University campus, reading course notes on the way",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:40-12:00",
+      "location": "Out",
+      "activity": "Attending second-year Master of Social Work lectures and tutorials, taking detailed handwritten notes and writing down assignment deadlines",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:40",
+      "location": "Out",
+      "activity": "Eating the packed lunch on campus and reviewing notes for the afternoon placement shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:40-13:20",
+      "location": "Out",
+      "activity": "Commuting by bus and train to the aged-care facility for the afternoon support shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:20-20:00",
+      "location": "Out",
+      "activity": "Working a part-time aged-care support shift, assisting residents with meals, mobility, personal care and social activity programs",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Out",
+      "activity": "Commuting home by train and bus after the shift, checking text messages on the way",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Kitchen",
+      "activity": "Reheating a simple flexitarian dinner, eating it and washing up the dishes and containers",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:15",
+      "location": "Bedroom 1",
+      "activity": "Writing up placement reflections on the computer and updating the weekly budget notes and reminder list at the desk",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bathroom",
+      "activity": "Showering, washing up and setting out clothes and bag for the next day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-23:15",
+      "location": "Bedroom 1",
+      "activity": "Drinking a cup of tea and sending written text messages to housemates about the weekend house meeting agenda",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:15-24:00",
+      "location": "Bedroom 1",
+      "activity": "Dimming the light, putting the phone on charge and settling into sleep with the fan on low",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

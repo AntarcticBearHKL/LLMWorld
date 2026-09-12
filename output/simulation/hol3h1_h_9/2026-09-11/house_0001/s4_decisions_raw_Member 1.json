@@ -1,0 +1,314 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:00",
+      "location": "Out",
+      "activity": "Working a night shift as a part-time aged-care support worker at the residential aged-care facility, assisting residents with personal care, repositioning, hydration and medication reminders, and writing up detailed handover notes for the morning staff",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:50",
+      "location": "Out",
+      "activity": "Commuting home from the aged-care facility by train and bus, checking text messages and reviewing the written shift handover on his phone while travelling",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:20",
+      "location": "Kitchen",
+      "activity": "Making a light breakfast after the night shift, toasting bread, boiling the kettle for a cup of tea, and quietly putting away his work bag and uniform",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:20-08:40",
+      "location": "Bathroom",
+      "activity": "Showering, washing up and changing out of his work clothes, then rinsing his uniform in the basin to wash properly later",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:40-08:55",
+      "location": "Bedroom 1",
+      "activity": "Closing the curtains, turning on the fan for steady background noise, setting his phone to silent with a written reminder for the afternoon, and preparing for daytime sleep after the night shift",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "08:55-15:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping during the day after the night shift, keeping the room dark and quiet for recovery",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:40",
+      "location": "Kitchen",
+      "activity": "Waking up and eating a late flexitarian lunch of rice, lentils and vegetables, reheating it in the microwave and drinking a cup of tea while sitting quietly",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:40-16:10",
+      "location": "Bathroom",
+      "activity": "Doing a load of laundry in the washing machine, including his aged-care uniform, and setting the dehumidifier to help things dry indoors",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:10-17:00",
+      "location": "Bedroom 1",
+      "activity": "Sitting at his desk with the desk lamp on, working through written university readings and notes on the computer for his Master of Social Work coursework",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Kitchen",
+      "activity": "Cooking dinner in batches, preparing a flexitarian meal with vegetables and tofu in the induction cooker and rice in the rice cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Eating dinner and drinking tea, then packing a portion into a container in the refrigerator for the next shift",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Kitchen",
+      "activity": "Cleaning the bench and cooktop, wiping down the appliances he used and loading the dishwasher",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:40",
+      "location": "Bathroom",
+      "activity": "Moving the laundry to the clothes dryer, folding the dried washing in the bathroom and tidying his towel and toiletries",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_clothesdryer",
+          "action": "run"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:40-20:30",
+      "location": "Bedroom 1",
+      "activity": "Tracking his weekly budget in a written notebook, counting out cash for the week's shared bills and confirming upcoming rent and utility amounts",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Bedroom 1",
+      "activity": "Drafting a written agenda for the next house meeting and typing detailed text-only messages to confirm quiet hours and shared plans in advance",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-21:45",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle for a last cup of tea and preparing a simple breakfast and snack to take to tomorrow's placement",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:45-22:20",
+      "location": "Bathroom",
+      "activity": "Evening washing routine, brushing his teeth and taking a warm shower before bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:20-23:00",
+      "location": "Bedroom 1",
+      "activity": "Looking at a saved photo of his family dog in China on his phone, reading a few pages of a book and winding down under the fan",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping, having set his written reminders and alarm for the next day's shift and study tasks",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

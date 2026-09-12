@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Out",
+      "activity": "Working a night shift as an aged-care support worker at a residential care facility, assisting residents with personal care, repositioning and night checks, and writing up detailed handover notes",
+      "desc": "Enter care facility. Clock in. Receive handover from previous shift. Walk to resident room. Perform night check. Check resident breathing. Reposition resident. Adjust bed rails. Assist resident with personal care. Walk resident to bathroom. Assist with toileting. Assist with showering. Dry resident. Assist with dressing. Walk resident back to bed. Write handover notes. Check on other residents. Record observations."
+    },
+    {
+      "time": "07:00-08:15",
+      "location": "Out",
+      "activity": "Travelling home from the night shift by train and bus, listening to nothing to keep calm and messaging ahead by text to confirm the plan for the day",
+      "desc": "Walk to train station. Wait on platform. Board train. Find seat. Sit down. Take out phone. Open messaging app. Type message to confirm plan. Send message. Read reply. Exit train. Walk to bus stop. Wait for bus. Board bus. Sit down. Look out window. Exit bus. Walk home."
+    },
+    {
+      "time": "08:15-08:45",
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes after the night shift, putting the uniform straight into the washing machine",
+      "desc": "Enter bathroom. Turn on light. Remove work clothes. Place uniform in washing machine. Add detergent. Turn on washing machine. Turn on shower. Adjust water temperature. Step into shower. Wash body. Wash hair. Rinse. Turn off shower. Step out. Pick up towel. Dry body. Dry hair. Put on clean clothes."
+    },
+    {
+      "time": "08:45-09:15",
+      "location": "Kitchen",
+      "activity": "Making a light post-shift breakfast with tea and eating quietly at the bench",
+      "desc": "Enter kitchen. Turn on light. Fill kettle with water. Turn on kettle. Open cupboard. Take out tea bag. Place tea bag in mug. Pour hot water into mug. Open fridge. Take out milk. Pour milk into mug. Stir tea. Take out bowl. Take out cereal. Pour cereal into bowl. Add milk. Sit at bench. Eat cereal. Drink tea."
+    },
+    {
+      "time": "09:15-14:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping after the night shift with the fan running for white noise and the light off, keeping the room quiet and dark",
+      "desc": "Enter bedroom. Close door. Turn off light. Turn on fan. Set fan to low. Remove phone from pocket. Place phone on bedside table. Lie down on bed. Pull blanket up. Adjust pillow. Close eyes. Sleep."
+    },
+    {
+      "time": "14:30-15:00",
+      "location": "Kitchen",
+      "activity": "Waking up, boiling the kettle and having a late lunch of leftovers with a cup of tea",
+      "desc": "Wake up. Get out of bed. Walk to kitchen. Turn on light. Fill kettle with water. Turn on kettle. Open fridge. Take out leftovers. Open microwave. Place leftovers in microwave. Set timer. Press start. Take out leftovers. Place on plate. Sit at bench. Eat leftovers. Drink tea."
+    },
+    {
+      "time": "15:00-15:40",
+      "location": "Bathroom",
+      "activity": "Moving the washed uniform to the clothes dryer and hand-washing smaller items, tidying the laundry area and using the dehumidifier",
+      "desc": "Enter bathroom. Open washing machine. Take out uniform. Open dryer door. Place uniform in dryer. Close dryer door. Turn on dryer. Fill sink with water. Add detergent. Hand wash small items. Rinse items. Wring out items. Hang items on rack. Wipe sink. Tidy laundry area. Turn on dehumidifier."
+    },
+    {
+      "time": "15:40-16:20",
+      "location": "Kitchen",
+      "activity": "Washing the dishes, wiping the benches and checking the fridge, freezer and pantry against a written shopping list",
+      "desc": "Enter kitchen. Turn on tap. Pick up sponge. Add dish soap. Wash dishes. Rinse dishes. Place dishes in drying rack. Turn off tap. Pick up cloth. Wipe benches. Open fridge. Check items. Open freezer. Check items. Open pantry. Check items. Pick up pen. Cross off items on list."
+    },
+    {
+      "time": "16:20-17:30",
+      "location": "Out",
+      "activity": "Walking to the supermarket and doing the weekly grocery shop, comparing unit prices and paying in cash to stay within the weekly budget",
+      "desc": "Put on shoes. Pick up reusable bags. Walk out door. Lock door. Walk to supermarket. Enter supermarket. Pick up basket. Walk to produce section. Pick up item. Check price. Compare unit price. Place in basket. Walk to checkout. Place items on counter. Open wallet. Take out cash. Pay cashier. Receive change. Put change in wallet. Pick up bags. Walk home."
+    },
+    {
+      "time": "17:30-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking a flexitarian dinner with the rice cooker and induction cooker and eating it at the table",
+      "desc": "Enter kitchen. Turn on light. Take out rice. Rinse rice. Place rice in rice cooker. Add water. Turn on rice cooker. Take out vegetables. Wash vegetables. Chop vegetables. Turn on induction cooker. Add oil. Add vegetables. Stir. Add tofu. Stir. Turn off induction cooker. Serve rice. Serve vegetables. Sit at table. Eat dinner."
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Washing up, loading the dishwasher and putting the groceries away with labels on shared items",
+      "desc": "Clear table. Pick up dishes. Scrape food into bin. Open dishwasher. Place dishes in dishwasher. Close dishwasher. Turn on dishwasher. Pick up groceries. Open fridge. Place items on shelves. Open pantry. Place items on shelves. Pick up label maker. Print label. Stick label on shared item."
+    },
+    {
+      "time": "19:15-21:00",
+      "location": "Bedroom 1",
+      "activity": "Studying Master of Social Work coursework at the desk with the desk lamp on, reading set texts on the monitor and typing notes on the computer",
+      "desc": "Enter bedroom. Sit at desk. Turn on desk lamp. Turn on computer. Open monitor. Log in. Open document. Read text on monitor. Type notes on keyboard. Highlight text. Scroll page. Open new document. Type more notes. Take break."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Kitchen",
+      "activity": "Taking a short break with a cup of tea and a light snack while re-reading the written task list for the week",
+      "desc": "Walk to kitchen. Fill kettle. Boil water. Take out mug. Place tea bag in mug. Pour water. Take out snack. Sit at bench. Drink tea. Eat snack. Pick up task list. Read task list. Pick up pen. Make notes."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Sending text messages to family in China, looking at the photo of the family dog, recording spending in the budget sheet and setting reminders for the next shift and class",
+      "desc": "Enter bedroom. Sit at desk. Pick up phone. Open messaging app. Type message. Send message. Wait for reply. Read reply. Type reply. Send reply. Pick up photo frame. Look at photo. Put down photo frame. Open budget spreadsheet on computer. Enter spending. Save file. Open calendar app. Set reminder."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Completing the evening wash routine and preparing clothes and bag for the next day",
+      "desc": "Enter bathroom. Turn on light. Turn on tap. Wash face. Brush teeth. Rinse mouth. Turn off tap. Dry face. Walk to bedroom. Open wardrobe. Pick out clothes. Place clothes on chair. Pack bag."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping with the light off and the fan on low for quiet background noise",
+      "desc": "Enter bedroom. Close door. Turn off light. Turn on fan. Set fan to low. Remove phone from pocket. Place phone on bedside table. Lie down on bed. Pull blanket up. Adjust pillow. Close eyes. Sleep."
+    }
+  ]
+}
