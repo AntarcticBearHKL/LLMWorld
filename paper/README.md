@@ -12,6 +12,7 @@
 | **封锁事件 → 日间负荷 +220.7%** | same-era 交错 **n=9**：0.649→2.081 kWh（t=3.34, p≈0.010） | 有效设计可判幅度 |
 | **寒潮事件 → 采暖启用** | baseline 0/10 vs cold_snap 6/10 | **≈0.011** |
 | **空调峰税 ac_tax → 关空调/削峰** | 热浪背景峰段 −22.5%/−24.6%/−20.6%（跨 3 世界，合并 p≈1e-7；AC-on 15/15→7/15） | **≈0.0022** |
+| **公共假日 holiday → 总电量上升（stay-home）** | 跨 2 世界：W1 **+48.3%**（p=3.5e-4）/ W2 **+31.9%**（p=3.8e-7）；照明/TV/烹饪齐升 | **<1e-6** |
 | ~~停电预警/电价上涨 → 峰段削减~~ | **已撤回**：连续指标跨时段基线漂移伪影（R104） | — |
 
 **方法学**：运行间噪声地板 std≈1.0 kWh（CV≈12%，R057）；单次/单臂不可信；功效分析表明文献尺度
@@ -44,7 +45,7 @@
 | 夜间回温 night_setback | RQ2 | Cabezas-Riviere 2025 | 采暖 −5~10% | null(单例:未降采暖反升) | `experiments/night_setback.md` |
 | 实时反馈 in_home_display | RQ2 | Monacchi 2015 / Faruqui 2010 | 3~10%（叠加 TOU 达 10~30%） | null(same-era交错:峰段−10.3% n.s.,总电量+4.2%) | `experiments/in_home_display.md` |
 | 封锁事件 lockdown | RQ2 | Xia et al. 2026 | 日间用量上升 | 有效果(二值跨3世界:Out>0 13/13→1/13, Fisher 双侧 p≈0.000003) | `experiments/event_lockdown.md` |
-| 公共假日 holiday | RQ2 | Xia et al. 2026 (disruption) | 日间用量上升 | 有效果(单世界:总电量 **+48.3%(p≈0.0004)**; 峰 +7.8% n.s.; **跨世界待验**) | `experiments/event_holiday.md` |
+| 公共假日 holiday | RQ2 | Xia et al. 2026 (disruption) | 日间用量上升 | **有效果(跨2世界)**: 总电量 +48.3%/W1、+31.9%/W2（p<1e-6）；照明/TV/烹饪齐升；峰幅度世界相关 | `experiments/event_holiday.md` |
 | 停电预警 blackout_risk | RQ2 | Xia et al. 2026 | 避开晚峰 | 撤回(连续削峰为基线漂移伪影,R104) | `experiments/event_blackout_risk.md` |
 | 电价上涨 price_hike | RQ2 | Faruqui & Sergici 2010 | 削峰省电 | 撤回(基线漂移伪影,R104) | `experiments/event_price_hike.md` |
 | 寒潮事件 cold_snap | RQ2 | Xia et al. 2026 | 采暖上升 | 有效果(二值:采暖 0/10 vs 6/10, 双侧 p≈0.011) | `experiments/event_cold_snap.md` |

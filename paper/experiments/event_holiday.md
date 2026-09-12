@@ -36,9 +36,20 @@ disruptions (stay-home → daytime demand up). The holiday result (+48.3% total,
 up) is the same mechanism as `lockdown` (daytime **+220.7%**, R107) but milder. Plan §4.3 Phase Three
 names public holidays as a target event — this fills that gap.
 
-## 7 Validity Check
-- same-era paired, n=15; **single household × single world × single day** → **cross-world replication
-  pending** (project red line 3). Not yet promoted to headline.
+## 7 Validity Check — **cross-world replicated**
+- same-era paired, n=15, **two worlds** (red line 3 satisfied):
+
+| Metric | W1 `world_838587` h002 | W2 `world_172148` h002 |
+|---|---|---|
+| Total energy | **+48.3%** (t=4.68, p=3.5e-4) | **+31.9%** (t=8.92, p=3.8e-7) |
+| Peak 16–21 | +7.8% (n.s.) | +24.9% (p=0.039) |
+| Valley 22–7 | −25.7% (n.s.) | −53.1% (p=3.7e-4) |
+| kitchen_light | +92.9% | +93.4% |
+| living_room_tv | +64.7% | +109.4% |
+| InductionCooker | +35.5% | +33.6% |
+
+- Cross-world **✅** (total, lighting, TV, cooking all up in both worlds) → promoted to headline.
+- Open: peak magnitude is world-dependent; 3rd world / multi-household pending.
 - No prompt directive beyond the factual holiday statement (natural-language injection only).
 
 ## 8 Conclusion
