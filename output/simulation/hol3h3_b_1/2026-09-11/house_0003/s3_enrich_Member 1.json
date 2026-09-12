@@ -1,0 +1,143 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-05:40",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Closes eyes. Breathes slowly. Turns to left side. Pulls blanket up. Places arm under pillow. Remains still. Turns to right side. Adjusts pillow. Continues sleeping."
+    },
+    {
+      "time": "05:40-06:00",
+      "location": "Bathroom",
+      "activity": "Washing up, brushing teeth, and taking morning medication for managed chronic condition",
+      "desc": "Wakes up. Walks to bathroom. Turns on light. Washes face. Brushes teeth. Takes medication. Turns off light. Exits bathroom."
+    },
+    {
+      "time": "06:00-06:25",
+      "location": "Out",
+      "activity": "Walking the dog around the neighborhood block",
+      "desc": "Attaches leash to dog collar. Opens door. Walks outside. Walks around block. Stops when dog sniffs. Picks up dog waste with bag. Continues walking. Returns home. Removes leash. Opens door. Enters house."
+    },
+    {
+      "time": "06:25-06:55",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, checking one-on-one text messages on phone",
+      "desc": "Enters kitchen. Turns on light. Opens refrigerator. Takes out eggs and milk. Closes refrigerator. Places pan on stove. Turns on stove. Cracks eggs into bowl. Beats eggs. Pours into pan. Cooks eggs. Toasts bread. Butters toast. Pours milk. Sits at table. Picks up phone. Reads and replies to messages. Eats breakfast. Drinks milk. Clears plate."
+    },
+    {
+      "time": "06:55-07:15",
+      "location": "Bedroom 1",
+      "activity": "Dressing for work, packing work bag, reviewing clinic appointment list and transit times",
+      "desc": "Enters bedroom. Opens closet. Takes out clothes. Dresses in shirt and pants. Puts on socks and shoes. Opens work bag. Packs laptop, notebook, pen. Checks phone for appointments and transit times. Closes bag. Picks up bag. Exits bedroom."
+    },
+    {
+      "time": "07:15-07:50",
+      "location": "Out",
+      "activity": "School run and drop-off on foot and public transit",
+      "desc": "Leaves house with child. Holds child's hand. Walks to bus stop. Waits for bus. Boards bus. Pays fare. Finds seat. Sits with child. Rides bus. Gets off at school stop. Walks to school gate. Crosses street. Presses pedestrian button. Arrives at school. Says goodbye to child. Watches child enter school. Turns around. Walks to bus stop for clinic commute."
+    },
+    {
+      "time": "07:50-08:25",
+      "location": "Out",
+      "activity": "Public transit commute toward the clinic",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Pays fare. Finds seat. Sits down. Takes out phone. Checks messages. Reads patient notes. Puts phone away. Rides bus. Stands up. Walks to exit. Steps off bus. Walks to clinic entrance. Opens door. Enters clinic."
+    },
+    {
+      "time": "08:25-09:00",
+      "location": "Out",
+      "activity": "Arriving at clinic, setting up consultation room, reviewing patient and student notes",
+      "desc": "Enters clinic. Greets colleagues. Walks to consultation room. Turns on light. Opens computer. Logs in. Opens patient files. Reviews notes. Arranges chairs. Sets up equipment. Checks schedule. Opens student notes. Reviews student notes. Prepares desk. Turns on monitor. Adjusts chair. Sits down. Reads notes."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Community healthcare appointments and follow-up check-ins at the clinic",
+      "desc": "Calls patient A. Measures blood pressure. Listens to heart. Asks about symptoms. Types notes. Provides advice. Schedules follow-up. Escorts patient A out. Calls patient B. Measures blood pressure. Listens to heart. Asks about symptoms. Types notes. Provides advice. Schedules follow-up. Escorts patient B out. Makes follow-up phone calls. Checks messages. Updates records."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Lunch break, replying to one-on-one text messages from relatives and neighbors",
+      "desc": "Goes to break room. Opens lunch bag. Takes out sandwich. Unwraps sandwich. Takes bite. Chews. Swallows. Picks up phone. Opens messaging app. Reads messages. Types reply. Sends message. Continues eating. Drinks water. Finishes sandwich. Wipes mouth. Puts phone away. Throws away wrapper."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Out",
+      "activity": "Public transit from clinic to the school",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Pays fare. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Rides bus. Stands up. Walks to exit. Steps off bus. Walks to school entrance. Opens door. Enters school."
+    },
+    {
+      "time": "13:00-16:30",
+      "location": "Out",
+      "activity": "Primary education aide duties in classrooms, supporting students and record-keeping",
+      "desc": "Enters classroom. Greets teacher. Distributes worksheets. Collects homework. Checks homework. Returns homework. Helps student A with reading. Helps student B with math. Takes notes. Records attendance. Files paperwork. Monitors recess. Assists with cleanup. Updates records. Communicates with teacher. Prepares materials for next day."
+    },
+    {
+      "time": "16:30-17:10",
+      "location": "Out",
+      "activity": "Public transit commute home",
+      "desc": "Walks to bus stop. Waits for bus. Boards bus. Pays fare. Finds seat. Sits down. Takes out phone. Checks messages. Puts phone away. Rides bus. Stands up. Walks to exit. Steps off bus. Walks home. Opens door. Enters house."
+    },
+    {
+      "time": "17:10-17:40",
+      "location": "Out",
+      "activity": "Walking the dog on the evening loop near home",
+      "desc": "Attaches leash to dog collar. Opens door. Walks outside. Walks around loop. Stops when dog sniffs. Picks up dog waste with bag. Continues walking. Greets neighbor. Says 'Good evening.' Continues walking. Returns home. Removes leash. Opens door. Enters house. Closes door. Washes hands."
+    },
+    {
+      "time": "17:40-18:15",
+      "location": "Kitchen",
+      "activity": "Cooking dinner using the induction cooker and rice cooker",
+      "desc": "Enters kitchen. Washes hands. Opens refrigerator. Takes out ingredients. Closes refrigerator. Chops vegetables. Cuts meat. Turns on induction cooker. Places pan on cooker. Adds oil. Adds meat. Stirs. Adds vegetables. Stirs. Adds sauce. Measures rice. Rinses rice. Adds water to rice cooker. Presses start. Serves food."
+    },
+    {
+      "time": "18:15-19:00",
+      "location": "Dining Room",
+      "activity": "Eating dinner",
+      "desc": "Sits at table. Serves food. Picks up fork. Takes bite. Chews. Swallows. Drinks water. Continues eating. Talks to family. Takes another bite. Finishes meal. Picks up plate. Carries plate to kitchen. Returns to table. Clears dishes. Wipes table."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing up dishes and loading the dishwasher, tidying the kitchen counters",
+      "desc": "Enters kitchen. Collects dishes. Scrapes food into trash. Loads dishes into dishwasher. Adds detergent. Closes dishwasher. Turns on dishwasher. Wipes counters with cloth. Rinses cloth. Wipes stove. Puts away leftovers. Wipes sink. Takes out trash. Replaces trash bag. Wipes table."
+    },
+    {
+      "time": "19:30-20:15",
+      "location": "Study",
+      "activity": "Remote paperwork and community outreach follow-up on the computer, sending detailed one-on-one text messages",
+      "desc": "Enters study. Turns on light. Turns on computer. Logs in. Opens paperwork files. Types notes. Saves files. Opens email. Sends emails. Picks up phone. Opens messaging app. Reads messages. Types detailed replies. Sends messages. Checks calendar. Updates schedule. Shuts down computer. Turns off light."
+    },
+    {
+      "time": "20:15-21:00",
+      "location": "Living Room",
+      "activity": "Watching TV to unwind after the shift",
+      "desc": "Enters living room. Turns on TV. Picks up remote. Changes channels. Sits on couch. Watches TV. Picks up phone. Checks messages. Puts phone down. Watches TV. Changes channel. Adjusts volume. Watches TV. Turns off TV. Stands up. Leaves living room."
+    },
+    {
+      "time": "21:00-21:45",
+      "location": "Bathroom",
+      "activity": "Showering and taking evening medication, using the dehumidifier and fan",
+      "desc": "Enters bathroom. Turns on light. Turns on water heater. Undresses. Steps into shower. Turns on water. Washes body. Shampoos hair. Rinses. Turns off water. Steps out. Dries body. Takes medication. Turns on dehumidifier. Turns on fan. Turns off light. Exits bathroom."
+    },
+    {
+      "time": "21:45-22:30",
+      "location": "Bedroom 1",
+      "activity": "One-on-one text check-ins with relatives and neighbors from bed",
+      "desc": "Enters bedroom. Lies on bed. Picks up phone. Opens messaging app. Reads messages. Types reply to relative. Sends message. Reads message from neighbor. Types reply. Sends message. Continues texting. Puts phone down. Turns off light. Closes eyes."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down under the desk lamp with the TV off",
+      "desc": "Turns on desk lamp. Picks up book. Opens to page. Reads. Turns page. Reads. Turns page. Reads. Closes book. Puts book down. Turns off desk lamp. Lies down. Closes eyes."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Closes eyes. Breathes slowly. Turns to side. Sleeps."
+    }
+  ]
+}
