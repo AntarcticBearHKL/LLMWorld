@@ -29,11 +29,12 @@ events — are injected **only as natural language**; aggregate behaviour is eme
 1. An end-to-end pipeline **behaviour → appliance decision → minute-resolution load**.
 2. A natural-language intervention surface (pricing / norms / events) with emergent effects.
 3. Alignment experiments against empirical benchmarks (Faruqui & Sergici 2010; Allcott 2011;
-   Costa & Kahn 2010; Xia et al. 2026; …), yielding **four statistically significant natural-language
+   Costa & Kahn 2010; Xia et al. 2026; …), yielding **five statistically significant natural-language
    event results**, each replicated across three synthetic worlds — heatwave → cooling (two-sided
    p≈0.00003), lockdown → stay-home (p≈0.000003) **plus a judgeable daytime-load magnitude
-   (+220.7%, same-era n=9, p≈0.010)**, cold-snap → heating (p≈0.011), and **air-conditioner peak tax
-   → AC-off/peak-shaving** (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−20.6%).
+   (+220.7%, same-era n=9, p≈0.010)**, cold-snap → heating (p≈0.011), **air-conditioner peak tax
+   → AC-off/peak-shaving** (AC-on 15/15→7/15, p≈0.0022; peak −22.5%/−24.6%/−20.6%), and **public
+   holiday → higher total energy** (stay-home; +48.3%/+31.9%/+39.8%, p≤0.0014).
 4. A **mechanistic account of peak-shaving** — the effect of a device-targeted intervention scales with
    the device's **peak-window load × behaviour-change rate** (a 3-world dose–response), with a distinct
    *window+price* path (`ac_tax`) that additionally shifts non-AC evening load. **Energy-saving ≠
