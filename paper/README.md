@@ -38,7 +38,7 @@
 | TOU 分时电价 | RQ2 | Faruqui & Sergici 2010 | 峰值 −3~6% | null(n=15:峰段−3.2%,总电量+5.4%,均n.s.) | `experiments/tou.md` |
 | 尖峰电价 CPP | RQ2 | Faruqui & Sergici 2010 | 峰值 −13~20% | null(**峰两世界均 n.s.**: W1 −2.7%/W2 +13.0%); 总量效应**世界特异**(W1 −14.4% p=0.007 / W2 −4.3% n.s.); cpp_soft W1 总 −10.9% | — |
 | 谷期补贴 subsidy | RQ2 | Alexeenko & Bitar 2023 | EV 峰移 30~60% | 占位(待跑,需EV) | `experiments/subsidy.md` |
-| 需量电费 peak_demand | RQ2 | Escarrega et al. 2025 | 峰值 −10~20% | null(N=3交错:峰值+4.2%,峰段−3.2%; **n=14 same-era:峰−7.5% n.s.,总0.0%**) | `experiments/peak_demand.md` |
+| 需量电费 peak_demand | RQ2 | Escarrega et al. 2025 | 峰值 −10~20% | null(N=3交错:峰值+4.2%,峰段−3.2%; **n=15 same-era:峰−6.9% n.s.,总−1.2% n.s.**) | `experiments/peak_demand.md` |
 | EV 延迟激励 ev_delay | RQ2 | Alexeenko & Bitar 2023 | 异质性可观测 | 占位(待跑,需EV) | `experiments/ev_delay.md` |
 | 社会规范 nudge | RQ2 | Allcott 2011 / Ayres 2013 | 总电量 −1~3% | 方向不稳定(大样本3/7增耗;方差主导) | `experiments/nudge.md` |
 | 损失框架 nudge_loss | RQ2 | Ghesla et al. 2019 | 比增益框架多 ~5% | 反例(总量+6%,方向相反) | `experiments/nudge_loss.md` |

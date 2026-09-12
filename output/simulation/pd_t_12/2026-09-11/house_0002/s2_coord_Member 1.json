@@ -9,72 +9,52 @@
     {
       "time": "06:30-07:00",
       "location": "Bathroom",
-      "activity": "Waking up, brushing teeth, and taking a morning shower"
+      "activity": "Washing up and getting ready"
     },
     {
       "time": "07:00-07:30",
       "location": "Kitchen",
-      "activity": "Preparing and eating breakfast while checking the day's schedule"
+      "activity": "Preparing and eating breakfast"
     },
     {
       "time": "07:30-08:00",
       "location": "Bedroom 1",
-      "activity": "Getting dressed in work clothes and packing a bag for the shift"
+      "activity": "Getting dressed and preparing for work"
     },
     {
       "time": "08:00-09:00",
       "location": "Out",
-      "activity": "Commuting to the clinic/hospital for the work shift"
+      "activity": "Commuting to work"
     },
     {
-      "time": "09:00-13:00",
+      "time": "09:00-17:00",
       "location": "Out",
-      "activity": "Working as a health care professional, attending to patients and clinical duties"
-    },
-    {
-      "time": "13:00-13:30",
-      "location": "Out",
-      "activity": "Taking a lunch break at work"
-    },
-    {
-      "time": "13:30-17:00",
-      "location": "Out",
-      "activity": "Continuing clinical work, patient care, and charting"
+      "activity": "Working as a health care professional"
     },
     {
       "time": "17:00-18:00",
       "location": "Out",
-      "activity": "Commuting home from work"
+      "activity": "Commuting home"
     },
     {
-      "time": "18:00-18:30",
-      "location": "Bathroom",
-      "activity": "Taking a shower and changing into comfortable clothes"
-    },
-    {
-      "time": "18:30-19:15",
+      "time": "18:00-19:00",
       "location": "Kitchen",
       "activity": "Cooking and eating dinner"
     },
     {
-      "time": "19:15-20:30",
+      "time": "19:00-21:00",
       "location": "Living Room",
-      "activity": "Relaxing on the sofa and watching TV"
+      "activity": "Relaxing and watching TV"
     },
     {
-      "time": "20:30-21:30",
-      "location": "Living Room",
-      "activity": "Using the computer for personal admin and professional reading"
-    },
-    {
-      "time": "21:30-22:00",
+      "time": "21:00-22:00",
       "location": "Bathroom",
-      "activity": "Evening hygiene routine, brushing teeth and washing up"
+      "activity": "Showering and personal hygiene"
     },
     {
       "time": "22:00-22:30",
       "location": "Bedroom 1",
-      "activity": "Winding down with the phone and dimming the lights"
+      "activity": "Reading or using phone before bed"
     },
     {
       "time": "22:30-24:00",
