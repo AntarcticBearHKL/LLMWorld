@@ -1,0 +1,105 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Waking up, stretching and getting dressed (Bathroom is occupied by Member 2 until 07:30)"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth"
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle, preparing and eating breakfast"
+    },
+    {
+      "time": "08:45-09:30",
+      "location": "Living Room",
+      "activity": "Drinking coffee while watching the morning news on TV"
+    },
+    {
+      "time": "09:30-10:15",
+      "location": "Living Room",
+      "activity": "Vacuuming the floor and tidying up the room"
+    },
+    {
+      "time": "10:15-11:30",
+      "location": "Out",
+      "activity": "Grocery shopping and running errands"
+    },
+    {
+      "time": "11:30-12:00",
+      "location": "Kitchen",
+      "activity": "Unpacking groceries and cooking lunch"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Eating lunch with Member 2 and chatting about the day"
+    },
+    {
+      "time": "13:00-14:15",
+      "location": "Bedroom 1",
+      "activity": "Resting and reading a book"
+    },
+    {
+      "time": "14:15-16:00",
+      "location": "Bedroom 1",
+      "activity": "Using the computer to plan upcoming community program activities"
+    },
+    {
+      "time": "16:00-17:00",
+      "location": "Out",
+      "activity": "Walking in the park and getting fresh air"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Kitchen",
+      "activity": "Preparing dinner with the induction cooker and oven"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner with Member 2"
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Cleaning up after dinner and washing dishes together with Member 2"
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Playing video games on the game console"
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Living Room",
+      "activity": "Watching a TV show while Member 2 reads and sketches nearby"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down and checking phone before bed"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

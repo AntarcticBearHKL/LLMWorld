@@ -1,0 +1,89 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Close eyes. Breathe regularly. Turn to left side. Pull blanket. Adjust pillow. Turn to right side. Stretch arms. Remain still. Sleep. Turn over. Sleep."
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Enter bathroom. Turn on light. Turn on tap. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Dry face with towel. Turn off tap. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bedroom 1",
+      "activity": "Checking schedule, light reading, and preparing for the day",
+      "desc": "Enter bedroom. Sit on bed. Pick up phone. Open calendar app. Scroll through schedule. Put down phone. Pick up book. Open book. Read pages. Close book. Put down book. Stand up. Open wardrobe. Select clothes. Lay clothes on bed."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with Member 2",
+      "desc": "Enter kitchen. Say 'Good morning' to Member 2. Open refrigerator. Take out milk, eggs, bread. Close refrigerator. Place items on counter. Pick up pan. Place pan on stove. Turn on stove. Crack eggs into pan. Stir eggs. Toast bread. Pour milk into glasses. Set table. Sit down. Eat breakfast. Talk with Member 2. Finish eating. Pick up plates. Rinse plates. Place plates in dishwasher."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing for work",
+      "desc": "Enter bedroom. Open wardrobe. Take out shirt. Take out pants. Lay shirt on bed. Lay pants on bed. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Open bag. Place laptop in bag. Place notebook in bag. Place pen in bag. Zip bag. Pick up phone. Place phone in pocket. Pick up bag. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk to bus stop. Stand at bus stop. Bus arrives. Board bus. Tap transit card. Find seat. Sit down. Bus stops. Stand up. Walk to exit. Get off bus. Walk to office building. Enter building. Walk to elevator. Press elevator button. Enter elevator. Press floor button. Exit elevator. Walk to office door. Open door."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a community program coordinator at a nonprofit",
+      "desc": "Enter office. Say 'Good morning' to colleagues. Sit at desk. Turn on computer. Check emails. Attend meeting. Make phone calls. Write reports. Organize event materials. Talk to community members. Take lunch break. Eat lunch. Return to desk. Continue work. Print documents. Attend another meeting. Update calendar. Send emails. Leave office."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk to bus stop. Stand at bus stop. Bus arrives. Board bus. Tap transit card. Find seat. Sit down. Look out window. Bus stops. Stand up. Walk to exit. Get off bus. Walk to home. Enter home."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 2",
+      "desc": "Enter kitchen. Say 'Hello' to Member 2. Open refrigerator. Take out vegetables and meat. Close refrigerator. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Cook meat. Add vegetables. Stir. Turn off stove. Set table. Sit down. Eat dinner. Talk with Member 2. Clear table. Wash dishes."
+    },
+    {
+      "time": "19:00-21:00",
+      "location": "Living Room",
+      "activity": "Watching TV or relaxing",
+      "desc": "Enter living room. Sit on sofa. Pick up remote. Turn on TV. Change channels. Watch show. Pick up phone. Put down phone. Stand up. Walk to kitchen. Open refrigerator. Take out snack. Close refrigerator. Walk back to living room. Sit on sofa. Continue watching TV. Turn off TV. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing with Member 2",
+      "desc": "Member 2 enters living room. Say 'Hi' to Member 2. Sit together on sofa. Talk with Member 2. Pick up remote. Change channel. Watch TV. Laugh. Pick up phone. Show something on phone to Member 2. Put down phone. Continue watching TV. Turn off TV. Stand up. Say 'Goodnight' to Member 2. Walk to bedroom."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using computer or reading",
+      "desc": "Enter bedroom. Sit at desk. Open laptop. Turn on computer. Check email. Browse internet. Read article. Close laptop. Pick up book. Open book. Read pages. Close book. Put down book."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready for bed",
+      "desc": "Enter bathroom. Turn on light. Turn on tap. Wash face. Brush teeth. Use toilet. Flush. Wash hands. Dry hands with towel. Turn off tap. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Enter bedroom. Turn off light. Lie down on bed. Pull blanket up. Close eyes. Breathe deeply. Turn to left side. Adjust pillow. Turn to right side. Stretch legs. Remain still. Sleep."
+    }
+  ]
+}

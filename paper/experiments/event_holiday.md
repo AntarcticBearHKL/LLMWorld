@@ -50,6 +50,8 @@ names public holidays as a target event — this fills that gap.
 | W3 h002 (2-person) | +39.8% | 0.0014 | −15.2% n.s. |
 | W3 h003 (3-person, AC-led) | **+64.5%** | **2.0e-4** | **+96.4%** |
 
+- **Full-household level (R181)**: simulating **all members** of a 2-person household (world_172148 h002,
+  n=9) gives total **+44.9%** (t=2.84, p=0.022) — the effect is **not a member-1-only artifact**.
 - same-era paired, n=15, **three worlds** (red line 3 satisfied):
 
 | Metric | W1 `838587` | W2 `172148` | W3 `143345` |
