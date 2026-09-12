@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed. Pull the blanket over the body. Place head on the pillow. Close eyes. Turn to the right side. Pull the blanket up to the shoulder. Turn to the left side. Stretch the left leg. Stretch the right leg. Turn onto the back. Place both arms outside the blanket. Turn onto the right side again. Pull the pillow toward the head. Keep the body still. Turn onto the left side. Bend the knees. Keep lying on the bed. Remain lying on the bed. Remain lying on the bed until the alarm sound."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Open eyes. Sit up on the bed. Swing both legs to the floor. Stand up. Press the phone screen to stop the alarm. Walk to the bathroom door. Push the door open. Step inside. Turn on the bathroom light. Turn on the tap. Cup both hands under the water. Splash water onto the face. Pick up the toothbrush from the holder. Squeeze toothpaste onto the bristles. Put the toothpaste tube down. Brush the upper teeth. Brush the lower teeth. Rinse the mouth with water. Spit into the sink. Put the toothbrush back into the holder. Turn off the tap. Pull the towel from the rack. Wipe the face with the towel. Hang the towel back on the rack. Turn off the light. Walk out of the bathroom."
+    },
+    {
+      "time": "07:00-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the eggs and milk. Close the refrigerator door. Put the eggs and milk on the counter. Open the cupboard door. Take out a bowl. Close the cupboard door. Crack the eggs into the bowl. Pick up a fork. Beat the eggs with the fork. Put the fork down. Press the kettle switch to boil water. Turn on the induction cooker. Pour oil into the pan. Pour the beaten eggs into the pan. Stir the eggs with a spatula. Turn off the induction cooker. Slide the eggs onto a plate. Pick up the plate. Carry the plate to the table. Pull out the chair. Sit down on the chair. Pick up the fork. Eat the eggs. Lift the cup. Drink the milk. Put the cup down. Stand up. Pick up the plate and cup. Carry them to the sink. Turn on the tap. Rinse the plate and cup. Turn off the tap. Put the plate and cup into the drying rack. Walk out of the kitchen."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and checking the day's roster on phone",
+      "desc": "Walk into the bedroom. Open the wardrobe door. Take out a shirt and trousers. Close the wardrobe door. Take off the sleepwear. Put on the shirt. Button the shirt. Put on the trousers. Pick up the phone from the desk. Press the power button. Unlock the screen. Tap the roster app. Scroll down the roster list. Read the shift times on the screen. Press the power button to lock the phone. Put the phone down on the desk."
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Working from home at desk: remote patient consultations, reviewing charts and updating care notes on computer",
+      "desc": "Pull out the desk chair. Sit down on the chair. Press the computer power button. Wait for the screen to load. Log in with the password. Open the patient consultation software. Put on the headset. Answer the first telehealth call. Speak to the patient: \"Good morning, how are you feeling today?\" Type notes into the care record. End the call. Open the next patient chart. Scroll through the medication list. Click the chart tab. Type the update into the notes field. Save the file. Answer the second call. Speak to the patient about the dosage. Type the dosage into the record. End the call. Stand up. Walk to the kitchen and fill a glass with water. Walk back to the bedroom. Sit down again. Open the third patient chart. Review the lab results on the screen. Type the care note. Save the file. Stand up. Stretch both arms above the head. Sit down again. Open the next chart. Type the follow-up note. Save the file."
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "desc": "Stand up from the desk chair. Walk out of the bedroom. Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the vegetables and the container of rice. Close the refrigerator door. Put the items on the counter. Open the cupboard door. Take out a pot. Close the cupboard door. Turn on the induction cooker. Pour water into the pot. Put the vegetables into the pot. Pick up a knife. Cut the vegetables on the cutting board. Put the knife down. Stir the pot with a spoon. Turn off the induction cooker. Pour the soup into a bowl. Pick up the bowl. Carry the bowl to the table. Pull out the chair. Sit down. Pick up the spoon. Eat the vegetables and rice. Lift the cup. Drink water. Put the cup down. Stand up. Pick up the bowl and cup. Carry them to the sink. Turn on the tap. Rinse the bowl and cup. Turn off the tap. Place them into the drying rack. Walk out of the kitchen."
+    },
+    {
+      "time": "12:45-13:15",
+      "location": "Living Room",
+      "activity": "Watching TV news and resting",
+      "desc": "Walk into the living room. Pick up the TV remote from the coffee table. Press the power button. Point the remote at the TV. Press the channel button. Sit down on the sofa. Lean back against the cushion. Place the remote on the armrest. Watch the news on the screen. Pick up the remote. Press the volume button to lower the volume. Put the remote down. Cross the legs. Stretch both arms forward. Pick up the remote again. Press the power button to turn off the TV. Put the remote back on the coffee table. Stand up from the sofa. Walk out of the living room."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Bedroom 1",
+      "activity": "Continuing remote clinical work: telehealth calls, medication follow-ups and documentation on computer",
+      "desc": "Walk into the bedroom. Pull out the desk chair. Sit down. Wake the computer screen. Log in again. Open the telehealth application. Put on the headset. Answer the telehealth call. Speak to the patient: \"Please tell me about your symptoms since the last visit.\" Type the answers into the notes field. End the call. Open the medication follow-up list. Click the first patient name. Check the prescription on the screen. Type the follow-up note. Save the file. Click the second patient name. Read the dosage record. Type the updated dosage. Save the file. Answer the next call. Speak to the patient about the test results. Type the summary. End the call. Stand up. Walk to the bathroom. Turn on the tap. Wash both hands. Turn off the tap. Walk back to the bedroom. Sit down again. Open the next chart. Scroll through the history. Type the care note. Save the file. Stand up. Stretch both arms above the head. Sit down again. Open the final chart. Type the closing note. Save the file. Close the application."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Living Room",
+      "activity": "Leisure time: light stretching and listening to music",
+      "desc": "Stand up from the desk chair. Walk out of the bedroom. Walk into the living room. Sit down on the sofa. Pick up the phone from the pocket. Unlock the screen. Open the music application. Tap a playlist. Put the phone down on the armrest. Stand up. Raise both arms above the head. Bend forward. Touch the floor with both hands. Stand upright. Turn the torso to the left. Turn the torso to the right. Raise the left leg. Raise the right leg. Sit down on the sofa. Pick up the phone. Skip to the next track. Put the phone down. Stretch both legs forward. Pick up the phone again. Press the pause button. Press the power button to lock the phone. Put the phone into the pocket. Stand up. Walk out of the living room."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the chicken and vegetables. Close the refrigerator door. Put the items on the counter. Open the cupboard door. Take out a pan. Close the cupboard door. Turn on the range hood. Turn on the induction cooker. Pour oil into the pan. Pick up the knife. Cut the chicken on the cutting board. Put the knife down. Put the chicken into the pan. Stir with a spatula. Add salt from the container. Stir again. Turn off the induction cooker. Slide the chicken onto a plate. Turn off the range hood. Pick up the plate. Carry it to the table. Pull out the chair. Sit down. Pick up the fork. Eat the chicken and vegetables. Lift the cup. Drink water. Put the cup down. Stand up. Pick up the plate and cup. Carry them to the sink. Turn on the tap. Rinse the plate and cup. Turn off the tap."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Pick up the plate from the table. Carry it to the sink. Pick up the cup from the table. Carry it to the sink. Wipe the table surface with a cloth. Fold the cloth. Put the cloth on the counter. Pick up the pan from the stove. Carry it to the sink. Open the dishwasher door. Pull out the lower rack. Place the plates into the rack. Place the cups into the rack. Place the pan into the rack. Push the lower rack in. Pull out the upper rack. Place the forks and spoons into the basket. Push the upper rack in. Close the dishwasher door. Press the start button on the dishwasher. Turn off the kitchen light. Walk out of the kitchen."
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower and personal hygiene routine",
+      "desc": "Walk into the bathroom. Turn on the bathroom light. Turn on the water heater. Open the shower door. Turn on the shower tap. Adjust the water temperature with the knob. Step into the shower. Wet the hair with water. Pick up the shampoo bottle. Squeeze shampoo into the palm. Put the bottle down. Rub the shampoo into the hair. Rinse the hair with water. Pick up the soap. Rub the soap over both arms. Rub the soap over the chest. Rub the soap over both legs. Rinse the body with water. Turn off the shower tap. Open the shower door. Step out. Pull the towel from the rack. Dry the hair with the towel. Dry the body with the towel. Hang the towel back on the rack. Turn off the bathroom light. Walk out of the bathroom."
+    },
+    {
+      "time": "21:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing with TV and reading on computer",
+      "desc": "Walk into the living room. Pick up the TV remote from the coffee table. Press the power button. Point the remote at the TV. Sit down on the sofa. Put the remote on the armrest. Watch the screen. Pick up the computer from the coffee table. Open the lid. Press the power button. Wait for the screen to load. Open the browser. Scroll through the news page. Click an article link. Read the article on the screen. Press the volume button on the remote. Pick up the phone. Unlock the screen. Type a reply message. Press send. Put the phone down. Close the browser tab. Open the e-book application. Read the page on the screen. Turn to the next page. Close the e-book application. Close the laptop lid. Press the power button on the remote to turn off the TV. Put the remote on the coffee table. Stand up from the sofa. Walk out of the living room."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Night routine: brushing teeth and preparing for bed",
+      "desc": "Walk into the bathroom. Turn on the bathroom light. Turn on the tap. Cup both hands under the water. Rinse the mouth. Pick up the toothbrush from the holder. Squeeze toothpaste onto the bristles. Put the toothpaste tube down. Brush the upper teeth. Brush the lower teeth. Rinse the mouth with water. Spit into the sink. Put the toothbrush back into the holder. Turn off the tap. Pull the towel from the rack. Wipe the mouth with the towel. Hang the towel back on the rack. Pick up the comb. Comb the hair. Put the comb down on the shelf. Turn off the bathroom light. Walk out of the bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Walk into the bedroom. Turn off the bedroom light. Pull back the blanket. Sit down on the bed. Lie down on the bed. Pull the blanket over the body. Place head on the pillow. Place the phone on the nightstand. Turn to the right side. Pull the blanket up to the shoulder. Turn to the left side. Stretch the left leg. Stretch the right leg. Turn onto the back. Place both arms outside the blanket. Turn onto the right side again. Adjust the pillow under the head. Keep the body still. Remain lying on the bed."
+    }
+  ]
+}

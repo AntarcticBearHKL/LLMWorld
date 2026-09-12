@@ -21,14 +21,14 @@ from engine import news  # noqa: E402
 
 
 class TemplateTests(unittest.TestCase):
-    def test_twelve_presets(self):
-        self.assertEqual(len(news.NEWS_TEMPLATES), 12)
-        self.assertEqual(len(news.list_templates()), 12)
+    def test_thirteen_presets(self):
+        self.assertEqual(len(news.NEWS_TEMPLATES), 13)
+        self.assertEqual(len(news.list_templates()), 13)
 
     def test_expected_names(self):
         expected = {"heatwave", "cold_snap", "storm", "price_hike", "energy_crisis",
                     "ac_tax", "rebate", "blackout_risk", "solar_incentive", "lockdown",
-                    "holiday", "wfh"}
+                    "holiday", "wfh", "transport_strike"}
         self.assertEqual(set(news.list_templates()), expected)
 
     def test_each_template_has_title_and_content(self):

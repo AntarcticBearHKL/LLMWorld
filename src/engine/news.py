@@ -59,6 +59,10 @@ NEWS_TEMPLATES = {
         "title": "Work-from-home day",
         "content": "Today is a work-from-home day; many residents are working from home instead of commuting to the office.",
     },
+    "transport_strike": {
+        "title": "Transport strike",
+        "content": "A public transport strike means many people cannot commute to work today and are staying at home.",
+    },
 }
 
 
