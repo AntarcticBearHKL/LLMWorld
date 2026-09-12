@@ -65,12 +65,14 @@ names public holidays as a target event — this fills that gap.
 - **Peak effect is NOT robust** (three worlds: + / + / −) → assert **total** only, not peak.
 - No prompt directive beyond the factual holiday statement (natural-language injection only).
 
-## 5b Mechanism — load shifts earlier (R170)
-Hourly means show a consistent **morning/daytime shift** across all three worlds: **08:00 +1.5~1.9 kWh**,
-**12:00 +0.6~1.2 kWh**, while the **18:00 evening peak falls by 0.3~1.3 kWh in 3/3 worlds**. The holiday
-therefore converts an evening-peak profile into a daytime-active profile; total rises because multiple
-daytime activities (breakfast/lunch cooking, lighting, TV, computers) exceed the evening-peak reduction.
-This explains why the *net* 16–21h peak change is world-dependent (±) and is why only the **total** is asserted.
+## 5b Mechanism — load shifts earlier (R170/R179, 6 households)
+Hourly means show a consistent **morning/daytime shift** across all six households: **08:00 rises in 6/6**
+(+0.4…+1.9 kWh), **12:00 rises in 6/6** (+0.6…+1.2), while the **18:00 evening load falls in 5/6**
+(−0.04…−1.31). The single exception (W2h001) has an almost empty baseline 18:00 (0.29 kWh), so the holiday
+*adds* evening activity there — which is exactly why its peak rose +232%. The holiday therefore converts a
+workday profile into a daytime-active one; total rises because daytime activities (breakfast/lunch cooking,
+lighting, TV, computers) exceed the evening reduction. This explains why the *net* 16–21h peak change is
+household-dependent (±) and is why only the **total** is asserted.
 
 ## 8 Conclusion
 Public holiday = a significant **stay-home** effect: **+48.3% total energy (p≈0.0004)**, driven by
