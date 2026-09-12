@@ -95,6 +95,8 @@
    **Water-heater targeting is also ineffective (R147/R182/R183)**: three tests left the water-heater
    peak unchanged (and, on two worlds, raised the *total* peak, R182/R183) — consistent with the
    requirement that a *device that actually responds* (AC), plus the window, is what shaves.
+   **`ac_tax` is conditional on the AC running (R188)**: without a heatwave the AC load is 0 and
+   `ac_tax` has no effect (peak −4.1%, n.s.) — event effects are baseline/appliance-state dependent.
 - **Future-oriented notices (world-specific, R141/R142/R146)**: on `world_838587` house_0002 a *future*
   TOU-tariff announcement and a community notice **increased** current total energy (+20.8%, p≈0.0001,
   n=15; +11.0%, p≈0.026, n=15) with no peak change, while a neutral custom event did not (+7.9%, n.s.).
@@ -116,6 +118,9 @@
 - **Injection-path confound ruled out (R165)**: preset vs custom injection with **byte-identical** content
   differed on **no** metric (n=15) → the path is not a confound; earlier preset/custom divergence reflects
   **content + small samples** (R159/R165).
+- **Valley-filling direction, underpowered (R185)**: a "free electricity 12:00–14:00" event raised midday
+  load +90% nominally (0.20→0.39 kWh) but **n.s.** (p=0.31, n=15) — direction consistent with price
+  response, but the absolute effect is below the noise floor (R057/R058).
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
