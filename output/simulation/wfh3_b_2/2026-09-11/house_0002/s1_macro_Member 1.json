@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth, and using the toilet"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, drinking a coffee"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes, packing bag and lunch, final check of the day"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "out",
+      "activity": "Commuting to the hospital for work"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "out",
+      "activity": "Working as a physiotherapist: assessing patients, running rehabilitation sessions and exercise programs"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "out",
+      "activity": "Taking a lunch break and eating lunch at the hospital"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "out",
+      "activity": "Continuing physiotherapy work: manual therapy, patient education and clinical notes"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking dinner and eating it"
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Kitchen",
+      "activity": "Washing dishes, wiping counters and tidying the kitchen"
+    },
+    {
+      "time": "19:15-20:00",
+      "location": "Living Room",
+      "activity": "Doing stretching and mobility exercises on the floor"
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching TV"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower and getting ready for bed"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading in bed and winding down, checking phone"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

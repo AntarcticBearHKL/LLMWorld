@@ -1,0 +1,361 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "start_minutes": 0,
+      "end_minutes": 390,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "start_minutes": 390,
+      "end_minutes": 420,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and using the toilet",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:40",
+      "start_minutes": 420,
+      "end_minutes": 460,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, drinking a hot drink",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:00",
+      "start_minutes": 460,
+      "end_minutes": 480,
+      "location": "Bedroom 1",
+      "activity": "Changing into work clothes and packing bag for the hospital shift",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting to the hospital where I work as a physiotherapist by public transport/walking",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Working as a physiotherapist: assessing patients and running individual rehabilitation sessions",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "start_minutes": 720,
+      "end_minutes": 765,
+      "location": "Out",
+      "activity": "Taking a lunch break at the hospital",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:45-17:00",
+      "start_minutes": 765,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Continuing physiotherapy sessions, teaching exercise programs and writing patient notes",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home from the hospital by public transport/walking",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "start_minutes": 1140,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Washing dishes and tidying the kitchen counters",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_ricecooker",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:30",
+      "start_minutes": 1170,
+      "end_minutes": 1230,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:00",
+      "start_minutes": 1230,
+      "end_minutes": 1260,
+      "location": "Living Room",
+      "activity": "Doing stretching and mobility exercises",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:30",
+      "start_minutes": 1260,
+      "end_minutes": 1290,
+      "location": "Bathroom",
+      "activity": "Taking a shower and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:30",
+      "start_minutes": 1290,
+      "end_minutes": 1350,
+      "location": "Bedroom 1",
+      "activity": "Winding down: reading and checking phone in bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "start_minutes": 1350,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_1_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
