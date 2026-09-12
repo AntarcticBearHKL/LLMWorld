@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, preparing a packed lunch"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, packing study materials and laptop into bag"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to Monash University campus (public transport)"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and seminars on campus"
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Eating lunch on campus"
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Attending tutorials and studying readings in the university library"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from campus (public transport)"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner, cleaning up dishes"
+    },
+    {
+      "time": "19:00-21:30",
+      "location": "Out",
+      "activity": "Working part-time hospitality and retail evening shift"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Out",
+      "activity": "Commuting home from part-time shift"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower and getting ready for bed"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reviewing study notes and winding down"
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

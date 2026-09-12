@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe steadily. Remain asleep. Turn to left side. Pull blanket up. Remain asleep. Turn to right side. Adjust pillow. Remain asleep. Turn onto back. Stretch legs. Remain asleep. Pull blanket. Remain asleep."
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Bathroom",
+      "activity": "Waking up, showering, and getting dressed",
+      "desc": "Open eyes. Sit up. Stand up. Walk to bathroom. Turn on light. Turn on tap. Adjust water. Step into shower. Wash body. Rinse body. Turn off tap. Step out. Dry body. Put on clothes. Walk out."
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Open refrigerator. Take out milk and bread. Close refrigerator. Cut bread. Place bread in toaster. Press lever. Remove toast. Spread butter. Pour milk. Sit at table. Eat breakfast. Drink milk. Stand up. Wash dishes. Put dishes away."
+    },
+    {
+      "time": "07:45-08:30",
+      "location": "Out",
+      "activity": "Commuting to Monash University",
+      "desc": "Pick up bag. Walk to door. Open door. Walk out. Close door. Walk to bus stop. Wait. Bus arrives. Board bus. Swipe card. Find seat. Sit down. Look out window. Bus stops. Stand up. Get off bus. Walk to university."
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education lectures and studying at Monash University",
+      "desc": "Enter lecture hall. Find seat. Sit down. Take out notebook. Take out pen. Listen to lecture. Write notes. Ask question. Write more notes. Lecture ends. Stand up. Walk to library. Sit at table. Open laptop. Type notes. Read textbook. Highlight text. Write summary. Close laptop. Pack bag."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Eating lunch at university",
+      "desc": "Walk to food court. Queue. Order food. Pay. Receive food. Walk to table. Sit down. Unwrap food. Pick up fork. Eat food. Drink water. Wipe mouth. Stand up. Throw trash. Walk to restroom. Wash hands."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Attending afternoon classes and studying at Monash University",
+      "desc": "Enter classroom. Find seat. Sit down. Take out notebook. Listen to lecture. Write notes. Participate in discussion. Take break. Walk to library. Sit at table. Open textbook. Read chapter. Write notes. Close textbook. Pack bag. Walk to bus stop."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home from university",
+      "desc": "Walk to bus stop. Wait. Bus arrives. Board bus. Swipe card. Find seat. Sit down. Look out window. Bus stops. Stand up. Get off bus. Walk home. Open door. Walk in. Close door."
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner",
+      "desc": "Open refrigerator. Take out ingredients. Close refrigerator. Wash vegetables. Cut vegetables. Turn on stove. Place pan on stove. Add oil. Add vegetables. Stir. Add seasoning. Turn off stove. Place food on plate. Sit at table. Eat dinner. Drink water. Stand up. Wash dishes. Put dishes away."
+    },
+    {
+      "time": "18:30-19:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk to living room. Pick up remote. Turn on TV. Sit on sofa. Change channel. Watch TV. Pick up phone. Check messages. Put down phone. Watch TV. Stand up. Turn off TV. Walk to bedroom."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Out",
+      "activity": "Commuting to part-time hospitality/retail job",
+      "desc": "Pick up bag. Walk to bus stop. Wait. Board bus. Swipe card. Sit down. Get off bus. Walk to workplace. Enter building. Change into uniform. Clock in. Walk to station."
+    },
+    {
+      "time": "19:30-22:30",
+      "location": "Out",
+      "activity": "Working part-time shift in hospitality/retail",
+      "desc": "Greet customer. Take order. Enter order into system. Prepare food. Serve food. Clean table. Operate cash register. Handle money. Restock shelves. Assist customer. Clean floor. Take out trash. Clock out. Change out of uniform. Walk out."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "desc": "Walk to bus stop. Wait. Board bus. Swipe card. Sit down. Get off bus. Walk home. Open door. Walk in. Close door."
+    },
+    {
+      "time": "23:00-23:30",
+      "location": "Bathroom",
+      "activity": "Personal hygiene and winding down",
+      "desc": "Walk to bathroom. Turn on tap. Wet toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Dry face. Turn off tap. Put on pajamas. Turn off light. Walk to bedroom."
+    },
+    {
+      "time": "23:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe. Turn to side. Adjust pillow. Remain asleep. Breathe."
+    }
+  ]
+}

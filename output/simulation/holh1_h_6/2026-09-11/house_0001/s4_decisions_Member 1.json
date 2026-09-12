@@ -1,0 +1,227 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:30",
+      "start_minutes": 0,
+      "end_minutes": 450,
+      "location": "Bedroom 1",
+      "activity": "Sleeping in on the public holiday",
+      "operations": []
+    },
+    {
+      "time": "07:30-08:00",
+      "start_minutes": 450,
+      "end_minutes": 480,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "operations": []
+    },
+    {
+      "time": "08:00-08:45",
+      "start_minutes": 480,
+      "end_minutes": 525,
+      "location": "Kitchen",
+      "activity": "Making and eating a relaxed breakfast with toast and tea using the toaster and kettle",
+      "operations": [
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:45-09:15",
+      "start_minutes": 525,
+      "end_minutes": 555,
+      "location": "Bathroom",
+      "activity": "Sorting laundry and starting a load in the washing machine",
+      "operations": [
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "09:15-10:45",
+      "start_minutes": 555,
+      "end_minutes": 645,
+      "location": "Bedroom 1",
+      "activity": "Reading education course materials on the computer at the desk with the desk lamp on",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "10:45-11:15",
+      "start_minutes": 645,
+      "end_minutes": 675,
+      "location": "Out",
+      "activity": "Walking around the neighbourhood for fresh air and light exercise",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "11:15-12:30",
+      "start_minutes": 675,
+      "end_minutes": 750,
+      "location": "Kitchen",
+      "activity": "Cooking a simple lunch on the induction cooker and eating it",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:30",
+      "start_minutes": 750,
+      "end_minutes": 810,
+      "location": "Bedroom 1",
+      "activity": "Writing a Master of Education assignment draft on the computer",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:30-14:00",
+      "start_minutes": 810,
+      "end_minutes": 840,
+      "location": "Out",
+      "activity": "Travelling to the part-time hospitality and retail job",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "14:00-18:00",
+      "start_minutes": 840,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Working a shift serving customers at the hospitality and retail workplace",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:30",
+      "start_minutes": 1080,
+      "end_minutes": 1110,
+      "location": "Out",
+      "activity": "Taking a dinner break and eating a staff meal at work",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:30-21:30",
+      "start_minutes": 1110,
+      "end_minutes": 1290,
+      "location": "Out",
+      "activity": "Continuing the evening shift at the hospitality and retail workplace",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Out",
+      "activity": "Travelling home after the shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bathroom",
+      "activity": "Showering and washing up after work",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:15",
+      "start_minutes": 1350,
+      "end_minutes": 1395,
+      "location": "Living Room",
+      "activity": "Relaxing on the couch watching TV to unwind",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:15-24:00",
+      "start_minutes": 1395,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Dimming the desk lamp, checking the phone briefly and going to sleep",
+      "operations": [
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

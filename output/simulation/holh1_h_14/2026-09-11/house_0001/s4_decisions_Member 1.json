@@ -1,0 +1,221 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-07:00",
+      "start_minutes": 0,
+      "end_minutes": 420,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "07:00-07:30",
+      "start_minutes": 420,
+      "end_minutes": 450,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "operations": []
+    },
+    {
+      "time": "07:30-08:15",
+      "start_minutes": 450,
+      "end_minutes": 495,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, boiling water with the kettle and toasting bread",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:15-09:00",
+      "start_minutes": 495,
+      "end_minutes": 540,
+      "location": "Bedroom 1",
+      "activity": "Reviewing Master of Education lecture notes on the computer at the desk with the desk lamp on",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-09:30",
+      "start_minutes": 540,
+      "end_minutes": 570,
+      "location": "Out",
+      "activity": "Commuting to the part-time hospitality and retail job, working a public holiday shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:30-15:00",
+      "start_minutes": 570,
+      "end_minutes": 900,
+      "location": "Out",
+      "activity": "Working a public holiday shift in hospitality and retail, serving customers and restocking",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:30",
+      "start_minutes": 900,
+      "end_minutes": 930,
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:30-16:00",
+      "start_minutes": 930,
+      "end_minutes": 960,
+      "location": "Bathroom",
+      "activity": "Showering and changing out of work clothes after the shift",
+      "operations": [
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "16:00-17:30",
+      "start_minutes": 960,
+      "end_minutes": 1050,
+      "location": "Bedroom 1",
+      "activity": "Studying for the Master of Education degree, reading and drafting an assignment on the computer",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:30",
+      "start_minutes": 1050,
+      "end_minutes": 1110,
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating it",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:30",
+      "start_minutes": 1110,
+      "end_minutes": 1170,
+      "location": "Bathroom",
+      "activity": "Sorting laundry and running the washing machine, then hanging clothes to dry",
+      "operations": [
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:30-21:30",
+      "start_minutes": 1170,
+      "end_minutes": 1290,
+      "location": "Living Room",
+      "activity": "Relaxing with the TV and game console under the air conditioner",
+      "operations": [
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bedroom 1",
+      "activity": "Tidying the room and organising notes and study materials for the next day",
+      "operations": []
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bathroom",
+      "activity": "Night-time routine, washing up and brushing teeth before bed",
+      "operations": []
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bedroom 1",
+      "activity": "Checking the phone for messages and reading briefly before sleep",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

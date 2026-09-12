@@ -1,0 +1,70 @@
+{
+  "member": "Member 1",
+  "activities": [
+    {
+      "time": "00:00-07:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bathroom",
+      "activity": "Washing and getting ready for the day"
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Eating breakfast and preparing for university"
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Out",
+      "activity": "Commuting to Monash University"
+    },
+    {
+      "time": "08:45-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Education classes and studying at Monash University"
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Having lunch at university campus"
+    },
+    {
+      "time": "13:00-16:00",
+      "location": "Out",
+      "activity": "Attending lectures and completing coursework at Monash University"
+    },
+    {
+      "time": "16:00-16:30",
+      "location": "Out",
+      "activity": "Commuting to part-time hospitality and retail job"
+    },
+    {
+      "time": "16:30-21:00",
+      "location": "Out",
+      "activity": "Working a shift in hospitality and retail"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Out",
+      "activity": "Commuting home from work"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and unwinding"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

@@ -36,7 +36,9 @@ disruptions (stay-home → daytime demand up). The holiday result (+48.3% total,
 up) is the same mechanism as `lockdown` (daytime **+220.7%**, R107) but milder. Plan §4.3 Phase Three
 names public holidays as a target event — this fills that gap.
 
-## 7 Validity Check — **cross-3-world replicated**
+## 7 Validity Check — **cross-3-world + cross-household replicated**
+- **Household 1 (world_838587 h001, 4-person, R174)**: total **+20.8%** (t=3.21, p=0.0063), peak **+63.0%**
+  (p=0.0024), valley **−46.1%** (p=6.6e-5) → the **total** effect replicates on a second household.
 - same-era paired, n=15, **three worlds** (red line 3 satisfied):
 
 | Metric | W1 `838587` | W2 `172148` | W3 `143345` |
