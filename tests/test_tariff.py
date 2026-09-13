@@ -61,6 +61,12 @@ class RenderCostContextTests(unittest.TestCase):
         self.assertNotIn("kitchen_kettle", text)
         self.assertNotIn("kitchen_refrigerator", text)
 
+    def test_sensitivity_note(self):
+        self.assertEqual(tariff.sensitivity_note(None), "")
+        self.assertEqual(tariff.sensitivity_note("other"), "")
+        self.assertIn("cost-conscious", tariff.sensitivity_note("high"))
+        self.assertIn("not very price-sensitive", tariff.sensitivity_note("low"))
+
     def test_cost_numbers(self):
         text = tariff.render_cost_context(self.DETAILS, self.TARIFF)
         self.assertIn("0.36 AUD", text)   # 0.6 kWh x 0.60

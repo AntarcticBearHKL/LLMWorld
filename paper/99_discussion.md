@@ -134,6 +134,10 @@
   (0.5→1.2 AUD, 2.4×) significantly increases shifting — peak **−7.3%** (p=0.0095), valley **+14.8%**
   (p=0.014). Without the cost context the same gap change had **no** effect (R180). The platform therefore
   exhibits a measurable **price elasticity** once the trade-off is made concrete.
+- **Price-sensitivity heterogeneity (R207)**: holding the tariff + cost context fixed, a high
+  cost-consciousness persona shifts significantly more than a low one (peak **−7.0%**, valley
+  **+14.6%**, p=0.014) — the platform reproduces **heterogeneous price response** (Costa & Kahn 2010;
+  Wang et al. 2021).
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
