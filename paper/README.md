@@ -37,7 +37,7 @@
 
 | 实验 | 对应 RQ | 文献基准 | 期望区间 | 状态 | 文件 |
 |---|---|---|---|---|---|
-| TOU 分时电价 | RQ2 | Faruqui & Sergici 2010 | 峰值 −3~6% | null(纯文本); **+cost-context 显著移峰:vs baseline 峰−13.2%/谷+25.6%(p≤0.0018, R201)**; 价差敏感性 null(R180) | `experiments/tou.md` |
+| TOU 分时电价 | RQ2 | Faruqui & Sergici 2010 | 峰值 −3~6% | null(纯文本); **+cost-context 显著移峰**（跨 2 世界：W1 峰−13.2%/谷+25.6%；W2 峰−5.0%/谷+8.2%；p≤0.012, R201/R202）; 价差敏感性 null(R180) | `experiments/tou.md` |
 | 尖峰电价 CPP | RQ2 | Faruqui & Sergici 2010 | 峰值 −13~20% | null(**峰两世界均 n.s.**: W1 −2.7%/W2 +13.0%); 总量效应**世界特异**(W1 −14.4% p=0.007 / W2 −4.3% n.s.); cpp_soft W1 总 −10.9% | — |
 | 谷期补贴 subsidy | RQ2 | Alexeenko & Bitar 2023 | EV 峰移 30~60% | 占位(待跑,需EV) | `experiments/subsidy.md` |
 | 需量电费 peak_demand | RQ2 | Escarrega et al. 2025 | 峰值 −10~20% | null(N=3交错:峰值+4.2%,峰段−3.2%; **n=15 same-era:峰−6.9% n.s.,总−1.2% n.s.**) | `experiments/peak_demand.md` |
