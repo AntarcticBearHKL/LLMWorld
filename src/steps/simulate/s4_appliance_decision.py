@@ -10,7 +10,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 import config
-from engine import SubAgent, utils, weather
+from engine import SubAgent, utils, weather, tariff
 from engine.json_parse import parse as parse_llm_json
 from engine.prompt import Prompt
 from steps.simulate.s1_macro_plan import load_home, resolve_member
@@ -98,7 +98,7 @@ def strip_ev_guidance(prompt):
     return prompt.replace(EV_OVERNIGHT_GUIDANCE, "")
 
 
-def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False):
+def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -117,7 +117,9 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
     allowed, always_on = collect_allowed_ids(home)
     decision_schema = build_decision_schema(allowed)
 
-    home_with_appl = json.dumps(home.get_home_structure_with_details(), ensure_ascii=False, indent=2)
+    home_details = home.get_home_structure_with_details()
+    home_with_appl = json.dumps(home_details, ensure_ascii=False, indent=2)
+    cost_context = tariff.render_cost_context(home_details, cost_tariff)
     w = weather.get_weather(date, override=weather_override)
     base_prompt = Prompt().load("simulate_step4_batch_appliance_decision",
                            member_name=member.name, member_age=member.age,
@@ -127,7 +129,8 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
                            allowed_appliance_ids=allowed_ids_text(allowed, always_on),
                            season=w["season"], weather=w["weather"],
                            temperature=w["temperature"],
-                           policy_context=policy_text, world_news=world_news)
+                           policy_context=policy_text, cost_context=cost_context,
+                           world_news=world_news)
 
     if natural_ev:
         base_prompt = strip_ev_guidance(base_prompt)

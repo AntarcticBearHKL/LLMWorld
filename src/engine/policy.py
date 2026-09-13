@@ -256,6 +256,45 @@ def parse_policy_arg(spec):
     return " ".join(texts), "+".join(tags)
 
 
+def parse_tariff(spec):
+    """Structured tariff (rates + windows) for price policies, else None.
+
+    Used to build the concrete cost context injected into s4. Returns a dict with
+    peak_window/valley_window/peak_rate/valley_rate/shoulder_rate.
+    """
+    if not spec:
+        return None
+    head = _policy_head(spec)
+    if head in ("tou", "tou_soft"):
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        peak = valley = shoulder = None
+        if rest:
+            nums = [float(v) for v in rest.split(",")]
+            if len(nums) >= 2:
+                peak, valley = nums[0], nums[1]
+            if len(nums) >= 3:
+                shoulder = nums[2]
+        cfg = _tou_config(peak, valley, shoulder)
+        return {
+            "peak_window": cfg["peak_window"],
+            "valley_window": cfg["valley_window"],
+            "peak_rate": cfg["peak_rate"],
+            "valley_rate": cfg["valley_rate"],
+            "shoulder_rate": cfg["shoulder_rate"],
+        }
+    if head in ("cpp", "cpp_soft"):
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        rate = float(rest) if rest else CPP_DEFAULT["peak_rate"]
+        return {
+            "peak_window": CPP_DEFAULT["window"],
+            "valley_window": TOU_DEFAULT["valley_window"],
+            "peak_rate": rate,
+            "valley_rate": TOU_DEFAULT["valley_rate"],
+            "shoulder_rate": TOU_DEFAULT["shoulder_rate"],
+        }
+    return None
+
+
 def parse_policy_schedule(specs):
     """Parse 'start,end,policy' entries into a schedule (end may be empty = open).
 

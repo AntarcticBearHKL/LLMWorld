@@ -99,7 +99,7 @@ def get_member_names(world_id, house="house_0001"):
 
 def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4_only=False,
                  houses=None, days=1, events=None, notices=None, policy_schedule=None,
-                 peer_nudge=False, natural_ev=False):
+                 peer_nudge=False, natural_ev=False, cost_tariff=None):
     print(f"\n########## SIMULATE world={world_id} env={env} workers={workers} "
           f"policy={policy_spec or 'none'} s4_only={s4_only} days={days} houses={houses or 'all'} ##########")
     policy_text, policy_tag = engine_policy.parse_policy_arg(policy_spec)
@@ -217,7 +217,7 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
                     lambda m: s4_appliance_decision.run_step(
                         world_id, m, d, env, policy_text=day_policy_text, policy_tag=day_policy_tag,
                         house=house, world_news=s4_news, weather_override=weather_effect,
-                        natural_ev=natural_ev),
+                        natural_ev=natural_ev, cost_tariff=cost_tariff),
                     targets))
             if any(not r[0] for r in results):
                 print(f"[WARN] s4 failed for some members (house={house} date={d})")
@@ -259,6 +259,7 @@ def main():
     parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default=None, help="override reasoning effort")
     parser.add_argument("--peer-nudge", action="store_true", help="simulate: inject neighbour-comparison social nudge from the previous day's community mean")
     parser.add_argument("--natural-ev", action="store_true", help="simulate: strip the overnight-EV-charging directive for a natural EV baseline")
+    parser.add_argument("--cost-context", action="store_true", help="simulate: inject concrete per-appliance peak/off-peak cost figures for the active price policy")
     args = parser.parse_args()
 
     applied = apply_sampling_overrides(args.temperature, False if args.no_thinking else None,
@@ -276,9 +277,12 @@ def main():
     except ValueError as exc:
         print(f"[Abort] {exc}")
         return 1
+    cost_tariff = engine_policy.parse_tariff(args.policy) if args.cost_context else None
+    if args.cost_context and cost_tariff is None:
+        print("[Warn] --cost-context given but the policy has no tariff (use tou/cpp); skipping cost context")
     return run_simulate(world_id, args.date, args.env, args.workers, args.member,
                         args.policy, args.s4_only, args.house, args.days, events, notices,
-                        policy_schedule, args.peer_nudge, args.natural_ev)
+                        policy_schedule, args.peer_nudge, args.natural_ev, cost_tariff)
 
 
 if __name__ == "__main__":

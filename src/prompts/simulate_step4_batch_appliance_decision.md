@@ -19,6 +19,8 @@ Environment information:
 
 {policy_context}
 
+{cost_context}
+
 {world_news}
 
 ## Appliance type explanation
@@ -66,6 +68,7 @@ Environment information:
 9. **Respect duty_cycle**: appliances with `duty_cycle` below 1 (e.g. thermostatic loads such as A/C) cycle on and off; never assume 100% duty when deciding runtime.
 10. **Respect season**: match `season` against the environment: `heating` appliances matter in cold weather, `cooling` appliances in hot weather.
 11. **Prefer off-peak for flexible loads**: when a peak/policy context is given, shift appliances marked `flexible: true` away from the configured peak periods.
+12. **Minimise cost (when a cost table is given)**: for every flexible appliance, compare its peak cost with its off-peak cost and schedule it at the cheapest feasible time; only run it in the peak window if the activity or comfort genuinely requires it.
 
 ## Typical usage durations (must follow, keep realistic)
 
