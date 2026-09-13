@@ -164,6 +164,11 @@
   table (kW × rate), `peak_demand` stays null (peak −2.6% n.s.), unlike TOU/CPP. Time-window prices are
   actionable ("move it out of the window"); a **global daily-max charge is not** (agents do not stagger
   appliances to lower the day's maximum).
+- **Social/psychological framing is flattened by a concrete price (R220)**: on top of `tou+cost`, adding
+  `nudge` (peak +1.4% n.s.) or `nudge_loss` (peak +4.7% n.s.) changes nothing — the concrete window+amount
+  dominates. Contrast the framing effects seen **without** concrete amounts (R041 nudge_loss). Together with
+  R215 (rebate crowds out ac_tax) and R218 (reward ≈ penalty), the pattern is: **give a window + a concrete
+  amount and the framing stops mattering.**
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent

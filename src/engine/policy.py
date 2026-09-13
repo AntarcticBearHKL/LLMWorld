@@ -299,12 +299,16 @@ def parse_tariff(spec):
     if head in ("tou", "tou_soft"):
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         peak = valley = shoulder = None
-        if rest:
-            nums = [float(v) for v in rest.split(",")]
-            if len(nums) >= 2:
-                peak, valley = nums[0], nums[1]
-            if len(nums) >= 3:
-                shoulder = nums[2]
+        nums = []
+        for token in rest.split(",") if rest else []:
+            try:
+                nums.append(float(token))
+            except ValueError:
+                break
+        if len(nums) >= 2:
+            peak, valley = nums[0], nums[1]
+        if len(nums) >= 3:
+            shoulder = nums[2]
         cfg = _tou_config(peak, valley, shoulder)
         return {
             "peak_window": cfg["peak_window"],
