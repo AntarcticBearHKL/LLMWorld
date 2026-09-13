@@ -139,7 +139,8 @@
 - **Price-sensitivity heterogeneity (R207)**: holding the tariff + cost context fixed, a high
   cost-consciousness persona shifts significantly more than a low one (peak **−7.0%**, valley
   **+14.6%**, p=0.014) — the platform reproduces **heterogeneous price response** (Costa & Kahn 2010;
-  Wang et al. 2021).
+  Wang et al. 2021). The level is now **derived from persona traits** (`energy_awareness` /
+  `conscientiousness`) and auto-injected (R213).
 - **Multi-day bill feedback (R208/R210)**: injecting yesterday's bill / peak cost (`--bill-feedback`)
   does **not** change day-2 behaviour. With a **shared day-2 timeline** (R210) the effect is a clean
   **null** (peak −0.7%, n.s.); the earlier "increase" (R208) was plan-level variance. The single-day cost

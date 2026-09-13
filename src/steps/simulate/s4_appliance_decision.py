@@ -60,6 +60,21 @@ def load_timeline(world_id, member_name, date, env, house):
         return json.load(f)
 
 
+def _raw_member_personality(world_id, house, member_name):
+    path = os.path.join(gw.WORLDS_DIR, world_id, "3168", house, "household.json")
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    for m in data.get("members", []) or []:
+        if isinstance(m, dict) and m.get("name") == member_name:
+            return m.get("personality") or {}
+    return {}
+
+
 def collect_allowed_ids(home):
     details = home.get_home_structure_with_details()
     allowed = []
@@ -120,7 +135,13 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
     home_details = home.get_home_structure_with_details()
     home_with_appl = json.dumps(home_details, ensure_ascii=False, indent=2)
     cost_context = tariff.render_cost_context(home_details, cost_tariff)
-    note = tariff.sensitivity_note(price_sensitivity)
+    level = price_sensitivity
+    if level is None and cost_tariff:
+        persona = _raw_member_personality(world_id, house, member.name)
+        big_five = persona.get("big_five") or {}
+        level = tariff.sensitivity_from_traits(persona.get("energy_awareness"),
+                                               big_five.get("conscientiousness", 0.5))
+    note = tariff.sensitivity_note(level)
     if note and cost_context:
         cost_context = note + "\n" + cost_context
     w = weather.get_weather(date, override=weather_override)
