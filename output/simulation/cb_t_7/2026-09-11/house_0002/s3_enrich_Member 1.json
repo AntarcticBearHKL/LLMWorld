@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping overnight in the assigned bedroom",
+      "desc": "Lie down on the bed in Bedroom 1. Pull the blanket over the body. Place head on the pillow. Close eyes. Remain lying still. Turn onto the left side. Pull the blanket up to the shoulder. Remain lying still. Turn onto the right side. Adjust the pillow with the hand. Remain lying still. Stretch out the legs. Turn onto the back. Remain lying still until 06:30."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, showering and washing up",
+      "desc": "Open eyes. Sit up on the edge of the bed. Stand up. Walk to the Bathroom. Turn on the Bathroom light. Turn on the water heater switch. Turn on the shower tap. Step into the shower area. Wet the body with water. Pick up the soap. Rub the soap on the body. Rinse the body with water. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub shampoo into the hair. Rinse the hair with water. Turn off the shower tap. Pick up the towel. Wipe the face with the towel. Wipe the hair with the towel. Wipe the body with the towel. Hang the towel on the hook. Turn off the Bathroom light. Walk out of the Bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, boiling water with the kettle",
+      "desc": "Walk into the Kitchen. Turn on the Kitchen light. Open the Refrigerator door. Take out the milk carton and the bread. Close the Refrigerator door. Place the bread on the counter. Pick up the kettle. Fill the kettle with water from the tap. Place the kettle on its base. Press the kettle power switch. Open the cupboard. Take out a bowl and a plate. Place the bowl and plate on the counter. Pick up the bread. Place the bread on the plate. Press the toaster lever down. Wait for the toaster to pop up. Pick up the toasted bread. Place the toasted bread on the plate. Open the Refrigerator door. Take out the butter. Close the Refrigerator door. Pick up a knife. Spread butter on the toasted bread. Put down the knife. Pour milk into the bowl. Pick up the spoon. Eat the bread with the hand. Drink the milk with the spoon. Pick up the kettle. Pour hot water into a cup. Pick up the cup. Drink the hot water. Put down the cup. Wipe the mouth with a napkin."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, packing work bag and checking phone",
+      "desc": "Walk to Bedroom 1. Turn on the Bedroom 1 light. Open the wardrobe. Take out the work uniform. Close the wardrobe. Take off the sleepwear. Put on the work uniform. Pull up the trousers. Button up the shirt. Put on the socks. Put on the shoes. Tie the shoelaces. Pick up the work bag. Open the work bag. Place the stethoscope into the work bag. Place the water bottle into the work bag. Zip the work bag closed. Pick up the phone from the nightstand. Press the phone power button. Look at the phone screen. Press the phone screen to check messages. Put the phone into the pocket. Pick up the work bag. Turn off the Bedroom 1 light. Walk out of Bedroom 1."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital for the day shift",
+      "desc": "Walk out of the house. Close the front door. Walk to the bus stop. Stand at the bus stop. Take the phone out of the pocket. Look at the phone screen. Put the phone back into the pocket. Step onto the bus. Tap the transit card on the reader. Walk to a seat. Sit down on the seat. Hold the handrail. Look out of the bus window. Stand up when the stop is announced. Walk to the bus door. Step off the bus. Walk to the hospital entrance. Push open the hospital door. Walk to the staff changing room. Open the locker. Take out the work badge. Put on the work badge. Close the locker. Walk to the ward station."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working day shift as a health care professional, caring for patients",
+      "desc": "Stand at the ward station. Pick up the patient chart. Read the chart. Put down the chart. Pick up the stethoscope. Walk to the first patient bed. Greet the patient. Place the stethoscope on the patient's chest. Listen to the heartbeat. Remove the stethoscope. Pick up the blood pressure cuff. Wrap the cuff around the patient's arm. Press the start button on the monitor. Read the blood pressure value. Write the value on the chart. Remove the cuff. Walk to the next patient bed. Greet the patient. Check the IV drip line. Adjust the IV flow regulator. Replace the IV bag. Write the record on the chart. Walk to the medication cart. Open the medication drawer. Take out the medication box. Close the drawer. Walk to the patient bed. Hand the medication cup to the patient. Pick up the water cup. Hand the water cup to the patient. Write the medication record. Walk back to the ward station. Pick up the phone. Answer the phone call. Put down the phone."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Out",
+      "activity": "Taking a lunch break and rehydrating during the heatwave",
+      "desc": "Walk to the staff break room. Pull out a chair. Sit down on the chair. Open the lunch box. Pick up the fork. Eat the rice with the fork. Eat the vegetables with the fork. Put down the fork. Pick up the water bottle. Unscrew the bottle cap. Lift the bottle to the mouth. Drink the water. Put down the water bottle. Screw the cap back on. Pick up the phone. Press the phone screen. Check the messages. Put down the phone. Pick up the water bottle again. Drink more water. Close the lunch box. Stand up. Push the chair back under the table."
+    },
+    {
+      "time": "12:30-17:00",
+      "location": "Out",
+      "activity": "Continuing clinical work and patient care on the day shift",
+      "desc": "Walk back to the ward station. Pick up the patient chart. Read the chart. Walk to the patient bed. Greet the patient. Check the patient's temperature with the thermometer. Write the temperature value on the chart. Adjust the patient's pillow. Help the patient sit up. Walk to the supply room. Open the supply cabinet. Take out the gauze and bandage. Close the cabinet. Walk to the patient bed. Open the gauze package. Clean the wound with the gauze. Apply the bandage. Press the bandage tape down. Write the wound care record. Walk to the medication cart. Take out the medication. Walk to the patient bed. Hand the medication to the patient. Pick up the water cup. Hand the water cup to the patient. Write the medication record. Walk to the computer at the station. Sit down on the chair. Type the patient notes on the keyboard. Press the save key. Stand up. Walk to the next patient bed. Greet the patient. Check the IV drip. Adjust the IV regulator. Walk back to the ward station. Answer the phone call. Write the handover notes."
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home after the shift",
+      "desc": "Walk to the staff changing room. Open the locker. Take off the work badge. Place the work badge into the locker. Change out of the work uniform. Put on casual clothes. Close the locker. Pick up the work bag. Walk out of the hospital. Walk to the bus stop. Stand at the bus stop. Take the phone out of the pocket. Look at the phone screen. Put the phone back into the pocket. Step onto the bus. Tap the transit card on the reader. Walk to a seat. Sit down on the seat. Hold the handrail. Stand up when the stop is announced. Walk to the bus door. Step off the bus. Walk to the house. Open the front door. Close the front door."
+    },
+    {
+      "time": "17:45-18:00",
+      "location": "Bathroom",
+      "activity": "Washing hands and freshening up after work",
+      "desc": "Walk into the Bathroom. Turn on the Bathroom light. Turn on the tap. Place both hands under the water. Pick up the soap. Rub the soap between the hands. Rub the soap on the back of the hands. Rinse the hands under the water. Turn off the tap. Pick up the towel. Dry the hands with the towel. Hang the towel on the hook. Turn on the tap again. Wet the face with water. Turn off the tap. Pick up the towel. Dry the face with the towel. Hang the towel on the hook. Turn off the Bathroom light. Walk out of the Bathroom."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and range hood, then eating",
+      "desc": "Walk into the Kitchen. Turn on the Kitchen light. Open the Refrigerator door. Take out the vegetables, meat and eggs. Close the Refrigerator door. Place the ingredients on the counter. Pick up the knife. Cut the vegetables on the cutting board. Cut the meat on the cutting board. Put down the knife. Pick up the pot. Place the pot on the InductionCooker. Press the InductionCooker power button. Press the RangeHood power button. Pour oil into the pot. Pick up the spatula. Place the vegetables into the pot. Stir the vegetables with the spatula. Add salt with the spoon. Stir the vegetables again. Turn off the InductionCooker. Pick up a plate. Place the cooked food on the plate. Place the plate on the table. Pick up the bowl. Fill the bowl with rice. Place the bowl on the table. Pull out the chair. Sit down on the chair. Pick up the chopsticks. Eat the food with the chopsticks. Drink water from the cup."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading the dishwasher",
+      "desc": "Stand up from the chair. Pick up the plates. Carry the plates to the sink. Pick up the bowls. Carry the bowls to the sink. Pick up the chopsticks. Carry the chopsticks to the sink. Scrape the food scraps into the bin. Open the Dishwasher door. Pull out the lower rack. Place the plates on the rack. Place the bowls on the rack. Place the chopsticks in the basket. Push the lower rack in. Close the Dishwasher door. Press the Dishwasher start button. Press the RangeHood power button to turn it off. Pick up the cloth. Wipe the table with the cloth. Wipe the counter with the cloth. Rinse the cloth under the tap. Wring out the cloth. Hang the cloth on the hook. Turn off the Kitchen light. Walk out of the Kitchen."
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV with the fan on, delaying air-conditioner use until after the evening peak tax",
+      "desc": "Walk into the Living Room. Press the Fan power button. Pick up the TV remote control. Press the TV power button on the remote. Sit down on the sofa. Press the channel button on the remote. Watch the TV screen. Press the volume button on the remote. Pick up the phone from the pocket. Press the phone screen. Scroll the phone screen. Put down the phone on the sofa. Press the channel button on the remote again. Stand up from the sofa. Walk to the Refrigerator. Open the Refrigerator door. Take out the water bottle. Close the Refrigerator door. Walk back to the sofa. Sit down on the sofa. Unscrew the bottle cap. Lift the bottle to the mouth. Drink the water. Screw the cap back on. Place the bottle on the table. Pick up the remote control. Press the TV power button to turn off the TV. Stand up from the sofa. Press the Fan power button to turn it off. Walk out of the Living Room."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking a cool shower before bed",
+      "desc": "Walk into the Bathroom. Turn on the Bathroom light. Turn on the shower tap. Adjust the tap to cold water. Step into the shower area. Wet the body with water. Pick up the soap. Rub the soap on the body. Rinse the body with water. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub shampoo into the hair. Rinse the hair with water. Turn off the shower tap. Pick up the towel. Wipe the hair with the towel. Wipe the body with the towel. Hang the towel on the hook. Turn off the Bathroom light. Walk out of the Bathroom."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down in bed, reading under the desk lamp and setting an alarm on the phone",
+      "desc": "Walk into Bedroom 1. Turn on the DeskLamp. Pull back the blanket. Sit down on the bed. Lie down on the bed. Pick up the book from the nightstand. Open the book. Hold the book with both hands. Read the pages. Turn a page with the hand. Read the next page. Turn another page. Close the book. Place the book on the nightstand. Pick up the phone from the nightstand. Press the phone power button. Press the phone screen to open the alarm. Set the alarm time. Press the confirm button. Press the phone power button to lock the screen. Place the phone on the nightstand. Turn off the DeskLamp. Pull the blanket over the body. Close eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping overnight in the assigned bedroom",
+      "desc": "Lie down on the bed in Bedroom 1. Pull the blanket over the body. Place head on the pillow. Close eyes. Remain lying still. Turn onto the left side. Pull the blanket up to the shoulder. Remain lying still. Turn onto the right side. Adjust the pillow with the hand. Remain lying still. Stretch out the legs. Turn onto the back. Remain lying still until 24:00."
+    }
+  ]
+}
