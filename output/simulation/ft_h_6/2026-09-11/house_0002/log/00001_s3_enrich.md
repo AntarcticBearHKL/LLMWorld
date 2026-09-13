@@ -1,0 +1,347 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-13 14:58:10
+- seq: 1
+- prefix: Member 2_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 2's day.
+
+Member information:
+- Name: Member 2
+- Age: 31
+- Occupation: Arts administrator and freelance illustrator
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-06:45",
+    "location": "Bedroom 2",
+    "activity": "Sleeping"
+  },
+  {
+    "time": "06:45-07:20",
+    "location": "Bathroom",
+    "activity": "Waking up, washing face, brushing teeth and showering with hot water"
+  },
+  {
+    "time": "07:20-08:00",
+    "location": "Kitchen",
+    "activity": "Making and eating breakfast, toasting bread and brewing tea with the kettle"
+  },
+  {
+    "time": "08:00-08:20",
+    "location": "Bedroom 2",
+    "activity": "Setting up the desk workspace, turning on the desk lamp and checking email on the computer"
+  },
+  {
+    "time": "08:20-12:00",
+    "location": "Bedroom 2",
+    "activity": "Working from home as an arts administrator: answering emails, drafting grant reports and joining online coordination meetings on the computer"
+  },
+  {
+    "time": "12:00-12:45",
+    "location": "Kitchen",
+    "activity": "Preparing and eating lunch with Member 1"
+  },
+  {
+    "time": "12:45-13:00",
+    "location": "Kitchen",
+    "activity": "Washing up the lunch dishes"
+  },
+  {
+    "time": "13:00-15:30",
+    "location": "Bedroom 2",
+    "activity": "Freelance illustration work: sketching and inking client artwork on the computer and monitor"
+  },
+  {
+    "time": "15:30-15:45",
+    "location": "Kitchen",
+    "activity": "Short tea break with Member 1, boiling water with the kettle"
+  },
+  {
+    "time": "15:45-16:50",
+    "location": "Bedroom 2",
+    "activity": "Continuing freelance illustration work, refining digital colour layers on the monitor"
+  },
+  {
+    "time": "16:50-17:20",
+    "location": "Out",
+    "activity": "Taking a walk around the neighbourhood for fresh air and exercise"
+  },
+  {
+    "time": "17:20-18:20",
+    "location": "Kitchen",
+    "activity": "Cooking dinner with Member 1 on the induction cooker and eating together"
+  },
+  {
+    "time": "18:20-19:00",
+    "location": "Living Room",
+    "activity": "Watching TV with Member 1 to relax"
+  },
+  {
+    "time": "19:00-20:30",
+    "location": "Bedroom 2",
+    "activity": "Working on a personal illustration project at the desk"
+  },
+  {
+    "time": "20:30-21:00",
+    "location": "Living Room",
+    "activity": "Tidying the living room and vacuuming the floor"
+  },
+  {
+    "time": "21:00-21:30",
+    "location": "Bathroom",
+    "activity": "Taking an evening shower and getting ready for bed"
+  },
+  {
+    "time": "21:30-22:30",
+    "location": "Bedroom 2",
+    "activity": "Reading and reviewing the next day's schedule by desk lamp light"
+  },
+  {
+    "time": "22:30-24:00",
+    "location": "Bedroom 2",
+    "activity": "Sleeping"
+  }
+]
+
+Other household members' timelines:
+{
+  "Member 1": [
+    {
+      "time": "00:00-06:15",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:15-06:45",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth"
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, boiling water with the kettle"
+    },
+    {
+      "time": "07:15-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and setting up the home workspace for the day, no commute because of the transport strike"
+    },
+    {
+      "time": "08:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Working remotely at the desk on the computer: answering emails, drafting community program plans and coordinating partner organisations"
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch with Member2"
+    },
+    {
+      "time": "12:45-13:00",
+      "location": "Living Room",
+      "activity": "Taking a short break, resting on the sofa"
+    },
+    {
+      "time": "13:00-15:30",
+      "location": "Bedroom 1",
+      "activity": "Continuing remote work: video calls with volunteers, updating program budgets and schedules on the computer"
+    },
+    {
+      "time": "15:30-15:45",
+      "location": "Kitchen",
+      "activity": "Short tea break with Member2, boiling water with the kettle"
+    },
+    {
+      "time": "15:45-17:00",
+      "location": "Bedroom 1",
+      "activity": "Continuing remote work: video calls with volunteers, updating program budgets and schedules on the computer"
+    },
+    {
+      "time": "17:00-17:20",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa before dinner"
+    },
+    {
+      "time": "17:20-18:20",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with Member2 on the induction cooker and eating together"
+    },
+    {
+      "time": "18:20-19:00",
+      "location": "Living Room",
+      "activity": "Watching TV with Member2 to relax"
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Watching TV and unwinding after the workday"
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Bathroom",
+      "activity": "Showering"
+    },
+    {
+      "time": "20:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Reading and browsing on the phone under the desk lamp"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Getting ready for bed and sleeping"
+    }
+  ]
+}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "Fan"
+    ]
+  },
+  "Bedroom 2": {
+    "appliances": [
+      "DeskLamp",
+      "SpaceHeater"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Oven",
+      "Toaster",
+      "Kettle",
+      "Dishwasher",
+      "Light"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "Light",
+      "Dehumidifier",
+      "Fan"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "Router",
+      "GameConsole",
+      "Light",
+      "VacuumCleaner"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "DeskLamp"
+    ]
+  },
+  "Member 2 personal appliances": {
+    "appliances": [
+      "Computer",
+      "Phone",
+      "Monitor"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 2" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{"member": "Member 2", "enriched_activities": [{"time": "00:00-06:45", "location": "Bedroom 2", "activity": "Sleeping", "desc": "Lie down on the bed. Pull the blanket up over the shoulders. Close eyes. Turn onto the left side. Pull the pillow under the head. Remain still with eyes closed. Turn onto the right side. Adjust the blanket with the hand. Pull the arm back under the blanket. Remain lying down with eyes closed. Turn onto the back. Stretch both legs out. Remain still. Turn onto the left side again. Keep eyes closed. Remain lying down until 06:45."}, {"time": "06:45-07:20", "location": "Bathroom", "activity": "Waking up, washing face, brushing teeth and showering with hot water", "desc": "Open eyes. Sit up on the bed. Swing both legs off the bed. Stand up. Walk to the bathroom door. Push the door open. Step inside. Reach for the light switch. Press the light switch on. Walk to the shower area. Turn the water heater switch on. Turn the shower tap to hot. Reach out a hand to test the water temperature. Turn the tap to adjust. Step under the water. Wet hair. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub shampoo into the hair. Rinse hair under the water. Pick up the soap. Rub soap over the arms and body. Rinse off the soap. Turn the tap off. Step out. Pick up the towel from the rail. Rub the hair with the towel. Wipe the face and body with the towel. Hang the towel back on the rail. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush the teeth. Rinse the mouth with water from the tap. Turn the tap off. Wipe the mouth with a hand towel. Turn the light switch off. Walk out of the bathroom."}, {"time": "07:20-08:00", "location": "Kitchen", "activity": "Making and eating breakfast, toasting bread and brewing tea with the kettle", "desc": "Walk into the kitchen. Reach for the light switch. Press the light switch on. Walk to the refrigerator. Pull the refrigerator door open. Take out the bread and a carton of milk. Push the refrigerator door closed. Place the bread bag on the counter. Open the bread bag. Take out two slices of bread. Put the slices into the toaster. Press the toaster lever down. Open the cupboard. Take out a cup and a plate. Place them on the counter. Open the drawer. Take out a knife. Pick up the kettle. Walk to the sink. Turn the tap on. Fill the kettle with water. Turn the tap off. Place the kettle on its base. Press the kettle switch down. Walk back to the counter. Take the milk carton. Pour milk into the cup. Put the milk carton back into the refrigerator. Wait beside the counter. Listen for the toaster to pop. Take the toast out of the toaster. Place the toast on the plate. Pick up the knife. Spread butter on the toast. Sit down on the chair at the table. Pick up a slice of toast. Bite and chew. Drink milk from the cup. Continue eating the toast. Finish the toast. Stand up. Carry the plate and cup to the sink. Place them in the sink. Pour the hot water from the kettle into a cup. Place a tea bag in the cup. Stir the tea with a spoon. Pick up the cup. Take a sip. Stand at the counter and drink the tea. Rinse the cup. Place the cup in the sink. Walk out of the kitchen."}, {"time": "08:00-08:20", "location": "Bedroom 2", "activity": "Setting up the desk workspace, turning on the desk lamp and checking email on the computer", "desc": "Walk into Bedroom 2. Walk to the desk. Pull the chair out from the desk. Sit down on the chair. Reach for the desk lamp switch. Press the desk lamp switch on. Adjust the lamp arm toward the desk. Press the computer power button. Wait for the screen to light up. Move the mouse with the right hand. Click on the email application icon. Scroll through the inbox with the mouse wheel. Click on the first email. Read the email. Click on the next email. Read it. Type a short reply on the keyboard. Click the send button. Push the chair back slightly. Adjust the chair height lever."}, {"time": "08:20-12:00", "location": "Bedroom 2", "activity": "Working from home as an arts administrator: answering emails, drafting grant reports and joining online coordination meetings on the computer", "desc": "Sit at the desk facing the computer and monitor. Move the mouse to open the email inbox. Click on an email. Read the email on the monitor. Place both hands on the keyboard. Type a reply. Click the send button. Open the next email. Read it. Type a reply. Click send. Open the grant report document. Move the mouse to the document window. Type paragraphs of the report on the keyboard. Scroll down the page with the mouse wheel. Highlight a sentence with the mouse. Press the delete key. Type a replacement sentence. Save the file with the keyboard shortcut. Pick up the phone. Check a message on the phone screen. Put the phone down on the desk. Open the video meeting link on the computer. Put on the headset. Speak into the microphone during the meeting. Turn the head toward the monitor. Write notes on paper with a pen. Click the mute button. Click the unmute button. Speak again. Click the leave meeting button. Take the headset off. Place the headset on the desk. Open another email. Type a reply. Click send. Pick up the cup from the desk. Take a sip. Put the cup down. Continue typing the grant report on the keyboard. Scroll through the report. Save the file again."}, {"time": "12:00-12:45", "location": "Kitchen", "activity": "Preparing and eating lunch with Member 1", "desc": "Stand up from the desk chair. Walk out of Bedroom 2 to the kitchen. Say \"I'll start on the vegetables\" to Member 1. Open the refrigerator door. Take out vegetables and eggs. Close the refrigerator door. Place the items on the counter. Open the drawer. Take out a knife and a chopping board. Place the board on the counter. Pick up the knife. Cut the vegetables on the board. Turn on the induction cooker. Place a pan on the induction cooker. Pour oil into the pan. Put the vegetables into the pan. Stir the vegetables with a spatula. Break an egg into the pan. Stir again. Turn the induction cooker off. Take two plates from the cupboard. Divide the food onto the plates with the spatula. Carry the plates to the table. Sit down on the chair. Pick up the chopsticks. Lift food to the mouth. Chew and swallow. Talk with Member 1 about the afternoon schedule. Continue eating. Finish the food. Put the chopsticks down on the plate."}, {"time": "12:45-13:00", "location": "Kitchen", "activity": "Washing up the lunch dishes", "desc": "Stand up from the chair. Pick up the plates and cups from the table. Carry them to the sink. Place them in the sink. Turn the tap on. Pick up the sponge. Squeeze dish soap onto the sponge. Rub the sponge over a plate. Rinse the plate under the tap. Place the plate in the drying rack. Rub the sponge over the second plate. Rinse it. Place it in the drying rack. Wash the chopsticks. Rinse the cups. Place the cups in the drying rack. Turn the tap off. Wipe the counter with a cloth. Wipe both hands on the towel."}, {"time": "13:00-15:30", "location": "Bedroom 2", "activity": "Freelance illustration work: sketching and inking client artwork on the computer and monitor", "desc": "Walk into Bedroom 2. Sit down on the desk chair. Move the mouse to wake the monitor. Open the illustration software. Create a new canvas. Pick up the stylus from the desk. Draw sketch lines on the drawing tablet. Adjust the brush size with the keyboard shortcut. Change the brush opacity with the mouse slider. Draw the outline of the figure. Erase a line with the eraser tool. Draw it again. Zoom in on the canvas with the mouse wheel. Add line details with the stylus. Zoom out. Open the reference image file. Look at the reference on the monitor. Draw the outline on a new layer. Click the layer panel. Rename the layer with the keyboard. Pick up the phone. Type a message to the client. Put the phone down. Continue inking the outline with the stylus. Press the undo shortcut. Draw the line again. Save the file. Adjust the desk lamp position. Continue inking. Zoom in to check the line work. Save the file again."}, {"time": "15:30-15:45", "location": "Kitchen", "activity": "Short tea break with Member 1, boiling water with the kettle", "desc": "Stand up from the desk chair. Walk out of Bedroom 2 to the kitchen. Say \"let's take a break\" to Member 1. Pick up the kettle. Walk to the sink. Turn the tap on. Fill the kettle with water. Turn the tap off. Place the kettle on its base. Press the kettle switch down. Take two cups from the cupboard. Place them on the counter. Put a tea bag in each cup. Wait beside the counter. Press the kettle switch up. Lift the kettle. Pour hot water into both cups. Put the kettle back on its base. Pick up a cup and hand it to Member 1. Pick up the other cup. Take a sip. Talk with Member 1 about the day's tasks. Take another sip. Place the cup in the sink."}, {"time": "15:45-16:50", "location": "Bedroom 2", "activity": "Continuing freelance illustration work, refining digital colour layers on the monitor", "desc": "Walk back into Bedroom 2. Sit down on the desk chair. Move the mouse to wake the monitor. Open the illustration file. Click on the colour layer in the layer panel. Pick up the stylus. Select the base colour with the colour picker. Fill an area with the paint bucket tool. Click on the next colour swatch. Fill another area. Adjust the layer opacity with the mouse slider. Add a shading layer. Draw shading strokes with the stylus. Zoom in on the monitor. Correct an edge with the eraser. Zoom out. Click the colour balance adjustment. Drag the slider with the mouse. Click apply. Save the file. Lean back and stretch both arms. Lean forward again. Continue refining the colour layers with the stylus. Save the file again."}, {"time": "16:50-17:20", "location": "Out", "activity": "Taking a walk around the neighbourhood for fresh air and exercise", "desc": "Stand up from the desk chair. Walk to the door. Put on the shoes. Pick up the keys from the hook. Open the door. Step outside. Pull the door closed. Walk down the path to the street. Turn right at the corner. Walk along the pavement. Swing both arms while walking. Cross the road at the crossing. Continue walking along the street. Turn left at the next corner. Walk past the shops. Turn around. Walk back along the same street. Cross the road again. Walk up the path to the door. Take out the keys. Unlock the door. Push the door open. Step inside. Close the door. Take off the shoes. Hang the keys back on the hook."}, {"time": "17:20-18:20", "location": "Kitchen", "activity": "Cooking dinner with Member 1 on the induction cooker and eating together", "desc": "Walk into the kitchen. Open the refrigerator door. Take out the meat and vegetables. Close the refrigerator door. Place them on the counter. Open the drawer. Take out a knife and chopping board. Place the board on the counter. Pick up the knife. Cut the meat into pieces. Cut the vegetables. Turn on the induction cooker. Place a pan on the induction cooker. Pour oil into the pan. Put the meat into the pan. Stir with a spatula. Add the vegetables to the pan. Stir again. Add salt from the shaker. Say \"can you set the table?\" to Member 1. Turn the range hood on. Turn the induction cooker off. Take two plates from the cupboard. Scoop the food onto the plates with the spatula. Carry the plates to the table. Sit down on the chair. Pick up the chopsticks. Lift food to the mouth. Chew and swallow. Talk with Member 1 about the transport strike. Continue eating. Finish the food. Put the chopsticks down."}, {"time": "18:20-19:00", "location": "Living Room", "activity": "Watching TV with Member 1 to relax", "desc": "Stand up from the kitchen chair. Walk into the living room. Sit down on the sofa next to Member 1. Pick up the remote control from the table. Press the power button. Point the remote at the TV. Press the channel button. Place the remote on the sofa armrest. Lean back on the sofa. Watch the screen. Pick up the remote again. Press the volume button. Put the remote down. Say \"this programme is good\" to Member 1. Lean forward. Pick up the cup from the table. Take a sip. Put the cup down. Lean back on the sofa. Continue watching the screen."}, {"time": "19:00-20:30", "location": "Bedroom 2", "activity": "Working on a personal illustration project at the desk", "desc": "Stand up from the sofa. Walk to Bedroom 2. Sit down on the desk chair. Press the desk lamp switch on. Move the mouse to wake the monitor. Open the personal illustration file. Pick up the stylus. Draw a new sketch line on the tablet. Change the brush with the keyboard shortcut. Draw the background shapes. Select a colour swatch with the mouse. Fill the shapes with the paint bucket. Add texture strokes with the stylus. Zoom in on the monitor. Erase an extra line. Zoom out. Add a new layer. Draw the foreground elements. Adjust the layer order by dragging in the layer panel. Save the file. Stretch both arms. Adjust the chair height. Continue drawing with the stylus. Save the file again."}, {"time": "20:30-21:00", "location": "Living Room", "activity": "Tidying the living room and vacuuming the floor", "desc": "Stand up from the desk chair. Walk into the living room. Pick up the cups from the table. Carry them to the kitchen. Place them in the sink. Walk back to the living room. Fold the blanket on the sofa. Place the cushions back in position. Pick up the remote control. Put it in the drawer. Walk to the corner. Pick up the vacuum cleaner. Plug the power cord into the socket. Press the power switch on. Push the vacuum cleaner across the floor. Pull it back. Move it under the table. Push it along the sofa edge. Push it toward the wall. Press the power switch off. Unplug the power cord. Wind the cord around the hook. Put the vacuum cleaner back in the corner. Push the sofa back into place."}, {"time": "21:00-21:30", "location": "Bathroom", "activity": "Taking an evening shower and getting ready for bed", "desc": "Walk into the bathroom. Press the light switch on. Walk to the shower area. Turn the water heater switch on. Turn the shower tap on. Test the water with a hand. Step under the water. Wet the hair. Pick up the shampoo bottle. Squeeze shampoo into the palm. Rub it into the hair. Rinse the hair. Pick up the soap. Rub it over the arms and body. Rinse off. Turn the tap off. Pick up the towel. Rub the hair with the towel. Wipe the face and body dry. Hang the towel on the rail. Pick up the toothbrush. Squeeze toothpaste onto the brush. Brush the teeth. Rinse the mouth. Turn the tap off. Wipe the mouth with the hand towel. Press the light switch off. Walk out of the bathroom."}, {"time": "21:30-22:30", "location": "Bedroom 2", "activity": "Reading and reviewing the next day's schedule by desk lamp light", "desc": "Walk into Bedroom 2. Sit down on the desk chair. Press the desk lamp switch on. Adjust the lamp arm toward the desk. Pick up the notebook from the desk. Open the notebook. Pick up the pen. Write the next day's schedule lines. Put the pen down. Pick up the phone. Open the calendar application. Scroll through the schedule with the thumb. Type two notes. Put the phone down on the desk. Pick up the book from the desk. Open the book. Read a page. Turn the page. Read the next page. Close the book. Place the book on the desk. Stand up. Walk to the bed. Pull the blanket back. Sit down on the bed."}, {"time": "22:30-24:00", "location": "Bedroom 2", "activity": "Sleeping", "desc": "Lie down on the bed. Pull the blanket up over the body. Place the head on the pillow. Close the eyes. Turn onto the right side. Pull the blanket up to the shoulders. Remain lying down with eyes closed. Turn onto the back. Adjust the pillow with the hand. Turn onto the left side. Remain still. Keep eyes closed. Remain lying down until 24:00."}]}
+```
+

@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:15",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Close eyes. Pull blanket over body. Breathe. Turn to left side. Adjust pillow. Sleep. Turn to right side. Pull blanket. Sleep. Wake up at 06:15. Open eyes. Stretch arms. Sit up on bed. Swing legs over edge. Stand up."
+    },
+    {
+      "time": "06:15-06:45",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready",
+      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Turn on tap. Wet hands. Pick up soap. Rub hands together. Rinse hands. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face with water. Pick up towel. Dry face. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "desc": "Walk to kitchen. Open refrigerator. Take out milk, eggs, bread. Close refrigerator. Crack eggs into bowl. Whisk eggs. Turn on induction cooker. Place pan. Pour oil. Pour eggs. Stir. Turn off cooker. Place eggs on plate. Toast bread. Spread butter. Pour milk. Sit at table. Eat. Drink. Stand up. Pick up plate. Walk to sink. Rinse plate. Place in dishwasher."
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Walk to bedroom. Open closet. Take out shirt. Take off pajama top. Put on shirt. Take off pajama bottom. Put on pants. Put on socks. Put on shoes. Look in mirror. Adjust collar. Pick up comb. Comb hair. Apply deodorant. Put on watch. Pick up phone. Check time."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Organizing personal items and preparing to leave",
+      "desc": "Open backpack. Place laptop inside. Place notebook. Place pen. Zip backpack. Pick up phone from nightstand. Unplug charger. Put phone in pocket. Pick up keys. Pick up wallet. Put in pocket. Turn off fan. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk to bus stop. Wait for bus. Bus arrives. Step onto bus. Swipe transit card. Walk to seat. Sit down. Put backpack on lap. Check phone. Look out window. Bus stops. Stand up. Walk to exit. Step off bus. Walk to office building. Open door. Walk to elevator. Press button. Enter elevator. Press floor button. Exit elevator. Walk to office."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working at nonprofit office",
+      "desc": "Sit at desk. Turn on computer. Log in. Open email. Read and reply to emails. Make phone calls. Write reports. Attend meetings. Take notes. Talk to colleagues. Drink coffee. Type documents. Organize files. Prepare materials. Eat lunch at desk. Continue working. Shut down computer. Stand up."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk to bus stop. Wait for bus. Bus arrives. Step onto bus. Swipe transit card. Walk to seat. Sit down. Check phone. Look out window. Bus stops. Stand up. Walk to exit. Step off bus. Walk home. Open door. Enter home. Close door."
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with Member 2",
+      "desc": "Walk to kitchen. Greet Member 2. Wash hands. Open refrigerator. Take out vegetables. Place on cutting board. Pick up knife. Chop vegetables. Turn on induction cooker. Place pan. Pour oil. Add vegetables. Stir. Member 2 says 'Can you pass the salt?' Pick up salt. Hand to Member 2. Stir again. Turn off cooker. Place food on plates."
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner and cleaning up with Member 2",
+      "desc": "Sit at table. Pick up fork. Eat food. Chew. Swallow. Drink water. Talk to Member 2. Ask 'How was your day?' Listen. Continue eating. Finish meal. Stand up. Pick up plate. Walk to sink. Rinse plate. Open dishwasher. Place plate inside. Close dishwasher. Pick up cloth. Wipe table. Put cloth down."
+    },
+    {
+      "time": "19:15-19:30",
+      "location": "Living Room",
+      "activity": "Relaxing after dinner",
+      "desc": "Walk to living room. Sit on sofa. Pick up remote. Turn on TV. Flip channels. Stop on a channel. Put remote down. Lean back. Watch TV."
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Sit on sofa. Watch TV. Pick up remote. Change channel. Put remote down. Watch TV. Stand up. Walk to kitchen. Open refrigerator. Take out snack. Close refrigerator. Walk back to living room. Sit on sofa. Open snack. Eat snack. Watch TV. Member 2 enters. Say 'Hi, how was your work?' Member 2 sits. Continue watching TV. Talk to Member 2."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine",
+      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Turn on tap. Wet face. Apply cleanser. Rinse face. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Use toilet. Flush. Wash hands. Pick up towel. Dry hands and face. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using computer for personal tasks",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Log in. Open browser. Check social media. Read news. Write email. Reply to messages. Watch video. Close browser. Open document. Write notes. Save document. Close laptop. Turn off desk lamp."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Stand up. Walk to bed. Pull back blanket. Lie down. Pull blanket over body. Close eyes. Breathe. Turn to left side. Adjust pillow. Sleep. Turn to right side. Sleep."
+    }
+  ]
+}

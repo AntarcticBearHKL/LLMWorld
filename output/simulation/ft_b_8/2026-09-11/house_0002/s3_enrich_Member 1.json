@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn to left side. Pull blanket. Adjust pillow. Turn to right side. Bend knees. Stretch arm. Turn to back. Sigh. Remain still."
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth",
+      "desc": "Wake up. Sit up. Swing legs out of bed. Stand up. Walk to bathroom. Open bathroom door. Turn on light. Turn on tap. Wet hands. Apply soap. Rub hands together. Rinse hands. Turn off tap. Pick up toothbrush. Squeeze toothpaste onto toothbrush. Brush teeth. Rinse mouth. Wipe face with towel. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Living Room",
+      "activity": "Reading and relaxing",
+      "desc": "Walk to living room. Sit on couch. Pick up book from table. Open book to bookmark. Read page. Turn page. Read page. Turn page. Adjust sitting position. Cross legs. Read page. Turn page. Close book. Place book on table. Stand up."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with Member 2",
+      "desc": "Walk to kitchen. Greet Member 2: 'Good morning.' Open refrigerator. Take out milk and eggs. Place on counter. Close refrigerator. Pick up bowl. Crack eggs into bowl. Whisk eggs. Turn on induction cooker. Place pan on cooker. Pour eggs into pan. Stir eggs. Turn off induction cooker. Pick up plates. Place eggs on plates. Place plates on table. Pour milk into glasses. Sit at table. Eat breakfast. Talk with Member 2 about work. Finish eating. Pick up plates. Place plates in sink. Turn on tap. Rinse plates. Turn off tap."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Walk to bedroom. Open closet. Take out shirt. Take out pants. Lay clothes on bed. Remove pajamas. Put on shirt. Button shirt. Put on pants. Zip pants. Put on socks. Put on shoes. Walk to mirror. Adjust shirt. Comb hair. Pick up bag. Check bag contents. Place wallet in bag. Place phone in bag. Pick up keys. Walk out of bedroom."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work by walking and public transport, possibly with Member 2",
+      "desc": "Walk out of house. Lock door. Walk with Member 2 to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Talk with Member 2. Look out window. Get off bus. Walk to office. Enter office building. Greet colleagues. Walk to desk. Sit down."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working at nonprofit office",
+      "desc": "Turn on computer. Open email. Read emails. Reply to emails. Open document. Type report. Attend meeting. Take notes. Speak in meeting. Return to desk. Make phone call. Dial number. Talk on phone. Hang up. Open spreadsheet. Enter data. Save file. Print document. Pick up printout. Staple pages. Place in folder."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break",
+      "desc": "Walk to cafe. Enter cafe. Stand in line. Order sandwich. Pay cashier. Take receipt. Wait for order. Pick up sandwich. Find table. Sit down. Unwrap sandwich. Eat sandwich. Drink water. Wipe mouth with napkin. Stand up. Throw away trash. Walk back to office."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Working at nonprofit office",
+      "desc": "Turn on computer. Open email. Read new emails. Reply to urgent email. Open calendar. Schedule meeting. Make phone call to partner. Discuss project. Hang up. Open document. Edit proposal. Save document. Send email with attachment. Attend conference call. Mute phone. Speak. Unmute. Hang up. Open database. Update records. Save changes."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Pay fare. Find seat. Sit down. Talk with Member 2. Look out window. Get off bus. Walk home. Unlock door. Enter house. Remove shoes. Place bag on floor. Walk to kitchen."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 2",
+      "desc": "Walk to kitchen. Greet Member 2: 'How was your day?' Open refrigerator. Take out vegetables and meat. Place on counter. Close refrigerator. Pick up knife. Chop vegetables. Turn on induction cooker. Place pan on cooker. Pour oil. Add vegetables. Stir. Add meat. Stir. Turn off induction cooker. Pick up plates. Serve food. Place plates on table. Sit at table. Eat dinner. Talk with Member 2 about day. Finish eating. Pick up plates. Place plates in sink. Turn on tap. Rinse plates."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV with Member 2",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Browse channels. Select movie. Watch TV. Talk with Member 2 about movie. Adjust volume. Put remote on table. Watch TV. Stretch arms. Yawn. Pick up remote. Turn off TV. Stand up."
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Living Room",
+      "activity": "Reading and relaxing",
+      "desc": "Turn on light. Sit on couch. Pick up book. Open book. Read page. Turn page. Read page. Turn page. Adjust sitting position. Cross legs. Read page. Turn page. Close book. Place book on table. Turn off light. Stand up."
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and evening hygiene",
+      "desc": "Walk to bathroom. Turn on light. Turn on water heater. Remove clothes. Step into shower. Turn on water. Wet body. Apply shampoo. Wash hair. Rinse hair. Apply soap. Wash body. Rinse body. Turn off water. Step out of shower. Pick up towel. Dry body. Dry hair. Wrap towel around waist. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Hang towel. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Using computer and winding down",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open computer. Press power button. Wait for computer to start. Type password. Open browser. Check social media. Scroll feed. Open email. Read email. Close browser. Open music player. Play music. Adjust volume. Pick up phone. Check messages. Put phone down. Close computer. Turn off desk lamp. Stand up."
+    },
+    {
+      "time": "22:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Turn off light. Pull back blanket. Lie down on bed. Pull blanket up. Adjust pillow. Close eyes. Breathe slowly. Turn to left side. Pull blanket. Adjust pillow. Turn to right side. Bend knees. Stretch arm. Turn to back. Sigh. Remain still."
+    }
+  ]
+}

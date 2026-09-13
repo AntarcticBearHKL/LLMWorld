@@ -1,0 +1,207 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:45-07:20",
+      "start_minutes": 405,
+      "end_minutes": 440,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth, and showering (after Member 1's bathroom slot)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:20-07:50",
+      "start_minutes": 440,
+      "end_minutes": 470,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with Member 1, using the kettle and toaster",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:50-08:30",
+      "start_minutes": 470,
+      "end_minutes": 510,
+      "location": "Out",
+      "activity": "Commuting to the arts center where I work as an arts administrator",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-12:30",
+      "start_minutes": 510,
+      "end_minutes": 750,
+      "location": "Out",
+      "activity": "Working as an arts administrator: coordinating exhibitions, meeting artists, and handling programming emails",
+      "operations": []
+    },
+    {
+      "time": "12:30-13:15",
+      "start_minutes": 750,
+      "end_minutes": 795,
+      "location": "Out",
+      "activity": "Taking a lunch break and eating lunch near the office",
+      "operations": []
+    },
+    {
+      "time": "13:15-17:15",
+      "start_minutes": 795,
+      "end_minutes": 1035,
+      "location": "Out",
+      "activity": "Continuing arts administration work: budget planning, gallery scheduling, and preparing exhibition materials",
+      "operations": []
+    },
+    {
+      "time": "17:15-18:00",
+      "start_minutes": 1035,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner using the induction cooker and washing up afterwards, finishing before Member 1's kitchen slot",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:15",
+      "start_minutes": 1125,
+      "end_minutes": 1155,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV (after Member 1's living room time, before Member 1's vacuuming)",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:15-21:30",
+      "start_minutes": 1155,
+      "end_minutes": 1290,
+      "location": "Bedroom 2",
+      "activity": "Freelance illustration work at the desk using the computer and monitor, with the desk lamp on and space heater running",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:30-22:00",
+      "start_minutes": 1290,
+      "end_minutes": 1320,
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and getting ready for bed (after Member 1's bathroom slot)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:40",
+      "start_minutes": 1320,
+      "end_minutes": 1360,
+      "location": "Bedroom 2",
+      "activity": "Reading and winding down by lamplight before sleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:40-24:00",
+      "start_minutes": 1360,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

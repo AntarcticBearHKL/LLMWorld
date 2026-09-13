@@ -1,0 +1,339 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 2",
+      "activity": "Sleeping in bed with the space heater off and the room dark",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:15",
+      "start_minutes": 405,
+      "end_minutes": 435,
+      "location": "Bathroom",
+      "activity": "Waking up, using the toilet, brushing teeth and taking a warm shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:45",
+      "start_minutes": 435,
+      "end_minutes": 465,
+      "location": "Kitchen",
+      "activity": "Having breakfast with Member 1, using the kettle and toaster, then washing up",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:00",
+      "start_minutes": 465,
+      "end_minutes": 480,
+      "location": "Bedroom 2",
+      "activity": "Getting dressed and packing a bag with a sketchbook and laptop",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "start_minutes": 480,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting to the arts organization office on public transport",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-13:00",
+      "start_minutes": 540,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Working as an arts administrator at the office: meetings, grant paperwork and program coordination",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:00-13:45",
+      "start_minutes": 780,
+      "end_minutes": 825,
+      "location": "Out",
+      "activity": "Taking a lunch break and eating near the office",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:45-17:00",
+      "start_minutes": 825,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Continuing administrative work and reviewing exhibition schedules at the office",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:15",
+      "start_minutes": 1125,
+      "end_minutes": 1155,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching a short TV program with Member 1",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_gameconsole",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_vacuumcleaner",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:15-22:30",
+      "start_minutes": 1155,
+      "end_minutes": 1350,
+      "location": "Bedroom 2",
+      "activity": "Working on freelance illustrations on the computer with the monitor and desk lamp on",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bathroom",
+      "activity": "Night routine: washing face, brushing teeth and preparing for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_dehumidifier",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Sleeping in bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

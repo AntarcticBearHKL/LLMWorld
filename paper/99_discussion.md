@@ -53,6 +53,10 @@
    driven by **stay-home** appliance use (kitchen light +93%/+93%, living-room TV +65%/+109%, induction
    cooker +34%/+36%). Same mechanism as lockdown, milder. The **peak effect is not robust** (three worlds:
    +7.8% n.s. / +24.9% / −15.2% n.s.) and is deliberately **not claimed**.
+   **Full-household validation (R214)**: with **all members** simulated the stay-home total effect holds —
+   holiday +44.9%, wfh +36.8%, transport_strike +50.3% (n=9). This **requires a full run**: with
+   `--s4-only` the events are null because stay-home is an **s1-planning** effect that s4-only skips
+   (`--s4-only` suits only the s4-injected price policies).
 - **Peak-shaving is conditional on the house's appliance-time structure**: reducing the *peak*
   requires the intervention to actually lower **peak-window** load, and whether it does is
   house-specific. On `world_838587` (bedroom AC, used mostly overnight) a targeted non-price request

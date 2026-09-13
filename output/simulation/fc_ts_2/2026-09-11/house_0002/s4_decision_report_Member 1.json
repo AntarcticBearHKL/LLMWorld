@@ -1,0 +1,14 @@
+{
+  "segments": 15,
+  "operations_in": 39,
+  "operations_kept": 38,
+  "repaired": [],
+  "dropped": [
+    {
+      "unique_id": "beingroom_1_fan",
+      "action": "idle",
+      "reason": "unknown appliance id or invalid action"
+    }
+  ],
+  "valid": false
+}

@@ -1,0 +1,90 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:10",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:10-06:40",
+      "location": "Bathroom",
+      "activity": "Washing up, brushing teeth, and showering (before Member 2's bathroom slot)"
+    },
+    {
+      "time": "06:40-07:20",
+      "location": "Bedroom 1",
+      "activity": "Dressing and packing the work bag"
+    },
+    {
+      "time": "07:20-07:50",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with Member 2, boiling water with the kettle and making toast"
+    },
+    {
+      "time": "07:50-08:10",
+      "location": "Bedroom 1",
+      "activity": "Final check of work bag and getting ready to leave"
+    },
+    {
+      "time": "08:10-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit office"
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working at the community program office, coordinating sessions and answering emails"
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break near the office"
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Working on community program coordination, meetings, and partner follow-ups"
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Out",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "17:45-18:45",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV (before Member 2's living room time)"
+    },
+    {
+      "time": "18:45-19:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner (after Member 2 finishes in the kitchen)"
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Living Room",
+      "activity": "Vacuuming and tidying up the living area"
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Bedroom 1",
+      "activity": "Using the computer at the desk for personal tasks"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed (before Member 2's evening bathroom slot)"
+    },
+    {
+      "time": "21:30-22:15",
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down, checking phone"
+    },
+    {
+      "time": "22:15-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

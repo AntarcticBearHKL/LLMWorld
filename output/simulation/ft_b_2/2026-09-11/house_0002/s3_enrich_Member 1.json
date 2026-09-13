@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:15",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Breathing slowly. Turning to the left side. Pulling the blanket up. Bending knees. Extending legs. Turning to the right side. Adjusting the pillow. Placing arm under pillow. Turning onto stomach. Stretching arms. Remaining still. Turning onto back. Pulling blanket down."
+    },
+    {
+      "time": "06:15-06:45",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Opening eyes. Sitting up. Standing up from bed. Walking to bathroom. Turning on light. Turning on tap. Wetting face. Applying face wash. Rubbing face. Rinsing face. Turning off tap. Picking up towel. Wiping face. Picking up toothbrush. Applying toothpaste. Brushing teeth. Rinsing mouth. Spitting. Turning off light. Walking out."
+    },
+    {
+      "time": "06:45-07:10",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and packing work bag (partial)",
+      "desc": "Opening closet. Selecting shirt. Putting on shirt. Buttoning shirt. Selecting pants. Putting on pants. Putting on socks. Picking up work bag. Putting laptop into bag. Putting notebook into bag."
+    },
+    {
+      "time": "07:10-07:45",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with Member 2, boiling water with the kettle and toasting bread",
+      "desc": "Walking into kitchen. Greeting Member 2: 'Good morning.' Filling kettle with water. Placing kettle on base. Pressing switch on. Placing bread in toaster. Pushing lever down. Taking plates and cups. Kettle boils, pouring water into cups. Adding tea bags. Toast pops up. Taking toast out. Spreading butter. Sitting at table. Eating toast. Drinking tea. Talking with Member 2: 'Did you sleep well?' Finishing breakfast."
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Finishing getting dressed and packing work bag",
+      "desc": "Entering bedroom. Putting on shoes. Tying shoelaces. Putting on jacket. Zipping jacket. Checking work bag. Adding wallet and keys to bag. Zipping bag closed."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the nonprofit office",
+      "desc": "Walking out of apartment. Walking to bus stop. Standing at bus stop. Taking out phone. Checking bus schedule. Bus arrives. Boarding bus. Tapping transit card. Finding seat. Sitting down. Holding bag on lap. Looking at phone. Bus stops. Standing up. Exiting bus. Walking to office building. Entering building."
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Out",
+      "activity": "Working at the nonprofit office, coordinating community programs",
+      "desc": "Sitting at desk. Turning on computer. Logging in. Opening email. Reading emails. Replying to emails. Making phone calls. Taking notes. Attending meeting. Talking to colleagues. Reviewing program schedule. Updating calendar. Printing documents. Filing documents. Taking a short break."
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Out",
+      "activity": "Taking a lunch break and eating lunch",
+      "desc": "Leaving office. Walking to nearby cafe. Entering cafe. Ordering food. Paying. Waiting for food. Receiving food. Finding table. Sitting down. Eating lunch. Drinking water. Checking phone. Clearing table. Walking back to office."
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Out",
+      "activity": "Working at the nonprofit office, scheduling and planning program activities",
+      "desc": "Sitting at desk. Opening scheduling software. Checking calendar. Scheduling meetings. Sending invitations. Calling community partners. Discussing program details. Updating project plan. Drafting reports. Editing documents. Printing materials. Attending a planning meeting. Taking meeting minutes. Sending follow-up emails. Organizing files."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from work",
+      "desc": "Leaving office. Walking to bus stop. Waiting for bus. Boarding bus. Tapping card. Sitting down. Checking phone. Looking out window. Bus stops. Exiting bus. Walking home. Entering apartment building. Taking elevator/stairs. Entering apartment."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and eating dinner with Member 2",
+      "desc": "Entering kitchen. Greeting Member 2. Taking ingredients from refrigerator. Washing vegetables. Chopping vegetables. Placing pan on induction cooker. Turning on induction cooker. Adding oil. Adding vegetables. Stirring. Adding seasoning. Covering pan. Waiting for food to cook. Setting table. Placing food on plates. Sitting at table. Eating dinner. Talking with Member 2: 'How was your day?' Drinking water. Finishing dinner."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Washing dishes and cleaning the kitchen counters",
+      "desc": "Clearing dishes from table. Scraping food into trash. Loading dishwasher. Adding detergent. Starting dishwasher. Wiping counters with cloth. Spraying cleaning solution. Wiping again. Sweeping floor. Taking out trash. Replacing trash bag. Washing hands."
+    },
+    {
+      "time": "19:30-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV (chatting with Member 2 until 19:45)",
+      "desc": "Walking to living room. Sitting on sofa. Picking up remote. Turning on TV. Changing channels. Chatting with Member 2: 'What should we watch?' Watching TV. Talking with Member 2 about the program. At 19:45, Member 2 stands up. Member 2 says: 'I need to work on illustrations.' Member 1 says: 'Okay, good night.' Member 2 leaves to Bedroom 2. Member 1 continues watching TV. Changing channel. Adjusting volume. Watching a movie. Checking phone. Turning off TV at 21:30. Standing up."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower and getting ready for bed",
+      "desc": "Walking to bathroom. Turning on light. Turning on water heater. Undressing. Turning on shower. Adjusting temperature. Stepping into shower. Wetting body. Applying soap. Scrubbing body. Rinsing body. Washing hair. Rinsing hair. Turning off shower. Picking up towel. Drying body. Putting on pajamas. Brushing teeth. Turning off light. Walking out."
+    },
+    {
+      "time": "22:00-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reading and winding down before sleep",
+      "desc": "Entering bedroom. Turning on bedside lamp. Picking up book. Sitting on bed. Opening book. Reading. Turning page. Reading. Turning page. Adjusting pillow. Reading. Turning page. Closing book. Placing book on nightstand. Turning off lamp. Lying down. Pulling blanket up. Closing eyes."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Breathing slowly. Turning to left side. Pulling blanket up. Bending knees. Extending legs. Turning to right side. Adjusting pillow. Placing arm under pillow. Turning onto stomach. Stretching arms. Remaining still. Turning onto back. Pulling blanket down."
+    }
+  ]
+}
