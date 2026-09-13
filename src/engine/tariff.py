@@ -7,6 +7,17 @@ otherwise lack; the decision itself remains emergent (no hardcoded behaviour).
 """
 
 
+_SENSITIVITY_NOTES = {
+    "high": "You are highly cost-conscious and will accept some inconvenience to cut your electricity bill.",
+    "low": "You are not very price-sensitive; comfort and convenience matter more than the bill.",
+}
+
+
+def sensitivity_note(sensitivity):
+    """Preference sentence for a price-sensitivity level ('' when unknown/none)."""
+    return _SENSITIVITY_NOTES.get(str(sensitivity or "").lower(), "")
+
+
 def _unit_energy_kwh(appliance):
     """Energy of one representative unit of use: cycle kWh, else per-hour kWh."""
     cycle = appliance.get("energy_per_cycle_kwh")

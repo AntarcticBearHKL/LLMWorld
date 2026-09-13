@@ -98,7 +98,7 @@ def strip_ev_guidance(prompt):
     return prompt.replace(EV_OVERNIGHT_GUIDANCE, "")
 
 
-def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None):
+def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None, price_sensitivity=None):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -120,6 +120,9 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
     home_details = home.get_home_structure_with_details()
     home_with_appl = json.dumps(home_details, ensure_ascii=False, indent=2)
     cost_context = tariff.render_cost_context(home_details, cost_tariff)
+    note = tariff.sensitivity_note(price_sensitivity)
+    if note and cost_context:
+        cost_context = note + "\n" + cost_context
     w = weather.get_weather(date, override=weather_override)
     base_prompt = Prompt().load("simulate_step4_batch_appliance_decision",
                            member_name=member.name, member_age=member.age,
