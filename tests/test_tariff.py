@@ -61,6 +61,13 @@ class RenderCostContextTests(unittest.TestCase):
         self.assertNotIn("kitchen_kettle", text)
         self.assertNotIn("kitchen_refrigerator", text)
 
+    def test_sensitivity_from_traits(self):
+        self.assertEqual(tariff.sensitivity_from_traits("High", 0.5), "high")
+        self.assertEqual(tariff.sensitivity_from_traits("Low", 0.1), "low")
+        self.assertEqual(tariff.sensitivity_from_traits("Medium", 0.5), None)
+        self.assertEqual(tariff.sensitivity_from_traits("Medium", 0.8), "high")
+        self.assertEqual(tariff.sensitivity_from_traits(None, None), None)
+
     def test_sensitivity_note(self):
         self.assertEqual(tariff.sensitivity_note(None), "")
         self.assertEqual(tariff.sensitivity_note("other"), "")

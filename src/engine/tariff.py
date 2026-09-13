@@ -55,6 +55,20 @@ def render_bill_feedback(total_cost, peak_cost):
     )
 
 
+def sensitivity_from_traits(energy_awareness, conscientiousness=0.5):
+    """Derive a price-sensitivity level from persona traits (None = neutral)."""
+    ea = str(energy_awareness or "").lower()
+    try:
+        c = float(conscientiousness)
+    except (TypeError, ValueError):
+        c = 0.5
+    if ea == "high" or c >= 0.66:
+        return "high"
+    if ea == "low" and c < 0.34:
+        return "low"
+    return None
+
+
 def sensitivity_note(sensitivity):
     """Preference sentence for a price-sensitivity level ('' when unknown/none)."""
     return _SENSITIVITY_NOTES.get(str(sensitivity or "").lower(), "")
