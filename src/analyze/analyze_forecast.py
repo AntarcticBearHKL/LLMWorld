@@ -144,7 +144,7 @@ def main():
 
     print(f"Load forecast analysis done ({report['households']} households)")
     for r in report["per_house"]:
-        print(f"  {r['house_id']}: MAE {r['mae_kw']}kW "
+        print(f"  {r['house_id']}: MAE {r['mae_kw']} (hourly mean-W) "
               f"(naive {r['naive_mae_kw']},  improvement {r['improvement_pct']}%) "
               f"MAPE {r['mape']}")
     print(f"  Saved: {args.out}")

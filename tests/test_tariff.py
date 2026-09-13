@@ -79,6 +79,13 @@ class RenderCostContextTests(unittest.TestCase):
         self.assertIn("cost-conscious", tariff.sensitivity_note("high"))
         self.assertIn("not very price-sensitive", tariff.sensitivity_note("low"))
 
+    def test_cost_context_modes(self):
+        strong = tariff.render_cost_context(self.DETAILS, self.TARIFF, mode="strong")
+        soft = tariff.render_cost_context(self.DETAILS, self.TARIFF, mode="soft")
+        self.assertIn("MAY move it to an off-peak segment", strong)
+        self.assertIn("Decide how to schedule", soft)
+        self.assertNotIn("MAY move", soft)
+
     def test_demand_cost_context(self):
         text = tariff.render_cost_context(self.DETAILS, {"mode": "demand", "rate": 12.0})
         self.assertIn("demand charge", text)

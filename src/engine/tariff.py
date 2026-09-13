@@ -111,8 +111,23 @@ def _render_demand_context(home_details, rate):
     return "\n".join([header] + rows + [trailer])
 
 
-def render_cost_context(home_details, tariff):
-    """Render the flexible-appliance cost table ('' when nothing applies)."""
+_TRAILER_STRONG = (
+    "To minimise cost: if a flexible appliance would otherwise run in the peak window, you MAY move it "
+    "to an off-peak segment earlier or later the same day (for example run the dishwasher overnight, or "
+    "shower before 16:00) — the activity still happens, only its time changes. Keep it in the peak "
+    "window only if the activity genuinely cannot move."
+)
+_TRAILER_SOFT = (
+    "These are today's flexible-appliance costs. Decide how to schedule your appliances."
+)
+
+
+def render_cost_context(home_details, tariff, mode="strong"):
+    """Render the flexible-appliance cost table ('' when nothing applies).
+
+    mode="strong" adds an explicit off-peak-rescheduling authorization; mode="soft"
+    gives the same numbers with a neutral instruction (prompt-bias control).
+    """
     if not tariff:
         return ""
     if tariff.get("mode") == "demand":
@@ -142,10 +157,5 @@ def render_cost_context(home_details, tariff):
         f"(peak {window_p[0]}-{window_p[1]} @{peak_rate:.2f} AUD/kWh; "
         f"off-peak {window_v[0]}-{window_v[1]} @{valley_rate:.2f} AUD/kWh):"
     )
-    trailer = (
-        "To minimise cost: if a flexible appliance would otherwise run in the peak window, you MAY "
-        "move it to an off-peak segment earlier or later the same day (for example run the dishwasher "
-        "overnight, or shower before 16:00) — the activity still happens, only its time changes. Keep "
-        "it in the peak window only if the activity genuinely cannot move."
-    )
+    trailer = _TRAILER_SOFT if str(mode).lower() == "soft" else _TRAILER_STRONG
     return "\n".join([header] + rows + [trailer])

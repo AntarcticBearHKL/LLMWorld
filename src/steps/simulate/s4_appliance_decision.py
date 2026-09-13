@@ -113,7 +113,7 @@ def strip_ev_guidance(prompt):
     return prompt.replace(EV_OVERNIGHT_GUIDANCE, "")
 
 
-def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None, price_sensitivity=None, bill_feedback=""):
+def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None, price_sensitivity=None, bill_feedback="", cost_context_mode="strong"):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -134,7 +134,7 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
 
     home_details = home.get_home_structure_with_details()
     home_with_appl = json.dumps(home_details, ensure_ascii=False, indent=2)
-    cost_context = tariff.render_cost_context(home_details, cost_tariff)
+    cost_context = tariff.render_cost_context(home_details, cost_tariff, mode=cost_context_mode)
     level = price_sensitivity
     if level is None and cost_tariff:
         persona = _raw_member_personality(world_id, house, member.name)

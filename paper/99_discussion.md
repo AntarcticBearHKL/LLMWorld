@@ -240,6 +240,21 @@ Relatedly, **framing effects are unstable**: the loss-framed `nudge_loss` did no
 Both the over-compliance and the framing results point to **wording-driven** rather than
 information/psychology-driven behaviour in the current agents.
 
+## Validity audit (R221/R222) — confidence labels
+
+- **Robust (direction)**: heatwave→AC, lockdown→stay-home, holiday/wfh/transport→total↑ (cross-world);
+  the null set (TOU-text, peak_demand, tax_uniform, storm, energy_crisis, solar_incentive, bill feedback).
+  All headline p-values survive **BH-FDR** across the 8 tests (max adjusted p=0.039).
+- **Prompt-sensitive (preliminary)**: **price shaving.** `tou+cost` is *partly* instruction-driven: a
+  **facts-only** cost table already gives a significant **valley shift (+11.6%)**; the explicit
+  off-peak **authorization** adds a further significant **peak reduction (−8.1%)**. So "the platform can
+  analyse prices" should read "**concrete cost information is effective, and an explicit rescheduling
+  authorization strengthens peak shaving**". Do **not** claim pure economic elasticity.
+- **Withdrawn / demoted**: **ac_tax peak −22.5% is NOT reproduced** on a shared timeline (R215: +6.1% n.s.);
+  only the **device-level AC reduction (−58%)** is robust. ac_tax×rebate (n=9) is weak evidence.
+- **Mechanism caveats**: `heatwave` also sets a structured weather field (not pure language); `season`
+  (R217) largely follows the prompt's season rule; substitution (R144) did not replicate (R211).
+
 ## Limitations
 
 - Event results are **binary / large-effect** (device on/off; out-of-home yes/no) and hold across three
