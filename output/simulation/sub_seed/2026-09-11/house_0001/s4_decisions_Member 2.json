@@ -1,0 +1,314 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:10",
+      "start_minutes": 405,
+      "end_minutes": 430,
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth, getting dressed for the day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:35",
+      "start_minutes": 430,
+      "end_minutes": 455,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast (toast and tea) while skimming art history notes on phone",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:35-08:25",
+      "start_minutes": 455,
+      "end_minutes": 505,
+      "location": "Out",
+      "activity": "Commuting by train and tram to Monash Caulfield campus",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:25-09:00",
+      "start_minutes": 505,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Sitting in the campus library reviewing assigned art history readings before class",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-11:00",
+      "start_minutes": 540,
+      "end_minutes": 660,
+      "location": "Out",
+      "activity": "Attending Art History lecture at Monash Caulfield",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:00-12:00",
+      "start_minutes": 660,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending Creative Writing tutorial and workshopping a short prose piece",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:40",
+      "start_minutes": 720,
+      "end_minutes": 760,
+      "location": "Out",
+      "activity": "Eating a packed lunch on campus and chatting briefly with classmates",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:40-13:10",
+      "start_minutes": 760,
+      "end_minutes": 790,
+      "location": "Out",
+      "activity": "Walking and taking the tram to the café where the shift starts",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:10-18:00",
+      "start_minutes": 790,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Working a part-time shift at the café, taking orders, making coffee and clearing tables",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "start_minutes": 1080,
+      "end_minutes": 1125,
+      "location": "Out",
+      "activity": "Commuting home from the café by tram and train",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:30",
+      "start_minutes": 1125,
+      "end_minutes": 1170,
+      "location": "Bedroom 2",
+      "activity": "Unwinding after the café shift and having a light snack while resting",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and washing up after the shift",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "start_minutes": 1200,
+      "end_minutes": 1230,
+      "location": "Kitchen",
+      "activity": "Cooking and eating a simple pasta dinner together with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:15",
+      "start_minutes": 1230,
+      "end_minutes": 1335,
+      "location": "Bedroom 2",
+      "activity": "Writing a creative writing assignment on the computer with the desk lamp on",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "start_minutes": 1335,
+      "end_minutes": 1365,
+      "location": "Bedroom 2",
+      "activity": "Reading a novel on phone and winding down for bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

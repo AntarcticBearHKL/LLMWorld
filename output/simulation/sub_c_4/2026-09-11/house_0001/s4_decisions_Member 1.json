@@ -1,0 +1,234 @@
+{
+  "member": "Member 1",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:00",
+      "start_minutes": 0,
+      "end_minutes": 360,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": []
+    },
+    {
+      "time": "06:00-06:30",
+      "start_minutes": 360,
+      "end_minutes": 390,
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "start_minutes": 390,
+      "end_minutes": 420,
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:40",
+      "start_minutes": 420,
+      "end_minutes": 460,
+      "location": "Bedroom 1",
+      "activity": "Getting ready and packing bag for university",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:15",
+      "start_minutes": 460,
+      "end_minutes": 495,
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus with Member 5",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:15-09:00",
+      "start_minutes": 495,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Studying in campus library with Member 5 before class",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending classes and studying at Monash Clayton",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Lunch break at university, having lunch with Member 4 and briefly joining Member 5",
+      "operations": []
+    },
+    {
+      "time": "13:00-15:00",
+      "start_minutes": 780,
+      "end_minutes": 900,
+      "location": "Out",
+      "activity": "Attending more classes and studying",
+      "operations": [
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:00-15:30",
+      "start_minutes": 900,
+      "end_minutes": 930,
+      "location": "Out",
+      "activity": "Commuting to Chadstone retail job",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "15:30-19:30",
+      "start_minutes": 930,
+      "end_minutes": 1170,
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone",
+      "operations": []
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Out",
+      "activity": "Commuting home",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "start_minutes": 1200,
+      "end_minutes": 1230,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:00",
+      "start_minutes": 1230,
+      "end_minutes": 1320,
+      "location": "Bedroom 1",
+      "activity": "Studying and relaxing on computer",
+      "operations": [
+        {
+          "unique_id": "bedroom_1_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_1_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "start_minutes": 1350,
+      "end_minutes": 1440,
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_1_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

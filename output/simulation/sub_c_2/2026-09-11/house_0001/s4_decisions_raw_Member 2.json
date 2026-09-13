@@ -1,0 +1,246 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:10",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth, getting dressed for the day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-07:35",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast (toast and tea) while skimming art history notes on phone",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:35-08:25",
+      "location": "Out",
+      "activity": "Commuting by train and tram to Monash Caulfield campus",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:25-09:00",
+      "location": "Out",
+      "activity": "Sitting in the campus library reviewing assigned art history readings before class",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-11:00",
+      "location": "Out",
+      "activity": "Attending Art History lecture at Monash Caulfield",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "11:00-12:00",
+      "location": "Out",
+      "activity": "Attending Creative Writing tutorial and workshopping a short prose piece",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:40",
+      "location": "Out",
+      "activity": "Eating a packed lunch on campus and chatting briefly with classmates",
+      "operations": []
+    },
+    {
+      "time": "12:40-13:10",
+      "location": "Out",
+      "activity": "Walking and taking the tram to the café where the shift starts",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:10-18:00",
+      "location": "Out",
+      "activity": "Working a part-time shift at the café, taking orders, making coffee and clearing tables",
+      "operations": []
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Out",
+      "activity": "Commuting home from the café by tram and train",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:30",
+      "location": "Bedroom 2",
+      "activity": "Unwinding after the café shift and having a light snack while resting",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Bathroom",
+      "activity": "Taking a warm shower and washing up after the shift",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating a simple pasta dinner together with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:15",
+      "location": "Bedroom 2",
+      "activity": "Writing a creative writing assignment on the computer with the desk lamp on",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:15-22:45",
+      "location": "Bedroom 2",
+      "activity": "Reading a novel on phone and winding down for bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

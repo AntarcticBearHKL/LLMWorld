@@ -1,0 +1,223 @@
+{
+  "member": "Member 5",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Out",
+      "activity": "Morning walk with his dog around the neighbourhood",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:15-07:40",
+      "location": "Bathroom",
+      "activity": "Cold shower and washing up (weekly cold shower day); skips breakfast as usual",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:15",
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus by public transit together with Member 1",
+      "operations": []
+    },
+    {
+      "time": "08:15-09:00",
+      "location": "Out",
+      "activity": "Studying in the campus library with Member 1 before class",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending Master of Business Information Systems lectures and studying in the campus library",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Having lunch on campus with Member 1, Member 3, and Member 4",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Part-time IT support assistant shift combined with coursework and assignment work",
+      "operations": [
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home by public transit",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner before the household's later group dinner",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:45-19:30",
+      "location": "Bathroom",
+      "activity": "Doing a load of laundry in the washing machine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_washingmachine",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Living Room",
+      "activity": "Organizing household chores and rent together with Member 3 and Member 4",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:15",
+      "location": "Bedroom 5",
+      "activity": "Tidying his room and sorting out overdue chores and deadlines",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:15-22:00",
+      "location": "Bedroom 5",
+      "activity": "Working on coursework and coding assignments on his computer",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:40",
+      "location": "Bedroom 5",
+      "activity": "Reading before bed",
+      "operations": [
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_5_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:40-23:00",
+      "location": "Bathroom",
+      "activity": "Night wash up and getting ready for bed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_5_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 5",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_5_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}
