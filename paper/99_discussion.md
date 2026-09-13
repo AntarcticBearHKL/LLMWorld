@@ -130,6 +130,10 @@
   total unchanged; versus TOU-text-only the table alone adds peak −7.2% / valley +16.6%. Without the
   authorization clause the same table had **no** effect (peak −0.1%). This is the platform's **first
   detectable price response** — the lever is concrete, actionable information, not the price text.
+- **Price-elasticity dose–response (R205)**: with the cost context on both arms, a larger peak/valley gap
+  (0.5→1.2 AUD, 2.4×) significantly increases shifting — peak **−7.3%** (p=0.0095), valley **+14.8%**
+  (p=0.014). Without the cost context the same gap change had **no** effect (R180). The platform therefore
+  exhibits a measurable **price elasticity** once the trade-off is made concrete.
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
