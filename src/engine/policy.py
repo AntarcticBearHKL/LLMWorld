@@ -90,6 +90,31 @@ def render_cpp_soft_policy(peak_rate=None):
 UNIFORM_TAX_DEFAULT = 0.10
 
 
+CPR_DEFAULT = 0.90
+
+
+def render_cpr_policy(rate=None):
+    """Critical-peak-rebate (CPR) event, reward framing (Faruqui & Sergici 2010).
+
+    The reward mirror of CPP: cutting use in the critical-peak window EARNS a rebate.
+    """
+    r = CPR_DEFAULT if rate is None else rate
+    return (
+        f"Today is a critical peak rebate (CPR) day: if you cut your electricity use during the "
+        f"critical peak window 17:00-20:00 you EARN a rebate of {r:.2f} AUD/kWh for the energy you "
+        "avoid; using power in that window forgoes the rebate."
+    )
+
+
+def render_cpr_soft_policy(rate=None):
+    """Critical-peak-rebate facts only, no 'earn/cut' directive (prompt-bias control)."""
+    r = CPR_DEFAULT if rate is None else rate
+    return (
+        f"Today a critical peak rebate of {r:.2f} AUD/kWh applies to electricity you avoid using "
+        "during the window 17:00-20:00."
+    )
+
+
 def render_uniform_tax_policy(rate=None):
     """Uniform electricity tax on all consumption, incl. self-generation (Gunkel et al. 2023).
 
@@ -163,7 +188,7 @@ def render_in_home_display_policy():
 
 
 _POLICY_NAMES = frozenset({
-    "tou", "tou_soft", "cpp", "cpp_soft", "tax_uniform", "tax_uniform_soft",
+    "tou", "tou_soft", "cpp", "cpp_soft", "cpr", "cpr_soft", "tax_uniform", "tax_uniform_soft",
     "nudge", "nudge_soft", "nudge_loss",
     "subsidy", "peak_demand", "ev_delay", "night_setback", "in_home_display",
 })
@@ -190,6 +215,11 @@ def _parse_single_policy(spec):
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         rate = float(rest) if rest else None
         render = render_cpp_policy if name == "cpp" else render_cpp_soft_policy
+        return render(rate), name
+    if name in ("cpr", "cpr_soft"):
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        rate = float(rest) if rest else None
+        render = render_cpr_policy if name == "cpr" else render_cpr_soft_policy
         return render(rate), name
     if name in ("tax_uniform", "tax_uniform_soft"):
         rest = spec.split(":", 1)[1] if ":" in spec else ""
@@ -220,7 +250,8 @@ def _parse_single_policy(spec):
         return render_in_home_display_policy(), "in_home_display"
     raise ValueError(
         "Unknown policy '%s'. Supported: tou, tou_soft, tou:<peak>,<valley>[,<shoulder>], "
-        "cpp[:<peak_rate>], cpp_soft[:<peak_rate>], tax_uniform[:<rate>], tax_uniform_soft[:<rate>], "
+        "cpp[:<peak_rate>], cpp_soft[:<peak_rate>], cpr[:<rate>], cpr_soft[:<rate>], "
+        "tax_uniform[:<rate>], tax_uniform_soft[:<rate>], "
         "nudge[:<kwh>], nudge_soft[:<kwh>], "
         "nudge_loss[:<aud>], subsidy[:<rate>], peak_demand[:<rate>], "
         "ev_delay[:<step>], night_setback, in_home_display; combine with commas e.g. 'tou,nudge'." % spec
@@ -291,6 +322,16 @@ def parse_tariff(spec):
             "peak_rate": rate,
             "valley_rate": TOU_DEFAULT["valley_rate"],
             "shoulder_rate": TOU_DEFAULT["shoulder_rate"],
+        }
+    if head in ("cpr", "cpr_soft"):
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        rate = float(rest) if rest else CPR_DEFAULT
+        return {
+            "peak_window": CPP_DEFAULT["window"],
+            "valley_window": TOU_DEFAULT["valley_window"],
+            "peak_rate": rate,
+            "valley_rate": 0.0,
+            "shoulder_rate": 0.0,
         }
     return None
 

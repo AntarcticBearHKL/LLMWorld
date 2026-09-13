@@ -31,6 +31,11 @@ class ParseTariffTests(unittest.TestCase):
         self.assertEqual(cfg["peak_window"], ("16:00", "21:00"))
         self.assertEqual(policy.parse_tariff("tou:0.9,0.20")["peak_rate"], 0.9)
 
+    def test_cpr_tariff(self):
+        cfg = policy.parse_tariff("cpr:1.00")
+        self.assertEqual(cfg["peak_rate"], 1.00)
+        self.assertEqual(cfg["valley_rate"], 0.0)
+
     def test_cpp_rate(self):
         cfg = policy.parse_tariff("cpp:1.20")
         self.assertEqual(cfg["peak_rate"], 1.20)
