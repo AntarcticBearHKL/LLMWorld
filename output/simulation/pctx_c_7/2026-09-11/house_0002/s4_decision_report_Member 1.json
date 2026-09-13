@@ -1,0 +1,14 @@
+{
+  "segments": 13,
+  "operations_in": 32,
+  "operations_kept": 31,
+  "repaired": [],
+  "dropped": [
+    {
+      "unique_id": "kitchen_oven",
+      "action": "use",
+      "reason": "unknown appliance id or invalid action"
+    }
+  ],
+  "valid": false
+}

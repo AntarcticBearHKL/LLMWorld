@@ -123,12 +123,13 @@
 - **Valley-filling direction, underpowered (R185)**: a "free electricity 12:00–14:00" event raised midday
   load +90% nominally (0.20→0.39 kWh) but **n.s.** (p=0.31, n=15) — direction consistent with price
   response, but the absolute effect is below the noise floor (R057/R058).
-- **Cost context makes TOU shifting detectable (R200)**: injecting a concrete per-appliance
+- **Cost context makes TOU shifting detectable (R200/R201)**: injecting a concrete per-appliance
   peak/off-peak **cost table** *plus explicit authorization to reschedule flexible loads off-peak*
-  produced a significant **shift** — peak **−7.2%** (p=0.013), valley **+16.6%** (p=0.007), total
-  unchanged — on a shared (s4-only) timeline. This is the platform's **first detectable price
-  response**; the lever is concrete, actionable information, not the price text itself. Without the
-  authorization clause the same table had no effect (peak −0.1%).
+  turns the otherwise-null TOU into a significant **shift**. Versus a *no-policy* baseline (shared
+  s4-only timeline, n=15) the effect is **peak −13.2%** (p=0.0018) and **valley +25.6%** (p=2.3e-5),
+  total unchanged; versus TOU-text-only the table alone adds peak −7.2% / valley +16.6%. Without the
+  authorization clause the same table had **no** effect (peak −0.1%). This is the platform's **first
+  detectable price response** — the lever is concrete, actionable information, not the price text.
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
