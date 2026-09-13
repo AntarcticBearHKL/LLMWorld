@@ -14,9 +14,9 @@ from dataset import iter_house_days
 from sklearn.ensemble import RandomForestRegressor
 
 
-def scan_house_daily_profiles(world_id, scenario):
+def scan_house_daily_profiles(world_id, scenario, env=None):
     per_house = {}
-    for record in iter_house_days(world_id, policy=scenario):
+    for record in iter_house_days(world_id, env=env, policy=scenario):
         hourly = [sum(record["load_profile_watts"][h * 60:(h + 1) * 60]) / 60.0
                   for h in range(24)]
         per_house.setdefault(record["house_id"], []).append({
@@ -121,11 +121,12 @@ def main():
     parser = argparse.ArgumentParser(description="Load forecasting and predictability analysis")
     parser.add_argument("world_id")
     parser.add_argument("--scenario", default="baseline")
+    parser.add_argument("--env", default=None, help="simulation env dir (defaults to world id)")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
     try:
-        per_house = scan_house_daily_profiles(args.world_id, args.scenario)
+        per_house = scan_house_daily_profiles(args.world_id, args.scenario, env=args.env)
         report = build_report(per_house)
     except ValueError as exc:
         print(f"[Error] {exc}")
