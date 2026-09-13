@@ -98,7 +98,7 @@ def strip_ev_guidance(prompt):
     return prompt.replace(EV_OVERNIGHT_GUIDANCE, "")
 
 
-def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None, price_sensitivity=None):
+def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None, price_sensitivity=None, bill_feedback=""):
     home = load_home(world_id, house)
     if home is None:
         return False, "household missing"
@@ -133,7 +133,7 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
                            season=w["season"], weather=w["weather"],
                            temperature=w["temperature"],
                            policy_context=policy_text, cost_context=cost_context,
-                           world_news=world_news)
+                           bill_feedback=bill_feedback, world_news=world_news)
 
     if natural_ev:
         base_prompt = strip_ev_guidance(base_prompt)

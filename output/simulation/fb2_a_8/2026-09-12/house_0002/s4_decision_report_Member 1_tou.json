@@ -1,0 +1,29 @@
+{
+  "segments": 16,
+  "operations_in": 52,
+  "operations_kept": 48,
+  "repaired": [],
+  "dropped": [
+    {
+      "unique_id": "living_room_vacuumcleaner",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    },
+    {
+      "unique_id": "living_room_light",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    },
+    {
+      "unique_id": "living_room_tv",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    },
+    {
+      "unique_id": "living_room_light",
+      "action": "idle",
+      "reason": "out of home: room appliance not allowed"
+    }
+  ],
+  "valid": false
+}

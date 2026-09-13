@@ -13,6 +13,48 @@ _SENSITIVITY_NOTES = {
 }
 
 
+def _in_window(minute, window):
+    start = int(window[0][:2]) * 60 + int(window[0][3:])
+    end = int(window[1][:2]) * 60 + int(window[1][3:])
+    if start <= end:
+        return start <= minute < end
+    return minute >= start or minute < end
+
+
+def rate_for_minute(minute, tariff):
+    """Tariff rate (AUD/kWh) applying at a given minute of the day."""
+    if _in_window(minute, tariff.get("peak_window", ("16:00", "21:00"))):
+        return float(tariff["peak_rate"])
+    if _in_window(minute, tariff.get("valley_window", ("22:00", "07:00"))):
+        return float(tariff["valley_rate"])
+    return float(tariff.get("shoulder_rate", tariff["valley_rate"]))
+
+
+def cost_from_profile(profile_watts, tariff):
+    """(total_cost, peak_cost) in AUD for a per-minute watts profile; None if unusable."""
+    if not tariff or not profile_watts:
+        return None
+    peak_window = tariff.get("peak_window", ("16:00", "21:00"))
+    total = peak = 0.0
+    for minute, watts in enumerate(profile_watts):
+        cost = (watts / 60.0 / 1000.0) * rate_for_minute(minute, tariff)
+        total += cost
+        if _in_window(minute, peak_window):
+            peak += cost
+    return total, peak
+
+
+def render_bill_feedback(total_cost, peak_cost):
+    """Yesterday's-bill feedback sentence ('' when the cost is unavailable)."""
+    if total_cost is None:
+        return ""
+    return (
+        f"Yesterday your household electricity cost about {total_cost:.2f} AUD, of which "
+        f"{peak_cost:.2f} AUD was during the peak window. Use this to decide when to run "
+        "flexible appliances today."
+    )
+
+
 def sensitivity_note(sensitivity):
     """Preference sentence for a price-sensitivity level ('' when unknown/none)."""
     return _SENSITIVITY_NOTES.get(str(sensitivity or "").lower(), "")

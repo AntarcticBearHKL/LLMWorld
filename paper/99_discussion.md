@@ -138,6 +138,10 @@
   cost-consciousness persona shifts significantly more than a low one (peak **−7.0%**, valley
   **+14.6%**, p=0.014) — the platform reproduces **heterogeneous price response** (Costa & Kahn 2010;
   Wang et al. 2021).
+- **Multi-day bill feedback (R208)**: injecting yesterday's bill / peak-window cost
+  (`--bill-feedback`) did **not** reduce the day-2 peak (peak +16.3% n.s.; total +15.3%). Multi-day arms
+  cannot share a day-2 timeline, so plan-level variance dominates at n=9 — the **habit/learning channel
+  is not yet supported** (consistent with the R140 timeline null).
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
