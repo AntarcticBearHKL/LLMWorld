@@ -233,7 +233,9 @@ information/psychology-driven behaviour in the current agents.
   worlds, but **continuous magnitudes cannot be resolved** at the observed noise floor (CV≈12%,
   R057/R058) — only large effects (≳10–20%) are detectable, so literature-scale (~3%) magnitudes are
   not claimed. Continuous claims additionally require **n≥15** (R112/R114).
-- Weather is currently a stub; event effects use a fixed temperature offset.
+- Weather was a stub; it now derives **season from the date** (Australian), so behaviour is
+  season-correct — winter uses **heating** (SpaceHeater 3.40 kWh, no cooling), summer uses **cooling**
+  (AC 3.64 + Fan 0.35, no heating) (R217). Event effects still use a temperature/weather override.
 - Refactor-era drift is resolved: `engine/news.py`, `compare_worlds.py`, all documented policies
   (`tou`/`tou_soft`/`nudge`/`nudge_soft`/`nudge_loss`/`subsidy`/`peak_demand`/`ev_delay`/
   `night_setback`/`in_home_display`), `--community-notice`, `--policy-schedule`, and `--peer-nudge`
