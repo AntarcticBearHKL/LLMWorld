@@ -1,0 +1,310 @@
+{
+  "member": "Member 4",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "start_minutes": 0,
+      "end_minutes": 390,
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_4_fan",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-06:45",
+      "start_minutes": 390,
+      "end_minutes": 405,
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth, and getting dressed",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "06:45-07:10",
+      "start_minutes": 405,
+      "end_minutes": 430,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, preparing a packed lunch",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:10-08:10",
+      "start_minutes": 430,
+      "end_minutes": 490,
+      "location": "Bedroom 4",
+      "activity": "Packing the study bag, reviewing chemistry notes, and preparing for the day",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:10-09:00",
+      "start_minutes": 490,
+      "end_minutes": 540,
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash Clayton campus",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Out",
+      "activity": "Attending second-year chemistry lectures and tutorials at Monash Clayton",
+      "operations": [
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-13:00",
+      "start_minutes": 720,
+      "end_minutes": 780,
+      "location": "Out",
+      "activity": "Eating lunch on campus with Member 1, Member 3, and briefly joining Member 5, then resting between classes",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:00-15:30",
+      "start_minutes": 780,
+      "end_minutes": 930,
+      "location": "Out",
+      "activity": "Attending chemistry laboratory practical session on campus",
+      "operations": []
+    },
+    {
+      "time": "15:30-17:00",
+      "start_minutes": 930,
+      "end_minutes": 1020,
+      "location": "Out",
+      "activity": "Working as a part-time lab assistant, cleaning glassware and preparing reagents",
+      "operations": []
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Out",
+      "activity": "Commuting home by public transport",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Bedroom 4",
+      "activity": "Studying on the computer, completing lab reports and assignments",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "start_minutes": 1140,
+      "end_minutes": 1170,
+      "location": "Bedroom 4",
+      "activity": "Taking a break, relaxing",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Living Room",
+      "activity": "Organizing household chores and rent with Member 3",
+      "operations": [
+        {
+          "unique_id": "member_4_phone",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "start_minutes": 1200,
+      "end_minutes": 1230,
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1, Member 2, and Member 3",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:00",
+      "start_minutes": 1230,
+      "end_minutes": 1260,
+      "location": "Bathroom",
+      "activity": "Taking an evening shower",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-22:00",
+      "start_minutes": 1260,
+      "end_minutes": 1320,
+      "location": "Bedroom 4",
+      "activity": "Studying on the computer, completing lab reports and assignments",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:30",
+      "start_minutes": 1320,
+      "end_minutes": 1350,
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "start_minutes": 1350,
+      "end_minutes": 1380,
+      "location": "Bedroom 4",
+      "activity": "Winding down, checking phone and setting out clothes for tomorrow",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_4_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "start_minutes": 1380,
+      "end_minutes": 1440,
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_4_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_4_desklamp",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}

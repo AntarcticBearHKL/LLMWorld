@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies down on the bed in Bedroom 1. Pulls the blanket up over the body. Closes eyes. Turns onto the right side. Breathes slowly and steadily. Turns onto the back. Shifts the pillow under the head. Turns onto the left side. Remains lying still. Stretches the legs under the blanket. Pulls the blanket back over the shoulder. Remains lying still. Turns over once more. Remains lying with eyes closed until the alarm sounds at 06:00."
+    },
+    {
+      "time": "06:00-06:30",
+      "location": "Bathroom",
+      "activity": "Washing up and getting dressed",
+      "desc": "Opens eyes at the alarm. Sits up on the bed. Stands up. Walks to the bathroom. Turns on the bathroom light. Turns on the tap. Rinses the face with water. Picks up the toothbrush. Squeezes toothpaste onto the toothbrush. Brushes teeth. Rinses the mouth. Turns off the tap. Picks up the towel. Wipes the face. Turns on the shower tap. Steps under the water. Washes the body with soap. Turns off the shower tap. Picks up the towel. Dries the body and hair. Puts on the shirt. Puts on the trousers. Walks out of the bathroom."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Kitchen",
+      "activity": "Eating breakfast",
+      "desc": "Walks into the kitchen. Turns on the kitchen light. Opens the refrigerator door. Takes out milk and bread. Closes the refrigerator door. Puts the bread into the toaster. Presses the toaster lever down. Pours milk into a bowl. Opens the cupboard. Takes out cereal. Pours cereal into the bowl. Waits for the toaster. Takes the toast out of the toaster. Places the toast on a plate. Sits down at the table. Eats the cereal with a spoon. Eats the toast. Drinks the milk. Talks with Member 3 who is eating at the same table. Picks up the bowl and plate. Carries them to the sink. Rinses the bowl and plate. Turns off the kitchen light. Walks out of the kitchen."
+    },
+    {
+      "time": "07:00-07:40",
+      "location": "Bedroom 1",
+      "activity": "Getting ready and packing bag for university",
+      "desc": "Walks into Bedroom 1. Turns on the bedroom light. Walks to the wardrobe. Opens the wardrobe door. Takes out a jacket. Puts the jacket on. Picks up the backpack. Opens the backpack. Places the laptop into the backpack. Places the charger into the backpack. Places a notebook and pen into the backpack. Closes the zipper of the backpack. Picks up the phone from the desk. Checks the phone screen. Puts the phone into the jacket pocket. Picks up the water bottle. Puts the water bottle into the side pocket of the backpack. Picks up the bag. Turns off the bedroom light. Walks out of Bedroom 1."
+    },
+    {
+      "time": "07:40-08:15",
+      "location": "Out",
+      "activity": "Commuting to Monash University Clayton campus with Member 5",
+      "desc": "Walks out of the front door. Pulls the front door closed. Walks along the footpath with Member 5. Reaches the bus stop. Stands and waits at the bus stop. Talks with Member 5 about the day's classes. Steps onto the bus. Taps the Myki card on the reader. Walks down the aisle. Sits down on a seat next to Member 5. Looks at the phone during the ride. Stands up as the bus approaches the stop. Walks to the door. Steps off the bus. Taps the Myki card on the reader. Walks toward the campus entrance with Member 5. Walks through the campus gate. Walks to the library building."
+    },
+    {
+      "time": "08:15-09:00",
+      "location": "Out",
+      "activity": "Studying in campus library with Member 5 before class",
+      "desc": "Walks through the library entrance. Walks to an empty table with Member 5. Puts the backpack on the floor. Pulls out a chair. Sits down. Opens the backpack. Takes out the laptop. Opens the laptop lid. Presses the power button. Waits for the laptop to start. Types the login password. Opens the course reading file. Reads the lecture slides on the screen. Takes out the notebook. Writes notes with a pen. Talks with Member 5 about the class topics. Takes out the water bottle. Opens the bottle. Drinks water. Closes the bottle. Continues reading the slides. Checks the time on the phone."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending classes and studying at Monash Clayton",
+      "desc": "Closes the laptop lid. Puts the laptop into the backpack. Zips the backpack. Stands up. Pushes the chair in. Walks out of the library with Member 5. Walks to the lecture hall. Enters the lecture hall. Walks down the aisle. Sits down at a seat. Opens the backpack. Takes out the notebook and pen. Listens to the lecturer. Writes notes with the pen. Raises the hand and asks a question. Copies the slides shown on the screen. Takes out the phone. Photographs the lecture slides. Puts the phone away. Writes more notes. Puts the pen down. Picks up the backpack. Walks out of the lecture hall. Walks to the next classroom. Sits down for the tutorial. Discusses the case study with a classmate. Writes answers on the worksheet. Hands the worksheet to the tutor."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break at university, having lunch with Member 4 and briefly joining Member 5",
+      "desc": "Walks to the campus food court. Joins Member 4 at a table. Puts the backpack down. Sits down. Opens the backpack. Takes out a lunchbox. Opens the lunchbox lid. Eats the food with a fork. Talks with Member 4 about the morning classes. Member 3 sits down at the table and joins the conversation. Member 5 walks over and sits down briefly. Talks with Member 5 about the afternoon schedule. Member 5 stands up and walks away. Drinks water from the bottle. Closes the lunchbox lid. Puts the lunchbox into the backpack. Wipes the mouth with a tissue. Stands up. Pushes the chair in. Walks out of the food court with Member 3 and Member 4."
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "Out",
+      "activity": "Attending more classes and studying",
+      "desc": "Walks into the classroom. Sits down at a desk. Opens the backpack. Takes out the laptop. Opens the laptop lid. Presses the power button. Types the login password. Opens the course file. Types notes during the lecture. Listens to the lecturer. Answers a question raised by the lecturer. Talks with a classmate about a group task. Saves the notes file. Closes the laptop lid. Puts the laptop into the backpack. Zips the backpack. Walks to the library. Sits down at a table. Takes out the notebook. Reviews the notes. Checks the time on the phone. Stands up. Picks up the backpack. Walks out of the library toward the bus stop."
+    },
+    {
+      "time": "15:00-15:30",
+      "location": "Out",
+      "activity": "Commuting to Chadstone retail job",
+      "desc": "Walks to the bus stop. Stands and waits. Steps onto the bus. Taps the Myki card on the reader. Walks down the aisle. Sits down on a seat. Holds the backpack on the lap. Checks the phone for the shift roster. Stands up at the Chadstone stop. Walks to the door. Steps off the bus. Taps the Myki card on the reader. Walks through the shopping centre entrance. Walks to the staff entrance. Opens the staff door. Walks into the staff room."
+    },
+    {
+      "time": "15:30-19:30",
+      "location": "Out",
+      "activity": "Working part-time retail shift at Chadstone",
+      "desc": "Puts the backpack into a staff locker. Closes the locker door. Puts on the staff name badge. Walks onto the shop floor. Turns on the register terminal. Logs into the register with the staff code. Greets a customer. Scans the item barcodes with the scanner. Presses the total button. Takes the payment card. Taps the card on the terminal. Prints the receipt. Hands the receipt to the customer. Folds the clothes on the display table. Picks up hangers. Hangs the returned garments on the rack. Walks to the stockroom. Carries a box of stock to the floor. Opens the box. Arranges the items on the shelf. Adjusts the price tags. Answers a customer's question about sizes. Walks to the fitting rooms. Collects the discarded garments. Returns them to the racks. Presses the button on the register to print the shift report. Logs out of the register."
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walks into the staff room. Opens the locker. Takes out the backpack. Removes the name badge. Closes the locker door. Walks out of the staff entrance. Walks through the shopping centre. Walks to the bus stop. Stands and waits. Steps onto the bus. Taps the Myki card on the reader. Sits down on a seat. Looks at the phone during the ride. Stands up at the stop near home. Walks to the door. Steps off the bus. Taps the Myki card on the reader. Walks along the footpath to the house. Opens the front door. Walks inside."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walks into the kitchen. Puts the backpack on a chair. Turns on the kitchen light. Opens the refrigerator door. Takes out vegetables and eggs. Closes the refrigerator door. Turns on the induction cooker. Pours oil into the pan. Cracks the eggs into the pan. Stirs the eggs with a spatula. Adds the vegetables to the pan. Turns off the induction cooker. Takes a plate from the cupboard. Puts the food onto the plate. Sits down at the table. Eats the dinner with Member 2 and Member 3. Talks with Member 2 about the shift at the café. Drinks water. Picks up the plate and cutlery. Carries them to the sink. Rinses the plate and pan. Turns off the kitchen light."
+    },
+    {
+      "time": "20:30-22:00",
+      "location": "Bedroom 1",
+      "activity": "Studying and relaxing on computer",
+      "desc": "Walks into Bedroom 1. Turns on the bedroom light. Sits down at the desk. Opens the laptop lid. Presses the power button. Types the login password. Opens the assignment document. Types text into the document. Reads the course notes on the screen. Scrolls through the lecture slides. Saves the document. Opens a browser tab. Watches a video. Pauses the video. Picks up the phone. Scrolls through messages. Puts the phone down. Continues typing on the laptop. Turns on the desk lamp. Checks the time. Closes the assignment document. Closes the laptop lid."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed",
+      "desc": "Stands up from the desk. Walks to the bathroom. Turns on the bathroom light. Turns on the shower tap. Steps under the water. Washes the body with soap. Washes the hair with shampoo. Rinses the body and hair. Turns off the shower tap. Picks up the towel. Dries the body and hair. Puts on the pyjamas. Picks up the toothbrush. Squeezes toothpaste onto it. Brushes teeth. Rinses the mouth. Turns off the bathroom light. Walks out of the bathroom."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Walks into Bedroom 1. Turns off the bedroom light. Turns off the desk lamp. Picks up the phone. Sets the alarm. Puts the phone on the bedside table. Lies down on the bed. Pulls the blanket over the body. Closes eyes. Turns onto the right side. Remains lying still. Turns onto the back. Adjusts the pillow. Remains lying still with eyes closed until 24:00."
+    }
+  ]
+}

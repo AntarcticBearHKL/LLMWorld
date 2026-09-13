@@ -1,0 +1,119 @@
+{
+  "member": "Member 4",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lie down on bed. Pull blanket over body. Close eyes. Breathe slowly. Turn to left side. Remain asleep. Turn to right side. Adjust pillow. Continue sleeping. Stretch legs. Shift blanket. Remain asleep."
+    },
+    {
+      "time": "06:30-06:45",
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth, and getting dressed",
+      "desc": "Walk to bathroom. Turn on light. Turn on tap. Wet hands. Apply soap to hands. Rub hands together. Rinse face with water. Pick up toothbrush. Squeeze toothpaste onto toothbrush. Brush teeth. Rinse mouth with water. Spit into sink. Wipe face with towel. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "06:45-07:10",
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast, preparing a packed lunch",
+      "desc": "Walk to kitchen. Open refrigerator. Take out bread, milk, and butter. Close refrigerator. Place bread in toaster. Press toaster lever. Open refrigerator. Take out lettuce and tomato. Close refrigerator. Wash lettuce and tomato. Slice tomato. Place lettuce and tomato on bread. Add cheese. Close sandwich. Wrap sandwich in foil. Place sandwich in lunch bag. Pour milk into glass. Drink milk. Eat toast. Wipe counter with cloth."
+    },
+    {
+      "time": "07:10-08:10",
+      "location": "Bedroom 4",
+      "activity": "Packing the study bag, reviewing chemistry notes, and preparing for the day",
+      "desc": "Walk to bedroom. Open backpack. Place notebooks inside. Place pens in pencil case. Zip pencil case. Put pencil case in backpack. Take out chemistry notes. Read notes. Highlight key points. Close notebook. Place notebook in backpack. Check timetable on phone. Close phone. Pick up water bottle. Fill water bottle from tap. Close cap. Put water bottle in backpack. Check backpack contents. Zip backpack. Place backpack by door."
+    },
+    {
+      "time": "08:10-09:00",
+      "location": "Out",
+      "activity": "Commuting by public transport to Monash Clayton campus",
+      "desc": "Walk out of bedroom. Walk to front door. Open door. Step outside. Close door. Lock door. Walk to bus stop. Wait for bus. Board bus. Tap on with Myki card. Find seat. Sit down. Look out window. Check phone. Read messages. Put phone away. Stand up when bus approaches stop. Exit bus. Tap off. Walk to train station. Wait for train. Board train. Tap on. Find seat. Sit down. Read notes. Arrive at station. Exit train. Tap off. Walk to campus. Enter campus. Walk to lecture hall."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Attending second-year chemistry lectures and tutorials at Monash Clayton",
+      "desc": "Enter lecture hall. Find seat. Sit down. Take out notebook. Take out pen. Listen to lecturer. Write notes. Raise hand to ask question. Answer question. Turn page. Highlight text. Check phone. Put phone away. Take out laptop. Type notes. Open textbook. Read chapter. Close textbook. Pack up. Stand up. Walk to next tutorial room. Enter tutorial room. Sit down. Participate in discussion. Work in group. Solve problem. Write answer. Submit worksheet. Pack up. Leave room."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Eating lunch on campus with Member 1, Member 3, and briefly joining Member 5, then resting between classes",
+      "desc": "Walk to cafeteria. Meet Member 1, Member 3, Member 5. Greet them. Sit at table. Open lunch bag. Take out sandwich. Unwrap sandwich. Eat sandwich. Drink water. Talk with Member 1. Talk with Member 3. Member 5 joins briefly. Say hello to Member 5. Member 5 leaves. Continue eating. Finish lunch. Pack up trash. Throw trash in bin. Stand up. Walk to library. Find quiet spot. Sit down. Rest. Check phone. Close eyes."
+    },
+    {
+      "time": "13:00-15:30",
+      "location": "Out",
+      "activity": "Attending chemistry laboratory practical session on campus",
+      "desc": "Enter lab. Put on lab coat. Put on safety goggles. Put on gloves. Find station. Read lab manual. Collect equipment. Measure chemicals. Use balance. Pour solution. Stir mixture. Heat beaker. Observe reaction. Record data. Clean glassware. Put away equipment. Remove gloves. Remove goggles. Remove lab coat. Wash hands. Pack bag. Leave lab."
+    },
+    {
+      "time": "15:30-17:00",
+      "location": "Out",
+      "activity": "Working as a part-time lab assistant, cleaning glassware and preparing reagents",
+      "desc": "Walk to lab assistant office. Clock in. Put on lab coat. Put on gloves. Collect dirty glassware. Wash with brush and soap. Rinse with water. Dry with rack. Prepare reagents: measure chemicals. Mix solutions. Label bottles. Store in cabinet. Clean bench. Dispose waste. Remove gloves. Remove lab coat. Clock out. Pack bag. Leave lab."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home by public transport",
+      "desc": "Walk to bus stop. Wait for bus. Board bus. Tap on. Find seat. Sit. Check phone. Read notes. Exit bus. Tap off. Walk to train station. Board train. Tap on. Sit. Listen to music. Exit train. Tap off. Walk home. Enter house. Close door. Greet housemates."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Bedroom 4",
+      "activity": "Studying on the computer, completing lab reports and assignments",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Log in. Open lab report file. Type data. Open reference PDF. Read. Copy formula. Paste. Save file. Open assignment. Write introduction. Check word count. Format document. Save again. Close laptop. Stand up. Stretch."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Bedroom 4",
+      "activity": "Taking a break, relaxing",
+      "desc": "Lie on bed. Pick up phone. Open social media. Scroll. Watch video. Put phone down. Close eyes. Listen to music. Sit up. Drink water. Stand up. Walk to living room."
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Living Room",
+      "activity": "Organizing household chores and rent with Member 3",
+      "desc": "Walk to living room. Sit on couch. Greet Member 3. Greet Member 5. Discuss chores. Assign tasks. Calculate rent. Open phone calculator. Split amount. Write down amounts. Use phone to transfer rent. Confirm payment. Stand up. Walk to kitchen."
+    },
+    {
+      "time": "20:00-20:30",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1, Member 2, and Member 3",
+      "desc": "Enter kitchen. Greet Member 1, Member 2, Member 3. Wash hands. Open refrigerator. Take out vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add oil. Add vegetables. Stir. Add sauce. Taste. Turn off stove. Serve onto plates. Place plates on table. Sit down. Eat. Talk. Finish eating. Clear plates. Wash plates."
+    },
+    {
+      "time": "20:30-21:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower",
+      "desc": "Walk to bathroom. Turn on light. Turn on shower. Adjust temperature. Step into shower. Wet body. Apply soap. Wash body. Rinse. Apply shampoo. Wash hair. Rinse. Turn off shower. Step out. Dry with towel. Put on clothes. Turn off light. Walk out."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Bedroom 4",
+      "activity": "Studying on the computer, completing lab reports and assignments",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Open laptop. Open assignment. Type. Read. Edit. Save. Open browser. Research. Close browser. Continue typing. Save. Close laptop. Stand up. Stretch."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Change channel. Watch show. Eat snack. Drink water. Turn off TV. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 4",
+      "activity": "Winding down, checking phone and setting out clothes for tomorrow",
+      "desc": "Walk to bedroom. Pick up phone. Check messages. Reply. Scroll. Put phone down. Open wardrobe. Take out clothes. Lay out on chair. Take off day clothes. Put on pajamas. Fold day clothes. Place on chair. Check alarm. Set alarm. Plug phone in charger. Turn off light. Lie down."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 4",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Turn over. Pull blanket. Remain asleep. Shift position. Adjust pillow. Continue sleeping. Stretch. Turn to side. Remain asleep."
+    }
+  ]
+}

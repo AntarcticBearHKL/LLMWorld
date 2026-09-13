@@ -85,7 +85,9 @@
   peak-window load by **−99.7%** but the agent switched to the **oven (+0.93 kWh) and microwave
   (+0.70 kWh)**, leaving the total peak unchanged (−0.2%). Non-substitutable cooling (AC) does shave the
   peak; substitutable cooking does not. The dose law is therefore bounded by appliance substitutability.
-  (Replicated on a second household, R149: cooker −1.64 → oven +1.02 / microwave +0.76, total peak +0.23.)
+   (Replicated on a second household, R149: cooker −1.64 → oven +1.02 / microwave +0.76, total peak +0.23.)
+   **Not universal (R211)**: on world_172148 h001 (all 5 members) the cooker-tax left the cooker
+   **byte-identical** (total peak −2.4% n.s.) — the substitution path is event/household-specific.
   **Population-level composition (R151)**: scanning every house, the evening peak is **cooking-dominated
   in most of them** (InductionCooker 27–54% of the window), so those peaks are substitution-bound;
   only AC-dominated houses (e.g. world_143345 house_0003, AC 28%) expose a shaveable peak. This unifies
