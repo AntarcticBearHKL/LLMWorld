@@ -51,6 +51,21 @@ def _peer_nudge_text(world_id, date, prev_date, env):
     return text
 
 
+def _bill_feedback_text(world_id, env, prev_date, house, tariff_cfg, policy_tag=None):
+    try:
+        from analyze import dataset
+        from engine import tariff as engine_tariff
+        recs = list(dataset.iter_house_days(world_id, env=env, date=prev_date,
+                                            policy=policy_tag or "baseline", houses=[house]))
+        if not recs:
+            return ""
+        total, peak = engine_tariff.cost_from_profile(recs[0]["load_profile_watts"], tariff_cfg)
+        return engine_tariff.render_bill_feedback(total, peak)
+    except Exception as exc:
+        print(f"[Bill] skipped for {prev_date}: {exc}")
+        return ""
+
+
 def auto_world_id():
     while True:
         cand = f"world_{random.randint(100000, 999999)}"
@@ -99,7 +114,8 @@ def get_member_names(world_id, house="house_0001"):
 
 def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4_only=False,
                  houses=None, days=1, events=None, notices=None, policy_schedule=None,
-                 peer_nudge=False, natural_ev=False, cost_tariff=None, price_sensitivity=None):
+                 peer_nudge=False, natural_ev=False, cost_tariff=None, price_sensitivity=None,
+                 bill_feedback=False):
     print(f"\n########## SIMULATE world={world_id} env={env} workers={workers} "
           f"policy={policy_spec or 'none'} s4_only={s4_only} days={days} houses={houses or 'all'} ##########")
     policy_text, policy_tag = engine_policy.parse_policy_arg(policy_spec)
@@ -212,13 +228,19 @@ def run_simulate(world_id, date, env, workers, member=None, policy_spec=None, s4
             else:
                 print("[s4_only] skipping s1/s2/s3; reusing existing timelines")
 
+            bill_text = ""
+            if bill_feedback and cost_tariff and prev_date:
+                bill_text = _bill_feedback_text(world_id, env, prev_date, house, cost_tariff,
+                                                policy_tag=day_policy_tag)
+                if bill_text:
+                    print(f"[Bill] {d}: {bill_text}")
             with ThreadPoolExecutor(max_workers=workers) as ex:
                 results = list(ex.map(
                     lambda m: s4_appliance_decision.run_step(
                         world_id, m, d, env, policy_text=day_policy_text, policy_tag=day_policy_tag,
                         house=house, world_news=s4_news, weather_override=weather_effect,
                         natural_ev=natural_ev, cost_tariff=cost_tariff,
-                        price_sensitivity=price_sensitivity),
+                        price_sensitivity=price_sensitivity, bill_feedback=bill_text),
                     targets))
             if any(not r[0] for r in results):
                 print(f"[WARN] s4 failed for some members (house={house} date={d})")
@@ -262,6 +284,7 @@ def main():
     parser.add_argument("--natural-ev", action="store_true", help="simulate: strip the overnight-EV-charging directive for a natural EV baseline")
     parser.add_argument("--cost-context", action="store_true", help="simulate: inject concrete per-appliance peak/off-peak cost figures for the active price policy")
     parser.add_argument("--price-sensitivity", choices=["low", "high"], default=None, help="simulate: add a cost-consciousness preference (with --cost-context)")
+    parser.add_argument("--bill-feedback", action="store_true", help="simulate: inject yesterday's peak-window bill (multi-day; with --cost-context)")
     args = parser.parse_args()
 
     applied = apply_sampling_overrides(args.temperature, False if args.no_thinking else None,
@@ -285,7 +308,7 @@ def main():
     return run_simulate(world_id, args.date, args.env, args.workers, args.member,
                         args.policy, args.s4_only, args.house, args.days, events, notices,
                         policy_schedule, args.peer_nudge, args.natural_ev, cost_tariff,
-                        args.price_sensitivity)
+                        args.price_sensitivity, args.bill_feedback)
 
 
 if __name__ == "__main__":

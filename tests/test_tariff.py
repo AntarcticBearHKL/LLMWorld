@@ -75,5 +75,27 @@ class RenderCostContextTests(unittest.TestCase):
         self.assertIn("move it to an off-peak segment", text)
 
 
+class CostFromProfileTests(unittest.TestCase):
+    TARIFF = {"peak_window": ("16:00", "21:00"), "valley_window": ("22:00", "07:00"),
+              "peak_rate": 0.60, "valley_rate": 0.18, "shoulder_rate": 0.35}
+
+    def test_rate_for_minute(self):
+        self.assertEqual(tariff.rate_for_minute(16 * 60, self.TARIFF), 0.60)
+        self.assertEqual(tariff.rate_for_minute(23 * 60, self.TARIFF), 0.18)
+        self.assertEqual(tariff.rate_for_minute(12 * 60, self.TARIFF), 0.35)
+
+    def test_cost_from_profile(self):
+        profile = [0.0] * 1440
+        profile[18 * 60] = 60000.0
+        total, peak = tariff.cost_from_profile(profile, self.TARIFF)
+        self.assertAlmostEqual(total, 0.60, places=2)
+        self.assertAlmostEqual(peak, 0.60, places=2)
+
+    def test_render_bill_feedback(self):
+        self.assertEqual(tariff.render_bill_feedback(None, None), "")
+        self.assertIn("AUD", tariff.render_bill_feedback(5.0, 2.0))
+        self.assertIn("5.00", tariff.render_bill_feedback(5.0, 2.0))
+
+
 if __name__ == "__main__":
     unittest.main()

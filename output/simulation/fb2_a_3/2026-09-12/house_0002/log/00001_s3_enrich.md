@@ -1,0 +1,386 @@
+# s3_enrich  (attempt 1)
+
+## 对话信息
+
+- time: 2026-09-13 11:17:31
+- seq: 1
+- prefix: Member 1_
+- stage: s3_enrich
+- attempt: 1
+- ok: True
+
+## 输入
+
+```
+You are a behavior analysis expert. Generate a detailed **behavior checklist** for Member 1's day.
+
+Member information:
+- Name: Member 1
+- Age: 29
+- Occupation: Health Care Professional
+- Personality: 
+
+This member's timeline:
+[
+  {
+    "time": "00:00-07:30",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  },
+  {
+    "time": "07:30-08:00",
+    "location": "Bathroom",
+    "activity": "Washing up and brushing teeth"
+  },
+  {
+    "time": "08:00-08:45",
+    "location": "Kitchen",
+    "activity": "Preparing and eating breakfast"
+  },
+  {
+    "time": "08:45-09:30",
+    "location": "Bathroom",
+    "activity": "Doing laundry with the washing machine and drying clothes"
+  },
+  {
+    "time": "09:30-10:15",
+    "location": "Living Room",
+    "activity": "Vacuuming and tidying the living room"
+  },
+  {
+    "time": "10:15-11:30",
+    "location": "Out",
+    "activity": "Grocery shopping at the supermarket"
+  },
+  {
+    "time": "11:30-12:00",
+    "location": "Kitchen",
+    "activity": "Putting away groceries and organising the refrigerator"
+  },
+  {
+    "time": "12:00-13:00",
+    "location": "Kitchen",
+    "activity": "Cooking and eating lunch"
+  },
+  {
+    "time": "13:00-14:00",
+    "location": "Living Room",
+    "activity": "Watching TV and relaxing"
+  },
+  {
+    "time": "14:00-15:30",
+    "location": "Out",
+    "activity": "Jogging and doing outdoor exercise in the park"
+  },
+  {
+    "time": "15:30-16:00",
+    "location": "Bathroom",
+    "activity": "Showering after exercise"
+  },
+  {
+    "time": "16:00-17:00",
+    "location": "Kitchen",
+    "activity": "Meal prepping and cooking for the coming week"
+  },
+  {
+    "time": "17:00-18:00",
+    "location": "Bedroom 1",
+    "activity": "Using the computer for continuing education study"
+  },
+  {
+    "time": "18:00-19:00",
+    "location": "Living Room",
+    "activity": "Watching TV and relaxing"
+  },
+  {
+    "time": "19:00-20:00",
+    "location": "Kitchen",
+    "activity": "Eating dinner"
+  },
+  {
+    "time": "20:00-21:30",
+    "location": "Living Room",
+    "activity": "Playing game console and watching TV"
+  },
+  {
+    "time": "21:30-22:15",
+    "location": "Bedroom 1",
+    "activity": "Using phone and winding down"
+  },
+  {
+    "time": "22:15-22:30",
+    "location": "Bathroom",
+    "activity": "Washing up before bed"
+  },
+  {
+    "time": "22:30-23:00",
+    "location": "Bedroom 1",
+    "activity": "Reading before sleep"
+  },
+  {
+    "time": "23:00-24:00",
+    "location": "Bedroom 1",
+    "activity": "Sleeping"
+  }
+]
+
+Other household members' timelines:
+{}
+
+Household structure:
+{
+  "Bedroom 1": {
+    "appliances": [
+      "TV",
+      "AirConditioner",
+      "DeskLamp",
+      "Light",
+      "Fan"
+    ]
+  },
+  "Kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "InductionCooker",
+      "RangeHood",
+      "Kettle",
+      "Toaster",
+      "Oven",
+      "Dishwasher",
+      "Light"
+    ]
+  },
+  "Living Room": {
+    "appliances": [
+      "TV",
+      "Computer",
+      "Monitor",
+      "Router",
+      "GameConsole",
+      "SpaceHeater",
+      "Light",
+      "VacuumCleaner"
+    ]
+  },
+  "Bathroom": {
+    "appliances": [
+      "WaterHeater",
+      "WashingMachine",
+      "ClothesDryer",
+      "Light",
+      "Dehumidifier"
+    ]
+  },
+  "Member 1 personal appliances": {
+    "appliances": [
+      "Phone",
+      "Computer"
+    ]
+  }
+}
+
+Environment: Spring, Sunny, 20 degrees
+
+## Important requirements
+
+**This is NOT novel-writing, this is behavior recording!**
+
+You are enriching an existing canonical timeline. Copy every input time, location, and activity value exactly and in the same order. Do not merge, split, add, remove, rename, or extend any segment. Only add the desc field.
+
+The description (desc field) must be a **detailed list of concrete actions**, recording as many observable behaviors as possible.
+
+### Requirements:
+1. **Record all concrete actions**:
+   - Body actions: walk, sit, stand, lie down, bend, reach, turn around, etc.
+   - Hand actions: pick up, put down, press, twist, push, pull, wipe, wash, etc.
+   - Operation actions: open, close, start, stop, adjust, etc.
+   - Interaction with objects: every object and device touched
+
+2. **Record in chronological order**:
+   - What is done first, what comes next
+   - The sequence of actions must be reasonable
+
+3. **Include dialogue** (if any):
+   - Briefly record what was said
+   - Communication with other members
+
+### Strictly forbidden:
+❌ Inner mental activity ("thinking..." "considering..." "feeling...")
+❌ Emotional description ("warm" "pleasant" "comfortable")
+❌ Environment description ("sunlight" "fragrance" "atmosphere")
+❌ Literary rhetoric and adjectives
+
+### Description length:
+- 1-5 minutes: 3-5 actions
+- 5-30 minutes: 5-12 actions
+- 30+ minutes: 12-20 actions
+
+### Description format example:
+
+**Good example**:
+"Wake up. Walk to the bathroom. Turn on the light. Turn on the tap. Pick up the toothbrush. Squeeze toothpaste onto it. Brush teeth. Rinse mouth. Wipe face with a towel. Turn off the tap. Turn off the light. Walk out of the bathroom."
+
+**Bad example**:
+"She woke up feeling a bit sleepy, slowly walked to the bathroom. The warm light made her feel comfortable..."
+
+## Output format
+
+Output JSON format (return ONLY the JSON, nothing else):
+- Output language: all generated VALUES (activity, desc, location) MUST be written in English, because the downstream system matches English tokens. The English text in this prompt is instruction only.
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "time segment",
+      "location": "location",
+      "activity": "activity",
+      "desc": "action 1. action 2. action 3. action 4. ... (in English)"
+    }
+  ]
+}
+
+## Core principle
+
+**Write only visible actions, never invisible thoughts!**
+**The more detailed the better, but it must be concrete behavior!**
+**The member field must exactly equal "Member 1" and names mentioned in descriptions must exactly match the supplied household members.**
+
+```
+
+## Schema
+
+```json
+(none)
+```
+
+## 返回(原始)
+
+```
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed. Pull the blanket over the body. Close eyes. Turn onto the right side. Adjust the pillow under the head. Pull the blanket up to the shoulders. Turn onto the left side. Extend the left arm under the pillow. Bend the knees. Turn onto the back. Stretch both arms above the head. Lower the arms to the sides. Turn onto the right side again. Pull the blanket over the legs. Keep eyes closed. Breathe steadily."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bathroom",
+      "activity": "Washing up and brushing teeth",
+      "desc": "Open eyes. Sit up on the bed. Swing legs off the bed. Stand up. Walk to the bathroom door. Push the door open. Step inside. Turn on the bathroom light. Turn on the cold water tap. Place both hands under the water. Rub the hands together. Turn on the warm water tap. Pick up the soap. Rub the soap between the palms. Put the soap back on the dish. Rub the face with both hands. Rinse the face with water. Turn off the tap. Pick up the towel. Wipe the face with the towel. Hang the towel back on the hook. Pick up the toothbrush. Open the toothpaste cap. Squeeze toothpaste onto the toothbrush. Close the toothpaste cap. Put the toothpaste down. Brush the upper teeth. Brush the lower teeth. Spit into the sink. Turn on the tap. Rinse the mouth with water. Rinse the toothbrush under the tap. Turn off the tap. Put the toothbrush back in the holder. Turn off the bathroom light. Walk out of the bathroom."
+    },
+    {
+      "time": "08:00-08:45",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the milk carton. Take out the eggs. Take out the butter. Close the refrigerator door. Put the items on the counter. Open the cupboard door. Take out a bowl. Take out a plate. Close the cupboard door. Place the bowl on the counter. Open the bread bag. Take out two slices of bread. Place the bread on the plate. Open the egg carton. Take out two eggs. Crack the first egg into the bowl. Crack the second egg into the bowl. Beat the eggs with a fork. Turn on the induction cooker. Place a pan on the cooker. Put the butter in the pan. Pour the eggs into the pan. Stir the eggs with a spatula. Turn off the induction cooker. Slide the eggs onto the plate. Place the plate on the table. Pour milk into a glass. Sit down on the chair. Pick up the fork. Cut the eggs with the fork. Lift the food to the mouth. Chew and swallow. Drink the milk from the glass. Pick up the plate. Carry the plate to the sink. Carry the glass to the sink. Rinse the plate under the tap. Rinse the glass under the tap. Place the plate in the dishwasher. Place the glass in the dishwasher. Wipe the counter with a cloth. Turn off the kitchen light. Walk out of the kitchen."
+    },
+    {
+      "time": "08:45-09:30",
+      "location": "Bathroom",
+      "activity": "Doing laundry with the washing machine and drying clothes",
+      "desc": "Walk into the bathroom. Turn on the bathroom light. Pick up the laundry basket. Place the basket on the floor next to the washing machine. Open the washing machine door. Pull out the clothes from the basket. Drop the clothes into the drum. Close the washing machine door. Open the detergent drawer. Pour detergent into the drawer. Pour fabric softener into the drawer. Close the detergent drawer. Press the power button on the washing machine. Press the program selection button. Press the start button. Step back. Wait for the drum to spin. Open the washing machine door after the cycle ends. Pull the wet clothes out of the drum. Place the wet clothes into the clothes dryer. Close the dryer door. Press the power button on the clothes dryer. Press the start button on the clothes dryer. Pick up the empty laundry basket. Place the basket on the shelf. Turn off the bathroom light. Walk out of the bathroom."
+    },
+    {
+      "time": "09:30-10:15",
+      "location": "Living Room",
+      "activity": "Vacuuming and tidying the living room",
+      "desc": "Walk into the living room. Turn on the living room light. Pick up the cushions from the sofa. Place the cushions on the armchair. Pick up the remote control from the sofa. Place the remote control on the coffee table. Pick up the magazines from the coffee table. Stack the magazines. Place the magazines on the shelf. Pick up the empty cup from the table. Carry the cup to the kitchen counter. Walk back to the living room. Open the storage cabinet door. Take out the vacuum cleaner. Close the cabinet door. Unwind the power cord. Plug the cord into the wall socket. Press the power button on the vacuum cleaner. Push the vacuum cleaner across the floor. Move the vacuum cleaner under the sofa. Pull the vacuum cleaner back. Move the vacuum cleaner along the wall. Push the vacuum cleaner around the coffee table. Move the vacuum cleaner to the corner. Pull the vacuum cleaner back to the center. Press the power button to stop the vacuum cleaner. Unplug the cord from the wall socket. Wind the cord around the hook. Open the cabinet door. Place the vacuum cleaner inside. Close the cabinet door. Fluff the cushions. Place the cushions back on the sofa. Turn off the living room light. Walk out of the living room."
+    },
+    {
+      "time": "10:15-11:30",
+      "location": "Out",
+      "activity": "Grocery shopping at the supermarket",
+      "desc": "Walk to the entrance door. Pick up the shopping bag. Open the entrance door. Step outside. Close the door. Walk down the path to the street. Walk along the sidewalk to the supermarket. Push the supermarket entrance door open. Step inside. Pick up a shopping cart. Push the cart along the aisle. Stop at the vegetable shelf. Pick up a bag of tomatoes. Place the tomatoes in the cart. Pick up a bag of lettuce. Place the lettuce in the cart. Push the cart to the fruit shelf. Pick up a bunch of bananas. Place the bananas in the cart. Pick up a bag of apples. Place the apples in the cart. Push the cart to the dairy shelf. Open the refrigerator door. Take out a carton of milk. Close the refrigerator door. Place the milk in the cart. Take out a pack of cheese. Place the cheese in the cart. Push the cart to the meat shelf. Pick up a pack of chicken. Place the chicken in the cart. Push the cart to the checkout counter. Place the items on the conveyor belt. Wait at the counter. Pick up the items. Place the items into the shopping bag. Open the wallet. Take out the bank card. Hand the card to the cashier. Take the card back. Put the card in the wallet. Close the wallet. Pick up the shopping bag. Walk to the exit. Push the exit door open. Step outside. Walk back along the sidewalk. Walk up the path to the house. Open the entrance door. Step inside. Close the door. Put the shopping bag on the kitchen counter."
+    },
+    {
+      "time": "11:30-12:00",
+      "location": "Kitchen",
+      "activity": "Putting away groceries and organising the refrigerator",
+      "desc": "Stand at the kitchen counter. Open the shopping bag. Take out the milk carton. Open the refrigerator door. Place the milk on the top shelf. Take out the cheese. Place the cheese on the middle shelf. Take out the chicken. Place the chicken on the bottom shelf. Take out the tomatoes. Place the tomatoes in the vegetable drawer. Take out the lettuce. Place the lettuce in the vegetable drawer. Take out the bananas. Place the bananas on the counter. Take out the apples. Place the apples in the fruit drawer. Close the refrigerator door. Pick up the bananas. Open the cupboard door. Place the bananas on the shelf. Close the cupboard door. Fold the empty shopping bag. Place the bag in the drawer. Wipe the counter with a cloth. Walk out of the kitchen."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch",
+      "desc": "Walk into the kitchen. Open the refrigerator door. Take out the chicken. Take out the lettuce. Take out the tomatoes. Close the refrigerator door. Place the items on the counter. Open the cupboard door. Take out a cutting board. Close the cupboard door. Place the cutting board on the counter. Pick up a knife from the block. Cut the chicken into pieces. Place the chicken pieces on a plate. Open the drawer. Take out a pot. Place the pot on the induction cooker. Turn on the induction cooker. Pour oil into the pot. Add the chicken pieces to the pot. Stir the chicken with a spatula. Add salt to the pot. Add water to the pot. Put the lid on the pot. Rinse the lettuce under the tap. Tear the lettuce into the bowl. Cut the tomatoes on the cutting board. Add the tomatoes to the bowl. Pour dressing on the salad. Turn off the induction cooker. Take out a bowl. Ladle the soup into the bowl. Place the bowl on the table. Place the salad bowl on the table. Sit down on the chair. Pick up the spoon. Lift the soup to the mouth. Chew and swallow. Drink the soup. Pick up the fork. Eat the salad. Stand up. Pick up the dishes. Carry the dishes to the sink. Rinse the dishes under the tap. Place the dishes in the dishwasher. Wipe the table with a cloth. Walk out of the kitchen."
+    },
+    {
+      "time": "13:00-14:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing",
+      "desc": "Walk into the living room. Pick up the remote control from the coffee table. Point the remote control at the TV. Press the power button. Press the channel button. Place the remote control on the armrest. Sit down on the sofa. Lean back against the cushions. Cross the left leg over the right leg. Place both hands on the lap. Watch the screen. Pick up the remote control. Press the volume button. Place the remote control back on the armrest. Shift the body on the sofa. Stretch both arms forward. Stand up. Walk to the kitchen. Open the refrigerator door. Take out a bottle of water. Close the refrigerator door. Walk back to the living room. Sit down on the sofa. Open the bottle cap. Drink water from the bottle. Close the bottle cap. Place the bottle on the coffee table. Lean back on the sofa. Pick up the remote control. Press the power button to turn off the TV. Stand up. Walk out of the living room."
+    },
+    {
+      "time": "14:00-15:30",
+      "location": "Out",
+      "activity": "Jogging and doing outdoor exercise in the park",
+      "desc": "Walk to the bedroom. Open the wardrobe door. Take out the sportswear. Take out the running shoes. Close the wardrobe door. Take off the house clothes. Put on the sport shirt. Put on the sport shorts. Put on the socks. Put on the running shoes. Tie the shoelaces. Stand up. Walk to the entrance door. Pick up the keys. Pick up the water bottle. Open the entrance door. Step outside. Close the door. Walk down the path to the street. Walk to the park entrance. Step onto the jogging path. Start jogging forward. Swing both arms. Breathe through the nose. Jog past the first bench. Jog around the pond. Jog up the small slope. Jog down the slope. Slow down to a walk. Stop near the bench. Place both hands on the hips. Breathe deeply. Stretch the right arm across the chest. Stretch the left arm across the chest. Bend forward to touch the toes. Stand up straight. Stretch the right leg on the bench. Stretch the left leg on the bench. Open the water bottle. Drink water. Close the bottle. Walk to the park exit. Walk back along the sidewalk. Walk up the path to the house. Open the entrance door. Step inside. Close the door."
+    },
+    {
+      "time": "15:30-16:00",
+      "location": "Bathroom",
+      "activity": "Showering after exercise",
+      "desc": "Walk into the bathroom. Turn on the bathroom light. Take off the sport shirt. Take off the sport shorts. Take off the socks. Take off the running shoes. Place the shoes by the door. Open the shower door. Step into the shower. Turn on the water tap. Place the head under the water. Pick up the shampoo bottle. Open the cap. Pour shampoo into the palm. Close the cap. Rub the shampoo into the hair. Rinse the hair under the water. Pick up the soap. Rub the soap over the body. Put the soap back on the dish. Rinse the body under the water. Turn off the tap. Open the shower door. Step out. Pick up the towel. Dry the hair with the towel. Dry the body with the towel. Hang the towel on the hook. Pick up the clothes. Carry the clothes to the laundry basket. Drop the clothes in the basket. Turn off the bathroom light. Walk out of the bathroom."
+    },
+    {
+      "time": "16:00-17:00",
+      "location": "Kitchen",
+      "activity": "Meal prepping and cooking for the coming week",
+      "desc": "Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the vegetables. Take out the chicken. Close the refrigerator door. Place the items on the counter. Open the cupboard door. Take out three containers. Close the cupboard door. Place the containers on the counter. Open the drawer. Take out a knife. Place the cutting board on the counter. Cut the carrots on the cutting board. Cut the broccoli on the cutting board. Cut the chicken into cubes. Open the drawer. Take out a pan. Place the pan on the induction cooker. Turn on the induction cooker. Pour oil into the pan. Add the chicken to the pan. Stir the chicken with a spatula. Add the carrots to the pan. Add the broccoli to the pan. Add salt and pepper. Stir the mixture. Turn off the induction cooker. Spoon the food into the first container. Spoon the food into the second container. Spoon the food into the third container. Close the lids on the containers. Place the containers in the refrigerator. Close the refrigerator door. Rinse the cutting board under the tap. Rinse the knife under the tap. Place the cutting board in the rack. Place the knife in the block. Wipe the counter with a cloth. Turn off the kitchen light. Walk out of the kitchen."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Bedroom 1",
+      "activity": "Using the computer for continuing education study",
+      "desc": "Walk into the bedroom. Turn on the bedroom light. Turn on the desk lamp. Pull the chair out from the desk. Sit down on the chair. Open the laptop lid. Press the power button. Wait for the screen to load. Place both hands on the keyboard. Type the password. Press the Enter key. Move the right hand to the mouse. Click the browser icon. Type the course website address. Press the Enter key. Scroll the page with the mouse wheel. Click the first lesson link. Watch the video on the screen. Pick up the pen. Write notes in the notebook. Put the pen down. Pause the video. Click the next lesson link. Type notes on the keyboard. Click the save button. Open a new browser tab. Type a search term. Press the Enter key. Read the article on the screen. Click the bookmark button. Close the browser tab. Click the shutdown button. Close the laptop lid. Stand up. Push the chair under the desk. Turn off the desk lamp. Turn off the bedroom light. Walk out of the bedroom."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing",
+      "desc": "Walk into the living room. Turn on the living room light. Pick up the remote control from the coffee table. Point the remote control at the TV. Press the power button. Press the channel button. Place the remote control on the armrest. Sit down on the sofa. Lean back against the cushions. Place both feet on the floor. Watch the screen. Pick up the water bottle from the coffee table. Open the bottle cap. Drink water. Close the bottle cap. Place the bottle back on the table. Pick up the remote control. Press the volume button. Place the remote control on the armrest. Shift the body on the sofa. Cross the right leg over the left leg. Watch the screen. Pick up the remote control. Press the power button to turn off the TV. Stand up. Walk out of the living room."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Kitchen",
+      "activity": "Eating dinner",
+      "desc": "Walk into the kitchen. Turn on the kitchen light. Open the refrigerator door. Take out the food container. Close the refrigerator door. Place the container on the counter. Open the container lid. Open the cupboard door. Take out a plate. Close the cupboard door. Place the plate on the counter. Spoon the food onto the plate. Open the microwave door. Place the plate inside. Close the microwave door. Press the start button. Wait for the microwave to beep. Open the microwave door. Take out the plate. Close the microwave door. Place the plate on the table. Pull the chair out. Sit down on the chair. Pick up the fork. Lift the food to the mouth. Chew and swallow. Drink water from the glass. Continue eating with the fork. Place the fork on the plate. Stand up. Pick up the plate. Carry the plate to the sink. Rinse the plate under the tap. Place the plate in the dishwasher. Close the food container. Place the container in the refrigerator. Close the refrigerator door. Wipe the table with a cloth. Turn off the kitchen light. Walk out of the kitchen."
+    },
+    {
+      "time": "20:00-21:30",
+      "location": "Living Room",
+      "activity": "Playing game console and watching TV",
+      "desc": "Walk into the living room. Turn on the living room light. Pick up the remote control. Point it at the TV. Press the power button. Pick up the game controller from the shelf. Press the power button on the console. Press the controller button to connect. Sit down on the sofa. Lean back against the cushions. Place both hands on the controller. Press the start button. Watch the screen. Press the directional buttons with the left thumb. Press the action buttons with the right thumb. Tilt the controller. Press the pause button. Place the controller on the lap. Pick up the water bottle. Open the cap. Drink water. Close the cap. Place the bottle on the table. Pick up the controller again. Press the resume button. Press the action buttons. Shift the body forward on the sofa. Press the directional buttons. Press the pause button. Stand up. Place the controller on the shelf. Press the power button on the console. Pick up the remote control. Press the channel button. Sit down on the sofa. Watch the TV program. Pick up the remote control. Adjust the volume. Place the remote control on the armrest. Lean back on the sofa. Pick up the remote control. Press the power button to turn off the TV. Stand up. Turn off the living room light. Walk out of the living room."
+    },
+    {
+      "time": "21:30-22:15",
+      "location": "Bedroom 1",
+      "activity": "Using phone and winding down",
+      "desc": "Walk into the bedroom. Turn on the bedroom light. Pick up the phone from the desk. Sit down on the edge of the bed. Press the phone power button. Unlock the screen with the thumb. Swipe the screen. Open the messaging app. Read the messages. Type a reply with both thumbs. Press the send button. Open the news app. Scroll the screen with the thumb. Press an article link. Read the article. Press the back button. Lock the phone screen. Place the phone on the nightstand. Stand up. Pull back the blanket. Turn off the bedroom light. Sit on the bed. Lie down on the bed. Pull the blanket over the body. Close eyes briefly. Open eyes. Pick up the phone from the nightstand. Press the power button. Unlock the screen. Scroll the screen. Lock the phone screen. Place the phone on the nightstand."
+    },
+    {
+      "time": "22:15-22:30",
+      "location": "Bathroom",
+      "activity": "Washing up before bed",
+      "desc": "Get out of bed. Walk to the bathroom. Turn on the bathroom light. Turn on the tap. Place both hands under the water. Rub the hands together. Pick up the soap. Rub the soap between the palms. Put the soap on the dish. Rinse the hands under the water. Turn off the tap. Pick up the towel. Wipe the hands with the towel. Hang the towel on the hook. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush the teeth. Spit into the sink. Turn on the tap. Rinse the mouth. Rinse the toothbrush. Turn off the tap. Place the toothbrush in the holder. Turn off the bathroom light. Walk out of the bathroom."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Reading before sleep",
+      "desc": "Walk into the bedroom. Turn on the bedroom light. Turn on the desk lamp. Pick up the book from the nightstand. Sit down on the bed. Open the book to the marked page. Hold the book with both hands. Read the page. Turn the page with the right hand. Continue reading. Turn the page again. Mark the page with the bookmark. Close the book. Place the book on the nightstand. Turn off the desk lamp. Turn off the bedroom light. Pull back the blanket. Lie down on the bed. Pull the blanket over the body."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed. Place the head on the pillow. Pull the blanket up to the shoulders. Close eyes. Turn onto the right side. Bend the left arm under the pillow. Pull the blanket over the legs. Turn onto the back. Place both arms along the sides. Turn onto the left side. Pull the blanket up to the chin. Adjust the pillow with the right hand. Keep eyes closed. Breathe steadily. Remain still."
+    }
+  ]
+}
+```
+

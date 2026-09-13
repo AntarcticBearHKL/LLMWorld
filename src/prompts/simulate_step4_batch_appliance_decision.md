@@ -21,6 +21,8 @@ Environment information:
 
 {cost_context}
 
+{bill_feedback}
+
 {world_news}
 
 ## Appliance type explanation
