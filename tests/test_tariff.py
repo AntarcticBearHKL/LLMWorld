@@ -79,6 +79,13 @@ class RenderCostContextTests(unittest.TestCase):
         self.assertIn("cost-conscious", tariff.sensitivity_note("high"))
         self.assertIn("not very price-sensitive", tariff.sensitivity_note("low"))
 
+    def test_demand_cost_context(self):
+        text = tariff.render_cost_context(self.DETAILS, {"mode": "demand", "rate": 12.0})
+        self.assertIn("demand charge", text)
+        self.assertIn("living_room_airconditioner", text)
+        self.assertIn("24.00 AUD", text)
+        self.assertNotIn("kitchen_kettle", text)
+
     def test_cost_numbers(self):
         text = tariff.render_cost_context(self.DETAILS, self.TARIFF)
         self.assertIn("0.36 AUD", text)   # 0.6 kWh x 0.60

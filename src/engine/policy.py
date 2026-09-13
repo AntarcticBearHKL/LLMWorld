@@ -323,6 +323,10 @@ def parse_tariff(spec):
             "valley_rate": TOU_DEFAULT["valley_rate"],
             "shoulder_rate": TOU_DEFAULT["shoulder_rate"],
         }
+    if head == "peak_demand":
+        rest = spec.split(":", 1)[1] if ":" in spec else ""
+        rate = float(rest) if rest else 12.0
+        return {"mode": "demand", "rate": rate}
     if head in ("cpr", "cpr_soft"):
         rest = spec.split(":", 1)[1] if ":" in spec else ""
         rate = float(rest) if rest else CPR_DEFAULT

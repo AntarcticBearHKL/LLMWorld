@@ -85,10 +85,38 @@ def _unit_energy_kwh(appliance):
     return None, None
 
 
+def _render_demand_context(home_details, rate):
+    rows = []
+    for section in (home_details or {}).values():
+        for appliance in section.get("appliances", []):
+            if not appliance.get("flexible") or appliance.get("type") == "always_on":
+                continue
+            power = appliance.get("power_watts")
+            if not power:
+                continue
+            kw = float(power) / 1000.0
+            rows.append(
+                f"- {appliance.get('unique_id')}: {kw:.1f} kW → up to {kw * rate:.2f} AUD added to the "
+                "demand charge if it sets the peak hour"
+            )
+    if not rows:
+        return ""
+    header = (
+        f"Your household is on a demand charge: the highest 60 minutes of the day is billed at "
+        f"{rate:.0f} AUD/kW. Each flexible appliance below raises that charge if it runs in the peak hour:"
+    )
+    trailer = (
+        "To lower the demand charge, avoid running high-power appliances at the same time; stagger them."
+    )
+    return "\n".join([header] + rows + [trailer])
+
+
 def render_cost_context(home_details, tariff):
     """Render the flexible-appliance cost table ('' when nothing applies)."""
     if not tariff:
         return ""
+    if tariff.get("mode") == "demand":
+        return _render_demand_context(home_details, float(tariff.get("rate") or 0.0))
     peak_rate = float(tariff.get("peak_rate") or 0.0)
     valley_rate = float(tariff.get("valley_rate") or 0.0)
     rows = []

@@ -160,6 +160,10 @@
   +27.9% vs baseline — statistically indistinguishable from the critical-peak **tax** (CPP, −13.2%/+25.6%).
   With the window and concrete amount given, gain-vs-loss framing does not matter (contrast the framing
   instability without concrete amounts, R041).
+- **Demand charge is NOT revived by concrete cost (R219)**: even with a per-appliance demand-charge
+  table (kW × rate), `peak_demand` stays null (peak −2.6% n.s.), unlike TOU/CPP. Time-window prices are
+  actionable ("move it out of the window"); a **global daily-max charge is not** (agents do not stagger
+  appliances to lower the day's maximum).
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
