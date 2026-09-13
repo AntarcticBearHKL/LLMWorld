@@ -1,0 +1,101 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-07:45",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies down on bed. Closes eyes. Falls asleep. Remains in bed. Shifts position. Pulls blanket up. Continues sleeping. Breathes regularly. Turns to side. Adjusts pillow. Remains asleep."
+    },
+    {
+      "time": "07:45-08:15",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face and brushing teeth",
+      "desc": "Wakes up. Sits up on bed. Swings legs over side. Stands up. Walks to bathroom. Turns on bathroom light. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Puts down toothbrush. Splashes water on face. Picks up towel. Wipes face. Turns off tap. Turns off light. Walks out of bathroom."
+    },
+    {
+      "time": "08:15-09:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out eggs. Takes out milk. Takes out bread. Closes refrigerator. Takes out frying pan. Places pan on stove. Turns on stove. Cracks eggs into pan. Cooks eggs. Toasts bread. Pours milk into glass. Places food on plate. Sits at table. Eats breakfast. Drinks milk. Stands up. Clears table. Washes dishes. Puts dishes away."
+    },
+    {
+      "time": "09:00-10:00",
+      "location": "Living Room",
+      "activity": "Doing morning chores and vacuuming the floor",
+      "desc": "Walks to living room. Picks up vacuum cleaner. Plugs in vacuum. Turns on vacuum. Moves vacuum across floor. Vacuums under sofa. Vacuums corners. Turns off vacuum. Unplugs vacuum. Wraps cord. Puts vacuum away. Picks up dust cloth. Wipes tables. Dusts shelves. Arranges cushions. Takes out trash. Walks to kitchen. Throws trash in bin."
+    },
+    {
+      "time": "10:00-11:00",
+      "location": "Bathroom",
+      "activity": "Doing laundry with the washing machine and clothes dryer",
+      "desc": "Walks to bathroom. Opens washing machine. Loads dirty clothes. Adds detergent. Closes washing machine. Presses start button. Waits. Washing machine stops. Opens washing machine. Takes out wet clothes. Loads into dryer. Closes dryer. Presses start button. Waits. Dryer stops. Opens dryer. Takes out dry clothes. Folds clothes. Puts clothes away."
+    },
+    {
+      "time": "11:00-12:00",
+      "location": "Living Room",
+      "activity": "Watching TV and relaxing indoors away from the heat",
+      "desc": "Walks to living room. Picks up remote control. Turns on TV. Sits on sofa. Changes channels. Settles on program. Watches TV. Adjusts volume. Pauses to drink water. Continues watching. Changes channel again. Turns off TV. Puts down remote."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating lunch",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out vegetables. Takes out meat. Closes refrigerator. Takes out cutting board. Cuts vegetables. Turns on stove. Places pan on stove. Adds oil. Adds vegetables. Stirs. Adds meat. Cooks. Adds seasoning. Turns off stove. Places food on plate. Sits at table. Eats lunch. Drinks water. Stands up. Clears table. Washes dishes. Puts dishes away."
+    },
+    {
+      "time": "13:00-15:00",
+      "location": "Bedroom 1",
+      "activity": "Resting and napping in air-conditioned room during the hottest hours",
+      "desc": "Walks to bedroom. Turns on air conditioner. Adjusts temperature. Lies down on bed. Closes eyes. Takes nap. Turns to side. Pulls blanket. Continues napping. Wakes up briefly. Turns over. Falls back asleep. Stretches. Sits up. Turns off air conditioner. Stands up."
+    },
+    {
+      "time": "15:00-16:30",
+      "location": "Bedroom 1",
+      "activity": "Reading and browsing on personal computer",
+      "desc": "Sits at desk. Turns on desk lamp. Opens laptop. Logs in. Opens web browser. Reads news. Checks email. Browses social media. Watches videos. Takes notes. Adjusts chair. Stretches. Continues browsing. Closes laptop. Turns off desk lamp."
+    },
+    {
+      "time": "16:30-17:30",
+      "location": "Bedroom 1",
+      "activity": "Doing light indoor stretching exercises",
+      "desc": "Stands in middle of room. Raises arms overhead. Stretches. Bends forward. Touches toes. Holds stretch. Stands up. Rotates torso. Stretches sides. Does lunges. Does squats. Does push-ups. Does jumping jacks. Cools down. Drinks water. Wipes sweat with towel."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower",
+      "desc": "Walks to bathroom. Turns on bathroom light. Turns on shower. Adjusts water temperature. Steps into shower. Wets body. Applies soap. Washes body. Rinses off. Washes hair with shampoo. Rinses hair. Turns off shower. Steps out. Picks up towel. Dries body. Dries hair. Wraps towel around body. Turns off light. Walks out."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out ingredients. Closes refrigerator. Takes out cutting board. Cuts vegetables. Turns on stove. Places pan on stove. Adds oil. Adds vegetables. Stirs. Adds protein. Cooks. Adds seasoning. Turns off stove. Places food on plate. Sits at table. Eats dinner. Drinks water. Stands up. Clears table. Washes dishes. Puts dishes away."
+    },
+    {
+      "time": "19:00-21:00",
+      "location": "Living Room",
+      "activity": "Watching TV",
+      "desc": "Walks to living room. Picks up remote. Turns on TV. Sits on sofa. Watches program. Changes channels. Adjusts volume. Pauses to get snack. Walks to kitchen. Opens refrigerator. Takes out snack. Returns to living room. Sits down. Eats snack. Continues watching. Turns off TV. Puts down remote."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Living Room",
+      "activity": "Using computer for personal leisure",
+      "desc": "Sits at computer desk. Turns on computer. Logs in. Opens web browser. Plays games. Watches videos. Chats with friends. Reads articles. Checks email. Adjusts monitor brightness. Stretches. Continues browsing. Shuts down computer. Turns off monitor."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down and preparing for bed",
+      "desc": "Walks to bedroom. Turns on bedside lamp. Changes into pajamas. Brushes teeth. Washes face. Sets alarm on phone. Turns off lamp. Pulls back covers. Lies down on bed. Adjusts pillow. Closes eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Eyes closed. Falls asleep. Remains asleep. Turns to side. Pulls blanket. Continues sleeping."
+    }
+  ]
+}

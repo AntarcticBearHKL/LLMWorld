@@ -153,6 +153,9 @@
 - **Price×price stacking is non-additive (R215)**: under a heatwave, `ac_tax` cut the AC −58.4% and total
   −29.0% (p=0.002); adding a generic `rebate` **reversed** it (AC +79.8%, total +16.6%) — consistent with
   the crowding-out / non-additivity of combinations (Pellerano 2017; R139).
+- **ac_tax persists across days with no drift (R216)**: over a 2-day heatwave, `ac_tax` cut the AC
+  −71.2% / −67.5% and total −28.5% / −19.3% — **no adaptation** on day 2 (consistent with the absence of
+  cross-day memory, R210).
 - Pricing interventions: **TOU is null at adequate power.** With a drift-free same-era interleaved
   design, the peak-shaving claim collapses as n grows: n=3 gave −17.5%, n=9 gave +13.1% (total), and
   **n=15 gave peak −3.2% / total +5.4% (both n.s.)** (R111/R112/R114). The earlier apparent
