@@ -1,0 +1,80 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:15",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:15-06:45",
+      "location": "Bathroom",
+      "activity": "Washing up and getting ready"
+    },
+    {
+      "time": "06:45-07:15",
+      "location": "Kitchen",
+      "activity": "Eating breakfast"
+    },
+    {
+      "time": "07:15-07:45",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work"
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Bedroom 1",
+      "activity": "Organizing personal items and preparing to leave"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work"
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working at nonprofit office"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home"
+    },
+    {
+      "time": "18:00-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with Member 2"
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner and cleaning up with Member 2"
+    },
+    {
+      "time": "19:15-19:30",
+      "location": "Living Room",
+      "activity": "Relaxing after dinner"
+    },
+    {
+      "time": "19:30-21:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV"
+    },
+    {
+      "time": "21:00-21:30",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine"
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Bedroom 1",
+      "activity": "Using computer for personal tasks"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}

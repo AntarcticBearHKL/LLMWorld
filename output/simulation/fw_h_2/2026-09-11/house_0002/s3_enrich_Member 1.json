@@ -1,0 +1,113 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Remain still. Turn onto left side. Pull blanket up. Adjust pillow. Continue sleeping. Turn onto right side. Stretch legs. Sigh. Remain asleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bedroom 1",
+      "activity": "Waking up, making bed, and light stretching",
+      "desc": "Open eyes. Sit up. Swing legs out of bed. Stand up. Stretch arms. Pull blanket to edge of bed. Fold blanket. Place blanket on bed. Flatten sheets. Fluff pillow. Place pillow at head of bed. Stretch arms overhead. Bend forward. Stretch legs. Twist torso. Walk to bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bathroom",
+      "activity": "Morning hygiene routine: showering, brushing teeth, and washing face",
+      "desc": "Enter bathroom. Turn on light. Turn on shower. Adjust water temperature. Step into shower. Wet body. Apply soap. Scrub body. Rinse body. Turn off shower. Step out. Pick up towel. Dry body. Wrap towel around. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Wash face. Dry face. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast",
+      "desc": "Enter kitchen. Greet Member 2. Open refrigerator. Take out eggs. Take out butter. Place pan on stove. Turn on stove. Crack eggs into pan. Cook eggs. Turn off stove. Place eggs on plate. Sit at table. Eat eggs. Drink water. Talk to Member 2. Finish eating. Pick up plate. Scrape leftovers into trash. Rinse plate. Open dishwasher. Place plate in dishwasher. Close dishwasher. Wipe counter."
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for the workday",
+      "desc": "Enter bedroom. Open closet. Select shirt. Select pants. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Walk to mirror. Comb hair. Put on deodorant. Put on watch. Put phone in pocket. Check bag. Pick up bag. Walk to living room."
+    },
+    {
+      "time": "08:30-09:00",
+      "location": "Living Room",
+      "activity": "Reading and relaxing before work",
+      "desc": "Enter living room. Sit on couch. Pick up book from table. Open book. Read pages. Turn page. Continue reading. Close book. Place book on table. Pick up phone. Check notifications. Put down phone. Stand up. Walk to bedroom."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Working on program coordination tasks, including computer work and virtual meetings",
+      "desc": "Sit at desk. Turn on desk lamp. Turn on computer. Open program coordination software. Type on keyboard. Click mouse. Join virtual meeting. Speak into microphone. Listen to participants. Take notes on paper. Leave meeting. Continue typing. Check email. Reply to email. Make phone call. Organize files. Stand up. Stretch. Sit down. Continue working."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Bedroom 1",
+      "activity": "Continuing work on program coordination tasks",
+      "desc": "Sit at desk. Type on keyboard. Click mouse. Read document. Highlight text. Copy text. Paste text. Open spreadsheet. Enter data. Save file. Check email. Reply to email. Stand up. Walk to kitchen. Get glass of water. Walk back. Sit down. Resume typing."
+    },
+    {
+      "time": "13:00-13:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch",
+      "desc": "Enter kitchen. Greet Member 2. Open refrigerator. Take out sandwich ingredients. Place bread on plate. Spread mayonnaise. Add lettuce. Add tomato. Add cheese. Close bread. Sit at table. Eat sandwich. Drink water. Talk to Member 2. Finish eating. Pick up plate. Rinse plate. Open dishwasher. Place plate in dishwasher. Close dishwasher. Wipe table."
+    },
+    {
+      "time": "13:30-17:30",
+      "location": "Bedroom 1",
+      "activity": "Continuing work on program coordination tasks",
+      "desc": "Sit at desk. Turn on computer. Open project plan. Review tasks. Type notes. Click mouse. Join virtual meeting. Speak. Listen. Take notes. Leave meeting. Edit document. Save document. Check email. Reply to email. Make phone call. Write to-do list. Stand up. Stretch. Sit down. Continue typing."
+    },
+    {
+      "time": "17:30-18:00",
+      "location": "Bedroom 1",
+      "activity": "Wrapping up work and organizing notes",
+      "desc": "Save all open files. Close computer programs. Shut down computer. Turn off desk lamp. Organize papers. Stack notes. Place papers in folder. Put folder in drawer. Close drawer. Stand up. Push chair under desk. Pick up phone. Check messages. Put phone in pocket. Walk to living room."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Enter living room. Greet Member 2. Sit on couch. Pick up remote. Turn on TV. Select channel. Watch TV. Talk to Member 2. Pick up phone. Check notifications. Put down phone. Continue watching TV. Stand up. Walk to kitchen. Get snack. Walk back. Sit down. Continue watching TV."
+    },
+    {
+      "time": "19:00-19:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating dinner",
+      "desc": "Enter kitchen. Greet Member 2. Open refrigerator. Take out vegetables. Take out chicken. Place pan on stove. Turn on stove. Add oil. Chop vegetables. Add vegetables to pan. Stir. Add chicken. Cook. Turn off stove. Place food on plates. Sit at table. Eat dinner. Drink water. Talk to Member 2. Finish eating. Pick up plate. Scrape leftovers. Rinse plate. Open dishwasher. Place plate in dishwasher. Close dishwasher."
+    },
+    {
+      "time": "19:30-20:00",
+      "location": "Kitchen",
+      "activity": "Cleaning up after dinner",
+      "desc": "Pick up plates. Scrape food into trash. Rinse plates. Load plates into dishwasher. Load glasses into dishwasher. Load utensils into dishwasher. Close dishwasher. Turn on dishwasher. Wipe counter. Wipe stove. Sweep floor. Pick up broom. Sweep debris into dustpan. Empty dustpan into trash. Put away broom. Wipe table. Turn off kitchen light. Walk to living room."
+    },
+    {
+      "time": "20:00-22:00",
+      "location": "Living Room",
+      "activity": "Leisure time: watching TV, using phone, and reading",
+      "desc": "Sit on couch. Pick up remote. Turn on TV. Watch TV. Pick up phone. Open social media app. Scroll. Put down phone. Pick up book. Open book. Read. Turn page. Close book. Put down book. Pick up phone. Put down phone. Watch TV. Stand up. Stretch. Sit down. Continue watching TV."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Evening hygiene routine: brushing teeth and washing face",
+      "desc": "Enter bathroom. Turn on light. Turn on tap. Wet toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Turn off tap. Turn on tap. Wet face. Apply cleanser. Rub face. Rinse face. Turn off tap. Pick up towel. Dry face. Turn off light. Exit bathroom."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down and reading",
+      "desc": "Enter bedroom. Turn on desk lamp. Pick up book. Sit on bed. Open book. Read. Turn page. Read. Turn page. Close book. Place book on nightstand. Turn off desk lamp. Pull back blanket. Lie down. Pull blanket up. Close eyes."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Close eyes. Breathe slowly. Remain still. Turn to side. Adjust pillow. Pull blanket. Continue sleeping. Turn to other side. Stretch legs. Sigh. Remain asleep."
+    }
+  ]
+}

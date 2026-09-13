@@ -1,0 +1,237 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    },
+    {
+      "time": "06:40-07:05",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and using the toilet (finishing before Member 1's morning shower slot)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:05-07:40",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle, toasting bread and eating breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:40-08:00",
+      "location": "Bedroom 2",
+      "activity": "Getting dressed, tidying the room and checking the day's schedule on the phone",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Bedroom 2",
+      "activity": "Reading work emails, replying to gallery and grant correspondence and planning the day's arts administration tasks at the desk",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:30",
+      "location": "Bedroom 2",
+      "activity": "Working at the desk on arts administration duties and illustrating commissioned pieces on the computer and monitor",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:30-13:15",
+      "location": "Kitchen",
+      "activity": "Preparing and having lunch together with Member 1, then helping clear the dishes",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:15-13:45",
+      "location": "Living Room",
+      "activity": "Taking a short break, watching TV with Member 1 and stretching (air conditioner on)",
+      "operations": [
+        {
+          "unique_id": "living_room_airconditioner",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:45-17:00",
+      "location": "Bedroom 2",
+      "activity": "Continuing afternoon illustration work and colour studies at the desk",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:45",
+      "location": "Kitchen",
+      "activity": "Preparing and cooking dinner using the oven and induction cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_oven",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:45-18:30",
+      "location": "Kitchen",
+      "activity": "Eating dinner and clearing the dishes into the dishwasher",
+      "operations": [
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV while Member 1 cooks dinner",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:30",
+      "location": "Living Room",
+      "activity": "Watching TV with Member 1 to unwind",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:15",
+      "location": "Bathroom",
+      "activity": "Taking a shower with hot water and doing evening skincare (while Member 1 is out on the evening walk)",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-22:30",
+      "location": "Bedroom 2",
+      "activity": "Personal sketching practice and reading under the desk lamp, with the space heater on",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 2",
+      "activity": "Winding down and sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

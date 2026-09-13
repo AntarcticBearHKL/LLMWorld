@@ -1,0 +1,340 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth, and getting dressed for the day",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Boiling water with the kettle, toasting bread, and preparing breakfast",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:30-07:45",
+      "location": "Kitchen",
+      "activity": "Eating breakfast with Member 1 (joint breakfast)",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:45-08:00",
+      "location": "Kitchen",
+      "activity": "Cleaning up breakfast dishes and tidying the kitchen",
+      "operations": [
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "location": "Living Room",
+      "activity": "Sitting with a cup of tea, checking phone messages, and planning the day's work tasks",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-12:00",
+      "location": "Bedroom 2",
+      "activity": "Working at the desk as an arts administrator: answering emails, drafting grant reports, and holding remote coordination calls because the transport strike keeps everyone at home",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:45",
+      "location": "Kitchen",
+      "activity": "Heating and eating lunch with Member 1, then rinsing dishes and loading the dishwasher",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        }
+      ]
+    },
+    {
+      "time": "12:45-13:15",
+      "location": "Out",
+      "activity": "Taking a short walk around the neighbourhood for fresh air and a break from screens",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "13:15-17:00",
+      "location": "Bedroom 2",
+      "activity": "Freelance illustration work at the desk with the monitor and lamp on: sketching concepts, refining linework, and colouring client artwork",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Living Room",
+      "activity": "Stretching and resting on the sofa with the TV on after finishing work",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "17:30-18:30",
+      "location": "Kitchen",
+      "activity": "Cooking dinner on the induction cooker and preparing ingredients",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:30-19:15",
+      "location": "Kitchen",
+      "activity": "Eating dinner at the table with Member 1 and cleaning up afterwards",
+      "operations": [
+        {
+          "unique_id": "kitchen_dishwasher",
+          "action": "run"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "idle"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "19:15-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa watching a show with Member 1 and browsing illustration references on the phone",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-22:30",
+      "location": "Bedroom 2",
+      "activity": "Doing personal illustration work at the desk with the desk lamp and space heater on, refining a portfolio piece",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "living_room_tv",
+          "action": "idle"
+        },
+        {
+          "unique_id": "living_room_light",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Taking a shower and completing evening hygiene routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "idle"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "idle"
+        }
+      ]
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 2",
+      "activity": "Reading in bed and winding down before sleeping",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        },
+        {
+          "unique_id": "bathroom_light",
+          "action": "idle"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "idle"
+        }
+      ]
+    }
+  ]
+}

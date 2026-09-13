@@ -1,0 +1,71 @@
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Lie in bed. Eyes closed. Breathe steadily. Turn to left side. Pull blanket up. Bend knees. Adjust pillow. Turn to right side. Stretch arms. Remain still. Breathe. Turn to back. Place hands on chest. Remain asleep."
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Washing up and morning hygiene, after Member 1's bathroom use to avoid conflict",
+      "desc": "Enter bathroom after Member 1 exits. Turn on light. Turn on water heater. Turn on tap. Adjust water temperature. Wet hands. Pick up soap. Rub hands together. Rinse hands. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Pick up towel. Wipe face. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Eating breakfast with Member 1",
+      "desc": "Enter kitchen. Greet Member 1: 'Good morning. How did you sleep?' Sit at table. Pick up bowl. Pour cereal from box. Open refrigerator. Take out milk. Pour milk into bowl. Close refrigerator. Pick up spoon. Scoop cereal. Eat. Chew. Swallow. Pick up cup. Pour juice from pitcher. Drink. Set down cup. Finish cereal. Stand up."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 2",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Enter bedroom. Open wardrobe. Pick out shirt. Pick out pants. Take off pajama top. Take off pajama bottoms. Put on shirt. Button shirt. Put on pants. Zip pants. Put on socks. Put on shoes. Tie shoelaces. Pick up bag. Pick up phone. Put phone in pocket. Pick up keys. Put keys in bag. Walk to door. Walk out."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk out of house. Lock front door. Walk to bus stop. Stand at bus stop. Check phone for time. Wait for bus. Bus arrives. Board bus. Tap transit card. Sit down. Put on headphones. Get off bus. Walk to office building. Enter building. Walk to elevator. Press elevator button. Enter elevator. Press floor button. Exit elevator. Walk to office."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as an arts administrator at the office",
+      "desc": "Arrive at desk. Turn on computer. Log in. Open email. Read emails. Reply to emails. Answer phone. Attend meeting. Discuss project. Work on spreadsheet. Make phone calls. Organize files. Print documents. Attend another meeting. Take notes. Return to desk. Check email. Write report. Save file. Log off."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Leave office. Walk to bus stop. Wait for bus. Board bus. Tap transit card. Sit down. Look out window. Get off bus. Walk home. Unlock front door. Enter house. Close door."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1",
+      "desc": "Enter kitchen. Wash hands. Open refrigerator. Take out vegetables and meat. Chop vegetables. Turn on stove. Place pan on stove. Add vegetables. Stir. Add meat. Stir. Add seasoning. Simmer covered. Set table with plates and utensils. Call Member 1: 'Dinner is ready.' Sit at table. Eat. Talk to Member 1. Finish eating. Clear dishes and place in dishwasher."
+    },
+    {
+      "time": "19:00-22:30",
+      "location": "Bedroom 2",
+      "activity": "Working on freelance illustration projects using computer and monitor",
+      "desc": "Enter bedroom. Sit at desk. Turn on DeskLamp. Turn on SpaceHeater. Turn on computer. Turn on monitor. Open illustration software. Pick up stylus. Sketch outline. Draw lines. Fill colors. Add shading. Save file. Draw details. Save file again. Turn off monitor. Turn off computer. Turn off DeskLamp. Turn off SpaceHeater. Walk out."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Evening wash and winding down, after Member 1's bathroom use to avoid conflict",
+      "desc": "Walk to bathroom. Wait for Member 1 to exit. Enter bathroom. Turn on light. Turn on water heater. Turn on tap. Adjust water temperature. Wet face. Pick up facial cleanser. Apply to face. Rub face. Rinse face. Pick up toothbrush. Apply toothpaste. Brush teeth. Rinse mouth. Pick up towel. Dry face. Turn off tap. Turn off light. Walk out of bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Enter bedroom. Close door. Turn off DeskLamp. Turn off SpaceHeater. Walk to bed. Pull back blanket. Sit on bed. Lie down. Pull blanket over body. Place head on pillow. Close eyes. Breathe steadily. Turn to left side. Bend knees. Adjust pillow. Turn to right side. Stretch arms. Pull blanket up. Remain still. Breathe. Turn to back. Place hands on chest. Fall asleep."
+    }
+  ]
+}

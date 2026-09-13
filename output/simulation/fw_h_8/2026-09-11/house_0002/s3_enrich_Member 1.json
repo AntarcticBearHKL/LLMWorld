@@ -1,0 +1,119 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies down on bed. Closes eyes. Pulls blanket. Turns to side. Remains asleep. Shifts position. Remains asleep. Breathes regularly. Occasional movement. Remains asleep."
+    },
+    {
+      "time": "06:30-06:45",
+      "location": "Bathroom",
+      "activity": "Quick morning hygiene: washing face and brushing teeth before Member 2's shower",
+      "desc": "Walks to bathroom. Turns on light. Turns on tap. Wets face. Applies soap. Rinses face. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Turns off tap. Turns off light. Walks out."
+    },
+    {
+      "time": "06:45-07:10",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and organizing work-from-home materials",
+      "desc": "Walks to bedroom. Opens wardrobe. Selects clothes. Puts on shirt. Puts on pants. Puts on socks. Puts on shoes. Opens drawer. Takes out notebook. Places notebook on desk. Picks up laptop. Places laptop on desk. Organizes pens. Checks phone."
+    },
+    {
+      "time": "07:10-07:50",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with Member 2",
+      "desc": "Enters kitchen. Opens refrigerator. Takes out milk. Takes out eggs. Takes out bread. Places items on counter. Opens cabinet. Takes out bowl. Takes out pan. Turns on stove. Cracks eggs into pan. Cooks eggs. Toasts bread. Pours milk into glass. Places food on plates. Carries plates to table. Sits down. Eats breakfast. Talks with Member 2. Picks up plate. Puts plate in sink. Returns to table."
+    },
+    {
+      "time": "07:50-08:25",
+      "location": "Living Room",
+      "activity": "Light stretching and reading morning news on phone",
+      "desc": "Walks to living room. Sits on floor. Stretches arms. Stretches legs. Touches toes. Rotates neck. Bends forward. Stands up. Picks up phone. Unlocks phone. Opens news app. Scrolls through articles. Reads. Sits on sofa. Continues reading. Puts phone down. Stands up."
+    },
+    {
+      "time": "08:25-09:00",
+      "location": "Bedroom 1",
+      "activity": "Setting up desk with computer and desk lamp, logging into work systems for the work-from-home day",
+      "desc": "Enters bedroom. Picks up computer. Places computer on desk. Picks up desk lamp. Places desk lamp on desk. Plugs in computer. Plugs in desk lamp. Turns on desk lamp. Opens computer. Turns on computer. Logs into work system. Opens email. Opens calendar. Checks schedule. Adjusts chair. Sits down."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Bedroom 1",
+      "activity": "Working from home as a community program coordinator: emails, scheduling, program planning on computer",
+      "desc": "Sits at desk. Types on keyboard. Moves mouse. Reads emails. Replies to emails. Opens scheduling software. Adds appointments. Opens program planning document. Types notes. Makes phone calls. Talks with community partners. Writes reports. Saves documents. Takes notes on paper. Stands up. Stretches. Sits down. Continues working."
+    },
+    {
+      "time": "12:00-12:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating lunch quickly before Member 2 uses the kitchen",
+      "desc": "Walks to kitchen. Opens refrigerator. Takes out leftovers. Places on counter. Opens microwave. Puts food in microwave. Closes microwave. Presses start. Waits. Opens microwave. Takes out food. Picks up fork. Eats lunch. Drinks water. Puts plate in sink. Washes hands. Leaves kitchen."
+    },
+    {
+      "time": "12:30-13:00",
+      "location": "Living Room",
+      "activity": "Short break, resting on the sofa",
+      "desc": "Walks to living room. Sits on sofa. Leans back. Closes eyes. Rests. Adjusts position. Opens eyes. Looks at phone. Puts phone down. Closes eyes again. Stretches arms. Stands up."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Bedroom 1",
+      "activity": "Working from home: virtual meetings with community partners, drafting reports and funding notes on computer",
+      "desc": "Sits at desk. Opens video conferencing app. Joins meeting. Talks with partners. Listens. Takes notes. Leaves meeting. Opens document. Types report. Edits text. Saves document. Opens funding notes. Types notes. Checks email. Replies to email. Stands up. Stretches. Sits down."
+    },
+    {
+      "time": "17:00-17:30",
+      "location": "Kitchen",
+      "activity": "Making a cup of tea with the kettle and having an afternoon snack",
+      "desc": "Walks to kitchen. Fills kettle with water. Places kettle on base. Turns on kettle. Opens cabinet. Takes out mug. Takes out tea bag. Places tea bag in mug. Opens refrigerator. Takes out snack. Places snack on plate. Kettle boils. Pours hot water into mug. Adds milk. Stirs tea. Picks up mug. Picks up plate. Carries to table. Sits down. Drinks tea. Eats snack."
+    },
+    {
+      "time": "17:30-18:15",
+      "location": "Out",
+      "activity": "Evening walk around the neighborhood to get fresh air after a work-from-home day",
+      "desc": "Puts on shoes. Opens door. Walks outside. Walks along sidewalk. Turns left. Continues walking. Looks at surroundings. Turns right. Walks uphill. Turns around. Walks back. Opens door. Enters house. Takes off shoes."
+    },
+    {
+      "time": "18:15-18:30",
+      "location": "Bedroom 1",
+      "activity": "Changing out of walking clothes and washing up before dinner",
+      "desc": "Walks to bedroom. Takes off shirt. Takes off pants. Puts on clean shirt. Puts on clean pants. Walks to bathroom. Turns on tap. Washes hands. Washes face. Dries face. Turns off tap. Walks out."
+    },
+    {
+      "time": "18:30-19:10",
+      "location": "Kitchen",
+      "activity": "Eating dinner with Member 2",
+      "desc": "Walks to kitchen. Sits at table. Serves food. Passes dish. Picks up fork. Eats food. Drinks water. Talks with Member 2. Picks up napkin. Wipes mouth. Continues eating. Picks up plate. Puts plate in sink. Returns to table."
+    },
+    {
+      "time": "19:10-19:40",
+      "location": "Kitchen",
+      "activity": "Cleaning up after dinner and loading the dishwasher with Member 2",
+      "desc": "Stands up. Picks up plates. Scrapes food into trash. Rinses plates. Opens dishwasher. Places plates in dishwasher. Picks up glasses. Rinses glasses. Places glasses in dishwasher. Picks up utensils. Places utensils in basket. Closes dishwasher. Turns on dishwasher. Wipes counter with cloth. Wrings cloth. Hangs cloth. Washes hands."
+    },
+    {
+      "time": "19:40-21:30",
+      "location": "Living Room",
+      "activity": "Relaxing with Member 2: watching TV and browsing on phone",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Selects channel. Watches TV. Picks up phone. Unlocks phone. Browses social media. Scrolls. Puts phone down. Watches TV. Picks up phone again. Checks messages. Puts phone down. Talks with Member 2. Watches TV."
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Showering and nighttime grooming with the water heater",
+      "desc": "Walks to bathroom. Turns on water heater. Turns on shower. Steps into shower. Washes body. Shampoos hair. Rinses. Turns off shower. Steps out. Picks up towel. Dries body. Dries hair. Puts on pajamas. Brushes teeth. Applies toothpaste. Rinses mouth. Washes face. Turns off water heater. Turns off light. Walks out."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down with reading and dim light",
+      "desc": "Walks to bedroom. Turns on desk lamp. Picks up book. Opens book. Reads. Turns page. Reads. Turns page. Closes book. Puts book on nightstand. Turns off desk lamp. Lies down. Closes eyes."
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lies in bed. Closes eyes. Breathes deeply. Turns to side. Remains asleep. Pulls blanket. Shifts position. Remains asleep."
+    }
+  ]
+}

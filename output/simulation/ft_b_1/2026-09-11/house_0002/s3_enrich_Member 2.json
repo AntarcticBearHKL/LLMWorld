@@ -1,0 +1,95 @@
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:40",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Breathing steadily. Turns to left side. Pulls blanket over shoulder. Remains still for several minutes. Turns to right side. Adjusts pillow. Continues sleeping. Stretches legs. Sighs. Remains asleep."
+    },
+    {
+      "time": "06:40-07:10",
+      "location": "Bathroom",
+      "activity": "Washing face, brushing teeth, showering and getting dressed for work (finishes before Member 1's 07:10 bathroom slot)",
+      "desc": "Walks into bathroom. Turns on light. Turns on water heater. Opens shower door. Steps into shower. Turns on shower. Washes body with soap. Rinses off. Turns off shower. Steps out. Picks up towel. Dries body. Wraps towel around waist. Walks to sink. Turns on tap. Picks up toothbrush. Applies toothpaste. Brushes teeth. Rinses mouth. Spits into sink. Turns off tap. Picks up face wash. Applies to face. Rinses face. Dries face with towel. Picks up clothes. Puts on underwear. Puts on shirt. Puts on pants. Puts on socks. Puts on shoes. Checks self in mirror. Turns off light. Walks out of bathroom. Leaves bathroom at 07:10."
+    },
+    {
+      "time": "07:10-07:40",
+      "location": "Kitchen",
+      "activity": "Boiling the kettle, toasting bread and eating breakfast",
+      "desc": "Walks into kitchen. Fills kettle with water from tap. Places kettle on base. Presses switch to boil. Opens refrigerator. Takes out bread, butter, jam. Places bread slices in toaster. Presses toaster lever down. Waits for toast. Takes plate from cupboard. Takes knife from drawer. When toast pops up, removes toast. Places toast on plate. Spreads butter on toast. Spreads jam on toast. Pours boiled water into mug. Adds tea bag to mug. Pours hot water into mug. Adds milk. Stirs with spoon. Sits at table. Eats toast. Drinks tea. Finishes breakfast. Washes plate and mug. Puts away items. Leaves kitchen."
+    },
+    {
+      "time": "07:40-08:00",
+      "location": "Bedroom 2",
+      "activity": "Checking email and reviewing the day's schedule on the computer at the desk",
+      "desc": "Walks into Bedroom 2. Sits at desk. Turns on computer. Enters password. Opens email client. Reads emails. Replies to urgent email. Opens calendar. Reviews schedule. Makes note of meetings. Closes email. Turns off computer. Stands up. Leaves room."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the arts centre where I work as an arts administrator",
+      "desc": "Walks out of house. Locks door. Walks to bus stop. Waits for bus. Boards bus. Shows pass. Finds seat. Sits down. Looks out window. Gets off bus. Walks to arts centre. Enters building. Greets colleague. Walks to office. Sits at desk."
+    },
+    {
+      "time": "09:00-13:00",
+      "location": "Out",
+      "activity": "Arts administration work: coordinating exhibition schedules, drafting budgets and replying to artists",
+      "desc": "Opens computer. Checks emails. Opens exhibition schedule file. Updates schedule. Calls artist to discuss schedule. Drafts budget in spreadsheet. Enters numbers. Reviews budget. Sends budget to director. Replies to artist emails. Takes notes in meeting. Attends meeting. Sits at desk. Types on keyboard. Moves mouse. Answers phone. Speaks on phone. Writes notes. Prints documents. Files documents. Talks with colleague. Drinks water. Stands up to stretch. Walks to printer. Picks up printouts. Returns to desk."
+    },
+    {
+      "time": "13:00-13:45",
+      "location": "Out",
+      "activity": "Lunch break at a cafe near the office",
+      "desc": "Walks to cafe. Enters cafe. Joins queue. Orders sandwich and coffee. Pays. Takes receipt. Finds table. Sits down. Eats sandwich. Drinks coffee. Checks phone. Reads news on phone. Finishes meal. Clears table. Exits cafe. Walks back to office."
+    },
+    {
+      "time": "13:45-17:00",
+      "location": "Out",
+      "activity": "Afternoon meetings with artists and planning upcoming community arts programs",
+      "desc": "Greets artist in meeting room. Shakes hands. Sits at table. Opens laptop. Discusses exhibition details. Takes notes. Shows artist schedule. Listens to artist. Nods. Makes suggestions. Agrees on dates. Stands up. Escorts artist out. Returns to desk. Opens community program planning document. Calls community center. Speaks on phone. Writes notes. Updates program timeline. Sends emails to participants."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the arts centre",
+      "desc": "Leaves office. Walks to bus stop. Waits for bus. Boards bus. Pays fare. Finds seat. Sits down. Checks phone. Gets off bus. Walks home. Unlocks door. Enters house. Removes shoes. Hangs coat. Walks to kitchen."
+    },
+    {
+      "time": "18:00-18:45",
+      "location": "Kitchen",
+      "activity": "Cooking dinner on the induction cooker and eating it together with Member 1",
+      "desc": "Walks into kitchen. Sees Member 1. Says 'Hi, how was your day?' Opens refrigerator. Takes out vegetables and meat. Places on counter. Washes vegetables. Chops vegetables on cutting board. Turns on induction cooker. Places pan on cooker. Adds oil. Adds vegetables. Stirs with spatula. Adds meat. Adds spices. Stirs. Turns off cooker. Takes plates from cupboard. Serves food onto plates. Sets table. Calls Member 1 to eat. Sits at table. Eats dinner. Talks with Member 1 about day. Finishes eating. Clears plates."
+    },
+    {
+      "time": "18:45-19:15",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching television with Member 1",
+      "desc": "Walks to living room. Sits on sofa. Picks up remote. Turns on TV. Changes channel. Puts remote down. Leans back. Watches TV. Talks with Member 1 about show. Laughs. Adjusts cushion. Crosses legs. Gets up to get water. Returns to sofa. Continues watching. Checks phone. Puts phone down. Watches TV."
+    },
+    {
+      "time": "19:15-22:00",
+      "location": "Bedroom 2",
+      "activity": "Working on a freelance illustration commission on the computer and monitor with the desk lamp on",
+      "desc": "Walks to Bedroom 2. Sits at desk. Turns on desk lamp. Turns on computer. Turns on monitor. Opens illustration software. Opens commission file. Sketches with stylus on tablet. Uses keyboard shortcuts. Zooms in. Changes colors. Draws lines. Erases. Saves file. Checks email for client feedback. Replies to client. Continues drawing. Stretches arms. Drinks water. Saves file again. Turns off monitor. Turns off computer. Turns off desk lamp. Stands up."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Taking a shower and doing the evening wash routine (finishes before Member 1's 22:30 bathroom slot)",
+      "desc": "Walks into bathroom. Turns on light. Turns on water heater. Opens shower. Steps in. Turns on shower. Washes body. Rinses. Turns off shower. Steps out. Picks up towel. Dries body. Wraps towel around waist. Walks to sink. Turns on tap. Washes face. Brushes teeth. Rinses mouth. Turns off tap. Dries face. Puts on pajamas. Hangs towel. Turns off light. Leaves bathroom. Says to Member 1 'Bathroom is free.'"
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 2",
+      "activity": "Reading and winding down with the space heater on",
+      "desc": "Walks into Bedroom 2. Turns on space heater. Picks up book from nightstand. Lies on bed. Opens book to bookmark. Reads pages. Turns page. Adjusts pillow. Continues reading. Closes book. Places book on nightstand. Turns off space heater. Turns off light. Pulls blanket up. Closes eyes. Sleeps."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Lying in bed. Eyes closed. Breathing slowly. Turns to left side. Pulls blanket up. Remains still. Turns to right side. Adjusts pillow. Continues sleeping. Stretches arm. Sighs. Remains asleep."
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "member": "Member 2",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Lie on bed. Pull blanket over body. Close eyes. Breathe slowly. Turn to left side. Pull blanket up. Adjust pillow. Turn to right side. Shift legs. Stretch arms. Remain still. Continue sleeping."
+    },
+    {
+      "time": "06:30-06:45",
+      "location": "Bedroom 2",
+      "activity": "Waking up and getting out of bed",
+      "desc": "Open eyes. Blink. Rub eyes. Stretch arms. Yawn. Sit up on bed. Swing legs over side. Place feet on floor. Stand up. Walk to door. Open door."
+    },
+    {
+      "time": "06:45-07:00",
+      "location": "Bathroom",
+      "activity": "Washing face and brushing teeth",
+      "desc": "Walk into bathroom. Turn on light. Turn on tap. Wet hands. Pick up soap. Apply soap to face. Rinse face. Pick up toothbrush. Squeeze toothpaste. Brush teeth. Rinse mouth. Wipe face."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast with Member 1",
+      "desc": "Walk to kitchen. Say 'Good morning' to Member 1. Open refrigerator. Take out milk. Take out eggs. Close refrigerator. Open cabinet. Take out frying pan. Place pan on stove. Turn on stove. Crack eggs into pan. Stir eggs. Toast bread. Place toast on plate. Sit at table. Eat breakfast. Talk with Member 1."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Bedroom 2",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Walk to bedroom. Open wardrobe. Take out shirt. Take out pants. Close wardrobe. Take off pajamas. Put on shirt. Put on pants. Put on socks. Put on shoes. Look in mirror. Adjust collar. Pick up phone. Check messages. Put phone in pocket. Pick up bag. Walk to door."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk out of house. Close door. Walk to bus stop. Check phone for time. Wait for bus. Bus arrives. Board bus. Tap card. Find seat. Sit down. Look out window. Bus stops. Stand up. Walk to door. Get off bus. Walk to office building. Enter building."
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as arts administrator at office",
+      "desc": "Arrive at desk. Sit down. Turn on computer. Log in. Open email client. Read emails. Reply to emails. Open calendar. Check schedule. Attend meeting. Take notes. Return to desk. Make phone calls. Organize files. Write report."
+    },
+    {
+      "time": "12:00-13:00",
+      "location": "Out",
+      "activity": "Lunch break",
+      "desc": "Walk to lunch area. Open refrigerator. Take out lunch bag. Close refrigerator. Sit at table. Open lunch bag. Take out sandwich. Unwrap sandwich. Take bite. Chew. Swallow. Drink water. Wipe mouth. Throw away wrapper. Walk back to office."
+    },
+    {
+      "time": "13:00-17:00",
+      "location": "Out",
+      "activity": "Working as arts administrator at office",
+      "desc": "Return to desk. Sit down. Open project files. Review documents. Write reports. Attend meeting. Take notes. Make phone calls. Reply to emails. Organize files. Update schedule. Print documents. File documents. Check messages. Return to desk."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Leave office. Walk to bus stop. Wait for bus. Bus arrives. Board bus. Tap card. Find seat. Sit down. Look out window. Bus stops. Stand up. Walk to door. Get off bus. Walk home. Enter house."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 1",
+      "desc": "Walk to kitchen. Say 'Hello' to Member 1. Open refrigerator. Take out vegetables. Take out meat. Close refrigerator. Wash vegetables. Chop vegetables. Turn on stove. Place pan on stove. Add vegetables. Stir. Add meat. Stir. Turn off stove. Serve on plates. Sit at table. Eat dinner. Talk with Member 1."
+    },
+    {
+      "time": "19:00-21:30",
+      "location": "Bedroom 2",
+      "activity": "Working on freelance illustration projects",
+      "desc": "Walk to bedroom. Sit at desk. Turn on desk lamp. Turn on computer. Open illustration software. Open project file. Sketch. Draw. Use graphics tablet. Adjust colors. Save file. Take break. Stretch. Return to desk. Continue drawing."
+    },
+    {
+      "time": "21:30-22:30",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV with Member 1",
+      "desc": "Walk to living room. Sit on couch. Pick up remote. Turn on TV. Change channels. Watch show. Talk with Member 1. Adjust volume. Change channel. Watch another show. Talk with Member 1. Turn off TV. Stand up. Walk to bathroom."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bathroom",
+      "activity": "Showering and getting ready for bed",
+      "desc": "Walk into bathroom. Turn on light. Turn on water heater. Adjust water temperature. Step into shower. Wet body. Apply soap. Scrub body. Rinse body. Turn off water. Step out of shower. Dry with towel. Put on pajamas. Brush teeth. Rinse mouth. Walk out of bathroom."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 2",
+      "activity": "Sleeping",
+      "desc": "Walk to bed. Pull back blanket. Sit on bed. Lie down. Pull blanket over body. Close eyes. Turn to left side. Pull blanket up. Adjust pillow. Turn to right side. Breathe slowly. Remain still."
+    }
+  ]
+}

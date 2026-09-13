@@ -1,0 +1,291 @@
+{
+  "member": "Member 2",
+  "appliance_decisions": [
+    {
+      "time": "00:00-06:45",
+      "start_minutes": 0,
+      "end_minutes": 405,
+      "location": "Bedroom 2",
+      "activity": "Sleeping in own bedroom",
+      "operations": []
+    },
+    {
+      "time": "06:45-07:20",
+      "start_minutes": 405,
+      "end_minutes": 440,
+      "location": "Bathroom",
+      "activity": "Waking up, showering with hot water and washing up",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "07:20-08:00",
+      "start_minutes": 440,
+      "end_minutes": 480,
+      "location": "Bedroom 2",
+      "activity": "Getting dressed and getting ready for the day; checking emails and preparing for breakfast",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:00-08:30",
+      "start_minutes": 480,
+      "end_minutes": 510,
+      "location": "Kitchen",
+      "activity": "Making and eating breakfast with Member 1; boiling the kettle and toasting bread",
+      "operations": [
+        {
+          "unique_id": "kitchen_kettle",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_toaster",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "08:30-09:00",
+      "start_minutes": 510,
+      "end_minutes": 540,
+      "location": "Bedroom 2",
+      "activity": "Checking emails and planning the day's arts administration tasks at the desk",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "09:00-12:00",
+      "start_minutes": 540,
+      "end_minutes": 720,
+      "location": "Bedroom 2",
+      "activity": "Working remotely as an arts administrator on the computer, updating program schedules and replying to partner organisations",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:00-12:40",
+      "start_minutes": 720,
+      "end_minutes": 760,
+      "location": "Kitchen",
+      "activity": "Preparing and eating a light lunch with Member 1; reheating food in the microwave",
+      "operations": [
+        {
+          "unique_id": "kitchen_microwave",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "12:40-13:10",
+      "start_minutes": 760,
+      "end_minutes": 790,
+      "location": "Out",
+      "activity": "Taking a short walk around the neighbourhood with Member 1 for fresh air and a coffee",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "13:10-17:00",
+      "start_minutes": 790,
+      "end_minutes": 1020,
+      "location": "Bedroom 2",
+      "activity": "Freelance illustration work at the desk, sketching and inking commissioned pieces on the monitor and computer",
+      "operations": [
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_monitor",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "17:00-18:00",
+      "start_minutes": 1020,
+      "end_minutes": 1080,
+      "location": "Living Room",
+      "activity": "Taking a break, watching TV and resting on the sofa",
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "18:00-19:00",
+      "start_minutes": 1080,
+      "end_minutes": 1140,
+      "location": "Bedroom 2",
+      "activity": "Continuing freelance illustration work under the desk lamp, refining client artwork",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:00-19:30",
+      "start_minutes": 1140,
+      "end_minutes": 1170,
+      "location": "Kitchen",
+      "activity": "Cooking dinner with Member 1 on the induction cooker",
+      "operations": [
+        {
+          "unique_id": "kitchen_inductioncooker",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_rangehood",
+          "action": "use"
+        },
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "19:30-20:00",
+      "start_minutes": 1170,
+      "end_minutes": 1200,
+      "location": "Kitchen",
+      "activity": "Eating dinner with Member 1",
+      "operations": [
+        {
+          "unique_id": "kitchen_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:00-20:30",
+      "start_minutes": 1200,
+      "end_minutes": 1230,
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa with Member 1",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "20:30-21:00",
+      "start_minutes": 1230,
+      "end_minutes": 1260,
+      "location": "Bedroom 2",
+      "activity": "Continuing freelance illustration work under the desk lamp, refining client artwork",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_computer",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:00-21:15",
+      "start_minutes": 1260,
+      "end_minutes": 1275,
+      "location": "Bathroom",
+      "activity": "Showering and completing night-time hygiene routine",
+      "operations": [
+        {
+          "unique_id": "bathroom_light",
+          "action": "use"
+        },
+        {
+          "unique_id": "bathroom_waterheater",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "21:15-22:00",
+      "start_minutes": 1275,
+      "end_minutes": 1320,
+      "location": "Bedroom 2",
+      "activity": "Winding down in Bedroom 2, browsing design references on the phone",
+      "operations": [
+        {
+          "unique_id": "member_2_phone",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:00-22:45",
+      "start_minutes": 1320,
+      "end_minutes": 1365,
+      "location": "Living Room",
+      "activity": "Reading quietly and winding down before bed",
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "action": "use"
+        }
+      ]
+    },
+    {
+      "time": "22:45-24:00",
+      "start_minutes": 1365,
+      "end_minutes": 1440,
+      "location": "Bedroom 2",
+      "activity": "Turning on the space heater, dimming the desk lamp and going to sleep",
+      "operations": [
+        {
+          "unique_id": "bedroom_2_spaceheater",
+          "action": "use"
+        },
+        {
+          "unique_id": "bedroom_2_desklamp",
+          "action": "use"
+        },
+        {
+          "unique_id": "member_2_phone",
+          "action": "charge_home"
+        }
+      ]
+    }
+  ]
+}

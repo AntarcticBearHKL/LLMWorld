@@ -1,0 +1,95 @@
+{
+  "member": "Member 1",
+  "enriched_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie down on the bed on the back. Pull the blanket up to the chest. Close eyes. Turn onto the right side. Bend the left arm under the pillow. Pull the blanket up over the shoulder. Turn onto the left side. Stretch the legs. Turn onto the back. Move the right arm above the head. Turn onto the right side. Pull the blanket up again. Turn onto the back. Turn the head to the left. Turn onto the left side. Bend both knees. Straighten the legs. Turn onto the right side. Turn the fan on with the remote at 01:20. Put the remote down on the nightstand. Turn onto the back. Remain motionless in bed."
+    },
+    {
+      "time": "06:30-06:45",
+      "location": "Bedroom 1",
+      "activity": "Waking up and getting out of bed",
+      "desc": "Open eyes. Turn head toward the window. Lift the right arm and rub the eyes. Move the blanket down to the waist. Sit up on the edge of the bed. Put both feet on the floor. Press both hands on the mattress. Stand up. Turn off the fan with the remote. Put the remote on the nightstand. Pick up the phone from the nightstand. Press the phone screen. Put the phone down. Walk to the bedroom door. Open the door. Walk out of Bedroom 1."
+    },
+    {
+      "time": "06:45-07:00",
+      "location": "Bathroom",
+      "activity": "Personal hygiene (washing, brushing teeth)",
+      "desc": "Walk into the bathroom. Turn on the light switch. Walk to the sink. Turn on the tap. Cup both hands under the water. Rinse the face. Turn off the tap. Pick up the towel from the hook. Wipe the face. Hang the towel back on the hook. Pick up the toothbrush. Pick up the toothpaste. Squeeze toothpaste onto the toothbrush. Put the toothpaste down. Brush teeth. Turn on the tap. Rinse the mouth. Spit into the sink. Turn off the tap. Put the toothbrush back in the holder. Turn off the light. Walk out of the bathroom."
+    },
+    {
+      "time": "07:00-07:30",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed and preparing for work",
+      "desc": "Walk into Bedroom 1. Open the wardrobe door. Take a shirt off the hanger. Take trousers off the hanger. Close the wardrobe door. Lay the shirt on the bed. Lay the trousers on the bed. Take off the pajama top. Take off the pajama bottoms. Put on the shirt. Button the shirt. Put on the trousers. Zip up the trousers. Button the waistband. Open the drawer. Take out a pair of socks. Close the drawer. Sit on the edge of the bed. Put on the left sock. Put on the right sock. Stand up. Walk to the bedroom door. Pick up the work bag from the floor. Open the bag. Put the laptop into the bag. Zip the bag. Put the bag on the shoulder. Walk out of Bedroom 1."
+    },
+    {
+      "time": "07:30-08:00",
+      "location": "Kitchen",
+      "activity": "Eating breakfast with Member 2",
+      "desc": "Walk into the kitchen. Put the bag down on the floor next to the chair. Say to Member 2: \"Good morning.\" Open the refrigerator door. Take out the milk. Take out the bread. Close the refrigerator door. Put the bread on the counter. Pick up the bread knife. Cut two slices of bread. Put the knife down. Put the slices into the toaster. Press the toaster lever down. Pick up a bowl from the cupboard. Put the bowl on the counter. Pour cereal into the bowl. Pour milk into the bowl. Pick up a spoon from the drawer. Sit down at the table. Pick up the spoon. Scoop cereal into the mouth. Chew and swallow. Pick up the glass of water. Drink. Put the glass down. Take the toast out of the toaster. Eat the toast. Push the chair back. Stand up. Pick up the bowl and the plate. Carry them to the sink. Put them in the sink. Open the dishwasher door. Take the bowl and plate out of the sink. Place them in the dishwasher rack. Close the dishwasher door. Say to Member 2: \"Ready to go?\" Pick up the bag from the floor."
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to work",
+      "desc": "Walk out of the house. Close the front door. Lock the door with the key. Put the key into the pocket. Walk along the sidewalk to the bus stop. Stand at the bus stop. Take the phone out of the pocket. Press the phone screen. Look at the phone. Put the phone back into the pocket. Step onto the bus. Take the transit card out of the pocket. Tap the card on the card reader. Put the card back into the pocket. Walk down the aisle. Grab the overhead bar with the right hand. Stand until the stop. Release the bar. Walk to the rear door. Step off the bus. Walk along the sidewalk. Push the office building door open. Walk into the lobby. Walk to the elevator. Press the elevator button. Step into the elevator. Press the floor button. Step out of the elevator. Walk to the office door. Push the door open. Walk to the desk."
+    },
+    {
+      "time": "09:00-17:00",
+      "location": "Out",
+      "activity": "Working as a community program coordinator at a nonprofit",
+      "desc": "Sit down at the desk. Turn on the computer. Press the computer power button. Open the email application. Read emails. Type replies on the keyboard. Move the mouse. Open the program schedule spreadsheet. Update the rows and columns. Open the donor contact list. Add two new entries. Pick up the phone. Dial a partner organization number. Talk on the phone about the volunteer schedule. End the call. Put the phone down. Walk to the meeting room. Sit down at the table. Open the notebook. Take notes with a pen. Talk to the team about the upcoming community event. Close the notebook. Stand up. Walk back to the desk. Sit down. Open the budget file. Enter the numbers on the keyboard. Print the documents. Stand up. Walk to the printer. Pick up the printed documents. Walk back to the desk. Staple the documents. Put them into a folder. Save the files on the computer. Stand up. Put on the jacket. Pick up the bag. Walk out of the office. Walk to the elevator. Press the elevator button. Step into the elevator. Press the ground floor button. Step out of the elevator. Walk out of the building."
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home",
+      "desc": "Walk along the sidewalk to the bus stop. Stand at the bus stop. Take the phone out of the pocket. Press the phone screen. Put the phone back into the pocket. Step onto the bus. Tap the transit card on the card reader. Put the card back into the pocket. Walk down the aisle. Grab the overhead bar with the left hand. Stand until the stop. Release the bar. Walk to the rear door. Step off the bus. Walk along the sidewalk to the house. Walk up the steps to the front door. Take the key out of the pocket. Insert the key into the lock. Turn the key. Push the front door open. Step inside. Close the door. Lock the door with the key. Take off the shoes. Put the shoes on the shoe rack. Hang the jacket on the hook."
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking and eating dinner with Member 2",
+      "desc": "Walk into the kitchen. Say to Member 2: \"I'll wash the vegetables.\" Open the refrigerator door. Take out the vegetables. Take out the eggs. Close the refrigerator door. Put the vegetables on the counter. Turn on the tap. Rinse the vegetables under the water. Turn off the tap. Pick up the knife. Cut the vegetables on the cutting board. Turn on the induction cooker. Pour oil into the pan. Put the vegetables into the pan. Stir with the spatula. Break the eggs into a bowl. Beat the eggs with chopsticks. Pour the eggs into the pan. Stir again. Turn off the induction cooker. Pick up two plates from the cupboard. Put the food onto the plates. Carry the plates to the table. Take two pairs of chopsticks from the drawer. Sit down at the table. Pick up the chopsticks. Eat the food. Talk with Member 2 about the day. Pick up the glass. Drink water. Put the glass down. Stand up. Carry the plates and bowls to the sink. Put them in the sink. Turn on the tap. Rinse the plates. Turn off the tap. Place the dishes in the dishwasher. Close the dishwasher door."
+    },
+    {
+      "time": "19:00-20:00",
+      "location": "Living Room",
+      "activity": "Relaxing and watching TV",
+      "desc": "Walk from the kitchen to the living room. Sit down on the sofa. Pick up the TV remote from the coffee table. Press the power button on the remote. Point the remote at the TV. Press the channel button. Put the remote down on the sofa cushion. Lean back against the sofa. Say to Member 2: \"What do you want to watch?\" Pick up the remote again. Change the channel. Put the remote down. Stretch both arms. Cross the right leg over the left. Take the phone out of the pocket. Press the phone screen. Scroll through the phone screen. Put the phone down on the coffee table. Watch the TV screen. Turn the head to Member 2. Talk about the program on the screen. Pick up the remote. Press the volume button. Put the remote down. Adjust the cushion behind the back. Stand up. Walk to the kitchen. Open the refrigerator door. Take out a bottle of water. Close the refrigerator door. Walk back to the living room. Sit down on the sofa. Open the bottle cap. Drink water. Close the cap. Put the bottle on the coffee table."
+    },
+    {
+      "time": "20:00-21:00",
+      "location": "Living Room",
+      "activity": "Doing household chores (vacuuming and tidying up)",
+      "desc": "Stand up from the sofa. Pick up the remote. Press the power button to turn off the TV. Put the remote on the coffee table. Pick up the cups from the coffee table. Carry the cups to the kitchen. Put the cups in the sink. Walk back to the living room. Open the storage cabinet door. Take out the vacuum cleaner. Put the vacuum cleaner on the floor. Plug the power cord into the wall socket. Press the power button on the vacuum cleaner. Push the vacuum cleaner across the floor. Pull the vacuum cleaner back. Push it along the edge of the sofa. Bend down. Push the vacuum cleaner under the coffee table. Pull it out. Push the vacuum cleaner along the baseboard. Press the power button to stop the vacuum cleaner. Pull the plug out of the wall socket. Wrap the power cord around the vacuum cleaner. Put the vacuum cleaner back into the storage cabinet. Close the cabinet door. Pick up the magazines from the coffee table. Stack the magazines. Put the magazines on the shelf. Pick up the cushions from the floor. Put the cushions back on the sofa. Fold the blanket. Put the blanket on the arm of the sofa."
+    },
+    {
+      "time": "21:00-22:00",
+      "location": "Bedroom 1",
+      "activity": "Personal time (using computer/phone, reading)",
+      "desc": "Walk into Bedroom 1. Sit down at the desk. Turn on the DeskLamp switch. Open the laptop. Press the power button. Move the mouse. Type on the keyboard. Open the browser. Read the web page. Scroll the page with the mouse. Pick up the phone. Press the phone screen. Type a message. Put the phone down on the desk. Pick up a book from the shelf. Open the book. Read pages. Turn the page with the right hand. Turn the page again. Close the book. Put the book on the shelf. Close the laptop. Turn off the DeskLamp. Stand up. Pull the blanket down on the bed. Sit on the bed. Take off the socks. Put the socks in the laundry basket. Stand up. Walk to the bedroom door. Open the door. Walk out of Bedroom 1."
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bathroom",
+      "activity": "Nighttime routine (showering, brushing teeth)",
+      "desc": "Walk into the bathroom. Turn on the light switch. Turn on the water heater. Open the shower door. Turn on the shower tap. Step into the shower. Wet the hair under the water. Pick up the shampoo bottle. Pour shampoo into the hand. Rub the shampoo into the hair. Rinse the hair. Pick up the soap. Rub the soap on the body. Rinse the body under the water. Turn off the shower tap. Open the shower door. Pick up the towel from the hook. Dry the hair with the towel. Dry the body with the towel. Hang the towel on the hook. Pick up the toothbrush. Squeeze toothpaste onto the toothbrush. Brush teeth. Turn on the tap. Rinse the mouth. Turn off the tap. Put the toothbrush back in the holder. Turn off the light. Walk out of the bathroom."
+    },
+    {
+      "time": "22:30-23:00",
+      "location": "Bedroom 1",
+      "activity": "Winding down (reading or listening to music)",
+      "desc": "Walk into Bedroom 1. Sit down on the bed. Pick up the phone from the desk. Press the phone screen. Open the music application. Tap the play button. Put the phone down on the nightstand. Pick up the book from the nightstand. Open the book. Read pages. Turn the page with the right hand. Turn the page again. Close the book. Put the book on the nightstand. Stand up. Pull the blanket down. Lie down on the bed. Pull the blanket up to the chest. Turn onto the right side. Turn onto the back. Pick up the phone. Press the phone screen. Tap the pause button. Put the phone down on the nightstand. Adjust the pillow under the head. Close eyes."
+    },
+    {
+      "time": "23:00-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping",
+      "desc": "Lie on the back on the bed. Pull the blanket up to the shoulders. Turn onto the right side. Bend the left arm under the pillow. Turn onto the back. Stretch the legs. Turn onto the left side. Pull the blanket up again. Turn onto the right side. Move the right arm above the head. Turn onto the back. Turn the head to the right. Turn onto the left side. Bend both knees. Straighten the legs. Turn onto the right side. Remain motionless in bed with eyes closed."
+    }
+  ]
+}
