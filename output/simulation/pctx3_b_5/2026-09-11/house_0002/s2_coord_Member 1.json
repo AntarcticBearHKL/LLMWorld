@@ -1,0 +1,85 @@
+{
+  "member": "Member 1",
+  "coordinated_activities": [
+    {
+      "time": "00:00-06:30",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    },
+    {
+      "time": "06:30-07:00",
+      "location": "Bathroom",
+      "activity": "Waking up, washing face, brushing teeth and taking a shower"
+    },
+    {
+      "time": "07:00-07:40",
+      "location": "Kitchen",
+      "activity": "Preparing and eating breakfast, making a hot drink with the kettle and toaster"
+    },
+    {
+      "time": "07:40-08:00",
+      "location": "Bedroom 1",
+      "activity": "Getting dressed, packing work bag and checking phone for the day's patient schedule"
+    },
+    {
+      "time": "08:00-09:00",
+      "location": "Out",
+      "activity": "Commuting to the hospital"
+    },
+    {
+      "time": "09:00-12:00",
+      "location": "Out",
+      "activity": "Working as a hospital physiotherapist: assessing patients, running rehabilitation sessions and updating treatment notes"
+    },
+    {
+      "time": "12:00-12:40",
+      "location": "Out",
+      "activity": "Lunch break at the hospital"
+    },
+    {
+      "time": "12:40-17:00",
+      "location": "Out",
+      "activity": "Continuing physiotherapy work: one-on-one therapy, mobility training and coordinating with ward staff"
+    },
+    {
+      "time": "17:00-18:00",
+      "location": "Out",
+      "activity": "Commuting home from the hospital"
+    },
+    {
+      "time": "18:00-19:00",
+      "location": "Kitchen",
+      "activity": "Cooking dinner with the induction cooker and rice cooker, then eating dinner"
+    },
+    {
+      "time": "19:00-19:20",
+      "location": "Kitchen",
+      "activity": "Clearing the table and loading dishes into the dishwasher"
+    },
+    {
+      "time": "19:20-20:30",
+      "location": "Living Room",
+      "activity": "Relaxing on the sofa and watching TV"
+    },
+    {
+      "time": "20:30-21:30",
+      "location": "Study",
+      "activity": "Using the computer and desk lamp to read clinical literature and complete continuing education modules"
+    },
+    {
+      "time": "21:30-22:00",
+      "location": "Bathroom",
+      "activity": "Taking an evening shower and washing up"
+    },
+    {
+      "time": "22:00-22:30",
+      "location": "Bedroom 1",
+      "activity": "Winding down for bed, setting an alarm on the phone and dimming the light"
+    },
+    {
+      "time": "22:30-24:00",
+      "location": "Bedroom 1",
+      "activity": "Sleeping"
+    }
+  ]
+}
