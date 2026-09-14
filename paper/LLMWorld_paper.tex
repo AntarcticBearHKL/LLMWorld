@@ -1,0 +1,436 @@
+% !TEX program = pdflatex
+% LLMWorld - consolidated paper (single-column article).
+% Compiles with pdflatex (also works on Overleaf, TeX Live, MiKTeX).
+% All non-ASCII characters are written as LaTeX macros, so no Unicode engine is required.
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\setlist{nosep,leftmargin=1.4em}
+
+\title{\bfseries LLM Society: A Multi-Agent Generative Framework for\\
+Population-Level Residential Behaviour Simulation and\\
+Natural-Language Policy Intervention}
+\author{Hongkun Lyu (Student ID 35933771) \\ Supervisor: Hao Wang \\ \small FIT5216}
+\date{2026-09-12}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+We present \textbf{LLMWorld}, a population-level multi-agent framework in which each household is an
+autonomous LLM-driven agent whose day is planned from a structured profile and then translated into a
+minute-resolution, appliance-level electricity load. Every external input --- prices, taxes, rebates,
+social norms and news events --- is injected \emph{only as natural language}; aggregate behaviour is
+emergent. We run a large battery of controlled experiments on three heterogeneous synthetic worlds
+following four validity rules (same-era baselines, $n\ge 15$, cross-world replication, content-contrast),
+and obtain \textbf{seven statistically significant, cross-world event results}: heatwave$\rightarrow$cooling
+($0/9\rightarrow 11/12$, $p\approx 3\times10^{-5}$), lockdown$\rightarrow$stay-home
+($13/13\rightarrow 1/13$, $p\approx 3\times10^{-6}$), cold-snap$\rightarrow$heating ($0/10\rightarrow 6/10$,
+$p\approx 0.011$), air-conditioner peak tax$\rightarrow$AC-off ($15/15\rightarrow 7/15$, $p\approx 0.0022$),
+and a \textbf{stay-home family} --- holiday, work-from-home and transport-strike --- that each raise total
+energy by roughly 20--65\% ($p\le 0.039$). We further show that \textbf{concrete, per-appliance
+peak/off-peak cost figures} turn otherwise-null time-of-use and critical-peak prices into significant
+peak-shifting (peak $-3.5\%$ to $-13.2\%$, valley $+8.2\%$ to $+27.9\%$ across three worlds), and we
+\emph{decompose} this effect: the cost information alone already produces a significant valley shift
+($+11.6\%$), while an explicit authorization to reschedule strengthens peak shaving ($-8.1\%$). We
+characterise \textbf{when peak shaving works} --- a dose law bounded by appliance substitutability,
+requiring a \emph{device} $\times$ \emph{window} anchoring --- and provide an adversarial \textbf{validity
+audit} that withdraws a previously reported peak-shaving result which does not survive a shared-timeline
+replication. We argue the calibrated capability boundary, rather than any single effect size, makes
+LLM-agent energy simulation trustworthy.
+\end{abstract}
+
+\section{Introduction}
+Residential electricity demand is increasingly shaped by distributed resources (rooftop PV, batteries,
+electric vehicles, heat pumps) and by heterogeneous household behaviour. Classical top-down forecasting
+treats households as an undifferentiated mass, while classical bottom-up models (ARGOS, Markov-chain
+activity models) encode behaviour as fixed states and transition probabilities, making them ill-suited to
+capture contextual decisions or responses to textual/complex signals (Capasso 1994; Wid\'en \& W\"ackelg\r{a}rd
+2010; Richardson 2010). LLM-based generative agents (Park et al. 2023) offer a far more expressive
+behavioural engine, but existing LLM energy-simulation work is largely single-household or small-scale
+(Chetty et al. 2025; Almashor et al. 2024) and has not been systematically validated against empirical
+demand-response benchmarks at population level.
+
+This paper asks:
+\begin{itemize}
+\item \textbf{RQ1 --- Large-scale heterogeneous population simulation.} Can LLM agents generate realistic,
+diverse minute-resolution household load profiles? \emph{(Population-scale generation and distributional
+validation are out of scope here; the population machinery exists but is exercised at $\le 5$ households.)}
+\item \textbf{RQ2 --- Behavioural transmission of external inputs.} When tariffs, taxes, subsidies, norms or
+news events are injected as natural language, how do agents respond at the appliance-decision level?
+\item \textbf{RQ3 --- Emergent patterns \& empirical alignment.} Do aggregate responses match the empirical
+literature, and do phenomena beyond individual behaviour emerge?
+\item \textbf{RQ4 --- Scalability \& practicality.} \emph{(Explicitly out of scope.)}
+\end{itemize}
+
+\noindent\textbf{Contributions.}
+\begin{enumerate}
+\item An end-to-end pipeline \textbf{behaviour $\rightarrow$ appliance decision $\rightarrow$
+minute-resolution load} driven by LLM agents.
+\item A \textbf{natural-language intervention surface} (pricing / norms / events / cost-context) whose
+effects are emergent (no hard-coded behaviour).
+\item \textbf{Seven cross-world significant event results} plus a validated \textbf{price-response
+capability}, benchmarked against the empirical literature.
+\item A \textbf{mechanistic account of peak shaving} --- dose $\times$ substitutability $\times$
+device/window anchoring --- and the observation that \textbf{energy-saving $\neq$ peak-shaving $\neq$
+load-shifting}.
+\item An honest \textbf{capability boundary}: where the platform is reliable, where it is prompt-sensitive,
+and what it cannot do --- including a withdrawn result.
+\end{enumerate}
+
+\section{Related work}
+\subsection{From top-down to bottom-up behavioural load modelling}
+Bottom-up models reconstruct load from household composition, appliance ownership and activity patterns,
+but reduce behaviour to finite states / Markov chains (Capasso 1994; Wid\'en \& W\"ackelg\r{a}rd 2010;
+Richardson 2010). Agent-based hybrids (Xu et al. 2026) add signal--demand feedback but keep rule-based
+agents. Their limitation is precisely the rigidity of behavioural representation --- the gap this work
+attacks.
+
+\subsection{LLM-based generative agents}
+Park et al. (2023) established the memory--reflection--planning template; AgentSociety (Piao et al. 2025)
+scaled LLM agents to more than 10{,}000 urban residents; SALM (Koley 2025) reduced token cost with
+hierarchical prompts; Chetty et al. (2025) inferred single-household energy with less than 10\% MAPE;
+Almashor et al. (2024) synthesised private-LLM household data; Michelon et al. (2025) parsed
+natural-language HEMS commands. Reasoning techniques --- CoT (Wei et al. 2022), ReAct (Yao et al. 2023a),
+ToT (Yao et al. 2023b), Self-Consistency (Wang et al. 2023) --- underpin coherent agent decisions. None of
+this work provides a population-level, empirically-aligned \emph{policy-intervention} testbed --- our
+positioning.
+
+\subsection{Empirical benchmarks (alignment targets)}
+\begin{itemize}
+\item \textbf{Pricing / demand response}: plain TOU cuts peak 3--6\% (Faruqui \& Sergici 2010); CPP
+13--20\%; demand charge 10--20\% (Escarrega et al. 2025); price effects are often dominated by habit
+(Wang et al. 2021).
+\item \textbf{Non-price behavioural}: social-norm savings roughly 1--3\%, strongest for high users
+(Allcott 2011; Ayres et al. 2013); loss framing roughly 5\% stronger (Ghesla et al. 2019); monetary
+incentives crowd out social norms (Pellerano et al. 2017); heterogeneous nudge/rebate effects
+(Murakami et al. 2022); ideology-modulated nudges (Costa \& Kahn 2010).
+\item \textbf{Information}: real-time feedback triples price elasticity (Jessoe \& Rapson 2012);
+personalised feedback (Monacchi et al. 2015).
+\item \textbf{Structural}: household-size economies (Schr\"oder et al. 2013); peer effects on solar
+adoption (Barnes et al. 2022); heating sobriety (Cabezas-Rivi\`ere et al. 2025).
+\item \textbf{Disruptions}: empirically grounding LLM agents improves realism under disruptions
+(Xia et al. 2026); counterfactual simulation (Fidone et al. 2025).
+\item \textbf{Method / economics}: CoRenew (Zhang et al. 2026), Eco3S (Wei et al. 2026),
+uniform electricity taxation (Gunkel et al. 2023), ML-based DR targeting (Zhou et al. 2016).
+\end{itemize}
+
+\section{System}
+\subsection{Architecture and entry point}
+A single entry point \texttt{run.py} has two modes. \texttt{--mode world} synthesises households
+(\textbf{s1} household types $\rightarrow$ \textbf{s2} persona alignment $\rightarrow$ \textbf{s3}
+household build $\rightarrow$ \textbf{s4} world assembly). \texttt{--mode simulate} generates behaviour
+(\textbf{s1} macro plan $\rightarrow$ \textbf{s2} coordination $\rightarrow$ \textbf{s3} contextual
+enrichment $\rightarrow$ \textbf{s4} appliance decisions). All artefacts are structured JSON under
+\texttt{output/}.
+
+\subsection{Domain model}
+A household = \textbf{members + rooms + appliances}. Appliances fall into four classes:
+\textbf{on-demand} (\texttt{use}/\texttt{idle}), \textbf{charging}
+(\texttt{charge\_home}/\texttt{charge\_external}/\texttt{use}/\texttt{idle}), \textbf{cycle}
+(\texttt{run}/\texttt{idle}; fixed energy per run) and \textbf{always-on} (auto). A shared catalog
+provides rated power, bounds, always-on daily energy, per-type experiment metadata (flexible/duty/season)
+and battery capacity/SoC. Charging appliances are bounded by a battery deficit per day.
+
+\subsection{Behaviour $\rightarrow$ load pipeline}
+\begin{enumerate}
+\item \textbf{Macro plan (s1)} --- each member's 00:00--24:00 activity segments, constrained to real
+rooms, full-day coverage, exact adjacency; \textbf{cross-day carry-over} prevents teleporting home at
+midnight.
+\item \textbf{Coordination (s2)} --- reconcile shared activities/resources among members.
+\item \textbf{Enrichment (s3)} --- add detail to each activity.
+\item \textbf{Appliance decision (s4)} --- map activities to appliance operations; validated/repaired
+against the registry (unknown ids repaired by family; out-of-home room operations dropped).
+\item \textbf{Energy calculation} --- minute-resolution load and per-appliance kWh.
+\end{enumerate}
+
+\subsection{Intervention surface (all natural-language)}
+\begin{itemize}
+\item \textbf{Policies} (\texttt{--policy}): TOU / TOU-soft, critical-peak pricing
+(\texttt{cpp}/\texttt{cpp\_soft}), critical-peak rebate (\texttt{cpr}/\texttt{cpr\_soft}), uniform
+electricity tax (\texttt{tax\_uniform}), subsidy, demand charge (\texttt{peak\_demand}), EV-delay
+(\texttt{ev\_delay}), social norm (\texttt{nudge}/\texttt{nudge\_soft}), loss framing
+(\texttt{nudge\_loss}), night setback, in-home display; \textbf{combinations}
+(\texttt{--policy "tou,nudge"}); \textbf{timeline} (\texttt{--policy-schedule}).
+\item \textbf{News / events} (\texttt{--event}, \texttt{--event-template}): \textbf{13 preset templates}
+--- heatwave, cold\_snap, storm, price\_hike, energy\_crisis, ac\_tax, rebate, blackout\_risk,
+solar\_incentive, lockdown, holiday, wfh, transport\_strike --- plus arbitrary custom events and community
+notices.
+\item \textbf{Social signals}: \texttt{--peer-nudge}, \texttt{--community-notice}.
+\end{itemize}
+Environment-type presets (heatwave / cold\_snap) also adjust the weather context so text and structured
+weather agree --- noted as a caveat in the audit (\S\ref{sec:audit}).
+
+\subsection{Cost-context (new)}
+Because agents otherwise lack any economic model, we add an optional \textbf{cost-context}: given a tariff
+and the household's flexible appliances, the s4 prompt receives a concrete money table
+(\texttt{--cost-context}, \texttt{--cost-context-mode \{strong,soft\}}):
+
+\begin{verbatim}
+Flexible-appliance costs under today's tariff (peak 16:00-21:00 @0.90; off-peak 22:00-07:00 @0.18):
+- bedroom_1_airconditioner: 1.80 AUD now (peak) vs 0.36 AUD off-peak -- save 1.44 per hour
+- kitchen_dishwasher:       0.99 AUD now (peak) vs 0.20 AUD off-peak -- save 0.79 per cycle
+- bathroom_waterheater:     2.70 AUD now (peak) vs 0.54 AUD off-peak -- save 2.16 per hour
+\end{verbatim}
+
+\noindent
+\texttt{strong} mode appends an explicit ``you MAY move it off-peak'' authorization; \texttt{soft} mode
+gives the same numbers with a neutral instruction (prompt-bias control). A \textbf{demand-charge} variant
+shows each appliance's kW $\times$ rate contribution; a multi-day \textbf{bill-feedback} injects
+yesterday's peak-window cost.
+
+\section{Experimental design and validity controls}
+\textbf{Worlds.} Three synthetic communities: \texttt{world\_838587} (2 households),
+\texttt{world\_172148} (3 households) and \texttt{world\_143345} (3 households, with EV). Household sizes
+range 1--6.
+
+\textbf{Design.} Each comparison is a paired, interleaved \textbf{same-era} baseline-vs-treatment design;
+most experiments run on the s4 stage only (\texttt{--s4-only}) against a \textbf{shared s1--s3 timeline}
+where the intervention acts at the appliance-decision stage, and with \textbf{full runs} where the
+intervention acts at planning (structural events). Sample sizes are $n=15$ per arm unless noted.
+
+\textbf{Four validity rules (induced from failure).}
+\begin{enumerate}
+\item \textbf{Drift.} LLM-agent continuous behaviour drifts across session time; always compare against a
+\emph{same-era} baseline or rely on \emph{binary/structural} signals (drift-immune).
+\item \textbf{Power.} Continuous magnitudes are unreliable below $n\approx 15$ (TOU: $-17.5\%\rightarrow
++13.1\%\rightarrow -3.2\%$ as $n=3\rightarrow 9\rightarrow 15$). The noise floor is std $\approx 1.0$\,kWh
+($\mathrm{CV}\approx 12\%$); literature-scale effects (3--6\%) are below it.
+\item \textbf{Cross-world.} Mechanistic claims require replication across worlds.
+\item \textbf{Content, not channel.} Preset vs custom injection with \emph{identical content} differ on no
+metric --- the operative variable is the content, not the injection path.
+\end{enumerate}
+
+\section{Results}
+\subsection{Disruption / environment events (cross-world, significant)}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\hline
+\textbf{Event} & \textbf{Evidence} & \textbf{Significance} \\
+\hline
+Heatwave $\rightarrow$ cooling & baseline AC $0/9$ vs heatwave $11/12$ & Fisher two-sided $p\approx 3\times10^{-5}$ \\
+Lockdown $\rightarrow$ stay-home & out-of-home $13/13\rightarrow 1/13$; daytime $+220.7\%$ (n=9) & $p\approx 3\times10^{-6}$; magnitude $p\approx 0.010$ \\
+Cold-snap $\rightarrow$ heating & $0/10$ vs $6/10$ & $p\approx 0.011$ \\
+\hline
+\end{tabular}
+\caption{Disruption events reproduce the robustness argument of Xia et al. (2026). The lockdown daytime
+magnitude is large; we assert only the \emph{direction} (see audit).}
+\end{table}
+
+\subsection{The stay-home family (cross-world, significant)}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\hline
+\textbf{Event} & \textbf{Total-energy change (W1 / W2 / W3)} & \textbf{Significance} \\
+\hline
+Holiday & $+19\%$ \ldots\ $+65\%$ (7 households) & $p\le 0.019$ (7/7 households) \\
+Work-from-home & $+30.6\%$ / $+28.7\%$ / $+30.6\%$ & $p\le 0.014$ (consistent) \\
+Transport strike & $+33.9\%$ / $+22.2\%$ / $+29.3\%$ & $p\le 0.039$ \\
+\hline
+\end{tabular}
+\caption{Three structural ``stay at home'' shocks each significantly raise total energy across three
+worlds. The mechanism is \emph{time-at-home}: the effect scales with how much the household is normally
+\emph{away} during the day (holiday effect vs baseline daytime share $r=-0.47$; weekend-vs-weekday effect
+vs holiday effect $r=0.82$). Weekend reproduces the same effect periodically.}
+\end{table}
+
+\subsection{Price response --- and what makes it work}
+Pure text pricing is \textbf{null} (e.g., TOU peak $-3.2\%$, $n=15$, n.s.). Adding the \textbf{cost-context}
+turns it on:
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\hline
+\textbf{Comparison} & \textbf{Peak 16--21 h} & \textbf{Valley 22--7 h} \\
+\hline
+TOU + cost vs baseline (3 worlds) & $-13.2\%$ / $-5.0\%$ / $-3.5\%$ & $+25.6\%$ / $+8.2\%$ / $+8.8\%$ ($p\le 0.035$) \\
+CPP + cost vs baseline & $-12.2\%$ ($p=0.004$) & $+23.2\%$ \\
+CPR (rebate) + cost vs baseline & $-13.7\%$ & $+27.9\%$ \\
+\textbf{facts-only} cost vs baseline & $-5.5\%$ (n.s.) & $+11.6\%$ ($p=0.019$) \\
+strong (authorized) vs facts-only & $-8.1\%$ ($p=0.031$) & $+12.5\%$ ($p=0.028$) \\
+\hline
+\end{tabular}
+\caption{Concrete per-appliance money figures turn null prices into significant shifting. The money
+figures \emph{alone} already give a significant valley shift; an explicit rescheduling authorization adds
+a further significant peak reduction. Hence the platform responds when the trade-off is made
+\emph{concrete} --- but this is not a clean economic elasticity (see audit).}
+\end{table}
+
+\noindent
+\textbf{Dose-response and heterogeneity.} A larger price gap produces more shifting (peak $-7.3\%$ /
+valley $+14.8\%$, $p\le 0.014$); higher \emph{price-sensitivity} personas shift more (peak $-7.0\%$ /
+valley $+14.6\%$, $p=0.014$), derived deterministically from \texttt{energy\_awareness} and
+conscientiousness. Reward and penalty framing are \textbf{equivalent} (CPR $\approx$ CPP).\\[2pt]
+\textbf{Nulls on the price side.} Demand charge stays null even with concrete figures (it requires a
+\emph{global} ``lower today's maximum'' action the agents do not perform); a ``free electricity'' window is
+nominal but n.s.; multi-day bill feedback is a clean null (no cross-day memory); a uniform electricity tax
+is null.
+
+\subsection{The peak-shaving mechanism}
+Targeting a device shaves the \textbf{total} peak only if the device is \textbf{not substitutable}:
+\begin{itemize}
+\item targeting the \textbf{air-conditioner} (non-substitutable) reduces AC by $\mathbf{-58\%}$
+(device-level, robust); the \emph{total-peak} claim ($-22.5\%$) is \textbf{withdrawn} (\S\ref{sec:audit});
+\item targeting the \textbf{induction cooker} (substitutable) cuts its own load by $-99.7\%$ but the agent
+switches to oven/microwave, leaving the total peak unchanged ($-0.2\%$); the cooker peak tax is null;
+\item targeting the \textbf{water heater} is ineffective (three tests).
+\end{itemize}
+The evening peak is \textbf{cooking-dominated} in most households (induction cooker 27--54\% of the
+window), which is why cook-dominated peaks resist shaving. Two further facts: \textbf{energy-saving
+$\neq$ peak-shaving} (a request can cut AC use while leaving the peak unmoved), and shaving requires a
+\textbf{device $\times$ window} joint anchor (generic window signals do not shave; \texttt{ac\_tax} does).
+The device-targeted dose law (shaving $\propto$ device peak-window load $\times$ behaviour-change rate)
+holds as a trend across worlds.
+
+\subsection{Null / retired results}
+TOU (text), demand charge, uniform tax (Gunkel 2023 alignment attempt), social norms (unstable), loss
+framing (counterexample), in-home display, night setback, storm, energy-crisis, solar-incentive, rebate
+(partial) and free window are \textbf{null}; \texttt{blackout\_risk} / \texttt{price\_hike} are
+\textbf{withdrawn} as baseline-drift artifacts; future-price / community notices are \textbf{world-specific};
+EV subsidy / delay are \textbf{blocked} by the overnight valley ceiling; the substitution effect did
+\textbf{not} replicate on a full 5-member household.
+
+\section{Discussion}
+\textbf{Two classes of behaviour.} The platform is a \textbf{context/instruction responder}, not an
+economic optimizer. Structural shocks that change the \emph{context} (weather, at-home status) produce
+strong, robust, cross-world effects through ordinary commonsense reasoning. Generic prices require an
+economic trade-off the agents do not possess; they respond only when the trade-off is made
+\textbf{concrete} (per-appliance money) and, for peak shaving, \textbf{actionable} (device $\times$ window).
+
+\noindent\textbf{Capability boundary.}
+\begin{itemize}
+\item \emph{Can}: the \textbf{direction} of structural events; \textbf{peak-shifting / valley-filling}
+under concrete pricing; \textbf{device-level} response of non-substitutable appliances.
+\item \emph{Cannot}: literature-scale (3--6\%) price elasticity from text; global (demand-charge) shaving;
+cross-day learning / habit; PV-adoption or EV-valley phenomena.
+\end{itemize}
+
+\noindent\textbf{Alignment with the literature.} Directions align with Faruqui \& Sergici (2010)
+(peak-shifting, CPP/CPR), Xia et al. (2026) (disruption realism), Allcott/Ayres and Costa \& Kahn
+(heterogeneity), Pellerano (2017) (non-additivity / crowding), and Zhou et al. (2016)
+(variability$\rightarrow$response, directionally). Magnitudes \textbf{exceed} empirical values --- consistent
+with LLM \textbf{over-compliance} --- so absolute magnitudes are not claimed; alignment is qualitative.
+
+\noindent\textbf{Prompt-sensitivity is a first-class finding.} ``The platform can analyse prices'' must be
+stated as ``concrete cost information is effective, and an explicit rescheduling authorization strengthens
+peak shaving'': a merely abstract price is null, and raw framing (reward/penalty, gain/loss, social norm)
+is \textbf{flattened} once the window and amount are concrete.
+
+\section{Validity audit (adversarial self-review)}
+\label{sec:audit}
+We re-examined every conclusion and classify it as \textbf{robust / prompt-sensitive / withdrawn}.
+
+\noindent\textbf{Robust (direction).} The seven event results and the null set; all eight primary $p$-values
+survive Benjamini--Hochberg correction across the eight tests (max adjusted $p=0.039$).
+
+\noindent\textbf{Prompt-sensitive (preliminary).}
+\begin{itemize}
+\item \textbf{Price shaving}: partly instruction-driven (facts-only gives valley $+11.6\%$; authorization
+adds peak $-8.1\%$). Do \emph{not} claim pure elasticity.
+\item \textbf{Heatwave}: preset events set a \textbf{structured weather field}, so the effect is not
+purely language-only.
+\item \textbf{Season}: with the date$\rightarrow$season mapping, winter-heating / summer-cooling largely
+follows the prompt's season rule.
+\end{itemize}
+
+\noindent\textbf{Withdrawn / demoted.}
+\begin{itemize}
+\item \textbf{\texttt{ac\_tax} peak $-22.5\%$ is withdrawn}: on a shared timeline the heatwave$\rightarrow$%
+\texttt{+ac\_tax} comparison gives $+6.1\%$ (n.s.); only the \textbf{device-level AC reduction ($-58\%$)}
+is robust.
+\item \texttt{ac\_tax} $\times$ rebate ($n=9$) is \textbf{weak} evidence; the substitution mechanism did
+\textbf{not} replicate; Zhou-variability is directional only ($n=5$).
+\end{itemize}
+
+\noindent\textbf{Cross-cutting risks (documented, partially mitigated).} Over-compliance inflating
+magnitudes; interventions that touch structured fields (weather/season) rather than language alone; a
+house-specific ``generic-event reactivity'' that inflates load; post-hoc prompt tuning; multiple
+comparisons (mitigated by BH-FDR); most experiments simulate a single member; platform-version drift
+during the session.
+
+\section{Limitations}
+\begin{itemize}
+\item Weather beyond the date-derived season and event overrides is a stub; season temperatures are nominal.
+\item Public benchmarks for occupant-driven stochastic load were not used; alignment is qualitative.
+\item Population scale is $\le 5$ households/world; RQ1-at-scale and RQ4 (distillation/cost) are out of scope.
+\item Most experiments are single-member; multi-member validation was done only for a subset.
+\item Absolute magnitudes are inflated by LLM over-compliance and are not claimed.
+\item EV and PV phenomena are structurally blocked (valley ceiling; no adoption mechanism).
+\end{itemize}
+
+\section{Conclusion}
+LLMWorld is an end-to-end, natural-language-intervention testbed whose emergent behaviour we validated
+against the demand-response literature while being explicit about its boundaries. Its reliable outputs are
+the \textbf{direction of structural ``stay-home'' and weather shocks} and \textbf{peak-shifting under
+concrete, per-appliance pricing} --- with peak shaving governed by a \textbf{dose $\times$ substitutability
+$\times$ device/window} mechanism. Equally important is the negative space: text-only prices, global
+demand charges, cross-day learning and PV/EV effects are not attainable, and a previously claimed
+peak-shaving result is withdrawn. We argue this calibrated boundary --- rather than any single effect size
+--- is the contribution that makes LLM-agent energy simulation trustworthy.
+
+\begin{thebibliography}{99}
+\small
+\bibitem{albadi2008} Albadi, M. H., \& El-Saadany, E. F. (2008). A summary of demand response in electricity markets. \emph{EPSR}, 78(11), 1989--1996.
+\bibitem{alexeenko2023} Alexeenko, P., \& Bitar, E. (2023). Achieving reliable coordination of residential plug-in electric vehicle charging: A pilot study. arXiv:2112.04559.
+\bibitem{allcott2011} Allcott, H. (2011). Social norms and energy conservation. \emph{Journal of Public Economics}, 95(9--10), 1082--1095.
+\bibitem{almashor2024} Almashor, M., et al. (2024). Can private LLM agents synthesize household energy consumption data? \emph{Energy and AI}, 16, 100360.
+\bibitem{ayres2013} Ayres, I., Raseman, S., \& Shih, A. (2013). Evidence from two large field experiments that peer comparison feedback can reduce residential energy usage. \emph{JLEO}, 29(5), 992--1022.
+\bibitem{barnes2022} Barnes, J., Islam, M. R., \& Morshed, S. (2022). Passive and active peer effects in the spatial diffusion of residential solar panels. \emph{ERSS}, 86, 102458.
+\bibitem{cabezas2025} Cabezas-Rivi\`ere, N., et al. (2025). Identifying and understanding obstacles to heating sobriety and thermal comfort in collective housing. arXiv:2512.16949.
+\bibitem{capasso1994} Capasso, A., Grattieri, W., Lamedica, R., \& Prudenzi, A. (1994). A bottom-up approach to residential load modeling. \emph{IEEE TPWRS}, 9(2), 957--964.
+\bibitem{chen2025} Chen, H., et al. (2025). Multi-agent consensus seeking via large language models. arXiv:2310.20151.
+\bibitem{chetty2025} Chetty, N., et al. (2025). An LLM framework for inferring household energy consumption through behaviour simulation. \emph{Applied Energy}, 355, 122335.
+\bibitem{costa2010} Costa, D. L., \& Kahn, M. E. (2010). Energy conservation ``nudges'' and environmentalist ideology. \emph{JEEA}, 11(3), 680--702.
+\bibitem{escarrega2025} Escarrega, C., et al. (2025). Demand charge management: Prototype design and testing. arXiv:2509.10713.
+\bibitem{faruqui2010} Faruqui, A., \& Sergici, S. (2010). Household response to dynamic pricing of electricity: A survey of 15 experiments. \emph{Journal of Regulatory Economics}, 38(2), 193--225.
+\bibitem{fidone2025} Fidone, G., et al. (2025). Evaluating online moderation via LLM-powered counterfactual simulations. arXiv:2511.07204.
+\bibitem{ghesla2019} Ghesla, C., Grieder, M., \& Schmitz, J. (2019). Pro-environmental incentives and loss aversion: A field experiment on electricity saving behavior. \emph{Energy Policy}, 128, 102--112.
+\bibitem{gunkel2023} Gunkel, P. A., et al. (2023). Uniform taxation of electricity: Incentives for flexibility and cost redistribution among household categories. arXiv:2306.11566.
+\bibitem{jin2021} Jin, L., et al. (2021). Investigating underlying drivers of variability in residential energy usage patterns with daily load shape clustering of smart meter data. arXiv:2102.11027.
+\bibitem{jessoe2012} Jessoe, K., \& Rapson, D. (2012). Knowledge is (less) power: Experimental evidence from residential energy use. \emph{AER}, 104(4), 1417--1438.
+\bibitem{koley2025} Koley, S. (2025). SALM: A multi-agent framework for language model-driven social network simulation. arXiv:2505.09081.
+\bibitem{michelon2025} Michelon, F., Zhou, Y., \& Morstyn, T. (2025). Large language model interface for home energy management systems. \emph{Applied Energy}, 358, 122590.
+\bibitem{monacchi2015} Monacchi, A., et al. (2015). An open solution to provide personalized feedback for building energy management. arXiv:1505.01311.
+\bibitem{murakami2022} Murakami, K., Shimada, K., \& Tanaka, M. (2022). Heterogeneous treatment effects of nudge and rebate. \emph{Energy Economics}, 105, 105737.
+\bibitem{park2023} Park, J. S., et al. (2023). Generative agents: Interactive simulacra of human behavior. \emph{UIST '23}.
+\bibitem{pellerano2017} Pellerano, J. A., et al. (2017). Do extrinsic incentives undermine social norms? Evidence from a field experiment in energy conservation. \emph{Environmental and Resource Economics}, 67(3), 413--431.
+\bibitem{piao2025} Piao, J., et al. (2025). AgentSociety: Large-scale LLM-driven generative agents. arXiv.
+\bibitem{richardson2010} Richardson, I., Thomson, M., Infield, D., \& Clifford, C. (2010). Domestic electricity use: A high-resolution energy demand model. \emph{Energy and Buildings}, 42(10), 1878--1887.
+\bibitem{schroder2013} Schr\"oder, C., et al. (2013). Household formation and residential energy demand: Evidence from Japan. \emph{Energy Economics}.
+\bibitem{thorvaldsen2021} Thorvaldsen, K., et al. (2021). Long-term value of flexibility from flexible assets in building operation. arXiv:2105.11952.
+\bibitem{wang2023} Wang, X., et al. (2023). Self-consistency improves chain of thought reasoning in language models. \emph{ICLR}.
+\bibitem{wang2021} Wang, Y., et al. (2021). Electricity price and habits: Which would affect household electricity consumption? \emph{Energy Policy}.
+\bibitem{wei2022} Wei, J., et al. (2022). Chain-of-thought prompting elicits reasoning in large language models. \emph{NeurIPS}.
+\bibitem{wei2026} Wei, Y., et al. (2026). Eco3S: Complex socio-economic system simulation via agent-based models. arXiv:2607.26588.
+\bibitem{widen2010} Wid\'en, J., \& W\"ackelg\r{a}rd, E. (2010). A high-resolution stochastic model of domestic activity patterns and electricity demand. \emph{Applied Energy}, 87(6), 1880--1892.
+\bibitem{xia2026} Xia, H., et al. (2026). Empirical grounding improves the realism of LLM agents simulating human behavior during disruptions. arXiv:2607.17437.
+\bibitem{yao2023a} Yao, S., et al. (2023a). ReAct: Synergizing reasoning and acting in language models. \emph{ICLR}.
+\bibitem{yao2023b} Yao, S., et al. (2023b). Tree of thoughts: Deliberate problem solving with large language models. \emph{NeurIPS}.
+\bibitem{zhang2026} Zhang, et al. (2026). CoRenew: A large language model agent-based policy simulation platform for multifamily residential redevelopment. arXiv:2607.25447.
+\bibitem{zhou2016} Zhou, D., Balandat, M., \& Tomlin, C. (2016). Residential demand response targeting using machine learning with observational data. arXiv:1607.00595.
+\end{thebibliography}
+
+\appendix
+\section{Reproducibility}
+The repository contains \texttt{run.py}, \texttt{src/engine/\{policy,tariff,news,social,weather\}.py},
+\texttt{src/steps/\{world,simulate\}/*}, \texttt{src/analyze/*}, 298 offline unit tests (\texttt{tests/}),
+and the full experimental record \texttt{reports/R001--R222}. All interventions are natural-language only;
+the intervention surface and the four validity rules are exercised throughout the reports.
+
+\end{document}

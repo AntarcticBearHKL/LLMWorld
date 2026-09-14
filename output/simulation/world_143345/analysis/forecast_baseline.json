@@ -1,0 +1,17 @@
+{
+  "households": 1,
+  "per_house": [
+    {
+      "train_days": 5,
+      "test_days": 2,
+      "mae_kw": 82.7972,
+      "mape": 0.1963,
+      "naive_mae_kw": 193.1732,
+      "naive_mape": 0.5866,
+      "improvement_pct": 57.14,
+      "house_id": "house_0003"
+    }
+  ],
+  "world_id": "world_143345",
+  "scenario": "baseline"
+}

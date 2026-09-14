@@ -2,14 +2,9 @@
   "events": [
     {
       "date": "2026-09-11",
-      "title": "Peak air-conditioner request",
-      "content": "To help balance the grid this evening, please avoid using your air conditioner between 5pm and 8pm today."
-    },
-    {
-      "date": "2026-09-11",
-      "title": "Heatwave warning",
-      "content": "A severe heatwave is forecast, with daytime temperatures above 38C for the next three days.",
-      "template": "heatwave"
+      "title": "Transport strike",
+      "content": "A public transport strike means many people cannot commute to work today and are staying at home.",
+      "template": "transport_strike"
     }
   ]
 }

@@ -2,9 +2,27 @@
   "events": [
     {
       "date": "2026-09-11",
-      "title": "Severe storm",
-      "content": "A severe storm is expected this evening, with possible local power outages.",
-      "template": "storm"
+      "title": "Heatwave warning",
+      "content": "A severe heatwave is forecast, with daytime temperatures above 38C for the next three days.",
+      "template": "heatwave"
+    },
+    {
+      "date": "2026-09-12",
+      "title": "Heatwave warning",
+      "content": "A severe heatwave is forecast, with daytime temperatures above 38C for the next three days.",
+      "template": "heatwave"
+    },
+    {
+      "date": "2026-09-11",
+      "title": "Air-conditioner peak tax",
+      "content": "A 10% tax on air-conditioner use during the evening peak takes effect today.",
+      "template": "ac_tax"
+    },
+    {
+      "date": "2026-09-12",
+      "title": "Air-conditioner peak tax",
+      "content": "A 10% tax on air-conditioner use during the evening peak takes effect today.",
+      "template": "ac_tax"
     }
   ]
 }
