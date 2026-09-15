@@ -12,14 +12,19 @@ from __future__ import annotations
 import json
 import os
 import threading
-from contextlib import asynccontextmanager
+from contextlib import AbstractAsyncContextManager, asynccontextmanager
+from typing import Callable, Optional
 
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.types import ASGIApp, Receive, Scope, Send
 
 from .paths import LLMWORLD_ROOT, OUTPUT_DIR, WEB_DIST
+
+# Set when the MCP app mounts below; the lifespan runs its session manager.
+_mcp_session_lifespan: Optional[Callable[[], AbstractAsyncContextManager[None]]] = None
 
 
 @asynccontextmanager
@@ -27,7 +32,11 @@ async def lifespan(_app: FastAPI):
     from . import store
 
     threading.Thread(target=store.list_run_summaries, daemon=True).start()
-    yield
+    if _mcp_session_lifespan is None:
+        yield
+    else:
+        async with _mcp_session_lifespan():
+            yield
 
 
 app = FastAPI(title="LLMWorld Research Console", version="0.1.0", lifespan=lifespan)
@@ -36,8 +45,28 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*", "Mcp-Session-Id", "Mcp-Protocol-Version", "Mcp-Trace-Id"],
+    expose_headers=["Mcp-Session-Id"],
 )
+
+
+class _McpPathNormalizer:
+    """Serve the bare '/mcp' path without Starlette's 307 redirect to '/mcp/'.
+
+    Some MCP clients refuse to follow redirects, so the path is rewritten before
+    routing and the mount matches '/mcp' directly.
+    """
+
+    def __init__(self, app: ASGIApp) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] == "http" and scope.get("path") == "/mcp":
+            scope = {**scope, "path": "/mcp/"}
+        await self.app(scope, receive, send)
+
+
+app.add_middleware(_McpPathNormalizer)
 
 ATTACHED: list[str] = []
 MISSING: list[str] = []
@@ -73,6 +102,15 @@ try:
     ATTACHED.append("build")
 except Exception as exc:  # keep the app bootable during parallel work
     MISSING.append(f"build: {exc}")
+
+try:
+    from . import mcp_server as _mcp
+
+    app.mount("/mcp", _mcp.asgi_app)
+    _mcp_session_lifespan = _mcp.session_lifespan
+    ATTACHED.append("mcp")
+except Exception as exc:  # noqa: BLE001 - keep the dashboard bootable if MCP fails
+    MISSING.append(f"mcp: {exc}")
 
 
 @app.get("/api/health")

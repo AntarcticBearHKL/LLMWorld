@@ -94,6 +94,50 @@
 - **验收门**：`npx tsc -b` / `npm run build` / `npm run lint` 均 exit 0；红线扫描 0 违规。
 - **待做（M5 余项）**：世界详情容器（构建 / 模拟 / 观看 三模式）、观看内 `小镇/网格/详情` 密度切换、`?mode=`/`?density=` 参数。
 
+### M6 验收 — ✅ PASS（同端口 MCP，零 LLM 端到端；LLM 路径受 402 阻塞）
+
+- **交付物**：
+  - 新增 `backend/mcp_server.py`：`mcp.server.MCPServer(name="llmworld")` + **18 个手写工具**（无 OpenAPI 自动转换），全部复用既有后端服务。
+  - `backend/main.py`：`app.mount("/mcp", asgi_app)` 走既有 **defensive try/except** 模式（成功 → `ATTACHED`，失败 → `MISSING`）；
+    lifespan 内 `async with server.session_manager.run()`（Starlette 不会运行挂载子应用的 lifespan）；
+    CORS 增 `expose_headers=["Mcp-Session-Id"]` 并显式放行 `Mcp-*` 请求头；
+    新增纯 ASGI `_McpPathNormalizer` 把裸 `/mcp` 改写为 `/mcp/`，**消除 307**（部分 MCP 客户端不跟随重定向）。
+  - `requirements.txt`：新增 `mcp>=2.0`。
+- **工具清单（18）**：`list_worlds` `create_world` `delete_world` `get_build_state` `get_build_preview` `run_build_step`
+  `list_jobs` `get_job` `cancel_job` `list_llm_calls` `get_llm_call` `get_artifact` `put_artifact`
+  `list_runs` `get_run_meta` `run_simulation` `get_day_replay` `get_snapshot`。
+  - 复用映射：`store.list_worlds`/`list_runs`/`run_meta`；`world_admin.create_world/delete_world/build_state/build_preview`；
+    `jobs.create_job`（build/simulate，`confirm=True` 才放行）/`list_jobs`/`get_job`/`cancel_job`；
+    `llm_trace.list_calls`/`get_call`；`artifacts.read_artifact`/`write_artifact`；`derive.build_day_replay`/`build_snapshot`。
+  - token 把关：`run_build_step`/`run_simulation` 均带 `confirm: bool = False`，未确认即明确拒绝（与 REST 一致）。
+- **证据（真实 MCP 客户端，`%TEMP%\mcp_probe.py`，连 `http://127.0.0.1:8000/mcp`）**：
+  - `initialize` → server `llmworld@0.1.0`；`tools/list` → **18** 个，名字与上表完全一致。
+  - `list_worlds` → `isError=false`。
+  - `create_world {world_id:"m6_probe_59610"}` → `{created:true, world_dir:output/worlds/m6_probe_59610}`（零 LLM）。
+  - `get_build_state` → `exists=true`，`types.runnable=true`，其余三步 `blocked_reason` 正确。
+  - `run_build_step {step:"types"}`（缺 confirm）→ `isError=true`，文本：
+    `refusing to run a token-costly build step: pass confirm=True …`。
+  - `delete_world` → `{existed:true, deleted:true, moved_to:output/_trash/m6_probe_59610_20260915_180650}`。
+- **认证**：`MCP_TOKEN` 未设置 → `/mcp` 直接可用（localhost）；设置后由 `BearerTokenGate` 强制
+  `Authorization: Bearer <MCP_TOKEN>`。进程内实测：无头/错头 → **401**（`WWW-Authenticate: Bearer`，响应体不含 token）；
+  正确头 → 200；令牌未设置 → 透明放行。token 从不打印/记录。
+- **传输/跨域**：非 localhost `Host` → **421**；`OPTIONS` 预检 200 且 `access-control-allow-headers` 回显 `mcp-session-id,…`；
+  简单响应含 `access-control-expose-headers: Mcp-Session-Id`；裸 `POST /mcp` → **400**（非 307，重定向已消除）。
+- **验收门**：后端 `py_compile` 全绿；红线扫描 0 违规；`/api/health` → `routers=[…,"mcp"]`、`missing_routers=[]`（dashboard 仍正常）。
+- **环境说明（必要兼容）**：本机 dev server 的解释器把 venv `site-packages` 经 `sys.path` 注入而非 `site.addsitedir`，
+  导致 `pywin32.pth` 未执行、`import mcp` 在 `pywintypes` 处失败。`mcp_server.py` 在 import `mcp` 前做了**幂等的 `.pth` 补偿**
+  （仅当 `pywintypes` 不可导入时触发），恢复 site 本会做的路径注册。
+- **客户端配置**（根键不同！）：
+  ```jsonc
+  // Claude Code / Cursor —— 根键 "mcpServers"
+  { "mcpServers": { "llmworld": { "type": "http", "url": "http://127.0.0.1:8000/mcp",
+    "headers": { "Authorization": "Bearer ${MCP_TOKEN}" } } } }
+  // VS Code —— 根键是 "servers"，不是 "mcpServers"
+  { "servers": { "llmworld": { "type": "http", "url": "http://127.0.0.1:8000/mcp" } } }
+  ```
+- **待补（受 402 阻塞）**：`run_build_step`/`run_simulation` 的 **LLM 成功路径**（与 M2/M5 同因账户余额耗尽），
+  `confirm=True` 的作业提交与状态机已由 REST/M2 证；MCP 侧复用同一 `jobs.create_job` 路径。
+
 ### ⚠️ 外部阻塞：DeepSeek API **402 Insufficient Balance**
 
 **账户余额耗尽**，导致 `types/personas/household` 的 **LLM 成功路径无法实测**。
@@ -109,7 +153,7 @@
 | **M3** | `LLM_TRACE_FILE` 接入 + `StepInspector` 通用化 | 每步可见 prompt / 原始响应 / 耗时 / 失败原因 | ✅ **PASS（本会话，真实 402 trace 端到端浏览器核对）** |
 | **M4** | 产物读写接口：`.bak.<ts>` + JSON 校验 + diff | 手改 `household.json` 后下一步骤使用改后内容 | ✅ **PASS（本会话，3→4 成员实测通过）** |
 | **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | 🟡 **部分完成**：构建工作区 + `?world=&step=` URL 复现**已交付并实测**；世界详情三模式 / 观看内密度切换待做 |
-| **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ⬜ |
+| **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ✅ **PASS（本会话，MCP 客户端端到端；LLM 需余额恢复）** |
 | **M7** | 设置面板 + 死配置清理 + 真重试 | 面板改 `MODEL` 后下一次调用生效 | ⬜ |
 | **M8** | 开源化：git 清理、LICENSE、README、`.env.example`、编码修复 | 新克隆一条命令跑起来，不含 1.1 GB 数据与密钥 | 🔴 阻塞（§12.4 决策 1/2） |
 
@@ -119,7 +163,7 @@
 |---|---|---|
 | 1 | `import/` ≈1.09 GB 人格 CSV（已跟踪）：LFS / 下载脚本 / 移出仓库 | ⬜ 待用户 |
 | 2 | LICENSE：MIT / Apache-2.0 / GPL-3.0 | ⬜ 待用户 |
-| 3 | MCP 认证：纯 localhost / 静态 Bearer（推荐） | ⬜ 待用户（阻塞 M6） |
+| 3 | MCP 认证：纯 localhost / 静态 Bearer（推荐） | ✅ **已实现「超集」**：默认纯 localhost（非 localhost → 421）+ 设 `MCP_TOKEN` 则强制 Bearer（401）；两个选项均覆盖，可随时切换 |
 | 4 | 6 个未提交后端文件：验证后收编 / 回滚 | ✅ **已决策：收编（已验证）** |
 | 5 | 「停掉所有开发任务」范围 | ⬜ 待用户 |
 
