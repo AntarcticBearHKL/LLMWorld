@@ -6,6 +6,8 @@
  * 就编译失败。glob 会丢掉类型，只能靠断言，那正是我们要避免的。
  */
 import type {
+  BuildPreview,
+  BuildState,
   DayReplay,
   HouseholdInfo,
   RoomInfo,
@@ -117,6 +119,55 @@ export const mockStages: Record<string, StagePayload> = {
   "world_838587/2026-09-11/house_0001/Member 2": stages2,
   "world_838587/2026-09-11/house_0001/Member 3": stages3,
   "world_838587/2026-09-11/house_0001/Member 4": stages4,
+}
+
+/** mock 模式没有构建产物：一律按「空世界、尚未开始」返回，供 UI 走正常态演示。 */
+export function mockBuildState(worldId: string): BuildState {
+  const exists = mockWorlds.some((item) => item.world_id === worldId)
+  return {
+    world_id: worldId,
+    world_dir: `mock://worlds/${worldId}`,
+    exists,
+    houses: [],
+    steps: [
+      {
+        step: "types",
+        scope: "world",
+        done: false,
+        runnable: exists,
+        blocked_reason: exists ? null : "world directory is missing",
+        houses: [],
+      },
+      {
+        step: "personas",
+        scope: "house",
+        done: false,
+        runnable: false,
+        blocked_reason: "no households yet; run 'types' first",
+        houses: [],
+      },
+      {
+        step: "household",
+        scope: "house",
+        done: false,
+        runnable: false,
+        blocked_reason: "no households yet; run 'personas' first",
+        houses: [],
+      },
+      {
+        step: "assemble",
+        scope: "house",
+        done: false,
+        runnable: false,
+        blocked_reason: "no households yet; run 'household' first",
+        houses: [],
+      },
+    ],
+  }
+}
+
+export function mockBuildPreview(worldId: string, step: string, house: string | null): BuildPreview {
+  return { world_id: worldId, step, house, reads: [], writes: [], overwrites: [] }
 }
 
 export const mockHouseholdKey = (run: string, house: string) => `${run}/${house}`

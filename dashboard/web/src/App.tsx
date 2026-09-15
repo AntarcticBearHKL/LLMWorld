@@ -20,6 +20,7 @@ const SceneView = lazy(() =>
 import { SceneFallback } from "@/scene/views/SceneFallback"
 import { SnapshotPanel } from "@/components/SnapshotPanel"
 import { TimeController } from "@/components/TimeController"
+import { WorldBuilder } from "@/components/WorldBuilder"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useBootstrapSelection } from "@/hooks/useBootstrapSelection"
@@ -40,6 +41,7 @@ const VIEWS: ReadonlyArray<{
   { key: "grid", label: "住户网格", hint: "每个方格是一户，点击查看成员", group: "observe" },
   { key: "detail", label: "住户详情", hint: "逐格查看每人每台电器", group: "observe" },
   { key: "generate", label: "生成", hint: "可控生成世界（消耗额度）", group: "control" },
+  { key: "build", label: "构建", hint: "手动分步构建世界：类型 → 人格 → 家庭 → 装配", group: "control" },
   { key: "simulate", label: "模拟", hint: "逐户逐天推进模拟（消耗额度）", group: "control" },
   { key: "jobs", label: "任务", hint: "作业状态与实时日志", group: "control" },
 ]
@@ -206,6 +208,12 @@ export default function App() {
         {view === "generate" ? (
           <div className="mx-auto h-full w-full max-w-3xl overflow-y-auto rounded-lg border border-border bg-surface">
             <GenerateWizard />
+          </div>
+        ) : null}
+
+        {view === "build" ? (
+          <div className="flex h-full min-h-0 flex-col">
+            <WorldBuilder />
           </div>
         ) : null}
 

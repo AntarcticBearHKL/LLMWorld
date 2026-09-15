@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
@@ -41,6 +41,7 @@ export function useCreateJob() {
     mutationFn: (payload: JobRequest) => createJob(payload),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: jobKeys.list })
+      void queryClient.invalidateQueries({ queryKey: ["worlds"] })
     },
   })
 }
@@ -93,12 +94,22 @@ export function useJobLog(jobId: string | null) {
 
 /** 一个作业的 LLM 调用清单；live=true 时快轮询（构建作业运行中，trace 持续增长）。 */
 export function useJobLlmCalls(jobId: string | null, live = false) {
-  return useQuery({
+  const queryClient = useQueryClient()
+  const wasLive = useRef(live)
+  const query = useQuery({
     queryKey: jobKeys.llmCalls(jobId ?? ""),
     queryFn: () => listJobLlmCalls(jobId ?? ""),
     enabled: jobId !== null,
     refetchInterval: live ? 3000 : false,
   })
+  useEffect(() => {
+    // 作业刚结束：轮询已停，但 trace 通常在最后才落盘 —— 补拉一次，避免停在空结果。
+    if (wasLive.current && !live && jobId !== null) {
+      void queryClient.invalidateQueries({ queryKey: jobKeys.llmCalls(jobId) })
+    }
+    wasLive.current = live
+  }, [live, jobId, queryClient])
+  return query
 }
 
 export function useJobLlmCall(jobId: string | null, callId: string | null) {

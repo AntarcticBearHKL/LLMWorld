@@ -275,6 +275,64 @@ export interface JobCreateResult {
   estimate: JobEstimate
 }
 
+export interface WorldCreateRequest {
+  world_id: string
+  world_config?: string | null
+  seed?: number | null
+}
+
+export interface WorldCreateResult {
+  world_id: string
+  world_dir: string
+  created: boolean
+}
+
+export interface WorldDeleteResult {
+  world_id: string
+  existed: boolean
+  deleted: boolean
+  moved_to: string | null
+}
+
+export interface ArtifactRef {
+  path: string
+  exists: boolean
+  role: "input" | "output"
+}
+
+export interface BuildPreview {
+  world_id: string
+  step: string
+  house: string | null
+  reads: ArtifactRef[]
+  writes: ArtifactRef[]
+  overwrites: string[]
+}
+
+export interface HouseStepStatus {
+  house: string
+  done: boolean
+  runnable: boolean
+  blocked_reason: string | null
+}
+
+export interface BuildStepStatus {
+  step: string
+  scope: "world" | "house"
+  done: boolean
+  runnable: boolean
+  blocked_reason: string | null
+  houses: HouseStepStatus[]
+}
+
+export interface BuildState {
+  world_id: string
+  world_dir: string
+  exists: boolean
+  houses: string[]
+  steps: BuildStepStatus[]
+}
+
 export interface LLMCallSummary {
   logical_call_id: string
   request_index: number

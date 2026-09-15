@@ -78,6 +78,22 @@
     House_0001 仍恰好 1 条（M2 去重未破）。
 - 前端编辑器 UI 归入 M5（世界详情构建面板）；M4 交付为**接口**，同时供 M6 的 `get_artifact`/`put_artifact` 复用。
 
+### M5 验收 — 🟡 部分完成（构建工作区 + URL 复现已交付）
+
+- **新增「构建」工作区**（`WorldBuilder.tsx` + `BuildStepCard.tsx` + `BuildPreviewList.tsx` + `useWorldBuild.ts`）：
+  世界列表（`GET /worlds`）→ 新建空世界（`POST /worlds`，零 LLM）→ 删除（`DELETE`，可恢复）；
+  右侧 4 步 stepper（类型/人格/家庭/装配）显示 `done/runnable/blocked_reason` + 住户级状态；
+  每步 `运行` 经既有 `JobSubmitBar`（估算 → 确认 → 提交，`kind:"build"`）；读写预览 `GET .../preview`；
+  每步挂 `StepInspector` 显示 LLM 交互（M3）。
+- **URL 复现**：`?view=build&world=<W>&step=<S>`（`store/time.ts` 加 `build` 视图 + `world`/`step`；`useUrlSync.ts` PARAM_ORDER 扩展）。
+- **证据（真实数据，浏览器 live 构建）**：新建空世界 `m5_probe`（`0 户 · world 目录已就绪`）→ stepper 正确门控
+  （类型可运行；其余 `blocked_reason`）→ 预览 `world.json`/`info.md` EXISTS、`household_types.json` MISSING →
+  估算 `1 次 LLM 调用` → 提交 `types` → 402 失败被可读渲染（`最近一次失败：… 402 …`）+
+  `StepInspector` 显示 `#1 HTTP 402 失败 697ms · 5.6k 字符` + 模型 `deepseek-v4-flash` + 完整提示词。
+- **修复**：`useJobLlmCalls` 在作业由「运行中」转「终态」时补拉一次（否则轮询停止后停在空结果 —— 已实测复现并修复）。
+- **验收门**：`npx tsc -b` / `npm run build` / `npm run lint` 均 exit 0；红线扫描 0 违规。
+- **待做（M5 余项）**：世界详情容器（构建 / 模拟 / 观看 三模式）、观看内 `小镇/网格/详情` 密度切换、`?mode=`/`?density=` 参数。
+
 ### ⚠️ 外部阻塞：DeepSeek API **402 Insufficient Balance**
 
 **账户余额耗尽**，导致 `types/personas/household` 的 **LLM 成功路径无法实测**。
@@ -92,7 +108,7 @@
 | **M2** | 4 步构建接口 + job 化 + s4 去重 + 失败兜底 | 逐步骤跑完一户；重跑 s4 不重复 | ✅ **PASS（§12.0 口径）**；LLM 成功路径待余额恢复补验 |
 | **M3** | `LLM_TRACE_FILE` 接入 + `StepInspector` 通用化 | 每步可见 prompt / 原始响应 / 耗时 / 失败原因 | ✅ **PASS（本会话，真实 402 trace 端到端浏览器核对）** |
 | **M4** | 产物读写接口：`.bak.<ts>` + JSON 校验 + diff | 手改 `household.json` 后下一步骤使用改后内容 | ✅ **PASS（本会话，3→4 成员实测通过）** |
-| **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | ⬜ |
+| **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | 🟡 **部分完成**：构建工作区 + `?world=&step=` URL 复现**已交付并实测**；世界详情三模式 / 观看内密度切换待做 |
 | **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ⬜ |
 | **M7** | 设置面板 + 死配置清理 + 真重试 | 面板改 `MODEL` 后下一次调用生效 | ⬜ |
 | **M8** | 开源化：git 清理、LICENSE、README、`.env.example`、编码修复 | 新克隆一条命令跑起来，不含 1.1 GB 数据与密钥 | 🔴 阻塞（§12.4 决策 1/2） |

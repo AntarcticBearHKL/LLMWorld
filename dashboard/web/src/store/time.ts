@@ -4,11 +4,11 @@ import { DAY_MINUTES, MINUTES_PER_SECOND_AT_1X, SPEED_PRESETS, clampMinute, snap
 
 export const DEFAULT_POLICY = "baseline"
 
-export type ViewKey = "scene" | "grid" | "detail" | "generate" | "simulate" | "jobs"
+export type ViewKey = "scene" | "grid" | "detail" | "generate" | "build" | "simulate" | "jobs"
 
 export const DEFAULT_VIEW: ViewKey = "grid"
 
-const VIEW_KEYS = new Set<string>(["scene", "grid", "detail", "generate", "simulate", "jobs"])
+const VIEW_KEYS = new Set<string>(["scene", "grid", "detail", "generate", "build", "simulate", "jobs"])
 
 const readView = (value: string | null): ViewKey =>
   value !== null && VIEW_KEYS.has(value) ? (value as ViewKey) : DEFAULT_VIEW
@@ -33,6 +33,8 @@ export interface TimeState {
   house: string
   policy: string
   view: ViewKey
+  world: string
+  step: string
   selectedMember: string | null
   carry: number
   stepMinutes: number
@@ -50,6 +52,8 @@ export interface TimeState {
   setHouse: (house: string) => void
   setPolicy: (policy: string) => void
   setView: (view: ViewKey) => void
+  setWorld: (world: string) => void
+  setStep: (step: string) => void
   setSelectedMember: (member: string | null) => void
   setSelection: (selection: { run?: string; date?: string; house?: string; policy?: string }) => void
   reset: () => void
@@ -63,6 +67,8 @@ const readInitial = () => {
     house: "",
     policy: DEFAULT_POLICY,
     view: DEFAULT_VIEW,
+    world: "",
+    step: "",
   }
   if (typeof window === "undefined") return fallback
   const params = new URLSearchParams(window.location.search)
@@ -74,6 +80,8 @@ const readInitial = () => {
     house: params.get("house") ?? "",
     policy: params.get("policy") ?? DEFAULT_POLICY,
     view: readView(params.get("view")),
+    world: params.get("world") ?? "",
+    step: params.get("step") ?? "",
   }
 }
 
@@ -90,6 +98,8 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
   house: initial.house,
   policy: initial.policy,
   view: initial.view,
+  world: initial.world,
+  step: initial.step,
   selectedMember: null,
   carry: 0,
   stepMinutes: 10,
@@ -149,6 +159,10 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
   setPolicy: (policy) => set({ policy }),
 
   setView: (view) => set({ view }),
+
+  setWorld: (world) => set({ world }),
+
+  setStep: (step) => set({ step }),
 
   setSelectedMember: (member) => set({ selectedMember: member }),
 

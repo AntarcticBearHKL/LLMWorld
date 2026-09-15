@@ -5,6 +5,9 @@
  * 组件层不需要知道数据来自哪里。切换开关：VITE_USE_MOCK。
  */
 import type {
+  BuildPreview,
+  BuildState,
+  BuildStep,
   DayReplay,
   HouseholdInfo,
   JobCreateResult,
@@ -19,9 +22,14 @@ import type {
   Snapshot,
   SnapshotHouse,
   StagePayload,
+  WorldCreateRequest,
+  WorldCreateResult,
+  WorldDeleteResult,
   WorldInfo,
 } from "@/api/types"
 import {
+  mockBuildPreview,
+  mockBuildState,
   mockHouseholdKey,
   mockHouseholds,
   mockReplays,
@@ -92,6 +100,16 @@ async function postJson<T>(path: string, payload: unknown): Promise<T> {
   return (await response.json()) as T
 }
 
+async function deleteJson<T>(path: string): Promise<T> {
+  const url = buildUrl(path)
+  const response = await fetch(url, { method: "DELETE", headers: { accept: "application/json" } })
+  if (!response.ok) {
+    const body = await response.text().catch(() => "")
+    throw new ApiError(url, response.status, body || `删除失败（HTTP ${response.status}）`)
+  }
+  return (await response.json()) as T
+}
+
 const delay = <T>(value: T): Promise<T> =>
   new Promise((resolve) => {
     setTimeout(() => resolve(value), 0)
@@ -142,6 +160,41 @@ export function listWorlds(): Promise<WorldInfo[]> {
 export function getWorld(world: string): Promise<WorldInfo> {
   if (USE_MOCK) return delay(mockWorld)
   return request<WorldInfo>(`/worlds/${encodeURIComponent(world)}`)
+}
+
+/* ------------------------------------------------------------------ *
+ * 世界生命周期 + 分步构建
+ * ------------------------------------------------------------------ */
+
+export function createWorld(payload: WorldCreateRequest): Promise<WorldCreateResult> {
+  if (USE_MOCK) {
+    return Promise.reject(
+      new ApiError("mock:/worlds", 501, "mock 模式不创建世界，请设置 VITE_USE_MOCK=0"),
+    )
+  }
+  return postJson<WorldCreateResult>("/worlds", payload)
+}
+
+export function deleteWorld(world: string): Promise<WorldDeleteResult> {
+  if (USE_MOCK) {
+    return Promise.reject(
+      new ApiError(`mock:/worlds/${world}`, 501, "mock 模式不删除世界，请设置 VITE_USE_MOCK=0"),
+    )
+  }
+  return deleteJson<WorldDeleteResult>(`/worlds/${encodeURIComponent(world)}`)
+}
+
+export function getBuildState(world: string): Promise<BuildState> {
+  if (USE_MOCK) return delay(mockBuildState(world))
+  return request<BuildState>(`/worlds/${encodeURIComponent(world)}/build`)
+}
+
+export function getBuildPreview(world: string, step: BuildStep, house?: string): Promise<BuildPreview> {
+  if (USE_MOCK) return delay(mockBuildPreview(world, step, house ?? null))
+  return request<BuildPreview>(
+    `/worlds/${encodeURIComponent(world)}/build/steps/${encodeURIComponent(step)}/preview`,
+    { house },
+  )
 }
 
 /* ------------------------------------------------------------------ *
