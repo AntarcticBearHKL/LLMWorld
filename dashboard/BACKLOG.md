@@ -153,6 +153,22 @@
 - **回归**：`python -m unittest discover -s tests` → **Ran 298 tests, OK**（src 改动未破坏研究）。
 - **验收门**：`py_compile` 全绿；`npx tsc -b` / `npm run build` / `npm run lint` exit 0；红线扫描 0 违规。
 
+### M8 验收 — 🟡 部分完成（文档齐备；LFS 迁移待批）
+
+- **已交付（安全、无历史改写）**：
+  - 根 `LICENSE`（**MIT**，用户决策 #2）；
+  - 根 `README.md`（一条命令起服务 + MCP 客户端配置 + 研究用法 + 测试 + 数据/LFS 说明）；
+  - `.env.example`（仅键名与占位，**不含任何密钥**；含 6 个 `LLMWORLD_*` 旋钮 + `MCP_TOKEN`）；
+  - `import/README.md`（数据来源说明：`world/Melbourne/3168` 源自 ABS 2021 普查 CC BY 4.0；
+    `persona/synthetic_*.csv` 为**合成**属性表、上游来源未记录，需作者确认）。
+- **核验纠偏（对 §12.2 的两处修正）**：
+  - `import/` 实测 **1048 MB / 45 文件**（≈1.09 GB 属实）；
+  - `stats.csv` **整文件合法 UTF-8**（BOM + 6,778,936 B 全量 `decode('utf-8')` 通过；`gbk` 在 byte 79 失败）
+    → §12.2 的「GBK 乱码」为**控制台显示假象**，**无需改编码**；
+  - `dimension_map.json` **确不存在**，但 `reader.py`/`sampler.py` 缺失时**优雅回退英文标签**（不崩），故非阻塞。
+- **阻塞（需用户批准）**：让 `import/` 真正「新克隆不含 1.1 GB」需 `git lfs migrate import`（**重写历史**），
+  而 §12.0 明令「禁止 `rebase`/`filter-branch`/`gc --prune`」（为保留 `output/` 可恢复）。二者冲突 → 见 §12.4 决策 #1。
+
 ### ⚠️ 外部阻塞：DeepSeek API **402 Insufficient Balance**
 
 **账户余额耗尽**，导致 `types/personas/household` 的 **LLM 成功路径无法实测**。
@@ -170,17 +186,17 @@
 | **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | 🟡 **部分完成**：构建工作区 + `?world=&step=` URL 复现**已交付并实测**；世界详情三模式 / 观看内密度切换待做 |
 | **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ✅ **PASS（本会话，MCP 客户端端到端；LLM 需余额恢复）** |
 | **M7** | 设置面板 + 死配置清理 + 真重试 | 面板改 `MODEL` 后下一次调用生效 | ✅ **PASS（本会话，UI 保存→config 生效实测；298 测试仍绿）** |
-| **M8** | 开源化：git 清理、LICENSE、README、`.env.example`、编码修复 | 新克隆一条命令跑起来，不含 1.1 GB 数据与密钥 | 🔴 阻塞（§12.4 决策 1/2） |
+| **M8** | 开源化：git 清理、LICENSE、README、`.env.example`、编码修复 | 新克隆一条命令跑起来，不含 1.1 GB 数据与密钥 | 🟡 **部分完成**：MIT `LICENSE` + 根 `README.md` + `.env.example` + `import/README.md`（数据说明）**已交付**；**LFS 迁移受 §12.0「禁止重写历史」阻塞（待批）**；`stats.csv` 经字节级核验**本就是合法 UTF-8**（§12.2 的「GBK 乱码」为控制台显示假象） |
 
 ## 2. §12.4 其余待决策
 
 | # | 决策 | 状态 |
 |---|---|---|
-| 1 | `import/` ≈1.09 GB 人格 CSV（已跟踪）：LFS / 下载脚本 / 移出仓库 | ⬜ 待用户 |
-| 2 | LICENSE：MIT / Apache-2.0 / GPL-3.0 | ⬜ 待用户 |
+| 1 | `import/` ≈1.09 GB 人格 CSV（已跟踪）：LFS / 下载脚本 / 移出仓库 | ✅ **已决策：Git LFS**；⚠️ 真正迁移（`git lfs migrate`）会**重写历史**，与 §12.0「禁止 rebase/filter-branch/gc --prune」冲突 → **待用户批准重写** |
+| 2 | LICENSE：MIT / Apache-2.0 / GPL-3.0 | ✅ **已决策：MIT**（根 `LICENSE` 已加） |
 | 3 | MCP 认证：纯 localhost / 静态 Bearer（推荐） | ✅ **已实现「超集」**：默认纯 localhost（非 localhost → 421）+ 设 `MCP_TOKEN` 则强制 Bearer（401）；两个选项均覆盖，可随时切换 |
 | 4 | 6 个未提交后端文件：验证后收编 / 回滚 | ✅ **已决策：收编（已验证）** |
-| 5 | 「停掉所有开发任务」范围 | ⬜ 待用户 |
+| 5 | 「停掉所有开发任务」范围 | ✅ 按 §12 边界默认**仅 dashboard**（不碰研究闭环） |
 
 ## 3. 验收门（§12.5.4）
 
