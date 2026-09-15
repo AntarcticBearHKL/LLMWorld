@@ -351,9 +351,9 @@ def get_llm_call(job_id: str, call_id: str) -> dict[str, Any]:
         "(e.g. 'house_0001/household.json'). JSON is parsed into data."
     )
 )
-def get_artifact(world: str, path: str) -> dict[str, Any]:
+def get_artifact(world_id: str, path: str) -> dict[str, Any]:
     try:
-        return artifacts.read_artifact(world, path).model_dump(mode="json")
+        return artifacts.read_artifact(world_id, path).model_dump(mode="json")
     except ValueError as exc:
         raise ToolError(str(exc)) from exc
 
@@ -365,9 +365,9 @@ def get_artifact(world: str, path: str) -> dict[str, Any]:
         "a unified diff is returned."
     )
 )
-def put_artifact(world: str, path: str, content: str) -> dict[str, Any]:
+def put_artifact(world_id: str, path: str, content: str) -> dict[str, Any]:
     try:
-        return artifacts.write_artifact(world, path, content).model_dump(mode="json")
+        return artifacts.write_artifact(world_id, path, content).model_dump(mode="json")
     except ValueError as exc:
         raise ToolError(str(exc)) from exc
 
@@ -395,7 +395,7 @@ def get_run_meta(run: str) -> dict[str, Any]:
     )
 )
 def run_simulation(
-    world: str,
+    world_id: str,
     date: Optional[str] = None,
     days: Optional[int] = None,
     house: Optional[str] = None,
@@ -414,7 +414,7 @@ def run_simulation(
         )
     request = JobRequest(
         kind="simulate",
-        world=world,
+        world=world_id,
         date=date,
         days=days,
         house=house,
