@@ -17,8 +17,22 @@ interface MultiHouseGridProps {
 export function MultiHouseGrid({ onOpen }: MultiHouseGridProps) {
   const minute = useTimeStore((state) => state.minute)
   const house = useTimeStore((state) => state.house)
+  const run = useTimeStore((state) => state.run)
   const snapshotQuery = useSnapshot()
   const snapshot = snapshotQuery.data
+
+  if (run.length === 0) {
+    return (
+      <div className="flex flex-1 flex-col items-center justify-center gap-2.5 p-8 text-center">
+        <p className="text-[13px] font-medium text-fg">还没有可回放的数据</p>
+        <p className="label-micro max-w-[420px] leading-relaxed">
+          先到「生成」工作区创建一个世界（会真实调用 LLM），再到「模拟」工作区跑一天。
+          之后这里会逐户显示每个人在做什么、哪些电器在用电。
+        </p>
+        <span className="label-latin mt-1">generate → simulate → replay</span>
+      </div>
+    )
+  }
 
   if (snapshotQuery.isPending) {
     return <p className="p-6 text-[11px] text-fg-subtle">载入住户快照…</p>
