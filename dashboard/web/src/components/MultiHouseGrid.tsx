@@ -8,13 +8,10 @@ import { useTimeStore } from "@/store/time"
 
 interface MultiHouseGridProps {
   onOpen: (house: string) => void
+  houses?: readonly string[]
 }
 
-/**
- * 住户网格：一张卡片 = 一个家庭。显示该户此刻每个成员在做什么、用电多少。
- * 点击卡片进入该户详情（成员卡片 + 平面图 + 时间轴）。
- */
-export function MultiHouseGrid({ onOpen }: MultiHouseGridProps) {
+export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
   const minute = useTimeStore((state) => state.minute)
   const house = useTimeStore((state) => state.house)
   const run = useTimeStore((state) => state.run)
@@ -24,38 +21,51 @@ export function MultiHouseGrid({ onOpen }: MultiHouseGridProps) {
   if (run.length === 0) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-2.5 p-8 text-center">
-        <p className="text-[13px] font-medium text-fg">还没有可回放的数据</p>
+        <p className="text-[13px] font-medium text-fg">No replay data yet</p>
         <p className="label-micro max-w-[420px] leading-relaxed">
-          先到「生成」工作区创建一个世界（会真实调用 LLM），再到「模拟」工作区跑一天。
-          之后这里会逐户显示每个人在做什么、哪些电器在用电。
+          Pick a world and open one of its spacetimes to replay a simulated day. This grid then shows
+          what every household is doing and which appliances draw power.
         </p>
-        <span className="label-latin mt-1">generate → simulate → replay</span>
+        <span className="label-latin mt-1">world → spacetime → watch</span>
       </div>
     )
   }
 
   if (snapshotQuery.isPending) {
-    return <p className="p-6 text-[11px] text-fg-subtle">载入住户快照…</p>
+    return <p className="p-6 text-[11px] text-fg-subtle">Loading household snapshot…</p>
   }
 
-  if (snapshot === undefined || snapshot.houses.length === 0) {
-    return <p className="p-6 text-[11px] text-fg-subtle">该时刻没有可用的住户数据。</p>
+  if (snapshot === undefined) {
+    return <p className="p-6 text-[11px] text-fg-subtle">No household data at this minute.</p>
   }
 
-  const peak = snapshot.houses.reduce((max, item) => Math.max(max, item.total_watts), 0) || 1
+  const visible =
+    houses === undefined
+      ? snapshot.houses
+      : snapshot.houses.filter((item) => houses.includes(item.house))
+
+  if (visible.length === 0) {
+    return (
+      <p className="p-6 text-[11px] text-fg-subtle">
+        No households in this selection for this day.
+      </p>
+    )
+  }
+
+  const peak = visible.reduce((max, item) => Math.max(max, item.total_watts), 0) || 1
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 items-baseline gap-3 border-b border-border px-4 py-2.5">
-        <span className="text-[13px] font-semibold text-fg">住户网格</span>
+        <span className="text-[13px] font-semibold text-fg">Household grid</span>
         <span className="num text-[11px] text-fg-subtle">
-          {snapshot.houses.length} 户 · {formatHHMM(minute)}
+          {visible.length} households · {formatHHMM(minute)}
         </span>
-        <span className="label-latin ml-auto">点击任一住户查看成员</span>
+        <span className="label-latin ml-auto">Select a household to inspect its members</span>
       </div>
 
       <div className="grid min-h-0 flex-1 grid-cols-1 content-start gap-3 overflow-y-auto p-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {snapshot.houses.map((item) => {
+        {visible.map((item) => {
           const memberIds = item.people.map((person) => person.member)
           const running = item.powered.filter((appliance) => appliance.watts > 0)
           const isCurrent = item.house === house
@@ -117,17 +127,17 @@ export function MultiHouseGrid({ onOpen }: MultiHouseGridProps) {
                 ))}
                 {item.people.length > 5 ? (
                   <li className="num text-[10px] text-fg-subtle">
-                    还有 {item.people.length - 5} 名成员
+                    {item.people.length - 5} more members
                   </li>
                 ) : null}
               </ul>
 
               <div className="mt-auto flex flex-wrap items-center gap-1 border-t border-border pt-2">
                 {running.length === 0 ? (
-                  <span className="text-[10px] text-fg-subtle">没有设备在用电</span>
+                  <span className="text-[10px] text-fg-subtle">No appliance drawing power</span>
                 ) : (
                   <>
-                    <span className="label-micro shrink-0">用电 {running.length}</span>
+                    <span className="label-micro shrink-0">Drawing {running.length}</span>
                     {running.slice(0, 3).map((appliance) => (
                       <span
                         key={appliance.unique_id}

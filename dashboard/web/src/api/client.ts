@@ -1,8 +1,9 @@
 /**
- * 类型化 API 客户端。
+ * Typed API client.
  *
- * 组件永远只调用这里的函数——mock 与真实后端在函数内部切换，
- * 组件层不需要知道数据来自哪里。切换开关：VITE_USE_MOCK。
+ * Components only ever call the functions here — mock and real backend are
+ * switched inside, so the component layer never knows where data comes from.
+ * Switch: VITE_USE_MOCK.
  */
 import type {
   BuildPreview,
@@ -139,7 +140,7 @@ const delay = <T>(value: T): Promise<T> =>
   })
 
 /* ------------------------------------------------------------------ *
- * 索引
+ * Index
  * ------------------------------------------------------------------ */
 
 export function listRuns(): Promise<RunInfo[]> {
@@ -192,7 +193,7 @@ export function getWorld(world: string): Promise<WorldInfo> {
 }
 
 /* ------------------------------------------------------------------ *
- * 世界生命周期 + 分步构建
+ * World lifecycle + step-by-step build
  * ------------------------------------------------------------------ */
 
 export function createWorld(payload: WorldCreateRequest): Promise<WorldCreateResult> {
@@ -284,7 +285,7 @@ export function getWorldDayBlocks(
 }
 
 /* ------------------------------------------------------------------ *
- * 家庭元数据
+ * Household metadata
  * ------------------------------------------------------------------ */
 
 export function getHousehold(run: string, house: string): Promise<HouseholdInfo> {
@@ -297,7 +298,7 @@ export function getHousehold(run: string, house: string): Promise<HouseholdInfo>
 }
 
 /* ------------------------------------------------------------------ *
- * 回放
+ * Replay
  * ------------------------------------------------------------------ */
 
 export function getDayReplay(
@@ -327,8 +328,8 @@ const wattsAt = (replay: DayReplay, minute: number): number => {
 }
 
 /**
- * mock 下由已存的各户回放就地推导快照：与 total_watts / intervals 同源，
- * 不会出现"快照和曲线对不上"的假数据。
+ * Derive the snapshot in mock mode from the stored per-house replays, so it
+ * shares its source with total_watts / intervals and cannot disagree with the curves.
  */
 export function getSnapshot(
   run: string,
@@ -381,7 +382,7 @@ export function getSnapshot(
 }
 
 /* ------------------------------------------------------------------ *
- * 决策流水线
+ * Decision pipeline
  * ------------------------------------------------------------------ */
 
 export function getStages(
@@ -403,7 +404,7 @@ export function getStages(
 }
 
 /* ------------------------------------------------------------------ *
- * 作业
+ * Jobs
  * ------------------------------------------------------------------ */
 
 export function listJobs(): Promise<JobInfo[]> {
@@ -453,10 +454,10 @@ export function cancelJob(jobId: string): Promise<JobInfo> {
 }
 
 /* ------------------------------------------------------------------ *
- * 运行设置
+ * Runtime settings
  * ------------------------------------------------------------------ */
 
-/** 与 dashboard/backend/settings.py 的默认值一致：mock 读取与「恢复默认」共用。 */
+/** Matches the defaults in dashboard/backend/settings.py: shared by mock reads and "restore defaults". */
 export const DEFAULT_SETTINGS: Settings = {
   model: "deepseek-v4-flash",
   temperature: 1,

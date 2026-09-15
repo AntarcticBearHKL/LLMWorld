@@ -16,8 +16,8 @@ interface JobSubmitBarProps {
 }
 
 /**
- * 统一的"先估算、再勾选确认、最后提交"护栏。
- * 未确认或未估算时禁止提交，避免误触直接烧额度。
+ * Shared guardrail: estimate first, tick to confirm, then submit.
+ * Submission is blocked until both steps are done, so a stray click cannot spend credits.
  */
 export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobSubmitBarProps) {
   const estimate = useEstimateJob()

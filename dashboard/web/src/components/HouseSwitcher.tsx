@@ -18,8 +18,8 @@ export function HouseSwitcher() {
 
   return (
     <Panel
-      title="同一运行的住户"
-      hint={`${ids.length} 户`}
+      title="Households in this spacetime"
+      hint={`${ids.length} households`}
       index={2}
       bodyClassName="p-3"
       actions={<Home className="size-3.5 text-fg-subtle" aria-hidden />}
@@ -56,7 +56,7 @@ export function HouseSwitcher() {
           )
         })}
         {ids.length === 0 ? (
-          <span className="text-[11px] text-fg-subtle">尚未载入住户列表。</span>
+          <span className="text-[11px] text-fg-subtle">No household list yet.</span>
         ) : null}
       </div>
     </Panel>

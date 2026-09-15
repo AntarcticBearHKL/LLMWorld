@@ -1,8 +1,9 @@
 /* ==========================================================================
-   vis-timeline 覆盖层
-   目标：把 vis-timeline 的默认"表格"外观改造成研究台面板——
-   1px 结构线、无阴影、分类色块、等宽轴标签。
-   第三方库 DOM 结构固定，部分规则需要 !important 覆盖其内联/高优先级样式。
+   vis-timeline overrides
+   Goal: turn vis-timeline's default "table" look into a research-console panel —
+   1px structural lines, no shadows, category colour blocks, monospaced axis labels.
+   The third-party DOM is fixed, so some rules need !important to override its
+   inline / high-specificity styles.
    ========================================================================== */
 
 .vis-timeline {
@@ -25,7 +26,7 @@
   box-sizing: border-box;
 }
 
-/* ---- 泳道标签（由 ActivityTimeline 以 DOM 构建） ---- */
+/* ---- Lane labels (built as DOM by ActivityTimeline) ---- */
 .lane-label {
   display: flex;
   align-items: center;
@@ -67,13 +68,13 @@
   color: var(--fg-subtle);
 }
 
-/* 所有泳道等高，避免"有并行活动的成员泳道更胖"的视觉噪音 */
+/* All lanes have equal height, so a member with concurrent activities does not look fatter */
 .vis-foreground .vis-group,
 .vis-labelset .vis-label {
   min-height: 54px;
 }
 
-/* ---- 面板骨架 ---- */
+/* ---- Panel skeleton ---- */
 .vis-panel {
   border-color: var(--border) !important;
 }
@@ -89,7 +90,7 @@
   background: var(--surface) !important;
 }
 
-/* 左右滚动时的渐隐阴影会破坏平面感 */
+/* Fade shadows while scrolling would break the flat look */
 .vis-shadow,
 .vis-panel > .vis-shadow,
 .vis-left .vis-shadow,
@@ -106,7 +107,7 @@
   border-left: 1px solid var(--border) !important;
 }
 
-/* ---- 网格线 ---- */
+/* ---- Grid lines ---- */
 .vis-grid.vis-minor,
 .vis-grid.vis-major,
 .vis-time-axis .vis-grid.vis-minor,
@@ -123,7 +124,7 @@
   border-color: var(--border-strong) !important;
 }
 
-/* 周末/星期底色会引入额外色块，研究台里不需要 */
+/* Weekend / weekday backgrounds would add extra colour blocks; the console does not need them */
 .vis-background .vis-grid.vis-saturday,
 .vis-background .vis-grid.vis-sunday,
 .vis-background .vis-grid.vis-holiday,
@@ -138,7 +139,7 @@
   border: none !important;
 }
 
-/* ---- 时间轴（顶部刻度） ---- */
+/* ---- Time axis (top scale) ---- */
 .vis-time-axis {
   background: var(--surface) !important;
 }
@@ -163,7 +164,7 @@
   opacity: 0.75;
 }
 
-/* ---- 分组标签（成员泳道） ---- */
+/* ---- Group labels (member lanes) ---- */
 .vis-labelset .vis-label {
   border-bottom: 1px solid var(--border) !important;
   background: var(--surface) !important;
@@ -183,7 +184,7 @@
   border-bottom: none !important;
 }
 
-/* ---- 泳道 ---- */
+/* ---- Lanes ---- */
 .vis-foreground .vis-group {
   border-bottom: 1px solid var(--border) !important;
 }
@@ -192,8 +193,8 @@
   border-bottom: none !important;
 }
 
-/* ---- 活动色块 ---- */
-/* 填充色 = 活动分类，左缘 3px 条 = 成员身份（见 DESIGN.md §2） */
+/* ---- Activity blocks ---- */
+/* Fill = activity category, 3px left edge = member identity (see DESIGN.md §2) */
 .cat-sleep {
   --cat: var(--cat-sleep);
 }
@@ -252,7 +253,7 @@
   color: color-mix(in srgb, var(--cat, var(--fg)) 88%, black);
 }
 
-/* 左缘 3px 成员色条：分类看填充色，成员看边条 */
+/* 3px member colour bar on the left edge: category reads from the fill, member from the bar */
 .vis-item.vis-range.lane-1,
 .vis-item.vis-range.lane-2,
 .vis-item.vis-range.lane-3,
@@ -282,7 +283,7 @@
   z-index: 5;
 }
 
-/* 外出/缺席：虚线描边，与"在场但静止"在形状上区分 */
+/* Away / absent: dashed outline, distinct in shape from "present but idle" */
 .vis-item.cat-away.vis-range {
   border-style: dashed !important;
 }
@@ -292,13 +293,13 @@
   opacity: 0.9;
 }
 
-/* 点事件（若有） */
+/* Point events (if any) */
 .vis-item.vis-point .vis-item-content,
 .vis-item.vis-dot {
   color: var(--fg) !important;
 }
 
-/* ---- 回放游标（addCustomTime） ---- */
+/* ---- Replay cursor (addCustomTime) ---- */
 .vis-custom-time {
   background-color: var(--brand) !important;
   width: 2px !important;
@@ -324,12 +325,12 @@
   top: 0 !important;
 }
 
-/* 库自带的"当前时刻"线在研究台里没有意义，隐藏以免与回放游标混淆 */
+/* The library's built-in "current time" line is meaningless here; hide it so it cannot be confused with the replay cursor */
 .vis-current-time {
   display: none !important;
 }
 
-/* ---- 提示气泡 ---- */
+/* ---- Tooltip ---- */
 .vis-tooltip {
   position: absolute;
   z-index: 40;
@@ -370,7 +371,7 @@
   padding-top: 4px;
 }
 
-/* ---- 选中成员时聚焦：非选中泳道整体降透明度 ---- */
+/* ---- Focus with a selected member: dim every non-selected lane ---- */
 .vis-timeline[data-selected="1"] .vis-group:not(.m1) .vis-item,
 .vis-timeline[data-selected="2"] .vis-group:not(.m2) .vis-item,
 .vis-timeline[data-selected="3"] .vis-group:not(.m3) .vis-item,
@@ -390,7 +391,7 @@
   opacity: 1;
 }
 
-/* ---- 交互手柄 ---- */
+/* ---- Interaction handles ---- */
 .vis-navigation .vis-button {
   border-radius: var(--r-sm) !important;
   border: 1px solid var(--border) !important;
@@ -408,7 +409,7 @@
   background: transparent;
 }
 
-/* 滚动条与容器一致 */
+/* Scrollbars match the container */
 .vis-timeline .vis-content::-webkit-scrollbar {
   width: 10px;
   height: 10px;

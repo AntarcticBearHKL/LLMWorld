@@ -15,7 +15,7 @@ export const jobKeys = {
 
 const isActive = (job: JobInfo): boolean => job.status === "running" || job.status === "queued"
 
-/** 有作业在跑就快轮询，否则慢轮询。 */
+/** Poll fast while a job is running, otherwise slowly. */
 export function useJobs() {
   const [interval, setInterval] = useState(15000)
   const query = useQuery({
@@ -46,7 +46,7 @@ export function useCreateJob() {
   })
 }
 
-/** SSE 实时日志。mock 模式下不连接（后端不存在）。 */
+/** Live SSE log. Not connected in mock mode (there is no backend). */
 export function useJobLog(jobId: string | null) {
   const [lines, setLines] = useState<string[]>([])
   const [connected, setConnected] = useState(false)
@@ -65,7 +65,7 @@ export function useJobLog(jobId: string | null) {
         const parsed: unknown = JSON.parse(data)
         if (typeof parsed === "string") text = parsed
       } catch {
-        // 后端也可能直接发纯文本行
+        // the backend may also emit plain text lines
       }
       setLines((previous) =>
         previous.length >= MAX_LOG_LINES ? [...previous.slice(-MAX_LOG_LINES + 1), text] : [...previous, text],
@@ -92,7 +92,7 @@ export function useJobLog(jobId: string | null) {
   return { lines, connected }
 }
 
-/** 一个作业的 LLM 调用清单；live=true 时快轮询（构建作业运行中，trace 持续增长）。 */
+/** LLM call list for one job; live=true polls fast (build job running, traces keep growing). */
 export function useJobLlmCalls(jobId: string | null, live = false) {
   const queryClient = useQueryClient()
   const wasLive = useRef(live)
@@ -103,7 +103,7 @@ export function useJobLlmCalls(jobId: string | null, live = false) {
     refetchInterval: live ? 3000 : false,
   })
   useEffect(() => {
-    // 作业刚结束：轮询已停，但 trace 通常在最后才落盘 —— 补拉一次，避免停在空结果。
+    // The job just finished: polling stopped, but traces usually land last — refetch once so we don't stop at an empty result.
     if (wasLive.current && !live && jobId !== null) {
       void queryClient.invalidateQueries({ queryKey: jobKeys.llmCalls(jobId) })
     }

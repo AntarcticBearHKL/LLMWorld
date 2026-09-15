@@ -17,13 +17,14 @@ const SceneView = lazy(() =>
 
 interface ObserveSceneProps {
   onOpenPipeline?: (memberId: string) => void
+  onEnterHouse?: (house: string) => void
 }
 
-export function ObserveScene({ onOpenPipeline }: ObserveSceneProps) {
+export function ObserveScene({ onOpenPipeline, onEnterHouse }: ObserveSceneProps) {
   return (
     <div className="h-full min-h-0">
       <Suspense fallback={<SceneFallback />}>
-        <SceneView onOpenPipeline={onOpenPipeline} />
+        <SceneView onOpenPipeline={onOpenPipeline} onEnterHouse={onEnterHouse} />
       </Suspense>
     </div>
   )
@@ -31,12 +32,13 @@ export function ObserveScene({ onOpenPipeline }: ObserveSceneProps) {
 
 interface ObserveGridProps {
   onOpen: (house: string) => void
+  houses?: readonly string[]
 }
 
-export function ObserveGrid({ onOpen }: ObserveGridProps) {
+export function ObserveGrid({ onOpen, houses }: ObserveGridProps) {
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
-      <MultiHouseGrid onOpen={onOpen} />
+      <MultiHouseGrid onOpen={onOpen} houses={houses} />
     </div>
   )
 }

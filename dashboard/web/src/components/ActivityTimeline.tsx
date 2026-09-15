@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { Maximize2, Minus, Plus } from "lucide-react"
 import { DataSet } from "vis-data"
-import { Timeline, type DataGroup, type DataItem, type IdType } from "vis-timeline/standalone"
+import { Timeline, type DataGroup, type DataItem, type IdType } from "vis-timeline/esnext"
 
 import type { DayReplay } from "@/api/types"
 import { CategoryLegend } from "@/components/primitives/CategoryLegend"
@@ -230,24 +230,42 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
       ? null
       : replay.members.findIndex((member) => member.id === selectedMember) + 1
 
-  const status = error !== null ? "加载失败" : isPending ? "载入中" : `${replay?.members.length ?? 0} 泳道`
+  const status = error !== null ? "Load failed" : isPending ? "Loading" : `${replay?.members.length ?? 0} lanes`
 
   return (
     <Panel
-      title="活动时间轴"
+      title="Activity timeline"
       hint={status}
       index={1}
       className="min-h-[280px]"
       bodyClassName="flex min-h-0 flex-col"
       actions={
         <>
-          <Button variant="ghost" size="icon-sm" onClick={fitDay} aria-label="显示全天" title="显示全天">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={fitDay}
+            aria-label="Show full day"
+            title="Show full day"
+          >
             <Maximize2 />
           </Button>
-          <Button variant="ghost" size="icon-sm" onClick={() => zoomBy(0.6)} aria-label="放大" title="放大">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={() => zoomBy(0.6)}
+            aria-label="Zoom in"
+            title="Zoom in"
+          >
             <Plus />
           </Button>
-          <Button variant="ghost" size="icon-sm" onClick={() => zoomBy(1.7)} aria-label="缩小" title="缩小">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={() => zoomBy(1.7)}
+            aria-label="Zoom out"
+            title="Zoom out"
+          >
             <Minus />
           </Button>
         </>
@@ -256,14 +274,14 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
       <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-4 py-2">
         <CategoryLegend />
         <span className="label-latin hidden shrink-0 xl:inline">
-          {selectedMember === null ? "点击色块可定位成员" : `已选 ${selectedMember}`}
+          {selectedMember === null ? "Select a block to locate its member" : `Selected ${selectedMember}`}
         </span>
       </div>
 
       {error !== null ? (
         <div className="flex flex-1 items-center justify-center px-4 py-10 text-center">
           <p className="max-w-md text-[12px] leading-relaxed text-fg-muted">
-            无法加载该组合的回放数据。
+            Could not load replay data for this selection.
             <br />
             <span className="num text-fg-subtle">{error.message}</span>
           </p>
@@ -272,7 +290,7 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
         <div
           ref={containerRef}
           role="region"
-          aria-label="四名成员的全天活动时间轴，横轴为 0 时到 24 时"
+          aria-label="Full-day activity timeline for every member; the axis runs from 00:00 to 24:00"
           data-selected={selectedLane === null || selectedLane <= 0 ? "" : String(selectedLane)}
           className="vis-host min-h-0 flex-1"
         />
@@ -280,11 +298,11 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
 
       <p className="sr-only">
         {replay === undefined
-          ? "尚未载入回放数据。"
+          ? "Replay data is not loaded yet."
           : replay.members
               .map(
                 (member) =>
-                  `${member.id}（${member.info.bedroom ?? "未标注房间"}）共 ${member.activities.length} 段活动。`,
+                  `${member.id} (${member.info.bedroom ?? "no room noted"}): ${member.activities.length} activity segments.`,
               )
               .join(" ")}
       </p>

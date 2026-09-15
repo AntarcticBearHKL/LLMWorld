@@ -30,9 +30,10 @@ const ownsArrowKeys = (target: EventTarget | null): boolean => {
 }
 
 /**
- * 连续模式由 rAF 驱动 minute 前进，跳格模式每 dwellMsFor(speed) 毫秒前进一格。
- * 标签页隐藏时暂停，避免后台标签白烧 CPU。
- * 键盘快捷键与播放互不干扰：输入框内不劫持按键，滑块上只接管空格。
+ * Continuous mode advances minute via rAF; auto-step mode advances one step
+ * every dwellMsFor(speed) milliseconds. Hidden tabs pause to avoid burning CPU
+ * in the background. Keyboard shortcuts and playback stay out of each other's
+ * way: keys are not hijacked inside inputs, and only Space is taken on sliders.
  */
 export function usePlayback(): void {
   const isPlaying = useTimeStore((state) => state.isPlaying)

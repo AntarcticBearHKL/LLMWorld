@@ -54,7 +54,7 @@ export function useWorld(world: string) {
   })
 }
 
-/** 有该世界的构建作业在跑就快轮询，否则慢轮询。 */
+  /** Poll fast while a build job for this world is running, otherwise slowly. */
 export function useBuildState(world: string, activeJob: boolean) {
   return useQuery({
     queryKey: worldKeys.build(world),
@@ -107,7 +107,7 @@ export function useCloneWorld() {
   })
 }
 
-/** 最近一次匹配的构建作业：住户级步骤优先匹配当前目标住户。 */
+  /** Most recent matching build job: house-scoped steps prefer the current target household. */
 export function latestJobFor(
   jobs: JobInfo[],
   world: string,

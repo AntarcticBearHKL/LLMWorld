@@ -75,7 +75,7 @@ export function SceneStage({ state, children }: SceneStageProps) {
       ref={wrapRef}
       className="relative h-full w-full overflow-hidden"
       role="img"
-      aria-label={`住户室内场景：${state.rooms.length} 个房间、${state.appliances.length} 台电器、${state.characters.length} 名成员`}
+      aria-label={`Indoor scene: ${state.rooms.length} rooms, ${state.appliances.length} appliances, ${state.characters.length} members`}
       style={{ backgroundColor: tokens.bg, cursor: dragging ? "grabbing" : "grab" }}
     >
       {size.width > 0 && size.height > 0 ? (
@@ -118,7 +118,7 @@ export function SceneStage({ state, children }: SceneStageProps) {
       ) : null}
 
       <div className="pointer-events-none absolute bottom-2 right-3 flex items-center gap-2 text-[10px] text-fg-subtle">
-        <span className="num">滚轮缩放 · 拖拽平移 · 双击复位 · 点击小人看详情</span>
+        <span className="num">Scroll to zoom · drag to pan · double-click to reset · select a member</span>
       </div>
     </div>
   )

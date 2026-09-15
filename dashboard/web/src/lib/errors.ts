@@ -13,7 +13,7 @@ const detailFromBody = (body: string): string | null => {
   return null
 }
 
-/** FastAPI 的错误体是 {"detail": "..."}，这里取出可读信息，取不到就退回原文。 */
+/** A FastAPI error body is {"detail": "..."}; prefer that, otherwise fall back to the raw text. */
 export function errorMessage(error: unknown): string {
   if (error instanceof ApiError) return detailFromBody(error.message) ?? error.message
   if (error instanceof Error) return error.message

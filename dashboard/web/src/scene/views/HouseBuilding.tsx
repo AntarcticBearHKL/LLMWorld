@@ -96,7 +96,7 @@ export function HouseBuilding({ town, selected, onEnter }: HouseBuildingProps) {
         y={town.y - 18}
         width={bodyW}
         align="center"
-        text={`${town.house} · ${town.memberCount} 人 · ${formatWatts(town.totalWatts)}`}
+        text={`${town.house} · ${town.memberCount} people · ${formatWatts(town.totalWatts)}`}
         fontSize={11}
         fontStyle="bold"
         fill={load > 0.7 ? tokens.energy : tokens.fg}
@@ -106,7 +106,7 @@ export function HouseBuilding({ town, selected, onEnter }: HouseBuildingProps) {
         y={town.y - 6}
         width={bodyW}
         align="center"
-        text={`在家 ${town.homeCount} · 外出 ${town.outMembers.length}`}
+        text={`home ${town.homeCount} · out ${town.outMembers.length}`}
         fontSize={9}
         fill={tokens.fgSubtle}
       />

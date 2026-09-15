@@ -2,7 +2,7 @@ import { Moon, Sun } from "lucide-react"
 
 import { JobsPanel } from "@/components/JobsPanel"
 import { SettingsPanel } from "@/components/SettingsPanel"
-import { WatchPlaceholder } from "@/components/WatchPlaceholder"
+import { WatchView } from "@/components/WatchView"
 import { WorldDetail } from "@/components/WorldDetail"
 import { WorldsList } from "@/components/WorldsList"
 import { Button } from "@/components/ui/button"
@@ -113,7 +113,7 @@ export default function App() {
 
         {view === "world" ? <WorldDetail /> : null}
 
-        {view === "watch" ? <WatchPlaceholder /> : null}
+        {view === "watch" ? <WatchView /> : null}
 
         {view === "jobs" ? (
           <div className="flex h-full min-h-0 flex-col">

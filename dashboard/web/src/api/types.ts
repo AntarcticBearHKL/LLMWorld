@@ -1,6 +1,6 @@
 /**
- * 与 dashboard/backend/models.py 一一对应的 TypeScript 契约镜像。
- * 契约是唯一真源：此处不得新增后端不存在的字段。
+ * TypeScript mirror of dashboard/backend/models.py, field for field.
+ * The contract is the single source of truth: never add a field the backend lacks.
  */
 
 export interface RunInfo {

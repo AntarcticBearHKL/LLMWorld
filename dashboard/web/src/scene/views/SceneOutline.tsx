@@ -11,7 +11,7 @@ interface SceneOutlineProps {
 
 export function SceneOutline({ state, highlighted, onHighlight }: SceneOutlineProps) {
   return (
-    <ul className="flex flex-col" aria-label="房间与电器清单">
+    <ul className="flex flex-col" aria-label="Rooms and appliances outline">
       {state.rooms.map((room) => {
         const appliances = state.appliances.filter((pose) => pose.room === room.room)
         return (

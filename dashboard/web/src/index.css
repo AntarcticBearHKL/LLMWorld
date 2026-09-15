@@ -3,19 +3,20 @@
 @import "tw-animate-css";
 @import "./styles/vis-timeline.css";
 
-/* shadcn 组件内的 dark: 变体跟随本项目的 .light 类，而不是系统偏好 */
+/* Inside shadcn components the dark: variant follows this project's .light class, not the system preference */
 @custom-variant dark (&:is(:root:not(.light) *));
 
 /* ==========================================================================
-   LLMWorld 研究控制台 — 设计 token
-   契约见 DESIGN.md。组件只允许引用 token，禁止硬编码色值 / 魔法数字。
+   LLMWorld Research Console — design tokens
+   Contract: DESIGN.md. Components may only reference tokens; hardcoded colours
+   and magic numbers are not allowed.
    ========================================================================== */
 
-/* ---- 深色（默认） ---- */
+/* ---- Dark (default) ---- */
 :root {
   color-scheme: dark;
 
-  /* 表面 */
+  /* Surfaces */
   --bg: #0a0f12;
   --surface: #0f161a;
   --surface-2: #141d22;
@@ -23,31 +24,31 @@
   --border: #1e2a30;
   --border-strong: #2a3840;
 
-  /* 文本 */
+  /* Text */
   --fg: #e7edf0;
   --fg-muted: #93a4ac;
   --fg-subtle: #64757e;
 
-  /* 品牌强调色（青绿）。命名避开 shadcn 的 --accent（悬停底色）语义。 */
+  /* Brand accent (teal). Named to avoid shadcn's --accent (hover surface) meaning. */
   --brand: #2fc4b2;
   --brand-fg: #04211e;
   --brand-soft: rgb(47 196 178 / 0.14);
   --brand-ring: rgb(47 196 178 / 0.45);
 
-  /* 语义 */
+  /* Semantic */
   --energy: #f5a524;
   --energy-soft: rgb(245 165 36 / 0.14);
   --success: #3dd68c;
   --danger: #f2555a;
   --info: #5b9dff;
 
-  /* 成员泳道 */
+  /* Member lanes */
   --member-1: #2fc4b2;
   --member-2: #7c9cff;
   --member-3: #c084fc;
   --member-4: #fb923c;
 
-  /* 活动分类 */
+  /* Activity categories */
   --cat-sleep: #3f4e5a;
   --cat-meal: #e8a33d;
   --cat-chore: #2fc4b2;
@@ -55,24 +56,24 @@
   --cat-leisure: #c084fc;
   --cat-away: #4b5a64;
 
-  /* 圆角 */
+  /* Radii */
   --r-sm: 6px;
   --r-md: 10px;
   --r-lg: 14px;
   --r-xl: 18px;
   --r-pill: 9999px;
 
-  /* 阴影：仅两档 */
+  /* Shadows: exactly two levels */
   --shadow-1: 0 1px 2px rgb(0 0 0 / 0.32);
   --shadow-2: 0 18px 40px -12px rgb(0 0 0 / 0.55);
 
-  /* 动效 */
+  /* Motion */
   --t-fast: 120ms;
   --t-base: 180ms;
   --t-slow: 320ms;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* --- shadcn 语义映射（组件无需改动即继承本项目配色） --- */
+  /* --- shadcn semantic mapping (components inherit this palette untouched) --- */
   --background: var(--bg);
   --foreground: var(--fg);
   --card: var(--surface);
@@ -106,7 +107,7 @@
   --chart-5: var(--cat-sleep);
 }
 
-/* ---- 浅色 ---- */
+/* ---- Light ---- */
 .light {
   color-scheme: light;
 

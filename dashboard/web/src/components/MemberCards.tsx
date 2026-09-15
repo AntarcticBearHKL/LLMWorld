@@ -24,20 +24,20 @@ export function MemberCards({ replay }: MemberCardsProps) {
 
   return (
     <Panel
-      title="家庭成员"
+      title="Household members"
       hint={formatHHMM(minute)}
       index={1}
       className="shrink-0"
       bodyClassName="overflow-x-auto"
       actions={
         <span className="label-latin">
-          {replay !== undefined ? `${replay.members.length} 人` : "—"}
+          {replay !== undefined ? `${replay.members.length} members` : "—"}
         </span>
       }
     >
       {replay === undefined ? (
         <div className="flex items-center justify-center px-4 py-8">
-          <span className="text-[11px] text-fg-subtle">载入成员…</span>
+          <span className="text-[11px] text-fg-subtle">Loading members…</span>
         </div>
       ) : (
         <div className="flex min-w-full gap-2.5 p-3">
@@ -99,18 +99,18 @@ export function MemberCards({ replay }: MemberCardsProps) {
                     )}
                   >
                     {segment !== undefined && segment.location.toLowerCase().includes("out")
-                      ? "外出"
-                      : "在家"}
+                      ? "Away"
+                      : "Home"}
                   </span>
                 </div>
 
                 <div className="flex flex-col gap-0.5">
                   <span className="num text-[10px] text-fg-subtle">
                     {member.info.bedroom ?? "—"}
-                    {member.info.age !== null ? ` · ${member.info.age} 岁` : ""}
+                    {member.info.age !== null ? ` · age ${member.info.age}` : ""}
                   </span>
                   <span className="text-[11px] leading-snug text-fg">
-                    {segment !== undefined ? segment.activity : "该时刻无活动记录"}
+                    {segment !== undefined ? segment.activity : "No activity recorded at this time"}
                   </span>
                   {segment !== undefined ? (
                     <span className="num text-[9px] text-fg-subtle">
@@ -121,7 +121,7 @@ export function MemberCards({ replay }: MemberCardsProps) {
 
                 <div className="flex flex-wrap items-center gap-1">
                   {used.length === 0 ? (
-                    <span className="text-[10px] text-fg-subtle">未使用设备</span>
+                    <span className="text-[10px] text-fg-subtle">No appliance in use</span>
                   ) : (
                     <>
                       {used.slice(0, 3).map((item) => (
@@ -148,7 +148,7 @@ export function MemberCards({ replay }: MemberCardsProps) {
                     <Clock className="size-2.5" aria-hidden />
                     {next !== undefined
                       ? `${formatHHMM(next.start)} ${next.activity.slice(0, 12)}`
-                      : "今日结束"}
+                      : "Day over"}
                   </span>
                 </div>
 
@@ -168,7 +168,8 @@ export function MemberCards({ replay }: MemberCardsProps) {
       )}
       {replay !== undefined ? (
         <p className="sr-only">
-          {replay.appliances.filter((item) => isRunning(stateAt(item, minute))).length} 台设备在用电。
+          {replay.appliances.filter((item) => isRunning(stateAt(item, minute))).length} appliances
+          drawing power.
         </p>
       ) : null}
     </Panel>

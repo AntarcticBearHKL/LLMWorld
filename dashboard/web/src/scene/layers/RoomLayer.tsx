@@ -94,7 +94,7 @@ export function RoomLayer({ state }: RoomLayerProps) {
         <Text
           x={outBand.x + 12}
           y={outBand.y + outBand.h / 2 - 6}
-          text="外出"
+          text="Out"
           fontSize={11}
           fill={tokens.fgMuted}
           listening={false}

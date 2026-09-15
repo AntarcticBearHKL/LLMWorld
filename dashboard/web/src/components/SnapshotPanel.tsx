@@ -57,15 +57,14 @@ export function SnapshotPanel() {
     )
     .sort((a, b) => b.watts - a.watts)
 
-  const label = (appliance: { watts: number; action: string | null }): string => {
-    if (appliance.watts <= 0) return "关闭"
-    if (appliance.action !== null) return APPLIANCE_STATE_LABELS.active
-    return "使用中"
-  }
+  const label = (appliance: { watts: number; action: string | null }): string =>
+    appliance.watts <= 0 || appliance.action === null
+      ? APPLIANCE_STATE_LABELS.off
+      : APPLIANCE_STATE_LABELS.active
 
   return (
     <Panel
-      title="此刻快照"
+      title="Current snapshot"
       hint={formatHHMM(minute)}
       index={1}
       className="min-h-[240px]"
@@ -79,14 +78,14 @@ export function SnapshotPanel() {
       <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-2">
         <span className="label-micro truncate">{current?.household_type ?? "—"}</span>
         <span className="label-latin">
-          {current !== undefined ? `${running.length} 台用电中` : "house total"}
+          {current !== undefined ? `${running.length} drawing power` : "house total"}
         </span>
       </div>
 
       <div className="flex flex-col gap-1.5 px-4 py-3">
         <span className="label-micro flex items-center gap-1.5">
           <Users className="size-3" aria-hidden />
-          成员位置
+          Member locations
         </span>
         <ul className="flex flex-col gap-1">
           {(current?.people ?? []).map((person) => (
@@ -104,7 +103,7 @@ export function SnapshotPanel() {
           ))}
           {current === undefined ? (
             <li className="text-[11px] text-fg-subtle">
-              {snapshotQuery.isPending ? "载入中…" : "该时刻无快照数据。"}
+              {snapshotQuery.isPending ? "Loading…" : "No snapshot data at this minute."}
             </li>
           ) : null}
         </ul>
@@ -113,7 +112,7 @@ export function SnapshotPanel() {
       <div className="flex flex-col gap-1.5 border-t border-border px-4 py-3">
         <span className="label-micro flex items-center gap-1.5">
           <Plug className="size-3" aria-hidden />
-          用电中的电器 · {running.length}
+          Powered appliances · {running.length}
         </span>
         <ul className="flex flex-col gap-1">
           {running.slice(0, 10).map((appliance) => (
@@ -129,7 +128,7 @@ export function SnapshotPanel() {
             </li>
           ))}
           {running.length === 0 && current !== undefined ? (
-            <li className="text-[11px] text-fg-subtle">此刻没有设备在用电。</li>
+            <li className="text-[11px] text-fg-subtle">No appliance drawing power at this minute.</li>
           ) : null}
         </ul>
       </div>

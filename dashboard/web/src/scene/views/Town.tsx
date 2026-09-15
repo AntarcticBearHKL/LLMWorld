@@ -117,7 +117,7 @@ export function Town({ onEnter }: TownProps) {
             <Text
               x={SCENE_PADDING}
               y={8}
-              text={`住户小镇 · ${formatHHMM(minute)} · 共 ${layout.houses.length} 户`}
+              text={`Town · ${formatHHMM(minute)} · ${layout.houses.length} households`}
               fontSize={12}
               fill={tokens.fgMuted}
             />
@@ -134,7 +134,7 @@ export function Town({ onEnter }: TownProps) {
       ) : null}
 
       <div className="pointer-events-none absolute bottom-2 right-3 text-[10px] text-fg-subtle">
-        <span className="num">滚轮缩放 · 拖拽平移 · 点击房子进入</span>
+        <span className="num">Scroll to zoom · drag to pan · select a house</span>
       </div>
     </div>
   )

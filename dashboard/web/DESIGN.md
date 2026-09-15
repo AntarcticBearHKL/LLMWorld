@@ -141,7 +141,6 @@
 | `Panel` | `components/primitives/Panel.tsx` | 研究台统一面板：`title` / `hint` / `actions` / `children`，头部分隔线 1px |
 | `MetricCell` | `components/primitives/MetricCell.tsx` | 微标签 + 等宽数值 + 单位，固定 `min-w` 防跳动 |
 | `StatusDot` | `components/primitives/StatusDot.tsx` | 8px 圆点，`on`=`--energy`，`off`=`--fg-subtle` |
-| `SegmentedControl` | `components/primitives/SegmentedControl.tsx` | 分段开关：`bg-surface-2` 底座 + 选中 `bg-brand-soft text-brand`，`aria-pressed`；用于世界工作区模式 / 观看密度 |
 | `TimeReadout` | `components/primitives/TimeReadout.tsx` | 等宽 `HH:MM`，`tabular-nums` |
 
 **活动分类推导**（`lib/activity.ts`）：后端 `ActivitySegment` 无 `category` 字段，前端按关键词映射到 6 个分类，映射表集中在一处，未命中 → `leisure`。这是展示层推导，**不新增任何 API 字段**。
@@ -155,7 +154,7 @@
 - 时间轴色块文本用提亮后的分类色，实测对比 ≥ 5:1。
 - 语义靠**颜色 + 形状**双通道：`away` 用虚线描边，用电状态除颜色外用 `StatusDot` 实心/空心区分。
 - 键盘：`Space` 播放/暂停，`←/→` ±15min，`Shift+←/→` ±60min，`Home/End` 首尾；焦点在输入框/下拉内时不劫持按键。
-- 页面 `lang="zh-CN"`；图表容器带 `aria-label`；`prefers-reduced-motion` 降级。
+- 页面 `lang="en"`；图表容器带 `aria-label`；`prefers-reduced-motion` 降级。
 
 ## 9. Accepted Debt
 
@@ -448,7 +447,7 @@ a *spacetime* is one simulation run over that world (policy + news/events + star
 | --- | --- | --- |
 | L0 | `view=worlds` (default) | World cards: id, block / household / spacetime counts, `Draft` (0 spacetimes) or `Frozen` badge, last activity. Actions: new blank world, clone, delete (recoverable, confirm first). |
 | L1 | `view=world&world=W` | Header (id, badge, clone, back link) + two tabs. `Spacetimes`: list + inline creation wizard; each row opens Watch. `Households`: draft → embedded `WorldBuilder`; frozen → read-only block/house structure with a lock banner (Lucide `Lock` icon; §1 bans emoji) and a clone action. |
-| L2 | `view=watch&world=W&run=R` | Placeholder until part 2 (4-layer drill-down: world → block → house → indoor). |
+| L2 | `view=watch&world=W&run=R` | 4-layer drill-down: world → block → house → indoor (§14). |
 
 **Store / URL contract** (`store/time.ts`, `hooks/useUrlSync.ts`) — `view` is
 `"worlds" | "world" | "watch" | "jobs" | "settings"`; the store also carries
@@ -456,13 +455,52 @@ a *spacetime* is one simulation run over that world (policy + news/events + star
 `indoor`, `policy`, `minute` (plus `step`, still used by the household builder).
 Initial values come from the URL and fall back to defaults; `PARAM_ORDER` is
 `view, world, tab, run, date, block, house, indoor, policy, minute`.
-The removed `mode` / `density` fields now live as local state in the unreachable
-`WorldWorkspace` shell kept for part 2.
+The `mode` / `density` fields were local state in the `WorldWorkspace` shell,
+which part 2 deleted; watch layers are URL state instead (§14).
 
 **New primitives / components** — `ui/textarea`, `primitives/WorldBadge`,
 `WorldsList`, `WorldDetail`, `SpacetimeList`, `SpacetimeWizard`, `WorldHouseholds`,
-`WatchPlaceholder`, `CloneWorldButton`; hooks `useWorld` / `useCloneWorld`
+`CloneWorldButton`; hooks `useWorld` / `useCloneWorld`
 (`useWorldBuild.ts`) and `useSpacetimes` / `useCreateSpacetime` /
 `useDeleteSpacetime` / `useWorldDayBlocks` (`useSpacetimes.ts`). No new tokens were
-required; everything reuses §2–§6.
+required; everything reuses §2–§6. `WatchPlaceholder` was a part-2 stepping stone
+and is replaced by `WatchView` in §14.
+
+## 14. Information architecture — L2a Watch (restructure part 2)
+
+`view=watch&world=W&run=R` renders `components/WatchView.tsx`. The active layer is
+derived from URL state, never from local component state:
+
+| Layer | Condition | Content |
+| --- | --- | --- |
+| 1 World | no `house`, no `block` | Town map (`ObserveScene` → lazy `SceneView` in map-only chrome, no interior toggle) plus a compact block strip from `useWorldDayBlocks` (postcode / households / total kWh / peak W). Selecting a block sets `block`. |
+| 2 Block | `block`, no `house` | Block summary + `ObserveGrid` = `MultiHouseGrid` filtered to the block's house ids. Selecting a household sets `house`. |
+| 3 House | `house`, `indoor=false` | `MetricStrip` + `ObserveDetail` (floor plan, load curve, members, activity timeline, snapshot, decision pipeline). Prominent `Enter indoor` sets `indoor=1`. |
+| 4 Indoor | `house`, `indoor=1` | Full-height `HouseFloorplan`: rooms with occupants, appliances and live load. `Back to house` clears `indoor`. |
+
+- **Breadcrumb** `World W / R / date / block / house`; every crumb is clickable and clears the
+  deeper selections. A back link returns to L1 (`view=world&world=W`).
+- **Day selector** reads `GET /api/runs/{run}/meta` via `useRunMeta` and writes `date`; an effect
+  converges `date` to the first valid day when the URL points at a missing one.
+- **Play bar gating** — `TimeController` is rendered only by `WatchView` (bottom glass frame), so
+  no other view shows it. `usePlayback` (rAF loop + keyboard shortcuts) mounts with `WatchView` too.
+- **Data** — replays come from the existing `useDayReplay`; day blocks from `useWorldDayBlocks`.
+  No new fetch primitives, no new tokens.
+- **Empty states** (English): no world / spacetime selected, loading, meta failure, no simulated
+  days, block without households, household without a replay.
+- **Reused primitives gained optional props** (defaults unchanged): `MultiHouseGrid.houses`,
+  `HouseFloorplan.className`, `SceneView.onEnterHouse`.
+
+**Cleanup** — deleted `WatchPlaceholder`, `WorldWorkspace`, `RunPicker`,
+`primitives/Placeholder`, `primitives/SegmentedControl`, `hooks/useBootstrapSelection`,
+`SimulateForm` and `GenerateWizard` (each unreachable after the watch wiring: their only entry
+points were the removed placeholder/workspace). The `mode` / `density` model went with
+`WorldWorkspace`.
+
+**English-only enforcement** — all user-visible copy, comments and fixtures under `src/` are
+English. The build additionally strips CJK from vendor sources via the `strip-vendor-cjk` plugin
+in `vite.config.ts` (moment locales, `vis-timeline`'s bundled translations, Chinese comments in
+`xss` / `cssfilter`); `ActivityTimeline` imports the unbundled `vis-timeline/esnext` build so
+`moment-with-locales` never enters the bundle. Gate: scanning `dist/` for `[\u4e00-\u9fff]`
+returns 0 matches.
 

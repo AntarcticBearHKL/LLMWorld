@@ -1,9 +1,10 @@
 /**
- * 活动分类推导。
+ * Activity category inference.
  *
- * 契约里的 ActivitySegment 没有 category 字段，因此分类是展示层推导：
- * 先看 location 判断"是否在家"，再按活动文本关键词归类。
- * 映射集中在这里一处，未命中一律归入 leisure。
+ * The ActivitySegment contract has no category field, so the category is a
+ * presentation-layer inference: first use location to decide whether the member
+ * is home, then classify by keywords in the activity text.
+ * The mapping lives here in one place; anything unmatched falls back to leisure.
  */
 
 export const ACTIVITY_CATEGORIES = [
@@ -18,21 +19,21 @@ export const ACTIVITY_CATEGORIES = [
 export type ActivityCategory = (typeof ACTIVITY_CATEGORIES)[number]
 
 export const CATEGORY_LABELS: Record<ActivityCategory, string> = {
-  sleep: "睡眠",
-  meal: "用餐",
-  chore: "家务",
-  focus: "学习工作",
-  leisure: "休闲自理",
-  away: "外出",
+  sleep: "Sleep",
+  meal: "Meal",
+  chore: "Chores",
+  focus: "Focus",
+  leisure: "Leisure",
+  away: "Away",
 }
 
 export const CATEGORY_DESCRIPTIONS: Record<ActivityCategory, string> = {
-  sleep: "睡眠与卧床休息",
-  meal: "吃饭、喝东西、茶歇",
-  chore: "做饭、清洁、洗衣、采购",
-  focus: "上课、实验、写作、会议",
-  leisure: "电视、游戏、社交、运动、洗漱",
-  away: "不在住宅内",
+  sleep: "Sleep and resting in bed",
+  meal: "Eating, drinking, coffee breaks",
+  chore: "Cooking, cleaning, laundry, shopping",
+  focus: "Classes, lab work, writing, meetings",
+  leisure: "TV, games, socialising, exercise, self-care",
+  away: "Not inside the home",
 }
 
 const OUT_LOCATION_KEYWORDS = [

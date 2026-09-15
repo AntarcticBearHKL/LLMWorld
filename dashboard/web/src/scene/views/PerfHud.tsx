@@ -78,14 +78,14 @@ export function PerfHud({ autoStart = false, onDegradeChange }: PerfHudProps) {
 
   return (
     <div className="flex items-center gap-2 rounded-md border border-border bg-surface-2 px-2 py-1">
-      <span className="label-micro">性能</span>
+      <span className="label-micro">Perf</span>
       <span className="num text-[10px] text-fg">
-        {report === null ? "未测量" : `${report.fps} fps`}
+        {report === null ? "Not sampled" : `${report.fps} fps`}
       </span>
       <span className="num text-[10px] text-fg-subtle">
         {report === null || report.heapDeltaMb === null
-          ? "堆 n/a"
-          : `堆 ${report.heapDeltaMb >= 0 ? "+" : ""}${report.heapDeltaMb} MB`}
+          ? "heap n/a"
+          : `heap ${report.heapDeltaMb >= 0 ? "+" : ""}${report.heapDeltaMb} MB`}
       </span>
       <span className="num text-[10px] text-fg-subtle">
         {growth === null ? "" : `${(growth * 100).toFixed(1)}%`}
@@ -99,11 +99,13 @@ export function PerfHud({ autoStart = false, onDegradeChange }: PerfHudProps) {
           invalid ? "text-fg-subtle" : degraded ? "text-danger" : "text-success",
         )}
       >
-        {invalid ? "采样无效" : degraded ? "已降级" : "正常"}
+        {invalid ? "Invalid sample" : degraded ? "Degraded" : "OK"}
       </span>
-      {invalid ? <span className="num text-[10px] text-fg-subtle">需页面在前台</span> : null}
+      {invalid ? (
+        <span className="num text-[10px] text-fg-subtle">needs foreground tab</span>
+      ) : null}
       <Button variant="outline" size="sm" className="h-6 px-2 text-[11px]" onClick={toggle}>
-        {running ? "停止测帧" : "开始测帧"}
+        {running ? "Stop sampling" : "Start sampling"}
       </Button>
     </div>
   )

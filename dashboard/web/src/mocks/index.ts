@@ -1,9 +1,10 @@
 /**
- * 夹具注册表。
+ * Fixture registry.
  *
- * 这里刻意使用静态 import 而不是 import.meta.glob：JSON 的字面量类型会被
- * TypeScript 结构化比对到 api/types.ts 的契约类型上，夹具一旦偏离 models.py
- * 就编译失败。glob 会丢掉类型，只能靠断言，那正是我们要避免的。
+ * Static imports are deliberate rather than import.meta.glob: the JSON literal
+ * types are structurally matched against the api/types.ts contract, so a fixture
+ * that drifts from models.py fails to compile. Glob drops the types and forces
+ * assertions, which is exactly what we want to avoid.
  */
 import type {
   BlockSummary,
@@ -149,7 +150,7 @@ export const mockStages: Record<string, StagePayload> = {
   "world_838587/2026-09-11/house_0001/Member 4": stages4,
 }
 
-/** mock 模式没有构建产物：一律按「空世界、尚未开始」返回，供 UI 走正常态演示。 */
+/** Mock mode has no build artifacts: always report "empty world, not started" so the UI shows its normal states. */
 export function mockBuildState(worldId: string): BuildState {
   const exists = mockWorlds.some((item) => item.world_id === worldId)
   return {

@@ -225,7 +225,7 @@ export function CharacterLayer({ state, showTrail = false }: CharacterLayerProps
       <Text
         x={outBand.x + 12}
         y={outBand.y + 6}
-        text={state.outMembers.length > 0 ? `${state.outMembers.length} 人外出` : ""}
+        text={state.outMembers.length > 0 ? `${state.outMembers.length} members out` : ""}
         fontSize={9}
         fill={tokens.fgSubtle}
         listening={false}

@@ -25,26 +25,26 @@ interface Segment {
 const STAGES = [
   {
     key: "s1",
-    title: "s1 · 宏观计划",
-    hint: "整天的时间 / 地点 / 活动",
+    title: "s1 · Macro plan",
+    hint: "time / place / activity for the whole day",
     listKey: "activities",
   },
   {
     key: "s2",
-    title: "s2 · 成员协调",
-    hint: "避免共用资源冲突",
+    title: "s2 · Member coordination",
+    hint: "avoid shared-resource conflicts",
     listKey: "coordinated_activities",
   },
   {
     key: "s3",
-    title: "s3 · 描述丰富",
-    hint: "为每段活动补充细节",
+    title: "s3 · Rich description",
+    hint: "add detail to each segment",
     listKey: "enriched_activities",
   },
   {
     key: "s4",
-    title: "s4 · 电器决策",
-    hint: "每段的电器操作",
+    title: "s4 · Appliance decisions",
+    hint: "appliance operations per segment",
     listKey: "appliance_decisions",
   },
 ] as const
@@ -76,7 +76,7 @@ export function PipelineDrawer() {
         <div className="flex items-center justify-between gap-2">
           <span className="label-micro flex items-center gap-1.5">
             <GitBranch className="size-3" aria-hidden />
-            决策流水线
+            Decision pipeline
           </span>
           <Badge variant="outline" className="label-latin">
             s1–s4
@@ -84,13 +84,13 @@ export function PipelineDrawer() {
         </div>
         <p className="text-[11px] text-fg-muted">
           {selectedMember === null
-            ? "在时间轴上点击任一色块以选中成员。"
-            : `已选 ${selectedMember}，可查看 s1 → s4 的推理链与 LLM 日志。`}
+            ? "Select a block on the timeline to pick a member."
+            : `Selected ${selectedMember} — inspect the s1 → s4 reasoning chain and LLM logs.`}
         </p>
         <SheetTrigger asChild>
           <Button variant="outline" size="sm" disabled={selectedMember === null} className="w-full">
             <ScrollText />
-            打开流水线
+            Open pipeline
           </Button>
         </SheetTrigger>
       </div>
@@ -98,11 +98,12 @@ export function PipelineDrawer() {
       <SheetContent side="right" className="flex w-full flex-col gap-0 sm:max-w-2xl">
         <SheetHeader className="border-b border-border">
           <SheetTitle className="flex items-center gap-2">
-            决策流水线
+            Decision pipeline
             <span className="num text-[12px] font-normal text-fg-muted">{selectedMember ?? "—"}</span>
           </SheetTitle>
           <SheetDescription>
-            该成员这一天的完整决策链：宏观计划 → 成员协调 → 描述丰富 → 电器决策，附各阶段 LLM 原始日志。
+            The full decision chain for this member&apos;s day: macro plan → member coordination → rich
+            description → appliance decisions, with the raw LLM log of every stage.
           </SheetDescription>
         </SheetHeader>
 
@@ -115,10 +116,10 @@ export function PipelineDrawer() {
               </TabsTrigger>
             ))}
             <TabsTrigger value="logs" className="text-[11px]">
-              日志
+              Logs
             </TabsTrigger>
             <TabsTrigger value="report" className="text-[11px]">
-              校验
+              Report
             </TabsTrigger>
           </TabsList>
 
@@ -132,13 +133,13 @@ export function PipelineDrawer() {
                     <span className="text-[12px] font-semibold text-fg">{stage.title}</span>
                     <span className="label-micro">{stage.hint}</span>
                     <span className="num ml-auto text-[10px] text-fg-subtle">
-                      {segments.length} 段
+                      {segments.length} segments
                     </span>
                   </div>
 
                   {segments.length === 0 ? (
                     <p className="text-[11px] text-fg-subtle">
-                      {stagesQuery.isPending ? "载入中…" : "该阶段没有数据。"}
+                      {stagesQuery.isPending ? "Loading…" : "No data for this stage."}
                     </p>
                   ) : (
                     <ul className="flex flex-col gap-1.5">
@@ -193,7 +194,7 @@ export function PipelineDrawer() {
                         <span className="label-latin">raw llm log</span>
                       </div>
                       <pre className="num max-h-72 overflow-auto rounded-md border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap text-fg-muted">
-                        {text.length > 0 ? text : "该阶段没有日志文件。"}
+                        {text.length > 0 ? text : "No log file for this stage."}
                       </pre>
                     </section>
                   )
@@ -203,12 +204,12 @@ export function PipelineDrawer() {
 
             <TabsContent value="report" className="mt-0">
               <div className="mb-3 flex items-baseline gap-2">
-                <span className="text-[12px] font-semibold text-fg">s4 校验报告</span>
-                <span className="label-micro">清理 / 修复 / 丢弃统计</span>
+                <span className="text-[12px] font-semibold text-fg">s4 validation report</span>
+                <span className="label-micro">cleaned / repaired / dropped counts</span>
               </div>
               <pre className="num max-h-[28rem] overflow-auto rounded-md border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap text-fg-muted">
                 {stages?.report === null || stages?.report === undefined
-                  ? "没有校验报告。"
+                  ? "No validation report."
                   : JSON.stringify(stages.report, null, 2)}
               </pre>
             </TabsContent>

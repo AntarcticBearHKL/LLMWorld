@@ -33,9 +33,9 @@ export const formatHHMM = (minute: number): string => {
 export const formatMinutesAsDuration = (minutes: number): string => {
   const hours = Math.floor(minutes / 60)
   const rest = Math.round(minutes % 60)
-  if (hours === 0) return `${rest} 分钟`
-  if (rest === 0) return `${hours} 小时`
-  return `${hours} 小时 ${rest} 分`
+  if (hours === 0) return `${rest} min`
+  if (rest === 0) return `${hours} h`
+  return `${hours} h ${rest} min`
 }
 
 export const formatWatts = (watts: number): string =>

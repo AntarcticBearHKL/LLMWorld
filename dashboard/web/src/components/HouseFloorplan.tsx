@@ -10,9 +10,9 @@ import { useTimeStore } from "@/store/time"
 
 interface HouseFloorplanProps {
   replay: DayReplay | undefined
+  className?: string
 }
 
-/** 平面图排列顺序：公共空间在前，卧室居中，其余按名称。 */
 const ROOM_RANK = ["Living Room", "Kitchen", "Bathroom", "Dining Room", "Study", "Laundry"]
 
 const rankOf = (room: string): number => {
@@ -20,7 +20,7 @@ const rankOf = (room: string): number => {
   return index < 0 ? ROOM_RANK.length + (room.startsWith("Bedroom") ? 0 : 1) : index
 }
 
-export function HouseFloorplan({ replay }: HouseFloorplanProps) {
+export function HouseFloorplan({ replay, className }: HouseFloorplanProps) {
   const minute = useTimeStore((state) => state.minute)
   const memberIds = replay?.members.map((member) => member.id) ?? []
   const rooms = [...(replay?.household.rooms ?? [])].sort(
@@ -47,16 +47,16 @@ export function HouseFloorplan({ replay }: HouseFloorplanProps) {
 
   return (
     <Panel
-      title="楼层平面图"
-      hint={`${rooms.length} 个空间`}
+      title="Floor plan"
+      hint={`${rooms.length} rooms`}
       index={0}
-      className="min-h-[232px]"
+      className={cn("min-h-[232px]", className)}
       bodyClassName="flex min-h-0 flex-col overflow-y-auto"
       actions={<span className="label-latin">{formatWatts(houseWatts)}</span>}
     >
       {replay === undefined ? (
         <div className="flex flex-1 items-center justify-center p-4">
-          <span className="text-[11px] text-fg-subtle">载入户型…</span>
+          <span className="text-[11px] text-fg-subtle">Loading floor plan…</span>
         </div>
       ) : (
         <>
@@ -132,15 +132,15 @@ export function HouseFloorplan({ replay }: HouseFloorplanProps) {
           <div className="mt-auto flex shrink-0 flex-wrap items-center gap-x-4 gap-y-1 border-t border-border px-3 py-2">
             <span className="label-micro flex items-center gap-1.5">
               <Users className="size-3" aria-hidden />
-              在家 {memberIds.length - away.length}/{memberIds.length}
+              Home {memberIds.length - away.length}/{memberIds.length}
             </span>
             {away.length > 0 ? (
               <span className="label-micro flex items-center gap-1.5">
                 <DoorOpen className="size-3" aria-hidden />
-                外出 {away.join(" · ")}
+                Away {away.join(" · ")}
               </span>
             ) : null}
-            <span className="label-micro ml-auto">通电设备 {activeCount}</span>
+            <span className="label-micro ml-auto">Powered appliances {activeCount}</span>
           </div>
         </>
       )}

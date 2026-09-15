@@ -61,8 +61,8 @@ const buildReport = (
 }
 
 /**
- * rAF 驱动的 FPS 采样器：按 windowMs 聚合均值，附带 performance.memory（Chrome）。
- * 标签页隐藏或长卡顿后重置窗口，避免把暂停时间算成低帧率。
+ * rAF-driven FPS sampler: averages over windowMs, with performance.memory (Chrome).
+ * Hidden tabs or long stalls reset the window so paused time is not counted as low FPS.
  */
 export function useFpsMeter(windowMs: number = DEFAULT_WINDOW_MS): FpsMeter {
   const [fps, setFps] = useState<number | null>(null)

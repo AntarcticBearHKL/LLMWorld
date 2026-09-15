@@ -32,34 +32,34 @@ import { cn } from "@/lib/utils"
 import { dwellMsFor, useTimeStore, type PlayMode } from "@/store/time"
 
 const PHASES: ReadonlyArray<{ until: number; label: string }> = [
-  { until: 360, label: "凌晨" },
-  { until: 720, label: "上午" },
-  { until: 840, label: "中午" },
-  { until: 1080, label: "下午" },
-  { until: 1320, label: "傍晚" },
-  { until: DAY_MINUTES + 1, label: "夜间" },
+  { until: 360, label: "Night" },
+  { until: 720, label: "Morning" },
+  { until: 840, label: "Midday" },
+  { until: 1080, label: "Afternoon" },
+  { until: 1320, label: "Evening" },
+  { until: DAY_MINUTES + 1, label: "Late night" },
 ]
 
 const dayRunLabel = (preset: number): string => {
   const seconds = DAY_MINUTES / preset
-  return seconds < 60 ? `${Math.round(seconds)} 秒` : formatMinutesAsDuration(seconds / 60)
+  return seconds < 60 ? `${Math.round(seconds)} s` : formatMinutesAsDuration(seconds / 60)
 }
 
 const PLAY_MODES: ReadonlyArray<{ value: PlayMode; label: string }> = [
-  { value: "continuous", label: "连续" },
-  { value: "autoStep", label: "跳格" },
+  { value: "continuous", label: "Continuous" },
+  { value: "autoStep", label: "Auto-step" },
 ]
 
 const formatDwell = (ms: number): string =>
-  ms >= 1000 ? `${Number((ms / 1000).toFixed(1))} 秒` : `${ms} ms`
+  ms >= 1000 ? `${Number((ms / 1000).toFixed(1))} s` : `${ms} ms`
 
 const speedHint = (preset: number, playMode: PlayMode): string =>
   playMode === "autoStep"
-    ? `每格 ${formatDwell(dwellMsFor(preset))}`
-    : `${dayRunLabel(preset)}跑完全天`
+    ? `step every ${formatDwell(dwellMsFor(preset))}`
+    : `full day in ${dayRunLabel(preset)}`
 
 const phaseOf = (minute: number): string =>
-  PHASES.find((phase) => minute < phase.until)?.label ?? "夜间"
+  PHASES.find((phase) => minute < phase.until)?.label ?? "Late night"
 
 function Key({ children }: { children: string }) {
   return (
@@ -117,10 +117,13 @@ export function TimeController() {
   return (
     <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
       <div className="flex items-center gap-1.5">
-        <TransportButton label="回到 00:00（Home）" onClick={() => setMinute(0)}>
+        <TransportButton label="Back to 00:00 (Home)" onClick={() => setMinute(0)}>
           <ChevronsLeft />
         </TransportButton>
-        <TransportButton label={`上一格 · 后退 ${stepMinutes} 分钟（←）`} onClick={() => jump(-1)}>
+        <TransportButton
+          label={`Previous step · back ${stepMinutes} min (←)`}
+          onClick={() => jump(-1)}
+        >
           <StepBack />
         </TransportButton>
         <Tooltip>
@@ -128,18 +131,21 @@ export function TimeController() {
             <Button
               size="icon"
               onClick={togglePlay}
-              aria-label={isPlaying ? "暂停" : "播放"}
+              aria-label={isPlaying ? "Pause" : "Play"}
               className="size-9 shadow-[inset_0_1px_0_rgb(255_255_255/0.08)]"
             >
               {isPlaying ? <Pause className="size-4" /> : <Play className="size-4" />}
             </Button>
           </TooltipTrigger>
-          <TooltipContent>{isPlaying ? "暂停（空格）" : "播放（空格）"}</TooltipContent>
+          <TooltipContent>{isPlaying ? "Pause (Space)" : "Play (Space)"}</TooltipContent>
         </Tooltip>
-        <TransportButton label={`下一格 · 前进 ${stepMinutes} 分钟（→）`} onClick={() => jump(1)}>
+        <TransportButton
+          label={`Next step · forward ${stepMinutes} min (→)`}
+          onClick={() => jump(1)}
+        >
           <StepForward />
         </TransportButton>
-        <TransportButton label="跳到 24:00（End）" onClick={() => setMinute(DAY_MINUTES)}>
+        <TransportButton label="Jump to 24:00 (End)" onClick={() => setMinute(DAY_MINUTES)}>
           <ChevronsRight />
         </TransportButton>
       </div>
@@ -151,7 +157,7 @@ export function TimeController() {
         <span className="flex flex-col leading-tight">
           <span className="label-micro">{phaseOf(minute)}</span>
           <span className="num text-[10px] text-fg-subtle">
-            第 {currentStep}/{totalSteps} 格
+            Step {currentStep}/{totalSteps}
           </span>
         </span>
       </div>
@@ -159,21 +165,21 @@ export function TimeController() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="sm" className="num gap-1.5 px-2.5">
-            {stepMinutes} 分/格
+            {stepMinutes} min/step
             <ChevronDown className="size-3 opacity-60" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="min-w-[172px]">
-          <DropdownMenuLabel className="label-latin">步长</DropdownMenuLabel>
+          <DropdownMenuLabel className="label-latin">Step size</DropdownMenuLabel>
           <DropdownMenuRadioGroup
             value={String(stepMinutes)}
             onValueChange={(value) => setStepMinutes(Number(value))}
           >
             {STEP_PRESETS.map((preset) => (
               <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
-                {preset} 分钟 / 格
+                {preset} min / step
                 <span className="ml-2 text-[10px] text-fg-subtle">
-                  全天 {stepCount(preset)} 格
+                  full day: {stepCount(preset)} steps
                 </span>
               </DropdownMenuRadioItem>
             ))}
@@ -194,11 +200,11 @@ export function TimeController() {
               useTimeStore.getState().setPlaying(false)
             }
           }}
-          aria-label="全天时间滑块"
+          aria-label="Day timeline"
           className="grow"
         />
         <span className="num shrink-0 text-[10px] text-fg-subtle">
-          {progress.toFixed(1)}% · 余 {formatMinutesAsDuration(remaining)}
+          {progress.toFixed(1)}% · {formatMinutesAsDuration(remaining)} left
         </span>
       </div>
 
@@ -206,7 +212,7 @@ export function TimeController() {
         <div
           className="flex items-center gap-0.5 rounded-md border border-border bg-surface-2 p-0.5"
           role="group"
-          aria-label="播放模式"
+          aria-label="Playback mode"
         >
           {PLAY_MODES.map((item) => (
             <button
@@ -227,7 +233,7 @@ export function TimeController() {
         </div>
         {playMode === "autoStep" ? (
           <span className="num text-[10px] text-fg-subtle">
-            每格 {formatDwell(dwellMsFor(speed))}
+            Step every {formatDwell(dwellMsFor(speed))}
           </span>
         ) : null}
       </div>
@@ -241,7 +247,7 @@ export function TimeController() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="min-w-[168px]">
-            <DropdownMenuLabel className="label-latin">回放倍速</DropdownMenuLabel>
+            <DropdownMenuLabel className="label-latin">Playback speed</DropdownMenuLabel>
             <DropdownMenuRadioGroup
               value={String(speed)}
               onValueChange={(value) => setSpeed(Number(value))}
@@ -260,13 +266,13 @@ export function TimeController() {
       </div>
 
       <div className="hidden items-center gap-1.5 2xl:flex">
-        <Key>空格</Key>
-        <span className="text-[10px] text-fg-subtle">播放</span>
+        <Key>Space</Key>
+        <span className="text-[10px] text-fg-subtle">play</span>
         <Key>←</Key>
         <Key>→</Key>
-        <span className="text-[10px] text-fg-subtle">±1 格</span>
+        <span className="text-[10px] text-fg-subtle">±1 step</span>
         <Key>Shift</Key>
-        <span className="text-[10px] text-fg-subtle">±60 分</span>
+        <span className="text-[10px] text-fg-subtle">±60 min</span>
         <Key>Home</Key>
         <Key>End</Key>
       </div>

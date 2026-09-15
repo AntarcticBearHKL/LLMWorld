@@ -41,7 +41,7 @@ const ringOffset = (index: number, count: number, radius: number): Point => {
 const OUT_BAND_HEIGHT = 56
 
 export const outBandOf = (size: SceneSize): RoomRect => ({
-  room: "外出",
+  room: "Out",
   x: ROOM_GAP + 6,
   y: Math.max(ROOM_GAP + 6, size.height - OUT_BAND_HEIGHT - ROOM_GAP),
   w: Math.min(340, Math.max(140, size.width - (ROOM_GAP + 6) * 2)),

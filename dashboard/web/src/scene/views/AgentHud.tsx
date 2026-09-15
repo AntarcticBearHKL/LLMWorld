@@ -50,7 +50,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
   return (
     <aside
       className="pointer-events-auto absolute bottom-3 left-3 z-20 flex max-h-[min(420px,calc(100%-24px))] w-[320px] flex-col overflow-hidden rounded-lg border border-border bg-surface/95 shadow-[var(--shadow-2)] backdrop-blur"
-      aria-label="成员详情"
+      aria-label="Member details"
     >
       <header className="flex shrink-0 items-center gap-2 border-b border-border px-3 py-2">
         <span
@@ -65,7 +65,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
           variant="ghost"
           size="icon-sm"
           className="ml-auto"
-          aria-label="关闭"
+          aria-label="Close"
           onClick={() => setSelectedMember(null)}
         >
           <X />
@@ -75,7 +75,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
       <div className="min-h-0 flex-1 overflow-y-auto px-3 py-2.5">
         <div className="flex flex-col gap-0.5">
           <span className="num text-[10px] text-fg-subtle">
-            {member.info.age !== null ? `${member.info.age} 岁` : "年龄未知"}
+            {member.info.age !== null ? `age ${member.info.age}` : "Age unknown"}
             {member.info.gender !== null ? ` · ${member.info.gender}` : ""}
           </span>
           {member.info.occupation !== null ? (
@@ -91,26 +91,26 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
         </div>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
-          <span className="label-micro">此刻</span>
+          <span className="label-micro">Now</span>
           {segment !== undefined ? (
             <>
               <span className="text-[11px] leading-snug text-fg">{segment.activity}</span>
               <span className="num text-[10px] text-fg-subtle">
-                {segment.location} · {formatHHMM(segment.start)}–{formatHHMM(segment.end)} · 已持续{" "}
-                {formatMinutesAsDuration(minute - segment.start)}
+                {segment.location} · {formatHHMM(segment.start)}–{formatHHMM(segment.end)} ·{" "}
+                {formatMinutesAsDuration(minute - segment.start)} elapsed
               </span>
             </>
           ) : (
-            <span className="text-[11px] text-fg-subtle">该时刻没有活动记录。</span>
+            <span className="text-[11px] text-fg-subtle">No activity recorded at this time.</span>
           )}
         </section>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
           <span className="label-micro">
-            在用电器 · {used.length} 台 · 合计 {formatWatts(totalWatts)}
+            In use · {used.length} appliances · {formatWatts(totalWatts)} total
           </span>
           {used.length === 0 ? (
-            <span className="text-[11px] text-fg-subtle">没有正在使用的电器。</span>
+            <span className="text-[11px] text-fg-subtle">No appliance in use.</span>
           ) : (
             <ul className="flex flex-col gap-1">
               {used.map((appliance) => (
@@ -131,9 +131,9 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
         </section>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
-          <span className="label-micro">接下来</span>
+          <span className="label-micro">Next</span>
           {upcoming.length === 0 ? (
-            <span className="text-[11px] text-fg-subtle">今日活动已结束。</span>
+            <span className="text-[11px] text-fg-subtle">No more activity today.</span>
           ) : (
             <ul className="flex flex-col gap-1">
               {upcoming.map((item) => (
@@ -150,7 +150,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
       {onOpenPipeline !== undefined ? (
         <footer className="shrink-0 border-t border-border px-3 py-2">
           <Button variant="outline" size="sm" className="w-full" onClick={() => onOpenPipeline(member.id)}>
-            打开决策流水线
+            Open decision pipeline
           </Button>
         </footer>
       ) : null}

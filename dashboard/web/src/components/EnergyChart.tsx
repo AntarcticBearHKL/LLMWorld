@@ -79,7 +79,7 @@ export function EnergyChart({ replay }: EnergyChartProps) {
       }
       series.push({
         id: "__rest__",
-        name: `其他 ${rest.length} 台`,
+        name: `Other ${rest.length}`,
         energy: rest.reduce((sum, appliance) => sum + appliance.energy_kwh, 0),
         color: colorAt(SERIES_COLORS.length - 1),
         values,
@@ -150,20 +150,20 @@ export function EnergyChart({ replay }: EnergyChartProps) {
 
   return (
     <Panel
-      title="全天负荷"
-      hint={stacked !== null ? `峰值 ${formatWatts(stacked.peak)}` : "无数据"}
+      title="Day load"
+      hint={stacked !== null ? `peak ${formatWatts(stacked.peak)}` : "No data"}
       index={3}
       className="min-h-[248px]"
       bodyClassName="flex min-h-0 flex-col"
       actions={
         <span className="label-latin">
-          {replay !== undefined ? `总 ${formatKwh(replay.metrics.total_kwh)} kWh` : "—"}
+          {replay !== undefined ? `total ${formatKwh(replay.metrics.total_kwh)} kWh` : "—"}
         </span>
       }
     >
       {model === null || stacked === null ? (
         <div className="flex flex-1 items-center justify-center px-4 py-6">
-          <span className="text-[11px] text-fg-subtle">载入负荷曲线…</span>
+          <span className="text-[11px] text-fg-subtle">Loading load curve…</span>
         </div>
       ) : (
         <>
