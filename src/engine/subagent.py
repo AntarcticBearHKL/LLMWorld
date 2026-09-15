@@ -285,7 +285,16 @@ class SubAgent:
     @staticmethod
     def call_with_retry(prompt, json_mode=False, thinking=None, api_key=None, model=None,
                         json_schema=None):
-        return SubAgent.call_deepseek(prompt, json_mode, thinking, api_key, model, json_schema)
+        attempt = 0
+        while True:
+            try:
+                return SubAgent.call_deepseek(prompt, json_mode, thinking, api_key, model,
+                                              json_schema)
+            except LLMCallError as exc:
+                attempt += 1
+                if not exc.retryable or attempt >= config.MAX_RETRIES:
+                    raise
+                time.sleep(config.RETRY_BACKOFF_SECONDS * attempt)
 
     @staticmethod
     def parallel_call(prompts, json_mode=False, thinking=None, api_key=None, model=None,

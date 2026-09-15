@@ -14,9 +14,9 @@ load_dotenv()
 
 DEEPSEEK_APIKEY = os.getenv("DEEPSEEK_APIKEY", "")
 DEEPSEEK_API_BASE = os.getenv("DEEPSEEK_API_BASE", "https://api.deepseek.com")
-MODEL = "deepseek-v4-flash"
-TEMPERATURE = 1.0
-MAX_TOKENS = 64000
+MODEL = os.getenv("LLMWORLD_MODEL", "deepseek-v4-flash")
+TEMPERATURE = float(os.getenv("LLMWORLD_TEMPERATURE", "1.0"))
+MAX_TOKENS = int(os.getenv("LLMWORLD_MAX_TOKENS", "64000"))
 
 
 
@@ -29,17 +29,16 @@ REASONING_EFFORT = os.getenv("REASONING_EFFORT", "low").strip().lower()
 
 
 
-MAX_RETRIES = 3
-RETRY_BACKOFF_SECONDS = 2
+MAX_RETRIES = max(1, int(os.getenv("LLMWORLD_MAX_RETRIES", "3")))
+RETRY_BACKOFF_SECONDS = float(os.getenv("LLMWORLD_RETRY_BACKOFF", "2"))
 LOGIC_MAX_ATTEMPTS = max(1, int(os.getenv("LOGIC_MAX_ATTEMPTS", "4")))
 LLM_MAX_CONCURRENCY = max(1, int(os.getenv("LLM_MAX_CONCURRENCY", "10")))
 
 
-REQUEST_TIMEOUT_SECONDS = 600
+REQUEST_TIMEOUT_SECONDS = int(os.getenv("LLMWORLD_REQUEST_TIMEOUT", "600"))
 
 
 DEFAULT_START_DATE = "2026-04-21"
-DEFAULT_DAYS = 5
 DEFAULT_SEASON = "Spring"
 DEFAULT_WEATHER = "Sunny"
 DEFAULT_TEMPERATURE = 20
@@ -50,19 +49,12 @@ CLAYTON_POSTCODE = "3168"
 
 
 
-ENV_MODE = "config"
-
-
 MELBOURNE_CLIMATE = {
     "Summer": {"temp_range": (24, 38), "weathers": [("Sunny", 40), ("Cloudy", 25), ("Heatwave", 15), ("Shower", 20)]},
     "Autumn": {"temp_range": (14, 25), "weathers": [("Sunny", 35), ("Cloudy", 30), ("Shower", 25), ("Windy", 10)]},
     "Winter": {"temp_range": (7, 16),  "weathers": [("Cloudy", 35), ("Overcast", 25), ("Shower", 30), ("ColdSnap", 10)]},
     "Spring": {"temp_range": (12, 23), "weathers": [("Sunny", 40), ("Cloudy", 30), ("Shower", 25), ("Windy", 5)]},
 }
-
-
-ENV_MANUAL_FILE = "env_manual.json"
-
 
 
 NEWS_MEMORY_KEEP = 5

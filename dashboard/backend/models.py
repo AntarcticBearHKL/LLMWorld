@@ -445,3 +445,24 @@ class ArtifactWriteResult(BaseModel):
     diff: str = ""
     json_valid: bool = True
     warnings: List[str] = Field(default_factory=list)
+
+
+# --------------------------------------------------------------------------
+# Dashboard settings (model + LLM knobs, injected into jobs as LLMWORLD_* env)
+# --------------------------------------------------------------------------
+class Settings(BaseModel):
+    model: str
+    temperature: float
+    max_tokens: int
+    request_timeout_seconds: int
+    max_retries: int
+    retry_backoff_seconds: float
+
+
+class SettingsUpdate(BaseModel):
+    model: Optional[str] = None
+    temperature: Optional[float] = None
+    max_tokens: Optional[int] = None
+    request_timeout_seconds: Optional[int] = None
+    max_retries: Optional[int] = None
+    retry_backoff_seconds: Optional[float] = None

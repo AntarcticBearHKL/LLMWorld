@@ -138,6 +138,21 @@
 - **待补（受 402 阻塞）**：`run_build_step`/`run_simulation` 的 **LLM 成功路径**（与 M2/M5 同因账户余额耗尽），
   `confirm=True` 的作业提交与状态机已由 REST/M2 证；MCP 侧复用同一 `jobs.create_job` 路径。
 
+### M7 验收 — ✅ PASS（用户授权最小改 `src/`）
+
+- **授权**：用户确认「允许 M7 最小改 `src/`」——仅 config 旋钮 env 化 + 真重试 + 死配置清理；不动模拟/政策/prompt 语义。
+- **`src/config.py`（最小改）**：`MODEL`/`TEMPERATURE`/`MAX_TOKENS`/`REQUEST_TIMEOUT_SECONDS`/`MAX_RETRIES`/`RETRY_BACKOFF_SECONDS`
+  改为 `os.getenv("LLMWORLD_*", <原默认>)`；删除**确证死配置** `DEFAULT_DAYS`/`ENV_MODE`/`ENV_MANUAL_FILE` + `git rm src/env_manual.json`。
+  ⚠️ **修正 §12.2**：`DEFAULT_START_DATE` **并非死配置**（被 4 个 simulate step 使用：`s1_macro_plan`/`s2_coordinate`/`s3_enrich`/`s4_appliance_decision`），**保留**。
+- **`src/engine/subagent.py`（最小改）**：`call_with_retry` 由「直接转发」改为**真重试**（`retryable` 错误 + `MAX_RETRIES` + 线性退避）；`single_call` 已委派它 → 覆盖所有 step 调用路径。
+- **新增** `backend/settings.py` + `GET/PUT /api/settings`（写 `dashboard/settings.json`，已 gitignore）+ `/api/health` 增 `settings`；
+  `jobs.py` 用 `settings.job_env()` 把 6 个 `LLMWORLD_*` 注入**每个**作业子进程（build 作业另带 `LLM_TRACE_FILE`）；移除已被取代的 `build.build_env`（无死代码）。
+- **新增前端「设置」面板**：`SettingsPanel.tsx` + `useSettings.ts` + `client.putJson/getSettings/updateSettings`。
+- **验收口径证据**：`LLMWORLD_MODEL=probe-model-xyz` → `src/config.py` `MODEL=probe-model-xyz`（env 覆盖生效）；
+  UI 改模型 → 保存 → `GET /api/settings` 与 `settings.json` 均为新值、`git check-ignore` 确认不入库；随后恢复默认。
+- **回归**：`python -m unittest discover -s tests` → **Ran 298 tests, OK**（src 改动未破坏研究）。
+- **验收门**：`py_compile` 全绿；`npx tsc -b` / `npm run build` / `npm run lint` exit 0；红线扫描 0 违规。
+
 ### ⚠️ 外部阻塞：DeepSeek API **402 Insufficient Balance**
 
 **账户余额耗尽**，导致 `types/personas/household` 的 **LLM 成功路径无法实测**。
@@ -154,7 +169,7 @@
 | **M4** | 产物读写接口：`.bak.<ts>` + JSON 校验 + diff | 手改 `household.json` 后下一步骤使用改后内容 | ✅ **PASS（本会话，3→4 成员实测通过）** |
 | **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | 🟡 **部分完成**：构建工作区 + `?world=&step=` URL 复现**已交付并实测**；世界详情三模式 / 观看内密度切换待做 |
 | **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ✅ **PASS（本会话，MCP 客户端端到端；LLM 需余额恢复）** |
-| **M7** | 设置面板 + 死配置清理 + 真重试 | 面板改 `MODEL` 后下一次调用生效 | ⬜ |
+| **M7** | 设置面板 + 死配置清理 + 真重试 | 面板改 `MODEL` 后下一次调用生效 | ✅ **PASS（本会话，UI 保存→config 生效实测；298 测试仍绿）** |
 | **M8** | 开源化：git 清理、LICENSE、README、`.env.example`、编码修复 | 新克隆一条命令跑起来，不含 1.1 GB 数据与密钥 | 🔴 阻塞（§12.4 决策 1/2） |
 
 ## 2. §12.4 其余待决策
@@ -169,6 +184,8 @@
 
 ## 3. 验收门（§12.5.4）
 
-- 后端 `py_compile`：**6/6 OK**
+- 后端 `py_compile`：**全绿**
+- 研究回归：`python -m unittest discover -s tests` → **Ran 298 tests, OK**（M7 改 `src/` 后仍绿）
 - `npx tsc -b`：**exit 0**
 - `npm run build`：**exit 0**（`vite` 对 `<script src="/config.js">` 的 stderr 提示为无害，退出码 0）
+- `npm run lint`：**exit 0**（仅既有 warnings，新文件 0 违规）

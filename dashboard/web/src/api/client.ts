@@ -19,6 +19,8 @@ import type {
   RunInfo,
   RunMeta,
   RunSummary,
+  Settings,
+  SettingsUpdate,
   Snapshot,
   SnapshotHouse,
   StagePayload,
@@ -96,6 +98,20 @@ async function postJson<T>(path: string, payload: unknown): Promise<T> {
   if (!response.ok) {
     const body = await response.text().catch(() => "")
     throw new ApiError(url, response.status, body || `提交失败（HTTP ${response.status}）`)
+  }
+  return (await response.json()) as T
+}
+
+async function putJson<T>(path: string, payload: unknown): Promise<T> {
+  const url = buildUrl(path)
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: { "content-type": "application/json", accept: "application/json" },
+    body: JSON.stringify(payload),
+  })
+  if (!response.ok) {
+    const body = await response.text().catch(() => "")
+    throw new ApiError(url, response.status, body || `保存失败（HTTP ${response.status}）`)
   }
   return (await response.json()) as T
 }
@@ -364,4 +380,32 @@ export function cancelJob(jobId: string): Promise<JobInfo> {
     return Promise.reject(new ApiError("mock:/jobs", 501, "mock 模式不能取消作业"))
   }
   return postJson<JobInfo>(`/jobs/${encodeURIComponent(jobId)}/cancel`, {})
+}
+
+/* ------------------------------------------------------------------ *
+ * 运行设置
+ * ------------------------------------------------------------------ */
+
+/** 与 dashboard/backend/settings.py 的默认值一致：mock 读取与「恢复默认」共用。 */
+export const DEFAULT_SETTINGS: Settings = {
+  model: "deepseek-v4-flash",
+  temperature: 1,
+  max_tokens: 64000,
+  request_timeout_seconds: 600,
+  max_retries: 3,
+  retry_backoff_seconds: 2,
+}
+
+export function getSettings(): Promise<Settings> {
+  if (USE_MOCK) return delay({ ...DEFAULT_SETTINGS })
+  return request<Settings>("/settings")
+}
+
+export function updateSettings(patch: SettingsUpdate): Promise<Settings> {
+  if (USE_MOCK) {
+    return Promise.reject(
+      new ApiError("mock:/settings", 501, "mock 模式不保存设置，请设置 VITE_USE_MOCK=0"),
+    )
+  }
+  return putJson<Settings>("/settings", patch)
 }

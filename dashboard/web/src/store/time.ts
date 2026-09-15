@@ -4,11 +4,28 @@ import { DAY_MINUTES, MINUTES_PER_SECOND_AT_1X, SPEED_PRESETS, clampMinute, snap
 
 export const DEFAULT_POLICY = "baseline"
 
-export type ViewKey = "scene" | "grid" | "detail" | "generate" | "build" | "simulate" | "jobs"
+export type ViewKey =
+  | "scene"
+  | "grid"
+  | "detail"
+  | "generate"
+  | "build"
+  | "simulate"
+  | "jobs"
+  | "settings"
 
 export const DEFAULT_VIEW: ViewKey = "grid"
 
-const VIEW_KEYS = new Set<string>(["scene", "grid", "detail", "generate", "build", "simulate", "jobs"])
+const VIEW_KEYS = new Set<string>([
+  "scene",
+  "grid",
+  "detail",
+  "generate",
+  "build",
+  "simulate",
+  "jobs",
+  "settings",
+])
 
 const readView = (value: string | null): ViewKey =>
   value !== null && VIEW_KEYS.has(value) ? (value as ViewKey) : DEFAULT_VIEW

@@ -13,6 +13,7 @@ import { MetricStrip } from "@/components/MetricStrip"
 import { MultiHouseGrid } from "@/components/MultiHouseGrid"
 import { PipelineDrawer } from "@/components/PipelineDrawer"
 import { RunPicker } from "@/components/RunPicker"
+import { SettingsPanel } from "@/components/SettingsPanel"
 import { SimulateForm } from "@/components/SimulateForm"
 const SceneView = lazy(() =>
   import("@/scene/views/SceneView").then((module) => ({ default: module.SceneView })),
@@ -44,6 +45,7 @@ const VIEWS: ReadonlyArray<{
   { key: "build", label: "构建", hint: "手动分步构建世界：类型 → 人格 → 家庭 → 装配", group: "control" },
   { key: "simulate", label: "模拟", hint: "逐户逐天推进模拟（消耗额度）", group: "control" },
   { key: "jobs", label: "任务", hint: "作业状态与实时日志", group: "control" },
+  { key: "settings", label: "设置", hint: "LLM 运行参数（模型 / 温度 / 超时 / 重试）", group: "control" },
 ]
 
 function BrandMark() {
@@ -226,6 +228,12 @@ export default function App() {
         {view === "jobs" ? (
           <div className="flex h-full min-h-0 flex-col">
             <JobsPanel />
+          </div>
+        ) : null}
+
+        {view === "settings" ? (
+          <div className="mx-auto h-full w-full max-w-3xl overflow-y-auto rounded-lg border border-border bg-surface">
+            <SettingsPanel />
           </div>
         ) : null}
       </main>

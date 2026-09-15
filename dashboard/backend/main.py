@@ -104,6 +104,14 @@ except Exception as exc:  # keep the app bootable during parallel work
     MISSING.append(f"build: {exc}")
 
 try:
+    from .routers import settings as _settings
+
+    app.include_router(_settings.router, prefix="/api")
+    ATTACHED.append("settings")
+except Exception as exc:  # noqa: BLE001 - keep the app bootable during parallel work
+    MISSING.append(f"settings: {exc}")
+
+try:
     from . import mcp_server as _mcp
 
     app.mount("/mcp", _mcp.asgi_app)

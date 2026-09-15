@@ -367,3 +367,14 @@ export interface LLMCallDetail {
   request: Record<string, unknown> | null
   response: unknown
 }
+
+export interface Settings {
+  model: string
+  temperature: number
+  max_tokens: number
+  request_timeout_seconds: number
+  max_retries: number
+  retry_backoff_seconds: number
+}
+
+export type SettingsUpdate = Partial<Settings>

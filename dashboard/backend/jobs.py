@@ -33,7 +33,7 @@ from collections import deque
 from datetime import datetime
 from typing import Deque, Dict, List, Optional, Tuple
 
-from . import build, paths, world_admin
+from . import build, paths, settings, world_admin
 from .models import JobCreateResult, JobEstimate, JobInfo, JobRequest
 
 # --------------------------------------------------------------------------
@@ -598,7 +598,7 @@ def _run_job(job_id: str) -> None:
         proc: "subprocess.Popen[str]" = subprocess.Popen(
             argv,
             cwd=paths.LLMWORLD_ROOT,
-            env=build.build_env(job_ref),
+            env=settings.job_env(job_ref),
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
