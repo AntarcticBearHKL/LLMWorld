@@ -1,9 +1,9 @@
 import { Group, Layer, Rect, Text } from "react-konva"
 
 import { formatWatts } from "@/lib/time"
-import { useSceneTokens, type SceneTokens } from "./tokens"
-import type { SceneState } from "./types"
-import { outBandOf } from "./useSceneState"
+import { useSceneTokens, type SceneTokens } from "../core/tokens"
+import type { SceneState } from "../core/types"
+import { outBandOf } from "../core/useSceneState"
 
 interface RoomLayerProps {
   state: SceneState

@@ -1,9 +1,9 @@
 import { Group, Rect, Text } from "react-konva"
 
 import { formatWatts } from "@/lib/time"
-import { useSceneTokens } from "./tokens"
-import type { TownHouse } from "./types"
-import { TOWN_HOUSE_HEIGHT, TOWN_HOUSE_WIDTH } from "./types"
+import { useSceneTokens } from "../core/tokens"
+import type { TownHouse } from "../core/types"
+import { TOWN_HOUSE_HEIGHT, TOWN_HOUSE_WIDTH } from "../core/types"
 
 interface HouseBuildingProps {
   town: TownHouse

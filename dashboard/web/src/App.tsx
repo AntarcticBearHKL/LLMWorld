@@ -15,7 +15,7 @@ import { PipelineDrawer } from "@/components/PipelineDrawer"
 import { RunPicker } from "@/components/RunPicker"
 import { SimulateForm } from "@/components/SimulateForm"
 const SceneView = lazy(() =>
-  import("@/scene/SceneView").then((module) => ({ default: module.SceneView })),
+  import("@/scene/views/SceneView").then((module) => ({ default: module.SceneView })),
 )
 import { SnapshotPanel } from "@/components/SnapshotPanel"
 import { TimeController } from "@/components/TimeController"

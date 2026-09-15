@@ -3,10 +3,10 @@ import { useEffect, useRef } from "react"
 import Konva from "konva"
 import { Circle, Layer, Rect } from "react-konva"
 
-import { effectFor, effectSlots, type EffectKind } from "./effects"
-import { prefersReducedMotion, useSceneTokens } from "./tokens"
-import type { SceneState } from "./types"
-import { APPLIANCE_RADIUS } from "./types"
+import { effectFor, effectSlots, type EffectKind } from "../core/effects"
+import { prefersReducedMotion, useSceneTokens } from "../core/tokens"
+import type { SceneState } from "../core/types"
+import { APPLIANCE_RADIUS } from "../core/types"
 
 interface EffectLayerProps {
   state: SceneState

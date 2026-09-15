@@ -10,10 +10,10 @@ import {
   appliancePulseName,
   applianceToneKey,
   type ToneKey,
-} from "./appliances"
-import { prefersReducedMotion, useSceneTokens, type SceneTokens } from "./tokens"
-import type { SceneState } from "./types"
-import { APPLIANCE_RADIUS } from "./types"
+} from "../core/appliances"
+import { prefersReducedMotion, useSceneTokens, type SceneTokens } from "../core/tokens"
+import type { SceneState } from "../core/types"
+import { APPLIANCE_RADIUS } from "../core/types"
 
 interface ApplianceLayerProps {
   state: SceneState

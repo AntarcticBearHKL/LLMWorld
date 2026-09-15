@@ -7,15 +7,15 @@ import { useSnapshot } from "@/hooks/useDayData"
 import { formatHHMM } from "@/lib/time"
 import { useTimeStore } from "@/store/time"
 import { HouseBuilding } from "./HouseBuilding"
-import { useSceneTokens } from "./tokens"
-import type { TownHouse, TownLayout } from "./types"
+import { useSceneTokens } from "../core/tokens"
+import type { TownHouse, TownLayout } from "../core/types"
 import {
   SCENE_PADDING,
   TOWN_GAP_X,
   TOWN_GAP_Y,
   TOWN_HOUSE_HEIGHT,
   TOWN_HOUSE_WIDTH,
-} from "./types"
+} from "../core/types"
 
 interface TownProps {
   onEnter: (house: string) => void

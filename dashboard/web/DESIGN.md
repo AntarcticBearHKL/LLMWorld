@@ -240,30 +240,37 @@ GET /config.js  →  window.__API_BASE__ = "<LLMWORLD_API_BASE 环境变量值�
 
 ```
 src/scene/
-  types.ts             冻结契约：SceneState / CharacterPose / AppliancePose / RoomPose / TownHouse
-  layout.ts            确定性户型布局（切片切分 + 邻接图 + 门点 + 房间间路径）
-  lighting.ts          昼夜光照纯函数（night / tint / peakWindow / lampRooms）
-  tokens.ts            canvas 内解析 CSS 变量（getComputedStyle + 主题变更重读）
-  appliances.ts        电器字形 / 状态色调 / 房间内槽位
-  effects.ts           电器特效判定（steam / airflow / screen / ring / drum / glow）
-  useSceneState.ts     DayReplay + minute → SceneState（唯一派生入口）
-  SceneStage.tsx       Stage + 命令式相机（滚轮/拖拽/双击复位/自动取景）+ 光照覆盖层
-  RoomLayer.tsx        房间地板 / 墙体 / 房间名 / 即时瓦数 / 外出带状区
-  ApplianceLayer.tsx   电器精灵（四态 + 呼吸/循环脉冲 + 悬停 tooltip）
-  CharacterLayer.tsx   角色（沿房间路径补间行走 / 睡眠 Z / OUT 徽标 / 轨迹）
-  EffectLayer.tsx      特效层（单动画驱动，不拦点击）
-  AgentHud.tsx         角色详情（人格 / 当前活动 / 在用电器 / 接下来 / Esc 关闭）
-  Town.tsx             小镇视图（房屋阵列 + 缩放平移）
-  HouseBuilding.tsx    单栋房屋（窗户点亮数 ∝ 负荷 + 负荷条 + OUT 徽标）
-  SceneView.tsx        组合器：小镇 ↔ 室内、特效/轨迹开关、成员选择条、无障碍摘要
+  core/    纯逻辑（可被 Node 直跑自测）
+    types.ts            冻结契约：SceneState / CharacterPose / AppliancePose / RoomPose / TownHouse
+    layout.ts           确定性户型布局（切片切分 + 邻接图 + 门点 + 房间间路径）
+    layout.selftest.ts  布局自测（node 直跑）
+    lighting.ts         昼夜光照纯函数（night / tint / peakWindow / lampRooms）
+    lighting.selftest.ts 光照自测（node 直跑）
+    tokens.ts           canvas 内解析 CSS 变量（getComputedStyle + 主题变更重读）
+    appliances.ts       电器字形 / 状态色调 / 房间内槽位
+    effects.ts          电器特效判定（steam / airflow / screen / ring / drum / glow）
+    useSceneState.ts    DayReplay + minute → SceneState（唯一派生入口）
+  layers/  只渲染，不依赖 app 层
+    RoomLayer.tsx       房间地板 / 墙体 / 房间名 / 即时瓦数 / 外出带状区
+    ApplianceLayer.tsx  电器精灵（四态 + 呼吸/循环脉冲 + 悬停 tooltip + 高亮环）
+    CharacterLayer.tsx  角色（沿房间路径补间行走 / 睡眠 Z / OUT 徽标 / 轨迹）
+    EffectLayer.tsx     特效层（单动画驱动，不拦点击）
+  views/   组合与交互
+    SceneStage.tsx      Stage + 命令式相机 + 光照覆盖层
+    SceneView.tsx       组合器：小镇 ↔ 室内、开关、成员条、无障碍摘要
+    Town.tsx            小镇视图（房屋阵列 + 缩放平移）
+    HouseBuilding.tsx   单栋房屋（窗户点亮数 ∝ 负荷 + 负荷条 + OUT 徽标）
+    AgentHud.tsx        角色详情（人格 / 当前活动 / 在用电器 / 接下来 / Esc 关闭）
+    SceneOutline.tsx    房间→电器可聚焦清单（无障碍等价路径）
+    PerfHud.tsx         帧率/内存诊断 + 降级判定
 ```
 
 ### 11.2 自测清单
 
 | # | 项 | 结果 | 证据 |
 | --- | --- | --- | --- |
-| 1 | 布局确定性、无重叠、铺满、连通 | ✅ | `node src/scene/layout.selftest.ts` → **34 passed / 0 failed** |
-| 2 | 光照单调性、无跳变（单分钟 Δ<0.01）、色值合法 | ✅ | `node src/scene/lighting.selftest.ts` → **18 passed / 0 failed** |
+| 1 | 布局确定性、无重叠、铺满、连通 | ✅ | `node src/scene/core/layout.selftest.ts` → **34 passed / 0 failed** |
+| 2 | 光照单调性、无跳变（单分钟 Δ<0.01）、色值合法 | ✅ | `node src/scene/core/lighting.selftest.ts` → **18 passed / 0 failed** |
 | 3 | 后端 `room_meta` 与 `household.json` 一致 | ✅ | `world_143345/house_0003`：10 房间，逐项 size 相同 |
 | 4 | 严格类型检查 | ✅ | `npx tsc -b` 退出码 0（`noUncheckedIndexedAccess` / `noUnusedLocals` / `verbatimModuleSyntax`） |
 | 5 | 生产构建 | ✅ | `npm run build` 退出码 0 |
@@ -347,14 +354,18 @@ HUD 显示 `采样无效` 表示该次采样被判为节流（帧间隔失速率
 
 约束（已在代码中成立）：canvas 层不反向依赖 app 层；纯逻辑模块可被 Node 直接跑自测（`layout` / `lighting`）；场景零新增网络请求与 LLM 调用。
 
-### 12.3 未执行的文件级目录拆分（及原因）
+### 12.3 文件级目录拆分（已执行）
 
-`src/scene/` 目前是 20 个文件的平铺目录。按 §12.2 拆成 `core/ layers/ views/` 三个子目录在结构上更清晰，但**本轮未执行**，原因：
+`src/scene/` 已由平铺 20 文件拆为三层：**`core/` 9（纯逻辑）· `layers/` 4（只渲染）· `views/` 7（组合交互）**，根目录零残留。
 
-1. `dashboard/` 在 git 中仍是**未跟踪状态**（`?? dashboard/`），没有版本控制安全网；20 个文件 + 约 30 处 import 的批量移动一旦留下半成品，无法一键回滚。
-2. 收益偏小：现有文件名已按角色自解释（`*Layer` / `Scene*` / `use*` / 纯逻辑单词名），20 个文件的平铺仍在可导航范围。
+- 依赖方向：`views → layers → core`，core 不反向依赖；core 内相对导入全在同目录，故 **core 无需任何改动**
+- 导入重写：`layers/*` 与 `views/*` 共 28 处 `"./X"` 改为 `"../core/X"` / `"../layers/X"`；`views/` 内 6 处同级引用（AgentHud / PerfHud / SceneOutline / SceneStage / Town / HouseBuilding）保持不变
+- 自测路径变更：`node src/scene/core/layout.selftest.ts`、`node src/scene/core/lighting.selftest.ts`
+- 外部唯一改动：`App.tsx` 懒加载路径 `@/scene/SceneView` → `@/scene/views/SceneView`
 
-建议：先 `git add dashboard/` 建立基线提交，再做移动（届时每步都可 `git checkout` 回退）。
+**过程教训（已踩过）**：首次拆分用 PowerShell `Set-Content` 重写导入，**把文件写坏了**（JSX 全面解析失败）。原因是 PS 5.1 的文本读写编码不可靠。已改用 `git` 恢复到基线提交（`616891f`），再以 **Node `fs` 显式 utf8 读写**完成重写。
+
+因此流程约定：**批量文件操作前先建 git 基线**（本次 `616891f` 正是回滚救命的依据）；文本重写用 Node，不用 PowerShell 的 `Set-Content`。
 
 ### 12.4 UI 架构（当前）
 

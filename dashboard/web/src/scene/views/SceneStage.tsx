@@ -4,10 +4,10 @@ import Konva from "konva"
 import { Layer, Rect, Stage } from "react-konva"
 
 import { useTimeStore } from "@/store/time"
-import { RoomLayer } from "./RoomLayer"
-import { useSceneTokens } from "./tokens"
-import type { SceneState } from "./types"
-import { SCENE_PADDING } from "./types"
+import { RoomLayer } from "../layers/RoomLayer"
+import { useSceneTokens } from "../core/tokens"
+import type { SceneState } from "../core/types"
+import { SCENE_PADDING } from "../core/types"
 
 interface SceneStageProps {
   state: SceneState

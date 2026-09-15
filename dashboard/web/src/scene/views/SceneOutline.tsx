@@ -1,7 +1,7 @@
 import { APPLIANCE_STATE_LABELS } from "@/lib/appliance"
 import { formatWatts } from "@/lib/time"
 import { cn } from "@/lib/utils"
-import type { SceneState } from "./types"
+import type { SceneState } from "../core/types"
 
 interface SceneOutlineProps {
   state: SceneState

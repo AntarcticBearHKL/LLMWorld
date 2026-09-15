@@ -4,10 +4,10 @@ import Konva from "konva"
 import { Circle, Group, Layer, Line, Text } from "react-konva"
 
 import { useTimeStore } from "@/store/time"
-import { prefersReducedMotion, useSceneTokens } from "./tokens"
-import type { Point, SceneState } from "./types"
-import { CHARACTER_RADIUS } from "./types"
-import { outBandOf } from "./useSceneState"
+import { prefersReducedMotion, useSceneTokens } from "../core/tokens"
+import type { Point, SceneState } from "../core/types"
+import { CHARACTER_RADIUS } from "../core/types"
+import { outBandOf } from "../core/useSceneState"
 
 interface CharacterLayerProps {
   state: SceneState
