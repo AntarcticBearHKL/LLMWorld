@@ -2,16 +2,18 @@ import { useQuery } from "@tanstack/react-query"
 
 import {
   getDayReplay,
+  getDefaultRun,
   getHousehold,
   getRunMeta,
   getSnapshot,
   getStages,
-  listRuns,
+  listRunSummaries,
 } from "@/api/client"
 import { useTimeStore } from "@/store/time"
 
 export const queryKeys = {
-  runs: ["runs"] as const,
+  runs: (query: string, limit: number) => ["runs", query, limit] as const,
+  runDefault: ["run-default"] as const,
   runMeta: (run: string) => ["run-meta", run] as const,
   household: (run: string, house: string) => ["household", run, house] as const,
   replay: (run: string, date: string, house: string, policy: string) =>
@@ -25,8 +27,20 @@ export const queryKeys = {
 export const bucketMinute = (minute: number, bucket: number): number =>
   Math.min(1440, Math.floor(minute / bucket) * bucket)
 
-export function useRuns() {
-  return useQuery({ queryKey: queryKeys.runs, queryFn: listRuns, staleTime: 60_000 })
+export function useRuns(query = "", limit = 60) {
+  return useQuery({
+    queryKey: queryKeys.runs(query, limit),
+    queryFn: () => listRunSummaries(query, limit),
+    staleTime: 60_000,
+  })
+}
+
+export function useDefaultRun() {
+  return useQuery({
+    queryKey: queryKeys.runDefault,
+    queryFn: getDefaultRun,
+    staleTime: 300_000,
+  })
 }
 
 export function useRunMeta(run: string) {

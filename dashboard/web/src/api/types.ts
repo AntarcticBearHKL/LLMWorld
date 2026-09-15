@@ -14,6 +14,16 @@ export interface RunInfo {
   latest_mtime: number | null
 }
 
+export interface RunSummary {
+  run: string
+  date_count: number
+  house_count: number
+  member_count: number
+  has_baseline: boolean
+  has_analysis: boolean
+  latest_mtime: number | null
+}
+
 export interface RunMeta {
   run: string
   dates: string[]

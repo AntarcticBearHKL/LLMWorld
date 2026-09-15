@@ -11,6 +11,7 @@ import type {
   RoomInfo,
   RunInfo,
   RunMeta,
+  RunSummary,
   StagePayload,
   WorldInfo,
 } from "@/api/types"
@@ -69,6 +70,15 @@ const asRunMeta = (raw: {
 })
 
 export const mockRuns: RunInfo[] = runsJson.map(asRunInfo)
+export const mockRunSummaries: RunSummary[] = mockRuns.map((item) => ({
+  run: item.run,
+  date_count: item.dates.length,
+  house_count: item.houses.length,
+  member_count: item.member_count,
+  has_baseline: item.has_baseline,
+  has_analysis: item.has_analysis,
+  latest_mtime: item.latest_mtime,
+}))
 export const mockRunMeta: RunMeta = asRunMeta(runMeta)
 export const mockWorlds: WorldInfo[] = worldsJson
 export const mockWorld: WorldInfo = worldJson

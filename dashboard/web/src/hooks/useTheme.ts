@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 
 export type ThemeMode = "dark" | "light"
 
-const STORAGE_KEY = "llmworld.theme"
+const STORAGE_KEY = "llmworld.theme.v2"
 
 const readTheme = (): ThemeMode => {
   if (typeof window === "undefined") return "light"

@@ -1,4 +1,6 @@
-import { CalendarDays, Database, Home, Shield } from "lucide-react"
+import { useEffect, useState } from "react"
+
+import { CalendarDays, Database, Home, Search, Shield } from "lucide-react"
 
 import {
   Select,
@@ -7,10 +9,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
 import { useRunMeta, useRuns } from "@/hooks/useDayData"
 import { USE_MOCK } from "@/api/client"
 import { cn } from "@/lib/utils"
 import { useTimeStore } from "@/store/time"
+
+const MAX_RUN_ITEMS = 60
 
 function Field({
   icon,
@@ -40,7 +45,15 @@ const triggerClass =
   "h-8 w-full min-w-[136px] rounded-md border-border-strong bg-surface-2 px-2.5 text-[12px] font-medium text-fg hover:bg-surface-3 focus-visible:border-brand"
 
 export function RunPicker() {
-  const runsQuery = useRuns()
+  const [query, setQuery] = useState("")
+  const [keyword, setKeyword] = useState("")
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setKeyword(query.trim()), 250)
+    return () => window.clearTimeout(timer)
+  }, [query])
+
+  const runsQuery = useRuns(keyword, MAX_RUN_ITEMS)
   const run = useTimeStore((state) => state.run)
   const date = useTimeStore((state) => state.date)
   const house = useTimeStore((state) => state.house)
@@ -49,22 +62,26 @@ export function RunPicker() {
   const metaQuery = useRunMeta(run)
 
   const runs = runsQuery.data ?? []
-  const currentRun = runs.find((item) => item.run === run)
-  const dates = metaQuery.data?.dates ?? currentRun?.dates ?? []
-  const houses = metaQuery.data?.houses ?? currentRun?.houses ?? []
+  const dates = metaQuery.data?.dates ?? []
+  const houses = metaQuery.data?.houses ?? []
   const policyOptions = ["baseline", ...(metaQuery.data?.policies ?? [])]
 
   const onRunChange = (nextRun: string) => {
-    const target = runs.find((item) => item.run === nextRun)
-    setSelection({
-      run: nextRun,
-      date: target?.dates[0] ?? "",
-      house: target?.houses[0] ?? "",
-    })
+    setSelection({ run: nextRun, date: "", house: "" })
   }
 
   return (
     <div className="flex flex-wrap items-end gap-2.5">
+      <Field icon={<Search className="size-3" />} label="搜索" className="min-w-[132px]">
+        <Input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="关键词过滤"
+          aria-label="关键词过滤运行"
+          className="h-8 w-full min-w-[132px] rounded-md border-border-strong bg-surface-2 px-2.5 text-[12px]"
+        />
+      </Field>
+
       <Field icon={<Database className="size-3" />} label="运行" className="min-w-[168px]">
         <Select value={run} onValueChange={onRunChange} disabled={runs.length === 0}>
           <SelectTrigger className={triggerClass} aria-label="选择运行">
@@ -75,13 +92,19 @@ export function RunPicker() {
               <SelectItem key={item.run} value={item.run}>
                 <span className="num">{item.run}</span>
                 <span className="ml-2 text-[11px] text-fg-subtle">
-                  {item.houses.length} 户 · {item.dates.length} 天
+                  {item.house_count} 户 · {item.date_count} 天
                 </span>
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
       </Field>
+
+      {runs.length >= MAX_RUN_ITEMS ? (
+        <span className="label-micro mb-2 whitespace-nowrap text-energy">
+          仅列前 {MAX_RUN_ITEMS} 个，请用搜索缩小范围
+        </span>
+      ) : null}
 
       <Field icon={<CalendarDays className="size-3" />} label="日期" className="min-w-[136px]">
         <Select

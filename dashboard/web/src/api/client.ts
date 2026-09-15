@@ -13,6 +13,7 @@ import type {
   JobRequest,
   RunInfo,
   RunMeta,
+  RunSummary,
   Snapshot,
   SnapshotHouse,
   StagePayload,
@@ -25,6 +26,7 @@ import {
   mockReplaysForDate,
   mockRunMeta,
   mockRuns,
+  mockRunSummaries,
   mockStageKey,
   mockStages,
   mockWorld,
@@ -100,6 +102,29 @@ const delay = <T>(value: T): Promise<T> =>
 export function listRuns(): Promise<RunInfo[]> {
   if (USE_MOCK) return delay(mockRuns)
   return request<RunInfo[]>("/runs")
+}
+
+export function listRunSummaries(query = "", limit?: number): Promise<RunSummary[]> {
+  if (USE_MOCK) {
+    const needle = query.trim().toLowerCase()
+    const matched =
+      needle.length === 0
+        ? mockRunSummaries
+        : mockRunSummaries.filter((item) => item.run.toLowerCase().includes(needle))
+    return delay(limit !== undefined && limit > 0 ? matched.slice(0, limit) : matched)
+  }
+  return request<RunSummary[]>("/runs/summary", { q: query || undefined, limit })
+}
+
+export function getDefaultRun(): Promise<RunSummary> {
+  if (USE_MOCK) {
+    const first = mockRunSummaries[0]
+    if (first === undefined) {
+      return Promise.reject(new ApiError("mock:/runs/default", 404, "mock 无可用运行"))
+    }
+    return delay(first)
+  }
+  return request<RunSummary>("/runs/default")
 }
 
 export function getRunMeta(run: string): Promise<RunMeta> {

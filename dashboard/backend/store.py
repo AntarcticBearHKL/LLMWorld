@@ -17,7 +17,15 @@ import threading
 import time
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
-from .models import ApplianceInfo, HouseholdInfo, MemberInfo, RoomInfo, RunInfo, WorldInfo
+from .models import (
+    ApplianceInfo,
+    HouseholdInfo,
+    MemberInfo,
+    RoomInfo,
+    RunInfo,
+    RunSummary,
+    WorldInfo,
+)
 from .paths import SIMULATION_DIR, WORLDS_DIR
 
 from analyze import dataset  # noqa: E402  (paths.py put src/ on sys.path)
@@ -146,6 +154,105 @@ def _build_runs() -> List[RunInfo]:
 
     runs.sort(key=lambda info: info.latest_mtime or 0.0, reverse=True)
     return runs
+
+
+def list_run_summaries() -> List[RunSummary]:
+    """Cheap catalog projection: directory counts only, no per-house file reads."""
+    return _cached("run-summaries", _build_run_summaries)
+
+
+def _build_run_summaries() -> List[RunSummary]:
+    summaries: List[RunSummary] = []
+    if not os.path.isdir(SIMULATION_DIR):
+        return summaries
+    try:
+        names = sorted(os.listdir(SIMULATION_DIR))
+    except OSError:
+        return summaries
+    for name in names:
+        if name == "analysis":
+            continue
+        run_dir = os.path.join(SIMULATION_DIR, name)
+        if not os.path.isdir(run_dir):
+            continue
+        dates = _run_dates(run_dir)
+        houses: set[str] = set()
+        stems: set[str] = set()
+        has_baseline = False
+        for date in dates:
+            try:
+                entries = os.scandir(os.path.join(run_dir, date))
+            except OSError:
+                continue
+            with entries:
+                for entry in entries:
+                    if not entry.is_dir() or not entry.name.startswith("house_"):
+                        continue
+                    houses.add(entry.name)
+                    try:
+                        files = os.listdir(entry.path)
+                    except OSError:
+                        continue
+                    enrich: set[str] = set()
+                    for filename in files:
+                        if filename.startswith("s3_enrich_") and filename.endswith(".json"):
+                            enrich.add(filename[len("s3_enrich_"):-len(".json")])
+                    if not enrich:
+                        continue
+                    stems |= enrich
+                    if not has_baseline:
+                        for stem in enrich:
+                            if os.path.isfile(os.path.join(entry.path, "s4_decisions_%s.json" % stem)):
+                                has_baseline = True
+                                break
+        summaries.append(RunSummary(
+            run=name,
+            date_count=len(dates),
+            house_count=len(houses),
+            member_count=len(stems),
+            has_baseline=has_baseline,
+            has_analysis=os.path.isdir(os.path.join(run_dir, "analysis")),
+            latest_mtime=_as_optional_float(os.path.getmtime(run_dir)),
+        ))
+    summaries.sort(key=lambda item: item.latest_mtime or 0.0, reverse=True)
+    return summaries
+
+
+def query_run_summaries(
+    keyword: Optional[str] = None,
+    limit: Optional[int] = None,
+) -> List[RunSummary]:
+    items = list_run_summaries()
+    if keyword:
+        needle = keyword.strip().lower()
+        if needle:
+            items = [item for item in items if needle in item.run.lower()]
+    if limit is not None and limit > 0:
+        items = items[:limit]
+    return items
+
+
+def _playable(item: RunSummary) -> bool:
+    return item.has_baseline and item.date_count > 0 and item.house_count > 0
+
+
+def default_run() -> Optional[RunSummary]:
+    """Best run to open when the URL carries no selection."""
+    items = list_run_summaries()
+    candidates = [item for item in items if _playable(item)]
+    if not candidates:
+        candidates = [item for item in items if item.date_count > 0 and item.house_count > 0]
+    if not candidates:
+        return None
+    return max(
+        candidates,
+        key=lambda item: (
+            int(item.has_analysis),
+            item.member_count,
+            item.house_count,
+            item.date_count,
+        ),
+    )
 
 
 def run_meta(run: str) -> Optional[Dict[str, Any]]:

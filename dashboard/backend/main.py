@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import json
 import os
+import threading
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,7 +21,16 @@ from fastapi.staticfiles import StaticFiles
 
 from .paths import LLMWORLD_ROOT, OUTPUT_DIR, WEB_DIST
 
-app = FastAPI(title="LLMWorld Research Console", version="0.1.0")
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    from . import store
+
+    threading.Thread(target=store.list_run_summaries, daemon=True).start()
+    yield
+
+
+app = FastAPI(title="LLMWorld Research Console", version="0.1.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

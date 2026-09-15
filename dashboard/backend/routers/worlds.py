@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException
 
 from .. import store
-from ..models import HouseholdInfo, RunInfo, RunMeta, WorldInfo
+from ..models import HouseholdInfo, RunInfo, RunMeta, RunSummary, WorldInfo
 
 router = APIRouter(tags=["worlds"])
 
@@ -15,6 +15,22 @@ router = APIRouter(tags=["worlds"])
 @router.get("/runs", response_model=List[RunInfo])
 def get_runs() -> List[RunInfo]:
     return store.list_runs()
+
+
+@router.get("/runs/summary", response_model=List[RunSummary])
+def get_run_summaries(
+    q: Optional[str] = None,
+    limit: Optional[int] = None,
+) -> List[RunSummary]:
+    return store.query_run_summaries(q, limit)
+
+
+@router.get("/runs/default", response_model=RunSummary)
+def get_default_run() -> RunSummary:
+    item = store.default_run()
+    if item is None:
+        raise HTTPException(status_code=404, detail="no playable run found")
+    return item
 
 
 @router.get("/runs/{run}/meta", response_model=RunMeta)

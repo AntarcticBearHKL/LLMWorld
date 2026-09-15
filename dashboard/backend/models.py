@@ -39,6 +39,18 @@ class RunMeta(BaseModel):
     policies: List[str] = Field(default_factory=list)
 
 
+class RunSummary(BaseModel):
+    """Cheap catalog row for the run picker (directory listings only)."""
+
+    run: str
+    date_count: int = 0
+    house_count: int = 0
+    member_count: int = 0
+    has_baseline: bool = False
+    has_analysis: bool = False
+    latest_mtime: Optional[float] = None
+
+
 class WorldInfo(BaseModel):
     world_id: str
     postcode: Optional[str] = None
