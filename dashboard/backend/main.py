@@ -66,6 +66,14 @@ try:
 except Exception as exc:  # noqa: BLE001
     MISSING.append(f"jobs: {exc}")
 
+try:
+    from .routers import build as _build
+
+    app.include_router(_build.router, prefix="/api")
+    ATTACHED.append("build")
+except Exception as exc:  # keep the app bootable during parallel work
+    MISSING.append(f"build: {exc}")
+
 
 @app.get("/api/health")
 def health() -> dict:

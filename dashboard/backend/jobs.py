@@ -33,7 +33,7 @@ from collections import deque
 from datetime import datetime
 from typing import Deque, Dict, List, Optional, Tuple
 
-from . import paths
+from . import build, paths, world_admin
 from .models import JobCreateResult, JobEstimate, JobInfo, JobRequest
 
 # --------------------------------------------------------------------------
@@ -142,6 +142,9 @@ def _count_lines(path: str) -> int:
 # --------------------------------------------------------------------------
 def _argv_and_warnings(req: JobRequest) -> Tuple[List[str], List[str]]:
     """Build the run.py argv plus any warnings worth recording in the log."""
+    if req.kind == "build":
+        return build.build_step_argv(req)
+
     warnings: List[str] = []
     argv: List[str] = [paths.VENV_PYTHON, RUN_PY, "--mode", req.kind]
 
@@ -271,6 +274,8 @@ def _list_world_houses(world: str) -> List[str]:
 
 def estimate(req: JobRequest) -> JobEstimate:
     """Predict the number of LLM calls a request will make. No side effects."""
+    if req.kind == "build":
+        return build.estimate_build(req)
     if req.kind == "world":
         count = int(req.count) if req.count is not None else 1
         calls = 1 + 3 * count
@@ -334,6 +339,18 @@ def _new_job_id() -> str:
     return f"job_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
 
 
+def _validate_build_request(req: JobRequest) -> None:
+    step = build.require_step(req)
+    if not req.world:
+        raise ValueError("build job requires 'world'")
+    if not world_admin.world_exists(req.world):
+        raise ValueError(
+            f"world '{req.world}' does not exist; create it first (POST /worlds)"
+        )
+    if step in build.HOUSE_SCOPE:
+        world_admin.resolve_house_label(req.world, req.house)
+
+
 def create_job(req: JobRequest) -> JobCreateResult:
     """Validate, persist as ``queued`` and enqueue. Refuses unconfirmed runs."""
     if not req.confirm:
@@ -341,6 +358,8 @@ def create_job(req: JobRequest) -> JobCreateResult:
             "refusing to start a token-costly run.py job: 'confirm' must be true. "
             "Call POST /jobs/estimate first and echo the confirmed request."
         )
+    if req.kind == "build":
+        _validate_build_request(req)
     if req.count is not None and int(req.count) > MAX_HOUSEHOLDS:
         raise ValueError(
             f"count must be <= {MAX_HOUSEHOLDS} (research rule: max "
@@ -352,6 +371,14 @@ def create_job(req: JobRequest) -> JobCreateResult:
     argv, warnings = _argv_and_warnings(req)
     est = estimate(req)
     job_id = _new_job_id()
+
+    build_step: Optional[str] = None
+    build_house: Optional[str] = None
+    if req.kind == "build":
+        build_step = build.require_step(req)
+        if build_step in build.HOUSE_SCOPE:
+            build_house = world_admin.resolve_house_label(req.world or "", req.house)
+
     job = JobInfo(
         id=job_id,
         kind=req.kind,
@@ -361,6 +388,8 @@ def create_job(req: JobRequest) -> JobCreateResult:
         world=req.world or req.env,
         log_path=_log_path(job_id),
         line_count=0,
+        step=build_step,
+        house=build_house,
     )
 
     with _lock:
@@ -506,6 +535,33 @@ def _worker_loop() -> None:
             _queue.task_done()
 
 
+def _error_tail(job_id: str, max_lines: int = 3, scan: int = 120) -> List[str]:
+    with _lock:
+        buf = _recent.get(job_id)
+        snapshot = list(buf) if buf is not None else []
+    tail = [line.strip() for line in snapshot[-scan:] if line.strip()]
+    keywords = ("error", "exception", "traceback", "llmcallerror", "failed")
+    picks = [line for line in reversed(tail) if any(k in line.lower() for k in keywords)]
+    picks = picks[:max_lines]
+    picks.reverse()
+    if not picks:
+        picks = tail[-max_lines:]
+    return [line[:300] for line in picks]
+
+
+def _failure_reason(job_id: str, job: JobInfo, code: int) -> str:
+    if job.kind != "build":
+        return f"run.py exited with code {code}"
+    label = f"build step '{job.step}'"
+    if job.house:
+        label += f" {job.house}"
+    message = f"{label} exited with code {code}"
+    tail = _error_tail(job_id)
+    if tail:
+        message += ": " + " | ".join(tail)
+    return message
+
+
 def _run_job(job_id: str) -> None:
     with _lock:
         job = _jobs.get(job_id)
@@ -515,11 +571,28 @@ def _run_job(job_id: str) -> None:
         job.started_at = _now()
         _persist(job)
         argv = list(job.argv)
+        job_ref = job.model_copy(deep=True)
 
     _append_log_lines(
         job_id,
         [f"[started] {_now()}", f"[argv] {subprocess.list2cmdline(argv)}", ""],
     )
+
+    if job_ref.kind == "build":
+        try:
+            prep_lines = build.prepare_step_run(job_ref)
+        except Exception as exc:
+            _append_log_lines(job_id, [f"[error] build prep failed: {type(exc).__name__}: {exc}"])
+            with _lock:
+                failed = _jobs.get(job_id)
+                if failed is not None and failed.status == "running":
+                    failed.status = "failed"
+                    failed.error = f"build prep failed: {type(exc).__name__}: {exc}"
+                    failed.finished_at = _now()
+                    _persist(failed)
+            return
+        if prep_lines:
+            _append_log_lines(job_id, prep_lines + [""])
 
     try:
         proc: "subprocess.Popen[str]" = subprocess.Popen(
@@ -594,7 +667,7 @@ def _run_job(job_id: str) -> None:
                         job.status = "done"
                     else:
                         job.status = "failed"
-                        job.error = f"run.py exited with code {proc.returncode}"
+                        job.error = _failure_reason(job_id, job, proc.returncode)
                 job.line_count = _line_counts.get(job_id, job.line_count)
                 _persist(job)
                 final_status = job.status

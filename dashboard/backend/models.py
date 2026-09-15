@@ -245,7 +245,7 @@ class StagePayload(BaseModel):
 # Jobs (world generation / simulation control)
 # --------------------------------------------------------------------------
 class JobRequest(BaseModel):
-    kind: Literal["world", "simulate"]
+    kind: Literal["world", "simulate", "build"]
     # world mode
     world: Optional[str] = None
     count: Optional[int] = None
@@ -275,6 +275,10 @@ class JobRequest(BaseModel):
     workers: Optional[int] = None
     # client must echo the confirmed estimate before a token-costly run is allowed
     confirm: bool = False
+    # build mode (kind="build"): which single world-generation stage to run.
+    # The target house for per-house stages reuses the ``house`` field above
+    # (a house id like "house_0001" or a 0-based index passed as a string).
+    step: Optional[Literal["types", "personas", "household", "assemble"]] = None
 
 
 class JobEstimate(BaseModel):
@@ -296,8 +300,76 @@ class JobInfo(BaseModel):
     log_path: Optional[str] = None
     line_count: int = 0
     error: Optional[str] = None
+    step: Optional[str] = None
+    house: Optional[str] = None
 
 
 class JobCreateResult(BaseModel):
     job: JobInfo
     estimate: JobEstimate
+
+
+# --------------------------------------------------------------------------
+# World lifecycle + stepwise world build
+# --------------------------------------------------------------------------
+class WorldCreateRequest(BaseModel):
+    world_id: str
+    world_config: Optional[str] = None
+    seed: Optional[int] = None
+
+
+class WorldCreateResult(BaseModel):
+    world_id: str
+    world_dir: str
+    created: bool
+
+
+class WorldDeleteResult(BaseModel):
+    world_id: str
+    existed: bool
+    deleted: bool
+    moved_to: Optional[str] = Field(
+        default=None, description="trash destination when moved to output/_trash/"
+    )
+
+
+class ArtifactRef(BaseModel):
+    path: str
+    exists: bool
+    role: Literal["input", "output"]
+
+
+class BuildPreview(BaseModel):
+    world_id: str
+    step: str
+    house: Optional[str] = None
+    reads: List[ArtifactRef] = Field(default_factory=list)
+    writes: List[ArtifactRef] = Field(default_factory=list)
+    overwrites: List[str] = Field(
+        default_factory=list,
+        description="write paths that already exist and will be backed up first",
+    )
+
+
+class HouseStepStatus(BaseModel):
+    house: str
+    done: bool = False
+    runnable: bool = False
+    blocked_reason: Optional[str] = None
+
+
+class BuildStepStatus(BaseModel):
+    step: str
+    scope: Literal["world", "house"]
+    done: bool = False
+    runnable: bool = False
+    blocked_reason: Optional[str] = None
+    houses: List[HouseStepStatus] = Field(default_factory=list)
+
+
+class BuildState(BaseModel):
+    world_id: str
+    world_dir: str
+    exists: bool
+    houses: List[str] = Field(default_factory=list)
+    steps: List[BuildStepStatus] = Field(default_factory=list)
