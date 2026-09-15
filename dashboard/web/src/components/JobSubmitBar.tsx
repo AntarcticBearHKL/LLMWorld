@@ -1,0 +1,92 @@
+import { useState } from "react"
+
+import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react"
+
+import type { JobRequest } from "@/api/types"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
+import { useCreateJob, useEstimateJob } from "@/hooks/useJobs"
+import { cn } from "@/lib/utils"
+
+interface JobSubmitBarProps {
+  payload: JobRequest
+  disabled?: boolean
+  disabledReason?: string
+}
+
+/**
+ * 统一的"先估算、再勾选确认、最后提交"护栏。
+ * 未确认或未估算时禁止提交，避免误触直接烧额度。
+ */
+export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobSubmitBarProps) {
+  const estimate = useEstimateJob()
+  const create = useCreateJob()
+  const [confirmed, setConfirmed] = useState(false)
+
+  const estimated = estimate.data !== undefined
+  const canSubmit = !disabled && estimated && confirmed && !create.isPending
+
+  return (
+    <div className="flex flex-col gap-3 rounded-md border border-border bg-surface-2 px-4 py-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => estimate.mutate(payload)}
+          disabled={disabled || estimate.isPending}
+        >
+          {estimate.isPending ? <Loader2 className="animate-spin" /> : null}
+          估算调用次数
+        </Button>
+
+        {estimate.data !== undefined ? (
+          <span className="text-[11px] text-fg-muted">
+            预计 <span className="num text-energy">{estimate.data.estimated_calls}</span> 次 LLM 调用 ·
+            {estimate.data.detail}
+          </span>
+        ) : (
+          <span className="text-[11px] text-fg-subtle">先估算，确认开销后再提交。</span>
+        )}
+      </div>
+
+      <div className="flex items-center gap-2.5">
+        <Switch
+          id="job-confirm"
+          checked={confirmed}
+          onCheckedChange={setConfirmed}
+          disabled={!estimated}
+        />
+        <Label htmlFor="job-confirm" className="text-[11px] text-fg-muted">
+          我确认本次执行会真实调用 LLM 并消耗 API 额度
+        </Label>
+      </div>
+
+      {disabled && disabledReason !== undefined ? (
+        <p className="flex items-center gap-1.5 text-[10px] text-energy">
+          <AlertTriangle className="size-3" aria-hidden />
+          {disabledReason}
+        </p>
+      ) : null}
+
+      <div className="flex flex-wrap items-center gap-2">
+        <Button size="sm" onClick={() => create.mutate({ ...payload, confirm: true })} disabled={!canSubmit}>
+          {create.isPending ? <Loader2 className="animate-spin" /> : <Send />}
+          提交作业
+        </Button>
+        {create.isSuccess ? (
+          <span className="flex items-center gap-1.5 text-[11px] text-success">
+            <CheckCircle2 className="size-3" aria-hidden />
+            已提交：<span className="num">{create.data.job.id.slice(0, 8)}</span>
+          </span>
+        ) : null}
+        {create.isError ? (
+          <span className={cn("text-[11px] text-danger")}>
+            提交失败：
+            {create.error instanceof Error ? create.error.message : "未知错误"}
+          </span>
+        ) : null}
+      </div>
+    </div>
+  )
+}

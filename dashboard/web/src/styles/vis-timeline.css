@@ -1,0 +1,415 @@
+/* ==========================================================================
+   vis-timeline 覆盖层
+   目标：把 vis-timeline 的默认"表格"外观改造成研究台面板——
+   1px 结构线、无阴影、分类色块、等宽轴标签。
+   第三方库 DOM 结构固定，部分规则需要 !important 覆盖其内联/高优先级样式。
+   ========================================================================== */
+
+.vis-timeline {
+  --vis-item-height: 22px;
+
+  border: none !important;
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: 11px !important;
+  color: var(--fg-muted);
+}
+
+.vis-host {
+  position: relative;
+  min-height: 180px;
+  overflow: hidden;
+}
+
+.vis-timeline * {
+  box-sizing: border-box;
+}
+
+/* ---- 泳道标签（由 ActivityTimeline 以 DOM 构建） ---- */
+.lane-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+}
+
+.lane-label-bar {
+  flex: 0 0 auto;
+  width: 3px;
+  height: 18px;
+  border-radius: var(--r-pill);
+  background: var(--lane);
+}
+
+.lane-label-text {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.lane-label-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.lane-label-room {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  color: var(--fg-subtle);
+}
+
+/* 所有泳道等高，避免"有并行活动的成员泳道更胖"的视觉噪音 */
+.vis-foreground .vis-group,
+.vis-labelset .vis-label {
+  min-height: 54px;
+}
+
+/* ---- 面板骨架 ---- */
+.vis-panel {
+  border-color: var(--border) !important;
+}
+
+.vis-panel.vis-left,
+.vis-panel.vis-right {
+  background: var(--surface) !important;
+}
+
+.vis-panel.vis-center,
+.vis-panel.vis-top,
+.vis-panel.vis-bottom {
+  background: var(--surface) !important;
+}
+
+/* 左右滚动时的渐隐阴影会破坏平面感 */
+.vis-shadow,
+.vis-panel > .vis-shadow,
+.vis-left .vis-shadow,
+.vis-right .vis-shadow {
+  display: none !important;
+  background: none !important;
+}
+
+.vis-panel.vis-left {
+  border-right: 1px solid var(--border) !important;
+}
+
+.vis-panel.vis-right {
+  border-left: 1px solid var(--border) !important;
+}
+
+/* ---- 网格线 ---- */
+.vis-grid.vis-minor,
+.vis-grid.vis-major,
+.vis-time-axis .vis-grid.vis-minor,
+.vis-time-axis .vis-grid.vis-major {
+  border-color: var(--border) !important;
+  opacity: 1 !important;
+}
+
+.vis-grid.vis-minor {
+  border-left-style: dashed !important;
+}
+
+.vis-grid.vis-vertical.vis-major {
+  border-color: var(--border-strong) !important;
+}
+
+/* 周末/星期底色会引入额外色块，研究台里不需要 */
+.vis-background .vis-grid.vis-saturday,
+.vis-background .vis-grid.vis-sunday,
+.vis-background .vis-grid.vis-holiday,
+.vis-grid.vis-saturday,
+.vis-grid.vis-sunday {
+  background: none !important;
+  border-color: var(--border) !important;
+}
+
+.vis-item.vis-background {
+  background: none !important;
+  border: none !important;
+}
+
+/* ---- 时间轴（顶部刻度） ---- */
+.vis-time-axis {
+  background: var(--surface) !important;
+}
+
+.vis-time-axis .vis-text {
+  color: var(--fg-subtle) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  padding: 4px 0 0 4px !important;
+}
+
+.vis-time-axis .vis-text.vis-major {
+  color: var(--fg-muted) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vis-time-axis .vis-text.vis-minor {
+  opacity: 0.75;
+}
+
+/* ---- 分组标签（成员泳道） ---- */
+.vis-labelset .vis-label {
+  border-bottom: 1px solid var(--border) !important;
+  background: var(--surface) !important;
+  color: var(--fg) !important;
+  overflow: hidden;
+}
+
+.vis-labelset .vis-label .vis-inner {
+  min-width: 0;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.vis-labelset .vis-label:last-child {
+  border-bottom: none !important;
+}
+
+/* ---- 泳道 ---- */
+.vis-foreground .vis-group {
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.vis-foreground .vis-group:last-child {
+  border-bottom: none !important;
+}
+
+/* ---- 活动色块 ---- */
+/* 填充色 = 活动分类，左缘 3px 条 = 成员身份（见 DESIGN.md §2） */
+.cat-sleep {
+  --cat: var(--cat-sleep);
+}
+.cat-meal {
+  --cat: var(--cat-meal);
+}
+.cat-chore {
+  --cat: var(--cat-chore);
+}
+.cat-focus {
+  --cat: var(--cat-focus);
+}
+.cat-leisure {
+  --cat: var(--cat-leisure);
+}
+.cat-away {
+  --cat: var(--cat-away);
+}
+
+.vis-item {
+  border-radius: var(--r-sm) !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  color: var(--fg) !important;
+  transition: filter var(--t-fast) var(--ease);
+}
+
+.vis-item.vis-range {
+  height: var(--vis-item-height) !important;
+  min-width: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: color-mix(in srgb, var(--cat, var(--border-strong)) 50%, transparent) !important;
+  background-color: color-mix(in srgb, var(--cat, var(--surface-3)) 24%, transparent) !important;
+  box-shadow: none !important;
+}
+
+.vis-item.vis-range .vis-item-overflow {
+  height: 100%;
+}
+
+.vis-item.vis-range .vis-item-content {
+  padding: 0 7px !important;
+  height: var(--vis-item-height);
+  line-height: calc(var(--vis-item-height) - 2px) !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--cat, var(--fg)) 82%, white);
+}
+
+.light .vis-item.vis-range .vis-item-content {
+  color: color-mix(in srgb, var(--cat, var(--fg)) 88%, black);
+}
+
+/* 左缘 3px 成员色条：分类看填充色，成员看边条 */
+.vis-item.vis-range.lane-1,
+.vis-item.vis-range.lane-2,
+.vis-item.vis-range.lane-3,
+.vis-item.vis-range.lane-4 {
+  border-left-width: 3px !important;
+}
+
+.vis-item.vis-range.lane-1 {
+  border-left-color: var(--member-1) !important;
+}
+.vis-item.vis-range.lane-2 {
+  border-left-color: var(--member-2) !important;
+}
+.vis-item.vis-range.lane-3 {
+  border-left-color: var(--member-3) !important;
+}
+.vis-item.vis-range.lane-4 {
+  border-left-color: var(--member-4) !important;
+}
+
+.vis-item.vis-range:hover {
+  filter: brightness(1.28);
+}
+
+.vis-item.vis-selected {
+  box-shadow: 0 0 0 2px var(--brand), 0 0 0 4px var(--brand-soft) !important;
+  z-index: 5;
+}
+
+/* 外出/缺席：虚线描边，与"在场但静止"在形状上区分 */
+.vis-item.cat-away.vis-range {
+  border-style: dashed !important;
+}
+
+.vis-item.cat-away .vis-item-content {
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* 点事件（若有） */
+.vis-item.vis-point .vis-item-content,
+.vis-item.vis-dot {
+  color: var(--fg) !important;
+}
+
+/* ---- 回放游标（addCustomTime） ---- */
+.vis-custom-time {
+  background-color: var(--brand) !important;
+  width: 2px !important;
+  opacity: 1 !important;
+  z-index: 12 !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+.vis-custom-time > .vis-custom-time-marker {
+  background: var(--brand) !important;
+  color: var(--brand-fg) !important;
+  border: none !important;
+  border-radius: 0 0 var(--r-sm) var(--r-sm) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  padding: 1px 5px !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+  white-space: nowrap;
+  top: 0 !important;
+}
+
+/* 库自带的"当前时刻"线在研究台里没有意义，隐藏以免与回放游标混淆 */
+.vis-current-time {
+  display: none !important;
+}
+
+/* ---- 提示气泡 ---- */
+.vis-tooltip {
+  position: absolute;
+  z-index: 40;
+  max-width: 320px;
+  padding: 8px 10px !important;
+  background: var(--surface-2) !important;
+  color: var(--fg) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--shadow-2) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+  pointer-events: none;
+}
+
+.vis-tooltip b {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.vis-tooltip .tip-time {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.vis-tooltip .tip-loc {
+  color: var(--fg-muted);
+}
+
+.vis-tooltip .tip-desc {
+  display: block;
+  margin-top: 3px;
+  color: var(--fg-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 4px;
+}
+
+/* ---- 选中成员时聚焦：非选中泳道整体降透明度 ---- */
+.vis-timeline[data-selected="1"] .vis-group:not(.m1) .vis-item,
+.vis-timeline[data-selected="2"] .vis-group:not(.m2) .vis-item,
+.vis-timeline[data-selected="3"] .vis-group:not(.m3) .vis-item,
+.vis-timeline[data-selected="4"] .vis-group:not(.m4) .vis-item {
+  opacity: 0.32;
+}
+
+.vis-timeline[data-selected="1"] .vis-label:not(.m1),
+.vis-timeline[data-selected="2"] .vis-label:not(.m2),
+.vis-timeline[data-selected="3"] .vis-label:not(.m3),
+.vis-timeline[data-selected="4"] .vis-label:not(.m4) {
+  opacity: 0.45;
+}
+
+.vis-timeline[data-selected=""] .vis-item,
+.vis-timeline[data-selected=""] .vis-label {
+  opacity: 1;
+}
+
+/* ---- 交互手柄 ---- */
+.vis-navigation .vis-button {
+  border-radius: var(--r-sm) !important;
+  border: 1px solid var(--border) !important;
+  background: var(--surface-2) !important;
+}
+
+.vis-navigation .vis-button:hover {
+  background: var(--surface-3) !important;
+  box-shadow: none !important;
+}
+
+.vis-panel .vis-drag-left,
+.vis-panel .vis-drag-right,
+.vis-range .vis-drag-center {
+  background: transparent;
+}
+
+/* 滚动条与容器一致 */
+.vis-timeline .vis-content::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}

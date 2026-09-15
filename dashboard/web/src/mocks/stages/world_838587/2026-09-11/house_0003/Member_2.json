@@ -1,0 +1,177 @@
+{
+  "member": "Member 2",
+  "s1": {
+    "prompt_id": "s1_activity",
+    "window": {
+      "start": 570,
+      "end": 720,
+      "time": "09:30"
+    },
+    "context": {
+      "household_type": "Retired Couple",
+      "season": "autumn",
+      "rooms": [
+        "Bedroom",
+        "Kitchen",
+        "Bathroom",
+        "Living Room",
+        "Hallway"
+      ],
+      "weather": {
+        "condition": "partly cloudy",
+        "temp_c": 19,
+        "wind_kph": 11
+      }
+    },
+    "persona": "Watches sport in the afternoon and keeps the hallway light on all evening.",
+    "output": {
+      "location": "Living Room",
+      "activity": "Newspaper and radio"
+    }
+  },
+  "s2": {
+    "prompt_id": "s2_operations",
+    "candidates": [
+      {
+        "unique_id": "kitchen_refrigerator",
+        "name": "Refrigerator",
+        "type": "always_on",
+        "room": "Kitchen",
+        "power_watts": 130
+      },
+      {
+        "unique_id": "kitchen_oven",
+        "name": "Built-in Oven",
+        "type": "cycle",
+        "room": "Kitchen",
+        "power_watts": 2300
+      },
+      {
+        "unique_id": "living_room_tv",
+        "name": "Living Room TV",
+        "type": "on_demand",
+        "room": "Living Room",
+        "power_watts": 100
+      },
+      {
+        "unique_id": "living_room_heater",
+        "name": "Living Room Heater",
+        "type": "on_demand",
+        "room": "Living Room",
+        "power_watts": 1200
+      },
+      {
+        "unique_id": "living_room_light",
+        "name": "Living Room Light",
+        "type": "on_demand",
+        "room": "Living Room",
+        "power_watts": 36
+      },
+      {
+        "unique_id": "living_room_vacuum",
+        "name": "Vacuum Cleaner",
+        "type": "on_demand",
+        "room": "Living Room",
+        "power_watts": 800
+      },
+      {
+        "unique_id": "bathroom_waterheater",
+        "name": "Bathroom Water Heater",
+        "type": "on_demand",
+        "room": "Bathroom",
+        "power_watts": 2600
+      },
+      {
+        "unique_id": "bathroom_washingmachine",
+        "name": "Washing Machine",
+        "type": "cycle",
+        "room": "Bathroom",
+        "power_watts": 1900
+      },
+      {
+        "unique_id": "hallway_light",
+        "name": "Hallway Light",
+        "type": "on_demand",
+        "room": "Hallway",
+        "power_watts": 15
+      },
+      {
+        "unique_id": "bedroom_light",
+        "name": "Bedroom Light",
+        "type": "on_demand",
+        "room": "Bedroom",
+        "power_watts": 14
+      }
+    ],
+    "output": {
+      "operations": [
+        {
+          "unique_id": "living_room_light",
+          "name": "Living Room Light",
+          "action": "use",
+          "power_watts": 36,
+          "room": "Living Room"
+        }
+      ]
+    }
+  },
+  "s3": {
+    "prompt_id": "s3_duration",
+    "output": {
+      "segments": [
+        {
+          "start": 570,
+          "end": 720,
+          "location": "Living Room",
+          "activity": "Newspaper and radio",
+          "operations": [
+            {
+              "unique_id": "living_room_light",
+              "action": "use"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "s4": {
+    "prompt_id": "s4_validate",
+    "checks": [
+      {
+        "rule": "appliance_available",
+        "passed": true,
+        "detail": "all chosen appliances are in the household inventory"
+      },
+      {
+        "rule": "no_room_conflict",
+        "passed": true,
+        "detail": "no exclusive appliance double-booked"
+      },
+      {
+        "rule": "power_within_capacity",
+        "passed": true,
+        "detail": "peak draw stays under the 63 A main fuse"
+      }
+    ],
+    "output": {
+      "accepted": true,
+      "repairs": []
+    }
+  },
+  "s4_raw": {
+    "raw_text": "{\"accepted\":true,\"segments\":1}",
+    "model": "gpt-4.1-mini",
+    "tokens": 418
+  },
+  "report": {
+    "summary": "Member 2 — Newspaper and radio in the Living Room from 09:30 to 12:00.",
+    "appliance_count": 1,
+    "energy_note": "Duration chosen to match the persona's typical routine."
+  },
+  "logs": {
+    "s1": "# Stage 1 — Activity planning\n\nInput window: 09:30 → 12:00 (09:30)\nPersona: Watches sport in the afternoon and keeps the hallway light on all evening.\n\nOutput:\n```json\n{\n  \"location\": \"Living Room\",\n  \"activity\": \"Newspaper and radio\"\n}\n```",
+    "s2": "# Stage 2 — Appliance selection\n\nCandidate inventory: 10 appliances.\n\n```json\n[\n  {\n    \"unique_id\": \"living_room_light\",\n    \"name\": \"Living Room Light\",\n    \"action\": \"use\",\n    \"power_watts\": 36,\n    \"room\": \"Living Room\"\n  }\n]\n```",
+    "s3": "# Stage 3 — Duration shaping\n\nSingle contiguous segment produced.\n",
+    "s4": "# Stage 4 — Validation\n\nAll rules passed, no repair needed.\n"
+  }
+}

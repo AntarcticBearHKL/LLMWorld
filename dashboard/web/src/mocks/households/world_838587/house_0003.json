@@ -1,0 +1,204 @@
+{
+  "run": "world_838587",
+  "house": "house_0003",
+  "household_type": "Retired Couple",
+  "season": "autumn",
+  "story": "A retired couple at home through the day. The electric heater carries most of the winter load; cooking happens three times a day on a predictable schedule.",
+  "home_name": "Maple Street 16",
+  "home_type": "Bungalow",
+  "home_size": 84,
+  "rooms": [
+    "Bedroom",
+    "Kitchen",
+    "Bathroom",
+    "Living Room",
+    "Hallway"
+  ],
+  "members": [
+    {
+      "id": "Member 1",
+      "age": 68,
+      "gender": "female",
+      "occupation": "Retired teacher",
+      "bedroom": "Bedroom",
+      "energy_awareness": "high",
+      "big_five": {
+        "openness": 0.6,
+        "conscientiousness": 0.79,
+        "extraversion": 0.5,
+        "agreeableness": 0.8,
+        "neuroticism": 0.42
+      },
+      "persona": "Home most of the day, cooks three proper meals and runs the heating on a timer.",
+      "is_out": false
+    },
+    {
+      "id": "Member 2",
+      "age": 71,
+      "gender": "male",
+      "occupation": "Retired",
+      "bedroom": "Bedroom",
+      "energy_awareness": "medium",
+      "big_five": {
+        "openness": 0.52,
+        "conscientiousness": 0.68,
+        "extraversion": 0.44,
+        "agreeableness": 0.76,
+        "neuroticism": 0.45
+      },
+      "persona": "Watches sport in the afternoon and keeps the hallway light on all evening.",
+      "is_out": false
+    }
+  ],
+  "appliances": [
+    {
+      "unique_id": "kitchen_refrigerator",
+      "name": "Refrigerator",
+      "type": "always_on",
+      "brand": "Whirlpool",
+      "room": "Kitchen",
+      "owner": null,
+      "power_watts": 130,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "run"
+      ]
+    },
+    {
+      "unique_id": "kitchen_oven",
+      "name": "Built-in Oven",
+      "type": "cycle",
+      "brand": "Siemens",
+      "room": "Kitchen",
+      "owner": null,
+      "power_watts": 2300,
+      "standby_watts": 2,
+      "is_exclusive": true,
+      "available_actions": [
+        "run",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "living_room_tv",
+      "name": "Living Room TV",
+      "type": "on_demand",
+      "brand": "Panasonic",
+      "room": "Living Room",
+      "owner": null,
+      "power_watts": 100,
+      "standby_watts": 0.4,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "living_room_heater",
+      "name": "Living Room Heater",
+      "type": "on_demand",
+      "brand": "Dimplex",
+      "room": "Living Room",
+      "owner": null,
+      "power_watts": 1200,
+      "standby_watts": 0,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "living_room_light",
+      "name": "Living Room Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Living Room",
+      "owner": null,
+      "power_watts": 36,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "living_room_vacuum",
+      "name": "Vacuum Cleaner",
+      "type": "on_demand",
+      "brand": "Miele",
+      "room": "Living Room",
+      "owner": null,
+      "power_watts": 800,
+      "standby_watts": 0,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bathroom_waterheater",
+      "name": "Bathroom Water Heater",
+      "type": "on_demand",
+      "brand": "Vaillant",
+      "room": "Bathroom",
+      "owner": null,
+      "power_watts": 2600,
+      "standby_watts": 2.5,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bathroom_washingmachine",
+      "name": "Washing Machine",
+      "type": "cycle",
+      "brand": "Bosch",
+      "room": "Bathroom",
+      "owner": null,
+      "power_watts": 1900,
+      "standby_watts": 0.6,
+      "is_exclusive": true,
+      "available_actions": [
+        "run",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "hallway_light",
+      "name": "Hallway Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Hallway",
+      "owner": null,
+      "power_watts": 15,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bedroom_light",
+      "name": "Bedroom Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Bedroom",
+      "owner": null,
+      "power_watts": 14,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    }
+  ]
+}

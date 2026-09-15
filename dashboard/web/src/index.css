@@ -1,0 +1,310 @@
+@import "vis-timeline/styles/vis-timeline-graph2d.css";
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./styles/vis-timeline.css";
+
+/* shadcn 组件内的 dark: 变体跟随本项目的 .light 类，而不是系统偏好 */
+@custom-variant dark (&:is(:root:not(.light) *));
+
+/* ==========================================================================
+   LLMWorld 研究控制台 — 设计 token
+   契约见 DESIGN.md。组件只允许引用 token，禁止硬编码色值 / 魔法数字。
+   ========================================================================== */
+
+/* ---- 深色（默认） ---- */
+:root {
+  color-scheme: dark;
+
+  /* 表面 */
+  --bg: #0a0f12;
+  --surface: #0f161a;
+  --surface-2: #141d22;
+  --surface-3: #1a252b;
+  --border: #1e2a30;
+  --border-strong: #2a3840;
+
+  /* 文本 */
+  --fg: #e7edf0;
+  --fg-muted: #93a4ac;
+  --fg-subtle: #64757e;
+
+  /* 品牌强调色（青绿）。命名避开 shadcn 的 --accent（悬停底色）语义。 */
+  --brand: #2fc4b2;
+  --brand-fg: #04211e;
+  --brand-soft: rgb(47 196 178 / 0.14);
+  --brand-ring: rgb(47 196 178 / 0.45);
+
+  /* 语义 */
+  --energy: #f5a524;
+  --energy-soft: rgb(245 165 36 / 0.14);
+  --success: #3dd68c;
+  --danger: #f2555a;
+  --info: #5b9dff;
+
+  /* 成员泳道 */
+  --member-1: #2fc4b2;
+  --member-2: #7c9cff;
+  --member-3: #c084fc;
+  --member-4: #fb923c;
+
+  /* 活动分类 */
+  --cat-sleep: #3f4e5a;
+  --cat-meal: #e8a33d;
+  --cat-chore: #2fc4b2;
+  --cat-focus: #7c9cff;
+  --cat-leisure: #c084fc;
+  --cat-away: #4b5a64;
+
+  /* 圆角 */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+  --r-pill: 9999px;
+
+  /* 阴影：仅两档 */
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.32);
+  --shadow-2: 0 18px 40px -12px rgb(0 0 0 / 0.55);
+
+  /* 动效 */
+  --t-fast: 120ms;
+  --t-base: 180ms;
+  --t-slow: 320ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- shadcn 语义映射（组件无需改动即继承本项目配色） --- */
+  --background: var(--bg);
+  --foreground: var(--fg);
+  --card: var(--surface);
+  --card-foreground: var(--fg);
+  --popover: var(--surface-2);
+  --popover-foreground: var(--fg);
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-fg);
+  --secondary: var(--surface-3);
+  --secondary-foreground: var(--fg);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--fg-muted);
+  --accent: var(--surface-3);
+  --accent-foreground: var(--fg);
+  --destructive: var(--danger);
+  --destructive-foreground: #ffffff;
+  --input: var(--border-strong);
+  --ring: var(--brand-ring);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--fg);
+  --sidebar-primary: var(--brand);
+  --sidebar-primary-foreground: var(--brand-fg);
+  --sidebar-accent: var(--surface-3);
+  --sidebar-accent-foreground: var(--fg);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--brand-ring);
+  --chart-1: var(--cat-focus);
+  --chart-2: var(--cat-chore);
+  --chart-3: var(--cat-meal);
+  --chart-4: var(--cat-leisure);
+  --chart-5: var(--cat-sleep);
+}
+
+/* ---- 浅色 ---- */
+.light {
+  color-scheme: light;
+
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-2: #f4f4f2;
+  --surface-3: #eaeae7;
+  --border: #e7e5e4;
+  --border-strong: #d6d3d1;
+
+  --fg: #1a1d1f;
+  --fg-muted: #57534e;
+  --fg-subtle: #8a8580;
+
+  --brand: #0e8f80;
+  --brand-fg: #ffffff;
+  --brand-soft: rgb(14 143 128 / 0.1);
+  --brand-ring: rgb(14 143 128 / 0.35);
+
+  --energy: #b45309;
+  --energy-soft: rgb(180 83 9 / 0.1);
+  --success: #047857;
+  --danger: #b91c1c;
+  --info: #1d4ed8;
+
+  --cat-sleep: #b6c2cb;
+  --cat-meal: #b45309;
+  --cat-chore: #0e8f80;
+  --cat-focus: #1d4ed8;
+  --cat-leisure: #7e22ce;
+  --cat-away: #a8a29e;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-2: 0 18px 40px -12px rgb(0 0 0 / 0.18);
+}
+
+/* ---- Tailwind v4 theme ---- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+
+  --color-brand: var(--brand);
+  --color-brand-fg: var(--brand-fg);
+  --color-brand-soft: var(--brand-soft);
+
+  --color-energy: var(--energy);
+  --color-energy-soft: var(--energy-soft);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  --color-member-1: var(--member-1);
+  --color-member-2: var(--member-2);
+  --color-member-3: var(--member-3);
+  --color-member-4: var(--member-4);
+
+  --color-cat-sleep: var(--cat-sleep);
+  --color-cat-meal: var(--cat-meal);
+  --color-cat-chore: var(--cat-chore);
+  --color-cat-focus: var(--cat-focus);
+  --color-cat-leisure: var(--cat-leisure);
+  --color-cat-away: var(--cat-away);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+
+  --shadow-1: var(--shadow-1);
+  --shadow-2: var(--shadow-2);
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI Variable Text",
+    "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI",
+    "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas,
+    "Liberation Mono", monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: var(--r-pill);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--fg-subtle);
+    background-clip: content-box;
+  }
+}
+
+@utility label-micro {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--fg-subtle);
+}
+
+@utility label-latin {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+@utility num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+@utility glass {
+  background-color: color-mix(in srgb, var(--surface) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility enter {
+  animation: enter var(--t-slow) var(--ease) both;
+  animation-delay: calc(var(--enter-index, 0) * 40ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

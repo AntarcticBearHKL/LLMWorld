@@ -1,0 +1,481 @@
+{
+  "run": "world_838587",
+  "house": "house_0001",
+  "household_type": "International Student Share House",
+  "season": "autumn",
+  "story": "Four postgraduate students from different cities share a rented terraced house near the university. Cooking, laundry and hot water are the big shared loads; the living room air conditioner runs on warm evenings.",
+  "home_name": "Maple Street 12",
+  "home_type": "Terraced house",
+  "home_size": 128,
+  "rooms": [
+    "Bedroom 1",
+    "Bedroom 2",
+    "Bedroom 3",
+    "Bedroom 4",
+    "Kitchen",
+    "Bathroom",
+    "Living Room",
+    "Hallway"
+  ],
+  "members": [
+    {
+      "id": "Member 1",
+      "age": 24,
+      "gender": "male",
+      "occupation": "MSc Computer Science student",
+      "bedroom": "Bedroom 1",
+      "energy_awareness": "medium",
+      "big_five": {
+        "openness": 0.72,
+        "conscientiousness": 0.58,
+        "extraversion": 0.41,
+        "agreeableness": 0.66,
+        "neuroticism": 0.44
+      },
+      "persona": "Night-owl CS master's student from Chengdu. Cooks most evenings, keeps the desk lamp on late, forgets to switch off the kitchen light.",
+      "is_out": false
+    },
+    {
+      "id": "Member 2",
+      "age": 23,
+      "gender": "female",
+      "occupation": "MSc Finance student, part-time intern",
+      "bedroom": "Bedroom 2",
+      "energy_awareness": "high",
+      "big_five": {
+        "openness": 0.55,
+        "conscientiousness": 0.81,
+        "extraversion": 0.63,
+        "agreeableness": 0.7,
+        "neuroticism": 0.35
+      },
+      "persona": "Early riser from Shanghai, runs before class and keeps a strict routine. Turns appliances off at the wall when she notices standby draw.",
+      "is_out": false
+    },
+    {
+      "id": "Member 3",
+      "age": 26,
+      "gender": "male",
+      "occupation": "PhD candidate, Materials Science",
+      "bedroom": "Bedroom 3",
+      "energy_awareness": "low",
+      "big_five": {
+        "openness": 0.78,
+        "conscientiousness": 0.74,
+        "extraversion": 0.29,
+        "agreeableness": 0.52,
+        "neuroticism": 0.48
+      },
+      "persona": "Third-year PhD from Wuhan. Works at the desk from morning to midnight and runs long simulations. Rarely thinks about what the meter is doing.",
+      "is_out": false
+    },
+    {
+      "id": "Member 4",
+      "age": 22,
+      "gender": "female",
+      "occupation": "BA Design student",
+      "bedroom": "Bedroom 4",
+      "energy_awareness": "medium",
+      "big_five": {
+        "openness": 0.86,
+        "conscientiousness": 0.42,
+        "extraversion": 0.74,
+        "agreeableness": 0.61,
+        "neuroticism": 0.53
+      },
+      "persona": "Second-year design student from Guangzhou. Studio deadlines mean irregular hours; watches TV in the living room and leaves the tablet charging overnight.",
+      "is_out": false
+    }
+  ],
+  "appliances": [
+    {
+      "unique_id": "kitchen_refrigerator",
+      "name": "Refrigerator",
+      "type": "always_on",
+      "brand": "Hisense",
+      "room": "Kitchen",
+      "owner": null,
+      "power_watts": 150,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "run"
+      ]
+    },
+    {
+      "unique_id": "kitchen_inductioncooker",
+      "name": "Induction Cooker",
+      "type": "on_demand",
+      "brand": "Midea",
+      "room": "Kitchen",
+      "owner": null,
+      "power_watts": 2000,
+      "standby_watts": 1.5,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "kitchen_kettle",
+      "name": "Electric Kettle",
+      "type": "on_demand",
+      "brand": "Xiaomi",
+      "room": "Kitchen",
+      "owner": null,
+      "power_watts": 1800,
+      "standby_watts": 0.8,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "kitchen_microwave",
+      "name": "Microwave",
+      "type": "on_demand",
+      "brand": "Galanz",
+      "room": "Kitchen",
+      "owner": null,
+      "power_watts": 1200,
+      "standby_watts": 2,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "kitchen_ricecooker",
+      "name": "Rice Cooker",
+      "type": "cycle",
+      "brand": "Bear",
+      "room": "Kitchen",
+      "owner": null,
+      "power_watts": 500,
+      "standby_watts": 1.2,
+      "is_exclusive": false,
+      "available_actions": [
+        "run",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "kitchen_dishwasher",
+      "name": "Dishwasher",
+      "type": "cycle",
+      "brand": "Bosch",
+      "room": "Kitchen",
+      "owner": null,
+      "power_watts": 1300,
+      "standby_watts": 0.5,
+      "is_exclusive": true,
+      "available_actions": [
+        "run",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "living_room_airconditioner",
+      "name": "Living Room Air Conditioner",
+      "type": "on_demand",
+      "brand": "Gree",
+      "room": "Living Room",
+      "owner": null,
+      "power_watts": 2200,
+      "standby_watts": 3,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "living_room_tv",
+      "name": "Living Room TV",
+      "type": "on_demand",
+      "brand": "TCL",
+      "room": "Living Room",
+      "owner": null,
+      "power_watts": 120,
+      "standby_watts": 0.4,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "living_room_vacuum",
+      "name": "Vacuum Cleaner",
+      "type": "on_demand",
+      "brand": "Dyson",
+      "room": "Living Room",
+      "owner": null,
+      "power_watts": 900,
+      "standby_watts": 0,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "living_room_light",
+      "name": "Living Room Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Living Room",
+      "owner": null,
+      "power_watts": 40,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bathroom_waterheater",
+      "name": "Bathroom Water Heater",
+      "type": "on_demand",
+      "brand": "A.O. Smith",
+      "room": "Bathroom",
+      "owner": null,
+      "power_watts": 3000,
+      "standby_watts": 2.5,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bathroom_hairdryer",
+      "name": "Hair Dryer",
+      "type": "on_demand",
+      "brand": "Panasonic",
+      "room": "Bathroom",
+      "owner": null,
+      "power_watts": 1600,
+      "standby_watts": 0,
+      "is_exclusive": true,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bathroom_washingmachine",
+      "name": "Washing Machine",
+      "type": "cycle",
+      "brand": "LG",
+      "room": "Bathroom",
+      "owner": null,
+      "power_watts": 2000,
+      "standby_watts": 0.6,
+      "is_exclusive": true,
+      "available_actions": [
+        "run",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bathroom_light",
+      "name": "Bathroom Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Bathroom",
+      "owner": null,
+      "power_watts": 24,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "hallway_light",
+      "name": "Hallway Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Hallway",
+      "owner": null,
+      "power_watts": 18,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bedroom_1_light",
+      "name": "Bedroom 1 Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Bedroom 1",
+      "owner": "Member 1",
+      "power_watts": 12,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bedroom_2_light",
+      "name": "Bedroom 2 Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Bedroom 2",
+      "owner": "Member 2",
+      "power_watts": 12,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bedroom_3_light",
+      "name": "Bedroom 3 Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Bedroom 3",
+      "owner": "Member 3",
+      "power_watts": 12,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "bedroom_4_light",
+      "name": "Bedroom 4 Light",
+      "type": "on_demand",
+      "brand": null,
+      "room": "Bedroom 4",
+      "owner": "Member 4",
+      "power_watts": 12,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "member_1_computer",
+      "name": "Member 1 Desktop",
+      "type": "on_demand",
+      "brand": "Lenovo",
+      "room": null,
+      "owner": "Member 1",
+      "power_watts": 180,
+      "standby_watts": 1.5,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "member_2_laptop",
+      "name": "Member 2 Laptop",
+      "type": "on_demand",
+      "brand": "Apple",
+      "room": null,
+      "owner": "Member 2",
+      "power_watts": 90,
+      "standby_watts": 0.8,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "member_3_desktop",
+      "name": "Member 3 Workstation",
+      "type": "on_demand",
+      "brand": "Dell",
+      "room": null,
+      "owner": "Member 3",
+      "power_watts": 320,
+      "standby_watts": 2,
+      "is_exclusive": false,
+      "available_actions": [
+        "use",
+        "idle"
+      ]
+    },
+    {
+      "unique_id": "member_4_tablet",
+      "name": "Member 4 Tablet",
+      "type": "charging",
+      "brand": "Apple",
+      "room": null,
+      "owner": "Member 4",
+      "power_watts": 30,
+      "standby_watts": 0,
+      "is_exclusive": false,
+      "available_actions": [
+        "charge_home",
+        "charge_external"
+      ]
+    },
+    {
+      "unique_id": "member_1_phone_charger",
+      "name": "Member 1 Phone Charger",
+      "type": "charging",
+      "brand": "Anker",
+      "room": null,
+      "owner": "Member 1",
+      "power_watts": 12,
+      "standby_watts": 0.2,
+      "is_exclusive": false,
+      "available_actions": [
+        "charge_home",
+        "charge_external"
+      ]
+    },
+    {
+      "unique_id": "member_2_phone_charger",
+      "name": "Member 2 Phone Charger",
+      "type": "charging",
+      "brand": "Anker",
+      "room": null,
+      "owner": "Member 2",
+      "power_watts": 12,
+      "standby_watts": 0.2,
+      "is_exclusive": false,
+      "available_actions": [
+        "charge_home",
+        "charge_external"
+      ]
+    },
+    {
+      "unique_id": "member_4_phone_charger",
+      "name": "Member 4 Phone Charger",
+      "type": "charging",
+      "brand": "Baseus",
+      "room": null,
+      "owner": "Member 4",
+      "power_watts": 12,
+      "standby_watts": 0.2,
+      "is_exclusive": false,
+      "available_actions": [
+        "charge_home",
+        "charge_external"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "member": "Member 4",
+  "s1": {
+    "prompt_id": "s1_activity",
+    "window": {
+      "start": 0,
+      "end": 80,
+      "time": "00:00"
+    },
+    "context": {
+      "household_type": "International Student Share House",
+      "season": "autumn",
+      "rooms": [
+        "Bedroom 1",
+        "Bedroom 2",
+        "Bedroom 3",
+        "Bedroom 4",
+        "Kitchen",
+        "Bathroom",
+        "Living Room",
+        "Hallway"
+      ],
+      "weather": {
+        "condition": "partly cloudy",
+        "temp_c": 19,
+        "wind_kph": 11
+      }
+    },
+    "persona": "Second-year design student from Guangzhou. Studio deadlines mean irregular hours; watches TV in the living room and leaves the tablet charging overnight.",
+    "output": {
+      "location": "Living Room",
+      "activity": "Gaming"
+    }
+  },
+  "s2": {
+    "prompt_id": "s2_operations",
+    "candidates": [
+      {
+        "unique_id": "kitchen_refrigerator",
+        "name": "Refrigerator",
+        "type": "always_on",
+        "room": "Kitchen",
+        "power_watts": 150
+      },
+      {
+        "unique_id": "kitchen_inductioncooker",
+        "name": "Induction Cooker",
+        "type": "on_demand",
+        "room": "Kitchen",
+        "power_watts": 2000
+      },
+      {
+        "unique_id": "kitchen_kettle",
+        "name": "Electric Kettle",
+        "type": "on_demand",
+        "room": "Kitchen",
+        "power_watts": 1800
+      },
+      {
+        "unique_id": "kitchen_microwave",
+        "name": "Microwave",
+        "type": "on_demand",
+        "room": "Kitchen",
+        "power_watts": 1200
+      },
+      {
+        "unique_id": "kitchen_ricecooker",
+        "name": "Rice Cooker",
+        "type": "cycle",
+        "room": "Kitchen",
+        "power_watts": 500
+      },
+      {
+        "unique_id": "kitchen_dishwasher",
+        "name": "Dishwasher",
+        "type": "cycle",
+        "room": "Kitchen",
+        "power_watts": 1300
+      },
+      {
+        "unique_id": "living_room_airconditioner",
+        "name": "Living Room Air Conditioner",
+        "type": "on_demand",
+        "room": "Living Room",
+        "power_watts": 2200
+      },
+      {
+        "unique_id": "living_room_tv",
+        "name": "Living Room TV",
+        "type": "on_demand",
+        "room": "Living Room",
+        "power_watts": 120
+      },
+      {
+        "unique_id": "living_room_vacuum",
+        "name": "Vacuum Cleaner",
+        "type": "on_demand",
+        "room": "Living Room",
+        "power_watts": 900
+      },
+      {
+        "unique_id": "living_room_light",
+        "name": "Living Room Light",
+        "type": "on_demand",
+        "room": "Living Room",
+        "power_watts": 40
+      },
+      {
+        "unique_id": "bathroom_waterheater",
+        "name": "Bathroom Water Heater",
+        "type": "on_demand",
+        "room": "Bathroom",
+        "power_watts": 3000
+      },
+      {
+        "unique_id": "bathroom_hairdryer",
+        "name": "Hair Dryer",
+        "type": "on_demand",
+        "room": "Bathroom",
+        "power_watts": 1600
+      },
+      {
+        "unique_id": "bathroom_washingmachine",
+        "name": "Washing Machine",
+        "type": "cycle",
+        "room": "Bathroom",
+        "power_watts": 2000
+      },
+      {
+        "unique_id": "bathroom_light",
+        "name": "Bathroom Light",
+        "type": "on_demand",
+        "room": "Bathroom",
+        "power_watts": 24
+      },
+      {
+        "unique_id": "hallway_light",
+        "name": "Hallway Light",
+        "type": "on_demand",
+        "room": "Hallway",
+        "power_watts": 18
+      },
+      {
+        "unique_id": "bedroom_1_light",
+        "name": "Bedroom 1 Light",
+        "type": "on_demand",
+        "room": "Bedroom 1",
+        "power_watts": 12
+      },
+      {
+        "unique_id": "bedroom_2_light",
+        "name": "Bedroom 2 Light",
+        "type": "on_demand",
+        "room": "Bedroom 2",
+        "power_watts": 12
+      },
+      {
+        "unique_id": "bedroom_3_light",
+        "name": "Bedroom 3 Light",
+        "type": "on_demand",
+        "room": "Bedroom 3",
+        "power_watts": 12
+      },
+      {
+        "unique_id": "bedroom_4_light",
+        "name": "Bedroom 4 Light",
+        "type": "on_demand",
+        "room": "Bedroom 4",
+        "power_watts": 12
+      },
+      {
+        "unique_id": "member_1_computer",
+        "name": "Member 1 Desktop",
+        "type": "on_demand",
+        "room": null,
+        "power_watts": 180
+      },
+      {
+        "unique_id": "member_2_laptop",
+        "name": "Member 2 Laptop",
+        "type": "on_demand",
+        "room": null,
+        "power_watts": 90
+      },
+      {
+        "unique_id": "member_3_desktop",
+        "name": "Member 3 Workstation",
+        "type": "on_demand",
+        "room": null,
+        "power_watts": 320
+      },
+      {
+        "unique_id": "member_4_tablet",
+        "name": "Member 4 Tablet",
+        "type": "charging",
+        "room": null,
+        "power_watts": 30
+      },
+      {
+        "unique_id": "member_1_phone_charger",
+        "name": "Member 1 Phone Charger",
+        "type": "charging",
+        "room": null,
+        "power_watts": 12
+      },
+      {
+        "unique_id": "member_2_phone_charger",
+        "name": "Member 2 Phone Charger",
+        "type": "charging",
+        "room": null,
+        "power_watts": 12
+      },
+      {
+        "unique_id": "member_4_phone_charger",
+        "name": "Member 4 Phone Charger",
+        "type": "charging",
+        "room": null,
+        "power_watts": 12
+      }
+    ],
+    "output": {
+      "operations": [
+        {
+          "unique_id": "living_room_tv",
+          "name": "Living Room TV",
+          "action": "use",
+          "power_watts": 120,
+          "room": "Living Room"
+        },
+        {
+          "unique_id": "living_room_light",
+          "name": "Living Room Light",
+          "action": "use",
+          "power_watts": 40,
+          "room": "Living Room"
+        }
+      ]
+    }
+  },
+  "s3": {
+    "prompt_id": "s3_duration",
+    "output": {
+      "segments": [
+        {
+          "start": 0,
+          "end": 80,
+          "location": "Living Room",
+          "activity": "Gaming",
+          "operations": [
+            {
+              "unique_id": "living_room_tv",
+              "action": "use"
+            },
+            {
+              "unique_id": "living_room_light",
+              "action": "use"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "s4": {
+    "prompt_id": "s4_validate",
+    "checks": [
+      {
+        "rule": "appliance_available",
+        "passed": true,
+        "detail": "all chosen appliances are in the household inventory"
+      },
+      {
+        "rule": "no_room_conflict",
+        "passed": true,
+        "detail": "no exclusive appliance double-booked"
+      },
+      {
+        "rule": "power_within_capacity",
+        "passed": true,
+        "detail": "peak draw stays under the 63 A main fuse"
+      }
+    ],
+    "output": {
+      "accepted": true,
+      "repairs": []
+    }
+  },
+  "s4_raw": {
+    "raw_text": "{\"accepted\":true,\"segments\":2}",
+    "model": "gpt-4.1-mini",
+    "tokens": 418
+  },
+  "report": {
+    "summary": "Member 4 — Gaming in the Living Room from 00:00 to 01:20.",
+    "appliance_count": 2,
+    "energy_note": "Duration chosen to match the persona's typical routine."
+  },
+  "logs": {
+    "s1": "# Stage 1 — Activity planning\n\nInput window: 00:00 → 01:20 (00:00)\nPersona: Second-year design student from Guangzhou. Studio deadlines mean irregular hours; watches TV in the living room and leaves the tablet charging overnight.\n\nOutput:\n```json\n{\n  \"location\": \"Living Room\",\n  \"activity\": \"Gaming\"\n}\n```",
+    "s2": "# Stage 2 — Appliance selection\n\nCandidate inventory: 26 appliances.\n\n```json\n[\n  {\n    \"unique_id\": \"living_room_tv\",\n    \"name\": \"Living Room TV\",\n    \"action\": \"use\",\n    \"power_watts\": 120,\n    \"room\": \"Living Room\"\n  },\n  {\n    \"unique_id\": \"living_room_light\",\n    \"name\": \"Living Room Light\",\n    \"action\": \"use\",\n    \"power_watts\": 40,\n    \"room\": \"Living Room\"\n  }\n]\n```",
+    "s3": "# Stage 3 — Duration shaping\n\nSingle contiguous segment produced.\n",
+    "s4": "# Stage 4 — Validation\n\nAll rules passed, no repair needed.\n"
+  }
+}

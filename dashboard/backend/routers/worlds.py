@@ -1,0 +1,48 @@
+"""Catalog endpoints: runs, run metadata, worlds and household metadata."""
+
+from __future__ import annotations
+
+from typing import List
+
+from fastapi import APIRouter, HTTPException
+
+from .. import store
+from ..models import HouseholdInfo, RunInfo, RunMeta, WorldInfo
+
+router = APIRouter(tags=["worlds"])
+
+
+@router.get("/runs", response_model=List[RunInfo])
+def get_runs() -> List[RunInfo]:
+    return store.list_runs()
+
+
+@router.get("/runs/{run}/meta", response_model=RunMeta)
+def get_run_meta(run: str) -> RunMeta:
+    meta = store.run_meta(run)
+    if meta is None:
+        raise HTTPException(status_code=404, detail="run not found: %s" % run)
+    return RunMeta(**meta)
+
+
+@router.get("/worlds", response_model=List[WorldInfo])
+def get_worlds() -> List[WorldInfo]:
+    return store.list_worlds()
+
+
+@router.get("/worlds/{world}", response_model=WorldInfo)
+def get_world(world: str) -> WorldInfo:
+    info = store.world_info(world)
+    if info is None:
+        raise HTTPException(status_code=404, detail="world not found: %s" % world)
+    return info
+
+
+@router.get("/worlds/{world}/houses/{house}", response_model=HouseholdInfo)
+def get_world_house(world: str, house: str) -> HouseholdInfo:
+    if store.world_info(world) is None:
+        raise HTTPException(status_code=404, detail="world not found: %s" % world)
+    try:
+        return store.household_info(world, house)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc

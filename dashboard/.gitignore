@@ -1,0 +1,6 @@
+# 运行期作业记录与日志（本地启动器状态，不入库）
+jobs/
+
+# 前端构建产物（由 npm run build 生成）
+web/dist/
+web/node_modules/
