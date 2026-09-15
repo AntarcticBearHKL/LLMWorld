@@ -411,3 +411,37 @@ class LLMCallDetail(BaseModel):
     error: Optional[str] = None
     request: Optional[Dict[str, Any]] = None
     response: Optional[Any] = None
+
+
+# --------------------------------------------------------------------------
+# World artifact read/write (hand editing, with backup + diff)
+# --------------------------------------------------------------------------
+class ArtifactRead(BaseModel):
+    world: str
+    path: str
+    rel_path: str
+    exists: bool
+    size: Optional[int] = None
+    modified_at: Optional[str] = None
+    kind: Literal["json", "text"]
+    data: Optional[Any] = None
+    text: Optional[str] = None
+    parse_error: Optional[str] = None
+
+
+class ArtifactWriteRequest(BaseModel):
+    path: str
+    content: str
+
+
+class ArtifactWriteResult(BaseModel):
+    world: str
+    path: str
+    rel_path: str
+    written: bool
+    created: bool
+    backup: Optional[str] = None
+    changed: bool
+    diff: str = ""
+    json_valid: bool = True
+    warnings: List[str] = Field(default_factory=list)

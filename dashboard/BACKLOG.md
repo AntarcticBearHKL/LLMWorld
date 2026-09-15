@@ -64,6 +64,20 @@
 - **验收门**：后端 `py_compile` 全绿；`npx tsc -b` exit 0；`npm run build` exit 0；`npm run lint` exit 0；红线扫描 0 违规。
 - 已知取舍：默认构建（`VITE_USE_MOCK` 未设）为 mock 模式；**live 构建需 `VITE_USE_MOCK=0`**，本会话 live 构建已实测通过（`dist/` 已 ignore）。
 
+### M4 验收 — ✅ PASS
+
+- **接口**：新增 `backend/artifacts.py`（路径限定在世界目录内，拒绝 `..` / 绝对路径 / 越界）+
+  `GET /api/worlds/{world}/artifact?path=` 与 `PUT /api/worlds/{world}/artifact`。
+- **安全契约**：写前自动 `.<name>.bak.<ts>`（新增文件不备份）；`.json` 先校验（非法 → **400，不落盘**）；
+  返回 unified **diff** + 顶层类型变化 warning；父目录不存在 → **400**（提示先跑前置步骤）。
+- **证据（真实数据）**：
+  - 创建/读取/编辑：`created=true` → 再写 `changed=true` + `backup=<…>.bak.<ts>` + `diff`；`GET` 返回解析后的 `data`；
+  - 非法 JSON / 路径穿越（`../../../.env`）/ 缺父目录 → 均 **400** 且原因可读；
+  - **验收口径**：写 `house_0001/household.json`(3 成员) → `assemble` → `households.json` `members_count=3`；
+    **手工改成 4 成员**（产生 `.bak`）→ 再 `assemble` → `members_count=4` → **下一步骤确用改后内容**；
+    House_0001 仍恰好 1 条（M2 去重未破）。
+- 前端编辑器 UI 归入 M5（世界详情构建面板）；M4 交付为**接口**，同时供 M6 的 `get_artifact`/`put_artifact` 复用。
+
 ### ⚠️ 外部阻塞：DeepSeek API **402 Insufficient Balance**
 
 **账户余额耗尽**，导致 `types/personas/household` 的 **LLM 成功路径无法实测**。
@@ -77,7 +91,7 @@
 | **M1** | 世界 CRUD（`POST /worlds` 空世界、`DELETE`、`GET .../build`） | 建完 `world.json` 存在；零 LLM | ✅ **PASS（本会话验证）** |
 | **M2** | 4 步构建接口 + job 化 + s4 去重 + 失败兜底 | 逐步骤跑完一户；重跑 s4 不重复 | ✅ **PASS（§12.0 口径）**；LLM 成功路径待余额恢复补验 |
 | **M3** | `LLM_TRACE_FILE` 接入 + `StepInspector` 通用化 | 每步可见 prompt / 原始响应 / 耗时 / 失败原因 | ✅ **PASS（本会话，真实 402 trace 端到端浏览器核对）** |
-| **M4** | 产物读写接口：`.bak.<ts>` + JSON 校验 + diff | 手改 `household.json` 后下一步骤使用改后内容 | ⬜ |
+| **M4** | 产物读写接口：`.bak.<ts>` + JSON 校验 + diff | 手改 `household.json` 后下一步骤使用改后内容 | ✅ **PASS（本会话，3→4 成员实测通过）** |
 | **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | ⬜ |
 | **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ⬜ |
 | **M7** | 设置面板 + 死配置清理 + 真重试 | 面板改 `MODEL` 后下一次调用生效 | ⬜ |
