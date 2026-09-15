@@ -56,6 +56,12 @@ def _cached(key: str, builder: Callable[[], Any]) -> Any:
     return value
 
 
+def invalidate_catalog() -> None:
+    """Drop the catalog cache so a mutation is visible immediately."""
+    with _CATALOG_LOCK:
+        _CATALOG_CACHE.clear()
+
+
 def _run_dates(run_dir: str) -> List[str]:
     try:
         names = os.listdir(run_dir)

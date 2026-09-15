@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { Layers } from "lucide-react"
 
 import { ObserveDetail, ObserveGrid, ObserveScene } from "@/components/ObserveViews"
@@ -7,26 +9,44 @@ import {
 } from "@/components/primitives/SegmentedControl"
 import { SimulateForm } from "@/components/SimulateForm"
 import { WorldBuilder } from "@/components/WorldBuilder"
-import { useTimeStore, type WatchDensity, type WorldMode } from "@/store/time"
+import { useTimeStore } from "@/store/time"
+
+type WorldMode = "build" | "simulate" | "watch"
+
+type WatchDensity = "town" | "grid" | "detail"
 
 const MODES: ReadonlyArray<SegmentedOption<WorldMode>> = [
-  { value: "build", label: "构建", hint: "手动分步构建世界：类型 → 人格 → 家庭 → 装配" },
-  { value: "simulate", label: "模拟", hint: "逐户逐天推进模拟（消耗额度）" },
-  { value: "watch", label: "观看", hint: "回放模拟结果：小镇 / 网格 / 详情" },
+  {
+    value: "build",
+    label: "Build",
+    hint: "Build the world step by step: types → personas → household → assemble",
+  },
+  {
+    value: "simulate",
+    label: "Simulate",
+    hint: "Advance one household at a time (spends API credits)",
+  },
+  {
+    value: "watch",
+    label: "Watch",
+    hint: "Replay a simulated day: town / grid / detail",
+  },
 ]
 
 const DENSITIES: ReadonlyArray<SegmentedOption<WatchDensity>> = [
-  { value: "town", label: "小镇", hint: "俯瞰各户，进屋看人和电器逐格走动" },
-  { value: "grid", label: "网格", hint: "每个方格是一户，点击查看成员" },
-  { value: "detail", label: "详情", hint: "逐格查看每人每台电器" },
+  {
+    value: "town",
+    label: "Town",
+    hint: "Overhead view of every household; enter one to watch people and appliances",
+  },
+  { value: "grid", label: "Grid", hint: "One cell per household; click to see its members" },
+  { value: "detail", label: "Detail", hint: "Inspect every member and appliance" },
 ]
 
 export function WorldWorkspace() {
   const world = useTimeStore((state) => state.world)
-  const mode = useTimeStore((state) => state.mode)
-  const density = useTimeStore((state) => state.density)
-  const setMode = useTimeStore((state) => state.setMode)
-  const setDensity = useTimeStore((state) => state.setDensity)
+  const [mode, setMode] = useState<WorldMode>("build")
+  const [density, setDensity] = useState<WatchDensity>("town")
   const setHouse = useTimeStore((state) => state.setHouse)
   const setSelectedMember = useTimeStore((state) => state.setSelectedMember)
 
@@ -35,19 +55,24 @@ export function WorldWorkspace() {
       <header className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border border-border bg-surface px-3 py-2">
         <span className="label-micro flex items-center gap-1.5">
           <Layers className="size-3" aria-hidden />
-          世界工作区
+          World workspace
         </span>
-        <SegmentedControl options={MODES} value={mode} onChange={setMode} label="世界工作区模式" />
+        <SegmentedControl
+          options={MODES}
+          value={mode}
+          onChange={setMode}
+          label="World workspace mode"
+        />
         {mode === "watch" ? (
           <SegmentedControl
             options={DENSITIES}
             value={density}
             onChange={setDensity}
-            label="观看密度"
+            label="Watch density"
           />
         ) : null}
         <span className="num ml-auto text-[11px] text-fg-muted">
-          {world.length > 0 ? world : "未选择世界"}
+          {world.length > 0 ? world : "no world selected"}
         </span>
       </header>
 

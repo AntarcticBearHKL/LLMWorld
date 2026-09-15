@@ -27,14 +27,14 @@ interface FieldSpec {
 const FIELDS: readonly FieldSpec[] = [
   {
     key: "model",
-    label: "模型",
+    label: "Model",
     env: "LLMWORLD_MODEL",
     kind: "text",
     placeholder: "deepseek-v4-flash",
   },
   {
     key: "temperature",
-    label: "温度",
+    label: "Temperature",
     env: "LLMWORLD_TEMPERATURE",
     kind: "number",
     min: 0,
@@ -43,7 +43,7 @@ const FIELDS: readonly FieldSpec[] = [
   },
   {
     key: "max_tokens",
-    label: "最大 token 数",
+    label: "Max tokens",
     env: "LLMWORLD_MAX_TOKENS",
     kind: "number",
     min: 1,
@@ -51,7 +51,7 @@ const FIELDS: readonly FieldSpec[] = [
   },
   {
     key: "request_timeout_seconds",
-    label: "请求超时（秒）",
+    label: "Request timeout (s)",
     env: "LLMWORLD_REQUEST_TIMEOUT",
     kind: "number",
     min: 1,
@@ -59,7 +59,7 @@ const FIELDS: readonly FieldSpec[] = [
   },
   {
     key: "max_retries",
-    label: "最大重试次数",
+    label: "Max retries",
     env: "LLMWORLD_MAX_RETRIES",
     kind: "number",
     min: 1,
@@ -67,7 +67,7 @@ const FIELDS: readonly FieldSpec[] = [
   },
   {
     key: "retry_backoff_seconds",
-    label: "重试退避（秒）",
+    label: "Retry backoff (s)",
     env: "LLMWORLD_RETRY_BACKOFF",
     kind: "number",
     min: 0,
@@ -94,21 +94,21 @@ type ParsedField = { ok: true; value: string | number } | { ok: false; message: 
 const parseField = (spec: FieldSpec, raw: string): ParsedField => {
   const text = raw.trim()
   if (spec.kind === "text") {
-    return text.length > 0 ? { ok: true, value: text } : { ok: false, message: "不能为空" }
+    return text.length > 0 ? { ok: true, value: text } : { ok: false, message: "Required" }
   }
   const value = Number(text)
-  if (text.length === 0 || !Number.isFinite(value)) return { ok: false, message: "请输入数字" }
+  if (text.length === 0 || !Number.isFinite(value)) return { ok: false, message: "Enter a number" }
   if (spec.key === "temperature" && (value < 0 || value > 2)) {
-    return { ok: false, message: "需在 0–2 之间" }
+    return { ok: false, message: "Must be between 0 and 2" }
   }
   if (spec.key === "retry_backoff_seconds" && value < 0) {
-    return { ok: false, message: "需 ≥ 0" }
+    return { ok: false, message: "Must be ≥ 0" }
   }
   if (spec.key === "max_tokens" || spec.key === "request_timeout_seconds") {
-    if (!Number.isInteger(value) || value <= 0) return { ok: false, message: "需为大于 0 的整数" }
+    if (!Number.isInteger(value) || value <= 0) return { ok: false, message: "Must be an integer > 0" }
   }
   if (spec.key === "max_retries" && (!Number.isInteger(value) || value < 1)) {
-    return { ok: false, message: "需为 ≥ 1 的整数" }
+    return { ok: false, message: "Must be an integer ≥ 1" }
   }
   return { ok: true, value }
 }
@@ -177,22 +177,22 @@ export function SettingsPanel() {
   }
 
   if (settingsQuery.isPending) {
-    return <p className="px-4 py-6 text-[11px] text-fg-subtle">设置载入中…</p>
+    return <p className="px-4 py-6 text-[11px] text-fg-subtle">Loading settings…</p>
   }
 
   if (settingsQuery.isError) {
     return (
       <div className="flex flex-col items-start gap-2 px-4 py-6">
-        <p className="text-[11px] text-danger">设置读取失败：{errorMessage(settingsQuery.error)}</p>
+        <p className="text-[11px] text-danger">Failed to load settings: {errorMessage(settingsQuery.error)}</p>
         <Button variant="outline" size="xs" onClick={() => void settingsQuery.refetch()}>
-          重试
+          Retry
         </Button>
       </div>
     )
   }
 
   if (draft === null) {
-    return <p className="px-4 py-6 text-[11px] text-fg-subtle">设置载入中…</p>
+    return <p className="px-4 py-6 text-[11px] text-fg-subtle">Loading settings…</p>
   }
 
   const canSave = draft.changed > 0 && draft.invalid === 0 && !update.isPending
@@ -202,10 +202,11 @@ export function SettingsPanel() {
       <header className="flex items-start gap-2">
         <Settings2 className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
         <div className="flex flex-col gap-1">
-          <h2 className="text-[13px] font-semibold text-fg">LLM 运行参数</h2>
+          <h2 className="text-[13px] font-semibold text-fg">LLM runtime settings</h2>
           <p className="text-[11px] text-fg-muted">
-            保存后写入后端设置文件，并在启动下一个作业时以{" "}
-            <span className="num">LLMWORLD_*</span> 环境变量注入子进程，因此只影响保存之后启动的作业，正在运行的作业不受影响。
+            Saving writes the backend settings file and injects the values into the next job as{" "}
+            <span className="num">LLMWORLD_*</span> environment variables, so it only affects jobs
+            started after saving; running jobs are untouched.
           </p>
         </div>
       </header>
@@ -242,36 +243,36 @@ export function SettingsPanel() {
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-3">
         <Button size="sm" onClick={onSave} disabled={!canSave}>
           {update.isPending ? <Loader2 className="animate-spin" /> : <Save />}
-          保存
+          Save
         </Button>
         <Button
           variant="outline"
           size="sm"
           onClick={onRestoreDefaults}
           disabled={update.isPending}
-          title="填回默认值，仍需点「保存」生效"
+          title="Fill in the defaults; click Save to apply"
         >
           <RotateCcw />
-          恢复默认
+          Restore defaults
         </Button>
 
         {draft.invalid > 0 ? (
-          <span className="text-[10px] text-danger">有 {draft.invalid} 项输入无效</span>
+          <span className="text-[10px] text-danger">{draft.invalid} invalid input(s)</span>
         ) : draft.changed > 0 ? (
-          <span className="label-micro">待保存 {draft.changed} 项</span>
+          <span className="label-micro">{draft.changed} pending change(s)</span>
         ) : (
-          <span className="label-micro">无改动</span>
+          <span className="label-micro">No changes</span>
         )}
 
         {justSaved ? (
           <span className="flex items-center gap-1 text-[10px] text-success">
             <CheckCircle2 className="size-3" aria-hidden />
-            已保存，下一个作业生效
+            Saved — applies to the next job
           </span>
         ) : null}
 
         {update.isError ? (
-          <span className="text-[10px] text-danger">保存失败：{errorMessage(update.error)}</span>
+          <span className="text-[10px] text-danger">Save failed: {errorMessage(update.error)}</span>
         ) : null}
       </div>
     </div>

@@ -12,7 +12,7 @@ from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
-from .. import artifacts, blocks, world_admin
+from .. import artifacts, blocks, store, world_admin
 from ..models import (
     ArtifactRead,
     ArtifactWriteRequest,
@@ -37,6 +37,7 @@ def worlds_create(req: WorldCreateRequest) -> WorldCreateResult:
         result = world_admin.create_world(req.world_id, req.world_config, req.seed)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
     return WorldCreateResult(**result)
 
 
@@ -47,6 +48,7 @@ def worlds_delete(world: str, permanent: bool = False) -> WorldDeleteResult:
         result = world_admin.delete_world(world, permanent)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
     return WorldDeleteResult(**result)
 
 
@@ -97,9 +99,11 @@ def world_artifact_put(world: str, req: ArtifactWriteRequest) -> ArtifactWriteRe
 def world_clone(world: str, req: WorldCloneRequest) -> WorldCloneResult:
     """Deep-copy a world (households included) into a new draft world."""
     try:
-        return WorldCloneResult(**world_admin.clone_world(world, req.new_id))
+        result = world_admin.clone_world(world, req.new_id)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
+    return WorldCloneResult(**result)
 
 
 @router.get("/worlds/{world}/runs/{run}/days/{date}/blocks", response_model=WorldDayBlocks)

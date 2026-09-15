@@ -17,5 +17,5 @@ const detailFromBody = (body: string): string | null => {
 export function errorMessage(error: unknown): string {
   if (error instanceof ApiError) return detailFromBody(error.message) ?? error.message
   if (error instanceof Error) return error.message
-  return "请求失败"
+  return "Request failed"
 }

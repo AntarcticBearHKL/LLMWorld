@@ -23,9 +23,15 @@ import type {
   SettingsUpdate,
   Snapshot,
   SnapshotHouse,
+  Spacetime,
+  SpacetimeCreate,
+  SpacetimeDeleteResult,
   StagePayload,
+  WorldCloneRequest,
+  WorldCloneResult,
   WorldCreateRequest,
   WorldCreateResult,
+  WorldDayBlocks,
   WorldDeleteResult,
   WorldInfo,
 } from "@/api/types"
@@ -39,9 +45,10 @@ import {
   mockRunMeta,
   mockRuns,
   mockRunSummaries,
+  mockSpacetimesFor,
   mockStageKey,
   mockStages,
-  mockWorld,
+  mockWorldDayBlocks,
   mockWorlds,
 } from "@/mocks"
 
@@ -83,7 +90,7 @@ async function request<T>(path: string, query?: Record<string, string | number |
   const response = await fetch(url, { headers: { accept: "application/json" } })
   if (!response.ok) {
     const body = await response.text().catch(() => "")
-    throw new ApiError(url, response.status, body || `请求失败（HTTP ${response.status}）`)
+    throw new ApiError(url, response.status, body || `Request failed (HTTP ${response.status})`)
   }
   return (await response.json()) as T
 }
@@ -97,7 +104,7 @@ async function postJson<T>(path: string, payload: unknown): Promise<T> {
   })
   if (!response.ok) {
     const body = await response.text().catch(() => "")
-    throw new ApiError(url, response.status, body || `提交失败（HTTP ${response.status}）`)
+    throw new ApiError(url, response.status, body || `Submit failed (HTTP ${response.status})`)
   }
   return (await response.json()) as T
 }
@@ -111,7 +118,7 @@ async function putJson<T>(path: string, payload: unknown): Promise<T> {
   })
   if (!response.ok) {
     const body = await response.text().catch(() => "")
-    throw new ApiError(url, response.status, body || `保存失败（HTTP ${response.status}）`)
+    throw new ApiError(url, response.status, body || `Save failed (HTTP ${response.status})`)
   }
   return (await response.json()) as T
 }
@@ -121,7 +128,7 @@ async function deleteJson<T>(path: string): Promise<T> {
   const response = await fetch(url, { method: "DELETE", headers: { accept: "application/json" } })
   if (!response.ok) {
     const body = await response.text().catch(() => "")
-    throw new ApiError(url, response.status, body || `删除失败（HTTP ${response.status}）`)
+    throw new ApiError(url, response.status, body || `Delete failed (HTTP ${response.status})`)
   }
   return (await response.json()) as T
 }
@@ -156,7 +163,7 @@ export function getDefaultRun(): Promise<RunSummary> {
   if (USE_MOCK) {
     const first = mockRunSummaries[0]
     if (first === undefined) {
-      return Promise.reject(new ApiError("mock:/runs/default", 404, "mock 无可用运行"))
+      return Promise.reject(new ApiError("mock:/runs/default", 404, "mock has no playable run"))
     }
     return delay(first)
   }
@@ -174,7 +181,13 @@ export function listWorlds(): Promise<WorldInfo[]> {
 }
 
 export function getWorld(world: string): Promise<WorldInfo> {
-  if (USE_MOCK) return delay(mockWorld)
+  if (USE_MOCK) {
+    const found = mockWorlds.find((item) => item.world_id === world)
+    if (found === undefined) {
+      return Promise.reject(new ApiError(`mock:/worlds/${world}`, 404, `mock data has no world ${world}`))
+    }
+    return delay(found)
+  }
   return request<WorldInfo>(`/worlds/${encodeURIComponent(world)}`)
 }
 
@@ -185,7 +198,7 @@ export function getWorld(world: string): Promise<WorldInfo> {
 export function createWorld(payload: WorldCreateRequest): Promise<WorldCreateResult> {
   if (USE_MOCK) {
     return Promise.reject(
-      new ApiError("mock:/worlds", 501, "mock 模式不创建世界，请设置 VITE_USE_MOCK=0"),
+      new ApiError("mock:/worlds", 501, "Mock mode does not create worlds; set VITE_USE_MOCK=0"),
     )
   }
   return postJson<WorldCreateResult>("/worlds", payload)
@@ -194,10 +207,23 @@ export function createWorld(payload: WorldCreateRequest): Promise<WorldCreateRes
 export function deleteWorld(world: string): Promise<WorldDeleteResult> {
   if (USE_MOCK) {
     return Promise.reject(
-      new ApiError(`mock:/worlds/${world}`, 501, "mock 模式不删除世界，请设置 VITE_USE_MOCK=0"),
+      new ApiError(`mock:/worlds/${world}`, 501, "Mock mode does not delete worlds; set VITE_USE_MOCK=0"),
     )
   }
   return deleteJson<WorldDeleteResult>(`/worlds/${encodeURIComponent(world)}`)
+}
+
+export function cloneWorld(world: string, payload: WorldCloneRequest): Promise<WorldCloneResult> {
+  if (USE_MOCK) {
+    return Promise.reject(
+      new ApiError(
+        `mock:/worlds/${world}/clone`,
+        501,
+        "Mock mode does not clone worlds; set VITE_USE_MOCK=0",
+      ),
+    )
+  }
+  return postJson<WorldCloneResult>(`/worlds/${encodeURIComponent(world)}/clone`, payload)
 }
 
 export function getBuildState(world: string): Promise<BuildState> {
@@ -213,6 +239,50 @@ export function getBuildPreview(world: string, step: BuildStep, house?: string):
   )
 }
 
+export function getSpacetimes(world: string): Promise<Spacetime[]> {
+  if (USE_MOCK) return delay(mockSpacetimesFor(world))
+  return request<Spacetime[]>(`/worlds/${encodeURIComponent(world)}/spacetimes`)
+}
+
+export function createSpacetime(world: string, payload: SpacetimeCreate): Promise<Spacetime> {
+  if (USE_MOCK) {
+    return Promise.reject(
+      new ApiError(
+        `mock:/worlds/${world}/spacetimes`,
+        501,
+        "Mock mode does not create spacetimes; set VITE_USE_MOCK=0",
+      ),
+    )
+  }
+  return postJson<Spacetime>(`/worlds/${encodeURIComponent(world)}/spacetimes`, payload)
+}
+
+export function deleteSpacetime(name: string): Promise<SpacetimeDeleteResult> {
+  if (USE_MOCK) {
+    return Promise.reject(
+      new ApiError(
+        `mock:/spacetimes/${name}`,
+        501,
+        "Mock mode does not delete spacetimes; set VITE_USE_MOCK=0",
+      ),
+    )
+  }
+  return deleteJson<SpacetimeDeleteResult>(`/spacetimes/${encodeURIComponent(name)}`)
+}
+
+export function getWorldDayBlocks(
+  world: string,
+  run: string,
+  date: string,
+  policy: string,
+): Promise<WorldDayBlocks> {
+  if (USE_MOCK) return delay(mockWorldDayBlocks(world, run, date))
+  return request<WorldDayBlocks>(
+    `/worlds/${encodeURIComponent(world)}/runs/${encodeURIComponent(run)}/days/${encodeURIComponent(date)}/blocks`,
+    { policy },
+  )
+}
+
 /* ------------------------------------------------------------------ *
  * 家庭元数据
  * ------------------------------------------------------------------ */
@@ -220,7 +290,7 @@ export function getBuildPreview(world: string, step: BuildStep, house?: string):
 export function getHousehold(run: string, house: string): Promise<HouseholdInfo> {
   if (USE_MOCK) {
     const found = mockHouseholds[mockHouseholdKey(run, house)]
-    if (!found) return Promise.reject(new ApiError(`mock:${run}/${house}`, 404, `mock 数据中没有 ${house}`))
+    if (!found) return Promise.reject(new ApiError(`mock:${run}/${house}`, 404, `mock data has no ${house}`))
     return delay(found)
   }
   return request<HouseholdInfo>(`/worlds/${encodeURIComponent(run)}/houses/${encodeURIComponent(house)}`)
@@ -240,7 +310,7 @@ export function getDayReplay(
     const found = mockReplays[`${run}/${date}/${house}`]
     if (!found) {
       return Promise.reject(
-        new ApiError(`mock:${run}/${date}/${house}`, 404, `mock 数据中没有 ${date} / ${house} 的回放`),
+        new ApiError(`mock:${run}/${date}/${house}`, 404, `mock data has no replay for ${date} / ${house}`),
       )
     }
     return delay(found)
@@ -323,7 +393,7 @@ export function getStages(
   if (USE_MOCK) {
     const found = mockStages[mockStageKey(run, date, house, member)]
     if (!found) {
-      return Promise.reject(new ApiError(`mock:${member}`, 404, `mock 数据中没有 ${member} 的流水线记录`))
+      return Promise.reject(new ApiError(`mock:${member}`, 404, `mock data has no pipeline records for ${member}`))
     }
     return delay(found)
   }
@@ -343,14 +413,14 @@ export function listJobs(): Promise<JobInfo[]> {
 
 export function estimateJob(payload: JobRequest): Promise<JobEstimate> {
   if (USE_MOCK) {
-    return delay({ kind: payload.kind, estimated_calls: 0, detail: "mock 模式不产生真实调用" })
+    return delay({ kind: payload.kind, estimated_calls: 0, detail: "mock mode makes no real calls" })
   }
   return postJson<JobEstimate>("/jobs/estimate", payload)
 }
 
 export function createJob(payload: JobRequest): Promise<JobCreateResult> {
   if (USE_MOCK) {
-    return Promise.reject(new ApiError("mock:/jobs", 501, "mock 模式不提交作业，请设置 VITE_USE_MOCK=0"))
+    return Promise.reject(new ApiError("mock:/jobs", 501, "Mock mode does not submit jobs; set VITE_USE_MOCK=0"))
   }
   return postJson<JobCreateResult>("/jobs", payload)
 }
@@ -368,7 +438,7 @@ export function listJobLlmCalls(jobId: string, offset = 0, limit = 500): Promise
 
 export function getJobLlmCall(jobId: string, callId: string): Promise<LLMCallDetail> {
   if (USE_MOCK) {
-    return Promise.reject(new ApiError(`mock:${callId}`, 404, "mock 模式没有 LLM 调用记录"))
+    return Promise.reject(new ApiError(`mock:${callId}`, 404, "mock mode has no LLM call records"))
   }
   return request<LLMCallDetail>(
     `/jobs/${encodeURIComponent(jobId)}/llm-calls/${encodeURIComponent(callId)}`,
@@ -377,7 +447,7 @@ export function getJobLlmCall(jobId: string, callId: string): Promise<LLMCallDet
 
 export function cancelJob(jobId: string): Promise<JobInfo> {
   if (USE_MOCK) {
-    return Promise.reject(new ApiError("mock:/jobs", 501, "mock 模式不能取消作业"))
+    return Promise.reject(new ApiError("mock:/jobs", 501, "mock mode cannot cancel jobs"))
   }
   return postJson<JobInfo>(`/jobs/${encodeURIComponent(jobId)}/cancel`, {})
 }
@@ -404,7 +474,7 @@ export function getSettings(): Promise<Settings> {
 export function updateSettings(patch: SettingsUpdate): Promise<Settings> {
   if (USE_MOCK) {
     return Promise.reject(
-      new ApiError("mock:/settings", 501, "mock 模式不保存设置，请设置 VITE_USE_MOCK=0"),
+      new ApiError("mock:/settings", 501, "Mock mode does not save settings; set VITE_USE_MOCK=0"),
     )
   }
   return putJson<Settings>("/settings", patch)

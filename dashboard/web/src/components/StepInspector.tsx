@@ -58,7 +58,7 @@ const formatDuration = (seconds: number | null): string => {
 
 const formatChars = (chars: number | null): string => {
   if (chars === null) return "—"
-  return chars >= 1000 ? `${(chars / 1000).toFixed(1)}k 字符` : `${chars} 字符`
+  return chars >= 1000 ? `${(chars / 1000).toFixed(1)}k chars` : `${chars} chars`
 }
 
 const formatStartedAt = (iso: string | null): string => {
@@ -70,7 +70,7 @@ const formatStartedAt = (iso: string | null): string => {
 }
 
 const statusText = (httpStatus: number | null): string =>
-  httpStatus === null ? "无状态码" : `HTTP ${httpStatus}`
+  httpStatus === null ? "no status" : `HTTP ${httpStatus}`
 
 const PRE_CLASS =
   "num max-h-80 overflow-auto rounded-md border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap break-words text-fg-muted"
@@ -113,7 +113,7 @@ function CallRow({
         <span
           className={cn("ml-auto text-[10px] whitespace-nowrap", call.ok ? "text-success" : "text-danger")}
         >
-          {call.ok ? "成功" : "失败"}
+          {call.ok ? "OK" : "Failed"}
         </span>
       </div>
       <div className="num flex items-center gap-1.5 text-[10px] text-fg-subtle">
@@ -143,11 +143,11 @@ function Section({ title, hint, children }: { title: string; hint?: string; chil
 }
 
 function ResponseBody({ view }: { view: ResponseView }) {
-  if (view.kind === "none") return <p className="text-[11px] text-fg-subtle">（无响应体）</p>
+  if (view.kind === "none") return <p className="text-[11px] text-fg-subtle">(no response body)</p>
   if (view.kind === "failure") {
     return (
       <div className="flex flex-col gap-1.5">
-        <span className="text-[10px] text-danger">HTTP 错误响应体（provider raw_text）</span>
+        <span className="text-[10px] text-danger">HTTP error response body (provider raw_text)</span>
         <pre className={cn(PRE_CLASS, "border-danger/40 text-fg")}>{view.rawText}</pre>
       </div>
     )
@@ -158,17 +158,17 @@ function ResponseBody({ view }: { view: ResponseView }) {
       {view.content.length > 0 ? (
         <pre className={cn(PRE_CLASS, "text-fg")}>{view.content}</pre>
       ) : (
-        <p className="text-[11px] text-fg-subtle">（响应内容为空）</p>
+        <p className="text-[11px] text-fg-subtle">(empty response content)</p>
       )}
       {view.reasoning !== null && view.reasoning.length > 0 ? (
         <div className="flex flex-col gap-1.5">
-          <span className="label-micro">推理内容</span>
+          <span className="label-micro">Reasoning</span>
           <pre className={PRE_CLASS}>{view.reasoning}</pre>
         </div>
       ) : null}
       {view.usage !== null && view.usage !== undefined ? (
         <div className="flex flex-col gap-1.5">
-          <span className="label-micro">用量</span>
+          <span className="label-micro">Usage</span>
           <pre className={PRE_CLASS}>{asJson(view.usage)}</pre>
         </div>
       ) : null}
@@ -180,12 +180,12 @@ function CallDetail({ jobId, callId }: { jobId: string; callId: string }) {
   const detailQuery = useJobLlmCall(jobId, callId)
 
   if (detailQuery.isPending) {
-    return <p className="px-4 py-3 text-[11px] text-fg-subtle">载入中…</p>
+    return <p className="px-4 py-3 text-[11px] text-fg-subtle">Loading…</p>
   }
 
   if (detailQuery.isError) {
     const message =
-      detailQuery.error instanceof ApiError ? detailQuery.error.message : "无法读取该次调用的详情"
+      detailQuery.error instanceof ApiError ? detailQuery.error.message : "Could not load this call's details"
     return <p className="px-4 py-3 text-[11px] text-danger">{message}</p>
   }
 
@@ -206,7 +206,7 @@ function CallDetail({ jobId, callId }: { jobId: string; callId: string }) {
         </span>
         <StatusChip ok={ok} httpStatus={detail.http_status} />
         <Badge variant="outline" className={cn("label-latin", ok ? "text-success" : "text-danger")}>
-          {ok ? "成功" : "失败"}
+          {ok ? "OK" : "Failed"}
         </Badge>
         <span className="num text-[10px] text-fg-subtle">{formatDuration(detail.duration_seconds)}</span>
         <span className="num text-[10px] text-fg-subtle">{formatChars(detail.prompt_chars)}</span>
@@ -216,25 +216,25 @@ function CallDetail({ jobId, callId }: { jobId: string; callId: string }) {
       <ScrollArea className="min-h-0 flex-1">
         <div className="flex flex-col gap-4 px-4 py-3">
           <div className="flex flex-wrap items-baseline gap-2">
-            <span className="label-micro">模型</span>
+            <span className="label-micro">Model</span>
             <span className="num text-[11px] text-fg">{model ?? "—"}</span>
             <span className="num ml-auto text-[10px] text-fg-subtle">{detail.logical_call_id}</span>
           </div>
 
-          <Section title="提示词" hint="request.input">
+          <Section title="Prompt" hint="request.input">
             {prompt === null || prompt.length === 0 ? (
-              <p className="text-[11px] text-fg-subtle">（没有记录提示词）</p>
+              <p className="text-[11px] text-fg-subtle">(no prompt recorded)</p>
             ) : (
               <pre className={PRE_CLASS}>{prompt}</pre>
             )}
           </Section>
 
-          <Section title="原始响应">
+          <Section title="Raw response">
             <ResponseBody view={describeResponse(detail.response)} />
           </Section>
 
           {detail.error !== null ? (
-            <Section title="错误">
+            <Section title="Error">
               <p className="rounded-md border border-danger/40 bg-surface-2 px-3 py-2 text-[11px] text-danger">
                 {detail.error}
               </p>
@@ -253,7 +253,7 @@ export function StepInspector({ jobId, step = null, live = false }: StepInspecto
   if (jobId === null) {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
-        <span className="text-[11px] text-fg-subtle">选择左侧任一构建作业以查看其 LLM 调用。</span>
+        <span className="text-[11px] text-fg-subtle">Select a build job to inspect its LLM calls.</span>
       </div>
     )
   }
@@ -268,15 +268,15 @@ export function StepInspector({ jobId, step = null, live = false }: StepInspecto
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 items-center gap-2 border-b border-border px-4 py-2">
-        <span className="label-micro">LLM 调用</span>
+        <span className="label-micro">LLM calls</span>
         <span className="num text-[10px] text-fg-subtle">
-          {list === undefined ? "—" : `${list.total} 次`}
+          {list === undefined ? "—" : `${list.total} calls`}
         </span>
-        {step !== null ? <span className="num text-[10px] text-fg-subtle">· 步骤 {step}</span> : null}
+        {step !== null ? <span className="num text-[10px] text-fg-subtle">· step {step}</span> : null}
         <Button
           variant="ghost"
           size="icon-sm"
-          aria-label="刷新 LLM 调用"
+          aria-label="Refresh LLM calls"
           className="ml-auto"
           onClick={() => void listQuery.refetch()}
         >
@@ -285,20 +285,20 @@ export function StepInspector({ jobId, step = null, live = false }: StepInspecto
       </div>
 
       {listQuery.isPending ? (
-        <p className="px-4 py-3 text-[11px] text-fg-subtle">载入中…</p>
+        <p className="px-4 py-3 text-[11px] text-fg-subtle">Loading…</p>
       ) : listQuery.isError ? (
         <p className="px-4 py-3 text-[11px] text-danger">
-          {listQuery.error instanceof ApiError ? listQuery.error.message : "无法读取 LLM 调用记录"}
+          {listQuery.error instanceof ApiError ? listQuery.error.message : "Could not load LLM calls"}
         </p>
       ) : list === undefined ? (
-        <p className="px-4 py-3 text-[11px] text-fg-subtle">载入中…</p>
+        <p className="px-4 py-3 text-[11px] text-fg-subtle">Loading…</p>
       ) : list.total === 0 ? (
         <div className="flex flex-1 flex-col items-center justify-center gap-1.5 p-6 text-center">
           <span className="text-[12px] text-fg-muted">
-            {list.exists ? "追踪文件为空。" : "该作业没有 LLM 调用记录。"}
+            {list.exists ? "The trace file is empty." : "This job has no LLM calls."}
           </span>
           <span className="text-[10px] text-fg-subtle">
-            可能原因：构建步骤尚未执行到 LLM 阶段，或作业仍在排队。
+            The step may not have reached its LLM phase yet, or the job is still queued.
           </span>
         </div>
       ) : (
@@ -316,7 +316,7 @@ export function StepInspector({ jobId, step = null, live = false }: StepInspecto
           </ul>
           <div className="flex min-h-0 flex-1 flex-col">
             {activeId === null ? (
-              <p className="px-4 py-3 text-[11px] text-fg-subtle">选择左侧任一调用以查看详情。</p>
+              <p className="px-4 py-3 text-[11px] text-fg-subtle">Select a call to view details.</p>
             ) : (
               <CallDetail jobId={jobId} callId={activeId} />
             )}

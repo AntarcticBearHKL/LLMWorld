@@ -4,56 +4,25 @@ import { DAY_MINUTES, MINUTES_PER_SECOND_AT_1X, SPEED_PRESETS, clampMinute, snap
 
 export const DEFAULT_POLICY = "baseline"
 
-export type ViewKey =
-  | "scene"
-  | "grid"
-  | "detail"
-  | "generate"
-  | "build"
-  | "simulate"
-  | "jobs"
-  | "settings"
+export type ViewKey = "worlds" | "world" | "watch" | "jobs" | "settings"
 
-export const DEFAULT_VIEW: ViewKey = "grid"
+export const DEFAULT_VIEW: ViewKey = "worlds"
 
-const VIEW_KEYS = new Set<string>([
-  "scene",
-  "grid",
-  "detail",
-  "generate",
-  "build",
-  "simulate",
-  "jobs",
-  "settings",
-])
+const VIEW_KEYS = new Set<string>(["worlds", "world", "watch", "jobs", "settings"])
 
 const readView = (value: string | null): ViewKey =>
   value !== null && VIEW_KEYS.has(value) ? (value as ViewKey) : DEFAULT_VIEW
 
-export type WorldMode = "build" | "simulate" | "watch"
+export type WorldTab = "spacetime" | "household"
 
-export const DEFAULT_WORLD_MODE: WorldMode = "build"
+export const DEFAULT_WORLD_TAB: WorldTab = "spacetime"
 
-const WORLD_MODES = new Set<string>(["build", "simulate", "watch"])
+const WORLD_TABS = new Set<string>(["spacetime", "household"])
 
-const readWorldMode = (value: string | null): WorldMode =>
-  value !== null && WORLD_MODES.has(value) ? (value as WorldMode) : DEFAULT_WORLD_MODE
+const readWorldTab = (value: string | null): WorldTab =>
+  value !== null && WORLD_TABS.has(value) ? (value as WorldTab) : DEFAULT_WORLD_TAB
 
-export type WatchDensity = "town" | "grid" | "detail"
-
-export const DEFAULT_WATCH_DENSITY: WatchDensity = "town"
-
-const WATCH_DENSITIES = new Set<string>(["town", "grid", "detail"])
-
-const readWatchDensity = (value: string | null): WatchDensity =>
-  value !== null && WATCH_DENSITIES.has(value) ? (value as WatchDensity) : DEFAULT_WATCH_DENSITY
-
-const readInitialView = (params: URLSearchParams): ViewKey => {
-  const value = params.get("view")
-  if (value !== null) return readView(value)
-  if (params.has("mode") || params.has("density")) return "build"
-  return DEFAULT_VIEW
-}
+const readIndoor = (value: string | null): boolean => value === "1" || value === "true"
 
 export type PlayMode = "continuous" | "autoStep"
 
@@ -75,9 +44,10 @@ export interface TimeState {
   house: string
   policy: string
   view: ViewKey
-  mode: WorldMode
-  density: WatchDensity
   world: string
+  tab: WorldTab
+  block: string
+  indoor: boolean
   step: string
   selectedMember: string | null
   carry: number
@@ -96,9 +66,10 @@ export interface TimeState {
   setHouse: (house: string) => void
   setPolicy: (policy: string) => void
   setView: (view: ViewKey) => void
-  setMode: (mode: WorldMode) => void
-  setDensity: (density: WatchDensity) => void
   setWorld: (world: string) => void
+  setTab: (tab: WorldTab) => void
+  setBlock: (block: string) => void
+  setIndoor: (indoor: boolean) => void
   setStep: (step: string) => void
   setSelectedMember: (member: string | null) => void
   setSelection: (selection: { run?: string; date?: string; house?: string; policy?: string }) => void
@@ -113,9 +84,10 @@ const readInitial = () => {
     house: "",
     policy: DEFAULT_POLICY,
     view: DEFAULT_VIEW,
-    mode: DEFAULT_WORLD_MODE,
-    density: DEFAULT_WATCH_DENSITY,
     world: "",
+    tab: DEFAULT_WORLD_TAB,
+    block: "",
+    indoor: false,
     step: "",
   }
   if (typeof window === "undefined") return fallback
@@ -127,10 +99,11 @@ const readInitial = () => {
     date: params.get("date") ?? "",
     house: params.get("house") ?? "",
     policy: params.get("policy") ?? DEFAULT_POLICY,
-    view: readInitialView(params),
-    mode: readWorldMode(params.get("mode")),
-    density: readWatchDensity(params.get("density")),
+    view: readView(params.get("view")),
     world: params.get("world") ?? "",
+    tab: readWorldTab(params.get("tab")),
+    block: params.get("block") ?? "",
+    indoor: readIndoor(params.get("indoor")),
     step: params.get("step") ?? "",
   }
 }
@@ -148,9 +121,10 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
   house: initial.house,
   policy: initial.policy,
   view: initial.view,
-  mode: initial.mode,
-  density: initial.density,
   world: initial.world,
+  tab: initial.tab,
+  block: initial.block,
+  indoor: initial.indoor,
   step: initial.step,
   selectedMember: null,
   carry: 0,
@@ -212,11 +186,18 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
 
   setView: (view) => set({ view }),
 
-  setMode: (mode) => set({ mode }),
+  setWorld: (world) =>
+    set((state) =>
+      state.world === world
+        ? { world }
+        : { world, run: "", date: "", block: "", house: "", selectedMember: null },
+    ),
 
-  setDensity: (density) => set({ density }),
+  setTab: (tab) => set({ tab }),
 
-  setWorld: (world) => set({ world }),
+  setBlock: (block) => set({ block }),
+
+  setIndoor: (indoor) => set({ indoor }),
 
   setStep: (step) => set({ step }),
 

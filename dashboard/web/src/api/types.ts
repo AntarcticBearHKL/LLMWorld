@@ -34,8 +34,11 @@ export interface RunMeta {
 export interface WorldInfo {
   world_id: string
   postcode: string | null
+  districts: string[]
   houses: string[]
   has_events: boolean
+  spacetimes: string[]
+  frozen: boolean
   latest_mtime: number | null
 }
 
@@ -292,6 +295,65 @@ export interface WorldDeleteResult {
   existed: boolean
   deleted: boolean
   moved_to: string | null
+}
+
+export interface WorldCloneRequest {
+  new_id: string
+}
+
+export interface WorldCloneResult {
+  world_id: string
+  cloned_from: string
+  world_dir: string
+}
+
+export interface Spacetime {
+  name: string
+  world: string
+  start_date: string | null
+  days: number
+  policy: string | null
+  events: string[]
+  notices: string[]
+  seed: number | null
+  created_at: string | null
+  status: string
+  has_manifest: boolean
+  date_count: number
+  house_count: number
+  latest_mtime: number | null
+}
+
+export interface SpacetimeCreate {
+  name: string
+  start_date: string
+  days: number
+  policy?: string | null
+  events?: string[]
+  notices?: string[]
+  seed?: number | null
+}
+
+export interface SpacetimeDeleteResult {
+  name: string
+  existed: boolean
+  deleted: boolean
+  moved_to: string | null
+}
+
+export interface BlockSummary {
+  postcode: string
+  houses: string[]
+  house_count: number
+  total_kwh: number
+  peak_watts: number
+}
+
+export interface WorldDayBlocks {
+  world: string
+  run: string
+  date: string
+  blocks: BlockSummary[]
 }
 
 export interface ArtifactRef {

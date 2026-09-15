@@ -432,3 +432,37 @@ HUD 显示 `采样无效` 表示该次采样被判为节流（帧间隔失速率
 - 独立视图（scene / grid / detail / generate / simulate / jobs / settings）原样保留，两条路径共存。
 - 验收：`npx tsc -b` / `npm run build` / `npm run lint` 均 exit 0。
 
+## 13. Information architecture — Worlds / World / Watch (restructure part 1)
+
+> Supersedes §12.4 (top bar) and §12.7 (world workspace navigation). All user-visible
+> copy is English from this point on.
+
+**Conceptual model** — a *world* is a fixed set of blocks (postcodes) and households;
+a *spacetime* is one simulation run over that world (policy + news/events + start date
++ arbitrary days) and only ever reads the households. A world with ≥1 spacetime is
+**frozen**: to edit its households you clone it into a new draft.
+
+**Navigation** — the top bar has exactly three items: `Worlds | Jobs | Settings`.
+
+| Level | View | Content |
+| --- | --- | --- |
+| L0 | `view=worlds` (default) | World cards: id, block / household / spacetime counts, `Draft` (0 spacetimes) or `Frozen` badge, last activity. Actions: new blank world, clone, delete (recoverable, confirm first). |
+| L1 | `view=world&world=W` | Header (id, badge, clone, back link) + two tabs. `Spacetimes`: list + inline creation wizard; each row opens Watch. `Households`: draft → embedded `WorldBuilder`; frozen → read-only block/house structure with a lock banner (Lucide `Lock` icon; §1 bans emoji) and a clone action. |
+| L2 | `view=watch&world=W&run=R` | Placeholder until part 2 (4-layer drill-down: world → block → house → indoor). |
+
+**Store / URL contract** (`store/time.ts`, `hooks/useUrlSync.ts`) — `view` is
+`"worlds" | "world" | "watch" | "jobs" | "settings"`; the store also carries
+`world`, `tab` (`"spacetime" | "household"`), `run`, `date`, `block`, `house`,
+`indoor`, `policy`, `minute` (plus `step`, still used by the household builder).
+Initial values come from the URL and fall back to defaults; `PARAM_ORDER` is
+`view, world, tab, run, date, block, house, indoor, policy, minute`.
+The removed `mode` / `density` fields now live as local state in the unreachable
+`WorldWorkspace` shell kept for part 2.
+
+**New primitives / components** — `ui/textarea`, `primitives/WorldBadge`,
+`WorldsList`, `WorldDetail`, `SpacetimeList`, `SpacetimeWizard`, `WorldHouseholds`,
+`WatchPlaceholder`, `CloneWorldButton`; hooks `useWorld` / `useCloneWorld`
+(`useWorldBuild.ts`) and `useSpacetimes` / `useCreateSpacetime` /
+`useDeleteSpacetime` / `useWorldDayBlocks` (`useSpacetimes.ts`). No new tokens were
+required; everything reuses §2–§6.
+

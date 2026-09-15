@@ -1,15 +1,23 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-import { createWorld, deleteWorld, getBuildPreview, getBuildState, listWorlds } from "@/api/client"
+import {
+  cloneWorld,
+  createWorld,
+  deleteWorld,
+  getBuildPreview,
+  getBuildState,
+  getWorld,
+  listWorlds,
+} from "@/api/client"
 import type { BuildStep, BuildStepStatus, JobInfo, WorldCreateRequest } from "@/api/types"
 
 export const BUILD_STEP_ORDER: readonly BuildStep[] = ["types", "personas", "household", "assemble"]
 
 export const BUILD_STEP_LABEL: Record<BuildStep, string> = {
-  types: "类型",
-  personas: "人格",
-  household: "家庭",
-  assemble: "装配",
+  types: "Types",
+  personas: "Personas",
+  household: "Household",
+  assemble: "Assemble",
 }
 
 export const BUILD_STEP_SCOPE: Record<BuildStep, "world" | "house"> = {
@@ -27,6 +35,7 @@ export const isActiveJob = (job: JobInfo): boolean =>
 
 export const worldKeys = {
   list: ["worlds"] as const,
+  detail: (world: string) => ["worlds", world] as const,
   build: (world: string) => ["worlds", world, "build"] as const,
   preview: (world: string, step: string, house: string) =>
     ["worlds", world, "build", step, "preview", house] as const,
@@ -34,6 +43,15 @@ export const worldKeys = {
 
 export function useWorlds() {
   return useQuery({ queryKey: worldKeys.list, queryFn: listWorlds, staleTime: 300_000 })
+}
+
+export function useWorld(world: string) {
+  return useQuery({
+    queryKey: worldKeys.detail(world),
+    queryFn: () => getWorld(world),
+    enabled: world.length > 0,
+    staleTime: 30_000,
+  })
 }
 
 /** 有该世界的构建作业在跑就快轮询，否则慢轮询。 */
@@ -74,6 +92,17 @@ export function useDeleteWorld() {
     onSuccess: (_result, world) => {
       void queryClient.invalidateQueries({ queryKey: worldKeys.list })
       queryClient.removeQueries({ queryKey: worldKeys.build(world) })
+    },
+  })
+}
+
+export function useCloneWorld() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ world, newId }: { world: string; newId: string }) =>
+      cloneWorld(world, { new_id: newId }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: worldKeys.list })
     },
   })
 }

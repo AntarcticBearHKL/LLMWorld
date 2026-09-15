@@ -12,7 +12,7 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException
 
-from .. import jobs, spacetimes, world_admin
+from .. import jobs, spacetimes, store, world_admin
 from ..models import JobRequest, Spacetime, SpacetimeCreate, SpacetimeDeleteResult
 
 router = APIRouter(tags=["spacetimes"])
@@ -77,6 +77,7 @@ def spacetime_create(world: str, req: SpacetimeCreate) -> Spacetime:
     created = spacetimes.read(req.name)
     if created is None:
         raise HTTPException(status_code=500, detail="spacetime manifest vanished")
+    store.invalidate_catalog()
     return created
 
 
@@ -87,4 +88,5 @@ def spacetime_delete(name: str, permanent: bool = False) -> SpacetimeDeleteResul
         result = spacetimes.delete(name, permanent)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
     return SpacetimeDeleteResult(**result)

@@ -6,6 +6,7 @@
  * 就编译失败。glob 会丢掉类型，只能靠断言，那正是我们要避免的。
  */
 import type {
+  BlockSummary,
   BuildPreview,
   BuildState,
   DayReplay,
@@ -14,7 +15,9 @@ import type {
   RunInfo,
   RunMeta,
   RunSummary,
+  Spacetime,
   StagePayload,
+  WorldDayBlocks,
   WorldInfo,
 } from "@/api/types"
 
@@ -33,6 +36,7 @@ import stages1 from "@/mocks/stages/world_838587/2026-09-11/house_0001/Member_1.
 import stages2 from "@/mocks/stages/world_838587/2026-09-11/house_0001/Member_2.json"
 import stages3 from "@/mocks/stages/world_838587/2026-09-11/house_0001/Member_3.json"
 import stages4 from "@/mocks/stages/world_838587/2026-09-11/house_0001/Member_4.json"
+import spacetimesJson from "@/mocks/spacetimes.json"
 import worldJson from "@/mocks/worlds/world_838587.json"
 import worldsJson from "@/mocks/worlds.json"
 
@@ -84,6 +88,30 @@ export const mockRunSummaries: RunSummary[] = mockRuns.map((item) => ({
 export const mockRunMeta: RunMeta = asRunMeta(runMeta)
 export const mockWorlds: WorldInfo[] = worldsJson
 export const mockWorld: WorldInfo = worldJson
+export const mockSpacetimes: Spacetime[] = spacetimesJson
+
+export const mockSpacetimesFor = (world: string): Spacetime[] =>
+  mockSpacetimes.filter((item) => item.world === world || item.name === world)
+
+export function mockWorldDayBlocks(world: string, run: string, date: string): WorldDayBlocks {
+  const info = mockWorlds.find((item) => item.world_id === world)
+  const districts = info?.districts ?? []
+  const replays = mockReplaysForDate(run, date)
+  const houses = replays.map((replay) => replay.house)
+  const total = replays.reduce((sum, replay) => sum + replay.metrics.total_kwh, 0)
+  const peak = replays.reduce((max, replay) => Math.max(max, replay.metrics.peak_watts ?? 0), 0)
+  const blocks: BlockSummary[] = districts.map((postcode) => {
+    const scoped = postcode === info?.postcode ? houses : []
+    return {
+      postcode,
+      houses: scoped,
+      house_count: scoped.length,
+      total_kwh: scoped.length > 0 ? Number(total.toFixed(3)) : 0,
+      peak_watts: scoped.length > 0 ? Number(peak.toFixed(1)) : 0,
+    }
+  })
+  return { world, run, date, blocks }
+}
 
 type RawHouseholdInfo = Omit<HouseholdInfo, "room_meta"> & { room_meta?: RoomInfo[] }
 

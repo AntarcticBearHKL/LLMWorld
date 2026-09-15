@@ -12,11 +12,11 @@ import { useJobLog, useJobs } from "@/hooks/useJobs"
 import { cn } from "@/lib/utils"
 
 const STATUS_LABEL: Record<JobInfo["status"], string> = {
-  queued: "排队中",
-  running: "运行中",
-  done: "已完成",
-  failed: "失败",
-  cancelled: "已取消",
+  queued: "Queued",
+  running: "Running",
+  done: "Done",
+  failed: "Failed",
+  cancelled: "Cancelled",
 }
 
 const STATUS_CLASS: Record<JobInfo["status"], string> = {
@@ -28,24 +28,24 @@ const STATUS_CLASS: Record<JobInfo["status"], string> = {
 }
 
 const KIND_LABEL: Record<string, string> = {
-  world: "生成世界",
-  simulate: "模拟",
-  build: "构建",
+  world: "Generate world",
+  simulate: "Simulate",
+  build: "Build",
 }
 
 const STEP_LABEL: Record<string, string> = {
-  types: "类型",
-  personas: "人格",
-  household: "家庭",
-  assemble: "装配",
+  types: "Types",
+  personas: "Personas",
+  household: "Household",
+  assemble: "Assemble",
 }
 
 const isActive = (job: JobInfo): boolean => job.status === "running" || job.status === "queued"
 
 const jobMeta = (job: JobInfo): string => {
   const parts = [
-    job.world ?? (job.kind === "build" ? null : "（自动世界名）"),
-    job.step !== null ? `步骤 ${STEP_LABEL[job.step] ?? job.step}` : null,
+    job.world ?? (job.kind === "build" ? null : "(auto world name)"),
+    job.step !== null ? `step ${STEP_LABEL[job.step] ?? job.step}` : null,
     job.house,
     job.exit_code !== null ? `exit ${job.exit_code}` : null,
   ]
@@ -59,7 +59,7 @@ function LogView({ jobId }: { jobId: string | null }) {
   if (jobId === null) {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
-        <span className="text-[11px] text-fg-subtle">选择左侧任一作业以查看实时日志。</span>
+        <span className="text-[11px] text-fg-subtle">Select a job to view its live log.</span>
       </div>
     )
   }
@@ -67,13 +67,13 @@ function LogView({ jobId }: { jobId: string | null }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-2">
-        <span className="label-micro">实时日志 · {lines.length} 行</span>
+        <span className="label-micro">Live log · {lines.length} lines</span>
         <span className={cn("label-latin", connected ? "text-success" : "text-fg-subtle")}>
           {connected ? "streaming" : "idle"}
         </span>
       </div>
       <pre className="num min-h-0 flex-1 overflow-auto px-4 py-3 text-[10px] leading-relaxed whitespace-pre-wrap text-fg-muted">
-        {lines.length === 0 ? "（暂无输出）" : lines.join("\n")}
+        {lines.length === 0 ? "(no output yet)" : lines.join("\n")}
       </pre>
     </div>
   )
@@ -87,10 +87,10 @@ function BuildJobView({ job }: { job: JobInfo }) {
       <div className="flex shrink-0 items-center gap-2 border-b border-border px-4 py-2">
         <TabsList className="h-7 p-0.5">
           <TabsTrigger value="trace" className="h-6 flex-none px-2 text-[11px]">
-            LLM 调用
+            LLM calls
           </TabsTrigger>
           <TabsTrigger value="log" className="h-6 flex-none px-2 text-[11px]">
-            实时日志
+            Live log
           </TabsTrigger>
         </TabsList>
         <span className="num ml-auto text-[10px] text-fg-subtle">{job.id.slice(0, 8)}</span>
@@ -125,7 +125,7 @@ export function JobsPanel() {
       await cancelJob(jobId)
       await jobsQuery.refetch()
     } catch (caught) {
-      setError(caught instanceof ApiError ? caught.message : "取消失败")
+      setError(caught instanceof ApiError ? caught.message : "Cancel failed")
     } finally {
       setBusy(null)
     }
@@ -138,17 +138,17 @@ export function JobsPanel() {
       <section className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
         <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-2.5">
           <span className="text-[13px] font-semibold text-fg">
-            作业 <span className="num text-[11px] text-fg-subtle">{jobs.length}</span>
+            Jobs <span className="num text-[11px] text-fg-subtle">{jobs.length}</span>
           </span>
-          <Button variant="ghost" size="icon-sm" aria-label="刷新" onClick={() => void jobsQuery.refetch()}>
+          <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void jobsQuery.refetch()}>
             <RefreshCw />
           </Button>
         </header>
         <div className="min-h-0 flex-1 overflow-y-auto">
           {jobs.length === 0 ? (
             <p className="px-4 py-6 text-[11px] text-fg-subtle">
-              还没有作业。切到「生成」「模拟」或「构建」提交一个。注意：作业会真实执行 run.py 并消耗 API
-              额度。
+              No jobs yet. Submit one from the build or simulation flows. Jobs really run run.py and
+              spend API credits.
             </p>
           ) : (
             <ul className="flex flex-col">
@@ -182,7 +182,7 @@ export function JobsPanel() {
                       )}
                     >
                       <X className="size-2.5" aria-hidden />
-                      取消作业
+                      Cancel job
                     </button>
                   ) : null}
                 </li>
@@ -204,7 +204,8 @@ export function JobsPanel() {
       </section>
 
       <p className="col-span-full text-[10px] text-fg-subtle">
-        作业会真实执行 run.py 并消耗 API 额度；同一时间只运行一个作业，避免 output/ 并发写入。
+        Jobs really run run.py and spend API credits; only one job runs at a time to avoid concurrent
+        writes under output/.
       </p>
     </div>
   )

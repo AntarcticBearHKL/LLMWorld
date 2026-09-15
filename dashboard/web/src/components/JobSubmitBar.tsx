@@ -37,16 +37,18 @@ export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobS
           disabled={disabled || estimate.isPending}
         >
           {estimate.isPending ? <Loader2 className="animate-spin" /> : null}
-          估算调用次数
+          Estimate LLM calls
         </Button>
 
         {estimate.data !== undefined ? (
           <span className="text-[11px] text-fg-muted">
-            预计 <span className="num text-energy">{estimate.data.estimated_calls}</span> 次 LLM 调用 ·
-            {estimate.data.detail}
+            Estimated <span className="num text-energy">{estimate.data.estimated_calls}</span> LLM
+            calls · {estimate.data.detail}
           </span>
         ) : (
-          <span className="text-[11px] text-fg-subtle">先估算，确认开销后再提交。</span>
+          <span className="text-[11px] text-fg-subtle">
+            Estimate first, then confirm the cost before submitting.
+          </span>
         )}
       </div>
 
@@ -58,7 +60,7 @@ export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobS
           disabled={!estimated}
         />
         <Label htmlFor="job-confirm" className="text-[11px] text-fg-muted">
-          我确认本次执行会真实调用 LLM 并消耗 API 额度
+          I understand this run calls the LLM and spends API credits
         </Label>
       </div>
 
@@ -72,18 +74,17 @@ export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobS
       <div className="flex flex-wrap items-center gap-2">
         <Button size="sm" onClick={() => create.mutate({ ...payload, confirm: true })} disabled={!canSubmit}>
           {create.isPending ? <Loader2 className="animate-spin" /> : <Send />}
-          提交作业
+          Submit job
         </Button>
         {create.isSuccess ? (
           <span className="flex items-center gap-1.5 text-[11px] text-success">
             <CheckCircle2 className="size-3" aria-hidden />
-            已提交：<span className="num">{create.data.job.id.slice(0, 8)}</span>
+            Submitted: <span className="num">{create.data.job.id.slice(0, 8)}</span>
           </span>
         ) : null}
         {create.isError ? (
           <span className={cn("text-[11px] text-danger")}>
-            提交失败：
-            {create.error instanceof Error ? create.error.message : "未知错误"}
+            Submit failed: {create.error instanceof Error ? create.error.message : "Unknown error"}
           </span>
         ) : null}
       </div>

@@ -13,7 +13,7 @@ export function PlaceholderBadge({ milestone, className }: PlaceholderBadgeProps
         className,
       )}
     >
-      待实现 · {milestone}
+      Coming soon · {milestone}
     </span>
   )
 }

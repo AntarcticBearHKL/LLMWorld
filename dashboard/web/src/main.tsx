@@ -19,7 +19,7 @@ const queryClient = new QueryClient({
 const container = document.getElementById("root")
 
 if (container === null) {
-  throw new Error("缺少 #root 挂载节点")
+  throw new Error("Missing #root mount node")
 }
 
 createRoot(container).render(

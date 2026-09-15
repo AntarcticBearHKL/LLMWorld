@@ -52,19 +52,19 @@ function Group({
 
 export function BuildPreviewList({ preview, isPending, error, needsHouse, house }: BuildPreviewListProps) {
   if (needsHouse && house.length === 0) {
-    return <p className="text-[10px] text-fg-subtle">先选择目标住户以查看读写路径。</p>
+    return <p className="text-[10px] text-fg-subtle">Pick a target household to view read/write paths.</p>
   }
 
   if (isPending) {
-    return <p className="text-[10px] text-fg-subtle">读写预览载入中…</p>
+    return <p className="text-[10px] text-fg-subtle">Loading read/write preview…</p>
   }
 
   if (error !== null) {
-    return <p className="text-[10px] text-danger">读写预览读取失败：{error}</p>
+    return <p className="text-[10px] text-danger">Failed to load read/write preview: {error}</p>
   }
 
   if (preview === undefined) {
-    return <p className="text-[10px] text-fg-subtle">暂无预览。</p>
+    return <p className="text-[10px] text-fg-subtle">No preview.</p>
   }
 
   const empty =
@@ -73,21 +73,21 @@ export function BuildPreviewList({ preview, isPending, error, needsHouse, house 
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap items-baseline gap-2">
-        <span className="label-micro">读写预览</span>
+        <span className="label-micro">Read/write preview</span>
         <span className="num text-[10px] text-fg-subtle">
-          读 <span className="text-fg-muted">{preview.reads.length}</span> · 写{" "}
-          <span className="text-fg-muted">{preview.writes.length}</span> · 覆盖{" "}
+          read <span className="text-fg-muted">{preview.reads.length}</span> · write{" "}
+          <span className="text-fg-muted">{preview.writes.length}</span> · overwrite{" "}
           <span className="text-energy">{preview.overwrites.length}</span>
         </span>
         {preview.house !== null ? (
-          <span className="num ml-auto text-[10px] text-fg-subtle" title="后端解析出的目标住户">
+          <span className="num ml-auto text-[10px] text-fg-subtle" title="Target household resolved by the backend">
             {preview.house}
           </span>
         ) : null}
       </div>
 
       {empty ? (
-        <p className="text-[10px] text-fg-subtle">（后端未返回读写路径）</p>
+        <p className="text-[10px] text-fg-subtle">(backend returned no read/write paths)</p>
       ) : (
         <>
           {preview.reads.length > 0 ? (
@@ -111,7 +111,7 @@ export function BuildPreviewList({ preview, isPending, error, needsHouse, house 
           ) : null}
 
           {preview.overwrites.length > 0 ? (
-            <Group title="overwrite" hint="先备份" tone="energy">
+            <Group title="overwrite" hint="backs up first" tone="energy">
               <ul className="flex flex-col gap-1">
                 {preview.overwrites.map((path) => (
                   <li key={path} className="num min-w-0 truncate text-[10px] text-energy" title={path}>

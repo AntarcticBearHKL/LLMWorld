@@ -21,14 +21,14 @@ import {
 } from "@/hooks/useWorldBuild"
 
 const MOCK_REASON =
-  "当前是 mock 模式（VITE_USE_MOCK=1），不会真正提交。请用 VITE_USE_MOCK=0 启动前端以连接后端。"
+  "Mock mode is on (VITE_USE_MOCK=1), so nothing is submitted. Start the frontend with VITE_USE_MOCK=0 to reach the backend."
 
 const JOB_STATUS_LABEL: Record<JobInfo["status"], string> = {
-  queued: "排队中",
-  running: "运行中",
-  done: "已完成",
-  failed: "失败",
-  cancelled: "已取消",
+  queued: "Queued",
+  running: "Running",
+  done: "Done",
+  failed: "Failed",
+  cancelled: "Cancelled",
 }
 
 const JOB_STATUS_CLASS: Record<JobInfo["status"], string> = {
@@ -78,9 +78,9 @@ export function BuildStepCard({
       : null
   const houseBlocked =
     needsHouse && !missingHouse && houseStatus === null
-      ? "目标住户不在该世界的住户列表中。"
+      ? "The target household is not in this world's household list."
       : needsHouse && !missingHouse && houseStatus?.runnable === false
-        ? (houseStatus.blocked_reason ?? "该住户当前不可运行。")
+        ? (houseStatus.blocked_reason ?? "This household is not runnable right now.")
         : null
   const targetRunnable = needsHouse ? houseStatus?.runnable === true : runnable
 
@@ -95,18 +95,18 @@ export function BuildStepCard({
   const disabledReason = USE_MOCK
     ? MOCK_REASON
     : missingHouse
-      ? "请先选择目标住户。"
-      : (houseBlocked ?? blockedReason ?? "当前步骤不可运行。")
+      ? "Pick a target household first."
+      : (houseBlocked ?? blockedReason ?? "This step is not runnable right now.")
 
   const reasonLines = [blockedReason, houseBlocked === blockedReason ? null : houseBlocked].filter(
     (reason): reason is string => reason !== null,
   )
 
   const statusChip = done
-    ? { text: "已完成", className: "border-success/50 text-success" }
+    ? { text: "Done", className: "border-success/50 text-success" }
     : runnable
-      ? { text: "可运行", className: "border-brand/50 text-brand" }
-      : { text: "被阻塞", className: "border-danger/50 text-danger" }
+      ? { text: "Runnable", className: "border-brand/50 text-brand" }
+      : { text: "Blocked", className: "border-danger/50 text-danger" }
 
   return (
     <section
@@ -124,7 +124,7 @@ export function BuildStepCard({
         <Badge variant="outline" className={cn("label-latin", statusChip.className)}>
           {statusChip.text}
         </Badge>
-        <span className="label-micro">{needsHouse ? "住户级" : "世界级"}</span>
+        <span className="label-micro">{needsHouse ? "household-scoped" : "world-scoped"}</span>
         <Button
           variant="outline"
           size="xs"
@@ -133,12 +133,12 @@ export function BuildStepCard({
           disabled={!runnable}
           title={
             runnable
-              ? `运行「${BUILD_STEP_LABEL[step]}」`
-              : (blockedReason ?? houseBlocked ?? "当前步骤不可运行")
+              ? `Run "${BUILD_STEP_LABEL[step]}"`
+              : (blockedReason ?? houseBlocked ?? "This step is not runnable right now")
           }
         >
           <Play aria-hidden />
-          运行
+          Run
         </Button>
       </header>
 
@@ -152,7 +152,7 @@ export function BuildStepCard({
 
         {needsHouse ? (
           status === null || status.houses.length === 0 ? (
-            <p className="text-[10px] text-fg-subtle">暂无住户：先运行「类型」。</p>
+            <p className="text-[10px] text-fg-subtle">No households yet — run Types first.</p>
           ) : (
             <ul className="flex flex-wrap gap-1.5">
               {status.houses.map((item) => (
@@ -200,14 +200,17 @@ export function BuildStepCard({
           </span>
 
           {missingHouse ? (
-            <span className="text-[10px] text-fg-subtle">选择目标住户后可预览读写路径。</span>
+            <span className="text-[10px] text-fg-subtle">
+              Pick a target household to preview read/write paths.
+            </span>
           ) : previewQuery.isPending ? (
-            <span className="label-micro">预览载入中…</span>
+            <span className="label-micro">Loading preview…</span>
           ) : previewQuery.isError ? (
-            <span className="text-[10px] text-danger">预览读取失败</span>
+            <span className="text-[10px] text-danger">Failed to load preview</span>
           ) : (
             <span className="num text-[10px] text-fg-subtle">
-              读 {previewQuery.data?.reads.length ?? 0} · 写 {previewQuery.data?.writes.length ?? 0} · 覆盖{" "}
+              read {previewQuery.data?.reads.length ?? 0} · write{" "}
+              {previewQuery.data?.writes.length ?? 0} · overwrite{" "}
               <span
                 className={
                   (previewQuery.data?.overwrites.length ?? 0) > 0 ? "text-energy" : undefined
@@ -223,10 +226,10 @@ export function BuildStepCard({
               <Badge variant="outline" className={cn("label-latin", JOB_STATUS_CLASS[job.status])}>
                 {JOB_STATUS_LABEL[job.status]}
               </Badge>
-              <span className="num text-[10px] text-fg-subtle">最近 {job.id.slice(0, 8)}</span>
+              <span className="num text-[10px] text-fg-subtle">latest {job.id.slice(0, 8)}</span>
             </>
           ) : (
-            <span className="text-[10px] text-fg-subtle">尚无运行记录</span>
+            <span className="text-[10px] text-fg-subtle">No runs yet</span>
           )}
 
           {!focused ? (
@@ -235,7 +238,7 @@ export function BuildStepCard({
               onClick={onFocus}
               className="label-micro ml-auto transition-colors hover:text-fg"
             >
-              展开
+              Expand
             </button>
           ) : null}
         </div>
@@ -253,7 +256,7 @@ export function BuildStepCard({
             {step === "types" ? (
               <div className="flex items-center gap-2">
                 <Label htmlFor={`build-count-${step}`} className="label-micro">
-                  住户类型数量（1–5）
+                  Household type count (1–5)
                 </Label>
                 <Input
                   id={`build-count-${step}`}
@@ -281,7 +284,7 @@ export function BuildStepCard({
               <div className="flex min-h-0 flex-col gap-2">
                 {job.error !== null ? (
                   <p className="rounded-md border border-danger/40 px-3 py-2 text-[11px] text-danger">
-                    最近一次失败：{job.error}
+                    Last failure: {job.error}
                   </p>
                 ) : null}
                 <div className="flex h-80 min-h-0 flex-col overflow-hidden rounded-md border border-border bg-surface">
@@ -290,7 +293,8 @@ export function BuildStepCard({
               </div>
             ) : (
               <p className="text-[11px] text-fg-subtle">
-                该步骤还没有运行记录；提交后这里会显示每次 LLM 调用的提示词、响应与耗时。
+                No runs for this step yet; after submitting, each LLM call&apos;s prompt, response and
+                latency appear here.
               </p>
             )}
           </div>
