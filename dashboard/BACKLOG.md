@@ -92,7 +92,11 @@
   `StepInspector` 显示 `#1 HTTP 402 失败 697ms · 5.6k 字符` + 模型 `deepseek-v4-flash` + 完整提示词。
 - **修复**：`useJobLlmCalls` 在作业由「运行中」转「终态」时补拉一次（否则轮询停止后停在空结果 —— 已实测复现并修复）。
 - **验收门**：`npx tsc -b` / `npm run build` / `npm run lint` 均 exit 0；红线扫描 0 违规。
-- **待做（M5 余项）**：世界详情容器（构建 / 模拟 / 观看 三模式）、观看内 `小镇/网格/详情` 密度切换、`?mode=`/`?density=` 参数。
+- **M5 余项（已完成）**：世界工作区升级为**世界详情三模式（构建/模拟/观看）**；观看内**密度切换（小镇/网格/详情）**；
+  新增 `mode`/`density` store 字段 + `?mode=`/`?density=`；导航「构建」→「**世界**」（保留 `view=build` 键）；
+  抽出 `ObserveViews.tsx`（观看组件复用，标记不变）+ `WorldWorkspace.tsx` + `SegmentedControl.tsx`；
+  观看模式下才显形观察工具条（RunPicker/MetricStrip/TimeController）。浏览器实测：`?view=build&mode=watch&density=grid` 渲染正常、工具条显现；
+  `mode=build` 渲染 stepper 且工具条隐藏；URL 全参数 round-trip。
 
 ### M6 验收 — ✅ PASS（同端口 MCP，零 LLM 端到端；LLM 路径受 402 阻塞）
 
@@ -191,7 +195,7 @@
 | **M2** | 4 步构建接口 + job 化 + s4 去重 + 失败兜底 | 逐步骤跑完一户；重跑 s4 不重复 | ✅ **PASS（§12.0 口径）**；LLM 成功路径待余额恢复补验 |
 | **M3** | `LLM_TRACE_FILE` 接入 + `StepInspector` 通用化 | 每步可见 prompt / 原始响应 / 耗时 / 失败原因 | ✅ **PASS（本会话，真实 402 trace 端到端浏览器核对）** |
 | **M4** | 产物读写接口：`.bak.<ts>` + JSON 校验 + diff | 手改 `household.json` 后下一步骤使用改后内容 | ✅ **PASS（本会话，3→4 成员实测通过）** |
-| **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | 🟡 **部分完成**：构建工作区 + `?world=&step=` URL 复现**已交付并实测**；世界详情三模式 / 观看内密度切换待做 |
+| **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | ✅ **完成**：世界列表 + 构建工作区 + **世界详情三模式（构建/模拟/观看）** + 观看内密度切换（小镇/网格/详情）；`?view=build&world=&mode=&density=&step=` 全参数 URL 复现，已浏览器实测 |
 | **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ✅ **PASS（本会话，MCP 客户端端到端；LLM 需余额恢复）** |
 | **M7** | 设置面板 + 死配置清理 + 真重试 | 面板改 `MODEL` 后下一次调用生效 | ✅ **PASS（本会话，UI 保存→config 生效实测；298 测试仍绿）** |
 | **M8** | 开源化：git 清理、LICENSE、README、`.env.example`、编码修复 | 新克隆一条命令跑起来，不含 1.1 GB 数据与密钥 | ✅ **已交付**：MIT `LICENSE` + 根 `README.md` + `.env.example` + `import/README.md`；**`import/persona/*.csv` 已迁入 Git LFS 并推送**（含 `.gitattributes`）；`stats.csv` 经字节级核验**本就是合法 UTF-8**（§12.2 的「GBK 乱码」为控制台显示假象，未做无谓改动） |

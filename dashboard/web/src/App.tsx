@@ -1,27 +1,16 @@
-import { Fragment, Suspense, lazy, useEffect } from "react"
+import { Fragment, useEffect } from "react"
 
 import { Moon, Sun } from "lucide-react"
 
-import { ActivityTimeline } from "@/components/ActivityTimeline"
-import { EnergyChart } from "@/components/EnergyChart"
 import { GenerateWizard } from "@/components/GenerateWizard"
-import { HouseFloorplan } from "@/components/HouseFloorplan"
-import { HouseSwitcher } from "@/components/HouseSwitcher"
 import { JobsPanel } from "@/components/JobsPanel"
-import { MemberCards } from "@/components/MemberCards"
 import { MetricStrip } from "@/components/MetricStrip"
-import { MultiHouseGrid } from "@/components/MultiHouseGrid"
-import { PipelineDrawer } from "@/components/PipelineDrawer"
+import { ObserveDetail, ObserveGrid, ObserveScene } from "@/components/ObserveViews"
 import { RunPicker } from "@/components/RunPicker"
 import { SettingsPanel } from "@/components/SettingsPanel"
 import { SimulateForm } from "@/components/SimulateForm"
-const SceneView = lazy(() =>
-  import("@/scene/views/SceneView").then((module) => ({ default: module.SceneView })),
-)
-import { SceneFallback } from "@/scene/views/SceneFallback"
-import { SnapshotPanel } from "@/components/SnapshotPanel"
 import { TimeController } from "@/components/TimeController"
-import { WorldBuilder } from "@/components/WorldBuilder"
+import { WorldWorkspace } from "@/components/WorldWorkspace"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useBootstrapSelection } from "@/hooks/useBootstrapSelection"
@@ -42,7 +31,12 @@ const VIEWS: ReadonlyArray<{
   { key: "grid", label: "住户网格", hint: "每个方格是一户，点击查看成员", group: "observe" },
   { key: "detail", label: "住户详情", hint: "逐格查看每人每台电器", group: "observe" },
   { key: "generate", label: "生成", hint: "可控生成世界（消耗额度）", group: "control" },
-  { key: "build", label: "构建", hint: "手动分步构建世界：类型 → 人格 → 家庭 → 装配", group: "control" },
+  {
+    key: "build",
+    label: "世界",
+    hint: "世界工作台：构建 → 模拟 → 观看（观看内含小镇 / 网格 / 详情）",
+    group: "control",
+  },
   { key: "simulate", label: "模拟", hint: "逐户逐天推进模拟（消耗额度）", group: "control" },
   { key: "jobs", label: "任务", hint: "作业状态与实时日志", group: "control" },
   { key: "settings", label: "设置", hint: "LLM 运行参数（模型 / 温度 / 超时 / 重试）", group: "control" },
@@ -109,6 +103,7 @@ function ViewSwitcher({ view, onChange }: { view: ViewKey; onChange: (next: View
 export default function App() {
   const { theme, toggleTheme } = useTheme()
   const view = useTimeStore((state) => state.view)
+  const mode = useTimeStore((state) => state.mode)
   const setView = useTimeStore((state) => state.setView)
   const setHouse = useTimeStore((state) => state.setHouse)
   const setSelectedMember = useTimeStore((state) => state.setSelectedMember)
@@ -126,7 +121,8 @@ export default function App() {
   }, [])
 
   const replay = replayQuery.data
-  const showToolbar = view === "scene" || view === "grid" || view === "detail"
+  const showToolbar =
+    view === "scene" || view === "grid" || view === "detail" || (view === "build" && mode === "watch")
 
   const openHouse = (house: string) => {
     setHouse(house)
@@ -165,47 +161,17 @@ export default function App() {
 
       <main className="min-h-0 flex-1 overflow-hidden p-3">
         {view === "scene" ? (
-          <div className="h-full min-h-0">
-            <Suspense fallback={<SceneFallback />}>
-              <SceneView
-                onOpenPipeline={(memberId) => {
-                  setSelectedMember(memberId)
-                  setView("detail")
-                }}
-              />
-            </Suspense>
-          </div>
+          <ObserveScene
+            onOpenPipeline={(memberId) => {
+              setSelectedMember(memberId)
+              setView("detail")
+            }}
+          />
         ) : null}
 
-        {view === "grid" ? (
-          <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
-            <MultiHouseGrid onOpen={openHouse} />
-          </div>
-        ) : null}
+        {view === "grid" ? <ObserveGrid onOpen={openHouse} /> : null}
 
-        {view === "detail" ? (
-          <div className="grid h-full min-h-0 grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,300px)_minmax(0,1fr)_minmax(0,320px)]">
-            <div className="flex min-h-0 flex-col gap-3 overflow-y-auto">
-              <HouseFloorplan replay={replay} />
-              <EnergyChart replay={replay} />
-            </div>
-
-            <div className="flex min-h-0 flex-col gap-3">
-              <MemberCards replay={replay} />
-              <ActivityTimeline
-                replay={replay}
-                isPending={replayQuery.isPending}
-                error={replayQuery.error}
-              />
-            </div>
-
-            <div className="flex min-h-0 flex-col gap-3 overflow-y-auto lg:col-span-2 xl:col-span-1">
-              <SnapshotPanel />
-              <HouseSwitcher />
-              <PipelineDrawer />
-            </div>
-          </div>
-        ) : null}
+        {view === "detail" ? <ObserveDetail /> : null}
 
         {view === "generate" ? (
           <div className="mx-auto h-full w-full max-w-3xl overflow-y-auto rounded-lg border border-border bg-surface">
@@ -213,11 +179,7 @@ export default function App() {
           </div>
         ) : null}
 
-        {view === "build" ? (
-          <div className="flex h-full min-h-0 flex-col">
-            <WorldBuilder />
-          </div>
-        ) : null}
+        {view === "build" ? <WorldWorkspace /> : null}
 
         {view === "simulate" ? (
           <div className="mx-auto h-full w-full max-w-4xl overflow-y-auto rounded-lg border border-border bg-surface">

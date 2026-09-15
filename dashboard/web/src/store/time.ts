@@ -30,6 +30,31 @@ const VIEW_KEYS = new Set<string>([
 const readView = (value: string | null): ViewKey =>
   value !== null && VIEW_KEYS.has(value) ? (value as ViewKey) : DEFAULT_VIEW
 
+export type WorldMode = "build" | "simulate" | "watch"
+
+export const DEFAULT_WORLD_MODE: WorldMode = "build"
+
+const WORLD_MODES = new Set<string>(["build", "simulate", "watch"])
+
+const readWorldMode = (value: string | null): WorldMode =>
+  value !== null && WORLD_MODES.has(value) ? (value as WorldMode) : DEFAULT_WORLD_MODE
+
+export type WatchDensity = "town" | "grid" | "detail"
+
+export const DEFAULT_WATCH_DENSITY: WatchDensity = "town"
+
+const WATCH_DENSITIES = new Set<string>(["town", "grid", "detail"])
+
+const readWatchDensity = (value: string | null): WatchDensity =>
+  value !== null && WATCH_DENSITIES.has(value) ? (value as WatchDensity) : DEFAULT_WATCH_DENSITY
+
+const readInitialView = (params: URLSearchParams): ViewKey => {
+  const value = params.get("view")
+  if (value !== null) return readView(value)
+  if (params.has("mode") || params.has("density")) return "build"
+  return DEFAULT_VIEW
+}
+
 export type PlayMode = "continuous" | "autoStep"
 
 const SPEEDS: readonly number[] = SPEED_PRESETS
@@ -50,6 +75,8 @@ export interface TimeState {
   house: string
   policy: string
   view: ViewKey
+  mode: WorldMode
+  density: WatchDensity
   world: string
   step: string
   selectedMember: string | null
@@ -69,6 +96,8 @@ export interface TimeState {
   setHouse: (house: string) => void
   setPolicy: (policy: string) => void
   setView: (view: ViewKey) => void
+  setMode: (mode: WorldMode) => void
+  setDensity: (density: WatchDensity) => void
   setWorld: (world: string) => void
   setStep: (step: string) => void
   setSelectedMember: (member: string | null) => void
@@ -84,6 +113,8 @@ const readInitial = () => {
     house: "",
     policy: DEFAULT_POLICY,
     view: DEFAULT_VIEW,
+    mode: DEFAULT_WORLD_MODE,
+    density: DEFAULT_WATCH_DENSITY,
     world: "",
     step: "",
   }
@@ -96,7 +127,9 @@ const readInitial = () => {
     date: params.get("date") ?? "",
     house: params.get("house") ?? "",
     policy: params.get("policy") ?? DEFAULT_POLICY,
-    view: readView(params.get("view")),
+    view: readInitialView(params),
+    mode: readWorldMode(params.get("mode")),
+    density: readWatchDensity(params.get("density")),
     world: params.get("world") ?? "",
     step: params.get("step") ?? "",
   }
@@ -115,6 +148,8 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
   house: initial.house,
   policy: initial.policy,
   view: initial.view,
+  mode: initial.mode,
+  density: initial.density,
   world: initial.world,
   step: initial.step,
   selectedMember: null,
@@ -176,6 +211,10 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
   setPolicy: (policy) => set({ policy }),
 
   setView: (view) => set({ view }),
+
+  setMode: (mode) => set({ mode }),
+
+  setDensity: (density) => set({ density }),
 
   setWorld: (world) => set({ world }),
 

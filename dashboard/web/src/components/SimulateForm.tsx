@@ -68,11 +68,15 @@ const toLines = (text: string): string[] =>
     .map((line) => line.trim())
     .filter((line) => line.length > 0)
 
-export function SimulateForm() {
+interface SimulateFormProps {
+  lockedWorld?: string
+}
+
+export function SimulateForm({ lockedWorld = "" }: SimulateFormProps) {
   const worldsQuery = useQuery({ queryKey: ["worlds"], queryFn: listWorlds, staleTime: 300_000 })
   const runsQuery = useRuns()
 
-  const [world, setWorld] = useState("")
+  const [world, setWorld] = useState(lockedWorld)
   const [house, setHouse] = useState("__all__")
   const [member, setMember] = useState("")
   const [date, setDate] = useState(todayIso())
@@ -86,15 +90,19 @@ export function SimulateForm() {
   const [peerNudge, setPeerNudge] = useState(false)
   const [workers, setWorkers] = useState(4)
 
-  const metaQuery = useRunMeta(world)
+  const locked = lockedWorld.length > 0
+  const effectiveWorld = locked ? lockedWorld : world
+  const metaQuery = useRunMeta(effectiveWorld)
   const worldOptions = (worldsQuery.data ?? []).map((item) => item.world_id)
   const runOptions = (runsQuery.data ?? []).map((item) => item.run)
-  const options = [...new Set([...worldOptions, ...runOptions])].sort()
+  const options = [
+    ...new Set([...(locked ? [lockedWorld] : []), ...worldOptions, ...runOptions]),
+  ].sort()
   const houses = metaQuery.data?.houses ?? []
 
   const payload: JobRequest = {
     kind: "simulate",
-    world: world.length > 0 ? world : null,
+    world: effectiveWorld.length > 0 ? effectiveWorld : null,
     house: house === "__all__" ? null : house,
     member: member.trim().length > 0 ? member.trim() : null,
     date,
@@ -124,8 +132,17 @@ export function SimulateForm() {
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
         <div className="flex flex-col gap-1.5">
-          <Label className="label-micro">世界 / 运行</Label>
-          <Select value={world} onValueChange={(next) => { setWorld(next); setHouse("__all__") }}>
+          <Label className="label-micro">
+            世界 / 运行{locked ? "（锁定为当前世界）" : ""}
+          </Label>
+          <Select
+            value={effectiveWorld}
+            onValueChange={(next) => {
+              setWorld(next)
+              setHouse("__all__")
+            }}
+            disabled={locked}
+          >
             <SelectTrigger className={TRIGGER_CLASS} aria-label="选择世界">
               <SelectValue placeholder={worldsQuery.isPending ? "载入中…" : "选择世界"} />
             </SelectTrigger>
@@ -141,7 +158,7 @@ export function SimulateForm() {
 
         <div className="flex flex-col gap-1.5">
           <Label className="label-micro">住户</Label>
-          <Select value={house} onValueChange={setHouse} disabled={world.length === 0}>
+          <Select value={house} onValueChange={setHouse} disabled={effectiveWorld.length === 0}>
             <SelectTrigger className={TRIGGER_CLASS} aria-label="选择住户">
               <SelectValue placeholder="选择住户" />
             </SelectTrigger>
@@ -297,7 +314,7 @@ export function SimulateForm() {
 
       <JobSubmitBar
         payload={payload}
-        disabled={USE_MOCK || world.length === 0}
+        disabled={USE_MOCK || effectiveWorld.length === 0}
         disabledReason={
           USE_MOCK
             ? "当前是 mock 模式（VITE_USE_MOCK=1），不会真正提交。请用 VITE_USE_MOCK=0 启动前端以连接后端。"

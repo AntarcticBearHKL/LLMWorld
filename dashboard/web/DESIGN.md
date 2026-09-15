@@ -141,6 +141,7 @@
 | `Panel` | `components/primitives/Panel.tsx` | 研究台统一面板：`title` / `hint` / `actions` / `children`，头部分隔线 1px |
 | `MetricCell` | `components/primitives/MetricCell.tsx` | 微标签 + 等宽数值 + 单位，固定 `min-w` 防跳动 |
 | `StatusDot` | `components/primitives/StatusDot.tsx` | 8px 圆点，`on`=`--energy`，`off`=`--fg-subtle` |
+| `SegmentedControl` | `components/primitives/SegmentedControl.tsx` | 分段开关：`bg-surface-2` 底座 + 选中 `bg-brand-soft text-brand`，`aria-pressed`；用于世界工作区模式 / 观看密度 |
 | `TimeReadout` | `components/primitives/TimeReadout.tsx` | 等宽 `HH:MM`，`tabular-nums` |
 
 **活动分类推导**（`lib/activity.ts`）：后端 `ActivitySegment` 无 `category` 字段，前端按关键词映射到 6 个分类，映射表集中在一处，未命中 → `leisure`。这是展示层推导，**不新增任何 API 字段**。
@@ -415,4 +416,19 @@ HUD 显示 `采样无效` 表示该次采样被判为节流（帧间隔失速率
 验证：`tsc -b` 0 / `npm run build` 0；浏览器实跑连点「下一格」三步（600→610→620→630），**无 console 报错**，场景数据一致（10 房间 / 40 电器 / 3 台在用电 / 325 W）。
 
 **仍未实测 FPS**：本环境 rAF 被节流（§11.6），数字取不到；以上为结构性推导，不是帧率对比。
+
+### 12.7 世界工作台（M5 收尾）
+
+| 项 | 交付 | 说明 |
+| --- | --- | --- |
+| 导航 | 「构建」→「世界」 | `view` 键仍为 `"build"`，既有 `?view=build` 链接继续有效 |
+| 世界工作区 | `components/WorldWorkspace.tsx` | 模式 `构建 / 模拟 / 观看`；store `mode`（`"build" \| "simulate" \| "watch"`，默认 `build`），URL `?mode=` |
+| 观看密度 | `SegmentedControl` + store `density`（`"town" \| "grid" \| "detail"`，默认 `town`），URL `?density=` | 分别渲染 `SceneView`（懒载）/ `MultiHouseGrid` / 详情三栏 |
+| 共享观察布局 | `components/ObserveViews.tsx` | `ObserveScene` / `ObserveGrid` / `ObserveDetail` 同时服务独立视图（scene/grid/detail）与观看模式，无重复标记 |
+| 模拟预填 | `SimulateForm` 新增 `lockedWorld` | 进入模拟模式时世界字段预填并锁定为当前 `world`；住户 / 日期 / 政策照旧可编辑 |
+| 工具栏 | `RunPicker` + `MetricStrip` + `TimeController` | 观看模式下随观察视图显示（`view=build && mode=watch`）；构建 / 模拟模式隐藏 |
+
+- URL 复现：`?view=build&world=<W>&mode=<m>&density=<d>&step=<S>`；仅带 `mode`/`density` 而无 `view` 的链接默认进入世界工作区。
+- 独立视图（scene / grid / detail / generate / simulate / jobs / settings）原样保留，两条路径共存。
+- 验收：`npx tsc -b` / `npm run build` / `npm run lint` 均 exit 0。
 
