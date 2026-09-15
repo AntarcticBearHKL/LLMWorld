@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type CSSProperties } from "react"
 
 import { Clock3, Loader2, Plus, RefreshCw, Trash2 } from "lucide-react"
 
@@ -15,25 +15,34 @@ import { cn } from "@/lib/utils"
 import { randomWorldId } from "@/lib/world"
 import { useTimeStore } from "@/store/time"
 
-const FIELD_CLASS =
-  "h-8 rounded-md border-border-strong bg-surface-2 px-2.5 text-[12px] text-fg focus-visible:border-brand"
+const FIELD_CLASS = "h-8 px-2.5 text-[12px]"
 
 function WorldCard({ info, onOpen }: { info: WorldInfo; onOpen: () => void }) {
   const remove = useDeleteWorld()
   const [pendingDelete, setPendingDelete] = useState(false)
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface transition-colors hover:border-border-strong">
-      <button type="button" onClick={onOpen} className="flex min-w-0 flex-col gap-2 px-4 py-3 text-left">
+    <article className="card card-lift flex h-full flex-col overflow-hidden hover:-translate-y-0.5 hover:border-border-strong hover:shadow-2">
+      <button
+        type="button"
+        onClick={onOpen}
+        className="flex min-w-0 flex-col gap-2.5 px-4 py-3.5 text-left"
+      >
         <span className="flex min-w-0 items-center gap-2">
-          <span className="num truncate text-[12px] font-medium text-fg">{info.world_id}</span>
+          <span className="num truncate text-[14px] font-semibold tracking-[-0.01em] text-fg">
+            {info.world_id}
+          </span>
           <WorldBadge frozen={info.frozen} />
         </span>
-        <span className="label-micro">
-          {countLabel(info.districts.length, "block")} ·{" "}
-          {countLabel(info.houses.length, "household")} ·{" "}
-          {countLabel(info.spacetimes.length, "spacetime")}
+
+        <span className="chip max-w-full">
+          <span className="num truncate text-[10px]">
+            {countLabel(info.districts.length, "block")} ·{" "}
+            {countLabel(info.houses.length, "household")} ·{" "}
+            {countLabel(info.spacetimes.length, "spacetime")}
+          </span>
         </span>
+
         <span className="label-micro flex items-center gap-1.5">
           <Clock3 className="size-3" aria-hidden />
           Last activity {formatMtime(info.latest_mtime)}
@@ -54,14 +63,14 @@ function WorldCard({ info, onOpen }: { info: WorldInfo; onOpen: () => void }) {
                 }
                 disabled={remove.isPending}
                 title="Moves to output/_trash/ (recoverable)"
-                className="label-micro rounded-sm border border-danger/50 px-1.5 py-0.5 text-danger disabled:opacity-50"
+                className="label-micro rounded-full border border-danger/50 px-2 py-0.5 text-danger transition-colors hover:bg-danger/10 disabled:opacity-50"
               >
                 Confirm delete
               </button>
               <button
                 type="button"
                 onClick={() => setPendingDelete(false)}
-                className="label-micro rounded-sm border border-border-strong px-1.5 py-0.5 text-fg-muted"
+                className="label-micro rounded-full border border-border-strong px-2 py-0.5 text-fg-muted transition-colors hover:bg-item-hover"
               >
                 Cancel
               </button>
@@ -73,7 +82,7 @@ function WorldCard({ info, onOpen }: { info: WorldInfo; onOpen: () => void }) {
             <Button
               variant="ghost"
               size="xs"
-              className="ml-auto text-fg-muted hover:text-danger"
+              className="ml-auto hover:text-danger"
               title="Moves to output/_trash/ (recoverable)"
               onClick={() => setPendingDelete(true)}
             >
@@ -118,17 +127,17 @@ export function WorldsList() {
   }
 
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col gap-3">
-      <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border bg-surface">
-        <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 border-b border-border px-4 py-2.5">
-          <span className="text-[13px] font-semibold text-fg">
-            Worlds <span className="num text-[11px] text-fg-subtle">{worlds.length}</span>
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-6xl flex-col gap-3">
+      <section className="chrome flex shrink-0 flex-col gap-3 px-4 py-3.5">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
+            Worlds <span className="num text-[12px] font-medium text-fg-muted">{worlds.length}</span>
           </span>
-          <span className="label-micro">
+          <span className="label-micro text-fg-muted">
             Households are a world&apos;s fixed physics — spacetimes are runs that read them.
           </span>
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon-sm"
             className="ml-auto"
             aria-label="Refresh worlds"
@@ -136,11 +145,11 @@ export function WorldsList() {
           >
             <RefreshCw />
           </Button>
-        </header>
+        </div>
 
-        <div className="flex shrink-0 flex-wrap items-end gap-2 border-b border-border px-3 py-2.5">
+        <div className="flex flex-wrap items-end gap-2">
           <div className="flex min-w-[200px] flex-1 flex-col gap-1">
-            <Label htmlFor="new-world-id" className="label-micro">
+            <Label htmlFor="new-world-id" className="label-micro text-fg-muted">
               World ID (blank = auto-generate)
             </Label>
             <Input
@@ -162,35 +171,42 @@ export function WorldsList() {
             <p className="w-full text-[10px] text-danger">Create failed: {errorMessage(create.error)}</p>
           ) : null}
         </div>
-
-        <div className="min-h-0 flex-1 overflow-y-auto p-3">
-          {worldsQuery.isPending ? (
-            <p className="px-1 py-6 text-[11px] text-fg-subtle">Loading worlds…</p>
-          ) : worldsQuery.isError ? (
-            <div className="flex flex-col items-start gap-2 px-1 py-6">
-              <p className="text-[11px] text-danger">
-                Failed to load worlds: {errorMessage(worldsQuery.error)}
-              </p>
-              <Button variant="outline" size="xs" onClick={() => void worldsQuery.refetch()}>
-                Retry
-              </Button>
-            </div>
-          ) : worlds.length === 0 ? (
-            <p className="px-1 py-6 text-[11px] text-fg-subtle">
-              No worlds yet. Enter a world ID (or leave it blank) and click New blank world to create
-              an empty shell — no LLM calls.
-            </p>
-          ) : (
-            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              {worlds.map((info) => (
-                <li key={info.world_id} className="min-w-0">
-                  <WorldCard info={info} onOpen={() => openWorld(info.world_id)} />
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
       </section>
+
+      <div className="min-h-0 flex-1 overflow-y-auto pb-1">
+        {worldsQuery.isPending ? (
+          <p className="px-1 py-6 text-[11px] text-fg-subtle">Loading worlds…</p>
+        ) : worldsQuery.isError ? (
+          <div className="card flex flex-col items-start gap-2 px-4 py-6">
+            <p className="text-[11px] text-danger">
+              Failed to load worlds: {errorMessage(worldsQuery.error)}
+            </p>
+            <Button variant="outline" size="xs" onClick={() => void worldsQuery.refetch()}>
+              Retry
+            </Button>
+          </div>
+        ) : worlds.length === 0 ? (
+          <div className="card px-4 py-8 text-center">
+            <p className="text-[13px] font-semibold text-fg">No worlds yet</p>
+            <p className="mx-auto mt-1 max-w-[420px] text-[11px] leading-relaxed text-fg-muted">
+              Enter a world ID (or leave it blank) and click New blank world to create an empty shell
+              — no LLM calls.
+            </p>
+          </div>
+        ) : (
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {worlds.map((info, index) => (
+              <li
+                key={info.world_id}
+                className="enter min-w-0"
+                style={{ "--enter-index": index } as CSSProperties}
+              >
+                <WorldCard info={info} onOpen={() => openWorld(info.world_id)} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }

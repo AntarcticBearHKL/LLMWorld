@@ -37,7 +37,7 @@ interface ObserveGridProps {
 
 export function ObserveGrid({ onOpen, houses }: ObserveGridProps) {
   return (
-    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
+    <div className="card flex h-full min-h-0 flex-col overflow-hidden">
       <MultiHouseGrid onOpen={onOpen} houses={houses} />
     </div>
   )

@@ -77,7 +77,7 @@ export function PerfHud({ autoStart = false, onDegradeChange }: PerfHudProps) {
   }
 
   return (
-    <div className="flex items-center gap-2 rounded-md border border-border bg-surface-2 px-2 py-1">
+    <div className="flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1">
       <span className="label-micro">Perf</span>
       <span className="num text-[10px] text-fg">
         {report === null ? "Not sampled" : `${report.fps} fps`}

@@ -63,7 +63,7 @@ const phaseOf = (minute: number): string =>
 
 function Key({ children }: { children: string }) {
   return (
-    <kbd className="num rounded-sm border border-border bg-surface-2 px-1 py-px text-[10px] text-fg-muted">
+    <kbd className="num rounded-md border border-border-strong bg-surface-2 px-1.5 py-px text-[10px] text-fg-muted">
       {children}
     </kbd>
   )
@@ -132,7 +132,7 @@ export function TimeController() {
               size="icon"
               onClick={togglePlay}
               aria-label={isPlaying ? "Pause" : "Play"}
-              className="size-9 shadow-[inset_0_1px_0_rgb(255_255_255/0.08)]"
+              className="size-9"
             >
               {isPlaying ? <Pause className="size-4" /> : <Play className="size-4" />}
             </Button>
@@ -155,8 +155,8 @@ export function TimeController() {
           {formatHHMM(minute)}
         </span>
         <span className="flex flex-col leading-tight">
-          <span className="label-micro">{phaseOf(minute)}</span>
-          <span className="num text-[10px] text-fg-subtle">
+          <span className="label-micro text-fg-muted">{phaseOf(minute)}</span>
+          <span className="num text-[10px] text-fg-muted">
             Step {currentStep}/{totalSteps}
           </span>
         </span>
@@ -178,7 +178,7 @@ export function TimeController() {
             {STEP_PRESETS.map((preset) => (
               <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
                 {preset} min / step
-                <span className="ml-2 text-[10px] text-fg-subtle">
+                <span className="ml-2 text-[10px] text-fg-muted">
                   full day: {stepCount(preset)} steps
                 </span>
               </DropdownMenuRadioItem>
@@ -203,14 +203,14 @@ export function TimeController() {
           aria-label="Day timeline"
           className="grow"
         />
-        <span className="num shrink-0 text-[10px] text-fg-subtle">
+        <span className="num shrink-0 text-[10px] text-fg-muted">
           {progress.toFixed(1)}% · {formatMinutesAsDuration(remaining)} left
         </span>
       </div>
 
       <div className="flex items-center gap-2">
         <div
-          className="flex items-center gap-0.5 rounded-md border border-border bg-surface-2 p-0.5"
+          className="flex items-center gap-0.5 rounded-full border border-border bg-surface-2 p-0.5"
           role="group"
           aria-label="Playback mode"
         >
@@ -221,10 +221,10 @@ export function TimeController() {
               onClick={() => setPlayMode(item.value)}
               aria-pressed={playMode === item.value}
               className={cn(
-                "rounded-sm px-2.5 py-1 text-[12px] font-medium transition-colors",
+                "rounded-full px-3 py-1 text-[12px] font-semibold transition-colors",
                 playMode === item.value
-                  ? "bg-brand-soft text-brand"
-                  : "text-fg-muted hover:bg-surface-3 hover:text-fg",
+                  ? "bg-brand text-brand-fg shadow-1"
+                  : "text-fg-muted hover:bg-item-hover hover:text-fg",
               )}
             >
               {item.label}
@@ -232,7 +232,7 @@ export function TimeController() {
           ))}
         </div>
         {playMode === "autoStep" ? (
-          <span className="num text-[10px] text-fg-subtle">
+          <span className="num text-[10px] text-fg-muted">
             Step every {formatDwell(dwellMsFor(speed))}
           </span>
         ) : null}
@@ -255,7 +255,7 @@ export function TimeController() {
               {SPEED_PRESETS.map((preset) => (
                 <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
                   ×{preset}
-                  <span className="ml-2 text-[10px] text-fg-subtle">
+                  <span className="ml-2 text-[10px] text-fg-muted">
                     {speedHint(preset, playMode)}
                   </span>
                 </DropdownMenuRadioItem>
@@ -267,12 +267,12 @@ export function TimeController() {
 
       <div className="hidden items-center gap-1.5 2xl:flex">
         <Key>Space</Key>
-        <span className="text-[10px] text-fg-subtle">play</span>
+        <span className="text-[10px] text-fg-muted">play</span>
         <Key>←</Key>
         <Key>→</Key>
-        <span className="text-[10px] text-fg-subtle">±1 step</span>
+        <span className="text-[10px] text-fg-muted">±1 step</span>
         <Key>Shift</Key>
-        <span className="text-[10px] text-fg-subtle">±60 min</span>
+        <span className="text-[10px] text-fg-muted">±60 min</span>
         <Key>Home</Key>
         <Key>End</Key>
       </div>

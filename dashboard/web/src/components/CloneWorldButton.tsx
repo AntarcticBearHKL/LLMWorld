@@ -9,8 +9,7 @@ import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 import { randomWorldId } from "@/lib/world"
 
-const FIELD_CLASS =
-  "h-7 w-36 rounded-md border-border-strong bg-surface-2 px-2 text-[11px] text-fg focus-visible:border-brand"
+const FIELD_CLASS = "h-7 w-36 px-2 text-[11px]"
 
 interface CloneWorldButtonProps {
   world: string

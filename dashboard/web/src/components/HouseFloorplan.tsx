@@ -75,8 +75,8 @@ export function HouseFloorplan({ replay, className }: HouseFloorplanProps) {
                 <div
                   key={room}
                   className={cn(
-                    "flex min-h-[68px] flex-col justify-between rounded-md border px-2.5 py-2 transition-colors",
-                    occupied ? "border-brand/45 bg-brand-soft" : "border-border-strong bg-surface-2",
+                    "flex min-h-[68px] flex-col justify-between rounded-lg border px-2.5 py-2 transition-colors",
+                    occupied ? "border-brand-ring bg-brand-soft" : "border-border bg-surface-2",
                   )}
                 >
                   <div className="flex items-baseline justify-between gap-1.5">

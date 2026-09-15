@@ -26,8 +26,7 @@ import { cn } from "@/lib/utils"
 import { randomWorldId } from "@/lib/world"
 import { useTimeStore } from "@/store/time"
 
-const FIELD_CLASS =
-  "h-8 rounded-md border-border-strong bg-surface-2 px-2.5 text-[12px] text-fg focus-visible:border-brand"
+const FIELD_CLASS = "h-8 px-2.5 text-[12px]"
 
 function WorldList({ selected, onSelect }: { selected: string; onSelect: (world: string) => void }) {
   const worldsQuery = useWorlds()
@@ -62,9 +61,9 @@ function WorldList({ selected, onSelect }: { selected: string; onSelect: (world:
 
   return (
     <>
-      <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-2.5">
-        <span className="text-[13px] font-semibold text-fg">
-          Worlds <span className="num text-[11px] text-fg-subtle">{worlds.length}</span>
+      <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
+        <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">
+          Worlds <span className="num text-[11px] font-medium text-fg-subtle">{worlds.length}</span>
         </span>
         <Button
           variant="ghost"
@@ -126,11 +125,11 @@ function WorldList({ selected, onSelect }: { selected: string; onSelect: (world:
                     onClick={() => onSelect(world.world_id)}
                     aria-current={active ? "true" : undefined}
                     className={cn(
-                      "flex min-w-0 flex-1 flex-col gap-0.5 rounded-sm px-3 py-2 text-left transition-colors",
-                      active ? "bg-brand-soft" : "hover:bg-surface-2",
+                      "flex min-w-0 flex-1 flex-col gap-0.5 rounded-lg px-3 py-2 text-left transition-colors",
+                      active ? "bg-item-selected" : "hover:bg-item-hover",
                     )}
                   >
-                    <span className={cn("num truncate text-[12px]", active ? "text-brand" : "text-fg")}>
+                    <span className={cn("num truncate text-[12px]", active ? "text-fg" : "text-fg-muted")}>
                       {world.world_id}
                     </span>
                     <span className="label-micro">
@@ -147,14 +146,14 @@ function WorldList({ selected, onSelect }: { selected: string; onSelect: (world:
                         onClick={() => onDelete(world.world_id)}
                         disabled={remove.isPending}
                         title="Moves to output/_trash/ (recoverable)"
-                        className="label-micro rounded-sm border border-danger/50 px-1.5 py-0.5 text-danger disabled:opacity-50"
+                        className="label-micro rounded-full border border-danger/50 px-2 py-0.5 text-danger transition-colors hover:bg-danger/10 disabled:opacity-50"
                       >
                         Confirm delete
                       </button>
                       <button
                         type="button"
                         onClick={() => setPendingDelete(null)}
-                        className="label-micro rounded-sm border border-border-strong px-1.5 py-0.5 text-fg-muted"
+                        className="label-micro rounded-full border border-border-strong px-2 py-0.5 text-fg-muted transition-colors hover:bg-item-hover"
                       >
                         Cancel
                       </button>
@@ -164,7 +163,7 @@ function WorldList({ selected, onSelect }: { selected: string; onSelect: (world:
                       type="button"
                       onClick={() => setPendingDelete(world.world_id)}
                       title="Moves to output/_trash/ (recoverable)"
-                      className="label-micro mx-1 inline-flex shrink-0 items-center gap-1 rounded-sm border border-border-strong px-1.5 py-0.5 transition-colors hover:border-danger/60 hover:text-danger"
+                      className="label-micro mx-1 inline-flex shrink-0 items-center gap-1 rounded-full border border-border-strong px-2 py-0.5 transition-colors hover:border-danger/60 hover:text-danger"
                     >
                       <Trash2 className="size-2.5" aria-hidden />
                       Delete
@@ -248,14 +247,14 @@ export function WorldBuilder() {
 
   return (
     <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 p-3 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
-      <section className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
+      <section className="card flex min-h-0 flex-col overflow-hidden">
         <WorldList selected={world} onSelect={setWorld} />
       </section>
 
-      <section className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
-        <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-4 py-2.5">
+      <section className="card flex min-h-0 flex-col overflow-hidden">
+        <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-4 py-3">
           <Hammer className="size-4 shrink-0 text-brand" aria-hidden />
-          <span className="text-[13px] font-semibold text-fg">Build</span>
+          <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">Build</span>
           {world.length > 0 ? <span className="num text-[11px] text-fg-muted">{world}</span> : null}
           {buildState !== undefined ? (
             <span className="label-micro">
@@ -312,10 +311,10 @@ export function WorldBuilder() {
                       aria-pressed={house === item}
                       onClick={() => setHouse(item)}
                       className={cn(
-                        "num rounded-sm border px-2 py-0.5 text-[10px] transition-colors",
+                        "num text-[10px] transition-colors",
                         house === item
-                          ? "border-brand/50 bg-brand-soft text-brand"
-                          : "border-border-strong text-fg-muted hover:text-fg",
+                          ? "chip chip-active"
+                          : "chip hover:border-border-strong hover:bg-item-hover hover:text-fg",
                       )}
                     >
                       {item}

@@ -7,12 +7,12 @@ const PANEL_ROWS = 4
 
 export function SceneFallback() {
   return (
-    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
-      <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3 py-2">
-        <span className="text-[13px] font-semibold text-fg">Scene</span>
-        <span className="flex items-center gap-1.5 rounded-md border border-border bg-surface-2 px-2 py-1">
+    <div className="card flex h-full min-h-0 flex-col overflow-hidden">
+      <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
+        <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">Scene</span>
+        <span className="chip">
           <Loader2 className="size-3 animate-spin text-brand" aria-hidden />
-          <span className="label-micro">Loading the scene canvas</span>
+          <span className="label-micro text-fg-muted">Loading the scene canvas</span>
         </span>
         <span className="label-micro ml-auto">
           react-konva (~350 kB) downloads once, then it opens instantly
@@ -25,7 +25,7 @@ export function SceneFallback() {
             <div
               key={index}
               className={cn(
-                "animate-pulse rounded-md border border-border bg-surface-2",
+                "animate-pulse rounded-xl border border-border bg-surface-2",
                 (index === 0 || index === 5) && "col-span-2 row-span-2",
               )}
               style={{ animationDelay: `${index * 60}ms` }}
@@ -36,7 +36,7 @@ export function SceneFallback() {
           {Array.from({ length: PANEL_ROWS }).map((_unused, index) => (
             <div
               key={index}
-              className="animate-pulse rounded-md border border-border bg-surface-2"
+              className="animate-pulse rounded-xl border border-border bg-surface-2"
               style={{ height: 64, animationDelay: `${index * 60}ms` }}
             />
           ))}

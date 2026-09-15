@@ -28,7 +28,7 @@ export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobS
   const canSubmit = !disabled && estimated && confirmed && !create.isPending
 
   return (
-    <div className="flex flex-col gap-3 rounded-md border border-border bg-surface-2 px-4 py-3">
+    <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface-2 px-4 py-3.5">
       <div className="flex flex-wrap items-center gap-2">
         <Button
           variant="outline"

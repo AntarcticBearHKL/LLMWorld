@@ -75,8 +75,7 @@ const FIELDS: readonly FieldSpec[] = [
   },
 ]
 
-const FIELD_CLASS =
-  "h-8 rounded-md border-border-strong bg-surface-2 px-2.5 text-[12px] text-fg focus-visible:border-brand"
+const FIELD_CLASS = "h-8 px-2.5 text-[12px]"
 
 type FormValues = Record<SettingsKey, string>
 
@@ -198,11 +197,11 @@ export function SettingsPanel() {
   const canSave = draft.changed > 0 && draft.invalid === 0 && !update.isPending
 
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <header className="flex items-start gap-2">
+    <div className="flex flex-col gap-5 p-5">
+      <header className="flex items-start gap-2.5">
         <Settings2 className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
         <div className="flex flex-col gap-1">
-          <h2 className="text-[13px] font-semibold text-fg">LLM runtime settings</h2>
+          <h2 className="text-[16px] font-bold tracking-[-0.01em] text-fg">LLM runtime settings</h2>
           <p className="text-[11px] text-fg-muted">
             Saving writes the backend settings file and injects the values into the next job as{" "}
             <span className="num">LLMWORLD_*</span> environment variables, so it only affects jobs
@@ -240,7 +239,7 @@ export function SettingsPanel() {
         })}
       </div>
 
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-3">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-4">
         <Button size="sm" onClick={onSave} disabled={!canSave}>
           {update.isPending ? <Loader2 className="animate-spin" /> : <Save />}
           Save

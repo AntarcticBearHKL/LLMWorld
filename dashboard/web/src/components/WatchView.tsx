@@ -23,8 +23,7 @@ import { countLabel } from "@/lib/format"
 import { formatKwh, formatWatts } from "@/lib/time"
 import { useTimeStore } from "@/store/time"
 
-const FIELD_CLASS =
-  "h-8 w-[142px] rounded-md border-border-strong bg-surface-2 px-2.5 text-[12px] font-medium text-fg hover:bg-surface-3 focus-visible:border-brand"
+const FIELD_CLASS = "h-8 w-[142px] px-2.5 text-[12px] font-medium"
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
@@ -43,9 +42,9 @@ function Notice({
 }) {
   return (
     <Frame>
-      <section className="flex flex-1 flex-col items-start justify-center gap-2 rounded-lg border border-border bg-surface p-6">
-        <h2 className="text-[13px] font-semibold text-fg">{title}</h2>
-        <p className="max-w-[520px] text-[11px] leading-relaxed text-fg-muted">{body}</p>
+      <section className="card flex flex-1 flex-col items-start justify-center gap-2 p-8">
+        <h2 className="text-[16px] font-bold tracking-[-0.01em] text-fg">{title}</h2>
+        <p className="max-w-[520px] text-[12px] leading-relaxed text-fg-muted">{body}</p>
         {action}
       </section>
     </Frame>
@@ -72,7 +71,7 @@ function Crumb({
     <button
       type="button"
       onClick={onClick}
-      className="num truncate rounded-sm px-1 text-[12px] text-fg-muted transition-colors hover:bg-surface-3 hover:text-fg"
+      className="num truncate rounded-full px-2 py-0.5 text-[12px] text-fg-muted transition-colors hover:bg-item-hover hover:text-fg"
     >
       {label}
     </button>
@@ -84,13 +83,11 @@ function BlockChip({ block, onOpen }: { block: BlockSummary; onOpen: () => void 
     <button
       type="button"
       onClick={onOpen}
-      className="flex min-w-[186px] shrink-0 flex-col gap-1 rounded-md border border-border-strong bg-surface-2 px-3 py-2 text-left transition-colors hover:border-brand/45 hover:bg-surface-3"
+      className="card-lift flex min-w-[186px] shrink-0 items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-2 text-left hover:border-border-strong hover:bg-surface-2 hover:shadow-1"
     >
-      <span className="num flex items-center gap-1.5 text-[12px] font-semibold text-fg">
-        <MapPin className="size-3 shrink-0 text-fg-subtle" aria-hidden />
-        {block.postcode}
-      </span>
-      <span className="label-micro">
+      <MapPin className="size-3.5 shrink-0 text-fg-subtle" aria-hidden />
+      <span className="num shrink-0 text-[12px] font-semibold text-fg">{block.postcode}</span>
+      <span className="label-micro truncate">
         {countLabel(block.house_count, "household")} · {formatKwh(block.total_kwh)} kWh · peak{" "}
         {formatWatts(block.peak_watts)}
       </span>
@@ -100,14 +97,14 @@ function BlockChip({ block, onOpen }: { block: BlockSummary; onOpen: () => void 
 
 function BlockStrip({ blocks, onOpen }: { blocks: BlockSummary[]; onOpen: (block: string) => void }) {
   return (
-    <section className="shrink-0 rounded-lg border border-border bg-surface px-3 py-2.5">
+    <section className="card shrink-0 px-3.5 py-3">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span className="text-[12px] font-semibold text-fg">
-          Blocks <span className="num text-[11px] text-fg-subtle">{blocks.length}</span>
+        <span className="text-[13px] font-semibold text-fg">
+          Blocks <span className="num text-[11px] font-medium text-fg-subtle">{blocks.length}</span>
         </span>
         <span className="label-micro">Select a block to drill into its households</span>
       </div>
-      <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
+      <div className="mt-2.5 flex gap-2 overflow-x-auto pb-1">
         {blocks.map((item) => (
           <BlockChip key={item.postcode} block={item} onOpen={() => onOpen(item.postcode)} />
         ))}
@@ -220,7 +217,7 @@ export function WatchView() {
 
   return (
     <div className="flex h-full min-h-0 flex-col gap-3">
-      <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-border bg-surface px-3 py-2">
+      <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-2.5">
         {backToWorldDetail}
         <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
 
@@ -229,26 +226,26 @@ export function WatchView() {
           className="flex min-w-0 flex-wrap items-center gap-0.5"
         >
           {crumb(`World ${world}`, () => clearTo("world"), layer === 1)}
-          <ChevronRight className="size-3 shrink-0 text-fg-subtle" aria-hidden />
+          <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
           {crumb(run, () => clearTo("world"), layer === 1)}
-          <ChevronRight className="size-3 shrink-0 text-fg-subtle" aria-hidden />
+          <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
           {crumb(date, () => clearTo("world"), layer === 1)}
           {block.length > 0 ? (
             <>
-              <ChevronRight className="size-3 shrink-0 text-fg-subtle" aria-hidden />
+              <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
               {crumb(block, () => clearTo("block"), layer === 2)}
             </>
           ) : null}
           {house.length > 0 ? (
             <>
-              <ChevronRight className="size-3 shrink-0 text-fg-subtle" aria-hidden />
+              <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
               {crumb(house, () => clearTo("house"), layer === 3)}
             </>
           ) : null}
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
-          <span className="label-micro flex items-center gap-1.5">
+          <span className="label-micro flex items-center gap-1.5 text-fg-muted">
             <CalendarDays className="size-3" aria-hidden />
             Day
           </span>
@@ -268,9 +265,7 @@ export function WatchView() {
               ))}
             </SelectContent>
           </Select>
-          <span className="label-latin rounded-sm border border-border-strong px-1.5 py-0.5">
-            {policy}
-          </span>
+          <span className="label-latin chip text-fg-muted">{policy}</span>
         </div>
       </header>
 
@@ -289,7 +284,7 @@ export function WatchView() {
             {blocksQuery.isPending ? (
               <p className="shrink-0 px-1 text-[11px] text-fg-subtle">Loading blocks…</p>
             ) : blocksQuery.isError ? (
-              <section className="flex shrink-0 flex-wrap items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
+              <section className="card flex shrink-0 flex-wrap items-center gap-2 px-3.5 py-2.5">
                 <p className="text-[11px] text-danger">
                   Failed to load blocks: {errorMessage(blocksQuery.error)}
                 </p>
@@ -298,7 +293,7 @@ export function WatchView() {
                 </Button>
               </section>
             ) : (blocksQuery.data?.blocks.length ?? 0) === 0 ? (
-              <section className="shrink-0 rounded-lg border border-border bg-surface px-3 py-2">
+              <section className="card shrink-0 px-3.5 py-2.5">
                 <p className="text-[11px] text-fg-subtle">
                   No blocks with households for {date}.
                 </p>
@@ -347,17 +342,17 @@ export function WatchView() {
               }
               return (
                 <Frame>
-                  <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-border bg-surface px-3 py-2">
+                  <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 px-3.5 py-2.5">
                     <Button variant="ghost" size="xs" onClick={() => clearTo("world")}>
                       <ArrowLeft />
                       All blocks
                     </Button>
-                    <span className="num text-[12px] font-semibold text-fg">{info.postcode}</span>
-                    <span className="label-micro">
+                    <span className="num text-[13px] font-semibold text-fg">{info.postcode}</span>
+                    <span className="label-micro text-fg-muted">
                       {countLabel(info.house_count, "household")} · {formatKwh(info.total_kwh)} kWh ·
                       peak {formatWatts(info.peak_watts)}
                     </span>
-                    <span className="label-latin ml-auto">Select a household to open its day</span>
+                    <span className="label-latin ml-auto text-fg-muted">Select a household to open its day</span>
                   </header>
                   <div className="min-h-0 flex-1">
                     <ObserveGrid
@@ -392,12 +387,12 @@ export function WatchView() {
             />
           ) : (
             <Frame>
-              <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-border bg-surface px-3 py-2">
-                <span className="flex items-center gap-1.5 text-[12px] font-semibold text-fg">
+              <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-2.5">
+                <span className="flex items-center gap-1.5 text-[13px] font-semibold text-fg">
                   <Home className="size-3.5" aria-hidden />
                   {house}
                 </span>
-                <span className="label-micro">
+                <span className="label-micro text-fg-muted">
                   {block.length > 0 ? `Block ${block} · ` : ""}
                   {date}
                 </span>
@@ -439,13 +434,13 @@ export function WatchView() {
             />
           ) : (
             <Frame>
-              <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-border bg-surface px-3 py-2">
-                <span className="flex items-center gap-1.5 text-[12px] font-semibold text-fg">
+              <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-2.5">
+                <span className="flex items-center gap-1.5 text-[13px] font-semibold text-fg">
                   <Building2 className="size-3.5" aria-hidden />
                   Indoors · {house}
                 </span>
-                <span className="label-micro">{date}</span>
-                <span className="label-latin ml-auto">
+                <span className="label-micro text-fg-muted">{date}</span>
+                <span className="label-latin ml-auto text-fg-muted">
                   Rooms, occupants, appliances and live load follow the play bar
                 </span>
                 <Button variant="outline" size="sm" onClick={() => setIndoor(false)}>
@@ -461,7 +456,7 @@ export function WatchView() {
         ) : null}
       </div>
 
-      <footer className="glass shrink-0 rounded-lg border border-border px-3 py-2.5">
+      <footer className="chrome shrink-0 px-3.5 py-3">
         <TimeController />
       </footer>
     </div>

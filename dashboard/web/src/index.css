@@ -1,3 +1,4 @@
+@import "./styles/fonts.css";
 @import "vis-timeline/styles/vis-timeline-graph2d.css";
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -10,68 +11,92 @@
    LLMWorld Research Console — design tokens
    Contract: DESIGN.md. Components may only reference tokens; hardcoded colours
    and magic numbers are not allowed.
+
+   Design language: "Warm Cocoa" + Baloo 2 + frosted glass, mirrored from the
+   sister canvas / kanban projects so all three read as one family. A warm
+   cocoa paper in light, a warm dark-cocoa paper in dark, and the SAME
+   frosted-glass chrome in both. Semantic colour is reserved for state; the
+   cocoa neutral is reserved for selected/active surfaces and primary actions.
    ========================================================================== */
 
 /* ---- Dark (default) ---- */
 :root {
   color-scheme: dark;
 
-  /* Surfaces */
-  --bg: #0a0f12;
-  --surface: #0f161a;
-  --surface-2: #141d22;
-  --surface-3: #1a252b;
-  --border: #1e2a30;
-  --border-strong: #2a3840;
+  /* Surfaces — warm dark-cocoa paper */
+  --bg: #181715;
+  --surface: #1f1d1a;
+  --surface-2: #292524;
+  --surface-3: #33302b;
+  --border: #44403c;
+  --border-strong: #57534e;
 
   /* Text */
-  --fg: #e7edf0;
-  --fg-muted: #93a4ac;
-  --fg-subtle: #64757e;
+  --fg: #f5f5f4;
+  --fg-muted: #d6d3d1;
+  --fg-subtle: #a8a29e;
 
-  /* Brand accent (teal). Named to avoid shadcn's --accent (hover surface) meaning. */
-  --brand: #2fc4b2;
-  --brand-fg: #04211e;
-  --brand-soft: rgb(47 196 178 / 0.14);
-  --brand-ring: rgb(47 196 178 / 0.45);
+  /* Primary — near-white cocoa (not a decorative accent) */
+  --brand: #fafafa;
+  --brand-fg: #171717;
+  --brand-soft: rgb(250 250 249 / 0.1);
+  --brand-ring: rgb(250 250 249 / 0.25);
 
-  /* Semantic */
-  --energy: #f5a524;
-  --energy-soft: rgb(245 165 36 / 0.14);
-  --success: #3dd68c;
-  --danger: #f2555a;
-  --info: #5b9dff;
+  /* Interactive surface states */
+  --item-hover: rgb(250 250 249 / 0.08);
+  --item-selected: rgb(250 250 249 / 0.12);
+  --overlay: rgb(0 0 0 / 0.6);
+  --on-danger: #171717;
 
-  /* Member lanes */
-  --member-1: #2fc4b2;
-  --member-2: #7c9cff;
-  --member-3: #c084fc;
-  --member-4: #fb923c;
+  /* Semantic — state only */
+  --energy: oklch(0.78 0.13 75);
+  --energy-soft: rgb(251 191 36 / 0.16);
+  --success: oklch(0.75 0.14 155);
+  --danger: oklch(0.704 0.191 22.216);
+  --info: oklch(0.72 0.12 250);
+
+  /* Member lanes — cocoa-compatible, muted */
+  --member-1: #8a9bb5;
+  --member-2: #a3b393;
+  --member-3: #c2a882;
+  --member-4: #b39ab3;
 
   /* Activity categories */
-  --cat-sleep: #3f4e5a;
-  --cat-meal: #e8a33d;
-  --cat-chore: #2fc4b2;
-  --cat-focus: #7c9cff;
-  --cat-leisure: #c084fc;
-  --cat-away: #4b5a64;
+  --cat-sleep: #57534e;
+  --cat-meal: oklch(0.78 0.13 75);
+  --cat-chore: oklch(0.75 0.14 155);
+  --cat-focus: oklch(0.72 0.12 250);
+  --cat-leisure: oklch(0.72 0.12 320);
+  --cat-away: #78716c;
 
-  /* Radii */
+  /* Radii — cocoa base 0.625rem */
   --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
+  --r-md: 8px;
+  --r-lg: 10px;
   --r-xl: 18px;
-  --r-pill: 9999px;
+  --r-pill: 999px;
 
-  /* Shadows: exactly two levels */
-  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.32);
-  --shadow-2: 0 18px 40px -12px rgb(0 0 0 / 0.55);
+  /* Shadows — soft and large */
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.45);
+  --shadow-2: 0 8px 24px rgb(0 0 0 / 0.45);
+  --shadow-3: 0 18px 54px rgb(0 0 0 / 0.45);
 
   /* Motion */
-  --t-fast: 120ms;
-  --t-base: 180ms;
+  --t-fast: 150ms;
+  --t-base: 200ms;
   --t-slow: 320ms;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Glass — the defining chrome surface (same recipe in both themes) */
+  --glass-bg: rgb(31 29 26 / 0.72);
+  --glass-bg-opaque: #1f1d1a;
+  --glass-border: rgb(255 255 255 / 0.1);
+  --glass-blur: blur(24px) saturate(150%);
+  --glass-blur-lg: blur(40px) saturate(150%);
+
+  /* Canvas dot grid */
+  --dot-color: rgb(245 245 244 / 0.24);
+  --dot-tile: 22px;
 
   /* --- shadcn semantic mapping (components inherit this palette untouched) --- */
   --background: var(--bg);
@@ -111,37 +136,54 @@
 .light {
   color-scheme: light;
 
-  --bg: #fafaf9;
-  --surface: #ffffff;
-  --surface-2: #f4f4f2;
-  --surface-3: #eaeae7;
-  --border: #e7e5e4;
-  --border-strong: #d6d3d1;
+  --bg: #f4f2ed;
+  --surface: #fbfaf7;
+  --surface-2: #e7e5df;
+  --surface-3: #dcd9d1;
+  --border: #d6d3ca;
+  --border-strong: #b8b4a8;
 
-  --fg: #1a1d1f;
-  --fg-muted: #57534e;
-  --fg-subtle: #8a8580;
+  --fg: #292524;
+  --fg-muted: #78716c;
+  --fg-subtle: #a8a29e;
 
-  --brand: #0e8f80;
+  --brand: #171717;
   --brand-fg: #ffffff;
-  --brand-soft: rgb(14 143 128 / 0.1);
-  --brand-ring: rgb(14 143 128 / 0.35);
+  --brand-soft: rgb(23 23 23 / 0.06);
+  --brand-ring: rgb(28 25 23 / 0.12);
 
-  --energy: #b45309;
-  --energy-soft: rgb(180 83 9 / 0.1);
-  --success: #047857;
-  --danger: #b91c1c;
-  --info: #1d4ed8;
+  --item-hover: rgb(23 23 23 / 0.06);
+  --item-selected: rgb(23 23 23 / 0.1);
+  --overlay: rgb(28 25 23 / 0.32);
+  --on-danger: #ffffff;
 
-  --cat-sleep: #b6c2cb;
-  --cat-meal: #b45309;
-  --cat-chore: #0e8f80;
-  --cat-focus: #1d4ed8;
-  --cat-leisure: #7e22ce;
+  --energy: oklch(0.58 0.12 72);
+  --energy-soft: rgb(202 138 4 / 0.12);
+  --success: oklch(0.55 0.13 152);
+  --danger: oklch(0.577 0.245 27.325);
+  --info: oklch(0.55 0.12 250);
+
+  --member-1: #8a9bb5;
+  --member-2: #7f8f6f;
+  --member-3: #a8825a;
+  --member-4: #8f7a8f;
+
+  --cat-sleep: #b6b1a6;
+  --cat-meal: oklch(0.58 0.12 72);
+  --cat-chore: oklch(0.55 0.13 152);
+  --cat-focus: oklch(0.55 0.12 250);
+  --cat-leisure: oklch(0.52 0.14 320);
   --cat-away: #a8a29e;
 
-  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.06);
-  --shadow-2: 0 18px 40px -12px rgb(0 0 0 / 0.18);
+  --shadow-1: 0 1px 2px rgb(28 25 23 / 0.05);
+  --shadow-2: 0 8px 24px rgb(28 25 23 / 0.08);
+  --shadow-3: 0 18px 54px rgb(28 25 23 / 0.16);
+
+  --glass-bg: rgb(251 250 247 / 0.72);
+  --glass-bg-opaque: #fbfaf7;
+  --glass-border: rgb(28 25 23 / 0.1);
+
+  --dot-color: rgb(68 64 60 / 0.28);
 }
 
 /* ---- Tailwind v4 theme ---- */
@@ -160,6 +202,12 @@
   --color-brand: var(--brand);
   --color-brand-fg: var(--brand-fg);
   --color-brand-soft: var(--brand-soft);
+  --color-brand-ring: var(--brand-ring);
+
+  --color-item-hover: var(--item-hover);
+  --color-item-selected: var(--item-selected);
+  --color-overlay: var(--overlay);
+  --color-on-danger: var(--on-danger);
 
   --color-energy: var(--energy);
   --color-energy-soft: var(--energy-soft);
@@ -204,10 +252,10 @@
 
   --shadow-1: var(--shadow-1);
   --shadow-2: var(--shadow-2);
+  --shadow-3: var(--shadow-3);
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI Variable Text",
-    "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI",
-    "Microsoft YaHei", sans-serif;
+  --font-sans: "Baloo 2", "Resource Han Rounded SC", "Yuanti SC", "YouYuan",
+    "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas,
     "Liberation Mono", monospace;
 }
@@ -225,6 +273,8 @@
 
   body {
     background-color: var(--bg);
+    background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+    background-size: var(--dot-tile) var(--dot-tile);
     color: var(--fg);
     font-family: var(--font-sans);
     font-size: 13px;
@@ -259,15 +309,15 @@
 
 @utility label-micro {
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   color: var(--fg-subtle);
 }
 
 @utility label-latin {
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fg-subtle);
 }
@@ -278,10 +328,81 @@
   font-feature-settings: "tnum" 1;
 }
 
+/* The defining chrome surface: frosted cocoa glass. */
 @utility glass {
-  background-color: color-mix(in srgb, var(--surface) 78%, transparent);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  background-color: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-color: var(--glass-border);
+}
+
+@utility glass-lg {
+  background-color: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur-lg);
+  backdrop-filter: var(--glass-blur-lg);
+  border-color: var(--glass-border);
+}
+
+/* Opaque cocoa paper — for surfaces that sit over the dot grid without blur. */
+@utility paper {
+  background-color: var(--surface);
+}
+
+@layer components {
+  /* Floating chrome: frosted cocoa glass at the large radius (bars, toolbars). */
+  .chrome {
+    background-color: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--r-xl);
+  }
+
+  /* Floating overlay chrome: heavier blur, for popovers and drawers. */
+  .chrome-lg {
+    background-color: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur-lg);
+    backdrop-filter: var(--glass-blur-lg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--r-xl);
+  }
+
+  /* Opaque cocoa card — the data surface of the console. */
+  .card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-1);
+  }
+
+  /* Motion for interactive cards; pair with hover: lift utilities. */
+  .card-lift {
+    transition:
+      translate var(--t-base) var(--ease),
+      transform var(--t-base) var(--ease),
+      box-shadow var(--t-base) var(--ease),
+      border-color var(--t-base) var(--ease),
+      background-color var(--t-base) var(--ease);
+  }
+
+  /* Cocoa pill for stats, status and selection. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-pill);
+    background-color: var(--surface-2);
+    padding: 2px 10px;
+    color: var(--fg-muted);
+  }
+
+  /* Selected cocoa pill: the neutral is the active surface, never an accent. */
+  .chip-active {
+    border-color: var(--brand-ring);
+    background-color: var(--brand-soft);
+    color: var(--fg);
+  }
 }
 
 @keyframes enter {
@@ -298,6 +419,18 @@
 @utility enter {
   animation: enter var(--t-slow) var(--ease) both;
   animation-delay: calc(var(--enter-index, 0) * 40ms);
+}
+
+/* Without backdrop-filter the frosted layers would show the dot grid through
+   them, so every glass surface falls back to opaque cocoa paper. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-lg,
+  .chrome,
+  .chrome-lg {
+    background-color: var(--glass-bg-opaque);
+    border-color: var(--border);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

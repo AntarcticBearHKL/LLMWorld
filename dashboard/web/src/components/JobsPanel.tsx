@@ -20,11 +20,11 @@ const STATUS_LABEL: Record<JobInfo["status"], string> = {
 }
 
 const STATUS_CLASS: Record<JobInfo["status"], string> = {
-  queued: "border-border-strong text-fg-muted",
-  running: "border-energy/50 bg-energy-soft text-energy",
-  done: "border-success/50 text-success",
-  failed: "border-danger/50 text-danger",
-  cancelled: "border-border-strong text-fg-subtle",
+  queued: "border-border-strong bg-surface-2 text-fg-muted",
+  running: "border-energy/40 bg-energy-soft text-energy",
+  done: "border-success/40 bg-success/10 text-success",
+  failed: "border-danger/40 bg-danger/10 text-danger",
+  cancelled: "border-border-strong bg-surface-2 text-fg-subtle",
 }
 
 const KIND_LABEL: Record<string, string> = {
@@ -135,10 +135,10 @@ export function JobsPanel() {
 
   return (
     <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 p-3 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
-      <section className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
-        <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-2.5">
-          <span className="text-[13px] font-semibold text-fg">
-            Jobs <span className="num text-[11px] text-fg-subtle">{jobs.length}</span>
+      <section className="card flex min-h-0 flex-col overflow-hidden">
+        <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
+          <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">
+            Jobs <span className="num text-[11px] font-medium text-fg-subtle">{jobs.length}</span>
           </span>
           <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void jobsQuery.refetch()}>
             <RefreshCw />
@@ -159,7 +159,7 @@ export function JobsPanel() {
                     onClick={() => setSelected(job.id)}
                     className={cn(
                       "flex w-full flex-col gap-1 px-4 py-2.5 text-left transition-colors",
-                      job.id === selected ? "bg-surface-2" : "hover:bg-surface-2",
+                      job.id === selected ? "bg-item-selected" : "hover:bg-item-hover",
                     )}
                   >
                     <div className="flex items-center gap-2">
@@ -177,7 +177,7 @@ export function JobsPanel() {
                       onClick={() => void onCancel(job.id)}
                       disabled={busy === job.id}
                       className={cn(
-                        "label-micro mx-4 mb-2 inline-flex items-center gap-1 rounded-sm border border-border-strong px-1.5 py-0.5",
+                        "label-micro mx-4 mb-2 inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5",
                         busy === job.id ? "opacity-50" : "hover:border-danger/60 hover:text-danger",
                       )}
                     >
@@ -195,7 +195,7 @@ export function JobsPanel() {
         ) : null}
       </section>
 
-      <section className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
+      <section className="card flex min-h-0 flex-col overflow-hidden">
         {selectedJob !== null && selectedIsBuild ? (
           <BuildJobView job={selectedJob} />
         ) : (
@@ -203,7 +203,7 @@ export function JobsPanel() {
         )}
       </section>
 
-      <p className="col-span-full text-[10px] text-fg-subtle">
+      <p className="col-span-full label-micro">
         Jobs really run run.py and spend API credits; only one job runs at a time to avoid concurrent
         writes under output/.
       </p>

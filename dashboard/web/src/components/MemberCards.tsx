@@ -73,10 +73,10 @@ export function MemberCards({ replay }: MemberCardsProps) {
                 type="button"
                 onClick={() => setSelectedMember(isSelected ? null : member.id)}
                 className={cn(
-                  "flex w-[228px] shrink-0 flex-col gap-2 rounded-md border px-3 py-2.5 text-left transition-colors",
+                  "card-lift flex w-[228px] shrink-0 flex-col gap-2 rounded-xl border px-3 py-2.5 text-left",
                   isSelected
-                    ? "border-brand/60 bg-brand-soft"
-                    : "border-border bg-surface-2 hover:border-border-strong",
+                    ? "border-brand-ring bg-brand-soft"
+                    : "border-border bg-surface-2 hover:border-border-strong hover:shadow-1",
                 )}
               >
                 <div className="flex items-center gap-2">
@@ -127,7 +127,7 @@ export function MemberCards({ replay }: MemberCardsProps) {
                       {used.slice(0, 3).map((item) => (
                         <span
                           key={item.uniqueId}
-                          className="num rounded-sm border border-energy/40 px-1.5 py-px text-[9px] text-energy"
+                          className="num rounded-full border border-energy/40 bg-energy-soft px-2 py-px text-[9px] text-energy"
                         >
                           {item.name}
                           {item.watts > 0 ? ` ${Math.round(item.watts)}W` : ""}

@@ -13,12 +13,14 @@ import { cn } from "@/lib/utils"
 import { useTimeStore } from "@/store/time"
 
 const statusClass = (status: string): string => {
-  if (status === "failed" || status === "error") return "border-danger/50 text-danger"
-  if (status === "queued" || status === "running") return "border-energy/50 bg-energy-soft text-energy"
-  if (status === "done" || status === "complete" || status === "completed") {
-    return "border-success/50 text-success"
+  if (status === "failed" || status === "error") return "border-danger/40 bg-danger/10 text-danger"
+  if (status === "queued" || status === "running") {
+    return "border-energy/40 bg-energy-soft text-energy"
   }
-  return "border-border-strong text-fg-muted"
+  if (status === "done" || status === "complete" || status === "completed") {
+    return "border-success/40 bg-success/10 text-success"
+  }
+  return "border-border-strong bg-surface-2 text-fg-muted"
 }
 
 function SpacetimeRow({
@@ -38,13 +40,17 @@ function SpacetimeRow({
   return (
     <li
       className={cn(
-        "flex flex-col gap-2 border-b border-border px-4 py-3 transition-colors sm:flex-row sm:items-center",
-        highlighted ? "bg-brand-soft" : "hover:bg-surface-2",
+        "card card-lift flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center",
+        highlighted
+          ? "border-brand-ring bg-brand-soft"
+          : "hover:border-border-strong hover:shadow-2",
       )}
     >
       <button type="button" onClick={onOpen} className="flex min-w-0 flex-1 flex-col gap-1 text-left">
         <span className="flex min-w-0 flex-wrap items-center gap-2">
-          <span className="num truncate text-[12px] font-medium text-fg">{item.name}</span>
+          <span className="num truncate text-[13px] font-semibold tracking-[-0.01em] text-fg">
+            {item.name}
+          </span>
           <Badge variant="outline" className={cn("label-latin", statusClass(item.status))}>
             {item.status}
           </Badge>
@@ -70,14 +76,14 @@ function SpacetimeRow({
               type="button"
               onClick={() => remove.mutate(item.name, { onSuccess: () => setPendingDelete(false) })}
               disabled={remove.isPending}
-              className="label-micro rounded-sm border border-danger/50 px-1.5 py-0.5 text-danger disabled:opacity-50"
+              className="label-micro rounded-full border border-danger/50 px-2 py-0.5 text-danger transition-colors hover:bg-danger/10 disabled:opacity-50"
             >
               Confirm delete
             </button>
             <button
               type="button"
               onClick={() => setPendingDelete(false)}
-              className="label-micro rounded-sm border border-border-strong px-1.5 py-0.5 text-fg-muted"
+              className="label-micro rounded-full border border-border-strong px-2 py-0.5 text-fg-muted transition-colors hover:bg-item-hover"
             >
               Cancel
             </button>
@@ -122,9 +128,9 @@ export function SpacetimeList({ world }: { world: string }) {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-4 py-2.5">
-        <span className="text-[13px] font-semibold text-fg">
-          Spacetimes <span className="num text-[11px] text-fg-subtle">{items.length}</span>
+      <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-4 py-3">
+        <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">
+          Spacetimes <span className="num text-[11px] font-medium text-fg-subtle">{items.length}</span>
         </span>
         <Button
           variant="ghost"
@@ -143,7 +149,7 @@ export function SpacetimeList({ world }: { world: string }) {
 
       <div className="min-h-0 flex-1 overflow-y-auto">
         {wizardOpen ? (
-          <div className="border-b border-border p-3">
+          <div className="p-3 pb-1">
             <SpacetimeWizard
               world={world}
               onCancel={() => setWizardOpen(false)}
@@ -156,7 +162,7 @@ export function SpacetimeList({ world }: { world: string }) {
         ) : null}
 
         {created !== null ? (
-          <div className="flex flex-wrap items-center gap-2 border-b border-border bg-surface-2 px-4 py-2">
+          <div className="mx-3 mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-success/40 bg-success/10 px-3.5 py-2">
             <CheckCircle2 className="size-3.5 shrink-0 text-success" aria-hidden />
             <span className="text-[11px] text-fg">
               Created spacetime <span className="num">{created.name}</span> — status {created.status} ·{" "}
@@ -171,7 +177,7 @@ export function SpacetimeList({ world }: { world: string }) {
         {query.isPending ? (
           <p className="px-4 py-6 text-[11px] text-fg-subtle">Loading spacetimes…</p>
         ) : query.isError ? (
-          <div className="flex flex-col items-start gap-2 px-4 py-6">
+          <div className="m-3 card flex flex-col items-start gap-2 px-4 py-5">
             <p className="text-[11px] text-danger">
               Failed to load spacetimes: {errorMessage(query.error)}
             </p>
@@ -185,7 +191,7 @@ export function SpacetimeList({ world }: { world: string }) {
             spacetime is created.
           </p>
         ) : (
-          <ul className="flex flex-col">
+          <ul className="flex flex-col gap-2.5 p-3">
             {items.map((item) => (
               <SpacetimeRow
                 key={item.name}

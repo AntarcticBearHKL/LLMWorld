@@ -117,8 +117,8 @@ export function SceneStage({ state, children }: SceneStageProps) {
         </Stage>
       ) : null}
 
-      <div className="pointer-events-none absolute bottom-2 right-3 flex items-center gap-2 text-[10px] text-fg-subtle">
-        <span className="num">Scroll to zoom · drag to pan · double-click to reset · select a member</span>
+      <div className="chip num pointer-events-none absolute bottom-3 right-3 text-[10px]">
+        Scroll to zoom · drag to pan · double-click to reset · select a member
       </div>
     </div>
   )

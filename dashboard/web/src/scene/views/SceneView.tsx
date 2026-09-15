@@ -65,8 +65,8 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
   }
 
   return (
-    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface">
-      <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-3 py-2">
+    <div className="card flex h-full min-h-0 flex-col overflow-hidden">
+      <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-3.5 py-2.5">
         <span className="label-micro flex items-center gap-1.5">
           {mapOnly || mode === "town" ? (
             <LayoutGrid className="size-3" />
@@ -78,19 +78,19 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
 
         {mapOnly ? null : (
           <>
-            <div className="ml-2 flex items-center gap-0.5 rounded-md border border-border bg-surface-2 p-0.5">
+            <div className="ml-2 flex items-center gap-0.5 rounded-full border border-border bg-surface-2 p-0.5">
               <Button
-                variant={mode === "town" ? "secondary" : "ghost"}
+                variant={mode === "town" ? "default" : "ghost"}
                 size="sm"
-                className="h-6 px-2 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[11px]"
                 onClick={() => setMode("town")}
               >
                 Town
               </Button>
               <Button
-                variant={mode === "interior" ? "secondary" : "ghost"}
+                variant={mode === "interior" ? "default" : "ghost"}
                 size="sm"
-                className="h-6 px-2 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[11px]"
                 onClick={() => setMode("interior")}
                 disabled={state === null}
               >
@@ -106,9 +106,9 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
                   return (
                     <Button
                       key={member.id}
-                      variant={active ? "secondary" : "outline"}
+                      variant={active ? "default" : "outline"}
                       size="sm"
-                      className="h-6 px-2 text-[11px]"
+                      className="h-6 rounded-full px-2.5 text-[11px]"
                       aria-pressed={active}
                       onClick={() => setSelectedMember(active ? null : member.id)}
                     >
@@ -122,9 +122,9 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
 
             <div className="ml-auto flex flex-wrap items-center gap-1.5">
               <Button
-                variant={diagnosticsOpen ? "secondary" : "outline"}
+                variant={diagnosticsOpen ? "default" : "outline"}
                 size="sm"
-                className="h-6 px-2 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[11px]"
                 onClick={() => setDiagnosticsOpen((value) => !value)}
                 disabled={mode !== "interior" || state === null}
                 title="Frame rate and memory diagnostics (keep the page in the foreground)"
@@ -132,18 +132,18 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
                 Diagnostics
               </Button>
               <Button
-                variant={outlineOpen ? "secondary" : "outline"}
+                variant={outlineOpen ? "default" : "outline"}
                 size="sm"
-                className="h-6 px-2 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[11px]"
                 onClick={() => setOutlineOpen((value) => !value)}
                 disabled={mode !== "interior" || state === null}
               >
                 Outline
               </Button>
               <Button
-                variant={effectsOn ? "secondary" : "outline"}
+                variant={effectsOn ? "default" : "outline"}
                 size="sm"
-                className="h-6 px-2 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[11px]"
                 onClick={() => {
                   if (degraded) {
                     setDegraded(false)
@@ -162,9 +162,9 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
                 {degraded ? " (degraded)" : ""}
               </Button>
               <Button
-                variant={trailEnabled ? "secondary" : "outline"}
+                variant={trailEnabled ? "default" : "outline"}
                 size="sm"
-                className="h-6 px-2 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[11px]"
                 onClick={() => setTrailEnabled((value) => !value)}
               >
                 Trails {trailEnabled ? "on" : "off"}
@@ -202,7 +202,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
         ) : null}
 
         {mode === "interior" && state !== null && outlineOpen ? (
-          <aside className="absolute right-3 top-3 z-20 flex max-h-[min(560px,calc(100%-24px))] w-[250px] flex-col overflow-hidden rounded-lg border border-border bg-surface/95 shadow-[var(--shadow-2)] backdrop-blur">
+          <aside className="chrome-lg absolute right-3 top-3 z-20 flex max-h-[min(560px,calc(100%-24px))] w-[250px] flex-col overflow-hidden shadow-3">
             <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-3 py-1.5">
               <span className="label-micro">Rooms and appliances</span>
               <Button

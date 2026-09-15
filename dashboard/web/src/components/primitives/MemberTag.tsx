@@ -16,8 +16,9 @@ export function MemberTag({ member, bedroom, lane, selected = false, onClick, cl
       type={onClick === undefined ? undefined : "button"}
       onClick={onClick}
       className={cn(
-        "flex w-full items-center gap-2 px-3 text-left",
-        onClick !== undefined && "cursor-pointer",
+        "flex w-full items-center gap-2 rounded-lg px-3 text-left",
+        onClick !== undefined && "cursor-pointer transition-colors hover:bg-item-hover",
+        selected && "bg-item-selected",
         className,
       )}
     >
@@ -29,8 +30,7 @@ export function MemberTag({ member, bedroom, lane, selected = false, onClick, cl
       <span className="flex min-w-0 flex-col leading-tight">
         <span
           className={cn(
-            "truncate text-[12px] font-semibold transition-colors",
-            selected ? "text-brand" : "text-fg",
+            "truncate text-[12px] font-semibold transition-colors text-fg",
           )}
         >
           {member}

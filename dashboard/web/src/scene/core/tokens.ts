@@ -18,20 +18,20 @@ export interface SceneTokens {
 }
 
 const FALLBACK: SceneTokens = {
-  bg: "#0a0f12",
-  surface: "#0f161a",
-  surface2: "#141d22",
-  surface3: "#1a252b",
-  border: "#1e2a30",
-  borderStrong: "#2a3840",
-  fg: "#e7edf0",
-  fgMuted: "#93a4ac",
-  fgSubtle: "#64757e",
-  brand: "#2fc4b2",
-  energy: "#f5a524",
-  danger: "#f2555a",
-  success: "#3dd68c",
-  member: ["#2fc4b2", "#7c9cff", "#c084fc", "#fb923c"],
+  bg: "#181715",
+  surface: "#1f1d1a",
+  surface2: "#292524",
+  surface3: "#33302b",
+  border: "#44403c",
+  borderStrong: "#57534e",
+  fg: "#f5f5f4",
+  fgMuted: "#d6d3d1",
+  fgSubtle: "#a8a29e",
+  brand: "#fafafa",
+  energy: "#e9a94a",
+  danger: "#ef6f6b",
+  success: "#57c98e",
+  member: ["#8a9bb5", "#a3b393", "#c2a882", "#b39ab3"],
 }
 
 const MEMBER_VARS = ["--member-1", "--member-2", "--member-3", "--member-4"] as const

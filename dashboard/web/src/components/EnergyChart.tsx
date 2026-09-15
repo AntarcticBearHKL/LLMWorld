@@ -234,7 +234,7 @@ export function EnergyChart({ replay }: EnergyChartProps) {
 
               {hover !== null ? (
                 <div
-                  className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 rounded border border-border bg-surface-2 px-2 py-1 shadow-[var(--shadow-1)]"
+                  className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 rounded-lg border border-border bg-surface-2 px-2 py-1 shadow-1"
                   style={{ left: `${(hover / DAY_MINUTES) * 100}%` }}
                 >
                   <div className="num text-[10px] text-fg">{formatHHMM(hover)}</div>
@@ -262,8 +262,8 @@ export function EnergyChart({ replay }: EnergyChartProps) {
                   onClick={() => toggle(item.id)}
                   title={`${item.name} · ${formatKwh(item.energy)} kWh`}
                   className={cn(
-                    "flex items-center gap-1.5 rounded-sm px-1 py-0.5 text-left transition-opacity",
-                    isHidden ? "opacity-40" : "opacity-100 hover:bg-surface-2",
+                    "flex items-center gap-1.5 rounded-full px-2 py-0.5 text-left transition-opacity",
+                    isHidden ? "opacity-40" : "opacity-100 hover:bg-item-hover",
                   )}
                 >
                   <span

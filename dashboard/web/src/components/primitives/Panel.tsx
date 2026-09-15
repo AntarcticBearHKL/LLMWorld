@@ -15,15 +15,12 @@ interface PanelProps {
 export function Panel({ title, hint, actions, children, className, bodyClassName, index = 0 }: PanelProps) {
   return (
     <section
-      className={cn(
-        "enter flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-surface",
-        className,
-      )}
+      className={cn("enter card flex min-h-0 flex-col overflow-hidden", className)}
       style={{ "--enter-index": index } as React.CSSProperties}
     >
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-4 py-2.5">
         <div className="flex min-w-0 items-baseline gap-2">
-          <h2 className="truncate text-[13px] font-semibold tracking-[-0.01em] text-fg">{title}</h2>
+          <h2 className="truncate text-[14px] font-semibold tracking-[-0.01em] text-fg">{title}</h2>
           {hint !== undefined ? (
             <span className="label-latin truncate">{hint}</span>
           ) : null}

@@ -16,7 +16,7 @@ function Chips({ items }: { items: string[] }) {
       {items.map((item) => (
         <span
           key={item}
-          className="num rounded-sm border border-border-strong px-1.5 py-0.5 text-[10px] text-fg-muted"
+          className="num rounded-full border border-border-strong bg-surface-2 px-2.5 py-0.5 text-[10px] text-fg-muted"
         >
           {item}
         </span>
@@ -45,8 +45,8 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
   )
 
   return (
-    <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border bg-surface">
-      <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border bg-energy-soft px-4 py-2.5">
+    <section className="card flex min-h-0 flex-1 flex-col overflow-hidden">
+      <div className="mx-3 mt-3 flex shrink-0 flex-wrap items-center gap-2 rounded-xl border border-energy/30 bg-energy-soft px-3.5 py-2.5">
         <Lock className="size-3.5 shrink-0 text-energy" aria-hidden />
         <span className="text-[11px] text-fg">
           Households are frozen (this world has spacetimes). Clone the world to edit.
@@ -92,10 +92,10 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
                 {blocks.map((block) => (
                   <li
                     key={block.postcode}
-                    className="flex flex-col gap-2 rounded-lg border border-border p-3"
+                    className="card-lift flex flex-col gap-2 rounded-xl border border-border bg-surface-2 p-3.5 hover:border-border-strong"
                   >
                     <span className="flex items-center gap-2">
-                      <span className="num text-[12px] text-fg">{block.postcode}</span>
+                      <span className="num text-[13px] font-semibold text-fg">{block.postcode}</span>
                       <Badge variant="outline" className="label-latin">
                         {countLabel(block.house_count, "household")}
                       </Badge>

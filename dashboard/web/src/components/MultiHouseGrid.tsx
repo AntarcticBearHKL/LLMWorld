@@ -56,8 +56,8 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="flex shrink-0 items-baseline gap-3 border-b border-border px-4 py-2.5">
-        <span className="text-[13px] font-semibold text-fg">Household grid</span>
+      <div className="flex shrink-0 items-baseline gap-3 border-b border-border px-4 py-3">
+        <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">Household grid</span>
         <span className="num text-[11px] text-fg-subtle">
           {visible.length} households · {formatHHMM(minute)}
         </span>
@@ -75,10 +75,10 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
               type="button"
               onClick={() => onOpen(item.house)}
               className={cn(
-                "enter flex min-h-[236px] flex-col gap-2.5 rounded-lg border bg-surface p-3.5 text-left transition-colors",
+                "card card-lift flex min-h-[236px] flex-col gap-2.5 p-3.5 text-left hover:-translate-y-0.5 hover:shadow-2",
                 isCurrent
-                  ? "border-brand/50 bg-brand-soft"
-                  : "border-border hover:border-brand/40 hover:bg-surface-2",
+                  ? "border-brand-ring bg-brand-soft"
+                  : "hover:border-border-strong",
               )}
             >
               <div className="flex items-center gap-2">
@@ -141,7 +141,7 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
                     {running.slice(0, 3).map((appliance) => (
                       <span
                         key={appliance.unique_id}
-                        className="num truncate rounded-sm border border-border-strong px-1.5 py-px text-[9px] text-fg-muted"
+                        className="num truncate rounded-full border border-border-strong bg-surface-2 px-2 py-px text-[9px] text-fg-muted"
                       >
                         {appliance.name}
                       </span>

@@ -63,12 +63,12 @@ export function MetricStrip({ replay, isPending }: MetricStripProps) {
         detail={replay?.household.household_type}
       />
 
-      <div className="ml-auto flex items-center gap-4">
-        <span className="flex items-center gap-1.5">
+      <div className="ml-auto flex flex-wrap items-center gap-x-4 gap-y-2">
+        <span className="chip">
           <StatusDot on />
           <span className="text-[11px] text-fg-muted">Drawing power</span>
         </span>
-        <span className="flex items-center gap-1.5">
+        <span className="chip">
           <StatusDot on={false} />
           <span className="text-[11px] text-fg-muted">Standby / off</span>
         </span>

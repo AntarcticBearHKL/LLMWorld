@@ -35,16 +35,16 @@ export function HouseSwitcher() {
               onClick={() => setSelection({ house: id })}
               title={snapshot?.household_type ?? id}
               className={cn(
-                "flex min-w-0 flex-col items-start gap-0.5 rounded-md border px-2.5 py-1.5 text-left transition-colors duration-150",
+                "card-lift flex min-w-0 flex-col items-start gap-0.5 rounded-xl border px-2.5 py-1.5 text-left",
                 active
-                  ? "border-brand/50 bg-brand-soft"
-                  : "border-border-strong bg-surface-2 hover:bg-surface-3",
+                  ? "border-brand-ring bg-brand-soft"
+                  : "border-border bg-surface-2 hover:border-border-strong hover:shadow-1",
               )}
             >
               <span
                 className={cn(
                   "num text-[11px] leading-none font-semibold",
-                  active ? "text-brand" : "text-fg",
+                  active ? "text-fg" : "text-fg-muted",
                 )}
               >
                 {id}

@@ -73,14 +73,16 @@ const statusText = (httpStatus: number | null): string =>
   httpStatus === null ? "no status" : `HTTP ${httpStatus}`
 
 const PRE_CLASS =
-  "num max-h-80 overflow-auto rounded-md border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap break-words text-fg-muted"
+  "num max-h-80 overflow-auto rounded-lg border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap break-words text-fg-muted"
 
 function StatusChip({ ok, httpStatus }: { ok: boolean; httpStatus: number | null }) {
   return (
     <span
       className={cn(
-        "num rounded-sm border px-1.5 py-px text-[9px] whitespace-nowrap",
-        ok ? "border-success/40 text-success" : "border-danger/40 text-danger",
+        "num rounded-full border px-2 py-px text-[9px] whitespace-nowrap",
+        ok
+          ? "border-success/40 bg-success/10 text-success"
+          : "border-danger/40 bg-danger/10 text-danger",
       )}
     >
       {statusText(httpStatus)}
@@ -104,7 +106,7 @@ function CallRow({
       aria-pressed={active}
       className={cn(
         "flex w-full flex-col gap-1 border-b border-border px-3 py-2 text-left transition-colors",
-        active ? "bg-brand-soft" : "hover:bg-surface-2",
+        active ? "bg-item-selected" : "hover:bg-item-hover",
       )}
     >
       <div className="flex items-center gap-2">
@@ -134,7 +136,7 @@ function Section({ title, hint, children }: { title: string; hint?: string; chil
   return (
     <section className="flex flex-col gap-1.5">
       <div className="flex items-baseline gap-2">
-        <span className="text-[12px] font-semibold text-fg">{title}</span>
+        <span className="text-[13px] font-semibold text-fg">{title}</span>
         {hint !== undefined ? <span className="label-latin">{hint}</span> : null}
       </div>
       {children}
@@ -235,7 +237,7 @@ function CallDetail({ jobId, callId }: { jobId: string; callId: string }) {
 
           {detail.error !== null ? (
             <Section title="Error">
-              <p className="rounded-md border border-danger/40 bg-surface-2 px-3 py-2 text-[11px] text-danger">
+              <p className="rounded-xl border border-danger/40 bg-danger/10 px-3 py-2 text-[11px] text-danger">
                 {detail.error}
               </p>
             </Section>

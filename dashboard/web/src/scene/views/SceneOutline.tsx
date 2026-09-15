@@ -39,8 +39,8 @@ export function SceneOutline({ state, highlighted, onHighlight }: SceneOutlinePr
                         aria-pressed={selected}
                         onClick={() => onHighlight(selected ? null : pose.uniqueId)}
                         className={cn(
-                          "flex w-full items-baseline gap-2 px-5 py-0.5 text-left transition-colors",
-                          selected ? "bg-brand-soft" : "hover:bg-surface-2",
+                          "flex w-full items-baseline gap-2 px-5 py-1 text-left transition-colors",
+                          selected ? "bg-item-selected" : "hover:bg-item-hover",
                         )}
                       >
                         <span

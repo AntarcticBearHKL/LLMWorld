@@ -32,7 +32,7 @@ export function WorldDetail() {
   if (world.length === 0) {
     return (
       <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-3">
-        <section className="flex flex-col items-start gap-3 rounded-lg border border-border bg-surface p-4">
+        <section className="card flex flex-col items-start gap-3 p-4">
           {back}
           <p className="text-[11px] text-fg-subtle">
             No world selected. Pick one from the worlds list.
@@ -45,7 +45,7 @@ export function WorldDetail() {
   if (worldQuery.isPending) {
     return (
       <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-3">
-        <section className="flex flex-col items-start gap-3 rounded-lg border border-border bg-surface p-4">
+        <section className="card flex flex-col items-start gap-3 p-4">
           {back}
           <p className="text-[11px] text-fg-subtle">
             Loading world <span className="num">{world}</span>…
@@ -60,7 +60,7 @@ export function WorldDetail() {
   if (worldQuery.isError || info === undefined) {
     return (
       <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-3">
-        <section className="flex flex-col items-start gap-3 rounded-lg border border-border bg-surface p-4">
+        <section className="card flex flex-col items-start gap-3 p-4">
           {back}
           <p className="text-[11px] text-danger">
             Failed to load world <span className="num">{world}</span>: {errorMessage(worldQuery.error)}
@@ -75,12 +75,14 @@ export function WorldDetail() {
 
   return (
     <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col gap-3">
-      <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-3">
         {back}
         <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
-        <span className="num truncate text-[13px] font-semibold text-fg">{info.world_id}</span>
+        <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
+          {info.world_id}
+        </span>
         <WorldBadge frozen={info.frozen} />
-        <span className="label-micro">
+        <span className="chip num text-[10px]">
           {countLabel(info.districts.length, "block")} ·{" "}
           {countLabel(info.houses.length, "household")} ·{" "}
           {countLabel(info.spacetimes.length, "spacetime")}
@@ -106,12 +108,12 @@ export function WorldDetail() {
         className="flex min-h-0 flex-1 flex-col"
       >
         <div className="flex shrink-0 flex-wrap items-center gap-2">
-          <TabsList className="h-8 p-0.5">
-            <TabsTrigger value="spacetime" className="h-7 px-3 text-[12px]">
+          <TabsList className="h-8">
+            <TabsTrigger value="spacetime" className="h-7 px-3.5 text-[12px]">
               Spacetimes{" "}
               <span className="num text-[10px] text-fg-subtle">{info.spacetimes.length}</span>
             </TabsTrigger>
-            <TabsTrigger value="household" className="h-7 px-3 text-[12px]">
+            <TabsTrigger value="household" className="h-7 px-3.5 text-[12px]">
               Households <span className="num text-[10px] text-fg-subtle">{info.houses.length}</span>
             </TabsTrigger>
           </TabsList>
@@ -119,7 +121,7 @@ export function WorldDetail() {
         </div>
 
         <TabsContent value="spacetime" className="mt-0 flex min-h-0 flex-1 flex-col">
-          <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border bg-surface">
+          <section className="card flex min-h-0 flex-1 flex-col overflow-hidden">
             <SpacetimeList world={info.world_id} />
           </section>
         </TabsContent>

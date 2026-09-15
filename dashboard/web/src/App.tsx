@@ -31,15 +31,15 @@ function BrandMark() {
     <div className="flex items-center gap-2.5">
       <span
         aria-hidden
-        className="flex size-7 items-center justify-center rounded-md border border-brand/40 bg-brand-soft"
+        className="flex size-8 items-center justify-center rounded-lg bg-brand text-brand-fg shadow-1"
       >
-        <span className="num text-[11px] font-bold text-brand">W</span>
+        <span className="text-[13px] font-extrabold">W</span>
       </span>
       <span className="flex flex-col leading-tight">
-        <span className="text-[13px] font-semibold tracking-[-0.01em] text-fg">
+        <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">
           LLMWorld Research Console
         </span>
-        <span className="label-latin">household energy replay</span>
+        <span className="label-latin text-fg-muted">household energy replay</span>
       </span>
     </div>
   )
@@ -48,7 +48,7 @@ function BrandMark() {
 function NavTabs({ active, onChange }: { active: ViewKey; onChange: (next: ViewKey) => void }) {
   return (
     <nav
-      className="flex items-center gap-0.5 rounded-md border border-border bg-surface-2 p-0.5"
+      className="flex items-center gap-0.5 rounded-full border border-border bg-surface-2 p-0.5"
       aria-label="Primary"
     >
       {NAV.map((item) => (
@@ -59,10 +59,10 @@ function NavTabs({ active, onChange }: { active: ViewKey; onChange: (next: ViewK
               onClick={() => onChange(item.key)}
               aria-current={active === item.key ? "page" : undefined}
               className={cn(
-                "rounded-sm px-3 py-1 text-[12px] font-medium transition-colors",
+                "rounded-full px-3.5 py-1 text-[12px] font-semibold transition-colors",
                 active === item.key
-                  ? "bg-brand-soft text-brand"
-                  : "text-fg-muted hover:bg-surface-3 hover:text-fg",
+                  ? "bg-brand text-brand-fg shadow-1"
+                  : "text-fg-muted hover:bg-item-hover hover:text-fg",
               )}
             >
               {item.label}
@@ -86,8 +86,8 @@ export default function App() {
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-bg">
-      <header className="glass sticky top-0 z-30 shrink-0 border-b border-border">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5">
+      <header className="glass sticky top-0 z-30 shrink-0 border-b">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
           <BrandMark />
           <NavTabs active={active} onChange={setView} />
           <div className="ml-auto">
@@ -108,7 +108,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="min-h-0 flex-1 overflow-hidden p-3">
+      <main className="min-h-0 flex-1 overflow-hidden p-3 lg:p-4">
         {view === "worlds" ? <WorldsList /> : null}
 
         {view === "world" ? <WorldDetail /> : null}
@@ -122,7 +122,7 @@ export default function App() {
         ) : null}
 
         {view === "settings" ? (
-          <div className="mx-auto h-full w-full max-w-3xl overflow-y-auto rounded-lg border border-border bg-surface">
+          <div className="card mx-auto h-full w-full max-w-3xl overflow-y-auto">
             <SettingsPanel />
           </div>
         ) : null}

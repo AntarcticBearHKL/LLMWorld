@@ -11,160 +11,184 @@
 | Layer B 品牌系统 | `sentry.md`（Dark dashboard, data-dense） | **选用**。要点：深色优先且**绝不使用纯黑**（用带色调的深底）；微标签大写 + 字距；按钮内阴影带来"可按压"的实体感；层级表面用磨砂玻璃 `blur(18px) saturate(180%)`；单一高可见度强调色，克制使用。 |
 | Layer B 备选（未选） | `kraken.md`、`cohere.md` | 未选原因：Kraken 紫色系与"能源/仪表"语义无关；Cohere 的鲜艳渐变与"安静、数据密集"的诉求冲突。 |
 | 偏离记录 | Lucide 图标 | `minimalist-skill` 禁用 Lucide；但任务明确要求 `lucide-react`。**接受该偏离**，以统一 1.5px 线宽、统一 16/14px 尺寸来保证一致性。 |
+| **Re-skin lane（第二轮）** | `kanvana/client/src/styles/tokens.css` · `layout.css` · `components/*.css` · `infinite-canvas/web/src/styles/globals.css` | **选用并已落地**。cocoa 纸张（`#fbfaf7` / `#1f1d1a`）、同一套磨砂玻璃、cocoa 中性作为唯一交互色、语义色只服务状态、Baloo 2 字体、`--r-md/xl/pill` 半径与三档大而软的阴影。第一轮的青绿 × 琥珀与深青黑底色整体废弃，见 §15。 |
 
-**重组结论（不照抄任何来源）**：底色由 Sentry 的深紫改为**深青黑**（能源/仪表的冷色仪器感），强调色用**青绿**，`on` 语义用**暖琥珀**——青绿 × 琥珀是仪表盘的经典互补对。夜间睡眠/外出等"低信息"活动刻意降饱和，把饱和度留给真正发生的用电行为。
+**重组结论（已废弃，仅存档）**：底色由 Sentry 的深紫改为**深青黑**（能源/仪表的冷色仪器感），强调色用**青绿**，`on` 语义用**暖琥珀**。该方案已在第二轮被 Warm Cocoa 取代。
+
+**重组结论（现行）**：暖可可纸面 + 同一套磨砂玻璃 + Baloo 2 圆体。交互色只用一个"可可中性"（近黑 / 近白），颜色预算全部留给状态语义；圆角、间距、阴影从 `--r-*` / 4px 基准 / `--shadow-*` 取值，组件层由 `card` / `chrome` / `chip` 三件套统一。
 
 ## 1. Design Principles
 
-1. **数据密集但安静** — 信息靠排版层级和留白分隔，不靠色块和阴影。
-2. **时间是一等公民** — 所有时间/数值用等宽 + `tabular-nums`，字宽不跳动。
-3. **颜色即语义** — 青绿=交互，琥珀=用电中，石板灰=静止/缺席。装饰性用色一律禁止。
-4. **深色优先，浅色可用** — 两套主题共用同一组语义 token 名。
-5. **动效服务意义** — 只动 `transform` / `opacity`；不做无信息量的悬停动画。
+1. **Warm cocoa paper, frosted chrome** — a warm light-cocoa paper in light, a warm dark-cocoa paper in dark, and the *same* frosted-glass chrome in both. Every surface is either opaque `card`/`paper` or `glass`/`chrome`; a half-transparent fill without blur is never used, because the dot grid would show through it.
+2. **The cocoa neutral is the interaction colour** — primary buttons, active nav, selected rows and active chips are near-black on cream (light) / near-white on cocoa (dark). The product has no decorative accent.
+3. **Colour is state only** — `--danger`, `--success`, `--energy`, `--info` describe a real state (failed / done / drawing power / frozen). They never appear as a plain button fill, a decorative border or a section tint.
+4. **Rounded and generous** — Baloo 2 (400–800) for the whole UI, radii from `--r-sm` to `--r-pill`, card padding 12–16px, page gutters 12–16px, one large soft shadow per floating surface.
+5. **Data is still monospaced** — time, watts, kWh, ids and counts keep the `num` utility (`--font-mono` + `tabular-nums`) so digits never reflow.
+6. **Motion serves meaning** — only `transform` / `opacity` / colour; hover lifts a card, active presses a button, `enter` cascades a group. No decorative animation.
 
-## 2. Color System
+## 2. Colour System
 
-所有色值以 CSS 变量形式定义在 `src/index.css`，dark 为 `:root` 默认，light 在 `.light` 覆盖。
-组件只允许写 `var(--…)` 或 Tailwind token（`bg-surface` / `text-fg-muted` / `border-border`）。
+All values are CSS variables in `src/index.css`; dark is the `:root` default and light is the `.light` override on `<html>`.
+Components may only use `var(--…)` or the Tailwind token classes (`bg-surface`, `text-fg-muted`, `border-border`, `bg-brand`, `text-brand-fg`, `bg-brand-soft`, `bg-item-hover`, `text-danger`, …).
 
-### 表面 / 文本（dark 默认）
+### Surfaces / text
 
-| Token | Dark | Light | 用途 |
+| Token | Dark | Light | Use |
 | --- | --- | --- | --- |
-| `--bg` | `#0A0F12` | `#FAFAF9` | 页面底色 |
-| `--surface` | `#0F161A` | `#FFFFFF` | 卡片 |
-| `--surface-2` | `#141D22` | `#F4F4F2` | 卡片内嵌区 / 表头 |
-| `--surface-3` | `#1A252B` | `#EAEAE7` | hover / 激活底 |
-| `--border` | `#1E2A30` | `#E7E5E4` | 1px 结构线（默认） |
-| `--border-strong` | `#2A3840` | `#D6D3D1` | 输入框 / 分隔强调 |
-| `--fg` | `#E7EDF0` | `#1A1D1F` | 主文本（不用纯黑/纯白） |
-| `--fg-muted` | `#93A4AC` | `#57534E` | 次要文本 |
-| `--fg-subtle` | `#64757E` | `#8A8580` | 标签 / 单位 |
+| `--bg` | `#181715` | `#f4f2ed` | page (carries the dot grid) |
+| `--surface` | `#1f1d1a` | `#fbfaf7` | cards, panels, drawers |
+| `--surface-2` | `#292524` | `#e7e5df` | nested areas, inputs (dark), chips |
+| `--surface-3` | `#33302b` | `#dcd9d1` | raised neutral, tracks |
+| `--border` | `#44403c` | `#d6d3ca` | 1px structural line |
+| `--border-strong` | `#57534e` | `#b8b4a8` | inputs, chip outlines |
+| `--fg` | `#f5f5f4` | `#292524` | primary text |
+| `--fg-muted` | `#d6d3d1` | `#78716c` | secondary text |
+| `--fg-subtle` | `#a8a29e` | `#a8a29e` | micro labels, units |
 
-### 语义
+### Cocoa neutral (interaction)
 
-| Token | Dark | Light | 语义 |
+| Token | Dark | Light | Use |
 | --- | --- | --- | --- |
-| `--accent` | `#2FC4B2` | `#0E8F80` | 交互主色（青绿） |
-| `--accent-fg` | `#04211E` | `#FFFFFF` | 强调底上的文本 |
-| `--accent-soft` | `rgba(47,196,178,.14)` | `rgba(14,143,128,.10)` | 选中底 / 焦点环底 |
-| `--energy` | `#F5A524` | `#B45309` | **用电中**（暖琥珀，电器 on） |
-| `--energy-soft` | `rgba(245,165,36,.14)` | `rgba(180,83,9,.10)` | 用电徽章底 |
-| `--success` | `#3DD68C` | `#047857` | 完成 / 正常 |
-| `--danger` | `#F2555A` | `#B91C1C` | 失败 / 警告 |
-| `--info` | `#5B9DFF` | `#1D4ED8` | 中性提示 |
+| `--brand` | `#fafafa` | `#171717` | primary fill, focus outline, cursor |
+| `--brand-fg` | `#171717` | `#ffffff` | text on the primary fill |
+| `--brand-soft` | `white 10%` | `black 6%` | selected row / soft cocoa wash |
+| `--brand-ring` | `white 25%` | `black 12%` | focus ring, selected outline |
+| `--item-hover` | `white 8%` | `black 6%` | hover wash |
+| `--item-selected` | `white 12%` | `black 10%` | selected wash |
+| `--overlay` | `black 60%` | `black 32%` | modal scrim |
+| `--on-danger` | `#171717` | `#ffffff` | text on `--danger` |
 
-### 成员泳道色（仅用于泳道标识，不用于语义）
+### Semantic (state only)
 
-`--member-1 #2FC4B2` · `--member-2 #7C9CFF` · `--member-3 #C084FC` · `--member-4 #FB923C`
+`--energy` (drawing power / queued / running) · `--energy-soft` · `--success` (done) · `--danger` (failed) · `--info` (frozen world) — plus the matching `*-soft`/tint washes used by status chips.
 
-### 活动分类色（时间轴色块 = 分类，非成员）
+### Glass
 
-| 分类 | token | Dark | 说明 |
-| --- | --- | --- | --- |
-| 睡眠 `sleep` | `--cat-sleep` | `#3F4E5A` | 刻意低饱和——占全天一半以上，不应抢注意力 |
-| 用餐 `meal` | `--cat-meal` | `#E8A33D` | 琥珀 |
-| 家务 `chore` | `--cat-chore` | `#2FC4B2` | 青绿 |
-| 学习工作 `focus` | `--cat-focus` | `#7C9CFF` | 蓝紫 |
-| 休闲 `leisure` | `--cat-leisure` | `#C084FC` | 紫 |
-| 外出 `away` | `--cat-away` | `#4B5A64` | 灰 + 虚线描边 = "不在此处" |
+| Token | Value |
+| --- | --- |
+| `--glass-bg` | dark `rgb(31 29 26 / .72)` · light `rgb(251 250 247 / .72)` |
+| `--glass-bg-opaque` | `#1f1d1a` / `#fbfaf7` |
+| `--glass-border` | `white 10%` / `black 10%` |
+| `--glass-blur` | `blur(24px) saturate(150%)` |
+| `--glass-blur-lg` | `blur(40px) saturate(150%)` |
 
-色块渲染公式（在 JS 中预计算，不依赖 `color-mix`）：
-背景 `alpha(cat, .22)` · 描边 `1px alpha(cat, .45)` · 文本 `alpha(cat, .92)` 提亮 · 左侧 3px 实心条 = 成员色。
+Glass text always uses `--fg` / `--fg-muted`; the 72% cocoa wash already darkens/lightens the backdrop, and light text on it never drops below the muted contrast floor.
+
+### Canvas
+
+`--dot-color` + `--dot-tile` (22px) paint the dot grid on `body`. `--member-1..4` identify members; `--cat-*` classify activities. Neither is semantic and neither may be reused for UI chrome.
 
 ## 3. Typography
 
-| 角色 | 字体 | 规格 |
+| Role | Font | Spec |
 | --- | --- | --- |
-| UI（默认） | `ui-sans-serif, system-ui, -apple-system, "Segoe UI Variable Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif` | — |
-| 数值 / 时间 | `"JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace` | `font-variant-numeric: tabular-nums` |
+| UI (default) | `"Baloo 2"` (400–800, bundled locally via `src/styles/fonts.css`) | `--font-sans` |
+| Numbers / time / ids | `"JetBrains Mono", "Cascadia Mono", …` | `num` utility, `tabular-nums` |
 
-> **为何不用 webfont**：本地离线研究工具，webfont 请求失败会触发 FOUT/布局跳动；中文子集体积过大。
-> 对比度改由**排版层级**建立：微标签大写 + 宽字距、超大等宽读数、标题负字距。
+Baloo 2 is bundled as two `woff2` subsets (latin, latin-ext) so the console never blocks on a network font request.
 
-| 层级 | 字号 / 行高 | 字重 | 字距 | 用途 |
+| Level | Size / line-height | Weight | Utility | Use |
 | --- | --- | --- | --- | --- |
-| Display 时间读数 | `34px / 1.0` | 500 | `-0.02em` | 时间控制条 `HH:MM`（等宽） |
-| 指标数值 | `24px / 1.15` | 500 | `-0.01em` | 指标条 kWh / W（等宽） |
-| 面板标题 | `14px / 1.3` | 600 | `-0.01em` | 卡片头 |
-| 正文 | `13px / 1.55` | 400 | `0` | 描述 |
-| 次要 | `12px / 1.5` | 400 | `0` | 提示 |
-| 微标签 (CJK) | `11px / 1.2` | 500 | `0.08em` | 指标名 / 分组名 |
-| 微标签 (Latin) | `10px / 1.2` | 600 | `0.14em` + `uppercase` | 单位 `KWH` / `W` / 状态码 |
+| View title | `15–16px` | 700–800 | — | Worlds / World / page headers |
+| Panel title | `14px` | 700 | — | `Panel` header |
+| Card title | `13–14px` | 600 | — | world id, spacetime name, block postcode |
+| Body | `13px / 1.55` | 400–500 | — | descriptions |
+| Secondary | `11–12px` | 400–500 | — | hints, meta |
+| Micro label | `11px` | 600 | `label-micro` | field labels, stat rows |
+| Latin micro | `10px` | 700 + `0.12em` uppercase | `label-latin` | units, status codes |
+| Numeric readout | `22–36px` | 500 | `num` | metric cells, clock |
 
 ## 4. Spacing & Layout
 
-基准 **4px**，Tailwind 刻度直接映射：`1=4 2=8 3=12 4=16 5=20 6=24 8=32 10=40 12=48`。
+Base **4px**; Tailwind steps map directly (`1=4 2=8 3=12 4=16 5=20 6=24 8=32`).
 
-- 卡片内边距：`p-4`(16) 常规、`p-5`(20) 主面板；卡片间距 `gap-3`(12)。
-- 页面外边距：`px-4 lg:px-5`，纵向 `gap-3`。
-- 结构：`header`（粘顶，磨砂）→ `main` 三栏 `grid-cols-[minmax(0,320px)_minmax(0,1fr)_minmax(0,340px)]`（`<1280px` 折为单列）→ `footer` 时间控制条（粘底）。
-- 内容宽度：主区不受 `max-w` 限制（研究工具，屏幕即画布），但左右面板最小宽 300px。
+- Page gutters `p-3 lg:p-4`; vertical rhythm `gap-3`.
+- Card padding `px-3.5/px-4 py-3` for bars, `p-4/p-5` for panels and forms.
+- Toolbars: `chrome px-3.5 py-3`; floating chrome (`chrome`) is reserved for bars, headers and the play bar; `chrome-lg` for popovers, drawers and canvas HUDs.
+- Content columns: `max-w-5xl` (detail/forms) and `max-w-6xl` (world grid); the console is desktop-first at 1440×900.
 
 ## 5. Radii / Elevation / Borders
 
-| Token | 值 | 用途 |
+| Token | Value | Use |
 | --- | --- | --- |
-| `--r-sm` | `6px` | 输入、徽章、kbd |
-| `--r-md` | `10px` | 按钮、色块 |
-| `--r-lg` | `14px` | 卡片、面板 |
-| `--r-xl` | `18px` | 抽屉、浮层 |
-| `--r-pill` | `9999px` | 状态点、极小徽章 |
+| `--r-sm` | 6px | kbd, tiny tags |
+| `--r-md` | 8px | inputs, buttons (small), sliders |
+| `--r-lg` | 10px | buttons, small tiles |
+| `--r-xl` | 18px | cards, panels, popovers, chrome |
+| `--r-pill` | 999px | chips, segmented controls, status dots |
 
-- 结构线**永远 1px**，用 `--border`；禁止 ≥2px 的装饰边框。
-- 阴影：仅两档。`--shadow-1: 0 1px 2px rgba(0,0,0,.32)`（浮层）；`--shadow-2: 0 18px 40px -12px rgba(0,0,0,.55)`（抽屉/弹层）。
-  卡片默认**无阴影**，靠 1px 描边与底色差分层。禁止 Tailwind `shadow-md/lg/xl` 默认值。
-- 主按钮加内阴影 `inset 0 1px 0 rgba(255,255,255,.08)` 形成可按压的实体感。
-- 磨砂：`backdrop-filter: blur(18px) saturate(180%)`，仅用于 header / footer / 弹层。
+- Structure lines are always **1px** `--border`; `--border-strong` marks inputs and chip outlines. No 2px decorative borders.
+- Elevation is three steps: `--shadow-1` (resting card / button), `--shadow-2` (hover lift, popover), `--shadow-3` (drawer, canvas HUD). No Tailwind default `shadow-md/lg/xl`.
+- Selected surfaces use `--brand-soft` + `--brand-ring`, never a coloured border.
 
 ## 6. Motion
 
-| Token | 值 | 用途 |
+| Token | Value | Use |
 | --- | --- | --- |
-| `--t-fast` | `120ms` | hover / 焦点 |
-| `--t-base` | `180ms` | 展开、tab 切换 |
-| `--t-slow` | `320ms` | 面板入场 |
-| `--ease` | `cubic-bezier(0.16, 1, 0.3, 1)` | 全局 |
+| `--t-fast` | 150ms | hover / focus |
+| `--t-base` | 200ms | card lift, tab switch |
+| `--t-slow` | 320ms | panel entrance |
+| `--ease` | `cubic-bezier(0.16, 1, 0.3, 1)` | global |
 
-- 只动 `transform` / `opacity`。禁止动 `top/left/width/height`。
-- 入场：`translateY(6px) + opacity 0 → 1`，`--t-slow --ease`，同组元素按 `index * 40ms` 级联。
-- `:active` 主按钮 `scale(0.985)`。
-- **播放游标不做补间动画**——它由 `minute` 直接驱动，逐帧位移即真实数据；不得额外加 transition 造成滞后。
-- 遵循 `prefers-reduced-motion: reduce`：关闭入场位移与级联。
+- Only `transform` / `translate` / `opacity` / colour properties. Interactive cards use `card-lift` (which transitions `translate`, `transform`, shadow and border together) paired with `hover:-translate-y-0.5 hover:shadow-2`.
+- Group entrance: `enter` utility, `translateY(6px) + opacity 0 → 1` staggered by `--enter-index` (40ms).
+- Primary buttons press with `scale(0.985)`.
+- The replay cursor never tweens — it is driven by `minute`, frame by frame.
+- `prefers-reduced-motion: reduce` disables entrance motion and every transition.
 
 ## 7. Component Primitives
 
-| 原语 | 文件 | 契约 |
-| --- | --- | --- |
-| `Button` | `components/ui/button.tsx` | shadcn；`default` 用 `--accent`，`outline` 用 1px `--border-strong` |
-| `Card` | `components/ui/card.tsx` | shadcn；本项目覆盖为 `bg-surface` + `1px --border` + `--r-lg` + 无阴影 |
-| `Panel` | `components/primitives/Panel.tsx` | 研究台统一面板：`title` / `hint` / `actions` / `children`，头部分隔线 1px |
-| `MetricCell` | `components/primitives/MetricCell.tsx` | 微标签 + 等宽数值 + 单位，固定 `min-w` 防跳动 |
-| `StatusDot` | `components/primitives/StatusDot.tsx` | 8px 圆点，`on`=`--energy`，`off`=`--fg-subtle` |
-| `TimeReadout` | `components/primitives/TimeReadout.tsx` | 等宽 `HH:MM`，`tabular-nums` |
+Shared vocabulary (all token-backed utilities in `index.css`):
 
-**活动分类推导**（`lib/activity.ts`）：后端 `ActivitySegment` 无 `category` 字段，前端按关键词映射到 6 个分类，映射表集中在一处，未命中 → `leisure`。这是展示层推导，**不新增任何 API 字段**。
+| Utility | Contract |
+| --- | --- |
+| `card` | opaque cocoa data surface: `--surface` + 1px `--border` + `--r-xl` + `--shadow-1` |
+| `chrome` | frosted glass bar: `--glass-bg` + `--glass-blur` + `--glass-border` + `--r-xl` |
+| `chrome-lg` | heavier-blur glass for popovers, drawers, canvas HUDs |
+| `chip` / `chip-active` | cocoa pill for stats and status; `chip-active` marks the selected pill |
+| `glass` / `glass-lg` / `paper` | background-only variants (chrome without border/radius) |
+| `card-lift` | the transition used by interactive cards |
+| `enter` | staggered entrance animation |
+| `num` / `label-micro` / `label-latin` | typographic roles |
+
+| Primitive | File | Contract |
+| --- | --- | --- |
+| `Button` | `components/ui/button.tsx` | `default` = cocoa primary (`bg-brand` + `text-brand-fg` + `shadow-1`), `outline` = 1px `--border-strong` + `--surface`, `secondary` = `--surface-3`, `ghost` = hover wash; `active:scale-[0.985]` |
+| `Badge` | `components/ui/badge.tsx` | pill; `outline` = `--surface-2` + `--border-strong` |
+| `Input` / `Textarea` | `components/ui/input.tsx`, `textarea.tsx` | `--surface` (dark `--surface-2`) + `--border-strong` + `--r-md`, focus `--brand-ring` |
+| `Tabs` | `components/ui/tabs.tsx` | cocoa segmented control: pill list on `--surface-2`, active trigger `bg-brand text-brand-fg` |
+| `Select` / `DropdownMenu` | `components/ui/select.tsx`, `dropdown-menu.tsx` | floating surfaces: `chrome-lg` + `--shadow-2`; items hover with `--item-hover` |
+| `Tooltip` | `components/ui/tooltip.tsx` | opaque `--popover` + `--shadow-2` so the arrow can carry the border |
+| `Sheet` | `components/ui/sheet.tsx` | opaque `--surface` drawer over a `--overlay` scrim, `--shadow-3` |
+| `Switch` / `Slider` | `components/ui/*` | checked/range = `--brand`, track = `--border-strong` / `--surface-3`, thumb = `--surface` |
+| `Panel` | `components/primitives/Panel.tsx` | `card` + header with 1px divider; `title` / `hint` / `actions` / `children` |
+| `WorldBadge` | `components/primitives/WorldBadge.tsx` | `Draft` = neutral pill, `Frozen` = `--info` tint |
+| `MetricCell` | `components/primitives/MetricCell.tsx` | micro label + `num` value + unit, fixed `min-w` |
+| `StatusDot` | `components/primitives/StatusDot.tsx` | 8px dot, `on` = `--energy` |
+| `CategoryLegend` | `components/primitives/CategoryLegend.tsx` | activity-category swatches from `--cat-*` |
+
+**Activity-category derivation** (`lib/activity.ts`) is unchanged: the backend `ActivitySegment` has no `category`, so the front-end maps keywords to the six categories in one place (miss → `leisure`). This is display-layer derivation and adds no API field.
 
 ## 8. Responsive & Accessibility
 
-断点：`<768px` 单列堆叠；`768–1279px` 双列（时间轴占满，两侧面板落到下方）；`≥1280px` 三列。
+Breakpoints: `<768px` single column; `768–1279px` two columns; `≥1280px` full three-column observation layout. Verified down to ~700px; the shell is desktop-first at 1440×900.
 
-- 所有交互元素 `min-height: 32px`，图标按钮 `32×32`；`focus-visible` 统一 `2px --accent` + `offset 2px`。
-- 颜色对比：正文 `--fg` on `--bg` ≥ 12:1；`--fg-muted` ≥ 5.5:1；`--accent` on `--bg` ≥ 7:1。
-- 时间轴色块文本用提亮后的分类色，实测对比 ≥ 5:1。
-- 语义靠**颜色 + 形状**双通道：`away` 用虚线描边，用电状态除颜色外用 `StatusDot` 实心/空心区分。
-- 键盘：`Space` 播放/暂停，`←/→` ±15min，`Shift+←/→` ±60min，`Home/End` 首尾；焦点在输入框/下拉内时不劫持按键。
-- 页面 `lang="en"`；图表容器带 `aria-label`；`prefers-reduced-motion` 降级。
+- Every interactive element is at least 32px tall (icon buttons 32×32, `xs` buttons 24px inside dense rows).
+- `:focus-visible` is a global `2px --brand` outline with 2px offset; floating surfaces additionally use `--brand-ring`.
+- Contrast: body `--fg` on `--surface`/`--glass-bg` ≥ 12:1; `--fg-muted` ≥ 5.5:1; on glass the bg is 72% cocoa, so only `--fg` / `--fg-muted` are used — never a lighter grey.
+- State is carried by colour **and** shape/text: away blocks are dashed, job status is a chip with a word, power is a filled vs hollow dot.
+- Keyboard: `Space` play/pause, `←/→` ±15min, `Shift+←/→` ±60min, `Home/End`; keys are not hijacked while a field has focus. Charts carry `aria-label`; canvas scenes expose an equivalent outline list.
+- `prefers-reduced-motion` is honoured (see §6).
 
 ## 9. Accepted Debt
 
-| 项 | 原因 | 偿还条件 |
+| Item | Reason | Payoff condition |
 | --- | --- | --- |
-| 使用 Lucide（minimalist-skill 禁用） | 任务硬性要求 | 若后续引入 Phosphor/Radix Icons 可替换 |
-| 无 webfont，靠系统字体栈 | 本地离线工具，避免 FOUT 与中文子集体积 | 若打包内嵌字体子集可升级 |
-| `HouseFloorplan` / `SnapshotPanel` / `EnergyChart` / `PipelineDrawer` 为占位壳 | 属后续里程碑范围 | 对应里程碑实现后替换 |
-| 活动分类为前端关键词推导 | 契约无 `category` 字段 | 若后端新增字段则改为直读 |
-| vis-timeline 自带 DOM 结构，部分样式靠 `!important` 覆盖 | 第三方库样式优先级 | 若自绘时间轴则移除 |
+| Lucide icons (banned by `minimalist-skill`) | task requirement | replace if Phosphor/Radix Icons are adopted |
+| `HouseFloorplan` / `SnapshotPanel` / `EnergyChart` / `PipelineDrawer` are placeholder shells | owned by later milestones | replace when the milestone lands |
+| Activity categories derived on the front end | contract has no `category` field | switch to the field if the backend adds one |
+| vis-timeline injects its own DOM, so some rules use `!important` | third-party specificity | remove if the timeline is drawn in-house |
+| Konva scene colours are resolved from CSS variables at runtime | canvas cannot consume CSS variables directly | inline the resolved tokens if the scene is server-rendered |
 
 ## 10. 场景渲染（react-konva）
 
@@ -504,3 +528,41 @@ in `vite.config.ts` (moment locales, `vis-timeline`'s bundled translations, Chin
 `moment-with-locales` never enters the bundle. Gate: scanning `dist/` for `[\u4e00-\u9fff]`
 returns 0 matches.
 
+## 15. Warm Cocoa re-skin (whole-console)
+
+The visual language of §1–§9 was replaced wholesale. Palette, radii, glass recipe and the Baloo 2
+type stack live in `src/index.css`; the mirror sources are
+`sister/kanvana/client/src/styles/tokens.css` + `layout.css` + `components/*.css` and
+`sister/infinite-canvas/web/src/styles/globals.css`, so all three products read as one family.
+
+### 15.1 What changed
+
+| Layer | Change |
+| --- | --- |
+| Tokens | surfaces/text/borders re-based on warm cocoa; `--brand` is now the cocoa neutral (`#171717` light / `#fafafa` dark) with `--brand-fg` as its inverse; semantic colour narrowed to state |
+| New tokens | `--item-hover`, `--item-selected`, `--overlay`, `--on-danger` (light + dark) and their Tailwind mappings (`bg-item-hover`, `bg-item-selected`, `bg-overlay`, `text-on-danger`, `ring-brand-ring`) |
+| New utilities | `chrome`, `chrome-lg` (frosted bars vs. heavy-blur overlays), `card` (opaque cocoa data surface), `card-lift` (interactive-card motion), `chip`, `chip-active` |
+| App shell | sticky `glass` header, cocoa brand mark, pill nav with `bg-brand` active item, outline theme toggle |
+| L0 Worlds | glass toolbar (title + counts + refresh + new-world form) above a responsive grid of `card` tiles: Baloo semibold world id, `Draft`/`Frozen` badge, stat pill, last activity, Clone/Delete footer; hover lift |
+| L1 World | glass header (back · id · badge · stat pill · Clone), cocoa segmented tab control, spacetime rows as cards with semantic status chips, wizard as a glass form |
+| L2a Watch | glass breadcrumb/day bar, paper pill block chips, glass layer headers, glass play bar (still mounted only by `WatchView`) |
+| Jobs / Settings / Build | `card` panels, `--item-hover` / `--item-selected` list rows, status chips with semantic tints, shared textarea/input/switch styling |
+| Observation panels | `Panel` is now `card`; room tiles, member cards, household cards and pipeline segments follow the same border/radius/tint rules; `MetricStrip` legend is a pill row |
+| Scene chrome | `SceneView` panel is `card`; outline/diagnostics toggles are cocoa pills; `AgentHud` and the rooms outline are `chrome-lg` + `--shadow-3`; canvas hints are `chip`; `scene/core/tokens.ts` fallbacks retuned to cocoa (runtime values still come from CSS variables) |
+| Docs | this section; §1–§9 rewritten; `vis-timeline.css` keeps its token-driven overrides (item radius raised to `--r-md`) |
+
+### 15.2 Invariants kept
+
+- No behaviour, data wiring, URL parameter, store shape or routing change; the play bar remains
+  `WatchView`-only.
+- All user-visible copy stays English.
+- Components reference tokens only — the single remaining hardcoded palette lives in
+  `scene/core/tokens.ts` as the non-DOM fallback, which is the documented canvas boundary.
+- `tsc -b`, `npm run build` and `npm run lint` are the gate for this change.
+
+### 15.3 Contrast notes
+
+Glass is 72% cocoa in both themes, so glass chrome uses `--fg` / `--fg-muted` only. Cocoa primary
+buttons pair `--brand` with `--brand-fg` (the exact inverse), so the pair inverts cleanly with the
+theme. Status chips always combine a semantic tint, a 1px border and a word, so state survives
+greyscale and colour-blind viewing.

@@ -72,7 +72,7 @@ export function PipelineDrawer() {
 
   return (
     <Sheet>
-      <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface px-4 py-3">
+      <div className="card flex flex-col gap-3 px-4 py-3.5">
         <div className="flex items-center justify-between gap-2">
           <span className="label-micro flex items-center gap-1.5">
             <GitBranch className="size-3" aria-hidden />
@@ -146,7 +146,7 @@ export function PipelineDrawer() {
                       {segments.map((segment, index) => (
                         <li
                           key={`${stage.key}-${index}`}
-                          className="rounded-md border border-border bg-surface-2 px-3 py-2"
+                          className="rounded-xl border border-border bg-surface-2 px-3.5 py-2.5"
                         >
                           <div className="flex items-baseline gap-2">
                             <span className="num shrink-0 text-[11px] text-brand">{segment.time ?? "—"}</span>
@@ -165,7 +165,7 @@ export function PipelineDrawer() {
                               {segment.operations.map((operation, opIndex) => (
                                 <span
                                   key={`${operation.unique_id}-${opIndex}`}
-                                  className="num rounded-sm border border-border-strong bg-surface px-1.5 py-px text-[9px] text-fg-muted"
+                                  className="num rounded-full border border-border-strong bg-surface px-2 py-px text-[9px] text-fg-muted"
                                 >
                                   {operation.unique_id}
                                   <span className="text-energy">
@@ -193,7 +193,7 @@ export function PipelineDrawer() {
                         <span className="text-[12px] font-semibold text-fg">{stage.title}</span>
                         <span className="label-latin">raw llm log</span>
                       </div>
-                      <pre className="num max-h-72 overflow-auto rounded-md border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap text-fg-muted">
+                      <pre className="num max-h-72 overflow-auto rounded-xl border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap text-fg-muted">
                         {text.length > 0 ? text : "No log file for this stage."}
                       </pre>
                     </section>
@@ -207,7 +207,7 @@ export function PipelineDrawer() {
                 <span className="text-[12px] font-semibold text-fg">s4 validation report</span>
                 <span className="label-micro">cleaned / repaired / dropped counts</span>
               </div>
-              <pre className="num max-h-[28rem] overflow-auto rounded-md border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap text-fg-muted">
+              <pre className="num max-h-[28rem] overflow-auto rounded-xl border border-border bg-surface-2 px-3 py-2 text-[10px] leading-relaxed whitespace-pre-wrap text-fg-muted">
                 {stages?.report === null || stages?.report === undefined
                   ? "No validation report."
                   : JSON.stringify(stages.report, null, 2)}

@@ -49,7 +49,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
 
   return (
     <aside
-      className="pointer-events-auto absolute bottom-3 left-3 z-20 flex max-h-[min(420px,calc(100%-24px))] w-[320px] flex-col overflow-hidden rounded-lg border border-border bg-surface/95 shadow-[var(--shadow-2)] backdrop-blur"
+      className="chrome-lg pointer-events-auto absolute bottom-3 left-3 z-20 flex max-h-[min(420px,calc(100%-24px))] w-[320px] flex-col overflow-hidden shadow-3"
       aria-label="Member details"
     >
       <header className="flex shrink-0 items-center gap-2 border-b border-border px-3 py-2">
@@ -60,7 +60,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
           {memberInitial(member.id)}
         </span>
         <span className="num text-[12px] font-semibold text-fg">{member.id}</span>
-        <span className="label-micro truncate">{member.info.bedroom ?? ""}</span>
+        <span className="label-micro text-fg-muted truncate">{member.info.bedroom ?? ""}</span>
         <Button
           variant="ghost"
           size="icon-sm"
@@ -74,7 +74,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3 py-2.5">
         <div className="flex flex-col gap-0.5">
-          <span className="num text-[10px] text-fg-subtle">
+          <span className="num text-[10px] text-fg-muted">
             {member.info.age !== null ? `age ${member.info.age}` : "Age unknown"}
             {member.info.gender !== null ? ` · ${member.info.gender}` : ""}
           </span>
@@ -84,33 +84,33 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
             </span>
           ) : null}
           {member.info.persona.length > 0 ? (
-            <span className="mt-0.5 line-clamp-2 text-[10px] leading-snug text-fg-subtle">
+            <span className="mt-0.5 line-clamp-2 text-[10px] leading-snug text-fg-muted">
               {member.info.persona}
             </span>
           ) : null}
         </div>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
-          <span className="label-micro">Now</span>
+          <span className="label-micro text-fg-muted">Now</span>
           {segment !== undefined ? (
             <>
               <span className="text-[11px] leading-snug text-fg">{segment.activity}</span>
-              <span className="num text-[10px] text-fg-subtle">
+              <span className="num text-[10px] text-fg-muted">
                 {segment.location} · {formatHHMM(segment.start)}–{formatHHMM(segment.end)} ·{" "}
                 {formatMinutesAsDuration(minute - segment.start)} elapsed
               </span>
             </>
           ) : (
-            <span className="text-[11px] text-fg-subtle">No activity recorded at this time.</span>
+            <span className="text-[11px] text-fg-muted">No activity recorded at this time.</span>
           )}
         </section>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
-          <span className="label-micro">
+          <span className="label-micro text-fg-muted">
             In use · {used.length} appliances · {formatWatts(totalWatts)} total
           </span>
           {used.length === 0 ? (
-            <span className="text-[11px] text-fg-subtle">No appliance in use.</span>
+            <span className="text-[11px] text-fg-muted">No appliance in use.</span>
           ) : (
             <ul className="flex flex-col gap-1">
               {used.map((appliance) => (
@@ -121,7 +121,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
                   <span className="num shrink-0 text-[10px] text-energy">
                     {formatWatts(wattsAt(appliance, minute))}
                   </span>
-                  <span className="label-latin shrink-0">
+                  <span className="label-latin shrink-0 text-fg-muted">
                     {APPLIANCE_STATE_LABELS[stateAt(appliance, minute)]}
                   </span>
                 </li>
@@ -131,9 +131,9 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
         </section>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
-          <span className="label-micro">Next</span>
+          <span className="label-micro text-fg-muted">Next</span>
           {upcoming.length === 0 ? (
-            <span className="text-[11px] text-fg-subtle">No more activity today.</span>
+            <span className="text-[11px] text-fg-muted">No more activity today.</span>
           ) : (
             <ul className="flex flex-col gap-1">
               {upcoming.map((item) => (

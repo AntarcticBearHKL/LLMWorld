@@ -32,15 +32,14 @@ const JOB_STATUS_LABEL: Record<JobInfo["status"], string> = {
 }
 
 const JOB_STATUS_CLASS: Record<JobInfo["status"], string> = {
-  queued: "border-border-strong text-fg-muted",
-  running: "border-energy/50 text-energy",
-  done: "border-success/50 text-success",
-  failed: "border-danger/50 text-danger",
-  cancelled: "border-border-strong text-fg-subtle",
+  queued: "border-border-strong bg-surface-2 text-fg-muted",
+  running: "border-energy/40 bg-energy-soft text-energy",
+  done: "border-success/40 bg-success/10 text-success",
+  failed: "border-danger/40 bg-danger/10 text-danger",
+  cancelled: "border-border-strong bg-surface-2 text-fg-subtle",
 }
 
-const COUNT_FIELD_CLASS =
-  "h-7 w-16 rounded-md border-border-strong bg-surface-2 px-2 text-[11px] text-fg focus-visible:border-brand"
+const COUNT_FIELD_CLASS = "h-7 w-16 px-2 text-[11px]"
 
 interface BuildStepCardProps {
   world: string
@@ -103,23 +102,23 @@ export function BuildStepCard({
   )
 
   const statusChip = done
-    ? { text: "Done", className: "border-success/50 text-success" }
+    ? { text: "Done", className: "border-success/40 bg-success/10 text-success" }
     : runnable
-      ? { text: "Runnable", className: "border-brand/50 text-brand" }
-      : { text: "Blocked", className: "border-danger/50 text-danger" }
+      ? { text: "Runnable", className: "border-brand-ring bg-brand-soft text-fg" }
+      : { text: "Blocked", className: "border-danger/40 bg-danger/10 text-danger" }
 
   return (
     <section
       className={cn(
-        "flex flex-col overflow-hidden rounded-lg border bg-surface transition-colors",
-        focused ? "border-brand/50" : "border-border",
+        "card card-lift flex flex-col overflow-hidden",
+        focused ? "border-brand-ring shadow-2" : "hover:border-border-strong",
       )}
     >
-      <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-3 py-2">
-        <span className="num flex size-5 shrink-0 items-center justify-center rounded-sm border border-border-strong text-[10px] text-fg-muted">
+      <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-3.5 py-2.5">
+        <span className="num flex size-5 shrink-0 items-center justify-center rounded-full border border-border-strong bg-surface-2 text-[10px] text-fg-muted">
           {index + 1}
         </span>
-        <span className="text-[12px] font-semibold text-fg">{BUILD_STEP_LABEL[step]}</span>
+        <span className="text-[13px] font-semibold text-fg">{BUILD_STEP_LABEL[step]}</span>
         <span className="label-latin">{step}</span>
         <Badge variant="outline" className={cn("label-latin", statusChip.className)}>
           {statusChip.text}
@@ -160,11 +159,11 @@ export function BuildStepCard({
                   <span
                     title={item.blocked_reason ?? undefined}
                     className={cn(
-                      "num inline-flex items-center gap-1 rounded-sm border px-1.5 py-0.5 text-[10px]",
+                      "num inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px]",
                       item.done
-                        ? "border-success/40 text-success"
+                        ? "border-success/40 bg-success/10 text-success"
                         : item.runnable
-                          ? "border-border-strong text-fg-muted"
+                          ? "border-border-strong bg-surface-2 text-fg-muted"
                           : "border-danger/30 text-fg-subtle",
                     )}
                   >
@@ -184,16 +183,20 @@ export function BuildStepCard({
         <div className="flex flex-wrap items-center gap-2">
           <span
             className={cn(
-              "num rounded-sm border px-1.5 py-px text-[9px]",
-              done ? "border-success/40 text-success" : "border-border-strong text-fg-subtle",
+              "num rounded-full border px-2 py-px text-[9px]",
+              done
+                ? "border-success/40 bg-success/10 text-success"
+                : "border-border-strong bg-surface-2 text-fg-subtle",
             )}
           >
             {done ? "done" : "not done"}
           </span>
           <span
             className={cn(
-              "num rounded-sm border px-1.5 py-px text-[9px]",
-              runnable ? "border-brand/40 text-brand" : "border-border-strong text-fg-subtle",
+              "num rounded-full border px-2 py-px text-[9px]",
+              runnable
+                ? "border-brand-ring bg-brand-soft text-fg"
+                : "border-border-strong bg-surface-2 text-fg-subtle",
             )}
           >
             {runnable ? "runnable" : "blocked"}
@@ -244,7 +247,7 @@ export function BuildStepCard({
         </div>
 
         {focused ? (
-          <div className="flex flex-col gap-3 rounded-md border border-border bg-surface-2 p-3">
+          <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface-2 p-3.5">
             <BuildPreviewList
               preview={previewQuery.data}
               isPending={previewQuery.isPending}
@@ -283,11 +286,11 @@ export function BuildStepCard({
             {job !== null ? (
               <div className="flex min-h-0 flex-col gap-2">
                 {job.error !== null ? (
-                  <p className="rounded-md border border-danger/40 px-3 py-2 text-[11px] text-danger">
+                  <p className="rounded-xl border border-danger/40 bg-danger/10 px-3 py-2 text-[11px] text-danger">
                     Last failure: {job.error}
                   </p>
                 ) : null}
-                <div className="flex h-80 min-h-0 flex-col overflow-hidden rounded-md border border-border bg-surface">
+                <div className="flex h-80 min-h-0 flex-col overflow-hidden rounded-xl border border-border bg-surface">
                   <StepInspector jobId={job.id} step={job.step} live={isActiveJob(job)} />
                 </div>
               </div>
