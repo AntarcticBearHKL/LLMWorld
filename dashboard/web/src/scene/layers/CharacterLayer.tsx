@@ -47,6 +47,13 @@ const pointAlong = (points: Point[], t: number): Point => {
 const walkDuration = (stepMinutes: number): number =>
   Math.min(600, Math.max(160, stepMinutes * 40))
 
+interface Walker {
+  node: Konva.Group
+  polyline: Point[]
+  duration: number
+  startedAt: number
+}
+
 export function CharacterLayer({ state, showTrail = false }: CharacterLayerProps) {
   const tokens = useSceneTokens()
   const stepMinutes = useTimeStore((store) => store.stepMinutes)
@@ -54,11 +61,30 @@ export function CharacterLayer({ state, showTrail = false }: CharacterLayerProps
   const selectedMember = useTimeStore((store) => store.selectedMember)
   const isSelected = (memberId: string): boolean => memberId === selectedMember
   const nodes = useRef<Map<string, Konva.Group>>(new Map())
-  const animations = useRef<Map<string, Konva.Animation>>(new Map())
+  const walkers = useRef<Map<string, Walker>>(new Map())
+  const walkAnimation = useRef<Konva.Animation | null>(null)
   const roomMemo = useRef<Map<string, string | null>>(new Map())
   const [trails, setTrails] = useState<Record<string, Point[]>>({})
   const reduced = prefersReducedMotion()
   const outBand = outBandOf({ width: state.layout.width, height: state.layout.height })
+
+  const startWalking = (layer: Konva.Layer | null): void => {
+    if (layer === null || walkAnimation.current !== null) return
+    const animation: Konva.Animation = new Konva.Animation(() => {
+      const now = performance.now()
+      for (const [memberId, walker] of walkers.current) {
+        const t = Math.min(1, (now - walker.startedAt) / walker.duration)
+        walker.node.position(pointAlong(walker.polyline, t * t * (3 - 2 * t)))
+        if (t >= 1) walkers.current.delete(memberId)
+      }
+      if (walkers.current.size === 0) {
+        animation.stop()
+        walkAnimation.current = null
+      }
+    }, layer)
+    walkAnimation.current = animation
+    animation.start()
+  }
 
   useLayoutEffect(() => {
     const additions: Record<string, Point[]> = {}
@@ -76,8 +102,7 @@ export function CharacterLayer({ state, showTrail = false }: CharacterLayerProps
         continue
       }
 
-      animations.current.get(pose.memberId)?.stop()
-      animations.current.delete(pose.memberId)
+      walkers.current.delete(pose.memberId)
 
       if (reduced) {
         node.position(pose.pos)
@@ -90,20 +115,13 @@ export function CharacterLayer({ state, showTrail = false }: CharacterLayerProps
           ? state.layout.pathBetween(previous, pose.room)
           : [from, pose.pos]
       const polyline: Point[] = raw.length > 1 ? [from, ...raw.slice(1)] : [from, pose.pos]
-      const duration = walkDuration(stepMinutes)
-      const startedAt = performance.now()
-
-      const animation = new Konva.Animation((frame) => {
-        const elapsed = (frame?.time ?? performance.now()) - startedAt
-        const t = Math.min(1, elapsed / duration)
-        node.position(pointAlong(polyline, t * t * (3 - 2 * t)))
-        if (t >= 1) {
-          animations.current.delete(pose.memberId)
-          animation.stop()
-        }
-      }, node.getLayer())
-      animations.current.set(pose.memberId, animation)
-      animation.start()
+      walkers.current.set(pose.memberId, {
+        node,
+        polyline,
+        duration: walkDuration(stepMinutes),
+        startedAt: performance.now(),
+      })
+      startWalking(node.getLayer())
     }
 
     const keys = Object.keys(additions)
@@ -121,9 +139,10 @@ export function CharacterLayer({ state, showTrail = false }: CharacterLayerProps
   }, [state, stepMinutes, reduced])
 
   useLayoutEffect(() => {
-    const running = animations.current
+    const running = walkers.current
     return () => {
-      for (const animation of running.values()) animation.stop()
+      walkAnimation.current?.stop()
+      walkAnimation.current = null
       running.clear()
     }
   }, [])

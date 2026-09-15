@@ -59,30 +59,41 @@ export function ApplianceLayer({ state, highlighted = null }: ApplianceLayerProp
 
   return (
     <>
-      <Layer ref={layerRef}>
-      {state.appliances.map((pose) => {
-        const tone = toneColor(applianceToneKey(pose.state, pose.cycling), tokens)
-        const live = pose.state === "active" || pose.state === "baseload"
-        return (
+      <Layer ref={layerRef} listening={false}>
+        {state.appliances.map((pose) => {
+          const tone = toneColor(applianceToneKey(pose.state, pose.cycling), tokens)
+          const live = pose.state === "active" || pose.state === "baseload"
+          return (
+            <Circle
+              key={pose.uniqueId}
+              name={appliancePulseName(pose.state, pose.cycling)}
+              x={pose.pos.x}
+              y={pose.pos.y}
+              radius={RADIUS}
+              fill={tone}
+              opacity={live ? 0.92 : 0.32}
+              stroke={tone}
+              strokeWidth={pose.cycling ? 2 : 1}
+              perfectDrawEnabled={false}
+              shadowForStrokeEnabled={false}
+            />
+          )
+        })}
+      </Layer>
+
+      <Layer>
+        {state.appliances.map((pose) => (
           <Circle
-            key={pose.uniqueId}
-            name={appliancePulseName(pose.state, pose.cycling)}
+            key={`${pose.uniqueId}-hit`}
             x={pose.pos.x}
             y={pose.pos.y}
-            radius={RADIUS}
-            fill={tone}
-            opacity={live ? 0.92 : 0.32}
-            stroke={tone}
-            strokeWidth={pose.cycling ? 2 : 1}
+            radius={RADIUS + 6}
+            fill="transparent"
             onMouseEnter={() => setHovered(pose.uniqueId)}
             onMouseLeave={() => setHovered((current) => (current === pose.uniqueId ? null : current))}
           />
-        )
-      })}
+        ))}
 
-      </Layer>
-
-      <Layer listening={false}>
         {state.appliances.map((pose) => (
           <Text
             key={`${pose.uniqueId}-glyph`}
@@ -93,6 +104,7 @@ export function ApplianceLayer({ state, highlighted = null }: ApplianceLayerProp
             text={applianceGlyph(pose.label, "")}
             fontSize={9}
             fill={pose.state === "active" || pose.state === "baseload" ? tokens.bg : tokens.fgSubtle}
+            listening={false}
           />
         ))}
 
@@ -106,11 +118,12 @@ export function ApplianceLayer({ state, highlighted = null }: ApplianceLayerProp
               radius={RADIUS + 4}
               stroke={tokens.brand}
               strokeWidth={2}
+              listening={false}
             />
           ))}
 
         {hoverPose !== undefined ? (
-          <Label x={hoverPose.pos.x + RADIUS + 4} y={hoverPose.pos.y - 22}>
+          <Label x={hoverPose.pos.x + RADIUS + 4} y={hoverPose.pos.y - 22} listening={false}>
             <Tag fill={tokens.surface2} stroke={tokens.borderStrong} strokeWidth={1} cornerRadius={4} />
             <Text
               text={`${hoverPose.label} · ${formatWatts(hoverPose.watts)} · ${APPLIANCE_STATE_LABELS[hoverPose.state]}`}
