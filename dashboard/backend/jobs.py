@@ -598,6 +598,7 @@ def _run_job(job_id: str) -> None:
         proc: "subprocess.Popen[str]" = subprocess.Popen(
             argv,
             cwd=paths.LLMWORLD_ROOT,
+            env=build.build_env(job_ref),
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,

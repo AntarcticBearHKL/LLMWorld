@@ -373,3 +373,41 @@ class BuildState(BaseModel):
     exists: bool
     houses: List[str] = Field(default_factory=list)
     steps: List[BuildStepStatus] = Field(default_factory=list)
+
+
+# --------------------------------------------------------------------------
+# LLM call trace (per build job; written via the LLM_TRACE_FILE env var)
+# --------------------------------------------------------------------------
+class LLMCallSummary(BaseModel):
+    logical_call_id: str
+    request_index: int = 1
+    request_count: int = 1
+    http_status: Optional[int] = None
+    duration_seconds: Optional[float] = None
+    started_at: Optional[str] = None
+    prompt_chars: Optional[int] = None
+    ok: bool = False
+    error: Optional[str] = None
+    has_response: bool = False
+
+
+class LLMCallList(BaseModel):
+    job_id: str
+    world: Optional[str] = None
+    step: Optional[str] = None
+    exists: bool
+    total: int
+    calls: List[LLMCallSummary] = Field(default_factory=list)
+
+
+class LLMCallDetail(BaseModel):
+    logical_call_id: str
+    request_index: int = 1
+    request_count: int = 1
+    http_status: Optional[int] = None
+    duration_seconds: Optional[float] = None
+    started_at: Optional[str] = None
+    prompt_chars: Optional[int] = None
+    error: Optional[str] = None
+    request: Optional[Dict[str, Any]] = None
+    response: Optional[Any] = None

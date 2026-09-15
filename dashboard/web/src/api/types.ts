@@ -210,7 +210,9 @@ export interface StagePayload {
   logs: Record<string, string>
 }
 
-export type JobKind = "world" | "simulate"
+export type JobKind = "world" | "simulate" | "build"
+
+export type BuildStep = "types" | "personas" | "household" | "assemble"
 
 export type JobStatus = "queued" | "running" | "done" | "failed" | "cancelled"
 
@@ -242,6 +244,7 @@ export interface JobRequest {
   reasoning_effort?: "low" | "medium" | "high" | null
   workers?: number | null
   confirm?: boolean
+  step?: BuildStep | null
 }
 
 export interface JobEstimate {
@@ -263,9 +266,46 @@ export interface JobInfo {
   log_path: string | null
   line_count: number
   error: string | null
+  step: string | null
+  house: string | null
 }
 
 export interface JobCreateResult {
   job: JobInfo
   estimate: JobEstimate
+}
+
+export interface LLMCallSummary {
+  logical_call_id: string
+  request_index: number
+  request_count: number
+  http_status: number | null
+  duration_seconds: number | null
+  started_at: string | null
+  prompt_chars: number | null
+  ok: boolean
+  error: string | null
+  has_response: boolean
+}
+
+export interface LLMCallList {
+  job_id: string
+  world: string | null
+  step: string | null
+  exists: boolean
+  total: number
+  calls: LLMCallSummary[]
+}
+
+export interface LLMCallDetail {
+  logical_call_id: string
+  request_index: number
+  request_count: number
+  http_status: number | null
+  duration_seconds: number | null
+  started_at: string | null
+  prompt_chars: number | null
+  error: string | null
+  request: Record<string, unknown> | null
+  response: unknown
 }

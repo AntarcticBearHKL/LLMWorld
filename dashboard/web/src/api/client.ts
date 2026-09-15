@@ -11,6 +11,8 @@ import type {
   JobEstimate,
   JobInfo,
   JobRequest,
+  LLMCallDetail,
+  LLMCallList,
   RunInfo,
   RunMeta,
   RunSummary,
@@ -286,6 +288,22 @@ export function createJob(payload: JobRequest): Promise<JobCreateResult> {
 
 export function jobStreamUrl(jobId: string): string {
   return buildUrl(`/jobs/${encodeURIComponent(jobId)}/stream`)
+}
+
+export function listJobLlmCalls(jobId: string, offset = 0, limit = 500): Promise<LLMCallList> {
+  if (USE_MOCK) {
+    return delay({ job_id: jobId, world: null, step: null, exists: false, total: 0, calls: [] })
+  }
+  return request<LLMCallList>(`/jobs/${encodeURIComponent(jobId)}/llm-calls`, { offset, limit })
+}
+
+export function getJobLlmCall(jobId: string, callId: string): Promise<LLMCallDetail> {
+  if (USE_MOCK) {
+    return Promise.reject(new ApiError(`mock:${callId}`, 404, "mock 模式没有 LLM 调用记录"))
+  }
+  return request<LLMCallDetail>(
+    `/jobs/${encodeURIComponent(jobId)}/llm-calls/${encodeURIComponent(callId)}`,
+  )
 }
 
 export function cancelJob(jobId: string): Promise<JobInfo> {

@@ -50,6 +50,20 @@
 | `GET .../build/steps/assemble/preview` | reads/writes/overwrites 解析正确 |
 | **失败路径**（真实 LLM `types` 步） | `status=failed` 且 `error` 可读：`build step 'types' exited with code 1: ... [JSON output failed] DeepSeek API error 402 ...` |
 
+### M3 验收 — ✅ PASS（真实 trace 端到端）
+
+- **后端**：`build.build_env()` 给 build 子进程注入
+  `LLM_TRACE_FILE=<world>/<postcode>/log/llm_trace_<job_id>.jsonl`（**按 job 隔离** → 每条调用天然归属到某步，
+  **零改动 `src/`**）；新增 `backend/llm_trace.py` 读取器 + `GET /api/jobs/{job_id}/llm-calls` 与
+  `GET /api/jobs/{job_id}/llm-calls/{call_id}`。
+- **前端**：新增 `StepInspector.tsx`（调用列表 + 提示词/响应/耗时/状态/失败详情），`JobsPanel` 为 build 作业给出
+  「LLM 调用 | 实时日志」页签；`types.ts`/`client.ts`/`useJobs.ts` 同步（`JobKind` 增 `"build"`）。
+- **证据（真实数据）**：跑 `types` 步 → 命中 DeepSeek **402** → 落盘 trace；浏览器（live 构建）实测 StepInspector
+  显示 `#1 HTTP 402 失败 655 ms · 5.6k 字符`，详情含 模型 `deepseek-v4-flash`、完整**提示词**、**原始响应**
+  （provider `raw_text` 402 JSON）。接口返回 `exists=true total=1 http=402 dur=0.655s ok=False`。
+- **验收门**：后端 `py_compile` 全绿；`npx tsc -b` exit 0；`npm run build` exit 0；`npm run lint` exit 0；红线扫描 0 违规。
+- 已知取舍：默认构建（`VITE_USE_MOCK` 未设）为 mock 模式；**live 构建需 `VITE_USE_MOCK=0`**，本会话 live 构建已实测通过（`dist/` 已 ignore）。
+
 ### ⚠️ 外部阻塞：DeepSeek API **402 Insufficient Balance**
 
 **账户余额耗尽**，导致 `types/personas/household` 的 **LLM 成功路径无法实测**。
@@ -62,7 +76,7 @@
 |---|---|---|---|
 | **M1** | 世界 CRUD（`POST /worlds` 空世界、`DELETE`、`GET .../build`） | 建完 `world.json` 存在；零 LLM | ✅ **PASS（本会话验证）** |
 | **M2** | 4 步构建接口 + job 化 + s4 去重 + 失败兜底 | 逐步骤跑完一户；重跑 s4 不重复 | ✅ **PASS（§12.0 口径）**；LLM 成功路径待余额恢复补验 |
-| **M3** | `LLM_TRACE_FILE` 接入 + `StepInspector` 通用化 | 每步可见 prompt / 原始响应 / 耗时 / 失败原因 | ⬜ 未开始（`StepInspector.tsx` 不存在） |
+| **M3** | `LLM_TRACE_FILE` 接入 + `StepInspector` 通用化 | 每步可见 prompt / 原始响应 / 耗时 / 失败原因 | ✅ **PASS（本会话，真实 402 trace 端到端浏览器核对）** |
 | **M4** | 产物读写接口：`.bak.<ts>` + JSON 校验 + diff | 手改 `household.json` 后下一步骤使用改后内容 | ⬜ |
 | **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | ⬜ |
 | **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ⬜ |

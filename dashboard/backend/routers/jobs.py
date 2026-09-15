@@ -14,6 +14,7 @@ from typing import Any, AsyncIterator, Dict, List
 from fastapi import APIRouter, HTTPException, Query
 from sse_starlette.sse import EventSourceResponse
 
+from .. import llm_trace
 from ..jobs import (
     TERMINAL_STATUSES,
     cancel_job,
@@ -23,7 +24,7 @@ from ..jobs import (
     list_jobs,
     read_log,
 )
-from ..models import JobCreateResult, JobEstimate, JobInfo, JobRequest
+from ..models import JobCreateResult, JobEstimate, JobInfo, JobRequest, LLMCallDetail, LLMCallList
 
 router = APIRouter()
 
@@ -71,6 +72,33 @@ def jobs_logs(job_id: str, offset: int = Query(0, ge=0)) -> Dict[str, Any]:
         "lines": lines,
         "line_count": total,
     }
+
+
+@router.get("/jobs/{job_id}/llm-calls", response_model=LLMCallList)
+def jobs_llm_calls(
+    job_id: str,
+    offset: int = Query(0, ge=0),
+    limit: int = Query(500, ge=1, le=2000),
+) -> LLMCallList:
+    """List the LLM calls a build step made, with duration / status / failure."""
+    job = get_job(job_id)
+    if job is None:
+        raise HTTPException(status_code=404, detail=f"unknown job '{job_id}'")
+    return llm_trace.list_calls(job, offset, limit)
+
+
+@router.get("/jobs/{job_id}/llm-calls/{call_id}", response_model=LLMCallDetail)
+def jobs_llm_call(job_id: str, call_id: str) -> LLMCallDetail:
+    """Full prompt / request / response for one traced LLM call."""
+    job = get_job(job_id)
+    if job is None:
+        raise HTTPException(status_code=404, detail=f"unknown job '{job_id}'")
+    detail = llm_trace.get_call(job, call_id)
+    if detail is None:
+        raise HTTPException(
+            status_code=404, detail=f"no LLM call '{call_id}' in job '{job_id}'"
+        )
+    return detail
 
 
 @router.get("/jobs/{job_id}/stream")

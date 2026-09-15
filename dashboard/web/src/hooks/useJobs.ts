@@ -2,13 +2,15 @@ import { useEffect, useState } from "react"
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-import { USE_MOCK, createJob, estimateJob, jobStreamUrl, listJobs } from "@/api/client"
+import { USE_MOCK, createJob, estimateJob, getJobLlmCall, jobStreamUrl, listJobLlmCalls, listJobs } from "@/api/client"
 import type { JobInfo, JobRequest } from "@/api/types"
 
 const MAX_LOG_LINES = 4000
 
 export const jobKeys = {
   list: ["jobs"] as const,
+  llmCalls: (jobId: string) => ["jobs", jobId, "llm-calls"] as const,
+  llmCall: (jobId: string, callId: string) => ["jobs", jobId, "llm-calls", callId] as const,
 }
 
 const isActive = (job: JobInfo): boolean => job.status === "running" || job.status === "queued"
@@ -87,4 +89,22 @@ export function useJobLog(jobId: string | null) {
   }, [jobId])
 
   return { lines, connected }
+}
+
+/** 一个作业的 LLM 调用清单；live=true 时快轮询（构建作业运行中，trace 持续增长）。 */
+export function useJobLlmCalls(jobId: string | null, live = false) {
+  return useQuery({
+    queryKey: jobKeys.llmCalls(jobId ?? ""),
+    queryFn: () => listJobLlmCalls(jobId ?? ""),
+    enabled: jobId !== null,
+    refetchInterval: live ? 3000 : false,
+  })
+}
+
+export function useJobLlmCall(jobId: string | null, callId: string | null) {
+  return useQuery({
+    queryKey: jobKeys.llmCall(jobId ?? "", callId ?? ""),
+    queryFn: () => getJobLlmCall(jobId ?? "", callId ?? ""),
+    enabled: jobId !== null && callId !== null,
+  })
 }

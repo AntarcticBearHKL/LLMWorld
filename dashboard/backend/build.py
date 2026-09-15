@@ -120,6 +120,24 @@ def prepare_step_run(job: JobInfo) -> List[str]:
     return lines
 
 
+def build_env(job: JobInfo) -> Optional[Dict[str, str]]:
+    """Environment for a build subprocess, or ``None`` to inherit the parent's.
+
+    Points ``LLM_TRACE_FILE`` at a per-job JSONL so ``src/engine/subagent.py``
+    records every prompt / response / duration / http_status for this step.
+    Nothing inside ``src/`` is modified - the trace hook is already env-driven.
+    """
+    if job.kind != "build" or not job.world or not job.id:
+        return None
+    try:
+        world_id = world_admin.normalize_world_id(job.world)
+    except ValueError:
+        return None
+    env = dict(os.environ)
+    env["LLM_TRACE_FILE"] = world_admin.llm_trace_path(world_id, job.id)
+    return env
+
+
 def _stamp() -> str:
     return datetime.now().strftime("%Y%m%d_%H%M%S_%f")
 

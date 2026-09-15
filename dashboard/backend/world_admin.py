@@ -163,6 +163,19 @@ def households_meta_path(world_id: str) -> str:
     return os.path.join(district_dir(world_id), "households.json")
 
 
+def log_dir(world_id: str) -> str:
+    return os.path.join(district_dir(world_id), "log")
+
+
+def llm_trace_path(world_id: str, job_id: str) -> str:
+    """Per-job LLM trace (JSONL) written by the build subprocess.
+
+    Scoping the trace to a single job keeps every call attributable to the
+    build step that made it without tagging anything inside ``src/``.
+    """
+    return os.path.join(log_dir(world_id), "llm_trace_%s.jsonl" % job_id)
+
+
 def house_dir(world_id: str, house_label_value: str) -> str:
     return os.path.join(district_dir(world_id), house_label_value)
 
