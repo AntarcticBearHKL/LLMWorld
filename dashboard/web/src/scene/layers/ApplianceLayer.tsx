@@ -53,12 +53,13 @@ export function ApplianceLayer({ state, highlighted = null }: ApplianceLayerProp
     return () => {
       animation.stop()
     }
-  }, [reduced, hasActive, state.minute, state.house])
+  }, [reduced, hasActive, state.house])
 
   const hoverPose = state.appliances.find((pose) => pose.uniqueId === hovered)
 
   return (
-    <Layer ref={layerRef}>
+    <>
+      <Layer ref={layerRef}>
       {state.appliances.map((pose) => {
         const tone = toneColor(applianceToneKey(pose.state, pose.cycling), tokens)
         const live = pose.state === "active" || pose.state === "baseload"
@@ -79,49 +80,47 @@ export function ApplianceLayer({ state, highlighted = null }: ApplianceLayerProp
         )
       })}
 
-      {state.appliances.map((pose) => (
-        <Text
-          key={`${pose.uniqueId}-glyph`}
-          x={pose.pos.x - RADIUS}
-          y={pose.pos.y - 5}
-          width={RADIUS * 2}
-          align="center"
-          text={applianceGlyph(pose.label, "")}
-          fontSize={9}
-          fill={pose.state === "active" || pose.state === "baseload" ? tokens.bg : tokens.fgSubtle}
-          listening={false}
-        />
-      ))}
+      </Layer>
 
-      {state.appliances
-        .filter((pose) => pose.uniqueId === highlighted)
-        .map((pose) => (
-          <Circle
-            key={`${pose.uniqueId}-halo`}
-            x={pose.pos.x}
-            y={pose.pos.y}
-            radius={RADIUS + 4}
-            stroke={tokens.brand}
-            strokeWidth={2}
-            listening={false}
+      <Layer listening={false}>
+        {state.appliances.map((pose) => (
+          <Text
+            key={`${pose.uniqueId}-glyph`}
+            x={pose.pos.x - RADIUS}
+            y={pose.pos.y - 5}
+            width={RADIUS * 2}
+            align="center"
+            text={applianceGlyph(pose.label, "")}
+            fontSize={9}
+            fill={pose.state === "active" || pose.state === "baseload" ? tokens.bg : tokens.fgSubtle}
           />
         ))}
 
-      {hoverPose !== undefined ? (
-        <Label
-          x={hoverPose.pos.x + RADIUS + 4}
-          y={hoverPose.pos.y - 22}
-          listening={false}
-        >
-          <Tag fill={tokens.surface2} stroke={tokens.borderStrong} strokeWidth={1} cornerRadius={4} />
-          <Text
-            text={`${hoverPose.label} · ${formatWatts(hoverPose.watts)} · ${APPLIANCE_STATE_LABELS[hoverPose.state]}`}
-            fontSize={10}
-            padding={4}
-            fill={tokens.fg}
-          />
-        </Label>
-      ) : null}
-    </Layer>
+        {state.appliances
+          .filter((pose) => pose.uniqueId === highlighted)
+          .map((pose) => (
+            <Circle
+              key={`${pose.uniqueId}-halo`}
+              x={pose.pos.x}
+              y={pose.pos.y}
+              radius={RADIUS + 4}
+              stroke={tokens.brand}
+              strokeWidth={2}
+            />
+          ))}
+
+        {hoverPose !== undefined ? (
+          <Label x={hoverPose.pos.x + RADIUS + 4} y={hoverPose.pos.y - 22}>
+            <Tag fill={tokens.surface2} stroke={tokens.borderStrong} strokeWidth={1} cornerRadius={4} />
+            <Text
+              text={`${hoverPose.label} · ${formatWatts(hoverPose.watts)} · ${APPLIANCE_STATE_LABELS[hoverPose.state]}`}
+              fontSize={10}
+              padding={4}
+              fill={tokens.fg}
+            />
+          </Label>
+        ) : null}
+      </Layer>
+    </>
   )
 }

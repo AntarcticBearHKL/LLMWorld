@@ -50,15 +50,17 @@ export const outBandOf = (size: SceneSize): RoomRect => ({
 
 export function useSceneState(replay: DayReplay | undefined, size: SceneSize): SceneState | null {
   const minute = useTimeStore((state) => state.minute)
-  const selectedMember = useTimeStore((state) => state.selectedMember)
+
+  const layout = useMemo(() => {
+    if (replay === undefined) return null
+    const inputs = roomInputsOf(replay.household)
+    if (inputs.length === 0) return null
+    return buildLayout(inputs, size)
+  }, [replay, size.width, size.height])
 
   return useMemo(() => {
-    if (replay === undefined) return null
+    if (replay === undefined || layout === null) return null
     const household = replay.household
-    const inputs = roomInputsOf(household)
-    if (inputs.length === 0) return null
-
-    const layout = buildLayout(inputs, size)
     const memberIds = replay.members.map((member) => member.id)
     const outBand = outBandOf(size)
 
@@ -143,7 +145,6 @@ export function useSceneState(replay: DayReplay | undefined, size: SceneSize): S
         sleeping:
           segment !== undefined &&
           categorizeActivity(segment.activity, segment.location) === "sleep",
-        selected: member.id === selectedMember,
       }
     })
 
@@ -171,5 +172,5 @@ export function useSceneState(replay: DayReplay | undefined, size: SceneSize): S
       totalWatts: profile[safeMinute] ?? 0,
       maxWatts: profile.reduce((max, value) => Math.max(max, value), 0) || 1,
     }
-  }, [replay, size.width, size.height, minute, selectedMember])
+  }, [replay, layout, minute])
 }

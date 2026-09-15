@@ -51,6 +51,8 @@ export function CharacterLayer({ state, showTrail = false }: CharacterLayerProps
   const tokens = useSceneTokens()
   const stepMinutes = useTimeStore((store) => store.stepMinutes)
   const setSelectedMember = useTimeStore((store) => store.setSelectedMember)
+  const selectedMember = useTimeStore((store) => store.selectedMember)
+  const isSelected = (memberId: string): boolean => memberId === selectedMember
   const nodes = useRef<Map<string, Konva.Group>>(new Map())
   const animations = useRef<Map<string, Konva.Animation>>(new Map())
   const roomMemo = useRef<Map<string, string | null>>(new Map())
@@ -156,14 +158,14 @@ export function CharacterLayer({ state, showTrail = false }: CharacterLayerProps
             else nodes.current.set(pose.memberId, node)
           }}
           opacity={pose.isOut ? 0.55 : 1}
-          onClick={() => setSelectedMember(pose.selected ? null : pose.memberId)}
-          onTap={() => setSelectedMember(pose.selected ? null : pose.memberId)}
+          onClick={() => setSelectedMember(isSelected(pose.memberId) ? null : pose.memberId)}
+          onTap={() => setSelectedMember(isSelected(pose.memberId) ? null : pose.memberId)}
         >
           <Circle
             radius={CHARACTER_RADIUS}
             fill={pose.color}
-            stroke={pose.selected ? tokens.fg : tokens.border}
-            strokeWidth={pose.selected ? 2 : 1}
+            stroke={isSelected(pose.memberId) ? tokens.fg : tokens.border}
+            strokeWidth={isSelected(pose.memberId) ? 2 : 1}
           />
           <Text
             x={-CHARACTER_RADIUS}

@@ -5,9 +5,9 @@ export type ThemeMode = "dark" | "light"
 const STORAGE_KEY = "llmworld.theme"
 
 const readTheme = (): ThemeMode => {
-  if (typeof window === "undefined") return "dark"
+  if (typeof window === "undefined") return "light"
   const stored = window.localStorage.getItem(STORAGE_KEY)
-  return stored === "light" ? "light" : "dark"
+  return stored === "dark" ? "dark" : "light"
 }
 
 export function useTheme(): { theme: ThemeMode; toggleTheme: () => void } {

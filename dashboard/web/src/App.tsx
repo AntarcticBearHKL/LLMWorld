@@ -1,4 +1,4 @@
-import { Fragment, Suspense, lazy } from "react"
+import { Fragment, Suspense, lazy, useEffect } from "react"
 
 import { Moon, Sun } from "lucide-react"
 
@@ -17,6 +17,7 @@ import { SimulateForm } from "@/components/SimulateForm"
 const SceneView = lazy(() =>
   import("@/scene/views/SceneView").then((module) => ({ default: module.SceneView })),
 )
+import { SceneFallback } from "@/scene/views/SceneFallback"
 import { SnapshotPanel } from "@/components/SnapshotPanel"
 import { TimeController } from "@/components/TimeController"
 import { Button } from "@/components/ui/button"
@@ -113,6 +114,13 @@ export default function App() {
   useBootstrapSelection()
   useUrlSync()
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      void import("@/scene/views/SceneView")
+    }, 1200)
+    return () => window.clearTimeout(timer)
+  }, [])
+
   const replay = replayQuery.data
   const showToolbar = view === "scene" || view === "grid" || view === "detail"
 
@@ -154,13 +162,7 @@ export default function App() {
       <main className="min-h-0 flex-1 overflow-hidden p-3">
         {view === "scene" ? (
           <div className="h-full min-h-0">
-            <Suspense
-              fallback={
-                <div className="flex h-full items-center justify-center">
-                  <span className="text-[12px] text-fg-subtle">载入小镇场景…</span>
-                </div>
-              }
-            >
+            <Suspense fallback={<SceneFallback />}>
               <SceneView
                 onOpenPipeline={(memberId) => {
                   setSelectedMember(memberId)

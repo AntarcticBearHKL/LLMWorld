@@ -42,7 +42,6 @@ export interface CharacterPose {
   pos: Point
   isOut: boolean
   sleeping: boolean
-  selected: boolean
 }
 
 export interface AppliancePose {
