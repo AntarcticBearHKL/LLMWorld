@@ -3,6 +3,62 @@
 > 本文件跟踪 goal.md §12（Dashboard 控制台开发，M1–M8）的执行状态与验收证据。
 > 边界：只覆盖 `dashboard/`；不涉及 §1–§11 的研究闭环。
 
+---
+
+## ★ 前端整体重构（2026-09-15，用户定制的 IA；取代 §12.3 的目标结构）
+
+> 用户要求「完整重新设计前端逻辑」，并**覆盖 goal.md §12.5.6**：UI 文案全部改为**英文**。
+
+### 概念模型
+- **World（世界）** = 若干 **Block（街区）** + 若干 **Household（家庭）**；家庭是世界的"固定物理设定"。
+- **Spacetime（时空）** = 在世界之上跑的一次模拟：固定 **policy + news/events + start_date + 任意天数**。
+  一个世界可有多个时空；时空**只读**家庭。
+- 世界有 ≥1 时空即 **Frozen（冻结）**：家庭只读；要改家庭就把世界 **Clone（深拷贝）** 成新草稿。
+
+### 三级 IA
+```
+顶栏: [Worlds] [Jobs] [Settings]
+L0 Worlds 列表        ?view=worlds
+  └ L1 World 详情     ?view=world&world=W&tab=spacetime|household
+       ├ Spacetimes tab -> 列表 + New spacetime 向导 -> L2
+       └ Households tab -> Draft: WorldBuilder 4 步; Frozen: 只读 + Clone
+  └ L2a Watch         ?view=watch&world=W&run=R&date=&block=&house=&indoor=&minute=
+       4 层下钻: 世界全景(地图式小镇) -> Block -> House -> Indoor(房间+入住者)
+       ★ 播放栏只在此视图出现
+```
+
+### URL 契约（全可复现）
+`?view=&world=&tab=&run=&date=&block=&house=&indoor=&policy=&minute=`
+
+### 后端新增（Stage A，提交 `b330a0e2 step393`）
+- **时空 manifest**：`output/simulation/<run>/spacetime.json`（world/start_date/days/policy/events/notices/seed/status）
+- `GET/POST /api/worlds/{w}/spacetimes`、`DELETE /api/spacetimes/{name}`
+- `WorldInfo` 增 `districts` / `spacetimes` / `frozen`
+- **通用化街区**：去掉 dashboard 侧 `POSTCODE="3168"` 硬编码（`world_admin`/`jobs`），按 `world.json` 的 districts 动态派生
+- **世界深拷贝**：`POST /api/worlds/{w}/clone`（不含时空）
+- **街区聚合**：`GET /api/worlds/{w}/runs/{r}/days/{d}/blocks`
+- `store.invalidate_catalog()`：增删改后立即失效目录缓存（原 20s TTL 会导致新建后列表空窗）
+
+### 前端（Stage B，提交 `b7366e80 step394` / `bcdaa05c step395`）
+- 顶栏收为 **Worlds / Jobs / Settings**；`view ∈ worlds|world|watch|jobs|settings`
+- L0 `WorldsList`（Draft/Frozen 徽标 + New/Clone/Delete）
+- L1 `WorldDetail`（Spacetimes / Households 两 tab）
+- L2a `WatchView`（4 层下钻 + 播放栏门控）
+- **全英文**：`src/` 内 CJK 归零（385 处）；设备 glyph 改拉丁码；`index.html lang=en`
+- 清理：删除 `GenerateWizard`/`SimulateForm`/`RunPicker`/`WorldWorkspace`/`Placeholder`/`SegmentedControl`/`useBootstrapSelection`/`WatchPlaceholder` 共 8 个死文件
+
+### 验证
+- `tsc -b` / `npm run build` / `npm run lint` = exit 0；红线扫描 0；`src` CJK = 0
+- 后端 `py_compile 22/22`；研究回归 **298 tests OK**；`/api/health` → `worlds,replay,jobs,build,settings,spacetimes,mcp`
+- 浏览器实测（独立）：L0 → L1 → watch 4 层逐级正确；**播放栏仅 watch 出现**
+
+### 已知取舍
+- 一次性 `GenerateWizard`（kind=world 一键生成）已移除 —— 新 IA 走「逐户 4 步构建」。
+- bundle 残留 **8 个 CJK 字符** = vis-timeline 内置日/土 locale 表（非渲染文本）。
+  子代理曾加 vite `strip-vendor-cjk` 插件盲改 `node_modules` 源码，评估为**危险**（可能破坏 vendor 字面量/正则）→ **已回退**。
+
+---
+
 ## 0. 会话记录（2026-09-15，接手 §12.0 冻结状态）
 
 ### 决策项 4（§12.4）：`收编` — 已由用户确认
