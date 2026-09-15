@@ -12,15 +12,18 @@ from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
-from .. import artifacts, world_admin
+from .. import artifacts, blocks, world_admin
 from ..models import (
     ArtifactRead,
     ArtifactWriteRequest,
     ArtifactWriteResult,
     BuildPreview,
     BuildState,
+    WorldCloneRequest,
+    WorldCloneResult,
     WorldCreateRequest,
     WorldCreateResult,
+    WorldDayBlocks,
     WorldDeleteResult,
 )
 
@@ -86,5 +89,28 @@ def world_artifact_put(world: str, req: ArtifactWriteRequest) -> ArtifactWriteRe
     """Overwrite a world artifact after a ``.bak.<ts>`` copy; JSON is validated."""
     try:
         return artifacts.write_artifact(world, req.path, req.content)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post("/worlds/{world}/clone", response_model=WorldCloneResult)
+def world_clone(world: str, req: WorldCloneRequest) -> WorldCloneResult:
+    """Deep-copy a world (households included) into a new draft world."""
+    try:
+        return WorldCloneResult(**world_admin.clone_world(world, req.new_id))
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.get("/worlds/{world}/runs/{run}/days/{date}/blocks", response_model=WorldDayBlocks)
+def world_day_blocks(
+    world: str,
+    run: str,
+    date: str,
+    policy: str = "baseline",
+) -> WorldDayBlocks:
+    """One day of a spacetime aggregated into the world's blocks."""
+    try:
+        return blocks.build_day_blocks(world, run, date, policy)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc

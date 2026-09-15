@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import contextlib
 import io
+import json
 import os
 import re
 import threading
@@ -31,6 +32,7 @@ from .paths import SIMULATION_DIR, WORLDS_DIR
 from analyze import dataset  # noqa: E402  (paths.py put src/ on sys.path)
 
 _DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+_POSTCODE_RE = re.compile(r"^\d{4}$")
 _TTL_SECONDS = 20.0
 
 _CATALOG_CACHE: Dict[str, Tuple[float, Any]] = {}
@@ -285,6 +287,31 @@ def list_worlds() -> List[WorldInfo]:
     return _cached("worlds", _build_worlds)
 
 
+def _world_districts(world_dir: str) -> List[str]:
+    """Postcode directories of a world: from world.json, else any 4-digit child."""
+    districts: List[str] = []
+    meta_path = os.path.join(world_dir, "world.json")
+    try:
+        with open(meta_path, encoding="utf-8") as fh:
+            meta = json.load(fh)
+        if isinstance(meta, dict):
+            for district in meta.get("districts") or []:
+                if isinstance(district, dict) and district.get("postcode"):
+                    districts.append(str(district["postcode"]))
+    except (OSError, ValueError):
+        districts = []
+    if districts:
+        return districts
+    try:
+        children = sorted(os.listdir(world_dir))
+    except OSError:
+        return []
+    return [
+        child for child in children
+        if _POSTCODE_RE.match(child) and os.path.isdir(os.path.join(world_dir, child))
+    ]
+
+
 def _build_worlds() -> List[WorldInfo]:
     worlds: List[WorldInfo] = []
     if not os.path.isdir(WORLDS_DIR):
@@ -294,37 +321,37 @@ def _build_worlds() -> List[WorldInfo]:
     except OSError:
         return worlds
 
+    from . import spacetimes  # local import keeps the module import graph acyclic
+
+    by_world = spacetimes.worlds_with_spacetimes()
+
     for name in names:
         world_dir = os.path.join(WORLDS_DIR, name)
         if not os.path.isdir(world_dir):
             continue
 
-        postcode = None
-        try:
-            children = sorted(os.listdir(world_dir))
-        except OSError:
-            children = []
-        for child in children:
-            if os.path.isdir(os.path.join(world_dir, child)):
-                postcode = child
-                break
-
+        districts = _world_districts(world_dir)
         houses: List[str] = []
-        if postcode:
+        for postcode in districts:
             base = os.path.join(world_dir, postcode)
             try:
-                houses = sorted(
-                    child for child in os.listdir(base)
-                    if child.startswith("house_") and os.path.isdir(os.path.join(base, child))
-                )
+                children = sorted(os.listdir(base))
             except OSError:
-                houses = []
+                continue
+            for child in children:
+                if child.startswith("house_") and os.path.isdir(os.path.join(base, child)):
+                    if child not in houses:
+                        houses.append(child)
 
+        runs = by_world.get(name, [])
         worlds.append(WorldInfo(
             world_id=name,
-            postcode=postcode,
+            postcode=districts[0] if districts else None,
+            districts=districts,
             houses=houses,
             has_events=os.path.isfile(os.path.join(world_dir, "events.json")),
+            spacetimes=runs,
+            frozen=bool(runs),
             latest_mtime=_as_optional_float(os.path.getmtime(world_dir)),
         ))
 

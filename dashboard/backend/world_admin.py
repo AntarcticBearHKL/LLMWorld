@@ -29,7 +29,7 @@ OUTPUT_DIR = paths.OUTPUT_DIR
 TRASH_DIR = os.path.join(OUTPUT_DIR, "_trash")
 IMPORT_WORLD_DIR = os.path.join(paths.LLMWORLD_ROOT, "import", "world")
 
-POSTCODE = "3168"
+DEFAULT_POSTCODE = "3168"
 DEFAULT_SEED = 42
 DEFAULT_WORLD_CONFIG = "Melbourne"
 
@@ -43,6 +43,7 @@ STEP_SCOPE: Dict[str, str] = {
 
 _WORLD_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 _HOUSE_RE = re.compile(r"^house_(\d+)$")
+_POSTCODE_RE = re.compile(r"^\d{4}$")
 
 
 def _gw() -> Any:
@@ -61,6 +62,33 @@ def read_json(path: str) -> Any:
 
 def _is_file(path: str) -> bool:
     return os.path.isfile(path)
+
+
+def districts(world_id: str) -> List[str]:
+    """Postcodes of a world: world.json's districts, else its 4-digit child dirs."""
+    meta = read_json(world_meta_path(world_id))
+    if isinstance(meta, dict):
+        found = [
+            str(district["postcode"])
+            for district in (meta.get("districts") or [])
+            if isinstance(district, dict) and district.get("postcode")
+        ]
+        if found:
+            return found
+    world_dir = resolve_world_dir(world_id)
+    try:
+        children = sorted(os.listdir(world_dir))
+    except OSError:
+        return []
+    return [
+        child for child in children
+        if _POSTCODE_RE.match(child) and os.path.isdir(os.path.join(world_dir, child))
+    ]
+
+
+def primary_district(world_id: str) -> str:
+    found = districts(world_id)
+    return found[0] if found else DEFAULT_POSTCODE
 
 
 def normalize_world_id(world_id: str) -> str:
@@ -147,8 +175,39 @@ def delete_world(world_id: str, permanent: bool = False) -> Dict[str, Any]:
     }
 
 
-def district_dir(world_id: str) -> str:
-    return os.path.join(resolve_world_dir(world_id), POSTCODE)
+def clone_world(world_id: str, new_id: str) -> Dict[str, Any]:
+    """Deep-copy a world (households included) to a new id.
+
+    Spacetimes are deliberately NOT copied: a clone is a fresh draft you edit.
+    """
+    src = normalize_world_id(world_id)
+    dst = normalize_world_id(new_id)
+    if src == dst:
+        raise ValueError("clone target must differ from the source world")
+    src_dir = os.path.join(WORLDS_DIR, src)
+    if not os.path.isdir(src_dir):
+        raise ValueError("world not found: %s" % src)
+    dst_dir = os.path.join(WORLDS_DIR, dst)
+    if os.path.exists(dst_dir):
+        raise ValueError("target world already exists: %s" % dst)
+
+    shutil.copytree(src_dir, dst_dir)
+    meta = read_json(world_meta_path(dst))
+    if isinstance(meta, dict):
+        meta["world_id"] = dst
+        meta["cloned_from"] = src
+        with open(world_meta_path(dst), "w", encoding="utf-8") as fh:
+            json.dump(meta, fh, ensure_ascii=False, indent=2)
+            fh.write("\n")
+    return {
+        "world_id": dst,
+        "cloned_from": src,
+        "world_dir": os.path.abspath(dst_dir),
+    }
+
+
+def district_dir(world_id: str, postcode: Optional[str] = None) -> str:
+    return os.path.join(resolve_world_dir(world_id), postcode or primary_district(world_id))
 
 
 def world_meta_path(world_id: str) -> str:
@@ -278,7 +337,7 @@ def build_state(world_id: str) -> BuildState:
     wid = normalize_world_id(world_id)
     world_dir = os.path.join(WORLDS_DIR, wid)
     exists = os.path.isdir(world_dir)
-    district = os.path.join(world_dir, POSTCODE)
+    district = district_dir(wid)
 
     types_done = _is_file(os.path.join(district, "household_types.json"))
     type_count = household_type_count(wid) if types_done else 0
@@ -371,7 +430,7 @@ def build_preview(world_id: str, step: str, house: Any = None) -> BuildPreview:
             "unknown step %r: expected one of %s" % (step, ", ".join(STEP_ORDER))
         )
     world_dir = os.path.join(WORLDS_DIR, wid)
-    district = os.path.join(world_dir, POSTCODE)
+    district = district_dir(wid)
     label = resolve_house_label(wid, house) if step_name != "types" else None
 
     reads: List[Tuple[str, str]] = []
@@ -381,7 +440,7 @@ def build_preview(world_id: str, step: str, house: Any = None) -> BuildPreview:
         config = _world_config_name(wid)
         reads = [
             ("input", os.path.join(world_dir, "world.json")),
-            ("input", os.path.join(IMPORT_WORLD_DIR, config, POSTCODE, "info.md")),
+            ("input", os.path.join(IMPORT_WORLD_DIR, config, primary_district(wid), "info.md")),
         ]
         writes = [("output", os.path.join(district, "household_types.json"))]
     elif step_name == "personas":

@@ -54,8 +54,11 @@ class RunSummary(BaseModel):
 class WorldInfo(BaseModel):
     world_id: str
     postcode: Optional[str] = None
+    districts: List[str] = Field(default_factory=list)
     houses: List[str] = Field(default_factory=list)
     has_events: bool = False
+    spacetimes: List[str] = Field(default_factory=list)
+    frozen: bool = False
     latest_mtime: Optional[float] = None
 
 
@@ -333,6 +336,16 @@ class WorldDeleteResult(BaseModel):
     )
 
 
+class WorldCloneRequest(BaseModel):
+    new_id: str
+
+
+class WorldCloneResult(BaseModel):
+    world_id: str
+    cloned_from: str
+    world_dir: str
+
+
 class ArtifactRef(BaseModel):
     path: str
     exists: bool
@@ -466,3 +479,55 @@ class SettingsUpdate(BaseModel):
     request_timeout_seconds: Optional[int] = None
     max_retries: Optional[int] = None
     retry_backoff_seconds: Optional[float] = None
+
+
+# --------------------------------------------------------------------------
+# Spacetimes (a simulation run pinned to a world, with its own policy/news/days)
+# --------------------------------------------------------------------------
+class Spacetime(BaseModel):
+    name: str
+    world: str
+    start_date: Optional[str] = None
+    days: int = 1
+    policy: Optional[str] = None
+    events: List[str] = Field(default_factory=list)
+    notices: List[str] = Field(default_factory=list)
+    seed: Optional[int] = None
+    created_at: Optional[str] = None
+    status: str = "created"
+    has_manifest: bool = True
+    date_count: int = 0
+    house_count: int = 0
+    latest_mtime: Optional[float] = None
+
+
+class SpacetimeCreate(BaseModel):
+    name: str
+    start_date: str
+    days: int = 1
+    policy: Optional[str] = None
+    events: List[str] = Field(default_factory=list)
+    notices: List[str] = Field(default_factory=list)
+    seed: Optional[int] = None
+
+
+class SpacetimeDeleteResult(BaseModel):
+    name: str
+    existed: bool
+    deleted: bool
+    moved_to: Optional[str] = None
+
+
+class BlockSummary(BaseModel):
+    postcode: str
+    houses: List[str] = Field(default_factory=list)
+    house_count: int = 0
+    total_kwh: float = 0.0
+    peak_watts: float = 0.0
+
+
+class WorldDayBlocks(BaseModel):
+    world: str
+    run: str
+    date: str
+    blocks: List[BlockSummary] = Field(default_factory=list)

@@ -44,7 +44,6 @@ os.makedirs(JOBS_DIR, exist_ok=True)
 
 RUN_PY = os.path.join(paths.LLMWORLD_ROOT, "run.py")
 WORLDS_DIR = paths.WORLDS_DIR
-POSTCODE = "3168"  # Clayton - the only district run.py/generate_world write to
 
 MAX_HOUSEHOLDS = 5  # research rule: count <= 5 per world
 RECENT_LINES = 5000  # in-memory tail kept per job
@@ -231,7 +230,9 @@ def build_argv(req: JobRequest) -> List[str]:
 # Estimation
 # --------------------------------------------------------------------------
 def _household_paths(world: str, house: str) -> Tuple[str, str]:
-    primary = os.path.join(WORLDS_DIR, world, POSTCODE, house, "household.json")
+    primary = os.path.join(
+        WORLDS_DIR, world, world_admin.primary_district(world), house, "household.json"
+    )
     fallback = os.path.join(WORLDS_DIR, world, "household.json")
     return primary, fallback
 
@@ -257,7 +258,7 @@ def _member_count(world: str, house: str) -> Optional[int]:
 
 def _list_world_houses(world: str) -> List[str]:
     """Mirror generate_world.list_houses without importing it (config loads .env)."""
-    district = os.path.join(WORLDS_DIR, world, POSTCODE)
+    district = os.path.join(WORLDS_DIR, world, world_admin.primary_district(world))
     if os.path.isdir(district):
         houses = sorted(
             d

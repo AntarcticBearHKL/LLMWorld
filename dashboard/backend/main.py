@@ -112,6 +112,14 @@ except Exception as exc:  # noqa: BLE001 - keep the app bootable during parallel
     MISSING.append(f"settings: {exc}")
 
 try:
+    from .routers import spacetimes as _spacetimes
+
+    app.include_router(_spacetimes.router, prefix="/api")
+    ATTACHED.append("spacetimes")
+except Exception as exc:  # noqa: BLE001 - keep the app bootable during parallel work
+    MISSING.append(f"spacetimes: {exc}")
+
+try:
     from . import mcp_server as _mcp
 
     app.mount("/mcp", _mcp.asgi_app)
