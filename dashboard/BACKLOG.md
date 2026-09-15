@@ -153,7 +153,7 @@
 - **回归**：`python -m unittest discover -s tests` → **Ran 298 tests, OK**（src 改动未破坏研究）。
 - **验收门**：`py_compile` 全绿；`npx tsc -b` / `npm run build` / `npm run lint` exit 0；红线扫描 0 违规。
 
-### M8 验收 — 🟡 部分完成（文档齐备；LFS 迁移待批）
+### M8 验收 — ✅ 已交付（含 `import/` Git LFS 迁移）
 
 - **已交付（安全、无历史改写）**：
   - 根 `LICENSE`（**MIT**，用户决策 #2）；
@@ -166,8 +166,16 @@
   - `stats.csv` **整文件合法 UTF-8**（BOM + 6,778,936 B 全量 `decode('utf-8')` 通过；`gbk` 在 byte 79 失败）
     → §12.2 的「GBK 乱码」为**控制台显示假象**，**无需改编码**；
   - `dimension_map.json` **确不存在**，但 `reader.py`/`sampler.py` 缺失时**优雅回退英文标签**（不崩），故非阻塞。
-- **阻塞（需用户批准）**：让 `import/` 真正「新克隆不含 1.1 GB」需 `git lfs migrate import`（**重写历史**），
-  而 §12.0 明令「禁止 `rebase`/`filter-branch`/`gc --prune`」（为保留 `output/` 可恢复）。二者冲突 → 见 §12.4 决策 #1。
+- **`import/` LFS 迁移（已执行，用户批准重写历史）**：
+  - `git lfs migrate import --include="import/persona/*.csv" --everything` → 重写 **472** commit；生成 `.gitattributes`
+    （`import/persona/*.csv filter=lfs diff=lfs merge=lfs -text`）；40 个 CSV 入 LFS；`git lfs ls-files` = 40。
+  - ⚠️ 迁移后工作树曾遗留 LFS 指针（133 B），已 `git lfs checkout` 还原为真实文件（27,302,953 B）；**复跑 298 测试 OK**。
+  - 已 `git push --force-with-lease origin main`（LFS 上传 40/40, 1.1 GB；`+ 9c3d179...4f49f43 main -> main (forced update)`）。
+  - **⚠️ 历史哈希全变** —— §12.0 的恢复命令需改用新哈希：
+    - 旧 `3797a00`(step380) → 新 **`aa08623`**；旧 `9c3d179`(step389) → 新 **`4f49f43`**；
+    - `output/` 的 blob 仍可达（`git log --all -- output` 可见）；`git checkout <新哈希> -- output` 仍可用。
+  - 安全网：迁移前镜像备份 `%TEMP%\opencode\LLMWorld-preLFS.git`（351.6 MB，含迁移前全部对象）。
+  - 备注：本地 `.git` 暂约 1.39 GB（尚存迁移前不可达对象）；§12.0 明令不动 `gc --prune`，故未手动执行，`git gc` 后会自动回落。
 
 ### ⚠️ 外部阻塞：DeepSeek API **402 Insufficient Balance**
 
@@ -186,13 +194,13 @@
 | **M5** | IA 重构：世界列表 → 世界详情（构建/模拟/观看）；URL 可复现 | 链接直接复现「某世界构建第 3 步」 | 🟡 **部分完成**：构建工作区 + `?world=&step=` URL 复现**已交付并实测**；世界详情三模式 / 观看内密度切换待做 |
 | **M6** | MCP 同端口挂载 + ~15 工具 + 认证 | `curl /mcp` 通；客户端能建世界并跑一步 | ✅ **PASS（本会话，MCP 客户端端到端；LLM 需余额恢复）** |
 | **M7** | 设置面板 + 死配置清理 + 真重试 | 面板改 `MODEL` 后下一次调用生效 | ✅ **PASS（本会话，UI 保存→config 生效实测；298 测试仍绿）** |
-| **M8** | 开源化：git 清理、LICENSE、README、`.env.example`、编码修复 | 新克隆一条命令跑起来，不含 1.1 GB 数据与密钥 | 🟡 **部分完成**：MIT `LICENSE` + 根 `README.md` + `.env.example` + `import/README.md`（数据说明）**已交付**；**LFS 迁移受 §12.0「禁止重写历史」阻塞（待批）**；`stats.csv` 经字节级核验**本就是合法 UTF-8**（§12.2 的「GBK 乱码」为控制台显示假象） |
+| **M8** | 开源化：git 清理、LICENSE、README、`.env.example`、编码修复 | 新克隆一条命令跑起来，不含 1.1 GB 数据与密钥 | ✅ **已交付**：MIT `LICENSE` + 根 `README.md` + `.env.example` + `import/README.md`；**`import/persona/*.csv` 已迁入 Git LFS 并推送**（含 `.gitattributes`）；`stats.csv` 经字节级核验**本就是合法 UTF-8**（§12.2 的「GBK 乱码」为控制台显示假象，未做无谓改动） |
 
 ## 2. §12.4 其余待决策
 
 | # | 决策 | 状态 |
 |---|---|---|
-| 1 | `import/` ≈1.09 GB 人格 CSV（已跟踪）：LFS / 下载脚本 / 移出仓库 | ✅ **已决策：Git LFS**；⚠️ 真正迁移（`git lfs migrate`）会**重写历史**，与 §12.0「禁止 rebase/filter-branch/gc --prune」冲突 → **待用户批准重写** |
+| 1 | `import/` ≈1.09 GB 人格 CSV（已跟踪）：LFS / 下载脚本 / 移出仓库 | ✅ **已决策+已执行：Git LFS**（用户批准重写历史）。`git lfs migrate import --include="import/persona/*.csv" --everything` 重写 472 commit；40 个 CSV 入 LFS；已 `--force-with-lease` 推送（LFS 上传 40/40, 1.1 GB）。**历史哈希全变** → 见下方迁移说明 |
 | 2 | LICENSE：MIT / Apache-2.0 / GPL-3.0 | ✅ **已决策：MIT**（根 `LICENSE` 已加） |
 | 3 | MCP 认证：纯 localhost / 静态 Bearer（推荐） | ✅ **已实现「超集」**：默认纯 localhost（非 localhost → 421）+ 设 `MCP_TOKEN` 则强制 Bearer（401）；两个选项均覆盖，可随时切换 |
 | 4 | 6 个未提交后端文件：验证后收编 / 回滚 | ✅ **已决策：收编（已验证）** |
