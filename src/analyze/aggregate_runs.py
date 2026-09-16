@@ -20,6 +20,7 @@ sys.path.insert(0, _HERE)
 sys.path.insert(0, os.path.dirname(_HERE))
 
 from load_model import build_load_profile  # noqa: E402
+import generate_world as gw  # noqa: E402
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(_HERE))
 WORLDS_DIR = os.path.join(PROJECT_ROOT, "output", "worlds")
@@ -38,15 +39,20 @@ def summarize(values):
             "min": round(min(clean), 4), "max": round(max(clean), 4)}
 
 
-def _read_household(world, house):
-    primary = os.path.join(WORLDS_DIR, world, "3168", house, "household.json")
-    path = primary if os.path.exists(primary) else os.path.join(WORLDS_DIR, world, "household.json")
+def _read_household(world, house, district=None):
+    """Household.json for a house, resolved through generate_world's districts.
+
+    ``district`` defaults to the world's primary district; the legacy
+    ``<world>/household.json`` file is still honoured as a fallback.
+    """
+    primary = os.path.join(gw.district_dir(world, district), house, "household.json")
+    path = primary if os.path.exists(primary) else os.path.join(gw.WORLDS_DIR, world, "household.json")
     with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
-def env_total_kwh(env, world, house, date, member, tag=None):
-    household = _read_household(world, house)
+def env_total_kwh(env, world, house, date, member, tag=None, district=None):
+    household = _read_household(world, house, district)
     suffix = ("_" + tag) if tag else ""
     path = os.path.join(SIMULATION_DIR, env, date, house, "s4_decisions_%s%s.json" % (member, suffix))
     if not os.path.exists(path):
@@ -61,6 +67,7 @@ def main():
     parser = argparse.ArgumentParser(description="Average a metric across repeated runs")
     parser.add_argument("--world", required=True)
     parser.add_argument("--house", default="house_0001")
+    parser.add_argument("--district", default=None, help="district name (default: world's primary district)")
     parser.add_argument("--member", default="Member 1")
     parser.add_argument("--date", required=True)
     parser.add_argument("--envs", nargs="+", required=True)
@@ -69,7 +76,8 @@ def main():
 
     totals = {}
     for env in args.envs:
-        totals[env] = env_total_kwh(env, args.world, args.house, args.date, args.member, args.tag)
+        totals[env] = env_total_kwh(env, args.world, args.house, args.date, args.member, args.tag,
+                                    args.district)
     summary = summarize(list(totals.values()))
     print(json.dumps({"world": args.world, "house": args.house, "member": args.member,
                       "date": args.date, "per_env": totals, "summary": summary},

@@ -335,22 +335,6 @@ def init_world(world_id, world_config_name=None, seed=42):
     return world_dir, log_dir
 
 
-def save_household_artifacts(world_id, idx, persona_texts, original_persona_texts,
-                             persona_seed, household, district=None):
-    d_dir = district_dir(world_id, district)
-    house_id = f"house_{idx + 1:04d}"
-    house_dir = os.path.join(d_dir, house_id)
-    os.makedirs(house_dir, exist_ok=True)
-
-    _write_json(os.path.join(house_dir, "personas.json"), {
-        "seed": persona_seed,
-        "persona_texts": persona_texts,                    
-        "original_persona_texts": original_persona_texts,  
-    })
-    _write_json(os.path.join(house_dir, "household.json"), household)
-    return house_id
-
-
 def update_world_meta(world_id, house_meta, district=None):
     d_dir = district_dir(world_id, district)
     district_meta_path = os.path.join(d_dir, "households.json")

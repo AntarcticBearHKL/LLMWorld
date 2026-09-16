@@ -41,8 +41,14 @@ PLAN_SCHEMA = {
 }
 
 
-def load_home(world_id, house="house_0001"):
-    path = os.path.join(gw.WORLDS_DIR, world_id, "3168", house, "household.json")
+def load_home(world_id, house="house_0001", district=None):
+    """Load a house's household.json and build a Home.
+
+    ``district`` defaults to the world's primary district (``generate_world``),
+    so named-district worlds resolve without a hardcoded postcode; the legacy
+    ``<world>/household.json`` file is still honoured as a fallback.
+    """
+    path = os.path.join(gw.district_dir(world_id, district), house, "household.json")
     if not os.path.exists(path):
         alt = os.path.join(gw.WORLDS_DIR, world_id, "household.json")
         if not os.path.exists(alt):
@@ -70,8 +76,8 @@ def resolve_member(home, member_arg):
 
 
 def run_step(world_id, member_arg, date=None, env=None, house="house_0001", prev_state=None,
-             world_news="", community_notice=""):
-    home = load_home(world_id, house)
+             world_news="", community_notice="", district=None):
+    home = load_home(world_id, house, district)
     if home is None:
         return False, "household missing"
     member = resolve_member(home, member_arg)

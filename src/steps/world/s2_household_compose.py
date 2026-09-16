@@ -14,11 +14,8 @@ sub-operations:
 
 Outputs ``<district>/house_XXXX/household.json`` (household type plus members;
 this step never writes ``home``), plus ``aligned_texts.json`` and
-``persona_provenance.json`` with the same shapes ``s2_persona_align`` writes,
-and registers the household via ``gw.update_world_meta``.
-
-Additive: the s1-s4 world steps and ``run.py`` are untouched; a later task
-switches the pipeline over.
+``persona_provenance.json`` recording the sampled and aligned portraits, and
+registers the household via ``gw.update_world_meta``.
 
 Run:
   .venv\\Scripts\\python.exe src\\steps\\world\\s2_household_compose.py --world <id>
@@ -42,7 +39,7 @@ from engine import SubAgent
 from engine.json_parse import parse as parse_llm_json
 from engine.subagent import LLMCallError
 from engine.prompt import Prompt
-from steps.world.s3_household_build import _apply_personality, _normalize_personal_appliances
+from steps.world.schema import _apply_personality, _normalize_personal_appliances
 import generate_world as gw
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))

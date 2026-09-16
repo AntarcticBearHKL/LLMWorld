@@ -3,9 +3,9 @@
 With the district description and the household (type + members) already known,
 ``generate_world_home.md`` is asked for the physical home only: a name, type,
 size and the rooms, each listing the appliances that physically sit in it. The
-strict JSON schema reuses ``s3_household_build.HOUSEHOLD_SCHEMA``'s ``home``
-definition, so the two can never drift, and the appliance type tokens come from
-the shared appliance registry.
+strict JSON schema reuses ``schema.HOUSEHOLD_SCHEMA``'s ``home`` definition, so
+the two can never drift, and the appliance type tokens come from the shared
+appliance registry.
 
 The generated ``home`` is merged into the existing
 ``<district>/house_XXXX/household.json`` (``type``, ``members`` and
@@ -43,7 +43,7 @@ from engine.subagent import LLMCallError
 from engine.prompt import Prompt
 from appliances import get_supported_appliances_text, get_appliance_schemas_text
 from appliances.catalog import backfill_power
-from steps.world.s3_household_build import HOUSEHOLD_SCHEMA
+from steps.world.schema import HOUSEHOLD_SCHEMA
 import generate_world as gw
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))

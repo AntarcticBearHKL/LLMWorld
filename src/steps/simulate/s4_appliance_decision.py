@@ -60,8 +60,8 @@ def load_timeline(world_id, member_name, date, env, house):
         return json.load(f)
 
 
-def _raw_member_personality(world_id, house, member_name):
-    path = os.path.join(gw.WORLDS_DIR, world_id, "3168", house, "household.json")
+def _raw_member_personality(world_id, house, member_name, district=None):
+    path = os.path.join(gw.district_dir(world_id, district), house, "household.json")
     if not os.path.exists(path):
         return {}
     try:
@@ -113,8 +113,8 @@ def strip_ev_guidance(prompt):
     return prompt.replace(EV_OVERNIGHT_GUIDANCE, "")
 
 
-def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None, price_sensitivity=None, bill_feedback="", cost_context_mode="strong"):
-    home = load_home(world_id, house)
+def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_tag=None, house="house_0001", world_news="", weather_override=None, natural_ev=False, cost_tariff=None, price_sensitivity=None, bill_feedback="", cost_context_mode="strong", district=None):
+    home = load_home(world_id, house, district)
     if home is None:
         return False, "household missing"
     member = resolve_member(home, member_arg)
@@ -137,7 +137,7 @@ def run_step(world_id, member_arg, date=None, env=None, policy_text="", policy_t
     cost_context = tariff.render_cost_context(home_details, cost_tariff, mode=cost_context_mode)
     level = price_sensitivity
     if level is None and cost_tariff:
-        persona = _raw_member_personality(world_id, house, member.name)
+        persona = _raw_member_personality(world_id, house, member.name, district)
         big_five = persona.get("big_five") or {}
         level = tariff.sensitivity_from_traits(persona.get("energy_awareness"),
                                                big_five.get("conscientiousness", 0.5))

@@ -16,7 +16,7 @@ if hasattr(sys.stdout, "reconfigure"):
 import config
 import generate_world as gw
 from engine import policy as engine_policy, news, social
-from steps.world import s1_household_types, s2_persona_align, s3_household_build, s4_world_assemble
+from steps.world import s1_district_description, s2_household_compose, s3_home
 from steps.simulate import s1_macro_plan, s2_coordinate, s3_enrich, s4_appliance_decision, day_state
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -73,35 +73,68 @@ def auto_world_id():
             return cand
 
 
-def run_house(world_id, house, seed):
-    print(f"\n########## HOUSE {house} ##########")
-    ok, r = s2_persona_align.run_step(world_id, house, seed)
-    if not ok:
-        print(f"[Abort] house {house} s2 failed: {r}")
-        return False
-    ok, r = s3_household_build.run_step(world_id, house, seed)
-    if not ok:
-        print(f"[Abort] house {house} s3 failed: {r}")
-        return False
-    ok, r = s4_world_assemble.run_step(world_id, house, seed)
-    if not ok:
-        print(f"[Abort] house {house} s4 failed: {r}")
-        return False
-    return True
+def run_world(world_id, districts=None, households=1, seed=42, world_config=None,
+              preset=None, prompt=None, with_home=False):
+    """Generate a world with the new district -> household -> home pipeline.
 
-
-def run_world(world_id, count, seed, workers=4, world_config=None):
-    print(f"\n########## WORLD {world_id} (count={count}, workers={workers}, config={world_config or 'default'}) ##########")
-    ok, r = s1_household_types.run_step(world_id, count, seed, world_config)
-    if not ok:
-        print(f"[Abort] s1 failed: {r}")
+    Districts are created locally (zero LLM); each gets one district description.
+    ``households`` households are composed per district, and when ``with_home``
+    is set each household also gets a home. Returns 0 on success, 1 otherwise.
+    """
+    print(f"\n########## WORLD {world_id} (districts={districts or world_config or 'default'}, "
+          f"households={households}, home={with_home}) ##########")
+    try:
+        gw.init_world(world_id, world_config, seed)
+    except FileNotFoundError as exc:
+        print(f"[Abort] {exc}")
         return 1
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        results = list(ex.map(lambda h: run_house(world_id, h, seed), range(count)))
-    if not all(results):
-        print("[Warn] some households failed")
-    print(f"\n########## WORLD {world_id} DONE ##########")
-    return 0 if all(results) else 1
+
+    names = list(districts or [])
+    if not names:
+        try:
+            names = [block["name"] for block in gw.load_world_config(world_config)["blocks"]]
+        except FileNotFoundError as exc:
+            print(f"[Abort] {exc}")
+            return 1
+    if not names:
+        print("[Abort] no districts to build (pass --districts or use a world config with blocks)")
+        return 1
+
+    for name in names:
+        result = gw.add_district(world_id, name)
+        print(f"[District] {result['district']} "
+              f"({'created' if result['created'] else 'exists'}) -> {result['district_dir']}")
+
+    if preset and prompt:
+        print("[Warn] both --preset and --prompt given; --preset wins")
+        prompt = None
+
+    for name in names:
+        print(f"[Step] district description <- {name}")
+        ok, r = s1_district_description.run_step(world_id, name, preset=preset, prompt=prompt, seed=seed)
+        if not ok:
+            print(f"[Abort] district description failed for {name}: {r}")
+            return 1
+
+    households_total = 0
+    for name in names:
+        for index in range(households):
+            print(f"[Step] household {index + 1}/{households} <- {name}")
+            ok, r = s2_household_compose.run_step(world_id, name, None, seed=seed)
+            if not ok:
+                print(f"[Abort] household compose failed for {name}: {r}")
+                return 1
+            households_total += 1
+            if with_home:
+                print(f"[Step] home <- {name} (household {index + 1})")
+                ok, r = s3_home.run_step(world_id, name, None, seed=seed)
+                if not ok:
+                    print(f"[Abort] home failed for {name}: {r}")
+                    return 1
+
+    print(f"\n########## WORLD {world_id} DONE "
+          f"({len(names)} district(s), {households_total} household(s)) ##########")
+    return 0
 
 
 def get_member_names(world_id, house="house_0001"):
@@ -263,8 +296,13 @@ def main():
     parser = argparse.ArgumentParser(description="LLMWorld single entry")
     parser.add_argument("--mode", choices=["world", "simulate"], required=True)
     parser.add_argument("--world", default=None, help="world ID (auto if omitted)")
-    parser.add_argument("--world-config", default=None, help="world config name under import/world/ (default Melbourne)")
-    parser.add_argument("--count", type=int, default=1, help="world: number of household types")
+    parser.add_argument("--world-config", default=None, help="world: config name under import/world/ (default Melbourne)")
+    parser.add_argument("--districts", default=None, help="world: comma-separated district names to create (default: every block in --world-config)")
+    parser.add_argument("--households", type=int, default=None, help="world: households to compose per district (default: 1)")
+    parser.add_argument("--home", action="store_true", help="world: also run the home (rooms + appliances) step for each household")
+    parser.add_argument("--preset", default=None, help="world: district-description preset id (wins over --prompt)")
+    parser.add_argument("--prompt", default=None, help="world: custom district-description prompt text")
+    parser.add_argument("--count", type=int, default=None, help="world: DEPRECATED alias for --households (simulate uses no count)")
     parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED)
     parser.add_argument("--date", default=None, help="simulate: start date")
     parser.add_argument("--days", type=int, default=1, help="simulate: number of consecutive days (default: 1)")
@@ -296,7 +334,24 @@ def main():
 
     world_id = args.world or auto_world_id()
     if args.mode == "world":
-        return run_world(world_id, args.count, args.seed, args.workers, args.world_config)
+        households = args.households
+        if households is None:
+            households = args.count if args.count is not None else 1
+            if args.count is not None:
+                print(f"[Warn] --count is deprecated; treating it as --households {args.count}")
+        elif args.count is not None:
+            print("[Warn] --count is ignored for --mode world (--households was given)")
+        if households < 1:
+            print(f"[Abort] --households must be >= 1; got {households}")
+            return 1
+        districts = None
+        if args.districts is not None:
+            districts = [token.strip() for token in args.districts.split(",") if token.strip()]
+            if not districts:
+                print("[Abort] --districts was empty")
+                return 1
+        return run_world(world_id, districts, households, args.seed, args.world_config,
+                         args.preset, args.prompt, args.home)
     try:
         events = news.parse_events(args.event, args.event_template)
         notices = [news.parse_event_spec(spec) for spec in (args.community_notice or []) if spec]
