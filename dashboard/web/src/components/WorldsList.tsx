@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from "react"
+import { useEffect, useState, type CSSProperties } from "react"
 
 import { Clock3, Loader2, Plus, RefreshCw, Trash2 } from "lucide-react"
 
@@ -10,24 +10,41 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useCreateWorld, useDeleteWorld, useWorlds } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
-import { countLabel, formatMtime } from "@/lib/format"
+import { formatMtime } from "@/lib/format"
 import { cn } from "@/lib/utils"
 import { randomWorldId } from "@/lib/world"
 import { useTimeStore } from "@/store/time"
 
 const FIELD_CLASS = "h-8 px-2.5 text-[14px]"
 
+function Stat({ value, word }: { value: number; word: string }) {
+  return (
+    <span className="whitespace-nowrap">
+      <span className="num font-semibold text-fg-muted">{value}</span>{" "}
+      {value === 1 ? word : `${word}s`}
+    </span>
+  )
+}
+
 function WorldRow({
   info,
   selected,
   onSelect,
+  onDeleted,
 }: {
   info: WorldInfo
   selected: boolean
   onSelect: () => void
+  onDeleted: () => void
 }) {
   const remove = useDeleteWorld()
-  const [pendingDelete, setPendingDelete] = useState(false)
+  const [armed, setArmed] = useState(false)
+
+  useEffect(() => {
+    if (!armed) return
+    const timer = window.setTimeout(() => setArmed(false), 6000)
+    return () => window.clearTimeout(timer)
+  }, [armed])
 
   return (
     <article
@@ -41,77 +58,61 @@ function WorldRow({
         onClick={onSelect}
         aria-current={selected ? "true" : undefined}
         className={cn(
-          "flex w-full min-w-0 flex-col gap-2 px-3.5 py-3 text-left transition-colors",
+          "flex w-full min-w-0 flex-col gap-1.5 px-3.5 py-2.5 text-left transition-colors",
           selected ? "bg-item-selected" : "hover:bg-item-hover",
         )}
       >
         <span className="flex min-w-0 items-center gap-2">
-          <span className="num truncate text-[14px] font-semibold tracking-[-0.01em] text-fg">
+          <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
             {info.world_id}
           </span>
           <WorldBadge frozen={info.frozen} />
-        </span>
-
-        <span className="chip max-w-full">
-          <span className="num truncate text-[12px]">
-            {countLabel(info.districts.length, "block")} ·{" "}
-            {countLabel(info.houses.length, "household")} ·{" "}
-            {countLabel(info.spacetimes.length, "spacetime")}
+          <span className="label-micro ml-auto flex shrink-0 items-center gap-1 whitespace-nowrap">
+            <Clock3 className="size-3" aria-hidden />
+            {formatMtime(info.latest_mtime)}
           </span>
         </span>
 
-        <span className="label-micro flex items-center gap-1.5">
-          <Clock3 className="size-3" aria-hidden />
-          Last activity {formatMtime(info.latest_mtime)}
+        <span className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12px] text-fg-subtle">
+          <Stat value={info.districts.length} word="block" />
+          <span aria-hidden>·</span>
+          <Stat value={info.houses.length} word="household" />
+          <span aria-hidden>·</span>
+          <Stat value={info.spacetimes.length} word="spacetime" />
         </span>
       </button>
 
-      <div className="flex flex-col gap-1.5 border-t border-border px-2.5 py-2">
-        {pendingDelete ? (
-          <>
-            <p className="text-[12px] text-energy">
-              Delete moves <span className="num">{info.world_id}</span> to output/_trash/ (recoverable).
-            </p>
-            <span className="flex flex-wrap items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() =>
-                  remove.mutate(info.world_id, { onSuccess: () => setPendingDelete(false) })
-                }
-                disabled={remove.isPending}
-                title="Moves to output/_trash/ (recoverable)"
-                className="label-micro rounded-full border border-danger/50 px-2 py-0.5 text-danger transition-colors hover:bg-danger/10 disabled:opacity-50"
-              >
-                Confirm delete
-              </button>
-              <button
-                type="button"
-                onClick={() => setPendingDelete(false)}
-                className="label-micro rounded-full border border-border-strong px-2 py-0.5 text-fg-muted transition-colors hover:bg-item-hover"
-              >
-                Cancel
-              </button>
-            </span>
-          </>
-        ) : (
-          <span className="flex flex-wrap items-center gap-1.5">
-            <CloneWorldButton world={info.world_id} />
-            <Button
-              variant="ghost"
-              size="xs"
-              className="ml-auto hover:text-danger"
-              title="Moves to output/_trash/ (recoverable)"
-              onClick={() => setPendingDelete(true)}
-            >
-              <Trash2 />
-              Delete
-            </Button>
-          </span>
-        )}
-        {remove.isError ? (
-          <p className="text-[12px] text-danger">Delete failed: {errorMessage(remove.error)}</p>
-        ) : null}
+      <div className="flex items-center justify-between gap-2 border-t border-border/60 px-2 py-1.5">
+        <CloneWorldButton world={info.world_id} />
+        <Button
+          variant="ghost"
+          size="xs"
+          disabled={remove.isPending}
+          title={
+            armed
+              ? "Click again to delete"
+              : "Delete this world (moves to output/_trash/, recoverable)"
+          }
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => {
+            if (!armed) {
+              setArmed(true)
+              return
+            }
+            remove.mutate(info.world_id, { onSuccess: onDeleted })
+          }}
+          className={cn(armed && "bg-danger/10 text-danger hover:bg-danger/15 hover:text-danger")}
+        >
+          {remove.isPending ? <Loader2 className="animate-spin" /> : <Trash2 />}
+          {armed ? "Confirm delete" : "Delete"}
+        </Button>
       </div>
+
+      {remove.isError ? (
+        <p className="border-t border-border/60 px-3.5 py-1.5 text-[12px] text-danger">
+          Delete failed: {errorMessage(remove.error)}
+        </p>
+      ) : null}
     </article>
   )
 }
@@ -222,6 +223,9 @@ export function WorldsList() {
                   info={info}
                   selected={world === info.world_id}
                   onSelect={() => openWorld(info.world_id)}
+                  onDeleted={() => {
+                    if (world === info.world_id) setWorld("")
+                  }}
                 />
               </li>
             ))}
