@@ -69,8 +69,8 @@ function WorldRow({
           selected && "bg-item-selected",
         )}
       >
-        <TableCell className="align-middle">
-          <div className="flex min-w-0 flex-col gap-0.5">
+        <TableCell className="max-w-[180px] align-middle">
+          <div className="flex max-w-[160px] min-w-0 flex-col gap-0.5">
             <div className="flex min-w-0 items-center gap-2">
               <button
                 type="button"
@@ -84,7 +84,9 @@ function WorldRow({
             </div>
             <span className="flex min-w-0 items-center gap-1 text-[11px] text-fg-subtle">
               <Clock3 className="size-3 shrink-0" aria-hidden />
-              <span className="truncate">{formatMtime(info.latest_mtime)}</span>
+              <span className="truncate" title={formatMtime(info.latest_mtime)}>
+                {formatMtime(info.latest_mtime)}
+              </span>
             </span>
           </div>
         </TableCell>
