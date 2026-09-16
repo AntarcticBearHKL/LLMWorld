@@ -1,5 +1,5 @@
-// World ids read as `world_<word>` (e.g. world_fish) so they are memorable and
-// sayable instead of an opaque hex suffix. The word list is deliberately
+// Generated ids read as `<prefix>_<word>` (e.g. world_fish, district_harbor) so they are
+// memorable and sayable instead of an opaque hex suffix. The word list is deliberately
 // curated — short, lowercase, unambiguous English nouns.
 
 const WORDS: readonly string[] = [
@@ -27,16 +27,21 @@ const WORDS: readonly string[] = [
 
 const pick = <T>(list: readonly T[]): T => list[Math.floor(Math.random() * list.length)] as T
 
-export const randomWorldId = (taken: Iterable<string> = []): string => {
+export const randomName = (prefix: string, taken: Iterable<string> = []): string => {
   const used = new Set(taken)
   const pool = [...WORDS]
   while (pool.length > 0) {
     const word = pool.splice(Math.floor(Math.random() * pool.length), 1)[0]
-    const candidate = `world_${word}`
+    const candidate = `${prefix}_${word}`
     if (!used.has(candidate)) return candidate
   }
-  const base = `world_${pick(WORDS)}`
+  const base = `${prefix}_${pick(WORDS)}`
   let suffix = 2
   while (used.has(`${base}_${suffix}`)) suffix += 1
   return `${base}_${suffix}`
 }
+
+export const randomWorldId = (taken: Iterable<string> = []): string => randomName("world", taken)
+
+export const randomDistrictId = (taken: Iterable<string> = []): string =>
+  randomName("district", taken)

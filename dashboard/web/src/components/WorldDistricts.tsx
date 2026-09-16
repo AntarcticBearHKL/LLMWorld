@@ -25,40 +25,46 @@ import {
 import { errorMessage } from "@/lib/errors"
 import { countLabel } from "@/lib/format"
 import { cn } from "@/lib/utils"
+import { randomDistrictId } from "@/lib/world"
 
 const FIELD_CLASS = "h-8 px-2.5 text-[14px]"
 
 function NewDistrictForm({ world }: { world: string }) {
   const create = useCreateDistrict(world)
+  const districtsQuery = useDistricts(world)
   const [draft, setDraft] = useState("")
 
   const onCreate = () => {
-    const name = draft.trim()
-    if (name.length === 0) return
+    const typed = draft.trim()
+    const taken = (districtsQuery.data ?? []).map((district) => district.name)
+    const name = typed.length > 0 ? typed : randomDistrictId(taken)
     create.mutate({ name }, { onSuccess: () => setDraft("") })
   }
 
   return (
     <div className="flex flex-col gap-1.5">
       <Label htmlFor="new-district-name" className="label-micro text-fg-muted">
-        New district
+        New district (blank = auto-generate)
       </Label>
       <div className="flex flex-wrap items-center gap-2">
         <Input
           id="new-district-name"
           value={draft}
-          placeholder="3168"
+          placeholder="district_harbor"
           onChange={(event) => setDraft(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Enter") onCreate()
           }}
           className={cn(FIELD_CLASS, "num w-40")}
         />
-        <Button size="sm" onClick={onCreate} disabled={create.isPending || draft.trim().length === 0}>
+        <Button size="sm" onClick={onCreate} disabled={create.isPending}>
           {create.isPending ? <Loader2 className="animate-spin" /> : <Plus />}
           Create district
         </Button>
-        <span className="text-[12px] text-fg-subtle">Creating a district is local — no LLM calls.</span>
+        <span className="text-[12px] text-fg-subtle">
+          Blank name generates a <span className="num">district_&lt;word&gt;</span> id. Creating a
+          district is local — no LLM calls.
+        </span>
       </div>
       {create.isError ? (
         <p className="text-[12px] text-danger">Create failed: {errorMessage(create.error)}</p>
