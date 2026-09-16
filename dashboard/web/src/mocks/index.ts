@@ -7,10 +7,14 @@
  * assertions, which is exactly what we want to avoid.
  */
 import type {
+  ArtifactRef,
   BlockSummary,
   BuildPreview,
   BuildState,
   DayReplay,
+  DistrictInfo,
+  DistrictPreset,
+  HouseStepStatus,
   HouseholdInfo,
   RoomInfo,
   RunInfo,
@@ -150,53 +154,140 @@ export const mockStages: Record<string, StagePayload> = {
   "world_838587/2026-09-11/house_0001/Member 4": stages4,
 }
 
-/** Mock mode has no build artifacts: always report "empty world, not started" so the UI shows its normal states. */
-export function mockBuildState(worldId: string): BuildState {
-  const exists = mockWorlds.some((item) => item.world_id === worldId)
+const MOCK_DISTRICT_DESCRIPTION =
+  "A mixed residential district: low-rise detached and semi-detached housing, a young " +
+  "student-heavy population clustered near the campus, a high rental share, and a settled " +
+  "older cohort on the quieter streets. Households range from one-person rentals to " +
+  "four-person families with two cars."
+
+export const mockDistrictPresets: DistrictPreset[] = [
+  {
+    id: "clayton_3168",
+    title: "Clayton 3168 (ABS census style)",
+    description: "ABS-style district profile modelled on the Clayton 3168 census text.",
+  },
+  {
+    id: "inner_city_highrise",
+    title: "Inner-city high-rise",
+    description: "Dense apartment district: high rental share, transient young professionals.",
+  },
+  {
+    id: "outer_suburban_family",
+    title: "Outer-suburban family",
+    description: "Mortgage-belt district of detached family homes and long commutes.",
+  },
+]
+
+export function mockBuildState(worldId: string, district: string | null): BuildState {
+  const info = mockWorlds.find((item) => item.world_id === worldId)
+  const exists = info !== undefined
+  const name = district ?? info?.districts[0] ?? ""
+  const scoped = info !== undefined && info.districts.includes(name) ? info.houses : []
+  const described = scoped.length > 0
+  const householdReason = described ? null : "no households yet; run 'district' first"
+  const homeReason = described ? null : "no households yet; run 'household' first"
+  const assembleReason = described ? null : "no households yet; run 'home' first"
+  const houseStatuses = (done: boolean, blockedReason: string | null): HouseStepStatus[] =>
+    scoped.map((house) => ({
+      house,
+      done,
+      runnable: blockedReason === null,
+      blocked_reason: blockedReason,
+    }))
+
   return {
     world_id: worldId,
     world_dir: `mock://worlds/${worldId}`,
     exists,
-    houses: [],
+    district: name,
+    houses: scoped,
     steps: [
       {
-        step: "types",
-        scope: "world",
-        done: false,
+        step: "district",
+        scope: "district",
+        done: described,
         runnable: exists,
         blocked_reason: exists ? null : "world directory is missing",
         houses: [],
       },
       {
-        step: "personas",
-        scope: "house",
-        done: false,
-        runnable: false,
-        blocked_reason: "no households yet; run 'types' first",
-        houses: [],
+        step: "household",
+        scope: "district",
+        done: described,
+        runnable: described,
+        blocked_reason: householdReason,
+        houses: houseStatuses(described, householdReason),
       },
       {
-        step: "household",
+        step: "home",
         scope: "house",
-        done: false,
-        runnable: false,
-        blocked_reason: "no households yet; run 'personas' first",
-        houses: [],
+        done: described,
+        runnable: described,
+        blocked_reason: homeReason,
+        houses: houseStatuses(described, homeReason),
       },
       {
         step: "assemble",
         scope: "house",
         done: false,
-        runnable: false,
-        blocked_reason: "no households yet; run 'household' first",
-        houses: [],
+        runnable: described,
+        blocked_reason: assembleReason,
+        houses: houseStatuses(false, assembleReason),
       },
     ],
   }
 }
 
-export function mockBuildPreview(worldId: string, step: string, house: string | null): BuildPreview {
-  return { world_id: worldId, step, house, reads: [], writes: [], overwrites: [] }
+export function mockBuildPreview(
+  worldId: string,
+  step: string,
+  district: string | null,
+  house: string | null,
+): BuildPreview {
+  const base = `output/worlds/${worldId}/${district ?? "primary"}`
+  const label = house ?? "house_0001"
+  const householdPath = `${base}/${label}/household.json`
+  const reads: ArtifactRef[] = [{ path: `${base}/district.json`, exists: true, role: "input" }]
+  const writes: ArtifactRef[] = []
+  const overwrites: string[] = []
+
+  if (step === "district") {
+    writes.push({ path: `${base}/description.md`, exists: false, role: "output" })
+  } else if (step === "household") {
+    reads.push({ path: `${base}/description.md`, exists: true, role: "input" })
+    writes.push({ path: householdPath, exists: false, role: "output" })
+  } else {
+    reads.push({ path: householdPath, exists: true, role: "input" })
+    reads.push({ path: `${base}/${label}/personas.json`, exists: true, role: "input" })
+    writes.push({ path: householdPath, exists: true, role: "output" })
+    overwrites.push(householdPath)
+  }
+
+  return { world_id: worldId, step, district, house, reads, writes, overwrites }
+}
+
+export function mockDistrictsFor(world: string): DistrictInfo[] {
+  const info = mockWorlds.find((item) => item.world_id === world)
+  const houses = info?.houses ?? []
+  return (info?.districts ?? []).map((name) => {
+    const described = houses.length > 0
+    return {
+      name,
+      description: described ? MOCK_DISTRICT_DESCRIPTION : "",
+      house_count: houses.length,
+      has_description: described,
+    }
+  })
+}
+
+export function mockDistrictHouseholds(
+  world: string,
+  district: string,
+  house: string,
+): HouseholdInfo | undefined {
+  const info = mockWorlds.find((item) => item.world_id === world)
+  if (info === undefined || !info.districts.includes(district)) return undefined
+  return mockHouseholds[mockHouseholdKey(world, house)]
 }
 
 export const mockHouseholdKey = (run: string, house: string) => `${run}/${house}`

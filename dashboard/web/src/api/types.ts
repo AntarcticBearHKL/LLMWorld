@@ -215,7 +215,9 @@ export interface StagePayload {
 
 export type JobKind = "world" | "simulate" | "build"
 
-export type BuildStep = "types" | "personas" | "household" | "assemble"
+export type BuildStep = "district" | "household" | "home" | "assemble"
+
+export type BuildStepScope = "world" | "district" | "house"
 
 export type JobStatus = "queued" | "running" | "done" | "failed" | "cancelled"
 
@@ -248,6 +250,9 @@ export interface JobRequest {
   workers?: number | null
   confirm?: boolean
   step?: BuildStep | null
+  district?: string | null
+  preset?: string | null
+  prompt?: string | null
 }
 
 export interface JobEstimate {
@@ -270,6 +275,7 @@ export interface JobInfo {
   line_count: number
   error: string | null
   step: string | null
+  district: string | null
   house: string | null
 }
 
@@ -305,6 +311,39 @@ export interface WorldCloneResult {
   world_id: string
   cloned_from: string
   world_dir: string
+}
+
+export interface DistrictInfo {
+  name: string
+  description: string
+  house_count: number
+  has_description: boolean
+}
+
+export interface DistrictCreateRequest {
+  name: string
+  description?: string | null
+}
+
+export interface DistrictCreateResult {
+  world_id: string
+  name: string
+  description: string | null
+  district_dir: string
+  created: boolean
+}
+
+export interface DistrictDeleteResult {
+  name: string
+  existed: boolean
+  deleted: boolean
+  moved_to: string | null
+}
+
+export interface DistrictPreset {
+  id: string
+  title: string
+  description: string
 }
 
 export interface Spacetime {
@@ -365,6 +404,7 @@ export interface ArtifactRef {
 export interface BuildPreview {
   world_id: string
   step: string
+  district: string | null
   house: string | null
   reads: ArtifactRef[]
   writes: ArtifactRef[]
@@ -380,7 +420,7 @@ export interface HouseStepStatus {
 
 export interface BuildStepStatus {
   step: string
-  scope: "world" | "house"
+  scope: BuildStepScope
   done: boolean
   runnable: boolean
   blocked_reason: string | null
@@ -391,6 +431,7 @@ export interface BuildState {
   world_id: string
   world_dir: string
   exists: boolean
+  district: string | null
   houses: string[]
   steps: BuildStepStatus[]
 }

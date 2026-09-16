@@ -10,6 +10,11 @@ import type {
   BuildState,
   BuildStep,
   DayReplay,
+  DistrictCreateRequest,
+  DistrictCreateResult,
+  DistrictDeleteResult,
+  DistrictInfo,
+  DistrictPreset,
   HouseholdInfo,
   JobCreateResult,
   JobEstimate,
@@ -39,6 +44,9 @@ import type {
 import {
   mockBuildPreview,
   mockBuildState,
+  mockDistrictHouseholds,
+  mockDistrictPresets,
+  mockDistrictsFor,
   mockHouseholdKey,
   mockHouseholds,
   mockReplays,
@@ -227,16 +235,85 @@ export function cloneWorld(world: string, payload: WorldCloneRequest): Promise<W
   return postJson<WorldCloneResult>(`/worlds/${encodeURIComponent(world)}/clone`, payload)
 }
 
-export function getBuildState(world: string): Promise<BuildState> {
-  if (USE_MOCK) return delay(mockBuildState(world))
-  return request<BuildState>(`/worlds/${encodeURIComponent(world)}/build`)
+export function listWorldDistricts(world: string): Promise<DistrictInfo[]> {
+  if (USE_MOCK) return delay(mockDistrictsFor(world))
+  return request<DistrictInfo[]>(`/worlds/${encodeURIComponent(world)}/districts`)
 }
 
-export function getBuildPreview(world: string, step: BuildStep, house?: string): Promise<BuildPreview> {
-  if (USE_MOCK) return delay(mockBuildPreview(world, step, house ?? null))
+export function createWorldDistrict(
+  world: string,
+  payload: DistrictCreateRequest,
+): Promise<DistrictCreateResult> {
+  if (USE_MOCK) {
+    return Promise.reject(
+      new ApiError(
+        `mock:/worlds/${world}/districts`,
+        501,
+        "Mock mode does not create districts; set VITE_USE_MOCK=0",
+      ),
+    )
+  }
+  return postJson<DistrictCreateResult>(`/worlds/${encodeURIComponent(world)}/districts`, payload)
+}
+
+export function deleteWorldDistrict(world: string, district: string): Promise<DistrictDeleteResult> {
+  if (USE_MOCK) {
+    return Promise.reject(
+      new ApiError(
+        `mock:/worlds/${world}/districts/${district}`,
+        501,
+        "Mock mode does not delete districts; set VITE_USE_MOCK=0",
+      ),
+    )
+  }
+  return deleteJson<DistrictDeleteResult>(
+    `/worlds/${encodeURIComponent(world)}/districts/${encodeURIComponent(district)}`,
+  )
+}
+
+export function listDistrictPresets(): Promise<DistrictPreset[]> {
+  if (USE_MOCK) return delay(mockDistrictPresets)
+  return request<DistrictPreset[]>("/district-presets")
+}
+
+export function getDistrictHousehold(
+  world: string,
+  district: string,
+  house: string,
+): Promise<HouseholdInfo> {
+  if (USE_MOCK) {
+    const found = mockDistrictHouseholds(world, district, house)
+    if (found === undefined) {
+      return Promise.reject(
+        new ApiError(
+          `mock:${world}/${district}/${house}`,
+          404,
+          `mock data has no ${house} in ${district}`,
+        ),
+      )
+    }
+    return delay(found)
+  }
+  return request<HouseholdInfo>(
+    `/worlds/${encodeURIComponent(world)}/districts/${encodeURIComponent(district)}/houses/${encodeURIComponent(house)}`,
+  )
+}
+
+export function getBuildState(world: string, district?: string): Promise<BuildState> {
+  if (USE_MOCK) return delay(mockBuildState(world, district ?? null))
+  return request<BuildState>(`/worlds/${encodeURIComponent(world)}/build`, { district })
+}
+
+export function getBuildPreview(
+  world: string,
+  step: BuildStep,
+  district?: string,
+  house?: string,
+): Promise<BuildPreview> {
+  if (USE_MOCK) return delay(mockBuildPreview(world, step, district ?? null, house ?? null))
   return request<BuildPreview>(
     `/worlds/${encodeURIComponent(world)}/build/steps/${encodeURIComponent(step)}/preview`,
-    { house },
+    { district, house },
   )
 }
 

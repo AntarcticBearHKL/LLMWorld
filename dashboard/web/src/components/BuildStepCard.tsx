@@ -5,22 +5,23 @@ import { AlertTriangle, CheckCircle2, Play, XCircle } from "lucide-react"
 import { USE_MOCK } from "@/api/client"
 import type { BuildStep, BuildStepStatus, JobInfo, JobRequest } from "@/api/types"
 import { BuildPreviewList } from "@/components/BuildPreviewList"
+import { DistrictPromptFields } from "@/components/DistrictPromptFields"
 import { JobSubmitBar } from "@/components/JobSubmitBar"
 import { StepInspector } from "@/components/StepInspector"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 import {
   BUILD_STEP_LABEL,
   BUILD_STEP_SCOPE,
+  SCOPE_LABEL,
   isActiveJob,
   useBuildPreview,
+  useDistrictPresets,
 } from "@/hooks/useWorldBuild"
 
-const MOCK_REASON =
+export const MOCK_REASON =
   "Mock mode is on (VITE_USE_MOCK=1), so nothing is submitted. Start the frontend with VITE_USE_MOCK=0 to reach the backend."
 
 const JOB_STATUS_LABEL: Record<JobInfo["status"], string> = {
@@ -39,10 +40,9 @@ const JOB_STATUS_CLASS: Record<JobInfo["status"], string> = {
   cancelled: "border-border-strong bg-surface-2 text-fg-subtle",
 }
 
-const COUNT_FIELD_CLASS = "h-7 w-16 px-2 text-[13px]"
-
 interface BuildStepCardProps {
   world: string
+  district: string
   house: string
   step: BuildStep
   index: number
@@ -54,6 +54,7 @@ interface BuildStepCardProps {
 
 export function BuildStepCard({
   world,
+  district,
   house,
   step,
   index,
@@ -62,7 +63,9 @@ export function BuildStepCard({
   focused,
   onFocus,
 }: BuildStepCardProps) {
-  const [typeCount, setTypeCount] = useState(1)
+  const [preset, setPreset] = useState("")
+  const [prompt, setPrompt] = useState("")
+  const presetsQuery = useDistrictPresets()
 
   const scope = status?.scope ?? BUILD_STEP_SCOPE[step]
   const needsHouse = scope === "house"
@@ -77,18 +80,21 @@ export function BuildStepCard({
       : null
   const houseBlocked =
     needsHouse && !missingHouse && houseStatus === null
-      ? "The target household is not in this world's household list."
+      ? "The target household is not in this district's household list."
       : needsHouse && !missingHouse && houseStatus?.runnable === false
         ? (houseStatus.blocked_reason ?? "This household is not runnable right now.")
         : null
   const targetRunnable = needsHouse ? houseStatus?.runnable === true : runnable
 
-  const previewQuery = useBuildPreview(world, step, needsHouse ? house : "")
+  const previewQuery = useBuildPreview(world, step, district, house)
 
-  const payload: JobRequest =
-    step === "types"
-      ? { kind: "build", world, step, count: typeCount }
-      : { kind: "build", world, step, house }
+  const trimmedPrompt = prompt.trim()
+  const payload: JobRequest = { kind: "build", world, district, step }
+  if (needsHouse) payload.house = house
+  if (step === "district") {
+    if (trimmedPrompt.length > 0) payload.prompt = trimmedPrompt
+    else if (preset.length > 0) payload.preset = preset
+  }
 
   const disabled = USE_MOCK || !targetRunnable || missingHouse
   const disabledReason = USE_MOCK
@@ -123,7 +129,7 @@ export function BuildStepCard({
         <Badge variant="outline" className={cn("label-latin", statusChip.className)}>
           {statusChip.text}
         </Badge>
-        <span className="label-micro">{needsHouse ? "household-scoped" : "world-scoped"}</span>
+        <span className="label-micro">{SCOPE_LABEL[scope]}</span>
         <Button
           variant="outline"
           size="xs"
@@ -151,7 +157,9 @@ export function BuildStepCard({
 
         {needsHouse ? (
           status === null || status.houses.length === 0 ? (
-            <p className="text-[12px] text-fg-subtle">No households yet — run Types first.</p>
+            <p className="text-[12px] text-fg-subtle">
+              No households in this district yet — run Household first.
+            </p>
           ) : (
             <ul className="flex flex-wrap gap-1.5">
               {status.houses.map((item) => (
@@ -256,28 +264,27 @@ export function BuildStepCard({
               house={house}
             />
 
-            {step === "types" ? (
-              <div className="flex items-center gap-2">
-                <Label htmlFor={`build-count-${step}`} className="label-micro">
-                  Household type count (1–5)
-                </Label>
-                <Input
-                  id={`build-count-${step}`}
-                  type="number"
-                  min={1}
-                  max={5}
-                  value={typeCount}
-                  onChange={(event) => {
-                    const next = Number(event.target.value)
-                    setTypeCount(Number.isFinite(next) ? Math.min(5, Math.max(1, Math.trunc(next))) : 1)
-                  }}
-                  className={COUNT_FIELD_CLASS}
+            {step === "district" ? (
+              <div className="flex flex-col gap-2.5">
+                <DistrictPromptFields
+                  presets={presetsQuery.data ?? []}
+                  presetsPending={presetsQuery.isPending}
+                  preset={preset}
+                  prompt={prompt}
+                  disabled={disabled}
+                  onPresetChange={setPreset}
+                  onPromptChange={setPrompt}
                 />
+                {preset.length === 0 && trimmedPrompt.length === 0 ? (
+                  <p className="text-[12px] text-energy">
+                    No preset or prompt set — the backend falls back to the first preset.
+                  </p>
+                ) : null}
               </div>
             ) : null}
 
             <JobSubmitBar
-              key={`${step}-${house}-${String(typeCount)}`}
+              key={`${step}-${house}-${preset}-${trimmedPrompt.length > 0 ? "custom" : "none"}`}
               payload={payload}
               disabled={disabled}
               disabledReason={disabledReason}

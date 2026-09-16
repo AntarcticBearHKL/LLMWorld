@@ -2,7 +2,7 @@ import { Lock } from "lucide-react"
 
 import type { WorldInfo } from "@/api/types"
 import { CloneWorldButton } from "@/components/CloneWorldButton"
-import { WorldBuilder } from "@/components/WorldBuilder"
+import { WorldDistricts } from "@/components/WorldDistricts"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useSpacetimes, useWorldDayBlocks } from "@/hooks/useSpacetimes"
@@ -142,5 +142,5 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
 }
 
 export function WorldHouseholds({ info }: { info: WorldInfo }) {
-  return info.frozen ? <FrozenHouseholds info={info} /> : <WorldBuilder />
+  return info.frozen ? <FrozenHouseholds info={info} /> : <WorldDistricts info={info} />
 }

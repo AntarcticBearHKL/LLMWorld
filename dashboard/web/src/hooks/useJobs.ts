@@ -15,6 +15,28 @@ export const jobKeys = {
 
 const isActive = (job: JobInfo): boolean => job.status === "running" || job.status === "queued"
 
+const activeJobSignature = (jobs: JobInfo[] | undefined): string =>
+  (jobs ?? [])
+    .filter(isActive)
+    .map((job) => job.id)
+    .join("|")
+
+const useRefreshWorldsOnJobDone = (jobs: JobInfo[] | undefined): void => {
+  const queryClient = useQueryClient()
+  const signature = activeJobSignature(jobs)
+  const previous = useRef(signature)
+
+  useEffect(() => {
+    const before = previous.current
+    previous.current = signature
+    if (before === signature) return
+    const running = new Set(signature.split("|").filter((id) => id.length > 0))
+    const finished = before.split("|").filter((id) => id.length > 0 && !running.has(id))
+    if (finished.length === 0) return
+    void queryClient.invalidateQueries({ queryKey: ["worlds"] })
+  }, [signature, queryClient])
+}
+
 /** Poll fast while a job is running, otherwise slowly. */
 export function useJobs() {
   const [interval, setInterval] = useState(15000)
@@ -28,6 +50,7 @@ export function useJobs() {
     const jobs = query.data ?? []
     setInterval(jobs.some(isActive) ? 2500 : 15000)
   }, [query.data])
+  useRefreshWorldsOnJobDone(query.data)
   return query
 }
 

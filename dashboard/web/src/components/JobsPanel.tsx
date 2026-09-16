@@ -34,9 +34,9 @@ const KIND_LABEL: Record<string, string> = {
 }
 
 const STEP_LABEL: Record<string, string> = {
-  types: "Types",
-  personas: "Personas",
+  district: "District",
   household: "Household",
+  home: "Home",
   assemble: "Assemble",
 }
 
@@ -45,6 +45,7 @@ const isActive = (job: JobInfo): boolean => job.status === "running" || job.stat
 const jobMeta = (job: JobInfo): string => {
   const parts = [
     job.world ?? (job.kind === "build" ? null : "(auto world name)"),
+    job.district,
     job.step !== null ? `step ${STEP_LABEL[job.step] ?? job.step}` : null,
     job.house,
     job.exit_code !== null ? `exit ${job.exit_code}` : null,
