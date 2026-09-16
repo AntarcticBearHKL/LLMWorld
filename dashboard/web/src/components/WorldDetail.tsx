@@ -77,7 +77,7 @@ export function WorldDetail() {
         </span>
         <WorldBadge frozen={info.frozen} />
         <span className="chip num text-[12px]">
-          {countLabel(info.districts.length, "block")} ·{" "}
+          {countLabel(info.districts.length, "district")} ·{" "}
           {countLabel(info.houses.length, "household")} ·{" "}
           {countLabel(info.spacetimes.length, "scenario")}
         </span>

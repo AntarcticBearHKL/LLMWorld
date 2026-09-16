@@ -8,7 +8,7 @@ export function WorldsWorkspace() {
   const selected = world.length > 0
 
   return (
-    <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)] gap-3 lg:grid-cols-[minmax(300px,360px)_minmax(0,1fr)]">
+    <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)] gap-3 lg:grid-cols-[minmax(400px,560px)_minmax(0,1fr)]">
       <div className={cn("flex min-h-0 flex-col", selected && "max-lg:hidden")}>
         <WorldsList />
       </div>

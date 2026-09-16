@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 import { Clock3, Loader2, Plus, RefreshCw, Trash2 } from "lucide-react"
 
@@ -8,6 +8,14 @@ import { WorldBadge } from "@/components/primitives/WorldBadge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { useCreateWorld, useDeleteWorld, useWorlds } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
 import { formatMtime } from "@/lib/format"
@@ -17,14 +25,11 @@ import { useTimeStore } from "@/store/time"
 
 const FIELD_CLASS = "h-8 px-2.5 text-[14px]"
 
-function Stat({ value, word }: { value: number; word: string }) {
-  return (
-    <span className="whitespace-nowrap">
-      <span className="num font-semibold text-fg-muted">{value}</span>{" "}
-      {value === 1 ? word : `${word}s`}
-    </span>
-  )
-}
+const HEAD_CLASS = "h-8 px-2.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-fg-muted"
+
+const HEAD_NUM_CLASS = cn(HEAD_CLASS, "text-right")
+
+const CELL_NUM_CLASS = "num text-right tabular-nums text-fg-muted"
 
 function WorldRow({
   info,
@@ -47,73 +52,88 @@ function WorldRow({
   }, [armed])
 
   return (
-    <article
-      className={cn(
-        "card card-lift overflow-hidden",
-        selected ? "border-brand-ring" : "hover:border-border-strong",
-      )}
-    >
-      <button
-        type="button"
+    <>
+      <TableRow
+        aria-selected={selected}
+        tabIndex={0}
         onClick={onSelect}
-        aria-current={selected ? "true" : undefined}
+        onKeyDown={(event) => {
+          if (event.target !== event.currentTarget) return
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault()
+            onSelect()
+          }
+        }}
         className={cn(
-          "flex w-full min-w-0 flex-col gap-1.5 px-3.5 py-2.5 text-left transition-colors",
-          selected ? "bg-item-selected" : "hover:bg-item-hover",
+          "h-10 cursor-pointer border-b border-border/60 hover:bg-item-hover",
+          selected && "bg-item-selected",
         )}
       >
-        <span className="flex min-w-0 items-center gap-2">
-          <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
-            {info.world_id}
-          </span>
-          <WorldBadge frozen={info.frozen} />
-          <span className="label-micro ml-auto flex shrink-0 items-center gap-1 whitespace-nowrap">
-            <Clock3 className="size-3" aria-hidden />
-            {formatMtime(info.latest_mtime)}
-          </span>
-        </span>
+        <TableCell className="align-middle">
+          <div className="flex min-w-0 flex-col gap-0.5">
+            <div className="flex min-w-0 items-center gap-2">
+              <button
+                type="button"
+                onClick={onSelect}
+                title={info.world_id}
+                className="num min-w-0 truncate text-left text-[13px] font-semibold tracking-[-0.01em] text-fg"
+              >
+                {info.world_id}
+              </button>
+              <WorldBadge frozen={info.frozen} className="shrink-0" />
+            </div>
+            <span className="flex min-w-0 items-center gap-1 text-[11px] text-fg-subtle">
+              <Clock3 className="size-3 shrink-0" aria-hidden />
+              <span className="truncate">{formatMtime(info.latest_mtime)}</span>
+            </span>
+          </div>
+        </TableCell>
 
-        <span className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12px] text-fg-subtle">
-          <Stat value={info.districts.length} word="block" />
-          <span aria-hidden>·</span>
-          <Stat value={info.houses.length} word="household" />
-          <span aria-hidden>·</span>
-          <Stat value={info.spacetimes.length} word="scenario" />
-        </span>
-      </button>
+        <TableCell className={CELL_NUM_CLASS}>{info.districts.length}</TableCell>
+        <TableCell className={CELL_NUM_CLASS}>{info.houses.length}</TableCell>
+        <TableCell className={CELL_NUM_CLASS}>{info.spacetimes.length}</TableCell>
 
-      <div className="flex items-center justify-between gap-2 border-t border-border/60 px-2 py-1.5">
-        <CloneWorldButton world={info.world_id} />
-        <Button
-          variant="ghost"
-          size="xs"
-          disabled={remove.isPending}
-          title={
-            armed
-              ? "Click again to delete"
-              : "Delete this world (moves to output/_trash/, recoverable)"
-          }
-          onMouseDown={(event) => event.preventDefault()}
-          onClick={() => {
-            if (!armed) {
-              setArmed(true)
-              return
-            }
-            remove.mutate(info.world_id, { onSuccess: onDeleted })
-          }}
-          className={cn(armed && "bg-danger/10 text-danger hover:bg-danger/15 hover:text-danger")}
+        <TableCell
+          className="text-right whitespace-nowrap"
+          onClick={(event) => event.stopPropagation()}
         >
-          {remove.isPending ? <Loader2 className="animate-spin" /> : <Trash2 />}
-          {armed ? "Confirm delete" : "Delete"}
-        </Button>
-      </div>
+          <span className="inline-flex items-center gap-1">
+            <CloneWorldButton world={info.world_id} label="" />
+            <Button
+              variant="ghost"
+              size={armed ? "xs" : "icon-xs"}
+              disabled={remove.isPending}
+              aria-label="Delete world"
+              title={
+                armed
+                  ? "Click again to delete"
+                  : "Delete this world (moves to output/_trash/, recoverable)"
+              }
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => {
+                if (!armed) {
+                  setArmed(true)
+                  return
+                }
+                remove.mutate(info.world_id, { onSuccess: onDeleted })
+              }}
+              className={cn(armed && "bg-danger/10 text-danger hover:bg-danger/15 hover:text-danger")}
+            >
+              {remove.isPending ? <Loader2 className="animate-spin" /> : <Trash2 />}
+              {armed ? "Confirm delete" : null}
+            </Button>
+          </span>
+        </TableCell>
+      </TableRow>
 
       {remove.isError ? (
-        <p className="border-t border-border/60 px-3.5 py-1.5 text-[12px] text-danger">
-          Delete failed: {errorMessage(remove.error)}
-        </p>
+        <TableRow className="border-b border-border/60 hover:bg-transparent">
+          <TableCell colSpan={5} className="px-2.5 py-1.5 text-[12px] text-danger">
+            Delete failed: {errorMessage(remove.error)}
+          </TableCell>
+        </TableRow>
       ) : null}
-    </article>
+    </>
   )
 }
 
@@ -193,35 +213,53 @@ export function WorldsList() {
         ) : null}
       </header>
 
-      <div className="min-h-0 flex-1 overflow-y-auto p-2.5">
-        {worldsQuery.isPending ? (
-          <p className="px-1 py-4 text-[13px] text-fg-subtle">Loading worlds…</p>
-        ) : worldsQuery.isError ? (
-          <div className="flex flex-col items-start gap-2 px-1 py-4">
-            <p className="text-[13px] text-danger">
-              Failed to load worlds: {errorMessage(worldsQuery.error)}
-            </p>
-            <Button variant="outline" size="xs" onClick={() => void worldsQuery.refetch()}>
-              Retry
-            </Button>
-          </div>
-        ) : worlds.length === 0 ? (
-          <div className="flex flex-col gap-1.5 px-1 py-4">
-            <p className="text-[15px] font-semibold text-fg">No worlds yet</p>
-            <p className="text-[13px] leading-relaxed text-fg-muted">
-              Enter a world ID (or leave it blank) and click New blank world to create an empty shell
-              — no LLM calls.
-            </p>
-          </div>
-        ) : (
-          <ul className="flex flex-col gap-2">
-            {worlds.map((info, index) => (
-              <li
-                key={info.world_id}
-                className="enter min-w-0"
-                style={{ "--enter-index": index } as CSSProperties}
-              >
+      <div className="min-h-0 flex-1 overflow-auto">
+        <Table className="w-full text-[13px]">
+          <TableHeader>
+            <TableRow className="border-b border-border hover:bg-transparent">
+              <TableHead className={HEAD_CLASS}>World</TableHead>
+              <TableHead className={HEAD_NUM_CLASS}>Districts</TableHead>
+              <TableHead className={HEAD_NUM_CLASS}>Households</TableHead>
+              <TableHead className={HEAD_NUM_CLASS}>Scenarios</TableHead>
+              <TableHead className={HEAD_CLASS}>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {worldsQuery.isPending ? (
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={5} className="p-6 text-center text-[13px] text-fg-subtle">
+                  Loading worlds…
+                </TableCell>
+              </TableRow>
+            ) : worldsQuery.isError ? (
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={5} className="p-6 text-center text-[13px] text-fg-subtle">
+                  <span className="flex flex-col items-center gap-2">
+                    <span className="text-[13px] text-danger">
+                      Failed to load worlds: {errorMessage(worldsQuery.error)}
+                    </span>
+                    <Button variant="outline" size="xs" onClick={() => void worldsQuery.refetch()}>
+                      Retry
+                    </Button>
+                  </span>
+                </TableCell>
+              </TableRow>
+            ) : worlds.length === 0 ? (
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={5} className="p-6 text-center text-[13px] text-fg-subtle">
+                  <span className="flex flex-col items-center gap-1.5">
+                    <span className="text-[15px] font-semibold text-fg">No worlds yet</span>
+                    <span className="text-[13px] leading-relaxed text-fg-muted">
+                      Enter a world ID (or leave it blank) and click New blank world to create an
+                      empty shell — no LLM calls.
+                    </span>
+                  </span>
+                </TableCell>
+              </TableRow>
+            ) : (
+              worlds.map((info) => (
                 <WorldRow
+                  key={info.world_id}
                   info={info}
                   selected={world === info.world_id}
                   onSelect={() => openWorld(info.world_id)}
@@ -229,10 +267,10 @@ export function WorldsList() {
                     if (world === info.world_id) setWorld("")
                   }}
                 />
-              </li>
-            ))}
-          </ul>
-        )}
+              ))
+            )}
+          </TableBody>
+        </Table>
       </div>
     </section>
   )

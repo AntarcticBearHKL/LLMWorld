@@ -80,7 +80,7 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
         ) : (
           <div className="flex flex-col gap-4">
             <span className="label-micro">
-              {countLabel(info.districts.length, "block")} ·{" "}
+              {countLabel(info.districts.length, "district")} ·{" "}
               {countLabel(info.houses.length, "household")} · latest scenario{" "}
               <span className="num">{latest.name}</span>
             </span>
