@@ -62,3 +62,14 @@ def get_world_house(world: str, house: str) -> HouseholdInfo:
         return store.household_info(world, house)
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@router.get("/worlds/{world}/districts/{district}/houses/{house}", response_model=HouseholdInfo)
+def get_world_district_house(world: str, district: str, house: str) -> HouseholdInfo:
+    """Household resolved inside one district (house ids repeat across districts)."""
+    if store.world_info(world) is None:
+        raise HTTPException(status_code=404, detail="world not found: %s" % world)
+    try:
+        return store.household_info(world, house, district)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc

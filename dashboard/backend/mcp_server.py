@@ -148,7 +148,7 @@ server = MCPServer(
     title="LLMWorld Research Console",
     instructions=(
         "Tools over the LLMWorld energy-simulation repository. Worlds are built "
-        "in four stages (types -> personas -> household -> assemble); "
+        "in four stages (district -> household -> home -> assemble); "
         "run_build_step and run_simulation spend real API tokens and require "
         "confirm=True. list_worlds/create_world/delete_world/get_build_state are "
         "zero-LLM."
@@ -215,14 +215,14 @@ def delete_world(world_id: str, permanent: bool = False) -> dict[str, Any]:
 
 @server.tool(
     description=(
-        "Per-step build progress for a world: which of the four steps "
-        "(types/personas/household/assemble) are done, runnable, or blocked, "
-        "plus the house-level breakdown."
+        "Per-step build progress for a world's district: which of the four steps "
+        "(district/household/home/assemble) are done, runnable, or blocked, plus "
+        "the house-level breakdown. district defaults to the primary district."
     )
 )
-def get_build_state(world_id: str) -> dict[str, Any]:
+def get_build_state(world_id: str, district: Optional[str] = None) -> dict[str, Any]:
     try:
-        return world_admin.build_state(world_id).model_dump(mode="json")
+        return world_admin.build_state(world_id, district).model_dump(mode="json")
     except ValueError as exc:
         raise ToolError(str(exc)) from exc
 
@@ -230,16 +230,17 @@ def get_build_state(world_id: str) -> dict[str, Any]:
 @server.tool(
     description=(
         "Preview the reads, writes and overwrites for one build step without "
-        "running it. step is one of types, personas, household, assemble."
+        "running it. step is one of district, household, home, assemble."
     )
 )
 def get_build_preview(
     world_id: str,
     step: str,
     house: Optional[str] = None,
+    district: Optional[str] = None,
 ) -> dict[str, Any]:
     try:
-        return world_admin.build_preview(world_id, step, house).model_dump(mode="json")
+        return world_admin.build_preview(world_id, step, house, district).model_dump(mode="json")
     except ValueError as exc:
         raise ToolError(str(exc)) from exc
 
@@ -254,7 +255,10 @@ def get_build_preview(
 def run_build_step(
     world_id: str,
     step: str,
+    district: Optional[str] = None,
     house: Optional[str] = None,
+    preset: Optional[str] = None,
+    prompt: Optional[str] = None,
     count: Optional[int] = None,
     seed: Optional[int] = None,
     confirm: bool = False,
@@ -272,7 +276,10 @@ def run_build_step(
         kind="build",
         world=world_id,
         step=step,
+        district=district,
         house=house,
+        preset=preset,
+        prompt=prompt,
         count=count,
         seed=seed,
         confirm=True,

@@ -29,10 +29,13 @@ from .models import (
 )
 from .paths import SIMULATION_DIR, WORLDS_DIR
 
+from . import world_admin
+
 from analyze import dataset  # noqa: E402  (paths.py put src/ on sys.path)
 
 _DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-_POSTCODE_RE = re.compile(r"^\d{4}$")
+_DISTRICT_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+_RESERVED_DISTRICT_NAMES = frozenset({"log"})
 _TTL_SECONDS = 20.0
 
 _CATALOG_CACHE: Dict[str, Tuple[float, Any]] = {}
@@ -294,7 +297,7 @@ def list_worlds() -> List[WorldInfo]:
 
 
 def _world_districts(world_dir: str) -> List[str]:
-    """Postcode directories of a world: from world.json, else any 4-digit child."""
+    """District names of a world: from world.json, else any district child dir."""
     districts: List[str] = []
     meta_path = os.path.join(world_dir, "world.json")
     try:
@@ -302,8 +305,11 @@ def _world_districts(world_dir: str) -> List[str]:
             meta = json.load(fh)
         if isinstance(meta, dict):
             for district in meta.get("districts") or []:
-                if isinstance(district, dict) and district.get("postcode"):
-                    districts.append(str(district["postcode"]))
+                if not isinstance(district, dict):
+                    continue
+                name = district.get("name") or district.get("postcode")
+                if name:
+                    districts.append(str(name))
     except (OSError, ValueError):
         districts = []
     if districts:
@@ -314,7 +320,9 @@ def _world_districts(world_dir: str) -> List[str]:
         return []
     return [
         child for child in children
-        if _POSTCODE_RE.match(child) and os.path.isdir(os.path.join(world_dir, child))
+        if child not in _RESERVED_DISTRICT_NAMES
+        and _DISTRICT_RE.match(child)
+        and os.path.isdir(os.path.join(world_dir, child))
     ]
 
 
@@ -376,14 +384,29 @@ def world_info(world_id: str) -> Optional[WorldInfo]:
 # --------------------------------------------------------------------------
 # Appliance registry (expensive, pure -> cached forever per house)
 # --------------------------------------------------------------------------
-def registry(world_id: str, house_id: str) -> Dict[str, Any]:
+def _read_household(
+    world_id: str, house_id: str, district: Optional[str] = None
+) -> Any:
+    """Household dict for a (world, house); district=None keeps the primary/legacy path."""
+    if district:
+        path = world_admin.house_file(world_id, house_id, "household.json", district)
+    else:
+        path = dataset.household_path(world_id, house_id)
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return None
+
+
+def registry(world_id: str, house_id: str, district: Optional[str] = None) -> Dict[str, Any]:
     """``{unique_id: Appliance}`` built from household.json (stdout muted)."""
-    key = (world_id, house_id)
+    key = (world_id, district or "", house_id)
     cached = _REGISTRY_CACHE.get(key)
     if cached is not None:
         return cached
 
-    household = dataset.read_household(world_id, house_id)
+    household = _read_household(world_id, house_id, district)
     if not isinstance(household, dict):
         raise ValueError("household not found for %s/%s" % (world_id, house_id))
 
@@ -437,20 +460,24 @@ def appliance_info(appliance: Any) -> ApplianceInfo:
 # --------------------------------------------------------------------------
 # Household metadata
 # --------------------------------------------------------------------------
-def world_household(world_id: str, house_id: str) -> HouseholdInfo:
+def world_household(
+    world_id: str, house_id: str, district: Optional[str] = None
+) -> HouseholdInfo:
     """Household metadata without building the appliance registry."""
-    household = dataset.read_household(world_id, house_id)
+    household = _read_household(world_id, house_id, district)
     if not isinstance(household, dict):
         raise ValueError("household not found for %s/%s" % (world_id, house_id))
-    return _household_info(world_id, house_id, household, with_appliances=False)
+    return _household_info(world_id, house_id, household, with_appliances=False, district=district)
 
 
-def household_info(world_id: str, house_id: str) -> HouseholdInfo:
+def household_info(
+    world_id: str, house_id: str, district: Optional[str] = None
+) -> HouseholdInfo:
     """Household metadata + the appliance registry."""
-    household = dataset.read_household(world_id, house_id)
+    household = _read_household(world_id, house_id, district)
     if not isinstance(household, dict):
         raise ValueError("household not found for %s/%s" % (world_id, house_id))
-    return _household_info(world_id, house_id, household, with_appliances=True)
+    return _household_info(world_id, house_id, household, with_appliances=True, district=district)
 
 
 def _household_info(
@@ -458,6 +485,7 @@ def _household_info(
     house_id: str,
     household: Dict[str, Any],
     with_appliances: bool,
+    district: Optional[str] = None,
 ) -> HouseholdInfo:
     home = household.get("home") if isinstance(household.get("home"), dict) else {}
     rooms = [
@@ -478,7 +506,7 @@ def _household_info(
 
     appliances: List[ApplianceInfo] = []
     if with_appliances:
-        for appliance in registry(world_id, house_id).values():
+        for appliance in registry(world_id, house_id, district).values():
             appliances.append(appliance_info(appliance))
 
     return HouseholdInfo(

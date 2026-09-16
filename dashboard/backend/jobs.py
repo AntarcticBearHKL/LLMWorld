@@ -348,8 +348,9 @@ def _validate_build_request(req: JobRequest) -> None:
         raise ValueError(
             f"world '{req.world}' does not exist; create it first (POST /worlds)"
         )
+    district = world_admin.resolve_district(req.world, req.district)
     if step in build.HOUSE_SCOPE:
-        world_admin.resolve_house_label(req.world, req.house)
+        world_admin.resolve_house_label(req.world, req.house, district)
 
 
 def create_job(req: JobRequest) -> JobCreateResult:
@@ -374,11 +375,15 @@ def create_job(req: JobRequest) -> JobCreateResult:
     job_id = _new_job_id()
 
     build_step: Optional[str] = None
+    build_district: Optional[str] = None
     build_house: Optional[str] = None
     if req.kind == "build":
         build_step = build.require_step(req)
+        build_district = world_admin.resolve_district(req.world or "", req.district)
         if build_step in build.HOUSE_SCOPE:
-            build_house = world_admin.resolve_house_label(req.world or "", req.house)
+            build_house = world_admin.resolve_house_label(
+                req.world or "", req.house, build_district
+            )
 
     job = JobInfo(
         id=job_id,
@@ -390,6 +395,7 @@ def create_job(req: JobRequest) -> JobCreateResult:
         log_path=_log_path(job_id),
         line_count=0,
         step=build_step,
+        district=build_district,
         house=build_house,
     )
 
@@ -554,6 +560,8 @@ def _failure_reason(job_id: str, job: JobInfo, code: int) -> str:
     if job.kind != "build":
         return f"run.py exited with code {code}"
     label = f"build step '{job.step}'"
+    if job.district:
+        label += f" in district {job.district}"
     if job.house:
         label += f" {job.house}"
     message = f"{label} exited with code {code}"

@@ -8,17 +8,22 @@ per-step build state so the UI can warn before re-running a stage.
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
-from .. import artifacts, blocks, store, world_admin
+from .. import artifacts, blocks, districts, store, world_admin
 from ..models import (
     ArtifactRead,
     ArtifactWriteRequest,
     ArtifactWriteResult,
     BuildPreview,
     BuildState,
+    DistrictCreateRequest,
+    DistrictCreateResult,
+    DistrictDeleteResult,
+    DistrictInfo,
+    DistrictPreset,
     WorldCloneRequest,
     WorldCloneResult,
     WorldCreateRequest,
@@ -28,6 +33,15 @@ from ..models import (
 )
 
 router = APIRouter(tags=["build"])
+
+
+def _ensure_world(world: str) -> None:
+    try:
+        exists = world_admin.world_exists(world)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if not exists:
+        raise HTTPException(status_code=404, detail="world not found: %s" % world)
 
 
 @router.post("/worlds", response_model=WorldCreateResult)
@@ -52,11 +66,55 @@ def worlds_delete(world: str, permanent: bool = False) -> WorldDeleteResult:
     return WorldDeleteResult(**result)
 
 
-@router.get("/worlds/{world}/build", response_model=BuildState)
-def world_build_state(world: str) -> BuildState:
-    """Per-step done/runnable/blocked status plus per-house completion."""
+@router.get("/district-presets", response_model=List[DistrictPreset])
+def district_presets() -> List[DistrictPreset]:
+    """Wizard presets for the district-description step (never the prompt text)."""
+    return districts.list_presets()
+
+
+@router.get("/worlds/{world}/districts", response_model=List[DistrictInfo])
+def world_districts_list(world: str) -> List[DistrictInfo]:
+    """Districts of a world with description presence and household counts."""
+    _ensure_world(world)
     try:
-        state = world_admin.build_state(world)
+        return districts.list_districts(world)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post("/worlds/{world}/districts", response_model=DistrictCreateResult)
+def world_districts_create(world: str, req: DistrictCreateRequest) -> DistrictCreateResult:
+    """Create a district locally (zero LLM); idempotent like POST /worlds."""
+    _ensure_world(world)
+    try:
+        result = world_admin.create_district(world, req.name, req.description)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
+    return DistrictCreateResult(**result)
+
+
+@router.delete(
+    "/worlds/{world}/districts/{district}", response_model=DistrictDeleteResult
+)
+def world_districts_delete(
+    world: str, district: str, permanent: bool = False
+) -> DistrictDeleteResult:
+    """Delete a district; default moves it to output/_trash/ (recoverable)."""
+    _ensure_world(world)
+    try:
+        result = world_admin.delete_district(world, district, permanent)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
+    return DistrictDeleteResult(**result)
+
+
+@router.get("/worlds/{world}/build", response_model=BuildState)
+def world_build_state(world: str, district: Optional[str] = None) -> BuildState:
+    """Per-step done/runnable/blocked status for one district's households."""
+    try:
+        state = world_admin.build_state(world, district)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     if not state.exists:
@@ -69,10 +127,11 @@ def world_build_preview(
     world: str,
     step: str,
     house: Optional[str] = None,
+    district: Optional[str] = None,
 ) -> BuildPreview:
     """What a step reads and writes (paths + existence) before it is run."""
     try:
-        return world_admin.build_preview(world, step, house)
+        return world_admin.build_preview(world, step, house, district)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 

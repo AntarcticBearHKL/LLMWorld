@@ -83,7 +83,9 @@ def job_env(job: JobInfo) -> Dict[str, str]:
         except ValueError:
             world_id = ""
         if world_id:
-            env["LLM_TRACE_FILE"] = world_admin.llm_trace_path(world_id, job.id)
+            env["LLM_TRACE_FILE"] = world_admin.llm_trace_path(
+                world_id, job.id, job.district
+            )
     return env
 
 

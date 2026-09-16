@@ -281,7 +281,11 @@ class JobRequest(BaseModel):
     # build mode (kind="build"): which single world-generation stage to run.
     # The target house for per-house stages reuses the ``house`` field above
     # (a house id like "house_0001" or a 0-based index passed as a string).
-    step: Optional[Literal["types", "personas", "household", "assemble"]] = None
+    step: Optional[Literal["district", "household", "home", "assemble"]] = None
+    district: Optional[str] = None
+    # preset wins over prompt when the district-description step carries both.
+    preset: Optional[str] = None
+    prompt: Optional[str] = None
 
 
 class JobEstimate(BaseModel):
@@ -304,6 +308,7 @@ class JobInfo(BaseModel):
     line_count: int = 0
     error: Optional[str] = None
     step: Optional[str] = None
+    district: Optional[str] = None
     house: Optional[str] = None
 
 
@@ -346,6 +351,41 @@ class WorldCloneResult(BaseModel):
     world_dir: str
 
 
+class DistrictInfo(BaseModel):
+    name: str
+    description: str = ""
+    house_count: int = 0
+    has_description: bool = False
+
+
+class DistrictCreateRequest(BaseModel):
+    name: str
+    description: Optional[str] = None
+
+
+class DistrictCreateResult(BaseModel):
+    world_id: str
+    name: str
+    description: Optional[str] = None
+    district_dir: str
+    created: bool
+
+
+class DistrictDeleteResult(BaseModel):
+    name: str
+    existed: bool
+    deleted: bool
+    moved_to: Optional[str] = Field(
+        default=None, description="trash destination when moved to output/_trash/"
+    )
+
+
+class DistrictPreset(BaseModel):
+    id: str
+    title: str = ""
+    description: str = ""
+
+
 class ArtifactRef(BaseModel):
     path: str
     exists: bool
@@ -355,6 +395,7 @@ class ArtifactRef(BaseModel):
 class BuildPreview(BaseModel):
     world_id: str
     step: str
+    district: Optional[str] = None
     house: Optional[str] = None
     reads: List[ArtifactRef] = Field(default_factory=list)
     writes: List[ArtifactRef] = Field(default_factory=list)
@@ -373,7 +414,7 @@ class HouseStepStatus(BaseModel):
 
 class BuildStepStatus(BaseModel):
     step: str
-    scope: Literal["world", "house"]
+    scope: Literal["world", "district", "house"]
     done: bool = False
     runnable: bool = False
     blocked_reason: Optional[str] = None
@@ -384,6 +425,7 @@ class BuildState(BaseModel):
     world_id: str
     world_dir: str
     exists: bool
+    district: Optional[str] = None
     houses: List[str] = Field(default_factory=list)
     steps: List[BuildStepStatus] = Field(default_factory=list)
 

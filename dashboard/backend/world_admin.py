@@ -27,23 +27,23 @@ from .models import (
 WORLDS_DIR = paths.WORLDS_DIR
 OUTPUT_DIR = paths.OUTPUT_DIR
 TRASH_DIR = os.path.join(OUTPUT_DIR, "_trash")
-IMPORT_WORLD_DIR = os.path.join(paths.LLMWORLD_ROOT, "import", "world")
 
 DEFAULT_POSTCODE = "3168"
 DEFAULT_SEED = 42
 DEFAULT_WORLD_CONFIG = "Melbourne"
 
-STEP_ORDER: Tuple[str, ...] = ("types", "personas", "household", "assemble")
+STEP_ORDER: Tuple[str, ...] = ("district", "household", "home", "assemble")
 STEP_SCOPE: Dict[str, str] = {
-    "types": "world",
-    "personas": "house",
-    "household": "house",
+    "district": "district",
+    "household": "district",
+    "home": "house",
     "assemble": "house",
 }
 
 _WORLD_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+_DISTRICT_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+_RESERVED_DISTRICT_NAMES = frozenset({"log"})
 _HOUSE_RE = re.compile(r"^house_(\d+)$")
-_POSTCODE_RE = re.compile(r"^\d{4}$")
 
 
 def _gw() -> Any:
@@ -64,14 +64,21 @@ def _is_file(path: str) -> bool:
     return os.path.isfile(path)
 
 
+def _district_entry_name(entry: Any) -> Optional[str]:
+    if not isinstance(entry, dict):
+        return None
+    name = entry.get("name") or entry.get("postcode")
+    return str(name) if name else None
+
+
 def districts(world_id: str) -> List[str]:
-    """Postcodes of a world: world.json's districts, else its 4-digit child dirs."""
+    """District names of a world: world.json's districts, else child dirs."""
     meta = read_json(world_meta_path(world_id))
     if isinstance(meta, dict):
         found = [
-            str(district["postcode"])
-            for district in (meta.get("districts") or [])
-            if isinstance(district, dict) and district.get("postcode")
+            name
+            for name in (_district_entry_name(entry) for entry in (meta.get("districts") or []))
+            if name
         ]
         if found:
             return found
@@ -82,13 +89,69 @@ def districts(world_id: str) -> List[str]:
         return []
     return [
         child for child in children
-        if _POSTCODE_RE.match(child) and os.path.isdir(os.path.join(world_dir, child))
+        if child not in _RESERVED_DISTRICT_NAMES
+        and _DISTRICT_RE.match(child)
+        and os.path.isdir(os.path.join(world_dir, child))
     ]
 
 
 def primary_district(world_id: str) -> str:
     found = districts(world_id)
     return found[0] if found else DEFAULT_POSTCODE
+
+
+def normalize_district(name: Any) -> str:
+    token = str(name or "").strip()
+    if not token or token in (".", "..") or not _DISTRICT_RE.match(token):
+        raise ValueError(
+            "invalid district name %r: use letters, digits, '.', '_' or '-'" % (name,)
+        )
+    return token
+
+
+def resolve_district(world_id: str, district: Any = None) -> str:
+    """Resolve a district selector (None -> the world's primary district)."""
+    token = str(district or "").strip()
+    if not token:
+        return primary_district(world_id)
+    return normalize_district(token)
+
+
+def create_district(
+    world_id: str, name: str, description: Optional[str] = None
+) -> Dict[str, Any]:
+    """Create a district locally (zero LLM); idempotent, ``created=False`` if present."""
+    wid = normalize_world_id(world_id)
+    if not os.path.isdir(os.path.join(WORLDS_DIR, wid)):
+        raise ValueError("world not found: %s" % wid)
+    result = _gw().add_district(wid, name, description)
+    district = str(result.get("district") or normalize_district(name))
+    meta = read_json(os.path.join(district_dir(wid, district), "district.json"))
+    stored = meta.get("description") if isinstance(meta, dict) else None
+    return {
+        "world_id": wid,
+        "name": district,
+        "description": stored if isinstance(stored, str) else description,
+        "district_dir": result.get("district_dir")
+        or os.path.abspath(district_dir(wid, district)),
+        "created": bool(result.get("created")),
+    }
+
+
+def delete_district(
+    world_id: str, name: str, permanent: bool = False
+) -> Dict[str, Any]:
+    """Remove a district; default is recoverable (move to output/_trash/)."""
+    wid = normalize_world_id(world_id)
+    if not os.path.isdir(os.path.join(WORLDS_DIR, wid)):
+        raise ValueError("world not found: %s" % wid)
+    result = _gw().remove_district(wid, name, permanent)
+    return {
+        "name": str(result.get("district") or name),
+        "existed": bool(result.get("existed")),
+        "deleted": bool(result.get("removed")),
+        "moved_to": result.get("moved_to"),
+    }
 
 
 def normalize_world_id(world_id: str) -> str:
@@ -206,41 +269,43 @@ def clone_world(world_id: str, new_id: str) -> Dict[str, Any]:
     }
 
 
-def district_dir(world_id: str, postcode: Optional[str] = None) -> str:
-    return os.path.join(resolve_world_dir(world_id), postcode or primary_district(world_id))
+def district_dir(world_id: str, district: Optional[str] = None) -> str:
+    return os.path.join(resolve_world_dir(world_id), district or primary_district(world_id))
 
 
 def world_meta_path(world_id: str) -> str:
     return os.path.join(resolve_world_dir(world_id), "world.json")
 
 
-def types_path(world_id: str) -> str:
-    return os.path.join(district_dir(world_id), "household_types.json")
+def types_path(world_id: str, district: Optional[str] = None) -> str:
+    return os.path.join(district_dir(world_id, district), "household_types.json")
 
 
-def households_meta_path(world_id: str) -> str:
-    return os.path.join(district_dir(world_id), "households.json")
+def households_meta_path(world_id: str, district: Optional[str] = None) -> str:
+    return os.path.join(district_dir(world_id, district), "households.json")
 
 
-def log_dir(world_id: str) -> str:
-    return os.path.join(district_dir(world_id), "log")
+def log_dir(world_id: str, district: Optional[str] = None) -> str:
+    return os.path.join(district_dir(world_id, district), "log")
 
 
-def llm_trace_path(world_id: str, job_id: str) -> str:
+def llm_trace_path(world_id: str, job_id: str, district: Optional[str] = None) -> str:
     """Per-job LLM trace (JSONL) written by the build subprocess.
 
     Scoping the trace to a single job keeps every call attributable to the
     build step that made it without tagging anything inside ``src/``.
     """
-    return os.path.join(log_dir(world_id), "llm_trace_%s.jsonl" % job_id)
+    return os.path.join(log_dir(world_id, district), "llm_trace_%s.jsonl" % job_id)
 
 
-def house_dir(world_id: str, house_label_value: str) -> str:
-    return os.path.join(district_dir(world_id), house_label_value)
+def house_dir(world_id: str, house_label_value: str, district: Optional[str] = None) -> str:
+    return os.path.join(district_dir(world_id, district), house_label_value)
 
 
-def house_file(world_id: str, house_label_value: str, name: str) -> str:
-    return os.path.join(house_dir(world_id, house_label_value), name)
+def house_file(
+    world_id: str, house_label_value: str, name: str, district: Optional[str] = None
+) -> str:
+    return os.path.join(house_dir(world_id, house_label_value, district), name)
 
 
 def house_label(index: int) -> str:
@@ -257,36 +322,49 @@ def house_index_from(house_label_or_index: Any) -> Optional[int]:
     return None
 
 
-def household_type_count(world_id: str) -> int:
-    data = read_json(types_path(world_id))
+def count_houses(world_id: str, district: Optional[str] = None) -> int:
+    """Number of ``house_XXXX`` directories present in a district."""
+    base = district_dir(world_id, district)
+    try:
+        children = os.listdir(base)
+    except OSError:
+        return 0
+    return sum(
+        1 for name in children
+        if _HOUSE_RE.match(name) and os.path.isdir(os.path.join(base, name))
+    )
+
+
+def household_type_count(world_id: str, district: Optional[str] = None) -> int:
+    data = read_json(types_path(world_id, district))
     entries = data.get("household_types") if isinstance(data, dict) else data
     return len(entries) if isinstance(entries, list) else 0
 
 
-def list_house_labels(world_id: str) -> List[str]:
+def list_house_labels(world_id: str, district: Optional[str] = None) -> List[str]:
     labels = set()
-    district = district_dir(world_id)
-    if os.path.isdir(district):
+    district_path = district_dir(world_id, district)
+    if os.path.isdir(district_path):
         try:
-            children = os.listdir(district)
+            children = os.listdir(district_path)
         except OSError:
             children = []
         for name in children:
-            if _HOUSE_RE.match(name) and os.path.isdir(os.path.join(district, name)):
+            if _HOUSE_RE.match(name) and os.path.isdir(os.path.join(district_path, name)):
                 labels.add(name)
-    for index in range(household_type_count(world_id)):
+    for index in range(household_type_count(world_id, district)):
         labels.add(house_label(index))
     return sorted(labels)
 
 
-def resolve_house_label(world_id: str, house: Any) -> str:
+def resolve_house_label(world_id: str, house: Any, district: Optional[str] = None) -> str:
     """Resolve a house selector ('house_0001', '0' or None) to a house label.
 
     None selects the first known house, or ``house_0001`` when the world has
     none yet so the step itself fails with a readable reason.
     """
     if house is None or str(house).strip() == "":
-        labels = list_house_labels(world_id)
+        labels = list_house_labels(world_id, district)
         return labels[0] if labels else house_label(0)
     index = house_index_from(house)
     if index is None:
@@ -299,22 +377,17 @@ def resolve_house_label(world_id: str, house: Any) -> str:
     return house_label(index)
 
 
-def member_count(world_id: str, house_label_value: Optional[str]) -> Optional[int]:
+def member_count(
+    world_id: str, house_label_value: Optional[str], district: Optional[str] = None
+) -> Optional[int]:
     if not house_label_value:
         return None
-    data = read_json(house_file(world_id, house_label_value, "aligned_texts.json"))
+    data = read_json(house_file(world_id, house_label_value, "aligned_texts.json", district))
     return len(data) if isinstance(data, list) else None
 
 
-def _world_config_name(world_id: str) -> str:
-    meta = read_json(world_meta_path(world_id))
-    if isinstance(meta, dict) and meta.get("world_config"):
-        return str(meta["world_config"])
-    return DEFAULT_WORLD_CONFIG
-
-
 def _aggregate(
-    step: str, houses: List[HouseStepStatus], empty_reason: str
+    step: str, scope: str, houses: List[HouseStepStatus], empty_reason: str
 ) -> BuildStepStatus:
     done = bool(houses) and all(item.done for item in houses)
     runnable = any(item.runnable for item in houses)
@@ -325,7 +398,7 @@ def _aggregate(
         reason = next((item.blocked_reason for item in houses if item.blocked_reason), "blocked")
     return BuildStepStatus(
         step=step,
-        scope="house",
+        scope=scope,
         done=done,
         runnable=runnable,
         blocked_reason=reason,
@@ -333,62 +406,60 @@ def _aggregate(
     )
 
 
-def build_state(world_id: str) -> BuildState:
+def _house_has_home(path: str) -> bool:
+    data = read_json(path)
+    return isinstance(data, dict) and isinstance(data.get("home"), dict) and bool(data["home"])
+
+
+def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
     wid = normalize_world_id(world_id)
     world_dir = os.path.join(WORLDS_DIR, wid)
     exists = os.path.isdir(world_dir)
-    district = district_dir(wid)
+    district_name = resolve_district(wid, district)
+    district_path = district_dir(wid, district_name)
 
-    types_done = _is_file(os.path.join(district, "household_types.json"))
-    type_count = household_type_count(wid) if types_done else 0
-    labels = list_house_labels(wid) if exists else []
+    description_done = _is_file(os.path.join(district_path, "description.md"))
+    labels = list_house_labels(wid, district_name) if exists else []
 
     assembled: set = set()
-    meta = read_json(os.path.join(district, "households.json"))
+    meta = read_json(households_meta_path(wid, district_name))
     if isinstance(meta, dict) and isinstance(meta.get("households"), list):
         for entry in meta["households"]:
             if isinstance(entry, dict) and entry.get("house_id"):
                 assembled.add(str(entry["house_id"]))
 
-    persona_houses: List[HouseStepStatus] = []
     household_houses: List[HouseStepStatus] = []
+    home_houses: List[HouseStepStatus] = []
     assemble_houses: List[HouseStepStatus] = []
     for label in labels:
-        raw_index = house_index_from(label)
-        index = 0 if raw_index is None else raw_index
-
-        personas_done = _is_file(house_file(wid, label, "aligned_texts.json"))
-        if not types_done:
-            personas_runnable = False
-            personas_reason = "household_types.json missing (run 'types' first)"
-        elif type_count and index >= type_count:
-            personas_runnable = False
-            personas_reason = "house index %d is out of range (types=%d)" % (index, type_count)
-        else:
-            personas_runnable = True
-            personas_reason = None
-        persona_houses.append(
-            HouseStepStatus(
-                house=label,
-                done=personas_done,
-                runnable=personas_runnable,
-                blocked_reason=personas_reason,
-            )
-        )
-
-        household_done = _is_file(house_file(wid, label, "household.json"))
+        household_path = house_file(wid, label, "household.json", district_name)
+        household_done = _is_file(household_path)
         household_houses.append(
             HouseStepStatus(
                 house=label,
                 done=household_done,
-                runnable=personas_done,
-                blocked_reason=None if personas_done else "aligned_texts.json missing (run 'personas' first)",
+                runnable=description_done,
+                blocked_reason=None
+                if description_done
+                else "district description missing (run 'district' first)",
+            )
+        )
+
+        home_done = household_done and _house_has_home(household_path)
+        home_houses.append(
+            HouseStepStatus(
+                house=label,
+                done=home_done,
+                runnable=household_done,
+                blocked_reason=None
+                if household_done
+                else "household.json missing (run 'household' first)",
             )
         )
 
         assemble_done = (
-            household_done
-            and _is_file(house_file(wid, label, "personas.json"))
+            home_done
+            and _is_file(house_file(wid, label, "personas.json", district_name))
             and label in assembled
         )
         assemble_houses.append(
@@ -396,33 +467,55 @@ def build_state(world_id: str) -> BuildState:
                 house=label,
                 done=assemble_done,
                 runnable=household_done,
-                blocked_reason=None if household_done else "household.json missing (run 'household' first)",
+                blocked_reason=None
+                if household_done
+                else "household.json missing (run 'household' first)",
             )
         )
 
     steps = [
         BuildStepStatus(
-            step="types",
-            scope="world",
-            done=types_done,
+            step="district",
+            scope="district",
+            done=description_done,
             runnable=exists,
             blocked_reason=None if exists else "world directory is missing",
         ),
-        _aggregate("personas", persona_houses, "no households yet; run 'types' first"),
-        _aggregate("household", household_houses, "no households yet; run 'personas' first"),
-        _aggregate("assemble", assemble_houses, "no households yet; run 'household' first"),
+        _aggregate("household", "district", household_houses, "no households yet; run 'household' first"),
+        _aggregate("home", "house", home_houses, "no households yet; run 'household' first"),
+        _aggregate("assemble", "house", assemble_houses, "no households yet; run 'home' first"),
     ]
 
     return BuildState(
         world_id=wid,
         world_dir=os.path.abspath(world_dir),
         exists=exists,
+        district=district_name,
         houses=labels,
         steps=steps,
     )
 
 
-def build_preview(world_id: str, step: str, house: Any = None) -> BuildPreview:
+def _next_house_label(world_id: str, district: str) -> str:
+    highest = -1
+    for label in list_house_labels(world_id, district):
+        index = house_index_from(label)
+        if index is not None and index > highest:
+            highest = index
+    return house_label(highest + 1)
+
+
+def _preview_house_label(world_id: str, district: str, step: str, house: Any) -> str:
+    if house is not None and str(house).strip():
+        return resolve_house_label(world_id, house, district)
+    if step == "household":
+        return _next_house_label(world_id, district)
+    return resolve_house_label(world_id, None, district)
+
+
+def build_preview(
+    world_id: str, step: str, house: Any = None, district: Optional[str] = None
+) -> BuildPreview:
     wid = normalize_world_id(world_id)
     step_name = str(step or "").strip()
     if step_name not in STEP_ORDER:
@@ -430,47 +523,57 @@ def build_preview(world_id: str, step: str, house: Any = None) -> BuildPreview:
             "unknown step %r: expected one of %s" % (step, ", ".join(STEP_ORDER))
         )
     world_dir = os.path.join(WORLDS_DIR, wid)
-    district = district_dir(wid)
-    label = resolve_house_label(wid, house) if step_name != "types" else None
+    district_name = resolve_district(wid, district)
+    district_path = district_dir(wid, district_name)
+    label: Optional[str] = None
+    if step_name == "household" or STEP_SCOPE[step_name] == "house":
+        label = _preview_house_label(wid, district_name, step_name, house)
 
     reads: List[Tuple[str, str]] = []
     writes: List[Tuple[str, str]] = []
 
-    if step_name == "types":
-        config = _world_config_name(wid)
+    if step_name == "district":
         reads = [
             ("input", os.path.join(world_dir, "world.json")),
-            ("input", os.path.join(IMPORT_WORLD_DIR, config, primary_district(wid), "info.md")),
+            ("input", os.path.join(district_path, "district.json")),
         ]
-        writes = [("output", os.path.join(district, "household_types.json"))]
-    elif step_name == "personas":
-        reads = [("input", os.path.join(district, "household_types.json"))]
         writes = [
-            ("output", house_file(wid, label, "aligned_texts.json")),
-            ("output", house_file(wid, label, "persona_provenance.json")),
+            ("output", os.path.join(district_path, "description.md")),
+            ("output", os.path.join(district_path, "district.json")),
         ]
     elif step_name == "household":
         reads = [
-            ("input", os.path.join(district, "household_types.json")),
-            ("input", house_file(wid, label, "aligned_texts.json")),
-            ("input", house_file(wid, label, "persona_provenance.json")),
+            ("input", os.path.join(district_path, "district.json")),
+            ("input", households_meta_path(wid, district_name)),
         ]
         writes = [
-            ("output", house_file(wid, label, "household.json")),
-            ("output", house_file(wid, label, "persona_rows.json")),
+            ("output", house_file(wid, label, "household.json", district_name)),
+            ("output", house_file(wid, label, "aligned_texts.json", district_name)),
+            ("output", house_file(wid, label, "persona_provenance.json", district_name)),
+            ("output", households_meta_path(wid, district_name)),
+        ]
+    elif step_name == "home":
+        household_path = house_file(wid, label, "household.json", district_name)
+        reads = [
+            ("input", os.path.join(district_path, "district.json")),
+            ("input", household_path),
+        ]
+        writes = [
+            ("output", household_path),
+            ("output", household_path + ".bak.<timestamp>"),
         ]
     else:
         reads = [
-            ("input", house_file(wid, label, "household.json")),
-            ("input", house_file(wid, label, "aligned_texts.json")),
-            ("input", house_file(wid, label, "persona_provenance.json")),
-            ("input", os.path.join(district, "household_types.json")),
-            ("input", os.path.join(district, "households.json")),
+            ("input", house_file(wid, label, "household.json", district_name)),
+            ("input", house_file(wid, label, "aligned_texts.json", district_name)),
+            ("input", house_file(wid, label, "persona_provenance.json", district_name)),
+            ("input", types_path(wid, district_name)),
+            ("input", households_meta_path(wid, district_name)),
         ]
         writes = [
-            ("output", house_file(wid, label, "household.json")),
-            ("output", house_file(wid, label, "personas.json")),
-            ("output", os.path.join(district, "households.json")),
+            ("output", house_file(wid, label, "household.json", district_name)),
+            ("output", house_file(wid, label, "personas.json", district_name)),
+            ("output", households_meta_path(wid, district_name)),
         ]
 
     read_refs = [
@@ -485,6 +588,7 @@ def build_preview(world_id: str, step: str, house: Any = None) -> BuildPreview:
     return BuildPreview(
         world_id=wid,
         step=step_name,
+        district=district_name,
         house=label,
         reads=read_refs,
         writes=write_refs,

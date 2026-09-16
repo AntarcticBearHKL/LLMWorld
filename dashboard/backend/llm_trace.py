@@ -23,7 +23,7 @@ def trace_path_for(job: JobInfo) -> Optional[str]:
         world_id = world_admin.normalize_world_id(job.world)
     except ValueError:
         return None
-    return world_admin.llm_trace_path(world_id, job.id)
+    return world_admin.llm_trace_path(world_id, job.id, job.district)
 
 
 def _iter_records(path: str) -> Iterator[Dict[str, Any]]:
