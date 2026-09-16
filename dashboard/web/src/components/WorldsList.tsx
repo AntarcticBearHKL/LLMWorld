@@ -1,13 +1,12 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Clock3, Loader2, Plus, RefreshCw, Trash2 } from "lucide-react"
 
 import type { WorldInfo } from "@/api/types"
 import { CloneWorldButton } from "@/components/CloneWorldButton"
+import { NewWorldSheet } from "@/components/NewWorldSheet"
 import { WorldBadge } from "@/components/primitives/WorldBadge"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Table,
   TableBody,
@@ -16,14 +15,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useCreateWorld, useDeleteWorld, useWorlds } from "@/hooks/useWorldBuild"
+import { useDeleteWorld, useWorlds } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
 import { formatMtime } from "@/lib/format"
 import { cn } from "@/lib/utils"
-import { randomWorldId } from "@/lib/world"
 import { useTimeStore } from "@/store/time"
-
-const FIELD_CLASS = "h-8 px-2.5 text-[14px]"
 
 const HEAD_CLASS = "h-8 px-2.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-fg-muted"
 
@@ -34,12 +30,12 @@ const CELL_NUM_CLASS = "num text-right tabular-nums text-fg-muted"
 function WorldRow({
   info,
   selected,
-  onSelect,
+  onOpen,
   onDeleted,
 }: {
   info: WorldInfo
   selected: boolean
-  onSelect: () => void
+  onOpen: () => void
   onDeleted: () => void
 }) {
   const remove = useDeleteWorld()
@@ -56,12 +52,12 @@ function WorldRow({
       <TableRow
         aria-selected={selected}
         tabIndex={0}
-        onClick={onSelect}
+        onClick={onOpen}
         onKeyDown={(event) => {
           if (event.target !== event.currentTarget) return
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault()
-            onSelect()
+            onOpen()
           }
         }}
         className={cn(
@@ -69,12 +65,12 @@ function WorldRow({
           selected && "bg-item-selected",
         )}
       >
-        <TableCell className="max-w-[180px] align-middle">
-          <div className="flex max-w-[160px] min-w-0 flex-col gap-0.5">
+        <TableCell className="align-middle">
+          <div className="flex min-w-0 flex-col gap-0.5">
             <div className="flex min-w-0 items-center gap-2">
               <button
                 type="button"
-                onClick={onSelect}
+                onClick={onOpen}
                 title={info.world_id}
                 className="num min-w-0 truncate text-left text-[13px] font-semibold tracking-[-0.01em] text-fg"
               >
@@ -141,78 +137,38 @@ function WorldRow({
 
 export function WorldsList() {
   const worldsQuery = useWorlds()
-  const create = useCreateWorld()
   const world = useTimeStore((state) => state.world)
   const setWorld = useTimeStore((state) => state.setWorld)
-  const [draft, setDraft] = useState("")
+  const setView = useTimeStore((state) => state.setView)
+  const [createOpen, setCreateOpen] = useState(false)
 
   const worlds = worldsQuery.data ?? []
-  const takenKey = worlds.map((item) => item.world_id).join("|")
-  const suggested = useMemo(
-    () => randomWorldId(takenKey === "" ? [] : takenKey.split("|")),
-    [takenKey],
-  )
 
-  const openWorld = (worldId: string) => setWorld(worldId)
-
-  const onCreate = () => {
-    const worldId = draft.trim().length > 0 ? draft.trim() : suggested
-    create.mutate(
-      { world_id: worldId },
-      {
-        onSuccess: (result) => {
-          setDraft("")
-          openWorld(result.world_id)
-        },
-      },
-    )
+  const openWorld = (worldId: string) => {
+    setWorld(worldId)
+    setView("world")
   }
 
   return (
     <section className="card flex h-full min-h-0 w-full flex-col overflow-hidden">
-      <header className="flex shrink-0 flex-col gap-2.5 border-b border-border px-3.5 py-3">
-        <div className="flex items-center gap-2">
-          <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
-            Worlds <span className="num text-[14px] font-medium text-fg-muted">{worlds.length}</span>
-          </span>
+      <header className="flex shrink-0 flex-wrap items-center gap-x-2 gap-y-2 border-b border-border px-3.5 py-3">
+        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
+          Worlds <span className="num text-[14px] font-medium text-fg-muted">{worlds.length}</span>
+        </span>
+        <span className="ml-auto inline-flex items-center gap-1.5">
           <Button
             variant="ghost"
             size="icon-sm"
-            className="ml-auto"
             aria-label="Refresh worlds"
             onClick={() => void worldsQuery.refetch()}
           >
             <RefreshCw />
           </Button>
-        </div>
-
-        <p className="label-micro">
-          Households are a world&apos;s fixed physics — scenarios replay them under their own policy and dates.
-        </p>
-
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="new-world-id" className="label-micro text-fg-muted">
-            World ID (blank = use the suggested id)
-          </Label>
-          <Input
-            id="new-world-id"
-            value={draft}
-            placeholder={suggested}
-            onChange={(event) => setDraft(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !create.isPending) onCreate()
-            }}
-            className={cn(FIELD_CLASS, "num")}
-          />
-          <Button size="sm" className="w-full" onClick={onCreate} disabled={create.isPending}>
-            {create.isPending ? <Loader2 className="animate-spin" /> : <Plus />}
-            New blank world
+          <Button size="sm" onClick={() => setCreateOpen(true)}>
+            <Plus />
+            New world
           </Button>
-        </div>
-
-        {create.isError ? (
-          <p className="text-[12px] text-danger">Create failed: {errorMessage(create.error)}</p>
-        ) : null}
+        </span>
       </header>
 
       <div className="min-h-0 flex-1 overflow-auto">
@@ -252,8 +208,7 @@ export function WorldsList() {
                   <span className="flex flex-col items-center gap-1.5">
                     <span className="text-[15px] font-semibold text-fg">No worlds yet</span>
                     <span className="text-[13px] leading-relaxed text-fg-muted">
-                      Enter a world ID (or leave it blank) and click New blank world to create an
-                      empty shell — no LLM calls.
+                      Click New world to create an empty shell — no LLM calls.
                     </span>
                   </span>
                 </TableCell>
@@ -264,7 +219,7 @@ export function WorldsList() {
                   key={info.world_id}
                   info={info}
                   selected={world === info.world_id}
-                  onSelect={() => openWorld(info.world_id)}
+                  onOpen={() => openWorld(info.world_id)}
                   onDeleted={() => {
                     if (world === info.world_id) setWorld("")
                   }}
@@ -274,6 +229,13 @@ export function WorldsList() {
           </TableBody>
         </Table>
       </div>
+
+      <NewWorldSheet
+        worldIds={worlds.map((info) => info.world_id)}
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        onCreated={openWorld}
+      />
     </section>
   )
 }

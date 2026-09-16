@@ -3,7 +3,8 @@ import { Moon, Sun } from "lucide-react"
 import { JobsPanel } from "@/components/JobsPanel"
 import { SettingsPanel } from "@/components/SettingsPanel"
 import { WatchView } from "@/components/WatchView"
-import { WorldsWorkspace } from "@/components/WorldsWorkspace"
+import { WorldDetail } from "@/components/WorldDetail"
+import { WorldsList } from "@/components/WorldsList"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useTheme } from "@/hooks/useTheme"
@@ -108,7 +109,9 @@ export default function App() {
       </header>
 
       <main className="min-h-0 flex-1 overflow-hidden p-3 lg:p-4">
-        {view === "worlds" || view === "world" ? <WorldsWorkspace /> : null}
+        {view === "worlds" ? <WorldsList /> : null}
+
+        {view === "world" ? <WorldDetail /> : null}
 
         {view === "watch" ? <WatchView /> : null}
 

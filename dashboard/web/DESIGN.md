@@ -583,3 +583,77 @@ store shape and URL contract there are unchanged. `max-w-3xl` (settings), `max-w
 
 Invariants: panes use `h-full min-h-0` with an inner `overflow-y-auto`, so the page never grows a
 second scrollbar; the play bar stays `WatchView`-only; no new tokens, no store-shape change.
+
+## 17. Focus pass — one screen, one job
+
+> **Supersedes §16's single two-pane workspace.** §1–§9 tokens, type, radii, motion and the Warm
+> Cocoa language are **unchanged** — this pass fixes *density and hierarchy*, not the palette.
+> The style skill in force is still `minimalist-skill.md` (see §0); this section adds the
+> `layout-skill.md` spatial contract that was missing.
+
+### 17.1 Diagnosis (the defect being fixed)
+
+At 1440×900 the Worlds route showed all of this at once: a 3-item top nav; a 560px list
+pane carrying an always-visible create form **and** a 5-column table; and the entire world
+detail beside it (header + badge + stat pill + Clone + 2 tabs + an explanatory paragraph +
+a districts table + a second explanatory paragraph + a households table). Concretely:
+
+| # | Defect | Evidence |
+| --- | --- | --- |
+| 1 | Two refresh buttons, two create entries | `Refresh worlds` + `Refresh districts`; `New blank world` + `New district` |
+| 2 | The same concept explained twice on one screen | "Households are a world's fixed physics…" beside "A scenario is a parallel version…" |
+| 3 | `Clone` offered twice | once per list row, once in the detail header |
+| 4 | Counts duplicated | the stat pill AND the same numbers in the tables |
+| 5 | **Three nested scroll regions side by side** | list pane, districts table, households table — the exact case `layout-skill.md` §1 calls a defect |
+| 6 | No primary action | create / generate-description / generate-home / Steps / Clone / Delete all carry near-equal weight |
+
+Nothing was primary, so everything competed. The width squeeze documented in §16 (a 560px
+worlds pane plus a 42% districts column) was a *symptom* of defect 5, not a fixed constraint.
+
+### 17.2 Rules this pass enforces
+
+1. **One screen, one job.** A route renders ONE primary region. `view=worlds` is the full-width
+   worlds index; `view=world&world=W` is that world's detail. **They are never shown side by
+   side.** The store/URL already modelled this — §16 merged it, this section splits it back.
+2. **One primary action per screen.** Exactly one `default`-variant button is visible without
+   interaction (the screen's create action). Every other action is `outline` / `ghost` / icon-only,
+   or lives behind a `Sheet`.
+3. **Create forms are never part of the layout.** New world / new district open in a right-hand
+   `Sheet` triggered by one button — the pattern §7's `Sheet` primitive already provides. No
+   always-visible form sits on a screen.
+4. **Say it once per screen.** Conceptual explanation is removed from panes and kept only in the
+   `Sheet` that performs the action, or in the empty state that actually needs it.
+5. **Counts appear once.** A count lives either in a table cell or in a header pill, never both.
+6. **Named scroll ownership** (`layout-skill.md` §1) — recorded in §17.3. Every scrollable region
+   must have a named job; no two scroll containers may be nested without one.
+7. **Named layout primitives** (`layout-skill.md` §3) — screens are built from `scroll-body-shell`,
+   `list-detail`, `cluster` and intrinsic grids instead of ad-hoc flex/grid.
+
+### 17.3 Screen contracts
+
+| Route | Spatial model | Scroll owner (named) | Primary action | Secondary actions |
+| --- | --- | --- | --- | --- |
+| `view=worlds` | full-width: toolbar over a table | the worlds table body only | `New world` (opens `Sheet`) | refresh (icon), per-row clone / delete (icon) |
+| `view=world&world=W` | header, then `Households` \| `Scenarios` tabs | one named region per visible pane, side by side, never nested | `New district` (Households tab) | per-district description / steps / delete (icon) |
+| `view=world&…&tab=scenarios` | same shell, `Scenarios` pane | the scenarios list only | `New scenario` | open / delete per row |
+| `view=watch` | unchanged (§14) | unchanged | — | — |
+| `view=jobs` | unchanged (§16) | unchanged | — | — |
+| `view=settings` | unchanged (§16) | unchanged | — | — |
+
+The Households pane uses the `list-detail` primitive: districts on the left, the selected
+district's households on the right. Both are full-width-pane tables, so neither needs the
+compressed proportions §16 required.
+
+### 17.4 Required stress states (`layout-skill.md` §6)
+
+Per screen: **empty** (no worlds / no districts / no households), **long label** (a 40-character
+id truncates with `title`), **unbroken string** (`min-w-0` + `truncate`), and **reflow** — at
+375px each screen is a single readable column with **no horizontal scroll of primary content**.
+Each is rendered as a full-width table row or the pane's own empty state.
+
+### 17.5 Accepted debt
+
+| Item | Reason | Payoff condition |
+| --- | --- | --- |
+| `/visual-qa` dual-oracle gate not run for this pass | this environment cannot capture pixels (the embedded browser panel's screenshot path errors, and the Playwright MCP profile is locked by a stale instance) | re-run `/visual-qa` at 375 / 768 / 1280 on a machine with working capture |
+| `FrozenHouseholds` still renders block cards, not a table | out of scope for this pass; the frozen view shows simulation blocks (kWh / peak W), a different shape from the districts list | convert when the frozen view is next touched |

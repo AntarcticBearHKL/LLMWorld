@@ -339,13 +339,9 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
   const selectedDistrict = districts.find((district) => district.name === selected) ?? null
 
   return (
-    <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(300px,42%)_minmax(0,1fr)]">
+    <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(320px,38%)_minmax(0,1fr)]">
       <section className="card flex min-h-0 flex-col overflow-hidden">
         <header className="flex shrink-0 items-center gap-2 border-b border-border px-3.5 py-2.5">
-          <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
-            Districts{" "}
-            <span className="num text-[14px] font-medium text-fg-muted">{districts.length}</span>
-          </span>
           <Button
             variant="ghost"
             size="icon-sm"
@@ -355,7 +351,7 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
           >
             <RefreshCw />
           </Button>
-          <Button variant="outline" size="xs" onClick={() => setNewOpen(true)}>
+          <Button variant="default" size="xs" onClick={() => setNewOpen(true)}>
             <Plus />
             New district
           </Button>

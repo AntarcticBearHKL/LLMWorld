@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+
 import { ArrowLeft } from "lucide-react"
 
 import { CloneWorldButton } from "@/components/CloneWorldButton"
@@ -19,26 +21,28 @@ export function WorldDetail() {
   const tab = useTimeStore((state) => state.tab)
   const setTab = useTimeStore((state) => state.setTab)
   const setWorld = useTimeStore((state) => state.setWorld)
+  const setView = useTimeStore((state) => state.setView)
   const worldQuery = useWorld(world)
 
+  useEffect(() => {
+    if (world.length === 0) setView("worlds")
+  }, [world, setView])
+
   const back = (
-    <Button variant="ghost" size="xs" className="lg:hidden" onClick={() => setWorld("")}>
+    <Button
+      variant="ghost"
+      size="xs"
+      onClick={() => {
+        setWorld("")
+        setView("worlds")
+      }}
+    >
       <ArrowLeft />
       All worlds
     </Button>
   )
 
-  if (world.length === 0) {
-    return (
-      <section className="card flex h-full min-h-0 flex-col items-start justify-center gap-2 p-8">
-        <h2 className="text-[16px] font-bold tracking-[-0.01em] text-fg">Select a world</h2>
-        <p className="max-w-[420px] text-[14px] leading-relaxed text-fg-muted">
-          Pick a world from the list on the left to open its households and scenarios, or create a
-          new blank world there.
-        </p>
-      </section>
-    )
-  }
+  if (world.length === 0) return null
 
   if (worldQuery.isPending) {
     return (
@@ -71,7 +75,7 @@ export function WorldDetail() {
     <div className="flex h-full min-h-0 w-full flex-col gap-3">
       <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-3">
         {back}
-        <span className="h-4 w-px shrink-0 bg-border-strong lg:hidden" aria-hidden />
+        <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
         <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
           {info.world_id}
         </span>
@@ -111,10 +115,6 @@ export function WorldDetail() {
               <span className="num text-[12px] text-fg-subtle">{info.spacetimes.length}</span>
             </TabsTrigger>
           </TabsList>
-          <span className="label-micro">
-            A scenario is a parallel version of this world — it replays the same households under its
-            own policy, news and dates, and never changes them.
-          </span>
         </div>
 
         <TabsContent value="scenarios" className="mt-0 flex min-h-0 flex-1 flex-col">
