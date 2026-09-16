@@ -273,3 +273,79 @@ L0 Worlds 列表        ?view=worlds
 - `npx tsc -b`：**exit 0**
 - `npm run build`：**exit 0**（`vite` 对 `<script src="/config.js">` 的 stderr 提示为无害，退出码 0）
 - `npm run lint`：**exit 0**（仅既有 warnings，新文件 0 违规）
+
+---
+
+## 4. World-generation redesign (2026-09-16)
+
+The world build pipeline was rebuilt around **districts** instead of a single
+hard-coded postcode. The concept order is now:
+
+**districts → district description → households → home**
+
+### Step ids
+The four build-step ids are `district` / `household` / `home` / `assemble`
+(previously `types` / `personas` / `household` / `assemble`). Scopes:
+`district` and `household` are district-scoped, `home` and `assemble` are
+household-scoped. LLM cost: district = 1 call, household = 2 calls,
+home = 1 call, assemble = 0 calls.
+
+### Districts by NAME (no more `3168`)
+- A world starts empty and districts are added explicitly:
+  `POST /api/worlds/{w}/districts` (`generate_world.add_district`) writes
+  `<world>/<name>/district.json` and registers it in `world.json`'s
+  `districts[]`; `DELETE` moves a district to `output/_trash/` (recoverable).
+- `generate_world` lost the postcode loop: `init_world` writes an empty
+  `districts` list, `districts()` / `primary_district()` / `district_dir()`
+  resolve from `world.json` (falling back to child dirs), every world step takes
+  a district name, and `load_district_text(district)` resolves by name and
+  returns `""` when absent instead of forcing the legacy Clayton postcode.
+
+### New `src/` step modules + presets
+- `src/steps/world/s1_district_description.py` — one prose LLM call per district;
+  writes `<district>/description.md` and merges `<district>/district.json`.
+- `src/steps/world/s2_household_compose.py` — composes a household (type +
+  member count + rationale), samples personas locally and aligns them; writes
+  `house_XXXX/household.json` **without** a `home` key.
+- `src/steps/world/s3_home.py` — invents the home (rooms + appliances), backs up
+  `household.json` to `household.json.bak.<ts>` and merges the `home` in.
+- `src/prompts/district_presets.json` — three built-in briefs (`clayton_3168`,
+  `inner_city_highrise`, `outer_suburban_family`). A custom prompt wins over a
+  preset; a preset wins over the first preset as the built-in default.
+
+### New endpoints
+- `GET /api/district-presets` (id / title / description only — the long prompt
+  text is never sent to the client)
+- `GET/POST /api/worlds/{w}/districts`, `DELETE /api/worlds/{w}/districts/{d}`
+- `GET /api/worlds/{w}/districts/{d}/houses/{h}` (district-qualified household read)
+- `GET /api/worlds/{w}/build?district=` and
+  `GET /api/worlds/{w}/build/steps/{step}/preview?district=&house=`
+
+### Frontend: inline Households-tab preview
+The world **Households** tab now hosts district management (create / list /
+delete), a description wizard (preset chips + custom prompt), and the four-step
+runner. Each household row expands an **inline preview**
+(`HouseholdPreview.tsx`, fetched from the district-qualified endpoint) showing
+its rooms, appliance chips with wattage, and members — no page navigation.
+New components: `WorldDistricts.tsx`, `DistrictPromptFields.tsx`,
+`HouseholdPreview.tsx`; `JobsPanel`/`BuildStepCard`/`WorldBuilder`/`useWorldBuild`
+follow the new step ids.
+
+### Verification
+- Research regression: `python -m unittest discover -s tests` → **Ran 367 tests, OK**.
+- Frontend gates: `npx tsc -b`, `npm run build`, `npm run lint` → exit 0.
+- Offline end-to-end smoke (zero LLM calls): `init_world` → `add_district`
+  (`clayton`, `dockside`) → `s1_district_description` → `s2_household_compose` →
+  `s3_home`, then the FastAPI `TestClient` read of the district-qualified
+  household returned rooms + members + appliances; a simulated `LLMCallError`
+  returned `(False, <readable message>)` and left no half-written
+  `household.json`. 28 / 28 assertions passed.
+
+### Open item
+The **simulate** layer still hard-codes `"3168"` when locating a household:
+- `src/steps/simulate/s1_macro_plan.py`
+- `src/steps/simulate/s4_appliance_decision.py`
+- `src/analyze/aggregate_runs.py`
+
+These must be switched to the district-by-name path before a simulation can run
+against a world whose district is not named `3168`.
