@@ -26,13 +26,15 @@ def _load_json_optional(path):
         return None
 
 
-def run_step(world_id, house=0, seed=42):
+def run_step(world_id, house=0, seed=42, district=None):
     world_dir = os.path.join(gw.WORLDS_DIR, world_id)
     if not os.path.isdir(world_dir):
         print(f"[Error] world directory not found: {world_dir}")
         return False, "world dir missing"
 
-    house_dir = os.path.join(world_dir, gw.CLAYTON_POSTCODE, f"house_{house + 1:04d}")
+    district = district or gw.primary_district(world_id)
+    d_dir = gw.district_dir(world_id, district)
+    house_dir = os.path.join(d_dir, f"house_{house + 1:04d}")
     hpath = os.path.join(house_dir, "household.json")
     if not os.path.exists(hpath):
         print(f"[Error] {hpath} not found; run step s3 first")
@@ -40,7 +42,7 @@ def run_step(world_id, house=0, seed=42):
     with open(hpath, encoding="utf-8") as f:
         household = json.load(f)
 
-    ht_path = os.path.join(world_dir, gw.CLAYTON_POSTCODE, "household_types.json")
+    ht_path = os.path.join(d_dir, "household_types.json")
     with open(ht_path, encoding="utf-8") as f:
         ht = json.load(f)
     types = ht["household_types"] if isinstance(ht, dict) else ht
@@ -73,7 +75,7 @@ def run_step(world_id, house=0, seed=42):
     if not aligned:
         print(f"[Warning] no aligned persona texts found for house {house}; personas.json will be empty")
 
-    gw.save_household_artifacts(world_id, house, aligned, canonical, persona_seed, household)
+    gw.save_household_artifacts(world_id, house, aligned, canonical, persona_seed, household, district)
     house_meta = {
         "house_id": f"house_{house + 1:04d}",
         "type": household.get("type", "?"),
@@ -81,7 +83,7 @@ def run_step(world_id, house=0, seed=42):
         "rooms_count": len(household.get("home", {}).get("rooms", [])),
         "llm_generated": household.get("llm_generated", True),
     }
-    gw.update_world_meta(world_id, house_meta)
+    gw.update_world_meta(world_id, house_meta, district)
 
     print(f"[House {house}] type={household.get('type')}")
     for r in household.get("home", {}).get("rooms", []):
@@ -97,8 +99,9 @@ def main():
     parser.add_argument("--world", required=True, help="world ID")
     parser.add_argument("--house", type=int, default=0, help="household index (0-based)")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--district", default=None, help="district name (default: world's primary district)")
     args = parser.parse_args()
-    ok, result = run_step(args.world, args.house, args.seed)
+    ok, result = run_step(args.world, args.house, args.seed, district=args.district)
     sys.exit(0 if ok else 1)
 
 

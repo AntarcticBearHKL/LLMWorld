@@ -45,10 +45,6 @@ DEFAULT_TEMPERATURE = 20
 DEFAULT_SEED = 42
 
 
-CLAYTON_POSTCODE = "3168"
-
-
-
 MELBOURNE_CLIMATE = {
     "Summer": {"temp_range": (24, 38), "weathers": [("Sunny", 40), ("Cloudy", 25), ("Heatwave", 15), ("Shower", 20)]},
     "Autumn": {"temp_range": (14, 25), "weathers": [("Sunny", 35), ("Cloudy", 30), ("Shower", 25), ("Windy", 10)]},

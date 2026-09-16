@@ -557,8 +557,10 @@ def _run_decomposed(htype, aligned, logger, prefix, persona_rows=None):
     return True, data
 
 
-def run_step(world_id, house=0, seed=42):
-    types = load_json(os.path.join(gw.WORLDS_DIR, world_id, gw.CLAYTON_POSTCODE, "household_types.json"))
+def run_step(world_id, house=0, seed=42, district=None):
+    district = district or gw.primary_district(world_id)
+    d_dir = gw.district_dir(world_id, district)
+    types = load_json(os.path.join(d_dir, "household_types.json"))
     if types is None:
         return False, "household_types.json missing"
     types = types["household_types"] if isinstance(types, dict) else types
@@ -567,7 +569,7 @@ def run_step(world_id, house=0, seed=42):
         return False, f"house {house} out of range"
     htype = normalize_type(types[house])
 
-    house_dir = os.path.join(gw.WORLDS_DIR, world_id, gw.CLAYTON_POSTCODE, f"house_{house + 1:04d}")
+    house_dir = os.path.join(d_dir, f"house_{house + 1:04d}")
     aligned = load_json(os.path.join(house_dir, "aligned_texts.json"))
     if aligned is None:
         return False, "aligned_texts.json missing (run s2 first)"
@@ -632,8 +634,9 @@ def main():
     parser.add_argument("--world", required=True, help="world ID")
     parser.add_argument("--house", type=int, default=0, help="household index (0-based)")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--district", default=None, help="district name (default: world's primary district)")
     args = parser.parse_args()
-    ok, result = run_step(args.world, args.house, args.seed)
+    ok, result = run_step(args.world, args.house, args.seed, district=args.district)
     sys.exit(0 if ok else 1)
 
 

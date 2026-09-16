@@ -44,8 +44,8 @@ def _members_schema(member_count):
     }
 
 
-def load_household_types(world_id):
-    path = os.path.join(gw.WORLDS_DIR, world_id, gw.CLAYTON_POSTCODE, "household_types.json")
+def load_household_types(world_id, district=None):
+    path = os.path.join(gw.district_dir(world_id, district), "household_types.json")
     if not os.path.exists(path):
         print(f"[Error] {path} not found; run step s1 first")
         return None
@@ -147,8 +147,9 @@ def _call_members(prompt, logger, prefix, member_count, fallback_texts=None):
     return fallback, "fallback"
 
 
-def run_step(world_id, house=0, seed=42):
-    types = load_household_types(world_id)
+def run_step(world_id, house=0, seed=42, district=None):
+    district = district or gw.primary_district(world_id)
+    types = load_household_types(world_id, district)
     if types is None:
         return False, "household_types.json missing"
     try:
@@ -164,8 +165,7 @@ def run_step(world_id, house=0, seed=42):
 
     persona_texts, _ = gw.sample_personas(household_type, seed, n=member_count)
 
-    world_dir = os.path.join(gw.WORLDS_DIR, world_id)
-    house_dir = os.path.join(world_dir, gw.CLAYTON_POSTCODE, f"house_{house + 1:04d}")
+    house_dir = os.path.join(gw.district_dir(world_id, district), f"house_{house + 1:04d}")
     os.makedirs(house_dir, exist_ok=True)
     log_dir = os.path.join(house_dir, "log")
     os.makedirs(log_dir, exist_ok=True)
@@ -207,17 +207,18 @@ def main():
     parser.add_argument("--house", type=int, default=0, help="household index (0-based)")
     parser.add_argument("--all-houses", action="store_true")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--district", default=None, help="district name (default: world's primary district)")
     args = parser.parse_args()
     if args.all_houses:
-        types = load_household_types(args.world)
+        types = load_household_types(args.world, args.district)
         if types is None:
             sys.exit(1)
         ok = True
         for house in range(len(types)):
-            step_ok, _ = run_step(args.world, house, args.seed)
+            step_ok, _ = run_step(args.world, house, args.seed, district=args.district)
             ok = ok and step_ok
         sys.exit(0 if ok else 1)
-    ok, _ = run_step(args.world, args.house, args.seed)
+    ok, _ = run_step(args.world, args.house, args.seed, district=args.district)
     sys.exit(0 if ok else 1)
 
 

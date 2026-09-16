@@ -7,7 +7,7 @@ Simulation files (written by run.py --mode simulate):
     output/simulation/<env>/<date>/<house>/s4_decisions_<Member>.json
     output/simulation/<env>/<date>/<house>/s4_decisions_<Member>_<tag>.json
 World files:
-    output/worlds/<world_id>/3168/<house>/household.json
+    output/worlds/<world_id>/<district>/<house>/household.json
 """
 
 import json
@@ -22,6 +22,7 @@ for _path in (_HERE, _SRC):
         sys.path.insert(0, _path)
 
 from load_model import build_load_profile
+import generate_world as gw
 
 PROJECT_ROOT = os.path.dirname(_SRC)
 SIMULATION_DIR = os.path.join(PROJECT_ROOT, "output", "simulation")
@@ -57,7 +58,7 @@ def list_houses(world_id, env, date):
 
 
 def household_path(world_id, house_id):
-    primary = os.path.join(WORLDS_DIR, world_id, "3168", house_id, "household.json")
+    primary = os.path.join(gw.district_dir(world_id), house_id, "household.json")
     if os.path.isfile(primary):
         return primary
     fallback = os.path.join(WORLDS_DIR, world_id, "household.json")

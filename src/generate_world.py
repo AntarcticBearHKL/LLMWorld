@@ -1,5 +1,7 @@
 import json
 import os
+import re
+import shutil
 import sys
 import threading
 from datetime import datetime
@@ -18,15 +20,19 @@ PERSONA_DIR = os.path.join(IMPORT_DIR, "persona")
 WORLD_CONFIG_DIR = os.path.join(IMPORT_DIR, "world")
 WORLDS_DIR = os.path.join(OUTPUT_DIR, "worlds")
 SIMULATION_DIR = os.path.join(OUTPUT_DIR, "simulation")
+TRASH_DIR = os.path.join(OUTPUT_DIR, "_trash")
 
-CLAYTON_POSTCODE = "3168"
 CLAYTON_CITY = "Melbourne"
 CLAYTON_DISTRICT = "Clayton"
 DEFAULT_WORLD_CONFIG = "Melbourne"
 
+# A district is identified by a name; the same rules as a world id apply.
+_DISTRICT_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+_RESERVED_DISTRICT_NAMES = frozenset({"log"})
+
 
 def load_world_config(world_config_name=None):
-    """Load a world configuration: import/world/<name>/<postcode>/info.md -> list of blocks."""
+    """Load a world configuration: import/world/<name>/<district>/info.md -> list of blocks."""
     world_config_name = world_config_name or DEFAULT_WORLD_CONFIG
     config_root = os.path.join(WORLD_CONFIG_DIR, world_config_name)
     if not os.path.isdir(config_root):
@@ -45,6 +51,7 @@ def load_world_config(world_config_name=None):
         with open(info_path, "r", encoding="utf-8") as f:
             info_text = f.read().strip()
         blocks.append({
+            "name": entry,
             "postcode": entry,
             "world": world_config_name,
             "info": info_text,
@@ -54,17 +61,19 @@ def load_world_config(world_config_name=None):
     return {"world": world_config_name, "blocks": blocks}
 
 
-def load_district_text(postcode=None, world_config_name=None):
-    """Load one block's info.md text by postcode from the world config."""
+def load_district_text(district=None, world_config_name=None):
+    """Load one district's info.md text by name from the world config.
+
+    Returns "" when the district (or its info.md) is absent; the legacy Clayton
+    postcode is no longer forced.
+    """
+    if not district:
+        return ""
     config = load_world_config(world_config_name)
-    postcode = postcode or CLAYTON_POSTCODE
     for block in config["blocks"]:
-        if block["postcode"] == postcode:
+        if district in (block.get("name"), block.get("postcode")):
             return block["info"]
-    raise FileNotFoundError(
-        f"postcode '{postcode}' not found in world config '{config['world']}' "
-        f"(available: {[b['postcode'] for b in config['blocks']]})"
-    )
+    return ""
 
 
 class ChatLogger:
@@ -171,48 +180,166 @@ def _write_json(path, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def init_world(world_id, world_config_name=None, seed=42):
-    world_config = load_world_config(world_config_name)
-    world_dir = os.path.join(WORLDS_DIR, world_id)
-    os.makedirs(world_dir, exist_ok=True)
+def _read_json(path):
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
 
-    districts = []
-    for block in world_config["blocks"]:
-        postcode = block["postcode"]
-        district_dir = os.path.join(world_dir, postcode)
-        log_dir = os.path.join(district_dir, "log")
-        os.makedirs(log_dir, exist_ok=True)
-        os.makedirs(district_dir, exist_ok=True)
-        district = {
-            "postcode": postcode,
-            "location": {"city": world_config["world"], "district": postcode,
-                         "coordinates": {"lat": -37.916, "lon": 145.123}},
-            "economic_level": "Medium",
-            "description": block["info"],
-        }
-        _write_json(os.path.join(district_dir, "district.json"), district)
-        districts.append({
-            "postcode": postcode,
-            "city": world_config["world"],
-            "district": postcode,
-            "economic_level": "Medium",
+
+def _world_dir(world_id):
+    return os.path.join(WORLDS_DIR, world_id)
+
+
+def _world_meta_path(world_id):
+    return os.path.join(_world_dir(world_id), "world.json")
+
+
+def _district_entry_name(entry):
+    if not isinstance(entry, dict):
+        return None
+    name = entry.get("name") or entry.get("postcode")
+    return str(name) if name else None
+
+
+def _validate_district_name(name):
+    token = str(name or "").strip()
+    if not token or token in (".", "..") or not _DISTRICT_NAME_RE.match(token):
+        raise ValueError(
+            "invalid district name %r: use letters, digits, '.', '_' or '-'" % (name,)
+        )
+    return token
+
+
+def districts(world_id):
+    """District names of a world: world.json's districts[].name, else child dirs."""
+    meta = _read_json(_world_meta_path(world_id))
+    if isinstance(meta, dict):
+        found = [name for name in (_district_entry_name(e) for e in (meta.get("districts") or [])) if name]
+        if found:
+            return found
+    world_dir = _world_dir(world_id)
+    try:
+        children = sorted(os.listdir(world_dir))
+    except OSError:
+        return []
+    return [
+        child for child in children
+        if child not in _RESERVED_DISTRICT_NAMES
+        and _DISTRICT_NAME_RE.match(child)
+        and os.path.isdir(os.path.join(world_dir, child))
+    ]
+
+
+def primary_district(world_id):
+    found = districts(world_id)
+    return found[0] if found else ""
+
+
+def district_dir(world_id, district=None):
+    """District directory: worlds/<world>/<district or primary district>."""
+    return os.path.join(WORLDS_DIR, world_id, district or primary_district(world_id))
+
+
+def add_district(world_id, name, description=None):
+    """Create a district (local, zero LLM) and register it in world.json.
+
+    Idempotent: an existing district is returned untouched with created=False.
+    """
+    district = _validate_district_name(name)
+    world_dir = _world_dir(world_id)
+    meta_path = _world_meta_path(world_id)
+    meta = _read_json(meta_path)
+    if not isinstance(meta, dict):
+        meta = {}
+    entries = meta.get("districts")
+    if not isinstance(entries, list):
+        entries = []
+    meta["world_id"] = meta.get("world_id") or world_id
+    meta["districts"] = entries
+    for entry in entries:
+        if _district_entry_name(entry) == district:
+            return {"world_id": world_id, "district": district,
+                    "district_dir": os.path.abspath(os.path.join(world_dir, district)),
+                    "created": False}
+
+    district_path = os.path.join(world_dir, district)
+    os.makedirs(district_path, exist_ok=True)
+    district_meta_path = os.path.join(district_path, "district.json")
+    if not os.path.isfile(district_meta_path):
+        _write_json(district_meta_path, {
+            "name": district,
+            "description": description or "",
+            "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         })
+    entries.append({"name": district, "postcode": district})
+    _write_json(meta_path, meta)
+    return {"world_id": world_id, "district": district,
+            "district_dir": os.path.abspath(district_path), "created": True}
 
-    world_meta = {
-        "world_id": world_id,
-        "world_config": world_config["world"],
-        "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "districts": districts,
-    }
-    _write_json(os.path.join(world_dir, "world.json"), world_meta)
-    return world_dir, os.path.join(world_dir, districts[0]["postcode"], "log")
+
+def remove_district(world_id, name, permanent=False):
+    """Remove a district; default is recoverable (move to output/_trash/)."""
+    district = _validate_district_name(name)
+    world_dir = _world_dir(world_id)
+    district_path = os.path.join(world_dir, district)
+    existed = os.path.isdir(district_path)
+    moved_to = None
+    if existed:
+        if permanent:
+            shutil.rmtree(district_path)
+        else:
+            os.makedirs(TRASH_DIR, exist_ok=True)
+            stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            dest = os.path.join(TRASH_DIR, "%s_%s_%s" % (world_id, district, stamp))
+            bump = 0
+            while os.path.exists(dest):
+                bump += 1
+                dest = os.path.join(TRASH_DIR, "%s_%s_%s_%d" % (world_id, district, stamp, bump))
+            shutil.move(district_path, dest)
+            moved_to = os.path.abspath(dest)
+
+    meta_path = _world_meta_path(world_id)
+    meta = _read_json(meta_path)
+    if isinstance(meta, dict) and isinstance(meta.get("districts"), list):
+        meta["districts"] = [
+            entry for entry in meta["districts"] if _district_entry_name(entry) != district
+        ]
+        _write_json(meta_path, meta)
+    return {"world_id": world_id, "district": district, "existed": existed,
+            "removed": existed, "moved_to": moved_to}
+
+
+def init_world(world_id, world_config_name=None, seed=42):
+    """Create the world scaffolding: world.json (empty districts) + world log/ dir.
+
+    Districts are created explicitly via add_district(); there is no postcode loop.
+    """
+    world_config = load_world_config(world_config_name)
+    world_dir = _world_dir(world_id)
+    os.makedirs(world_dir, exist_ok=True)
+    log_dir = os.path.join(world_dir, "log")
+    os.makedirs(log_dir, exist_ok=True)
+
+    meta_path = _world_meta_path(world_id)
+    world_meta = _read_json(meta_path)
+    if not isinstance(world_meta, dict):
+        world_meta = {}
+    world_meta["world_id"] = world_id
+    world_meta["world_config"] = world_config["world"]
+    world_meta.setdefault("created_at", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    if not isinstance(world_meta.get("districts"), list):
+        world_meta["districts"] = []
+    _write_json(meta_path, world_meta)
+    return world_dir, log_dir
 
 
 def save_household_artifacts(world_id, idx, persona_texts, original_persona_texts,
-                             persona_seed, household):
-    district_dir = os.path.join(WORLDS_DIR, world_id, CLAYTON_POSTCODE)
+                             persona_seed, household, district=None):
+    d_dir = district_dir(world_id, district)
     house_id = f"house_{idx + 1:04d}"
-    house_dir = os.path.join(district_dir, house_id)
+    house_dir = os.path.join(d_dir, house_id)
     os.makedirs(house_dir, exist_ok=True)
 
     _write_json(os.path.join(house_dir, "personas.json"), {
@@ -224,9 +351,9 @@ def save_household_artifacts(world_id, idx, persona_texts, original_persona_text
     return house_id
 
 
-def update_world_meta(world_id, house_meta):
-    district_dir = os.path.join(WORLDS_DIR, world_id, CLAYTON_POSTCODE)
-    district_meta_path = os.path.join(district_dir, "households.json")
+def update_world_meta(world_id, house_meta, district=None):
+    d_dir = district_dir(world_id, district)
+    district_meta_path = os.path.join(d_dir, "households.json")
     if os.path.exists(district_meta_path):
         with open(district_meta_path, "r", encoding="utf-8") as f:
             district_meta = json.load(f)
@@ -237,15 +364,15 @@ def update_world_meta(world_id, house_meta):
     return district_meta
 
 
-def list_houses(world_id, postcode=CLAYTON_POSTCODE):
-    district_dir = os.path.join(WORLDS_DIR, world_id, postcode)
-    if os.path.isdir(district_dir):
+def list_houses(world_id, district=None):
+    d_dir = district_dir(world_id, district)
+    if os.path.isdir(d_dir):
         houses = sorted(
-            d for d in os.listdir(district_dir)
-            if d.startswith("house_") and os.path.isfile(os.path.join(district_dir, d, "household.json"))
+            d for d in os.listdir(d_dir)
+            if d.startswith("house_") and os.path.isfile(os.path.join(d_dir, d, "household.json"))
         )
         if houses:
             return houses
-    if os.path.isfile(os.path.join(WORLDS_DIR, world_id, "household.json")):
+    if os.path.isfile(os.path.join(_world_dir(world_id), "household.json")):
         return ["house_0001"]
     return []

@@ -75,18 +75,20 @@ def _contract_household_types(types):
     return out
 
 
-def run_step(world_id, count=1, seed=config.DEFAULT_SEED, world_config=None):
+def run_step(world_id, count=1, seed=config.DEFAULT_SEED, world_config=None, district=None):
     world_dir = os.path.join(gw.WORLDS_DIR, world_id)
     if not os.path.isdir(world_dir):
         world_dir, _ = gw.init_world(world_id, world_config, seed)
         print(f"[Info] world directory created: {world_dir}")
 
-    log_dir = os.path.join(world_dir, gw.CLAYTON_POSTCODE, "log")
+    district = district or gw.primary_district(world_id)
+    d_dir = gw.district_dir(world_id, district)
+    log_dir = os.path.join(d_dir, "log")
     os.makedirs(log_dir, exist_ok=True)
     logger = gw.ChatLogger(log_dir)
     prompt = Prompt().load(
         "generate_world_step1_types",
-        district_info=gw.load_district_text(gw.CLAYTON_POSTCODE, world_config),
+        district_info=gw.load_district_text(district, world_config),
         count=count,
     )
 
@@ -123,7 +125,7 @@ def run_step(world_id, count=1, seed=config.DEFAULT_SEED, world_config=None):
     logger.record("step1_types", prompt, resp["content"], reasoning="",
                   ok=True, attempt=1, prefix="global_",
                   schema=_household_types_schema(count), parsed=data)
-    out_path = os.path.join(world_dir, gw.CLAYTON_POSTCODE, "household_types.json")
+    out_path = os.path.join(d_dir, "household_types.json")
     with open(out_path, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=2)
         file.write("\n")
@@ -140,8 +142,9 @@ def main():
     parser.add_argument("--world", required=True, help="world ID")
     parser.add_argument("--count", type=int, default=1)
     parser.add_argument("--seed", type=int, default=config.DEFAULT_SEED)
+    parser.add_argument("--district", default=None, help="district name (default: world's primary district)")
     args = parser.parse_args()
-    ok, _ = run_step(args.world, args.count, args.seed)
+    ok, _ = run_step(args.world, args.count, args.seed, district=args.district)
     sys.exit(0 if ok else 1)
 
 
