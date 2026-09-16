@@ -39,7 +39,7 @@ const JOB_STATUS_CLASS: Record<JobInfo["status"], string> = {
   cancelled: "border-border-strong bg-surface-2 text-fg-subtle",
 }
 
-const COUNT_FIELD_CLASS = "h-7 w-16 px-2 text-[11px]"
+const COUNT_FIELD_CLASS = "h-7 w-16 px-2 text-[13px]"
 
 interface BuildStepCardProps {
   world: string
@@ -115,10 +115,10 @@ export function BuildStepCard({
       )}
     >
       <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-3.5 py-2.5">
-        <span className="num flex size-5 shrink-0 items-center justify-center rounded-full border border-border-strong bg-surface-2 text-[10px] text-fg-muted">
+        <span className="num flex size-5 shrink-0 items-center justify-center rounded-full border border-border-strong bg-surface-2 text-[12px] text-fg-muted">
           {index + 1}
         </span>
-        <span className="text-[13px] font-semibold text-fg">{BUILD_STEP_LABEL[step]}</span>
+        <span className="text-[15px] font-semibold text-fg">{BUILD_STEP_LABEL[step]}</span>
         <span className="label-latin">{step}</span>
         <Badge variant="outline" className={cn("label-latin", statusChip.className)}>
           {statusChip.text}
@@ -143,7 +143,7 @@ export function BuildStepCard({
 
       <div className="flex flex-col gap-2 px-3 py-2.5">
         {reasonLines.map((reason) => (
-          <p key={reason} className="flex items-start gap-1.5 text-[10px] text-danger">
+          <p key={reason} className="flex items-start gap-1.5 text-[12px] text-danger">
             <AlertTriangle className="mt-px size-3 shrink-0" aria-hidden />
             {reason}
           </p>
@@ -151,7 +151,7 @@ export function BuildStepCard({
 
         {needsHouse ? (
           status === null || status.houses.length === 0 ? (
-            <p className="text-[10px] text-fg-subtle">No households yet — run Types first.</p>
+            <p className="text-[12px] text-fg-subtle">No households yet — run Types first.</p>
           ) : (
             <ul className="flex flex-wrap gap-1.5">
               {status.houses.map((item) => (
@@ -159,7 +159,7 @@ export function BuildStepCard({
                   <span
                     title={item.blocked_reason ?? undefined}
                     className={cn(
-                      "num inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px]",
+                      "num inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[12px]",
                       item.done
                         ? "border-success/40 bg-success/10 text-success"
                         : item.runnable
@@ -183,7 +183,7 @@ export function BuildStepCard({
         <div className="flex flex-wrap items-center gap-2">
           <span
             className={cn(
-              "num rounded-full border px-2 py-px text-[9px]",
+              "num rounded-full border px-2 py-px text-[12px]",
               done
                 ? "border-success/40 bg-success/10 text-success"
                 : "border-border-strong bg-surface-2 text-fg-subtle",
@@ -193,7 +193,7 @@ export function BuildStepCard({
           </span>
           <span
             className={cn(
-              "num rounded-full border px-2 py-px text-[9px]",
+              "num rounded-full border px-2 py-px text-[12px]",
               runnable
                 ? "border-brand-ring bg-brand-soft text-fg"
                 : "border-border-strong bg-surface-2 text-fg-subtle",
@@ -203,15 +203,15 @@ export function BuildStepCard({
           </span>
 
           {missingHouse ? (
-            <span className="text-[10px] text-fg-subtle">
+            <span className="text-[12px] text-fg-subtle">
               Pick a target household to preview read/write paths.
             </span>
           ) : previewQuery.isPending ? (
             <span className="label-micro">Loading preview…</span>
           ) : previewQuery.isError ? (
-            <span className="text-[10px] text-danger">Failed to load preview</span>
+            <span className="text-[12px] text-danger">Failed to load preview</span>
           ) : (
-            <span className="num text-[10px] text-fg-subtle">
+            <span className="num text-[12px] text-fg-subtle">
               read {previewQuery.data?.reads.length ?? 0} · write{" "}
               {previewQuery.data?.writes.length ?? 0} · overwrite{" "}
               <span
@@ -229,10 +229,10 @@ export function BuildStepCard({
               <Badge variant="outline" className={cn("label-latin", JOB_STATUS_CLASS[job.status])}>
                 {JOB_STATUS_LABEL[job.status]}
               </Badge>
-              <span className="num text-[10px] text-fg-subtle">latest {job.id.slice(0, 8)}</span>
+              <span className="num text-[12px] text-fg-subtle">latest {job.id.slice(0, 8)}</span>
             </>
           ) : (
-            <span className="text-[10px] text-fg-subtle">No runs yet</span>
+            <span className="text-[12px] text-fg-subtle">No runs yet</span>
           )}
 
           {!focused ? (
@@ -286,7 +286,7 @@ export function BuildStepCard({
             {job !== null ? (
               <div className="flex min-h-0 flex-col gap-2">
                 {job.error !== null ? (
-                  <p className="rounded-xl border border-danger/40 bg-danger/10 px-3 py-2 text-[11px] text-danger">
+                  <p className="rounded-xl border border-danger/40 bg-danger/10 px-3 py-2 text-[13px] text-danger">
                     Last failure: {job.error}
                   </p>
                 ) : null}
@@ -295,7 +295,7 @@ export function BuildStepCard({
                 </div>
               </div>
             ) : (
-              <p className="text-[11px] text-fg-subtle">
+              <p className="text-[13px] text-fg-subtle">
                 No runs for this step yet; after submitting, each LLM call&apos;s prompt, response and
                 latency appear here.
               </p>

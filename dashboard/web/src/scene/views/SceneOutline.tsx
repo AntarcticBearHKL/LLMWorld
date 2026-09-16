@@ -17,13 +17,13 @@ export function SceneOutline({ state, highlighted, onHighlight }: SceneOutlinePr
         return (
           <li key={room.room} className="border-b border-border last:border-b-0">
             <div className="flex items-baseline gap-2 px-3 py-1.5">
-              <span className="min-w-0 flex-1 truncate text-[11px] font-medium text-fg">
+              <span className="min-w-0 flex-1 truncate text-[13px] font-medium text-fg">
                 {room.room}
               </span>
               <span className="label-latin shrink-0">
                 {room.occupants.length > 0 ? room.occupants.join(" · ") : ""}
               </span>
-              <span className="num shrink-0 text-[10px] text-energy">
+              <span className="num shrink-0 text-[12px] text-energy">
                 {room.watts > 0 ? formatWatts(room.watts) : "—"}
               </span>
             </div>
@@ -45,13 +45,13 @@ export function SceneOutline({ state, highlighted, onHighlight }: SceneOutlinePr
                       >
                         <span
                           className={cn(
-                            "min-w-0 flex-1 truncate text-[10px]",
+                            "min-w-0 flex-1 truncate text-[12px]",
                             live ? "text-fg" : "text-fg-subtle",
                           )}
                         >
                           {pose.label}
                         </span>
-                        <span className="num shrink-0 text-[9px] text-fg-subtle">
+                        <span className="num shrink-0 text-[12px] text-fg-subtle">
                           {pose.watts > 0 ? formatWatts(pose.watts) : APPLIANCE_STATE_LABELS[pose.state]}
                         </span>
                       </button>

@@ -18,12 +18,11 @@ export function WorldDetail() {
   const world = useTimeStore((state) => state.world)
   const tab = useTimeStore((state) => state.tab)
   const setTab = useTimeStore((state) => state.setTab)
-  const setView = useTimeStore((state) => state.setView)
   const setWorld = useTimeStore((state) => state.setWorld)
   const worldQuery = useWorld(world)
 
   const back = (
-    <Button variant="ghost" size="xs" onClick={() => setView("worlds")}>
+    <Button variant="ghost" size="xs" className="lg:hidden" onClick={() => setWorld("")}>
       <ArrowLeft />
       All worlds
     </Button>
@@ -31,27 +30,24 @@ export function WorldDetail() {
 
   if (world.length === 0) {
     return (
-      <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-3">
-        <section className="card flex flex-col items-start gap-3 p-4">
-          {back}
-          <p className="text-[11px] text-fg-subtle">
-            No world selected. Pick one from the worlds list.
-          </p>
-        </section>
-      </div>
+      <section className="card flex h-full min-h-0 flex-col items-start justify-center gap-2 p-8">
+        <h2 className="text-[16px] font-bold tracking-[-0.01em] text-fg">Select a world</h2>
+        <p className="max-w-[420px] text-[14px] leading-relaxed text-fg-muted">
+          Pick a world from the list on the left to open its spacetimes and households, or create a
+          new blank world there.
+        </p>
+      </section>
     )
   }
 
   if (worldQuery.isPending) {
     return (
-      <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-3">
-        <section className="card flex flex-col items-start gap-3 p-4">
-          {back}
-          <p className="text-[11px] text-fg-subtle">
-            Loading world <span className="num">{world}</span>…
-          </p>
-        </section>
-      </div>
+      <section className="card flex h-full min-h-0 flex-col items-start gap-3 p-8">
+        {back}
+        <p className="text-[13px] text-fg-subtle">
+          Loading world <span className="num">{world}</span>…
+        </p>
+      </section>
     )
   }
 
@@ -59,30 +55,28 @@ export function WorldDetail() {
 
   if (worldQuery.isError || info === undefined) {
     return (
-      <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-3">
-        <section className="card flex flex-col items-start gap-3 p-4">
-          {back}
-          <p className="text-[11px] text-danger">
-            Failed to load world <span className="num">{world}</span>: {errorMessage(worldQuery.error)}
-          </p>
-          <Button variant="outline" size="xs" onClick={() => void worldQuery.refetch()}>
-            Retry
-          </Button>
-        </section>
-      </div>
+      <section className="card flex h-full min-h-0 flex-col items-start gap-3 p-8">
+        {back}
+        <p className="text-[13px] text-danger">
+          Failed to load world <span className="num">{world}</span>: {errorMessage(worldQuery.error)}
+        </p>
+        <Button variant="outline" size="xs" onClick={() => void worldQuery.refetch()}>
+          Retry
+        </Button>
+      </section>
     )
   }
 
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col gap-3">
+    <div className="flex h-full min-h-0 w-full flex-col gap-3">
       <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-3">
         {back}
-        <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
+        <span className="h-4 w-px shrink-0 bg-border-strong lg:hidden" aria-hidden />
         <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
           {info.world_id}
         </span>
         <WorldBadge frozen={info.frozen} />
-        <span className="chip num text-[10px]">
+        <span className="chip num text-[12px]">
           {countLabel(info.districts.length, "block")} ·{" "}
           {countLabel(info.houses.length, "household")} ·{" "}
           {countLabel(info.spacetimes.length, "spacetime")}
@@ -109,12 +103,12 @@ export function WorldDetail() {
       >
         <div className="flex shrink-0 flex-wrap items-center gap-2">
           <TabsList className="h-8">
-            <TabsTrigger value="spacetime" className="h-7 px-3.5 text-[12px]">
+            <TabsTrigger value="spacetime" className="h-7 px-3.5 text-[14px]">
               Spacetimes{" "}
-              <span className="num text-[10px] text-fg-subtle">{info.spacetimes.length}</span>
+              <span className="num text-[12px] text-fg-subtle">{info.spacetimes.length}</span>
             </TabsTrigger>
-            <TabsTrigger value="household" className="h-7 px-3.5 text-[12px]">
-              Households <span className="num text-[10px] text-fg-subtle">{info.houses.length}</span>
+            <TabsTrigger value="household" className="h-7 px-3.5 text-[14px]">
+              Households <span className="num text-[12px] text-fg-subtle">{info.houses.length}</span>
             </TabsTrigger>
           </TabsList>
           <span className="label-micro">Spacetimes read the households; they never change them.</span>

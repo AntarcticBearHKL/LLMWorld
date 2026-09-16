@@ -48,7 +48,7 @@ function SpacetimeRow({
     >
       <button type="button" onClick={onOpen} className="flex min-w-0 flex-1 flex-col gap-1 text-left">
         <span className="flex min-w-0 flex-wrap items-center gap-2">
-          <span className="num truncate text-[13px] font-semibold tracking-[-0.01em] text-fg">
+          <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
             {item.name}
           </span>
           <Badge variant="outline" className={cn("label-latin", statusClass(item.status))}>
@@ -71,7 +71,7 @@ function SpacetimeRow({
       <span className="flex shrink-0 flex-wrap items-center gap-1.5">
         {pendingDelete ? (
           <>
-            <span className="text-[10px] text-energy">Moves to output/_trash/ (recoverable).</span>
+            <span className="text-[12px] text-energy">Moves to output/_trash/ (recoverable).</span>
             <button
               type="button"
               onClick={() => remove.mutate(item.name, { onSuccess: () => setPendingDelete(false) })}
@@ -105,7 +105,7 @@ function SpacetimeRow({
           </>
         )}
         {remove.isError ? (
-          <span className="text-[10px] text-danger">{errorMessage(remove.error)}</span>
+          <span className="text-[12px] text-danger">{errorMessage(remove.error)}</span>
         ) : null}
       </span>
     </li>
@@ -129,8 +129,8 @@ export function SpacetimeList({ world }: { world: string }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-4 py-3">
-        <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">
-          Spacetimes <span className="num text-[11px] font-medium text-fg-subtle">{items.length}</span>
+        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
+          Spacetimes <span className="num text-[13px] font-medium text-fg-subtle">{items.length}</span>
         </span>
         <Button
           variant="ghost"
@@ -164,7 +164,7 @@ export function SpacetimeList({ world }: { world: string }) {
         {created !== null ? (
           <div className="mx-3 mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-success/40 bg-success/10 px-3.5 py-2">
             <CheckCircle2 className="size-3.5 shrink-0 text-success" aria-hidden />
-            <span className="text-[11px] text-fg">
+            <span className="text-[13px] text-fg">
               Created spacetime <span className="num">{created.name}</span> — status {created.status} ·{" "}
               {created.days} {created.days === 1 ? "day" : "days"} from {created.start_date ?? "—"}
             </span>
@@ -175,10 +175,10 @@ export function SpacetimeList({ world }: { world: string }) {
         ) : null}
 
         {query.isPending ? (
-          <p className="px-4 py-6 text-[11px] text-fg-subtle">Loading spacetimes…</p>
+          <p className="px-4 py-6 text-[13px] text-fg-subtle">Loading spacetimes…</p>
         ) : query.isError ? (
           <div className="m-3 card flex flex-col items-start gap-2 px-4 py-5">
-            <p className="text-[11px] text-danger">
+            <p className="text-[13px] text-danger">
               Failed to load spacetimes: {errorMessage(query.error)}
             </p>
             <Button variant="outline" size="xs" onClick={() => void query.refetch()}>
@@ -186,7 +186,7 @@ export function SpacetimeList({ world }: { world: string }) {
             </Button>
           </div>
         ) : items.length === 0 ? (
-          <p className="px-4 py-6 text-[11px] text-fg-subtle">
+          <p className="px-4 py-6 text-[13px] text-fg-subtle">
             No spacetimes yet. This world is still a draft — households stay editable until its first
             spacetime is created.
           </p>

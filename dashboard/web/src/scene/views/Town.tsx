@@ -133,7 +133,7 @@ export function Town({ onEnter }: TownProps) {
         </Stage>
       ) : null}
 
-      <div className="chip num pointer-events-none absolute bottom-3 right-3 text-[10px]">
+      <div className="chip num pointer-events-none absolute bottom-3 right-3 text-[12px]">
         Scroll to zoom · drag to pan · select a house
       </div>
     </div>

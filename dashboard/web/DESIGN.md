@@ -105,7 +105,7 @@ Base **4px**; Tailwind steps map directly (`1=4 2=8 3=12 4=16 5=20 6=24 8=32`).
 - Page gutters `p-3 lg:p-4`; vertical rhythm `gap-3`.
 - Card padding `px-3.5/px-4 py-3` for bars, `p-4/p-5` for panels and forms.
 - Toolbars: `chrome px-3.5 py-3`; floating chrome (`chrome`) is reserved for bars, headers and the play bar; `chrome-lg` for popovers, drawers and canvas HUDs.
-- Content columns: `max-w-5xl` (detail/forms) and `max-w-6xl` (world grid); the console is desktop-first at 1440×900.
+- **No centred page columns.** Every view fills the viewport width; the only page gutter is `main`'s `p-3 lg:p-4`. Reading-measure `max-w-*` inside a component (a modal, an empty-state paragraph) is still allowed — §16.
 
 ## 5. Radii / Elevation / Borders
 
@@ -566,3 +566,20 @@ Glass is 72% cocoa in both themes, so glass chrome uses `--fg` / `--fg-muted` on
 buttons pair `--brand` with `--brand-fg` (the exact inverse), so the pair inverts cleanly with the
 theme. Status chips always combine a semantic tint, a 1px border and a word, so state survives
 greyscale and colour-blind viewing.
+
+## 16. Full-bleed layout (master–detail worlds)
+
+Supersedes the centred content columns of §4 and the L0/L1 presentation of §13; the data wiring,
+store shape and URL contract there are unchanged. `max-w-3xl` (settings), `max-w-6xl` (worlds) and
+`max-w-5xl` (world detail) page wrappers are gone — every view is full-bleed inside `main`'s
+`p-3 lg:p-4` gutter.
+
+| View | Layout contract |
+| --- | --- |
+| Worlds / World — one workspace for `view=worlds` and `view=world` | `grid h-full min-h-0 grid-rows-[minmax(0,1fr)] gap-3 lg:grid-cols-[minmax(300px,360px)_minmax(0,1fr)]`. **Left pane** (`card`, scrolls on its own) owns select / add / delete: new-world form, then one row per world (id, `Draft`/`Frozen`, block · household · spacetime counts, last activity, Clone, Delete) with the selected row on `--item-selected` + `--brand-ring`. **Right pane** is the world detail (glass header with badge + Clone, `Spacetimes` / `Households` tabs) or, with no selection, the "Select a world" empty state. Below `lg` the workspace collapses to one column: list first, the detail replaces it once a world is selected, and the header's back button (hidden at `lg`) clears `world` to bring the list back. Selecting a row writes `world` to the store and the URL; `view` is left alone so both old links keep working. |
+| Watch (`view=watch`) | Unchanged full-height stack: full-width glass breadcrumb + day bar, layer content in `min-h-0 flex-1`, full-width glass play bar pinned at the bottom. |
+| Jobs (`view=jobs`) | `grid h-full min-h-0 grid-cols-1 gap-3 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:grid-rows-[minmax(0,1fr)_auto]`; the job list and the log / LLM-call inspector fill the height side by side and scroll internally. |
+| Settings (`view=settings`) | Full-width `card`; fields in a `md:grid-cols-2 xl:grid-cols-3` form grid, each field carrying a one-line description and its `LLMWORLD_*` variable. |
+
+Invariants: panes use `h-full min-h-0` with an inner `overflow-y-auto`, so the page never grows a
+second scrollbar; the play bar stays `WatchView`-only; no new tokens, no store-shape change.

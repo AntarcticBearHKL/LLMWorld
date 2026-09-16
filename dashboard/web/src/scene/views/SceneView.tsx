@@ -82,7 +82,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={mode === "town" ? "default" : "ghost"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[13px]"
                 onClick={() => setMode("town")}
               >
                 Town
@@ -90,7 +90,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={mode === "interior" ? "default" : "ghost"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[13px]"
                 onClick={() => setMode("interior")}
                 disabled={state === null}
               >
@@ -108,7 +108,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
                       key={member.id}
                       variant={active ? "default" : "outline"}
                       size="sm"
-                      className="h-6 rounded-full px-2.5 text-[11px]"
+                      className="h-6 rounded-full px-2.5 text-[13px]"
                       aria-pressed={active}
                       onClick={() => setSelectedMember(active ? null : member.id)}
                     >
@@ -124,7 +124,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={diagnosticsOpen ? "default" : "outline"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[13px]"
                 onClick={() => setDiagnosticsOpen((value) => !value)}
                 disabled={mode !== "interior" || state === null}
                 title="Frame rate and memory diagnostics (keep the page in the foreground)"
@@ -134,7 +134,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={outlineOpen ? "default" : "outline"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[13px]"
                 onClick={() => setOutlineOpen((value) => !value)}
                 disabled={mode !== "interior" || state === null}
               >
@@ -143,7 +143,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={effectsOn ? "default" : "outline"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[13px]"
                 onClick={() => {
                   if (degraded) {
                     setDegraded(false)
@@ -164,7 +164,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={trailEnabled ? "default" : "outline"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[11px]"
+                className="h-6 rounded-full px-2.5 text-[13px]"
                 onClick={() => setTrailEnabled((value) => !value)}
               >
                 Trails {trailEnabled ? "on" : "off"}
@@ -187,7 +187,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
 
         {mode === "interior" && state === null ? (
           <div className="flex h-full items-center justify-center p-6 text-center">
-            <p className="text-[12px] text-fg-muted">
+            <p className="text-[14px] text-fg-muted">
               {replayQuery.isPending ? "Loading…" : "No replay data for this household and date."}
             </p>
           </div>

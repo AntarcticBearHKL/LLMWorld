@@ -56,7 +56,7 @@ export function HouseFloorplan({ replay, className }: HouseFloorplanProps) {
     >
       {replay === undefined ? (
         <div className="flex flex-1 items-center justify-center p-4">
-          <span className="text-[11px] text-fg-subtle">Loading floor plan…</span>
+          <span className="text-[13px] text-fg-subtle">Loading floor plan…</span>
         </div>
       ) : (
         <>
@@ -82,14 +82,14 @@ export function HouseFloorplan({ replay, className }: HouseFloorplanProps) {
                   <div className="flex items-baseline justify-between gap-1.5">
                     <span
                       className={cn(
-                        "truncate text-[11px] font-medium",
+                        "truncate text-[13px] font-medium",
                         occupied ? "text-fg" : "text-fg-muted",
                       )}
                     >
                       {room}
                     </span>
                     {watts > 0 ? (
-                      <span className="num shrink-0 text-[9px] text-energy">
+                      <span className="num shrink-0 text-[12px] text-energy">
                         {formatWatts(watts)}
                       </span>
                     ) : null}
@@ -100,7 +100,7 @@ export function HouseFloorplan({ replay, className }: HouseFloorplanProps) {
                       <span
                         key={member}
                         title={member}
-                        className="num flex size-5 items-center justify-center rounded-full text-[9px] font-semibold"
+                        className="num flex size-5 items-center justify-center rounded-full text-[12px] font-semibold"
                         style={{
                           backgroundColor: memberColorVar(member, memberIds),
                           color: "var(--bg)",

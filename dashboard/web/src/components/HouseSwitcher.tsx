@@ -43,20 +43,20 @@ export function HouseSwitcher() {
             >
               <span
                 className={cn(
-                  "num text-[11px] leading-none font-semibold",
+                  "num text-[13px] leading-none font-semibold",
                   active ? "text-fg" : "text-fg-muted",
                 )}
               >
                 {id}
               </span>
-              <span className="num text-[10px] leading-none text-fg-subtle">
+              <span className="num text-[12px] leading-none text-fg-subtle">
                 {snapshot === undefined ? "—" : formatWatts(snapshot.total_watts)}
               </span>
             </button>
           )
         })}
         {ids.length === 0 ? (
-          <span className="text-[11px] text-fg-subtle">No household list yet.</span>
+          <span className="text-[13px] text-fg-subtle">No household list yet.</span>
         ) : null}
       </div>
     </Panel>

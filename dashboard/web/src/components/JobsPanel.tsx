@@ -59,7 +59,7 @@ function LogView({ jobId }: { jobId: string | null }) {
   if (jobId === null) {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
-        <span className="text-[11px] text-fg-subtle">Select a job to view its live log.</span>
+        <span className="text-[13px] text-fg-subtle">Select a job to view its live log.</span>
       </div>
     )
   }
@@ -72,7 +72,7 @@ function LogView({ jobId }: { jobId: string | null }) {
           {connected ? "streaming" : "idle"}
         </span>
       </div>
-      <pre className="num min-h-0 flex-1 overflow-auto px-4 py-3 text-[10px] leading-relaxed whitespace-pre-wrap text-fg-muted">
+      <pre className="num min-h-0 flex-1 overflow-auto px-4 py-3 text-[12px] leading-relaxed whitespace-pre-wrap text-fg-muted">
         {lines.length === 0 ? "(no output yet)" : lines.join("\n")}
       </pre>
     </div>
@@ -86,14 +86,14 @@ function BuildJobView({ job }: { job: JobInfo }) {
     <Tabs key={job.id} defaultValue={active ? "log" : "trace"} className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 items-center gap-2 border-b border-border px-4 py-2">
         <TabsList className="h-7 p-0.5">
-          <TabsTrigger value="trace" className="h-6 flex-none px-2 text-[11px]">
+          <TabsTrigger value="trace" className="h-6 flex-none px-2 text-[13px]">
             LLM calls
           </TabsTrigger>
-          <TabsTrigger value="log" className="h-6 flex-none px-2 text-[11px]">
+          <TabsTrigger value="log" className="h-6 flex-none px-2 text-[13px]">
             Live log
           </TabsTrigger>
         </TabsList>
-        <span className="num ml-auto text-[10px] text-fg-subtle">{job.id.slice(0, 8)}</span>
+        <span className="num ml-auto text-[12px] text-fg-subtle">{job.id.slice(0, 8)}</span>
       </div>
       <TabsContent value="trace" className="mt-0 flex min-h-0 flex-1 flex-col">
         <StepInspector jobId={job.id} step={job.step} live={active} />
@@ -134,11 +134,11 @@ export function JobsPanel() {
   const selectedIsBuild = selectedJob !== null && selectedJob.kind === "build"
 
   return (
-    <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 p-3 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
+    <div className="grid h-full min-h-0 grid-cols-1 gap-3 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:grid-rows-[minmax(0,1fr)_auto]">
       <section className="card flex min-h-0 flex-col overflow-hidden">
         <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
-          <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">
-            Jobs <span className="num text-[11px] font-medium text-fg-subtle">{jobs.length}</span>
+          <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
+            Jobs <span className="num text-[13px] font-medium text-fg-subtle">{jobs.length}</span>
           </span>
           <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void jobsQuery.refetch()}>
             <RefreshCw />
@@ -146,7 +146,7 @@ export function JobsPanel() {
         </header>
         <div className="min-h-0 flex-1 overflow-y-auto">
           {jobs.length === 0 ? (
-            <p className="px-4 py-6 text-[11px] text-fg-subtle">
+            <p className="px-4 py-6 text-[13px] text-fg-subtle">
               No jobs yet. Submit one from the build or simulation flows. Jobs really run run.py and
               spend API credits.
             </p>
@@ -167,9 +167,9 @@ export function JobsPanel() {
                         {STATUS_LABEL[job.status]}
                       </Badge>
                       <span className="label-micro">{KIND_LABEL[job.kind] ?? job.kind}</span>
-                      <span className="num ml-auto text-[10px] text-fg-subtle">{job.id.slice(0, 8)}</span>
+                      <span className="num ml-auto text-[12px] text-fg-subtle">{job.id.slice(0, 8)}</span>
                     </div>
-                    <span className="num truncate text-[11px] text-fg-muted">{jobMeta(job)}</span>
+                    <span className="num truncate text-[13px] text-fg-muted">{jobMeta(job)}</span>
                   </button>
                   {job.status === "running" || job.status === "queued" ? (
                     <button
@@ -191,7 +191,7 @@ export function JobsPanel() {
           )}
         </div>
         {error !== null ? (
-          <p className="shrink-0 border-t border-border px-4 py-2 text-[10px] text-danger">{error}</p>
+          <p className="shrink-0 border-t border-border px-4 py-2 text-[12px] text-danger">{error}</p>
         ) : null}
       </section>
 

@@ -280,7 +280,7 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
 
       {error !== null ? (
         <div className="flex flex-1 items-center justify-center px-4 py-10 text-center">
-          <p className="max-w-md text-[12px] leading-relaxed text-fg-muted">
+          <p className="max-w-md text-[14px] leading-relaxed text-fg-muted">
             Could not load replay data for this selection.
             <br />
             <span className="num text-fg-subtle">{error.message}</span>

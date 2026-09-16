@@ -3,8 +3,7 @@ import { Moon, Sun } from "lucide-react"
 import { JobsPanel } from "@/components/JobsPanel"
 import { SettingsPanel } from "@/components/SettingsPanel"
 import { WatchView } from "@/components/WatchView"
-import { WorldDetail } from "@/components/WorldDetail"
-import { WorldsList } from "@/components/WorldsList"
+import { WorldsWorkspace } from "@/components/WorldsWorkspace"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useTheme } from "@/hooks/useTheme"
@@ -33,10 +32,10 @@ function BrandMark() {
         aria-hidden
         className="flex size-8 items-center justify-center rounded-lg bg-brand text-brand-fg shadow-1"
       >
-        <span className="text-[13px] font-extrabold">W</span>
+        <span className="text-[15px] font-extrabold">W</span>
       </span>
       <span className="flex flex-col leading-tight">
-        <span className="text-[14px] font-bold tracking-[-0.01em] text-fg">
+        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
           LLMWorld Research Console
         </span>
         <span className="label-latin text-fg-muted">household energy replay</span>
@@ -59,7 +58,7 @@ function NavTabs({ active, onChange }: { active: ViewKey; onChange: (next: ViewK
               onClick={() => onChange(item.key)}
               aria-current={active === item.key ? "page" : undefined}
               className={cn(
-                "rounded-full px-3.5 py-1 text-[12px] font-semibold transition-colors",
+                "rounded-full px-3.5 py-1 text-[14px] font-semibold transition-colors",
                 active === item.key
                   ? "bg-brand text-brand-fg shadow-1"
                   : "text-fg-muted hover:bg-item-hover hover:text-fg",
@@ -109,20 +108,14 @@ export default function App() {
       </header>
 
       <main className="min-h-0 flex-1 overflow-hidden p-3 lg:p-4">
-        {view === "worlds" ? <WorldsList /> : null}
-
-        {view === "world" ? <WorldDetail /> : null}
+        {view === "worlds" || view === "world" ? <WorldsWorkspace /> : null}
 
         {view === "watch" ? <WatchView /> : null}
 
-        {view === "jobs" ? (
-          <div className="flex h-full min-h-0 flex-col">
-            <JobsPanel />
-          </div>
-        ) : null}
+        {view === "jobs" ? <JobsPanel /> : null}
 
         {view === "settings" ? (
-          <div className="card mx-auto h-full w-full max-w-3xl overflow-y-auto">
+          <div className="card h-full overflow-y-auto">
             <SettingsPanel />
           </div>
         ) : null}

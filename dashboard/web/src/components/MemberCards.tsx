@@ -37,7 +37,7 @@ export function MemberCards({ replay }: MemberCardsProps) {
     >
       {replay === undefined ? (
         <div className="flex items-center justify-center px-4 py-8">
-          <span className="text-[11px] text-fg-subtle">Loading members…</span>
+          <span className="text-[13px] text-fg-subtle">Loading members…</span>
         </div>
       ) : (
         <div className="flex min-w-full gap-2.5 p-3">
@@ -81,7 +81,7 @@ export function MemberCards({ replay }: MemberCardsProps) {
               >
                 <div className="flex items-center gap-2">
                   <span
-                    className="num flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold"
+                    className="num flex size-6 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold"
                     style={{
                       backgroundColor: memberColorVar(member.id, memberIds),
                       color: "var(--bg)",
@@ -89,7 +89,7 @@ export function MemberCards({ replay }: MemberCardsProps) {
                   >
                     {memberInitial(member.id)}
                   </span>
-                  <span className="num min-w-0 flex-1 truncate text-[12px] font-semibold text-fg">
+                  <span className="num min-w-0 flex-1 truncate text-[14px] font-semibold text-fg">
                     {member.id}
                   </span>
                   <span
@@ -105,15 +105,15 @@ export function MemberCards({ replay }: MemberCardsProps) {
                 </div>
 
                 <div className="flex flex-col gap-0.5">
-                  <span className="num text-[10px] text-fg-subtle">
+                  <span className="num text-[12px] text-fg-subtle">
                     {member.info.bedroom ?? "—"}
                     {member.info.age !== null ? ` · age ${member.info.age}` : ""}
                   </span>
-                  <span className="text-[11px] leading-snug text-fg">
+                  <span className="text-[13px] leading-snug text-fg">
                     {segment !== undefined ? segment.activity : "No activity recorded at this time"}
                   </span>
                   {segment !== undefined ? (
-                    <span className="num text-[9px] text-fg-subtle">
+                    <span className="num text-[12px] text-fg-subtle">
                       {segment.location} · {formatHHMM(segment.start)}–{formatHHMM(segment.end)}
                     </span>
                   ) : null}
@@ -121,30 +121,30 @@ export function MemberCards({ replay }: MemberCardsProps) {
 
                 <div className="flex flex-wrap items-center gap-1">
                   {used.length === 0 ? (
-                    <span className="text-[10px] text-fg-subtle">No appliance in use</span>
+                    <span className="text-[12px] text-fg-subtle">No appliance in use</span>
                   ) : (
                     <>
                       {used.slice(0, 3).map((item) => (
                         <span
                           key={item.uniqueId}
-                          className="num rounded-full border border-energy/40 bg-energy-soft px-2 py-px text-[9px] text-energy"
+                          className="num rounded-full border border-energy/40 bg-energy-soft px-2 py-px text-[12px] text-energy"
                         >
                           {item.name}
                           {item.watts > 0 ? ` ${Math.round(item.watts)}W` : ""}
                         </span>
                       ))}
                       {used.length > 3 ? (
-                        <span className="num text-[9px] text-fg-subtle">+{used.length - 3}</span>
+                        <span className="num text-[12px] text-fg-subtle">+{used.length - 3}</span>
                       ) : null}
                     </>
                   )}
                 </div>
 
                 <div className="mt-auto flex items-center gap-2 border-t border-border pt-1.5">
-                  <span className="num text-[9px] text-fg-subtle">
+                  <span className="num text-[12px] text-fg-subtle">
                     {dayWatts > 0 ? formatWatts(dayWatts) : "—"}
                   </span>
-                  <span className="num ml-auto flex items-center gap-1 text-[9px] text-fg-subtle">
+                  <span className="num ml-auto flex items-center gap-1 text-[12px] text-fg-subtle">
                     <Clock className="size-2.5" aria-hidden />
                     {next !== undefined
                       ? `${formatHHMM(next.start)} ${next.activity.slice(0, 12)}`

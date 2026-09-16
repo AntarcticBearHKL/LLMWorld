@@ -66,11 +66,11 @@ export function MetricStrip({ replay, isPending }: MetricStripProps) {
       <div className="ml-auto flex flex-wrap items-center gap-x-4 gap-y-2">
         <span className="chip">
           <StatusDot on />
-          <span className="text-[11px] text-fg-muted">Drawing power</span>
+          <span className="text-[13px] text-fg-muted">Drawing power</span>
         </span>
         <span className="chip">
           <StatusDot on={false} />
-          <span className="text-[11px] text-fg-muted">Standby / off</span>
+          <span className="text-[13px] text-fg-muted">Standby / off</span>
         </span>
         <span
           className="flex items-center gap-1.5 text-fg-subtle"

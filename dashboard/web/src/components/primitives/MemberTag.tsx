@@ -30,13 +30,13 @@ export function MemberTag({ member, bedroom, lane, selected = false, onClick, cl
       <span className="flex min-w-0 flex-col leading-tight">
         <span
           className={cn(
-            "truncate text-[12px] font-semibold transition-colors text-fg",
+            "truncate text-[14px] font-semibold transition-colors text-fg",
           )}
         >
           {member}
         </span>
         {bedroom !== null && bedroom !== undefined ? (
-          <span className="truncate text-[10px] text-fg-subtle">{bedroom}</span>
+          <span className="truncate text-[12px] text-fg-subtle">{bedroom}</span>
         ) : null}
       </span>
     </Wrapper>

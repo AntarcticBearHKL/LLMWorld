@@ -28,7 +28,7 @@ export function MetricCell({ label, value, unit, detail, tone = "default", class
         {unit !== undefined ? <span className="label-latin">{unit}</span> : null}
       </span>
       {detail !== undefined ? (
-        <span className="num text-[10px] leading-none text-fg-subtle">{detail}</span>
+        <span className="num text-[12px] leading-none text-fg-subtle">{detail}</span>
       ) : null}
     </div>
   )

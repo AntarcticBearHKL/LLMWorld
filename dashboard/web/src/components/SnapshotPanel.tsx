@@ -70,7 +70,7 @@ export function SnapshotPanel() {
       className="min-h-[240px]"
       bodyClassName="flex min-h-0 flex-col overflow-y-auto"
       actions={
-        <span className="num text-[12px] font-medium text-energy">
+        <span className="num text-[14px] font-medium text-energy">
           {formatWatts(current?.total_watts ?? 0)}
         </span>
       }
@@ -95,14 +95,14 @@ export function SnapshotPanel() {
                 style={{ backgroundColor: memberColorVar(person.member, memberIds) }}
                 aria-hidden
               />
-              <span className="num shrink-0 text-[11px] text-fg">{person.member}</span>
-              <span className="min-w-0 flex-1 truncate text-right text-[11px] text-fg-muted">
+              <span className="num shrink-0 text-[13px] text-fg">{person.member}</span>
+              <span className="min-w-0 flex-1 truncate text-right text-[13px] text-fg-muted">
                 {person.location} · {person.activity}
               </span>
             </li>
           ))}
           {current === undefined ? (
-            <li className="text-[11px] text-fg-subtle">
+            <li className="text-[13px] text-fg-subtle">
               {snapshotQuery.isPending ? "Loading…" : "No snapshot data at this minute."}
             </li>
           ) : null}
@@ -118,17 +118,17 @@ export function SnapshotPanel() {
           {running.slice(0, 10).map((appliance) => (
             <li key={appliance.unique_id} className="flex items-center gap-2">
               <StatusDot on />
-              <span className="min-w-0 flex-1 truncate text-[11px] text-fg-muted">
+              <span className="min-w-0 flex-1 truncate text-[13px] text-fg-muted">
                 {appliance.room !== null ? `${appliance.name} · ${appliance.room}` : appliance.name}
               </span>
-              <span className={cn("num shrink-0 text-[10px]", STATE_TONE.active)}>
+              <span className={cn("num shrink-0 text-[12px]", STATE_TONE.active)}>
                 {formatWatts(appliance.watts)}
               </span>
               <span className="label-latin shrink-0">{label(appliance)}</span>
             </li>
           ))}
           {running.length === 0 && current !== undefined ? (
-            <li className="text-[11px] text-fg-subtle">No appliance drawing power at this minute.</li>
+            <li className="text-[13px] text-fg-subtle">No appliance drawing power at this minute.</li>
           ) : null}
         </ul>
       </div>

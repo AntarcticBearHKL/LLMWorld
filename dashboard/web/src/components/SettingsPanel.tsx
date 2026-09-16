@@ -17,6 +17,7 @@ interface FieldSpec {
   key: SettingsKey
   label: string
   env: string
+  description: string
   kind: "text" | "number"
   min?: number
   max?: number
@@ -29,6 +30,7 @@ const FIELDS: readonly FieldSpec[] = [
     key: "model",
     label: "Model",
     env: "LLMWORLD_MODEL",
+    description: "The model every pipeline stage calls.",
     kind: "text",
     placeholder: "deepseek-v4-flash",
   },
@@ -36,6 +38,7 @@ const FIELDS: readonly FieldSpec[] = [
     key: "temperature",
     label: "Temperature",
     env: "LLMWORLD_TEMPERATURE",
+    description: "Sampling randomness — 0 is the most deterministic.",
     kind: "number",
     min: 0,
     max: 2,
@@ -45,6 +48,7 @@ const FIELDS: readonly FieldSpec[] = [
     key: "max_tokens",
     label: "Max tokens",
     env: "LLMWORLD_MAX_TOKENS",
+    description: "Upper bound on tokens per LLM response.",
     kind: "number",
     min: 1,
     step: 1,
@@ -53,6 +57,7 @@ const FIELDS: readonly FieldSpec[] = [
     key: "request_timeout_seconds",
     label: "Request timeout (s)",
     env: "LLMWORLD_REQUEST_TIMEOUT",
+    description: "Abort a single LLM call after this long.",
     kind: "number",
     min: 1,
     step: 1,
@@ -61,6 +66,7 @@ const FIELDS: readonly FieldSpec[] = [
     key: "max_retries",
     label: "Max retries",
     env: "LLMWORLD_MAX_RETRIES",
+    description: "Retry attempts before a step is marked failed.",
     kind: "number",
     min: 1,
     step: 1,
@@ -69,13 +75,14 @@ const FIELDS: readonly FieldSpec[] = [
     key: "retry_backoff_seconds",
     label: "Retry backoff (s)",
     env: "LLMWORLD_RETRY_BACKOFF",
+    description: "Pause between retry attempts.",
     kind: "number",
     min: 0,
     step: 0.5,
   },
 ]
 
-const FIELD_CLASS = "h-8 px-2.5 text-[12px]"
+const FIELD_CLASS = "h-8 px-2.5 text-[14px]"
 
 type FormValues = Record<SettingsKey, string>
 
@@ -176,13 +183,13 @@ export function SettingsPanel() {
   }
 
   if (settingsQuery.isPending) {
-    return <p className="px-4 py-6 text-[11px] text-fg-subtle">Loading settings…</p>
+    return <p className="px-4 py-6 text-[13px] text-fg-subtle">Loading settings…</p>
   }
 
   if (settingsQuery.isError) {
     return (
       <div className="flex flex-col items-start gap-2 px-4 py-6">
-        <p className="text-[11px] text-danger">Failed to load settings: {errorMessage(settingsQuery.error)}</p>
+        <p className="text-[13px] text-danger">Failed to load settings: {errorMessage(settingsQuery.error)}</p>
         <Button variant="outline" size="xs" onClick={() => void settingsQuery.refetch()}>
           Retry
         </Button>
@@ -191,18 +198,18 @@ export function SettingsPanel() {
   }
 
   if (draft === null) {
-    return <p className="px-4 py-6 text-[11px] text-fg-subtle">Loading settings…</p>
+    return <p className="px-4 py-6 text-[13px] text-fg-subtle">Loading settings…</p>
   }
 
   const canSave = draft.changed > 0 && draft.invalid === 0 && !update.isPending
 
   return (
-    <div className="flex flex-col gap-5 p-5">
+    <div className="flex flex-col gap-6 p-5 lg:p-6">
       <header className="flex items-start gap-2.5">
         <Settings2 className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
         <div className="flex flex-col gap-1">
           <h2 className="text-[16px] font-bold tracking-[-0.01em] text-fg">LLM runtime settings</h2>
-          <p className="text-[11px] text-fg-muted">
+          <p className="max-w-[720px] text-[13px] text-fg-muted">
             Saving writes the backend settings file and injects the values into the next job as{" "}
             <span className="num">LLMWORLD_*</span> environment variables, so it only affects jobs
             started after saving; running jobs are untouched.
@@ -210,7 +217,7 @@ export function SettingsPanel() {
         </div>
       </header>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2 xl:grid-cols-3">
         {FIELDS.map((spec) => {
           const error = draft.errors[spec.key]
           return (
@@ -231,9 +238,15 @@ export function SettingsPanel() {
                 onChange={(event) => onChange(spec.key, event.target.value)}
                 className={cn(FIELD_CLASS, spec.kind === "number" && "num")}
               />
-              <span className={cn("text-[10px]", error === undefined ? "label-latin" : "text-danger")}>
-                {error ?? spec.env}
+              <span
+                className={cn(
+                  "text-[12px] leading-snug",
+                  error === undefined ? "text-fg-subtle" : "text-danger",
+                )}
+              >
+                {error ?? spec.description}
               </span>
+              <span className="label-latin">{spec.env}</span>
             </div>
           )
         })}
@@ -256,7 +269,7 @@ export function SettingsPanel() {
         </Button>
 
         {draft.invalid > 0 ? (
-          <span className="text-[10px] text-danger">{draft.invalid} invalid input(s)</span>
+          <span className="text-[12px] text-danger">{draft.invalid} invalid input(s)</span>
         ) : draft.changed > 0 ? (
           <span className="label-micro">{draft.changed} pending change(s)</span>
         ) : (
@@ -264,14 +277,14 @@ export function SettingsPanel() {
         )}
 
         {justSaved ? (
-          <span className="flex items-center gap-1 text-[10px] text-success">
+          <span className="flex items-center gap-1 text-[12px] text-success">
             <CheckCircle2 className="size-3" aria-hidden />
             Saved — applies to the next job
           </span>
         ) : null}
 
         {update.isError ? (
-          <span className="text-[10px] text-danger">Save failed: {errorMessage(update.error)}</span>
+          <span className="text-[12px] text-danger">Save failed: {errorMessage(update.error)}</span>
         ) : null}
       </div>
     </div>

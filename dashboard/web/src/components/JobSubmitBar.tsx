@@ -41,12 +41,12 @@ export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobS
         </Button>
 
         {estimate.data !== undefined ? (
-          <span className="text-[11px] text-fg-muted">
+          <span className="text-[13px] text-fg-muted">
             Estimated <span className="num text-energy">{estimate.data.estimated_calls}</span> LLM
             calls · {estimate.data.detail}
           </span>
         ) : (
-          <span className="text-[11px] text-fg-subtle">
+          <span className="text-[13px] text-fg-subtle">
             Estimate first, then confirm the cost before submitting.
           </span>
         )}
@@ -59,13 +59,13 @@ export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobS
           onCheckedChange={setConfirmed}
           disabled={!estimated}
         />
-        <Label htmlFor="job-confirm" className="text-[11px] text-fg-muted">
+        <Label htmlFor="job-confirm" className="text-[13px] text-fg-muted">
           I understand this run calls the LLM and spends API credits
         </Label>
       </div>
 
       {disabled && disabledReason !== undefined ? (
-        <p className="flex items-center gap-1.5 text-[10px] text-energy">
+        <p className="flex items-center gap-1.5 text-[12px] text-energy">
           <AlertTriangle className="size-3" aria-hidden />
           {disabledReason}
         </p>
@@ -77,13 +77,13 @@ export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobS
           Submit job
         </Button>
         {create.isSuccess ? (
-          <span className="flex items-center gap-1.5 text-[11px] text-success">
+          <span className="flex items-center gap-1.5 text-[13px] text-success">
             <CheckCircle2 className="size-3" aria-hidden />
             Submitted: <span className="num">{create.data.job.id.slice(0, 8)}</span>
           </span>
         ) : null}
         {create.isError ? (
-          <span className={cn("text-[11px] text-danger")}>
+          <span className={cn("text-[13px] text-danger")}>
             Submit failed: {create.error instanceof Error ? create.error.message : "Unknown error"}
           </span>
         ) : null}

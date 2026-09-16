@@ -9,7 +9,7 @@ import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 import { randomWorldId } from "@/lib/world"
 
-const FIELD_CLASS = "h-7 w-36 px-2 text-[11px]"
+const FIELD_CLASS = "h-7 w-36 px-2 text-[13px]"
 
 interface CloneWorldButtonProps {
   world: string
@@ -31,7 +31,7 @@ export function CloneWorldButton({
   const [draft, setDraft] = useState("")
 
   const start = () => {
-    setDraft(randomWorldId())
+      setDraft(randomWorldId([world]))
     setOpen(true)
   }
 
@@ -79,7 +79,7 @@ export function CloneWorldButton({
           if (event.key === "Escape") cancel()
         }}
         aria-label="New world id"
-        placeholder="world_9f3a1c"
+          placeholder="world_fish"
         autoFocus
         className={cn(FIELD_CLASS, "num")}
       />
@@ -91,7 +91,7 @@ export function CloneWorldButton({
         Cancel
       </Button>
       {clone.isError ? (
-        <span className="w-full text-[10px] text-danger">{errorMessage(clone.error)}</span>
+        <span className="w-full text-[12px] text-danger">{errorMessage(clone.error)}</span>
       ) : null}
     </span>
   )

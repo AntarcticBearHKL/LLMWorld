@@ -23,7 +23,7 @@ export function CategoryLegend({ className, activeOnly = false }: CategoryLegend
               borderColor: `var(--cat-${category})`,
             }}
           />
-          <span className="text-[11px] text-fg-muted" title={CATEGORY_DESCRIPTIONS[category]}>
+          <span className="text-[13px] text-fg-muted" title={CATEGORY_DESCRIPTIONS[category]}>
             {CATEGORY_LABELS[category]}
           </span>
         </li>
