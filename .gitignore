@@ -12,3 +12,8 @@ __pycache__/
 .venv/
 __pycache__/
 .vscode/
+
+# 生成的世界数据与可恢复删除的回收站（不入库）
+# 注意: output/*.log 是历史日志, 仍保留在版本库中, 故不整目录忽略
+output/worlds/
+output/_trash/
