@@ -329,11 +329,7 @@ export interface DistrictCreateRequest {
   description?: string | null
 }
 
-export interface DistrictCreateResult {
-  world_id: string
-  name: string
-  description: string | null
-  district_dir: string
+export interface DistrictCreateResult extends DistrictInfo {
   created: boolean
 }
 

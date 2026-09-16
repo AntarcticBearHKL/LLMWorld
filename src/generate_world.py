@@ -182,10 +182,12 @@ def _write_json(path, data):
 
 def _read_json(path):
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8-sig") as f:
             return json.load(f)
-    except (OSError, ValueError):
+    except FileNotFoundError:
         return None
+    except (OSError, ValueError) as exc:
+        raise ValueError("%s exists but is not readable JSON: %s" % (path, exc)) from exc
 
 
 def _world_dir(world_id):

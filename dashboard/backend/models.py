@@ -389,12 +389,10 @@ class DistrictCopyRequest(BaseModel):
     name: Optional[str] = None
 
 
-class DistrictCreateResult(BaseModel):
-    world_id: str
-    name: str
-    description: Optional[str] = None
-    district_dir: str
-    created: bool
+class DistrictCreateResult(DistrictInfo):
+    """``DistrictInfo`` plus whether THIS call created the district (idempotent create, §18.2)."""
+
+    created: bool = False
 
 
 class DistrictDeleteResult(BaseModel):

@@ -72,9 +72,9 @@ def build_step_argv(req: JobRequest) -> Tuple[List[str], List[str]]:
         elif prompt:
             argv += ["--prompt", prompt]
         else:
-            warnings.append(
-                "neither --preset nor --prompt set; the district step falls back to "
-                "the first preset."
+            raise ValueError(
+                "no preset or prompt given for district %s: refusing to fall back "
+                "to the first preset" % district
             )
         argv += ["--seed", str(seed)]
         return argv, warnings

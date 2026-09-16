@@ -84,7 +84,7 @@ export function DistrictPromptFields({
           {custom
             ? "Custom prompt takes precedence over the preset."
             : selected === null
-              ? "Pick a preset, or write a prompt: with neither, the backend falls back to the first preset."
+              ? "Pick a preset or write a prompt: the district step refuses to run with neither."
               : "Clear the prompt to fall back to the selected preset."}
         </span>
       </div>

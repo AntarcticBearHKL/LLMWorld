@@ -486,7 +486,12 @@ class GateTests(DistrictLifecycleBase):
     def test_build_job_argv_leaves_the_district_step_alone(self):
         self.add_district("clayton")
         request = models.JobRequest(
-            kind="build", step="district", world="w1", district="clayton", confirm=True
+            kind="build",
+            step="district",
+            world="w1",
+            district="clayton",
+            preset="clayton_3168",
+            confirm=True,
         )
         argv, _warnings = build_module.build_step_argv(request)
         self.assertIn("s1_district_description.py", argv[1])
@@ -523,7 +528,7 @@ class ContractShapeTests(DistrictLifecycleBase):
 
     def test_every_district_mutation_route_responds_with_district_info(self):
         expected = {
-            ("POST", "/worlds/{world}/districts"): models.DistrictInfo,
+            ("POST", "/worlds/{world}/districts"): models.DistrictCreateResult,
             ("PATCH", "/worlds/{world}/districts/{district}"): models.DistrictInfo,
             ("POST", "/worlds/{world}/districts/{district}/lock"): models.DistrictInfo,
             ("POST", "/worlds/{world}/districts/{district}/copy"): models.DistrictInfo,
@@ -535,6 +540,24 @@ class ContractShapeTests(DistrictLifecycleBase):
                 if key in expected:
                     found[key] = route.response_model
         self.assertEqual(found, expected)
+
+    def test_create_route_reports_whether_it_created_the_district(self):
+        first = build_router.world_districts_create(
+            "w1", models.DistrictCreateRequest(name="dockside")
+        )
+        self.assertTrue(first.created)
+        self.assertEqual(first.status, "uninitialized")
+
+        second = build_router.world_districts_create(
+            "w1", models.DistrictCreateRequest(name="dockside")
+        )
+        self.assertFalse(second.created)
+        self.assertEqual(second.status, "uninitialized")
+
+    def test_create_result_schema_exposes_created(self):
+        schema = models.DistrictCreateResult.model_json_schema()
+        self.assertIn("created", schema["properties"])
+        self.assertIn("status", schema["properties"])
 
     def test_list_route_responds_with_district_info(self):
         list_routes = [

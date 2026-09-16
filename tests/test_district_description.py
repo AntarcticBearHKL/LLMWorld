@@ -1,9 +1,10 @@
 """L1 offline tests for the district-description step (mocked LLM, 0 API calls).
 
 Covers preset loading (real file + missing/malformed), resolve_prompt precedence
-(custom > preset id > default), a successful run_step write (description.md plus
-a district.json merge that keeps unrelated keys), the LLMCallError path
-(returns (False, msg) and writes nothing) and the no-districts error path.
+(custom > preset id; a request with neither is refused), a successful run_step
+write (description.md plus a district.json merge that keeps unrelated keys), the
+LLMCallError path (returns (False, msg) and writes nothing) and the no-districts
+error path.
 
 Run:  .venv\\Scripts\\python.exe -m unittest discover -s tests -v
 """
@@ -123,11 +124,19 @@ class ResolvePromptTests(DistrictDescriptionBase):
     def test_preset_id_resolves(self):
         self.assertEqual(dd.resolve_prompt("second"), ("SECOND PROMPT", "second"))
 
-    def test_default_is_first_preset(self):
-        self.assertEqual(dd.resolve_prompt(), ("FIRST PROMPT", "default"))
+    def test_no_brief_is_refused(self):
+        with self.assertRaises(ValueError) as ctx:
+            dd.resolve_prompt(district="clayton")
+        self.assertEqual(
+            str(ctx.exception),
+            "no preset or prompt given for district clayton: "
+            "refusing to fall back to the first preset",
+        )
 
-    def test_unknown_preset_falls_back_to_default(self):
-        self.assertEqual(dd.resolve_prompt("ghost"), ("FIRST PROMPT", "default"))
+    def test_unknown_preset_is_refused(self):
+        with self.assertRaises(ValueError) as ctx:
+            dd.resolve_prompt("ghost")
+        self.assertIn("unknown district preset", str(ctx.exception))
 
     def test_blank_custom_prompt_falls_through_to_preset(self):
         self.assertEqual(dd.resolve_prompt("second", "   "), ("SECOND PROMPT", "second"))

@@ -57,23 +57,30 @@ def _find_preset(presets, preset_id):
     return None
 
 
-def resolve_prompt(preset_id=None, prompt=None) -> tuple[str, str]:
+def resolve_prompt(preset_id=None, prompt=None, district=None) -> tuple[str, str]:
     """Resolve the district brief text and its source.
 
-    Precedence: an explicit ``prompt`` wins, then a matching ``preset_id``, then
-    the first preset as the built-in default. Returns ``(text, source)`` where
-    ``source`` is ``"custom"``, the resolved preset id, or ``"default"``.
+    Precedence: an explicit ``prompt`` wins, then a matching ``preset_id``. With
+    neither there is no implicit default — this refuses instead of silently
+    using the first preset in the library.
+
+    Returns ``(text, source)`` where ``source`` is ``"custom"`` or the resolved
+    preset id; raises ``ValueError`` when no brief was chosen, or when
+    ``preset_id`` is not in the preset library.
     """
     if isinstance(prompt, str) and prompt.strip():
         return prompt, "custom"
-    presets = load_presets()
     if preset_id:
-        preset = _find_preset(presets, preset_id)
+        preset = _find_preset(load_presets(), preset_id)
         if preset is not None:
             return preset["prompt"], str(preset.get("id"))
-    if presets:
-        return presets[0]["prompt"], "default"
-    return "", "default"
+        raise ValueError(
+            "unknown district preset %r: choose one from the preset library" % (preset_id,)
+        )
+    raise ValueError(
+        "no preset or prompt given for district %s: refusing to fall back to the first preset"
+        % (district or "<district>",)
+    )
 
 
 def _read_district_meta(district_path):
@@ -97,7 +104,11 @@ def run_step(world_id, district=None, *, preset=None, prompt=None, seed=42) -> t
     if not district:
         return False, f"no districts in world {world_id}"
 
-    body, source = resolve_prompt(preset, prompt)
+    try:
+        body, source = resolve_prompt(preset, prompt, district)
+    except ValueError as exc:
+        return False, str(exc)
+
     district_path = gw.district_dir(world_id, district)
     os.makedirs(district_path, exist_ok=True)
     log_dir = os.path.join(district_path, "log")

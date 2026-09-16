@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils"
 
 interface JobSubmitBarProps {
   payload: JobRequest
+  label?: string
   disabled?: boolean
   disabledReason?: string
 }
@@ -19,7 +20,12 @@ interface JobSubmitBarProps {
  * Shared guardrail: estimate first, tick to confirm, then submit.
  * Submission is blocked until both steps are done, so a stray click cannot spend credits.
  */
-export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobSubmitBarProps) {
+export function JobSubmitBar({
+  payload,
+  label = "Submit job",
+  disabled = false,
+  disabledReason,
+}: JobSubmitBarProps) {
   const estimate = useEstimateJob()
   const create = useCreateJob()
   const [confirmed, setConfirmed] = useState(false)
@@ -74,7 +80,7 @@ export function JobSubmitBar({ payload, disabled = false, disabledReason }: JobS
       <div className="flex flex-wrap items-center gap-2">
         <Button size="sm" onClick={() => create.mutate({ ...payload, confirm: true })} disabled={!canSubmit}>
           {create.isPending ? <Loader2 className="animate-spin" /> : <Send />}
-          Submit job
+          {label}
         </Button>
         {create.isSuccess ? (
           <span className="flex items-center gap-1.5 text-[13px] text-success">

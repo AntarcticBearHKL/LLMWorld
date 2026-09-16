@@ -21,6 +21,7 @@ from ..models import (
     BuildState,
     DistrictCopyRequest,
     DistrictCreateRequest,
+    DistrictCreateResult,
     DistrictDeleteResult,
     DistrictInfo,
     DistrictPatchRequest,
@@ -87,8 +88,8 @@ def world_districts_list(world: str) -> List[DistrictInfo]:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@router.post("/worlds/{world}/districts", response_model=DistrictInfo)
-def world_districts_create(world: str, req: DistrictCreateRequest) -> DistrictInfo:
+@router.post("/worlds/{world}/districts", response_model=DistrictCreateResult)
+def world_districts_create(world: str, req: DistrictCreateRequest) -> DistrictCreateResult:
     """Create a district locally (zero LLM); idempotent like POST /worlds."""
     _ensure_world(world)
     try:
@@ -96,7 +97,8 @@ def world_districts_create(world: str, req: DistrictCreateRequest) -> DistrictIn
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     store.invalidate_catalog()
-    return _district_info(world, result["name"])
+    info = _district_info(world, result["name"])
+    return DistrictCreateResult(**info.model_dump(), created=bool(result.get("created")))
 
 
 @router.delete(

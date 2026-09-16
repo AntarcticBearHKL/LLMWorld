@@ -95,10 +95,12 @@ def _gw() -> Any:
 
 def read_json(path: str) -> Any:
     try:
-        with open(path, encoding="utf-8") as fh:
+        with open(path, encoding="utf-8-sig") as fh:
             return json.load(fh)
-    except (OSError, ValueError):
+    except FileNotFoundError:
         return None
+    except (OSError, ValueError) as exc:
+        raise ValueError("%s exists but is not readable JSON: %s" % (path, exc)) from exc
 
 
 def _write_json(path: str, data: Any) -> None:
