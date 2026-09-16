@@ -13,14 +13,19 @@ const VIEW_KEYS = new Set<string>(["worlds", "world", "watch", "jobs", "settings
 const readView = (value: string | null): ViewKey =>
   value !== null && VIEW_KEYS.has(value) ? (value as ViewKey) : DEFAULT_VIEW
 
-export type WorldTab = "spacetime" | "household"
+export type WorldTab = "scenarios" | "household"
 
-export const DEFAULT_WORLD_TAB: WorldTab = "spacetime"
+export const DEFAULT_WORLD_TAB: WorldTab = "household"
 
-const WORLD_TABS = new Set<string>(["spacetime", "household"])
+const WORLD_TABS = new Set<string>(["scenarios", "household"])
 
-const readWorldTab = (value: string | null): WorldTab =>
-  value !== null && WORLD_TABS.has(value) ? (value as WorldTab) : DEFAULT_WORLD_TAB
+const LEGACY_TABS: Record<string, WorldTab> = { spacetime: "scenarios", scenario: "scenarios" }
+
+const readWorldTab = (value: string | null): WorldTab => {
+  if (value === null) return DEFAULT_WORLD_TAB
+  if (WORLD_TABS.has(value)) return value as WorldTab
+  return LEGACY_TABS[value] ?? DEFAULT_WORLD_TAB
+}
 
 const readIndoor = (value: string | null): boolean => value === "1" || value === "true"
 

@@ -78,7 +78,7 @@ function WorldRow({
           <span aria-hidden>·</span>
           <Stat value={info.houses.length} word="household" />
           <span aria-hidden>·</span>
-          <Stat value={info.spacetimes.length} word="spacetime" />
+          <Stat value={info.spacetimes.length} word="scenario" />
         </span>
       </button>
 
@@ -163,7 +163,7 @@ export function WorldsList() {
         </div>
 
         <p className="label-micro">
-          Households are a world&apos;s fixed physics — spacetimes are runs that read them.
+          Households are a world&apos;s fixed physics — scenarios replay them under their own policy and dates.
         </p>
 
         <div className="flex flex-col gap-1.5">

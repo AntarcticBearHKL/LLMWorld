@@ -12,7 +12,7 @@ import { countLabel } from "@/lib/format"
 import { useTimeStore, type WorldTab } from "@/store/time"
 
 const isWorldTab = (value: string): value is WorldTab =>
-  value === "spacetime" || value === "household"
+  value === "scenarios" || value === "household"
 
 export function WorldDetail() {
   const world = useTimeStore((state) => state.world)
@@ -33,7 +33,7 @@ export function WorldDetail() {
       <section className="card flex h-full min-h-0 flex-col items-start justify-center gap-2 p-8">
         <h2 className="text-[16px] font-bold tracking-[-0.01em] text-fg">Select a world</h2>
         <p className="max-w-[420px] text-[14px] leading-relaxed text-fg-muted">
-          Pick a world from the list on the left to open its spacetimes and households, or create a
+          Pick a world from the list on the left to open its households and scenarios, or create a
           new blank world there.
         </p>
       </section>
@@ -79,7 +79,7 @@ export function WorldDetail() {
         <span className="chip num text-[12px]">
           {countLabel(info.districts.length, "block")} ·{" "}
           {countLabel(info.houses.length, "household")} ·{" "}
-          {countLabel(info.spacetimes.length, "spacetime")}
+          {countLabel(info.spacetimes.length, "scenario")}
         </span>
         <span className="ml-auto">
           <CloneWorldButton
@@ -103,18 +103,21 @@ export function WorldDetail() {
       >
         <div className="flex shrink-0 flex-wrap items-center gap-2">
           <TabsList className="h-8">
-            <TabsTrigger value="spacetime" className="h-7 px-3.5 text-[14px]">
-              Spacetimes{" "}
-              <span className="num text-[12px] text-fg-subtle">{info.spacetimes.length}</span>
-            </TabsTrigger>
             <TabsTrigger value="household" className="h-7 px-3.5 text-[14px]">
               Households <span className="num text-[12px] text-fg-subtle">{info.houses.length}</span>
             </TabsTrigger>
+            <TabsTrigger value="scenarios" className="h-7 px-3.5 text-[14px]">
+              Scenarios{" "}
+              <span className="num text-[12px] text-fg-subtle">{info.spacetimes.length}</span>
+            </TabsTrigger>
           </TabsList>
-          <span className="label-micro">Spacetimes read the households; they never change them.</span>
+          <span className="label-micro">
+            A scenario is a parallel version of this world — it replays the same households under its
+            own policy, news and dates, and never changes them.
+          </span>
         </div>
 
-        <TabsContent value="spacetime" className="mt-0 flex min-h-0 flex-1 flex-col">
+        <TabsContent value="scenarios" className="mt-0 flex min-h-0 flex-1 flex-col">
           <section className="card flex min-h-0 flex-1 flex-col overflow-hidden">
             <SpacetimeList world={info.world_id} />
           </section>

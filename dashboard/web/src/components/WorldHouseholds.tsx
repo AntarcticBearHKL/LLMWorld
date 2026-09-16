@@ -49,7 +49,7 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
       <div className="mx-3 mt-3 flex shrink-0 flex-wrap items-center gap-2 rounded-xl border border-energy/30 bg-energy-soft px-3.5 py-2.5">
         <Lock className="size-3.5 shrink-0 text-energy" aria-hidden />
         <span className="text-[13px] text-fg">
-          Households are frozen (this world has spacetimes). Clone the world to edit.
+          Households are frozen (this world has scenarios). Clone the world to edit.
         </span>
         <span className="ml-auto">
           <CloneWorldButton
@@ -65,23 +65,23 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
 
       <div className="min-h-0 flex-1 overflow-y-auto p-4">
         {spacetimesQuery.isPending ? (
-          <p className="text-[13px] text-fg-subtle">Loading spacetimes…</p>
+          <p className="text-[13px] text-fg-subtle">Loading scenarios…</p>
         ) : spacetimesQuery.isError ? (
           <div className="flex flex-col items-start gap-2">
             <p className="text-[13px] text-danger">
-              Failed to load spacetimes: {errorMessage(spacetimesQuery.error)}
+              Failed to load scenarios: {errorMessage(spacetimesQuery.error)}
             </p>
             <Button variant="outline" size="xs" onClick={() => void spacetimesQuery.refetch()}>
               Retry
             </Button>
           </div>
         ) : latest === null ? (
-          <p className="text-[13px] text-fg-subtle">No spacetimes found for this world.</p>
+          <p className="text-[13px] text-fg-subtle">No scenarios found for this world.</p>
         ) : (
           <div className="flex flex-col gap-4">
             <span className="label-micro">
               {countLabel(info.districts.length, "block")} ·{" "}
-              {countLabel(info.houses.length, "household")} · latest spacetime{" "}
+              {countLabel(info.houses.length, "household")} · latest scenario{" "}
               <span className="num">{latest.name}</span>
             </span>
 

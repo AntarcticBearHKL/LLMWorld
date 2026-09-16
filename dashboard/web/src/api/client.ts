@@ -251,7 +251,7 @@ export function createSpacetime(world: string, payload: SpacetimeCreate): Promis
       new ApiError(
         `mock:/worlds/${world}/spacetimes`,
         501,
-        "Mock mode does not create spacetimes; set VITE_USE_MOCK=0",
+        "Mock mode does not create scenarios; set VITE_USE_MOCK=0",
       ),
     )
   }
@@ -264,7 +264,7 @@ export function deleteSpacetime(name: string): Promise<SpacetimeDeleteResult> {
       new ApiError(
         `mock:/spacetimes/${name}`,
         501,
-        "Mock mode does not delete spacetimes; set VITE_USE_MOCK=0",
+        "Mock mode does not delete scenarios; set VITE_USE_MOCK=0",
       ),
     )
   }

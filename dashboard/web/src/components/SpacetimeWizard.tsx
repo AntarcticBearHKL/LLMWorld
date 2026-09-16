@@ -163,12 +163,12 @@ export function SpacetimeWizard({
   return (
     <div className="chrome flex flex-col gap-3.5 p-4">
       <span className="label-micro text-fg-muted">
-        A spacetime fixes a policy, news and a start date for this world&apos;s households. Creating
+        A scenario fixes a policy, news and a start date for this world&apos;s households. Creating
         one queues a simulation job.
       </span>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <Field id="spacetime-name" label="Name" hint="run name — letters, digits, '.', '_' or '-'" error={errors.name}>
+        <Field id="spacetime-name" label="Name" hint="scenario id — letters, digits, '.', '_' or '-'" error={errors.name}>
           <Input
             id="spacetime-name"
             value={draft.name}
@@ -257,7 +257,7 @@ export function SpacetimeWizard({
       <div className="flex flex-wrap items-center gap-2">
         <Button size="sm" onClick={onSubmit} disabled={create.isPending}>
           {create.isPending ? <Loader2 className="animate-spin" /> : <Plus />}
-          Create spacetime
+          Create scenario
         </Button>
         <Button variant="ghost" size="sm" onClick={onCancel} disabled={create.isPending}>
           Cancel

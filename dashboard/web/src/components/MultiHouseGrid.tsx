@@ -23,10 +23,10 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
       <div className="flex flex-1 flex-col items-center justify-center gap-2.5 p-8 text-center">
         <p className="text-[15px] font-medium text-fg">No replay data yet</p>
         <p className="label-micro max-w-[420px] leading-relaxed">
-          Pick a world and open one of its spacetimes to replay a simulated day. This grid then shows
+          Pick a world and open one of its scenarios to replay a simulated day. This grid then shows
           what every household is doing and which appliances draw power.
         </p>
-        <span className="label-latin mt-1">world → spacetime → watch</span>
+        <span className="label-latin mt-1">world → scenario → watch</span>
       </div>
     )
   }

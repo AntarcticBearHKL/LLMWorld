@@ -165,8 +165,8 @@ export function WatchView() {
   if (world.length === 0 || run.length === 0) {
     return (
       <Notice
-        title="No spacetime selected"
-        body="Open a world, then pick one of its spacetimes to replay a simulated day. Blocks, households and rooms all live under that spacetime."
+        title="No scenario selected"
+        body="Open a world, then pick one of its scenarios to replay a simulated day. Blocks, households and rooms all live under that scenario."
         action={backToWorldDetail}
       />
     )
@@ -175,7 +175,7 @@ export function WatchView() {
   if (metaQuery.isPending) {
     return (
       <Notice
-        title="Loading spacetime…"
+        title="Loading scenario…"
         body={`Reading days and households for ${run}.`}
         action={backToWorldDetail}
       />
@@ -185,7 +185,7 @@ export function WatchView() {
   if (metaQuery.isError) {
     return (
       <Notice
-        title="Failed to load spacetime"
+        title="Failed to load scenario"
         body={`Could not read ${run}: ${errorMessage(metaQuery.error)}`}
         action={
           <span className="flex items-center gap-2">
@@ -203,7 +203,7 @@ export function WatchView() {
     return (
       <Notice
         title="No simulated days"
-        body={`Spacetime ${run} has no simulated days yet. Run a simulation from its world page, then come back.`}
+        body={`Scenario ${run} has no simulated days yet. Run a simulation from its world page, then come back.`}
         action={backToWorldDetail}
       />
     )
@@ -331,7 +331,7 @@ export function WatchView() {
                 return (
                   <Notice
                     title="Empty block"
-                    body={`Block ${block} has no households in this spacetime on ${date}.`}
+                    body={`Block ${block} has no households in this scenario on ${date}.`}
                     action={
                       <Button variant="outline" size="xs" onClick={() => clearTo("world")}>
                         All blocks

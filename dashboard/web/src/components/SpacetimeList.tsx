@@ -130,20 +130,20 @@ export function SpacetimeList({ world }: { world: string }) {
     <div className="flex min-h-0 flex-1 flex-col">
       <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-4 py-3">
         <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
-          Spacetimes <span className="num text-[13px] font-medium text-fg-subtle">{items.length}</span>
+          Scenarios <span className="num text-[13px] font-medium text-fg-subtle">{items.length}</span>
         </span>
         <Button
           variant="ghost"
           size="icon-sm"
           className="ml-auto"
-          aria-label="Refresh spacetimes"
+          aria-label="Refresh scenarios"
           onClick={() => void query.refetch()}
         >
           <RefreshCw />
         </Button>
         <Button size="sm" onClick={() => setWizardOpen((open) => !open)}>
           <Plus />
-          New spacetime
+          New scenario
         </Button>
       </header>
 
@@ -165,7 +165,7 @@ export function SpacetimeList({ world }: { world: string }) {
           <div className="mx-3 mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-success/40 bg-success/10 px-3.5 py-2">
             <CheckCircle2 className="size-3.5 shrink-0 text-success" aria-hidden />
             <span className="text-[13px] text-fg">
-              Created spacetime <span className="num">{created.name}</span> — status {created.status} ·{" "}
+              Created scenario <span className="num">{created.name}</span> — status {created.status} ·{" "}
               {created.days} {created.days === 1 ? "day" : "days"} from {created.start_date ?? "—"}
             </span>
             <Button variant="outline" size="xs" className="ml-auto" onClick={() => openWatch(created.name)}>
@@ -175,11 +175,11 @@ export function SpacetimeList({ world }: { world: string }) {
         ) : null}
 
         {query.isPending ? (
-          <p className="px-4 py-6 text-[13px] text-fg-subtle">Loading spacetimes…</p>
+          <p className="px-4 py-6 text-[13px] text-fg-subtle">Loading scenarios…</p>
         ) : query.isError ? (
           <div className="m-3 card flex flex-col items-start gap-2 px-4 py-5">
             <p className="text-[13px] text-danger">
-              Failed to load spacetimes: {errorMessage(query.error)}
+              Failed to load scenarios: {errorMessage(query.error)}
             </p>
             <Button variant="outline" size="xs" onClick={() => void query.refetch()}>
               Retry
@@ -187,8 +187,8 @@ export function SpacetimeList({ world }: { world: string }) {
           </div>
         ) : items.length === 0 ? (
           <p className="px-4 py-6 text-[13px] text-fg-subtle">
-            No spacetimes yet. This world is still a draft — households stay editable until its first
-            spacetime is created.
+            No scenarios yet. This world is still a draft — households stay editable until its first
+            scenario is created.
           </p>
         ) : (
           <ul className="flex flex-col gap-2.5 p-3">

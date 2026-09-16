@@ -18,7 +18,7 @@ export function HouseSwitcher() {
 
   return (
     <Panel
-      title="Households in this spacetime"
+      title="Households in this scenario"
       hint={`${ids.length} households`}
       index={2}
       bodyClassName="p-3"
