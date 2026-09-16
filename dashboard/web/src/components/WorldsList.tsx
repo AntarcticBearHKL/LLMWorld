@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from "react"
+import { useEffect, useMemo, useState, type CSSProperties } from "react"
 
 import { Clock3, Loader2, Plus, RefreshCw, Trash2 } from "lucide-react"
 
@@ -125,14 +125,16 @@ export function WorldsList() {
   const [draft, setDraft] = useState("")
 
   const worlds = worldsQuery.data ?? []
+  const takenKey = worlds.map((item) => item.world_id).join("|")
+  const suggested = useMemo(
+    () => randomWorldId(takenKey === "" ? [] : takenKey.split("|")),
+    [takenKey],
+  )
 
   const openWorld = (worldId: string) => setWorld(worldId)
 
   const onCreate = () => {
-    const worldId =
-      draft.trim().length > 0
-        ? draft.trim()
-        : randomWorldId(worlds.map((item) => item.world_id))
+    const worldId = draft.trim().length > 0 ? draft.trim() : suggested
     create.mutate(
       { world_id: worldId },
       {
@@ -168,12 +170,12 @@ export function WorldsList() {
 
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="new-world-id" className="label-micro text-fg-muted">
-            World ID (blank = auto-generate)
+            World ID (blank = use the suggested id)
           </Label>
           <Input
             id="new-world-id"
             value={draft}
-            placeholder="world_fish"
+            placeholder={suggested}
             onChange={(event) => setDraft(event.target.value)}
             onKeyDown={(event) => {
               if (event.key === "Enter" && !create.isPending) onCreate()

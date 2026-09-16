@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 import { ChevronRight, Loader2, Plus, RefreshCw, Sparkles, Trash2 } from "lucide-react"
 
@@ -33,24 +33,28 @@ function NewDistrictForm({ world }: { world: string }) {
   const create = useCreateDistrict(world)
   const districtsQuery = useDistricts(world)
   const [draft, setDraft] = useState("")
+  const takenKey = (districtsQuery.data ?? []).map((district) => district.name).join("|")
+  const suggested = useMemo(
+    () => randomDistrictId(takenKey === "" ? [] : takenKey.split("|")),
+    [takenKey],
+  )
 
   const onCreate = () => {
     const typed = draft.trim()
-    const taken = (districtsQuery.data ?? []).map((district) => district.name)
-    const name = typed.length > 0 ? typed : randomDistrictId(taken)
+    const name = typed.length > 0 ? typed : suggested
     create.mutate({ name }, { onSuccess: () => setDraft("") })
   }
 
   return (
     <div className="flex flex-col gap-1.5">
       <Label htmlFor="new-district-name" className="label-micro text-fg-muted">
-        New district (blank = auto-generate)
+        New district (blank = use the suggested id)
       </Label>
       <div className="flex flex-wrap items-center gap-2">
         <Input
           id="new-district-name"
           value={draft}
-          placeholder="district_harbor"
+          placeholder={suggested}
           onChange={(event) => setDraft(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Enter") onCreate()
@@ -62,8 +66,8 @@ function NewDistrictForm({ world }: { world: string }) {
           Create district
         </Button>
         <span className="text-[12px] text-fg-subtle">
-          Blank name generates a <span className="num">district_&lt;word&gt;</span> id. Creating a
-          district is local — no LLM calls.
+          A blank name uses the suggested <span className="num">district_&lt;word&gt;</span> id shown
+          above. Creating a district is local — no LLM calls.
         </span>
       </div>
       {create.isError ? (
