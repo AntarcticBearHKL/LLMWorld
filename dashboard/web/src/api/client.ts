@@ -10,11 +10,13 @@ import type {
   BuildState,
   BuildStep,
   DayReplay,
+  DistrictCopyRequest,
   DistrictCreateRequest,
   DistrictCreateResult,
   DistrictDeleteResult,
   DistrictInfo,
   DistrictPreset,
+  DistrictUpdateRequest,
   HouseholdInfo,
   JobCreateResult,
   JobEstimate,
@@ -44,11 +46,13 @@ import type {
 import {
   mockBuildPreview,
   mockBuildState,
+  mockCopyDistrict,
   mockDistrictHouseholds,
   mockDistrictPresets,
   mockDistrictsFor,
   mockHouseholdKey,
   mockHouseholds,
+  mockLockDistrict,
   mockReplays,
   mockReplaysForDate,
   mockRunMeta,
@@ -57,6 +61,7 @@ import {
   mockSpacetimesFor,
   mockStageKey,
   mockStages,
+  mockUpdateDistrict,
   mockWorldDayBlocks,
   mockWorlds,
 } from "@/mocks"
@@ -128,6 +133,20 @@ async function putJson<T>(path: string, payload: unknown): Promise<T> {
   if (!response.ok) {
     const body = await response.text().catch(() => "")
     throw new ApiError(url, response.status, body || `Save failed (HTTP ${response.status})`)
+  }
+  return (await response.json()) as T
+}
+
+async function patchJson<T>(path: string, payload: unknown): Promise<T> {
+  const url = buildUrl(path)
+  const response = await fetch(url, {
+    method: "PATCH",
+    headers: { "content-type": "application/json", accept: "application/json" },
+    body: JSON.stringify(payload),
+  })
+  if (!response.ok) {
+    const body = await response.text().catch(() => "")
+    throw new ApiError(url, response.status, body || `Update failed (HTTP ${response.status})`)
   }
   return (await response.json()) as T
 }
@@ -268,6 +287,70 @@ export function deleteWorldDistrict(world: string, district: string): Promise<Di
   }
   return deleteJson<DistrictDeleteResult>(
     `/worlds/${encodeURIComponent(world)}/districts/${encodeURIComponent(district)}`,
+  )
+}
+
+export function updateDistrict(
+  world: string,
+  district: string,
+  payload: DistrictUpdateRequest,
+): Promise<DistrictInfo> {
+  if (USE_MOCK) {
+    const result = mockUpdateDistrict(world, district, payload)
+    if (!result.ok) {
+      return Promise.reject(
+        new ApiError(`mock:/worlds/${world}/districts/${district}`, result.status, result.detail),
+      )
+    }
+    return delay(result.district)
+  }
+  return patchJson<DistrictInfo>(
+    `/worlds/${encodeURIComponent(world)}/districts/${encodeURIComponent(district)}`,
+    payload,
+  )
+}
+
+export function lockDistrict(world: string, district: string): Promise<DistrictInfo> {
+  if (USE_MOCK) {
+    const result = mockLockDistrict(world, district)
+    if (!result.ok) {
+      return Promise.reject(
+        new ApiError(
+          `mock:/worlds/${world}/districts/${district}/lock`,
+          result.status,
+          result.detail,
+        ),
+      )
+    }
+    return delay(result.district)
+  }
+  return postJson<DistrictInfo>(
+    `/worlds/${encodeURIComponent(world)}/districts/${encodeURIComponent(district)}/lock`,
+    {},
+  )
+}
+
+export function copyDistrict(
+  world: string,
+  district: string,
+  payload: DistrictCopyRequest,
+): Promise<DistrictInfo> {
+  if (USE_MOCK) {
+    const result = mockCopyDistrict(world, district, payload)
+    if (!result.ok) {
+      return Promise.reject(
+        new ApiError(
+          `mock:/worlds/${world}/districts/${district}/copy`,
+          result.status,
+          result.detail,
+        ),
+      )
+    }
+    return delay(result.district)
+  }
+  return postJson<DistrictInfo>(
+    `/worlds/${encodeURIComponent(world)}/districts/${encodeURIComponent(district)}/copy`,
+    payload,
   )
 }
 

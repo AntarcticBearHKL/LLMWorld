@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
 
-import { ListChecks, Loader2, Plus, RefreshCw, Sparkles, Trash2 } from "lucide-react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-import type { DistrictInfo, JobInfo, WorldInfo } from "@/api/types"
+import { Copy, ListChecks, Loader2, Lock, Plus, RefreshCw, Sparkles, Trash2 } from "lucide-react"
+
+import { copyDistrict, lockDistrict } from "@/api/client"
+import type { DistrictInfo, DistrictStatus, JobInfo, WorldInfo } from "@/api/types"
 import {
   DistrictDescriptionSheet,
   DistrictStepsSheet,
@@ -25,6 +28,7 @@ import {
   useBuildState,
   useDeleteDistrict,
   useDistricts,
+  worldKeys,
 } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
@@ -35,6 +39,11 @@ const CELL_NUM_CLASS = "num text-right tabular-nums text-fg-muted"
 const CHIP_CLASS = "num rounded-full border px-2 py-px text-[12px]"
 const CHIP_ON_CLASS = "border-success/40 bg-success/10 text-success"
 const CHIP_OFF_CLASS = "border-border-strong bg-surface-2 text-fg-subtle"
+const STATUS_CHIP_CLASS: Record<DistrictStatus, string> = {
+  uninitialized: CHIP_OFF_CLASS,
+  initialized: "border-energy/40 bg-energy-soft text-energy",
+  locked: CHIP_ON_CLASS,
+}
 
 type DeleteNotice =
   | { kind: "error"; message: string }
@@ -44,6 +53,21 @@ function DescriptionChip({ hasDescription }: { hasDescription: boolean }) {
   return (
     <span className={cn(CHIP_CLASS, hasDescription ? CHIP_ON_CLASS : CHIP_OFF_CLASS)}>
       {hasDescription ? "described" : "no description"}
+    </span>
+  )
+}
+
+function StatusChip({ status }: { status: DistrictStatus }) {
+  return (
+    <span
+      className={cn(
+        CHIP_CLASS,
+        "inline-block max-w-full truncate align-middle",
+        STATUS_CHIP_CLASS[status],
+      )}
+      title={status}
+    >
+      {status}
     </span>
   )
 }
@@ -62,6 +86,8 @@ function DistrictRow({
   selected,
   onSelect,
   onGenerateDescription,
+  onCopied,
+  onActionError,
   onDeleteNotice,
 }: {
   world: string
@@ -69,9 +95,12 @@ function DistrictRow({
   selected: boolean
   onSelect: () => void
   onGenerateDescription: () => void
+  onCopied: (name: string) => void
+  onActionError: (message: string | null) => void
   onDeleteNotice: (notice: DeleteNotice) => void
 }) {
   const remove = useDeleteDistrict(world)
+  const queryClient = useQueryClient()
   const [armed, setArmed] = useState(false)
 
   useEffect(() => {
@@ -80,9 +109,33 @@ function DistrictRow({
     return () => window.clearTimeout(timer)
   }, [armed])
 
-  const descriptionLabel = district.has_description
-    ? "Regenerate description"
-    : "Generate description"
+  const invalidate = (name: string) => {
+    void queryClient.invalidateQueries({ queryKey: worldKeys.districts(world) })
+    void queryClient.invalidateQueries({ queryKey: worldKeys.build(world, name) })
+  }
+
+  const lockMutation = useMutation({
+    mutationFn: () => lockDistrict(world, district.name),
+    onSuccess: () => {
+      onActionError(null)
+      invalidate(district.name)
+    },
+    onError: (error) => onActionError(errorMessage(error)),
+  })
+
+  const copyMutation = useMutation({
+    mutationFn: () => copyDistrict(world, district.name, {}),
+    onSuccess: (created) => {
+      onActionError(null)
+      invalidate(district.name)
+      invalidate(created.name)
+      onCopied(created.name)
+    },
+    onError: (error) => onActionError(errorMessage(error)),
+  })
+
+  const descriptionLabel =
+    district.status === "uninitialized" ? "Generate description" : "Edit description"
 
   return (
     <TableRow
@@ -101,9 +154,9 @@ function DistrictRow({
         selected && "bg-item-selected",
       )}
     >
-      <TableCell className="max-w-[180px] align-middle">
+      <TableCell className="align-middle">
         <span
-          className="num block max-w-[160px] truncate text-[13px] font-semibold tracking-[-0.01em] text-fg"
+          className="num block truncate text-[13px] font-semibold tracking-[-0.01em] text-fg"
           title={district.name}
         >
           {district.name}
@@ -111,25 +164,58 @@ function DistrictRow({
       </TableCell>
 
       <TableCell className="align-middle">
-        <DescriptionChip hasDescription={district.has_description} />
+        <StatusChip status={district.status} />
       </TableCell>
 
-      <TableCell className={CELL_NUM_CLASS}>{district.house_count}</TableCell>
+      <TableCell className={CELL_NUM_CLASS}>
+        <span className="block truncate" title={String(district.house_count)}>
+          {district.house_count}
+        </span>
+      </TableCell>
 
       <TableCell
         className="text-right whitespace-nowrap"
         onClick={(event) => event.stopPropagation()}
       >
         <span className="inline-flex items-center gap-1">
-          <Button
-            variant="outline"
-            size="icon-xs"
-            title={descriptionLabel}
-            aria-label={descriptionLabel}
-            onClick={onGenerateDescription}
-          >
-            <Sparkles />
-          </Button>
+          {district.status === "locked" ? null : (
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              className="text-success"
+              title={descriptionLabel}
+              aria-label={descriptionLabel}
+              onClick={onGenerateDescription}
+            >
+              <Sparkles />
+            </Button>
+          )}
+          {district.status === "initialized" ? (
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              className="text-brand"
+              title="Lock this district (one-way)"
+              aria-label="Lock this district (one-way)"
+              disabled={lockMutation.isPending}
+              onClick={() => lockMutation.mutate()}
+            >
+              {lockMutation.isPending ? <Loader2 className="animate-spin" /> : <Lock />}
+            </Button>
+          ) : null}
+          {district.status === "locked" ? (
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              className="text-fg-subtle"
+              title="Copy this district (new initialized district, no households)"
+              aria-label="Copy this district"
+              disabled={copyMutation.isPending}
+              onClick={() => copyMutation.mutate()}
+            >
+              {copyMutation.isPending ? <Loader2 className="animate-spin" /> : <Copy />}
+            </Button>
+          ) : null}
           <Button
             variant="ghost"
             size={armed ? "xs" : "icon-xs"}
@@ -160,7 +246,10 @@ function DistrictRow({
                 },
               })
             }}
-            className={cn(armed && "bg-danger/10 text-danger hover:bg-danger/15 hover:text-danger")}
+            className={cn(
+              "text-danger",
+              armed && "bg-danger/10 hover:bg-danger/15 hover:text-danger",
+            )}
           >
             {remove.isPending ? <Loader2 className="animate-spin" /> : <Trash2 />}
             {armed ? "Confirm delete" : null}
@@ -201,6 +290,7 @@ function DistrictHouseholdsPanel({
   const homeStatusFor = (house: string) =>
     homeStep?.houses.find((item) => item.house === house) ?? null
   const openHomeStatus = houseOpen === null ? null : homeStatusFor(houseOpen)
+  const isLocked = district.status === "locked"
 
   return (
     <section className="card flex min-h-0 flex-col overflow-hidden">
@@ -224,7 +314,11 @@ function DistrictHouseholdsPanel({
         </span>
       </header>
 
-      <div className="min-h-0 flex-1 overflow-auto">
+      <div className="relative min-h-0 flex-1">
+        <div
+          className={cn("h-full overflow-auto", !isLocked && "pointer-events-none")}
+          aria-hidden={!isLocked}
+        >
         <Table className="w-full text-[13px]">
           <TableHeader>
             <TableRow className="border-b border-border hover:bg-transparent">
@@ -277,6 +371,14 @@ function DistrictHouseholdsPanel({
             )}
           </TableBody>
         </Table>
+        </div>
+        {isLocked ? null : (
+          <div className="glass pointer-events-auto absolute inset-0 flex items-center justify-center px-6 backdrop-blur">
+            <p className="max-w-[240px] text-center text-[13px] leading-relaxed text-fg-muted">
+              Lock this district to start generating households.
+            </p>
+          </div>
+        )}
       </div>
 
       <DistrictDescriptionSheet
@@ -323,6 +425,7 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
   const [stepsOpen, setStepsOpen] = useState(false)
   const [houseOpen, setHouseOpen] = useState<string | null>(null)
   const [deleteNotice, setDeleteNotice] = useState<DeleteNotice | null>(null)
+  const [actionError, setActionError] = useState<string | null>(null)
 
   useEffect(() => {
     if (districtsQuery.isPending) return
@@ -358,13 +461,35 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
         </header>
 
         <div className="min-h-0 flex-1 overflow-auto">
-          <Table className="w-full text-[13px]">
+          <Table className="w-full table-fixed text-[13px]">
+            <colgroup>
+              <col className="w-1/4" />
+              <col className="w-1/4" />
+              <col className="w-1/4" />
+              <col className="w-1/4" />
+            </colgroup>
             <TableHeader>
               <TableRow className="border-b border-border hover:bg-transparent">
-                <TableHead className={HEAD_CLASS}>District</TableHead>
-                <TableHead className={HEAD_CLASS}>Description</TableHead>
-                <TableHead className={HEAD_NUM_CLASS}>Households</TableHead>
-                <TableHead className={HEAD_CLASS}>Actions</TableHead>
+                <TableHead className={HEAD_CLASS}>
+                  <span className="block truncate" title="District">
+                    District
+                  </span>
+                </TableHead>
+                <TableHead className={HEAD_CLASS}>
+                  <span className="block truncate" title="Status">
+                    Status
+                  </span>
+                </TableHead>
+                <TableHead className={HEAD_NUM_CLASS}>
+                  <span className="block truncate" title="Households">
+                    Households
+                  </span>
+                </TableHead>
+                <TableHead className={HEAD_CLASS}>
+                  <span className="block truncate" title="Actions">
+                    Actions
+                  </span>
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -411,6 +536,8 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
                       setSelected(district.name)
                       setDescriptionOpen(true)
                     }}
+                    onCopied={setSelected}
+                    onActionError={setActionError}
                     onDeleteNotice={setDeleteNotice}
                   />
                 ))
@@ -419,8 +546,11 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
           </Table>
         </div>
 
-        {deleteNotice === null && !jobsQuery.isError ? null : (
+        {deleteNotice === null && actionError === null && !jobsQuery.isError ? null : (
           <div className="shrink-0 border-t border-border px-3.5 py-2">
+            {actionError !== null ? (
+              <p className="text-[12px] text-danger">District action failed: {actionError}</p>
+            ) : null}
             {deleteNotice?.kind === "error" ? (
               <p className="text-[12px] text-danger">Delete failed: {deleteNotice.message}</p>
             ) : null}

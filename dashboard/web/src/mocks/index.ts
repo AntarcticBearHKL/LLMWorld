@@ -12,8 +12,11 @@ import type {
   BuildPreview,
   BuildState,
   DayReplay,
+  DistrictCopyRequest,
   DistrictInfo,
   DistrictPreset,
+  DistrictStatus,
+  DistrictUpdateRequest,
   HouseStepStatus,
   HouseholdInfo,
   RoomInfo,
@@ -256,18 +259,168 @@ export function mockBuildPreview(
   return { world_id: worldId, step, district, house, reads, writes, overwrites }
 }
 
-export function mockDistrictsFor(world: string): DistrictInfo[] {
+/* ------------------------------------------------------------------ *
+ * District lifecycle (DESIGN.md §18)
+ *
+ * The fixtures are static, so the lifecycle runs on a module-level overlay
+ * that behaves like the server: name/description rewrites, a persisted lock
+ * with no unlock, and copies appended as new initialized districts.
+ * ------------------------------------------------------------------ */
+
+export type MockDistrictResult =
+  | { ok: true; district: DistrictInfo }
+  | { ok: false; status: number; detail: string }
+
+type DistrictOverride = {
+  name: string
+  description: string
+  locked_at: string | null
+}
+
+const districtOverrides = new Map<string, Map<string, DistrictOverride>>()
+const districtCopies = new Map<string, DistrictInfo[]>()
+
+const overridesFor = (world: string): Map<string, DistrictOverride> => {
+  const existing = districtOverrides.get(world)
+  if (existing !== undefined) return existing
+  const created = new Map<string, DistrictOverride>()
+  districtOverrides.set(world, created)
+  return created
+}
+
+const statusFor = (description: string, lockedAt: string | null): DistrictStatus => {
+  if (lockedAt !== null) return "locked"
+  return description.length > 0 ? "initialized" : "uninitialized"
+}
+
+const asDistrictInfo = (
+  name: string,
+  description: string,
+  houseCount: number,
+  lockedAt: string | null,
+): DistrictInfo => ({
+  name,
+  description,
+  house_count: houseCount,
+  has_description: description.length > 0,
+  status: statusFor(description, lockedAt),
+  locked_at: lockedAt,
+})
+
+/** The fixture districts with the session's lifecycle overlay applied. */
+function baseDistrictsFor(world: string): { key: string; info: DistrictInfo }[] {
   const info = mockWorlds.find((item) => item.world_id === world)
   const houses = info?.houses ?? []
-  return (info?.districts ?? []).map((name) => {
-    const described = houses.length > 0
+  const description = houses.length > 0 ? MOCK_DISTRICT_DESCRIPTION : ""
+  const overrides = overridesFor(world)
+  return (info?.districts ?? []).map((key) => {
+    const override = overrides.get(key)
     return {
-      name,
-      description: described ? MOCK_DISTRICT_DESCRIPTION : "",
-      house_count: houses.length,
-      has_description: described,
+      key,
+      info: asDistrictInfo(
+        override?.name ?? key,
+        override?.description ?? description,
+        houses.length,
+        override?.locked_at ?? null,
+      ),
     }
   })
+}
+
+export function mockDistrictsFor(world: string): DistrictInfo[] {
+  return [...baseDistrictsFor(world).map((entry) => entry.info), ...(districtCopies.get(world) ?? [])]
+}
+
+const districtNamed = (world: string, district: string): DistrictInfo | undefined =>
+  mockDistrictsFor(world).find((item) => item.name === district)
+
+const duplicateName = (world: string, name: string, except: string): boolean =>
+  mockDistrictsFor(world).some((item) => item.name === name && item.name !== except)
+
+const replaceCopy = (world: string, previousName: string, updated: DistrictInfo): void => {
+  const list = districtCopies.get(world) ?? []
+  districtCopies.set(
+    world,
+    list.map((item) => (item.name === previousName ? updated : item)),
+  )
+}
+
+export function mockUpdateDistrict(
+  world: string,
+  district: string,
+  payload: DistrictUpdateRequest,
+): MockDistrictResult {
+  const found = districtNamed(world, district)
+  if (found === undefined) {
+    return { ok: false, status: 404, detail: `mock data has no district ${district} in ${world}` }
+  }
+  if (found.status === "locked") {
+    return { ok: false, status: 409, detail: `district ${district} is locked` }
+  }
+  const name = payload.name ?? found.name
+  if (name !== found.name && duplicateName(world, name, found.name)) {
+    return { ok: false, status: 409, detail: `district ${name} already exists` }
+  }
+  const description = payload.description ?? found.description
+  const updated = asDistrictInfo(name, description, found.house_count, null)
+  const copy = districtCopies.get(world)?.find((item) => item.name === found.name)
+  if (copy !== undefined) {
+    replaceCopy(world, found.name, updated)
+  } else {
+    const entry = baseDistrictsFor(world).find((item) => item.info.name === found.name)
+    if (entry !== undefined) {
+      overridesFor(world).set(entry.key, { name, description, locked_at: null })
+    }
+  }
+  return { ok: true, district: updated }
+}
+
+export function mockLockDistrict(world: string, district: string): MockDistrictResult {
+  const found = districtNamed(world, district)
+  if (found === undefined) {
+    return { ok: false, status: 404, detail: `mock data has no district ${district} in ${world}` }
+  }
+  if (found.status === "locked") return { ok: true, district: found }
+  const lockedAt = new Date().toISOString()
+  const updated = asDistrictInfo(found.name, found.description, found.house_count, lockedAt)
+  const copy = districtCopies.get(world)?.find((item) => item.name === found.name)
+  if (copy !== undefined) {
+    replaceCopy(world, found.name, updated)
+  } else {
+    const entry = baseDistrictsFor(world).find((item) => item.info.name === found.name)
+    if (entry !== undefined) {
+      overridesFor(world).set(entry.key, {
+        name: found.name,
+        description: found.description,
+        locked_at: lockedAt,
+      })
+    }
+  }
+  return { ok: true, district: updated }
+}
+
+export function mockCopyDistrict(
+  world: string,
+  district: string,
+  payload: DistrictCopyRequest,
+): MockDistrictResult {
+  const source = districtNamed(world, district)
+  if (source === undefined) {
+    return { ok: false, status: 404, detail: `mock data has no district ${district} in ${world}` }
+  }
+  if (source.status !== "locked") {
+    return { ok: false, status: 409, detail: `district ${district} must be locked before it can be copied` }
+  }
+  const base = payload.name !== undefined && payload.name.length > 0 ? payload.name : `${district}_copy`
+  let name = base
+  let suffix = 2
+  while (duplicateName(world, name, "")) {
+    name = `${base}_${suffix}`
+    suffix += 1
+  }
+  const created = asDistrictInfo(name, source.description, 0, null)
+  districtCopies.set(world, [...(districtCopies.get(world) ?? []), created])
+  return { ok: true, district: created }
 }
 
 export function mockDistrictHouseholds(

@@ -313,11 +313,15 @@ export interface WorldCloneResult {
   world_dir: string
 }
 
+export type DistrictStatus = "uninitialized" | "initialized" | "locked"
+
 export interface DistrictInfo {
   name: string
   description: string
   house_count: number
   has_description: boolean
+  status: DistrictStatus
+  locked_at: string | null
 }
 
 export interface DistrictCreateRequest {
@@ -338,6 +342,15 @@ export interface DistrictDeleteResult {
   existed: boolean
   deleted: boolean
   moved_to: string | null
+}
+
+export interface DistrictUpdateRequest {
+  name?: string
+  description?: string
+}
+
+export interface DistrictCopyRequest {
+  name?: string
 }
 
 export interface DistrictPreset {
