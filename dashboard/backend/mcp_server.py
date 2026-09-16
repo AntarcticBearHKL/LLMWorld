@@ -148,7 +148,7 @@ server = MCPServer(
     title="LLMWorld Research Console",
     instructions=(
         "Tools over the LLMWorld energy-simulation repository. Worlds are built "
-        "in four stages (district -> household -> home -> assemble); "
+        "in three stages (district -> household -> home); "
         "run_build_step and run_simulation spend real API tokens and require "
         "confirm=True. list_worlds/create_world/delete_world/get_build_state are "
         "zero-LLM."
@@ -215,8 +215,8 @@ def delete_world(world_id: str, permanent: bool = False) -> dict[str, Any]:
 
 @server.tool(
     description=(
-        "Per-step build progress for a world's district: which of the four steps "
-        "(district/household/home/assemble) are done, runnable, or blocked, plus "
+        "Per-step build progress for a world's district: which of the three steps "
+        "(district/household/home) are done, runnable, or blocked, plus "
         "the house-level breakdown. district defaults to the primary district."
     )
 )
@@ -230,7 +230,7 @@ def get_build_state(world_id: str, district: Optional[str] = None) -> dict[str, 
 @server.tool(
     description=(
         "Preview the reads, writes and overwrites for one build step without "
-        "running it. step is one of district, household, home, assemble."
+        "running it. step is one of district, household, home."
     )
 )
 def get_build_preview(

@@ -186,7 +186,6 @@ export function mockBuildState(worldId: string, district: string | null): BuildS
   const described = scoped.length > 0
   const householdReason = described ? null : "no households yet; run 'district' first"
   const homeReason = described ? null : "no households yet; run 'household' first"
-  const assembleReason = described ? null : "no households yet; run 'home' first"
   const houseStatuses = (done: boolean, blockedReason: string | null): HouseStepStatus[] =>
     scoped.map((house) => ({
       house,
@@ -226,14 +225,6 @@ export function mockBuildState(worldId: string, district: string | null): BuildS
         blocked_reason: homeReason,
         houses: houseStatuses(described, homeReason),
       },
-      {
-        step: "assemble",
-        scope: "house",
-        done: false,
-        runnable: described,
-        blocked_reason: assembleReason,
-        houses: houseStatuses(false, assembleReason),
-      },
     ],
   }
 }
@@ -258,7 +249,6 @@ export function mockBuildPreview(
     writes.push({ path: householdPath, exists: false, role: "output" })
   } else {
     reads.push({ path: householdPath, exists: true, role: "input" })
-    reads.push({ path: `${base}/${label}/personas.json`, exists: true, role: "input" })
     writes.push({ path: householdPath, exists: true, role: "output" })
     overwrites.push(householdPath)
   }

@@ -404,7 +404,7 @@ function DistrictCard({ world, district, jobs }: { world: string; district: Dist
               className={cn("size-3.5 transition-transform", stepsOpen && "rotate-90")}
               aria-hidden
             />
-            Step runner · district → household → home → assemble
+            Step runner · district → household → home
           </button>
           {stepsOpen ? <WorldBuilder world={world} district={district.name} /> : null}
         </div>

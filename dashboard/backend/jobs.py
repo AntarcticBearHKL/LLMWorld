@@ -279,10 +279,10 @@ def estimate(req: JobRequest) -> JobEstimate:
         return build.estimate_build(req)
     if req.kind == "world":
         count = int(req.count) if req.count is not None else 1
-        calls = 1 + 3 * count
+        calls = 1 + 2 * count
         detail = (
-            f"world: s1 household types = 1 call; s2 persona + s3 household + "
-            f"s4 assemble = 3 calls per household x {count} = {calls} LLM calls"
+            f"world: district description = 1 call; household compose = 2 calls "
+            f"per household x {count} = {calls} LLM calls"
         )
         if req.count is None:
             detail += " (count not set; run.py defaults to 1)"

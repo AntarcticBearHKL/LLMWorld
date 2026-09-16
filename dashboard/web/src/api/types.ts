@@ -215,7 +215,7 @@ export interface StagePayload {
 
 export type JobKind = "world" | "simulate" | "build"
 
-export type BuildStep = "district" | "household" | "home" | "assemble"
+export type BuildStep = "district" | "household" | "home"
 
 export type BuildStepScope = "world" | "district" | "house"
 

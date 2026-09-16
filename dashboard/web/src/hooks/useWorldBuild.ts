@@ -23,27 +23,24 @@ import type {
   WorldCreateRequest,
 } from "@/api/types"
 
-export const BUILD_STEP_ORDER: readonly BuildStep[] = ["district", "household", "home", "assemble"]
+export const BUILD_STEP_ORDER: readonly BuildStep[] = ["district", "household", "home"]
 
 export const BUILD_STEP_LABEL: Record<BuildStep, string> = {
   district: "District",
   household: "Household",
   home: "Home",
-  assemble: "Assemble",
 }
 
 export const BUILD_STEP_SCOPE: Record<BuildStep, BuildStepScope> = {
   district: "district",
   household: "district",
   home: "house",
-  assemble: "house",
 }
 
 export const BUILD_STEP_HINT: Record<BuildStep, string> = {
   district: "1 LLM call per district, from a preset or a custom prompt.",
   household: "2 LLM calls per household: compose, then adapt to a sampled persona.",
   home: "1 LLM call per household: invent its rooms and appliances.",
-  assemble: "0 LLM calls: merges the artifacts that already exist into households.json.",
 }
 
 export const SCOPE_LABEL: Record<BuildStepScope, string> = {

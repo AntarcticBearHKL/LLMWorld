@@ -281,7 +281,7 @@ class JobRequest(BaseModel):
     # build mode (kind="build"): which single world-generation stage to run.
     # The target house for per-house stages reuses the ``house`` field above
     # (a house id like "house_0001" or a 0-based index passed as a string).
-    step: Optional[Literal["district", "household", "home", "assemble"]] = None
+    step: Optional[Literal["district", "household", "home"]] = None
     district: Optional[str] = None
     # preset wins over prompt when the district-description step carries both.
     preset: Optional[str] = None

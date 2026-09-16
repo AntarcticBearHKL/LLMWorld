@@ -32,12 +32,11 @@ DEFAULT_POSTCODE = "3168"
 DEFAULT_SEED = 42
 DEFAULT_WORLD_CONFIG = "Melbourne"
 
-STEP_ORDER: Tuple[str, ...] = ("district", "household", "home", "assemble")
+STEP_ORDER: Tuple[str, ...] = ("district", "household", "home")
 STEP_SCOPE: Dict[str, str] = {
     "district": "district",
     "household": "district",
     "home": "house",
-    "assemble": "house",
 }
 
 _WORLD_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
@@ -421,16 +420,8 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
     description_done = _is_file(os.path.join(district_path, "description.md"))
     labels = list_house_labels(wid, district_name) if exists else []
 
-    assembled: set = set()
-    meta = read_json(households_meta_path(wid, district_name))
-    if isinstance(meta, dict) and isinstance(meta.get("households"), list):
-        for entry in meta["households"]:
-            if isinstance(entry, dict) and entry.get("house_id"):
-                assembled.add(str(entry["house_id"]))
-
     household_houses: List[HouseStepStatus] = []
     home_houses: List[HouseStepStatus] = []
-    assemble_houses: List[HouseStepStatus] = []
     for label in labels:
         household_path = house_file(wid, label, "household.json", district_name)
         household_done = _is_file(household_path)
@@ -457,22 +448,6 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
             )
         )
 
-        assemble_done = (
-            home_done
-            and _is_file(house_file(wid, label, "personas.json", district_name))
-            and label in assembled
-        )
-        assemble_houses.append(
-            HouseStepStatus(
-                house=label,
-                done=assemble_done,
-                runnable=household_done,
-                blocked_reason=None
-                if household_done
-                else "household.json missing (run 'household' first)",
-            )
-        )
-
     steps = [
         BuildStepStatus(
             step="district",
@@ -483,7 +458,6 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
         ),
         _aggregate("household", "district", household_houses, "no households yet; run 'household' first"),
         _aggregate("home", "house", home_houses, "no households yet; run 'household' first"),
-        _aggregate("assemble", "house", assemble_houses, "no households yet; run 'home' first"),
     ]
 
     return BuildState(
@@ -552,7 +526,7 @@ def build_preview(
             ("output", house_file(wid, label, "persona_provenance.json", district_name)),
             ("output", households_meta_path(wid, district_name)),
         ]
-    elif step_name == "home":
+    else:  # home
         household_path = house_file(wid, label, "household.json", district_name)
         reads = [
             ("input", os.path.join(district_path, "district.json")),
@@ -561,19 +535,6 @@ def build_preview(
         writes = [
             ("output", household_path),
             ("output", household_path + ".bak.<timestamp>"),
-        ]
-    else:
-        reads = [
-            ("input", house_file(wid, label, "household.json", district_name)),
-            ("input", house_file(wid, label, "aligned_texts.json", district_name)),
-            ("input", house_file(wid, label, "persona_provenance.json", district_name)),
-            ("input", types_path(wid, district_name)),
-            ("input", households_meta_path(wid, district_name)),
-        ]
-        writes = [
-            ("output", house_file(wid, label, "household.json", district_name)),
-            ("output", house_file(wid, label, "personas.json", district_name)),
-            ("output", households_meta_path(wid, district_name)),
         ]
 
     read_refs = [

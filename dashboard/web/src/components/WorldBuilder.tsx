@@ -57,7 +57,7 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
     const pending = BUILD_STEP_ORDER.find(
       (item) => findStepStatus(buildState.steps, item)?.done === false,
     )
-    setStep(pending ?? "assemble")
+    setStep(pending ?? "home")
   }, [step, buildState, setStep])
 
   useEffect(() => {

@@ -37,7 +37,6 @@ const STEP_LABEL: Record<string, string> = {
   district: "District",
   household: "Household",
   home: "Home",
-  assemble: "Assemble",
 }
 
 const isActive = (job: JobInfo): boolean => job.status === "running" || job.status === "queued"
