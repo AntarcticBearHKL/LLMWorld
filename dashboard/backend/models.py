@@ -351,16 +351,42 @@ class WorldCloneResult(BaseModel):
     world_dir: str
 
 
+DistrictStatus = Literal["uninitialized", "initialized", "locked"]
+
+
 class DistrictInfo(BaseModel):
+    """One district plus its lifecycle state (DESIGN.md §18).
+
+    ``status`` is DERIVED, never stored: ``uninitialized`` when the district has
+    no description, otherwise ``initialized`` - unless the lock marker
+    (``<district>/.locked``) exists, which makes it ``locked`` (one-way).
+    ``locked_at`` is the ISO-8601 timestamp read back from that marker.
+    """
+
     name: str
     description: str = ""
     house_count: int = 0
     has_description: bool = False
+    status: DistrictStatus = "uninitialized"
+    locked_at: Optional[str] = None
 
 
 class DistrictCreateRequest(BaseModel):
     name: str
     description: Optional[str] = None
+
+
+class DistrictPatchRequest(BaseModel):
+    """Partial edit of an unlocked district: rename and/or re-describe it."""
+
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+
+class DistrictCopyRequest(BaseModel):
+    """Copy a district's brief into a NEW district; name defaults to '<src>_copy'."""
+
+    name: Optional[str] = None
 
 
 class DistrictCreateResult(BaseModel):

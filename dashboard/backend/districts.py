@@ -44,28 +44,13 @@ def list_presets() -> List[DistrictPreset]:
     return presets
 
 
-def _description(world_id: str, name: str) -> str:
-    meta = world_admin.read_json(
-        os.path.join(world_admin.district_dir(world_id, name), "district.json")
-    )
-    if isinstance(meta, dict) and isinstance(meta.get("description"), str):
-        return meta["description"].strip()
-    return ""
-
-
 def list_districts(world_id: str) -> List[DistrictInfo]:
-    infos: List[DistrictInfo] = []
-    for name in world_admin.districts(world_id):
-        description = _description(world_id, name)
-        has_md = os.path.isfile(
-            os.path.join(world_admin.district_dir(world_id, name), "description.md")
-        )
-        infos.append(
-            DistrictInfo(
-                name=name,
-                description=description,
-                house_count=world_admin.count_houses(world_id, name),
-                has_description=bool(description) or has_md,
-            )
-        )
-    return infos
+    """Every district as a DistrictInfo, including its derived lifecycle status.
+
+    The payload is assembled by :func:`world_admin.district_record` so the list,
+    PATCH, lock and copy endpoints can never disagree about a district's state.
+    """
+    return [
+        DistrictInfo(**world_admin.district_record(world_id, name))
+        for name in world_admin.districts(world_id)
+    ]

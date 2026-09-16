@@ -657,3 +657,54 @@ Each is rendered as a full-width table row or the pane's own empty state.
 | --- | --- | --- |
 | `/visual-qa` dual-oracle gate not run for this pass | this environment cannot capture pixels (the embedded browser panel's screenshot path errors, and the Playwright MCP profile is locked by a stale instance) | re-run `/visual-qa` at 375 / 768 / 1280 on a machine with working capture |
 | `FrozenHouseholds` still renders block cards, not a table | out of scope for this pass; the frozen view shows simulation blocks (kWh / peak W), a different shape from the districts list | convert when the frozen view is next touched |
+
+## 18. District lifecycle — uninitialized → initialized → locked
+
+### 18.1 States
+
+| Status | Meaning | Source |
+| --- | --- | --- |
+| `uninitialized` | A newly created district. It has no description, so the world holds no information about it yet. | **derived** — `has_description == false` |
+| `initialized` | The district has a description. **Still editable**: both its name and its description can be rewritten. | **derived** — `has_description == true` and not locked |
+| `locked` | The description was accepted and frozen. **There is no unlock.** | **persisted** |
+
+`locked` is persisted in a marker file **outside** `district.json`
+(`output/worlds/<world>/<district>/.locked`, holding the ISO timestamp), so a pipeline
+rewrite of `district.json` can never silently clear the lock. It travels with the
+directory on rename and on the recoverable delete to `output/_trash/`.
+
+### 18.2 Transitions
+
+| From | Action | To | Notes |
+| --- | --- | --- | --- |
+| — | create district | `uninitialized` | local, no LLM (see §7) |
+| `uninitialized` | edit description (name + description) | `initialized` | the LLM **optimises the operator's prompt**; this step is a text optimisation, not a generation |
+| `initialized` | lock | `locked` | **one-way** |
+| `locked` | copy | a NEW district in `initialized` | copies description + location + economic level; **copies no households** |
+| any | delete | — | recoverable: moves to `output/_trash/` (§7) |
+
+A `locked` row therefore offers exactly two actions: **copy** and **delete**.
+
+### 18.3 Hard gate
+
+The `household` and `home` build steps are runnable **only for a `locked` district**.
+Before the lock the households pane is rendered **frosted and non-interactive** — a
+disabled surface, not a hidden one. The gate is enforced in the backend
+(`BuildStepStatus.runnable` / `blocked_reason`), not just in the UI: the Steps sheet and
+the HTTP API must both refuse.
+
+### 18.4 Action colours — recorded deviation
+
+§1 principle 3 says colour is state only. The district row actions are a deliberate,
+user-requested exception:
+
+| Action | Colour | Icon |
+| --- | --- | --- |
+| edit description | `--success` | sparkles |
+| lock | `--brand` (the cocoa neutral) | lock |
+| copy (locked rows only) | `--fg-subtle` (grey) | copy |
+| delete | `--danger` | trash |
+
+They remain icon-only buttons with **no button chrome** (`ghost` + `icon-xs`), each with a
+`title` and an `aria-label`. Because the colour is the only thing separating them, each
+also keeps a **distinct icon**, so the row survives greyscale and colour-blind viewing (§8).

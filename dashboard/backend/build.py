@@ -38,10 +38,21 @@ def require_step(req: JobRequest) -> str:
     return step
 
 
+def require_district_lock(step: str, world_id: str, district: str) -> None:
+    """Refuse the household/home steps until the district is locked (§18.3).
+
+    Called on the job path, so a direct ``POST /api/jobs`` is refused with the
+    same wording the Steps sheet shows via ``BuildStepStatus.blocked_reason``.
+    """
+    if step in world_admin.LOCKED_STEPS and not world_admin.is_locked(world_id, district):
+        raise ValueError(world_admin.LOCK_REQUIRED_REASON)
+
+
 def build_step_argv(req: JobRequest) -> Tuple[List[str], List[str]]:
     step = require_step(req)
     world_id = world_admin.normalize_world_id(req.world or "")
     district = world_admin.resolve_district(world_id, req.district)
+    require_district_lock(step, world_id, district)
     warnings: List[str] = []
     argv: List[str] = [
         paths.VENV_PYTHON,

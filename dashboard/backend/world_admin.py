@@ -1,9 +1,22 @@
 """World lifecycle service for the LLMWorld Research Console.
 
 Owns the filesystem side of a world: creating an EMPTY world (scaffolding only,
-zero LLM calls), resolving and deleting world directories, and reporting per-step
-build progress for the four world-generation stages. Nothing here calls the LLM
-or run.py - build jobs are still executed by :mod:`backend.jobs`.
+zero LLM calls), resolving and deleting world directories, the district
+lifecycle (uninitialized -> initialized -> locked, DESIGN.md §18) and reporting
+per-step build progress for the world-generation stages. Nothing here calls the
+LLM or run.py - build jobs are still executed by :mod:`backend.jobs`.
+
+District lifecycle invariants
+-----------------------------
+* ``status`` is always DERIVED from files on disk - it is never persisted:
+  no description -> ``uninitialized``; description but no lock marker ->
+  ``initialized``; lock marker present -> ``locked``.
+* The lock is a marker file OUTSIDE ``district.json`` (so a pipeline rewrite of
+  the brief can never clear it). It travels with the directory on rename.
+* The lock is one-way: there is no unlock path anywhere in this module.
+* The ``household`` and ``home`` build steps are gated on the lock; both
+  :func:`build_state` and :mod:`backend.build` use :data:`LOCK_REQUIRED_REASON`
+  so the Steps sheet and the job HTTP API refuse with the same wording.
 """
 
 from __future__ import annotations
@@ -21,6 +34,7 @@ from .models import (
     BuildPreview,
     BuildState,
     BuildStepStatus,
+    DistrictStatus,
     HouseStepStatus,
 )
 
@@ -39,10 +53,38 @@ STEP_SCOPE: Dict[str, str] = {
     "home": "house",
 }
 
+#: Steps refused until the district is locked (DESIGN.md §18.3).
+LOCKED_STEPS: Tuple[str, ...] = ("household", "home")
+#: The one and only wording for the gate: the state reporter and the build-job
+#: argv builder must refuse with identical text (DESIGN.md §18.3).
+LOCK_REQUIRED_REASON = (
+    "Lock the district first — households can only be generated for a locked district."
+)
+
+#: ``<district>/.locked`` - the persisted, one-way lock marker; always read and
+#: written through the helpers below so every caller agrees.
+LOCK_MARKER_NAME = ".locked"
+#: district.json keys a copy carries over (the brief, never the households).
+COPY_KEYS: Tuple[str, ...] = ("location", "economic_level", "postcode")
+
 _WORLD_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 _DISTRICT_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 _RESERVED_DISTRICT_NAMES = frozenset({"log"})
 _HOUSE_RE = re.compile(r"^house_(\d+)$")
+
+
+class DistrictConflictError(ValueError):
+    pass
+
+
+class DistrictLockedError(ValueError):
+    pass
+
+
+def district_status(has_description: bool, locked: bool) -> DistrictStatus:
+    if locked:
+        return "locked"
+    return "initialized" if has_description else "uninitialized"
 
 
 def _gw() -> Any:
@@ -57,6 +99,27 @@ def read_json(path: str) -> Any:
             return json.load(fh)
     except (OSError, ValueError):
         return None
+
+
+def _write_json(path: str, data: Any) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(data, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+
+
+def _read_text(path: str) -> str:
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return fh.read()
+    except OSError:
+        return ""
+
+
+def _write_text(path: str, text: str) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(text)
 
 
 def _is_file(path: str) -> bool:
@@ -276,6 +339,257 @@ def world_meta_path(world_id: str) -> str:
     return os.path.join(resolve_world_dir(world_id), "world.json")
 
 
+def district_meta_path(world_id: str, district: Optional[str] = None) -> str:
+    return os.path.join(district_dir(world_id, district), "district.json")
+
+
+def description_md_path(world_id: str, district: Optional[str] = None) -> str:
+    return os.path.join(district_dir(world_id, district), "description.md")
+
+
+def lock_marker_path(world_id: str, district: Optional[str] = None) -> str:
+    return os.path.join(district_dir(world_id, district), LOCK_MARKER_NAME)
+
+
+def read_lock(world_id: str, district: Optional[str] = None) -> Optional[str]:
+    """The lock timestamp, or ``None`` when the district is not locked."""
+    try:
+        with open(lock_marker_path(world_id, district), encoding="utf-8") as fh:
+            stamp = fh.read().strip()
+    except OSError:
+        return None
+    return stamp or None
+
+
+def is_locked(world_id: str, district: Optional[str] = None) -> bool:
+    return _is_file(lock_marker_path(world_id, district))
+
+
+def write_lock(world_id: str, district: Optional[str] = None) -> str:
+    """Write the lock marker; idempotent, an existing timestamp is preserved."""
+    if is_locked(world_id, district):
+        return read_lock(world_id, district) or ""
+    stamp = datetime.now().isoformat(timespec="seconds")
+    path = lock_marker_path(world_id, district)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(stamp + "\n")
+    return stamp
+
+
+def district_description(world_id: str, district: Optional[str] = None) -> str:
+    meta = read_json(district_meta_path(world_id, district))
+    if isinstance(meta, dict) and isinstance(meta.get("description"), str):
+        return meta["description"].strip()
+    return ""
+
+
+def district_has_description(world_id: str, district: Optional[str] = None) -> bool:
+    """Existing meaning, unchanged: brief text present, or ``description.md``."""
+    if district_description(world_id, district):
+        return True
+    return _is_file(description_md_path(world_id, district))
+
+
+def district_record(world_id: str, district: str) -> Dict[str, Any]:
+    """The one place a DistrictInfo payload is assembled (list + every mutation)."""
+    wid = normalize_world_id(world_id)
+    name = normalize_district(district)
+    has_description = district_has_description(wid, name)
+    locked = is_locked(wid, name)
+    return {
+        "name": name,
+        "description": district_description(wid, name),
+        "house_count": count_houses(wid, name),
+        "has_description": has_description,
+        "status": district_status(has_description, locked),
+        "locked_at": read_lock(wid, name),
+    }
+
+
+def lock_district(world_id: str, name: str) -> Dict[str, Any]:
+    """Lock a district (one-way, idempotent) and return its record."""
+    wid = normalize_world_id(world_id)
+    district = normalize_district(name)
+    if not os.path.isdir(os.path.join(WORLDS_DIR, wid)):
+        raise ValueError("world not found: %s" % wid)
+    if not os.path.isdir(district_dir(wid, district)):
+        raise ValueError("district not found: %s" % district)
+    write_lock(wid, district)
+    return district_record(wid, district)
+
+
+def _district_taken(world_id: str, name: str) -> bool:
+    return name in districts(world_id) or os.path.exists(
+        os.path.join(resolve_world_dir(world_id), name)
+    )
+
+
+def _copy_name(world_id: str, source: str, requested: Optional[str]) -> str:
+    if requested is not None and str(requested).strip():
+        candidate = normalize_district(requested)
+        if _district_taken(world_id, candidate):
+            raise DistrictConflictError("district already exists: %s" % candidate)
+        return candidate
+    candidate = "%s_copy" % source
+    suffix = 1
+    while _district_taken(world_id, candidate):
+        suffix += 1
+        candidate = "%s_copy%d" % (source, suffix)
+    return candidate
+
+
+def copy_district(
+    world_id: str, source: str, name: Optional[str] = None
+) -> Dict[str, Any]:
+    """Copy a district's BRIEF into a NEW district - zero household data.
+
+    The copy carries the source's description, location, economic level and
+    postcode, is ``initialized`` (it has a description) and is never locked.
+    """
+    wid = normalize_world_id(world_id)
+    src = normalize_district(source)
+    if not os.path.isdir(os.path.join(WORLDS_DIR, wid)):
+        raise ValueError("world not found: %s" % wid)
+    src_dir = district_dir(wid, src)
+    if not os.path.isdir(src_dir):
+        raise ValueError("district not found: %s" % src)
+
+    target = _copy_name(wid, src, name)
+    description = district_description(wid, src)
+    if not description:
+        description = _read_text(description_md_path(wid, src)).strip()
+
+    create_district(wid, target, description or None)
+
+    source_meta = read_json(district_meta_path(wid, src))
+    new_meta: Dict[str, Any] = {
+        "name": target,
+        "description": description,
+        "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "copied_from": src,
+    }
+    if isinstance(source_meta, dict):
+        for key in COPY_KEYS:
+            if key in source_meta:
+                new_meta[key] = source_meta[key]
+    _write_json(district_meta_path(wid, target), new_meta)
+
+    if description:
+        _write_text(description_md_path(wid, target), description + "\n")
+    return district_record(wid, target)
+
+
+def rename_district(world_id: str, name: str, new_name: str) -> Dict[str, Any]:
+    """Move the district directory and keep world.json + district.json in step."""
+    wid = normalize_world_id(world_id)
+    old = normalize_district(name)
+    new = normalize_district(new_name)
+    if old == new:
+        return district_record(wid, old)
+    if is_locked(wid, old):
+        raise DistrictLockedError(
+            "district %s is locked; it can no longer be renamed" % old
+        )
+    world_dir = resolve_world_dir(wid)
+    old_dir = os.path.join(world_dir, old)
+    new_dir = os.path.join(world_dir, new)
+    if not os.path.isdir(old_dir):
+        raise ValueError("district not found: %s" % old)
+    if os.path.exists(new_dir):
+        raise DistrictConflictError("district already exists: %s" % new)
+
+    try:
+        shutil.move(old_dir, new_dir)
+    except OSError as exc:
+        raise ValueError(
+            "could not rename district %s -> %s: %s" % (old, new, exc)
+        ) from exc
+
+    _sync_district_meta(wid, new)
+    _rename_in_world_meta(wid, old, new)
+    return district_record(wid, new)
+
+
+def _sync_district_meta(world_id: str, name: str) -> None:
+    path = district_meta_path(world_id, name)
+    meta = read_json(path)
+    if not isinstance(meta, dict):
+        return
+    meta["name"] = name
+    meta["postcode"] = name
+    location = meta.get("location")
+    if isinstance(location, dict):
+        location["district"] = name
+    _write_json(path, meta)
+
+
+def _rename_in_world_meta(world_id: str, old: str, new: str) -> None:
+    path = world_meta_path(world_id)
+    meta = read_json(path)
+    if not isinstance(meta, dict) or not isinstance(meta.get("districts"), list):
+        return
+    changed = False
+    for index, entry in enumerate(meta["districts"]):
+        if isinstance(entry, str):
+            if entry == old:
+                meta["districts"][index] = {"name": new, "postcode": new}
+                changed = True
+            continue
+        if not isinstance(entry, dict) or _district_entry_name(entry) != old:
+            continue
+        entry["name"] = new
+        if "postcode" in entry:
+            entry["postcode"] = new
+        changed = True
+    if changed:
+        _write_json(path, meta)
+
+
+def _write_description(world_id: str, name: str, text: str) -> None:
+    value = text.strip()
+    meta = read_json(district_meta_path(world_id, name))
+    if not isinstance(meta, dict):
+        meta = {"name": name}
+    meta["name"] = name
+    meta["description"] = value
+    meta["description_updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    _write_json(district_meta_path(world_id, name), meta)
+
+    md_path = description_md_path(world_id, name)
+    if value:
+        _write_text(md_path, value + "\n")
+    elif os.path.isfile(md_path):
+        os.remove(md_path)
+
+
+def edit_district(
+    world_id: str,
+    name: str,
+    new_name: Optional[str] = None,
+    description: Optional[str] = None,
+) -> Dict[str, Any]:
+    """PATCH an unlocked district: rename it and/or replace its description."""
+    wid = normalize_world_id(world_id)
+    current = normalize_district(name)
+    if not os.path.isdir(district_dir(wid, current)):
+        raise ValueError("district not found: %s" % current)
+    if is_locked(wid, current):
+        raise DistrictLockedError(
+            "district %s is locked; its name and description can no longer be edited"
+            % current
+        )
+
+    target = current
+    if new_name is not None and str(new_name).strip():
+        target = normalize_district(new_name)
+        if target != current:
+            rename_district(wid, current, target)
+    if description is not None:
+        _write_description(wid, target, str(description))
+    return district_record(wid, target)
+
+
 def types_path(world_id: str, district: Optional[str] = None) -> str:
     return os.path.join(district_dir(world_id, district), "household_types.json")
 
@@ -386,13 +700,19 @@ def member_count(
 
 
 def _aggregate(
-    step: str, scope: str, houses: List[HouseStepStatus], empty_reason: str
+    step: str,
+    scope: str,
+    houses: List[HouseStepStatus],
+    empty_reason: str,
+    runnable_when_empty: bool = False,
 ) -> BuildStepStatus:
+    """Zero houses is an entry point for ``household`` and a dead end for ``home`` (§18.3)."""
     done = bool(houses) and all(item.done for item in houses)
     runnable = any(item.runnable for item in houses)
     reason: Optional[str] = None
     if not houses:
-        reason = empty_reason
+        runnable = runnable_when_empty
+        reason = None if runnable_when_empty else empty_reason
     elif not runnable:
         reason = next((item.blocked_reason for item in houses if item.blocked_reason), "blocked")
     return BuildStepStatus(
@@ -419,6 +739,7 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
 
     description_done = _is_file(os.path.join(district_path, "description.md"))
     labels = list_house_labels(wid, district_name) if exists else []
+    gate_reason = None if is_locked(wid, district_name) else LOCK_REQUIRED_REASON
 
     household_houses: List[HouseStepStatus] = []
     home_houses: List[HouseStepStatus] = []
@@ -429,10 +750,13 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
             HouseStepStatus(
                 house=label,
                 done=household_done,
-                runnable=description_done,
-                blocked_reason=None
-                if description_done
-                else "district description missing (run 'district' first)",
+                runnable=description_done and gate_reason is None,
+                blocked_reason=gate_reason
+                or (
+                    None
+                    if description_done
+                    else "district description missing (run 'district' first)"
+                ),
             )
         )
 
@@ -441,10 +765,13 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
             HouseStepStatus(
                 house=label,
                 done=home_done,
-                runnable=household_done,
-                blocked_reason=None
-                if household_done
-                else "household.json missing (run 'household' first)",
+                runnable=household_done and gate_reason is None,
+                blocked_reason=gate_reason
+                or (
+                    None
+                    if household_done
+                    else "household.json missing (run 'household' first)"
+                ),
             )
         )
 
@@ -456,8 +783,19 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
             runnable=exists,
             blocked_reason=None if exists else "world directory is missing",
         ),
-        _aggregate("household", "district", household_houses, "no households yet; run 'household' first"),
-        _aggregate("home", "house", home_houses, "no households yet; run 'household' first"),
+        _aggregate(
+            "household",
+            "district",
+            household_houses,
+            gate_reason or "no households yet; run 'household' first",
+            runnable_when_empty=description_done and gate_reason is None,
+        ),
+        _aggregate(
+            "home",
+            "house",
+            home_houses,
+            gate_reason or "no households yet; run 'household' first",
+        ),
     ]
 
     return BuildState(

@@ -19,10 +19,11 @@ from ..models import (
     ArtifactWriteResult,
     BuildPreview,
     BuildState,
+    DistrictCopyRequest,
     DistrictCreateRequest,
-    DistrictCreateResult,
     DistrictDeleteResult,
     DistrictInfo,
+    DistrictPatchRequest,
     DistrictPreset,
     WorldCloneRequest,
     WorldCloneResult,
@@ -42,6 +43,10 @@ def _ensure_world(world: str) -> None:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     if not exists:
         raise HTTPException(status_code=404, detail="world not found: %s" % world)
+
+
+def _district_info(world: str, name: str) -> DistrictInfo:
+    return DistrictInfo(**world_admin.district_record(world, name))
 
 
 @router.post("/worlds", response_model=WorldCreateResult)
@@ -82,8 +87,8 @@ def world_districts_list(world: str) -> List[DistrictInfo]:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@router.post("/worlds/{world}/districts", response_model=DistrictCreateResult)
-def world_districts_create(world: str, req: DistrictCreateRequest) -> DistrictCreateResult:
+@router.post("/worlds/{world}/districts", response_model=DistrictInfo)
+def world_districts_create(world: str, req: DistrictCreateRequest) -> DistrictInfo:
     """Create a district locally (zero LLM); idempotent like POST /worlds."""
     _ensure_world(world)
     try:
@@ -91,7 +96,7 @@ def world_districts_create(world: str, req: DistrictCreateRequest) -> DistrictCr
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     store.invalidate_catalog()
-    return DistrictCreateResult(**result)
+    return _district_info(world, result["name"])
 
 
 @router.delete(
@@ -108,6 +113,51 @@ def world_districts_delete(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     store.invalidate_catalog()
     return DistrictDeleteResult(**result)
+
+
+@router.patch("/worlds/{world}/districts/{district}", response_model=DistrictInfo)
+def world_districts_patch(
+    world: str, district: str, req: DistrictPatchRequest
+) -> DistrictInfo:
+    """Edit an unlocked district: rename it and/or replace its description."""
+    _ensure_world(world)
+    try:
+        record = world_admin.edit_district(world, district, req.name, req.description)
+    except (world_admin.DistrictLockedError, world_admin.DistrictConflictError) as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
+    return DistrictInfo(**record)
+
+
+@router.post("/worlds/{world}/districts/{district}/lock", response_model=DistrictInfo)
+def world_districts_lock(world: str, district: str) -> DistrictInfo:
+    """Lock a district (one-way, idempotent). There is no unlock endpoint."""
+    _ensure_world(world)
+    try:
+        record = world_admin.lock_district(world, district)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
+    return DistrictInfo(**record)
+
+
+@router.post("/worlds/{world}/districts/{district}/copy", response_model=DistrictInfo)
+def world_districts_copy(
+    world: str, district: str, req: Optional[DistrictCopyRequest] = None
+) -> DistrictInfo:
+    """Copy a district's brief into a NEW (initialized, unlocked) district."""
+    _ensure_world(world)
+    requested = req.name if req is not None else None
+    try:
+        record = world_admin.copy_district(world, district, requested)
+    except (world_admin.DistrictLockedError, world_admin.DistrictConflictError) as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    store.invalidate_catalog()
+    return DistrictInfo(**record)
 
 
 @router.get("/worlds/{world}/build", response_model=BuildState)
