@@ -434,6 +434,7 @@ class HouseStepStatus(BaseModel):
     done: bool = False
     runnable: bool = False
     blocked_reason: Optional[str] = None
+    stage: Literal["missing", "described", "composed"] = "missing"
 
 
 class BuildStepStatus(BaseModel):

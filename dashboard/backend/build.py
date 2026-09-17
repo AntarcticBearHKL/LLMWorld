@@ -86,6 +86,8 @@ def build_step_argv(req: JobRequest) -> Tuple[List[str], List[str]]:
             )
         else:
             argv += ["--house", world_admin.resolve_house_label(world_id, req.house, district)]
+        if req.count is not None:
+            argv += ["--count", str(int(req.count))]
         argv += ["--seed", str(seed)]
         return argv, warnings
 
@@ -107,6 +109,13 @@ def estimate_build(req: JobRequest) -> JobEstimate:
             detail="build: s1 district description = 1 LLM call (retries may add calls)",
         )
     if step == "household":
+        if req.count is not None:
+            return JobEstimate(
+                kind="build",
+                estimated_calls=1,
+                detail="build: s2 household batch = 1 LLM call for %d descriptions "
+                "(no members; retries may add calls)" % int(req.count),
+            )
         return JobEstimate(
             kind="build",
             estimated_calls=2,

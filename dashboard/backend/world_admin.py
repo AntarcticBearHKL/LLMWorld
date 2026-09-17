@@ -732,6 +732,17 @@ def _house_has_home(path: str) -> bool:
     return isinstance(data, dict) and isinstance(data.get("home"), dict) and bool(data["home"])
 
 
+def _household_status(path: str) -> Tuple[bool, str]:
+    """(done, stage): a household is done only once its ``members`` list is non-empty."""
+    data = read_json(path)
+    if not isinstance(data, dict):
+        return False, "missing"
+    members = data.get("members")
+    if isinstance(members, list) and members:
+        return True, "composed"
+    return False, "described"
+
+
 def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
     wid = normalize_world_id(world_id)
     world_dir = os.path.join(WORLDS_DIR, wid)
@@ -747,11 +758,13 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
     home_houses: List[HouseStepStatus] = []
     for label in labels:
         household_path = house_file(wid, label, "household.json", district_name)
-        household_done = _is_file(household_path)
+        household_exists = _is_file(household_path)
+        household_done, household_stage = _household_status(household_path)
         household_houses.append(
             HouseStepStatus(
                 house=label,
                 done=household_done,
+                stage=household_stage,
                 runnable=description_done and gate_reason is None,
                 blocked_reason=gate_reason
                 or (
@@ -762,16 +775,16 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
             )
         )
 
-        home_done = household_done and _house_has_home(household_path)
+        home_done = household_exists and _house_has_home(household_path)
         home_houses.append(
             HouseStepStatus(
                 house=label,
                 done=home_done,
-                runnable=household_done and gate_reason is None,
+                runnable=household_exists and gate_reason is None,
                 blocked_reason=gate_reason
                 or (
                     None
-                    if household_done
+                    if household_exists
                     else "household.json missing (run 'household' first)"
                 ),
             )

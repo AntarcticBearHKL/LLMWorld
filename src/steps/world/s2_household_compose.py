@@ -21,6 +21,11 @@ Run:
   .venv\\Scripts\\python.exe src\\steps\\world\\s2_household_compose.py --world <id>
   .venv\\Scripts\\python.exe src\\steps\\world\\s2_household_compose.py --world <id> --house 0
   .venv\\Scripts\\python.exe src\\steps\\world\\s2_household_compose.py --world <id> --all
+  .venv\\Scripts\\python.exe src\\steps\\world\\s2_household_compose.py --world <id> --count 4
+
+With ``--count N`` the step switches to stage-1 batch mode: ONE LLM call writes
+``N`` description-only households (``status="described"``, no members); the
+member fill-in is a later stage.
 """
 
 import argparse
@@ -54,6 +59,7 @@ DEFAULT_GENDER = "Unknown"
 MAX_MEMBER_ATTEMPTS = 3
 
 COMPOSE_STAGE = "household_compose"
+BATCH_COMPOSE_STAGE = "household_compose_batch"
 MEMBERS_STAGE = "household_members"
 
 _HOUSE_ID_RE = re.compile(r"^house_(\d{4})$")
@@ -82,6 +88,29 @@ def _household_schema():
             "household_type": {"type": "string"},
             "member_count": {"type": "integer", "minimum": MIN_MEMBERS, "maximum": MAX_MEMBERS},
             "rationale": {"type": "string"},
+        },
+    }
+
+
+def _household_batch_schema(requested_count):
+    return {
+        "type": "object",
+        "required": ["households"],
+        "properties": {
+            "households": {
+                "type": "array",
+                "minItems": requested_count,
+                "maxItems": requested_count,
+                "items": {
+                    "type": "object",
+                    "required": ["household_type", "member_count", "description"],
+                    "properties": {
+                        "household_type": {"type": "string"},
+                        "member_count": {"type": "integer", "minimum": MIN_MEMBERS, "maximum": MAX_MEMBERS},
+                        "description": {"type": "string"},
+                    },
+                },
+            }
         },
     }
 
@@ -140,10 +169,14 @@ def _existing_households(district_path, exclude=None):
 
 
 def _next_house_id(district_path):
+    return _next_house_ids(district_path, 1)[0]
+
+
+def _next_house_ids(district_path, count):
     highest = 0
     for house_id in _house_ids(district_path):
         highest = max(highest, int(_HOUSE_ID_RE.match(house_id).group(1)))
-    return "house_%04d" % (highest + 1)
+    return ["house_%04d" % (highest + 1 + offset) for offset in range(count)]
 
 
 def _resolve_house_id(district_path, house):
@@ -174,7 +207,7 @@ def _resolve_house_id(district_path, house):
 def _existing_types_text(existing):
     types = []
     for _, household in existing:
-        household_type = household.get("type")
+        household_type = household.get("type") or household.get("household_type")
         if isinstance(household_type, str) and household_type.strip():
             types.append(household_type.strip())
     return ", ".join(types) if types else "none"
@@ -195,6 +228,42 @@ def _plan_problem(data):
     if rationale is not None and not isinstance(rationale, str):
         return "rationale must be a string"
     return None
+
+
+def _batch_items_problem(data, requested_count):
+    if not isinstance(data, dict):
+        return "response is not a JSON object"
+    households = data.get("households")
+    if not isinstance(households, list) or not households:
+        return "response lacks a households list"
+    if len(households) != requested_count:
+        return "returned %d households, expected exactly %d" % (len(households), requested_count)
+    for household in households:
+        if not isinstance(household, dict):
+            return "a household entry is not an object"
+        household_type = household.get("household_type")
+        if not isinstance(household_type, str) or not household_type.strip():
+            return "a household entry lacks a non-empty household_type"
+        member_count = household.get("member_count")
+        if isinstance(member_count, bool) or not isinstance(member_count, int):
+            return "member_count must be an integer"
+        if not (MIN_MEMBERS <= member_count <= MAX_MEMBERS):
+            return "member_count %d is outside %d..%d" % (member_count, MIN_MEMBERS, MAX_MEMBERS)
+        description = household.get("description")
+        if not isinstance(description, str) or not description.strip():
+            return "a household entry lacks a non-empty description"
+    return None
+
+
+def _batch_items(data):
+    return [
+        {
+            "household_type": household["household_type"].strip(),
+            "member_count": int(household["member_count"]),
+            "description": household["description"].strip(),
+        }
+        for household in data["households"]
+    ]
 
 
 def _coerce_age(value):
@@ -282,6 +351,30 @@ def _call_compose(prompt, logger, prefix):
     logger.record(COMPOSE_STAGE, prompt, resp["content"], reasoning="", ok=True,
                   attempt=1, prefix=prefix, schema=schema, parsed=data)
     return plan
+
+
+def _call_batch_compose(prompt, logger, prefix, requested_count):
+    schema = _household_batch_schema(requested_count)
+    print("================ COMPOSE BATCH INPUT ================")
+    print(prompt)
+    resp = SubAgent.single_call(prompt, json_mode=True, json_schema=schema)
+    print("================ COMPOSE BATCH OUTPUT ================")
+    print(resp["content"])
+    try:
+        data = parse_llm_json(resp["content"])
+    except Exception as exc:
+        logger.record(BATCH_COMPOSE_STAGE, prompt, resp["content"], reasoning="", ok=False,
+                      error="JSON parse failed: %s" % exc, attempt=1, prefix=prefix, schema=schema)
+        raise LLMCallError("batch compose response is not valid JSON: %s" % exc) from exc
+    problem = _batch_items_problem(data, requested_count)
+    if problem is not None:
+        logger.record(BATCH_COMPOSE_STAGE, prompt, resp["content"], reasoning="", ok=False,
+                      error=problem, attempt=1, prefix=prefix, schema=schema)
+        raise LLMCallError("batch compose structure rejected: %s" % problem)
+    items = _batch_items(data)
+    logger.record(BATCH_COMPOSE_STAGE, prompt, resp["content"], reasoning="", ok=True,
+                  attempt=1, prefix=prefix, schema=schema, parsed=data)
+    return items
 
 
 def _call_members(prompt, logger, prefix, member_count, fallback_texts=None):
@@ -372,13 +465,69 @@ def _upsert_household_meta(world_id, house_meta, district):
     return gw.update_world_meta(world_id, house_meta, district)
 
 
-def run_step(world_id, district=None, house=None, *, seed=42) -> tuple[bool, str]:
+def _run_batch(world_id, district, count):
+    """Generate ``count`` description-only households in ONE LLM call (stage 1)."""
+    district = district or gw.primary_district(world_id)
+    if not district:
+        return False, "no districts in world %s" % world_id
+
+    description = _district_description(world_id, district)
+    if not description:
+        return False, "district description missing; run the district-description step first"
+
+    district_path = gw.district_dir(world_id, district)
+    house_ids = _next_house_ids(district_path, count)
+    for house_id in house_ids:
+        os.makedirs(os.path.join(district_path, house_id, "log"), exist_ok=True)
+    logger = gw.ChatLogger(os.path.join(district_path, house_ids[0], "log"))
+    prefix = "%s_" % house_ids[0]
+
+    existing = _existing_households(district_path)
+    batch_prompt = Prompt().load(
+        "generate_world_household_batch",
+        district_description=description,
+        household_count=len(existing),
+        existing_types=_existing_types_text(existing),
+        requested_count=count,
+    )
+    try:
+        items = _call_batch_compose(batch_prompt, logger, prefix, count)
+    except LLMCallError as exc:
+        print("[Batch compose failed] %s" % exc)
+        return False, str(exc)
+
+    for house_id, item in zip(house_ids, items):
+        household = {
+            "household_type": item["household_type"],
+            "member_count": item["member_count"],
+            "description": item["description"],
+            "status": "described",
+        }
+        household_path = os.path.join(district_path, house_id, "household.json")
+        _write_json(household_path, household)
+        print("[House %s] %s | members %d | %s"
+              % (house_id, item["household_type"], item["member_count"], item["description"]))
+        print("[Saved] %s" % household_path)
+
+    return True, "%d household descriptions written to %s" % (len(items), district_path)
+
+
+def run_step(world_id, district=None, house=None, *, seed=42, count=None) -> tuple[bool, str]:
     """Compose one household for a district and persist its aligned members.
 
-    ``house=None`` appends a new ``house_XXXX``; an int (0-based) or a
-    ``house_XXXX`` string overwrites an existing household. Returns
-    ``(True, house_dir)`` on success and ``(False, error)`` otherwise.
+    ``count=None`` composes one full household (type + members). A positive
+    ``count`` switches to the batch mode: ONE LLM call writes ``count``
+    description-only households (``status="described"``, no members), leaving
+    the member fill-in to a later stage. ``house=None`` appends a new
+    ``house_XXXX``; an int (0-based) or a ``house_XXXX`` string overwrites an
+    existing household. Returns ``(True, result)`` on success and
+    ``(False, error)`` otherwise.
     """
+    if count is not None:
+        if isinstance(count, bool) or not isinstance(count, int) or count < 1:
+            return False, "count must be a positive integer; got %r" % (count,)
+        return _run_batch(world_id, district, count)
+
     district = district or gw.primary_district(world_id)
     if not district:
         return False, "no districts in world %s" % world_id
@@ -452,6 +601,7 @@ def run_step(world_id, district=None, house=None, *, seed=42) -> tuple[bool, str
         "llm_generated": True,
         "story": rationale,
         "members": members,
+        "status": "composed",
     }
     household_path = os.path.join(house_dir, "household.json")
     _write_json(household_path, household)
@@ -488,6 +638,13 @@ def run_step(world_id, district=None, house=None, *, seed=42) -> tuple[bool, str
     return True, house_dir
 
 
+def _step_options(args):
+    options = {"seed": args.seed}
+    if args.count is not None:
+        options["count"] = args.count
+    return options
+
+
 def main():
     parser = argparse.ArgumentParser(description="World step: compose a household (type + members) for a district")
     parser.add_argument("--world", required=True, help="world ID")
@@ -495,6 +652,9 @@ def main():
     parser.add_argument("--house", default=None,
                         help="household index (0-based) or house_XXXX; default appends the next household")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--count", type=int, default=None,
+                        help="batch mode: generate this many description-only households "
+                             "in one LLM call (stage 1; no members)")
     parser.add_argument("--all", action="store_true", help="compose one household for every district")
     args = parser.parse_args()
 
@@ -505,7 +665,7 @@ def main():
             print("[Error] no districts in world %s" % args.world)
             sys.exit(1)
         for district in districts:
-            step_ok, result = run_step(args.world, district, None, seed=args.seed)
+            step_ok, result = run_step(args.world, district, None, **_step_options(args))
             if step_ok:
                 print(result)
             else:
@@ -513,7 +673,7 @@ def main():
             ok = ok and step_ok
         sys.exit(0 if ok else 1)
 
-    ok, result = run_step(args.world, args.district, args.house, seed=args.seed)
+    ok, result = run_step(args.world, args.district, args.house, **_step_options(args))
     if ok:
         print(result)
     else:
