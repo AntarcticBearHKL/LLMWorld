@@ -236,6 +236,96 @@ class SingleComposeStageTests(_TempWorlds):
         self.assertEqual(len(household["members"]), 2)
 
 
+class StoredBriefTests(_TempWorlds):
+    def _personas(self):
+        texts = ["Member 1:\npersona", "Member 2:\npersona"]
+        rows = [{"BFI-2 Conscientiousness": "High", "Energy level": "High"} for _ in range(2)]
+        return texts, rows
+
+    def test_described_household_composes_from_the_stored_brief_in_one_call(self):
+        self.add_district()
+        self.seed_house("house_0001", {"household_type": "Retired Couple", "member_count": 2,
+                                       "description": "Two retired teachers.", "status": "described"})
+        texts, rows = self._personas()
+        captured = {}
+
+        def fake_single_call(prompt, **kwargs):
+            captured["prompt"] = prompt
+            return {"content": _members_payload(2)}
+
+        with mock.patch.object(gw, "sample_personas", return_value=(texts, rows)) as sample, \
+                mock.patch.object(compose.SubAgent, "single_call", side_effect=fake_single_call) as call:
+            ok, house_dir = compose.run_step("w1", "clayton", house=0)
+
+        self.assertTrue(ok)
+        self.assertEqual(call.call_count, 1)
+        self.assertIn("Two retired teachers.", captured["prompt"])
+        self.assertEqual(sample.call_args.kwargs.get("n"), 2)
+
+        household = _read_json(os.path.join(house_dir, "household.json"))
+        self.assertEqual(household["type"], "Retired Couple")
+        self.assertEqual(len(household["members"]), 2)
+        self.assertEqual(household["status"], "composed")
+        provenance = _read_json(os.path.join(house_dir, "persona_provenance.json"))
+        self.assertEqual(provenance["member_count"], 2)
+
+    def test_legacy_record_without_a_brief_still_makes_two_calls(self):
+        self.add_district()
+        self.seed_house("house_0001")
+        texts, rows = self._personas()
+        with mock.patch.object(gw, "sample_personas", return_value=(texts, rows)), \
+                mock.patch.object(compose.SubAgent, "single_call",
+                                  side_effect=[{"content": _compose_payload()},
+                                               {"content": _members_payload(2)}]) as call:
+            ok, house_dir = compose.run_step("w1", "clayton", house=0)
+        self.assertTrue(ok)
+        self.assertEqual(call.call_count, 2)
+        household = _read_json(os.path.join(house_dir, "household.json"))
+        self.assertEqual(household["type"], "International Student Share House")
+        self.assertEqual(household["status"], "composed")
+
+    def test_missing_record_without_a_brief_still_makes_two_calls(self):
+        self.add_district()
+        texts, rows = self._personas()
+        with mock.patch.object(gw, "sample_personas", return_value=(texts, rows)), \
+                mock.patch.object(compose.SubAgent, "single_call",
+                                  side_effect=[{"content": _compose_payload()},
+                                               {"content": _members_payload(2)}]) as call:
+            ok, _house_dir = compose.run_step("w1", "clayton", house=0)
+        self.assertTrue(ok)
+        self.assertEqual(call.call_count, 2)
+
+    def test_stored_brief_accepts_a_full_record_and_strips(self):
+        path = os.path.join(self.house_path("house_0001"), "household.json")
+        _write_json(path, {"household_type": "  Retired Couple  ", "member_count": 2,
+                           "description": "  Two retired teachers.  ", "status": "described"})
+        self.assertEqual(compose._stored_brief(path), ("Retired Couple", 2, "Two retired teachers."))
+
+    def test_stored_brief_accepts_legacy_type_and_story(self):
+        path = os.path.join(self.house_path("house_0001"), "household.json")
+        _write_json(path, {"type": "Legacy Type", "member_count": 3, "story": "Legacy story."})
+        self.assertEqual(compose._stored_brief(path), ("Legacy Type", 3, "Legacy story."))
+
+    def test_stored_brief_rejects_invalid_records(self):
+        path = os.path.join(self.house_path("house_0001"), "household.json")
+        self.assertIsNone(compose._stored_brief(path))
+        records = [
+            ["not", "a", "dict"],
+            {"household_type": "T", "member_count": compose.MAX_MEMBERS + 1, "description": "d"},
+            {"household_type": "T", "member_count": compose.MIN_MEMBERS - 1, "description": "d"},
+            {"household_type": "T", "member_count": "2", "description": "d"},
+            {"household_type": "T", "member_count": 2.0, "description": "d"},
+            {"household_type": "T", "member_count": True, "description": "d"},
+            {"member_count": 2, "description": "d"},
+            {"household_type": "", "member_count": 2, "description": "d"},
+            {"household_type": "T", "member_count": 2},
+            {"household_type": "T", "member_count": 2, "description": ""},
+        ]
+        for record in records:
+            _write_json(path, record)
+            self.assertIsNone(compose._stored_brief(path), record)
+
+
 class BackendStageTests(_TempWorlds):
     def setUp(self):
         super().setUp()

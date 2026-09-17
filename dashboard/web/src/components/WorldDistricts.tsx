@@ -5,8 +5,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Copy, ListChecks, Loader2, Lock, Plus, RefreshCw, Sparkles, Trash2 } from "lucide-react"
 
 import { copyDistrict, lockDistrict } from "@/api/client"
-import type { DistrictInfo, DistrictStatus, JobInfo, WorldInfo } from "@/api/types"
+import type { DistrictInfo, DistrictStatus, HouseStepStatus, JobInfo, WorldInfo } from "@/api/types"
 import { AddHouseholdsSheet } from "@/components/AddHouseholdsSheet"
+import { ComposeHouseholdSheet } from "@/components/ComposeHouseholdSheet"
 import {
   DistrictDescriptionSheet,
   DistrictStepsSheet,
@@ -47,6 +48,9 @@ const STATUS_CHIP_CLASS: Record<DistrictStatus, string> = {
   initialized: "border-energy/40 bg-energy-soft text-energy",
   locked: CHIP_ON_CLASS,
 }
+
+type HouseholdStage = "missing" | "described" | "composed"
+type HouseholdStageStatus = HouseStepStatus & { stage?: HouseholdStage }
 
 type DeleteNotice =
   | { kind: "error"; message: string }
@@ -258,6 +262,8 @@ function DistrictHouseholdsPanel({
   onStepsOpenChange,
   addHouseholdsOpen,
   onAddHouseholdsOpenChange,
+  composeHouse,
+  onComposeHouseOpenChange,
   houseOpen,
   onHouseOpenChange,
 }: {
@@ -270,6 +276,8 @@ function DistrictHouseholdsPanel({
   onStepsOpenChange: (open: boolean) => void
   addHouseholdsOpen: boolean
   onAddHouseholdsOpenChange: (open: boolean) => void
+  composeHouse: string | null
+  onComposeHouseOpenChange: (house: string | null) => void
   houseOpen: string | null
   onHouseOpenChange: (house: string | null) => void
 }) {
@@ -283,9 +291,15 @@ function DistrictHouseholdsPanel({
   const buildState = buildQuery.data
   const districtStep = buildState === undefined ? null : findStepStatus(buildState.steps, "district")
   const homeStep = buildState === undefined ? null : findStepStatus(buildState.steps, "home")
+  const householdStep =
+    buildState === undefined ? null : findStepStatus(buildState.steps, "household")
   const houses = buildState?.houses ?? []
   const homeStatusFor = (house: string) =>
     homeStep?.houses.find((item) => item.house === house) ?? null
+  const householdStageFor = (house: string): HouseholdStage => {
+    const status = householdStep?.houses.find((item) => item.house === house)
+    return (status as HouseholdStageStatus | undefined)?.stage ?? "missing"
+  }
   const openHomeStatus = houseOpen === null ? null : homeStatusFor(houseOpen)
   const isLocked = district.status === "locked"
   const householdGate =
@@ -394,9 +408,20 @@ function DistrictHouseholdsPanel({
                       <HomeChip done={done} />
                     </TableCell>
                     <TableCell className="text-right whitespace-nowrap">
-                      <Button variant="outline" size="xs" onClick={() => onHouseOpenChange(house)}>
-                        Open
-                      </Button>
+                      <span className="inline-flex items-center gap-1">
+                        {householdStageFor(house) === "described" ? (
+                          <Button
+                            variant="outline"
+                            size="xs"
+                            onClick={() => onComposeHouseOpenChange(house)}
+                          >
+                            Compose members
+                          </Button>
+                        ) : null}
+                        <Button variant="outline" size="xs" onClick={() => onHouseOpenChange(house)}>
+                          Open
+                        </Button>
+                      </span>
                     </TableCell>
                   </TableRow>
                 )
@@ -438,6 +463,15 @@ function DistrictHouseholdsPanel({
         open={addHouseholdsOpen}
         onOpenChange={onAddHouseholdsOpenChange}
       />
+      <ComposeHouseholdSheet
+        world={world}
+        district={district.name}
+        house={composeHouse ?? ""}
+        open={composeHouse !== null}
+        onOpenChange={(open) => {
+          if (!open) onComposeHouseOpenChange(null)
+        }}
+      />
       <HouseholdSheet
         world={world}
         district={district.name}
@@ -473,6 +507,7 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
   const [descriptionOpen, setDescriptionOpen] = useState(false)
   const [stepsOpen, setStepsOpen] = useState(false)
   const [addHouseholdsOpen, setAddHouseholdsOpen] = useState(false)
+  const [composeHouse, setComposeHouse] = useState<string | null>(null)
   const [houseOpen, setHouseOpen] = useState<string | null>(null)
   const [deleteNotice, setDeleteNotice] = useState<DeleteNotice | null>(null)
   const [actionError, setActionError] = useState<string | null>(null)
@@ -665,6 +700,8 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
           onStepsOpenChange={setStepsOpen}
           addHouseholdsOpen={addHouseholdsOpen}
           onAddHouseholdsOpenChange={setAddHouseholdsOpen}
+          composeHouse={composeHouse}
+          onComposeHouseOpenChange={setComposeHouse}
           houseOpen={houseOpen}
           onHouseOpenChange={setHouseOpen}
         />

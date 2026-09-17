@@ -148,6 +148,29 @@ def _district_description(world_id, district):
     return ""
 
 
+def _stored_brief(household_path):
+    """The brief stage 1 wrote, or None when there is nothing to consume."""
+    data = _read_json(household_path)
+    if not isinstance(data, dict):
+        return None
+    household_type = data.get("household_type")
+    if not isinstance(household_type, str) or not household_type.strip():
+        household_type = data.get("type")
+    if not isinstance(household_type, str) or not household_type.strip():
+        return None
+    member_count = data.get("member_count")
+    if isinstance(member_count, bool) or not isinstance(member_count, int):
+        return None
+    if not (MIN_MEMBERS <= member_count <= MAX_MEMBERS):
+        return None
+    description = data.get("description")
+    if not isinstance(description, str) or not description.strip():
+        description = data.get("story")
+    if not isinstance(description, str) or not description.strip():
+        return None
+    return household_type.strip(), member_count, description.strip()
+
+
 def _house_ids(district_path):
     try:
         children = os.listdir(district_path)
@@ -549,23 +572,29 @@ def run_step(world_id, district=None, house=None, *, seed=42, count=None) -> tup
     logger = gw.ChatLogger(log_dir)
     prefix = "%s_" % house_id
 
-    existing = _existing_households(district_path, exclude=house_id)
-    compose_prompt = Prompt().load(
-        "generate_world_household",
-        district_description=description,
-        household_count=len(existing),
-        existing_types=_existing_types_text(existing),
-    )
-    try:
-        plan = _call_compose(compose_prompt, logger, prefix)
-    except LLMCallError as exc:
-        print("[Compose failed] %s" % exc)
-        return False, str(exc)
-
-    household_type = plan["household_type"]
-    member_count = plan["member_count"]
-    rationale = plan["rationale"]
-    print("[House %s] %s | members %d | %s" % (house_id, household_type, member_count, rationale))
+    household_path = os.path.join(house_dir, "household.json")
+    brief = _stored_brief(household_path)
+    if brief is not None:
+        household_type, member_count, rationale = brief
+        print("[House %s] composing from the stored brief: %s | members %d | %s"
+              % (house_id, household_type, member_count, rationale))
+    else:
+        existing = _existing_households(district_path, exclude=house_id)
+        compose_prompt = Prompt().load(
+            "generate_world_household",
+            district_description=description,
+            household_count=len(existing),
+            existing_types=_existing_types_text(existing),
+        )
+        try:
+            plan = _call_compose(compose_prompt, logger, prefix)
+        except LLMCallError as exc:
+            print("[Compose failed] %s" % exc)
+            return False, str(exc)
+        household_type = plan["household_type"]
+        member_count = plan["member_count"]
+        rationale = plan["rationale"]
+        print("[House %s] %s | members %d | %s" % (house_id, household_type, member_count, rationale))
 
     minimal_type = {
         "type": household_type,
@@ -603,7 +632,6 @@ def run_step(world_id, district=None, house=None, *, seed=42, count=None) -> tup
         "members": members,
         "status": "composed",
     }
-    household_path = os.path.join(house_dir, "household.json")
     _write_json(household_path, household)
     print("[Saved] %s" % household_path)
 
