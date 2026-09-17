@@ -108,7 +108,7 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
       ) : buildState === undefined ? (
         <p className="px-3.5 py-4 text-[13px] text-fg-subtle">Loading build state…</p>
       ) : (
-        <div className="flex flex-col gap-3 p-3.5">
+          <div className="flex flex-col divide-y divide-border px-3.5">
           <div className="flex flex-wrap items-center gap-2">
             <span className="label-micro">Target household</span>
             {buildState.houses.length === 0 ? (
