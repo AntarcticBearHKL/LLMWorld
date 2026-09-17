@@ -958,6 +958,40 @@ console separates its areas with **hairlines, not gaps**:
 So one continuous flat surface is subdivided by 1px lines instead of being cut into floating
 tiles. Radius is a property of *controls and floating objects*, never of *areas*.
 
+## 25. Resizable panels
+
+A column of stacked panels (§7's `Panel`) splits the available height by flex weights, so a
+panel that needs more room — the activity timeline with six members, a floor plan — gets
+squeezed and clipped instead. The operator, not the layout, should decide the split.
+
+### 25.1 The handle
+
+Every `Panel` carries a **drag handle** on its bottom edge:
+
+| Property | Value |
+| --- | --- |
+| Appearance | a 1px `--border` hairline flush with the panel's bottom; it thickens to 3px and turns `--brand` while hovered or dragged, so the affordance is visible without adding chrome |
+| Cursor | `row-resize` on the handle and on the 8px hit strip above it |
+| Behaviour | dragging sets an explicit pixel height on that panel; until the first drag the panel keeps `flex: 1` and the handle is inert |
+
+### 25.2 Bounds and neighbours
+
+`MIN_PANEL_PX` 140 · `MAX_PANEL_PX` 1200. A panel below the minimum is not allowed; a panel
+larger than the column simply makes the column scroll (the columns already own their scroll,
+§24.2). Panels that were never dragged keep `flex: 1` and absorb whatever is left, so a single
+drag re-splits the column without touching the others.
+
+### 25.3 Persistence and a11y
+
+- The height is stored per panel in `localStorage` under `llmworld.panel.<panelId>.height`, so
+  a working layout survives a reload. It is **not** put in the URL (§20.3 — a shared link must
+  not carry someone else's layout).
+- The handle is a `role="separator"` with `aria-orientation="horizontal"`, an
+  `aria-label` naming the panel, and `aria-valuenow` in pixels. It is focusable, and `ArrowUp`
+  / `ArrowDown` resize by 16px (a keyboard path must exist — §8).
+- The drag is direct manipulation, so it has no transition and no `prefers-reduced-motion`
+  branch: §6 forbids animating layout properties, it does not forbid the user moving them.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the
