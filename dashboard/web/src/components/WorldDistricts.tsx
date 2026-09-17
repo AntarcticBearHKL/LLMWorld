@@ -34,8 +34,9 @@ import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 
 const HEAD_CLASS = "h-8 px-2.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-fg-muted"
-const HEAD_NUM_CLASS = cn(HEAD_CLASS, "text-right")
-const CELL_NUM_CLASS = "num text-right tabular-nums text-fg-muted"
+
+const HEAD_CENTER_CLASS = cn(HEAD_CLASS, "text-center")
+const CELL_CENTER_CLASS = "num text-center tabular-nums text-fg-muted"
 const CHIP_CLASS = "num rounded-full border px-2 py-px text-[12px]"
 const CHIP_ON_CLASS = "border-success/40 bg-success/10 text-success"
 const CHIP_OFF_CLASS = "border-border-strong bg-surface-2 text-fg-subtle"
@@ -154,7 +155,7 @@ function DistrictRow({
         selected && "bg-item-selected",
       )}
     >
-      <TableCell className="align-middle">
+      <TableCell className="text-center align-middle">
         <span
           className="num block truncate text-[13px] font-semibold tracking-[-0.01em] text-fg"
           title={district.name}
@@ -163,18 +164,18 @@ function DistrictRow({
         </span>
       </TableCell>
 
-      <TableCell className="align-middle">
+      <TableCell className="text-center align-middle">
         <StatusChip status={district.status} />
       </TableCell>
 
-      <TableCell className={CELL_NUM_CLASS}>
+      <TableCell className={CELL_CENTER_CLASS}>
         <span className="block truncate" title={String(district.house_count)}>
           {district.house_count}
         </span>
       </TableCell>
 
       <TableCell
-        className="text-right whitespace-nowrap"
+        className="text-center whitespace-nowrap"
         onClick={(event) => event.stopPropagation()}
       >
         <span className="inline-flex items-center gap-1">
@@ -501,22 +502,22 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
             </colgroup>
             <TableHeader>
               <TableRow className="border-b border-border hover:bg-transparent">
-                <TableHead className={HEAD_CLASS}>
+                <TableHead className={HEAD_CENTER_CLASS}>
                   <span className="block truncate" title="District">
                     District
                   </span>
                 </TableHead>
-                <TableHead className={HEAD_CLASS}>
+                <TableHead className={HEAD_CENTER_CLASS}>
                   <span className="block truncate" title="Status">
                     Status
                   </span>
                 </TableHead>
-                <TableHead className={HEAD_NUM_CLASS}>
+                <TableHead className={HEAD_CENTER_CLASS}>
                   <span className="block truncate" title="Households">
                     Households
                   </span>
                 </TableHead>
-                <TableHead className={HEAD_CLASS}>
+                <TableHead className={HEAD_CENTER_CLASS}>
                   <span className="block truncate" title="Actions">
                     Actions
                   </span>
