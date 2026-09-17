@@ -54,7 +54,7 @@ export function ObserveDetail() {
         <EnergyChart replay={replay} />
       </div>
 
-      <div className="flex min-h-0 flex-col gap-3 border-b border-border xl:border-r xl:border-b-0">
+      <div className="flex min-h-0 flex-col gap-3 overflow-y-auto border-b border-border xl:border-r xl:border-b-0">
         <MemberCards replay={replay} />
         <ActivityTimeline
           replay={replay}

@@ -18,6 +18,9 @@ interface TimelineActivityItem extends DataItem {
   category: ActivityCategory
 }
 
+const LANE_HEIGHT_PX = 54
+const AXIS_HEIGHT_PX = 52
+
 const escapeHtml = (value: string): string =>
   value
     .replace(/&/g, "&amp;")
@@ -293,6 +296,7 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
           aria-label="Full-day activity timeline for every member; the axis runs from 00:00 to 24:00"
           data-selected={selectedLane === null || selectedLane <= 0 ? "" : String(selectedLane)}
           className="vis-host min-h-0 flex-1"
+          style={{ minHeight: AXIS_HEIGHT_PX + Math.max(replay?.members.length ?? 0, 1) * LANE_HEIGHT_PX }}
         />
       )}
 
