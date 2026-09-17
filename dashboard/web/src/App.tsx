@@ -78,18 +78,33 @@ function NavTabs({ active, onChange }: { active: ViewKey; onChange: (next: ViewK
 export default function App() {
   const { theme, toggleTheme } = useTheme()
   const view = useTimeStore((state) => state.view)
+  const worldsView = useTimeStore((state) => state.worldsView)
+  const world = useTimeStore((state) => state.world)
+  const run = useTimeStore((state) => state.run)
   const setView = useTimeStore((state) => state.setView)
 
   useUrlSync()
 
   const active: ViewKey = view === "world" || view === "watch" ? "worlds" : view
 
+  const onNavChange = (next: ViewKey) => {
+    if (next !== "worlds") {
+      setView(next)
+      return
+    }
+    if (worldsView === "watch") {
+      setView(run.length > 0 ? "watch" : world.length > 0 ? "world" : "worlds")
+      return
+    }
+    setView(worldsView === "world" && world.length === 0 ? "worlds" : worldsView)
+  }
+
   return (
     <div className="flex h-full min-h-0 flex-col bg-bg">
       <header className="glass sticky top-0 z-30 shrink-0 border-b">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
           <BrandMark />
-          <NavTabs active={active} onChange={setView} />
+          <NavTabs active={active} onChange={onNavChange} />
           <div className="ml-auto">
             <Tooltip>
               <TooltipTrigger asChild>

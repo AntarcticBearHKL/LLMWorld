@@ -13,6 +13,9 @@ const VIEW_KEYS = new Set<string>(["worlds", "world", "watch", "jobs", "settings
 const readView = (value: string | null): ViewKey =>
   value !== null && VIEW_KEYS.has(value) ? (value as ViewKey) : DEFAULT_VIEW
 
+export const isFamilyView = (view: ViewKey): boolean =>
+  view === "worlds" || view === "world" || view === "watch"
+
 export type WorldTab = "scenarios" | "household"
 
 export const DEFAULT_WORLD_TAB: WorldTab = "household"
@@ -49,6 +52,7 @@ export interface TimeState {
   house: string
   policy: string
   view: ViewKey
+  worldsView: ViewKey
   world: string
   tab: WorldTab
   block: string
@@ -94,17 +98,20 @@ const readInitial = () => {
     block: "",
     indoor: false,
     step: "",
+    worldsView: DEFAULT_VIEW,
   }
   if (typeof window === "undefined") return fallback
   const params = new URLSearchParams(window.location.search)
   const minuteRaw = Number(params.get("minute"))
+  const urlView = readView(params.get("view"))
   return {
     minute: Number.isFinite(minuteRaw) && params.has("minute") ? clampMinute(minuteRaw) : 0,
     run: params.get("run") ?? "",
     date: params.get("date") ?? "",
     house: params.get("house") ?? "",
     policy: params.get("policy") ?? DEFAULT_POLICY,
-    view: readView(params.get("view")),
+    view: urlView,
+    worldsView: isFamilyView(urlView) ? urlView : DEFAULT_VIEW,
     world: params.get("world") ?? "",
     tab: readWorldTab(params.get("tab")),
     block: params.get("block") ?? "",
@@ -126,6 +133,7 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
   house: initial.house,
   policy: initial.policy,
   view: initial.view,
+  worldsView: initial.worldsView,
   world: initial.world,
   tab: initial.tab,
   block: initial.block,
@@ -189,7 +197,8 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
   setHouse: (house) => set({ house, selectedMember: null }),
   setPolicy: (policy) => set({ policy }),
 
-  setView: (view) => set({ view }),
+  setView: (view) =>
+    set(isFamilyView(view) ? { view, worldsView: view } : { view }),
 
   setWorld: (world) =>
     set((state) =>
