@@ -693,6 +693,15 @@ disabled surface, not a hidden one. The gate is enforced in the backend
 (`BuildStepStatus.runnable` / `blocked_reason`), not just in the UI: the Steps sheet and
 the HTTP API must both refuse.
 
+The treatment is `glass-lg` over the **list region only** (the pane's header strip with its
+`Description` / `Steps` buttons stays outside the mask and therefore stays usable): the
+table beneath carries `pointer-events-none` + `aria-hidden`, and the mask itself is a
+centred lock-glyph in a `--surface-2` disc above the one-line reason. The mask never uses a
+second Tailwind `backdrop-blur` — `glass-lg` already owns `backdrop-filter`, and stacking a
+utility on top of it silently degrades the declared `blur(40px)` to the utility's 8px.
+An unlocked district always has zero households (the gate forbids generating them first),
+so the mask must state the rule itself rather than rely on dimmed content to imply it.
+
 ### 18.4 Action colours — recorded deviation
 
 §1 principle 3 says colour is state only. The district row actions are a deliberate,

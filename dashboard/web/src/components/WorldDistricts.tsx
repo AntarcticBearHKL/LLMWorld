@@ -374,8 +374,11 @@ function DistrictHouseholdsPanel({
         </Table>
         </div>
         {isLocked ? null : (
-          <div className="glass pointer-events-auto absolute inset-0 flex items-center justify-center px-6 backdrop-blur">
-            <p className="max-w-[240px] text-center text-[13px] leading-relaxed text-fg-muted">
+          <div className="glass-lg absolute inset-0 flex flex-col items-center justify-center gap-2.5 px-6">
+            <span className="flex size-9 items-center justify-center rounded-full border border-border-strong bg-surface-2 text-fg-subtle">
+              <Lock className="size-4" aria-hidden />
+            </span>
+            <p className="max-w-[260px] text-center text-[13px] leading-relaxed text-fg-muted">
               Lock this district to start generating households.
             </p>
           </div>
