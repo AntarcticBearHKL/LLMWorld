@@ -14,6 +14,7 @@ import {
   HouseholdSheet,
   NewDistrictSheet,
 } from "@/components/DistrictSheets"
+import { Panel } from "@/components/primitives/Panel"
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -36,11 +37,11 @@ import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 import { useTimeStore } from "@/store/time"
 
-const HEAD_CLASS = "h-8 px-2.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-fg-muted"
+const HEAD_CLASS = "h-8 px-2.5 t-micro"
 
 const HEAD_CENTER_CLASS = cn(HEAD_CLASS, "text-center")
-const CELL_CENTER_CLASS = "num text-center tabular-nums text-fg-muted"
-const CHIP_CLASS = "num rounded-full border px-2 py-px text-[12px]"
+const CELL_CENTER_CLASS = "num text-center t-body"
+const CHIP_CLASS = "num rounded-full border px-2 py-px t-micro"
 const CHIP_ON_CLASS = "border-success/40 bg-success/10 text-success"
 const CHIP_OFF_CLASS = "border-border-strong bg-surface-2 text-fg-subtle"
 const STATUS_CHIP_CLASS: Record<DistrictStatus, string> = {
@@ -101,12 +102,19 @@ function DistrictRow({
   const remove = useDeleteDistrict(world)
   const queryClient = useQueryClient()
   const [armed, setArmed] = useState(false)
+  const [lockArmed, setLockArmed] = useState(false)
 
   useEffect(() => {
     if (!armed) return
     const timer = window.setTimeout(() => setArmed(false), 6000)
     return () => window.clearTimeout(timer)
   }, [armed])
+
+  useEffect(() => {
+    if (!lockArmed) return
+    const timer = window.setTimeout(() => setLockArmed(false), 6000)
+    return () => window.clearTimeout(timer)
+  }, [lockArmed])
 
   const invalidate = (name: string) => {
     void queryClient.invalidateQueries({ queryKey: worldKeys.districts(world) })
@@ -152,7 +160,7 @@ function DistrictRow({
     >
       <TableCell className="text-center align-middle">
         <span
-          className="num block truncate text-[13px] font-semibold tracking-[-0.01em] text-fg"
+          className="num block truncate t-title"
           title={district.name}
         >
           {district.name}
@@ -185,14 +193,24 @@ function DistrictRow({
           {district.status === "initialized" ? (
             <Button
               variant="ghost"
-              size="icon-xs"
-              className="text-brand"
-              title="Lock this district (one-way)"
-              aria-label="Lock this district (one-way)"
+              size={lockArmed ? "xs" : "icon-xs"}
+              className={cn("text-brand", lockArmed && "bg-brand/10 hover:bg-brand/15")}
+              title={lockArmed ? "Confirm lock · cannot be undone" : "Lock this district (one-way)"}
+              aria-label={lockArmed ? "Confirm lock · cannot be undone" : "Lock this district (one-way)"}
               disabled={lockMutation.isPending}
-              onClick={() => lockMutation.mutate()}
+              onMouseDown={(event) => event.preventDefault()}
+              onBlur={() => setLockArmed(false)}
+              onClick={() => {
+                if (!lockArmed) {
+                  setLockArmed(true)
+                  return
+                }
+                setLockArmed(false)
+                lockMutation.mutate()
+              }}
             >
               {lockMutation.isPending ? <Loader2 className="animate-spin" /> : <Lock />}
+              {lockArmed ? "Confirm lock · cannot be undone" : null}
             </Button>
           ) : null}
           {district.status === "locked" ? (
@@ -310,15 +328,12 @@ function DistrictHouseholdsPanel({
         : "Lock this district first."
 
   return (
-    <section className="card flex min-h-0 flex-col overflow-hidden">
-      <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-3.5 py-2.5">
-        <span
-          className="num min-w-0 truncate text-[15px] font-semibold tracking-[-0.01em] text-fg"
-          title={district.name}
-        >
-          {district.name}
-        </span>
-        <span className="ml-auto flex items-center gap-1">
+    <Panel
+      index={1}
+      title={district.name}
+      bodyClassName="flex flex-col overflow-hidden"
+      actions={
+        <>
           <Button variant="outline" size="sm" onClick={() => onDescriptionOpenChange(true)}>
             <Sparkles aria-hidden />
             Description
@@ -341,8 +356,9 @@ function DistrictHouseholdsPanel({
           >
             <ListChecks aria-hidden />
           </Button>
-        </span>
-      </header>
+        </>
+      }
+    >
 
       {generatingJob === null ? null : (
         <div className="flex shrink-0 items-center gap-2 border-b border-border px-3.5 py-2">
@@ -366,7 +382,7 @@ function DistrictHouseholdsPanel({
           className={cn("h-full overflow-auto", !isLocked && "pointer-events-none")}
           aria-hidden={!isLocked}
         >
-        <Table className="w-full text-[13px]">
+        <Table className="w-full">
           <TableHeader>
             <TableRow className="border-b border-border hover:bg-transparent">
               <TableHead className={HEAD_CLASS}>Household</TableHead>
@@ -377,19 +393,19 @@ function DistrictHouseholdsPanel({
           <TableBody>
             {buildQuery.isPending ? (
               <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={3} className="p-6 text-center text-[13px] text-fg-subtle">
+                <TableCell colSpan={3} className="p-6 text-center t-caption">
                   Loading households…
                 </TableCell>
               </TableRow>
             ) : buildQuery.isError ? (
               <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={3} className="p-6 text-center text-[13px] text-fg-subtle">
+                <TableCell colSpan={3} className="p-6 text-center t-caption">
                   Households unavailable: {errorMessage(buildQuery.error)}
                 </TableCell>
               </TableRow>
             ) : houses.length === 0 ? (
               <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={3} className="p-6 text-center text-[13px] text-fg-subtle">
+                <TableCell colSpan={3} className="p-6 text-center t-caption">
                   No households in this district yet.
                 </TableCell>
               </TableRow>
@@ -400,7 +416,7 @@ function DistrictHouseholdsPanel({
                 return (
                   <TableRow key={house} className="h-10 border-b border-border/60 hover:bg-item-hover">
                     <TableCell className="align-middle">
-                      <span className="num text-[13px] font-semibold tracking-[-0.01em] text-fg">
+                      <span className="num t-body">
                         {house}
                       </span>
                     </TableCell>
@@ -413,12 +429,18 @@ function DistrictHouseholdsPanel({
                           <Button
                             variant="outline"
                             size="xs"
+                            className="t-caption"
                             onClick={() => onComposeHouseOpenChange(house)}
                           >
                             Compose members
                           </Button>
                         ) : null}
-                        <Button variant="outline" size="xs" onClick={() => onHouseOpenChange(house)}>
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          className="t-caption"
+                          onClick={() => onHouseOpenChange(house)}
+                        >
                           Open
                         </Button>
                       </span>
@@ -435,7 +457,7 @@ function DistrictHouseholdsPanel({
             <span className="flex size-9 items-center justify-center rounded-full border border-border-strong bg-surface-2 text-fg-subtle">
               <Lock className="size-4" aria-hidden />
             </span>
-            <p className="max-w-[260px] text-center text-[13px] leading-relaxed text-fg-muted">
+            <p className="max-w-[260px] text-center t-caption leading-relaxed">
               Lock this district to start generating households.
             </p>
           </div>
@@ -484,7 +506,7 @@ function DistrictHouseholdsPanel({
           if (!open) onHouseOpenChange(null)
         }}
       />
-    </section>
+    </Panel>
   )
 }
 
@@ -533,8 +555,8 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
         <div className="grid min-h-full flex-1 grid-rows-[auto_1fr_auto]">
           <div className="row-start-2 flex items-center justify-center px-6 py-8">
             <div className="flex w-full max-w-[440px] flex-col items-center text-center">
-              <p className="text-[15px] font-semibold text-fg">No districts yet</p>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-fg-muted">
+              <p className="t-title">No districts yet</p>
+              <p className="mt-1.5 t-body leading-relaxed">
                 A district is this world's first layer. Name it, write its description, and lock it —
                 only then can you generate households.
               </p>
@@ -559,25 +581,31 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
 
   return (
     <div className="grid min-h-0 flex-1 gap-0 lg:grid-cols-[minmax(320px,38%)_minmax(0,1fr)]">
-      <section className="card flex min-h-0 flex-col overflow-hidden border-r border-border">
-        <header className="flex shrink-0 items-center gap-2 border-b border-border px-3.5 py-2.5">
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            className="ml-auto"
-            aria-label="Refresh districts"
-            onClick={() => void districtsQuery.refetch()}
-          >
-            <RefreshCw />
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => setNewOpen(true)}>
-            <Plus />
-            New district
-          </Button>
-        </header>
+      <Panel
+        index={0}
+        title="Districts"
+        className="border-r border-border"
+        bodyClassName="flex flex-col overflow-hidden"
+        actions={
+          <>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              aria-label="Refresh districts"
+              onClick={() => void districtsQuery.refetch()}
+            >
+              <RefreshCw />
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => setNewOpen(true)}>
+              <Plus />
+              New district
+            </Button>
+          </>
+        }
+      >
 
         <div className="min-h-0 flex-1 overflow-auto">
-          <Table className="w-full table-fixed text-[13px]">
+          <Table className="w-full table-fixed">
             <colgroup>
               <col className="w-1/4" />
               <col className="w-1/4" />
@@ -611,15 +639,15 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
             <TableBody>
               {districtsQuery.isPending ? (
                 <TableRow className="hover:bg-transparent">
-                  <TableCell colSpan={4} className="p-6 text-center text-[13px] text-fg-subtle">
+                  <TableCell colSpan={4} className="p-6 text-center t-caption">
                     Loading districts…
                   </TableCell>
                 </TableRow>
               ) : districtsQuery.isError ? (
                 <TableRow className="hover:bg-transparent">
-                  <TableCell colSpan={4} className="p-6 text-center text-[13px] text-fg-subtle">
+                  <TableCell colSpan={4} className="p-6 text-center t-caption">
                     <span className="flex flex-col items-center gap-2">
-                      <span className="text-[13px] text-danger">
+                      <span className="t-caption text-danger">
                         Failed to load districts: {errorMessage(districtsQuery.error)}
                       </span>
                       <Button variant="outline" size="xs" onClick={() => void districtsQuery.refetch()}>
@@ -650,13 +678,13 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
         {deleteNotice === null && actionError === null && !jobsQuery.isError ? null : (
           <div className="shrink-0 border-t border-border px-3.5 py-2">
             {actionError !== null ? (
-              <p className="text-[12px] text-danger">District action failed: {actionError}</p>
+              <p className="t-caption text-danger">District action failed: {actionError}</p>
             ) : null}
             {deleteNotice?.kind === "error" ? (
-              <p className="text-[12px] text-danger">Delete failed: {deleteNotice.message}</p>
+              <p className="t-caption text-danger">Delete failed: {deleteNotice.message}</p>
             ) : null}
             {deleteNotice?.kind === "success" ? (
-              <p className="min-w-0 text-[12px] text-fg-subtle">
+              <p className="min-w-0 t-caption">
                 {deleteNotice.deleted
                   ? `Deleted ${deleteNotice.name} — recoverable from output/_trash/`
                   : `Nothing deleted for ${deleteNotice.name}`}
@@ -671,7 +699,7 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
               </p>
             ) : null}
             {jobsQuery.isError ? (
-              <p className="text-[12px] text-danger">
+              <p className="t-caption text-danger">
                 Failed to load jobs; recent run status may be incomplete:{" "}
                 {errorMessage(jobsQuery.error)}
               </p>
@@ -686,7 +714,7 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
           onOpenChange={setNewOpen}
           onCreated={(name) => setSelected(name)}
         />
-      </section>
+      </Panel>
 
       {selectedDistrict === null ? null : (
         <DistrictHouseholdsPanel

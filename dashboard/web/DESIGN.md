@@ -1138,6 +1138,70 @@ keep their values.
    → members (`t-title`) → the timeline (`t-micro`) → provenance. Nothing lower in the list may
    be louder than something above it.
 
+## 29. Every screen has a focal point
+
+§28 fixed the two ladders but was applied to the Watch/house page only. Every other screen still
+reads flat. §29 extends it, and adds the rule that was missing: **a short screen must size itself to
+its content.** A panel stretched to fill a 900px viewport so that it can hold two rows has no focal
+point by construction — the emptiness is the loudest thing on the page.
+
+### 29.1 Each screen's focal element
+
+Exactly one per screen (§28.4 rule 1). Everything else on the screen is arranged *around* it.
+
+| Screen | Focal element | Everything else |
+| --- | --- | --- |
+| Worlds | the **focused world row** — its name at `t-title`, its status as state, not colour | other rows `t-body`; the table **sizes to its rows**, never stretches |
+| World detail → Households | the **districts table** — the master region; district names `t-title`, household counts `t-body` | the household pane is quiet until a district is selected |
+| World detail → Scenarios | the **scenario rows** — name `t-title`, date/policy `t-caption` | the actions column stays `t-caption` |
+| Watch — world / block | the **block list row** being inspected; block name `t-title` | the rest `t-body` |
+| Watch — household / indoor | the **current load** at `t-hero` (§28.4 rule 5) | the seven panels below it, in gradient order |
+| Jobs | the **running job** — its status at `t-title` with the live indicator; finished jobs recede to `t-body`/`t-caption` | the log is `t-caption` |
+| Settings | **model** and **temperature** — the two knobs that change results; label `t-micro`, value `t-body` | every other field is `t-body` at most, grouped, with no competing emphasis |
+| Scene (if reachable) | the **canvas itself** | all chrome (HUD, side panel) is `t-caption`/`t-micro` only |
+
+### 29.2 The short-content rule
+
+A region sizes to its content. A table with two rows is two rows tall. Panels do not stretch to the
+viewport (`h-full`, `flex-1` against a viewport height) unless the content is genuinely unbounded
+(a canvas, a live log) — in which case it gets an explicit height, not a leftover. This is the same
+defect §27 fixed for the shell, applied one level down.
+
+### 29.3 Control logic
+
+Styling is not the whole of it: a control's **logic** must also be defensible. Every control must
+satisfy these, and any that cannot must be changed:
+
+1. **A destructive action states what it destroys and asks first.** Delete/overwrite/regenerate:
+   a confirm that names the artefact and what is lost, and the destructive styling is on the
+   confirm — never the strongest weight on the screen's main flow.
+2. **A disabled control says why, next to it.** A title/tooltip or an inline reason; a greyed-out
+   button with no explanation is a dead end.
+3. **One job, one control.** Two entry points to the same action on one screen is a defect.
+4. **Every icon-only control has an `aria-label` and a tooltip.**
+5. **Every async action shows three states** — pending (disabled + progress), success (visible
+   state change), failure (the error, rendered). A silent failure is worse than a disabled button.
+6. **Emphasis follows rarity**: the strongest visual weight goes to the screen's primary action;
+   rare and dangerous actions get the least.
+7. **Every overlay has an escape hatch** — Escape closes it, and the close control is visible.
+8. **State changes are visible.** If a control changes what is rendered, the change is announced
+   (a selection, a focus ring, a label), never silent.
+
+### 29.4 Cleanup rules
+
+The refactor removes code, not behaviour:
+
+1. **Delete only what is provably unreferenced.** Every deletion is backed by a search returning
+   zero hits plus a green `tsc -b` / `lint` / `build` / `unittest`. An unverified deletion is a
+   broken build.
+2. **No file keeps an unused import, export, prop, constant, CSS utility or asset.**
+3. **No dead CSS.** An `@utility` with no call site is deleted, not commented out.
+4. **No commented-out code and no leftover `TODO`/`FIXME`** in the shipped tree.
+5. **Deleting a prop means deleting its last consumer in the same change** — a prop kept "for
+   later" is dead code with a delay.
+6. **Behaviour is frozen during cleanup.** If a cleanup pass reveals a logic defect, it is filed
+   as a §29.3 violation and fixed separately — never folded into a deletion.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the

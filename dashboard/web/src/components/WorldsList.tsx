@@ -21,11 +21,11 @@ import { formatMtime } from "@/lib/format"
 import { cn } from "@/lib/utils"
 import { useTimeStore } from "@/store/time"
 
-const HEAD_CLASS = "h-8 px-2.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-fg-muted"
+const HEAD_CLASS = "h-8 px-2.5 t-micro text-fg-faint"
 
 const HEAD_NUM_CLASS = cn(HEAD_CLASS, "text-right")
 
-const CELL_NUM_CLASS = "num text-right tabular-nums text-fg-muted"
+const CELL_NUM_CLASS = "num text-right t-body"
 
 function WorldRow({
   info,
@@ -72,13 +72,13 @@ function WorldRow({
                 type="button"
                 onClick={onOpen}
                 title={info.world_id}
-                className="num min-w-0 truncate text-left text-[13px] font-semibold tracking-[-0.01em] text-fg"
+                className="num t-title min-w-0 truncate text-left"
               >
                 {info.world_id}
               </button>
               <WorldBadge frozen={info.frozen} className="shrink-0" />
             </div>
-            <span className="flex min-w-0 items-center gap-1 text-[11px] text-fg-subtle">
+            <span className="t-caption flex min-w-0 items-center gap-1">
               <Clock3 className="size-3 shrink-0" aria-hidden />
               <span className="truncate" title={formatMtime(info.latest_mtime)}>
                 {formatMtime(info.latest_mtime)}
@@ -96,7 +96,7 @@ function WorldRow({
           onClick={(event) => event.stopPropagation()}
         >
           <span className="inline-flex items-center gap-1">
-            <CloneWorldButton world={info.world_id} label="" />
+            <CloneWorldButton world={info.world_id} label="Clone world" />
             <Button
               variant="ghost"
               size={armed ? "xs" : "icon-xs"}
@@ -126,7 +126,7 @@ function WorldRow({
 
       {remove.isError ? (
         <TableRow className="border-b border-border/60 hover:bg-transparent">
-          <TableCell colSpan={5} className="px-2.5 py-1.5 text-[12px] text-danger">
+          <TableCell colSpan={5} className="px-2.5 py-1.5 t-body text-danger">
             Delete failed: {errorMessage(remove.error)}
           </TableCell>
         </TableRow>
@@ -150,10 +150,10 @@ export function WorldsList() {
   }
 
   return (
-    <section className="card flex h-full min-h-0 w-full flex-col overflow-hidden">
+    <section className="card flex w-full flex-col overflow-hidden">
       <header className="flex shrink-0 flex-wrap items-center gap-x-2 gap-y-2 border-b border-border px-3.5 py-3">
-        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
-          Worlds <span className="num text-[14px] font-medium text-fg-muted">{worlds.length}</span>
+        <span className="t-title">
+          Worlds <span className="num t-micro">{worlds.length}</span>
         </span>
         <span className="ml-auto inline-flex items-center gap-1.5">
           <Button
@@ -171,64 +171,62 @@ export function WorldsList() {
         </span>
       </header>
 
-      <div className="min-h-0 flex-1 overflow-auto">
-        <Table className="w-full text-[13px]">
-          <TableHeader>
-            <TableRow className="border-b border-border hover:bg-transparent">
-              <TableHead className={HEAD_CLASS}>World</TableHead>
-              <TableHead className={HEAD_NUM_CLASS}>Districts</TableHead>
-              <TableHead className={HEAD_NUM_CLASS}>Households</TableHead>
-              <TableHead className={HEAD_NUM_CLASS}>Scenarios</TableHead>
-              <TableHead className={HEAD_CLASS}>Actions</TableHead>
+      <Table className="w-full">
+        <TableHeader>
+          <TableRow className="border-b border-border hover:bg-transparent">
+            <TableHead className={HEAD_CLASS}>World</TableHead>
+            <TableHead className={HEAD_NUM_CLASS}>Districts</TableHead>
+            <TableHead className={HEAD_NUM_CLASS}>Households</TableHead>
+            <TableHead className={HEAD_NUM_CLASS}>Scenarios</TableHead>
+            <TableHead className={HEAD_CLASS}>Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {worldsQuery.isPending ? (
+            <TableRow className="hover:bg-transparent">
+              <TableCell colSpan={5} className="p-6 text-center t-body text-fg-subtle">
+                Loading worlds…
+              </TableCell>
             </TableRow>
-          </TableHeader>
-          <TableBody>
-            {worldsQuery.isPending ? (
-              <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={5} className="p-6 text-center text-[13px] text-fg-subtle">
-                  Loading worlds…
-                </TableCell>
-              </TableRow>
-            ) : worldsQuery.isError ? (
-              <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={5} className="p-6 text-center text-[13px] text-fg-subtle">
-                  <span className="flex flex-col items-center gap-2">
-                    <span className="text-[13px] text-danger">
-                      Failed to load worlds: {errorMessage(worldsQuery.error)}
-                    </span>
-                    <Button variant="outline" size="xs" onClick={() => void worldsQuery.refetch()}>
-                      Retry
-                    </Button>
+          ) : worldsQuery.isError ? (
+            <TableRow className="hover:bg-transparent">
+              <TableCell colSpan={5} className="p-6 text-center t-body text-fg-subtle">
+                <span className="flex flex-col items-center gap-2">
+                  <span className="t-body text-danger">
+                    Failed to load worlds: {errorMessage(worldsQuery.error)}
                   </span>
-                </TableCell>
-              </TableRow>
-            ) : worlds.length === 0 ? (
-              <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={5} className="p-6 text-center text-[13px] text-fg-subtle">
-                  <span className="flex flex-col items-center gap-1.5">
-                    <span className="text-[15px] font-semibold text-fg">No worlds yet</span>
-                    <span className="text-[13px] leading-relaxed text-fg-muted">
-                      Click New world to create an empty shell — no LLM calls.
-                    </span>
+                  <Button variant="outline" size="xs" onClick={() => void worldsQuery.refetch()}>
+                    Retry
+                  </Button>
+                </span>
+              </TableCell>
+            </TableRow>
+          ) : worlds.length === 0 ? (
+            <TableRow className="hover:bg-transparent">
+              <TableCell colSpan={5} className="p-6 text-center t-body text-fg-subtle">
+                <span className="flex flex-col items-center gap-1.5">
+                  <span className="t-body text-fg">No worlds yet</span>
+                  <span className="t-caption leading-relaxed text-fg-muted">
+                    Click New world to create an empty shell — no LLM calls.
                   </span>
-                </TableCell>
-              </TableRow>
-            ) : (
-              worlds.map((info) => (
-                <WorldRow
-                  key={info.world_id}
-                  info={info}
-                  selected={world === info.world_id}
-                  onOpen={() => openWorld(info.world_id)}
-                  onDeleted={() => {
-                    if (world === info.world_id) setWorld("")
-                  }}
-                />
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </div>
+                </span>
+              </TableCell>
+            </TableRow>
+          ) : (
+            worlds.map((info) => (
+              <WorldRow
+                key={info.world_id}
+                info={info}
+                selected={world === info.world_id}
+                onOpen={() => openWorld(info.world_id)}
+                onDeleted={() => {
+                  if (world === info.world_id) setWorld("")
+                }}
+              />
+            ))
+          )}
+        </TableBody>
+      </Table>
 
       <NewWorldSheet
         worldIds={worlds.map((info) => info.world_id)}

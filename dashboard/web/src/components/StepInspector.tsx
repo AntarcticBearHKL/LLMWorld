@@ -73,13 +73,13 @@ const statusText = (httpStatus: number | null): string =>
   httpStatus === null ? "no status" : `HTTP ${httpStatus}`
 
 const PRE_CLASS =
-  "num max-h-80 overflow-auto rounded-lg border border-border bg-surface-2 px-3 py-2 text-[12px] leading-relaxed whitespace-pre-wrap break-words text-fg-muted"
+  "num max-h-80 overflow-auto rounded-lg border border-border bg-surface-2 px-3 py-2 t-body leading-relaxed whitespace-pre-wrap break-words text-fg-muted"
 
 function StatusChip({ ok, httpStatus }: { ok: boolean; httpStatus: number | null }) {
   return (
     <span
       className={cn(
-        "num rounded-full border px-2 py-px text-[12px] whitespace-nowrap",
+        "num rounded-full border px-2 py-px t-caption whitespace-nowrap",
         ok
           ? "border-success/40 bg-success/10 text-success"
           : "border-danger/40 bg-danger/10 text-danger",
@@ -110,15 +110,15 @@ function CallRow({
       )}
     >
       <div className="flex items-center gap-2">
-        <span className="num text-[13px] text-fg">#{call.request_index}</span>
+        <span className="num t-body text-fg">#{call.request_index}</span>
         <StatusChip ok={call.ok} httpStatus={call.http_status} />
         <span
-          className={cn("ml-auto text-[12px] whitespace-nowrap", call.ok ? "text-success" : "text-danger")}
+          className={cn("ml-auto t-caption whitespace-nowrap", call.ok ? "text-success" : "text-danger")}
         >
           {call.ok ? "OK" : "Failed"}
         </span>
       </div>
-      <div className="num flex items-center gap-1.5 text-[12px] text-fg-subtle">
+      <div className="num flex items-center gap-1.5 t-caption text-fg-subtle">
         <span>{formatDuration(call.duration_seconds)}</span>
         <span aria-hidden>·</span>
         <span>{formatChars(call.prompt_chars)}</span>
@@ -136,8 +136,8 @@ function Section({ title, hint, children }: { title: string; hint?: string; chil
   return (
     <section className="flex flex-col gap-1.5">
       <div className="flex items-baseline gap-2">
-        <span className="text-[15px] font-semibold text-fg">{title}</span>
-        {hint !== undefined ? <span className="label-latin">{hint}</span> : null}
+        <span className="t-title text-fg">{title}</span>
+        {hint !== undefined ? <span className="t-caption">{hint}</span> : null}
       </div>
       {children}
     </section>
@@ -145,11 +145,11 @@ function Section({ title, hint, children }: { title: string; hint?: string; chil
 }
 
 function ResponseBody({ view }: { view: ResponseView }) {
-  if (view.kind === "none") return <p className="text-[13px] text-fg-subtle">(no response body)</p>
+  if (view.kind === "none") return <p className="t-caption text-fg-subtle">(no response body)</p>
   if (view.kind === "failure") {
     return (
       <div className="flex flex-col gap-1.5">
-        <span className="text-[12px] text-danger">HTTP error response body (provider raw_text)</span>
+        <span className="t-caption text-danger">HTTP error response body (provider raw_text)</span>
         <pre className={cn(PRE_CLASS, "border-danger/40 text-fg")}>{view.rawText}</pre>
       </div>
     )
@@ -160,17 +160,17 @@ function ResponseBody({ view }: { view: ResponseView }) {
       {view.content.length > 0 ? (
         <pre className={cn(PRE_CLASS, "text-fg")}>{view.content}</pre>
       ) : (
-        <p className="text-[13px] text-fg-subtle">(empty response content)</p>
+        <p className="t-caption text-fg-subtle">(empty response content)</p>
       )}
       {view.reasoning !== null && view.reasoning.length > 0 ? (
         <div className="flex flex-col gap-1.5">
-          <span className="label-micro">Reasoning</span>
+          <span className="t-micro">Reasoning</span>
           <pre className={PRE_CLASS}>{view.reasoning}</pre>
         </div>
       ) : null}
       {view.usage !== null && view.usage !== undefined ? (
         <div className="flex flex-col gap-1.5">
-          <span className="label-micro">Usage</span>
+          <span className="t-micro">Usage</span>
           <pre className={PRE_CLASS}>{asJson(view.usage)}</pre>
         </div>
       ) : null}
@@ -182,13 +182,13 @@ function CallDetail({ jobId, callId }: { jobId: string; callId: string }) {
   const detailQuery = useJobLlmCall(jobId, callId)
 
   if (detailQuery.isPending) {
-    return <p className="px-4 py-3 text-[13px] text-fg-subtle">Loading…</p>
+    return <p className="px-4 py-3 t-caption text-fg-subtle">Loading…</p>
   }
 
   if (detailQuery.isError) {
     const message =
       detailQuery.error instanceof ApiError ? detailQuery.error.message : "Could not load this call's details"
-    return <p className="px-4 py-3 text-[13px] text-danger">{message}</p>
+    return <p className="px-4 py-3 t-body text-danger">{message}</p>
   }
 
   const detail = detailQuery.data
@@ -200,32 +200,32 @@ function CallDetail({ jobId, callId }: { jobId: string; callId: string }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-4 py-2">
-        <span className="num text-[13px] text-fg">
+        <span className="num t-title text-fg">
           #{detail.request_index}
           {detail.request_count > 1 ? (
             <span className="text-fg-subtle">/{detail.request_count}</span>
           ) : null}
         </span>
         <StatusChip ok={ok} httpStatus={detail.http_status} />
-        <Badge variant="outline" className={cn("label-latin", ok ? "text-success" : "text-danger")}>
+        <Badge variant="outline" className={cn("t-caption", ok ? "text-success" : "text-danger")}>
           {ok ? "OK" : "Failed"}
         </Badge>
-        <span className="num text-[12px] text-fg-subtle">{formatDuration(detail.duration_seconds)}</span>
-        <span className="num text-[12px] text-fg-subtle">{formatChars(detail.prompt_chars)}</span>
-        <span className="num ml-auto text-[12px] text-fg-subtle">{formatStartedAt(detail.started_at)}</span>
+        <span className="num t-caption text-fg-subtle">{formatDuration(detail.duration_seconds)}</span>
+        <span className="num t-caption text-fg-subtle">{formatChars(detail.prompt_chars)}</span>
+        <span className="num ml-auto t-caption text-fg-subtle">{formatStartedAt(detail.started_at)}</span>
       </div>
 
       <ScrollArea className="min-h-0 flex-1">
         <div className="flex flex-col gap-4 px-4 py-3">
           <div className="flex flex-wrap items-baseline gap-2">
-            <span className="label-micro">Model</span>
-            <span className="num text-[13px] text-fg">{model ?? "—"}</span>
-            <span className="num ml-auto text-[12px] text-fg-subtle">{detail.logical_call_id}</span>
+            <span className="t-micro">Model</span>
+            <span className="num t-title text-fg">{model ?? "—"}</span>
+            <span className="num ml-auto t-caption text-fg-subtle">{detail.logical_call_id}</span>
           </div>
 
           <Section title="Prompt" hint="request.input">
             {prompt === null || prompt.length === 0 ? (
-              <p className="text-[13px] text-fg-subtle">(no prompt recorded)</p>
+              <p className="t-caption text-fg-subtle">(no prompt recorded)</p>
             ) : (
               <pre className={PRE_CLASS}>{prompt}</pre>
             )}
@@ -237,7 +237,7 @@ function CallDetail({ jobId, callId }: { jobId: string; callId: string }) {
 
           {detail.error !== null ? (
             <Section title="Error">
-              <p className="rounded-xl border border-danger/40 bg-danger/10 px-3 py-2 text-[13px] text-danger">
+              <p className="rounded-xl border border-danger/40 bg-danger/10 px-3 py-2 t-body text-danger">
                 {detail.error}
               </p>
             </Section>
@@ -255,7 +255,7 @@ export function StepInspector({ jobId, step = null, live = false }: StepInspecto
   if (jobId === null) {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
-        <span className="text-[13px] text-fg-subtle">Select a build job to inspect its LLM calls.</span>
+        <span className="t-body text-fg-subtle">Select a build job to inspect its LLM calls.</span>
       </div>
     )
   }
@@ -270,11 +270,11 @@ export function StepInspector({ jobId, step = null, live = false }: StepInspecto
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 items-center gap-2 border-b border-border px-4 py-2">
-        <span className="label-micro">LLM calls</span>
-        <span className="num text-[12px] text-fg-subtle">
+        <span className="t-micro">LLM calls</span>
+        <span className="num t-caption text-fg-subtle">
           {list === undefined ? "—" : `${list.total} calls`}
         </span>
-        {step !== null ? <span className="num text-[12px] text-fg-subtle">· step {step}</span> : null}
+        {step !== null ? <span className="num t-caption text-fg-subtle">· step {step}</span> : null}
         <Button
           variant="ghost"
           size="icon-sm"
@@ -287,19 +287,19 @@ export function StepInspector({ jobId, step = null, live = false }: StepInspecto
       </div>
 
       {listQuery.isPending ? (
-        <p className="px-4 py-3 text-[13px] text-fg-subtle">Loading…</p>
+        <p className="px-4 py-3 t-caption text-fg-subtle">Loading…</p>
       ) : listQuery.isError ? (
-        <p className="px-4 py-3 text-[13px] text-danger">
+        <p className="px-4 py-3 t-body text-danger">
           {listQuery.error instanceof ApiError ? listQuery.error.message : "Could not load LLM calls"}
         </p>
       ) : list === undefined ? (
-        <p className="px-4 py-3 text-[13px] text-fg-subtle">Loading…</p>
+        <p className="px-4 py-3 t-caption text-fg-subtle">Loading…</p>
       ) : list.total === 0 ? (
         <div className="flex flex-1 flex-col items-center justify-center gap-1.5 p-6 text-center">
-          <span className="text-[14px] text-fg-muted">
+          <span className="t-body text-fg-muted">
             {list.exists ? "The trace file is empty." : "This job has no LLM calls."}
           </span>
-          <span className="text-[12px] text-fg-subtle">
+          <span className="t-caption text-fg-subtle">
             The step may not have reached its LLM phase yet, or the job is still queued.
           </span>
         </div>
@@ -318,7 +318,7 @@ export function StepInspector({ jobId, step = null, live = false }: StepInspecto
           </ul>
           <div className="flex min-h-0 flex-1 flex-col">
             {activeId === null ? (
-              <p className="px-4 py-3 text-[13px] text-fg-subtle">Select a call to view details.</p>
+              <p className="px-4 py-3 t-body text-fg-subtle">Select a call to view details.</p>
             ) : (
               <CallDetail jobId={jobId} callId={activeId} />
             )}
