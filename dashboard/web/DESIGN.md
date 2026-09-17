@@ -749,3 +749,46 @@ collapses to a single centred **`cover`** (`layout-skill.md` §3): grid rows `au
 
 This applies to every list-detail screen, not just districts. Loading and error states keep
 their existing full-width row treatment.
+
+## 20. The floating window — a surface you watch while you work
+
+### 20.1 Why a third surface type
+
+§19 splits surfaces into two kinds: authoring uses the **centered panel**, inspection uses
+the **drawer**. Neither can be watched *in parallel*: both are modal, so the page underneath
+is inert while they are open. Monitoring is a third job — you start a job, then keep working
+in Worlds while you watch the LLM calls and the live log.
+
+**Rule.** A surface the operator must watch *while continuing to work* is a **floating
+window**: non-modal, moveable, dismissible, and it never blocks the page. A surface that
+must be answered before anything else continues stays modal (§19).
+
+### 20.2 The `FloatingPanel` primitive
+
+| Property | Value |
+| --- | --- |
+| Modality | **Non-modal.** No scrim, no focus trap, no `aria-modal`. The page underneath stays fully interactive. |
+| Role | `role="complementary"` with an `aria-label` — it is an auxiliary region, not a dialog. |
+| Position | `fixed`, default bottom-right (`right-4 bottom-4`), moved by dragging its header. |
+| Size | `w-[min(920px,calc(100vw-2rem))] h-[min(600px,calc(100dvh-2rem))]`; the body owns its scroll (`min-h-0` + `overflow-hidden`, inner panes scroll). |
+| Surface | `chrome-lg` (heavy frosted glass, §7) + `--shadow-3` + `--r-xl`. |
+| Header | Title + live status + a close button (`ghost icon-xs`, `aria-label`). The header is the drag handle; a drag must not fire a click on its children. |
+| Stacking | `z-40` — **below** the modal surfaces (`z-50`), so a confirmation panel always wins. |
+| Keyboard | `Escape` closes it while it holds focus; nothing inside steals focus on open. |
+| Motion | `--t-base` slide/fade on open, `transform`/`opacity` only (§6). |
+
+Drag is `transform`-based (never `left`/`top`), begins only on the header, and is disabled
+under `prefers-reduced-motion` (the window then stays at its default corner).
+
+### 20.3 Jobs moves into the floating window
+
+- The top bar drops the `Jobs` item: the nav is **`Worlds | Settings`**.
+- The trigger is a top-bar icon button (`Activity`, `aria-label="Job activity"`) carrying a
+  live count of `running`/`queued` jobs; it opens the floating window over whatever view is
+  current, and the window stays open across view switches.
+- The window's body is the existing `JobsPanel` (job list + `LLM calls` / `Live log` tabs) —
+  no new job UI is invented, and no new fetch primitive is added.
+- Open/closed lives in the store (`jobsOpen`) so it survives navigation but does **not**
+  enter the URL: a shared link should not carry someone else's monitor state.
+- `view=jobs` keeps working for old links: it renders the Worlds-family view underneath and
+  forces the window open (`view=jobs` ⇒ effective view `worldsView`, window open).

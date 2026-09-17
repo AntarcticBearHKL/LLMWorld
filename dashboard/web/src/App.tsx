@@ -1,12 +1,13 @@
-import { Moon, Sun } from "lucide-react"
+import { Activity, Moon, Sun } from "lucide-react"
 
-import { JobsPanel } from "@/components/JobsPanel"
+import { FloatingJobsWindow } from "@/components/FloatingJobsWindow"
 import { SettingsPanel } from "@/components/SettingsPanel"
 import { WatchView } from "@/components/WatchView"
 import { WorldDetail } from "@/components/WorldDetail"
 import { WorldsList } from "@/components/WorldsList"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { useJobs } from "@/hooks/useJobs"
 import { useTheme } from "@/hooks/useTheme"
 import { useUrlSync } from "@/hooks/useUrlSync"
 import { cn } from "@/lib/utils"
@@ -18,7 +19,6 @@ const NAV: ReadonlyArray<{ key: ViewKey; label: string; hint: string }> = [
     label: "Worlds",
     hint: "All worlds — a world is a fixed set of blocks and households",
   },
-  { key: "jobs", label: "Jobs", hint: "Job queue and live logs" },
   {
     key: "settings",
     label: "Settings",
@@ -81,11 +81,23 @@ export default function App() {
   const worldsView = useTimeStore((state) => state.worldsView)
   const world = useTimeStore((state) => state.world)
   const run = useTimeStore((state) => state.run)
+  const jobsOpen = useTimeStore((state) => state.jobsOpen)
   const setView = useTimeStore((state) => state.setView)
+  const setJobsOpen = useTimeStore((state) => state.setJobsOpen)
+  const activeJobs = (useJobs().data ?? []).filter(
+    (job) => job.status === "running" || job.status === "queued",
+  ).length
 
   useUrlSync()
 
-  const active: ViewKey = view === "world" || view === "watch" ? "worlds" : view
+  const effectiveView = view === "jobs" ? worldsView : view
+  const active: ViewKey =
+    effectiveView === "world" || effectiveView === "watch" ? "worlds" : effectiveView
+
+  const closeJobs = () => {
+    setJobsOpen(false)
+    if (view === "jobs") setView(effectiveView)
+  }
 
   const onNavChange = (next: ViewKey) => {
     if (next !== "worlds") {
@@ -105,7 +117,26 @@ export default function App() {
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
           <BrandMark />
           <NavTabs active={active} onChange={onNavChange} />
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-1.5">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon-sm"
+                  className="relative"
+                  onClick={() => setJobsOpen(!jobsOpen)}
+                  aria-label="Job activity"
+                >
+                  <Activity />
+                  {activeJobs > 0 ? (
+                    <span className="num absolute -top-1 -right-1 rounded-full border border-energy/40 bg-energy-soft px-1 text-[10px] leading-4 text-energy">
+                      {activeJobs}
+                    </span>
+                  ) : null}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Job activity</TooltipContent>
+            </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -124,20 +155,20 @@ export default function App() {
       </header>
 
       <main className="min-h-0 flex-1 overflow-hidden p-3 lg:p-4">
-        {view === "worlds" ? <WorldsList /> : null}
+        {effectiveView === "worlds" ? <WorldsList /> : null}
 
-        {view === "world" ? <WorldDetail /> : null}
+        {effectiveView === "world" ? <WorldDetail /> : null}
 
-        {view === "watch" ? <WatchView /> : null}
+        {effectiveView === "watch" ? <WatchView /> : null}
 
-        {view === "jobs" ? <JobsPanel /> : null}
-
-        {view === "settings" ? (
+        {effectiveView === "settings" ? (
           <div className="card h-full overflow-y-auto">
             <SettingsPanel />
           </div>
         ) : null}
       </main>
+
+      {jobsOpen || view === "jobs" ? <FloatingJobsWindow onClose={closeJobs} /> : null}
     </div>
   )
 }
