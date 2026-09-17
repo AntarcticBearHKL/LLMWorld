@@ -109,9 +109,9 @@ function BuildJobView({ job }: { job: JobInfo }) {
   )
 }
 
-export function JobsPanel() {
+export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null }) {
   const jobsQuery = useJobs()
-  const [selected, setSelected] = useState<string | null>(null)
+  const [selected, setSelected] = useState<string | null>(focusJobId)
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -202,9 +202,6 @@ export function JobsPanel() {
         )}
       </section>
 
-      <p className="col-span-full label-micro">
-        Only one job runs at a time to avoid concurrent writes under output/.
-      </p>
     </div>
   )
 }

@@ -33,6 +33,7 @@ import {
 } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
+import { useTimeStore } from "@/store/time"
 
 const HEAD_CLASS = "h-8 px-2.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-fg-muted"
 
@@ -78,6 +79,7 @@ function DistrictRow({
   world,
   district,
   selected,
+  generating,
   onSelect,
   onCopied,
   onActionError,
@@ -86,6 +88,7 @@ function DistrictRow({
   world: string
   district: DistrictInfo
   selected: boolean
+  generating: boolean
   onSelect: () => void
   onCopied: (name: string) => void
   onActionError: (message: string | null) => void
@@ -153,7 +156,15 @@ function DistrictRow({
       </TableCell>
 
       <TableCell className="text-center align-middle">
-        <StatusChip status={district.status} />
+        <span className="inline-flex items-center gap-1.5">
+          {generating ? (
+            <Loader2
+              className="size-3 shrink-0 animate-spin text-energy motion-reduce:animate-none"
+              aria-hidden
+            />
+          ) : null}
+          <StatusChip status={district.status} />
+        </span>
       </TableCell>
 
       <TableCell className={CELL_CENTER_CLASS}>
@@ -263,6 +274,11 @@ function DistrictHouseholdsPanel({
   onHouseOpenChange: (house: string | null) => void
 }) {
   const activeJob = jobs.filter((job) => (job.district ?? "") === district.name).some(isActiveJob)
+  const openJob = useTimeStore((state) => state.openJob)
+  const generatingJob =
+    jobs.find(
+      (job) => job.step === "household" && (job.district ?? "") === district.name && isActiveJob(job),
+    ) ?? null
   const buildQuery = useBuildState(world, district.name, activeJob)
   const buildState = buildQuery.data
   const districtStep = buildState === undefined ? null : findStepStatus(buildState.steps, "district")
@@ -313,6 +329,23 @@ function DistrictHouseholdsPanel({
           </Button>
         </span>
       </header>
+
+      {generatingJob === null ? null : (
+        <div className="flex shrink-0 items-center gap-2 border-b border-border px-3.5 py-2">
+          <Loader2
+            className="size-3 shrink-0 animate-spin text-energy motion-reduce:animate-none"
+            aria-hidden
+          />
+          <span className="label-latin">Generating households</span>
+          <button
+            type="button"
+            onClick={() => openJob(generatingJob.id)}
+            className="label-latin ml-auto underline-offset-2 transition-colors hover:text-fg hover:underline"
+          >
+            View job
+          </button>
+        </div>
+      )}
 
       <div className="relative min-h-0 flex-1">
         <div
@@ -427,6 +460,12 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
   const jobsQuery = useJobs()
   const jobs = jobsQuery.data ?? []
   const worldJobs = jobs.filter((job) => job.kind === "build" && job.world === world)
+  const generatingDistricts = new Set(
+    worldJobs
+      .filter(isActiveJob)
+      .map((job) => job.district ?? "")
+      .filter((name) => name.length > 0),
+  )
   const districts = districtsQuery.data ?? []
 
   const [selected, setSelected] = useState("")
@@ -561,6 +600,7 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
                     world={world}
                     district={district}
                     selected={district.name === selected}
+                    generating={generatingDistricts.has(district.name)}
                     onSelect={() => setSelected(district.name)}
                     onCopied={setSelected}
                     onActionError={setActionError}

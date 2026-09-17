@@ -53,6 +53,7 @@ export interface TimeState {
   policy: string
   view: ViewKey
   jobsOpen: boolean
+  jobsFocus: string | null
   worldsView: ViewKey
   world: string
   tab: WorldTab
@@ -77,6 +78,7 @@ export interface TimeState {
   setPolicy: (policy: string) => void
   setView: (view: ViewKey) => void
   setJobsOpen: (open: boolean) => void
+  openJob: (jobId: string) => void
   setWorld: (world: string) => void
   setTab: (tab: WorldTab) => void
   setBlock: (block: string) => void
@@ -136,6 +138,7 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
   policy: initial.policy,
   view: initial.view,
   jobsOpen: false,
+  jobsFocus: null,
   worldsView: initial.worldsView,
   world: initial.world,
   tab: initial.tab,
@@ -204,6 +207,8 @@ export const useTimeStore = create<TimeState>()((set, get) => ({
     set(isFamilyView(view) ? { view, worldsView: view } : { view }),
 
   setJobsOpen: (open) => set({ jobsOpen: open }),
+
+  openJob: (jobId) => set({ jobsOpen: true, jobsFocus: jobId }),
 
   setWorld: (world) =>
     set((state) =>
