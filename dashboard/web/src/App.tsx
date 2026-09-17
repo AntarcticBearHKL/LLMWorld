@@ -113,7 +113,7 @@ export default function App() {
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-bg">
-      <header className="glass sticky top-0 z-30 shrink-0 border-b">
+      <header className="glass sticky top-0 z-30 shrink-0 rounded-none border-b border-border">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
           <BrandMark />
           <NavTabs active={active} onChange={onNavChange} />

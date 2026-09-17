@@ -48,13 +48,13 @@ export function ObserveDetail() {
   const replay = replayQuery.data
 
   return (
-    <div className="grid h-full min-h-0 grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-[minmax(0,300px)_minmax(0,1fr)_minmax(0,320px)]">
-      <div className="flex min-h-0 flex-col gap-3 overflow-y-auto">
+    <div className="grid h-full min-h-0 grid-cols-1 gap-0 lg:grid-cols-2 xl:grid-cols-[minmax(0,300px)_minmax(0,1fr)_minmax(0,320px)]">
+      <div className="flex min-h-0 flex-col gap-3 overflow-y-auto border-b border-border lg:border-r xl:border-b-0">
         <HouseFloorplan replay={replay} />
         <EnergyChart replay={replay} />
       </div>
 
-      <div className="flex min-h-0 flex-col gap-3">
+      <div className="flex min-h-0 flex-col gap-3 border-b border-border xl:border-r xl:border-b-0">
         <MemberCards replay={replay} />
         <ActivityTimeline
           replay={replay}

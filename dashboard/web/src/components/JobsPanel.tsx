@@ -135,8 +135,8 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
 
   return (
     <div className="@container h-full min-h-0">
-      <div className="grid h-full min-h-0 grid-cols-1 gap-3 @2xl:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
-        <section className="card flex min-h-0 flex-col overflow-hidden">
+      <div className="grid h-full min-h-0 grid-cols-1 gap-0 @2xl:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
+        <section className="card flex min-h-0 flex-col overflow-hidden border-b border-border @2xl:border-b-0 @2xl:border-r">
           <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
             <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
               Jobs <span className="num text-[13px] font-medium text-fg-subtle">{jobs.length}</span>

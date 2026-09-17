@@ -27,7 +27,7 @@ const FIELD_CLASS = "h-8 w-[142px] px-2.5 text-[14px] font-medium"
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-full min-h-0 flex-col gap-3">{children}</div>
+    <div className="flex h-full min-h-0 flex-col gap-0">{children}</div>
   )
 }
 
@@ -216,8 +216,8 @@ export function WatchView() {
   )
 
   return (
-    <div className="flex h-full min-h-0 flex-col gap-3">
-      <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-2.5">
+    <div className="flex h-full min-h-0 flex-col gap-0">
+      <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
         {backToWorldDetail}
         <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
 
@@ -269,10 +269,10 @@ export function WatchView() {
         </div>
       </header>
 
-      <div className="min-h-0 flex-1">
+      <div className="min-h-0 flex-1 border-b border-border">
         {layer === 1 ? (
           <Frame>
-            <div className="min-h-0 flex-1">
+            <div className="min-h-0 flex-1 border-b border-border">
               <ObserveScene
                 onEnterHouse={(next) => {
                   setHouse(next)
@@ -342,7 +342,7 @@ export function WatchView() {
               }
               return (
                 <Frame>
-                  <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 px-3.5 py-2.5">
+                  <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 border-b border-border px-3.5 py-2.5">
                     <Button variant="ghost" size="xs" onClick={() => clearTo("world")}>
                       <ArrowLeft />
                       All blocks
@@ -387,7 +387,7 @@ export function WatchView() {
             />
           ) : (
             <Frame>
-              <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-2.5">
+              <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
                 <span className="flex items-center gap-1.5 text-[15px] font-semibold text-fg">
                   <Home className="size-3.5" aria-hidden />
                   {house}
@@ -406,7 +406,7 @@ export function WatchView() {
                   Enter indoor
                 </Button>
               </header>
-              <div className="shrink-0">
+              <div className="shrink-0 border-b border-border">
                 <MetricStrip replay={replayQuery.data} isPending={replayQuery.isPending} />
               </div>
               <div className="min-h-0 flex-1">
@@ -434,7 +434,7 @@ export function WatchView() {
             />
           ) : (
             <Frame>
-              <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-2.5">
+              <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
                 <span className="flex items-center gap-1.5 text-[15px] font-semibold text-fg">
                   <Building2 className="size-3.5" aria-hidden />
                   Indoors · {house}

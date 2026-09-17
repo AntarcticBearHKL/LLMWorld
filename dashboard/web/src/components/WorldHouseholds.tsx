@@ -88,11 +88,11 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
             {info.districts.length === 0 ? (
               <p className="text-[13px] text-fg-subtle">This world has no blocks yet.</p>
             ) : grouped ? (
-              <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <ul className="grid grid-cols-1 gap-0 sm:grid-cols-2">
                 {blocks.map((block) => (
                   <li
                     key={block.postcode}
-                    className="card-lift flex flex-col gap-2 rounded-xl border border-border bg-surface-2 p-3.5 hover:border-border-strong"
+                    className="card-lift flex flex-col gap-2 border-b border-border bg-surface-2 p-3.5 hover:border-border-strong sm:odd:border-r"
                   >
                     <span className="flex items-center gap-2">
                       <span className="num text-[15px] font-semibold text-fg">{block.postcode}</span>

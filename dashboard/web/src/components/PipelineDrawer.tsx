@@ -142,11 +142,11 @@ export function PipelineDrawer() {
                       {stagesQuery.isPending ? "Loading…" : "No data for this stage."}
                     </p>
                   ) : (
-                    <ul className="flex flex-col gap-1.5">
+                    <ul className="flex flex-col gap-0">
                       {segments.map((segment, index) => (
                         <li
                           key={`${stage.key}-${index}`}
-                          className="rounded-xl border border-border bg-surface-2 px-3.5 py-2.5"
+                          className="border-b border-border bg-surface-2 px-3.5 py-2.5"
                         >
                           <div className="flex items-baseline gap-2">
                             <span className="num shrink-0 text-[13px] text-brand">{segment.time ?? "—"}</span>

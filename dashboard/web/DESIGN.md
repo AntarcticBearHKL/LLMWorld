@@ -939,6 +939,25 @@ every existing usage becomes flat without touching its file. The per-screen swee
 about leftovers — pill-shaped tags, spacing, and the surfaces that used to justify their shape
 by elevation.
 
+### 24.2 Regions, not boxes
+
+§24 removed the *depth* from the cards but left the **boxes**: 21 `card` shells were still
+bordered, rounded rectangles separated by a `gap-3`, which is the card style itself. A flat
+console separates its areas with **hairlines, not gaps**:
+
+| Element | Treatment |
+| --- | --- |
+| A pane (`card`) | a flat region on `--surface` — **no border, no radius, no shadow** |
+| The page gutter (`main`) | the only outer spacing (`p-3 lg:p-4`) |
+| Between horizontal neighbours | `gap-0`, and the **leading** region carries `border-r border-border` |
+| Between stacked neighbours | `gap-0`, and the upper region carries `border-b border-border` |
+| A bar (`chrome`) | full-width, **radius 0**, 1px bottom hairline |
+| A floating surface (the centered panel §19, the floating window §20, `chrome-lg` popovers and drawers) | **keeps `--r-md`** — it is a control-like object hovering over the page, not a region of it |
+| Inner elements (inputs, buttons, chips, tags) | keep `--r-md` / `--r-sm` — crisp outside, soft inside |
+
+So one continuous flat surface is subdivided by 1px lines instead of being cut into floating
+tiles. Radius is a property of *controls and floating objects*, never of *areas*.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the

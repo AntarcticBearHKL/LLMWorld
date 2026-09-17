@@ -349,8 +349,8 @@
   /* Floating chrome: flat paper (bars, toolbars). */
   .chrome {
     background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
   }
 
   /* Floating overlay chrome: flat paper, for popovers and drawers. */
@@ -363,8 +363,6 @@
   /* Flat paper card — the data surface of the console (§24). */
   .card {
     background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
   }
 
   /* Motion for interactive cards: colour only, never position (§24). */

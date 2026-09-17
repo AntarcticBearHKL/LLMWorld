@@ -40,7 +40,7 @@ function SpacetimeRow({
   return (
     <li
       className={cn(
-        "card card-lift flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center",
+        "card card-lift flex flex-col gap-2 border-b border-border px-4 py-3 sm:flex-row sm:items-center",
         highlighted
           ? "border-brand-ring bg-brand-soft"
           : "hover:border-border-strong hover:shadow-2",
@@ -191,7 +191,7 @@ export function SpacetimeList({ world }: { world: string }) {
             scenario is created.
           </p>
         ) : (
-          <ul className="flex flex-col gap-2.5 p-3">
+          <ul className="flex flex-col gap-0 p-3">
             {items.map((item) => (
               <SpacetimeRow
                 key={item.name}

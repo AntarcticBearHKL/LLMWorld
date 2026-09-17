@@ -523,8 +523,8 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
   }
 
   return (
-    <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(320px,38%)_minmax(0,1fr)]">
-      <section className="card flex min-h-0 flex-col overflow-hidden">
+    <div className="grid min-h-0 flex-1 gap-0 lg:grid-cols-[minmax(320px,38%)_minmax(0,1fr)]">
+      <section className="card flex min-h-0 flex-col overflow-hidden border-r border-border">
         <header className="flex shrink-0 items-center gap-2 border-b border-border px-3.5 py-2.5">
           <Button
             variant="ghost"

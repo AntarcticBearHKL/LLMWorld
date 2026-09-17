@@ -85,7 +85,7 @@ export function WorldDetail() {
   }
 
   return (
-    <div className="flex h-full min-h-0 w-full flex-col gap-3">
+    <div className="flex h-full min-h-0 w-full flex-col gap-0">
       <header className="chrome flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 px-3.5 py-3">
         {back}
         <span className="h-4 w-px shrink-0 bg-border" aria-hidden />
