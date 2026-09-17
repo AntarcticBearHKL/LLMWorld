@@ -6,6 +6,7 @@ import { Copy, ListChecks, Loader2, Lock, Plus, RefreshCw, Sparkles, Trash2 } fr
 
 import { copyDistrict, lockDistrict } from "@/api/client"
 import type { DistrictInfo, DistrictStatus, JobInfo, WorldInfo } from "@/api/types"
+import { AddHouseholdsSheet } from "@/components/AddHouseholdsSheet"
 import {
   DistrictDescriptionSheet,
   DistrictStepsSheet,
@@ -49,14 +50,6 @@ const STATUS_CHIP_CLASS: Record<DistrictStatus, string> = {
 type DeleteNotice =
   | { kind: "error"; message: string }
   | { kind: "success"; name: string; deleted: boolean; movedTo: string | null }
-
-function DescriptionChip({ hasDescription }: { hasDescription: boolean }) {
-  return (
-    <span className={cn(CHIP_CLASS, hasDescription ? CHIP_ON_CLASS : CHIP_OFF_CLASS)}>
-      {hasDescription ? "described" : "no description"}
-    </span>
-  )
-}
 
 function StatusChip({ status }: { status: DistrictStatus }) {
   return (
@@ -252,6 +245,8 @@ function DistrictHouseholdsPanel({
   onDescriptionOpenChange,
   stepsOpen,
   onStepsOpenChange,
+  addHouseholdsOpen,
+  onAddHouseholdsOpenChange,
   houseOpen,
   onHouseOpenChange,
 }: {
@@ -262,6 +257,8 @@ function DistrictHouseholdsPanel({
   onDescriptionOpenChange: (open: boolean) => void
   stepsOpen: boolean
   onStepsOpenChange: (open: boolean) => void
+  addHouseholdsOpen: boolean
+  onAddHouseholdsOpenChange: (open: boolean) => void
   houseOpen: string | null
   onHouseOpenChange: (house: string | null) => void
 }) {
@@ -275,6 +272,12 @@ function DistrictHouseholdsPanel({
     homeStep?.houses.find((item) => item.house === house) ?? null
   const openHomeStatus = houseOpen === null ? null : homeStatusFor(houseOpen)
   const isLocked = district.status === "locked"
+  const householdGate =
+    district.status === "locked"
+      ? null
+      : district.status === "uninitialized"
+        ? "Write the district description first."
+        : "Lock this district first."
 
   return (
     <section className="card flex min-h-0 flex-col overflow-hidden">
@@ -285,15 +288,28 @@ function DistrictHouseholdsPanel({
         >
           {district.name}
         </span>
-        <DescriptionChip hasDescription={district.has_description} />
         <span className="ml-auto flex items-center gap-1">
-          <Button variant="outline" size="xs" onClick={() => onDescriptionOpenChange(true)}>
+          <Button variant="outline" size="sm" onClick={() => onDescriptionOpenChange(true)}>
             <Sparkles aria-hidden />
             Description
           </Button>
-          <Button variant="outline" size="xs" onClick={() => onStepsOpenChange(true)}>
+          <Button
+            size="sm"
+            disabled={householdGate !== null}
+            title={householdGate ?? undefined}
+            onClick={() => onAddHouseholdsOpenChange(true)}
+          >
+            {householdGate === null ? <Plus aria-hidden /> : <Lock aria-hidden />}
+            Add household
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            title="Steps"
+            aria-label="Steps"
+            onClick={() => onStepsOpenChange(true)}
+          >
             <ListChecks aria-hidden />
-            Steps
           </Button>
         </span>
       </header>
@@ -382,6 +398,13 @@ function DistrictHouseholdsPanel({
         open={stepsOpen}
         onOpenChange={onStepsOpenChange}
       />
+      <AddHouseholdsSheet
+        world={world}
+        district={district.name}
+        districtStatus={district.status}
+        open={addHouseholdsOpen}
+        onOpenChange={onAddHouseholdsOpenChange}
+      />
       <HouseholdSheet
         world={world}
         district={district.name}
@@ -410,6 +433,7 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
   const [newOpen, setNewOpen] = useState(false)
   const [descriptionOpen, setDescriptionOpen] = useState(false)
   const [stepsOpen, setStepsOpen] = useState(false)
+  const [addHouseholdsOpen, setAddHouseholdsOpen] = useState(false)
   const [houseOpen, setHouseOpen] = useState<string | null>(null)
   const [deleteNotice, setDeleteNotice] = useState<DeleteNotice | null>(null)
   const [actionError, setActionError] = useState<string | null>(null)
@@ -472,7 +496,7 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
           >
             <RefreshCw />
           </Button>
-          <Button variant="default" size="xs" onClick={() => setNewOpen(true)}>
+          <Button variant="outline" size="sm" onClick={() => setNewOpen(true)}>
             <Plus />
             New district
           </Button>
@@ -599,6 +623,8 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
           onDescriptionOpenChange={setDescriptionOpen}
           stepsOpen={stepsOpen}
           onStepsOpenChange={setStepsOpen}
+          addHouseholdsOpen={addHouseholdsOpen}
+          onAddHouseholdsOpenChange={setAddHouseholdsOpen}
           houseOpen={houseOpen}
           onHouseOpenChange={setHouseOpen}
         />

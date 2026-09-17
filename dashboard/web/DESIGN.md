@@ -816,3 +816,59 @@ the list and the header stay consistent.
 
 `lib/format.ts` gained `nounLabel(value, singular)` so a bare noun can sit beside a separate
 `num` value; `countLabel` now composes it and its output is unchanged.
+
+## 22. Pane headers and their actions
+
+### 22.1 Amendment to §17.2 rule 2 (primary-action assignment)
+
+§17.2 rule 2 read "exactly one `default`-variant button per screen". Applying it literally to
+the Households tab put the cocoa primary on **`New district`** — the action of the *list*
+pane — while the pane you are actually working in had none. Amended:
+
+**The cocoa primary belongs to the SELECTED item's pane.** So on the Households tab the
+primary is the selected district's `Add household`, and `New district` is demoted to
+`outline`. The empty state keeps its centred `default` CTA (it is the only action then, and
+`New district` is not rendered). Still exactly one `default` button is visible.
+
+### 22.2 Pane header contract
+
+A detail pane's header carries **at most one primary and one secondary**, plus quiet icon
+controls:
+
+| Rank | Treatment |
+| --- | --- |
+| Primary | `default`, `size="sm"` |
+| Secondary | `outline`, `size="sm"` |
+| Tertiary (advanced / rare) | `ghost`, `size="icon-xs"`, `title` + `aria-label` only |
+
+On the households pane: **`Description`** = secondary (`outline`, `Sparkles`),
+**`Add household`** = primary, **`Steps`** = tertiary ghost icon (`ListChecks`) — the raw
+step runner stays reachable without competing for attention.
+
+### 22.3 The household action is state-gated (§18.3 made visible)
+
+`Add household` is the visible form of §18.3's gate, so it renders the gate rather than
+hiding it:
+
+| District status | Button |
+| --- | --- |
+| `uninitialized` | disabled, `Lock` icon, reason `Write the district description first.` |
+| `initialized` | disabled, `Lock` icon, reason `Lock this district first.` |
+| `locked` | **enabled primary** — opens the count panel (§22.4) |
+
+A disabled control must say what unblocks it, so each state carries its own reason in
+`title` and `disabledReason`.
+
+### 22.4 The count panel
+
+`Add household` opens a centered panel (§19) holding a single **count** field (integer ≥ 1,
+default 1) and the shared `JobSubmitBar` with the payload
+`{ kind: "build", world, district, step: "household", count: n }`. It is the UI half of the
+batch mode §18.2 stage 1 already implements — one LLM call producing `n` household
+descriptions.
+
+### 22.5 No restated state in the pane header
+
+`DescriptionChip` is removed from the households pane header. Whether a description exists is
+already the left table's `Status` column (§18.1), and §17.2 rule 5 forbids showing the same
+state twice on one screen. The chip component itself survives for other callers.
