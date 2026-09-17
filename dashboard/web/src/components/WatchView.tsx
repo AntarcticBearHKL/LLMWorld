@@ -216,7 +216,7 @@ export function WatchView() {
   )
 
   return (
-    <div className="flex h-full min-h-0 flex-col gap-0">
+    <div className="flex min-h-0 flex-col gap-0">
       <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
         {backToWorldDetail}
         <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
@@ -456,9 +456,7 @@ export function WatchView() {
         ) : null}
       </div>
 
-      <footer className="chrome shrink-0 px-3.5 py-3">
-        <TimeController />
-      </footer>
+      <TimeController />
     </div>
   )
 }

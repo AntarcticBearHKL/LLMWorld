@@ -1,9 +1,9 @@
 import {
-  ChevronDown,
   ChevronsLeft,
   ChevronsRight,
   Pause,
   Play,
+  SlidersHorizontal,
   StepBack,
   StepForward,
 } from "lucide-react"
@@ -28,7 +28,6 @@ import {
   stepCount,
   stepIndex,
 } from "@/lib/time"
-import { cn } from "@/lib/utils"
 import { dwellMsFor, useTimeStore, type PlayMode } from "@/store/time"
 
 const PHASES: ReadonlyArray<{ until: number; label: string }> = [
@@ -115,166 +114,146 @@ export function TimeController() {
   const totalSteps = stepCount(stepMinutes)
 
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-      <div className="flex items-center gap-1.5">
-        <TransportButton label="Back to 00:00 (Home)" onClick={() => setMinute(0)}>
-          <ChevronsLeft />
-        </TransportButton>
-        <TransportButton
-          label={`Previous step · back ${stepMinutes} min (←)`}
-          onClick={() => jump(-1)}
-        >
-          <StepBack />
-        </TransportButton>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              size="icon"
-              onClick={togglePlay}
-              aria-label={isPlaying ? "Pause" : "Play"}
-              className="size-9"
-            >
-              {isPlaying ? <Pause className="size-4" /> : <Play className="size-4" />}
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>{isPlaying ? "Pause (Space)" : "Play (Space)"}</TooltipContent>
-        </Tooltip>
-        <TransportButton
-          label={`Next step · forward ${stepMinutes} min (→)`}
-          onClick={() => jump(1)}
-        >
-          <StepForward />
-        </TransportButton>
-        <TransportButton label="Jump to 24:00 (End)" onClick={() => setMinute(DAY_MINUTES)}>
-          <ChevronsRight />
-        </TransportButton>
-      </div>
-
-      <div className="flex items-baseline gap-2">
-        <span className="num text-[34px] leading-none font-medium tracking-[-0.02em] text-fg">
-          {formatHHMM(minute)}
-        </span>
-        <span className="flex flex-col leading-tight">
-          <span className="label-micro text-fg-muted">{phaseOf(minute)}</span>
-          <span className="num text-[12px] text-fg-muted">
-            Step {currentStep}/{totalSteps}
+    <div className="pointer-events-none fixed inset-x-0 bottom-4 z-30 flex justify-center px-4">
+      <div className="chrome-lg pointer-events-auto flex max-w-full flex-wrap items-center justify-center gap-1.5 px-2.5 py-2 shadow-3">
+        <div className="flex items-baseline gap-2">
+          <span className="num text-[34px] leading-none font-medium tracking-[-0.02em] text-fg">
+            {formatHHMM(minute)}
           </span>
-        </span>
-      </div>
-
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="num gap-1.5 px-2.5">
-            {stepMinutes} min/step
-            <ChevronDown className="size-3 opacity-60" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="min-w-[172px]">
-          <DropdownMenuLabel className="label-latin">Step size</DropdownMenuLabel>
-          <DropdownMenuRadioGroup
-            value={String(stepMinutes)}
-            onValueChange={(value) => setStepMinutes(Number(value))}
-          >
-            {STEP_PRESETS.map((preset) => (
-              <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
-                {preset} min / step
-                <span className="ml-2 text-[12px] text-fg-muted">
-                  full day: {stepCount(preset)} steps
-                </span>
-              </DropdownMenuRadioItem>
-            ))}
-          </DropdownMenuRadioGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      <div className="flex min-w-[200px] flex-1 items-center gap-3">
-        <Slider
-          value={[minute]}
-          min={0}
-          max={DAY_MINUTES}
-          step={stepMinutes}
-          onValueChange={(value) => {
-            const next = value[0]
-            if (typeof next === "number") {
-              setMinute(next)
-              useTimeStore.getState().setPlaying(false)
-            }
-          }}
-          aria-label="Day timeline"
-          className="grow"
-        />
-        <span className="num shrink-0 text-[12px] text-fg-muted">
-          {progress.toFixed(1)}% · {formatMinutesAsDuration(remaining)} left
-        </span>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <div
-          className="flex items-center gap-0.5 rounded-full border border-border bg-surface-2 p-0.5"
-          role="group"
-          aria-label="Playback mode"
-        >
-          {PLAY_MODES.map((item) => (
-            <button
-              key={item.value}
-              type="button"
-              onClick={() => setPlayMode(item.value)}
-              aria-pressed={playMode === item.value}
-              className={cn(
-                "rounded-full px-3 py-1 text-[14px] font-semibold transition-colors",
-                playMode === item.value
-                  ? "bg-brand text-brand-fg shadow-1"
-                  : "text-fg-muted hover:bg-item-hover hover:text-fg",
-              )}
-            >
-              {item.label}
-            </button>
-          ))}
+          <span className="flex flex-col leading-tight">
+            <span className="label-micro text-fg-muted">{phaseOf(minute)}</span>
+            <span className="num text-[12px] text-fg-muted">
+              Step {currentStep}/{totalSteps}
+            </span>
+          </span>
         </div>
-        {playMode === "autoStep" ? (
-          <span className="num text-[12px] text-fg-muted">
-            Step every {formatDwell(dwellMsFor(speed))}
+
+        <div className="flex items-center gap-1.5">
+          <TransportButton label="Back to 00:00 (Home)" onClick={() => setMinute(0)}>
+            <ChevronsLeft />
+          </TransportButton>
+          <TransportButton
+            label={`Previous step · back ${stepMinutes} min (←)`}
+            onClick={() => jump(-1)}
+          >
+            <StepBack />
+          </TransportButton>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size="icon"
+                onClick={togglePlay}
+                aria-label={isPlaying ? "Pause" : "Play"}
+                className="size-9"
+              >
+                {isPlaying ? <Pause className="size-4" /> : <Play className="size-4" />}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>{isPlaying ? "Pause (Space)" : "Play (Space)"}</TooltipContent>
+          </Tooltip>
+          <TransportButton
+            label={`Next step · forward ${stepMinutes} min (→)`}
+            onClick={() => jump(1)}
+          >
+            <StepForward />
+          </TransportButton>
+          <TransportButton label="Jump to 24:00 (End)" onClick={() => setMinute(DAY_MINUTES)}>
+            <ChevronsRight />
+          </TransportButton>
+        </div>
+
+        <div className="flex items-center gap-2.5 px-1">
+          <Slider
+            value={[minute]}
+            min={0}
+            max={DAY_MINUTES}
+            step={stepMinutes}
+            onValueChange={(value) => {
+              const next = value[0]
+              if (typeof next === "number") {
+                setMinute(next)
+                useTimeStore.getState().setPlaying(false)
+              }
+            }}
+            aria-label="Day timeline"
+            className="w-[120px] sm:w-[200px]"
+          />
+          <span className="num shrink-0 text-[12px] text-fg-muted">
+            {progress.toFixed(1)}% · {formatMinutesAsDuration(remaining)} left
           </span>
-        ) : null}
-      </div>
+        </div>
 
-      <div className="flex items-center gap-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="num gap-1.5 px-2.5">
-              ×{speed}
-              <ChevronDown className="size-3 opacity-60" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="min-w-[168px]">
-            <DropdownMenuLabel className="label-latin">Playback speed</DropdownMenuLabel>
-            <DropdownMenuRadioGroup
-              value={String(speed)}
-              onValueChange={(value) => setSpeed(Number(value))}
-            >
-              {SPEED_PRESETS.map((preset) => (
-                <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
-                  ×{preset}
-                  <span className="ml-2 text-[12px] text-fg-muted">
-                    {speedHint(preset, playMode)}
-                  </span>
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+        <div className="flex items-center gap-1.5">
+          <span className="num text-[12px] text-fg-muted">
+            ×{speed} · {stepMinutes} min/step
+          </span>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon-xs" aria-label="Playback settings">
+                <SlidersHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-[240px]">
+              <DropdownMenuLabel className="label-latin">Step size</DropdownMenuLabel>
+              <DropdownMenuRadioGroup
+                value={String(stepMinutes)}
+                onValueChange={(value) => setStepMinutes(Number(value))}
+              >
+                {STEP_PRESETS.map((preset) => (
+                  <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
+                    {preset} min / step
+                    <span className="ml-2 text-[12px] text-fg-muted">
+                      full day: {stepCount(preset)} steps
+                    </span>
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
 
-      <div className="hidden items-center gap-1.5 2xl:flex">
-        <Key>Space</Key>
-        <span className="text-[12px] text-fg-muted">play</span>
-        <Key>←</Key>
-        <Key>→</Key>
-        <span className="text-[12px] text-fg-muted">±1 step</span>
-        <Key>Shift</Key>
-        <span className="text-[12px] text-fg-muted">±60 min</span>
-        <Key>Home</Key>
-        <Key>End</Key>
+              <DropdownMenuLabel className="label-latin">Mode</DropdownMenuLabel>
+              <DropdownMenuRadioGroup
+                value={playMode}
+                onValueChange={(value) => {
+                  const next = PLAY_MODES.find((item) => item.value === value)
+                  if (next !== undefined) setPlayMode(next.value)
+                }}
+              >
+                {PLAY_MODES.map((item) => (
+                  <DropdownMenuRadioItem key={item.value} value={item.value}>
+                    {item.label}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+
+              <DropdownMenuLabel className="label-latin">Playback speed</DropdownMenuLabel>
+              <DropdownMenuRadioGroup
+                value={String(speed)}
+                onValueChange={(value) => setSpeed(Number(value))}
+              >
+                {SPEED_PRESETS.map((preset) => (
+                  <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
+                    ×{preset}
+                    <span className="ml-2 text-[12px] text-fg-muted">
+                      {speedHint(preset, playMode)}
+                    </span>
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+
+              <DropdownMenuLabel className="label-latin">Shortcuts</DropdownMenuLabel>
+              <div className="flex flex-wrap items-center gap-1.5 px-2 py-1.5">
+                <Key>Space</Key>
+                <span className="text-[12px] text-fg-muted">play</span>
+                <Key>←</Key>
+                <Key>→</Key>
+                <span className="text-[12px] text-fg-muted">±1 step</span>
+                <Key>Shift</Key>
+                <span className="text-[12px] text-fg-muted">±60 min</span>
+                <Key>Home</Key>
+                <Key>End</Key>
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </div>
   )

@@ -154,7 +154,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="min-h-0 flex-1 overflow-hidden p-3 lg:p-4">
+      <main className="min-h-0 flex-1 overflow-y-auto p-3 lg:p-4">
         {effectiveView === "worlds" ? <WorldsList /> : null}
 
         {effectiveView === "world" ? <WorldDetail /> : null}

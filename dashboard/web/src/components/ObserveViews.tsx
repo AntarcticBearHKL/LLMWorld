@@ -48,27 +48,18 @@ export function ObserveDetail() {
   const replay = replayQuery.data
 
   return (
-    <div className="flex h-full min-h-0 flex-col gap-0">
-      <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(0,1fr)] lg:grid-cols-2 xl:grid-cols-3">
-        <div className="flex min-h-0 flex-col border-b border-border lg:border-r xl:border-b-0">
-          <HouseFloorplan replay={replay} />
-          <EnergyChart replay={replay} />
-        </div>
-        <div className="flex min-h-0 flex-col border-b border-border xl:border-r xl:border-b-0">
-          <MemberCards replay={replay} />
-        </div>
-        <div className="flex min-h-0 flex-col border-b border-border lg:col-span-2 xl:col-span-1 xl:border-b-0">
-          <SnapshotPanel />
-          <HouseSwitcher />
-          <PipelineDrawer />
-        </div>
-      </div>
-
+    <div className="flex flex-col gap-0 pb-28">
+      <HouseFloorplan replay={replay} />
+      <EnergyChart replay={replay} />
+      <MemberCards replay={replay} />
       <ActivityTimeline
         replay={replay}
         isPending={replayQuery.isPending}
         error={replayQuery.error}
       />
+      <SnapshotPanel />
+      <HouseSwitcher />
+      <PipelineDrawer />
     </div>
   )
 }

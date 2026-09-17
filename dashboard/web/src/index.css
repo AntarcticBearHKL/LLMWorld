@@ -353,11 +353,13 @@
     border-radius: 0;
   }
 
-  /* Floating overlay chrome: flat paper, for popovers and drawers. */
+  /* Floating overlay chrome: frosted glass, for popovers, drawers and the play bar. */
   .chrome-lg {
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
+    background-color: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur-lg);
+    backdrop-filter: var(--glass-blur-lg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--r-pill);
   }
 
   /* Flat paper card — the data surface of the console (§24). */
@@ -416,5 +418,11 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .chrome-lg {
+    background-color: var(--surface);
   }
 }

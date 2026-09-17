@@ -1037,6 +1037,47 @@ own content has nothing to allocate, so a divider there would only create the bl
 section exists to remove. The timeline is never squeezed because it is not in a flex race at
 all — which is the outcome the drag would otherwise have been used to achieve.
 
+## 27. Document-scale layout — one concern per panel
+
+§24.2 and §25 assumed a **fixed-height shell**: every view filled the viewport, so panels
+competed for height, got squeezed, and needed handles to be re-split. That competition is the
+source of every compression and clipping defect reported since. This section removes the
+assumption instead of managing it.
+
+### 27.1 The shell stops clamping
+
+- `main` **scrolls** (`overflow-y-auto`) rather than `overflow-hidden`, and a view's root takes
+  natural height instead of `h-full`. A view that needs 2000px makes the page 2000px long.
+- Nothing is sized against the viewport height, so nothing can be squeezed by a neighbour.
+- The page keeps one scroll owner: `main`. Panels do not scroll internally unless their content
+  is genuinely unbounded (a log, a long list).
+
+### 27.2 One concern per panel
+
+A panel holds exactly one thing. Two panels stacked inside one column (a floor plan above a load
+curve) is forbidden — each gets its own full-width panel. Panels stack in **one column**,
+separated by the §24.2 hairline, and each is full width.
+
+### 27.3 §25's drag handles are retired
+
+They existed to re-split a competed height. With nothing competing they are affordance without a
+job, so `Panel` returns to a plain region and `hooks/usePanelHeight.ts` is deleted. (§26.2's
+`ResizableColumns` stays available for the one case where two regions genuinely share a width —
+the districts | households columns — but it is not applied to stacked panels.)
+
+### 27.4 The play bar becomes a floating toolbar
+
+The single place §15's material returns: a bottom-centred **`chrome-lg`** bar — frosted glass,
+`--r-pill`-adjacent radius, `--shadow-3` — pinned to the **viewport** bottom, holding only what a
+transport needs:
+
+| In the bar | Moved out |
+| --- | --- |
+| the time readout, `Back to 00:00`, `Previous step`, `Play`/`Pause`, `Next step`, `Jump to 24:00` | step size, continuous vs step, speed — collapsed into one compact disclosure inside the bar |
+
+Content carries bottom padding equal to the bar's height plus the gutter, so the bar never hides
+the last panel.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the
