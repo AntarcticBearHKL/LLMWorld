@@ -395,7 +395,7 @@ HUD 显示 `采样无效` 表示该次采样被判为节流（帧间隔失速率
 
 ```
 ┌ 顶栏（全局，glass 吸顶）
-│  BrandMark │ 工作区切换（观察 │ 控制） │ 选择控�制 run/date/house/policy │ 主题
+│  BrandMark │ 工作区切换（观察 │ 控制） │ 选择控制 run/date/house/policy │ 主题
 ├ 指标条（观察类工作区）  总电量 / 峰功率 / 峰时段 / 负荷率 / 活跃电器 / 成员数
 ├ 主区（按工作区切换）
 │  小镇    → 房子阵列（Konva）→ 点房进室内
@@ -791,4 +791,28 @@ under `prefers-reduced-motion` (the window then stays at its default corner).
 - Open/closed lives in the store (`jobsOpen`) so it survives navigation but does **not**
   enter the URL: a shared link should not carry someone else's monitor state.
 - `view=jobs` keeps working for old links: it renders the Worlds-family view underneath and
-  forces the window open (`view=jobs` ⇒ effective view `worldsView`, window open).
+  forces the window open (`view=jobs` → effective view `worldsView`, window open).
+
+## 21. Instrument headers — typography, not containers
+
+§7 documented `WorldBadge` as a pill and the world header drew its counts in a `chip`. Two
+rounded-rectangle tags of equal visual weight sat beside the world id, so the header reported
+everything and ranked nothing.
+
+**Rule.** A header that reports state and counts builds hierarchy from **type**, not from
+containers:
+
+| Element | Treatment |
+| --- | --- |
+| State (`Draft` / `Frozen`) | a 6px dot + an 11px `label-latin` micro-label. **Hollow** dot = draft, **filled** `--info` dot = frozen — state rides on shape as well as colour (§8). No border, no fill, no radius. |
+| Counts | a `num` value at 13px/600 in `--fg`, then its noun in `label-latin`; the three pairs are separated by `1px --border` rules. The number leads, the label recedes. |
+| Structural rules | `1px --border` — never `--border-strong`, which is reserved for inputs and chip outlines (§5). |
+| Separators | one `h-4 w-px` rule after the back control; `h-3 w-px` rules between stat pairs. |
+
+`chip` (§7) survives for **selectable** pills (`DistrictPromptFields`, `WorldBuilder` preset
+pickers) and for in-canvas HUDs (`SceneStage`, `Town`) — it is no longer used for header
+counts. `WorldBadge` keeps its name and both call sites (`WorldsList` rows, `WorldDetail`) so
+the list and the header stay consistent.
+
+`lib/format.ts` gained `nounLabel(value, singular)` so a bare noun can sit beside a separate
+`num` value; `countLabel` now composes it and its output is unchanged.

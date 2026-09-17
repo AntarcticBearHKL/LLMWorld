@@ -10,11 +10,24 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useWorld } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
-import { countLabel } from "@/lib/format"
+import { nounLabel } from "@/lib/format"
 import { useTimeStore, type WorldTab } from "@/store/time"
 
 const isWorldTab = (value: string): value is WorldTab =>
   value === "scenarios" || value === "household"
+
+function Stat({ value, word }: { value: number; word: string }) {
+  return (
+    <span className="flex items-baseline gap-1.5">
+      <span className="num text-[13px] font-semibold text-fg">{value}</span>
+      <span className="label-latin">{nounLabel(value, word)}</span>
+    </span>
+  )
+}
+
+function Divider() {
+  return <span className="h-3 w-px shrink-0 bg-border" aria-hidden />
+}
 
 export function WorldDetail() {
   const world = useTimeStore((state) => state.world)
@@ -73,17 +86,19 @@ export function WorldDetail() {
 
   return (
     <div className="flex h-full min-h-0 w-full flex-col gap-3">
-      <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 px-3.5 py-3">
+      <header className="chrome flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 px-3.5 py-3">
         {back}
-        <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
+        <span className="h-4 w-px shrink-0 bg-border" aria-hidden />
         <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
           {info.world_id}
         </span>
         <WorldBadge frozen={info.frozen} />
-        <span className="chip num text-[12px]">
-          {countLabel(info.districts.length, "district")} ·{" "}
-          {countLabel(info.houses.length, "household")} ·{" "}
-          {countLabel(info.spacetimes.length, "scenario")}
+        <span className="flex items-center gap-3">
+          <Stat value={info.districts.length} word="district" />
+          <Divider />
+          <Stat value={info.houses.length} word="household" />
+          <Divider />
+          <Stat value={info.spacetimes.length} word="scenario" />
         </span>
         <span className="ml-auto">
           <CloneWorldButton
