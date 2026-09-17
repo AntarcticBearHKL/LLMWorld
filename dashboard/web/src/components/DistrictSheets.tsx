@@ -101,22 +101,22 @@ export function NewDistrictSheet(props: {
                 value={draft}
                 placeholder={suggested}
                 onChange={(event) => setDraft(event.target.value)}
-                className="num h-8 w-full px-2.5 text-[14px]"
+                className="num h-8 w-full px-2.5 t-title"
               />
               <Button size="sm" type="submit" disabled={create.isPending}>
                 <Plus />
                 Create district
               </Button>
             </div>
-            <p className="text-[12px] text-fg-subtle">
+            <p className="t-caption text-fg-subtle">
               A blank name uses the suggested <span className="num">district_&lt;word&gt;</span> id
               shown above. Creating a district is local — no LLM calls.
             </p>
             {create.isError ? (
-              <p className="text-[12px] text-danger">Create failed: {errorMessage(create.error)}</p>
+              <p className="t-caption text-danger">Create failed: {errorMessage(create.error)}</p>
             ) : null}
             {create.isSuccess ? (
-              <p className="num text-[12px] text-success">
+              <p className="num t-caption text-success">
                 District {create.data.name}{" "}
                 {create.data.created ? "created" : "already existed — nothing changed"}.
               </p>
@@ -220,9 +220,9 @@ function DescriptionBody({
           id="district-description-name"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          className="num h-8 w-full px-2.5 text-[14px]"
+          className="num h-8 w-full px-2.5 t-title"
         />
-        {nameError !== null ? <p className="text-[12px] text-danger">{nameError}</p> : null}
+        {nameError !== null ? <p className="t-caption text-danger">{nameError}</p> : null}
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -233,15 +233,15 @@ function DescriptionBody({
           id="district-description-text"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
-          className="min-h-32 text-[13px] whitespace-pre-wrap"
+          className="min-h-32 t-body whitespace-pre-wrap"
         />
         {!district.has_description ? (
-          <p className="text-[12px] text-fg-subtle">
+          <p className="t-caption text-fg-subtle">
             {target} has no description yet — write a prompt below and the LLM rewrites it into
             one, then saves it.
           </p>
         ) : district.description.length === 0 ? (
-          <p className="text-[12px] text-fg-subtle">
+          <p className="t-caption text-fg-subtle">
             The description file for {target} exists, but its text is not inlined here.
           </p>
         ) : null}
@@ -250,17 +250,17 @@ function DescriptionBody({
       <div className="flex flex-wrap items-center gap-2">
         <Button size="sm" type="button" onClick={onSave} disabled={save.isPending || !dirty}>
           <Save />
-          {save.isPending ? "Saving…" : "Save changes"}
+          {save.isPending ? "Saving…" : nameChanged ? "Save changes & rename" : "Save description"}
         </Button>
-        <span className="text-[12px] text-fg-subtle">
+        <span className="t-caption text-fg-subtle">
           {dirty ? "Only the fields you changed are sent." : "Everything matches what is saved."}
         </span>
       </div>
       {save.isError ? (
-        <p className="text-[12px] text-danger">Save failed: {errorMessage(save.error)}</p>
+        <p className="t-caption text-danger">Save failed: {errorMessage(save.error)}</p>
       ) : null}
       {save.isSuccess && !dirty ? (
-        <p className="num text-[12px] text-success">Saved {saved.name}.</p>
+        <p className="num t-caption text-success">Saved {saved.name}.</p>
       ) : null}
 
       <div className="border-t border-border" />
@@ -268,7 +268,7 @@ function DescriptionBody({
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <span className="label-micro">Optimize the description</span>
-          <p className="text-[12px] text-fg-subtle">
+          <p className="t-caption text-fg-subtle">
             This is a text optimisation, not a generation: the LLM rewrites your prompt into this
             district's description and saves it — it does not invent the district from nothing.
           </p>
@@ -377,7 +377,7 @@ export function HouseholdSheet(props: {
             <HouseholdPreview world={world} district={district} house={house} />
           ) : (
             <div className="flex flex-col gap-3">
-              <p className="text-[12px] text-fg-subtle">
+              <p className="t-caption text-fg-subtle">
                 No home for {house} yet — generate its rooms and appliances to preview them here.
               </p>
               <JobSubmitBar

@@ -26,11 +26,11 @@ const groupByRoom = (info: HouseholdInfo): Map<string, ApplianceInfo[]> => {
 function ApplianceChip({ appliance }: { appliance: ApplianceInfo }) {
   return (
     <span
-      className="chip text-[12px]"
+      className="chip t-body"
       title={appliance.owner === null ? appliance.type : `${appliance.type} · ${appliance.owner}`}
     >
       <span>{appliance.name}</span>
-      <span className="num shrink-0 text-fg-subtle">{Math.round(appliance.power_watts)} W</span>
+      <span className="num shrink-0 t-caption">{Math.round(appliance.power_watts)} W</span>
     </span>
   )
 }
@@ -49,14 +49,14 @@ function RoomRow({
   return (
     <li className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-2.5 py-1.5">
       <span className="flex flex-wrap items-baseline gap-x-2">
-        <span className="text-[13px] text-fg">{name}</span>
-        {size !== null ? <span className="num text-[12px] text-fg-subtle">{size} m²</span> : null}
+        <span className="t-body">{name}</span>
+        {size !== null ? <span className="num t-caption">{size} m²</span> : null}
         {totalWatts > 0 ? (
-          <span className="num ml-auto text-[12px] text-fg-subtle">{Math.round(totalWatts)} W</span>
+          <span className="num ml-auto t-caption">{Math.round(totalWatts)} W</span>
         ) : null}
       </span>
       {appliances.length === 0 ? (
-        <span className="text-[12px] text-fg-subtle">No appliances.</span>
+        <span className="t-caption">No appliances.</span>
       ) : (
         <span className="flex flex-wrap gap-1.5">
           {appliances.map((appliance) => (
@@ -72,15 +72,15 @@ function MemberRow({ member }: { member: MemberInfo }) {
   return (
     <li className="rounded-lg border border-border bg-surface px-2.5 py-1.5">
       <div className="flex flex-wrap items-baseline gap-x-2">
-        <span className="num text-[13px] font-semibold text-fg">{member.id}</span>
-        <span className="num text-[12px] text-fg-muted">
+        <span className="num t-body">{member.id}</span>
+        <span className="num t-caption">
           {member.age !== null ? `${member.age} y` : "age unknown"}
         </span>
-        <span className="text-[12px] text-fg-muted">{member.gender ?? "gender unknown"}</span>
+        <span className="t-caption">{member.gender ?? "gender unknown"}</span>
       </div>
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-fg-subtle">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 t-caption">
         <span>{member.occupation ?? "occupation unknown"}</span>
-        {member.bedroom !== null ? <span className="chip text-[12px]">{member.bedroom}</span> : null}
+        {member.bedroom !== null ? <span className="chip t-body">{member.bedroom}</span> : null}
       </div>
     </li>
   )
@@ -90,12 +90,12 @@ export function HouseholdPreview({ world, district, house }: HouseholdPreviewPro
   const query = useDistrictHousehold(world, district, house, true)
 
   if (query.isPending) {
-    return <p className="text-[12px] text-fg-subtle">Loading rooms, members and appliances…</p>
+    return <p className="t-caption">Loading rooms, members and appliances…</p>
   }
 
   if (query.isError) {
     return (
-      <p className="text-[12px] text-danger">
+      <p className="t-caption text-danger">
         Failed to load this household: {errorMessage(query.error)}
       </p>
     )
@@ -103,7 +103,7 @@ export function HouseholdPreview({ world, district, house }: HouseholdPreviewPro
 
   const info = query.data
   if (info === undefined) {
-    return <p className="text-[12px] text-fg-subtle">No household data for {house}.</p>
+    return <p className="t-caption">No household data for {house}.</p>
   }
 
   const rooms = roomList(info)
@@ -116,15 +116,15 @@ export function HouseholdPreview({ world, district, house }: HouseholdPreviewPro
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span className="text-[13px] font-semibold text-fg">{info.household_type}</span>
+        <span className="t-title">{info.household_type}</span>
         {info.home_name !== null ? (
-          <span className="num text-[12px] text-fg-muted">{info.home_name}</span>
+          <span className="num t-caption">{info.home_name}</span>
         ) : null}
         {info.home_type !== null ? (
-          <span className="text-[12px] text-fg-muted">{info.home_type}</span>
+          <span className="t-caption">{info.home_type}</span>
         ) : null}
         {info.home_size !== null ? (
-          <span className="num text-[12px] text-fg-subtle">{info.home_size} m²</span>
+          <span className="num t-caption">{info.home_size} m²</span>
         ) : null}
         <span className="label-micro ml-auto">
           {countLabel(rooms.length, "room")} · {countLabel(info.members.length, "member")} ·{" "}
@@ -136,7 +136,7 @@ export function HouseholdPreview({ world, district, house }: HouseholdPreviewPro
         <section className="flex flex-col gap-2">
           <span className="label-micro">Rooms &amp; appliances</span>
           {emptyRooms ? (
-            <p className="text-[12px] text-fg-subtle">No rooms recorded for this household.</p>
+            <p className="t-caption">No rooms recorded for this household.</p>
           ) : (
             <ul className="flex flex-col gap-1.5">
               {rooms.map((room) => (
@@ -160,7 +160,7 @@ export function HouseholdPreview({ world, district, house }: HouseholdPreviewPro
         <section className="flex flex-col gap-2">
           <span className="label-micro">Members</span>
           {info.members.length === 0 ? (
-            <p className="text-[12px] text-fg-subtle">No members recorded for this household.</p>
+            <p className="t-caption">No members recorded for this household.</p>
           ) : (
             <ul className="flex flex-col gap-1.5">
               {info.members.map((member) => (

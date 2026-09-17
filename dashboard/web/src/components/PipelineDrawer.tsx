@@ -82,7 +82,7 @@ export function PipelineDrawer() {
             s1–s4
           </Badge>
         </div>
-        <p className="text-[13px] text-fg-muted">
+        <p className="t-body">
           {selectedMember === null
             ? "Select a block on the timeline to pick a member."
             : `Selected ${selectedMember} — inspect the s1 → s4 reasoning chain and LLM logs.`}
@@ -99,7 +99,7 @@ export function PipelineDrawer() {
         <SheetHeader className="border-b border-border">
           <SheetTitle className="flex items-center gap-2">
             Decision pipeline
-            <span className="num text-[14px] font-normal text-fg-muted">{selectedMember ?? "—"}</span>
+            <span className="num t-caption">{selectedMember ?? "—"}</span>
           </SheetTitle>
           <SheetDescription>
             The full decision chain for this member&apos;s day: macro plan → member coordination → rich
@@ -110,15 +110,15 @@ export function PipelineDrawer() {
         <Tabs defaultValue="s1" className="flex min-h-0 flex-1 flex-col">
           <TabsList className="mx-5 mt-4 shrink-0 justify-start">
             {STAGES.map((stage) => (
-              <TabsTrigger key={stage.key} value={stage.key} className="num text-[13px]">
+              <TabsTrigger key={stage.key} value={stage.key} className="num t-micro">
                 {stage.key}
                 {available(stage.key) ? "" : " ·"}
               </TabsTrigger>
             ))}
-            <TabsTrigger value="logs" className="text-[13px]">
+            <TabsTrigger value="logs" className="t-micro">
               Logs
             </TabsTrigger>
-            <TabsTrigger value="report" className="text-[13px]">
+            <TabsTrigger value="report" className="t-micro">
               Report
             </TabsTrigger>
           </TabsList>
@@ -130,15 +130,15 @@ export function PipelineDrawer() {
               return (
                 <TabsContent key={stage.key} value={stage.key} className="mt-0">
                   <div className="mb-3 flex items-baseline gap-2">
-                    <span className="text-[14px] font-semibold text-fg">{stage.title}</span>
+                    <span className="t-title">{stage.title}</span>
                     <span className="label-micro">{stage.hint}</span>
-                    <span className="num ml-auto text-[12px] text-fg-subtle">
+                    <span className="num ml-auto t-caption">
                       {segments.length} segments
                     </span>
                   </div>
 
                   {segments.length === 0 ? (
-                    <p className="text-[13px] text-fg-subtle">
+                    <p className="t-caption">
                       {stagesQuery.isPending ? "Loading…" : "No data for this stage."}
                     </p>
                   ) : (
@@ -149,14 +149,14 @@ export function PipelineDrawer() {
                           className="border-b border-border bg-surface-2 px-3.5 py-2.5"
                         >
                           <div className="flex items-baseline gap-2">
-                            <span className="num shrink-0 text-[13px] text-brand">{segment.time ?? "—"}</span>
-                            <span className="min-w-0 flex-1 truncate text-[13px] text-fg-muted">
+                            <span className="num shrink-0 t-caption text-brand">{segment.time ?? "—"}</span>
+                            <span className="min-w-0 flex-1 truncate t-body">
                               {segment.location ?? "—"}
                             </span>
                           </div>
-                          <div className="mt-0.5 text-[13px] text-fg">{segment.activity ?? "—"}</div>
+                          <div className="mt-0.5 t-body">{segment.activity ?? "—"}</div>
                           {segment.desc !== undefined && segment.desc.length > 0 ? (
-                            <div className="mt-0.5 text-[12px] leading-relaxed text-fg-subtle">
+                            <div className="mt-0.5 t-body leading-relaxed">
                               {segment.desc}
                             </div>
                           ) : null}
@@ -165,7 +165,7 @@ export function PipelineDrawer() {
                               {segment.operations.map((operation, opIndex) => (
                                 <span
                                   key={`${operation.unique_id}-${opIndex}`}
-                                  className="num rounded-full border border-border-strong bg-surface px-2 py-px text-[12px] text-fg-muted"
+                                  className="num rounded-full border border-border-strong bg-surface px-2 py-px t-micro"
                                 >
                                   {operation.unique_id}
                                   <span className="text-energy">
@@ -190,10 +190,10 @@ export function PipelineDrawer() {
                   return (
                     <section key={`log-${stage.key}`}>
                       <div className="mb-1.5 flex items-baseline gap-2">
-                        <span className="text-[14px] font-semibold text-fg">{stage.title}</span>
+                        <span className="t-title">{stage.title}</span>
                         <span className="label-latin">raw llm log</span>
                       </div>
-                      <pre className="num max-h-72 overflow-auto rounded-xl border border-border bg-surface-2 px-3 py-2 text-[12px] leading-relaxed whitespace-pre-wrap text-fg-muted">
+                      <pre className="num max-h-72 overflow-auto rounded-xl border border-border bg-surface-2 px-3 py-2 t-caption leading-relaxed whitespace-pre-wrap">
                         {text.length > 0 ? text : "No log file for this stage."}
                       </pre>
                     </section>
@@ -204,10 +204,10 @@ export function PipelineDrawer() {
 
             <TabsContent value="report" className="mt-0">
               <div className="mb-3 flex items-baseline gap-2">
-                <span className="text-[14px] font-semibold text-fg">s4 validation report</span>
+                <span className="t-title">s4 validation report</span>
                 <span className="label-micro">cleaned / repaired / dropped counts</span>
               </div>
-              <pre className="num max-h-[28rem] overflow-auto rounded-xl border border-border bg-surface-2 px-3 py-2 text-[12px] leading-relaxed whitespace-pre-wrap text-fg-muted">
+              <pre className="num max-h-[28rem] overflow-auto rounded-xl border border-border bg-surface-2 px-3 py-2 t-caption leading-relaxed whitespace-pre-wrap">
                 {stages?.report === null || stages?.report === undefined
                   ? "No validation report."
                   : JSON.stringify(stages.report, null, 2)}

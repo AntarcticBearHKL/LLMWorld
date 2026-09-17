@@ -54,13 +54,13 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
     >
       <header className="flex shrink-0 items-center gap-2 border-b border-border px-3 py-2">
         <span
-          className="num flex size-6 items-center justify-center rounded-full text-[12px] font-semibold"
+          className="num flex size-6 items-center justify-center rounded-full t-caption"
           style={{ backgroundColor: memberColorVar(member.id, memberIds), color: "var(--bg)" }}
         >
           {memberInitial(member.id)}
         </span>
-        <span className="num text-[14px] font-semibold text-fg">{member.id}</span>
-        <span className="label-micro text-fg-muted truncate">{member.info.bedroom ?? ""}</span>
+        <span className="num t-title">{member.id}</span>
+        <span className="t-caption text-fg-muted truncate">{member.info.bedroom ?? ""}</span>
         <Button
           variant="ghost"
           size="icon-sm"
@@ -74,54 +74,54 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3 py-2.5">
         <div className="flex flex-col gap-0.5">
-          <span className="num text-[12px] text-fg-muted">
+          <span className="num t-caption text-fg-muted">
             {member.info.age !== null ? `age ${member.info.age}` : "Age unknown"}
             {member.info.gender !== null ? ` · ${member.info.gender}` : ""}
           </span>
           {member.info.occupation !== null ? (
-            <span className="text-[13px] leading-snug text-fg-muted" title={member.info.occupation}>
+            <span className="t-caption leading-snug text-fg-muted" title={member.info.occupation}>
               {member.info.occupation}
             </span>
           ) : null}
           {member.info.persona.length > 0 ? (
-            <span className="mt-0.5 line-clamp-2 text-[12px] leading-snug text-fg-muted">
+            <span className="mt-0.5 line-clamp-2 t-caption leading-snug text-fg-muted">
               {member.info.persona}
             </span>
           ) : null}
         </div>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
-          <span className="label-micro text-fg-muted">Now</span>
+          <span className="t-micro">Now</span>
           {segment !== undefined ? (
             <>
-              <span className="text-[13px] leading-snug text-fg">{segment.activity}</span>
-              <span className="num text-[12px] text-fg-muted">
+              <span className="t-caption leading-snug text-fg">{segment.activity}</span>
+              <span className="num t-caption text-fg-muted">
                 {segment.location} · {formatHHMM(segment.start)}–{formatHHMM(segment.end)} ·{" "}
                 {formatMinutesAsDuration(minute - segment.start)} elapsed
               </span>
             </>
           ) : (
-            <span className="text-[13px] text-fg-muted">No activity recorded at this time.</span>
+            <span className="t-caption text-fg-muted">No activity recorded at this time.</span>
           )}
         </section>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
-          <span className="label-micro text-fg-muted">
+          <span className="t-micro">
             In use · {used.length} appliances · {formatWatts(totalWatts)} total
           </span>
           {used.length === 0 ? (
-            <span className="text-[13px] text-fg-muted">No appliance in use.</span>
+            <span className="t-caption text-fg-muted">No appliance in use.</span>
           ) : (
             <ul className="flex flex-col gap-1">
               {used.map((appliance) => (
                 <li key={appliance.unique_id} className="flex items-baseline gap-2">
-                  <span className="min-w-0 flex-1 truncate text-[13px] text-fg-muted">
+                  <span className="min-w-0 flex-1 truncate t-caption text-fg-muted">
                     {appliance.info.name} · {roomOf(appliance.info)}
                   </span>
-                  <span className="num shrink-0 text-[12px] text-energy">
+                  <span className="num shrink-0 t-caption text-energy">
                     {formatWatts(wattsAt(appliance, minute))}
                   </span>
-                  <span className="label-latin shrink-0 text-fg-muted">
+                  <span className="t-micro shrink-0">
                     {APPLIANCE_STATE_LABELS[stateAt(appliance, minute)]}
                   </span>
                 </li>
@@ -131,15 +131,15 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
         </section>
 
         <section className="mt-3 flex flex-col gap-1 border-t border-border pt-2">
-          <span className="label-micro text-fg-muted">Next</span>
+          <span className="t-micro">Next</span>
           {upcoming.length === 0 ? (
-            <span className="text-[13px] text-fg-muted">No more activity today.</span>
+            <span className="t-caption text-fg-muted">No more activity today.</span>
           ) : (
             <ul className="flex flex-col gap-1">
               {upcoming.map((item) => (
                 <li key={`${item.start}-${item.activity.slice(0, 12)}`} className="flex items-baseline gap-2">
-                  <span className="num shrink-0 text-[12px] text-brand">{formatHHMM(item.start)}</span>
-                  <span className="min-w-0 flex-1 truncate text-[13px] text-fg-muted">{item.activity}</span>
+                  <span className="num shrink-0 t-caption text-brand">{formatHHMM(item.start)}</span>
+                  <span className="min-w-0 flex-1 truncate t-caption text-fg-muted">{item.activity}</span>
                 </li>
               ))}
             </ul>
@@ -149,7 +149,7 @@ export function AgentHud({ replay, onOpenPipeline }: AgentHudProps) {
 
       {onOpenPipeline !== undefined ? (
         <footer className="shrink-0 border-t border-border px-3 py-2">
-          <Button variant="outline" size="sm" className="w-full" onClick={() => onOpenPipeline(member.id)}>
+          <Button variant="outline" size="sm" className="w-full t-caption" onClick={() => onOpenPipeline(member.id)}>
             Open decision pipeline
           </Button>
         </footer>

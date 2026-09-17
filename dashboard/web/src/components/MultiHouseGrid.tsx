@@ -21,7 +21,7 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
   if (run.length === 0) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-2.5 p-8 text-center">
-        <p className="text-[15px] font-medium text-fg">No replay data yet</p>
+        <p className="t-title">No replay data yet</p>
         <p className="label-micro max-w-[420px] leading-relaxed">
           Pick a world and open one of its scenarios to replay a simulated day. This grid then shows
           what every household is doing and which appliances draw power.
@@ -32,11 +32,11 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
   }
 
   if (snapshotQuery.isPending) {
-    return <p className="p-6 text-[13px] text-fg-subtle">Loading household snapshot…</p>
+    return <p className="p-6 t-caption">Loading household snapshot…</p>
   }
 
   if (snapshot === undefined) {
-    return <p className="p-6 text-[13px] text-fg-subtle">No household data at this minute.</p>
+    return <p className="p-6 t-caption">No household data at this minute.</p>
   }
 
   const visible =
@@ -46,7 +46,7 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
 
   if (visible.length === 0) {
     return (
-      <p className="p-6 text-[13px] text-fg-subtle">
+      <p className="p-6 t-caption">
         No households in this selection for this day.
       </p>
     )
@@ -57,8 +57,8 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 items-baseline gap-3 border-b border-border px-4 py-3">
-        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">Household grid</span>
-        <span className="num text-[13px] text-fg-subtle">
+        <span className="t-title">Household grid</span>
+        <span className="num t-caption">
           {visible.length} households · {formatHHMM(minute)}
         </span>
         <span className="label-latin ml-auto">Select a household to inspect its members</span>
@@ -82,9 +82,9 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
               )}
             >
               <div className="flex items-center gap-2">
-                <span className="num text-[15px] font-semibold text-fg">{item.house}</span>
+                <span className="num t-title">{item.house}</span>
                 <ChevronRight className="size-3.5 shrink-0 text-fg-subtle" aria-hidden />
-                <span className="num ml-auto text-[15px] font-medium text-energy">
+                <span className="num ml-auto t-display text-energy">
                   {formatWatts(item.total_watts)}
                 </span>
               </div>
@@ -108,7 +108,7 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
                 {item.people.slice(0, 5).map((person) => (
                   <li key={person.member} className="flex items-start gap-1.5">
                     <span
-                      className="num mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold"
+                      className="num t-micro mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full"
                       style={{
                         backgroundColor: memberColorVar(person.member, memberIds),
                         color: "var(--bg)",
@@ -117,16 +117,16 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
                       {memberInitial(person.member)}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="num text-[12px] text-fg">{person.member}</span>
-                      <span className="ml-1.5 text-[12px] text-fg-subtle">{person.location}</span>
-                      <span className="mt-px line-clamp-2 block text-[12px] leading-snug text-fg-muted">
+                      <span className="num t-body text-fg">{person.member}</span>
+                      <span className="ml-1.5 t-caption">{person.location}</span>
+                      <span className="mt-px line-clamp-2 block t-body leading-snug">
                         {person.activity}
                       </span>
                     </span>
                   </li>
                 ))}
                 {item.people.length > 5 ? (
-                  <li className="num text-[12px] text-fg-subtle">
+                  <li className="num t-caption">
                     {item.people.length - 5} more members
                   </li>
                 ) : null}
@@ -134,20 +134,20 @@ export function MultiHouseGrid({ onOpen, houses }: MultiHouseGridProps) {
 
               <div className="mt-auto flex flex-wrap items-center gap-1 border-t border-border pt-2">
                 {running.length === 0 ? (
-                  <span className="text-[12px] text-fg-subtle">No appliance drawing power</span>
+                  <span className="t-caption">No appliance drawing power</span>
                 ) : (
                   <>
                     <span className="label-micro shrink-0">Drawing {running.length}</span>
                     {running.slice(0, 3).map((appliance) => (
                       <span
                         key={appliance.unique_id}
-                        className="num truncate rounded-full border border-border-strong bg-surface-2 px-2 py-px text-[12px] text-fg-muted"
+                        className="num t-caption truncate rounded-full border border-border-strong bg-surface-2 px-2 py-px"
                       >
                         {appliance.name}
                       </span>
                     ))}
                     {running.length > 3 ? (
-                      <span className="num text-[12px] text-fg-subtle">+{running.length - 3}</span>
+                      <span className="num t-caption">+{running.length - 3}</span>
                     ) : null}
                   </>
                 )}

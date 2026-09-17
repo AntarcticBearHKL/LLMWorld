@@ -1,14 +1,12 @@
 import { Lock } from "lucide-react"
 
 import type { WorldInfo } from "@/api/types"
-import { CloneWorldButton } from "@/components/CloneWorldButton"
 import { WorldDistricts } from "@/components/WorldDistricts"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useSpacetimes, useWorldDayBlocks } from "@/hooks/useSpacetimes"
 import { errorMessage } from "@/lib/errors"
 import { countLabel } from "@/lib/format"
-import { useTimeStore } from "@/store/time"
 
 function Chips({ items }: { items: string[] }) {
   return (
@@ -16,7 +14,7 @@ function Chips({ items }: { items: string[] }) {
       {items.map((item) => (
         <span
           key={item}
-          className="num rounded-full border border-border-strong bg-surface-2 px-2.5 py-0.5 text-[12px] text-fg-muted"
+          className="num t-body rounded-full border border-border-strong bg-surface-2 px-2.5 py-0.5"
         >
           {item}
         </span>
@@ -26,8 +24,6 @@ function Chips({ items }: { items: string[] }) {
 }
 
 function FrozenHouseholds({ info }: { info: WorldInfo }) {
-  const setWorld = useTimeStore((state) => state.setWorld)
-  const setTab = useTimeStore((state) => state.setTab)
   const spacetimesQuery = useSpacetimes(info.world_id)
   const latest = spacetimesQuery.data?.[0] ?? null
   const run = latest?.name ?? ""
@@ -38,7 +34,7 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
   const grouped = blocks.some((block) => block.houses.length > 0)
 
   const noDaysNote = (
-    <p className="text-[12px] text-fg-subtle">
+    <p className="t-caption">
       No simulated days in {latest?.name ?? "this world"} yet — household-to-block grouping appears
       after the simulation has run.
     </p>
@@ -48,27 +44,17 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
     <section className="card flex min-h-0 flex-1 flex-col overflow-hidden">
       <div className="mx-3 mt-3 flex shrink-0 flex-wrap items-center gap-2 rounded-xl border border-energy/30 bg-energy-soft px-3.5 py-2.5">
         <Lock className="size-3.5 shrink-0 text-energy" aria-hidden />
-        <span className="text-[13px] text-fg">
+        <span className="t-caption">
           Households are frozen (this world has scenarios). Clone the world to edit.
-        </span>
-        <span className="ml-auto">
-          <CloneWorldButton
-            world={info.world_id}
-            label="Clone world"
-            onCloned={(worldId) => {
-              setWorld(worldId)
-              setTab("household")
-            }}
-          />
         </span>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto p-4">
         {spacetimesQuery.isPending ? (
-          <p className="text-[13px] text-fg-subtle">Loading scenarios…</p>
+          <p className="t-caption">Loading scenarios…</p>
         ) : spacetimesQuery.isError ? (
           <div className="flex flex-col items-start gap-2">
-            <p className="text-[13px] text-danger">
+            <p className="t-caption text-danger">
               Failed to load scenarios: {errorMessage(spacetimesQuery.error)}
             </p>
             <Button variant="outline" size="xs" onClick={() => void spacetimesQuery.refetch()}>
@@ -76,7 +62,7 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
             </Button>
           </div>
         ) : latest === null ? (
-          <p className="text-[13px] text-fg-subtle">No scenarios found for this world.</p>
+          <p className="t-caption">No scenarios found for this world.</p>
         ) : (
           <div className="flex flex-col gap-4">
             <span className="label-micro">
@@ -86,7 +72,7 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
             </span>
 
             {info.districts.length === 0 ? (
-              <p className="text-[13px] text-fg-subtle">This world has no blocks yet.</p>
+              <p className="t-caption">This world has no blocks yet.</p>
             ) : grouped ? (
               <ul className="grid grid-cols-1 gap-0 sm:grid-cols-2">
                 {blocks.map((block) => (
@@ -95,7 +81,7 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
                     className="card-lift flex flex-col gap-2 border-b border-border bg-surface-2 p-3.5 hover:border-border-strong sm:odd:border-r"
                   >
                     <span className="flex items-center gap-2">
-                      <span className="num text-[15px] font-semibold text-fg">{block.postcode}</span>
+                      <span className="num t-title">{block.postcode}</span>
                       <Badge variant="outline" className="label-latin">
                         {countLabel(block.house_count, "household")}
                       </Badge>
@@ -116,7 +102,7 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
                 <div className="flex flex-col gap-1.5">
                   <span className="label-micro">Households</span>
                   {info.houses.length === 0 ? (
-                    <p className="text-[13px] text-fg-subtle">No households in this world.</p>
+                    <p className="t-caption">No households in this world.</p>
                   ) : (
                     <Chips items={info.houses} />
                   )}
@@ -124,9 +110,9 @@ function FrozenHouseholds({ info }: { info: WorldInfo }) {
                 {date.length === 0 ? (
                   noDaysNote
                 ) : blocksQuery.isPending ? (
-                  <p className="text-[13px] text-fg-subtle">Loading block structure…</p>
+                  <p className="t-caption">Loading block structure…</p>
                 ) : blocksQuery.isError ? (
-                  <p className="text-[13px] text-fg-subtle">
+                  <p className="t-caption">
                     Block structure unavailable: {errorMessage(blocksQuery.error)}
                   </p>
                 ) : (

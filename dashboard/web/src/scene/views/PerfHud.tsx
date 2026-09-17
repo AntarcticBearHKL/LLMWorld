@@ -78,33 +78,33 @@ export function PerfHud({ autoStart = false, onDegradeChange }: PerfHudProps) {
 
   return (
     <div className="flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1">
-      <span className="label-micro">Perf</span>
-      <span className="num text-[12px] text-fg">
+      <span className="t-micro">Perf</span>
+      <span className="num t-caption text-fg">
         {report === null ? "Not sampled" : `${report.fps} fps`}
       </span>
-      <span className="num text-[12px] text-fg-subtle">
+      <span className="num t-caption text-fg-subtle">
         {report === null || report.heapDeltaMb === null
           ? "heap n/a"
           : `heap ${report.heapDeltaMb >= 0 ? "+" : ""}${report.heapDeltaMb} MB`}
       </span>
-      <span className="num text-[12px] text-fg-subtle">
+      <span className="num t-caption text-fg-subtle">
         {growth === null ? "" : `${(growth * 100).toFixed(1)}%`}
       </span>
-      <span className="num text-[12px] text-fg-subtle">
+      <span className="num t-caption text-fg-subtle">
         {report === null ? "" : `${report.sampleSeconds}s`}
       </span>
       <span
         className={cn(
-          "label-latin",
+          "t-micro",
           invalid ? "text-fg-subtle" : degraded ? "text-danger" : "text-success",
         )}
       >
         {invalid ? "Invalid sample" : degraded ? "Degraded" : "OK"}
       </span>
       {invalid ? (
-        <span className="num text-[12px] text-fg-subtle">needs foreground tab</span>
+        <span className="num t-caption text-fg-subtle">needs foreground tab</span>
       ) : null}
-      <Button variant="outline" size="sm" className="h-6 px-2 text-[13px]" onClick={toggle}>
+      <Button variant="outline" size="sm" className="h-6 px-2 t-caption" onClick={toggle}>
         {running ? "Stop sampling" : "Start sampling"}
       </Button>
     </div>
