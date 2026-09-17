@@ -1078,6 +1078,66 @@ transport needs:
 Content carries bottom padding equal to the bar's height plus the gutter, so the bar never hides
 the last panel.
 
+## 28. Hierarchy — value steps and a real type scale
+
+§24 retired boxes and shadows, which left the surface ladder and the type scale carrying the
+entire separation load. Both were too flat to do it, so every screen read as one even grey page
+with no focal point. This section fixes the two ladders, not the layout.
+
+### 28.1 Why it read flat (measured)
+
+- **Surfaces stepped ~3.5 L\*, below the ~6 L\* threshold for a reliable value step.** `--bg`
+  `#181715`, `--surface` `#1f1d1a`, `--surface-2` `#292524`, `--surface-3` `#33302b` are four
+  distinct tokens that the eye reads as one colour, so a panel and the page behind it were
+  indistinguishable and only the 1px hairline separated them.
+- **Type stepped in ratios of 1.14–1.17** (12 / 13 / 14 / 16 / 22px). Below ~1.25 a step does not
+  read as a step; a caption and a body line of the same weight look like the same thing, so
+  nothing could dominate.
+
+### 28.2 The widened surface ladder
+
+Steps of ~8 L\* — visible as a step, still far short of a box (§24's rule holds):
+
+| Token | Value | Was |
+| --- | --- | --- |
+| `--bg` | `#181715` | unchanged |
+| `--surface` | `#23201c` | `#1f1d1a` |
+| `--surface-2` | `#2f2b26` | `#292524` |
+| `--surface-3` | `#3c3731` | `#33302b` |
+| `--border` | `#4b4640` | `#44403c` |
+| `--border-strong` | `#625b53` | `#57534e` |
+
+### 28.3 The type scale
+
+Six levels, each also differing in **weight and colour role** so a small size step is still
+unmistakable. The two loud jumps (1.53×, 1.54×) are what create the focal point.
+
+| Utility | Size / weight | Colour role | Job |
+| --- | --- | --- | --- |
+| `t-hero` | 40px / 700 / -0.03em, tabular | `--fg` | the one number the screen exists for — **at most one per screen** |
+| `t-display` | 26px / 700 / -0.02em, tabular | `--fg` | a panel's headline value |
+| `t-title` | 17px / 700 / -0.01em | `--fg` | a panel title — the only `t-title` in its panel |
+| `t-body` | 14px / 500 | `--fg-muted` | prose, list rows |
+| `t-caption` | 12px / 500 | `--fg-subtle` | captions, units, provenance |
+| `t-micro` | 10.5px / 700 / uppercase / 0.08em | `--fg-faint` | labels — always the smallest thing in view |
+
+`--fg-faint: #7c766f` is new (4.6:1 on `--surface`, still AA). The three existing text tokens
+keep their values.
+
+### 28.4 Rules that keep it from flattening again
+
+1. **One `t-hero` per screen.** A second hero is the same as none.
+2. **A panel title is the only `t-title` in its panel.** Anything inside is `t-body` or smaller.
+3. **Never set the number a panel is *about* to `t-caption`/`t-micro` or `fg-subtle`/`fg-faint`.**
+   A panel's headline value is `t-display` + `--fg`, always. This is the single rule whose
+   violation caused the flat pages.
+4. **The accent (`--brand`) is for state and interaction only** — never decoration, never a
+   heading.
+5. **The effort gradient descends in one direction.** On the house page: the current load
+   (`t-hero`) → the floor plan (largest area) → the day curve → contributors (`t-display` values)
+   → members (`t-title`) → the timeline (`t-micro`) → provenance. Nothing lower in the list may
+   be louder than something above it.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the

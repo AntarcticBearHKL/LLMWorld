@@ -28,16 +28,17 @@
 
   /* Surfaces — warm dark-cocoa paper */
   --bg: #181715;
-  --surface: #1f1d1a;
-  --surface-2: #292524;
-  --surface-3: #33302b;
-  --border: #44403c;
-  --border-strong: #57534e;
+  --surface: #23201c;
+  --surface-2: #2f2b26;
+  --surface-3: #3c3731;
+  --border: #4b4640;
+  --border-strong: #625b53;
 
   /* Text */
   --fg: #f5f5f4;
   --fg-muted: #d6d3d1;
   --fg-subtle: #a8a29e;
+  --fg-faint: #7c766f;
 
   /* Primary — near-white cocoa (not a decorative accent) */
   --brand: #fafafa;
@@ -201,6 +202,7 @@
   --color-fg: var(--fg);
   --color-fg-muted: var(--fg-muted);
   --color-fg-subtle: var(--fg-subtle);
+  --color-fg-faint: var(--fg-faint);
 
   --color-brand: var(--brand);
   --color-brand-fg: var(--brand-fg);
@@ -323,6 +325,51 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fg-subtle);
+}
+
+@utility t-hero {
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+@utility t-display {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+@utility t-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+@utility t-body {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+@utility t-caption {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-subtle);
+}
+
+@utility t-micro {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
 }
 
 @utility num {
