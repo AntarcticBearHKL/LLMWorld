@@ -19,7 +19,7 @@ const isWorldTab = (value: string): value is WorldTab =>
 function Stat({ value, word }: { value: number; word: string }) {
   return (
     <span className="flex items-baseline gap-1.5">
-      <span className="num text-[13px] font-semibold text-fg">{value}</span>
+      <span className="num t-body">{value}</span>
       <span className="label-latin">{nounLabel(value, word)}</span>
     </span>
   )
@@ -61,7 +61,7 @@ export function WorldDetail() {
     return (
       <section className="card flex h-full min-h-0 flex-col items-start gap-3 p-8">
         {back}
-        <p className="text-[13px] text-fg-subtle">
+        <p className="t-caption">
           Loading world <span className="num">{world}</span>…
         </p>
       </section>
@@ -74,7 +74,7 @@ export function WorldDetail() {
     return (
       <section className="card flex h-full min-h-0 flex-col items-start gap-3 p-8">
         {back}
-        <p className="text-[13px] text-danger">
+        <p className="t-caption text-danger">
           Failed to load world <span className="num">{world}</span>: {errorMessage(worldQuery.error)}
         </p>
         <Button variant="outline" size="xs" onClick={() => void worldQuery.refetch()}>
@@ -89,7 +89,7 @@ export function WorldDetail() {
       <header className="chrome flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 px-3.5 py-3">
         {back}
         <span className="h-4 w-px shrink-0 bg-border" aria-hidden />
-        <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
+        <span className="num truncate t-title">
           {info.world_id}
         </span>
         <WorldBadge frozen={info.frozen} />
@@ -122,12 +122,12 @@ export function WorldDetail() {
       >
         <div className="flex shrink-0 flex-wrap items-center gap-2">
           <TabsList className="h-8">
-            <TabsTrigger value="household" className="h-7 px-3.5 text-[14px]">
-              Households <span className="num text-[12px] text-fg-subtle">{info.houses.length}</span>
+            <TabsTrigger value="household" className="h-7 px-3.5 t-body">
+              Households <span className="num t-caption">{info.houses.length}</span>
             </TabsTrigger>
-            <TabsTrigger value="scenarios" className="h-7 px-3.5 text-[14px]">
+            <TabsTrigger value="scenarios" className="h-7 px-3.5 t-body">
               Scenarios{" "}
-              <span className="num text-[12px] text-fg-subtle">{info.spacetimes.length}</span>
+              <span className="num t-caption">{info.spacetimes.length}</span>
             </TabsTrigger>
           </TabsList>
         </div>

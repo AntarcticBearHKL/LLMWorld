@@ -1286,7 +1286,14 @@ for (const spec of houses) {
   }
 }
 
-for (const spec of houses) {
+/**
+ * stages/ 只写消费者真正导入的 house：src/mocks/index.ts 静态导入的是参考日
+ * house_0001 的 Member_1..4。此前对每栋 house 都生成 stage 文件，house_0002/0003
+ * 的四个文件没有任何引用，是死文件（DESIGN.md §29.4）。生成器的产出必须与消费者
+ * 一致；新增 house 的 stage 消费者时，同步把 house 加进这里。
+ */
+const STAGE_HOUSES = ["house_0001"]
+for (const spec of houses.filter((h) => STAGE_HOUSES.includes(h.house))) {
   const replay = replayByHouse.get(spec.house)
   for (const m of replay.members) {
     write(`stages/${RUN}/${REFERENCE_DATE}/${spec.house}/${m.id.replace(/\s+/g, "_")}.json`, buildStages(replay, m.id))

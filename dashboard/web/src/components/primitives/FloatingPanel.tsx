@@ -67,11 +67,16 @@ export function FloatingPanel(props: {
     event.stopPropagation()
   }
 
-  const onKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
-    if (event.key !== "Escape") return
-    event.stopPropagation()
-    onClose()
-  }
+  React.useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return
+      onClose()
+    }
+    document.addEventListener("keydown", onKeyDown)
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+    }
+  }, [onClose])
 
   return (
     <div
@@ -81,7 +86,6 @@ export function FloatingPanel(props: {
       <div
         role="complementary"
         aria-label={title}
-        onKeyDown={onKeyDown}
         className="enter chrome-lg shadow-3 flex h-full w-full flex-col overflow-hidden rounded-xl"
       >
         <header

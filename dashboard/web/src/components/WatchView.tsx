@@ -23,7 +23,7 @@ import { countLabel } from "@/lib/format"
 import { formatKwh, formatWatts } from "@/lib/time"
 import { useTimeStore } from "@/store/time"
 
-const FIELD_CLASS = "h-8 w-[142px] px-2.5 text-[14px] font-medium"
+const FIELD_CLASS = "h-8 w-[142px] px-2.5 t-body"
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
@@ -43,8 +43,8 @@ function Notice({
   return (
     <Frame>
       <section className="card flex flex-1 flex-col items-start justify-center gap-2 p-8">
-        <h2 className="text-[16px] font-bold tracking-[-0.01em] text-fg">{title}</h2>
-        <p className="max-w-[520px] text-[14px] leading-relaxed text-fg-muted">{body}</p>
+        <h2 className="t-title">{title}</h2>
+        <p className="max-w-[520px] t-body leading-relaxed">{body}</p>
         {action}
       </section>
     </Frame>
@@ -62,7 +62,7 @@ function Crumb({
 }) {
   if (current) {
     return (
-      <span aria-current="location" className="num truncate text-[14px] font-semibold text-fg">
+      <span aria-current="location" className="num truncate t-body">
         {label}
       </span>
     )
@@ -71,7 +71,7 @@ function Crumb({
     <button
       type="button"
       onClick={onClick}
-      className="num truncate rounded-full px-2 py-0.5 text-[14px] text-fg-muted transition-colors hover:bg-item-hover hover:text-fg"
+      className="num truncate rounded-full px-2 py-0.5 t-body transition-colors hover:bg-item-hover hover:text-fg"
     >
       {label}
     </button>
@@ -86,7 +86,7 @@ function BlockChip({ block, onOpen }: { block: BlockSummary; onOpen: () => void 
       className="card-lift flex min-w-[186px] shrink-0 items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-2 text-left hover:border-border-strong hover:bg-surface-2 hover:shadow-1"
     >
       <MapPin className="size-3.5 shrink-0 text-fg-subtle" aria-hidden />
-      <span className="num shrink-0 text-[14px] font-semibold text-fg">{block.postcode}</span>
+      <span className="num shrink-0 t-body">{block.postcode}</span>
       <span className="label-micro truncate">
         {countLabel(block.house_count, "household")} · {formatKwh(block.total_kwh)} kWh · peak{" "}
         {formatWatts(block.peak_watts)}
@@ -99,8 +99,8 @@ function BlockStrip({ blocks, onOpen }: { blocks: BlockSummary[]; onOpen: (block
   return (
     <section className="card shrink-0 px-3.5 py-3">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span className="text-[15px] font-semibold text-fg">
-          Blocks <span className="num text-[13px] font-medium text-fg-subtle">{blocks.length}</span>
+        <span className="t-title">
+          Blocks <span className="num t-caption">{blocks.length}</span>
         </span>
         <span className="label-micro">Select a block to drill into its households</span>
       </div>
@@ -292,10 +292,10 @@ export function WatchView() {
             </div>
 
             {blocksQuery.isPending ? (
-              <p className="shrink-0 px-1 text-[13px] text-fg-subtle">Loading blocks…</p>
+              <p className="shrink-0 px-1 t-caption">Loading blocks…</p>
             ) : blocksQuery.isError ? (
               <section className="card flex shrink-0 flex-wrap items-center gap-2 px-3.5 py-2.5">
-                <p className="text-[13px] text-danger">
+                <p className="t-caption text-danger">
                   Failed to load blocks: {errorMessage(blocksQuery.error)}
                 </p>
                 <Button variant="outline" size="xs" onClick={() => void blocksQuery.refetch()}>
@@ -304,7 +304,7 @@ export function WatchView() {
               </section>
             ) : (blocksQuery.data?.blocks.length ?? 0) === 0 ? (
               <section className="card shrink-0 px-3.5 py-2.5">
-                <p className="text-[13px] text-fg-subtle">
+                <p className="t-caption">
                   No blocks with households for {date}.
                 </p>
               </section>
@@ -357,7 +357,7 @@ export function WatchView() {
                       <ArrowLeft />
                       All blocks
                     </Button>
-                    <span className="num text-[15px] font-semibold text-fg">{info.postcode}</span>
+                    <span className="num t-title">{info.postcode}</span>
                     <span className="label-micro text-fg-muted">
                       {countLabel(info.house_count, "household")} · {formatKwh(info.total_kwh)} kWh ·
                       peak {formatWatts(info.peak_watts)}
@@ -398,7 +398,7 @@ export function WatchView() {
           ) : (
             <Frame>
               <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
-                <span className="flex items-center gap-1.5 text-[15px] font-semibold text-fg">
+                <span className="flex items-center gap-1.5 t-title">
                   <Home className="size-3.5" aria-hidden />
                   {house}
                 </span>
@@ -411,10 +411,14 @@ export function WatchView() {
                   className="ml-auto"
                   onClick={() => setIndoor(true)}
                   disabled={replayQuery.isPending}
+                  title={replayQuery.isPending ? "Replay for this day is still loading" : undefined}
                 >
                   <DoorOpen />
                   Enter indoor
                 </Button>
+                {replayQuery.isPending ? (
+                  <span className="t-caption">Replay for this day is still loading</span>
+                ) : null}
               </header>
               <div className="shrink-0 border-b border-border">
                 <MetricStrip replay={replayQuery.data} isPending={replayQuery.isPending} />
@@ -445,7 +449,7 @@ export function WatchView() {
           ) : (
             <Frame>
               <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
-                <span className="flex items-center gap-1.5 text-[15px] font-semibold text-fg">
+                <span className="flex items-center gap-1.5 t-title">
                   <Building2 className="size-3.5" aria-hidden />
                   Indoors · {house}
                 </span>

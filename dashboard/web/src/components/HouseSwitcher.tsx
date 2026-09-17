@@ -10,6 +10,8 @@ export function HouseSwitcher() {
   const run = useTimeStore((state) => state.run)
   const house = useTimeStore((state) => state.house)
   const setSelection = useTimeStore((state) => state.setSelection)
+  const setBlock = useTimeStore((state) => state.setBlock)
+  const setIndoor = useTimeStore((state) => state.setIndoor)
   const metaQuery = useRunMeta(run)
   const snapshotQuery = useSnapshot()
 
@@ -32,7 +34,11 @@ export function HouseSwitcher() {
             <button
               key={id}
               type="button"
-              onClick={() => setSelection({ house: id })}
+              onClick={() => {
+                setSelection({ house: id })
+                setBlock("")
+                setIndoor(false)
+              }}
               title={snapshot?.household_type ?? id}
               className={cn(
                 "card-lift flex min-w-0 flex-col items-start gap-0.5 rounded-xl border px-2.5 py-1.5 text-left",

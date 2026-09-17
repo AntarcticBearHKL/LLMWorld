@@ -42,6 +42,11 @@ export function JobSubmitBar({
             calls · {estimate.data.detail}
           </span>
         ) : null}
+        {estimate.isError ? (
+          <span className={cn("text-[13px] text-danger")}>
+            Estimate failed: {estimate.error instanceof Error ? estimate.error.message : "Unknown error"}
+          </span>
+        ) : null}
       </div>
 
       {disabled && disabledReason !== undefined ? (

@@ -48,7 +48,7 @@ function SpacetimeRow({
     >
       <button type="button" onClick={onOpen} className="flex min-w-0 flex-1 flex-col gap-1 text-left">
         <span className="flex min-w-0 flex-wrap items-center gap-2">
-          <span className="num truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
+          <span className="num truncate t-title">
             {item.name}
           </span>
           <Badge variant="outline" className={cn("label-latin", statusClass(item.status))}>
@@ -71,7 +71,7 @@ function SpacetimeRow({
       <span className="flex shrink-0 flex-wrap items-center gap-1.5">
         {pendingDelete ? (
           <>
-            <span className="text-[12px] text-energy">Moves to output/_trash/ (recoverable).</span>
+            <span className="t-caption text-energy">Moves to output/_trash/ (recoverable).</span>
             <button
               type="button"
               onClick={() => remove.mutate(item.name, { onSuccess: () => setPendingDelete(false) })}
@@ -105,7 +105,7 @@ function SpacetimeRow({
           </>
         )}
         {remove.isError ? (
-          <span className="text-[12px] text-danger">{errorMessage(remove.error)}</span>
+          <span className="t-caption text-danger">{errorMessage(remove.error)}</span>
         ) : null}
       </span>
     </li>
@@ -127,10 +127,10 @@ export function SpacetimeList({ world }: { world: string }) {
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div className="flex flex-col">
       <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-4 py-3">
-        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
-          Scenarios <span className="num text-[13px] font-medium text-fg-subtle">{items.length}</span>
+        <span className="t-title">
+          Scenarios <span className="num t-micro">{items.length}</span>
         </span>
         <Button
           variant="ghost"
@@ -147,7 +147,7 @@ export function SpacetimeList({ world }: { world: string }) {
         </Button>
       </header>
 
-      <div className="min-h-0 flex-1 overflow-y-auto">
+      <div>
         {wizardOpen ? (
           <div className="p-3 pb-1">
             <SpacetimeWizard
@@ -164,7 +164,7 @@ export function SpacetimeList({ world }: { world: string }) {
         {created !== null ? (
           <div className="mx-3 mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-success/40 bg-success/10 px-3.5 py-2">
             <CheckCircle2 className="size-3.5 shrink-0 text-success" aria-hidden />
-            <span className="text-[13px] text-fg">
+            <span className="t-caption text-fg">
               Created scenario <span className="num">{created.name}</span> — status {created.status} ·{" "}
               {created.days} {created.days === 1 ? "day" : "days"} from {created.start_date ?? "—"}
             </span>
@@ -175,10 +175,10 @@ export function SpacetimeList({ world }: { world: string }) {
         ) : null}
 
         {query.isPending ? (
-          <p className="px-4 py-6 text-[13px] text-fg-subtle">Loading scenarios…</p>
+          <p className="px-4 py-6 t-caption">Loading scenarios…</p>
         ) : query.isError ? (
           <div className="m-3 card flex flex-col items-start gap-2 px-4 py-5">
-            <p className="text-[13px] text-danger">
+            <p className="t-caption text-danger">
               Failed to load scenarios: {errorMessage(query.error)}
             </p>
             <Button variant="outline" size="xs" onClick={() => void query.refetch()}>
@@ -186,7 +186,7 @@ export function SpacetimeList({ world }: { world: string }) {
             </Button>
           </div>
         ) : items.length === 0 ? (
-          <p className="px-4 py-6 text-[13px] text-fg-subtle">
+          <p className="px-4 py-6 t-caption">
             No scenarios yet. This world is still a draft — households stay editable until its first
             scenario is created.
           </p>

@@ -82,7 +82,7 @@ const FIELDS: readonly FieldSpec[] = [
   },
 ]
 
-const FIELD_CLASS = "h-8 px-2.5 text-[14px]"
+const FIELD_CLASS = "h-8 px-2.5 t-body"
 
 type FormValues = Record<SettingsKey, string>
 
@@ -183,13 +183,13 @@ export function SettingsPanel() {
   }
 
   if (settingsQuery.isPending) {
-    return <p className="px-4 py-6 text-[13px] text-fg-subtle">Loading settings…</p>
+    return <p className="px-4 py-6 t-caption">Loading settings…</p>
   }
 
   if (settingsQuery.isError) {
     return (
       <div className="flex flex-col items-start gap-2 px-4 py-6">
-        <p className="text-[13px] text-danger">Failed to load settings: {errorMessage(settingsQuery.error)}</p>
+        <p className="t-caption text-danger">Failed to load settings: {errorMessage(settingsQuery.error)}</p>
         <Button variant="outline" size="xs" onClick={() => void settingsQuery.refetch()}>
           Retry
         </Button>
@@ -198,7 +198,7 @@ export function SettingsPanel() {
   }
 
   if (draft === null) {
-    return <p className="px-4 py-6 text-[13px] text-fg-subtle">Loading settings…</p>
+    return <p className="px-4 py-6 t-caption">Loading settings…</p>
   }
 
   const canSave = draft.changed > 0 && draft.invalid === 0 && !update.isPending
@@ -208,8 +208,8 @@ export function SettingsPanel() {
       <header className="flex items-start gap-2.5">
         <Settings2 className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
         <div className="flex flex-col gap-1">
-          <h2 className="text-[16px] font-bold tracking-[-0.01em] text-fg">LLM runtime settings</h2>
-          <p className="max-w-[720px] text-[13px] text-fg-muted">
+          <h2 className="t-body">LLM runtime settings</h2>
+          <p className="max-w-[720px] t-caption">
             Saving writes the backend settings file and injects the values into the next job as{" "}
             <span className="num">LLMWORLD_*</span> environment variables, so it only affects jobs
             started after saving; running jobs are untouched.
@@ -240,7 +240,7 @@ export function SettingsPanel() {
               />
               <span
                 className={cn(
-                  "text-[12px] leading-snug",
+                  "t-caption leading-snug",
                   error === undefined ? "text-fg-subtle" : "text-danger",
                 )}
               >
@@ -269,7 +269,7 @@ export function SettingsPanel() {
         </Button>
 
         {draft.invalid > 0 ? (
-          <span className="text-[12px] text-danger">{draft.invalid} invalid input(s)</span>
+          <span className="t-caption text-danger">{draft.invalid} invalid input(s)</span>
         ) : draft.changed > 0 ? (
           <span className="label-micro">{draft.changed} pending change(s)</span>
         ) : (
@@ -277,14 +277,14 @@ export function SettingsPanel() {
         )}
 
         {justSaved ? (
-          <span className="flex items-center gap-1 text-[12px] text-success">
+          <span className="flex items-center gap-1 t-caption text-success">
             <CheckCircle2 className="size-3" aria-hidden />
             Saved — applies to the next job
           </span>
         ) : null}
 
         {update.isError ? (
-          <span className="text-[12px] text-danger">Save failed: {errorMessage(update.error)}</span>
+          <span className="t-caption text-danger">Save failed: {errorMessage(update.error)}</span>
         ) : null}
       </div>
     </div>

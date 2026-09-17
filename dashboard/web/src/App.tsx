@@ -79,8 +79,6 @@ export default function App() {
   const { theme, toggleTheme } = useTheme()
   const view = useTimeStore((state) => state.view)
   const worldsView = useTimeStore((state) => state.worldsView)
-  const world = useTimeStore((state) => state.world)
-  const run = useTimeStore((state) => state.run)
   const jobsOpen = useTimeStore((state) => state.jobsOpen)
   const setView = useTimeStore((state) => state.setView)
   const setJobsOpen = useTimeStore((state) => state.setJobsOpen)
@@ -100,15 +98,11 @@ export default function App() {
   }
 
   const onNavChange = (next: ViewKey) => {
-    if (next !== "worlds") {
-      setView(next)
+    if (next === "worlds") {
+      setView("worlds")
       return
     }
-    if (worldsView === "watch") {
-      setView(run.length > 0 ? "watch" : world.length > 0 ? "world" : "worlds")
-      return
-    }
-    setView(worldsView === "world" && world.length === 0 ? "worlds" : worldsView)
+    setView(next)
   }
 
   return (

@@ -59,7 +59,7 @@ function LogView({ jobId }: { jobId: string | null }) {
   if (jobId === null) {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
-        <span className="text-[13px] text-fg-subtle">Select a job to view its live log.</span>
+        <span className="t-caption">Select a job to view its live log.</span>
       </div>
     )
   }
@@ -72,7 +72,7 @@ function LogView({ jobId }: { jobId: string | null }) {
           {connected ? "streaming" : "idle"}
         </span>
       </div>
-      <pre className="num min-h-0 flex-1 overflow-auto px-4 py-3 text-[12px] leading-relaxed whitespace-pre-wrap text-fg-muted">
+      <pre className="num min-h-0 flex-1 overflow-auto px-4 py-3 t-caption leading-relaxed whitespace-pre-wrap">
         {lines.length === 0 ? "(no output yet)" : lines.join("\n")}
       </pre>
     </div>
@@ -86,14 +86,14 @@ function BuildJobView({ job }: { job: JobInfo }) {
     <Tabs key={job.id} defaultValue={active ? "log" : "trace"} className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 items-center gap-2 border-b border-border px-4 py-2">
         <TabsList className="h-7 p-0.5">
-          <TabsTrigger value="trace" className="h-6 flex-none px-2 text-[13px]">
+          <TabsTrigger value="trace" className="h-6 flex-none px-2 t-micro">
             LLM calls
           </TabsTrigger>
-          <TabsTrigger value="log" className="h-6 flex-none px-2 text-[13px]">
+          <TabsTrigger value="log" className="h-6 flex-none px-2 t-micro">
             Live log
           </TabsTrigger>
         </TabsList>
-        <span className="num ml-auto text-[12px] text-fg-subtle">{job.id.slice(0, 8)}</span>
+        <span className="num ml-auto t-caption">{job.id.slice(0, 8)}</span>
       </div>
       <TabsContent value="trace" className="mt-0 flex min-h-0 flex-1 flex-col">
         <StepInspector jobId={job.id} step={job.step} live={active} />
@@ -138,8 +138,8 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
       <div className="grid h-full min-h-0 grid-cols-1 gap-0 @2xl:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
         <section className="card flex min-h-0 flex-col overflow-hidden border-b border-border @2xl:border-b-0 @2xl:border-r">
           <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
-            <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
-              Jobs <span className="num text-[13px] font-medium text-fg-subtle">{jobs.length}</span>
+            <span className="t-title">
+              Jobs <span className="num t-micro">{jobs.length}</span>
             </span>
             <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void jobsQuery.refetch()}>
               <RefreshCw />
@@ -147,7 +147,7 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
           </header>
           <div className="min-h-0 flex-1 overflow-y-auto">
             {jobs.length === 0 ? (
-              <p className="px-4 py-6 text-[13px] text-fg-subtle">
+              <p className="px-4 py-6 t-caption">
                 No jobs yet. Submit one from the build or simulation flows.
               </p>
             ) : (
@@ -167,9 +167,9 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
                           {STATUS_LABEL[job.status]}
                         </Badge>
                         <span className="label-micro">{KIND_LABEL[job.kind] ?? job.kind}</span>
-                        <span className="num ml-auto text-[12px] text-fg-subtle">{job.id.slice(0, 8)}</span>
+                        <span className="num ml-auto t-caption">{job.id.slice(0, 8)}</span>
                       </div>
-                      <span className="num truncate text-[13px] text-fg-muted" title={jobMeta(job)}>
+                      <span className="num truncate t-body" title={jobMeta(job)}>
                         {jobMeta(job)}
                       </span>
                     </button>
@@ -193,7 +193,7 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
             )}
           </div>
           {error !== null ? (
-            <p className="shrink-0 border-t border-border px-4 py-2 text-[12px] text-danger">{error}</p>
+            <p className="shrink-0 border-t border-border px-4 py-2 t-caption text-danger">{error}</p>
           ) : null}
         </section>
 
