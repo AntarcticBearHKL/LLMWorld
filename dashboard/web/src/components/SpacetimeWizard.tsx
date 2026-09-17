@@ -11,7 +11,7 @@ import { useCreateSpacetime } from "@/hooks/useSpacetimes"
 import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 
-const FIELD_CLASS = "h-8 px-2.5 text-[14px]"
+const FIELD_CLASS = "h-8 px-2.5 t-body"
 
 const NAME_RE = /^[A-Za-z0-9][A-Za-z0-9._-]*$/
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/
@@ -124,7 +124,7 @@ function Field({
         {label}
       </Label>
       {cloneElement(children, { "aria-invalid": error !== undefined })}
-      <span className={cn("text-[12px]", error !== undefined ? "text-danger" : "label-latin text-fg-muted")}>
+      <span className={cn("t-caption", error !== undefined ? "text-danger" : "label-latin text-fg-muted")}>
         {error ?? hint}
       </span>
     </div>
@@ -234,7 +234,7 @@ export function SpacetimeWizard({
           onChange={(event) => patch("events", event.target.value)}
           rows={3}
           placeholder="2026-09-11|heatwave"
-          className={cn("num min-h-16 px-2.5 py-2 text-[13px]")}
+          className={cn("num min-h-16 px-2.5 py-2 t-body")}
         />
       </Field>
 
@@ -250,7 +250,7 @@ export function SpacetimeWizard({
           onChange={(event) => patch("notices", event.target.value)}
           rows={3}
           placeholder="2026-09-11|Grid maintenance|Planned outage 09:00–11:00"
-          className={cn("num min-h-16 px-2.5 py-2 text-[13px]")}
+          className={cn("num min-h-16 px-2.5 py-2 t-body")}
         />
       </Field>
 
@@ -263,7 +263,7 @@ export function SpacetimeWizard({
           Cancel
         </Button>
         {create.isError ? (
-          <span className="text-[12px] text-danger">{errorMessage(create.error)}</span>
+          <span className="t-caption text-danger">{errorMessage(create.error)}</span>
         ) : null}
       </div>
     </div>

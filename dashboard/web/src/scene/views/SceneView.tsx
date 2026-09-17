@@ -67,7 +67,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
   return (
     <div className="card flex h-full min-h-0 flex-col overflow-hidden">
       <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-3.5 py-2.5">
-        <span className="label-micro flex items-center gap-1.5">
+        <span className="t-micro flex items-center gap-1.5">
           {mapOnly || mode === "town" ? (
             <LayoutGrid className="size-3" />
           ) : (
@@ -82,7 +82,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={mode === "town" ? "default" : "ghost"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[13px]"
+                className="h-6 rounded-full px-2.5 t-caption"
                 onClick={() => setMode("town")}
               >
                 Town
@@ -90,7 +90,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={mode === "interior" ? "default" : "ghost"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[13px]"
+                className="h-6 rounded-full px-2.5 t-caption"
                 onClick={() => setMode("interior")}
                 disabled={state === null}
               >
@@ -108,7 +108,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
                       key={member.id}
                       variant={active ? "default" : "outline"}
                       size="sm"
-                      className="h-6 rounded-full px-2.5 text-[13px]"
+                      className="h-6 rounded-full px-2.5 t-caption"
                       aria-pressed={active}
                       onClick={() => setSelectedMember(active ? null : member.id)}
                     >
@@ -124,7 +124,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={diagnosticsOpen ? "default" : "outline"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[13px]"
+                className="h-6 rounded-full px-2.5 t-caption"
                 onClick={() => setDiagnosticsOpen((value) => !value)}
                 disabled={mode !== "interior" || state === null}
                 title="Frame rate and memory diagnostics (keep the page in the foreground)"
@@ -134,7 +134,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={outlineOpen ? "default" : "outline"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[13px]"
+                className="h-6 rounded-full px-2.5 t-caption"
                 onClick={() => setOutlineOpen((value) => !value)}
                 disabled={mode !== "interior" || state === null}
               >
@@ -143,7 +143,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={effectsOn ? "default" : "outline"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[13px]"
+                className="h-6 rounded-full px-2.5 t-caption"
                 onClick={() => {
                   if (degraded) {
                     setDegraded(false)
@@ -164,7 +164,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               <Button
                 variant={trailEnabled ? "default" : "outline"}
                 size="sm"
-                className="h-6 rounded-full px-2.5 text-[13px]"
+                className="h-6 rounded-full px-2.5 t-caption"
                 onClick={() => setTrailEnabled((value) => !value)}
               >
                 Trails {trailEnabled ? "on" : "off"}
@@ -187,7 +187,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
 
         {mode === "interior" && state === null ? (
           <div className="flex h-full items-center justify-center p-6 text-center">
-            <p className="text-[14px] text-fg-muted">
+            <p className="t-caption text-fg-muted">
               {replayQuery.isPending ? "Loading…" : "No replay data for this household and date."}
             </p>
           </div>
@@ -204,7 +204,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
         {mode === "interior" && state !== null && outlineOpen ? (
           <aside className="chrome-lg absolute right-3 top-3 z-20 flex max-h-[min(560px,calc(100%-24px))] w-[250px] flex-col overflow-hidden shadow-3">
             <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-3 py-1.5">
-              <span className="label-micro">Rooms and appliances</span>
+              <span className="t-micro">Rooms and appliances</span>
               <Button
                 variant="ghost"
                 size="icon-sm"

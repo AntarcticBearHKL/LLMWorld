@@ -117,7 +117,7 @@ export function SceneStage({ state, children }: SceneStageProps) {
         </Stage>
       ) : null}
 
-      <div className="chip num pointer-events-none absolute bottom-3 right-3 text-[12px]">
+      <div className="chip num pointer-events-none absolute bottom-3 right-3 t-caption">
         Scroll to zoom · drag to pan · double-click to reset · select a member
       </div>
     </div>

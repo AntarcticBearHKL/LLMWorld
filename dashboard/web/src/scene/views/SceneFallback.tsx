@@ -9,12 +9,12 @@ export function SceneFallback() {
   return (
     <div className="card flex h-full min-h-0 flex-col overflow-hidden">
       <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
-        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">Scene</span>
+        <span className="t-caption font-bold tracking-[-0.01em] text-fg">Scene</span>
         <span className="chip">
           <Loader2 className="size-3 animate-spin text-brand" aria-hidden />
-          <span className="label-micro text-fg-muted">Loading the scene canvas</span>
+          <span className="t-caption text-fg-muted">Loading the scene canvas</span>
         </span>
-        <span className="label-micro ml-auto">
+        <span className="t-caption ml-auto">
           react-konva (~350 kB) downloads once, then it opens instantly
         </span>
       </header>

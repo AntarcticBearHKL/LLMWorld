@@ -72,8 +72,8 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
     <section className="card flex flex-col overflow-hidden">
       <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-3.5 py-2.5">
         <Hammer className="size-4 shrink-0 text-brand" aria-hidden />
-        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">Build</span>
-        <span className="num text-[13px] text-fg-muted">{district}</span>
+        <span className="t-title font-bold tracking-[-0.01em] text-fg">Build</span>
+        <span className="num t-body text-fg-muted">{district}</span>
         {buildState !== undefined ? (
           <span className="label-micro">
             {buildState.houses.length} households ·{" "}
@@ -92,10 +92,10 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
       </header>
 
       {buildQuery.isPending ? (
-        <p className="px-3.5 py-4 text-[13px] text-fg-subtle">Loading build state…</p>
+        <p className="px-3.5 py-4 t-caption text-fg-subtle">Loading build state…</p>
       ) : buildQuery.isError ? (
         <div className="flex flex-col items-start gap-2 px-3.5 py-4">
-          <p className="text-[13px] text-danger">
+          <p className="t-caption text-danger">
             {buildQuery.error instanceof ApiError && buildQuery.error.status === 404
               ? "World or district missing: "
               : "Failed to load build state: "}
@@ -106,13 +106,13 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
           </Button>
         </div>
       ) : buildState === undefined ? (
-        <p className="px-3.5 py-4 text-[13px] text-fg-subtle">Loading build state…</p>
+        <p className="px-3.5 py-4 t-caption text-fg-subtle">Loading build state…</p>
       ) : (
           <div className="flex flex-col divide-y divide-border px-3.5">
           <div className="flex flex-wrap items-center gap-2">
             <span className="label-micro">Target household</span>
             {buildState.houses.length === 0 ? (
-              <span className="text-[13px] text-fg-subtle">
+              <span className="t-caption text-fg-subtle">
                 No households in this district yet — run Household first.
               </span>
             ) : (
@@ -123,7 +123,7 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
                   aria-pressed={house === item}
                   onClick={() => setHouse(item)}
                   className={cn(
-                    "num text-[12px] transition-colors",
+                    "num t-body transition-colors",
                     house === item
                       ? "chip chip-active"
                       : "chip hover:border-border-strong hover:bg-item-hover hover:text-fg",
@@ -134,7 +134,7 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
               ))
             )}
             {house.length > 0 && !buildState.houses.includes(house) ? (
-              <span className="num text-[12px] text-energy">{house} is not in {district}</span>
+              <span className="num t-caption text-energy">{house} is not in {district}</span>
             ) : null}
           </div>
 
@@ -154,7 +154,7 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
           ))}
 
           {jobsQuery.isError ? (
-            <p className="text-[12px] text-danger">
+            <p className="t-caption text-danger">
               Failed to load jobs; recent run status may be incomplete:{" "}
               {errorMessage(jobsQuery.error)}
             </p>
@@ -165,7 +165,7 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
               {BUILD_STEP_ORDER.map((item) => (
                 <div key={item} className="flex flex-wrap items-baseline gap-2">
                   <dt className="label-latin w-24 shrink-0">{BUILD_STEP_LABEL[item]}</dt>
-                  <dd className="text-[12px] text-fg-subtle">{BUILD_STEP_HINT[item]}</dd>
+                  <dd className="t-caption text-fg-subtle">{BUILD_STEP_HINT[item]}</dd>
                 </div>
               ))}
             </dl>

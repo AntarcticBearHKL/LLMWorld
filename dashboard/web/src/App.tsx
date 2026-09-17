@@ -33,10 +33,10 @@ function BrandMark() {
         aria-hidden
         className="flex size-8 items-center justify-center rounded-lg bg-brand text-brand-fg shadow-1"
       >
-        <span className="text-[15px] font-extrabold">W</span>
+        <span className="t-title text-brand-fg">W</span>
       </span>
       <span className="flex flex-col leading-tight">
-        <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
+        <span className="t-title text-fg">
           LLMWorld Research Console
         </span>
         <span className="label-latin text-fg-muted">household energy replay</span>
@@ -59,7 +59,7 @@ function NavTabs({ active, onChange }: { active: ViewKey; onChange: (next: ViewK
               onClick={() => onChange(item.key)}
               aria-current={active === item.key ? "page" : undefined}
               className={cn(
-                "rounded-full px-3.5 py-1 text-[14px] font-semibold transition-colors",
+                "rounded-full px-3.5 py-1 t-caption transition-colors",
                 active === item.key
                   ? "bg-brand text-brand-fg shadow-1"
                   : "text-fg-muted hover:bg-item-hover hover:text-fg",
@@ -123,7 +123,7 @@ export default function App() {
                 >
                   <Activity />
                   {activeJobs > 0 ? (
-                    <span className="num absolute -top-1 -right-1 rounded-full border border-energy/40 bg-energy-soft px-1 text-[10px] leading-4 text-energy">
+                    <span className="num absolute -top-1 -right-1 rounded-full border border-energy/40 bg-energy-soft px-1 t-caption leading-4 text-energy">
                       {activeJobs}
                     </span>
                   ) : null}

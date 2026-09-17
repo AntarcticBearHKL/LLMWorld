@@ -37,20 +37,20 @@ export function JobSubmitBar({
         </Button>
 
         {estimate.data !== undefined ? (
-          <span className="text-[13px] text-fg-muted">
+          <span className="t-caption text-fg-muted">
             Estimated <span className="num text-energy">{estimate.data.estimated_calls}</span> LLM
             calls · {estimate.data.detail}
           </span>
         ) : null}
         {estimate.isError ? (
-          <span className={cn("text-[13px] text-danger")}>
+          <span className={cn("t-caption text-danger")}>
             Estimate failed: {estimate.error instanceof Error ? estimate.error.message : "Unknown error"}
           </span>
         ) : null}
       </div>
 
       {disabled && disabledReason !== undefined ? (
-        <p className="flex items-center gap-1.5 text-[12px] text-energy">
+        <p className="flex items-center gap-1.5 t-caption text-energy">
           <AlertTriangle className="size-3" aria-hidden />
           {disabledReason}
         </p>
@@ -62,13 +62,13 @@ export function JobSubmitBar({
           {label}
         </Button>
         {create.isSuccess ? (
-          <span className="flex items-center gap-1.5 text-[13px] text-success">
+          <span className="flex items-center gap-1.5 t-caption text-success">
             <CheckCircle2 className="size-3" aria-hidden />
             Submitted: <span className="num">{create.data.job.id.slice(0, 8)}</span>
           </span>
         ) : null}
         {create.isError ? (
-          <span className={cn("text-[13px] text-danger")}>
+          <span className={cn("t-caption text-danger")}>
             Submit failed: {create.error instanceof Error ? create.error.message : "Unknown error"}
           </span>
         ) : null}

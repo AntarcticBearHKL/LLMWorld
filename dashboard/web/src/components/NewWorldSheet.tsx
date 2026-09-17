@@ -67,7 +67,7 @@ export function NewWorldSheet(props: {
               value={draft}
               placeholder={suggested}
               onChange={(event) => setDraft(event.target.value)}
-              className="num h-8 w-full px-2.5 text-[14px]"
+              className="num h-8 w-full px-2.5 t-body"
             />
             <div className="flex flex-wrap items-center gap-2">
               <Button size="sm" type="submit" disabled={create.isPending}>
@@ -75,12 +75,12 @@ export function NewWorldSheet(props: {
                 New blank world
               </Button>
             </div>
-            <p className="text-[12px] text-fg-subtle">
+            <p className="t-caption text-fg-subtle">
               Households are a world&apos;s fixed physics — scenarios replay them under their own
               policy and dates.
             </p>
             {create.isError ? (
-              <p className="text-[12px] text-danger">Create failed: {errorMessage(create.error)}</p>
+              <p className="t-caption text-danger">Create failed: {errorMessage(create.error)}</p>
             ) : null}
           </form>
         </div>

@@ -33,9 +33,9 @@ export function DistrictPromptFields({
       <div className="flex flex-col gap-1.5">
         <span className="label-micro">Preset</span>
         {presetsPending ? (
-          <span className="text-[12px] text-fg-subtle">Loading presets…</span>
+          <span className="t-caption text-fg-subtle">Loading presets…</span>
         ) : presets.length === 0 ? (
-          <span className="text-[12px] text-fg-subtle">
+          <span className="t-caption text-fg-subtle">
             No presets available — write a custom prompt instead.
           </span>
         ) : (
@@ -51,7 +51,7 @@ export function DistrictPromptFields({
                   title={item.description}
                   onClick={() => onPresetChange(active ? "" : item.id)}
                   className={cn(
-                    "text-[12px] transition-colors disabled:opacity-50",
+                    "t-body transition-colors disabled:opacity-50",
                     active
                       ? "chip chip-active"
                       : "chip hover:border-border-strong hover:bg-item-hover hover:text-fg",
@@ -64,7 +64,7 @@ export function DistrictPromptFields({
           </div>
         )}
         {selected !== null && !custom ? (
-          <p className="text-[12px] text-fg-subtle">{selected.description}</p>
+          <p className="t-caption text-fg-subtle">{selected.description}</p>
         ) : null}
       </div>
 
@@ -78,9 +78,9 @@ export function DistrictPromptFields({
           disabled={disabled}
           placeholder="Write the district-description prompt yourself — it overrides the preset."
           onChange={(event) => onPromptChange(event.target.value)}
-          className="min-h-24 text-[13px]"
+          className="min-h-24 t-body"
         />
-        <span className="text-[12px] text-fg-subtle">
+        <span className="t-caption text-fg-subtle">
           {custom
             ? "Custom prompt takes precedence over the preset."
             : selected === null

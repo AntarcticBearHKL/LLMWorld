@@ -76,11 +76,11 @@ export function AddHouseholdsSheet(props: {
                 step={1}
                 value={Number.isFinite(count) ? count : ""}
                 onChange={(event) => setCount(event.target.valueAsNumber)}
-                className="num h-8 w-full px-2.5 text-[14px]"
+                className="num h-8 w-full px-2.5 t-body"
               />
             </div>
 
-            <p className="text-[12px] text-fg-subtle">
+            <p className="t-caption text-fg-subtle">
               One LLM call writes this many household descriptions from the district description.
               They start as described households — members come next.
             </p>

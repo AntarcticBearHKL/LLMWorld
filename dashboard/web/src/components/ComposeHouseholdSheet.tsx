@@ -33,7 +33,7 @@ export function ComposeHouseholdSheet(props: {
 
         <div className="min-h-0 flex-1 overflow-y-auto p-4">
           <div className="flex flex-col gap-3">
-            <p className="text-[12px] text-fg-subtle">
+            <p className="t-caption text-fg-subtle">
               This household already has its description. Composing turns that brief into its
               members — one LLM call — so the residents match the description you reviewed.
             </p>

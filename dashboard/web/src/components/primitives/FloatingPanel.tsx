@@ -100,7 +100,7 @@ export function FloatingPanel(props: {
           )}
         >
           <div className="flex min-w-0 items-baseline gap-2">
-            <h2 className="truncate text-[15px] font-semibold tracking-[-0.01em] text-fg">
+            <h2 className="truncate t-title text-fg">
               {title}
             </h2>
             {subtitle !== undefined ? <span className="label-latin truncate">{subtitle}</span> : null}

@@ -9,7 +9,7 @@ import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 import { randomWorldId } from "@/lib/world"
 
-const FIELD_CLASS = "h-7 w-36 px-2 text-[13px]"
+const FIELD_CLASS = "h-7 w-36 px-2 t-body"
 
 interface CloneWorldButtonProps {
   world: string
@@ -91,7 +91,7 @@ export function CloneWorldButton({
         Cancel
       </Button>
       {clone.isError ? (
-        <span className="w-full text-[12px] text-danger">{errorMessage(clone.error)}</span>
+        <span className="w-full t-caption text-danger">{errorMessage(clone.error)}</span>
       ) : null}
     </span>
   )
