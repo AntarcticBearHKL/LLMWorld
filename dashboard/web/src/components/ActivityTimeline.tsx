@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react"
-import { Maximize2, Minus, Plus } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Maximize2, Minimize2, Minus, Plus } from "lucide-react"
 import { DataSet } from "vis-data"
 import { Timeline, type DataGroup, type DataItem, type IdType } from "vis-timeline/esnext"
 
@@ -84,6 +84,8 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
   const containerRef = useRef<HTMLDivElement | null>(null)
   const timelineRef = useRef<Timeline | null>(null)
   const customTimeIdRef = useRef<IdType | null>(null)
+  const [activated, setActivated] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   const minute = useTimeStore((state) => state.minute)
   const selectedMember = useTimeStore((state) => state.selectedMember)
@@ -137,7 +139,7 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
       selectable: true,
       multiselect: false,
       moveable: true,
-      zoomable: true,
+      zoomable: false,
       zoomMin: 1000 * 60 * 30,
       zoomMax: 1000 * 60 * DAY_MINUTES,
       verticalScroll: false,
@@ -209,6 +211,20 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
 
   useEffect(() => {
     const timeline = timelineRef.current
+    if (timeline === null) return
+    timeline.setOptions({ zoomable: activated })
+  }, [activated, replayKey])
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === (containerRef.current?.closest("section") ?? null))
+    }
+    document.addEventListener("fullscreenchange", handleFullscreenChange)
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange)
+  }, [])
+
+  useEffect(() => {
+    const timeline = timelineRef.current
     const cursorId = customTimeIdRef.current
     if (timeline === null || cursorId === null) return
     const cursor = minuteToDate(minute)
@@ -236,8 +252,14 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
     timeline.setWindow(new Date(center - half), new Date(center + half), { animation: false })
   }
 
-  const fitDay = () => {
-    timelineRef.current?.setWindow(minuteToDate(0), minuteToDate(DAY_MINUTES), { animation: false })
+  const toggleFullscreen = () => {
+    const section = containerRef.current?.closest("section") ?? null
+    if (section === null) return
+    if (document.fullscreenElement === null) {
+      void section.requestFullscreen()
+    } else {
+      void document.exitFullscreen()
+    }
   }
 
   const selectedLane =
@@ -245,25 +267,30 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
       ? null
       : replay.members.findIndex((member) => member.id === selectedMember) + 1
 
-  const status = error !== null ? "Load failed" : isPending ? "Loading" : `${replay?.members.length ?? 0} lanes`
+  const status =
+    error !== null
+      ? "Load failed"
+      : isPending
+        ? "Loading"
+        : `${replay?.members.length ?? 0} lanes · ${activated ? "scroll to zoom" : "click to zoom"}`
 
   return (
     <Panel
       title="Activity timeline"
       hint={status}
       index={1}
-      className="min-h-0 flex-none"
+      className={isFullscreen ? "min-h-0 flex-none bg-bg h-screen" : "min-h-0 flex-none"}
       bodyClassName="flex min-h-0 flex-col"
       actions={
         <>
           <Button
             variant="ghost"
             size="icon-sm"
-            onClick={fitDay}
-            aria-label="Show full day"
-            title="Show full day"
+            onClick={toggleFullscreen}
+            aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+            title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
           >
-            <Maximize2 />
+            {isFullscreen ? <Minimize2 /> : <Maximize2 />}
           </Button>
           <Button
             variant="ghost"
@@ -307,7 +334,11 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
           role="region"
           aria-label="Full-day activity timeline for every member; the axis runs from 00:00 to 24:00"
           data-selected={selectedLane === null || selectedLane <= 0 ? "" : String(selectedLane)}
-          className="vis-host flex-none"
+          tabIndex={0}
+          onClick={() => setActivated(true)}
+          onFocus={() => setActivated(true)}
+          onBlur={() => setActivated(false)}
+          className={`vis-host flex-none outline-none ${activated ? "ring-1 ring-brand-ring" : ""}`}
           style={{ height: AXIS_HEIGHT_PX + Math.max(replay?.members.length ?? 0, 1) * LANE_HEIGHT_PX }}
         />
       )}
