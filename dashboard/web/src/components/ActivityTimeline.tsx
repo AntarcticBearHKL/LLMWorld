@@ -19,7 +19,7 @@ interface TimelineActivityItem extends DataItem {
 }
 
 const LANE_HEIGHT_PX = 54
-const AXIS_HEIGHT_PX = 52
+const AXIS_HEIGHT_PX = 22
 
 const escapeHtml = (value: string): string =>
   value
@@ -240,7 +240,7 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
       title="Activity timeline"
       hint={status}
       index={1}
-      className="min-h-[280px]"
+      className="min-h-0 flex-none"
       bodyClassName="flex min-h-0 flex-col"
       actions={
         <>
@@ -295,8 +295,8 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
           role="region"
           aria-label="Full-day activity timeline for every member; the axis runs from 00:00 to 24:00"
           data-selected={selectedLane === null || selectedLane <= 0 ? "" : String(selectedLane)}
-          className="vis-host min-h-0 flex-1"
-          style={{ minHeight: AXIS_HEIGHT_PX + Math.max(replay?.members.length ?? 0, 1) * LANE_HEIGHT_PX }}
+          className="vis-host flex-none"
+          style={{ height: AXIS_HEIGHT_PX + Math.max(replay?.members.length ?? 0, 1) * LANE_HEIGHT_PX }}
         />
       )}
 

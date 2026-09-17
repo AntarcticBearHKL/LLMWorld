@@ -992,6 +992,51 @@ drag re-splits the column without touching the others.
 - The drag is direct manipulation, so it has no transition and no `prefers-reduced-motion`
   branch: §6 forbids animating layout properties, it does not forbid the user moving them.
 
+## 26. The Watch layout — a hero timeline
+
+The detail layer exists to read one artefact: the day's activity across every member. §24.2
+gave it three equal columns, so the timeline got 787px of a 1440px window — barely half a day
+visible at a time — while six panels of context competed at the same visual weight. That is
+what "no design sense, tiring to look at" describes: no hero, everything equal.
+
+### 26.1 The layout
+
+```
+┌ support row ────────────────────────────────────────────────────────────┐
+│ floor plan │ member cards │ load curve │ snapshot · switcher · pipeline │
+├── drag divider ─────────────────────────────────────────────────────────┤
+│ ACTIVITY TIMELINE — full width, pinned to the bottom                    │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+- The timeline is **full width** (it is the artefact) and pinned to the **bottom** of the
+  layer, so it never has to share a column.
+- The support row above holds the context panels at equal width; it scrolls on its own.
+- One **drag divider** between them sets the split, so the operator can give the timeline
+  everything (the timeline panel is `flex-none` and sizes to its own content — §25's handle
+  does not apply to it, its height is content-driven and its own min-height wins).
+
+### 26.2 `ResizableColumns`
+
+A two-region primitive, generalised from the same mechanics as §25:
+
+| Property | Value |
+| --- | --- |
+| Shape | `ResizableColumns({ first, second, storageId })` — a `1fr / divider / 1fr` grid of COLUMNS |
+| Handle | the same 1px hairline, thickening to 3px in `--brand` on hover, focus and drag |
+| Bounds | both columns keep ≥ 260px; clamped on every change |
+| Keyboard | `role="separator"`, focusable, `←/→` move the divider by 24px |
+| Persistence | `localStorage` under `llmworld.split.<storageId>`, never the URL |
+| Responsive | below `lg` the two panes render as a plain stack and the divider is not rendered |
+
+Used for the districts | households columns of the Households tab.
+
+**Why there is no split around the timeline.** §26.1 pins the timeline to the bottom at
+**content height** (`flex-none`, `AXIS + lanes × 54`). A region that is exactly as tall as its
+own content has nothing to allocate, so a divider there would only create the blank band this
+section exists to remove. The timeline is never squeezed because it is not in a flex race at
+all — which is the outcome the drag would otherwise have been used to achieve.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the
