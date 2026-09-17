@@ -86,7 +86,6 @@ function DistrictRow({
   district,
   selected,
   onSelect,
-  onGenerateDescription,
   onCopied,
   onActionError,
   onDeleteNotice,
@@ -95,7 +94,6 @@ function DistrictRow({
   district: DistrictInfo
   selected: boolean
   onSelect: () => void
-  onGenerateDescription: () => void
   onCopied: (name: string) => void
   onActionError: (message: string | null) => void
   onDeleteNotice: (notice: DeleteNotice) => void
@@ -134,9 +132,6 @@ function DistrictRow({
     },
     onError: (error) => onActionError(errorMessage(error)),
   })
-
-  const descriptionLabel =
-    district.status === "uninitialized" ? "Generate description" : "Edit description"
 
   return (
     <TableRow
@@ -179,18 +174,6 @@ function DistrictRow({
         onClick={(event) => event.stopPropagation()}
       >
         <span className="inline-flex items-center gap-1">
-          {district.status === "locked" ? null : (
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              className="text-success"
-              title={descriptionLabel}
-              aria-label={descriptionLabel}
-              onClick={onGenerateDescription}
-            >
-              <Sparkles />
-            </Button>
-          )}
           {district.status === "initialized" ? (
             <Button
               variant="ghost"
@@ -555,10 +538,6 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
                     district={district}
                     selected={district.name === selected}
                     onSelect={() => setSelected(district.name)}
-                    onGenerateDescription={() => {
-                      setSelected(district.name)
-                      setDescriptionOpen(true)
-                    }}
                     onCopied={setSelected}
                     onActionError={setActionError}
                     onDeleteNotice={setDeleteNotice}
