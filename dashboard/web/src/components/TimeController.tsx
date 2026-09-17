@@ -62,7 +62,7 @@ const phaseOf = (minute: number): string =>
 
 function Key({ children }: { children: string }) {
   return (
-    <kbd className="num rounded-md border border-border-strong bg-surface-2 px-1.5 py-px text-[12px] text-fg-muted">
+    <kbd className="num t-caption rounded-md border border-border-strong bg-surface-2 px-1.5 py-px">
       {children}
     </kbd>
   )
@@ -115,22 +115,10 @@ export function TimeController() {
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-30 flex justify-center px-4">
-      <div className="chrome-lg pointer-events-auto grid w-[min(760px,calc(100vw-2rem))] grid-cols-[128px_minmax(0,1fr)_316px] items-center gap-4 px-5 py-2.5 shadow-3">
-        <div className="num t-body tabular-nums">
-          <div className="flex items-baseline gap-2">
-          <span className="num tabular-nums text-[34px] leading-none font-medium tracking-[-0.02em] text-fg">
-            {formatHHMM(minute)}
-          </span>
-          <span className="flex flex-col leading-tight">
-            <span className="label-micro text-fg-muted">{phaseOf(minute)}</span>
-            <span className="num tabular-nums text-[12px] text-fg-muted">
-              Step {currentStep}/{totalSteps}
-            </span>
-          </span>
-        </div>
-        </div>
+      <div className="chrome-lg pointer-events-auto flex h-14 w-[min(620px,calc(100vw-2rem))] items-center gap-4 overflow-hidden px-5 shadow-3">
+        <span className="num t-title shrink-0 tabular-nums">{formatHHMM(minute)}</span>
 
-        <div className="flex items-center justify-center gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5">
           <TransportButton label="Back to 00:00 (Home)" onClick={() => setMinute(0)}>
             <ChevronsLeft />
           </TransportButton>
@@ -164,100 +152,90 @@ export function TimeController() {
           </TransportButton>
         </div>
 
-        <div className="flex items-center justify-end gap-3">
-        <div className="flex items-center gap-2.5 px-1">
-          <Slider
-            value={[minute]}
-            min={0}
-            max={DAY_MINUTES}
-            step={stepMinutes}
-            onValueChange={(value) => {
-              const next = value[0]
-              if (typeof next === "number") {
-                setMinute(next)
-                useTimeStore.getState().setPlaying(false)
-              }
-            }}
-            aria-label="Day timeline"
-            className="w-[120px] sm:w-[200px]"
-          />
-          <span className="num shrink-0 tabular-nums text-[12px] text-fg-muted">
-            {progress.toFixed(1)}% · {formatMinutesAsDuration(remaining)} left
-          </span>
-        </div>
+        <Slider
+          value={[minute]}
+          min={0}
+          max={DAY_MINUTES}
+          step={stepMinutes}
+          onValueChange={(value) => {
+            const next = value[0]
+            if (typeof next === "number") {
+              setMinute(next)
+              useTimeStore.getState().setPlaying(false)
+            }
+          }}
+          aria-label="Day timeline"
+          className="min-w-0 flex-1"
+        />
 
-        <div className="flex items-center gap-1.5">
-          <span className="num tabular-nums text-[12px] text-fg-muted">
-            ×{speed} · {stepMinutes} min/step
-          </span>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon-xs" aria-label="Playback settings">
-                <SlidersHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="min-w-[240px]">
-              <DropdownMenuLabel className="label-latin">Step size</DropdownMenuLabel>
-              <DropdownMenuRadioGroup
-                value={String(stepMinutes)}
-                onValueChange={(value) => setStepMinutes(Number(value))}
-              >
-                {STEP_PRESETS.map((preset) => (
-                  <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
-                    {preset} min / step
-                    <span className="ml-2 text-[12px] text-fg-muted">
-                      full day: {stepCount(preset)} steps
-                    </span>
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon-xs" aria-label="Playback settings">
+              <SlidersHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="min-w-[240px]">
+            <DropdownMenuLabel className="t-caption">
+              {phaseOf(minute)} · step {currentStep}/{totalSteps}
+            </DropdownMenuLabel>
+            <DropdownMenuLabel className="t-caption">
+              {progress.toFixed(1)}% · {formatMinutesAsDuration(remaining)} left · ×{speed} · {stepMinutes} min/step
+            </DropdownMenuLabel>
+            <DropdownMenuLabel className="label-latin">Step size</DropdownMenuLabel>
+            <DropdownMenuRadioGroup
+              value={String(stepMinutes)}
+              onValueChange={(value) => setStepMinutes(Number(value))}
+            >
+              {STEP_PRESETS.map((preset) => (
+                <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
+                  {preset} min / step
+                  <span className="t-caption ml-2">full day: {stepCount(preset)} steps</span>
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
 
-              <DropdownMenuLabel className="label-latin">Mode</DropdownMenuLabel>
-              <DropdownMenuRadioGroup
-                value={playMode}
-                onValueChange={(value) => {
-                  const next = PLAY_MODES.find((item) => item.value === value)
-                  if (next !== undefined) setPlayMode(next.value)
-                }}
-              >
-                {PLAY_MODES.map((item) => (
-                  <DropdownMenuRadioItem key={item.value} value={item.value}>
-                    {item.label}
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
+            <DropdownMenuLabel className="label-latin">Mode</DropdownMenuLabel>
+            <DropdownMenuRadioGroup
+              value={playMode}
+              onValueChange={(value) => {
+                const next = PLAY_MODES.find((item) => item.value === value)
+                if (next !== undefined) setPlayMode(next.value)
+              }}
+            >
+              {PLAY_MODES.map((item) => (
+                <DropdownMenuRadioItem key={item.value} value={item.value}>
+                  {item.label}
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
 
-              <DropdownMenuLabel className="label-latin">Playback speed</DropdownMenuLabel>
-              <DropdownMenuRadioGroup
-                value={String(speed)}
-                onValueChange={(value) => setSpeed(Number(value))}
-              >
-                {SPEED_PRESETS.map((preset) => (
-                  <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
-                    ×{preset}
-                    <span className="ml-2 text-[12px] text-fg-muted">
-                      {speedHint(preset, playMode)}
-                    </span>
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
+            <DropdownMenuLabel className="label-latin">Playback speed</DropdownMenuLabel>
+            <DropdownMenuRadioGroup
+              value={String(speed)}
+              onValueChange={(value) => setSpeed(Number(value))}
+            >
+              {SPEED_PRESETS.map((preset) => (
+                <DropdownMenuRadioItem key={preset} value={String(preset)} className="num">
+                  ×{preset}
+                  <span className="t-caption ml-2">{speedHint(preset, playMode)}</span>
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
 
-              <DropdownMenuLabel className="label-latin">Shortcuts</DropdownMenuLabel>
-              <div className="flex flex-wrap items-center gap-1.5 px-2 py-1.5">
-                <Key>Space</Key>
-                <span className="text-[12px] text-fg-muted">play</span>
-                <Key>←</Key>
-                <Key>→</Key>
-                <span className="text-[12px] text-fg-muted">±1 step</span>
-                <Key>Shift</Key>
-                <span className="text-[12px] text-fg-muted">±60 min</span>
-                <Key>Home</Key>
-                <Key>End</Key>
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-        </div>
+            <DropdownMenuLabel className="label-latin">Shortcuts</DropdownMenuLabel>
+            <div className="flex flex-wrap items-center gap-1.5 px-2 py-1.5">
+              <Key>Space</Key>
+              <span className="t-caption">play</span>
+              <Key>←</Key>
+              <Key>→</Key>
+              <span className="t-caption">±1 step</span>
+              <Key>Shift</Key>
+              <span className="t-caption">±60 min</span>
+              <Key>Home</Key>
+              <Key>End</Key>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   )

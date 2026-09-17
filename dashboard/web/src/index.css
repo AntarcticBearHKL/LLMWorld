@@ -92,11 +92,11 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Glass — the defining chrome surface (same recipe in both themes) */
-  --glass-bg: rgb(31 29 26 / 0.55);
+  --glass-bg: rgb(31 29 26 / 0.30);
   --glass-bg-opaque: #1f1d1a;
   --glass-border: rgb(255 255 255 / 0.1);
   --glass-blur: blur(24px) saturate(150%);
-  --glass-blur-lg: blur(40px) saturate(150%);
+  --glass-blur-lg: blur(44px) saturate(200%);
 
   /* Canvas dot grid */
   --dot-color: rgb(245 245 244 / 0.24);
@@ -183,7 +183,7 @@
   --shadow-2: none;
   --shadow-3: none;
 
-  --glass-bg: rgb(251 250 247 / 0.72);
+  --glass-bg: rgb(251 250 247 / 0.40);
   --glass-bg-opaque: #fbfaf7;
   --glass-border: rgb(28 25 23 / 0.1);
 
