@@ -106,7 +106,10 @@ class DistrictLifecycleBase(unittest.TestCase):
     def add_house(self, name, label="house_0001", household=None):
         house = os.path.join(self.district_path(name), label)
         os.makedirs(house, exist_ok=True)
-        _write_json(os.path.join(house, "household.json"), household or {"home": {}, "members": []})
+        _write_json(
+            os.path.join(house, "household.json"),
+            household or {"home": {}, "members": [{"name": "Member 1"}]},
+        )
         return house
 
     # -- router helpers (the frozen HTTP contract) ------------------------

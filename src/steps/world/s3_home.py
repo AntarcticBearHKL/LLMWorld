@@ -224,9 +224,13 @@ def run_step(world_id, district=None, house=None, *, seed=42) -> tuple[bool, str
     house_dir = os.path.join(district_path, house_id)
     household_path = os.path.join(house_dir, "household.json")
     household = _read_json(household_path)
-    members = household.get("members") if isinstance(household, dict) else None
-    if not isinstance(household, dict) or not isinstance(members, list) or not members:
+    if not isinstance(household, dict):
         return False, "household.json missing; run the household step first"
+    members = household.get("members")
+    if not isinstance(members, list) or not members:
+        return False, (
+            "this household has no members yet: compose them before generating a home"
+        )
 
     description = _district_description(world_id, district)
     log_dir = os.path.join(house_dir, "log")

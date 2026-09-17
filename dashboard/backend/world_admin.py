@@ -60,6 +60,9 @@ LOCKED_STEPS: Tuple[str, ...] = ("household", "home")
 LOCK_REQUIRED_REASON = (
     "Lock the district first — households can only be generated for a locked district."
 )
+HOUSEHOLD_MEMBERS_REQUIRED_REASON = (
+    "this household has no members yet: compose them before generating a home"
+)
 
 #: ``<district>/.locked`` - the persisted, one-way lock marker; always read and
 #: written through the helpers below so every caller agrees.
@@ -758,7 +761,6 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
     home_houses: List[HouseStepStatus] = []
     for label in labels:
         household_path = house_file(wid, label, "household.json", district_name)
-        household_exists = _is_file(household_path)
         household_done, household_stage = _household_status(household_path)
         household_houses.append(
             HouseStepStatus(
@@ -775,18 +777,19 @@ def build_state(world_id: str, district: Optional[str] = None) -> BuildState:
             )
         )
 
-        home_done = household_exists and _house_has_home(household_path)
+        if household_done:
+            home_blocked = None
+        elif household_stage == "described":
+            home_blocked = HOUSEHOLD_MEMBERS_REQUIRED_REASON
+        else:
+            home_blocked = "household.json missing (run 'household' first)"
+        home_done = household_done and _house_has_home(household_path)
         home_houses.append(
             HouseStepStatus(
                 house=label,
                 done=home_done,
-                runnable=household_exists and gate_reason is None,
-                blocked_reason=gate_reason
-                or (
-                    None
-                    if household_exists
-                    else "household.json missing (run 'household' first)"
-                ),
+                runnable=household_done and gate_reason is None,
+                blocked_reason=gate_reason or home_blocked,
             )
         )
 

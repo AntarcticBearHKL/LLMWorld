@@ -226,6 +226,16 @@ class HomeErrorTests(HomeBase):
                                side_effect=AssertionError("LLM must not be called")):
             ok, msg = home.run_step("w1", "clayton")
         self.assertFalse(ok)
+        self.assertEqual(
+            msg, "this household has no members yet: compose them before generating a home"
+        )
+
+    def test_missing_household_file(self):
+        self.add_district()
+        with mock.patch.object(home.SubAgent, "single_call",
+                               side_effect=AssertionError("LLM must not be called")):
+            ok, msg = home.run_step("w1", "clayton")
+        self.assertFalse(ok)
         self.assertEqual(msg, "household.json missing; run the household step first")
 
     def test_invalid_json_returns_false_and_leaves_file_untouched(self):

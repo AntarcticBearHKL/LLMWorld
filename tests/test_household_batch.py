@@ -255,6 +255,11 @@ class BackendStageTests(_TempWorlds):
         step = self._household_step()
         return next(item for item in step.houses if item.house == house_id)
 
+    def _home_status_for(self, house_id):
+        state = world_admin.build_state("w1")
+        step = next(item for item in state.steps if item.step == "home")
+        return next(item for item in step.houses if item.house == house_id)
+
     def test_described_household_is_not_done_and_reports_stage(self):
         self.seed_house("house_0001", {"household_type": "Young DINK Couple", "member_count": 2,
                                        "description": "A couple.", "status": "described"})
@@ -282,6 +287,21 @@ class BackendStageTests(_TempWorlds):
         status = self._status_for("house_0001")
         self.assertEqual(status.stage, "described")
         self.assertFalse(status.done)
+
+    def test_home_is_blocked_until_the_household_has_members(self):
+        self.seed_house("house_0001", {"household_type": "Young DINK Couple", "member_count": 2,
+                                       "description": "A couple.", "status": "described"})
+        home = self._home_status_for("house_0001")
+        self.assertFalse(home.runnable)
+        self.assertFalse(home.done)
+        self.assertEqual(home.blocked_reason, world_admin.HOUSEHOLD_MEMBERS_REQUIRED_REASON)
+
+    def test_home_becomes_runnable_once_members_exist(self):
+        self.seed_house("house_0001", {"type": "Young DINK Couple",
+                                       "members": [{"name": "Member 1"}], "status": "composed"})
+        home = self._home_status_for("house_0001")
+        self.assertTrue(home.runnable)
+        self.assertIsNone(home.blocked_reason)
 
     def test_stage_field_is_part_of_the_contract(self):
         schema = models.HouseStepStatus.model_json_schema()
