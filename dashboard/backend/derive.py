@@ -13,7 +13,7 @@ import io
 import os
 from typing import Any, Dict, List, Optional, Tuple
 
-from . import store
+from . import spacetimes, store
 from .models import (
     ActivitySegment,
     ApplianceDay,
@@ -134,7 +134,18 @@ def to_intervals(
 # --------------------------------------------------------------------------
 # Day derivation (cached - a snapshot needs every house of a day)
 # --------------------------------------------------------------------------
+def world_for_run(run: str) -> str:
+    """The world a run replays; a legacy run whose directory name IS the world keeps working."""
+    try:
+        spacetime = spacetimes.read(run)
+    except ValueError:
+        return run
+    world = spacetime.world if spacetime is not None else None
+    return world if isinstance(world, str) and world else run
+
+
 def _derive_day(run: str, date: str, house: str, policy: str = "baseline") -> Dict[str, Any]:
+    world = world_for_run(run)
     key = (run, date, house, policy)
     cached = _DAY_CACHE.get(key)
     if cached is not None:
@@ -144,7 +155,7 @@ def _derive_day(run: str, date: str, house: str, policy: str = "baseline") -> Di
     # The library builds the appliance registry (and prints [Dedup]/[Warn] lines)
     # lazily on the first next(); mute it so API logs stay clean.
     with contextlib.redirect_stdout(io.StringIO()):
-        for candidate in dataset.iter_house_days(run, date=date, policy=policy, houses=[house]):
+        for candidate in dataset.iter_house_days(world, env=run, date=date, policy=policy, houses=[house]):
             record = candidate
             break
     if record is None:
@@ -152,7 +163,7 @@ def _derive_day(run: str, date: str, house: str, policy: str = "baseline") -> Di
             "no decisions for run=%s date=%s house=%s policy=%s" % (run, date, house, policy)
         )
 
-    registry = store.registry(run, house)
+    registry = store.registry(world, house)
     series, best_action = _series_and_actions(
         record["household"], record["decisions"], registry,
     )
@@ -161,7 +172,7 @@ def _derive_day(run: str, date: str, house: str, policy: str = "baseline") -> Di
         "registry": registry,
         "series": series,
         "best_action": best_action,
-        "info": store.household_info(run, house),
+        "info": store.household_info(world, house),
     }
     if len(_DAY_CACHE) >= _DAY_CACHE_MAX:
         _DAY_CACHE.pop(next(iter(_DAY_CACHE)))
@@ -307,7 +318,7 @@ def build_snapshot(run: str, date: str, minute: int, policy: str = "baseline") -
     index = max(0, min(MINUTES_PER_DAY - 1, int(minute)))
     houses: List[SnapshotHouse] = []
 
-    for house in dataset.list_houses(run, run, date):
+    for house in dataset.list_houses(world_for_run(run), run, date):
         try:
             data = _derive_day(run, date, house, policy)
         except ValueError:
