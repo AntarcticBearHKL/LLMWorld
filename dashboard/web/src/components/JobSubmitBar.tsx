@@ -1,11 +1,7 @@
-import { useState } from "react"
-
 import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react"
 
 import type { JobRequest } from "@/api/types"
 import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
 import { useCreateJob, useEstimateJob } from "@/hooks/useJobs"
 import { cn } from "@/lib/utils"
 
@@ -16,10 +12,6 @@ interface JobSubmitBarProps {
   disabledReason?: string
 }
 
-/**
- * Shared guardrail: estimate first, tick to confirm, then submit.
- * Submission is blocked until both steps are done, so a stray click cannot spend credits.
- */
 export function JobSubmitBar({
   payload,
   label = "Submit job",
@@ -28,10 +20,8 @@ export function JobSubmitBar({
 }: JobSubmitBarProps) {
   const estimate = useEstimateJob()
   const create = useCreateJob()
-  const [confirmed, setConfirmed] = useState(false)
 
-  const estimated = estimate.data !== undefined
-  const canSubmit = !disabled && estimated && confirmed && !create.isPending
+  const canSubmit = !disabled && !create.isPending
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface-2 px-4 py-3.5">
@@ -51,23 +41,7 @@ export function JobSubmitBar({
             Estimated <span className="num text-energy">{estimate.data.estimated_calls}</span> LLM
             calls · {estimate.data.detail}
           </span>
-        ) : (
-          <span className="text-[13px] text-fg-subtle">
-            Estimate first, then confirm the cost before submitting.
-          </span>
-        )}
-      </div>
-
-      <div className="flex items-center gap-2.5">
-        <Switch
-          id="job-confirm"
-          checked={confirmed}
-          onCheckedChange={setConfirmed}
-          disabled={!estimated}
-        />
-        <Label htmlFor="job-confirm" className="text-[13px] text-fg-muted">
-          I understand this run calls the LLM and spends API credits
-        </Label>
+        ) : null}
       </div>
 
       {disabled && disabledReason !== undefined ? (

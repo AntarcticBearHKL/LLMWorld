@@ -147,8 +147,7 @@ export function JobsPanel() {
         <div className="min-h-0 flex-1 overflow-y-auto">
           {jobs.length === 0 ? (
             <p className="px-4 py-6 text-[13px] text-fg-subtle">
-              No jobs yet. Submit one from the build or simulation flows. Jobs really run run.py and
-              spend API credits.
+              No jobs yet. Submit one from the build or simulation flows.
             </p>
           ) : (
             <ul className="flex flex-col">
@@ -204,8 +203,7 @@ export function JobsPanel() {
       </section>
 
       <p className="col-span-full label-micro">
-        Jobs really run run.py and spend API credits; only one job runs at a time to avoid concurrent
-        writes under output/.
+        Only one job runs at a time to avoid concurrent writes under output/.
       </p>
     </div>
   )

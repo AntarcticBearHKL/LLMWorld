@@ -169,9 +169,6 @@ export function WorldBuilder({ world, district }: WorldBuilderProps) {
                 </div>
               ))}
             </dl>
-            <p className="text-[12px] text-fg-subtle">
-              Build jobs really run the pipeline and spend API credits.
-            </p>
           </div>
         </div>
       )}
