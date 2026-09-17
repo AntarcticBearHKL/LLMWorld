@@ -708,3 +708,35 @@ user-requested exception:
 They remain icon-only buttons with **no button chrome** (`ghost` + `icon-xs`), each with a
 `title` and an `aria-label`. Because the colour is the only thing separating them, each
 also keeps a **distinct icon**, so the row survives greyscale and colour-blind viewing (§8).
+
+## 19. Centered panels, and empty masters
+
+### 19.1 The centered panel
+
+`SheetContent` gains a third variant, `side="center"` (it is still the Radix Dialog
+primitive, so focus trapping, `Esc` and the scrim are unchanged):
+
+| Property | Value |
+| --- | --- |
+| Position | `fixed inset-0 m-auto h-fit` — centred on both axes, never off-screen |
+| Width | `w-[calc(100%-2rem)]` plus a per-instance `max-w-*`; the instance picks the measure |
+| Height | capped at `max-h-[85dvh]`; the body is the scroll owner (`min-h-0 overflow-y-auto`) |
+| Surface | `--surface` + 1px `--border` + `--r-xl` + `--shadow-3`, same as a drawer |
+| Motion | `zoom-in-95` / `zoom-out-95` + fade (§6 tokens; no directional slide) |
+| Width/measure | authoring panels `sm:max-w-lg`; a prose editor `sm:max-w-2xl`; an embedded table `sm:max-w-3xl` |
+
+**Rule — which surface an action gets.** A surface that *authors or mutates* uses the
+**centered panel**. A surface that only *inspects* uses the right-hand **drawer**. So the
+five authoring surfaces — new world, new district, district description, household, steps —
+are centred; `PipelineDrawer` (a read-only LLM-trace viewer) stays a drawer.
+
+### 19.2 An empty master never leaves a blank detail pane
+
+A `list-detail` screen (§17.3) whose master list is empty must **not** render the detail
+pane at all — a half-blank two-column split was the reported defect. Instead the screen
+collapses to a single centred **`cover`** (`layout-skill.md` §3): grid rows `auto 1fr auto`,
+`min-height: 100%`, holding the empty-state title, the one-line explanation, and the screen's
+**primary action** so the CTA is reachable from the empty state itself.
+
+This applies to every list-detail screen, not just districts. Loading and error states keep
+their existing full-width row treatment.

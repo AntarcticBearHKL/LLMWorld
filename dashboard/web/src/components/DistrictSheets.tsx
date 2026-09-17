@@ -81,7 +81,7 @@ export function NewDistrictSheet(props: {
         onOpenChange(next)
       }}
     >
-      <SheetContent side="right" className="flex w-full flex-col gap-0 sm:max-w-lg">
+        <SheetContent side="center" className="flex flex-col gap-0 sm:max-w-lg">
         <SheetHeader className="border-b border-border">
           <SheetTitle>New district</SheetTitle>
           <SheetDescription>
@@ -323,7 +323,7 @@ export function DistrictDescriptionSheet(props: {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="flex w-full flex-col gap-0 sm:max-w-lg">
+      <SheetContent side="center" className="flex flex-col gap-0 sm:max-w-2xl">
         <SheetHeader className="border-b border-border">
           <SheetTitle>District description</SheetTitle>
           <SheetDescription>
@@ -366,7 +366,7 @@ export function HouseholdSheet(props: {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="flex w-full flex-col gap-0 sm:max-w-lg">
+        <SheetContent side="center" className="flex flex-col gap-0 sm:max-w-lg">
         <SheetHeader className="border-b border-border">
           <SheetTitle>Household</SheetTitle>
           <SheetDescription>{house === "" ? "No household selected." : house}</SheetDescription>
@@ -408,7 +408,7 @@ export function DistrictStepsSheet(props: {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="flex w-full flex-col gap-0 sm:max-w-lg">
+        <SheetContent side="center" className="flex flex-col gap-0 sm:max-w-lg">
         <SheetHeader className="border-b border-border">
           <SheetTitle>Steps</SheetTitle>
           <SheetDescription>

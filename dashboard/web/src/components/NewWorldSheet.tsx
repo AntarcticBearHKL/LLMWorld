@@ -49,7 +49,7 @@ export function NewWorldSheet(props: {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="flex w-full flex-col gap-0 sm:max-w-lg">
+        <SheetContent side="center" className="flex flex-col gap-0 sm:max-w-lg">
         <SheetHeader className="border-b border-border">
           <SheetTitle>New world</SheetTitle>
           <SheetDescription>

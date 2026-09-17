@@ -440,6 +440,37 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
   }, [districtsQuery.isPending, districtsQuery.data, selected])
 
   const selectedDistrict = districts.find((district) => district.name === selected) ?? null
+  const isEmpty = !districtsQuery.isPending && !districtsQuery.isError && districts.length === 0
+
+  if (isEmpty) {
+    return (
+      <section className="card flex min-h-0 flex-1 flex-col overflow-hidden">
+        <div className="grid min-h-full flex-1 grid-rows-[auto_1fr_auto]">
+          <div className="row-start-2 flex items-center justify-center px-6 py-8">
+            <div className="flex w-full max-w-[440px] flex-col items-center text-center">
+              <p className="text-[15px] font-semibold text-fg">No districts yet</p>
+              <p className="mt-1.5 text-[13px] leading-relaxed text-fg-muted">
+                A district is this world's first layer. Name it, write its description, and lock it —
+                only then can you generate households.
+              </p>
+              <Button size="sm" className="mt-4" onClick={() => setNewOpen(true)}>
+                <Plus />
+                New district
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <NewDistrictSheet
+          world={world}
+          districtNames={districts.map((district) => district.name)}
+          open={newOpen}
+          onOpenChange={setNewOpen}
+          onCreated={(name) => setSelected(name)}
+        />
+      </section>
+    )
+  }
 
   return (
     <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(320px,38%)_minmax(0,1fr)]">
@@ -509,18 +540,6 @@ export function WorldDistricts({ info }: { info: WorldInfo }) {
                       <Button variant="outline" size="xs" onClick={() => void districtsQuery.refetch()}>
                         Retry
                       </Button>
-                    </span>
-                  </TableCell>
-                </TableRow>
-              ) : districts.length === 0 ? (
-                <TableRow className="hover:bg-transparent">
-                  <TableCell colSpan={4} className="p-6 text-center text-[13px] text-fg-subtle">
-                    <span className="flex flex-col items-center gap-1.5">
-                      <span className="text-[15px] font-semibold text-fg">No districts yet</span>
-                      <span className="text-[13px] leading-relaxed text-fg-muted">
-                        Add a district above to start building this world: name it, generate its
-                        description, then add households and generate their homes.
-                      </span>
                     </span>
                   </TableCell>
                 </TableRow>
