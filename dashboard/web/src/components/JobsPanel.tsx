@@ -134,74 +134,77 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
   const selectedIsBuild = selectedJob !== null && selectedJob.kind === "build"
 
   return (
-    <div className="grid h-full min-h-0 grid-cols-1 gap-3 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:grid-rows-[minmax(0,1fr)_auto]">
-      <section className="card flex min-h-0 flex-col overflow-hidden">
-        <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
-          <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
-            Jobs <span className="num text-[13px] font-medium text-fg-subtle">{jobs.length}</span>
-          </span>
-          <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void jobsQuery.refetch()}>
-            <RefreshCw />
-          </Button>
-        </header>
-        <div className="min-h-0 flex-1 overflow-y-auto">
-          {jobs.length === 0 ? (
-            <p className="px-4 py-6 text-[13px] text-fg-subtle">
-              No jobs yet. Submit one from the build or simulation flows.
-            </p>
-          ) : (
-            <ul className="flex flex-col">
-              {jobs.map((job) => (
-                <li key={job.id} className="border-b border-border">
-                  <button
-                    type="button"
-                    onClick={() => setSelected(job.id)}
-                    className={cn(
-                      "flex w-full flex-col gap-1 px-4 py-2.5 text-left transition-colors",
-                      job.id === selected ? "bg-item-selected" : "hover:bg-item-hover",
-                    )}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline" className={cn("label-latin", STATUS_CLASS[job.status])}>
-                        {STATUS_LABEL[job.status]}
-                      </Badge>
-                      <span className="label-micro">{KIND_LABEL[job.kind] ?? job.kind}</span>
-                      <span className="num ml-auto text-[12px] text-fg-subtle">{job.id.slice(0, 8)}</span>
-                    </div>
-                    <span className="num truncate text-[13px] text-fg-muted">{jobMeta(job)}</span>
-                  </button>
-                  {job.status === "running" || job.status === "queued" ? (
+    <div className="@container h-full min-h-0">
+      <div className="grid h-full min-h-0 grid-cols-1 gap-3 @2xl:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
+        <section className="card flex min-h-0 flex-col overflow-hidden">
+          <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
+            <span className="text-[15px] font-bold tracking-[-0.01em] text-fg">
+              Jobs <span className="num text-[13px] font-medium text-fg-subtle">{jobs.length}</span>
+            </span>
+            <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void jobsQuery.refetch()}>
+              <RefreshCw />
+            </Button>
+          </header>
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            {jobs.length === 0 ? (
+              <p className="px-4 py-6 text-[13px] text-fg-subtle">
+                No jobs yet. Submit one from the build or simulation flows.
+              </p>
+            ) : (
+              <ul className="flex flex-col">
+                {jobs.map((job) => (
+                  <li key={job.id} className="border-b border-border">
                     <button
                       type="button"
-                      onClick={() => void onCancel(job.id)}
-                      disabled={busy === job.id}
+                      onClick={() => setSelected(job.id)}
                       className={cn(
-                        "label-micro mx-4 mb-2 inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5",
-                        busy === job.id ? "opacity-50" : "hover:border-danger/60 hover:text-danger",
+                        "flex w-full flex-col gap-1 px-4 py-2.5 text-left transition-colors",
+                        job.id === selected ? "bg-item-selected" : "hover:bg-item-hover",
                       )}
                     >
-                      <X className="size-2.5" aria-hidden />
-                      Cancel job
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className={cn("label-latin", STATUS_CLASS[job.status])}>
+                          {STATUS_LABEL[job.status]}
+                        </Badge>
+                        <span className="label-micro">{KIND_LABEL[job.kind] ?? job.kind}</span>
+                        <span className="num ml-auto text-[12px] text-fg-subtle">{job.id.slice(0, 8)}</span>
+                      </div>
+                      <span className="num truncate text-[13px] text-fg-muted" title={jobMeta(job)}>
+                        {jobMeta(job)}
+                      </span>
                     </button>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
+                    {job.status === "running" || job.status === "queued" ? (
+                      <button
+                        type="button"
+                        onClick={() => void onCancel(job.id)}
+                        disabled={busy === job.id}
+                        className={cn(
+                          "label-micro mx-4 mb-2 inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5",
+                          busy === job.id ? "opacity-50" : "hover:border-danger/60 hover:text-danger",
+                        )}
+                      >
+                        <X className="size-2.5" aria-hidden />
+                        Cancel job
+                      </button>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          {error !== null ? (
+            <p className="shrink-0 border-t border-border px-4 py-2 text-[12px] text-danger">{error}</p>
+          ) : null}
+        </section>
+
+        <section className="card flex min-h-0 flex-col overflow-hidden">
+          {selectedJob !== null && selectedIsBuild ? (
+            <BuildJobView job={selectedJob} />
+          ) : (
+            <LogView jobId={selectedJob?.id ?? null} />
           )}
-        </div>
-        {error !== null ? (
-          <p className="shrink-0 border-t border-border px-4 py-2 text-[12px] text-danger">{error}</p>
-        ) : null}
-      </section>
-
-      <section className="card flex min-h-0 flex-col overflow-hidden">
-        {selectedJob !== null && selectedIsBuild ? (
-          <BuildJobView job={selectedJob} />
-        ) : (
-          <LogView jobId={selectedJob?.id ?? null} />
-        )}
-      </section>
-
+        </section>
+      </div>
     </div>
   )
 }

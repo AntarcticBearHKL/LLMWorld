@@ -872,3 +872,78 @@ descriptions.
 `DescriptionChip` is removed from the households pane header. Whether a description exists is
 already the left table's `Status` column (§18.1), and §17.2 rule 5 forbids showing the same
 state twice on one screen. The chip component itself survives for other callers.
+
+## 23. Live generation state
+
+### 23.1 The rule
+
+While a build job is running, the surface that is **being filled** must say so — not leave the
+operator guessing whether a click did anything. A job is "active" when its status is
+`running` or `queued` (`isActiveJob`, `hooks/useWorldBuild`), and the wiring already polls
+faster while one is active (`useBuildState`).
+
+| Surface being filled | Treatment |
+| --- | --- |
+| A district row's `Status` cell (§18.1) | the status chip gains a leading spinner while any active job targets that district — the stored status stays visible, the spinner adds "and something is happening". |
+| The households pane (the `household` step's output) | a one-line `Generating…` strip above the list, carrying the step label, plus the `View job` link (§23.3). |
+
+The indicator is a `Loader2` at `size-3` with `animate-spin` and `motion-reduce:animate-none`
+(§6 — motion serves meaning, and reduced motion still gets a static marker). Colour is
+`--energy`, the documented "running / drawing power" state colour (§2) — never a decorative
+accent.
+
+### 23.2 Nothing else changes
+
+The indicator never replaces the data it annotates: the status chip keeps its word, the
+households list keeps its rows and its empty/loading/error states (§17.3), and the frosted
+lock mask (§18.3) keeps precedence — an unlocked district has no active job by construction.
+
+### 23.3 `View job` — a text link, not a button
+
+The link is **tertiary** (§22.2): plain text in `label-latin`, `--fg-muted`, underlined on
+hover, with no button chrome. Pressing it opens the floating job window **focused on that
+job** so the live log and LLM calls are on screen immediately, rather than a window listing
+everything with nothing selected.
+
+Wiring: `store/time.ts` gains `jobsFocus: string | null` and `openJob(jobId)` (which sets
+`jobsOpen = true` **and** `jobsFocus = jobId`); `FloatingJobsWindow` forwards it as an optional
+`focusJobId` prop on `JobsPanel`, which seeds its selected row from it and re-seeds when it
+changes. Neither the focus nor the open flag enters the URL (§20.3).
+
+## 24. Flat surfaces — the card material is retired
+
+**Supersedes §15's material.** §15 re-skinned the console with frosted glass, three soft
+shadows and `--r-xl` cards. §0's Layer A is `minimalist-skill.md`, which forbids heavy shadows
+and asks for 1px structural lines — the glass/card material had drifted away from the style
+skill the project chose. This section returns to it.
+
+| Was (§15) | Now |
+| --- | --- |
+| `card` = `--surface` + 1px border + `--r-xl` + `--shadow-1` | frame + 1px `--border`, `--r-md`, **no shadow** |
+| `chrome` / `chrome-lg` = frosted glass (72% wash + `backdrop-filter`) | flat `--surface` + 1px `--border`, `--r-md`, no blur |
+| `glass` / `glass-lg` = frozen glass | flat `--surface-2`, no blur; a masked region is opaque and marked by `aria-hidden` + `pointer-events-none` (§18.3) |
+| `--shadow-1/2/3` | resolve to **none** (the tokens stay declared so nothing breaks) |
+| `--r-xl` 18px · `--r-lg` 10px · `--r-md` 8px | `--r-xl` 10px · `--r-lg` 8px · `--r-md` 6px |
+| hover = lift (`translateY` + shadow) | hover = `--item-hover` wash only — no lift, no shadow |
+
+Rules:
+
+1. **Elevation is background, never shadow.** Raised = `--surface-2` / `--surface-3`; resting = `--surface`. `--bg` is the page.
+2. **Exactly one structural line width: 1px.** `--border` for structure; `--border-strong` only for inputs and chip outlines (§5).
+3. **Opaque only.** With no blur left, no surface may be translucent (§1's rule survives its reason): every surface resolves to a solid colour. `--overlay` stays translucent — it is a modal scrim, not a surface.
+4. **Motion is colour, not position.** `card-lift` loses its translate; hover and press are background/colour transitions (§6).
+5. **The dot grid stays** on `body` over the flat `--bg` — texture is not material, and a completely untextured flat page reads sterile (`minimalist-skill` §6).
+
+**Migration.** Because `card` / `chrome` / `glass` / `card-lift` are redefined in `index.css`,
+every existing usage becomes flat without touching its file. The per-screen sweep is then only
+about leftovers — pill-shaped tags, spacing, and the surfaces that used to justify their shape
+by elevation.
+
+### 24.1 The floating window holds at any size
+
+§20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the
+*window* never reflowed its inside — the list column kept a 340px floor and its rows broke.
+The window's body must respond to **its own width**, not the viewport (`layout-skill.md` §4):
+`JobsPanel` wraps its two regions in a `container-type: inline-size` parent and switches to a
+single stacked column below `~640px` of *container* width, list first. The viewport `lg:` grid
+is removed.
