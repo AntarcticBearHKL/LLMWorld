@@ -120,6 +120,7 @@ export function WatchView() {
   const block = useTimeStore((state) => state.block)
   const house = useTimeStore((state) => state.house)
   const indoor = useTimeStore((state) => state.indoor)
+  const minute = useTimeStore((state) => state.minute)
   const policy = useTimeStore((state) => state.policy)
   const setSelection = useTimeStore((state) => state.setSelection)
   const setView = useTimeStore((state) => state.setView)
@@ -211,6 +212,10 @@ export function WatchView() {
 
   const layer: 1 | 2 | 3 | 4 = house.length > 0 ? (indoor ? 4 : 3) : block.length > 0 ? 2 : 1
 
+  const replay = replayQuery.data
+  const currentWatts = replay?.total_watts[Math.min(1439, Math.max(0, minute))] ?? 0
+  const peakHint = replay === undefined ? "—" : `of ${formatWatts(replay.metrics.peak_watts)} peak`
+
   const crumb = (label: string, onClick: () => void, current: boolean) => (
     <Crumb key={label} label={label} onClick={onClick} current={current} />
   )
@@ -243,6 +248,11 @@ export function WatchView() {
             </>
           ) : null}
         </nav>
+
+        <div className="flex items-baseline gap-2">
+          <span className="t-hero">{formatWatts(currentWatts)}</span>
+          <span className="t-caption">{peakHint}</span>
+        </div>
 
         <div className="ml-auto flex items-center gap-2">
           <span className="label-micro flex items-center gap-1.5 text-fg-muted">
