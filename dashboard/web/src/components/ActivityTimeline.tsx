@@ -43,12 +43,12 @@ const buildTooltip = (
   if (desc !== null && desc.length > 0) {
     parts.push(`<span class="tip-desc">${escapeHtml(desc)}</span>`)
   }
-  return parts.join(" ")
+  return `<span class="t-caption">${parts.join(" ")}</span>`
 }
 
 const buildGroupLabel = (member: string, bedroom: string | null, lane: number): HTMLElement => {
   const wrapper = document.createElement("div")
-  wrapper.className = "lane-label"
+  wrapper.className = "lane-label t-micro"
   wrapper.style.setProperty("--lane", `var(--member-${lane})`)
 
   const bar = document.createElement("span")
@@ -163,6 +163,17 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
 
     timelineRef.current = timeline
 
+    const markQuietText = () => {
+      container.querySelectorAll<HTMLElement>(".vis-time-axis .vis-text").forEach((label) => {
+        label.classList.add("t-micro")
+      })
+      container.querySelectorAll<HTMLElement>(".vis-item-content").forEach((label) => {
+        label.classList.add("t-caption")
+      })
+    }
+    markQuietText()
+    timeline.on("changed", markQuietText)
+
     const cursorId = timeline.addCustomTime(minuteToDate(useTimeStore.getState().minute), "replay-cursor")
     customTimeIdRef.current = cursorId
     timeline.setCustomTimeTitle(formatHHMM(useTimeStore.getState().minute), cursorId)
@@ -188,6 +199,7 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
     return () => {
       timeline.off("click", handleClick)
       timeline.off("doubleClick", handleDoubleClick)
+      timeline.off("changed", markQuietText)
       timeline.destroy()
       timelineRef.current = null
       customTimeIdRef.current = null
@@ -276,14 +288,14 @@ export function ActivityTimeline({ replay, isPending, error }: ActivityTimelineP
     >
       <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-4 py-2">
         <CategoryLegend />
-        <span className="label-latin hidden shrink-0 xl:inline">
+        <span className="t-caption hidden shrink-0 xl:inline">
           {selectedMember === null ? "Select a block to locate its member" : `Selected ${selectedMember}`}
         </span>
       </div>
 
       {error !== null ? (
         <div className="flex flex-1 items-center justify-center px-4 py-10 text-center">
-          <p className="max-w-md text-[14px] leading-relaxed text-fg-muted">
+          <p className="max-w-md t-caption leading-relaxed">
             Could not load replay data for this selection.
             <br />
             <span className="num text-fg-subtle">{error.message}</span>

@@ -70,20 +70,20 @@ export function SnapshotPanel() {
       className="min-h-[240px]"
       bodyClassName="flex min-h-0 flex-col overflow-y-auto"
       actions={
-        <span className="num text-[14px] font-medium text-energy">
+        <span className="num t-body text-energy">
           {formatWatts(current?.total_watts ?? 0)}
         </span>
       }
     >
       <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-2">
-        <span className="label-micro truncate">{current?.household_type ?? "—"}</span>
-        <span className="label-latin">
+        <span className="t-micro truncate">{current?.household_type ?? "—"}</span>
+        <span className="t-caption">
           {current !== undefined ? `${running.length} drawing power` : "house total"}
         </span>
       </div>
 
       <div className="flex flex-col gap-1.5 px-4 py-3">
-        <span className="label-micro flex items-center gap-1.5">
+        <span className="t-caption flex items-center gap-1.5">
           <Users className="size-3" aria-hidden />
           Member locations
         </span>
@@ -95,14 +95,14 @@ export function SnapshotPanel() {
                 style={{ backgroundColor: memberColorVar(person.member, memberIds) }}
                 aria-hidden
               />
-              <span className="num shrink-0 text-[13px] text-fg">{person.member}</span>
-              <span className="min-w-0 flex-1 truncate text-right text-[13px] text-fg-muted">
+              <span className="num shrink-0 t-body text-fg">{person.member}</span>
+              <span className="min-w-0 flex-1 truncate text-right t-caption text-fg-muted">
                 {person.location} · {person.activity}
               </span>
             </li>
           ))}
           {current === undefined ? (
-            <li className="text-[13px] text-fg-subtle">
+            <li className="t-caption text-fg-subtle">
               {snapshotQuery.isPending ? "Loading…" : "No snapshot data at this minute."}
             </li>
           ) : null}
@@ -110,7 +110,7 @@ export function SnapshotPanel() {
       </div>
 
       <div className="flex flex-col gap-1.5 border-t border-border px-4 py-3">
-        <span className="label-micro flex items-center gap-1.5">
+        <span className="t-caption flex items-center gap-1.5">
           <Plug className="size-3" aria-hidden />
           Powered appliances · {running.length}
         </span>
@@ -118,17 +118,17 @@ export function SnapshotPanel() {
           {running.slice(0, 10).map((appliance) => (
             <li key={appliance.unique_id} className="flex items-center gap-2">
               <StatusDot on />
-              <span className="min-w-0 flex-1 truncate text-[13px] text-fg-muted">
+              <span className="min-w-0 flex-1 truncate t-body text-fg-muted">
                 {appliance.room !== null ? `${appliance.name} · ${appliance.room}` : appliance.name}
               </span>
-              <span className={cn("num shrink-0 text-[12px]", STATE_TONE.active)}>
+              <span className={cn("num shrink-0 t-body", STATE_TONE.active)}>
                 {formatWatts(appliance.watts)}
               </span>
-              <span className="label-latin shrink-0">{label(appliance)}</span>
+              <span className="t-caption shrink-0">{label(appliance)}</span>
             </li>
           ))}
           {running.length === 0 && current !== undefined ? (
-            <li className="text-[13px] text-fg-subtle">No appliance drawing power at this minute.</li>
+            <li className="t-caption text-fg-subtle">No appliance drawing power at this minute.</li>
           ) : null}
         </ul>
       </div>

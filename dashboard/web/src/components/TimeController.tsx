@@ -115,20 +115,22 @@ export function TimeController() {
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-30 flex justify-center px-4">
-      <div className="chrome-lg pointer-events-auto flex max-w-full flex-wrap items-center justify-center gap-1.5 px-2.5 py-2 shadow-3">
-        <div className="flex items-baseline gap-2">
-          <span className="num text-[34px] leading-none font-medium tracking-[-0.02em] text-fg">
+      <div className="chrome-lg pointer-events-auto grid w-[min(760px,calc(100vw-2rem))] grid-cols-[128px_minmax(0,1fr)_316px] items-center gap-4 px-5 py-2.5 shadow-3">
+        <div className="num t-body tabular-nums">
+          <div className="flex items-baseline gap-2">
+          <span className="num tabular-nums text-[34px] leading-none font-medium tracking-[-0.02em] text-fg">
             {formatHHMM(minute)}
           </span>
           <span className="flex flex-col leading-tight">
             <span className="label-micro text-fg-muted">{phaseOf(minute)}</span>
-            <span className="num text-[12px] text-fg-muted">
+            <span className="num tabular-nums text-[12px] text-fg-muted">
               Step {currentStep}/{totalSteps}
             </span>
           </span>
         </div>
+        </div>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center justify-center gap-1.5">
           <TransportButton label="Back to 00:00 (Home)" onClick={() => setMinute(0)}>
             <ChevronsLeft />
           </TransportButton>
@@ -162,6 +164,7 @@ export function TimeController() {
           </TransportButton>
         </div>
 
+        <div className="flex items-center justify-end gap-3">
         <div className="flex items-center gap-2.5 px-1">
           <Slider
             value={[minute]}
@@ -178,13 +181,13 @@ export function TimeController() {
             aria-label="Day timeline"
             className="w-[120px] sm:w-[200px]"
           />
-          <span className="num shrink-0 text-[12px] text-fg-muted">
+          <span className="num shrink-0 tabular-nums text-[12px] text-fg-muted">
             {progress.toFixed(1)}% · {formatMinutesAsDuration(remaining)} left
           </span>
         </div>
 
         <div className="flex items-center gap-1.5">
-          <span className="num text-[12px] text-fg-muted">
+          <span className="num tabular-nums text-[12px] text-fg-muted">
             ×{speed} · {stepMinutes} min/step
           </span>
           <DropdownMenu>
@@ -253,6 +256,7 @@ export function TimeController() {
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
+        </div>
         </div>
       </div>
     </div>

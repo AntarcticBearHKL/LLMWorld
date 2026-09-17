@@ -92,7 +92,7 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Glass — the defining chrome surface (same recipe in both themes) */
-  --glass-bg: rgb(31 29 26 / 0.72);
+  --glass-bg: rgb(31 29 26 / 0.55);
   --glass-bg-opaque: #1f1d1a;
   --glass-border: rgb(255 255 255 / 0.1);
   --glass-blur: blur(24px) saturate(150%);

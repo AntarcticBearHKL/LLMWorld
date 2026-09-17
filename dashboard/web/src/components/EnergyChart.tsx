@@ -156,14 +156,14 @@ export function EnergyChart({ replay }: EnergyChartProps) {
       className="min-h-[248px]"
       bodyClassName="flex min-h-0 flex-col"
       actions={
-        <span className="label-latin">
+        <span className="num t-body">
           {replay !== undefined ? `total ${formatKwh(replay.metrics.total_kwh)} kWh` : "—"}
         </span>
       }
     >
       {model === null || stacked === null ? (
         <div className="flex flex-1 items-center justify-center px-4 py-6">
-          <span className="text-[13px] text-fg-subtle">Loading load curve…</span>
+          <span className="t-caption">Loading load curve…</span>
         </div>
       ) : (
         <>
@@ -237,15 +237,15 @@ export function EnergyChart({ replay }: EnergyChartProps) {
                   className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 rounded-lg border border-border bg-surface-2 px-2 py-1 shadow-1"
                   style={{ left: `${(hover / DAY_MINUTES) * 100}%` }}
                 >
-                  <div className="num text-[12px] text-fg">{formatHHMM(hover)}</div>
-                  <div className="num text-[12px] text-energy">{formatWatts(markWatts)}</div>
+                  <div className="num t-body">{formatHHMM(hover)}</div>
+                  <div className="num t-body">{formatWatts(markWatts)}</div>
                 </div>
               ) : null}
             </div>
 
             <div className="pointer-events-none absolute -bottom-0.5 left-0 right-0 flex justify-between">
               {["00:00", "06:00", "12:00", "18:00", "24:00"].map((label) => (
-                <span key={label} className="num text-[12px] text-fg-subtle">
+                <span key={label} className="num t-micro">
                   {label}
                 </span>
               ))}
@@ -271,8 +271,8 @@ export function EnergyChart({ replay }: EnergyChartProps) {
                     style={{ backgroundColor: item.color }}
                     aria-hidden
                   />
-                  <span className="num text-[12px] text-fg-muted">{item.name}</span>
-                  <span className="num text-[12px] text-fg-subtle">{formatKwh(item.energy)}</span>
+                  <span className="t-caption">{item.name}</span>
+                  <span className="num t-caption">{formatKwh(item.energy)}</span>
                 </button>
               )
             })}
