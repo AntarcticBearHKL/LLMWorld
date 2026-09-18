@@ -6,10 +6,12 @@ import { USE_MOCK } from "@/api/client"
 import type { BuildStep, BuildStepStatus, JobInfo, JobRequest } from "@/api/types"
 import { BuildPreviewList } from "@/components/BuildPreviewList"
 import { DistrictPromptFields } from "@/components/DistrictPromptFields"
+import { GateHint } from "@/components/primitives/GateHint"
 import { JobSubmitBar } from "@/components/JobSubmitBar"
 import { StepInspector } from "@/components/StepInspector"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 import {
@@ -130,21 +132,27 @@ export function BuildStepCard({
           {statusChip.text}
         </Badge>
         <span className="label-micro">{SCOPE_LABEL[scope]}</span>
-        <Button
-          variant="outline"
-          size="xs"
-          className="ml-auto"
-          onClick={onFocus}
-          disabled={!runnable}
-          title={
-            runnable
-              ? `Configure "${BUILD_STEP_LABEL[step]}"`
-              : (blockedReason ?? houseBlocked ?? "This step is not runnable right now")
-          }
-        >
-          <SlidersHorizontal aria-hidden />
-          Configure
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="ml-auto inline-flex">
+              <Button
+                variant="outline"
+                size="xs"
+                className="ml-auto"
+                onClick={onFocus}
+                disabled={!runnable}
+              >
+                <SlidersHorizontal aria-hidden />
+                Configure
+              </Button>
+            </span>
+          </TooltipTrigger>
+          {!runnable ? (
+            <TooltipContent>
+              {blockedReason ?? houseBlocked ?? "This step is not runnable right now."}
+            </TooltipContent>
+          ) : null}
+        </Tooltip>
       </header>
 
       <div className="flex flex-col gap-2 px-3 py-2.5">
@@ -161,7 +169,7 @@ export function BuildStepCard({
           ) : (
             <ul className="flex flex-wrap gap-1.5">
               {status.houses.map((item) => (
-                <li key={item.house}>
+                <li key={item.house} className="flex flex-col items-start gap-1">
                   <span
                     title={item.blocked_reason ?? undefined}
                     className={cn(
@@ -180,6 +188,9 @@ export function BuildStepCard({
                       <XCircle className="size-2.5" aria-hidden />
                     )}
                   </span>
+                  {!item.runnable && item.blocked_reason && item.house === house ? (
+                    <GateHint>{item.blocked_reason}</GateHint>
+                  ) : null}
                 </li>
               ))}
             </ul>

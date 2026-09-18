@@ -150,8 +150,8 @@ export function WorldsList() {
   }
 
   return (
-    <section className="card flex w-full flex-col overflow-hidden">
-      <header className="flex shrink-0 flex-wrap items-center gap-x-2 gap-y-2 border-b border-border px-3.5 py-3">
+    <section className="card flex w-full flex-col overflow-hidden border-t border-border first:border-t-0">
+      <header className="flex shrink-0 flex-wrap items-center gap-x-2 gap-y-2 px-3.5 py-3">
         <span className="t-title">
           Worlds <span className="num t-micro">{worlds.length}</span>
         </span>

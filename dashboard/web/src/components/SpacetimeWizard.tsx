@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { useJobs } from "@/hooks/useJobs"
 import { useCreateSpacetime } from "@/hooks/useSpacetimes"
+import { isActiveJob } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 
@@ -143,6 +146,18 @@ export function SpacetimeWizard({
   const create = useCreateSpacetime(world)
   const [draft, setDraft] = useState<WizardDraft>(emptyDraft)
   const [errors, setErrors] = useState<WizardErrors>({})
+  const jobs = useJobs().data ?? []
+  const scenarioName = draft.name.trim()
+  const scenarioJobInFlight =
+    scenarioName.length > 0 &&
+    jobs.some(
+      (job) =>
+        job.kind === "simulate" &&
+        job.world === world &&
+        job.argv.indexOf("--env") !== -1 &&
+        job.argv[job.argv.indexOf("--env") + 1] === scenarioName &&
+        isActiveJob(job),
+    )
 
   const patch = (key: WizardKey, value: string) => {
     setDraft((previous) => ({ ...previous, [key]: value }))
@@ -255,10 +270,19 @@ export function SpacetimeWizard({
       </Field>
 
       <div className="flex flex-wrap items-center gap-2">
-        <Button size="sm" onClick={onSubmit} disabled={create.isPending}>
-          {create.isPending ? <Loader2 className="animate-spin" /> : <Plus />}
-          Create scenario
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="inline-flex">
+              <Button size="sm" onClick={onSubmit} disabled={create.isPending || scenarioJobInFlight}>
+                {create.isPending ? <Loader2 className="animate-spin" /> : <Plus />}
+                Create scenario
+              </Button>
+            </span>
+          </TooltipTrigger>
+          {scenarioJobInFlight ? (
+            <TooltipContent>Waiting for the running job to finish</TooltipContent>
+          ) : null}
+        </Tooltip>
         <Button variant="ghost" size="sm" onClick={onCancel} disabled={create.isPending}>
           Cancel
         </Button>

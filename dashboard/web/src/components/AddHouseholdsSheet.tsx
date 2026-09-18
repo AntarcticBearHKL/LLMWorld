@@ -13,6 +13,9 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { useJobs } from "@/hooks/useJobs"
+import { isActiveJob } from "@/hooks/useWorldBuild"
 
 const MIN_COUNT = 1
 const MAX_COUNT = 50
@@ -44,6 +47,15 @@ export function AddHouseholdsSheet(props: {
       : countValid
         ? undefined
         : COUNT_INVALID
+  const jobs = useJobs().data ?? []
+  const householdJobInFlight = jobs.some(
+    (job) =>
+      job.kind === "build" &&
+      job.world === world &&
+      job.step === "household" &&
+      (job.district ?? "") === district &&
+      isActiveJob(job),
+  )
 
   return (
     <Sheet
@@ -85,12 +97,21 @@ export function AddHouseholdsSheet(props: {
               They start as described households — members come next.
             </p>
 
-            <JobSubmitBar
-              payload={payload}
-              label="Add households"
-              disabled={disabledReason !== undefined}
-              disabledReason={disabledReason}
-            />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="inline-flex w-full [&>div]:w-full">
+                  <JobSubmitBar
+                    payload={payload}
+                    label="Add households"
+                    disabled={disabledReason !== undefined || householdJobInFlight}
+                    disabledReason={disabledReason}
+                  />
+                </span>
+              </TooltipTrigger>
+              {householdJobInFlight ? (
+                <TooltipContent>Waiting for the running job to finish</TooltipContent>
+              ) : null}
+            </Tooltip>
           </div>
         </div>
       </SheetContent>

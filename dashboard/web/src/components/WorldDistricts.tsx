@@ -25,6 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useJobs } from "@/hooks/useJobs"
 import {
   findStepStatus,
@@ -339,16 +340,25 @@ function DistrictHouseholdsPanel({
             <Sparkles aria-hidden />
             Description
           </Button>
-          <Button
-            size="sm"
-            disabled={householdGate !== null}
-            title={householdGate ?? undefined}
-            onClick={() => onAddHouseholdsOpenChange(true)}
-          >
-            {householdGate === null ? <Plus aria-hidden /> : <Lock aria-hidden />}
-            Add household
-          </Button>
-          {householdGate === null ? null : <GateHint>{householdGate}</GateHint>}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex">
+                <Button
+                  size="sm"
+                  disabled={householdGate !== null}
+                  onClick={() => onAddHouseholdsOpenChange(true)}
+                >
+                  {householdGate === null ? <Plus aria-hidden /> : <Lock aria-hidden />}
+                  Add household
+                </Button>
+              </span>
+            </TooltipTrigger>
+            {householdGate === null ? null : (
+              <TooltipContent>
+                <GateHint>{householdGate}</GateHint>
+              </TooltipContent>
+            )}
+          </Tooltip>
           <Button
             variant="ghost"
             size="icon-xs"
@@ -455,15 +465,23 @@ function DistrictHouseholdsPanel({
         </Table>
         </div>
         {isLocked ? null : (
-          <div className="glass-lg absolute inset-0 flex flex-col items-center justify-center gap-2.5 px-6">
-            <span className="flex size-9 items-center justify-center rounded-full border border-border-strong bg-surface-2 text-fg-subtle">
-              <Lock className="size-4" aria-hidden />
-            </span>
-            <p className="max-w-[260px] text-center t-caption leading-relaxed">
-              Lock this district to start generating households.
-            </p>
-            {householdGate === null ? null : <GateHint>{householdGate}</GateHint>}
-          </div>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex">
+                <div className="glass-lg absolute inset-0 flex flex-col items-center justify-center gap-2.5 px-6">
+                  <span className="flex size-9 items-center justify-center rounded-full border border-border-strong bg-surface-2 text-fg-subtle">
+                    <Lock className="size-4" aria-hidden />
+                  </span>
+                  <p className="max-w-[260px] text-center t-caption leading-relaxed">
+                    Lock this district to start generating households.
+                  </p>
+                </div>
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>
+              {householdGate === null ? null : <GateHint>{householdGate}</GateHint>}
+            </TooltipContent>
+          </Tooltip>
         )}
       </div>
 

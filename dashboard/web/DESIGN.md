@@ -1175,8 +1175,13 @@ satisfy these, and any that cannot must be changed:
 1. **A destructive action states what it destroys and asks first.** Delete/overwrite/regenerate:
    a confirm that names the artefact and what is lost, and the destructive styling is on the
    confirm — never the strongest weight on the screen's main flow.
-2. **A disabled control says why, next to it.** A title/tooltip or an inline reason; a greyed-out
-   button with no explanation is a dead end.
+2. **A disabled control says why, on hover.** The reason is delivered by a **styled tooltip** — the app's
+   `Tooltip` primitive, never the native `title` attribute and never permanent inline text on the panel.
+   A native `title` is slow, unstyled and easy to miss; permanent text adds chrome to every gated
+   control at once and competes with the content. Hover is where a blocked affordance should explain
+   itself, and only when asked.
+   **A disabled element fires no hover events**, so the tooltip trigger must be a wrapper element
+   around the disabled control, not the control itself.
 3. **One job, one control.** Two entry points to the same action on one screen is a defect.
 4. **Every icon-only control has an `aria-label` and a tooltip.**
 5. **Every async action shows three states** — pending (disabled + progress), success (visible
@@ -1229,6 +1234,98 @@ A count appears once. If a section switch carries `Households 0` / `Scenarios 0`
 it must not also list household and scenario counts — it keeps only what the switch does not show
 (district count, world status). The same number twice, one line apart, reads as an error even when
 both are correct.
+
+## 31. The district description sheet
+
+The sheet stacked two unrelated jobs in one column — the district's own text, and the prompt that
+rewrites it — so the eye had no left-to-right story and the bottom grew a second button. It becomes
+a two-column editor with one action.
+
+### 31.1 Left: the district. Right: the prompt that rewrites it
+
+| Column | Holds |
+| --- | --- |
+| **Left** | the district's **name** and **description**, their help text, and the save affordance for them |
+| **Right** | the **optimization prompt** — the instruction the LLM is given — under a header that also carries the **library** opener |
+
+Stacked below both columns, **exactly one button: `Optimize`**.
+
+### 31.2 The library is a dialog, and its contents are frozen
+
+The prompt templates live behind an opener in the right column's header, which raises a **centered
+dialog** (§19) listing them. Entries are **hard-coded in the frontend and read-only** — this is a
+library, not a form. Choosing one fills the right column's prompt field and closes the dialog, so
+what the user is about to apply is always visible in the column behind it.
+
+### 31.3 One prompt field, and why
+
+The old sheet had preset chips *and* a custom textarea, which invited the question of which one wins.
+There is now **one** prompt field: the library writes into it, the user may edit it afterwards, and
+what is sent is always simply the field's contents. Presets are no longer a separate axis — they are
+entries in the library.
+
+### 31.4 `Estimate LLM calls` is not shown here
+
+This sheet keeps one action. The shared submit bar gains a way to suppress its estimate control, so
+the build cards keep it and this sheet does not — the sheet's job is to be optimised, not estimated.
+
+## 32. Two kinds of blocking, never conflated
+
+A control can be unavailable for two different reasons, and they must not look or speak the same way.
+
+| Kind | Cause | Treatment |
+| --- | --- | --- |
+| **Prerequisite gate** | something is *missing* — a description not written, a district not locked | a **lock** glyph and the reason: what unlocks it (§29.3 rule 2) |
+| **In flight** | the work is *already running* — this exact generation has a job outstanding | the control stays **disabled until the job returns**, and its tooltip says to **wait** — no lock glyph, no "unlock" language |
+
+### 32.1 A generation control remembers that it is running
+
+Every control that starts a generation — the district description, the household batch, the members,
+the home, the scenario's simulation — becomes disabled the moment its own job is submitted and stays
+disabled until that job finishes. Two reasons this matters beyond politeness:
+
+- Submitting the same generation twice concurrently is how you get two writers on one artefact.
+- Without it the button invites a second click, and the user cannot tell whether the first one took.
+
+The state must come from the **existing** job signal the app already uses to know a job is running
+(the same one that drives the `View job` link and the stage progress) — never from a new poll, a new
+timer, or a locally-tracked "I clicked" flag. A local flag would lie the moment the page reloads,
+and a poll would duplicate a subscription that already exists.
+
+### 32.2 It says wait, not lock
+
+The tooltip wording is about waiting for the running job, not about a missing step. A lock icon here
+would send the user looking for something to satisfy when there is nothing to do but wait.
+
+## 33. One bar, then sections
+
+The app header and the first panel's header were **structurally identical** — title left, controls
+right, full-bleed band — so the page opened with the same sentence said twice and read as bloated.
+§28.2's band was not wrong; applying it to *both* levels was.
+
+### 33.1 A band belongs to pinned chrome only
+
+| Chrome | Band? | Why |
+| --- | --- | --- |
+| the app bar | **yes** | it is pinned to the viewport and never scrolls away — it is furniture |
+| a floating window's title bar (`FloatingPanel`) | **yes** | same: it is pinned within its own frame |
+| a panel in the document flow | **no** | it scrolls with the content, so a band turns it into a bar that appears to be navigation |
+
+A flowing panel's header is **typographic**: the title at `t-title` (§28.4 rule 2 — still the only
+`t-title` in its panel), the actions right-aligned, sitting on the page background with **no surface,
+no band, and no rule under it**. The §24.2 hairline moves to the **top edge of each panel after the
+first** (`border-t`, cleared on `:first-child`), so panels are still separated by one hairline each —
+the separation moves from "a stripe per panel" to "a single line between panels".
+
+The hierarchy §28 was buying is unchanged: titles still carry it, and there is now exactly **one**
+full-bleed band on the screen instead of one per level.
+
+### 33.2 What the app bar is for
+
+The app bar carries **identity, app-level navigation and global controls** — and nothing else. It is
+the only pinned band, and the empty middle it currently has is deliberate: it belongs to the app, not
+to whichever screen happens to be open. Screen-level titles and actions belong to their section
+(§33.1), not in the bar.
 
 ### 24.1 The floating window holds at any size
 

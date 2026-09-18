@@ -10,6 +10,7 @@ interface JobSubmitBarProps {
   label?: string
   disabled?: boolean
   disabledReason?: string
+  showEstimate?: boolean
 }
 
 export function JobSubmitBar({
@@ -17,6 +18,7 @@ export function JobSubmitBar({
   label = "Submit job",
   disabled = false,
   disabledReason,
+  showEstimate = true,
 }: JobSubmitBarProps) {
   const estimate = useEstimateJob()
   const create = useCreateJob()
@@ -25,29 +27,31 @@ export function JobSubmitBar({
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface-2 px-4 py-3.5">
-      <div className="flex flex-wrap items-center gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => estimate.mutate(payload)}
-          disabled={disabled || estimate.isPending}
-        >
-          {estimate.isPending ? <Loader2 className="animate-spin" /> : null}
-          Estimate LLM calls
-        </Button>
+      {showEstimate ? (
+        <div className="flex flex-wrap items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => estimate.mutate(payload)}
+            disabled={disabled || estimate.isPending}
+          >
+            {estimate.isPending ? <Loader2 className="animate-spin" /> : null}
+            Estimate LLM calls
+          </Button>
 
-        {estimate.data !== undefined ? (
-          <span className="t-caption text-fg-muted">
-            Estimated <span className="num text-energy">{estimate.data.estimated_calls}</span> LLM
-            calls · {estimate.data.detail}
-          </span>
-        ) : null}
-        {estimate.isError ? (
-          <span className={cn("t-caption text-danger")}>
-            Estimate failed: {estimate.error instanceof Error ? estimate.error.message : "Unknown error"}
-          </span>
-        ) : null}
-      </div>
+          {estimate.data !== undefined ? (
+            <span className="t-caption text-fg-muted">
+              Estimated <span className="num text-energy">{estimate.data.estimated_calls}</span> LLM
+              calls · {estimate.data.detail}
+            </span>
+          ) : null}
+          {estimate.isError ? (
+            <span className={cn("t-caption text-danger")}>
+              Estimate failed: {estimate.error instanceof Error ? estimate.error.message : "Unknown error"}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
 
       {disabled && disabledReason !== undefined ? (
         <p className="flex items-center gap-1.5 t-caption text-energy">

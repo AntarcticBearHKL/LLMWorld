@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react"
 import { Building2, House, LayoutGrid, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { GateHint } from "@/components/primitives/GateHint"
 import { useDayReplay } from "@/hooks/useDayData"
 import { memberInitial } from "@/lib/members"
 import { useTimeStore } from "@/store/time"
@@ -87,16 +89,29 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
               >
                 Town
               </Button>
-              <Button
-                variant={mode === "interior" ? "default" : "ghost"}
-                size="sm"
-                className="h-6 rounded-full px-2.5 t-caption"
-                onClick={() => setMode("interior")}
-                disabled={state === null}
-              >
-                <House className="mr-1 size-3" />
-                Indoor
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="inline-flex">
+                    <Button
+                      variant={mode === "interior" ? "default" : "ghost"}
+                      size="sm"
+                      className="h-6 rounded-full px-2.5 t-caption"
+                      onClick={() => setMode("interior")}
+                      disabled={state === null}
+                    >
+                      <House className="mr-1 size-3" />
+                      Indoor
+                    </Button>
+                  </span>
+                </TooltipTrigger>
+                {state === null ? (
+                  <TooltipContent>
+                    <span className="t-caption">
+                      Waiting for the scene to finish loading; Indoor is unavailable until it does.
+                    </span>
+                  </TooltipContent>
+                ) : null}
+              </Tooltip>
             </div>
 
             {replay !== undefined && mode === "interior" ? (
@@ -121,25 +136,65 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
             ) : null}
 
             <div className="ml-auto flex flex-wrap items-center gap-1.5">
-              <Button
-                variant={diagnosticsOpen ? "default" : "outline"}
-                size="sm"
-                className="h-6 rounded-full px-2.5 t-caption"
-                onClick={() => setDiagnosticsOpen((value) => !value)}
-                disabled={mode !== "interior" || state === null}
-                title="Frame rate and memory diagnostics (keep the page in the foreground)"
-              >
-                Diagnostics
-              </Button>
-              <Button
-                variant={outlineOpen ? "default" : "outline"}
-                size="sm"
-                className="h-6 rounded-full px-2.5 t-caption"
-                onClick={() => setOutlineOpen((value) => !value)}
-                disabled={mode !== "interior" || state === null}
-              >
-                Outline
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="inline-flex">
+                    <Button
+                      variant={diagnosticsOpen ? "default" : "outline"}
+                      size="sm"
+                      className="h-6 rounded-full px-2.5 t-caption"
+                      onClick={() => setDiagnosticsOpen((value) => !value)}
+                      disabled={mode !== "interior" || state === null}
+                      aria-disabled={mode === "interior" ? false : undefined}
+                    >
+                      Diagnostics
+                    </Button>
+                  </span>
+                </TooltipTrigger>
+                {mode !== "interior" ? (
+                  <TooltipContent>
+                    <GateHint>
+                      Requires the interior view: switch to Interior view to open diagnostics.
+                    </GateHint>
+                  </TooltipContent>
+                ) : state === null ? (
+                  <TooltipContent>
+                    <span className="t-caption">
+                      Waiting for the scene to finish loading; Diagnostics is unavailable until it
+                      does.
+                    </span>
+                  </TooltipContent>
+                ) : null}
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="inline-flex">
+                    <Button
+                      variant={outlineOpen ? "default" : "outline"}
+                      size="sm"
+                      className="h-6 rounded-full px-2.5 t-caption"
+                      onClick={() => setOutlineOpen((value) => !value)}
+                      disabled={mode !== "interior" || state === null}
+                      aria-disabled={mode === "interior" ? false : undefined}
+                    >
+                      Outline
+                    </Button>
+                  </span>
+                </TooltipTrigger>
+                {mode !== "interior" ? (
+                  <TooltipContent>
+                    <GateHint>
+                      Requires the interior view: switch to Interior view to open the outline.
+                    </GateHint>
+                  </TooltipContent>
+                ) : state === null ? (
+                  <TooltipContent>
+                    <span className="t-caption">
+                      Waiting for the scene to finish loading; Outline is unavailable until it does.
+                    </span>
+                  </TooltipContent>
+                ) : null}
+              </Tooltip>
               <Button
                 variant={effectsOn ? "default" : "outline"}
                 size="sm"
@@ -170,6 +225,7 @@ export function SceneView({ onOpenPipeline, onEnterHouse }: SceneViewProps) {
                 Trails {trailEnabled ? "on" : "off"}
               </Button>
             </div>
+
           </>
         )}
       </header>

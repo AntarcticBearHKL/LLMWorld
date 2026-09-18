@@ -21,7 +21,9 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { Textarea } from "@/components/ui/textarea"
-import { useCreateDistrict, useDistrictPresets, worldKeys } from "@/hooks/useWorldBuild"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { useJobs } from "@/hooks/useJobs"
+import { isActiveJob, useCreateDistrict, worldKeys } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
 import { randomDistrictId } from "@/lib/world"
 
@@ -157,9 +159,7 @@ function DescriptionBody({
   districtRunnable: boolean
   districtBlockedReason: string | null
 }): React.JSX.Element {
-  const presetsQuery = useDistrictPresets()
   const save = useSaveDistrict(world)
-  const [preset, setPreset] = React.useState("")
   const [prompt, setPrompt] = React.useState("")
   const [name, setName] = React.useState(district.name)
   const [description, setDescription] = React.useState(district.description)
@@ -174,7 +174,16 @@ function DescriptionBody({
   const nameChanged = trimmedName !== saved.name
   const descriptionChanged = trimmedDescription !== saved.description
   const dirty = nameChanged || descriptionChanged
-  const nothingChosen = trimmedPrompt.length === 0 && preset.length === 0
+  const nothingChosen = trimmedPrompt.length === 0
+  const jobs = useJobs().data ?? []
+  const districtJobInFlight = jobs.some(
+    (job) =>
+      job.kind === "build" &&
+      job.world === world &&
+      job.step === "district" &&
+      (job.district ?? "") === target &&
+      isActiveJob(job),
+  )
 
   const payload: JobRequest = {
     kind: "build",
@@ -183,7 +192,6 @@ function DescriptionBody({
     step: "district",
   }
   if (trimmedPrompt.length > 0) payload.prompt = trimmedPrompt
-  else if (preset.length > 0) payload.preset = preset
 
   const onSave = () => {
     if (trimmedName.length === 0) {
@@ -211,92 +219,92 @@ function DescriptionBody({
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="district-description-name" className="label-micro text-fg-muted">
-          Name
-        </Label>
-        <Input
-          id="district-description-name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          className="num h-8 w-full px-2.5 t-title"
-        />
-        {nameError !== null ? <p className="t-caption text-danger">{nameError}</p> : null}
-      </div>
+    <div className="grid gap-6 lg:grid-cols-2">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="district-description-name" className="label-micro text-fg-muted">
+            Name
+          </Label>
+          <Input
+            id="district-description-name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            className="num h-8 w-full px-2.5 t-title"
+          />
+          {nameError !== null ? <p className="t-caption text-danger">{nameError}</p> : null}
+        </div>
 
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="district-description-text" className="label-micro text-fg-muted">
-          Description
-        </Label>
-        <Textarea
-          id="district-description-text"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-          className="min-h-32 t-body whitespace-pre-wrap"
-        />
-        {!district.has_description ? (
-          <p className="t-caption text-fg-subtle">
-            {target} has no description yet — write a prompt below and the LLM rewrites it into
-            one, then saves it.
-          </p>
-        ) : district.description.length === 0 ? (
-          <p className="t-caption text-fg-subtle">
-            The description file for {target} exists, but its text is not inlined here.
-          </p>
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="district-description-text" className="label-micro text-fg-muted">
+            Description
+          </Label>
+          <Textarea
+            id="district-description-text"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+            className="min-h-32 t-body whitespace-pre-wrap"
+          />
+          {!district.has_description ? (
+            <p className="t-caption text-fg-subtle">
+              {target} has no description yet — write a prompt below and the LLM rewrites it into
+              one, then saves it.
+            </p>
+          ) : district.description.length === 0 ? (
+            <p className="t-caption text-fg-subtle">
+              The description file for {target} exists, but its text is not inlined here.
+            </p>
+          ) : null}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <Button size="sm" type="button" onClick={onSave} disabled={save.isPending || !dirty}>
+            <Save />
+            {save.isPending ? "Saving…" : nameChanged ? "Save changes & rename" : "Save description"}
+          </Button>
+          <span className="t-caption text-fg-subtle">
+            {dirty ? "Only the fields you changed are sent." : "Everything matches what is saved."}
+          </span>
+        </div>
+        {save.isError ? (
+          <p className="t-caption text-danger">Save failed: {errorMessage(save.error)}</p>
+        ) : null}
+        {save.isSuccess && !dirty ? (
+          <p className="num t-caption text-success">Saved {saved.name}.</p>
         ) : null}
       </div>
 
-      <div className="flex flex-wrap items-center gap-2">
-        <Button size="sm" type="button" onClick={onSave} disabled={save.isPending || !dirty}>
-          <Save />
-          {save.isPending ? "Saving…" : nameChanged ? "Save changes & rename" : "Save description"}
-        </Button>
-        <span className="t-caption text-fg-subtle">
-          {dirty ? "Only the fields you changed are sent." : "Everything matches what is saved."}
-        </span>
-      </div>
-      {save.isError ? (
-        <p className="t-caption text-danger">Save failed: {errorMessage(save.error)}</p>
-      ) : null}
-      {save.isSuccess && !dirty ? (
-        <p className="num t-caption text-success">Saved {saved.name}.</p>
-      ) : null}
+      <DistrictPromptFields
+        prompt={prompt}
+        disabled={!districtRunnable}
+        onPromptChange={setPrompt}
+      />
 
-      <div className="border-t border-border" />
-
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-col gap-1">
-          <span className="label-micro">Optimize the description</span>
-          <p className="t-caption text-fg-subtle">
-            This is a text optimisation, not a generation: the LLM rewrites your prompt into this
-            district's description and saves it — it does not invent the district from nothing.
-          </p>
-        </div>
-        <DistrictPromptFields
-          presets={presetsQuery.data ?? []}
-          presetsPending={presetsQuery.isPending}
-          preset={preset}
-          prompt={prompt}
-          disabled={!districtRunnable}
-          onPresetChange={setPreset}
-          onPromptChange={setPrompt}
-        />
-        <JobSubmitBar
-          key={`${district.name}-${preset}-${trimmedPrompt.length > 0 ? "custom" : "none"}`}
-          label="Optimize description"
-          payload={payload}
-          disabled={USE_MOCK || !districtRunnable || nothingChosen}
-          disabledReason={
-            USE_MOCK
-              ? MOCK_REASON
-              : !districtRunnable
-                ? (districtBlockedReason ?? NOT_RUNNABLE)
-                : nothingChosen
-                  ? NOTHING_CHOSEN
-                  : undefined
-          }
-        />
+      <div className="lg:col-span-2">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="inline-flex w-full [&>div]:w-full">
+              <JobSubmitBar
+                key={`${district.name}-${trimmedPrompt.length > 0 ? "custom" : "none"}`}
+                label="Optimize"
+                payload={payload}
+                disabled={USE_MOCK || !districtRunnable || nothingChosen || districtJobInFlight}
+                disabledReason={
+                  USE_MOCK
+                    ? MOCK_REASON
+                    : !districtRunnable
+                      ? (districtBlockedReason ?? NOT_RUNNABLE)
+                      : nothingChosen
+                        ? NOTHING_CHOSEN
+                        : undefined
+                }
+                showEstimate={false}
+              />
+            </span>
+          </TooltipTrigger>
+          {districtJobInFlight ? (
+            <TooltipContent>Waiting for the running job to finish</TooltipContent>
+          ) : null}
+        </Tooltip>
       </div>
     </div>
   )
@@ -363,6 +371,16 @@ export function HouseholdSheet(props: {
   const { world, district, house, homeDone, homeRunnable, homeBlockedReason, open, onOpenChange } =
     props
   const homePayload: JobRequest = { kind: "build", world, district, step: "home", house }
+  const jobs = useJobs().data ?? []
+  const homeJobInFlight = jobs.some(
+    (job) =>
+      job.kind === "build" &&
+      job.world === world &&
+      job.step === "home" &&
+      (job.district ?? "") === district &&
+      job.house === house &&
+      isActiveJob(job),
+  )
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -380,16 +398,27 @@ export function HouseholdSheet(props: {
               <p className="t-caption text-fg-subtle">
                 No home for {house} yet — generate its rooms and appliances to preview them here.
               </p>
-              <JobSubmitBar
-                key={`${house}-home`}
-                payload={homePayload}
-                disabled={USE_MOCK || !homeRunnable}
-                disabledReason={
-                  USE_MOCK
-                    ? MOCK_REASON
-                    : (homeBlockedReason ?? "This household is not runnable right now.")
-                }
-              />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="inline-flex w-full [&>div]:w-full">
+                    <JobSubmitBar
+                      key={`${house}-home`}
+                      payload={homePayload}
+                      disabled={USE_MOCK || !homeRunnable || homeJobInFlight}
+                      disabledReason={
+                        USE_MOCK
+                          ? MOCK_REASON
+                          : !homeRunnable
+                            ? (homeBlockedReason ?? "This household is not runnable right now.")
+                            : undefined
+                      }
+                    />
+                  </span>
+                </TooltipTrigger>
+                {homeJobInFlight ? (
+                  <TooltipContent>Waiting for the running job to finish</TooltipContent>
+                ) : null}
+              </Tooltip>
             </div>
           )}
         </div>

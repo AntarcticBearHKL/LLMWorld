@@ -16,8 +16,8 @@ export function Panel({ title, hint, actions, children, className, bodyClassName
   const style = { "--enter-index": index } as CSSProperties
 
   return (
-    <section className={cn("enter card flex min-h-0 flex-col overflow-hidden", className)} style={style}>
-      <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border bg-surface-2 px-4 py-2.5">
+    <section className={cn("enter card flex min-h-0 flex-col overflow-hidden border-t border-border first:border-t-0", className)} style={style}>
+      <header className="flex shrink-0 items-center justify-between gap-3 px-4 py-2.5">
         <div className="flex min-w-0 items-baseline gap-2">
           <h2 className="t-title truncate">{title}</h2>
           {hint !== undefined ? (

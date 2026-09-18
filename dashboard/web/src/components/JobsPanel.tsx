@@ -8,6 +8,7 @@ import { StepInspector } from "@/components/StepInspector"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useJobLog, useJobs } from "@/hooks/useJobs"
 import { cn } from "@/lib/utils"
 
@@ -174,18 +175,29 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
                       </span>
                     </button>
                     {job.status === "running" || job.status === "queued" ? (
-                      <button
-                        type="button"
-                        onClick={() => void onCancel(job.id)}
-                        disabled={busy === job.id}
-                        className={cn(
-                          "label-micro mx-4 mb-2 inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5",
-                          busy === job.id ? "opacity-50" : "hover:border-danger/60 hover:text-danger",
-                        )}
-                      >
-                        <X className="size-2.5" aria-hidden />
-                        Cancel job
-                      </button>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="inline-flex">
+                            <button
+                              type="button"
+                              onClick={() => void onCancel(job.id)}
+                              disabled={busy === job.id}
+                              className={cn(
+                                "label-micro mx-4 mb-2 inline-flex items-center gap-1 rounded-full border border-border-strong px-2 py-0.5",
+                                busy === job.id ? "opacity-50" : "hover:border-danger/60 hover:text-danger",
+                              )}
+                            >
+                              <X className="size-2.5" aria-hidden />
+                              Cancel job
+                            </button>
+                          </span>
+                        </TooltipTrigger>
+                        {busy === job.id ? (
+                          <TooltipContent>
+                            This job is busy — the cancellation is still in progress.
+                          </TooltipContent>
+                        ) : null}
+                      </Tooltip>
                     ) : null}
                   </li>
                 ))}
