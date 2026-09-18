@@ -1202,6 +1202,34 @@ The refactor removes code, not behaviour:
 6. **Behaviour is frozen during cleanup.** If a cleanup pass reveals a logic defect, it is filed
    as a §29.3 violation and fixed separately — never folded into a deletion.
 
+## 30. One navigation language per level
+
+Two levels of navigation must never wear the same clothes. The top nav (`Worlds` / `Settings`) and
+a section switch inside a screen (`Households` / `Scenarios`) were both rendered as identical
+rounded black pills, so the eye could not tell primary navigation from a view toggle — the screen
+read as having no layout at all.
+
+### 30.1 The two levels
+
+| Level | What it is | Treatment |
+| --- | --- | --- |
+| **Primary navigation** | the app's top-level views — `Worlds`, `Settings` | the **pill** (`--r-pill`, `--brand` when active). It is the only place a pill means "you are here". |
+| **Section switch** | a toggle *inside* one screen — `Households` / `Scenarios`, `LLM calls` / `Live log` | **typographic, never a pill**: no background, no radius, no border. Active = `t-title` + `--fg` + a 2px bottom underline; inactive = `t-body` + `--fg-muted`. |
+
+### 30.2 The underline row
+
+A section switch sits on a full-width row with a 1px `--border` hairline along its bottom edge, and
+the active item's 2px underline sits **exactly on that hairline**. This is what turns an otherwise
+near-empty band into a deliberate section header instead of wasted vertical space — the rule gives
+the row structure, so the row no longer needs chrome.
+
+### 30.3 Never repeat a count at two levels
+
+A count appears once. If a section switch carries `Households 0` / `Scenarios 0`, the header above
+it must not also list household and scenario counts — it keeps only what the switch does not show
+(district count, world status). The same number twice, one line apart, reads as an error even when
+both are correct.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the

@@ -25,10 +25,6 @@ function Stat({ value, word }: { value: number; word: string }) {
   )
 }
 
-function Divider() {
-  return <span className="h-3 w-px shrink-0 bg-border" aria-hidden />
-}
-
 export function WorldDetail() {
   const world = useTimeStore((state) => state.world)
   const tab = useTimeStore((state) => state.tab)
@@ -95,10 +91,6 @@ export function WorldDetail() {
         <WorldBadge frozen={info.frozen} />
         <span className="flex items-center gap-3">
           <Stat value={info.districts.length} word="district" />
-          <Divider />
-          <Stat value={info.houses.length} word="household" />
-          <Divider />
-          <Stat value={info.spacetimes.length} word="scenario" />
         </span>
         <span className="ml-auto">
           <CloneWorldButton
@@ -121,11 +113,17 @@ export function WorldDetail() {
         className="flex min-h-0 flex-1 flex-col"
       >
         <div className="flex shrink-0 flex-wrap items-center gap-2">
-          <TabsList className="h-8">
-            <TabsTrigger value="household" className="h-7 px-3.5 t-body">
+          <TabsList className="flex w-full items-stretch justify-start gap-6 rounded-none border-x-0 border-t-0 border-b border-border bg-transparent p-0">
+            <TabsTrigger
+              value="household"
+              className="relative -mb-px h-auto flex-none items-center justify-start gap-1.5 rounded-none border-x-0 border-t-0 border-b-2 border-transparent bg-transparent px-0 py-0 t-body text-fg-muted hover:bg-transparent hover:text-fg data-[state=active]:border-fg data-[state=active]:bg-transparent data-[state=active]:text-fg data-[state=active]:shadow-none data-[state=active]:t-title"
+            >
               Households <span className="num t-caption">{info.houses.length}</span>
             </TabsTrigger>
-            <TabsTrigger value="scenarios" className="h-7 px-3.5 t-body">
+            <TabsTrigger
+              value="scenarios"
+              className="relative -mb-px h-auto flex-none items-center justify-start gap-1.5 rounded-none border-x-0 border-t-0 border-b-2 border-transparent bg-transparent px-0 py-0 t-body text-fg-muted hover:bg-transparent hover:text-fg data-[state=active]:border-fg data-[state=active]:bg-transparent data-[state=active]:text-fg data-[state=active]:shadow-none data-[state=active]:t-title"
+            >
               Scenarios{" "}
               <span className="num t-caption">{info.spacetimes.length}</span>
             </TabsTrigger>

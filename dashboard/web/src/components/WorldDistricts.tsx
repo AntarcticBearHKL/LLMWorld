@@ -14,6 +14,7 @@ import {
   HouseholdSheet,
   NewDistrictSheet,
 } from "@/components/DistrictSheets"
+import { GateHint } from "@/components/primitives/GateHint"
 import { Panel } from "@/components/primitives/Panel"
 import { Button } from "@/components/ui/button"
 import {
@@ -347,6 +348,7 @@ function DistrictHouseholdsPanel({
             {householdGate === null ? <Plus aria-hidden /> : <Lock aria-hidden />}
             Add household
           </Button>
+          {householdGate === null ? null : <GateHint>{householdGate}</GateHint>}
           <Button
             variant="ghost"
             size="icon-xs"
@@ -460,6 +462,7 @@ function DistrictHouseholdsPanel({
             <p className="max-w-[260px] text-center t-caption leading-relaxed">
               Lock this district to start generating households.
             </p>
+            {householdGate === null ? null : <GateHint>{householdGate}</GateHint>}
           </div>
         )}
       </div>
