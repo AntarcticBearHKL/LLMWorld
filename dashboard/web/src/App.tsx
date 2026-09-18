@@ -1,4 +1,4 @@
-import { Moon, Settings, Sun } from "lucide-react"
+import { Settings } from "lucide-react"
 
 import { FloatingJobsWindow } from "@/components/FloatingJobsWindow"
 import { SettingsPanel } from "@/components/SettingsPanel"
@@ -9,7 +9,6 @@ import { LevelPills } from "@/components/primitives/LevelPills"
 import { ScreenChromeProvider, useScreenChromeValue } from "@/components/primitives/ScreenChrome"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { useTheme } from "@/hooks/useTheme"
 import { useUrlSync } from "@/hooks/useUrlSync"
 import { useTimeStore } from "@/store/time"
 
@@ -35,7 +34,6 @@ export default function App() {
 }
 
 function AppShell() {
-  const { theme, toggleTheme } = useTheme()
   const view = useTimeStore((state) => state.view)
   const worldsView = useTimeStore((state) => state.worldsView)
   const setView = useTimeStore((state) => state.setView)
@@ -75,19 +73,6 @@ function AppShell() {
                 </Button>
               </TooltipTrigger>
               <TooltipContent>{settingsOpen ? "Close settings" : "Settings"}</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon-sm"
-                  onClick={toggleTheme}
-                  aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-                >
-                  {theme === "dark" ? <Sun /> : <Moon />}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>{theme === "dark" ? "Light theme" : "Dark theme"}</TooltipContent>
             </Tooltip>
           </div>
         </div>

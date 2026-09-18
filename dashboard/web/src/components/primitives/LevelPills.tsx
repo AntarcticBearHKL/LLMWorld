@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { useTimeStore, type ViewKey, type WorldTab } from "@/store/time"
 
-type Level = "worlds" | "world" | "scenarios"
+type Level = "world" | "scenarios"
 
 const levelFor = (view: ViewKey, tab: WorldTab): Level | null => {
-  if (view === "worlds") return "worlds"
   if (view === "world" || view === "watch") return tab === "household" ? "world" : "scenarios"
   return null
 }
@@ -42,33 +41,26 @@ export function LevelPills() {
   const base = view === "jobs" ? worldsView : view
   const active = levelFor(base, tab)
 
+  if (world.length === 0) return null
+
   return (
     <nav aria-label="Levels" className="flex flex-wrap items-center gap-1">
       <LevelPill
-        label="Worlds"
-        active={active === "worlds"}
-        onClick={() => setView("worlds")}
+        label={world}
+        active={active === "world"}
+        onClick={() => {
+          setView("world")
+          setTab("household")
+        }}
       />
-      {world.length > 0 ? (
-        <LevelPill
-          label={world}
-          active={active === "world"}
-          onClick={() => {
-            setView("world")
-            setTab("household")
-          }}
-        />
-      ) : null}
-      {world.length > 0 ? (
-        <LevelPill
-          label="Scenarios"
-          active={active === "scenarios"}
-          onClick={() => {
-            setView("world")
-            setTab("scenarios")
-          }}
-        />
-      ) : null}
+      <LevelPill
+        label="Scenarios"
+        active={active === "scenarios"}
+        onClick={() => {
+          setView("world")
+          setTab("scenarios")
+        }}
+      />
     </nav>
   )
 }

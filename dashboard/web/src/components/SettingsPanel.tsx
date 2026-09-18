@@ -8,7 +8,9 @@ import { useScreenChrome } from "@/components/primitives/ScreenChrome"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useSettings, useUpdateSettings } from "@/hooks/useSettings"
+import { useTheme } from "@/hooks/useTheme"
 import { errorMessage } from "@/lib/errors"
 import { cn } from "@/lib/utils"
 
@@ -160,6 +162,7 @@ export function SettingsPanel() {
   const settingsQuery = useSettings()
   const update = useUpdateSettings()
   const setChrome = useScreenChrome()
+  const { theme, toggleTheme } = useTheme()
   const [form, setForm] = useState<FormValues | null>(null)
   const [justSaved, setJustSaved] = useState(false)
 
@@ -190,6 +193,10 @@ export function SettingsPanel() {
   const onRestoreDefaults = () => {
     setJustSaved(false)
     setForm(toForm(DEFAULT_SETTINGS))
+  }
+
+  const onThemeChange = (next: string) => {
+    if (next !== theme) toggleTheme()
   }
 
   if (settingsQuery.isPending) {
@@ -259,6 +266,20 @@ export function SettingsPanel() {
             </div>
           )
         })}
+        <div className="flex flex-col gap-1.5">
+          <Label id="settings-theme" className="label-micro">
+            Theme
+          </Label>
+          <Tabs value={theme} onValueChange={onThemeChange}>
+            <TabsList aria-labelledby="settings-theme">
+              <TabsTrigger value="light">Light</TabsTrigger>
+              <TabsTrigger value="dark">Dark</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <span className="t-caption leading-snug text-fg-subtle">
+            Light or dark; remembered in this browser.
+          </span>
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-4">
