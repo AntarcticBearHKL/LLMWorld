@@ -1,6 +1,9 @@
-import { Settings } from "lucide-react"
+import { useState } from "react"
+
+import { Plus, Settings } from "lucide-react"
 
 import { FloatingJobsWindow } from "@/components/FloatingJobsWindow"
+import { NewWorldSheet } from "@/components/NewWorldSheet"
 import { SettingsPanel } from "@/components/SettingsPanel"
 import { WatchView } from "@/components/WatchView"
 import { WorldDetail } from "@/components/WorldDetail"
@@ -10,6 +13,7 @@ import { ScreenChromeProvider, useScreenChromeValue } from "@/components/primiti
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useUrlSync } from "@/hooks/useUrlSync"
+import { useWorlds } from "@/hooks/useWorldBuild"
 import { useTimeStore } from "@/store/time"
 
 function ScreenChromeZone() {
@@ -37,9 +41,19 @@ function AppShell() {
   const view = useTimeStore((state) => state.view)
   const worldsView = useTimeStore((state) => state.worldsView)
   const setView = useTimeStore((state) => state.setView)
+  const setWorld = useTimeStore((state) => state.setWorld)
   const setJobsOpen = useTimeStore((state) => state.setJobsOpen)
+  const worldsQuery = useWorlds()
+  const [createOpen, setCreateOpen] = useState(false)
 
   useUrlSync()
+
+  const worlds = worldsQuery.data ?? []
+
+  const openWorld = (worldId: string) => {
+    setWorld(worldId)
+    setView("world")
+  }
 
   const effectiveView = view === "jobs" ? worldsView : view
   const settingsOpen = effectiveView === "settings"
@@ -57,9 +71,21 @@ function AppShell() {
     <div className="flex h-full min-h-0 flex-col bg-bg">
       <header className="glass sticky top-0 z-30 shrink-0 rounded-none border-b border-border">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
-          <LevelPills />
-          <ScreenChromeZone />
-          <div className="ml-auto flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <Button size="sm" onClick={() => setCreateOpen(true)}>
+              <Plus />
+              New world
+            </Button>
+            <LevelPills />
+          </div>
+
+          <div className="flex flex-1 items-center justify-center gap-2">
+            <img src="/favicon.svg" alt="" className="size-5 shrink-0" />
+            <span className="t-title">LLMWorld Research Console</span>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-end gap-1.5">
+            <ScreenChromeZone />
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -93,6 +119,13 @@ function AppShell() {
       </main>
 
       <FloatingJobsWindow onClose={closeJobs} />
+
+      <NewWorldSheet
+        worldIds={worlds.map((info) => info.world_id)}
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        onCreated={openWorld}
+      />
     </div>
   )
 }

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
 
-import { Clock3, Loader2, Plus, Trash2 } from "lucide-react"
+import { Clock3, Loader2, Trash2 } from "lucide-react"
 
 import type { WorldInfo } from "@/api/types"
 import { CloneWorldButton } from "@/components/CloneWorldButton"
-import { NewWorldSheet } from "@/components/NewWorldSheet"
-import { useScreenChrome } from "@/components/primitives/ScreenChrome"
 import { WorldBadge } from "@/components/primitives/WorldBadge"
 import { Button } from "@/components/ui/button"
 import {
@@ -95,7 +93,7 @@ function WorldRow({
 
         <TableCell className={CELL_CLASS} onClick={(event) => event.stopPropagation()}>
           <span className="inline-flex items-center justify-center gap-1">
-            <CloneWorldButton world={info.world_id} label="" />
+            <CloneWorldButton world={info.world_id} label="Clone" />
             <Button
               variant="ghost"
               size={armed ? "xs" : "icon-xs"}
@@ -139,8 +137,6 @@ export function WorldsList() {
   const world = useTimeStore((state) => state.world)
   const setWorld = useTimeStore((state) => state.setWorld)
   const setView = useTimeStore((state) => state.setView)
-  const [createOpen, setCreateOpen] = useState(false)
-  const setChrome = useScreenChrome()
 
   const worlds = worldsQuery.data ?? []
 
@@ -149,19 +145,9 @@ export function WorldsList() {
     setView("world")
   }
 
-  useEffect(() => setChrome({ title: "Worlds" }), [setChrome])
-
   return (
     <section className="card flex w-full flex-col overflow-hidden border-t border-border first:border-t-0">
-      <div className="flex items-center justify-between gap-3 px-2.5 pt-2.5 pb-1.5">
-        <h2 className="t-title min-w-0 truncate">World</h2>
-        <Button size="sm" onClick={() => setCreateOpen(true)}>
-          <Plus />
-          New world
-        </Button>
-      </div>
-
-      <Table className="w-full table-fixed">
+      <Table className="w-full table-fixed bg-surface">
         <TableHeader>
           <TableRow className="border-b border-border hover:bg-transparent">
             <TableHead className={HEAD_CLASS}>World</TableHead>
@@ -219,13 +205,6 @@ export function WorldsList() {
           )}
         </TableBody>
       </Table>
-
-      <NewWorldSheet
-        worldIds={worlds.map((info) => info.world_id)}
-        open={createOpen}
-        onOpenChange={setCreateOpen}
-        onCreated={openWorld}
-      />
     </section>
   )
 }
