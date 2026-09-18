@@ -5,6 +5,7 @@ import { Clock3, Loader2, Plus, RefreshCw, Trash2 } from "lucide-react"
 import type { WorldInfo } from "@/api/types"
 import { CloneWorldButton } from "@/components/CloneWorldButton"
 import { NewWorldSheet } from "@/components/NewWorldSheet"
+import { useScreenChrome } from "@/components/primitives/ScreenChrome"
 import { WorldBadge } from "@/components/primitives/WorldBadge"
 import { Button } from "@/components/ui/button"
 import {
@@ -141,6 +142,7 @@ export function WorldsList() {
   const setWorld = useTimeStore((state) => state.setWorld)
   const setView = useTimeStore((state) => state.setView)
   const [createOpen, setCreateOpen] = useState(false)
+  const setChrome = useScreenChrome()
 
   const worlds = worldsQuery.data ?? []
 
@@ -149,28 +151,38 @@ export function WorldsList() {
     setView("world")
   }
 
+  const refetch = worldsQuery.refetch
+
+  useEffect(
+    () =>
+      setChrome({
+        title: (
+          <>
+            Worlds <span className="num t-micro">{worlds.length}</span>
+          </>
+        ),
+        actions: (
+          <>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              aria-label="Refresh worlds"
+              onClick={() => void refetch()}
+            >
+              <RefreshCw />
+            </Button>
+            <Button size="sm" onClick={() => setCreateOpen(true)}>
+              <Plus />
+              New world
+            </Button>
+          </>
+        ),
+      }),
+    [refetch, setChrome, worlds.length],
+  )
+
   return (
     <section className="card flex w-full flex-col overflow-hidden border-t border-border first:border-t-0">
-      <header className="flex shrink-0 flex-wrap items-center gap-x-2 gap-y-2 px-3.5 py-3">
-        <span className="t-title">
-          Worlds <span className="num t-micro">{worlds.length}</span>
-        </span>
-        <span className="ml-auto inline-flex items-center gap-1.5">
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            aria-label="Refresh worlds"
-            onClick={() => void worldsQuery.refetch()}
-          >
-            <RefreshCw />
-          </Button>
-          <Button size="sm" onClick={() => setCreateOpen(true)}>
-            <Plus />
-            New world
-          </Button>
-        </span>
-      </header>
-
       <Table className="w-full">
         <TableHeader>
           <TableRow className="border-b border-border hover:bg-transparent">

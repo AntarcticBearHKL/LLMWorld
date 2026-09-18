@@ -1,13 +1,13 @@
-import { Activity, Moon, Sun } from "lucide-react"
+import { Moon, Sun } from "lucide-react"
 
 import { FloatingJobsWindow } from "@/components/FloatingJobsWindow"
 import { SettingsPanel } from "@/components/SettingsPanel"
 import { WatchView } from "@/components/WatchView"
 import { WorldDetail } from "@/components/WorldDetail"
 import { WorldsList } from "@/components/WorldsList"
+import { ScreenChromeProvider, useScreenChromeValue } from "@/components/primitives/ScreenChrome"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { useJobs } from "@/hooks/useJobs"
 import { useTheme } from "@/hooks/useTheme"
 import { useUrlSync } from "@/hooks/useUrlSync"
 import { cn } from "@/lib/utils"
@@ -75,16 +75,33 @@ function NavTabs({ active, onChange }: { active: ViewKey; onChange: (next: ViewK
   )
 }
 
+function ScreenChromeZone() {
+  const { title, actions } = useScreenChromeValue()
+
+  if (!title && !actions) return null
+
+  return (
+    <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-2">
+      {title ? <span className="t-title flex min-w-0 items-center gap-2">{title}</span> : null}
+      {actions ? <span className="flex items-center gap-1.5">{actions}</span> : null}
+    </div>
+  )
+}
+
 export default function App() {
+  return (
+    <ScreenChromeProvider>
+      <AppShell />
+    </ScreenChromeProvider>
+  )
+}
+
+function AppShell() {
   const { theme, toggleTheme } = useTheme()
   const view = useTimeStore((state) => state.view)
   const worldsView = useTimeStore((state) => state.worldsView)
-  const jobsOpen = useTimeStore((state) => state.jobsOpen)
   const setView = useTimeStore((state) => state.setView)
   const setJobsOpen = useTimeStore((state) => state.setJobsOpen)
-  const activeJobs = (useJobs().data ?? []).filter(
-    (job) => job.status === "running" || job.status === "queued",
-  ).length
 
   useUrlSync()
 
@@ -111,26 +128,8 @@ export default function App() {
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
           <BrandMark />
           <NavTabs active={active} onChange={onNavChange} />
+          <ScreenChromeZone />
           <div className="ml-auto flex items-center gap-1.5">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon-sm"
-                  className="relative"
-                  onClick={() => setJobsOpen(!jobsOpen)}
-                  aria-label="Job activity"
-                >
-                  <Activity />
-                  {activeJobs > 0 ? (
-                    <span className="num absolute -top-1 -right-1 rounded-full border border-energy/40 bg-energy-soft px-1 t-caption leading-4 text-energy">
-                      {activeJobs}
-                    </span>
-                  ) : null}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Job activity</TooltipContent>
-            </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -162,7 +161,7 @@ export default function App() {
         ) : null}
       </main>
 
-      {jobsOpen || view === "jobs" ? <FloatingJobsWindow onClose={closeJobs} /> : null}
+      <FloatingJobsWindow onClose={closeJobs} />
     </div>
   )
 }

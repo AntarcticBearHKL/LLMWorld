@@ -1327,6 +1327,48 @@ the only pinned band, and the empty middle it currently has is deliberate: it be
 to whichever screen happens to be open. Screen-level titles and actions belong to their section
 (§33.1), not in the bar.
 
+**§34 supersedes this: the bar's middle is not spare, it is reserved for the current screen.**
+
+## 34. One contextual bar
+
+Two stacked bars is one too many. The bar is now the **only** horizontal chrome, and its middle
+changes with the screen — which is what that space was always for. §33.1's rule still holds (a band
+belongs to pinned chrome only); the consequence changes: because the flowing panel header has no band
+left to carry a title, the title moves **up** into the bar.
+
+### 34.1 The bar's three zones
+
+| Zone | Carries | Lifetime |
+| --- | --- | --- |
+| **left** | identity — the product mark and name | permanent |
+| **middle** | the **current screen's** context: its breadcrumb/title and its primary actions | replaced on every screen change |
+| **right** | app-level controls — theme, and **no longer the job monitor** (§34.3) | permanent |
+
+### 34.2 How a screen publishes its context
+
+Screens must not have to know the bar exists. A minimal context (`useScreenChrome`) is the mechanism:
+
+- A screen calls `setChrome({ title, actions, breadcrumb })` in an effect and clears it on unmount.
+- The bar renders whatever is currently published; with nothing published it falls back to identity
+  only, so a screen that has not adopted it yet is **unchanged, not broken**.
+- Adoption is therefore **per screen and incremental** — the shell never has to know the list of
+  screens, and a screen that never adopts it simply keeps its own header.
+
+### 34.3 The job monitor becomes a floating bubble
+
+The job monitor leaves the bar for the bottom-right as a **persistent floating ball** that expands and
+collapses in place: collapsed it is a small status affordance (with the active-job count), expanded it
+is the jobs window it is today. It is `fixed`, bottom-right, above the content, and uses the floating
+chrome material (§27.4 — the same exception as the play bar). The play bar is centred and this is
+right-aligned, so the two never collide.
+
+### 34.4 The hierarchy lives in the pills
+
+The rounded-pill selector is the app's way of showing **level**, so it carries the hierarchy rather
+than a flat list: on a world, the pills walk `Worlds → districts → households → scenarios`, and the
+active pill is the level you are standing on. A level that is a *switch* inside one screen (the §30.1
+section switch) stays typographic — pills are for levels, not for toggles.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the
