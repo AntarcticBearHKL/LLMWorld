@@ -1380,9 +1380,20 @@ The pair is removed.
 
 | Zone | Carries |
 | --- | --- |
-| **left** | the product name, **text only** — no badge. The name is the identity; a mark beside it adds a second, smaller identity |
+| **left** | *(removed — the bar has no product mark)* |
 | **middle** | the current screen: its title/breadcrumb and its actions (§34.1) |
 | **right** | app-level controls: **`Settings` as an icon** (a gear), then the theme toggle |
+
+### 35.0 The bar has no product identity
+
+The product name and its tagline were removed from the bar. The bar's job is the **current screen**,
+and a permanent name block was competing for the first thing the eye lands on with the screen title
+that actually changes. Identity lives in the browser tab and the window chrome, which is where a
+recurring user looks for it — not in a strip they read once.
+
+Consequence: the bar now has **two zones, not three**, and the middle zone is the leftmost content.
+Nothing anchors the far left, so the middle zone must never be pushed right, centred, or given a
+trailing spacer.
 
 ### 35.1 An icon with no nav still needs a way back
 

@@ -5,24 +5,13 @@ import { SettingsPanel } from "@/components/SettingsPanel"
 import { WatchView } from "@/components/WatchView"
 import { WorldDetail } from "@/components/WorldDetail"
 import { WorldsList } from "@/components/WorldsList"
+import { LevelPills } from "@/components/primitives/LevelPills"
 import { ScreenChromeProvider, useScreenChromeValue } from "@/components/primitives/ScreenChrome"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useTheme } from "@/hooks/useTheme"
 import { useUrlSync } from "@/hooks/useUrlSync"
 import { useTimeStore } from "@/store/time"
-
-function BrandMark() {
-  return (
-    <div className="flex items-center gap-2.5">
-      <span>
-        <span className="t-title text-fg">
-          LLMWorld Research Console
-        </span>
-      </span>
-    </div>
-  )
-}
 
 function ScreenChromeZone() {
   const { title, actions } = useScreenChromeValue()
@@ -70,7 +59,7 @@ function AppShell() {
     <div className="flex h-full min-h-0 flex-col bg-bg">
       <header className="glass sticky top-0 z-30 shrink-0 rounded-none border-b border-border">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
-          <BrandMark />
+          <LevelPills />
           <ScreenChromeZone />
           <div className="ml-auto flex items-center gap-1.5">
             <Tooltip>
