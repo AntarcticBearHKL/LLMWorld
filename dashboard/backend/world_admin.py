@@ -63,6 +63,11 @@ LOCK_REQUIRED_REASON = (
 HOUSEHOLD_MEMBERS_REQUIRED_REASON = (
     "this household has no members yet: compose them before generating a home"
 )
+#: A scenario only replays a world's households, so the world needs a district
+#: to hold them and at least one household to simulate.
+SPACETIME_DISTRICT_AND_HOUSEHOLD_REQUIRED_REASON = (
+    "world %r needs at least one district and one household before a scenario can be created"
+)
 
 #: ``<district>/.locked`` - the persisted, one-way lock marker; always read and
 #: written through the helpers below so every caller agrees.
@@ -236,6 +241,14 @@ def resolve_world_dir(world_id: str) -> str:
 
 def world_exists(world_id: str) -> bool:
     return os.path.isdir(resolve_world_dir(world_id))
+
+
+def require_spacetime_ready(world_id: str) -> None:
+    """Refuse a scenario until the world has a district with a household."""
+    wid = normalize_world_id(world_id)
+    names = districts(wid)
+    if not names or not any(count_houses(wid, name) for name in names):
+        raise ValueError(SPACETIME_DISTRICT_AND_HOUSEHOLD_REQUIRED_REASON % wid)
 
 
 def create_world(

@@ -30,8 +30,9 @@ from fastapi import HTTPException  # noqa: E402
 
 from backend import build as build_module  # noqa: E402
 from backend import districts as districts_service  # noqa: E402
-from backend import models, world_admin  # noqa: E402
+from backend import models, paths, world_admin  # noqa: E402
 from backend.routers import build as build_router  # noqa: E402
+from backend.routers import spacetimes as spacetimes_router  # noqa: E402
 
 
 def _write_json(path, data):
@@ -582,6 +583,44 @@ class ContractShapeTests(DistrictLifecycleBase):
         listed = districts_service.list_districts("w1")
         self.assertEqual([item.name for item in listed], ["dockside"])
         self.assertEqual(listed[0].status, "uninitialized")
+
+
+class SpacetimeGateTests(DistrictLifecycleBase):
+    def setUp(self):
+        super().setUp()
+        self.simulation = os.path.join(self._tmp.name, "simulation")
+        os.makedirs(self.simulation, exist_ok=True)
+        self._sim_patch = mock.patch.object(paths, "SIMULATION_DIR", self.simulation)
+        self._sim_patch.start()
+        self.addCleanup(self._sim_patch.stop)
+
+    def _create(self, name="run_1"):
+        request = models.SpacetimeCreate(name=name, start_date="2026-09-11", days=1)
+        with mock.patch.object(spacetimes_router.jobs, "create_job"):
+            return spacetimes_router.spacetime_create("w1", request)
+
+    def test_creation_is_refused_without_districts(self):
+        error = self.assert_http_error(400, self._create)
+        expected = world_admin.SPACETIME_DISTRICT_AND_HOUSEHOLD_REQUIRED_REASON % "w1"
+        self.assertEqual(str(error.detail), expected)
+        self.assertFalse(os.path.exists(os.path.join(self.simulation, "run_1")))
+
+    def test_creation_is_refused_when_no_household_exists(self):
+        self.add_district("clayton", description="A student suburb.")
+        error = self.assert_http_error(400, self._create)
+        expected = world_admin.SPACETIME_DISTRICT_AND_HOUSEHOLD_REQUIRED_REASON % "w1"
+        self.assertEqual(str(error.detail), expected)
+        self.assertFalse(os.path.exists(os.path.join(self.simulation, "run_1")))
+
+    def test_creation_succeeds_with_a_district_and_a_household(self):
+        self.add_district("clayton", description="A student suburb.")
+        self.add_house("clayton")
+        created = self._create()
+        self.assertEqual(created.name, "run_1")
+        self.assertEqual(created.world, "w1")
+        self.assertEqual(created.status, "queued")
+        manifest = os.path.join(self.simulation, "run_1", "spacetime.json")
+        self.assertTrue(os.path.isfile(manifest))
 
 
 if __name__ == "__main__":

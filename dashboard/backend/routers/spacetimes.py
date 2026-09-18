@@ -37,6 +37,10 @@ def spacetime_create(world: str, req: SpacetimeCreate) -> Spacetime:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     if not world_admin.world_exists(wid):
         raise HTTPException(status_code=404, detail="world not found: %s" % wid)
+    try:
+        world_admin.require_spacetime_ready(wid)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     if spacetimes.exists(req.name):
         raise HTTPException(
             status_code=400, detail="spacetime already exists: %s" % req.name

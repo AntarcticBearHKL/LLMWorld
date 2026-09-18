@@ -1,12 +1,17 @@
 import { useState } from "react"
 
-import { CalendarClock, CheckCircle2, Plus, RefreshCw } from "lucide-react"
+import { useQueryClient } from "@tanstack/react-query"
 
-import type { Spacetime } from "@/api/types"
+import { CalendarClock, CheckCircle2, Lock, Plus, RefreshCw } from "lucide-react"
+
+import type { Spacetime, WorldInfo } from "@/api/types"
+import { GateHint } from "@/components/primitives/GateHint"
 import { SpacetimeWizard } from "@/components/SpacetimeWizard"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useDeleteSpacetime, useSpacetimes } from "@/hooks/useSpacetimes"
+import { worldKeys } from "@/hooks/useWorldBuild"
 import { errorMessage } from "@/lib/errors"
 import { countLabel } from "@/lib/format"
 import { cn } from "@/lib/utils"
@@ -114,12 +119,18 @@ function SpacetimeRow({
 
 export function SpacetimeList({ world }: { world: string }) {
   const query = useSpacetimes(world)
+  const queryClient = useQueryClient()
   const setSelection = useTimeStore((state) => state.setSelection)
   const setView = useTimeStore((state) => state.setView)
   const [wizardOpen, setWizardOpen] = useState(false)
   const [created, setCreated] = useState<Spacetime | null>(null)
 
   const items = query.data ?? []
+  const worldInfo = queryClient.getQueryData<WorldInfo>(worldKeys.detail(world))
+  const gateReason =
+    worldInfo !== undefined && (worldInfo.districts.length === 0 || worldInfo.houses.length === 0)
+      ? "the world needs a district and a household first"
+      : null
 
   const openWatch = (name: string) => {
     setSelection({ run: name, date: "", house: "" })
@@ -141,10 +152,25 @@ export function SpacetimeList({ world }: { world: string }) {
         >
           <RefreshCw />
         </Button>
-        <Button size="sm" onClick={() => setWizardOpen((open) => !open)}>
-          <Plus />
-          New scenario
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="inline-flex">
+              <Button
+                size="sm"
+                disabled={gateReason !== null}
+                onClick={() => setWizardOpen((open) => !open)}
+              >
+                {gateReason === null ? <Plus /> : <Lock aria-hidden />}
+                New scenario
+              </Button>
+            </span>
+          </TooltipTrigger>
+          {gateReason === null ? null : (
+            <TooltipContent>
+              <GateHint>{gateReason}</GateHint>
+            </TooltipContent>
+          )}
+        </Tooltip>
       </header>
 
       <div>
