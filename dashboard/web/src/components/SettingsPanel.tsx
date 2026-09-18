@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { CheckCircle2, Loader2, RotateCcw, Save, Settings2 } from "lucide-react"
 
 import { DEFAULT_SETTINGS } from "@/api/client"
 import type { Settings, SettingsUpdate } from "@/api/types"
+import { useScreenChrome } from "@/components/primitives/ScreenChrome"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -158,8 +159,17 @@ const analyze = (values: FormValues, settings: Settings): Draft => {
 export function SettingsPanel() {
   const settingsQuery = useSettings()
   const update = useUpdateSettings()
+  const setChrome = useScreenChrome()
   const [form, setForm] = useState<FormValues | null>(null)
   const [justSaved, setJustSaved] = useState(false)
+
+  useEffect(
+    () =>
+      setChrome({
+        title: "Settings",
+      }),
+    [setChrome],
+  )
 
   const settings = settingsQuery.data
   const values = form ?? (settings === undefined ? null : toForm(settings))
@@ -208,7 +218,6 @@ export function SettingsPanel() {
       <header className="flex items-start gap-2.5">
         <Settings2 className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
         <div className="flex flex-col gap-1">
-          <h2 className="t-body">LLM runtime settings</h2>
           <p className="max-w-[720px] t-caption">
             Saving writes the backend settings file and injects the values into the next job as{" "}
             <span className="num">LLMWORLD_*</span> environment variables, so it only affects jobs

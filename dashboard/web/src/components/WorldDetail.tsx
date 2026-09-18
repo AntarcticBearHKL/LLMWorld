@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react"
 import { CloneWorldButton } from "@/components/CloneWorldButton"
 import { SpacetimeList } from "@/components/SpacetimeList"
 import { WorldHouseholds } from "@/components/WorldHouseholds"
+import { useScreenChrome } from "@/components/primitives/ScreenChrome"
 import { WorldBadge } from "@/components/primitives/WorldBadge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -32,10 +33,50 @@ export function WorldDetail() {
   const setWorld = useTimeStore((state) => state.setWorld)
   const setView = useTimeStore((state) => state.setView)
   const worldQuery = useWorld(world)
+  const setChrome = useScreenChrome()
+  const info = worldQuery.data
 
   useEffect(() => {
     if (world.length === 0) setView("worlds")
   }, [world, setView])
+
+  useEffect(() => {
+    if (info === undefined) return
+    return setChrome({
+      title: (
+        <>
+          <Button
+            variant="ghost"
+            size="xs"
+            onClick={() => {
+              setWorld("")
+              setView("worlds")
+            }}
+          >
+            <ArrowLeft />
+            All worlds
+          </Button>
+          <span className="h-4 w-px shrink-0 bg-border" aria-hidden />
+          <span className="num truncate t-title">
+            {info.world_id}
+          </span>
+          <WorldBadge frozen={info.frozen} />
+          <Stat value={info.districts.length} word="district" />
+        </>
+      ),
+      actions: (
+        <CloneWorldButton
+          world={info.world_id}
+          size="sm"
+          label="Clone world"
+          onCloned={(worldId) => {
+            setWorld(worldId)
+            setTab("household")
+          }}
+        />
+      ),
+    })
+  }, [info, setChrome, setTab, setView, setWorld])
 
   const back = (
     <Button
@@ -64,8 +105,6 @@ export function WorldDetail() {
     )
   }
 
-  const info = worldQuery.data
-
   if (worldQuery.isError || info === undefined) {
     return (
       <section className="card flex h-full min-h-0 flex-col items-start gap-3 p-8">
@@ -82,29 +121,6 @@ export function WorldDetail() {
 
   return (
     <div className="flex h-full min-h-0 w-full flex-col gap-0">
-      <header className="chrome flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 px-3.5 py-3">
-        {back}
-        <span className="h-4 w-px shrink-0 bg-border" aria-hidden />
-        <span className="num truncate t-title">
-          {info.world_id}
-        </span>
-        <WorldBadge frozen={info.frozen} />
-        <span className="flex items-center gap-3">
-          <Stat value={info.districts.length} word="district" />
-        </span>
-        <span className="ml-auto">
-          <CloneWorldButton
-            world={info.world_id}
-            size="sm"
-            label="Clone world"
-            onCloned={(worldId) => {
-              setWorld(worldId)
-              setTab("household")
-            }}
-          />
-        </span>
-      </header>
-
       <Tabs
         value={tab}
         onValueChange={(value) => {

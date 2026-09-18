@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { RefreshCw, X } from "lucide-react"
 
 import { ApiError, cancelJob } from "@/api/client"
 import type { JobInfo } from "@/api/types"
 import { StepInspector } from "@/components/StepInspector"
+import { useScreenChrome } from "@/components/primitives/ScreenChrome"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useJobLog, useJobs } from "@/hooks/useJobs"
 import { cn } from "@/lib/utils"
+import { useTimeStore } from "@/store/time"
 
 const STATUS_LABEL: Record<JobInfo["status"], string> = {
   queued: "Queued",
@@ -115,9 +117,30 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
   const [selected, setSelected] = useState<string | null>(focusJobId)
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const view = useTimeStore((state) => state.view)
+  const setChrome = useScreenChrome()
 
   const jobs = jobsQuery.data ?? []
   const selectedJob = jobs.find((job) => job.id === selected) ?? null
+  const isScreen = view === "jobs"
+
+  const refetch = jobsQuery.refetch
+
+  useEffect(() => {
+    if (!isScreen) return
+    return setChrome({
+      title: (
+        <>
+          Jobs <span className="num t-micro">{jobs.length}</span>
+        </>
+      ),
+      actions: (
+        <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void refetch()}>
+          <RefreshCw />
+        </Button>
+      ),
+    })
+  }, [isScreen, refetch, setChrome, jobs.length])
 
   const onCancel = async (jobId: string) => {
     setBusy(jobId)
@@ -138,14 +161,16 @@ export function JobsPanel({ focusJobId = null }: { focusJobId?: string | null })
     <div className="@container h-full min-h-0">
       <div className="grid h-full min-h-0 grid-cols-1 gap-0 @2xl:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
         <section className="card flex min-h-0 flex-col overflow-hidden border-b border-border @2xl:border-b-0 @2xl:border-r">
-          <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
-            <span className="t-title">
-              Jobs <span className="num t-micro">{jobs.length}</span>
-            </span>
-            <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void jobsQuery.refetch()}>
-              <RefreshCw />
-            </Button>
-          </header>
+          {isScreen ? null : (
+            <header className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
+              <span className="t-title">
+                Jobs <span className="num t-micro">{jobs.length}</span>
+              </span>
+              <Button variant="ghost" size="icon-sm" aria-label="Refresh jobs" onClick={() => void refetch()}>
+                <RefreshCw />
+              </Button>
+            </header>
+          )}
           <div className="min-h-0 flex-1 overflow-y-auto">
             {jobs.length === 0 ? (
               <p className="px-4 py-6 t-caption">

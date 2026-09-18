@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 
 import { ArrowLeft, Building2, CalendarDays, ChevronRight, DoorOpen, Home, MapPin } from "lucide-react"
 
@@ -6,6 +6,7 @@ import type { BlockSummary } from "@/api/types"
 import { HouseFloorplan } from "@/components/HouseFloorplan"
 import { MetricStrip } from "@/components/MetricStrip"
 import { ObserveDetail, ObserveGrid, ObserveScene } from "@/components/ObserveViews"
+import { useScreenChrome } from "@/components/primitives/ScreenChrome"
 import { TimeController } from "@/components/TimeController"
 import { Button } from "@/components/ui/button"
 import {
@@ -129,10 +130,11 @@ export function WatchView() {
   const setIndoor = useTimeStore((state) => state.setIndoor)
 
   usePlayback()
+  const setChrome = useScreenChrome()
 
   const metaQuery = useRunMeta(run)
   const meta = metaQuery.data
-  const dates = meta?.dates ?? []
+  const dates = useMemo(() => meta?.dates ?? [], [meta])
   const blocksQuery = useWorldDayBlocks(world, run, date, policy, true)
   const replayQuery = useDayReplay()
 
@@ -141,27 +143,141 @@ export function WatchView() {
     if (!meta.dates.includes(date)) setSelection({ date: meta.dates[0] ?? "" })
   }, [meta, date, setSelection])
 
-  const clearTo = (level: "world" | "block" | "house") => {
-    if (level === "world") {
-      setBlock("")
-      setHouse("")
+  const clearTo = useCallback(
+    (level: "world" | "block" | "house") => {
+      if (level === "world") {
+        setBlock("")
+        setHouse("")
+        setIndoor(false)
+        return
+      }
+      if (level === "block") {
+        setHouse("")
+        setIndoor(false)
+        return
+      }
       setIndoor(false)
-      return
-    }
-    if (level === "block") {
-      setHouse("")
-      setIndoor(false)
-      return
-    }
-    setIndoor(false)
-  }
-
-  const backToWorldDetail = (
-    <Button variant="ghost" size="xs" onClick={() => setView(world.length > 0 ? "world" : "worlds")}>
-      <ArrowLeft />
-      {world.length > 0 ? "World" : "Worlds"}
-    </Button>
+    },
+    [setBlock, setHouse, setIndoor],
   )
+
+  const backToWorldDetail = useMemo(
+    () => (
+      <Button variant="ghost" size="xs" onClick={() => setView(world.length > 0 ? "world" : "worlds")}>
+        <ArrowLeft />
+        {world.length > 0 ? "World" : "Worlds"}
+      </Button>
+    ),
+    [setView, world],
+  )
+
+  const layer: 1 | 2 | 3 | 4 = house.length > 0 ? (indoor ? 4 : 3) : block.length > 0 ? 2 : 1
+
+  const replay = replayQuery.data
+  const currentWatts = replay?.total_watts[Math.min(1439, Math.max(0, minute))] ?? 0
+  const peakHint = replay === undefined ? "—" : `of ${formatWatts(replay.metrics.peak_watts)} peak`
+
+  useEffect(() => {
+    if (
+      world.length === 0 ||
+      run.length === 0 ||
+      metaQuery.isPending ||
+      metaQuery.isError ||
+      dates.length === 0
+    ) {
+      return
+    }
+    return setChrome({
+      title: (
+        <span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
+          {backToWorldDetail}
+          <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
+          <nav
+            aria-label="Watch breadcrumb"
+            className="flex min-w-0 flex-wrap items-center gap-0.5"
+          >
+            <Crumb label={`World ${world}`} onClick={() => clearTo("world")} current={layer === 1} />
+            <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
+            <Crumb label={run} onClick={() => clearTo("world")} current={layer === 1} />
+            <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
+            <Crumb label={date} onClick={() => clearTo("world")} current={layer === 1} />
+            {block.length > 0 ? (
+              <>
+                <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
+                <Crumb label={block} onClick={() => clearTo("block")} current={layer === 2} />
+              </>
+            ) : null}
+            {house.length > 0 ? (
+              <>
+                <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
+                <Crumb label={house} onClick={() => clearTo("house")} current={layer === 3} />
+              </>
+            ) : null}
+          </nav>
+          <span className="flex items-baseline gap-2">
+            <span className="t-hero">{formatWatts(currentWatts)}</span>
+            <span className="t-caption">{peakHint}</span>
+          </span>
+        </span>
+      ),
+      actions: (
+        <span className="flex min-w-0 flex-wrap items-center gap-1.5">
+          <span className="label-micro flex items-center gap-1.5 text-fg-muted">
+            <CalendarDays className="size-3" aria-hidden />
+            Day
+          </span>
+          <Select
+            value={date}
+            onValueChange={(next) => setSelection({ date: next })}
+            disabled={dates.length === 0}
+          >
+            <SelectTrigger className={FIELD_CLASS} aria-label="Select day">
+              <SelectValue placeholder="Select day" />
+            </SelectTrigger>
+            <SelectContent>
+              {dates.map((item) => (
+                <SelectItem key={item} value={item}>
+                  <span className="num">{item}</span>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <span className="label-latin chip text-fg-muted">{policy}</span>
+          {layer === 3 ? (
+            <Button
+              size="sm"
+              className="ml-auto"
+              onClick={() => setIndoor(true)}
+              disabled={replayQuery.isPending}
+              title={replayQuery.isPending ? "Replay for this day is still loading" : undefined}
+            >
+              <DoorOpen />
+              Enter indoor
+            </Button>
+          ) : null}
+        </span>
+      ),
+    })
+  }, [
+    backToWorldDetail,
+    block,
+    clearTo,
+    currentWatts,
+    date,
+    dates,
+    house,
+    layer,
+    metaQuery.isError,
+    metaQuery.isPending,
+    peakHint,
+    policy,
+    replayQuery.isPending,
+    run,
+    setChrome,
+    setIndoor,
+    setSelection,
+    world,
+  ])
 
   if (world.length === 0 || run.length === 0) {
     return (
@@ -210,75 +326,8 @@ export function WatchView() {
     )
   }
 
-  const layer: 1 | 2 | 3 | 4 = house.length > 0 ? (indoor ? 4 : 3) : block.length > 0 ? 2 : 1
-
-  const replay = replayQuery.data
-  const currentWatts = replay?.total_watts[Math.min(1439, Math.max(0, minute))] ?? 0
-  const peakHint = replay === undefined ? "—" : `of ${formatWatts(replay.metrics.peak_watts)} peak`
-
-  const crumb = (label: string, onClick: () => void, current: boolean) => (
-    <Crumb key={label} label={label} onClick={onClick} current={current} />
-  )
-
   return (
     <div className="flex min-h-0 flex-col gap-0">
-      <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
-        {backToWorldDetail}
-        <span className="h-4 w-px shrink-0 bg-border-strong" aria-hidden />
-
-        <nav
-          aria-label="Watch breadcrumb"
-          className="flex min-w-0 flex-wrap items-center gap-0.5"
-        >
-          {crumb(`World ${world}`, () => clearTo("world"), layer === 1)}
-          <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
-          {crumb(run, () => clearTo("world"), layer === 1)}
-          <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
-          {crumb(date, () => clearTo("world"), layer === 1)}
-          {block.length > 0 ? (
-            <>
-              <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
-              {crumb(block, () => clearTo("block"), layer === 2)}
-            </>
-          ) : null}
-          {house.length > 0 ? (
-            <>
-              <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
-              {crumb(house, () => clearTo("house"), layer === 3)}
-            </>
-          ) : null}
-        </nav>
-
-        <div className="flex items-baseline gap-2">
-          <span className="t-hero">{formatWatts(currentWatts)}</span>
-          <span className="t-caption">{peakHint}</span>
-        </div>
-
-        <div className="ml-auto flex items-center gap-2">
-          <span className="label-micro flex items-center gap-1.5 text-fg-muted">
-            <CalendarDays className="size-3" aria-hidden />
-            Day
-          </span>
-          <Select
-            value={date}
-            onValueChange={(next) => setSelection({ date: next })}
-            disabled={dates.length === 0}
-          >
-            <SelectTrigger className={FIELD_CLASS} aria-label="Select day">
-              <SelectValue placeholder="Select day" />
-            </SelectTrigger>
-            <SelectContent>
-              {dates.map((item) => (
-                <SelectItem key={item} value={item}>
-                  <span className="num">{item}</span>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <span className="label-latin chip text-fg-muted">{policy}</span>
-        </div>
-      </header>
-
       <div className="min-h-0 flex-1 border-b border-border">
         {layer === 1 ? (
           <Frame>
@@ -406,16 +455,6 @@ export function WatchView() {
                   {block.length > 0 ? `Block ${block} · ` : ""}
                   {date}
                 </span>
-                <Button
-                  size="sm"
-                  className="ml-auto"
-                  onClick={() => setIndoor(true)}
-                  disabled={replayQuery.isPending}
-                  title={replayQuery.isPending ? "Replay for this day is still loading" : undefined}
-                >
-                  <DoorOpen />
-                  Enter indoor
-                </Button>
                 {replayQuery.isPending ? (
                   <span className="t-caption">Replay for this day is still loading</span>
                 ) : null}
