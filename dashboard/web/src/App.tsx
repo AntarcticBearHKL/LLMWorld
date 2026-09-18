@@ -8,7 +8,6 @@ import { SettingsPanel } from "@/components/SettingsPanel"
 import { WatchView } from "@/components/WatchView"
 import { WorldDetail } from "@/components/WorldDetail"
 import { WorldsList } from "@/components/WorldsList"
-import { LevelPills } from "@/components/primitives/LevelPills"
 import { ScreenChromeProvider, useScreenChromeValue } from "@/components/primitives/ScreenChrome"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
@@ -16,17 +15,20 @@ import { useUrlSync } from "@/hooks/useUrlSync"
 import { useWorlds } from "@/hooks/useWorldBuild"
 import { useTimeStore } from "@/store/time"
 
-function ScreenChromeZone() {
-  const { title, actions } = useScreenChromeValue()
+function ScreenChromeTitle() {
+  const { title } = useScreenChromeValue()
 
-  if (!title && !actions) return null
+  if (!title) return null
 
-  return (
-    <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-2">
-      {title ? <h1 className="t-title flex min-w-0 items-center gap-2">{title}</h1> : null}
-      {actions ? <span className="flex items-center gap-1.5">{actions}</span> : null}
-    </div>
-  )
+  return <h1 className="t-title flex min-w-0 items-center gap-2">{title}</h1>
+}
+
+function ScreenChromeActions() {
+  const { actions } = useScreenChromeValue()
+
+  if (!actions) return null
+
+  return <span className="flex items-center gap-1.5">{actions}</span>
 }
 
 export default function App() {
@@ -71,21 +73,26 @@ function AppShell() {
     <div className="flex h-full min-h-0 flex-col bg-bg">
       <header className="glass sticky top-0 z-30 shrink-0 rounded-none border-b border-border">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <Button size="sm" onClick={() => setCreateOpen(true)}>
+          <div className="flex flex-1 flex-wrap items-center justify-start gap-1.5">
+            <ScreenChromeTitle />
+            <Button size="sm" variant="outline" onClick={() => setCreateOpen(true)}>
               <Plus />
               New world
             </Button>
-            <LevelPills />
           </div>
 
           <div className="flex flex-1 items-center justify-center gap-2">
-            <img src="/favicon.svg" alt="" className="size-5 shrink-0" />
+            <span
+              aria-hidden
+              className="flex size-8 items-center justify-center rounded-lg bg-brand text-brand-fg shadow-1"
+            >
+              <span className="t-title text-brand-fg">W</span>
+            </span>
             <span className="t-title">LLMWorld Research Console</span>
           </div>
 
-          <div className="flex flex-wrap items-center justify-end gap-1.5">
-            <ScreenChromeZone />
+          <div className="flex flex-1 flex-wrap items-center justify-end gap-1.5">
+            <ScreenChromeActions />
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button

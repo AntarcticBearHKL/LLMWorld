@@ -93,7 +93,13 @@ function WorldRow({
 
         <TableCell className={CELL_CLASS} onClick={(event) => event.stopPropagation()}>
           <span className="inline-flex items-center justify-center gap-1">
-            <CloneWorldButton world={info.world_id} label="Clone" />
+            <CloneWorldButton
+              world={info.world_id}
+              variant="ghost"
+              label=""
+              aria-label="Clone world"
+              className="rounded-none hover:bg-transparent"
+            />
             <Button
               variant="ghost"
               size={armed ? "xs" : "icon-xs"}
@@ -112,7 +118,10 @@ function WorldRow({
                 }
                 remove.mutate(info.world_id, { onSuccess: onDeleted })
               }}
-              className={cn(armed && "bg-danger/10 text-danger hover:bg-danger/15 hover:text-danger")}
+              className={cn(
+                "text-danger hover:text-danger",
+                armed && "bg-danger/15 hover:bg-danger/20",
+              )}
             >
               {remove.isPending ? <Loader2 className="animate-spin" /> : <Trash2 />}
               {armed ? "Confirm delete" : null}

@@ -1386,14 +1386,35 @@ The pair is removed.
 
 ### 35.0 The bar has no product identity
 
-The product name and its tagline were removed from the bar. The bar's job is the **current screen**,
-and a permanent name block was competing for the first thing the eye lands on with the screen title
-that actually changes. Identity lives in the browser tab and the window chrome, which is where a
-recurring user looks for it — not in a strip they read once.
+**Superseded.** The product mark and name returned to the bar, and they sit **centred**. What survives
+from this section is its reasoning, not its conclusion:
 
-Consequence: the bar now has **two zones, not three**, and the middle zone is the leftmost content.
-Nothing anchors the far left, so the middle zone must never be pushed right, centred, or given a
-trailing spacer.
+- The mark was removed because a permanent name block competed for the first thing the eye lands on
+  with the screen title that changes. That competition is real, and it is why the name is **not**
+  competing with a second title — the screen title publication for this screen was dropped, so there
+  is only one loud thing in the bar.
+- The tagline stayed gone: a two-line identity block is taller than the bar's content needs.
+- The badge and the name returned **together**. A brand is mark-plus-name; either alone reads as a
+  half-loaded identity.
+
+### 35.3 Centring means centred in the bar, not in what is left over
+
+When the bar's outer zones have different widths — which they always do, since the left control is a
+labelled button and the right is a single icon — a `flex-1` centre zone is centred **in the leftover
+space**, and the leftover space's centre is shifted away from the bar's centre by half the width
+difference. The identity then sits visibly off-centre even though the code says "centre".
+
+**The left and right zones must be given equal widths** (both `flex-1`, left content `justify-start`,
+right content `justify-end`) so the centre zone's centre coincides with the bar's. Centring a zone is
+not the same as centring a bar, and only the second one reads as balanced.
+
+### 35.4 The bar's primary control follows the operator's call
+
+`New world` is this screen's primary action and sits in the bar's left zone as an **outline** control
+(§29.3 rule 6 would otherwise give the screen's primary action the strongest weight). The operator
+asked for outline deliberately. If the screen later reads as "where do I click", the cause is this
+demotion — not the palette — and the fix is to restore the filled variant rather than to add colour
+elsewhere.
 
 ### 35.1 An icon with no nav still needs a way back
 

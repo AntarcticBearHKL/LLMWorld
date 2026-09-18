@@ -14,7 +14,9 @@ const FIELD_CLASS = "h-7 w-36 px-2 t-body"
 interface CloneWorldButtonProps {
   world: string
   size?: "xs" | "sm"
+  variant?: "outline" | "ghost"
   label?: string
+  "aria-label"?: string
   className?: string
   onCloned?: (worldId: string) => void
 }
@@ -22,7 +24,9 @@ interface CloneWorldButtonProps {
 export function CloneWorldButton({
   world,
   size = "xs",
+  variant = "outline",
   label = "Clone",
+  "aria-label": ariaLabel,
   className,
   onCloned,
 }: CloneWorldButtonProps) {
@@ -57,11 +61,12 @@ export function CloneWorldButton({
   if (!open) {
     return (
       <Button
-        variant="outline"
+        variant={variant}
         size={size}
         className={className}
         onClick={start}
         title="Copy this world (households included) into a new draft"
+        aria-label={ariaLabel}
       >
         <Copy />
         {label}
@@ -85,7 +90,7 @@ export function CloneWorldButton({
       />
       <Button size={size} onClick={submit} disabled={clone.isPending || draft.trim().length === 0}>
         {clone.isPending ? <Loader2 className="animate-spin" /> : <Copy />}
-        {label}
+        {label || "Clone"}
       </Button>
       <Button variant="ghost" size={size} onClick={cancel} disabled={clone.isPending}>
         Cancel
