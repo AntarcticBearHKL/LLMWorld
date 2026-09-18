@@ -15,11 +15,10 @@ import { useTimeStore } from "@/store/time"
 function BrandMark() {
   return (
     <div className="flex items-center gap-2.5">
-      <span className="flex flex-col leading-tight">
+      <span>
         <span className="t-title text-fg">
           LLMWorld Research Console
         </span>
-        <span className="label-latin text-fg-muted">household energy replay</span>
       </span>
     </div>
   )
