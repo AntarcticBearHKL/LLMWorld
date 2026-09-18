@@ -19,7 +19,7 @@ function ScreenChromeZone() {
 
   return (
     <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-2">
-      {title ? <span className="t-title flex min-w-0 items-center gap-2">{title}</span> : null}
+      {title ? <h1 className="t-title flex min-w-0 items-center gap-2">{title}</h1> : null}
       {actions ? <span className="flex items-center gap-1.5">{actions}</span> : null}
     </div>
   )

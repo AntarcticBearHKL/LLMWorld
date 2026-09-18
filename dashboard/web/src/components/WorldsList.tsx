@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import { Clock3, Loader2, Plus, RefreshCw, Trash2 } from "lucide-react"
+import { Clock3, Loader2, Plus, Trash2 } from "lucide-react"
 
 import type { WorldInfo } from "@/api/types"
 import { CloneWorldButton } from "@/components/CloneWorldButton"
@@ -22,11 +22,10 @@ import { formatMtime } from "@/lib/format"
 import { cn } from "@/lib/utils"
 import { useTimeStore } from "@/store/time"
 
-const HEAD_CLASS = "h-8 px-2.5 t-micro text-fg-faint"
+const HEAD_CLASS =
+  "h-8 w-[14.2857%] px-2.5 t-micro text-fg-faint text-center align-middle"
 
-const HEAD_NUM_CLASS = cn(HEAD_CLASS, "text-right")
-
-const CELL_NUM_CLASS = "num text-right t-body"
+const CELL_CLASS = "text-center align-middle"
 
 function WorldRow({
   info,
@@ -66,38 +65,37 @@ function WorldRow({
           selected && "bg-item-selected",
         )}
       >
-        <TableCell className="align-middle">
-          <div className="flex min-w-0 flex-col gap-0.5">
-            <div className="flex min-w-0 items-center gap-2">
-              <button
-                type="button"
-                onClick={onOpen}
-                title={info.world_id}
-                className="num t-title min-w-0 truncate text-left"
-              >
-                {info.world_id}
-              </button>
-              <WorldBadge frozen={info.frozen} className="shrink-0" />
-            </div>
-            <span className="t-caption flex min-w-0 items-center gap-1">
-              <Clock3 className="size-3 shrink-0" aria-hidden />
-              <span className="truncate" title={formatMtime(info.latest_mtime)}>
-                {formatMtime(info.latest_mtime)}
-              </span>
-            </span>
-          </div>
+        <TableCell className={CELL_CLASS}>
+          <button
+            type="button"
+            onClick={onOpen}
+            title={info.world_id}
+            className="num t-title block w-full truncate text-center"
+          >
+            {info.world_id}
+          </button>
         </TableCell>
 
-        <TableCell className={CELL_NUM_CLASS}>{info.districts.length}</TableCell>
-        <TableCell className={CELL_NUM_CLASS}>{info.houses.length}</TableCell>
-        <TableCell className={CELL_NUM_CLASS}>{info.spacetimes.length}</TableCell>
+        <TableCell className={CELL_CLASS}>
+          <WorldBadge frozen={info.frozen} className="shrink-0" />
+        </TableCell>
 
-        <TableCell
-          className="text-right whitespace-nowrap"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <span className="inline-flex items-center gap-1">
-            <CloneWorldButton world={info.world_id} label="Clone world" />
+        <TableCell className={CELL_CLASS}>
+          <span className="t-caption inline-flex max-w-full items-center gap-1">
+            <Clock3 className="size-3 shrink-0" aria-hidden />
+            <span className="min-w-0 truncate" title={formatMtime(info.latest_mtime)}>
+              {formatMtime(info.latest_mtime)}
+            </span>
+          </span>
+        </TableCell>
+
+        <TableCell className={cn(CELL_CLASS, "num")}>{info.districts.length}</TableCell>
+        <TableCell className={cn(CELL_CLASS, "num")}>{info.houses.length}</TableCell>
+        <TableCell className={cn(CELL_CLASS, "num")}>{info.spacetimes.length}</TableCell>
+
+        <TableCell className={CELL_CLASS} onClick={(event) => event.stopPropagation()}>
+          <span className="inline-flex items-center justify-center gap-1">
+            <CloneWorldButton world={info.world_id} label="" />
             <Button
               variant="ghost"
               size={armed ? "xs" : "icon-xs"}
@@ -127,7 +125,7 @@ function WorldRow({
 
       {remove.isError ? (
         <TableRow className="border-b border-border/60 hover:bg-transparent">
-          <TableCell colSpan={5} className="px-2.5 py-1.5 t-body text-danger">
+          <TableCell colSpan={7} className="px-2.5 py-1.5 t-body text-center text-danger">
             Delete failed: {errorMessage(remove.error)}
           </TableCell>
         </TableRow>
@@ -151,58 +149,40 @@ export function WorldsList() {
     setView("world")
   }
 
-  const refetch = worldsQuery.refetch
-
-  useEffect(
-    () =>
-      setChrome({
-        title: (
-          <>
-            Worlds <span className="num t-micro">{worlds.length}</span>
-          </>
-        ),
-        actions: (
-          <>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              aria-label="Refresh worlds"
-              onClick={() => void refetch()}
-            >
-              <RefreshCw />
-            </Button>
-            <Button size="sm" onClick={() => setCreateOpen(true)}>
-              <Plus />
-              New world
-            </Button>
-          </>
-        ),
-      }),
-    [refetch, setChrome, worlds.length],
-  )
+  useEffect(() => setChrome({ title: "Worlds" }), [setChrome])
 
   return (
     <section className="card flex w-full flex-col overflow-hidden border-t border-border first:border-t-0">
-      <Table className="w-full">
+      <div className="flex items-center justify-between gap-3 px-2.5 pt-2.5 pb-1.5">
+        <h2 className="t-title min-w-0 truncate">World</h2>
+        <Button size="sm" onClick={() => setCreateOpen(true)}>
+          <Plus />
+          New world
+        </Button>
+      </div>
+
+      <Table className="w-full table-fixed">
         <TableHeader>
           <TableRow className="border-b border-border hover:bg-transparent">
             <TableHead className={HEAD_CLASS}>World</TableHead>
-            <TableHead className={HEAD_NUM_CLASS}>Districts</TableHead>
-            <TableHead className={HEAD_NUM_CLASS}>Households</TableHead>
-            <TableHead className={HEAD_NUM_CLASS}>Scenarios</TableHead>
+            <TableHead className={HEAD_CLASS}>Status</TableHead>
+            <TableHead className={HEAD_CLASS}>Created</TableHead>
+            <TableHead className={HEAD_CLASS}>Districts</TableHead>
+            <TableHead className={HEAD_CLASS}>Households</TableHead>
+            <TableHead className={HEAD_CLASS}>Scenarios</TableHead>
             <TableHead className={HEAD_CLASS}>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {worldsQuery.isPending ? (
             <TableRow className="hover:bg-transparent">
-              <TableCell colSpan={5} className="p-6 text-center t-body text-fg-subtle">
+              <TableCell colSpan={7} className="p-6 text-center t-body text-fg-subtle">
                 Loading worlds…
               </TableCell>
             </TableRow>
           ) : worldsQuery.isError ? (
             <TableRow className="hover:bg-transparent">
-              <TableCell colSpan={5} className="p-6 text-center t-body text-fg-subtle">
+              <TableCell colSpan={7} className="p-6 text-center t-body text-fg-subtle">
                 <span className="flex flex-col items-center gap-2">
                   <span className="t-body text-danger">
                     Failed to load worlds: {errorMessage(worldsQuery.error)}
@@ -215,7 +195,7 @@ export function WorldsList() {
             </TableRow>
           ) : worlds.length === 0 ? (
             <TableRow className="hover:bg-transparent">
-              <TableCell colSpan={5} className="p-6 text-center t-body text-fg-subtle">
+              <TableCell colSpan={7} className="p-6 text-center t-body text-fg-subtle">
                 <span className="flex flex-col items-center gap-1.5">
                   <span className="t-body text-fg">No worlds yet</span>
                   <span className="t-caption leading-relaxed text-fg-muted">
