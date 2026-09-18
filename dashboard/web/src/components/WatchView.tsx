@@ -137,6 +137,7 @@ export function WatchView() {
   const dates = useMemo(() => meta?.dates ?? [], [meta])
   const blocksQuery = useWorldDayBlocks(world, run, date, policy, true)
   const replayQuery = useDayReplay()
+  const blockInfo = blocksQuery.data?.blocks.find((item) => item.postcode === block)
 
   useEffect(() => {
     if (meta === undefined) return
@@ -177,7 +178,49 @@ export function WatchView() {
   const currentWatts = replay?.total_watts[Math.min(1439, Math.max(0, minute))] ?? 0
   const peakHint = replay === undefined ? "—" : `of ${formatWatts(replay.metrics.peak_watts)} peak`
 
+  const chromeActions = useMemo(
+    () => (
+      <span className="flex min-w-0 flex-wrap items-center gap-1.5">
+        <span className="label-micro flex items-center gap-1.5 text-fg-muted">
+          <CalendarDays className="size-3" aria-hidden />
+          Day
+        </span>
+        <Select
+          value={date}
+          onValueChange={(next) => setSelection({ date: next })}
+          disabled={dates.length === 0}
+        >
+          <SelectTrigger className={FIELD_CLASS} aria-label="Select day">
+            <SelectValue placeholder="Select day" />
+          </SelectTrigger>
+          <SelectContent>
+            {dates.map((item) => (
+              <SelectItem key={item} value={item}>
+                <span className="num">{item}</span>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <span className="label-latin chip text-fg-muted">{policy}</span>
+        {layer === 3 ? (
+          <Button
+            size="sm"
+            className="ml-auto"
+            onClick={() => setIndoor(true)}
+            disabled={replayQuery.isPending}
+            title={replayQuery.isPending ? "Replay for this day is still loading" : undefined}
+          >
+            <DoorOpen />
+            Enter indoor
+          </Button>
+        ) : null}
+      </span>
+    ),
+    [date, dates, layer, policy, replayQuery.isPending, setIndoor, setSelection],
+  )
+
   useEffect(() => {
+    if (layer !== 1) return
     if (
       world.length === 0 ||
       run.length === 0 ||
@@ -201,18 +244,6 @@ export function WatchView() {
             <Crumb label={run} onClick={() => clearTo("world")} current={layer === 1} />
             <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
             <Crumb label={date} onClick={() => clearTo("world")} current={layer === 1} />
-            {block.length > 0 ? (
-              <>
-                <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
-                <Crumb label={block} onClick={() => clearTo("block")} current={layer === 2} />
-              </>
-            ) : null}
-            {house.length > 0 ? (
-              <>
-                <ChevronRight className="size-3 shrink-0 text-fg-muted" aria-hidden />
-                <Crumb label={house} onClick={() => clearTo("house")} current={layer === 3} />
-              </>
-            ) : null}
           </nav>
           <span className="flex items-baseline gap-2">
             <span className="t-hero">{formatWatts(currentWatts)}</span>
@@ -220,62 +251,153 @@ export function WatchView() {
           </span>
         </span>
       ),
-      actions: (
-        <span className="flex min-w-0 flex-wrap items-center gap-1.5">
-          <span className="label-micro flex items-center gap-1.5 text-fg-muted">
-            <CalendarDays className="size-3" aria-hidden />
-            Day
-          </span>
-          <Select
-            value={date}
-            onValueChange={(next) => setSelection({ date: next })}
-            disabled={dates.length === 0}
-          >
-            <SelectTrigger className={FIELD_CLASS} aria-label="Select day">
-              <SelectValue placeholder="Select day" />
-            </SelectTrigger>
-            <SelectContent>
-              {dates.map((item) => (
-                <SelectItem key={item} value={item}>
-                  <span className="num">{item}</span>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <span className="label-latin chip text-fg-muted">{policy}</span>
-          {layer === 3 ? (
-            <Button
-              size="sm"
-              className="ml-auto"
-              onClick={() => setIndoor(true)}
-              disabled={replayQuery.isPending}
-              title={replayQuery.isPending ? "Replay for this day is still loading" : undefined}
-            >
-              <DoorOpen />
-              Enter indoor
-            </Button>
-          ) : null}
-        </span>
-      ),
+      actions: chromeActions,
     })
   }, [
     backToWorldDetail,
-    block,
+    chromeActions,
     clearTo,
     currentWatts,
+    date,
+    dates,
+    layer,
+    metaQuery.isError,
+    metaQuery.isPending,
+    peakHint,
+    run,
+    setChrome,
+    world,
+  ])
+
+  useEffect(() => {
+    if (layer !== 2) return
+    if (
+      world.length === 0 ||
+      run.length === 0 ||
+      metaQuery.isPending ||
+      metaQuery.isError ||
+      dates.length === 0
+    ) {
+      return
+    }
+    return setChrome({
+      title: (
+        <span className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1">
+          <Button variant="ghost" size="xs" onClick={() => clearTo("world")}>
+            <ArrowLeft />
+            All blocks
+          </Button>
+          <span className="num t-title">{block}</span>
+          {blockInfo !== undefined ? (
+            <span className="label-micro text-fg-muted">
+              {countLabel(blockInfo.house_count, "household")} · {formatKwh(blockInfo.total_kwh)} kWh ·
+              peak {formatWatts(blockInfo.peak_watts)}
+            </span>
+          ) : null}
+          <span className="label-latin ml-auto text-fg-muted">Select a household to open its day</span>
+        </span>
+      ),
+      actions: chromeActions,
+    })
+  }, [
+    block,
+    blockInfo,
+    chromeActions,
+    clearTo,
+    dates,
+    layer,
+    metaQuery.isError,
+    metaQuery.isPending,
+    run,
+    setChrome,
+    world,
+  ])
+
+  useEffect(() => {
+    if (layer !== 3) return
+    if (
+      world.length === 0 ||
+      run.length === 0 ||
+      metaQuery.isPending ||
+      metaQuery.isError ||
+      dates.length === 0
+    ) {
+      return
+    }
+    return setChrome({
+      title: (
+        <span className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="flex items-center gap-1.5 t-title">
+            <Home className="size-3.5" aria-hidden />
+            {house}
+          </span>
+          <span className="label-micro text-fg-muted">
+            {block.length > 0 ? `Block ${block} · ` : ""}
+            {date}
+          </span>
+          {replayQuery.isPending ? (
+            <span className="t-caption">Replay for this day is still loading</span>
+          ) : null}
+        </span>
+      ),
+      actions: chromeActions,
+    })
+  }, [
+    block,
+    chromeActions,
     date,
     dates,
     house,
     layer,
     metaQuery.isError,
     metaQuery.isPending,
-    peakHint,
-    policy,
     replayQuery.isPending,
     run,
     setChrome,
+    world,
+  ])
+
+  useEffect(() => {
+    if (layer !== 4) return
+    if (
+      world.length === 0 ||
+      run.length === 0 ||
+      metaQuery.isPending ||
+      metaQuery.isError ||
+      dates.length === 0
+    ) {
+      return
+    }
+    return setChrome({
+      title: (
+        <span className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="flex items-center gap-1.5 t-title">
+            <Building2 className="size-3.5" aria-hidden />
+            Indoors · {house}
+          </span>
+          <span className="label-micro text-fg-muted">{date}</span>
+          <span className="label-latin ml-auto text-fg-muted">
+            Rooms, occupants, appliances and live load follow the play bar
+          </span>
+          <Button variant="outline" size="sm" onClick={() => setIndoor(false)}>
+            <ArrowLeft />
+            Back to house
+          </Button>
+        </span>
+      ),
+      actions: chromeActions,
+    })
+  }, [
+    chromeActions,
+    date,
+    dates,
+    house,
+    layer,
+    metaQuery.isError,
+    metaQuery.isPending,
+    run,
+    setChrome,
     setIndoor,
-    setSelection,
     world,
   ])
 
@@ -385,8 +507,7 @@ export function WatchView() {
             />
           ) : (
             (() => {
-              const info = blocksQuery.data?.blocks.find((item) => item.postcode === block)
-              if (info === undefined) {
+              if (blockInfo === undefined) {
                 return (
                   <Notice
                     title="Empty block"
@@ -401,21 +522,9 @@ export function WatchView() {
               }
               return (
                 <Frame>
-                  <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 border-b border-border px-3.5 py-2.5">
-                    <Button variant="ghost" size="xs" onClick={() => clearTo("world")}>
-                      <ArrowLeft />
-                      All blocks
-                    </Button>
-                    <span className="num t-title">{info.postcode}</span>
-                    <span className="label-micro text-fg-muted">
-                      {countLabel(info.house_count, "household")} · {formatKwh(info.total_kwh)} kWh ·
-                      peak {formatWatts(info.peak_watts)}
-                    </span>
-                    <span className="label-latin ml-auto text-fg-muted">Select a household to open its day</span>
-                  </header>
                   <div className="min-h-0 flex-1">
                     <ObserveGrid
-                      houses={info.houses}
+                      houses={blockInfo.houses}
                       onOpen={(next) => {
                         setHouse(next)
                         setIndoor(false)
@@ -446,19 +555,6 @@ export function WatchView() {
             />
           ) : (
             <Frame>
-              <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
-                <span className="flex items-center gap-1.5 t-title">
-                  <Home className="size-3.5" aria-hidden />
-                  {house}
-                </span>
-                <span className="label-micro text-fg-muted">
-                  {block.length > 0 ? `Block ${block} · ` : ""}
-                  {date}
-                </span>
-                {replayQuery.isPending ? (
-                  <span className="t-caption">Replay for this day is still loading</span>
-                ) : null}
-              </header>
               <div className="shrink-0 border-b border-border">
                 <MetricStrip replay={replayQuery.data} isPending={replayQuery.isPending} />
               </div>
@@ -487,20 +583,6 @@ export function WatchView() {
             />
           ) : (
             <Frame>
-              <header className="chrome flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-border px-3.5 py-2.5">
-                <span className="flex items-center gap-1.5 t-title">
-                  <Building2 className="size-3.5" aria-hidden />
-                  Indoors · {house}
-                </span>
-                <span className="label-micro text-fg-muted">{date}</span>
-                <span className="label-latin ml-auto text-fg-muted">
-                  Rooms, occupants, appliances and live load follow the play bar
-                </span>
-                <Button variant="outline" size="sm" onClick={() => setIndoor(false)}>
-                  <ArrowLeft />
-                  Back to house
-                </Button>
-              </header>
               <div className="min-h-0 flex-1">
                 <HouseFloorplan replay={replayQuery.data} className="h-full min-h-0" />
               </div>
