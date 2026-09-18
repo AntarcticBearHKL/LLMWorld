@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide-react"
+import { Moon, Settings, Sun } from "lucide-react"
 
 import { FloatingJobsWindow } from "@/components/FloatingJobsWindow"
 import { SettingsPanel } from "@/components/SettingsPanel"
@@ -10,31 +10,11 @@ import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useTheme } from "@/hooks/useTheme"
 import { useUrlSync } from "@/hooks/useUrlSync"
-import { cn } from "@/lib/utils"
-import { useTimeStore, type ViewKey } from "@/store/time"
-
-const NAV: ReadonlyArray<{ key: ViewKey; label: string; hint: string }> = [
-  {
-    key: "worlds",
-    label: "Worlds",
-    hint: "All worlds — a world is a fixed set of blocks and households",
-  },
-  {
-    key: "settings",
-    label: "Settings",
-    hint: "LLM runtime parameters (model / temperature / timeout / retries)",
-  },
-]
+import { useTimeStore } from "@/store/time"
 
 function BrandMark() {
   return (
     <div className="flex items-center gap-2.5">
-      <span
-        aria-hidden
-        className="flex size-8 items-center justify-center rounded-lg bg-brand text-brand-fg shadow-1"
-      >
-        <span className="t-title text-brand-fg">W</span>
-      </span>
       <span className="flex flex-col leading-tight">
         <span className="t-title text-fg">
           LLMWorld Research Console
@@ -42,36 +22,6 @@ function BrandMark() {
         <span className="label-latin text-fg-muted">household energy replay</span>
       </span>
     </div>
-  )
-}
-
-function NavTabs({ active, onChange }: { active: ViewKey; onChange: (next: ViewKey) => void }) {
-  return (
-    <nav
-      className="flex items-center gap-0.5 rounded-full border border-border bg-surface-2 p-0.5"
-      aria-label="Primary"
-    >
-      {NAV.map((item) => (
-        <Tooltip key={item.key}>
-          <TooltipTrigger asChild>
-            <button
-              type="button"
-              onClick={() => onChange(item.key)}
-              aria-current={active === item.key ? "page" : undefined}
-              className={cn(
-                "rounded-full px-3.5 py-1 t-caption transition-colors",
-                active === item.key
-                  ? "bg-brand text-brand-fg shadow-1"
-                  : "text-fg-muted hover:bg-item-hover hover:text-fg",
-              )}
-            >
-              {item.label}
-            </button>
-          </TooltipTrigger>
-          <TooltipContent>{item.hint}</TooltipContent>
-        </Tooltip>
-      ))}
-    </nav>
   )
 }
 
@@ -106,20 +56,15 @@ function AppShell() {
   useUrlSync()
 
   const effectiveView = view === "jobs" ? worldsView : view
-  const active: ViewKey =
-    effectiveView === "world" || effectiveView === "watch" ? "worlds" : effectiveView
+  const settingsOpen = effectiveView === "settings"
 
   const closeJobs = () => {
     setJobsOpen(false)
     if (view === "jobs") setView(effectiveView)
   }
 
-  const onNavChange = (next: ViewKey) => {
-    if (next === "worlds") {
-      setView("worlds")
-      return
-    }
-    setView(next)
+  const toggleSettings = () => {
+    setView(settingsOpen ? worldsView : "settings")
   }
 
   return (
@@ -127,9 +72,22 @@ function AppShell() {
       <header className="glass sticky top-0 z-30 shrink-0 rounded-none border-b border-border">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-4 py-2.5 lg:px-5">
           <BrandMark />
-          <NavTabs active={active} onChange={onNavChange} />
           <ScreenChromeZone />
           <div className="ml-auto flex items-center gap-1.5">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={settingsOpen ? "default" : "ghost"}
+                  size="icon-sm"
+                  onClick={toggleSettings}
+                  aria-pressed={settingsOpen}
+                  aria-label={settingsOpen ? "Close settings" : "Open settings"}
+                >
+                  <Settings />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{settingsOpen ? "Close settings" : "Settings"}</TooltipContent>
+            </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button

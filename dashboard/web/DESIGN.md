@@ -1369,6 +1369,35 @@ than a flat list: on a world, the pills walk `Worlds → districts → household
 active pill is the level you are standing on. A level that is a *switch* inside one screen (the §30.1
 section switch) stays typographic — pills are for levels, not for toggles.
 
+**§35 supersedes this for the app-level pair: once the contextual zone names the current screen, an
+app-level pill pair repeats it.**
+
+## 35. The bar has three zones, and no app-level nav
+
+Once the middle zone names the current screen (§34.1), a `Worlds` / `Settings` pill pair in the bar
+says the same thing twice — and the active pill competes with the screen title that is already there.
+The pair is removed.
+
+| Zone | Carries |
+| --- | --- |
+| **left** | the product name, **text only** — no badge. The name is the identity; a mark beside it adds a second, smaller identity |
+| **middle** | the current screen: its title/breadcrumb and its actions (§34.1) |
+| **right** | app-level controls: **`Settings` as an icon** (a gear), then the theme toggle |
+
+### 35.1 An icon with no nav still needs a way back
+
+Removing the nav pair removes the only way to leave Settings, so the Settings icon is a **toggle, not
+a link**: it carries its own active state while the Settings view is open, and pressing it again
+returns to the screen you came from. Its `aria-label` and `aria-pressed` must say which of the two it
+will do, and the return must not lose the worlds-family view the user was on (§34's remembered
+state already handles that).
+
+### 35.2 What the middle zone looks like without nav beside it
+
+With the pills gone the middle zone is no longer squeezed between two groups, so it starts directly
+after the identity and keeps the bar's natural left-to-right reading order. It must not be centred —
+a centred screen title with actions beside it reads as a toolbar, which is what §33 removed.
+
 ### 24.1 The floating window holds at any size
 
 §20's window was laid out with viewport breakpoints (`lg:grid-cols-[…]`), so shrinking the
